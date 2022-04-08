@@ -1,0 +1,164 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 3;\n"
+"X-Crowdin-Project: orchard-core\n"
+"X-Crowdin-Language: cs\n"
+"X-Crowdin-File: /dev/Localization/OrchardCore.DisplayManagement.pot\n"
+"Project-Id-Version: orchard-core\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Czech\n"
+"Language: cs_CZ\n"
+"PO-Revision-Date: 2020-05-10 20:34\n"
+
+#. return H.Plural(time.TotalYears(), "1 year ago", "{0***REMOVED*** years ago");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:44
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "1 year ago"
+msgid_plural "{0***REMOVED*** years ago"
+msgstr[0] "před rokem"
+msgstr[1] "před {0***REMOVED*** lety"
+msgstr[2] "před {0***REMOVED*** lety"
+msgstr[3] "před {0***REMOVED*** lety"
+
+#. return H.Plural(-time.TotalYears(), "in 1 year", "in {0***REMOVED*** years");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:46
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "in 1 year"
+msgid_plural "in {0***REMOVED*** years"
+msgstr[0] "za 1 rok"
+msgstr[1] "za {0***REMOVED*** roky"
+msgstr[2] "za {0***REMOVED*** roků"
+msgstr[3] "za {0***REMOVED*** roků"
+
+#. return H.Plural(time.TotalMonths(), "1 month ago", "{0***REMOVED*** months ago");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:49
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "1 month ago"
+msgid_plural "{0***REMOVED*** months ago"
+msgstr[0] "před měsícem"
+msgstr[1] "před {0***REMOVED*** měsíci"
+msgstr[2] "před {0***REMOVED*** měsíci"
+msgstr[3] "před {0***REMOVED*** měsíci"
+
+#. return H.Plural(-time.TotalMonths(), "in 1 month", "in {0***REMOVED*** months");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:51
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "in 1 month"
+msgid_plural "in {0***REMOVED*** months"
+msgstr[0] "za měsíc"
+msgstr[1] "za {0***REMOVED*** měsíce"
+msgstr[2] "za {0***REMOVED*** měsíců"
+msgstr[3] "za {0***REMOVED*** měsíců"
+
+#. return H.Plural(time.TotalWeeks(), "1 week ago", "{0***REMOVED*** weeks ago");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:54
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "1 week ago"
+msgid_plural "{0***REMOVED*** weeks ago"
+msgstr[0] "před týdnem"
+msgstr[1] "před {0***REMOVED*** týdny"
+msgstr[2] "před {0***REMOVED*** týdny"
+msgstr[3] "před {0***REMOVED*** týdny"
+
+#. return H.Plural(-time.TotalWeeks(), "in 1 week", "in {0***REMOVED*** weeks");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:56
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "in 1 week"
+msgid_plural "in {0***REMOVED*** weeks"
+msgstr[0] "za týden"
+msgstr[1] "za {0***REMOVED*** týdny"
+msgstr[2] "za {0***REMOVED*** týdnů"
+msgstr[3] "za {0***REMOVED*** týdnů"
+
+#. return H.Plural(time.Days, "1 day ago", "{0***REMOVED*** days ago");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:59
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "1 day ago"
+msgid_plural "{0***REMOVED*** days ago"
+msgstr[0] "včera"
+msgstr[1] "před {0***REMOVED*** dny"
+msgstr[2] "před {0***REMOVED*** dny"
+msgstr[3] "před {0***REMOVED*** dny"
+
+#. return H.Plural(-time.Days, "in 1 day", "in {0***REMOVED*** days");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:61
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "in 1 day"
+msgid_plural "in {0***REMOVED*** days"
+msgstr[0] "zítra"
+msgstr[1] "za {0***REMOVED*** dny"
+msgstr[2] "za {0***REMOVED*** dnů"
+msgstr[3] "za {0***REMOVED*** dnů"
+
+#. return H.Plural(time.Hours, "1 hour ago", "{0***REMOVED*** hours ago");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:64
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "1 hour ago"
+msgid_plural "{0***REMOVED*** hours ago"
+msgstr[0] "před hodinou"
+msgstr[1] "před {0***REMOVED*** hodinami"
+msgstr[2] "před {0***REMOVED*** hodinami"
+msgstr[3] "před {0***REMOVED*** hodinami"
+
+#. return H.Plural(-time.Hours, "in 1 hour", "in {0***REMOVED*** hours");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:66
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "in 1 hour"
+msgid_plural "in {0***REMOVED*** hours"
+msgstr[0] "za hodinu"
+msgstr[1] "za {0***REMOVED*** hodiny"
+msgstr[2] "za {0***REMOVED*** hodin"
+msgstr[3] "za {0***REMOVED*** hodin"
+
+#. return H.Plural(time.Minutes, "1 minute ago", "{0***REMOVED*** minutes ago");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:69
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "1 minute ago"
+msgid_plural "{0***REMOVED*** minutes ago"
+msgstr[0] "před minutou"
+msgstr[1] "před {0***REMOVED*** minutami"
+msgstr[2] "před {0***REMOVED*** minutami"
+msgstr[3] "před {0***REMOVED*** minutami"
+
+#. return H.Plural(-time.Minutes, "in 1 minute", "in {0***REMOVED*** minutes");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:71
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "in 1 minute"
+msgid_plural "in {0***REMOVED*** minutes"
+msgstr[0] "za minutu"
+msgstr[1] "za {0***REMOVED*** minuty"
+msgstr[2] "za {0***REMOVED*** minut"
+msgstr[3] "za {0***REMOVED*** minut"
+
+#. return H.Plural(time.Seconds, "1 second ago", "{0***REMOVED*** seconds ago"); //aware that the singular won't be used
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:74
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "1 second ago"
+msgid_plural "{0***REMOVED*** seconds ago"
+msgstr[0] "před sekundou"
+msgstr[1] "před {0***REMOVED*** sekundami"
+msgstr[2] "před {0***REMOVED*** sekundami"
+msgstr[3] "před {0***REMOVED*** sekundami"
+
+#. return H.Plural(-time.Seconds, "in 1 second", "in {0***REMOVED*** seconds");
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:76
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "in 1 second"
+msgid_plural "in {0***REMOVED*** seconds"
+msgstr[0] "za sekundu"
+msgstr[1] "za {0***REMOVED*** sekundy"
+msgstr[2] "za {0***REMOVED*** sekund"
+msgstr[3] "za {0***REMOVED*** sekund"
+
+#. ? H["a moment ago"]
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:79
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "a moment ago"
+msgstr "před chvílí"
+
+#. : H["in a moment"];
+#: OrchardCore.DisplayManagement\Shapes\DateTimeShapes.cs:80
+msgctxt "OrchardCore.DisplayManagement.Shapes.DateTimeShapes"
+msgid "in a moment"
+msgstr "za okamžik"
+

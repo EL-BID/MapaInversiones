@@ -1,0 +1,214 @@
+﻿@inject OrchardCore.IOrchardHelper Orchard
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+***REMOVED***
+<!--MAIN BANNER-->
+<section class="banner-main-asc mb-0">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="/">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>Datos abiertos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="banner-main-info pb-0">
+                    <div class="banner-main-title">
+                        <h1>Datos abiertos</h1>
+                    </div>
+                    <!--<div class="banner-main-desc">
+        <p>Explore y descargue datos públicos en formatos abiertos sobre información de presupuesto e indicadores del Plan Nacional de Desarrollo e información de presupuesto e indicadores de las Entidades y sus proyecto/actividad.</p>
+
+    </div>-->
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<!--DATOS PLANEACION-->
+<section class="section main-Content">
+    <div class="container">
+        <div class="row justify-content-center">
+            @{
+                var datosplanificacion = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosPlanificacion");
+        ***REMOVED***
+            <div class="section-heading heading-left">
+                <h2>@datosplanificacion.Content.DatosAbiertos.Titulo.Text</h2>
+                <p>@Html.Raw(datosplanificacion.Content.HtmlBodyPart.Html)</p>
+            </div>
+        </div>
+        <div class="row justify-content-center items">
+            @foreach (var caja in datosplanificacion.Content.BagPart.ContentItems)
+            {
+                <div class="col-xl-6 col-md-6 col-12 item">
+                    <!-- Begin OpenData item -->
+                    <div class="services-item services-item-row item-style">
+                        <div class="services-item-info">
+                            <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
+                            <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
+                            <div class="actions-links">
+                                <a onclick="ga('send','event','Download','XLSX', this.href]);" target="_blank" href="@caja.DescargaDatosAbiertos.UrlBotonDiccionario.Url">
+                                    <span class="badge badge-pill badge-primary"> @caja.DescargaDatosAbiertos.UrlBotonDiccionario.Text</span>
+                                </a>
+                                <a onclick="ga('send','event','Download','CSV', this.href]);" target="_blank" href="@caja.DescargaDatosAbiertos.UrlBotonCVS.Url">
+                                    <span class="badge badge-pill badge-primary"> @caja.DescargaDatosAbiertos.UrlBotonCVS.Text</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="services-item-ico">
+                            <i class="material-icons material-icons-outlined md-48">cloud_download</i>
+                        </div>
+                    </div>
+                    
+                    <!-- End open data item -->
+                </div>
+        ***REMOVED***
+
+        </div>
+    </div>
+</section>
+
+
+<!--OA PRESUPUESTO-->
+<section class="section main-Content section-bg2">
+    <div class="container">
+        <div class="row justify-content-center">
+            @{
+                var datospresupuesto = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosPresupuesto");
+        ***REMOVED***
+            <div class="section-heading heading-left">
+                <h2>@datospresupuesto.Content.DatosAbiertos.Titulo.Text</h2>
+                <p>@Html.Raw(datospresupuesto.Content.HtmlBodyPart.Html)</p>
+            </div>
+        </div>
+        <div class="row justify-content-center items">
+            @foreach (var caja in datospresupuesto.Content.BagPart.ContentItems)
+            {
+                <div class="col-xl-6 col-md-6 col-12 item">
+                    <!-- Begin OpenData item -->
+                    <div class="services-item services-item-row item-style">
+                        <div class="services-item-info">
+                            <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
+                            <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
+                            <div class="actions-links">
+                                <a href="@caja.DescargaDatosAbiertos.UrlBotonDiccionario.Url">
+                                    <span class="badge badge-pill badge-primary"> @caja.DescargaDatosAbiertos.UrlBotonDiccionario.Text</span>
+                                </a>
+                                <a href="@caja.DescargaDatosAbiertos.UrlBotonCVS.Url">
+                                    <span class="badge badge-pill badge-primary"> @caja.DescargaDatosAbiertos.UrlBotonCVS.Text</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="services-item-ico">
+                            <i class="material-icons material-icons-outlined md-48">cloud_download</i>
+                        </div>
+                    </div>
+
+                    <!-- End open data item -->
+                </div>
+        ***REMOVED***
+
+        </div>
+    </div>
+</section>
+
+
+<!--OA entidades-->
+<!--<section class="section main-Content">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="section-heading heading-left">
+                <h2>Entidades</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut aliquam massa. Morbi maximus ullamcorper aliquet. Suspendisse lectus libero, ultrices eu diam ac, sodales vehicula erat. Maecenas in dapibus lorem. Nam pretium feugiat eros, quis ornare ipsum dignissim quis.</p>
+            </div>
+        </div>
+        <div class="row justify-content-center items">
+            <div class="col-xl-6 col-md-6 col-12 item">-->
+                <!-- Begin OpenData item -->
+                <!--<a href="" class="services-item services-item-row item-style">
+                    <div class="services-item-info">
+                        <h4 class="services-item-heading">SPR - Total por Eje Reporte PND</h4>
+                        <div class="small services-item-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</div>
+                        <div class="actions-links">
+
+                            <span class="badge badge-pill badge-primary"> Descargar JSON</span>
+
+                            <span class="badge badge-pill badge-primary"> Descargar XLSX</span>
+                        </div>
+                    </div>
+                    <div class="services-item-ico">
+                        <i class="material-icons material-icons-outlined md-48">cloud_download</i>
+                    </div>
+
+                </a>-->
+                <!-- End open data item -->
+            <!--</div>
+            <div class="col-xl-6 col-md-6 col-12 item">-->
+                <!-- Begin OpenData item -->
+                <!--<a href="" class="services-item services-item-row item-style">
+                    <div class="services-item-info">
+                        <h4 class="services-item-heading">SPR - Total por Eje Reporte PND</h4>
+                        <div class="small">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</div>
+                        <div class="actions-links">
+
+                            <span class="badge badge-pill badge-primary"> Descargar JSON</span>
+
+                            <span class="badge badge-pill badge-primary"> Descargar XLSX</span>
+                        </div>
+                    </div>
+
+                    <div class="services-item-ico">
+                        <i class="material-icons material-icons-outlined md-48">cloud_download</i>
+                    </div>
+
+                </a>--><!-- End open data item -->
+            <!--</div>
+
+        </div>
+        <div class="row justify-content-left items">
+            <div class="col-xl-6 col-md-6 col-12 item">-->
+                <!-- Begin OpenData item -->
+                <!--<a href="" class="services-item services-item-row item-style">
+                    <div class="services-item-info">
+                        <h4 class="services-item-heading">SPR - Total por Eje Reporte PND</h4>
+                        <div class="small">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</div>
+                        <div class="actions-links">
+
+                            <span class="badge badge-pill badge-primary"> Descargar JSON</span>
+
+                            <span class="badge badge-pill badge-primary"> Descargar XLSX</span>
+                        </div>
+                    </div>
+                    <div class="services-item-ico">
+                        <i class="material-icons material-icons-outlined md-48">cloud_download</i>
+                    </div>
+
+                </a>-->
+                <!-- End open data item -->
+            <!--</div>
+
+
+        </div>
+    </div>
+</section>-->

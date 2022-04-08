@@ -1,0 +1,259 @@
+﻿@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+***REMOVED***
+@model PlataformaTransparencia.Modelos.ResultadoBusquedaViewModel
+
+@section scripts
+{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="~/js/search_aux.js"></script>
+***REMOVED***
+<style>
+    .pagination-list li.active {
+        color: var(--main-color);
+        border-color: var(--main-color);
+        
+***REMOVED***
+
+    .pagination-list li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.1875rem;
+        height: 2.1875rem;
+        color: var(--text-secondary);
+        text-decoration: none;
+        border: 1px solid var(--border-color);
+        border-radius: var(--el-border-radius-min);
+        
+***REMOVED***
+
+        .pagination-list li.pagination-item-enabled {
+            color: var(--main-color);
+            cursor: pointer;
+    ***REMOVED***
+
+        .pagination-list li.paginacion {
+            cursor: pointer;
+    ***REMOVED***
+    
+</style>
+<!--MAIN BANNER-->
+<section class="banner-main search-results">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="/">inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li><a>Resultados de búsqueda</a>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h2>Resultados de búsqueda</h2>
+                    </div>
+                    <!--<div class="banner-main-desc">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+    </div>-->
+                    <!--SEARCH-->
+                    <div class="search-page-container">
+                        @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" ***REMOVED***))
+                        {
+                            <div class="form-field">
+                                <label for="page-field-search" class="form-field-label">Buscar...</label>
+                                <input type="search" class="form-field-input" name="SearchString" value="@Model.CadenaBusqueda" autocomplete="off" required="required" id="page-field-search">
+                                <input type="hidden" name="Type" value="@Model.Type" id="page-field-type">
+                                <button type="submit" class="search-btn"><i class="material-icons md-22">search</i></button>
+                            </div>
+                    ***REMOVED***
+                        <p class="search-page-results-text">
+                            Se encontró <b> @Model.TotalResultados </b> resultado(s) que coniciden
+
+
+                            con <b id="cadenaBusqueda">
+                                "@Model.CadenaBusqueda"
+                            </b>
+
+                            y filtrado por tipo  <b id="tipoRefine">
+                                "@Model.Type"
+                            </b>
+
+
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--MAIN CONTENT-->
+<main>
+    <section class="search-results">
+        <div class="container">
+            <div class="row">
+                <!--FILTER RESULTS-->
+                <div class="col-lg-3 col-12">
+                    <div class="section-heading">
+                        <h4>Filtre los resultados</h4>
+                    </div>
+                    @*<div class="selected-opt">
+                <div class="option-pill">
+                    <a href="#!"> Alto Paraguay <span class="badge bg-light text-dark">X</span></a>
+                </div>
+                <div class="option-pill">
+                    <a href="#!"> Planes <span class="badge bg-light text-dark">X</span></a>
+                </div>
+                <div class="option-pill">
+                    <a href="#!"> Alto Paraguay <span class="badge bg-light text-dark">X</span></a>
+                </div>
+            </div>*@
+                    <aside class="sidebar sidebar-filters sidebar-filters-mob">
+
+                        <div class="sidebar-item sidebar-item-margin sidebar-item-style">
+
+                            <ul class="sidebar-cat hl-list sidebar-cat-tree">
+
+                                @foreach (var Jerarquia in Model.ListaJerarquia)
+                                {
+                                    <li class="sidebar-cat-item sidebar-cat-item-has-child">
+                                        <a href="#!" id="HierarchySearch" class="sidebar-cat-link hover-link" data-title="@Jerarquia.Hierarchy">
+                                            <span>@Jerarquia.Hierarchy</span>
+                                            <i class="material-icons md-22 sidebar-cat-icon">chevron_right</i>
+                                        </a>
+                                        <ul style="display: block;">
+                                            @foreach (var type in @Jerarquia.ListaTipos)
+                                            {
+                                                <li><a href="#!" id="TypeSearch" class="hover-link" data-title="@type.Type"><span>@type.Type</span></a></li>
+                                        ***REMOVED***
+                                        </ul>
+                                    </li>
+                            ***REMOVED***
+                            </ul>
+                        </div>
+
+
+                    </aside>
+                </div>
+                <!--CARD-ITEM RESULTS-->
+
+
+
+                <div class="col-lg-9">
+                    <div class="row justify-content-right">
+                        <div class="col-lg-9"></div>
+                        <div class="col-lg-3">
+                            <div class="form-field form-field-small">
+                                <div class="select">
+                                    <label for="Ordenar por"></label>
+                                    <select id="selectOrden">
+                                        <option value="0">Orden A -> Z</option>
+                                        <option value="1">Orden Z -> A</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="SearchResults">
+                        @foreach (var item in Model.ListaResultados)
+                        {
+                            <!-- Begin card -->
+                            <div class="card card-info-wide">
+                                <div class="card-body">
+                                    <a href="@item.Url" class="h5" title="@item.NombreProyecto">@item.NombreProyecto</a>
+                                    <div class="card-posted-in card-wide-item">
+                                        <a href="#!" class="card-category" title="@item.Sector">@item.Sector</a>
+                                        <a href="#!" class="card-category" title="@item.Type"> - @item.Type</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                    ***REMOVED***
+                    </div><!-- End card -->
+                </div>
+                <!-- Begin pagination -->
+                @{
+                    int paginasimp = 10; //cantidad de paginas a imprimir por fila de paginacion
+                    int rows = 10;
+
+                    int totalResultados = Model.TotalResultados;
+                    int paginasfor = paginasimp; //cantidad de paginas a mostrar en el for de impresion
+                    int paginas = (int)(Math.Ceiling((decimal)totalResultados / rows)); // 10 rows por pagina y se calcula cuantas paginas hay en total
+                    int final = paginas - (paginas % paginasimp); //se calcula la pagina inicial del bloque final en la paginacoin;
+                    string deshabilitado = "pagination-item-enabled";
+                    int siguiente = 0;
+                    int siguienteb = 0;
+
+                    if (paginas < 10)
+                    {
+                        deshabilitado = "pagination-item-disabled";
+                        paginasfor = paginas;
+                ***REMOVED***
+                    else
+                    {
+
+                        siguiente = 1;
+                        siguienteb = 10;
+                        //pagina en la que inicia el conteo al darle en el next
+                ***REMOVED***
+
+                    int activo = 0;
+
+            ***REMOVED***
+                <nav class="pagination">
+                    <ul id="ulPaginacion" class="pagination-list" refine="@Model.Type" actual="0" anterior="0" anteriorb="0" inicial="0" siguiente="@siguiente" siguienteb="@siguienteb" final="@final" rows="@rows" paginasimp="@paginasimp">
+
+
+                        <li class="pagination-item-arrow pagination-item-arrow-first pagination-item-disabled material-icons md-24" pagina="fp">first_page</li>
+                        <li class="pagination-item-arrow pagination-item-arrow-prev pagination-item-disabled material-icons md-24" pagina="bp">chevron_left</li>
+                        @for (var g = 1; g <= paginasfor; g++)
+                        {
+                            var pag = @g - 1;
+                            if (activo == 0)
+                            {
+                                <li pagina="@pag" class="paginacion active">@g</li>
+                                activo = activo + 1;
+                        ***REMOVED***
+                            else
+                            {
+                                <li class="paginacion" pagina="@pag">@g</li>
+                        ***REMOVED***
+                            @*<li class="active"><a href="#!">1</a></li>
+                    <li><a href="#!">2</a></li>
+                    <li><a href="#!">3</a></li>
+                    <li >
+                    <a href="#!">...</a></li>
+                    <li><a href="#!">12</a></li>
+                    <li><a href="#!">13</a></li>
+                    <li><a href="#!">14</a></li>*@
+                    ***REMOVED***
+                        <li class="pagination-item-arrow pagination-item-arrow-next material-icons md-24 @deshabilitado" pagina="ap">chevron_right</li>
+                        <li class="pagination-item-arrow pagination-item-arrow-last material-icons md-24 @deshabilitado" pagina="lp">last_page</li>
+                    </ul><!-- End pagination -->
+                </nav>
+            </div>
+
+        </div>
+
+    </section>
+</main>

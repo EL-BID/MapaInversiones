@@ -1,0 +1,132 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using OrchardCore.Entities
+@using OrchardCore.Settings
+@using OrchardCore.Users
+@using OrchardCore.Users.Models
+@model OrchardCore.Users.ViewModels.LoginViewModel
+@inject SignInManager<IUser> SignInManager
+@inject ISiteService SiteService
+@inject UserManager<IUser> UserManager;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+***REMOVED***
+@{
+
+    //ViewLayout  = "Layout__Login";
+    var userCanRegister = (await SiteService.GetSiteSettingsAsync()).As<RegistrationSettings>().UsersCanRegister == UserRegistrationType.AllowRegistration;
+    var allowResetPassword = (await SiteService.GetSiteSettingsAsync()).As<ResetPasswordSettings>().AllowResetPassword;
+    var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+    var disableLocalLogin = (await SiteService.GetSiteSettingsAsync()).As<LoginSettings>().DisableLocalLogin;
+***REMOVED***
+
+
+
+<section class="section-login">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 welcome-box">
+                <h1>Inicia Sesión para:<br />Participar, reportar  <br />y Controlar</h1>
+                <!--<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>-->
+            </div>
+            @if (!disableLocalLogin)
+            {
+                <div class="col-md-4 card-login shadow border-0 @(loginProviders.Count == 0 ? "offset-md-3" : String.Empty)">
+
+                    <div class="card-body">
+                        <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="auth-form">
+                            <h4>Ingreso</h4>
+                            <hr />
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="UserName">Usuario o Correo Electrónico</label>
+                                <input asp-for="UserName" class="form-control" autofocus tabindex="1" />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password">
+                                    Password
+                                    @if (allowResetPassword)
+                                    {
+                                        <a asp-controller="ResetPassword" asp-action="ForgotPassword" class="label-link">[¿Olvido su password?</a>
+                                ***REMOVED***
+                                </label>
+                                <div class="input-group">
+                                    <input asp-for="Password" class="form-control" tabindex="2" />
+                                    <div class="input-group-append">
+                                        <button tabindex="-1" class="btn btn-cards" type="button" id="togglePassword"><i class="icon fa fa-eye"></i></button>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group custom-control custom-checkbox">
+                                <input asp-for="RememberMe" class="custom-control-input" tabindex="3">
+                                <label asp-for="RememberMe" class="custom-control-label">Recordarme</label>
+                            </div>
+                            <div></div>
+                            <button type="submit" class="btn btn-cards" tabindex="4">Ingresar</button>
+                            @if (userCanRegister)
+                            {
+                                <div class="mt-4">
+                                    <a asp-controller="Registration" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Registrar como nuevo usuario</a>
+                                </div>
+                        ***REMOVED***
+                        </form>
+                    </div>
+
+                   
+                </div>
+        ***REMOVED***
+        </div>
+        <div class="row">
+            @if (loginProviders.Count > 0)
+            {
+                <div class="col-md-4 offset-8 @(disableLocalLogin ? "offset-md-3" : String.Empty)">
+                    <div class="card-body">
+                        <h4 class="text-center">o ingresa con </h4>
+                        <hr />
+                        <div class="text-center">
+                            <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                                <div>
+                                    <p>
+                                        @foreach (var provider in loginProviders)
+                                        {
+                                            <button type="submit" class="btn btn-light shadow @(disableLocalLogin ? "w-100" : String.Empty)" name="provider" value="@provider.Name" title="[" Log in using your {0***REMOVED*** account", provider.DisplayName]">@provider.DisplayName</button>
+                                            @if (disableLocalLogin)
+                                            {
+                                                <br />
+                                        ***REMOVED***
+                                    ***REMOVED***
+                                    </p>
+                                </div>
+                            </form>
+
+                        </div>
+                        
+                    </div>
+
+                </div>
+        ***REMOVED***
+        </div>
+    </div>
+</section>
+
+    
+    <script at="Foot">
+    togglePassword = document.querySelector('#togglePassword');
+    password = document.querySelector('#Password');
+    togglePassword.addEventListener('click', function (e) {
+        @* toggle the type attribute *@
+        type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        @* toggle the eye slash icon *@
+        icon = this.getElementsByClassName('icon')[0];
+        if (icon.getAttribute('data-icon')){ @* if the icon is rendered as a svg *@
+            type === 'password' ? icon.setAttribute('data-icon', 'eye') : icon.setAttribute('data-icon', 'eye-slash');
+    ***REMOVED***
+        else{ @* if the icon is still a <i> element *@
+            type === 'password' ? icon.classList.remove('fa-eye-slash') : icon.classList.remove('fa-eye');
+            type === 'password' ? icon.classList.add('fa-eye') : icon.classList.add('fa-eye-slash');
+    ***REMOVED***
+***REMOVED***);
+    </script>
+

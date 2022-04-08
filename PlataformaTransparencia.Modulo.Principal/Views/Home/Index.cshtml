@@ -1,0 +1,370 @@
+﻿@inject OrchardCore.IOrchardHelper Orchard
+@model PlataformaTransparencia.Modelos.ModelHomeData
+
+@section scripts
+{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/search_aux.js"></script>
+***REMOVED***
+<style>
+
+    .autocomplete-suggestions {
+        border: 1px solid #999;
+        background: #FFF;
+        overflow: auto;
+***REMOVED***
+
+    .autocomplete-suggestion {
+        padding: 2px 5px;
+        white-space: nowrap;
+        overflow: hidden;
+***REMOVED***
+
+    .autocomplete-selected {
+        background: #F0F0F0;
+***REMOVED***
+
+    .autocomplete-suggestions strong {
+        font-weight: normal;
+        color: #3399FF;
+***REMOVED***
+
+    .autocomplete-group {
+        padding: 2px 5px;
+***REMOVED***
+
+        .autocomplete-group strong {
+            display: block;
+            border-bottom: 1px solid #000;
+    ***REMOVED***
+</style>
+
+<main>
+    <!-- SEARCH SECTION -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-page-container header-search">
+
+                <div class="Tagline text-center">Los recursos p&uacute;blicos son del <span>pueblo paraguayo</span></div>
+                <div class="Tagline2 text-center">Use esta plataforma para informarse, participar y controlar</div>
+
+                @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" ***REMOVED***))
+                {
+                    <div class="form-field">
+                        <label for="SearchString" class="form-field-label">Entidades, Planes y programas, por ejemplo: Plan nacional de Desarrollo.</label>
+                        <input type="search" class="form-field-input" name="SearchString" id="SearchString" value="" autocomplete="on" required="required">
+                        <!--id="page-field-search"-->
+                        <!--<button type="submit" class="search-btn">Buscar</button>-->
+                    </div>
+
+            ***REMOVED***
+                <!--<div class="form-recommendations">
+                    <div class="row">
+                        <div class="searchtxt col-lg-3">B&uacute;squedas m&aacute;s populares</div>
+                        <div class="col-auto">
+                            <div class="badge rounded-pill Outlinetagw"><a href="#">Mi primer empleo</a></div>
+                            <div class="badge rounded-pill Outlinetagw"><a href="#">Subsidios</a></div>
+                            <div class="badge rounded-pill Outlinetagw"><a href="#">STP</a></div>
+                        </div>
+                    </div>
+                </div>-->
+                <div id="search-home" class="search-body">
+                    <div id="divNoEncontrado" class="no-search-results" style="display: none;">No se han encontrado resultados</div>
+                    <div class="search-results objHidden" id="divResultados">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- SLIDESHOW -->
+    <div class="section-bg intro">
+        <div class="intro-slider flickity-dots-absolute" data-flickity='{ "autoPlay": true, "bgLazyLoad": 1, "bgLazyLoad": true, "fade": true, "prevNextButtons": false ***REMOVED***'>
+            @{
+                var banners = await Orchard.GetContentItemByHandleAsync("alias:bannerhome");
+        ***REMOVED***
+            @foreach (var item in banners.Content.BagPart.ContentItems)
+            {
+
+                var ruta_aux = "";
+                if (@item.Banner.Fondo.Paths.Count > 0)
+                {
+                    ruta_aux = @item.Banner.Fondo.Paths[0];
+            ***REMOVED***
+
+                <div class="intro-item" data-flickity-bg-lazyload="@Orchard.AssetUrl((string)ruta_aux,200,200,OrchardCore.Media.Processing.ResizeMode.Crop)">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="intro-content">
+                                    <div class="section-heading shm-none">
+                                        <h1>@item.DisplayText</h1>
+                                        <p class="section-desc">@Html.Raw(item.HtmlBodyPart.Html)</p>
+                                    </div>
+
+                                    <div class="wrap-btn intro-btns">
+                                        <a href="@item.LinkMenuItemPart.Url" class="btn btn-cards ripple">
+                                            <span>@item.LinkMenuItemPart.Name</span>
+                                            <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        ***REMOVED***
+        </div>
+    </div><!-- End SLIDESHOW -->
+    <!-- MAIN QUESTIONS -->
+    <section class="section-questions">
+        <div class="container">
+            <div class="card-group negative-margin">
+                @{
+                    var anuncios = await Orchard.GetContentItemByHandleAsync("alias:anuncios");
+            ***REMOVED***
+                @foreach (var anuncio in anuncios.Content.BagPart.ContentItems)
+                {
+                    <div class="card no-rounded">
+                        <a href="@anuncio.LinkMenuItemPart.Url" class="services-item item-style">
+                            <h4 class="services-item-heading">@anuncio.DisplayText</h4>
+
+                            <div class="services-item-desc mb-4">@Html.Raw(anuncio.HtmlBodyPart.Html)</div>
+                            @if (anuncio.LinkMenuItemPart.Name != null)
+                            {
+                                <div class="btn btn-cards">
+                                    <span>@anuncio.LinkMenuItemPart.Name</span>
+                                    <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
+                                </div>
+                        ***REMOVED***
+                        </a>
+                    </div>
+            ***REMOVED***
+
+            </div>
+
+        </div>
+    </section><!-- End services -->
+    <!-- INFOGRAFIA LINKS -->
+    <section class="infogram">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="d-flex px-5">
+                        <div class="section-heading heading-left">
+                            <span class="h2 text-bold">
+                                Conoce como se vinculan el Plan Nacional de Desarrollo (PND) y el Presupuesto General de la Naci&oacute;n (PGN) con los Objetivos de Desarrollo Sostenible (ODS)
+                            </span>
+
+                            <!--<div class="section-subheading">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et</div>-->
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="content-infogram p-3">
+                        <div class="infogram-slider flickity-dots-absolute" data-flickity='{ "bgLazyLoad": 1, "bgLazyLoad": true, "fade": true, "prevNextButtons": false ***REMOVED***'>
+                            <div class="intro-item" data-flickity-bg-lazyload="">
+                                <div class="col">
+                                    <div class="intro-content">
+                                        <div class="section-heading shm-none">
+                                            <span class="h3 text-bold">
+                                                El Paraguay comprometido con la Agenda 2030
+
+                                            </span>
+                                            <p class="section-desc">
+                                                En el a&#241;o 2017, los representantes de los tres Poderes del Estado de Paraguay firmaron la declaraci&oacute;n conjunta Interpoderes, reafirmando el compromiso del pa&iacute;s para el cumplimiento de los ODS.
+                                        </div>
+                                        <div class="wrap-btn intro-btns2">
+                                            <a href="/PLanODS" class="btn btn-cards">
+                                                <span>
+                                                    Vinculaci&oacute;n PND &#8211; ODS
+                                                </span>
+                                                <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
+                                            </a>
+                                            <a href="/DesarrolloSostenible" class="btn btn-cards">
+                                                <span>
+                                                    Vinculaci&oacute;n PGN &#8211; ODS
+                                                </span>
+                                                <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="intro-item" data-flickity-bg-lazyload="">
+                                <div class="col">
+                                    <div class="intro-content">
+                                        <div class="section-heading shm-none">
+                                            <h2>¿Qu&eacute; es la Agenda 2030 para el Desarrollo Sostenible? </h2>
+                                            <!--<p class="section-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam</p>
+                                        </div>
+                                        <div class="wrap-btn intro-btns">
+                                            <a href="/DesarrolloSostenible" class="btn btn-cards">
+                                                <span>Ver vinculaci&oacute;n </span>
+                                                <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <!--<div class="intro-item" data-flickity-bg-lazyload="">
+                                <div class="col">
+                                    <div class="intro-content">
+                                        <div class="section-heading shm-none">
+                                            <h2>Title 3</h2>
+                                            <p class="section-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam</p>
+                                        </div>
+                                        <div class="wrap-btn intro-btns">
+                                            <a href="#!" class="btn btn-with-icon btn-small ripple">
+                                                <span>CTA 3</span>
+                                                <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="assets/img/sprite.svg#arrow-right"></use></svg>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ENTIDADES LINKS -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading heading-center">
+                        <h2>&#191;Cu&aacute;nto est&aacute;n gastando las entidades p&uacute;blicas&#63;</h2>
+                        <div class="section-subheading">Conozca  c&oacute;mo se est&aacute;n ejecutando los recursos en las diversas entidades del estado en miles de millones de guaran&iacute;es</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @if (Model.Entidades != null)
+                {
+                    @foreach (var item in Model.Entidades)
+                    {
+                        var porcentaje = "0%";
+                        var href_aux = "/PerfilEntidad?codEntidad=" + @item.id;
+                        porcentaje = @item.porcentaje.ToString().Replace(',', '.') + "%";
+
+                        <text>
+                            <div class="col-lg-3">
+
+                                <div class="card h-100 shadow border-0 card-entidad">
+                                    <a href=@href_aux>
+                                        <div class="card-body">
+                                            <div class="card-title-container">
+                                                <h6 class="text-center" id="@item.id">@item.labelGroup</h6>
+                                            </div>
+                                            <div class="wrap-desc-entidad">
+                                                <div class="execute text-center">Ejecutado</div>
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" style="width:@porcentaje" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <div class="executeN text-center">₲ @String.Format("{0:n0***REMOVED***", item.avance / 1000000000)</div>
+                                                <div class="executeV text-center">Miles de Millones de Guaran&iacute;es</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </text>
+
+                ***REMOVED***
+            ***REMOVED***
+            </div>
+            <div class="section-btns justify-content-center py-5">
+                <a href="/BusquedaResultados?Type=Entidad" class="btn btn-cards">
+                    <span>Ver todas las entidades</span>
+                    <span class="el-ripple-circle" style="left: 326.5px; top: 313px;"></span>
+                </a>
+            </div>
+        </div>
+
+    </section>
+    <!-- NEWS AND SOCIAL MEDIA-->
+    <section class="section-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+
+                    <div class="section-heading heading-left">
+                        <a href="Noticias"><h2>Noticias</h2></a>
+                    </div>
+                    <div class="cards-News-container">
+                        @foreach (var noticia in await Orchard.GetRecentContentItemsByContentTypeAsync("BlogPost", 4))
+                        {
+
+                            <!--NOTICIA 3-->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-4 col-lg-3">
+                                        @{
+                                            var imgpath = "img/Pic001.jpg";
+                                            if (noticia.Content.BlogPost.Image.Paths.Count != 0)
+                                            {
+                                                imgpath = noticia.Content.BlogPost.Image.Paths[0];
+                                                <img class="img-fluid" src=@Orchard.AssetUrl((string)imgpath) alt="...">
+                                        ***REMOVED***
+                                            else
+                                            {
+                                                <img class="img-fluid" src=@imgpath alt="...">
+                                        ***REMOVED***
+                                    ***REMOVED***
+
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <div class="card-body">
+                                            <a href="/Noticia/@noticia.ContentItemId"><h5 class="card-title">@noticia</h5></a>
+                                            <p class="card-text">@noticia.Content.BlogPost.Subtitle.Text</p>
+                                            <p class="card-text"><small class="text-muted">Creado: @noticia.CreatedUtc</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    ***REMOVED***
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="section-heading heading-left">
+                        <h2>Sigue la conversaci&oacute;n</h2>
+                    </div>
+                    <div class="section-twitter">
+                        <div class="content-twitter">
+                            <a class="twitter-timeline" data-height="540" href="https://twitter.com/Haciendapy?ref_src=twsrc%5Etfw">Tweets by Haciendapy</a>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </section>
+    <!--CONTACT US-->
+    <!--HELP CENTER SHORTCUT-->
+    <div id="helpCenter"></div>
+</main>
+
+
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>

@@ -1,0 +1,553 @@
+﻿@model PlataformaTransparencia.Modelos.ModelPresupuestoData
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+***REMOVED***
+@{
+    var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
+    var LabelDistPresupuesto = "";
+    var TituloDistPresupuesto = "";
+    var LabelAvanceSectores = "";
+    var TituloAvanceSectores = "";
+    var LabelGrupoGasto = "";
+    var TituloGrupoGasto = "";
+    var LabelSolicitadoXAprobado = "";
+    var TituloSolicitadoXAprobado = "";
+    var LabelAvancePresupuestal = "";
+    var TituloAvancePresupuestal = "";
+    var LabelDistProgramas = "";
+    var TituloDistProgramas = ""; 
+    var LabelDistObjetosGasto = "";
+    var TituloDistObjetosGasto = "";
+***REMOVED***
+@foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
+{
+    if (@etiqueta.AliasPart.Alias == "DistribucionPresupuesto")
+    { LabelDistPresupuesto = @etiqueta.HtmlBodyPart.Html;
+        TituloDistPresupuesto = @etiqueta.TitlePart.Title;
+***REMOVED***
+    else if (@etiqueta.AliasPart.Alias == "AvanceSectores")
+    {
+        LabelAvanceSectores = @etiqueta.HtmlBodyPart.Html;
+        TituloAvanceSectores = @etiqueta.TitlePart.Title;
+***REMOVED***
+    else if (@etiqueta.AliasPart.Alias == "GrupoGasto")
+    {
+        LabelGrupoGasto = @etiqueta.HtmlBodyPart.Html;
+        TituloGrupoGasto = @etiqueta.TitlePart.Title;
+***REMOVED***
+    else if (@etiqueta.AliasPart.Alias == "SolicitadoXAprobado")
+    {
+        LabelSolicitadoXAprobado = @etiqueta.HtmlBodyPart.Html;
+        TituloSolicitadoXAprobado = @etiqueta.TitlePart.Title;
+***REMOVED***
+    else if (@etiqueta.AliasPart.Alias == "AvancePresupuestal")
+    {
+        LabelAvancePresupuestal = @etiqueta.HtmlBodyPart.Html;
+        TituloAvancePresupuestal = @etiqueta.TitlePart.Title;
+***REMOVED***
+    else if (@etiqueta.AliasPart.Alias == "DistProgramas")
+    {
+        LabelDistProgramas = @etiqueta.HtmlBodyPart.Html;
+        TituloDistProgramas = @etiqueta.TitlePart.Title;
+***REMOVED***
+    else if (@etiqueta.AliasPart.Alias == "DistObjetosGasto")
+    {
+        LabelDistObjetosGasto = @etiqueta.HtmlBodyPart.Html;
+        TituloDistObjetosGasto = @etiqueta.TitlePart.Title;
+***REMOVED***
+***REMOVED***
+
+<section class="banner-main">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li><a href="#!">Presupuesto</a><i class="material-icons md-18">chevron_right</i></li>
+                            <li>Presupuesto General de la Nación (PGN)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h2>Presupuesto General de la Nación (PGN)</h2>
+                    </div>
+                    <div class="banner-main-desc">
+                        <p>
+                            El Presupuesto General de la Nación es la suma total de dinero que piensa gastar el Estado Paraguayo para poder cumplir con sus funciones y objetivos prioritarios en un año determinado.
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-4">
+                <!--YEAR FILTER-->
+                <div class="form-group subtitle">
+                    <label for="input-select">Selecciona un año:</label>
+                    <select class="form-select" aria-label="Selecciona un año:" id="annioPresupuesto">
+                        @foreach (var item in Model.Presupuesto)
+                        {
+                            <text>
+                                <option value="@item.AnioPresupuesto">@item.AnioPresupuesto</option>
+                            </text>
+
+                    ***REMOVED***
+                        @*<option selected>2020</option>
+                            <option value="1">2019</option>
+                            <option value="2">2018</option>
+                            <option value="3">2017</option>*@
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--NAVIGATION ON PAGE-->
+    <div class="row navs-shortcuts">
+
+        <div class="" id="navs-header">
+            <a class="btn-section" href="#Distribucion">
+                <span class="ic-shortcut"><i class="material-icons md-24">calendar_view_month</i></span>
+                <span class="text-btn">Distribución</span>
+            </a>
+            <a class="btn-section" href="#Avance">
+                <span class="ic-shortcut"><i class="material-icons md-24">waterfall_chart</i></span>
+                <span class="text-btn">Avance</span>
+            </a>
+            <a class="btn-section" href="#GrupoGasto">
+                <span class="ic-shortcut"><i class="material-icons md-24">payments</i></span>
+                <span class="text-btn">Grupo de Gasto</span>
+            </a>
+            <a class="btn-section" href="#Presupuesto">
+                <span class="ic-shortcut"><i class="material-icons md-24">stacked_bar_chart</i></span>
+                <span class="text-btn">Presupuesto</span>
+            </a>
+            <a class="btn-section" href="#AvanceTiempo">
+                <span class="ic-shortcut"><i class="material-icons md-24">timeline</i></span>
+                <span class="text-btn">Avance Presupuestal</span>
+            </a>
+            <a class="btn-section" href="#DistribucionProgramas">
+                <span class="ic-shortcut"><i class="material-icons md-24">donut_large</i></span>
+                <span class="text-btn">Programas</span>
+            </a>
+            <a class="btn-section" href="#DistribucionObjetoGasto">
+                <span class="ic-shortcut"><i class="material-icons md-24">donut_small</i></span>
+                <span class="text-btn">Objeto de Gasto</span>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+<section class="section" id="Distribucion">
+    <div class="container">
+        <div class="section-heading">
+            <h2>@TituloDistPresupuesto</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="section-body">
+                    <h4>El presupuesto del gobierno de Paraguay en el <span id="annioPresupuestoText"></span></h4>
+                    <p>@Html.Raw(@LabelDistPresupuesto)</p>
+                    <div class="wrap-bigData">
+                        <h5>Presupuesto Vigente</h5>
+                        <!--<h5 id="totalPresupuesto"></h5>-->
+                        <h2 id="totalPresupuestoValue"></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8" id="divContenedorGrafica1" style="padding-right: 10px; padding-left: 5px; padding-top: 5px;">
+                    <div class="col-lg-8 col-md-6 col-sm-12">
+                        <div class="pBotonera">
+                            <span class="btn badge rounded-pill bg-active" id="todosSectores" cons="1">Por Sector </span><span class="btn badge rounded-pill bg-noactive" id="todosEntidades" cons="2">Por Nivel </span>
+                        </div>
+                    </div>
+                    <div class="pChart">
+                        <div class="btnback">
+                            <span id="btnVolverDP"><i class="material-icons md-18">arrow_back</i><div>atras</div></span>
+                        </div>
+                        <div id="divGraphTreePresupuesto"></div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section gray-bg" id="Avance">
+    <div class="container">
+        <div class="section-heading">
+            <h2>@TituloAvanceSectores</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+
+                <div class="section-body">
+                    <p>@Html.Raw(LabelAvanceSectores)</p>
+                </div>
+
+            </div>
+            <div class="col-lg-8">
+                <div class="col-lg-8 col-md-6 col-sm-12">
+                    <div class="pBotonera">
+                        <span class="btn badge rounded-pill bg-active" id="topSectoresG" cons="0">Top Sectores </span><span class="btn badge rounded-pill bg-noactive" id="todosSectoresG" cons="1">Todos los Sectores </span>
+                    </div>
+                </div>
+                <div class="pChart">
+                    <div width="100%" height="500px" id="divGraphBarChartGastoSectores"></div>
+                </div>    
+                   
+                </div>
+        </div>
+    </div>
+</section>
+<section class="section" id="GrupoGasto">
+    <div class="container">
+        <div class="section-heading">
+            <h2>@TituloGrupoGasto</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+
+                <div class="section-body">
+                    <p>@Html.Raw(LabelGrupoGasto)</p>
+                </div>
+
+            </div>
+            <div class="col-lg-8">
+                <div class="col-lg-8 col-md-6 col-sm-12">
+                    <div class="pBotonera">
+                        <span class="btn badge rounded-pill bg-active" id="topGruposG" cons="0">Top Grupos </span><span class="btn badge rounded-pill bg-noactive" id="todosGruposG" cons="1">Todos los Grupos </span>
+                    </div>
+                </div>
+                <div class="pChart">
+                    <div width="100%" height="500px" id="divGraphGrupoGasto"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section gray-bg" id="Presupuesto">
+    <div class="container">
+        <div class="section-heading">
+            <h2>@TituloSolicitadoXAprobado</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+
+                <div class="section-body">
+                    <p>@Html.Raw(LabelSolicitadoXAprobado)</p>
+                </div>
+
+                <div class="form-group section-form">
+                    <label for="input-select">Versión Base</label>
+                    <select class="form-select" aria-label="Selecciona una versión:" id="version1">
+                    </select>
+                </div>
+                <div class="form-group section-form">
+                    <label for="input-select">Versión Comparación</label>
+                    <select class="form-select" aria-label="Selecciona una versión:" id="version2">
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-8" style="padding-right: 10px; padding-left: 5px; padding-top: 5px; min-height:300px;min-width:400px;">
+                <div class="col-lg-8 col-md-6 col-sm-12">
+                    <div class="pBotonera">
+                        <span class="btn badge rounded-pill bg-active" id="topSectoresPSAA" cons="0">Top Sectores </span><span class="btn badge rounded-pill bg-noactive" id="todosSectoresPSAA" cons="1">Todos los Sectores </span>
+                    </div>
+                </div>
+                <div class="pChart">
+                    <div width="100%" height="800px" id="divGraphBarChartPresupuestoSolicitadoVAprobado"></div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+
+</section>
+<section class="section" id="AvanceTiempo">
+    <div class="container">
+        <div class="section-heading">
+            <h2>@TituloAvancePresupuestal</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+
+                <p>@Html.Raw(LabelAvancePresupuestal)</p>
+            </div>
+            <div class="col-lg-8">
+                <div class="col-lg-2 col-md-2 col-md-2">
+                    <div class="pBotonera">
+                        <span class="btn badge rounded-pill bg-active" id="ultimos5APT" cons="0">Últimos 3 años</span><span class="btn badge rounded-pill bg-noactive" id="annioPT" cons="1">Por año </span>
+                    </div>
+                </div>
+                <div class="pChart">
+                    <div width="100%" height="450px" id="divGraphBarLinePlotPresupuestoTiempo"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section >
+<section class="section gray-bg" id="DistribucionProgramas">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>@TituloDistProgramas</h2>
+                    <p>@Html.Raw(LabelDistProgramas)</p>
+                    <span class="h3" id="totalPresupuestoProgramas"></span>
+                </div>
+              
+            </div>
+            <div class="col-lg-4">
+                <div class="selectBlue" id="selectClasificacion">
+                    <div class="numberTree">1</div>
+                    <div class="levelTree">
+                        <div class="form-group">
+                            <label for="input-select">Clasificación</label>
+                            <select class="form-select" aria-label="Selecciona una clasificación:" id="clasificacion">
+                                <option selected value="">Todas las clasificaciones</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="selectDis" id="selectEntidad">
+                    <div class="numberTree">2</div>
+                    <div class="levelTree">
+                        <div class="form-group">
+                            <label for="input-select">Entidad</label>
+                            <select class="form-select" aria-label="Selecciona una entidad:" id="entidad">
+                                <option selected value="">Todos las Entidades</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="selectDis" id="selectClasePrograma">
+                    <div class="numberTree">3</div>
+                    <div class="levelTree">
+                        <div class="form-group">
+                            <label for="input-select">Clase Programa</label>
+                            <select class="form-select" aria-label="Selecciona una Clase de Programa:" id="clasePrograma">
+                                <option selected value="">Todos las Clases de Programa</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="selectDis" id="selectProyectoActividad">
+                    <div class="numberTree">4</div>
+                    <div class="levelTree">
+                        <div class="form-group">
+                            <label for="input-select">Proyecto Actividad</label>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <div class="btn btn-small btn-cards">
+                            <span id="btnLimpiar">Limpiar Filtros</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8" style="padding-right: 10px; padding-left: 5px; padding-top: 5px; min-height:400px; ">
+                <div class="btnback" id="">
+                    <span id="btnVolver"><i class="material-icons md-18">arrow_back</i><div>atras</div></span>
+                </div>
+                <div id="treeMapCombos"></div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<section class="section" id="DistribucionObjetoGasto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                   <h2>@TituloDistObjetosGasto</h2>
+                    <p>@Html.Raw(LabelDistObjetosGasto)</p>
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+                <div class="selectBlue" id="selectEntidadOG">
+                    <div class="numberTree">1</div>
+                    <div class="levelTree">
+                        <div class="form-group">
+                            <label for="input-select">Entidad</label>
+                            <select class="form-select" aria-label="Selecciona una entidad:" id="entidadOG">
+                                <option selected value="">Todos las Entidades</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="selectDis" id="selectProyectoActividadOG">
+                    <div class="numberTree">2</div>
+                    <div class="levelTree">
+                        <div class="form-group">
+                            <label for="input-select">Proyecto Actividad</label>
+                            <select class="form-select" aria-label="Selecciona un proyecto actividad:" id="proyectoActividadOG">
+                                <option selected value="">Todos los Proyectos/Actividades</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="selectDis" id="selectObjetoGasto">
+                    <div class="numberTree">3</div>
+                    <div class="levelTree">
+                        <div class="form-group">
+                            <label for="input-select">Objeto de Gasto</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <div class="btn btn-small btn-cards">
+                            <span id="btnLimpiarOG">Limpiar Filtros</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8" style="padding-right: 10px; padding-left: 5px; padding-top: 5px; min-height:400px;">
+                <div class="btnback" id="">
+                    <span id="btnVolverOG"><i class="material-icons md-18">arrow_back</i><div>atras</div></span>
+                </div>
+                <div   id="treeMapCombosOG"></div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!--RELATED INFO-->
+<section class="relatedInfo">
+    <div class="container">
+        <!--LINKS OTRAS SECCIONES-->
+        <div class="row">
+            <!--LEFT COLUMN-->
+            <div class="col-lg-8">
+                <!--LINKS seccion infografia planificacion-->
+                <h2>Conoce</h2>
+                <div class="wrap-cta py-5">
+                    <a href="../ProcesoPresupuesto" class="py-5 mb-5 px-0">
+                        <div class="h3">El Proceso Presupuestario <i class="material-icons md-18">arrow_forward</i> </div>
+                    </a>
+                </div>
+
+                <!--LINKS seccion infografia planificacion-->
+
+                <div class="wrap-cta py-5">
+                    <p class="card-title mb-4">Información suministrada por:</p>
+                    <a href="https://www.hacienda.gov.py/web-hacienda/index.php" target="_blank">
+                        <img class="img-fluid" src="../img/logoHaciendaB.png" alt="ir a Secretaria tecnica de planeación" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h2>Explora</h2>
+                <p>Entidades y sus planes operativos</p>
+                <ul id="entidadesPlanNacional" class="list-group list-group-flush">
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!--HELP CENTER SHORTCUT-->
+<div id="helpCenter"></div>
+
+
+
+<script>
+    window.onscroll = function () { myFunction() ***REMOVED***;
+
+    var header = document.getElementById("navs-header");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+            header.classList.add("bg-white");
+    ***REMOVED*** else {
+            header.classList.remove("sticky");
+            header.classList.remove("bg-white");
+    ***REMOVED***
+***REMOVED***
+</script>
+@*Grafico*@
+@*<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>*@
+@*<script src="https://d3plus.org/js/d3plus-plot.v1.0.full.min.js"></script>*@
+@*<script src="https://d3plus.org/js/d3plus-hierarchy.v1.0.full.min.js"></script>*@
+@*<script src="https://d3plus.org/js/d3plus.v2.0.0-alpha.30.full.min.js"></script>*@
+
+@*<script src="https://d3plus.org/js/d3plus.v2.0.0-alpha.30.full.min.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+<script src="js/presupuesto_aux.js"></script>
+@*<script>
+    Highcharts.chart('container3', {
+        title: {
+            //text: 'Evolución del gasto'
+      ***REMOVED***
+        xAxis: {
+            categories: ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009']
+      ***REMOVED***
+        labels: {
+            items: [{
+                //html: 'Gasto total',
+                style: {
+                    left: '50px',
+                    top: '18px',
+                    color: ( // theme
+                        Highcharts.defaultOptions.title.style &&
+                        Highcharts.defaultOptions.title.style.color
+                    ) || 'black'
+            ***REMOVED***
+        ***REMOVED***]
+      ***REMOVED***
+        series: [{
+            type: 'column',
+            name: 'Gasto',
+            data: [8, -24, -25, 25, 9, 19, 31, 26, 3, 32]
+      ***REMOVED*** {
+            type: 'spline',
+            name: 'Average',
+            data: [0, -9, -16, -8, -5, 1, 3, 4, 8, 29],
+            marker: {
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[3],
+                fillColor: 'white'
+        ***REMOVED***
+    ***REMOVED***]
+***REMOVED***);
+</script>*@

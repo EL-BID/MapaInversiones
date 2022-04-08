@@ -1,0 +1,108 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: orchard-core\n"
+"X-Crowdin-Language: de\n"
+"X-Crowdin-File: /dev/Localization/OrchardCore.Infrastructure.pot\n"
+"Project-Id-Version: orchard-core\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: German\n"
+"Language: de_DE\n"
+"PO-Revision-Date: 2020-03-31 13:47\n"
+
+#. await OutputExceptionAsync(output, S["Error executing command \"{0***REMOVED***\"", string.Join(" ", args)], ex);
+#: OrchardCore.Infrastructure\Commands\CommandHostAgent.cs:72
+msgctxt "OrchardCore.Environment.Commands.CommandHostAgent"
+msgid "Error executing command \"{0***REMOVED***\""
+msgstr "Fehler beim Ausführen des Befehls \"{0***REMOVED***\""
+
+#. await output.WriteLineAsync(S["Exception Details: {0***REMOVED***: {1***REMOVED***", exception.GetType().FullName, exception.Message]);
+#: OrchardCore.Infrastructure\Commands\CommandHostAgent.cs:99
+msgctxt "OrchardCore.Environment.Commands.CommandHostAgent"
+msgid "Exception Details: {0***REMOVED***: {1***REMOVED***"
+msgstr "Ausnahmedetails: {0***REMOVED***: {1***REMOVED***"
+
+#. await output.WriteLineAsync(S["Stack Trace:"]);
+#: OrchardCore.Infrastructure\Commands\CommandHostAgent.cs:101
+msgctxt "OrchardCore.Environment.Commands.CommandHostAgent"
+msgid "Stack Trace:"
+msgstr "Stack-Trace:"
+
+#. await output.WriteLineAsync(S["[{0***REMOVED***: {1***REMOVED***]", error.GetType().Name, error.Message]);
+#: OrchardCore.Infrastructure\Commands\CommandHostAgent.cs:107
+msgctxt "OrchardCore.Environment.Commands.CommandHostAgent"
+msgid "[{0***REMOVED***: {1***REMOVED***]"
+msgstr "[{0***REMOVED***: {1***REMOVED***]"
+
+#. await output.WriteLineAsync(S["{0***REMOVED***", error.StackTrace]);
+#: OrchardCore.Infrastructure\Commands\CommandHostAgent.cs:108
+msgctxt "OrchardCore.Environment.Commands.CommandHostAgent"
+msgid "{0***REMOVED***"
+msgstr "{0***REMOVED***"
+
+#. throw new Exception(S["Tenant {0***REMOVED*** does not exist", tenant]);
+#: OrchardCore.Infrastructure\Commands\CommandHostAgent.cs:127
+msgctxt "OrchardCore.Environment.Commands.CommandHostAgent"
+msgid "Tenant {0***REMOVED*** does not exist"
+msgstr "Mandant {0***REMOVED*** existiert nicht"
+
+#. throw new InvalidOperationException(S["Switch \"{0***REMOVED***\" was not found", commandSwitch.Key]);
+#: OrchardCore.Infrastructure\Commands\DefaultCommandHandler.cs:45
+msgctxt "OrchardCore.Environment.Commands.DefaultCommandHandler"
+msgid "Switch \"{0***REMOVED***\" was not found"
+msgstr "Schalter \"{0***REMOVED***\" wurde nicht gefunden"
+
+#. throw new InvalidOperationException(S["A property \"{0***REMOVED***\" exists but is not decorated with \"{1***REMOVED***\"", commandSwitch.Key, typeof(OrchardSwitchAttribute).Name]);
+#: OrchardCore.Infrastructure\Commands\DefaultCommandHandler.cs:49
+msgctxt "OrchardCore.Environment.Commands.DefaultCommandHandler"
+msgid "A property \"{0***REMOVED***\" exists but is not decorated with \"{1***REMOVED***\""
+msgstr "Eine Eigenschaft \"{0***REMOVED***\" existiert, ist aber nicht mit \"{1***REMOVED*** \" gekennzeichnet"
+
+#. string message = S["Error converting value \"{0***REMOVED***\" to \"{1***REMOVED***\" for switch \"{2***REMOVED***\"",
+#: OrchardCore.Infrastructure\Commands\DefaultCommandHandler.cs:66
+msgctxt "OrchardCore.Environment.Commands.DefaultCommandHandler"
+msgid "Error converting value \"{0***REMOVED***\" to \"{1***REMOVED***\" for switch \"{2***REMOVED***\""
+msgstr "Fehler beim Konvertieren des Wertes \"{0***REMOVED***\" in \"{1***REMOVED***\" für Schalter \"{2***REMOVED***\""
+
+#. throw new InvalidOperationException(S["Command arguments \"{0***REMOVED***\" don't match command definition", string.Join(" ", arguments)]);
+#: OrchardCore.Infrastructure\Commands\DefaultCommandHandler.cs:82
+msgctxt "OrchardCore.Environment.Commands.DefaultCommandHandler"
+msgid "Command arguments \"{0***REMOVED***\" don't match command definition"
+msgstr "Befehlsargumente \"{0***REMOVED***\" stimmen nicht mit der Befehlsdefinition überein"
+
+#. throw new InvalidOperationException(S["Method \"{0***REMOVED***\" does not support switch \"{1***REMOVED***\".", methodInfo.Name, commandSwitch]);
+#: OrchardCore.Infrastructure\Commands\DefaultCommandHandler.cs:173
+msgctxt "OrchardCore.Environment.Commands.DefaultCommandHandler"
+msgid "Method \"{0***REMOVED***\" does not support switch \"{1***REMOVED***\"."
+msgstr "Methode \"{0***REMOVED***\" unterstützt keinen Schalter \"{1***REMOVED***\"."
+
+#. throw new Exception(S["Multiple commands found matching arguments \"{0***REMOVED***\". Commands available: {1***REMOVED***.",
+#: OrchardCore.Infrastructure\Commands\DefaultCommandManager.cs:38
+msgctxt "OrchardCore.Environment.Commands.DefaultCommandManager"
+msgid "Multiple commands found matching arguments \"{0***REMOVED***\". Commands available: {1***REMOVED***."
+msgstr "Mehrere Befehle gefunden für Argumente \"{0***REMOVED***\". Verfügbare Befehle: {1***REMOVED***."
+
+#. throw new Exception(S["No command found matching arguments \"{0***REMOVED***\". Commands available: {1***REMOVED***.",
+#: OrchardCore.Infrastructure\Commands\DefaultCommandManager.cs:41
+msgctxt "OrchardCore.Environment.Commands.DefaultCommandManager"
+msgid "No command found matching arguments \"{0***REMOVED***\". Commands available: {1***REMOVED***."
+msgstr "Kein Befehl wurde zu den Argumenten \"{0***REMOVED***\" gefunden. Befehle verfügbar: {1***REMOVED***."
+
+#. await Context.Output.WriteLineAsync(S["List of available commands:"]);
+#: OrchardCore.Infrastructure\Commands\Builtin\HelpCommand.cs:25
+msgctxt "OrchardCore.Environment.Commands.Builtin.HelpCommand"
+msgid "List of available commands:"
+msgstr "Liste der verfügbaren Befehle:"
+
+#. await Context.Output.WriteLineAsync(S["Command {0***REMOVED*** doesn't exist", command]);
+#: OrchardCore.Infrastructure\Commands\Builtin\HelpCommand.cs:49
+msgctxt "OrchardCore.Environment.Commands.Builtin.HelpCommand"
+msgid "Command {0***REMOVED*** doesn't exist"
+msgstr "Befehl {0***REMOVED*** existiert nicht"
+
+#. return S["{0***REMOVED***.{1***REMOVED***: no help text", descriptor.MethodInfo.DeclaringType?.FullName, descriptor.MethodInfo.Name];
+#: OrchardCore.Infrastructure\Commands\Builtin\HelpCommand.cs:70
+msgctxt "OrchardCore.Environment.Commands.Builtin.HelpCommand"
+msgid "{0***REMOVED***.{1***REMOVED***: no help text"
+msgstr "{0***REMOVED***.{1***REMOVED***: kein Hilfetext"
+

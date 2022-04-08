@@ -1,0 +1,561 @@
+﻿@model PlataformaTransparencia.Negocios.Entidad.EntidadContract
+@*PlataformaTransparencia.Modulo.Principal.Views.Entidad.perfilEntidadModel*@
+
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+***REMOVED***
+
+@{
+  var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
+  var LabelViculacionObjetivos = "";
+  var TituloViculacionObjetivos = "";
+  var LabelProgramasEntidades = "";
+  var TituloProgramasEntidades = "";
+
+***REMOVED***
+@foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
+{
+  if (@etiqueta.AliasPart.Alias == "ViculacionObjetivos")
+  {
+    LabelViculacionObjetivos = @etiqueta.HtmlBodyPart.Html;
+    TituloViculacionObjetivos = @etiqueta.TitlePart.Title;
+  ***REMOVED***
+  else if (@etiqueta.AliasPart.Alias == "ProgramasEntidades")
+  {
+    LabelProgramasEntidades = @etiqueta.HtmlBodyPart.Html;
+    TituloProgramasEntidades = @etiqueta.TitlePart.Title;
+  ***REMOVED***
+***REMOVED***
+<head>
+    <style>
+
+        .node rect {
+            cursor: move;
+            fill-opacity: .8;
+            shape-rendering: crispEdges;
+    ***REMOVED***
+
+        .node text {
+            pointer-events: none;
+            /*text-shadow: 0 1px 0 #fff;*/
+    ***REMOVED***
+
+        .link {
+            fill: none;
+            stroke: #000;
+            stroke-opacity: .1;
+    ***REMOVED***
+
+            .link:hover {
+                stroke-opacity: .2;
+        ***REMOVED***
+
+        .arc text {
+            font: 12px sans-serif;
+            text-anchor: middle;
+            font-weight: bold;
+    ***REMOVED***
+
+        .arc path {
+            stroke: #fff;
+    ***REMOVED***
+
+        .toolTip {
+            position: absolute;
+            display: none;
+            width: auto;
+            height: auto;
+            background: none repeat scroll 0 0 white;
+            border: 0 none;
+            border-radius: 8px 8px 8px 8px;
+            box-shadow: -3px 3px 15px #888888;
+            color: black;
+            font: 12px sans-serif;
+            padding: 5px;
+            text-align: center;
+    ***REMOVED***
+    </style>
+</head>
+<body>
+    <!--MAIN BANNER-->
+    <section class="banner-main mb-0">
+
+        <div class="container">
+            <!-- Begin bread crumbs -->
+            <nav class="bread-crumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="bread-crumbs-list">
+                                <li>
+                                    <a href="/">Inicio</a>
+                                    <i class="material-icons md-18">chevron_right</i>
+                                </li>
+                                <li><a href="/BusquedaResultados">Resultados de búsqueda</a><i class="material-icons md-18">chevron_right</i></li>
+                                <li>@Model.EntidadModel.NombreEntidad</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav><!-- End bread crumbs -->
+
+
+            <div class="row justify-content-center">
+
+                <div class="col-lg-8">
+                    <div class="banner-main-info pb-0">
+                        <div class="banner-main-title">
+                            <h2>@Model.EntidadModel.NombreEntidad</h2>
+                        </div>
+                        <div class="banner-main-desc">
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!--SELECT AÑO-->
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
+                    <!--YEAR FILTER-->
+                    <div class="form-group">
+                        <label style="color:white" for="input-select">Selecciona un año:</label>
+                        <select class="form-select" aria-label="Selecciona un año:" id="annioEntidad" onchange="seleccionoAnio(this);">
+                            <option selected>2022</option>
+                            <option value="1">2021</option>
+                            <option value="2">2020</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--NAVIGATION ON PAGE-->
+        <div class="row navs-shortcuts">
+
+            <div class="" id="navs-header">
+                <a class="btn-section" href="#misionvision">
+                    <span class="ic-shortcut"><i class="material-icons md-24">chrome_reader_mode</i></span>
+                    <span class="text-btn">Misión y Visión</span>
+                </a>
+                <a class="btn-section" href="#vinculacionGoals">
+                    <span class="ic-shortcut"><i class="material-icons md-24">device_hub</i></span>
+                    <span class="text-btn">Vinculación al PND</span>
+                </a>
+                <a class="btn-section" href="#programasActividades">
+                    <span class="ic-shortcut"><i class="material-icons md-24">grid_view</i></span>
+                    <span class="text-btn">Programas, actividades e indicadores</span>
+                </a>
+            </div>
+        </div>
+
+    </section>
+    <!--MISION VISION-->
+    <section class="section" id="misionvision">
+        <div class="container">
+            <div class="row justify-content-center no-gutters">
+                <div class="col-lg-6">
+                    <div class="card mision h-100">
+                        <div class="section-heading heading-left">
+                            <h2>Misión</h2>
+
+                        </div>
+                        <div class="section-subheading">@Model.EntidadModel.Mision</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card vision h-100">
+                        <div class="section-heading heading-left">
+                            <h2>Visión</h2>
+                        </div>
+                        <div class="section-subheading">@Model.EntidadModel.Vision</div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+    </section>
+    <!--VINCULACION OBJS ESTRATEGICOS-->
+    <section class="section" id="vinculacionGoals">
+        <div class="container">
+          <div class="section-heading heading-left">
+            <h2>@TituloViculacionObjetivos</h2> @*Vinculación al PND 2030*@
+
+            <div class="section-subheading"><p>@Html.Raw(LabelViculacionObjetivos)</p> </div>
+          </div>
+            <div class="wrap_sankey">
+                <div id="sankey_basic" style="width: 100%; height: auto;"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!--PROGRAMAS - ACTIVIDADES- INDICADORES-->
+    <section class="section" id="programasActividades">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading heading-left mb-3">
+                        <h2>@TituloProgramasEntidades</h2>
+                        <div class="section-subheading"><p>@Html.Raw(LabelProgramasEntidades)</p></div>
+                    </div>
+                    <div class="mb-5">
+                        <h4 class="small">Nota</h4>
+                        <p class="small">
+                            <b>Los montos para el 2020 y 2021 corresponden al Presupuesto Vigente.<br />Los montos del 2022, corresponden al Proyecto Ejecutivo<br />No incluye transferencias consolidables</b>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <!--TABS TIPOS DE PROGRAMA-->
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <!--TABS-->
+                    <div class="tabs goals programas">
+                        <ul class="tabs-nav text-center">
+                            <li onclick="ObtenerActividades(1)" class="active">
+                                <div class="goal-name">
+                                    <div class="h6">Programa Central</div>
+                                </div>
+                                <div id="totalActividadesProgramaCentral" class="goal-number">@Model.EntidadModel.ProyectosHaciendaCentral.Count</div>
+                                <small>Actividades/Proyectos</small>
+                            </li>
+                            <li onclick="ObtenerActividades(2)">
+                                <div class="goal-name">
+                                    <div class="h6">Programas Sustantivos</div>
+                                </div>
+                                <div id="totalProgramaSustantivo" class="goal-number">@Model.EntidadModel.ProyectosHaciendaSustantivo.Count</div>
+                                <small>Programas</small>
+                            </li>
+                            <li onclick="ObtenerActividades(3)">
+                                <div class="goal-name">
+                                    <div class="h6">Partidas no asignables a programas</div>
+                                </div>
+                                <div id="totalActividadesProgramaNoAsignable" class="goal-number">@Model.EntidadModel.ProyectosHaciendaNoAsignable.Count</div>
+                                <small>Actividades</small>
+                            </li>
+                        </ul>
+                        <div id="loading" class="tabs-container" style="display:none">
+                            <h5>Realizando proceso de consulta...</h5>
+                        </div>
+                        <div id="contenidoActividades" class="tabs-container">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!--<div class="container programas">-->
+            <!--MAQUETA BASE PARA ANIDAMIENTO  -- ELIMINAR LUEGO DE IMPLEMENTACION-->
+            <!--Programa/actividad SIN INDICADORES-->
+            <!--<div class="card h-100">
+                <div class="card-title">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-8">
+                            <h4 class="">Gestion administrativa y financiera</h4>
+                            <span class="badge rounded-pill Outlinetag" style="color: black;">Actividad Administrativa</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <span class="h6">Descripción:</span><br><p>*</p>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <span class="h6">Monto total actividad</span><br>
+                            <span class="h3">₲2.319Millones</span>
+
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <span class="h6">Avance</span><br><span class="h3">₲ 0Millones</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>-->
+
+            <!--Programa/actividad CON INDICADORES-->
+            <!--<div class="card h-100">
+                <div class="card-title">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-8">
+                            <h4 class="">Gestion administrativa y financiera</h4>
+                            <span class="badge rounded-pill Outlinetag" style="color: black;">Actividad Administrativa</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-lg-6">
+                            <span class="h6">Descripción:</span><br>
+                                                                <p>Monitorear los ambitos de privacion de libertad o encierro para que identifiquen y prevengan situaciones que den o puedan dar origen a torturas, malos tratos, penas crueles, inhumanos o degradantes.</p>
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <span class="h6">Monto total actividad</span><br>
+                            <span class="h3">₲2.319Millones</span>
+
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <span class="h6">Avance</span><br><span class="h3">₲ 0Millones</span>
+                        </div>
+                    </div>-->
+                    <!--INDICADOR BOX-->
+                    <!--<div class="row">
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <span class="h6">Indicadores</span>
+                            </div>
+                            
+                            <ul class="accordion-list">-->
+                                <!--indicador 1-->
+                                <!--<li class="accordion-item">
+                                    <div class="accordion-trigger">
+                                        <span class="name-indicator">Instituciones de privación de libertad o encierro monitoreadas.</span>
+                                    </div>
+                                    <div class="accordion-content content">-->
+                                        <!--ROW INFORMACION 1-->
+                                        <!--<div class="row data-entidad">
+                                            <div class="col-lg-7">
+                                                <small class="text-bold">Descripción</small>
+                                                <p class="">Respuesta de las instituciones  monitoreadas, a las recomendaciones presentadas en los informes del mnp. permite identificar los cambios introducidos por las instituciones en los ambitos de intervencion del mnp (recomendaciones). 							</p>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <small class="text-bold">Fórmula</small>
+                                                <p class="text-bold"> Número de instituciones monitoreadas / Número de instituciones identificadas como objetivo *100	</p>
+
+                                                <small class="text-bold">Fuente</small>
+                                                <p class="">Mnp - base de datos de informes</p>
+                                            </div>
+                                        </div>-->
+                                        <!--ROW INFORMACION 2-->
+                                        <!--<div class="row data-entidad">
+                                            <div class="col-lg-3">
+                                                <div class="sidebar-item sidebar-item-margin sidebar-item-style bg-softGray">
+
+                                                    <div class="row">
+                                                        <div class="col-6 col-lg-12">
+                                                            <div class="sidebar-item-row">
+                                                                <small class="text-bold">Unidad de medida</small>
+                                                                <p class="">Instituciones</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-lg-12">
+                                                            <div class="sidebar-item-row">
+                                                                <small class="text-bold">Avance</small><br />
+                                                                <p class="text-xl">24.14</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-lg-12">
+                                                            <div class="sidebar-item-row">
+                                                                <small class="text-bold">Meta Hombres</small><br />
+                                                                <p class="text-xl">24.14</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-lg-12">
+                                                            <div class="sidebar-item-row">
+                                                                <small class="text-bold">Meta Mujeres</small><br />
+                                                                <p class="text-md">60</p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <div class="wrap-grafica">
+                                                    Aqui va la gráfica
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </li>-->
+                                <!--indicador 2-->
+                                <!--<li class="accordion-item">
+                                    <div class="accordion-trigger">
+                                        <span class="name-indicator">Instituciones de privacion de libertad implementan mejoras en base a las recomendaciones del mnp</span>
+                                    </div>
+                                    <div class="accordion-content content">-->
+                                        <!--ROW info -->
+                                        <!--<div class="row data-entidad">
+                                            <div class="col-lg-7">
+                                                <small class="text-bold">Descripción</small>
+                                                <p class="">Respuesta de las instituciones  monitoreadas, a las recomendaciones presentadas en los informes del mnp. permite identificar los cambios introducidos por las instituciones en los ambitos de intervencion del mnp (recomendaciones). 							</p>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <small class="text-bold">Fórmula</small>
+                                                <p class="text-bold"> Número de instituciones monitoreadas / Número de instituciones identificadas como objetivo *100	</p>
+
+                                                <small class="text-bold">Fuente</small>
+                                                <p class="">Mnp - base de datos de informes</p>
+                                            </div>
+                                        </div>-->
+                                        <!--ROW info-->
+                                        <!--<div class="row data-entidad">
+                                            <div class="col-lg-3">
+                                                <div class="sidebar-item sidebar-item-margin sidebar-item-style bg-softGray">
+
+                                                    <div class="row">
+                                                        <div class="col-6 col-lg-12">
+                                                            <div class="sidebar-item-row">
+                                                                <small class="text-bold">Unidad de medida</small>
+                                                                <p class="">Instituciones</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-lg-12">
+                                                            <div class="sidebar-item-row">
+                                                                <small class="text-bold">Avance</small><br />
+                                                                <p class="text-xl">24.14</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-lg-12">
+                                                            <div class="sidebar-item-row">
+                                                                <small class="text-bold">Meta Hombres</small><br />
+                                                                <p class="text-xl">24.14</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-lg-12">
+                                                            <div class="sidebar-item-row">
+                                                                <small class="text-bold">Meta Mujeres</small><br />
+                                                                <p class="text-md">60</p>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <div class="wrap-grafica">
+                                                    Aqui va la gráfica
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+
+        </div>-->
+
+
+        <!--cierre de MAQUETA BASE-->
+    </section>
+    <!--RELATED INFO-->
+    <section class="relatedInfo">
+        <div class="container">
+            <!--LINKS OTRAS SECCIONES-->
+            <div class="row">
+                <!--LEFT COLUMN-->
+                <div class="col-lg-8">
+                    <!--LINKS seccion infografia planificacion-->
+                    <h2>Conoce</h2>
+                    <div class="wrap-cta py-5">
+                        <a href="../ProcesoPresupuesto" class="py-5 mb-5 px-0">
+                            <div class="h3">El Proceso Presupuestario <i class="material-icons md-18">arrow_forward</i> </div>
+                        </a>
+                        <a href="../ProcesoPlanNacional" class="py-5 mb-5 px-0">
+                            <div class="h3">El Proceso de la Planificación Nacional<i class="material-icons md-18">arrow_forward</i> </div>
+                        </a>
+                    </div>
+
+                    <!--LINKS seccion infografia planificacion-->
+
+                    <div class="wrap-cta py-5 ">
+                        <p class="card-title mb-4">Información suministrada por:</p>
+                        <a href="https://www.hacienda.gov.py/web-hacienda/index.php" target="_blank">
+                            <img class="img-fluid cardimg" src="../img/LogoHaciendaB.png" alt="ir a Secretaria tecnica de planeación" />
+                        </a>
+                        <a href="https://www.stp.gov.py/v1/" target="_blank">
+                            <img class="img-fluid" src="../img/Logostp.png" alt="ir a Secretaria tecnica de planeación" />
+                        </a>
+                    </div>
+                </div>
+                <!--RIGHT COL-->
+                <div class="col-lg-4">
+                    <h2>Explora</h2>
+                    <p>Programas institucionales</p>
+                    <ul class="list-group list-group-flush">
+                        @foreach (var itemEntidad in @Model.EntidadModel.Entidades)
+                        {
+                            <li class="list-group-item"><a href=@("/PerfilEntidad?codEntidad=" + @itemEntidad.CodEntidad)><span> @itemEntidad.Nombre</span><i class="material-icons md-18">chevron_right</i></a></li>
+                    ***REMOVED***
+                        <li class='list-group-item'><a href='/BusquedaResultados?Type=Entidad'><span>Ver todos</span><i class='material-icons md-18'>chevron_right</i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="codigoEntidadId" style="display: none">@Model.EntidadModel.CodigoEntidad</div>
+
+        </div>
+    </section>
+
+    @*<section class="section-question">
+          <div class="container">
+            <div class="col-12 text-center">
+              <h3>¿No has encontrado lo que estabas buscando?</h3>
+              <div class="section-btns justify-content-center py-3">
+                <a href="#" class="btn btn-cards">
+                  <span>CONTACTANOS</span>
+                  <span class="el-ripple-circle" style="left: 326.5px; top: 313px;"></span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </section>*@
+
+    <!--HELP CENTER SHORTCUT-->
+    <div id="helpCenter"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+    <script src="js/sankey.js"></script>
+    <script src="js/entidad_aux.js"></script>
+
+    <script>
+
+        window.onscroll = function () { myFunction() ***REMOVED***;
+
+        var header = document.getElementById("navs-header");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+                header.classList.add("bg-white");
+        ***REMOVED*** else {
+                header.classList.remove("sticky");
+                header.classList.remove("bg-white");
+        ***REMOVED***
+    ***REMOVED***
+    </script>
+
+</body>
+
+

@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using PlataformaTransparencia.Infrastructura.DataModels;
+using PlataformaTransparencia.Modelos;
+using PlataformaTransparencia.Negocios.Home;
+
+namespace PlataformaTransparencia.Negocios.BLL.Contracts
+{
+    public class HomeContract : RespuestaContratoBase
+    {
+        private readonly TransparenciaDB _connection;
+        public ModelHomeData HomeModel { get; set; ***REMOVED***
+
+        public HomeContract(TransparenciaDB connection)
+        {
+            this.HomeModel = new ModelHomeData();
+            _connection = connection;
+    ***REMOVED***
+
+        public void Fill(bool esHome = true)
+        {
+            try {
+
+                ConsolidadosNacionalesBLL objNegocioConsolidados = new ConsolidadosNacionalesBLL(_connection);
+                this.HomeModel = objNegocioConsolidados.ObtenerDatosModeloInicio(esHome);
+                this.Status = true;
+
+        ***REMOVED***
+            catch (Exception ex) {
+                this.Status = false;
+                this.Message = "Lo sentimos, ha ocurrido un error.";
+        ***REMOVED***
+    ***REMOVED***
+
+***REMOVED***
+***REMOVED***
