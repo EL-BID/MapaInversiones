@@ -16,10 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PlataformaTransparencia.Modulo.Noticias\PlataformaTransparencia.Modulo.Noticias.csproj" />
-    <ProjectReference Include="..\PlataformaTransparencia.Modulo.Principal\PlataformaTransparencia.Modulo.Principal.csproj" />
-    <ProjectReference Include="..\PlataformaTransparencia.Infrastructura\PlataformaTransparencia.Infraestructura.csproj" />
-    <ProjectReference Include="..\PlataformaTransparencia.Modelos\PlataformaTransparencia.Modelos.csproj" />
+    <ProjectReference Include="..\MapaInversiones.Infrastructura\PlataformaTransparencia.Infrastructura.csproj" />
+    <ProjectReference Include="..\MapaInversiones.Modelos\PlataformaTransparencia.Modelos.csproj" />
+    <ProjectReference Include="..\MapaInversiones.Modulo.Noticias\PlataformaTransparencia.Modulo.Noticias.csproj" />
+    <ProjectReference Include="..\MapaInversiones.Modulo.Principal\PlataformaTransparencia.Modulo.Principal.csproj" />
   </ItemGroup>
 
 </Project>

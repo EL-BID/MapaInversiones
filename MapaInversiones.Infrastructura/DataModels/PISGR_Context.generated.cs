@@ -24,7 +24,7 @@ namespace DataModels
 {
 	/// <summary>
 	/// Database       : NuevaVisionPY
-	/// Data Source    : 20.55.34.170,5085
+	/// Data Source    : 00.55.00.170,5085
 	/// Server Version : 14.00.3370
 	/// </summary>
 	public partial class NuevaVisionPYDB : LinqToDB.Data.DataConnection

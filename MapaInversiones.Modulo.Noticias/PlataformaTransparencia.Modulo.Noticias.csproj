@@ -29,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PlataformaTransparencia.Modelos\PlataformaTransparencia.Modelos.csproj" />
+    <ProjectReference Include="..\MapaInversiones.Modelos\PlataformaTransparencia.Modelos.csproj" />
   </ItemGroup>
 
 </Project>
