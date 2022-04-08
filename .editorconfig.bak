@@ -88,3 +88,4 @@ csharp_preferred_modifier_order = public,private,override,static,readonly:sugges
 dotnet_style_qualification_for_field = false:suggestion
 #prefer properties not to be prefaced with this. or Me. in Visual Basic
 dotnet_style_qualification_for_property = false:suggestion
+
