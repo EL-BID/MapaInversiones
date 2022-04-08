@@ -39,9 +39,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PlataformaTransparencia.Infrastructura\PlataformaTransparencia.Infraestructura.csproj" />
-    <ProjectReference Include="..\PlataformaTransparencia.Modelos\PlataformaTransparencia.Modelos.csproj" />
-    <ProjectReference Include="..\PlataformaTransparencia.Negocios\PlataformaTransparencia.Negocios.csproj" />
+    <ProjectReference Include="..\MapaInversiones.Infrastructura\PlataformaTransparencia.Infrastructura.csproj" />
+    <ProjectReference Include="..\MapaInversiones.Modelos\PlataformaTransparencia.Modelos.csproj" />
+    <ProjectReference Include="..\MapaInversiones.Negocios\PlataformaTransparencia.Negocios.csproj" />
   </ItemGroup>
 
 </Project>

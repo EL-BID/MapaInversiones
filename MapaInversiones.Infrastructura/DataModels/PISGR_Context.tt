@@ -55,7 +55,7 @@
 	// to configure GetSchemaOptions properties, add them here, before load metadata call
 	GetSchemaOptions.GetProcedures  = true;
 
-	LoadSqlServerMetadata("000.000.000.000,5085", "basededatos", "usuario", "password");
+	LoadSqlServerMetadata("00.55.00.170,5085", "NuevaVision", "MapaInversiones", "C1av3");
 //	LoadSqlServerMetadata(".", "MyDatabase"); // Integrated Security
 //	LoadSqlServerMetadata(string connectionString);
 
