@@ -1,0 +1,431 @@
+﻿@page
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--MAIN BANNER-->
+<section class="banner-main">
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li><a href="#!">Presupuesto</a><i class="material-icons md-18">chevron_right</i></li>
+                            <li>Conoce el proceso presupuestario</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-12">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h2>Conoce el proceso presupuestario</h2>
+                    </div>
+                    <div class="banner-main-desc">
+                        <p>La formulación del Presupuesto General de la Nación, es responsabilidad del Poder Ejecutivo a través del Ministerio de Hacienda (MH) y su discusión y aprobación corresponde al Congreso Nacional, compuesto por las Cámaras de Senadores y Diputados. La ejecución del mismo es responsabilidad de cada uno de los Organismos y Entidades del Estados </p>
+                        <!--<p class="text-bold">Las políticas públicas para construir el Paraguay del 2030 se concentrarán en tres grandes ejes estratégicos:</p>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row navs-shortcuts">
+
+        <div class="" id="navs-header">
+            <a class="btn-section" href="#Presupuesto">
+                <span class="ic-shortcut"><i class="material-icons md-24">payments</i></span>
+                <span class="text-btn">Qué es el Presupuesto?</span>
+            </a>
+            <a class="btn-section" href="#Crecimiento">
+                <span class="ic-shortcut"><i class="material-icons md-24">stacked_line_chart</i></span>
+                <span class="text-btn">Perspectiva de crecimiento</span>
+            </a>
+            <a class="btn-section" href="#Variables">
+                <span class="ic-shortcut"><i class="material-icons md-24">bubble_chart</i></span>
+                <span class="text-btn">Principales variables</span>
+            </a>
+            <a class="btn-section" href="#Fuente">
+                <span class="ic-shortcut"><i class="material-icons md-24">account_balance</i></span>
+                <span class="text-btn">Fuente de Financiamiento</span>
+            </a>
+            <a class="btn-section" href="#Financiamiento">
+                <span class="ic-shortcut"><i class="material-icons md-24">track_changes</i></span>
+                <span class="text-btn">Distribución del Presupuesto</span>
+            </a>
+        </div>
+    </div>
+</section>
+<!--OBJETIVO ESTRATEGICO-->
+<!--1.Qué es el Presupuesto General de la Nación-->
+<section class="section" id="Presupuesto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2 class="mb-3">Qué es el Presupuesto General de la Nación</h2>
+                    <div class="section-subheading">
+                        <p>El Presupuesto General de la Nación (PGN) es el conjunto de ingresos y gastos planeados por el Gobierno en un año determinado.</p>
+                    </div>
+                    <div class="PreVideo">
+                        <video width="896" height="504" controls poster="img/VideosPresupuesto.jpg"  >
+                            <source src="https://ppr.hacienda.gov.py/wp-content/uploads/2021/09/Etapas-del-Ciclo-Presupuestario.mp4" type="video/mp4">
+                        </video>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--2. Perspectiva de crecimiento de Paraguay-->
+<section class="section gray-bg" id="Crecimiento">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>Perspectiva de crecimiento de Paraguay</h2>
+                </div>
+                <div class="preBody">
+                    <p>
+                        El Presupuesto General de la Nación se elabora considerando las proyecciones macroeconómicas, entre las cuales se encuentra el crecimiento económico.
+                        Para el año 2021, el Banco Central del Paraguay (BCP), estima un crecimiento del PIB del 3,8%, siendo uno de los países que más crecerá en la región.
+
+                    </p>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <h4>
+                                Crecimiento dentro<br />de una mirada regional
+                            </h4>
+                            <p>Dentro del contexto regional, específicamente en el MERCOSUR, la recuperación de Paraguay se sustenta en:</p>
+                            <div class="planInf">
+                                <ul>
+                                    <li><i class="material-icons md-24">play_circle_outline</i>Sólida posición fiscal.</li>
+                                    <li><i class="material-icons md-24">play_circle_outline</i>Sólida base productiva, tales como el sector agrícola y ganadero, producción de energía, etc.</li>
+                                    <li><i class="material-icons md-24">play_circle_outline</i>Recuperación del consumo y la inversión.</li>
+                                </ul>
+                            </div>
+                            <p>
+                                Estos constituyen los pilares fundamentales para lograr revertir la situación adversa iniciada con la pandemia.
+
+                            </p>
+                        </div>
+                        <div class="col-lg-9">
+                            <img class="img-fluid" src="../img/Grafica1.jpg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--3. Principales variables macroeconómicas-->
+<section class="section" id="Variables">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>Principales variables macroeconómicas</h2>
+                </div>
+                <div class="row gy-2">
+
+                    <div class="col-lg-5">
+                        <div class="card shadow border-0 h-100">
+                            <div class="card-body">
+                                <img src="img/svg-icons/Ico_1.svg" />
+                                <h4>PIB Nominal</h4>
+                                <h5 class="rHlg">
+                                    284.223 miles de millones de G
+                                </h5>
+                                <h6>USD 40.649 millones</h6>
+                                <p>Crecimiento nominal: 7.5% - Crecimiento real: 3.8%</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="card shadow border-0 h-100">
+                            <div class="card-body">
+                                <img class="img-fluid" src="img/svg-icons/Ico_2.svg" />
+                                <h4>Importaciones Reg. de Bienes</h4>
+                                <h5 class="rHlg">
+                                    USD 11.799  millones
+                                </h5>
+                                <p>
+                                    Crecimiento nominal: 5,4%
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="card shadow border-0 h-100">
+                            <div class="card-body">
+                                <img src="img/svg-icons/Ico_3b.svg" />
+                                <h4>Inflación</h4>
+                                <h5 class="rHlg">4%</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="card shadow border-0 h-100">
+                            <div class="card-body">
+                                <img class="img-fluid" src="img/svg-icons/Ico_3.svg" />
+                                <h4>Tipo de cambio nominal</h4>
+                                <h5 class="rHlg">G/USD 6.992</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--4. Fuente de Financiamiento y Distribución del Presupuesto-->
+<section class="section gray-bg" id="Fuente">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>Fuente de Financiamiento</h2>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="preBody">
+                    <p>
+                        Constituye el ordenamiento de los recursos públicos, mediante la identificación de la fuente de origen que financiará los mismos y que tiene como objetivo facilitar el análisis y distribución de los recursos asignados a los Organismos y Entidades del Estado.
+                    </p>
+                    <div class="row">
+                        <div class="col-lg-3 gy-4">
+                            <h4>Estimación de Ingresos</h4>
+                            <div class="planInf">
+                                <ul>
+                                    <li><i class="material-icons md-24">play_circle_outline</i>El proyecto de presupuesto para el año 2022 incluye una previsión de ingresos tributarios de G. 27.485 mil millones, el cual constituye una variación de 8,2% más de lo estimado para el año 2021.</li>
+                                    <li><i class="material-icons md-24">play_circle_outline</i>La previsión de ingresos tributarios con respecto al cierre fiscal del año 2021 esperado es un 11,7 % más de lo recaudado en el año 2020.</li>
+                                    <li><i class="material-icons md-24">play_circle_outline</i>La recaudación tributaria al año 2022, representaría el 9,8 % del PIB.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 text-center">
+                            <img class="img-fluid" src="../img/Graph2.jpg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 gy-4">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="cardR shadow border-0 h-100">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <img src="img/svg-icons/Ico_4.svg" />
+                                </div>
+                                <div>
+                                    <h4 class="text-center">Recursos del Tesoro</h4>
+                                    <p class="text-center">
+                                        Corresponde a los recursos de la Tesorería General administrada por la Dirección General del Tesoro Público del Ministerio de Hacienda recaudados y obtenidos durante el ejercicio fiscal destinados para el financiamiento de los gastos e inversiones de los Organismos y Entidades del Estado.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="cardR shadow border-0 h-100">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <img src="img/svg-icons/Ico_5.svg" />
+                                </div>
+                                <h4 class="text-center">Recursos del Crédito Público</h4>
+                                <p class="text-center">
+                                    Corresponde a los recursos provenientes del endeudamiento público interno y externo, por la colocación de títulos y valores o por el desembolso de préstamos. Comprende el crédito público interno y el crédito público externo, celebrados dentro del marco legal y reglamentario de la Ley N° 1535/99 “DE ADMINISTRACION FINANCIERA DEL ESTADO”.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="cardR shadow border-0 h-100">
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <img src="img/svg-icons/Ico_6.svg" />
+                                </div>
+                                <div>
+                                    <h4 class="text-center">Recursos Propios</h4>
+                                    <p class="text-center">
+                                        Comprende los recursos pertenecientes a los organismos de la Administración Central y Entidades Descentralizadas, originados por disposición legal, coparticipación tributaria y no tributaria, transferencias, donaciones u otros conceptos. Incluye los ingresos generados por la producción de bienes o la prestación de servicios de determinados Organismos y Entidades del Estado.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+</section>
+<section class="section" id="Financiamiento">
+    <div class="container">
+        <div class="row gy-4 col-12">
+            <h2>Distribución del Presupuesto</h2>
+            <p>
+                La distribución del presupuesto sirve para ordenar las transacciones financieras y facilitar el análisis de la política fiscal y la programación, ejecución y control del presupuesto.
+                Los gastos se clasifican atendiendo a las finalidades que persiguen; la clasificación del gasto según su objeto determina la naturaleza de los bienes servicios que el Gobierno adquiere para desarrollar sus actividades; la clasificación económica del gasto determina el destino del mismo y la clasificación funcional del gasto determina las finalidades específicas, según los propósitos inmediatos de la actividad gubernamental.
+            </p>
+            <h5 class="text-center">Clasificación por:</h5>
+            <div class="col-lg-6">
+                <div class="cardR shadow border-0">
+                    <div class="card-body">
+                        <div class="disIcoMain text-center"><img src="img/svg-icons/Ico_4.svg" /></div>
+                        <h4 class="text-center">Grupo de gasto</h4>
+                        <div class="disList">
+                            <ul>
+                                <li><i class="material-icons md-24">play_circle_outline</i>Servicios Personales</li>
+                                <li><i class="material-icons md-24">play_circle_outline</i>Servicios no Personales</li>
+                                <li><i class="material-icons md-24">play_circle_outline</i>Bienes de Consumo e Insumos</li>
+                                <li><i class="material-icons md-24">play_circle_outline</i>Bienes de Cambio</li>
+                                <li><i class="material-icons md-24">play_circle_outline</i>Inversión Física</li>
+                                <li><i class="material-icons md-24">play_circle_outline</i>Inversión Financiera</li>
+                                <li><i class="material-icons md-24">play_circle_outline</i>Servicios de la deuda Pública</li>
+                                <li><i class="material-icons md-24">play_circle_outline</i>Transferencias</li>
+                                <li><i class="material-icons md-24">play_circle_outline</i>Otros Gastos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="cardR shadow border-0">
+                    <div class="card-body">
+                        <div class="disIcoMain text-center"><img src="img/svg-icons/Ico_5.svg" /></div>
+                        <h4 class="text-center">Clasificación Económica</h4>
+                        <div class="disBody">
+                            <div class="row">
+                                <div class="col-lg-2"><img src="img/svg-icons/Ico_3c.svg" alt="icono decorativo" /></div>
+                                <div class="col-lg-10">
+                                    <div class="">
+                                        <span class="distitle">Gastos Corrientes</span><br />
+                                        Los créditos asignados a gastos corrientes preverán la atención de los programas que tienen por objeto el costo de funcionamiento u operativo de los Organismos y Entidades del Estado, los gastos financieros del servicio de la deuda pública, aportes y/o transferencias corrientes y otros gastos.
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="disBody">
+                            <div class="row">
+                                <div class="col-lg-2"><img src="img/svg-icons/Ico_3d.svg" alt="icono decorativo" /></div>
+                                <div class="col-lg-10">
+                                    <div class="wrap-text">
+                                        <span class="distitle">Gastos de Capital</span><br />
+                                        Son gastos destinados a la adquisición o producción de bienes materiales e inmateriales y a inversiones financieras que incrementan el activo del Estado y sirven como instrumento para la producción de bienes y servicios. Incluyen, de igual forma, las transferencias de capital, gastos e inversión financiera, que responden a la consecución de objetivos de política y no a lograr rentabilidad en la aplicación de excedentes financieros.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="disBody">
+                        <div class="row">
+                            <div class="col-lg-2"><img src="img/svg-icons/Ico_8.svg" alt="icono decorativo" /></div>
+                            <div class="col-lg-10">
+                                <div class="wrap-text">
+                                    <span class="distitle">Gastos de Financiamiento</span><br />
+                                    Son gastos destinados a la atención de las amortizaciones de capital, del servicio de la deuda y otros de naturaleza financiera. Comprende la amortización de deuda instrumentada mediante títulos, valores, bonos, colocados en el mercado interno o externo, así como la amortización de préstamos no instrumentada adquirida con el sector privado, público y externo.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!--RELATED INFO-->
+<section class="relatedInfo">
+    <div class="container">
+        <!--LINKS OTRAS SECCIONES-->
+        <div class="row">
+            <!--LEFT COLUMN-->
+            <div class="col-lg-8">
+                <!--LINKS seccion infografia planificacion-->
+                <h2>Conoce</h2>
+                <div class="wrap-cta py-5">
+                    <a href="../PresupuestoGeneral" class="py-5 mb-5 px-0">
+                        <div class="h3">El Presupuesto General de la Nación (PGN) <i class="material-icons md-18">arrow_forward</i> </div>
+                    </a>
+                </div>
+
+                <!--LINKS seccion infografia planificacion-->
+
+                <div class="wrap-cta py-5">
+                    <p class="card-title mb-4">Información suministrada por:</p>
+                    <a href="https://www.hacienda.gov.py/web-hacienda/index.php" target="_blank">
+                        <img class="img-fluid" src="../img/logoHaciendaB.png" alt="ir a Secretaria tecnica de planeación" />
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h2>Explora</h2>
+                <p>Entidades y sus planes operativos</p>
+                <ul id="entidadesPlanNacional" class="list-group list-group-flush">
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Call to action-->
+<!--HELP CENTER SHORTCUT-->
+<div id="helpCenter"></div>
+<script src="js/comunes_infografias.js"></script>
+
+<script>
+    $(document).ready(function () {
+        obtListadoEntidades();
+    });
+
+    window.onscroll = function () { myFunction() };
+
+    var header = document.getElementById("navs-header");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+            header.classList.add("bg-white");
+        } else {
+            header.classList.remove("sticky");
+            header.classList.remove("bg-white");
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

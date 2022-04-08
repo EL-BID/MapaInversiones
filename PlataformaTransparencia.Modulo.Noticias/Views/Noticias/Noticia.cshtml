@@ -1,0 +1,89 @@
+﻿@inject OrchardCore.IOrchardHelper Orchard
+@model PlataformaTransparencia.Modelos.NoticiaModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var blogPost = await Orchard.GetContentItemByIdAsync(Model.Id);
+}
+<!--MAIN BANNER-->
+<section class="banner-main-asc">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="/">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>
+                                <a href="/Noticias">Noticias</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>
+                                @blogPost.DisplayText
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+        <div class="row justify-content-center">
+
+            <!--<div class="col-lg-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h1>@blogPost.DisplayText</h1>
+                    </div>
+
+                </div>
+
+            </div>-->
+
+        </div>
+    </div>
+</section>
+<!--main content-->
+<main class="news">
+    <!-- Page Content-->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="news-main-title">
+                        <h1>@blogPost.DisplayText</h1>
+                    </div>
+                    <div class="image-Container">
+                        @{
+                            var imgpath = "img/Pic001.jpg";
+                            if (@blogPost.Content.BlogPost.Image.Paths.Count != 0)
+                            {
+                                imgpath = @blogPost.Content.BlogPost.Image.Paths[0];
+                                <img class="img-fluid-news" src=@Orchard.AssetUrl((string)imgpath) alt="...">
+                            }
+                            else
+                            {
+                                <img class="img-fluid-news" src=@imgpath alt="...">
+                            }
+                        }
+
+                    </div>
+                    <div class="row justify-content-center" style="text-align:justify">
+
+                        <p align="justify">@await Orchard.MarkdownToHtmlAsync((string)blogPost.Content.MarkdownBodyPart.Markdown)</p>
+
+                    </div>
+                </div>
+                <!--<div class="col-lg-4">
+        <h2>Noticias Relacionadas</h2>
+    </div>-->
+            </div>
+            
+            
+        </div>
+    </section>
+
+</main>

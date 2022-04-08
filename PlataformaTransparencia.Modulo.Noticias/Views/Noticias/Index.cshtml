@@ -1,0 +1,168 @@
+﻿@inject OrchardCore.IOrchardHelper Orchard
+<!--MAIN BANNER-->
+<section class="banner-main-asc mb-0">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="/">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>Noticias</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h1>Noticias</h1>
+                    </div>
+                    <div class="banner-main-desc">
+                        @*<p>Lorem ipsum dolor sit amet, consetetur sadipscing elit, olor sit amet, consetetur sadipscing .</p>*@
+                        
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<!--main content-->
+<main class="news">
+    <!-- Page Content-->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="section-heading heading-left">
+                <h2>Destacados</h2>
+            </div>
+            @{
+                var noticias = await Orchard.GetRecentContentItemsByContentTypeAsync("BlogPost", 10);
+            }
+            <div class="card border-0 shadow rounded-3 overflow-hidden">
+                <div class="card-body p-0">
+                    <div class="row gx-0">
+                        <div class="col-lg-6 col-xl-5 py-lg-5">
+                            <div class="p-4 p-md-5">
+                                @{
+                                    var compara = string.Format("{0}", @noticias.First().Content.BlogPost.Tags);
+                                    if (compara != "{}")
+                                    {
+                                        @foreach (var tag in @noticias.First().Content.BlogPost.Tags.TagNames)
+                                        {
+                                            <div class="badge bg-primary bg-gradient rounded-pill mb-2">@tag</div>
+                                        }
+                                    }
+                                }
+                                <div class="h2 fw-bolder">@noticias.First().DisplayText</div>
+                                <p>@noticias.First().Content.BlogPost.Subtitle.Text</p>
+                                <a class="stretched-link text-decoration-none" href="Noticia/@noticias.First().ContentItemId">
+                                    Ver más...
+                                    <i class="bi bi-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-xl-7">
+                            @{
+                                var firstpath = "img/Pic001.jpg";
+                                if (@noticias.First().Content.BlogPost.Image.Paths.Count != 0)
+                                {
+                                    firstpath = @noticias.First().Content.BlogPost.Image.Paths[0];
+                                    <div class="bg-featured-blog" style="background-image: url('@Orchard.AssetUrl((string)firstpath)')"></div>
+                                }
+                                else
+                                {
+                                    <div class="bg-featured-blog" style="background-image: url('@firstpath')"></div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @{
+            var menu = await Orchard.GetContentItemByHandleAsync("alias:main-menu");
+        }
+    </section>
+    <section class="other-news">
+        <div class="container">
+            <div class="row gx-5">
+                <div class="col-lg-8">
+
+                    <div class="cards-News-container">
+                        @foreach (var noticia in noticias)
+                        {
+
+                            <!--NOTICIA-->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-4 col-lg-3">
+                                        @{
+                                            var imgpath = "img/Pic001.jpg";
+                                            if (noticia.Content.BlogPost.Image.Paths.Count != 0)
+                                            {
+                                                imgpath = noticia.Content.BlogPost.Image.Paths[0];
+                                                <img class="img-fluid" src=@Orchard.AssetUrl((string)imgpath) alt="...">
+                                            }
+                                            else
+                                            {
+                                                <img class="img-fluid" src=@imgpath alt="...">
+                                            }
+                                        }
+
+                                    </div>
+                                    <div class="col-md-8 col-lg-9">
+                                        <div class="card-body">
+                                            @{
+                                                var x = string.Format("{0}", noticia.Content.BlogPost.Tags);
+                                                if (x != "{}")
+                                                {
+                                                    foreach (var tag in noticia.Content.BlogPost.Tags.TagNames)
+                                                    {
+                                                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">@tag</div>
+                                                    }
+                                                }
+                                            }
+                                            <a href="/Noticia/@noticia.ContentItemId"><h5 class="card-title">@noticia</h5></a>
+                                            <p class="card-text">@noticia.Content.BlogPost.Subtitle.Text</p>
+                                            <p class="card-text"><small class="text-muted">Creado: @noticia.CreatedUtc</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-4">
+
+                    <div class="section-heading heading-left">
+                        <h2>Sigue la conversación</h2>
+                        <div class="linebottom"></div>
+                    </div>
+                    <div class="section-twitter">
+                        <div class="content-twitter">
+                            <a class="twitter-timeline" data-height="540" href="https://twitter.com/Haciendapy?ref_src=twsrc%5Etfw">Tweets by Haciendapy</a>
+                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</main>

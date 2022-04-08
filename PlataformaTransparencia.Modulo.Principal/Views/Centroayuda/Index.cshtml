@@ -1,0 +1,353 @@
+﻿@page
+
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var displaypreguntas = "";
+    var displaycontacto = "";
+    if (ViewBag.tab == 3|| ViewBag.tab == 31 || ViewBag.tab == 32 || ViewBag.tab == 33)
+    { displaypreguntas = "display:none";
+        displaycontacto = "display:block";
+    }
+    else
+    { displaycontacto = "display:none";
+        displaypreguntas = "display:block";
+    }
+
+}
+
+<!--MAIN BANNER-->
+<section class="banner-main-asc mb-0">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="/">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>Centro de Ayuda</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="banner-main-info pb-0">
+                    <div class="banner-main-title">
+                        <h2>Centro de ayuda</h2>
+                    </div>
+                    <div class="banner-main-desc">
+                        <!--<p>Lorem ipsum dolor sit amet consectetur adipiscing elit, rutrum vulputate fermentum ullamcorper litora vel, suspendisse ac consequat rhoncus lectus ligula.</p>-->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<div class="subMenuGlosario">
+    <div class="container">
+        <div class="row navs-shortcuts justify-content-center m-0">
+            <div class="" id="navs-header">
+                @if (ViewBag.tab == 0 || ViewBag.tab == null)
+                {
+                    <a class="btn-section focused-btn" id="preguntas" style="display: inline;" href="#!">
+                        Preguntas Frecuentes
+                    </a>
+                    <a class="btn-section" id="glosario" style="display: inline;" href="#!">
+                        Glosario
+                    </a>
+                    <a class="btn-section" id="contacto"  href="#!">
+                        Contáctenos
+                    </a>
+                }
+                else
+                {
+                    <a class="btn-section " id="preguntas" style="display: inline;" href="#!">
+                        Preguntas Frecuentes
+                    </a>
+                    <a class="btn-section" id="glosario" style="display: inline;" href="#!">
+                        Glosario
+                    </a>
+                    <a class="btn-section focused-btn" id="contacto" href="#!">
+                        Contáctenos
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!--main content-->
+<section class="">
+    <div class="container">
+
+        <div class="sect-tab preguntas" id="preguntas" style="@displaypreguntas">
+            <div class="row">
+                @{ var preguntas = await Orchard.GetContentItemByHandleAsync("alias:Preguntas");
+                                List<string> categorias = new List<string>(); }
+                <!--LEFT COLUMN-->
+                <div class="col-lg-3">
+                    @foreach (var pregunta in preguntas.Content.BagPart.ContentItems)
+                    {
+        @foreach (var termId in pregunta.Pregunta.Categoria.TermContentItemIds)
+        {
+            string term = termId + "";
+            string taxonomy = pregunta.Pregunta.Categoria.TaxonomyContentItemId + "";
+            var display = await Orchard.GetTaxonomyTermAsync(taxonomy, term);
+            if (!categorias.Contains(term))
+            {
+                categorias.Add(term);
+    <div class="categoriapregunta" id="@term">
+        <span class="h5">@display</span>
+    </div>}
+                    }            }
+                </div>
+                <!--RIGHT COLUMN-->
+                <div class="col-lg-8">
+
+
+                    @foreach (var pregunta in preguntas.Content.BagPart.ContentItems)
+                    {
+        @foreach (var termId in pregunta.Pregunta.Categoria.TermContentItemIds)
+        {
+            string term = termId + "";
+            string taxonomy = pregunta.Pregunta.Categoria.TaxonomyContentItemId + "";
+            var display = await Orchard.GetTaxonomyTermAsync(taxonomy, term);
+
+    <div class="pregunta @term">
+        <h4>@pregunta.DisplayText</h4>
+        <div>@Html.Raw(pregunta.HtmlBodyPart.Html)</div>
+    </div>}            }
+
+
+                </div>
+            </div>
+        </div>
+        <!--GLOSARIO-->
+        <div class="sect-tab glosario" id="glosario" style="display:none">
+            <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-8">
+
+                    @for (char c = 'A'; c < 'Z'; c++)
+                    {
+        <div class="indice" id="@c" style="display:block; float:left">
+            @c 
+        </div>            }
+                </div>
+            </div>
+            <div class="row">
+                @{ var glosario = await Orchard.GetContentItemByHandleAsync("alias:PalabrasGlosario"); }
+                <!--LEFT COLUMN-->
+                <div class="col-lg-2">
+                </div>
+                <!--RIGHT COLUMN-->
+                <div class="col-lg-8">
+                    @foreach (var palabra in glosario.Content.BagPart.ContentItems)
+                    {
+                        string p = @palabra.DisplayText.ToString().Substring(0, 1);
+        <div class="palabra @p" id="">
+            <br />
+            <h4>@palabra.DisplayText</h4>
+            <div>@Html.Raw(palabra.HtmlBodyPart.Html)</div>
+
+        </div>            }
+
+
+                </div>
+            </div>
+        </div>
+        
+        
+        <!--CONTACT FORM-->
+                    <div class="sect-tab contacto" id="contacto" style="@displaycontacto">
+                        <div class="row justify-content-center">
+                            @if (ViewBag.tab == 0 || ViewBag.tab == 3)
+                            {
+                        <div class="col-lg-8 content-item">
+                            <div class="row mb-4">
+                                <small>Los campos marcados con (*) son obligatorios</small>
+                            </div>
+
+                            <form action="/workflows/Invoke?token=CfDJ8BOZMx9v-GRFhYEsfb8t9dp8HCromD5p7KpuNv4-ncvMxEoMN3mgm68HEOQYnTg7kQqIuZp6bcsTnAroTn9kkLEe-HDF7ZGzbGcBQk8EN-uZbiAOTNH3tQttniCQdfSTExq-SMH7JZZ7K3i218AmNK4MYEKhy-cBp6x2ECVKNajAsaI10sn99wUaFHyJlRrq2nb6nR2wiGlb6YCJ1rskLbF2ngi_zGEM-nrywuhAuMPT" method="post" class="contact-form">
+
+                                <!-- Begin hidden Field for send form -->
+                                <input type="hidden" name="form_subject" value="Contact form">
+                                <!-- End hidden Field for send form -->
+                                <div class="row gutters-default">
+                                    <div class="col-sm-6 col-12">
+                                        <div class="form-field">
+                                            <label for="contact-name" class="form-label">Nombre *</label>
+                                            <input type="text" class="form-field-input" name="Nombre" value="" autocomplete="off" required="required" id="contact-name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-12">
+                                        <div class="form-field">
+                                            <label for="contact-name" class="form-label">Apellido *</label>
+                                            <input type="text" class="form-field-input" name="Apellido" value="" autocomplete="off" required="required" id="contact--last-name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-12">
+                                        <div class="form-field">
+                                            <label for="contact-email" class="form-label">Email *</label>
+                                            <input type="email" class="form-field-input" name="Email" value="" autocomplete="off" required="required" id="contact-email">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-12">
+                                        <div class="form-field">
+                                            <label for="contact-phone" class="form-label">Teléfono</label>
+                                            <input type="tel" class="form-field-input mask-phone" name="Telefono" value="" autocomplete="off" id="contact-phone">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-field">
+                                            <label for="contact-subject" class="form-label">Asunto *</label>
+                                            <input type="text" class="form-field-input" name="Asunto" value="" autocomplete="off" required="required" id="contact-subject">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-field">
+                                            <label for="contact-message" class="form-label">Escriba su mensaje *</label>
+                                            <textarea name="Mensaje" class="form-field-input" id="contact-message" cols="30" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                    @Html.AntiForgeryToken()
+                                    <div class="col-12">
+                                        <div class="form-btn">
+                                            <button type="submit" class="btn btn-cards btn-w240"><span>Enviar</span> <i class="material-icons md-24">send</i> </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div> 
+                        }
+                    else if (ViewBag.tab == 31)
+                    {
+                        <div class="col-lg-8 content-item">
+                            <h2>Mensaje enviado</h2>
+                            <div class="col-12">
+                                <div class="form-btn">
+                                    <a href="../CentroAyuda?id=3" class="btn btn-with-icon ripple"><span>Aceptar</span></a>
+                                </div>
+                            </div>
+                        </div> 
+                        }
+                            else if (ViewBag.tab == 32)
+                            {
+                        <div class="col-lg-8 content-item">
+                            <h2>Error en el guardado </h2>
+                            <div class="col-12">
+                                <div class="form-btn">
+                                    <a href="../CentroAyuda?id=3" class="btn btn-with-icon ripple"><span>Aceptar</span></a>
+                                </div>
+                            </div>
+                        </div> 
+                        }
+                            else if (ViewBag.tab == 33)
+                            {
+                        <div class="col-lg-8 content-item">
+                            <h2>Error en el envio de correo</h2>
+
+                            <div class="col-12">
+                                <div class="form-btn">
+                                    <a href="../CentroAyuda?id=3" class="btn btn-with-icon ripple"><span>Aceptar</span></a>
+                                </div>
+                            </div>
+                        </div>
+                        }
+
+
+                        </div>
+                    </div>
+                                </div>
+</section>
+
+@*<script type="text/javascript" src="../../js/centroayuda_aux.js"></script>*@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+      var enlacePregunta = document.getElementById("preguntas");
+      if (enlacePregunta.style.display != "none") {
+        //Muestra las preguntas de la primera categoria
+        var c = document.getElementsByClassName("categoriapregunta");
+        id = "pregunta " + c[0].id;
+          Mostrar("pregunta", id)
+          var p = document.getElementById(c[0].id);
+          p.className = "categoriapregunta focused-cat"
+        //Muestra las palabras del glosario de la primera letra
+          Mostrar("palabra", "palabra A")
+          var g = document.getElementById('A');
+          g.className = "indice focused-glo"
+      }
+      else {
+          Mostrar("sect-tab", "sect-tab contacto");
+          
+      }
+       $('.section-question').hide();
+        
+
+    });
+
+    $(document).on('click', '.categoriapregunta', function (e) {
+        id = "pregunta " + this.id;
+        Mostrar('pregunta', id);
+        var y = document.getElementsByClassName('categoriapregunta');
+        var i;
+        for (i = 0; i < y.length; i++) {
+            y[i].className = "categoriapregunta";
+        }
+        this.className = "categoriapregunta focused-cat"
+    });
+
+    $(document).on('click', '.btn-section', function (e) {
+        id = "sect-tab " + this.id;
+        Mostrar('sect-tab', id);
+        var y = document.getElementsByClassName('btn-section');
+        var i;
+        for (i = 0; i < y.length; i++) {
+            y[i].className = "btn-section";
+        }
+        this.className = "btn-section focused-btn"
+    });
+
+
+    $(document).on('click', '.indice', function (e) {
+        id = "palabra " + this.id;
+        Mostrar('palabra', id);
+        var y = document.getElementsByClassName('indice');
+        var i;
+        for (i = 0; i < y.length; i++) {
+            y[i].className = "indice";
+        }
+        this.className = "indice focused-glo"
+    });
+  function Mostrar(ocultar, mostrar) {
+    console.log("Ocultar:" + ocultar);
+    console.log("Mostrar:" + mostrar);
+        var y = document.getElementsByClassName(ocultar);
+        var i;
+        for (i = 0; i < y.length; i++) {
+            y[i].style.display = "none";
+        }
+        var x = document.getElementsByClassName(mostrar);
+        var i;
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "block";
+        }
+    }
+</script>

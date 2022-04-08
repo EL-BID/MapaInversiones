@@ -1,0 +1,550 @@
+﻿@page
+
+@model PlataformaTransparencia.Modelos.ModelPlanData
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
+    var LabelRecursosAsignados = "";
+    var TituloRecursosAsignados = "";
+    var LabelEntidadesAportan = "";
+    var TituloEntidadesAportan = "";
+    var LabelNotasAlPie = "";
+    var TituloNotasAlPie = "";
+
+}
+@foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
+{
+    if (@etiqueta.AliasPart.Alias == "RecursosAsignados")
+    {
+        LabelRecursosAsignados = @etiqueta.HtmlBodyPart.Html;
+        TituloRecursosAsignados = @etiqueta.TitlePart.Title;
+    }
+    else if (@etiqueta.AliasPart.Alias == "EntidadesAportan")
+    {
+        LabelEntidadesAportan = @etiqueta.HtmlBodyPart.Html;
+        TituloEntidadesAportan = @etiqueta.TitlePart.Title;
+    }
+    else if (@etiqueta.AliasPart.Alias == "NotasAlPie")
+    {
+        LabelNotasAlPie = @etiqueta.HtmlBodyPart.Html;
+        TituloNotasAlPie = @etiqueta.TitlePart.Title;
+    }
+}
+<head>
+
+</head>
+<!--MAIN BANNER-->
+<section class="banner-main-stp">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li><a href="#!">Planificación</a><i class="material-icons md-18">chevron_right</i></li>
+                            <li>Plan Nacional de Desarrollo Paraguay 2030</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h2>Plan Nacional de Desarrollo Paraguay 2030</h2>
+                    </div>
+                    <div class="banner-main-desc">
+                        <p>
+                            El Plan Nacional de Desarrollo Paraguay 2030 es el instrumento de planificación de largo plazo adoptado por la República del Paraguay a partir del año 2014, este instrumento orienta las acciones públicas a corto, mediano y largo plazo. Responde a un mandato constitucional, el cual establece que los planes de desarrollo son de cumplimiento obligatorio para el sector público e indicativo para el sector privado. El PND Paraguay 2030 fue aprobado mediante el Decreto N° 2.794/2014, y en el mismo se establece que rige por un período de 15 años (2014-2030).
+                        </p>
+                        <!--<p class="text-bold">Las políticas públicas para construir el Paraguay del 2030 se concentrarán en tres grandes ejes estratégicos:</p>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--NAVIGATION ON PAGE-->
+    <div class="row navs-shortcuts">
+
+        <div class="" id="navs-header">
+            <a class="btn-section" href="#s0">
+                <span class="ic-shortcut"><i class="material-icons md-24">calendar_view_month</i></span>
+                <span class="text-btn">Marco estratégico</span>
+            </a>
+            <a class="btn-section" href="#s1">
+                <span class="ic-shortcut"><i class="material-icons md-24">payments</i></span>
+                <span class="text-btn">Orientación PGN - PND</span>
+            </a>
+            <a class="btn-section" href="#s2">
+                <span class="ic-shortcut"><i class="material-icons md-24">track_changes</i></span>
+                <span class="text-btn">Ejes, objetivos e indicadores</span>
+            </a>
+            <a class="btn-section" href="#s4">
+                <span class="ic-shortcut"><i class="material-icons md-24">account_balance</i></span>
+                <span class="text-btn">Entidades</span>
+            </a>
+
+        </div>
+    </div>
+</section>
+<section class="section" id="s0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12"><h2 class="mb-5">Marco estratégico</h2></div>
+            <div class="col-lg-3">
+                <p class="mb-4">El PND Paraguay 2030 se compone de 16 objetivos estratégicos que resultan de la interacción de sus 4 ejes estratégicos y 4 líneas transversales, los cuales representan el marco de intervención de programas y proyectos en materia de política social, económica, ambiental e institucional.</p>
+                <div class="tags">
+                    <span class="badge rounded-pill Outlinetag">
+                        <span class="circle c1"></span><b>Política Social</b>
+                    </span>
+                    <span class="badge rounded-pill Outlinetag">
+                        <span class="circle c2"></span><b>Política Económica</b>
+                    </span>
+                    <span class="badge rounded-pill Outlinetag">
+                        <span class="circle c3"></span><b>Política Ambiental</b>
+                    </span>
+                    <span class="badge rounded-pill Outlinetag">
+                        <span class="circle c4"></span><b>Política Institucional</b>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="table-responsive-outer">
+                    <div class="table-responsive">
+                        <table class="table focusable">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="4" class="text-center border1">Líneas Transversales</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-bold b1 bg-alice">Ejes estratégicos</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+
+                                            <div class="tit-lt">
+                                                <small>Linea A</small><br />
+                                                Igualdad de oportunidades
+                                            </div>
+                                            <!-- Link to open the modal -->
+                                            <p><a href="#m1" rel="modal:open"><i class="material-icons md-24">info</i></a></p>
+
+                                            <!--<a href="#lt1" class="btn popup8_open"><span>+</span></a>-->
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+
+                                            <div class="tit-lt"><small>Linea B</small><br /> Gestión pública eficiente y transparente</div>
+                                            <p><a href="#m2" rel="modal:open"><i class="material-icons md-24">info</i></a></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="tit-lt"><small>Linea C</small><br /> Ordenamiento y desarrollo territorial</div>
+                                            <p><a href="#m3" rel="modal:open"><i class="material-icons md-24">info</i></a></p>
+                                        </div>
+                                        
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="tit-lt"><small>Linea D</small><br /> Sostenibilidad ambiental</div>
+                                            <p><a href="#m4" rel="modal:open"><i class="material-icons md-24">info</i></a></p>
+                                        </div>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ax1">
+                                        <div class="d-flex">
+                                            <div class="icon-Eje"><img src="../img/ax-1_white.svg" alt="icono Eje 1" /></div>
+                                            <div class="tit-axis">
+                                                <span class="text-bold">Eje 1</span><br />
+                                                <small>Reducción de probreza y desarrollo social</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c1">
+                                            <span class="t-number">1.1</span> Lograr un desarrollo social equitativo
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c1">
+                                            <span class="t-number">1.2</span> Brindar servicios sociales de calidad
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c1">
+                                            <span class="t-number">1.3</span> Alcanzar un desarrollo local participativo
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c1">
+                                            <span class="t-number">1.4</span> Desarrollar un hábitat adecuado y sostenible
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ax2" valign="middle">
+                                        <div class="d-flex">
+                                            <div class="icon-Eje"><img src="../img/ax-2_white.svg" alt="icono Eje 2" /></div>
+                                            <div class="tit-axis">
+                                                <span class="text-bold">
+                                                    Eje 2
+                                                </span>
+                                                <br />
+                                                <small>Crecimiento económico inclusivo</small>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c1">
+                                            <span class="t-number">2.1</span> Promover el empleo y la seguridad social
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c2">
+                                            <span class="t-number">2.2</span> Propiciar la competitividad y la innovación
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c2">
+                                            <span class="t-number">2.3</span> Ampliar la regionalización y la diversificación productiva
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c3">
+                                            <span class="t-number">2.4</span> Valorizar el capital ambiental
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ax3" valign="middle">
+                                        <div class="d-flex">
+                                            <div class="icon-Eje"><img src="../img/ax-3_white.svg" alt="icono Eje 3" /></div>
+                                            <div class="tit-axis">
+                                                <span class="text-bold">
+                                                    Eje 3
+                                                </span>
+                                                <br />
+                                                <small>Proyección de Paraguay en el mundo</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c1">
+                                            <span class="t-number">3.1</span> Garantizar igualdad de oportunidades en un mundo globalizado
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c2">
+                                            <span class="t-number">3.2</span> Impulsar la atracción de inversiones, comercio exterior, turismo e imagen país
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c2">
+                                            <span class="t-number">3.3</span> Fortalecer la integración económica regional
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c3">
+                                            <span class="t-number">3.4</span> Contribuir a la sostenibilidad del hábitat global
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ax4" valign="middle">
+                                        <div class="d-flex">
+                                            <div class="icon-Eje"><img src="../img/ax-4_white.svg" alt="icono Eje 4" /></div>
+                                            <div class="tit-axis">
+                                                <span class="text-bold">
+                                                    Eje 4
+                                                </span>
+                                                <br />
+                                                <small>Fortalecimiento político institucional</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c1">
+                                            <span class="t-number">4.1</span> Garantizar el acceso a los derechos humanos, mejorar la justicia y la seguridad
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c4">
+                                            <span class="t-number">4.2</span> Modernizar la administración pública
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c4">
+                                            <span class="t-number">4.3</span> Avanzar hacia la descentralización efectiva
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="wrap-tText c3">
+                                            <span class="t-number">4.4</span> Proteger y defender el medioambiente y los recursos naturales
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section gray-bg" id="s1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="mb-4">@TituloRecursosAsignados</h2>
+            </div>
+            <div class="col-lg-12">
+                <p>@Html.Raw(LabelRecursosAsignados)</p>
+            </div>
+            <div class="col-lg-4" id="filtrosGraph">
+                <div class="selectBlue" id="selectEjes">
+                    <div class="numberTree">1</div>
+                    <div class="levelTree">
+                        <div class="form-group">
+                            <label for="input-select">Ejes</label>
+                            <select class="form-select" aria-label="Selecciona un eje:" id="filter_ejes">
+                                <option selected value="">Todos los ejes</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="selectDis" id="selectEstrategicos">
+                    <div class="numberTree">2</div>
+                    <div class="levelTree">
+                        <div class="form-group">
+                            <label for="input-select">Objetivo Estratégico</label>
+                            <select class="form-select" aria-label="Selecciona un objetivo:" id="filter_obj_estrateg">
+                                <option selected value="">Todos los Objetivos</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="selectDis" id="selectEspecificos">
+                    <div class="numberTree">3</div>
+                    <div class="levelTree">
+                        <div class="form-group">
+                            <label for="input-select">Objetivo Específico</label>
+                            <select class="form-select" aria-label="Selecciona un objetivo:" id="filter_obj_especific">
+                                <option selected value="">Todos los Objetivos</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="selectDis" id="selectEntidades">
+                    <div class="numberTree">4</div>
+                    <div class="levelTree">
+                        <div class="form-group">
+                            <label for="input-select">Entidades</label>
+                            <select class="form-select" aria-label="Selecciona un objetivo:" id="filter_entidades">
+                                <option selected value="">Todos las entidades</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <div class="btn btn-small btn-cards">
+                            <span id="btnLimpiar">Limpiar Filtros</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8" style="padding-right: 10px; padding-left: 5px; padding-top: 5px; min-height:600px; ">
+                <div class="btnback" id="btnback" style="display:none;">
+                    <span id="btnVolver"><i class="material-icons md-18">arrow_back</i>Atrás</span>
+                </div>
+                <div nivel="1" style="width:auto; height:600px!important;" id="divGraphRecursosObj"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--OBJETIVO ESTRATEGICO-->
+<section class="section" id="s2">
+    <div class="container">
+        <div class="section-heading">
+            <h2>Ejes, objetivos e indicadores</h2>
+        </div>
+        <div class="row justify-content-left mb-5">
+            <div class="col-lg-6 contentselect-pnd">
+                <div class="text-left"><span class="">Seleccione un eje estratégico</span></div>
+                <select name="ejesEstrategicos" class="select-pnd" onchange="seleccionoEje(this);">
+                </select>
+                <i></i>
+            </div>
+        </div>
+        <div class="mb-5 bg-alice">
+            <div class="row justify-content-left">
+
+                <div class="col-lg-2">
+                    <div id="recuadroImagenEje" class="icon-eje ax1 h-100"><img id="imagenEje" src="../img/ax-1_white.svg" alt="icono Eje 1" /></div>
+                </div>
+                <div class="col-lg-10">
+                    <div class="goals-main-info">
+                        <div class="banner-main-title-blue">
+                            <h3 id="tituloEje"></h3>
+                        </div>
+                        <div class="banner-main-desc-blue">
+                            <p id="descripcionEje"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-heading">
+            <h4>Objetivos estratégicos (<span id="totalObjEstrategicosPorEje">0</span>)</h4>
+        </div>
+        <!--TABS-->
+        <div class="tabs goals">
+            <ul id="tabObjetivos" class="tabs-nav">
+            </ul>
+            <div id="contentTabObjetivos" class="tabs-container">
+
+            </div>
+            <div>
+                <h4>@TituloNotasAlPie</h4>
+                <p>@Html.Raw(LabelNotasAlPie)</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!--TESTING-->
+<!-- Modal HTML embedded directly into document -->
+<div id="m1" class="modal m4">
+    <h6>Linea A</h6>
+    <h2 class="mb-4">Igualdad de oportunidades</h2>
+    <p>Significa garantizar que el futuro de las personas no esté condicionado por su situación de vulnerabilidad de origen (sexo, etnicidad, lugar de nacimiento, discapacidad, edad, contexto cultural y territorial, nivel educativo de los padres o escasos recursos económicos), que las circunstancias de nacimiento no ejerzan influencia sobre las oportunidades de vida del individuo.</p>
+    <a class="close-window" href="#" rel="modal:close">Cerrar</a>
+</div>
+<div id="m2" class="modal m3">
+    <h6>Linea B</h6>
+    <h2 class="mb-4">Gestión pública transparente y eficiente</h2>
+    <p>Implica satisfacer las necesidades de la población, coordinando las áreas funcionales para eliminar la fragmentación de tareas, optimizando los recursos, ofreciendo información veraz de todos los actos de gestión pública de interés para la sociedad. Significa orientar la gestión pública a resultados para la ciudadanía, asegurando un Estado solidario, garante de derechos, abierto, sin discriminaciones y sin tolerancia hacia la corrupción.</p>
+    <a class="close-window"  href="#" rel="modal:close">Cerrar</a>
+</div>
+<div id="m3" class="modal m2">
+    <h6>Linea C</h6>
+    <h2 class="mb-4">Ordenamiento y desarrollo territorial</h2>
+    <p>Refiere a la definición de un modelo de ocupación y organización del territorio paraguayo, señalando las acciones territoriales prioritarias (reducción de pobreza, servicios, infraestructura, gestión de riesgos, entre otros), y arreglos institucionales necesarios para su adecuado funcionamiento (acuerdos programáticos para intervención en territorio, desconcentración administrativa y medidas graduales de descentralización).</p>
+    <a class="close-window"  href="#" rel="modal:close">Cerrar</a>
+</div>
+<div id="m4" class="modal m1">
+    <h6>Linea D</h6>
+    <h2 class="mb-4">Sostenibilidad ambiental</h2>
+    <p>Disminuir los desequilibrios ambientales a causa de la actividad económica y los asentamientos humanos. Significa mejorar considerablemente la calidad de vida de la población en asentamientos humanos, con viviendas mejoradas, acceso universal al agua potable, a servicios básicos de saneamiento y a sistemas de gestión de residuos. También, disminuir los niveles de contaminación ambiental de las industrias, con planificación y control sobre las zonas de explotación de recursos naturales, reduciendo así la pérdida del patrimonio natural y de la biodiversidad nativa. Además, implica la creación de oportunidades para incentivar el capital natural a través de la protección y recuperación de los ecosistemas.</p>
+    <a class="close-window" href="#" rel="modal:close">Cerrar</a>
+</div>
+
+
+<!--RELATED INFO-->
+<section class="relatedInfo section" id="s4">
+    <div class="container">
+        <!--LINKS OTRAS SECCIONES-->
+        <div class="row">
+            <!--LEFT COLUMN-->
+            <div class="col-lg-8">
+                <!--LINKS seccion infografia planificacion-->
+                <h2>Conoce</h2>
+                <div class="wrap-cta py-5">
+                    <a href="../ProcesoPlanNacional" class="py-5 mb-5 px-0">
+                        <div class="h3">El Proceso de la Planificación Nacional<i class="material-icons md-18">arrow_forward</i> </div>
+                    </a>
+                </div>
+
+                <!--LINKS seccion infografia planificacion-->
+
+                <div class="wrap-cta py-5">
+                    <p class="card-title mb-4">Información suministrada por:</p>
+                    <a href="https://www.stp.gov.py/v1/" target="_blank">
+                        <img class="img-fluid" src="../img/Logostp.png" alt="ir a Secretaria tecnica de planeación" />
+                    </a>
+                </div>
+            </div>
+            <!--RIGHT COL-->
+            <div class="col-lg-4">
+                <h2>Explora</h2>
+                <p>Entidades y sus planes operativos</p>
+                <ul id="entidadesPlanNacional" class="list-group list-group-flush">
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!--CONTACT US-->
+<!--HELP CENTER SHORTCUT-->
+<div id="helpCenter"></div>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+
+<script src="js/plan_aux.js"></script>
+<!-- Remember to include jQuery :) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script>
+    window.onscroll = function () { myFunction() };
+
+    var header = document.getElementById("navs-header");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+            header.classList.add("bg-white");
+        } else {
+            header.classList.remove("sticky");
+            header.classList.remove("bg-white");
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

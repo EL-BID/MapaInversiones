@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Entidad\EntidadBLL.cs~RFf2caaea.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SolrNet" Version="1.0.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PlataformaTransparencia.Infrastructura\PlataformaTransparencia.Infraestructura.csproj" />
+    <ProjectReference Include="..\PlataformaTransparencia.Modelos\PlataformaTransparencia.Modelos.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,263 @@
+﻿@inject OrchardCore.IOrchardHelper Orchard
+<header id="header" class="header">
+    <!-- TOP HEADER -->
+    <nav class="header-top">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-auto">
+                    <div class="header-top-links">
+                        <!-- secondary pages -->
+                        <ul class="nav">
+
+                            <li class="nav-item">
+                                <a href="/Acercade" title="Acerca de Paraguay en Resultados">
+                                    Acerca de Paraguay en Resultados
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/MarcoLegal" title="Marco Legal">
+                                    Marco Legal
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/CentroAyuda" title="LinkedIn">
+                                    Centro de ayuda
+                                </a>
+                            </li>
+                            @*@if (User.Identity.IsAuthenticated)
+            {<text>
+                    <li>
+                        <form method="post" class="form-inline" action="/Users/LogOff">
+                            <button type="submit" class="btn-sesionHome" role="button">Cerrar sesión</button>
+                            @Html.AntiForgeryToken()
+                        </form>
+
+                    </li>
+                    <li>
+                        <a href="#!" title="@User.Identity.Name">
+                            @User.Identity.Name
+                        </a>
+                    </li>
+            </text>
+        }
+        else
+        {
+            <li>
+                <a href="/Login" title="Inicie sesión">
+                    Inicie sesión
+                </a>
+            </li>
+            <li>
+                <a href="/Register" title="Registrese">
+                    ¿Nuevo usuario?
+                </a>
+            </li>
+        }*@
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="Sub-header-top">
+                <div class="logoRC">
+                    <a href="https://rindiendocuentas.gov.py/">
+                        <img src="../img/logoRindiendoCuentas.png" />
+                    </a>
+                </div>
+                <div class="logoIntro">
+                    <!-- Begin logo -->
+                    <a href="/">
+                        <img src="../img/logoMIV.svg" />
+                    </a>
+                </div>
+                <div class="botonera">
+                    <div class="btnVideo btn-link" role="button"><a href="https://rindiendocuentas.gov.py/covid/TrasmisionesEnVivo" target="_blank"><img class="topIcon" src="../img/ic_broadcast.svg" /> Transmisiones en Vivo </a></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End header top -->
+    <!-- Begin header fixed -->
+    <nav class="header-fixed">
+        <div class="container">
+            <div class="row flex-nowrap align-items-center justify-content-between">
+                <div class="col-auto d-block d-lg-none header-fixed-col">
+                    <div class="main-mnu-btn">
+                        <span class="bar bar-1"></span>
+                        <span class="bar bar-2"></span>
+                        <span class="bar bar-3"></span>
+                        <span class="bar bar-4"></span>
+                    </div>
+                </div>
+                <div class="col-auto header-fixed-col">
+                    <!-- Begin logo -->
+                    <a href="/" class="logo logo-ico-widht-text" title="PARAGUAY EN RESULTADOS">
+                        <img src="../img/logoMIV.svg">
+                    </a>
+                </div>
+                <div class="col-lg col-auto col-static header-fixed-col">
+                    <div class="row flex-nowrap align-items-center justify-content-center">
+                        <div class="col-auto header-fixed-col d-none d-lg-block col-static">
+                            <!-- Begin main menu -->
+                            <nav class="main-mnu">
+                                @{
+                                    var menu = await Orchard.GetContentItemByHandleAsync("alias:second-menu");
+                                                              <ul class="main-mnu-list">
+                                                                @foreach (var menuitem in menu.Content.MenuItemsListPart.MenuItems)
+                                                                {
+                                                                  @if (@menuitem.LinkMenuItemPart.Name != null)
+                                                                  {
+                                                                    var enlace = @menuitem.LinkMenuItemPart.Url;
+                                                                    var nameEnlace = @menuitem.LinkMenuItemPart.Name.Value;
+                                                                    var enlace_aux = "#!";
+                                                                    if (enlace != "")
+                                                                    {
+                                                                      enlace_aux = enlace;
+                                                                    }
+                                                                    var claseLi = "main-mnu-item-has-child";
+                                                                    @if (ViewBag != null && ViewBag.ruta != null && ViewBag.ruta == @nameEnlace)
+                                                                    {
+                                                                      claseLi= "main-mnu-item-has-child-activeTab";
+                                                                    }
+
+                                                                      <li class=@claseLi>
+
+                                                                        @if (menuitem.MenuItemsListPart != null)
+                                                                        {
+                                                                          <a href="@enlace_aux" data-title="@menuitem.LinkMenuItemPart.Name">
+                                                                            <span>@menuitem.LinkMenuItemPart.Name</span>
+                                                                            <i class="material-icons">expand_more</i>
+                                                                          </a>
+                                                                          var cant = @menuitem.MenuItemsListPart.MenuItems.Count;
+                                                                          if (@cant > 0)
+                                                                          {
+                                                                            <ul>
+                                                                              @foreach (var submenu in menuitem.MenuItemsListPart.MenuItems)
+                                                                              {
+                                                                                @if (@submenu.LinkMenuItemPart.Name != null)
+                                                                                {
+                                                                                  var enlace_sub = @submenu.LinkMenuItemPart.Url;
+                                                                                  var enlace_sub_aux = "#!";
+                                                                                  if (enlace_sub != "")
+                                                                                  {
+                                                                                    enlace_sub_aux = enlace_sub;
+                                                                                  }
+                                                                                  <li>
+                                                                                    <a href="@enlace_sub_aux" data-title="@submenu.LinkMenuItemPart.Name">
+                                                                                      <span>@submenu.LinkMenuItemPart.Name</span>
+                                                                                    </a>
+                                                                                  </li>
+                                                                                }
+                                                                              }
+                                                                            </ul>
+                                                                          }
+
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                          <a href="@enlace_aux" data-title="@menuitem.LinkMenuItemPart.Name">
+                                                                            <span>@menuitem.LinkMenuItemPart.Name</span>
+                                                                          </a>
+
+                                                                        }
+                                                                      </li>
+                                                                      }
+                                                                      }
+                                                                    </ul>
+                                }
+                            </nav><!-- End main menu -->
+                        </div>
+                        <div class="col-auto header-fixed-col col-static">
+                            <!-- Begin header actions -->
+                            <ul class="header-actions">
+                                <!-- Begin header search -->
+                                <li>
+                                    <div class="header-search">
+                                        <div class="header-action-icon header-search-ico">
+                                            <i class="material-icons md-22 header-search-ico-search">search</i>
+                                            <i class="material-icons md-22 header-search-ico-close">close</i>
+                                        </div>
+                                        <form action="#!" method="post" class="header-search-form">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-field">
+                                                            <label for="field-search" class="form-field-label">Search...</label>
+                                                            <input type="search" class="form-field-input" name="Search" value="" autocomplete="off" required="required" id="field-search">
+                                                            <button type="submit" class="header-search-btn"><i class="material-icons md-22">search</i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </li><!-- End header search -->
+                                <!-- Begin header navbar -->
+                                <li class="d-block d-lg-none">
+                                    <div class="header-navbar">
+                                        <div class="header-navbar-btn">
+                                            <i class="material-icons md-24">more_vert</i>
+                                        </div>
+                                        <ul class="header-navbar-content">
+
+                                            <li>
+                                                <a href="#!" title="Acerca de Datos fiscales">
+                                                    Acerca de Paraguay en Resultados
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#!" title="LinkedIn">
+                                                    Centro de ayuda
+                                                </a>
+                                            </li>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {<text>
+                                                    <li>
+                                                        <a href="/Users/LogOff" title="Cerrar sesión">
+                                                            Cerrar sesión
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#!" title="@User.Identity.Name">
+                                                            @User.Identity.Name
+                                                        </a>
+                                                    </li>
+                                            </text>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <a href="/Login" title="Inicie sesión">
+                                                    Inicie sesión
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/Register" title="Registrarse">
+                                                    ¿Nuevo usuario?
+                                                </a>
+                                            </li>
+                                        }
+
+                                        </ul>
+                                    </div>
+
+                                </li><!-- End header navbar -->
+                            </ul><!-- End header actions -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End header fixed -->
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2P29FNQKB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y2P29FNQKB');
+</script>
+</header><!-- End header -->
