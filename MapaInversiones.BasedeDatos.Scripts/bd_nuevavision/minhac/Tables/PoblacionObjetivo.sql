@@ -1,0 +1,28 @@
+﻿CREATE TABLE [minhac].[PoblacionObjetivo] (
+    [ANIOPRESUP]                INT             NULL,
+    [CodigoIndicador]           INT             NULL,
+    [CodigoIndDetallePoblacion] INT             NULL,
+    [CodigoPoblacionObjetivo]   INT             NULL,
+    [CodigoDepartamento]        INT             NULL,
+    [CodigoDistrito]            INT             NULL,
+    [Mes]                       INT             NULL,
+    [CodigoRango]               INT             NULL,
+    [DenominadorHombre]         NUMERIC (22, 2) NULL,
+    [DenominadorMujer]          NUMERIC (22, 2) NULL,
+    [MetaHombre]                NUMERIC (22, 2) NULL,
+    [MetaMujer]                 NUMERIC (22, 2) NULL,
+    [AvanceHombre]              NUMERIC (22, 2) NULL,
+    [AvanceMujer]               NUMERIC (22, 2) NULL,
+    [DenominadorTotal]          NUMERIC (30, 2) NULL,
+    [MetaTotal]                 NUMERIC (30, 2) NULL,
+    [AvanceTotal]               NUMERIC (30, 2) NULL,
+    [Comentario]                VARCHAR (1000)  NULL,
+    [CantidadDenominador]       NUMERIC (22, 2) NULL,
+    [CantidadMeta]              NUMERIC (22, 2) NULL,
+    [CantidadAvance]            NUMERIC (22, 2) NULL,
+    [POBJ_FCHING]               DATETIME        NULL,
+    [POBJ_USRING]               VARCHAR (8)     NULL,
+    [POBJ_FCHACT]               DATETIME        NULL,
+    [POBJ_USRACT]               VARCHAR (8)     NULL
+);
+

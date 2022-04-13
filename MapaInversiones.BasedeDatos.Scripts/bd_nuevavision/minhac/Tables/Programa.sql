@@ -1,0 +1,25 @@
+﻿CREATE TABLE [minhac].[Programa] (
+    [ANIOPRESUP]            INT             NULL,
+    [CodigoNivel]           INT             NULL,
+    [CodigoEntidad]         INT             NULL,
+    [CodigoTipo]            INT             NULL,
+    [CodigoPrograma]        INT             NULL,
+    [codigoclasiffuncional] INT             NULL,
+    [NOMBRE]                NVARCHAR (60)   NULL,
+    [NOMABR]                NVARCHAR (20)   NULL,
+    [DESCRIP]               NVARCHAR (2000) NULL,
+    [FCHING]                DATETIME        NULL,
+    [USRING]                NVARCHAR (8)    NULL,
+    [FCHACT]                DATETIME        NULL,
+    [USRACT]                NVARCHAR (8)    NULL,
+    [REPROG]                NUMERIC (2)     NULL,
+    [BASE]                  NVARCHAR (30)   NULL,
+    [RESULTADO]             NVARCHAR (1000) NULL,
+    [PAI_CODIGO]            INT             NULL,
+    [DPT_CODIGO]            INT             NULL,
+    [CIU_CODIGO]            INT             NULL,
+    [JUSTIFICA]             NVARCHAR (2000) NULL,
+    [DIAGNOSTICO]           NVARCHAR (2000) NULL,
+    [GLOSAS]                NVARCHAR (3000) NULL
+);
+

@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [mapainversionespy]
+    WITH PASSWORD = N'jypptdqins_i{zSfd:p|axyJmsFT7_&#$!~<n{okdoRx1opn', SID = 0x031E2A9E355A994A856F2D44768A61B5, DEFAULT_DATABASE = [PISGR_PY], DEFAULT_LANGUAGE = [Español], CHECK_POLICY = OFF;
+
