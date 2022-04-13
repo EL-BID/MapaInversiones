@@ -1,0 +1,2 @@
+﻿CREATE USER [DNP\mapainversiones];
+

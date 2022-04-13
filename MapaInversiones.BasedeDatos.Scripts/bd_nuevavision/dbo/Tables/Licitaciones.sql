@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[Licitaciones] (
+    [ID_Proyecto]              INT            NOT NULL,
+    [Codigo_BPIN]              VARCHAR (MAX)  NULL,
+    [URL]                      VARCHAR (4000) NOT NULL,
+    [Id]                       VARCHAR (4000) NOT NULL,
+    [EstadoPublicacion]        VARCHAR (4000) NOT NULL,
+    [NroLicitacion]            VARCHAR (4000) NOT NULL,
+    [Objeto]                   VARCHAR (4000) NOT NULL,
+    [FechaPublicacion]         DATETIME       NOT NULL,
+    [PresentacionOfertas]      DATETIME       NOT NULL,
+    [FechaLimiteConsultas]     DATETIME       NOT NULL,
+    [Beneficiarios]            BIGINT         NOT NULL,
+    [AperturaOfertas]          DATETIME       NOT NULL,
+    [Pregunta]                 VARCHAR (4000) NOT NULL,
+    [FechaLimiteParaContestar] VARCHAR (4000) NOT NULL,
+    [EstadoNombre]             VARCHAR (4000) NOT NULL,
+    [EstadoPublicacionNombre]  VARCHAR (4000) NOT NULL,
+    [CategoriaNombre]          VARCHAR (4000) NOT NULL,
+    [LocalidadNombre]          VARCHAR (4000) NOT NULL,
+    [TipoMoneda]               VARCHAR (4000) NOT NULL,
+    [Presupuesto]              VARCHAR (4000) NOT NULL,
+    [TotalRows]                INT            NOT NULL,
+    [FechaUltimaModificacion]  DATETIME       NOT NULL,
+    [ConsecutivoCarga]         INT            NOT NULL,
+    [Modificadopor]            VARCHAR (30)   NOT NULL
+);
+

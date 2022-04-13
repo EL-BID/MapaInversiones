@@ -1,0 +1,7 @@
+﻿CREATE TABLE [mh].[PLANES_X_PROYECTO] (
+    [idProyecto] INT NULL,
+    [idPlan]     INT NULL,
+    CONSTRAINT [FK_PLANES_X_FK_OBJ_ES_PLANES] FOREIGN KEY ([idPlan]) REFERENCES [mh].[PLANES] ([idPlan]),
+    CONSTRAINT [FK_PLANES_X_FK_PROYEC_PROYECTO] FOREIGN KEY ([idProyecto]) REFERENCES [mh].[PROYECTO_ACTIVIDAD] ([idProyectoActividad])
+);
+

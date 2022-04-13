@@ -1,0 +1,25 @@
+﻿CREATE TABLE [minhac].[RubroPresupuesto] (
+    [ANIOPRESUP]            INT             NULL,
+    [CodigoNivel]           INT             NULL,
+    [CodigoEntidad]         INT             NULL,
+    [CodigoTipo]            INT             NULL,
+    [CodigoPrograma]        INT             NULL,
+    [CodigoSubPrograma]     INT             NULL,
+    [CodigoProyecto]        INT             NULL,
+    [CodigoObjetoGasto]     INT             NULL,
+    [CodigoClasifFuncional] INT             NOT NULL,
+    [CodigoFuente]          INT             NULL,
+    [CodigoVersion]         INT             NULL,
+    [PAI_CODIGO]            INT             NULL,
+    [DPT_CODIGO]            INT             NULL,
+    [DESEMBOLSO]            NUMERIC (15)    NULL,
+    [CONTRNAC]              NUMERIC (15)    NULL,
+    [PROGRAMADO]            NUMERIC (15)    NULL,
+    [FCHING]                DATETIME        NULL,
+    [USRING]                NVARCHAR (8)    NULL,
+    [FCHACT]                DATETIME        NULL,
+    [USRACT]                NVARCHAR (8)    NULL,
+    [JUSTIFICA]             NVARCHAR (2000) NULL,
+    [DESTINO]               NUMERIC (3)     NULL
+);
+

@@ -1,0 +1,27 @@
+﻿CREATE TABLE [dbo].[ProgramaEjecucionPresupuestaria] (
+    [FechaPresupuesto]        DATETIME      NULL,
+    [Entidad]                 VARCHAR (255) NULL,
+    [NombreProgrma]           VARCHAR (255) NULL,
+    [NombreProyectoActividad] VARCHAR (255) NULL,
+    [Clasificacion]           VARCHAR (5)   NULL,
+    [Pagado]                  FLOAT (53)    NULL,
+    [Planificado]             FLOAT (53)    NULL,
+    [Ejecutado]               FLOAT (53)    NULL,
+    [Anio]                    FLOAT (53)    NULL,
+    [Nivel]                   FLOAT (53)    NULL,
+    [CodigoEntidad]           FLOAT (53)    NULL,
+    [ClasePrograma]           FLOAT (53)    NULL,
+    [CodigoPrograma]          FLOAT (53)    NULL,
+    [CodigoProyecto]          FLOAT (53)    NULL,
+    [CodigoSnip]              FLOAT (53)    NULL,
+    [ObjetoGasto]             FLOAT (53)    NULL,
+    [FuenteFinanciamiento]    FLOAT (53)    NULL,
+    [EntidadFinanciamiento]   FLOAT (53)    NULL,
+    [Pais]                    FLOAT (53)    NULL,
+    [Depto]                   FLOAT (53)    NULL,
+    [Modificacion]            FLOAT (53)    NULL,
+    [Vigente]                 FLOAT (53)    NULL,
+    [fechaModificacion]       DATETIME      NULL,
+    [EsCovid]                 INT           NULL
+);
+
