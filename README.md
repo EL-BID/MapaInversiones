@@ -47,7 +47,7 @@ Esta es la sección que permite agregar más información de contexto al proyect
 
 ### Licencia 
 ---
-Licencia BID [LICENSE](https://github.com/EL-BID/MapaInversiones/Licencia.md)
+Licencia BID [LICENSE](https://github.com/EL-BID/MapaInversiones/License.md)
 
 ## Limitación de responsabilidades
 
