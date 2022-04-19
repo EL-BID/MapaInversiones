@@ -16,7 +16,7 @@ Explica los pasos básicos sobre cómo usar la herramienta digital. Es una buena
 ---
 Esta herramienta tiene su base de datos creada en Microsoft SQL Server 2019, para facilitar su despliegue, se ha creado una solucion llamada bd_nuevavision que se encuentra en la carpeta https://github.com/EL-BID/MapaInversiones/tree/main/MapaInversiones.BasedeDatos.Scripts, al compilarla y publicarla se pueden realizar lopasos necesarios para la conexión al servidro, creacion de la base de datos, y creacion de todas las tablas necesarias. Para mayor detalle puede consultar el manual que se encuentra en https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Manuales/Instalaci%C3%B3n%20proyecto%20de%20base%20de%20datos.pdf
 
-Una vez creada la base de datos con sus tablas y datos, es necesario cambiar la configuración de la conexion en los archivos appsettings.json que se encuentran en https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/App_Data/Sites/Default/appsettings.json y https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/appsettings.json. 
+Una vez creada la base de datos con sus tablas y datos, es necesario cambiar la configuración de la conexion en los archivos appsettings.json que se encuentran en https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/App_Data/Sites/Default/appsettings.json y https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/appsettings.json.
 
 Para el manejo de datos se utiliza LINQ2DB, por lo cual, en caso de ser necesario realizar algun ajuste en la programación, tambies es necesario ajustar la cadena de conexion en el archivo https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Infrastructura/DataModels/PISGR_Context.tt
 
