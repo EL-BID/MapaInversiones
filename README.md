@@ -21,13 +21,15 @@ Una vez creada la base de datos con sus tablas y datos, es necesario cambiar la 
 Para el manejo de datos se utiliza LINQ2DB, por lo cual, en caso de ser necesario realizar algun ajuste en la programación, tambies es necesario ajustar la cadena de conexion en el archivo https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Infrastructura/DataModels/PISGR_Context.tt
 
 ### Dependencias
--Windows Server 2019 Datacenter o superior
--Microsoft SQL Server 2019
--IIS 8 o superior
--Microsoft Visual Studio Community 2015 o superior
--Orchard Core
--Apache Solr
--Linq2DB
+- Windows Server 2019 Datacenter o superior
+- Microsoft SQL Server 2019
+- IIS 8 o superior
+- Microsoft Visual Studio Community 2015 o superior
+- Orchard Core
+- Apache Solr
+- Linq2DB
+
+
 
 ## Código de conducta 
 ---
