@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
+using PlataformaTransparencia.Modelos.Plan;
+using PlataformaTransparencia.Modelos.Presupuesto;
+using PlataformaTransparencia.Negocios.Interfaces;
 
 namespace PlataformaTransparencia.Negocios.Presupuesto
 {
-    public class PresupuestoBLL
+    public class PresupuestoBLL : IPresupuestoBLL
     {
-
         private readonly TransparenciaDB _connection;
 
         public PresupuestoBLL(TransparenciaDB connection)
@@ -17,531 +19,725 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             _connection = connection;
     ***REMOVED***
 
-        public List<InfoPresupuesto> ObtenerPresupuesto(int consulta, int annio)
+        public List<InfoConsolidadoPresupuesto> ObtenerRecursosPerNivel(int annio)
         {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
-            if (consulta == 0) {
-                //var query1 = (from notpre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                //              where notpre.AnioPresupuesto == annio
-                //             group notpre by notpre.Sectores into g
-                //             orderby g.Sum(h => h.PresupuestoVigente) descending
-                //             select g.Key).Take(4);
 
-                //objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                //             where pre.AnioPresupuesto == annio
-                //             group pre by pre.Sectores into g
-                //                           select new InfoPresupuesto {
-                //                               rawValue = (decimal)g.Sum(g => g.PresupuestoVigente)/1000000,
-                //                               labelGroup = g.Key
-                //                       ***REMOVED***).OrderByDescending(g => g.rawValue).Take(4)
-                //                           //.Union(from pre in _connection.PresupuestoXSectorMinHaciendas
-                //                           //       where pre.AnioPresupuesto == annio && pre.CodigoVersion == 50
-                //                           //       && !pre.Sectores == query1
-                //                           //       group pre by pre.Sectores into g
-                //                           //       select new InfoPresupuesto {
-                //                           //           rawValue = (decimal)g.Sum(g => g.Presupuesto),
-                //                           //           labelGroup = g.Key
-                //                           //   ***REMOVED***)
-                //                           .ToList();
-        ***REMOVED***
-            if (consulta == 1) {
-                objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                             where pre.AnioPresupuesto == annio
-                             group pre by new { pre.Sectores, pre.NombreEntidad ***REMOVED*** into g
-                                           select new InfoPresupuesto {
-                                               rawValue = (decimal)g.Sum(g => g.PresupuestoVigente) / 1000000,
-                                               labelGroup = g.Key.Sectores,
-                                               label=g.Key.NombreEntidad
-                                       ***REMOVED***).ToList();
-        ***REMOVED***
-            if (consulta == 2) {
-                objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                             where pre.AnioPresupuesto == annio
-                             group pre by new { pre.Clasificacion, pre.NombreEntidad ***REMOVED*** into g
-                                           select new InfoPresupuesto {
-                                               rawValue = (decimal)g.Sum(g => g.PresupuestoVigente) / 1000000,
-                                               labelGroup = g.Key.Clasificacion,
-                                               label=g.Key.NombreEntidad
-                                       ***REMOVED***).ToList();
-        ***REMOVED***
+            List<InfoConsolidadoPresupuesto> objReturn = new List<InfoConsolidadoPresupuesto>();
+            var RecursosPerObjetoQuery = (from info in _connection.VwPresupuesto
+                                          where info.Periodo == annio
+                                          group info by new { info.NivelDeAdministracion,info.CodigoInstitucion,info.Institucion ***REMOVED*** into g
+
+                                          select new InfoConsolidadoPresupuesto
+                                          { 
+                                              labelGroup = g.Key.NivelDeAdministracion,
+                                              Id=g.Key.CodigoInstitucion.Value,
+                                              label = g.Key.Institucion,
+                                              rawValueDouble = g.Sum(g => g.Vigente.Value),
+                                              vigente= g.Sum(g => g.Vigente.Value),
+                                              aprobado= g.Sum(g => g.Aprobado.Value),
+                                              ejecutado=g.Sum(g=>g.EjecucionDelMes.Value)
+
+                                      ***REMOVED***).OrderBy(x => x.labelGroup).ThenBy(n => n.label).ToList();
+
+            objReturn = RecursosPerObjetoQuery;
+
 
             return objReturn;
 
     ***REMOVED***
 
-        public List<InfoPresupuesto> ObtenerPresupuestoTotalAnnio(int annio)
+        public List<InfoConsolidadoPresupuesto> ObtenerRecursosPerOrganismo(int annio)
         {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
-            objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                         where pre.AnioPresupuesto == annio
-                            group pre by pre.CodigoVersion into g
-                            select new InfoPresupuesto {
-                                 totalGasto = (decimal)g.Sum(g => g.PresupuestoVigente),
-                                 totalPresupuesto = (decimal)g.Sum(g => g.PresupuestoVigente),
-                                 trimestre = "3", //cambiar cuando se tenga fecha en la tabla
-                                 annio = annio
-                         ***REMOVED***).ToList();
-            
+
+            List<InfoConsolidadoPresupuesto> objReturn = new List<InfoConsolidadoPresupuesto>();
+            var RecursosPerObjetoQuery = (from info in _connection.VwPresupuesto
+                                          where info.Periodo == annio
+                                          group info by new { info.FuenteDeFinanciamiento, info.Institucion ***REMOVED*** into g
+
+                                          select new InfoConsolidadoPresupuesto
+                                          {
+                                              labelGroup = g.Key.FuenteDeFinanciamiento,
+                                              label = g.Key.Institucion,
+                                              rawValueDouble = g.Sum(g => g.Vigente.Value),
+                                      ***REMOVED***).ToList();
+
+            objReturn = RecursosPerObjetoQuery;
+
 
             return objReturn;
+
+    ***REMOVED***
+
+        public List<InfoConsolidadoPresupuesto> GetConsolidadoPeriodos(int anyo)
+        {
+
+            var max = anyo;
+            var min = max-3;
+
+            List<InfoConsolidadoPresupuesto> objReturn = new List<InfoConsolidadoPresupuesto>();
+            var RecursosPerObjetoQuery = (from info in _connection.VwPresupuesto
+                                          where (info.Periodo >= min && info.Periodo <= max) //datos del año anterior al seleccionado
+                                          group info by new { info.Periodo ***REMOVED*** into g
+
+                                          select new InfoConsolidadoPresupuesto
+                                          {
+                                              periodo = g.Key.Periodo.Value,
+                                              vigente = g.Sum(g => g.Vigente.Value),
+                                              aprobado = g.Sum(g => g.Aprobado.Value),
+                                              ejecutado = g.Sum(g => g.EjecucionDelMes.Value)
+                                      ***REMOVED***).OrderByDescending(x => x.periodo).ToList();
+
+            objReturn = RecursosPerObjetoQuery;
+
+
+            return objReturn;
+
+    ***REMOVED***
+
+        public List<InfoConsolidadoPresupuesto> ObtenerInfoPerGrupoDeGasto(List<int> filtro,int anyo,List<String> filtro_gasto)
+        {
+            List<InfoConsolidadoPresupuesto> objReturn = new List<InfoConsolidadoPresupuesto>();
+            List<InfoConsolidadoPresupuesto> query1 = new List<InfoConsolidadoPresupuesto>();
+
+                var max = filtro.Max();
+                var min = filtro.Min();
+                
+                var queryTotal= (from pre in _connection.VwPresupuesto
+                                 where filtro.Contains(pre.Periodo.Value)
+                                 group pre by new { pre.Periodo ***REMOVED*** into g
+                                 select new InfoConsolidadoPresupuesto
+                                 {
+                                     rawValue = (decimal)g.Sum(g => g.EjecucionDelMes) / 1000000,
+                                     periodo = (int)g.Key.Periodo.Value
+                             ***REMOVED***).ToList();
+
+                if (filtro_gasto.Count > 0)
+                {
+                    query1 = (from pre in _connection.VwPresupuesto
+                              where filtro.Contains(pre.Periodo.Value) && filtro_gasto.Contains(pre.GrupoDeGasto)
+                              group pre by new { pre.Periodo, pre.GrupoDeGasto ***REMOVED*** into g
+                              select new InfoConsolidadoPresupuesto
+                              {
+                                  rawValue = (decimal)g.Sum(g => g.EjecucionDelMes) / 1000000,
+                                  labelGroup = g.Key.GrupoDeGasto,
+                                  periodo = (int)g.Key.Periodo.Value,
+                          ***REMOVED***).ToList();
+            ***REMOVED***
+                else
+                {
+                    query1 = (from pre in _connection.VwPresupuesto
+                                  //where (pre.Periodo >= min && pre.Periodo<=max) //datos del año anterior al seleccionado
+                              where filtro.Contains(pre.Periodo.Value)
+                              group pre by new { pre.Periodo, pre.GrupoDeGasto ***REMOVED*** into g
+                              from q0 in ((from pre in _connection.VwPresupuesto
+                                           where pre.Periodo == anyo ///top del presupuesto del año seleccionado
+                                           group pre by new { pre.GrupoDeGasto ***REMOVED*** into h
+                                           select new InfoConsolidadoPresupuesto
+                                           {
+                                               rawValue = (decimal)(h.Sum(h => h.EjecucionDelMes)),
+                                               labelGroup = h.Key.GrupoDeGasto
+                                       ***REMOVED***).OrderByDescending(h => h.rawValue).Take(4))
+                                           .Where(j => j.labelGroup == g.Key.GrupoDeGasto) //inner join
+                              select new InfoConsolidadoPresupuesto
+                              {
+                                  rawValue = (decimal)g.Sum(g => g.EjecucionDelMes) / 1000000,
+                                  labelGroup = g.Key.GrupoDeGasto,
+                                  periodo = (int)g.Key.Periodo.Value,
+                          ***REMOVED***).ToList();
+
+            ***REMOVED***
+
+
+                objReturn = query1.OrderByDescending(x => x.periodo).ThenBy(n => n.rawValue).ToList();
+                foreach (var item in objReturn)
+                {
+                    //calculo porcentaje
+                    var objTotalPeriodo = queryTotal.Find(p => p.periodo == item.periodo);
+                    if (objTotalPeriodo != null)
+                    {
+                        item.porcentaje = Math.Round((item.rawValue / objTotalPeriodo.rawValue) * 100, 2);
+                ***REMOVED***
+            ***REMOVED***
+
+            return objReturn;
+
+    ***REMOVED***
+
+        public List<InfoEntidad> ObtenerEntidadesPlanNacional()
+        {
+            List<InfoEntidad> objReturn = new List<InfoEntidad>();
+            var entidadesPlanNacional = (from info in _connection.CatalogoEntidades
+                                         where info.Institucion!=null && !info.Institucion.ToUpper().Contains("ALCALD")
+                                         select new InfoEntidad
+                                         {
+                                             CodEntidad = info.CodigoInstitucion,
+                                             Nombre = info.Institucion,
+                                     ***REMOVED***
+                                         ).Distinct().OrderBy(x => x.Nombre).ToList();
+            objReturn = new List<InfoEntidad>(entidadesPlanNacional.Count > 6 ? entidadesPlanNacional.OrderBy(x => x.Nombre).Take(6) : entidadesPlanNacional.OrderBy(x => x.Nombre));
+            return objReturn;
+    ***REMOVED***
+
+    /// <summary>
+    /// Entidades que hacen parte del plan nacional de desarrollo sin alcaldías
+    /// </summary>
+    /// <returns>Un listado con las entidades relacionadas con el plan Nacional de desarrollo sin alcaldías</returns>
+    public List<InfoEntidad> ObtenerEntidadesPlanNacionalNoAlcaldias()
+    {
+      List<InfoEntidad> objReturn = new List<InfoEntidad>();
+      var entidadesPlanNacional = (from info in _connection.CatalogoEntidades
+                                   where info.Institucion != null && !info.Institucion.ToUpper().Contains("ALCALD")
+                                   select new InfoEntidad
+                                   {
+                                     CodEntidad = info.CodigoInstitucion,
+                                     Nombre = info.Institucion,
+                               ***REMOVED***
+                                   ).Distinct().OrderBy(x => x.Nombre).ToList();
+      objReturn = new List<InfoEntidad>(entidadesPlanNacional.Count > 6 ? entidadesPlanNacional.OrderBy(x => x.Nombre).Take(6) : entidadesPlanNacional.OrderBy(x => x.Nombre));
+      return objReturn;
 ***REMOVED***
 
-        public List<InfoPresupuesto> ObtenerGastoSectores(int consulta, int annio)
+    public List<infograficoGasto> GetInfograficoPerGasto(int annio)
         {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
-            if (consulta == 0) {
+            var objReturn = new List<infograficoGasto>();
 
-                var query1 = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                              where pre.AnioPresupuesto == annio
-                              group pre by new { pre.Sectores ***REMOVED*** into g
-                              select new InfoPresupuesto {
-                                  rawValue = (decimal)(g.Sum(g => g.PresupuestoVigente)/1000000),
-                                  label = g.Key.Sectores,
-                          ***REMOVED***).OrderByDescending(g => g.rawValue).Take(4);
+            var infoQuery = (from info in _connection.VwPresupuesto
+                             where info.Periodo==annio
+                             group info by new { 
+                                 info.CodigoGrupoDeGasto
+                                 ,info.GrupoDeGasto
+                                 ,info.CodigoInstitucion
+                                 ,info.Institucion
+                                 ,info.CodigoActividadObra
+                                 ,info.ActividadObra 
+                         ***REMOVED*** into g
+                             select new
+                             {
+                                 IdCodGrupo = g.Key.CodigoGrupoDeGasto,
+                                 GrupoGasto = "grp|" + g.Key.GrupoDeGasto,
+                                 IdEntidad = g.Key.CodigoInstitucion,
+                                 NombreEntidad = "ent|" + g.Key.Institucion,
+                                 IdActividad = g.Key.CodigoActividadObra,
+                                 NombreActividad = "act|" + g.Key.ActividadObra,
+                                 AportePresupuesto = (g.Sum(g => g.Vigente.Value)),
+                                 Avance = (g.Sum(g => g.EjecucionDelMes.Value))
+                         ***REMOVED***
+                            ).Distinct().OrderBy(x => x.GrupoGasto).
+                                    ThenBy(x => x.NombreEntidad).
+                                    ThenBy(x => x.NombreActividad).ToList();
 
-                objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                             where pre.AnioPresupuesto == annio && (pre.CodigoVersion == 2 || pre.CodigoVersion == 50)
-                                group pre by new { pre.Sectores, pre.CodigoVersion ***REMOVED*** into g
-                                from que in query1.Where(j => j.label == g.Key.Sectores)
-                                select new InfoPresupuesto {
-                                    rawValue = (decimal)(g.Sum(g => g.PresupuestoVigente) / 1000000),
-                                    label = g.Key.Sectores,
-                                    labelGroup = (annio == 2022 ?  "Presupuesto Proyecto Ejecutivo por sector" : "Presupuesto Vigente por sector")
-                            ***REMOVED***).Union(
-                             (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                             where pre.AnioPresupuesto == annio && (pre.CodigoVersion == 2 || pre.CodigoVersion == 50)
-                             group pre by new { pre.Sectores, pre.CodigoVersion ***REMOVED*** into g
-                             from que in query1.Where(j => j.label == g.Key.Sectores)
-                             select new InfoPresupuesto {
-                                 rawValue = (decimal)(g.Sum(g => g.PresupuestoAvance) / 1000000),
-                                 label = g.Key.Sectores,
-                                 labelGroup = "Presupuesto Avance por sector"
-                         ***REMOVED***)).OrderByDescending(g => g.rawValue).ToList();
+            infograficoGasto objGasto = null;
+            infograficoEntidad objEntidad = null;
+            infograficoActividad objActividad = null;
+            double total = 0;
 
-                //objReturn = (from pre in _connection.PresupuestoXSectorMinHaciendas
-                //             where pre.AnioPresupuesto == annio && (pre.CodigoVersion==2 || pre.CodigoVersion == 50)
-                //             orderby pre.Presupuesto descending
-                //             group pre by new { pre.Sectores, pre.CodigoVersion ***REMOVED*** into g
-                //             select new InfoPresupuesto {
-                //                 rawValue = (decimal)g.Sum(g => g.Presupuesto),
-                //                // totalGasto = g.Key.CodigoVersion == 2 ? g.Sum(g => g.Presupuesto) : null,
-                //                 label = g.Key.Sectores,
-                //                 labelGroup = g.Key.CodigoVersion ==2 ? "Presupuesto asignado al sector" : g.Key.CodigoVersion == 50 ? "Gasto ecónomico por sector" :""
-                //         ***REMOVED***).Take(8).ToList();
+            foreach (var fila in infoQuery)
+            {
+                objGasto = objReturn.Find(p => p.Id == fila.IdCodGrupo.ToString());
+                if (objGasto == null)
+                {
+                    objGasto = new infograficoGasto();
+                    objGasto.Id = fila.IdCodGrupo.ToString();
+                    objGasto.Nombre = fila.GrupoGasto;
+                    objGasto.presupuesto = fila.AportePresupuesto;
+                    objGasto.avance = fila.Avance;
+
+                    objEntidad = objGasto.Detalles.Find(p => p.Id == fila.IdEntidad.ToString());
+                    if (objEntidad == null)
+                    {
+                        objEntidad = new infograficoEntidad();
+                        objEntidad.Id = fila.IdEntidad.ToString();
+                        objEntidad.Nombre = fila.NombreEntidad;
+                        objEntidad.presupuesto = fila.AportePresupuesto;
+                        objEntidad.avance = fila.Avance;
+
+                        objActividad = objEntidad.Detalles.Find(p => p.Id == fila.IdActividad.ToString());
+                        if (objActividad == null)
+                        {
+                            objActividad = new infograficoActividad();
+                            objActividad.Id = fila.IdActividad.ToString();
+                            objActividad.Nombre = fila.NombreActividad;
+                            objActividad.presupuesto = fila.AportePresupuesto;
+                            objActividad.avance = fila.Avance;
+
+                            objEntidad.Detalles.Add(objActividad);
+
+                    ***REMOVED***
+                        else
+                        {
+                            objActividad.presupuesto += fila.AportePresupuesto;
+                            objActividad.avance += fila.Avance;
+
+                    ***REMOVED***
+
+                        objGasto.Detalles.Add(objEntidad);
+                ***REMOVED***
+                    else
+                    {
+                        objEntidad.presupuesto += fila.AportePresupuesto;
+                        objEntidad.avance += fila.Avance;
+
+                        objActividad = objEntidad.Detalles.Find(p => p.Id == fila.IdActividad.ToString());
+                        if (objActividad == null)
+                        {
+                            objActividad = new infograficoActividad();
+                            objActividad.Id = fila.IdActividad.ToString();
+                            objActividad.Nombre = fila.NombreActividad;
+                            objActividad.presupuesto =fila.AportePresupuesto;
+                            objActividad.avance = fila.Avance;
+
+                            objEntidad.Detalles.Add(objActividad);
+
+                    ***REMOVED***
+                        else
+                        {
+                            objActividad.presupuesto += fila.AportePresupuesto;
+                            objActividad.avance += fila.Avance;
+                    ***REMOVED***
+
+                ***REMOVED***
+
+                    objReturn.Add(objGasto);
+            ***REMOVED***
+                else
+                {
+                    objGasto.presupuesto += fila.AportePresupuesto;
+                    objGasto.avance += fila.Avance;
+                    objEntidad = objGasto.Detalles.Find(p => p.Id == fila.IdEntidad.ToString());
+                    if (objEntidad == null)
+                    {
+                        objEntidad = new infograficoEntidad();
+                        objEntidad.Id = fila.IdEntidad.ToString();
+                        objEntidad.Nombre = fila.NombreEntidad;
+                        objEntidad.presupuesto = fila.AportePresupuesto;
+                        objEntidad.avance = fila.Avance;
+
+                        objActividad = objEntidad.Detalles.Find(p => p.Id == fila.IdActividad.ToString());
+                        if (objActividad == null)
+                        {
+                            objActividad = new infograficoActividad();
+                            objActividad.Id = fila.IdActividad.ToString();
+                            objActividad.Nombre = fila.NombreActividad;
+                            objActividad.presupuesto = fila.AportePresupuesto;
+                            objActividad.avance = fila.Avance;
+
+                            objEntidad.Detalles.Add(objActividad);
+
+                    ***REMOVED***
+                        else
+                        {
+                            objActividad.presupuesto += fila.AportePresupuesto;
+                            objActividad.avance += fila.Avance;
+
+                    ***REMOVED***
+
+                        objGasto.Detalles.Add(objEntidad);
+                ***REMOVED***
+                    else
+                    {
+                        objEntidad.presupuesto += fila.AportePresupuesto;
+                        objEntidad.avance += fila.Avance;
+
+                        objActividad = objEntidad.Detalles.Find(p => p.Id == fila.IdActividad.ToString());
+                        if (objActividad == null)
+                        {
+                            objActividad = new infograficoActividad();
+                            objActividad.Id = fila.IdActividad.ToString();
+                            objActividad.Nombre = fila.NombreActividad;
+                            objActividad.presupuesto = fila.AportePresupuesto;
+                            objActividad.avance = fila.Avance;
+
+                            objEntidad.Detalles.Add(objActividad);
+
+                    ***REMOVED***
+                        else
+                        {
+                            objActividad.presupuesto += fila.AportePresupuesto;
+                            objActividad.avance += fila.Avance;
+                    ***REMOVED***
+
+                ***REMOVED***
+
+
+            ***REMOVED***
         ***REMOVED***
-            if (consulta == 1) {
 
-                objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                             where pre.AnioPresupuesto == annio && (pre.CodigoVersion == 2 || pre.CodigoVersion == 50)
-                             group pre by new { pre.Sectores, pre.CodigoVersion ***REMOVED*** into g
-                             select new InfoPresupuesto {
-                                 rawValue = (decimal)(g.Sum(g => g.PresupuestoVigente) / 1000000),
-                                 //totalGasto = g.Key.CodigoVersion == 2 ? g.Sum(g => g.Presupuesto) : null,
-                                 label = g.Key.Sectores,
-                                 labelGroup = "Presupuesto Vigente por sector" 
-                         ***REMOVED***).Union
-                             (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                              where pre.AnioPresupuesto == annio && (pre.CodigoVersion == 2 || pre.CodigoVersion == 50)
-                              group pre by new { pre.Sectores, pre.CodigoVersion ***REMOVED*** into g
-                              select new InfoPresupuesto {
-                                  rawValue = (decimal)(g.Sum(g => g.PresupuestoAvance) / 1000000),
-                                  //totalGasto = g.Key.CodigoVersion == 2 ? g.Sum(g => g.Presupuesto) : null,
-                                  label = g.Key.Sectores,
-                                  labelGroup =  "Presupuesto Avance por sector" 
-                          ***REMOVED***).OrderByDescending(g => g.rawValue).ToList();
+            ///ordena primer nivel gasto
+            var result = objReturn.OrderByDescending(x => x.presupuesto).ToList();
+            foreach (var item in result)
+            {
+                //ordena nivel entidad
+                item.Detalles = item.Detalles.OrderByDescending(x => x.presupuesto).ToList();
+                foreach (var item_actividad in item.Detalles)
+                {
+                    //ordena nivel actividad
+                    item_actividad.Detalles = item_actividad.Detalles.OrderByDescending(x => x.presupuesto).ToList();
+            ***REMOVED***
         ***REMOVED***
-    
-            return objReturn;
+            return result;
 
     ***REMOVED***
 
-
-        public List<InfoPresupuesto> ObtenerPresupuestoSolicitadoAprobado(int consulta, int annio, int version1, int version2)
+        public List<infograficoGasto> GetInfograficoPerEntidad(int annio)
         {
-             List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
-            if (consulta == 0) {
+            var objReturn = new List<infograficoGasto>();
 
-                var query1 = (from pre in _connection.PresupuestoXVersionMinHacientas
-                              where pre.AnioPresupuesto == annio && (pre.CodigoVersion == version1)
-                              group pre by new { pre.Sectores, pre.NombreVersion ***REMOVED*** into g
-                              select new InfoPresupuesto {
-                                  rawValue = (decimal)(g.Sum(g => g.Presupuesto) / 1000000),
-                                  label = g.Key.Sectores,
-                          ***REMOVED***).OrderByDescending(g => g.rawValue).Take(4);
+            var infoQuery = (from info in _connection.VwPresupuesto
+                             where info.Periodo == annio
+                             group info by new
+                             {
+                                 info.CodigoGrupoDeGasto,
+                                 info.GrupoDeGasto,
+                                 info.CodigoInstitucion,
+                                 info.Institucion,
+                                 info.CodigoActividadObra,
+                                 info.ActividadObra
+                         ***REMOVED*** into g
+                             select new
+                             {
+                                 IdCodGrupo = g.Key.CodigoGrupoDeGasto,
+                                 GrupoGasto = "grp|" + g.Key.GrupoDeGasto,
+                                 IdEntidad = g.Key.CodigoInstitucion,
+                                 NombreEntidad = "ent|" + g.Key.Institucion,
+                                 IdActividad = g.Key.CodigoActividadObra,
+                                 NombreActividad = "act|" + g.Key.ActividadObra,
+                                 AportePresupuesto = (g.Sum(g => g.Vigente.Value)),
+                                 Avance = (g.Sum(g => g.EjecucionDelMes.Value))
+                         ***REMOVED***
+                            ).Distinct().OrderBy(x => x.NombreEntidad).
+                                    ThenBy(x => x.GrupoGasto).
+                                    ThenBy(x => x.NombreActividad).ToList();
 
-
-                objReturn = (from pre in _connection.PresupuestoXVersionMinHacientas
-                             where pre.AnioPresupuesto == annio && (pre.CodigoVersion == version1 || pre.CodigoVersion == version2)
-                             orderby pre.Presupuesto descending
-                             group pre by new { pre.Sectores, pre.NombreVersion ***REMOVED*** into g
-                             from que in query1.Where(j => j.label == g.Key.Sectores)
-                             select new InfoPresupuesto {
-                                 //totalPresupuesto = g.Key.CodigoVersion == 50 ? g.Sum(g => g.Presupuesto) : null,
-                                 //totalGasto = g.Key.CodigoVersion == 2 ? g.Sum(g => g.Presupuesto) : null,
-                                 //totalMH= g.Key.CodigoVersion == 23 ? g.Sum(g => g.Presupuesto) : null,
-                                 rawValue = (decimal)(g.Sum(g => g.Presupuesto) / 1000000),
-                                 label = g.Key.Sectores,
-                                 labelGroup = g.Key.NombreVersion //g.Key.CodigoVersion == 2 ? "Presupuesto solicitado por entidades" : g.Key.CodigoVersion == 23 ? "Presupuesto aprobado por MH" : g.Key.CodigoVersion == 50 ? "Presupuesto por aprobado el Congreso" : ""
-                         ***REMOVED***).ToList();
-        ***REMOVED***
-            if (consulta == 1) {
-                objReturn = (from pre in _connection.PresupuestoXVersionMinHacientas
-                             where pre.AnioPresupuesto == annio && (pre.CodigoVersion == version1 || pre.CodigoVersion == version2)
-                             orderby pre.Presupuesto descending
-                             group pre by new { pre.Sectores, pre.NombreVersion ***REMOVED*** into g
-                             select new InfoPresupuesto {
-                                 //totalPresupuesto = g.Key.CodigoVersion == 50 ? g.Sum(g => g.Presupuesto) : null,
-                                 //totalGasto = g.Key.CodigoVersion == 2 ? g.Sum(g => g.Presupuesto) : null,
-                                 //totalMH = g.Key.CodigoVersion == 23 ? g.Sum(g => g.Presupuesto) : null,
-                                 rawValue = (decimal)(g.Sum(g => g.Presupuesto) / 1000000),
-                                 label = g.Key.Sectores,
-                                 labelGroup = g.Key.NombreVersion// g.Key.CodigoVersion == 2 ? "Presupuesto solicitado por entidades" : g.Key.CodigoVersion == 23 ? "Presupuesto aprobado por MH" : g.Key.CodigoVersion == 50 ? "Presupuesto por aprobado el Congreso" : ""
-                         ***REMOVED***).OrderByDescending(g => g.rawValue).ToList();
-        ***REMOVED***
-
-            return objReturn;
-
-    ***REMOVED***
-
-
-        public List<InfoPresupuesto> ObtenerGastoPresupuestalTiempo(int consulta, int annio)
-        {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
+            //cambia orden por: entidad - gasto - actividad obra
             
-            if (consulta == 0) {
+            infograficoGasto objGasto = null;
+            infograficoEntidad objEntidad = null;
+            infograficoActividad objActividad = null;
+            double total = 0;
 
-                var query1 = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                              where  (pre.AnioPresupuesto > DateTime.Today.Year-5)
-                              group pre by new { pre.Sectores, pre.AnioPresupuesto ***REMOVED*** into g
-                              select new  InfoPresupuesto {
-                                  totalGasto = (decimal)g.Sum(g => g.PresupuestoVigente),
-                                  labelGroup = g.Key.Sectores,
-                                  label = g.Key.AnioPresupuesto.ToString()
-                          ***REMOVED***);
-                var query2 = (from pre in query1
-                              group pre by new { pre.label ***REMOVED*** into g
-                              select new InfoPresupuesto {
-                                  totalPresupuesto = g.Sum(t => t.totalGasto),
-                                  label = g.Key.label
-                          ***REMOVED***);
-                objReturn = (from pre in query1
-                             from gas in query2.Where(j => j.label == pre.label)
-                             select new InfoPresupuesto {
-                                 rawValue = (gas.totalPresupuesto > 0 ? (decimal)((pre.totalGasto / gas.totalPresupuesto) *100) : 0),
-                                 labelGroup = pre.labelGroup,
-                                 label = pre.label
-                         ***REMOVED***).ToList();
+            foreach (var fila in infoQuery)
+            {
+                objGasto = objReturn.Find(p => p.Id == fila.IdEntidad.ToString());
+                if (objGasto == null)
+                {
+                    objGasto = new infograficoGasto();
+                    objGasto.Id = fila.IdEntidad.ToString();
+                    objGasto.Nombre = fila.NombreEntidad;
+                    objGasto.presupuesto = fila.AportePresupuesto;
+                    objGasto.avance = fila.Avance;
 
-                
+                    objEntidad = objGasto.Detalles.Find(p => p.Id == fila.IdCodGrupo.ToString());
+                    if (objEntidad == null)
+                    {
+                        objEntidad = new infograficoEntidad();
+                        objEntidad.Id = fila.IdCodGrupo.ToString();
+                        objEntidad.Nombre = fila.GrupoGasto;
+                        objEntidad.presupuesto = fila.AportePresupuesto;
+                        objEntidad.avance = fila.Avance;
+
+                        objActividad = objEntidad.Detalles.Find(p => p.Id == fila.IdActividad.ToString());
+                        if (objActividad == null)
+                        {
+                            objActividad = new infograficoActividad();
+                            objActividad.Id = fila.IdActividad.ToString();
+                            objActividad.Nombre = fila.NombreActividad;
+                            objActividad.presupuesto = fila.AportePresupuesto;
+                            objActividad.avance = fila.Avance;
+
+                            objEntidad.Detalles.Add(objActividad);
+
+                    ***REMOVED***
+                        else
+                        {
+                            objActividad.presupuesto += fila.AportePresupuesto;
+                            objActividad.avance += fila.Avance;
+
+                    ***REMOVED***
+
+                        objGasto.Detalles.Add(objEntidad);
+                ***REMOVED***
+                    else
+                    {
+                        objEntidad.presupuesto += fila.AportePresupuesto;
+                        objEntidad.avance += fila.Avance;
+
+                        objActividad = objEntidad.Detalles.Find(p => p.Id == fila.IdActividad.ToString());
+                        if (objActividad == null)
+                        {
+                            objActividad = new infograficoActividad();
+                            objActividad.Id = fila.IdActividad.ToString();
+                            objActividad.Nombre = fila.NombreActividad;
+                            objActividad.presupuesto = fila.AportePresupuesto;
+                            objActividad.avance = fila.Avance;
+
+                            objEntidad.Detalles.Add(objActividad);
+
+                    ***REMOVED***
+                        else
+                        {
+                            objActividad.presupuesto += fila.AportePresupuesto;
+                            objActividad.avance += fila.Avance;
+                    ***REMOVED***
+
+                ***REMOVED***
+
+                    objReturn.Add(objGasto);
+            ***REMOVED***
+                else
+                {
+                    objGasto.presupuesto += fila.AportePresupuesto;
+                    objGasto.avance += fila.Avance;
+                    objEntidad = objGasto.Detalles.Find(p => p.Id == fila.IdCodGrupo.ToString());
+                    if (objEntidad == null)
+                    {
+                        objEntidad = new infograficoEntidad();
+                        objEntidad.Id = fila.IdCodGrupo.ToString();
+                        objEntidad.Nombre = fila.GrupoGasto;
+                        objEntidad.presupuesto = fila.AportePresupuesto;
+                        objEntidad.avance = fila.Avance;
+
+                        objActividad = objEntidad.Detalles.Find(p => p.Id == fila.IdActividad.ToString());
+                        if (objActividad == null)
+                        {
+                            objActividad = new infograficoActividad();
+                            objActividad.Id = fila.IdActividad.ToString();
+                            objActividad.Nombre = fila.NombreActividad;
+                            objActividad.presupuesto = fila.AportePresupuesto;
+                            objActividad.avance = fila.Avance;
+
+                            objEntidad.Detalles.Add(objActividad);
+
+                    ***REMOVED***
+                        else
+                        {
+                            objActividad.presupuesto += fila.AportePresupuesto;
+                            objActividad.avance += fila.Avance;
+
+                    ***REMOVED***
+
+                        objGasto.Detalles.Add(objEntidad);
+                ***REMOVED***
+                    else
+                    {
+                        objEntidad.presupuesto += fila.AportePresupuesto;
+                        objEntidad.avance += fila.Avance;
+
+                        objActividad = objEntidad.Detalles.Find(p => p.Id == fila.IdActividad.ToString());
+                        if (objActividad == null)
+                        {
+                            objActividad = new infograficoActividad();
+                            objActividad.Id = fila.IdActividad.ToString();
+                            objActividad.Nombre = fila.NombreActividad;
+                            objActividad.presupuesto = fila.AportePresupuesto;
+                            objActividad.avance = fila.Avance;
+
+                            objEntidad.Detalles.Add(objActividad);
+
+                    ***REMOVED***
+                        else
+                        {
+                            objActividad.presupuesto += fila.AportePresupuesto;
+                            objActividad.avance += fila.Avance;
+                    ***REMOVED***
+
+                ***REMOVED***
+
+
+            ***REMOVED***
         ***REMOVED***
-            if (consulta == 1) {
-                //busco total por sector en cada año
-                var query1 = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                              group pre by new { pre.Sectores,  pre.AnioPresupuesto ***REMOVED*** into g
-                              select new InfoPresupuesto {
-                                  totalGasto = (decimal)g.Sum(g => g.PresupuestoVigente), //temporal para total de cada sector
-                                  labelGroup = g.Key.Sectores,
-                                  label = g.Key.AnioPresupuesto.ToString()
-                          ***REMOVED***);
-                // busco total del presupuesto en cada año
-                var query2 = (from pre in query1
-                              group pre by new { pre.label ***REMOVED*** into g
-                              select new InfoPresupuesto {
-                                  totalPresupuesto = g.Sum(t => t.totalGasto), //temporal para total de cada año
-                                  label = g.Key.label
-                          ***REMOVED***);
-                // obtengo porcentaje del presupuesto total por sector en cada año
-                objReturn = (from pre in query1
-                             from gas in query2.Where(j => j.label == pre.label)
-                             select new InfoPresupuesto {
-                                 rawValue = (gas.totalPresupuesto > 0 ? (decimal)((pre.totalGasto / gas.totalPresupuesto) * 100) : 0), //porcentaje
-                                 labelGroup = pre.labelGroup,
-                                 label = pre.label
+
+            ///ordena primer nivel gasto
+            var result = objReturn.OrderByDescending(x => x.presupuesto).ToList();
+            foreach (var item in result)
+            {
+                //ordena nivel entidad
+                item.Detalles = item.Detalles.OrderByDescending(x => x.presupuesto).ToList();
+                foreach (var item_actividad in item.Detalles)
+                {
+                    //ordena nivel actividad
+                    item_actividad.Detalles = item_actividad.Detalles.OrderByDescending(x => x.presupuesto).ToList();
+            ***REMOVED***
+        ***REMOVED***
+            return result;
+
+    ***REMOVED***
+
+        public List<InfoPresupuesto> GetComparativePerVersiones(List<int> filtro, int anyo)
+        {
+           List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
+
+            var queryTotal = (from info in _connection.VwPresupuestoVersiones
+                              where info.AnioPresupuesto == anyo
+                              where filtro.Contains(info.CodigoVersion.Value)
+                              orderby info.Presupuesto descending
+                              group info by new { info.NombreVersion ***REMOVED*** into g
+                              select new InfoPresupuesto
+                              {
+                                  rawValue = (decimal)(g.Sum(g => g.Presupuesto) / 1000000),
+                                  labelGroup = g.Key.NombreVersion
+
+                          ***REMOVED***).OrderByDescending(g => g.rawValue).ToList();
+
+            objReturn = (from info in _connection.VwPresupuestoVersiones
+                             where info.AnioPresupuesto == anyo                              
+                             where filtro.Contains(info.CodigoVersion.Value)
+                             orderby info.Presupuesto descending
+                             group info by new { info.Sectores, info.NombreVersion ***REMOVED*** into g
+                         from q0 in ((from pre in _connection.VwPresupuestoVersiones
+                                      where pre.AnioPresupuesto == anyo ///top del presupuesto del año seleccionado
+                                      where filtro.Contains(pre.CodigoVersion.Value)
+                                      group pre by new { pre.Sectores ***REMOVED*** into h
+                                      select new InfoRecAsignadosPresupuesto
+                                      {
+                                          rawValue = (decimal)(h.Sum(h => h.Presupuesto)),
+                                          labelGroup = h.Key.Sectores
+                                  ***REMOVED***).OrderByDescending(h => h.rawValue).Take(4))
+                                    .Where(j => j.labelGroup == g.Key.Sectores) //inner join
+                         select new InfoPresupuesto
+                             {
+                                 rawValue = (decimal)(g.Sum(g => g.Presupuesto) / 1000000),
+                                 label = g.Key.Sectores,
+                                 labelGroup = g.Key.NombreVersion
+                                 
                          ***REMOVED***).OrderByDescending(g => g.rawValue).ToList();
+
+            foreach (var item in objReturn)
+            {
+                //calculo porcentaje
+                var objTotalVersion = queryTotal.Find(p => p.labelGroup == item.labelGroup);
+                if (objTotalVersion != null)
+                {
+                    item.porcentaje = Math.Round((item.rawValue / objTotalVersion.rawValue) * 100, 2);
+            ***REMOVED***
+
+
+
         ***REMOVED***
+
 
             return objReturn;
 
     ***REMOVED***
 
-        public List<InfoPresupuesto> ObtenerGrupoDeGasto(int consulta, int annio)
+        public List<InfoConsolidadoPresupuesto> ObtenerInfoPerFuncionesGob(List<int> filtro, int anyo,List<string>filtro_func)
         {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
+            List<InfoConsolidadoPresupuesto> objReturn = new List<InfoConsolidadoPresupuesto>();
+            List<InfoConsolidadoPresupuesto> query1 = new List<InfoConsolidadoPresupuesto>();
+                var queryTotal = (from pre in _connection.VwPresupuesto
+                              where filtro.Contains(pre.Periodo.Value)
+                              group pre by new { pre.Periodo***REMOVED*** into g
+                              select new InfoConsolidadoPresupuesto
+                              {
+                                  rawValue = (decimal)g.Sum(g => g.Aprobado) / 1000000,
+                                  periodo = (int)g.Key.Periodo.Value,
+                          ***REMOVED***).ToList();
 
-            if (consulta == 0) {
 
-                //var query0 = ((from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                //               where pre.AnioPresupuesto == annio ///presupuesto año seleccionado
-                //               group pre by new { pre.DescripcionGrupo ***REMOVED*** into g
-                //               select new InfoPresupuesto {
-                //                   rawValue = (decimal)(g.Sum(g => g.PresupuestoVigente)),
-                //                   labelGroup = g.Key.DescripcionGrupo
-                //           ***REMOVED***).OrderByDescending(g => g.rawValue).Take(4));
+            if (filtro_func.Count>0)
+            {
+                query1 = (from pre in _connection.VwPresupuesto
+                              where filtro.Contains(pre.Periodo.Value) && filtro_func.Contains(pre.Funcion)
+                              group pre by new { pre.Periodo, pre.Funcion ***REMOVED*** into g
+                              select new InfoConsolidadoPresupuesto
+                              {
+                                  rawValue = (decimal)g.Sum(g => g.Aprobado) / 1000000,
+                                  labelGroup = g.Key.Funcion,
+                                  periodo = (int)g.Key.Periodo.Value,
+                          ***REMOVED***).ToList();
 
-                var query1 = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                              where (pre.AnioPresupuesto == annio - 1) //datos del año anterior al seleccionado
-                              group pre by new { pre.DescripcionGrupo, pre.AnioPresupuesto ***REMOVED*** into g
-                              from q0 in ((from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                                           where pre.AnioPresupuesto == annio ///top del presupuesto del año seleccionado
-                                           group pre by new { pre.DescripcionGrupo ***REMOVED*** into h
-                                           select new InfoPresupuesto {
-                                               rawValue = (decimal)(h.Sum(h => h.PresupuestoVigente)),
-                                               labelGroup = h.Key.DescripcionGrupo
+        ***REMOVED***
+            else 
+            {
+                query1 = (from pre in _connection.VwPresupuesto
+                              where filtro.Contains(pre.Periodo.Value)
+                              group pre by new { pre.Periodo, pre.Funcion ***REMOVED*** into g
+                              from q0 in ((from pre in _connection.VwPresupuesto
+                                           where pre.Periodo == anyo ///top del presupuesto del año seleccionado
+                                           group pre by new { pre.Funcion ***REMOVED*** into h
+                                           select new InfoConsolidadoPresupuesto
+                                           {
+                                               rawValue = (decimal)(h.Sum(h => h.Aprobado)),
+                                               labelGroup = h.Key.Funcion
                                        ***REMOVED***).OrderByDescending(h => h.rawValue).Take(4))
-                                           .Where(j => j.labelGroup == g.Key.DescripcionGrupo) //inner join
-                              select new InfoPresupuesto {
-                                  totalGasto = (decimal)g.Sum(g => g.PresupuestoVigente) / 1000000, 
-                                  labelGroup = g.Key.DescripcionGrupo,
-                                  annio = g.Key.AnioPresupuesto,
-                                  rawValue=0
-                          ***REMOVED***);
+                                           .Where(j => j.labelGroup == g.Key.Funcion) //inner join
+                              select new InfoConsolidadoPresupuesto
+                              {
+                                  rawValue = (decimal)g.Sum(g => g.Aprobado) / 1000000,
+                                  labelGroup = g.Key.Funcion,
+                                  periodo = (int)g.Key.Periodo.Value,
+                          ***REMOVED***).ToList();
 
-                var annioanterior = query1.Count(); /// saber si existendatos del año anterior al seleccionado
-
-                var query2 = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                              where (pre.AnioPresupuesto == annio) //datos año seleccionado
-                              group pre by new { pre.DescripcionGrupo, pre.AnioPresupuesto ***REMOVED*** into g
-                              from q0 in ((from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                                           where pre.AnioPresupuesto == annio 
-                                           group pre by new { pre.DescripcionGrupo ***REMOVED*** into h
-                                           select new InfoPresupuesto {
-                                               rawValue = (decimal)(h.Sum(h => h.PresupuestoVigente)),
-                                               labelGroup = h.Key.DescripcionGrupo
-                                       ***REMOVED***).OrderByDescending(h => h.rawValue).Take(4))
-                              .Where(j => j.labelGroup == g.Key.DescripcionGrupo)
-                              select new InfoPresupuesto {
-                                  totalPresupuesto = (decimal)g.Sum(t => t.PresupuestoVigente) / 1000000,
-                                  labelGroup = g.Key.DescripcionGrupo,
-                                  annio = g.Key.AnioPresupuesto,
-                                  rawValue=0
-                          ***REMOVED***);
-                if (annioanterior > 0) {
-
-                    objReturn = (from gas in query1
-                                      from pre in query2.Where(j => j.labelGroup == gas.labelGroup).DefaultIfEmpty()
-                                      select new InfoPresupuesto {
-                                          rawValue = (gas.totalGasto > 0 ? (decimal)((pre.totalPresupuesto / gas.totalGasto) * 100) - 100 : 0),
-                                          labelGroup = pre.labelGroup,
-                                          annio = pre.annio,
-                                          totalPresupuesto = pre.totalPresupuesto
-
-                                  ***REMOVED***).OrderByDescending(g => g.totalPresupuesto).Union(from gas in query1
-                                                                                          from pre in query2.Where(j => j.labelGroup == gas.labelGroup).DefaultIfEmpty()
-                                                                                          select new InfoPresupuesto {
-                                                                                              rawValue = (gas.totalGasto > 0 ? (decimal)((pre.totalPresupuesto / gas.totalGasto) * 100) - 100 : 0),
-                                                                                              labelGroup = pre.labelGroup,
-                                                                                              annio = gas.annio,
-                                                                                              totalPresupuesto = gas.totalGasto
-
-                                                                                      ***REMOVED***).OrderBy(g => g.annio).ThenByDescending(g => g.totalPresupuesto)
-
-                   .ToList();
-            ***REMOVED***
-                else {
-                    objReturn = query2.ToList();
-
-
-            ***REMOVED***
 
         ***REMOVED***
-            if (consulta == 1) {
-                var query1 = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                              where (pre.AnioPresupuesto == annio - 1)
-                              group pre by new { pre.DescripcionGrupo, pre.AnioPresupuesto ***REMOVED*** into g
-                              select new InfoPresupuesto {
-                                  totalGasto = (decimal)g.Sum(g => g.PresupuestoVigente) / 1000000, ///presupuesto año anterior al seleccionado
-                                  labelGroup = g.Key.DescripcionGrupo,
-                                  annio = g.Key.AnioPresupuesto,
-                                  rawValue = 0
-                          ***REMOVED***);
 
-                var annioanterior = query1.Count();
+               
 
-                var query2 = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                              where (pre.AnioPresupuesto == annio)
-                              group pre by new { pre.DescripcionGrupo, pre.AnioPresupuesto ***REMOVED*** into g
-                              select new InfoPresupuesto {
-                                  totalPresupuesto = (decimal)g.Sum(t => t.PresupuestoVigente) / 1000000,
-                                  labelGroup = g.Key.DescripcionGrupo,
-                                  annio = g.Key.AnioPresupuesto,
-                                  rawValue = 0
-                          ***REMOVED***);
-                if (annioanterior > 0) {
-
-                    objReturn = (from gas in query1
-                                 from pre in query2.Where(j => j.labelGroup == gas.labelGroup).DefaultIfEmpty()
-                                 select new InfoPresupuesto {
-                                     rawValue = (gas.totalGasto > 0 ? (decimal)((pre.totalPresupuesto / gas.totalGasto) * 100) - 100 : 0),
-                                     labelGroup = pre.labelGroup,
-                                     annio = pre.annio,
-                                     totalPresupuesto = pre.totalPresupuesto
-
-                             ***REMOVED***).OrderByDescending(g => g.totalPresupuesto).Union(from gas in query1
-                                                                                     from pre in query2.Where(j => j.labelGroup == gas.labelGroup).DefaultIfEmpty()
-                                                                                     select new InfoPresupuesto {
-                                                                                         rawValue = (gas.totalGasto > 0 ? (decimal)((pre.totalPresupuesto / gas.totalGasto) * 100) - 100 : 0),
-                                                                                         labelGroup = pre.labelGroup,
-                                                                                         annio = gas.annio,
-                                                                                         totalPresupuesto = gas.totalGasto
-
-                                                                                 ***REMOVED***).OrderBy(g => g.annio).ThenByDescending(g=> g.totalPresupuesto)
-
-                   .ToList();
-            ***REMOVED***
-                else {
-                    objReturn = query2.ToList();
-
-
+                objReturn = query1.OrderByDescending(x => x.periodo).ThenBy(n => n.rawValue).ToList();
+                foreach (var item in objReturn)
+                {
+                    //calculo porcentaje
+                    var objTotalPeriodo = queryTotal.Find(p => p.periodo == item.periodo);
+                    if (objTotalPeriodo != null)
+                    {
+                        item.porcentaje = Math.Round((item.rawValue / objTotalPeriodo.rawValue)*100, 2);
+                ***REMOVED***
+                    
+                    
+                    
             ***REMOVED***
 
-                
+
+            
+
+            return objReturn;
+
+    ***REMOVED***
+
+        public List<InformationGraphics> ObtenerFuncionesPerNombre(string texto, int anyo)
+        {
+            List<InformationGraphics> _objreturn = new List<InformationGraphics>();
+            if (texto != null)
+            {
+                _objreturn = (from cont in _connection.VwPresupuesto
+                              where cont.Periodo == anyo && (cont.Funcion.Contains(texto))
+                              group cont by cont.Funcion into g
+                              select new InformationGraphics
+                              {
+                                  label = g.Key
+                          ***REMOVED***).Distinct().ToList();
         ***REMOVED***
-            return objReturn;
+            else {
+                _objreturn = (from cont in _connection.VwPresupuesto
+                              where cont.Periodo == anyo
+                              group cont by cont.Funcion into g
+                              select new InformationGraphics
+                              {
+                                  label = g.Key
+                          ***REMOVED***).Distinct().ToList();
+
+        ***REMOVED***
+            
+
+            return _objreturn;
+
     ***REMOVED***
 
-
-
-        public List<InfoPresupuesto> ObtenerClasificacion(int annio)
+        public List<InformationGraphics> ObtenerGrupoGastoPerNombre(int anyo)
         {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
+            List<InformationGraphics> _objreturn = new List<InformationGraphics>();
+                _objreturn = (from cont in _connection.VwPresupuesto
+                              where cont.Periodo == anyo
+                              group cont by cont.GrupoDeGasto into g
+                              select new InformationGraphics
+                              {
+                                  label = g.Key
+                          ***REMOVED***).Distinct().ToList();
 
-         
-                objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                             where pre.AnioPresupuesto == annio
-                             group pre by new { pre.Clasificacion, pre.CodigoVersion, pre.AnioPresupuesto ***REMOVED*** into g
-                             select new InfoPresupuesto {
-                                 totalClasificacion = (decimal)g.Sum(g => g.PresupuestoVigente),
-                                 clasificacion =g.Key.Clasificacion,
-                                 version=g.Key.CodigoVersion
-                         ***REMOVED***).ToList();
-            return objReturn;
+           
 
-    ***REMOVED***
-
-        public List<InfoPresupuesto> ObtenerEntidad(int annio, string clasificacion)
-        {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
-
-
-            objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                         where pre.AnioPresupuesto == annio && (pre.Clasificacion == clasificacion)
-                         group pre by new { pre.NombreEntidad, pre.CodigoVersion, pre.AnioPresupuesto ***REMOVED*** into g
-                         select new InfoPresupuesto {
-                             totalEntidad = (decimal)g.Sum(g => g.PresupuestoVigente),
-                             entidad = g.Key.NombreEntidad,
-                             version = g.Key.CodigoVersion
-                     ***REMOVED***).ToList();
-
-            return objReturn;
-
-    ***REMOVED***
-        public List<InfoPresupuesto> ObtenerClasePrograma(int annio, string clasificacion, string entidad)
-        {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
-
-
-            objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                         where pre.AnioPresupuesto == annio && (pre.Clasificacion == clasificacion) && (pre.NombreEntidad == entidad)
-                         group pre by new { pre.ClasePrograma, pre.CodigoVersion, pre.AnioPresupuesto ***REMOVED*** into g
-                         select new InfoPresupuesto {
-                             totalClasePrograma = (decimal)g.Sum(g => g.PresupuestoVigente),
-                             clasePrograma = g.Key.ClasePrograma,
-                             version = g.Key.CodigoVersion
-                     ***REMOVED***).ToList();
-
-            return objReturn;
+            return _objreturn;
 
     ***REMOVED***
 
-
-
-        public List<InfoPresupuesto> ObtenerProyectoActividades(int annio, string clasificacion, string entidad, string clasePrograma)
-        {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
-
-
-            objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                         where pre.AnioPresupuesto == annio && (pre.Clasificacion == clasificacion)  && (pre.NombreEntidad == entidad) && (pre.ClasePrograma == clasePrograma)
-                         group pre by new { pre.NombreProyectoActividad, pre.CodigoVersion, pre.AnioPresupuesto ***REMOVED*** into g
-                         select new InfoPresupuesto {
-                             totalProyectoActividad = (decimal)g.Sum(g => g.PresupuestoVigente),
-                             proyectoActividad = g.Key.NombreProyectoActividad,
-                             version = g.Key.CodigoVersion
-                     ***REMOVED***).ToList();
-
-            return objReturn;
-
-    ***REMOVED***
-
-        public List<InfoPresupuesto> ObtenerVersiones(int annio)
-        {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
-
-
-            objReturn = (from pre in _connection.PresupuestoXVersionMinHacientas
-                         where pre.AnioPresupuesto == annio 
-                         group pre by new { pre.AnioPresupuesto, pre.CodigoVersion, pre.NombreVersion ***REMOVED*** into g
-                         select new InfoPresupuesto {
-                             nombreVersion= g.Key.NombreVersion,
-                             version = (int)g.Key.CodigoVersion
-                     ***REMOVED***).OrderBy(g => g.version).ToList();
-
-            return objReturn;
-
-    ***REMOVED***
-
-        public List<InfoPresupuesto> ObtenerEntidadOG(int annio)
-        {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
-
-
-            objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                         where pre.AnioPresupuesto == annio
-                         group pre by new { pre.NombreEntidad, pre.CodigoVersion, pre.AnioPresupuesto ***REMOVED*** into g
-                         select new InfoPresupuesto {
-                             totalEntidad = (decimal)g.Sum(g => g.PresupuestoVigente),
-                             entidad = g.Key.NombreEntidad,
-                             version = g.Key.CodigoVersion
-                     ***REMOVED***).ToList();
-
-            return objReturn;
-
-    ***REMOVED***
-
-        public List<InfoPresupuesto> ObtenerProyectoActividadesOG(int annio, string entidad)
-        {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
-
-
-            objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                         where pre.AnioPresupuesto == annio && (pre.NombreEntidad == entidad) 
-                         group pre by new { pre.NombreProyectoActividad, pre.CodigoVersion, pre.AnioPresupuesto ***REMOVED*** into g
-                         select new InfoPresupuesto {
-                             totalProyectoActividad = (decimal)g.Sum(g => g.PresupuestoVigente),
-                             proyectoActividad = g.Key.NombreProyectoActividad,
-                             version = g.Key.CodigoVersion
-                     ***REMOVED***).ToList();
-
-            return objReturn;
-
-    ***REMOVED***
-
-        public List<InfoPresupuesto> ObtenerObjetoGasto(int annio, string entidad, string proyectoActividad)
-        {
-            List<InfoPresupuesto> objReturn = new List<InfoPresupuesto>();
-
-
-            objReturn = (from pre in _connection.PresupuestoVigenteXSectorMinHaciendas
-                         where pre.AnioPresupuesto == annio && (pre.NombreEntidad == entidad) && (pre.NombreProyectoActividad == proyectoActividad)
-                         group pre by new { pre.NombreObjetoGasto, pre.CodigoVersion, pre.AnioPresupuesto ***REMOVED*** into g
-                         select new InfoPresupuesto {
-                             totalPresupuesto = (decimal)g.Sum(g => g.PresupuestoVigente),
-                             labelGroup = g.Key.NombreObjetoGasto,
-                             version = g.Key.CodigoVersion
-                     ***REMOVED***).ToList();
-
-            return objReturn;
-
-    ***REMOVED***
 ***REMOVED***
 ***REMOVED***

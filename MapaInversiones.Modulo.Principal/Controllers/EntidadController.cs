@@ -30,10 +30,26 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 ***REMOVED***
     public IActionResult perfilEntidad(string codEntidad)
     {
+      
       EntidadContract entidad = new EntidadContract(_connection);
       string nombreEntidad= entidad.ObtenerNombreEntidad(codEntidad);
       entidad.Fill(nombreEntidad,codEntidad);
+
+      ViewBag.dataSource = entidad.ObtFuenteDatos();
+
       return View(entidad);
 ***REMOVED***
-  ***REMOVED***
+
+    public IActionResult EntidadesGeneral()
+    {
+
+        EntidadContract entidad = new EntidadContract(_connection);
+        //string nombreEntidad = entidad.ObtenerNombreEntidad(codEntidad);
+        //entidad.Fill(nombreEntidad, codEntidad);
+        //ViewBag.dataSource = entidad.ObtFuenteDatos();
+
+        return View();
+***REMOVED***
+
+***REMOVED***
 ***REMOVED***

@@ -2,11 +2,17 @@
 
 @inject OrchardCore.IOrchardHelper Orchard
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+  Layout = "~/Views/Shared/_Layout.cshtml";
+
+
 ***REMOVED***
 
+@*@{ 
+  ViewData["ShowContacts"] = false;
+***REMOVED****@
+
 <!--MAIN BANNER-->
-<section class="banner-main mb-0">
+<section class="banner-main-asc mb-0">
 
     <div class="container">
         <!-- Begin bread crumbs -->
@@ -19,7 +25,7 @@
                                 <a href="/">Inicio</a>
                                 <i class="material-icons md-18">chevron_right</i>
                             </li>
-                            <li>Contactanos</li>
+                            <li>Contáctenos</li>
                         </ul>
                     </div>
                 </div>
@@ -32,10 +38,10 @@
             <div class="col-lg-8">
                 <div class="banner-main-info pb-0">
                     <div class="banner-main-title">
-                      <h2>Contactanos</h2>
+                        <h1>Contáctenos</h1>
                     </div>
                     <div class="banner-main-desc">
-                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, rutrum vulputate fermentum ullamcorper litora vel, suspendisse ac consequat rhoncus lectus ligula.</p>
+                        <!--<p>Lorem ipsum dolor sit amet consectetur adipiscing elit, rutrum vulputate fermentum ullamcorper litora vel, suspendisse ac consequat rhoncus lectus ligula.</p>-->
 
                     </div>
 
@@ -47,221 +53,117 @@
     </div>
 
 </section>
-<div class="subMenu">
+<!--main content-->
+<section class="">
     <div class="container">
-        <div class="row navs-shortcuts justify-content-center m-0">
-            <div class="" id="navs-header">
-                <a class="btn-section" id="preguntas" href="#!">
-                    Preguntas Frecuentes
-                </a>
-                <a class="btn-section" id="glosario" href="#!">
-                    Glosario
-                </a>
-                <a class="btn-section" id="contacto" href="#!">
-                    Contáctenos
-                </a>
+
+        
+        <!--CONTACT FORM-->
+        <div class="sect-tab contacto" id="contacto">
+            <div class="row justify-content-center">
+                <div class="section-heading text-center">
+                    <span class="h4">Honduras Inversiones mejora continuamente. Envía tus comentarios o sugerencias aquí.</span>
+                </div>
+                @if (ViewBag.tab == null || ViewBag.tab == 3)
+                {
+                    <div class="col-lg-8 content-item">
+                        <div class="row mb-4">
+                            <small>Los campos marcados con (*) son obligatorios</small>
+                        </div>
+
+                        <form action="/workflows/Invoke?token=CfDJ8AEGa0OSVyJCnv9eg1ZZ_2YXIMd_IDtnz8UwjOizkWB52nX81g_t1YAVkTsXx_88kAl3Ng5ZupwZ--_qLc638u84pXh5JkYQ8l9M7eX15rT-ouJKdOEOGKPXT6DXu3SCFZBtP2PGZhqTWHAyVw5uEGDBoXaP3voBQ1wn6F8pKc-ejtUZreSNyrUPol5c5Z1zSLVe9w3dGKd45SKXSPNyWSmKMwHPKXyBCdhWR3s2ETQS" method="post" class="contact-form">
+
+                            <!-- Begin hidden Field for send form -->
+                            <input type="hidden" name="form_subject" value="Contact form">
+                            <!-- End hidden Field for send form -->
+                            <div class="row gutters-default">
+                                <div class="col-sm-6 col-12">
+                                    <div class="form-field">
+                                        <label for="contact-name" class="form-label">Nombre *</label>
+                                        <input type="text" class="form-field-input" name="Nombre" value="" autocomplete="off" required="required" id="contact-name">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-12">
+                                    <div class="form-field">
+                                        <label for="contact-name" class="form-label">Apellido *</label>
+                                        <input type="text" class="form-field-input" name="Apellido" value="" autocomplete="off" required="required" id="contact--last-name">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-12">
+                                    <div class="form-field">
+                                        <label for="contact-email" class="form-label">Email *</label>
+                                        <input type="email" class="form-field-input" name="Email" value="" autocomplete="off" required="required" id="contact-email">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-12">
+                                    <div class="form-field">
+                                        <label for="contact-phone" class="form-label">Teléfono</label>
+                                        <input type="tel" class="form-field-input mask-phone" name="Telefono" value="" autocomplete="off" id="contact-phone">
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-field">
+                                        <label for="contact-subject" class="form-label">Asunto *</label>
+                                        <input type="text" class="form-field-input" name="Asunto" value="" autocomplete="off" required="required" id="contact-subject">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-field">
+                                        <label for="contact-message" class="form-label">Escriba su mensaje *</label>
+                                        <textarea name="Mensaje" class="form-field-input" id="contact-message" cols="30" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                @Html.AntiForgeryToken()
+                                <div class="col-12">
+                                    <div class="form-btn">
+                                        <button type="submit" class="btn btn-cards btn-w240"><span>Enviar</span> <i class="material-icons md-24">send</i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+            ***REMOVED***
+                else if (ViewBag.tab == 31)
+                {
+                    <div class="col-lg-8 content-item">
+                        <h2>Mensaje enviado</h2>
+                        <div class="col-12">
+                            <div class="form-btn">
+                                <a href="../Contactanos" class="btn btn-with-icon ripple"><span>Aceptar</span></a>
+                            </div>
+                        </div>
+                    </div>
+            ***REMOVED***
+                else if (ViewBag.tab == 32)
+                {
+                    <div class="col-lg-8 content-item">
+                        <h2>Error en el guardado </h2>
+                        <div class="col-12">
+                            <div class="form-btn">
+                                <a href="../Contactanos" class="btn btn-with-icon ripple"><span>Aceptar</span></a>
+                            </div>
+                        </div>
+                    </div>
+            ***REMOVED***
+                else if (ViewBag.tab == 33)
+                {
+                    <div class="col-lg-8 content-item">
+                        <h2>Error en el envio de correo</h2>
+
+                        <div class="col-12">
+                            <div class="form-btn">
+                                <a href="../Contactanos" class="btn btn-with-icon ripple"><span>Aceptar</span></a>
+                            </div>
+                        </div>
+                    </div>
+            ***REMOVED***
+
+
             </div>
         </div>
-    </div>
-</div>
-<!--main content-->
-<section class="section main-Content">
-    <div class="container">
-        <section class="sect-tab preguntas" id="preguntas">
-            <div class="row">
-                @{
-                    var preguntas = await Orchard.GetContentItemByHandleAsync("alias:Preguntas");
-                    List<string> categorias = new List<string>();
-            ***REMOVED***
-                <!--LEFT COLUMN-->
-                <div class="col-lg-3">
-                    @foreach (var pregunta in preguntas.Content.BagPart.ContentItems)
-                    {
-                        @foreach (var termId in pregunta.Pregunta.Categoria.TermContentItemIds)
-                        {
-                            string term = termId + "";
-                            string taxonomy = pregunta.Pregunta.Categoria.TaxonomyContentItemId + "";
-                            var display = await Orchard.GetTaxonomyTermAsync(taxonomy, term);
-                            if (!categorias.Contains(term))
-                            {
-                                categorias.Add(term);
-                                <div class="categoriapregunta" id="@term">
-                                    <span class="h5">@display</span>
-                                </div>
-                        ***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***
-                </div>
-                <!--RIGHT COLUMN-->
-                <div class="col-lg-8">
-                    <aside>
-
-                        @foreach (var pregunta in preguntas.Content.BagPart.ContentItems)
-                        {
-                            @foreach (var termId in pregunta.Pregunta.Categoria.TermContentItemIds)
-                            {
-                                string term = termId + "";
-                                string taxonomy = pregunta.Pregunta.Categoria.TaxonomyContentItemId + "";
-                                var display = await Orchard.GetTaxonomyTermAsync(taxonomy, term);
-                                
-                        <div class="pregunta @term">
-                            <br />
-                            <h4>@pregunta.DisplayText</h4>
-                            <div>@Html.Raw(pregunta.HtmlBodyPart.Html)</div>
-                        </div>
-
-                        ***REMOVED***
-                    ***REMOVED***
-                    </aside>
-
-                </div>
-            </div>
-        </section>
-        <!--GLOSARIO-->
-        <section class="sect-tab glosario" id="glosario" style="display:none">
-            <div class="row">
-                <div class="col-lg-2">
-                </div>
-                <div class="col-lg-8">
-
-                    @for (char c = 'A'; c < 'Z'; c++)
-                    {
-                        <div class="indice" id="@c" style="display:block; float:left">
-                            @c  &nbsp; &nbsp;
-                        </div>
-
-                ***REMOVED***
-                </div>
-            </div>
-            <div class="row">
-                @{
-                    var glosario = await Orchard.GetContentItemByHandleAsync("alias:PalabrasGlosario");
-            ***REMOVED***
-                <!--LEFT COLUMN-->
-                <div class="col-lg-2">
-                </div>
-                <!--RIGHT COLUMN-->
-                <div class="col-lg-8">
-                    @foreach (var palabra in glosario.Content.BagPart.ContentItems)
-                    {
-                        string p = @palabra.DisplayText.ToString().Substring(0, 1);
-                    <div class="palabra @p" id="">
-                        <br />
-                        <h4>@palabra.DisplayText</h4>
-                        <div>@Html.Raw(palabra.HtmlBodyPart.Html)</div>
-
-                    </div>
-
-
-
-
-                ***REMOVED***
-
-
-                </div>
-            </div>
-        </section>
-        <!--CONTACT FORM-->
-        <section class="sect-tab contacto" id="contacto" style="display:none">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 content-item">
-                    <form action="#!" method="post" class="contact-form">
-                        <!-- Begin hidden Field for send form -->
-                        <input type="hidden" name="form_subject" value="Contact form">
-                        <!-- End hidden Field for send form -->
-                        <div class="row gutters-default">
-                            <div class="col-sm-6 col-12">
-                                <div class="form-field">
-                                    <label for="contact-name" class="form-field-label">Nombre</label>
-                                    <input type="text" class="form-field-input" name="ContactName" value="" autocomplete="off" required="required" id="contact-name">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-12">
-                                <div class="form-field">
-                                    <label for="contact-name" class="form-field-label">Apellido</label>
-                                    <input type="text" class="form-field-input" name="ContactName" value="" autocomplete="off" required="required" id="contact--last-name">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-12">
-                                <div class="form-field">
-                                    <label for="contact-phone" class="form-field-label">Teléfono</label>
-                                    <input type="tel" class="form-field-input mask-phone" name="ContactPhone" value="" autocomplete="off" required="required" id="contact-phone">
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-12">
-                                <div class="form-field">
-                                    <label for="contact-email" class="form-field-label">Email</label>
-                                    <input type="email" class="form-field-input" name="ContactEmail" value="" autocomplete="off" required="required" id="contact-email">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-field">
-                                    <label for="contact-message" class="form-field-label">Asunto</label>
-                                    <textarea name="ContactMessage" class="form-field-input" id="contact-message" cols="30" rows="5"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-field">
-                                    <label for="contact-message" class="form-field-label">Escriba su mensaje</label>
-                                    <textarea name="ContactMessage" class="form-field-input" id="contact-message" cols="30" rows="5"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-btn">
-                                    <button type="submit" class="btn btn-w240 ripple"><span>Enviar</span></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-
-            </div>
-        </section>
     </div>
 </section>
 
 @*<script type="text/javascript" src="../../js/centroayuda_aux.js"></script>*@
-<script type="text/javascript">
 
-    $(document).ready(function () {
-
-        //Muestra las preguntas de la primera categoria
-        var c = document.getElementsByClassName("categoriapregunta");
-        id = "pregunta " + c[0].id;
-        Mostrar("pregunta", id)
-        //Muestra las palabras del glosario de la primera letra
-        Mostrar("palabra", "palabra A")
-***REMOVED***);
-
-    $(document).on('click', '.categoriapregunta', function (e) {
-        id = "pregunta " + this.id;
-        Mostrar('pregunta', id);
-
-***REMOVED***);
-
-    $(document).on('click', '.btn-section', function (e) {
-        id = "sect-tab " + this.id;
-        Mostrar('sect-tab', id);
-
-***REMOVED***);
-
-
-    $(document).on('click', '.indice', function (e) {
-        id = "palabra " + this.id;
-        Mostrar('palabra', id);
-
-***REMOVED***);
-    function Mostrar(ocultar, mostrar) {
-        var y = document.getElementsByClassName(ocultar);
-        var i;
-        for (i = 0; i < y.length; i++) {
-            y[i].style.display = "none";
-    ***REMOVED***
-        var x = document.getElementsByClassName(mostrar);
-        var i;
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "block";
-    ***REMOVED***
-***REMOVED***
-</script>

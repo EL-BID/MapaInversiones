@@ -1,0 +1,1399 @@
+﻿@inject OrchardCore.IOrchardHelper Orchard
+@model PlataformaTransparencia.Modelos.ModelProjectProfile
+@section scripts
+{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+***REMOVED***
+
+@{
+    ViewBag.Title = "Project " + @Truncate(Model.ProjectInformation.name, 20) + " en " + @Model.ProjectInformation.location + "";
+    ViewBag.SectionId = "section-projects";
+    ViewBag.ProjectsSelected = "selected";
+    System.IFormatProvider cultureHN = new System.Globalization.CultureInfo("es-HN");
+
+    var beneficiarios = "";
+
+    string Truncate(string input, int length)
+    {
+        if (input == null)
+        {
+            return "";
+    ***REMOVED***
+        else if (input.Length <= length)
+        {
+            return @input;
+    ***REMOVED***
+        else
+        {
+            return @input.Substring(0, length) + "...";
+    ***REMOVED***
+***REMOVED***
+
+***REMOVED***
+
+<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+
+<input type="hidden" id="hdNomUsuario" value="" />
+<input type="hidden" id="hdIdUsuario" value="" />
+<body>
+    <!--MAIN BANNER-->
+    <section id="s0" class="banner-main-section s0-section" style="background-image: url('../img/preview-project.jpg')">
+        <div class="bgBlueOverlay">&nbsp;</div><!-- DON'T EREASE-->
+        <div class="container">
+            <!-- Begin bread crumbs -->
+            <nav class="bread-crumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="bread-crumbs-list">
+                                <li>
+                                    <a href="\">Inicio</a>
+                                    <i class="material-icons md-18">chevron_right</i>
+                                </li>
+                                <li><a href="/MapView">Mapa de Inversión Pública</a><i class="material-icons md-18">chevron_right</i></li>
+                                <li>
+                                    <a>
+                                        @if (@Model.ProjectInformation.name != null)
+                                        {
+                                            @Model.ProjectInformation.name.Trim()
+                                            ;
+                                    ***REMOVED***
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- End bread crumbs -->
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="banner-main-info">
+                        <div class="banner-main-title">
+                            <h2 class="text-center">
+                                @if (@Model.ProjectInformation.name != null)
+                                {
+                                    @Model.ProjectInformation.name.Trim();
+                            ***REMOVED***
+                            </h2>
+                        </div>
+                        <div class="banner-main-desc">
+                            @*<div class="sub_t0_gray text-center">
+                                    <ul class="list-inline optionList">
+                                        <li><span class="glyphicon glyphicon-comment"></span><text id="spComentarios">Comments(@Model.ProjectInformation.contComentarios)</text></li>
+                                    </ul>
+                                </div>*@
+                            <h6 class="sub_t1_red text-center">
+                                SECTOR
+                                <br />
+                                @Model.ProjectInformation.sector
+                            </h6>
+                        </div>
+                        <div class="sub_t2_red text-center">
+                            <ul class="list-inline">
+                                @if (Model.ProjectInformation.EntesBeneficiados.Count() < 5)
+                                {
+                                    var count = 0;
+                                    var cant_items = Model.ProjectInformation.EntesBeneficiados.Count();
+                                    foreach (var item in Model.ProjectInformation.EntesBeneficiados)
+                                    {
+                                        if (count < cant_items - 1)
+                                        {
+                                            if (@item.Tipo == "MUNICIPIO")
+                                            {
+                                                <li>@item.Nombre ,</li>
+                                                //<a class="enlace_ficha" role="button" tipo="@item.Tipo" location_id="@item.IdMunicipio"></a>
+                                        ***REMOVED***
+                                            else if (@item.Tipo == "DEPARTAMENTO" || @item.Tipo == "REGION")
+                                            {
+                                                <li>@item.Nombre ,</li>
+                                                //<a class="enlace_ficha" role="button" tipo="@item.Tipo" location_id="@item.IdDepartamento"></a>
+                                        ***REMOVED***
+                                            else
+                                            {
+                                                <li>@item.Nombre ,</li>
+
+                                        ***REMOVED***
+                                    ***REMOVED***
+                                        else
+                                        {
+                                            if (@item.Tipo == "MUNICIPIO" || @item.Tipo == "COUNTY")
+                                            {
+                                                <li>@item.Nombre</li>
+                                                //<a class="enlace_ficha" role="button" tipo="@item.Tipo" location_id="@item.IdMunicipio"></a>
+                                        ***REMOVED***
+                                            else if (@item.Tipo == "DEPARTAMENTO" || @item.Tipo == "REGION")
+                                            {
+                                                <li>@item.Nombre</li>
+                                                //<a class="enlace_ficha" role="button" tipo="@item.Tipo" location_id="@item.IdDepartamento"></a>
+                                        ***REMOVED***
+                                            else
+                                            {
+                                                <li>@item.Nombre</li>
+                                        ***REMOVED***
+                                    ***REMOVED***
+
+                                        count++;
+                                ***REMOVED***
+
+                            ***REMOVED***
+                                else
+                                {
+                                    var count = 0;
+                                    foreach (var item in Model.ProjectInformation.EntesBeneficiados)
+                                    {
+                                        if (count <= 2)
+                                        {
+                                            <text>
+                                                @if (@item.Tipo == "MUNICIPIO" || @item.Tipo == "COUNTY")
+                                                {
+                                                    <li>@item.Nombre ,</li>
+                                                    //<a class="enlace_ficha" role="button" tipo="@item.Tipo" location_id="@item.IdMunicipio"></a>
+                                            ***REMOVED***
+                                                else if (@item.Tipo == "DEPARTAMENTO" || @item.Tipo == "REGION")
+                                                {
+                                                    <li>@item.Nombre ,</li>
+                                                    //<a class="enlace_ficha" role="button" tipo="@item.Tipo" location_id="@item.IdDepartamento"></a>
+                                            ***REMOVED***
+                                                else
+                                                {
+                                                    <li>@item.Nombre ,</li>
+                                            ***REMOVED***
+                                            </text>
+                                    ***REMOVED***
+                                        //else {
+                                        //    beneficiarios += "<li>@item.Nombre</li>";
+                                        //***REMOVED***
+                                        beneficiarios += ""+@item.Nombre+", ";
+                                        count++;
+                                ***REMOVED***
+                                    <li> y <a href="#benefi">otros @String.Format("{0***REMOVED***", @count - 3)</a></li>
+                            ***REMOVED***
+
+                            </ul>
+                        </div>
+                        <ul class="list-inline details">
+                            <li>
+
+                                <h3>@String.Format(cultureHN, "{0:n1***REMOVED***", @Model.ProjectInformation.duracion) Años</h3>
+                                <h6>Duración Del Proyecto</h6>
+                            </li>
+                            <li>
+                                <h3 id="lblCostoEstimado">L @String.Format(cultureHN, "{0:n1***REMOVED***", Model.ProjectInformation.TotalValue)</h3>
+                                <h6>Costo Estimado</h6>
+                            </li>
+                            @if (Model.ProjectInformation.IDMoneda != "HNL")
+                            {
+                                <li>
+                                    <h3>@Model.ProjectInformation.IDMoneda @String.Format(cultureHN, "{0:n1***REMOVED***", Model.ProjectInformation.TotalValueAll)</h3>
+                                    <h6>Costo en otra moneda</h6>
+                                </li>
+
+                                <li>
+                                    <h3>@Model.ProjectInformation.IDMoneda @String.Format(cultureHN, "{0:n1***REMOVED***", Model.ProjectInformation.TasaCambio)</h3>
+                                    <h6>Tasa de Cambio</h6>
+                                </li>
+                        ***REMOVED***
+                            <!--<li>
+                                <h3>@Model.ProjectInformation.avance_financiero %</h3>
+                                <h6>Avance Financiero</h6>
+                            </li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--NAVIGATION ON PAGE-->
+        <div class="row navs-shortcuts">
+            <div class="" id="navs-header">
+                <a class="btn-section" href="#s1">
+                    <span class="ic-shortcut"><i class="material-icons md-24">feed</i></span>
+                    <span class="text-btn">Información General</span>
+                </a>
+                @*<a class="btn-section" href="#s2">
+                        <span class="ic-shortcut"><i class="material-icons md-24">ballot</i></span>
+                        <span class="text-btn">Entregables</span>
+                    </a>*@
+                <a class="btn-section" href="#s2">
+                    <span class="ic-shortcut"><i class="material-icons md-24">earbuds</i></span>
+                    <span class="text-btn">Proceso de Contratación</span>
+                </a>
+                <a class="btn-section" href="#s3">
+                    <span class="ic-shortcut"><i class="material-icons md-24">collections</i></span>
+                    <span class="text-btn">Fotos</span>
+                </a>
+                <a class="btn-section" href="#s4">
+                    <span class="ic-shortcut"><i class="material-icons md-24">speaker_notes</i></span>
+                    <span class="text-btn">Participación Ciudadana</span>
+                </a>
+                @*<a class="btn-section" href="#s3" id="btnGenPdfProy">
+                        <span class="ic-shortcut"><i class="material-icons md-24">sim_card_download</i></span>
+                        <span class="text-btn">Descargar Pdf</span>
+                    </a>*@
+            </div>
+        </div>
+    </section>
+    <!-- Informacion Proyecto -->
+    <section class="s1E-section whiteBg" id="s1">
+        <div class="container">
+            <div class="row sep mb-4">
+                <!--GENERAL INFO COLUMN-->
+                <div class="col-lg-4">
+                    <div class="card description-box mb-10">
+                        <div class="section-heading-Project">
+                            <div class="row">
+                                <div class="col-md-2"><img src="../img/svg-icons/ico_infoproyecto.svg" /></div>
+                                <div class="col-md-10">
+                                    <h4 class="mb-3">Información General del Proyecto</h4>
+                                </div>
+                            </div>
+                            <div class="">
+                                <ul class="listDetail">
+                                    <li class="data-list">
+                                        <span class="label-desc">Institución Ejecutora Principal</span>
+                                        <span class="text-desc">@Model.ProjectInformation.NombreActor</span>
+                                    </li>
+                                    @*<li class="data-list">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <span class="label-desc">Etapa</span>
+                                                    <span class="text-desc">@Model.ProjectInformation.Etapa</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <span class="label-desc">Fase</span>
+                                                    <span class="text-desc">@Model.ProjectInformation.Fase</span>
+                                                </div>
+                                            </div>
+                                        </li>*@
+                                    <li class="data-list">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <span class="label-desc">Estado</span>
+                                                <span class="text-desc">@Model.ProjectInformation.Status</span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    <li class="data-list">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="label-desc">Fecha de Inicio</span>
+                                                <span class="text-desc">@Model.ProjectInformation.startdate</span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span class="label-desc">Fecha de Finalización</span>
+                                                <span class="text-desc">@Model.ProjectInformation.enddate</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="data-list" id="benefi">
+                                        <span class="label-desc">Código BIP</span>
+                                        <span class="text-desc">@Model.ProjectInformation.BPIN</span>
+                                    </li>
+                                     @if (beneficiarios.Trim() != "")
+                                     {
+                                        <text>
+                                        <li class="data-list" >
+                                            <span class="label-desc"><strong>Beneficiarios</strong></span>
+                                            <span class=""><br>@Html.Raw(@beneficiarios.Substring(0, @beneficiarios.Length - 1))</span>
+
+
+                                        </li>
+                                        </text>
+                                 ***REMOVED***
+                                    @*<li class="data-list">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h5 class="label-benf">Beneficiarios</h5>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bIcon">
+                                                        <img src="../img/svg-icons/BmanPP.svg" />
+                                                    </div>
+                                                    <span class="label-benf">Hombres</span>
+                                                    <span class="text-desc">@Model.ProjectInformation.NumBeneficHombres</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="bIcon">
+                                                        <img src="../img/svg-icons/BmanWM.svg" />
+                                                    </div>
+                                                    <span class="label-benf">Mujeres</span>
+                                                    <span class="text-desc">@Model.ProjectInformation.NumBeneficMujeres</span>
+                                                </div>
+                                            </div>
+                                        </li>*@
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--<div class="card description-box" id="divContainerActores">
+                        <div class="section-heading-Project">
+                            <h4 class="mb-3">Actores del Proyecto</h4>
+                        </div>
+                        <div class="form-group subtitle" id="divGruposActores"></div>
+                        <div id="listActPerGrupo"></div>
+                    </div>-->
+                </div>
+                <!--GRAPH SIDE-->
+                <div class="col-lg-8">
+                    <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="card shadow border-0 card-entidad">
+                                <div class="card-body">
+                                    <div class="heading-Project">
+                                        <h5><img src="../img/svg-icons/ICO_desc.svg" />Descripción</h5>
+                                    </div>
+                                    <span class="text-desc">@Model.ProjectInformation.descripcion</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="card shadow border-0 card-entidad">
+                                <div class="card-body">
+                                    <div class="heading-Project">
+                                        <h5><img src="../img/svg-icons/ICO_obj.svg" />Objetivo General</h5>
+                                    </div>
+                                    <span class="text-desc">@Model.ProjectInformation.objGeneral</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="card shadow border-0 card-entidad">
+                                <div class="card-body">
+                                    <div class="heading-Project">
+                                        <h5><img src="../img/svg-icons/ICO_Avance.svg" /> Avance Financiero Acumulado</h5>
+                                    </div>
+                                    <div class="containerGraph" style="width:auto;height:auto;" id="divGraphAvanceFinanciero"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-12">
+                            <div class="card shadow border-0 card-entidad">
+                                <div class="card-body">
+                                    <div class="heading-Project">
+                                        <h5><img src="../img/svg-icons/ICO_Presu.svg" /> Ejecución Presupuestal Anual</h5>
+                                    </div>
+                                    <div class="containerBoxExec">
+                                        <label for="filtro_periodo">Seleccione el periodo de análisis</label>
+                                        <div class="form-group">
+
+                                            <select class="form-select" aria-label="periodo" id="filtro_periodo">
+                                                @if (Model.periodos_fuentes != null)
+                                                {
+                                                    int i = 0;
+                                                    foreach (var item in Model.periodos_fuentes)
+                                                    {<text>
+                                                            <option value="@item.id" class="export_option">@item.id</option>
+                                                    </text>
+                                                    i++;
+                                            ***REMOVED***
+                                        ***REMOVED***
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div id="divDetFuentes">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @if (Model.componentes_proy.Count > 0)
+                        {
+                            <div class="col-lg-12" id="divComponentes">
+                                <div class="card shadow border-0 card-entidad">
+                                    <div class="card-body">
+                                        <div class="heading-Project">
+                                            <h5><img src="../img/svg-icons/ICO_compo.svg" /> Componentes y Actividades</h5>
+                                            <p>Seleccione el componente del cual desea visualizar las actividades asociadas</p>
+                                        </div>
+                                        <div class="containerBoxExec">
+                                            <label for="filtro_Componente">Seleccione </label>
+                                            <div class="form-group">
+                                                <select class="form-select" aria-label="periodo" id="filtro_Componente">
+                                                    @if (Model.componentes_proy.Count > 0)
+                                                    {
+                                                        int i = 0;
+                                                        foreach (var item in Model.componentes_proy)
+                                                        {<text>
+                                                                <option codigo="@item.Id" value="@item.Id">
+                                                                    <span class="indicatorCat"> @item.Id </span>@item.Nombre
+                                                                </option>
+                                                        </text>
+                                                        i++;
+                                                ***REMOVED***
+
+                                            ***REMOVED***
+
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="containerActivities list-group objHidden" id="divDetActividades"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    ***REMOVED***
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Entregables-->
+    <!--Fin entregables-->
+    @if (Model.entregables.Count > 0)
+    {
+
+
+        <section class="section section-bg2" id="s5">
+            <div class="container">
+                <div class="section-heading text-center">
+                    <h3>Entregables</h3>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-8 offset-2">
+                        <div class="card shadow border-0 card-entidad">
+                            <div class="card-body">
+                                <table class="table table-striped tablefont">
+                                    <thead>
+                                        <tr>
+                                            @* <th scope="col">Código</th>*@
+                                            <th scope="col">Entregable</th>
+                                            @*<th scope="col">Cantidad</th>*@
+                                            <th scope="col">Unidad de Media</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.entregables)
+                                        {
+                                            <text>
+                                                <tr>
+                                                    @*<th scope="row">@item.IdEntregable</th>*@
+                                                    <td>
+                                                        @item.EntregableColumn
+                                                    </td>
+                                                    @*<td>@String.Format("{0:n1***REMOVED***",@item.Cantidad)</td>*@
+                                                    <td>@item.NombreUnidadMedida</td>
+                                                </tr>
+                                            </text>
+                                    ***REMOVED***
+
+
+
+                                        @*<tr>
+                                            <th scope="row">193</th>
+                                            <td>
+                                            Técnicos agropecuarios con conocimientos y habilidades técnicas innovadoras y climáticamente inteligentes proveen servicios de asistencia técnica de alto nivel al finalizar el proyecto año 2024.
+                                            </td>
+                                            <td>1350</td>
+                                            <td>Documento</td>
+                                            </tr>
+                                            <tr>
+                                            <th scope="row">193</th>
+                                            <td>
+                                            Técnicos agropecuarios con conocimientos y habilidades técnicas innovadoras y climáticamente inteligentes proveen servicios de asistencia técnica de alto nivel al finalizar el proyecto año 2024.
+                                            </td>
+                                            <td>1350</td>
+                                            <td>Documento</td>
+                                            </tr>*@
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-10 offset-1">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+***REMOVED***
+    else
+    {
+        <section class="section section-bg2" id="s5">
+            <div class="container">
+                <div class="section-heading text-center">
+                    <h3>Entregables</h3>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-8 offset-2">
+                        <div class="card shadow border-0 card-entidad">
+                            <div class="card-body">
+                                <div class="alertCont alert-info" role="alert">Esta informaci&oacute;n esta en proceso de actualizaci&oacute;n</div>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+***REMOVED***
+    <!--Ordenes de Pago-->
+    <section class="section" id="s2">
+        <div class="container">
+            <div class="section-heading text-center">
+                <h3>Proceso de Contratación</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+
+                    <form class="contractList bgSoftGray">
+                        @*<div class="form-group">
+                                <label class="year" for="year">Año</label>
+                                <select class="form-control" id="top_contratos_periodos"></select>
+
+                            </div>*@
+                        @*<div class="form-group">
+                                <label class="year" for="year">Estado</label>
+                                <select class="form-control" id="top_contratos_estados">
+                                    <option value="">Todos los Estados</option>
+                                    @if (Model.Consolidados.Count > 0)
+                                    {
+                                        foreach (var item in Model.Consolidados)
+                                        {
+                                            <text>
+                                                <option value="@item.EstadoContrato">@item.EstadoContrato</option>
+                                            </text>
+                                    ***REMOVED***
+                                ***REMOVED***
+                                </select>
+
+                            </div>*@
+                        <div class="form-group">
+                            <label class="year" for="entidad">Año</label>
+                            <label class="origen" for="top_origen_informacion">Fuente de Datos</label>
+                            <select class="form-select" id="top_origen_informacion">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="origen" for="top_origen_semestre">Semestre</label>
+                            <select class="form-select" id="top_origen_semestre">
+                                @*<option value="1">Primero</option>
+                                    <option value="2">Segundo</option>*@
+                            </select>
+                        </div>
+                        <div class="triggerForm">
+                            <input type="button" class="btn btn-primary" value="Buscar" id="btn-buscar" disabled=""><div class="clearfix"></div>
+                            <a class="btn btn-link text-center" id="btnLimpiar" disabled="disabled">LIMPIAR FILTROS</a>
+                        </div>
+
+                    </form>
+
+                </div>
+                <!--CONTRACT-LIST-->
+                <div class="col-lg-8">
+                    <!--ESTRUCTURA HTML PARA TOMAR COMO REFERENCIA-->
+                    <!--CIERRE DE ESTRUCTURA-->
+                    <div class="wrap-proceso whiteBg" id="srcContratos">
+                        @*<div class="contractBox">
+                                <div class="cotractName contractONCAE">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-12">
+                                            <span class="small">Obra</span>
+                                            <div class="clearfix"></div>
+                                            <span class="h4">Lote 1 “Equipo Generador de la Central Hidroeléctrica Cañaveral (Adquisición e instalación de los Equipos Principales y Auxiliares)”  (Obras Civiles Asociadas)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="processName">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <span class="small">Fuente de Financiamiento</span>
+                                            <div class="clearfix"></div>
+                                            <span class="h4">Crédito Externo</span>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <span class="small">Monto</span>
+                                            <div class="clearfix"></div>
+                                            <span class="h4">L 433.395.229,75</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wrap-head-process">
+                                    <div class="contractData">
+                                        <div class="row border-b">
+                                            <div class="col-xs-4 col-md-2">
+                                                <span class="small">Convenio</span>
+                                                <span class="amount_adj">BCIE 2177</span>
+                                            </div>
+                                            <div class="col-md-6 offset-md-4">
+                                                <span class="small">Tipo de Proceso</span>
+                                                <span class="amount_adj">LICITACIÓN PÚBLICA INTERNACIONAL (LPI)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contractBox">
+                                <div class="cotractName contractONCAE">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-12">
+                                            <span class="small">Obra</span>
+                                            <div class="clearfix"></div>
+                                            <span class="h4">Lote 1 “Equipo Generador de la Central Hidroeléctrica Cañaveral (Adquisición e instalación de los Equipos Principales y Auxiliares)”  (Obras Civiles Asociadas)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="processName">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <span class="small">Fuente de Financiamiento</span>
+                                            <div class="clearfix"></div>
+                                            <span class="h4">Crédito Externo</span>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <span class="small">Monto</span>
+                                            <div class="clearfix"></div>
+                                            <span class="h4">L 433.395.229,75</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wrap-head-process">
+                                    <div class="contractData">
+                                        <div class="row border-b">
+                                            <div class="col-xs-4 col-md-2">
+                                                <span class="small">Convenio</span>
+                                                <span class="amount_adj">BCIE 2177</span>
+                                            </div>
+                                            <div class="col-md-6 offset-md-4">
+                                                <span class="small">Tipo de Proceso</span>
+                                                <span class="amount_adj">LICITACIÓN PÚBLICA INTERNACIONAL (LPI)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contractBox">
+                                <div class="cotractName contractONCAE">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-12">
+                                            <span class="small">Obra</span>
+                                            <div class="clearfix"></div>
+                                            <span class="h4">Lote 1 “Equipo Generador de la Central Hidroeléctrica Cañaveral (Adquisición e instalación de los Equipos Principales y Auxiliares)”  (Obras Civiles Asociadas)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="processName">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <span class="small">Fuente de Financiamiento</span>
+                                            <div class="clearfix"></div>
+                                            <span class="h4">Crédito Externo</span>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <span class="small">Monto</span>
+                                            <div class="clearfix"></div>
+                                            <span class="h4">L 433.395.229,75</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wrap-head-process">
+                                    <div class="contractData">
+                                        <div class="row border-b">
+                                            <div class="col-xs-4 col-md-2">
+                                                <span class="small">Convenio</span>
+                                                <span class="amount_adj">BCIE 2177</span>
+                                            </div>
+                                            <div class="col-md-6 offset-md-4">
+                                                <span class="small">Tipo de Proceso</span>
+                                                <span class="amount_adj">LICITACIÓN PÚBLICA INTERNACIONAL (LPI)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contractBox">
+                                <div class="cotractName contractONCAE">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-12">
+                                            <span class="small">Obra</span>
+                                            <div class="clearfix"></div>
+                                            <span class="h4">Lote 1 “Equipo Generador de la Central Hidroeléctrica Cañaveral (Adquisición e instalación de los Equipos Principales y Auxiliares)”  (Obras Civiles Asociadas)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="processName">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <span class="small">Fuente de Financiamiento</span>
+                                            <div class="clearfix"></div>
+                                            <span class="h4">Crédito Externo</span>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <span class="small">Monto</span>
+                                            <div class="clearfix"></div>
+                                            <span class="h4">L 433.395.229,75</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="wrap-head-process">
+                                    <div class="contractData">
+                                        <div class="row border-b">
+                                            <div class="col-xs-4 col-md-2">
+                                                <span class="small">Convenio</span>
+                                                <span class="amount_adj">BCIE 2177</span>
+                                            </div>
+                                            <div class="col-md-6 offset-md-4">
+                                                <span class="small">Tipo de Proceso</span>
+                                                <span class="amount_adj">LICITACIÓN PÚBLICA INTERNACIONAL (LPI)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+
+                    <div id="divPagContratos" class="">
+                    </div>
+
+                </div>
+                <!--END CONTAINER-->
+            </div>
+        </div>
+    </section>
+    <!--fin ordenes de pago-->
+    <!-- En Ejecución Section -->
+    <section class="section section-bg2" id="s3">
+        <div class="container">
+            <div class="section-heading heading-left">
+                <h3 class="mb-3 text-center">FOTOS DE LA UNIDAD EJECUTORA</h3>
+            </div>
+            @if (Model.Images.Count() == 0)
+            {
+                <text>
+                    <div class="empty-gallery">No existen imágenes aún para este proyecto</div>
+                </text>
+        ***REMOVED***
+            else
+            {
+                <div class="project-carusel w2col" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true ***REMOVED***'>
+                    @foreach (var photo in Model.Images)
+                    {
+                        <!--ITEM 1-->
+                        <div class="project-col gallery-col-carusel">
+                            <!-- Begin project item -->
+                            <div class="gallery-card">
+                                <div class="thumbnail type5">
+
+                                    <div class="enlace_img" descrip="@photo.description" data-src="@photo.large" style="background-image: url('@photo.large')">
+                                        <div class="btn-zoom" data-toggle="modal" data-target="#FotoModal"><div class="ic-gal"><i class="material-icons md-48">zoom_in</i></div></div>
+                                        <div class="labelCategory">
+                                            <div class="d-flex">
+                                                <div class="desc-gal">
+                                                    <span class="clearfix">Subido el @photo.fechaFoto</span>
+                                                    <span class="text-elipsis">@photo.description</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </div>
+                            </div><!-- End project item -->
+                        </div>
+
+                ***REMOVED***
+                </div>
+
+        ***REMOVED***
+
+            <!--MODAL-->
+            <div id="FotoModal" class="modal fade" role="dialog">
+                <div class="modal-dialog MIVBox">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Fotos</h3>
+                            <button type="button" id="btnCloseFotoModal" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                        </div>
+                        <div class="modal-body" id="divDatosModal">
+                            <img class="img-fluid" id="img-modal" alt="imagen complementaria" src="">
+                            <div id="des"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="clearfix"></div>
+    <section id="s4" class="section-gray">
+        <div class="container">
+            <div class="section-heading text-center">
+                <h2 class="mb-4">Tu participación es importante para nosotros</h2>
+                <p class="section-subheading">Participa deja tu comentario sobre este proyecto</p>
+            </div>
+            <div class="row">
+                <div class="col-md-4 user-form-login">
+                    <!--NEW user-->
+                    <div class="light-bg">
+                        <div id="divUsuarioLog">
+                            <div class="p-3">
+                                <p>Ingresa tus datos a continuación</p>
+                                <div id="divDatosLogin">
+                                    <div class="form-group">
+                                        <label for="txtEmailLog" class="required">Email</label>
+                                        <input type="email" class="form-control" id="txtEmailLog" placeholder="">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txtClaveLog" class="required">Password</label>
+                                        <input type="password" class="form-control" id="txtClaveLog" placeholder="">
+                                    </div>
+                                    @Html.AntiForgeryToken()
+                                </div>
+
+                                <div class="form-group text-center mb-5">
+                                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btnIngresarUsuLog">INGRESAR </button><br><br>
+                                    <a id="btnEnlaceOlvidoClave" role="button">Olvid&eacute; la contraseña</a>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-12 text-center">
+                                        <div class="btn btn-lg btn-primary" id="btnNuevaCuenta">Crear Nueva Cuenta</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--NEW ACCOUNT-->
+                    <div class="light-bg">
+                        <div id="divCuentaNueva" style="display:none;">
+                            <div class="p-3" id="divInfoUsuario">
+                                <h4>NUEVA CUENTA</h4>
+                                <div class="form-group">
+                                    <label for="txtNombre" class="required">Nombre</label>
+                                    <input type="text" class="form-control" id="txtNombre">
+                                    <div id="error_txtNombre" class="alert-danger" hidden="hidden">Nombre no puede ser vacío</div>
+                                </div>
+                                <div class="form-group" id="divGenero">
+
+                                    @if (Model.genero_participacion.Count() > 0)
+                                    {
+                                        <text>
+                                            <label for="filtro_Genero" class="required">Género:</label>
+                                            <select class="form-select" aria-label="Selecciona un género:" id="filtro_Genero">
+                                                <option id="0" id_gen="0" nom_gen="" class="selected">Género</option>
+                                                @foreach (var item in Model.genero_participacion)
+                                                {
+                                                    <option id="@item.id" id_gen="@item.id" nom_gen="@item.name">@item.name</option>
+                                            ***REMOVED***
+
+                                            </select>
+                                        </text>
+                                ***REMOVED***
+                                    <div id="error_filtro_Genero" class="alert-danger" hidden="hidden">Género no puede ser vacío</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtEdad" class="required">Edad</label>
+                                    <input type="text" class="form-control" id="txtEdad">
+                                    <div id="error_txtEdad" class="alert-danger" hidden="hidden">Edad no puede ser vacía</div>
+                                </div>
+                                <div class="form-group" id="divRol">
+
+                                    @if (Model.rol_participacion.Count() > 0)
+                                    {
+                                        <label for="filtro_Rol" class="required">Rol</label>
+                                        <select class="form-select" aria-label="Selecciona un rol:" id="filtro_Rol">
+                                            <option id="0" id_rol="0" nom_rol="" class="selected">Rol Actual</option>
+
+                                            @foreach (var item in Model.rol_participacion)
+                                            {
+                                                <option id="@item.id" id_rol="@item.id" nom_rol="@item.id">@item.name</option>
+                                        ***REMOVED***
+                                        </select>
+                                ***REMOVED***
+                                    <div id="error_filtro_Rol" class="alert-danger" hidden="hidden">Rol no puede ser vacío </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtEmail" class="required">Email</label>
+                                    <input type="text" class="form-control" id="txtEmail">
+                                    <div id="error_txtEmail" class="alert-danger" hidden="hidden">Email no puede ser vacío</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtPassword" class="required">Password</label>
+                                    <input type="password" class="form-control" id="txtPassword">
+                                    <div id="error_txtPassword" class="alert-danger" hidden="hidden">Password no puede ser vacío</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtPassword_2" class="required">Confirme su Password</label>
+                                    <input type="password" class="form-control" id="txtPassword_2">
+                                    <div id="error_txtPassword_2" class="alert-danger" hidden="hidden">Confirmación no puede ser vacía</div>
+                                </div>
+                                <div class="form-group mb-3" id="divMedio">
+                                    @if (Model.medios_participacion.Count() > 0)
+                                    {
+                                        <label for="filtro_Medios" class="required">¿Cómo se enteró de Mapa Inversiones?</label>
+                                        <select class="form-select" aria-label="Selecciona un medio:" id="filtro_Medios">
+                                            <option id="0" id_medio="0" nom_medio="" class="selected">¿Cómo se enteró de Mapa Inversiones?</option>
+                                            @foreach (var item in Model.medios_participacion)
+                                            {
+                                                <option id="@item.id" id_medio="@item.id" nom_medio="@item.id">@item.name</option>
+                                        ***REMOVED***
+                                        </select>
+                                ***REMOVED***
+                                    <div id="error_filtro_Medios" class="alert-danger" hidden="hidden">"¿Cómo se enteró de Mapa Inversiones?" No puede ser vacío</div>
+                                </div>
+                                <div class="disclaimer well mb-3">
+                                    <div class="row">
+                                        <div class="col-md-1 iconLarge text-center"><span class="glyphicon glyphicon-info-sign"></span></div>
+                                        <div class="col-md-11"><p>Con la activación de la cuenta usted acepta los <a href="~/TerminosCondiciones/v1"> términos y condiciones.</a></p></div>
+                                    </div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <button type="button" class="btn btn-primary btn-block" id="btnAddCuentaUsu"> ENVIAR </button><br><br>
+                                    <a href="" class="btn btn-default">CANCEL</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--FORGOT PASSWORD-->
+                    <div class="light-bg">
+                        <div id="divOlvidoClave" class="objHidden">
+                            <div class="p-3">
+                                <span class="h4">Re establecimiento de clave</span>
+                                <div class="center-block w60">
+
+                                    <div class="well">
+                                        <span id="textoVerifica">Para asignar una nueva clave ingrese el correo electrónico registrado, se enviará un código de verificación al mismo.</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txtEmailReset" class="required">Email</label>
+                                        <input type="text" class="form-control" id="txtEmailReset">
+                                        <div id="error_txtEmailReset" class="alert alert-danger alert-dismissible" hidden="hidden">Email no puede ser vacio</div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button type="button" class="btn btn-primary" id="btnEnviaCodigoClave"> ENVIAR </button><br><br>
+                                        <a href="">CANCELAR</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--CONFIRM PASSWORD-->
+                    <div class="light-bg">
+                        <div id="divConfirmaCodigo" class="objHidden">
+                            <div class="p-3">
+                                <span class="h4 orangeLink">Re establecimiento de clave</span>
+                                <div class="center-block w60">
+                                    <div class="well">
+                                        <span class="h4" id="textoVerifica"><strong>Ingresar código de verificación</strong></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txtCodigoVerifica" class="required">Código:</label>
+                                        <input type="text" class="form-control" id="txtCodigoVerifica">
+                                        <input type="hidden" id="txtEmailVerifica" />
+                                        <div id="error_txtCodigoVerifica" class="alert alert-danger alert-dismissible" hidden="hidden">Código no puede ser vacío</div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button type="button" class="btn btn-primary" id="btnVerificaCodigoClave"> ENVIAR </button><br><br>
+                                        <a href="">CANCELAR</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--RESET PASSWORD-->
+                    <div class="light-bg">
+                        <div id="divResetPassword" class="objHidden">
+                            <div class="p-3">
+                                <span class="h4 orangeLink">Re establecimiento de clave</span>
+                                <div class="center-block w60">
+                                    <div class="well">
+                                        <span class="h4" id="textoVerifica"><strong>Cambio de clave</strong></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txtPassword_re" class="required">Nueva Clave</label>
+                                        <input type="password" class="form-control" id="txtPassword_re">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="txtPassword_re_2" class="required">Confirma nueva Clave</label>
+                                        <input type="password" class="form-control" id="txtPassword_re_2">
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button type="button" class="btn btn-primary" id="btnCambiarClaveOlvido"> GUARDAR </button><br><br>
+                                        <a href="">CANCELAR</a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--SURVEY-->
+                    <div class="light-bg">
+                        <div id="divPregParticipacion" class="objHidden">
+                            <div class="p-3">
+                                <h3 id="divNomUsuarioLog"></h3><br>
+                                <br>
+
+                                @*ParticipacionComentarios*@
+                                <div id="divTipoComentario" class="form-group">
+                                    <label for="filtro_TipoCometario" class="required">Tipo de comentario:</label>
+                                    <select class="form-select" aria-label="Selecciona un tipo comentario" id="filtro_TipoCometario">
+                                        <option id_tipo="" class="selected">Tipo</option>
+                                        @if (Model.tipo_comentario.Count() > 0)
+                                        {
+                                            @foreach (var item in Model.tipo_comentario)
+                                            {
+                                                <option id_tipo="@item.idTC">@item.nameTC</option>
+                                        ***REMOVED***
+                                    ***REMOVED***
+
+                                    </select>
+                                </div>
+                                <div class="highlightBox">
+                                    <div id="divAreaInfluencia" class="form-group">
+                                        <label for="sel_area_influencia" class="required">Municipio afectado:</label>
+                                        <select class="form-select" aria-label="Selecciona un tipo comentario" id="filtro_AreaInfluencia">
+                                            <option id_munic="" id_depa="" class="selected">Área</option>
+                                            @if (Model.ProjectInformation.EntesBeneficiados.Count() > 0)
+                                            {
+                                                @foreach (var item in Model.ProjectInformation.EntesBeneficiados)
+                                                {
+                                                    <option id_depa="@item.IdDepartamento">@item.Nombre</option>
+                                            ***REMOVED***
+                                        ***REMOVED***
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+                                @*ParticipacionComentarios*@
+                                <div>
+                                    <label for="txtcomentario" class="required">Escribe tu comentario:</label>
+                                    <div id="divComentario">
+                                        <textarea rows="4" class="txtAbierto form-control" id="txtcomentario" name="" value="" id_tipo=""></textarea>
+                                    </div>
+                                </div>
+                                <div class="disclaimer well">
+                                    <span class="glyphicon glyphicon-alert"></span>
+                                    <p>Se informa que los comentarios de su participación antes de ser publicados serán validados por MapaInversiones. Si desea, su opinión puede ser anónima. </p>
+                                </div>
+                                <div>
+                                    <input type="checkbox" id="anonimo" class="" /> Anónimo
+                                </div>
+                                <div class="form-group text-center">
+                                    <button type="button" class="btn btn-primary" id="btnGuardarComent"> ENVIAR </button><br><br>
+                                    <a href="">CANCELAR</a>
+                                </div>
+                                @*ParticipacionCuestionario*@
+                                @*<div class="boxQuestions" id="divDetPreguntas">
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <!--CONFIRM-->
+                    <div class="light-bg">
+                        <div id="divConfirmaEnvio" style="display:none;">
+                            <div class="p-3 text-center">
+                                <img src="~/content/img/location/icSuccess.jpg" /><br><br>
+                                <span class="h3 orangeLink" id="txtMsgConfirmaEnvio"></span><br>
+                                <span class="h4">Tu comentario será publicado cuando el administrador lo verifique</span>
+                                <div class="closeSesion"><a href="../../" class="btn btn-default">Comentar otro proyecto</a></div>
+                                @*<div class="closeSesion"><a href="">Cerrar Sesion <span class="glyphicon glyphicon-arrow-right"></span></a></div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center closeSesion" id="divCloseSesion" style="display:none;">
+                        <a role="button" id="enlace_cierre"><i class="material-icons md-24">logout</i> Cerrar Sesión </a></div>
+                </div>
+                <div class="col-md-8 s2" id="divComentarios">
+                    <div class="Tcomments">
+                        <div class="lcomments">
+                            <span class="h3" id="txtNumComentarios"> </span>
+                            <span class="h3">Total Comentarios </span>
+                        </div>
+                    </div>
+                    <div id="content-2" class="content mCustomScrollbar" data-mcs-theme="dark">
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+    <div class="clearfix"></div>
+
+    <script src="~/js/lib/D3/d3.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+
+    <script src="~/js/bootstrap/3.3.5/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/js/Bootbox/bootbox.min.js" type="text/javascript"></script>
+
+    <script src="~/js/projects_aux.js"></script>
+
+    <script>
+
+        window.onscroll = function () { myFunction() ***REMOVED***;
+
+        var header = document.getElementById("navs-header");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+                header.classList.add("bg-white");
+        ***REMOVED*** else {
+                header.classList.remove("sticky");
+                header.classList.remove("bg-white");
+        ***REMOVED***
+    ***REMOVED***
+    </script>
+
+    @using (Html.BeginForm("GeneratePDF_ARC", "Proyecto", FormMethod.Post, new { id = "formPdfProy" ***REMOVED***))
+    {
+        <input type="hidden" name="id_obj_pdf" id="id_obj_pdf" />
+        <input type="hidden" name="cant_cont" id="cant_cont" value="0" />
+        <input type="hidden" name="annio" id="annio" value="" />
+        <input type="button" id="btnEnviar" value="Download Pdf" style="display:none;" />
+***REMOVED***
+
+    <script type="text/javascript">
+    $(function () {
+        $("#btnGenPdfProy").click(function () {
+            var id_proy=@Model.idproject;
+            var cant_cont= 50000;
+            var annio=$("#top_contratista_periodos").val();
+            $("#id_obj_pdf").val(id_proy);
+            $("#cant_cont").val(cant_cont);
+            $("#annio").val(annio);
+            $("#formPdfProy").submit();
+
+    ***REMOVED***);
+
+
+        $("#btnEnviarExc").click(function () {
+            var id_proy=@Model.idproject;
+            $("#id_obj_exc").val(id_proy);
+            $("#formExComent").submit();
+
+    ***REMOVED***);
+
+***REMOVED***);
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var submitIcon = $('.searchbox-icon');
+            var inputBox = $('.searchbox-input');
+            var searchBox = $('.searchbox2');
+            var isOpen = false;
+            submitIcon.click(function () {
+                if (isOpen == false) {
+                    searchBox.addClass('searchbox-open');
+                    inputBox.focus();
+                    isOpen = true;
+            ***REMOVED*** else {
+                    searchBox.removeClass('searchbox-open');
+                    inputBox.focusout();
+                    isOpen = false;
+            ***REMOVED***
+        ***REMOVED***);
+            submitIcon.mouseup(function () {
+                return false;
+        ***REMOVED***);
+            searchBox.mouseup(function () {
+                return false;
+        ***REMOVED***);
+            $(document).mouseup(function () {
+                if (isOpen == true) {
+                    $('.searchbox-icon').css('display', 'block');
+                    submitIcon.click();
+            ***REMOVED***
+        ***REMOVED***);
+
+
+
+
+
+
+    ***REMOVED***);
+        function buttonUp() {
+            var inputVal = $('.searchbox-input').val();
+            inputVal = $.trim(inputVal).length;
+            if (inputVal !== 0) {
+                $('.searchbox-icon').css('display', 'none');
+        ***REMOVED*** else {
+                $('.searchbox-input').val('');
+                $('.searchbox-icon').css('display', 'block');
+        ***REMOVED***
+    ***REMOVED***
+
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".btn-select").each(function (e) {
+                var value = $(this).find("ul li.selected").html();
+                if (value != undefined) {
+                    $(this).find(".btn-select-input").val(value);
+                    $(this).find(".btn-select-value").html(value);
+            ***REMOVED***
+        ***REMOVED***);
+    ***REMOVED***);
+
+        $(document).on('click', '.btn-select', function (e) {
+            e.preventDefault();
+            var ul = $(this).find("ul");
+            if ($(this).hasClass("active")) {
+                if (ul.find("li").is(e.target)) {
+                    var target = $(e.target);
+                    target.addClass("selected").siblings().removeClass("selected");
+                    var value = target.html();
+                    $(this).find(".btn-select-input").val(value);
+                    $(this).find(".btn-select-value").html(value);
+            ***REMOVED***
+                ul.hide();
+                $(this).removeClass("active");
+        ***REMOVED***
+            else {
+                $('.btn-select').not(this).each(function () {
+                    $(this).removeClass("active").find("ul").hide();
+            ***REMOVED***);
+                ul.slideDown();
+                $(this).addClass("active");
+        ***REMOVED***
+    ***REMOVED***);
+
+        $(document).on('click', function (e) {
+            var target = $(e.target).closest(".btn-select");
+            if (!target.length) {
+                $(".btn-select").removeClass("active").find("ul").hide();
+        ***REMOVED***
+    ***REMOVED***);
+
+
+    </script>
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#btnUploadFile').on('click', function () {
+            var data = new FormData();
+            var maxFileSize = 1048576; // 1MB ->  1024 * 1024
+          var files = $("#fileUpload").get(0).files;
+          console.log("Entro por clic:");
+            // Add the uploaded image content to the form data collection
+            if (files.length > 0)
+            {
+              console.log("Entró por files:");
+                //using(var ms = new MemoryStream())
+                //{
+                //  files[0].CopyTo(ms);
+                //  var fileBytes = ms.ToArray();
+                //  string s = Convert.ToBase64String(fileBytes);
+                //  console.log("Imagen:" + s);
+                //  // act on the Base64 data
+                //***REMOVED***
+
+                if (files[0].size < maxFileSize) {
+                    /*data.append("UploadedImage", files[0]);
+                    data.append("DescripcionImage", $('#tbDescripcion').val());
+                    data.append("LocationImage", $('#filtro_AreaFotoUsuUpload option:selected').val());*/
+                    //data.append("ProjectImage",@Model.idproject);
+                  console.log(files[0]);
+
+
+                  var reader = new FileReader();
+                  const fileByteArray = [];
+                  reader.readAsArrayBuffer(files[0]);
+                  reader.onloadend = (evt) => {
+                    if (evt.target.readyState === FileReader.DONE) {
+                      const arrayBuffer = evt.target.result,
+                        array = new Uint8Array(arrayBuffer);
+                      for (const a of array) {
+                        fileByteArray.push(a);
+                  ***REMOVED***
+                      var params_img = {
+                        UploadedImage: fileByteArray,
+                        DescripcionImage: $('#tbDescripcion').val(),
+                        LocationImage: $('#filtro_AreaFotoUsuUpload option:selected').val(),
+                        ProjectImage:@Model.idproject
+	                    ***REMOVED***;
+                      $.ajax({
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        url: "/api/Participacion/SubirArchivo",
+                        cache: false,
+                        data: JSON.stringify(params_img),
+                        success: function (result) {
+                          //separa error y mensaje
+                          var cad_result = result.split("<||>");
+                          if (cad_result.length > 1) {
+                            var cod_error = cad_result[0];
+                            var mensaje_error = cad_result[1];
+                            if (cod_error == "0") {
+                              bootbox.alert(mensaje_error, function () {
+                                $('select,input[type=text],input[type=radio],textarea', $('#divDatosModal')).each(function (i, e) {
+                                  $(e).val("");
+                            ***REMOVED***);
+                                $("#btnCloseFotos").trigger("click");
+                          ***REMOVED***);
+                        ***REMOVED*** else {
+                              bootbox.alert(mensaje_error);
+                        ***REMOVED***
+                      ***REMOVED*** else {
+                            bootbox.alert(result);
+                      ***REMOVED***
+                      ***REMOVED***
+                        error: function (response) {
+                          bootbox.alert('Error: ' + response.responseText);
+                      ***REMOVED***
+                        failure: function (response) {
+                          bootbox.alert('Fallo: ' + response.responseText);
+                    ***REMOVED***
+                  ***REMOVED***);
+
+                ***REMOVED***
+              ***REMOVED***
+            ***REMOVED***
+                else {
+                    var tamanoArchivo = Math.round(files[0].size / maxFileSize);
+                    bootbox.alert('Lo sentimos, el archivo tiene un tamaño de ' + tamanoArchivo +' MB y supera el máximo tamaño permitido que es de 1MB.\nPor favor, modifique la imagen disminuyendo el tamaño del archivo antes de subirlo al sistema.');
+            ***REMOVED***
+        ***REMOVED***
+            else bootbox.alert('No existe archivo para subir.');
+    ***REMOVED***);
+
+        $('.enlace_img').on('click' , function(e){
+            var id = $(this).attr("data-src");
+            $('#img-modal').attr("src", id);
+            var des = $(this).attr("descrip");
+
+
+    ***REMOVED***);
+***REMOVED***);
+    </script>
+
+    <div id="fb-root"></div>
+    @section DataBody {
+        data-profile='[{"avance_financiero":"@Model.ProjectInformation.avance_financiero","id_project":"@Model.idproject"***REMOVED***]'
+        data-actores='[@foreach (var info in @Model.actores_proy)
+        {<text> {"idCategoria":"@info.idCategoria","Categoria": "@info.Categoria","nomActor": "@info.nomActor"***REMOVED***@if (info != @Model.actores_proy.Last())
+        {<text>,</text>***REMOVED***</text>***REMOVED***]'
+***REMOVED***
+
+</body>

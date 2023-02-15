@@ -68,11 +68,30 @@ namespace PlataformaTransparencia.Negocios.PlanNacional
       List<InfoEntidad> objReturn = new List<InfoEntidad>();
       var entidadesPlanNacional = (from info in _connection.CatalogoEntidades
                                    select new InfoEntidad {
-                                     CodEntidad = info.CodNivelEntidad,
-                                     Nombre = info.NombreEntidad,
+                                     CodEntidad = info.CodigoInstitucion,
+                                     Nombre = info.Institucion,
                                ***REMOVED***
                                    ).Distinct().OrderBy(x => x.Nombre).ToList();
       objReturn = new List<InfoEntidad>(entidadesPlanNacional.Count>6 ?  entidadesPlanNacional.OrderBy(x=>x.Nombre).Take(6) : entidadesPlanNacional.OrderBy(x => x.Nombre));
+      return objReturn;
+***REMOVED***
+
+    /// <summary>
+    /// Entidades que hacen parte del plan nacional de desarrollo sin alcaldías
+    /// </summary>
+    /// <returns>Un listado con las entidades relacionadas con el plan Nacional de desarrollo sin alcaldías</returns>
+    public List<InfoEntidad> ObtenerEntidadesPlanNacionalNoAlcaldias()
+    {
+      List<InfoEntidad> objReturn = new List<InfoEntidad>();
+      var entidadesPlanNacional = (from info in _connection.CatalogoEntidades
+                                   where info.Institucion!=null && !info.Institucion.ToUpper().Contains("ALCALD")
+                                   select new InfoEntidad
+                                   {
+                                     CodEntidad = info.CodigoInstitucion,
+                                     Nombre = info.Institucion,
+                               ***REMOVED***
+                                   ).Distinct().OrderBy(x => x.Nombre).ToList();
+      objReturn = new List<InfoEntidad>(entidadesPlanNacional.Count > 6 ? entidadesPlanNacional.OrderBy(x => x.Nombre).Take(6) : entidadesPlanNacional.OrderBy(x => x.Nombre));
       return objReturn;
 ***REMOVED***
 

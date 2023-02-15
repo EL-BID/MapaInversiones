@@ -8,8 +8,17 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="js/search_aux.js"></script>
 ***REMOVED***
-<style>
+    @{
+    var Sefin = Model.Consolidados.Where(o => o.OrigenInformacion.ToUpper().Contains("SEFIN"));
+    var Oncae = Model.Consolidados.Where(o => o.OrigenInformacion.ToUpper().Contains("ONCAE"));
+    System.IFormatProvider cultureHN = new System.Globalization.CultureInfo("es-HN");
+   
 
+***REMOVED***
+<style>
+    .capitalEntidad {
+        text-transform: capitalize;
+***REMOVED***
     .autocomplete-suggestions {
         border: 1px solid #999;
         background: #FFF;
@@ -47,16 +56,18 @@
         <div class="container">
             <div class="search-page-container header-search">
 
-                <div class="Tagline text-center">Los recursos p&uacute;blicos son del <span>pueblo paraguayo</span></div>
-                <div class="Tagline2 text-center">Use esta plataforma para informarse, participar y controlar</div>
+                <div class="Tagline text-center">
+                    <h1> Honduras Inversiones Transparencia y Cuentas Claras</h1>
+                    <span class="h5">Use esta plataforma para informarse, participar y controlar</span>
+                </div>
 
                 @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" ***REMOVED***))
                 {
-                    <div class="form-field">
-                        <label for="SearchString" class="form-field-label">Entidades, Planes y programas, por ejemplo: Plan nacional de Desarrollo.</label>
-                        <input type="search" class="form-field-input" name="SearchString" id="SearchString" value="" autocomplete="on" required="required">
+                    <div class="form-field whiteSearch" id="contentSearchDiv">
+                        <label for="SearchString" class="form-field-label">Instituciones, Planes y programas, por ejemplo: Secretaría de Energía.</label>
+                        <button type="submit" class="buttonsearBTN" title="Click para Iniciar Buqueda"><i class="material-icons md-22">search</i> <span class="d-none d-sm-inline">Buscar</span></button>
+                        <input type="search" class="form-field-input" name="SearchString" id="SearchString" value="" autocomplete="off" required="required">
                         <!--id="page-field-search"-->
-                        <!--<button type="submit" class="search-btn">Buscar</button>-->
                     </div>
 
             ***REMOVED***
@@ -94,13 +105,13 @@
                     ruta_aux = @item.Banner.Fondo.Paths[0];
             ***REMOVED***
 
-                <div class="intro-item" data-flickity-bg-lazyload="@Orchard.AssetUrl((string)ruta_aux,200,200,OrchardCore.Media.Processing.ResizeMode.Crop)">
+               <div class="intro-item" data-flickity-bg-lazyload="@Orchard.AssetUrl((string)ruta_aux,200,200,OrchardCore.Media.Processing.ResizeMode.Crop)">
                     <div class="container">
                         <div class="row">
-                            <div class="col">
+                            <!--<div class="col">
                                 <div class="intro-content">
                                     <div class="section-heading shm-none">
-                                        <h1>@item.DisplayText</h1>
+                                        <h2>@item.DisplayText</h2>
                                         <p class="section-desc">@Html.Raw(item.HtmlBodyPart.Html)</p>
                                     </div>
 
@@ -112,7 +123,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -122,21 +133,23 @@
     <!-- MAIN QUESTIONS -->
     <section class="section-questions">
         <div class="container">
-            <div class="card-group negative-margin">
+            <div class="card-group">
                 @{
                     var anuncios = await Orchard.GetContentItemByHandleAsync("alias:anuncios");
             ***REMOVED***
                 @foreach (var anuncio in anuncios.Content.BagPart.ContentItems)
                 {
                     <div class="card no-rounded">
-                        <a href="@anuncio.LinkMenuItemPart.Url" class="services-item item-style">
-                            <h4 class="services-item-heading">@anuncio.DisplayText</h4>
 
+                        <a href="@anuncio.LinkMenuItemPart.Url" class="services-item item-style">
+                            <div class="mh72">
+                            <span class="h4 services-item-heading">@anuncio.DisplayText</span>
+                            </div>
                             <div class="services-item-desc mb-4">@Html.Raw(anuncio.HtmlBodyPart.Html)</div>
                             @if (anuncio.LinkMenuItemPart.Name != null)
                             {
                                 <div class="btn btn-cards">
-                                    <span>@anuncio.LinkMenuItemPart.Name</span>
+                                    <span title="Ver más">@anuncio.LinkMenuItemPart.Name</span>
                                     <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
                                 </div>
                         ***REMOVED***
@@ -155,9 +168,7 @@
                 <div class="col-lg-6">
                     <div class="d-flex px-5">
                         <div class="section-heading heading-left">
-                            <span class="h2 text-bold">
-                                Conoce como se vinculan el Plan Nacional de Desarrollo (PND) y el Presupuesto General de la Naci&oacute;n (PGN) con los Objetivos de Desarrollo Sostenible (ODS)
-                            </span>
+                            
 
                             <!--<div class="section-subheading">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et</div>-->
                         </div>
@@ -166,70 +177,43 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="content-infogram p-3">
-                        <div class="infogram-slider flickity-dots-absolute" data-flickity='{ "bgLazyLoad": 1, "bgLazyLoad": true, "fade": true, "prevNextButtons": false ***REMOVED***'>
+                        <div class="infogram-slider flickity-dots-absolute" data-flickity='{ "autoPlay": true, "bgLazyLoad": 1, "bgLazyLoad": true, "fade": true, "prevNextButtons": false ***REMOVED***'>
                             <div class="intro-item" data-flickity-bg-lazyload="">
                                 <div class="col">
+
                                     <div class="intro-content">
                                         <div class="section-heading shm-none">
-                                            <span class="h3 text-bold">
-                                                El Paraguay comprometido con la Agenda 2030
-
-                                            </span>
+                                            <!--<span class="h3 text-bold">
+                                                Para la etapa de formulación o elaboración del presupuesto, se detalla un cronograma de trabajo que establece tiempos y responsabilidades para las instituciones participantes del Poder Ejecutivo específicamente Presidente de la República y Ministro
+                                            </span>-->
+                                            <h2>
+                                                Conoce el Mapa de Inversión Pública
+                                            </h2>
                                             <p class="section-desc">
-                                                En el a&#241;o 2017, los representantes de los tres Poderes del Estado de Paraguay firmaron la declaraci&oacute;n conjunta Interpoderes, reafirmando el compromiso del pa&iacute;s para el cumplimiento de los ODS.
+                                                En Honduras los programas y los proyectos son gestionados a través del Sistema Nacional de Inversión Pública (SNIPH) para que contribuyan a la prioridades de desarrollo nacional y al bienestar de toda la ciudadanía hondureña.
+                                                <br /><br />
+                                                Conoce los proyectos de inversión pública en ejecución en tu territorio.
+
+                                            </p>
                                         </div>
                                         <div class="wrap-btn intro-btns2">
-                                            <a href="/PLanODS" class="btn btn-cards">
+                                            <a href="/MapView" target="_blank" class="btn btn-cards">
                                                 <span>
-                                                    Vinculaci&oacute;n PND &#8211; ODS
+                                                    Ir al mapa
                                                 </span>
                                                 <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
                                             </a>
-                                            <a href="/DesarrolloSostenible" class="btn btn-cards">
-                                                <span>
-                                                    Vinculaci&oacute;n PGN &#8211; ODS
-                                                </span>
-                                                <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
-                                            </a>
+                                            <!--<a href="/DesarrolloSostenible" class="btn btn-cards">
+                                                    <span>
+                                                        Vinculaci&oacute;n PGN &#8211; ODS
+                                                    </span>
+                                                    <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
+                                            </a>-->
 
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!--<div class="intro-item" data-flickity-bg-lazyload="">
-                                <div class="col">
-                                    <div class="intro-content">
-                                        <div class="section-heading shm-none">
-                                            <h2>¿Qu&eacute; es la Agenda 2030 para el Desarrollo Sostenible? </h2>
-                                            <!--<p class="section-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam</p>
-                                        </div>
-                                        <div class="wrap-btn intro-btns">
-                                            <a href="/DesarrolloSostenible" class="btn btn-cards">
-                                                <span>Ver vinculaci&oacute;n </span>
-                                                <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
-                            <!--<div class="intro-item" data-flickity-bg-lazyload="">
-                                <div class="col">
-                                    <div class="intro-content">
-                                        <div class="section-heading shm-none">
-                                            <h2>Title 3</h2>
-                                            <p class="section-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam</p>
-                                        </div>
-                                        <div class="wrap-btn intro-btns">
-                                            <a href="#!" class="btn btn-with-icon btn-small ripple">
-                                                <span>CTA 3</span>
-                                                <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="assets/img/sprite.svg#arrow-right"></use></svg>
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
+                            </div>                      
                         </div>
 
                     </div>
@@ -241,17 +225,70 @@
     </section>
 
     <!-- ENTIDADES LINKS -->
-    <section class="section">
+    <section class="section-white">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="section-heading heading-center">
-                        <h2>&#191;Cu&aacute;nto est&aacute;n gastando las entidades p&uacute;blicas&#63;</h2>
-                        <div class="section-subheading">Conozca  c&oacute;mo se est&aacute;n ejecutando los recursos en las diversas entidades del estado en miles de millones de guaran&iacute;es</div>
+                        <h2>Presupuestos Ciudadanos</h2>
+                    </div>
+                </div>
+                <div class="row py-5">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 card-entidad">
+                            <div class="card-body">
+                                <div class="card-title-container mh56">
+                                    <h3 class="text-center"> ¿Cuál es el ciclo <br />presupuestario?</h3>
+                                </div>
+                                <div class="wrap-desc-entidad text-center">
+                                    El presupuesto contempla 5 etapas:<strong> formulación</strong>, <strong>aprobación</strong>, <strong>ejecución</strong>, <strong>seguimiento y evaluación</strong>, <strong>liquidación y rendición de cuentas</strong>, estas etapas de presupuesto deben ser vistas como un proceso continuo.
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 card-entidad">
+                            <div class="card-body">
+                                <div class="card-title-container mh56">
+                                    <h3 class="text-center">¿De dónde se espera <br />obtener los ingresos?</h3>
+                                </div>
+                                <div class="wrap-desc-entidad text-center">
+                                    El presupuesto de ingresos públicos es la estimación de recursos financieros que el Estado espera percibir durante el año.
+                                    <br /><br />
+                                    Para el <strong>2022</strong> los ingresos estimados son<br /> <strong>L 162,435.7</strong> de fuentes como: impuestos, tasas, contribuciones, prestamos, entre otros.
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-0 card-entidad">
+                            <div class="card-body">
+                                <div class="card-title-container mh56">
+                                    <h3 class="text-center">¿ Cuánto es el presupuesto<br />de gastos ?</h3>
+                                </div>
+                                <div class="wrap-desc-entidad text-center">
+                                    Para el año <strong>2022</strong>, la <strong>Administración Central</strong> y la <strong>Administración descentralizada</strong> tiene asignado un presupuesto de gasto de <br /><strong>L 308,233.6 millones.</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section-btns justify-content-center py-5">
+                        <a title="Ir a presupuestos Ciudadanos" href="/ProcesoPresupuesto" class="btn btn-cards">
+                            <span>Ir a presupuestos Ciudadanos</span>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row py-4">
+                <div class="col-12">
+                    <div class="section-heading heading-center">
+                        <h2>Presupuesto Ejecutado por Institución </h2>
+                        <h3>Año @Model.MaxAnnioEntidades</h3>
+                        <div class="section-subheading">Conozca c&oacute;mo se est&aacute;n ejecutando los recursos en las diversas instituciones del Estado en millones de Lempiras</div>
+                    </div>
+                </div>
                 @if (Model.Entidades != null)
                 {
                     @foreach (var item in Model.Entidades)
@@ -261,101 +298,227 @@
                         porcentaje = @item.porcentaje.ToString().Replace(',', '.') + "%";
 
                         <text>
-                            <div class="col-lg-3">
+                            <div class="col-lg-3 mb-3">
 
                                 <div class="card h-100 shadow border-0 card-entidad">
                                     <a href=@href_aux>
                                         <div class="card-body">
-                                            <div class="card-title-container">
-                                                <h6 class="text-center" id="@item.id">@item.labelGroup</h6>
+                                            <div class="card-title-container mh56">
+                                                <h3 class="text-center capitalEntidad" id="@item.id">@item.labelGroup</h3>
                                             </div>
                                             <div class="wrap-desc-entidad">
                                                 <div class="execute text-center">Ejecutado</div>
                                                 <div class="progress">
-                                                    <div class="progress-bar" role="progressbar" style="width:@porcentaje" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    <div class="progress-bar" aria-label="Porcentaje Ejecutado" role="progressbar" style="width:@porcentaje" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                                 </div>
-                                                <div class="executeN text-center">₲ @String.Format("{0:n0***REMOVED***", item.avance / 1000000000)</div>
-                                                <div class="executeV text-center">Miles de Millones de Guaran&iacute;es</div>
+                                                <div class="executeN text-center">L @String.Format(cultureHN, "{0:n0***REMOVED***", item.avance / 1000000)</div>
+                                                <div class="executeV text-center">Millones de Lempiras</div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
                         </text>
-
                 ***REMOVED***
             ***REMOVED***
             </div>
             <div class="section-btns justify-content-center py-5">
-                <a href="/BusquedaResultados?Type=Entidad" class="btn btn-cards">
-                    <span>Ver todas las entidades</span>
+                <a title="Ver todas la Entidades" href="/Entidades" class="btn btn-cards">
+                    <span>Ver todas las instituciones</span>
                     <span class="el-ripple-circle" style="left: 326.5px; top: 313px;"></span>
                 </a>
             </div>
         </div>
 
     </section>
-    <!-- NEWS AND SOCIAL MEDIA-->
+
+
+
     <section class="section-gray">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-
-
-                    <div class="section-heading heading-left">
-                        <a href="Noticias"><h2>Noticias</h2></a>
-                    </div>
-                    <div class="cards-News-container">
-                        @foreach (var noticia in await Orchard.GetRecentContentItemsByContentTypeAsync("BlogPost", 4))
-                        {
-
-                            <!--NOTICIA 3-->
-                            <div class="card mb-3">
-                                <div class="row g-0">
-                                    <div class="col-md-4 col-lg-3">
-                                        @{
-                                            var imgpath = "img/Pic001.jpg";
-                                            if (noticia.Content.BlogPost.Image.Paths.Count != 0)
-                                            {
-                                                imgpath = noticia.Content.BlogPost.Image.Paths[0];
-                                                <img class="img-fluid" src=@Orchard.AssetUrl((string)imgpath) alt="...">
-                                        ***REMOVED***
-                                            else
-                                            {
-                                                <img class="img-fluid" src=@imgpath alt="...">
-                                        ***REMOVED***
+            <div class="section-heading heading-center">
+                <h2>Contratos por Fuente de Datos </h2>
+                <h3>Año @Model.MaxAnnioContratos</h3>
+            </div>
+           <div class="row">
+            <div class="col-md-4">
+                <div class="card shadow border-0 h-100">
+                    <div class="car-deck">
+                            <div class="card-headerdata  text-center">
+                                <img class="img-fluid img20" src="../img/logoHaciendaB.png" alt="ir a Secretaria tecnica de planeación" />
+                        </div>
+                        <div class="car-bodycntos">
+                            <div class="car-content">
+                                <div class="info_contra" id="dataSEFIN">
+                                    @if (Sefin.Count() > 0)
+                                    {
+                                        foreach (var item in Sefin)
+                                        {
+                                            <text>
+                                                <div class="h6">Órdenes de Pago SEFIN</div>
+                                                <div class="h4"> @String.Format(cultureHN, "{0:n0***REMOVED***", @item.NroContratos)</div>
+                                                <div class="h6">Valor</div>
+                                                <div class="h4">
+                                                    @item.MonedaContrato
+                                                    @if (@item.ValorContratado >= 1000000)
+                                                    {
+                                                        <text> @String.Format(cultureHN, "{0:n1***REMOVED***", @item.ValorContratado / 1000000) Millones</text>
+                                                ***REMOVED***
+                                                    else
+                                                    {
+                                            <text> @String.Format(cultureHN, "{0:n1***REMOVED***", @item.ValorContratado)</text>
+                                                ***REMOVED***
+                                                </div>
+                                                </text>
                                     ***REMOVED***
+                                ***REMOVED***
+                                    else
+                                    {
+                                            <text>
+                                                <div class="h6">Órdenes de Pago SEFIN</div>
+                                                <div class="h4">0</div>
+                                                <div class="h6">Valor</div>
+                                                <div class="h4">- -</div>
+                                            </text>
 
-                                    </div>
-                                    <div class="col-md-8 col-lg-9">
-                                        <div class="card-body">
-                                            <a href="/Noticia/@noticia.ContentItemId"><h5 class="card-title">@noticia</h5></a>
-                                            <p class="card-text">@noticia.Content.BlogPost.Subtitle.Text</p>
-                                            <p class="card-text"><small class="text-muted">Creado: @noticia.CreatedUtc</small></p>
-                                        </div>
-                                    </div>
+                                ***REMOVED***
                                 </div>
                             </div>
-                    ***REMOVED***
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="section-heading heading-left">
-                        <h2>Sigue la conversaci&oacute;n</h2>
-                    </div>
-                    <div class="section-twitter">
-                        <div class="content-twitter">
-                            <a class="twitter-timeline" data-height="540" href="https://twitter.com/Haciendapy?ref_src=twsrc%5Etfw">Tweets by Haciendapy</a>
-                            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         </div>
                     </div>
                 </div>
-
             </div>
+            <div class="col-md-8">
+                <div class="card shadow border-0 h-100">
+                    <div class="car-deck">
+                            <div class="card-headerdata  text-center">
+                                <img class="img-fluid img20" src="../img/LogoOncaet.png" alt="ir a Secretaria tecnica de planeación" />
+                        </div>
+                        <div class="car-bodycntos">
+                            <div class="car-content">
+                                <div class="info_contra">
+                                        <div class="row justify-content-center" id="dataONCAE">
+                                        @if (Oncae.Count() > 0)
+                                        {
+                                            foreach (var item in Oncae)
+                                            {
+                                                <text>
+                                                    <div class="col-md-4">
+                                                        <div class="h6">@item.OrigenInformacion.Replace("Oncae - ", "").Replace("ONCAE - ", "").Replace("Catalogo Electrónico", "Catálogo Electrónico")</div>
+                                                        <div class="h4"> @String.Format(cultureHN, "{0:n0***REMOVED***", @item.NroContratos)</div>
+                                                        <div class="h6">Valor</div>
+                                                        <div class="h4">
+                                                            @item.MonedaContrato
+                                                            @if (@item.ValorContratado >= 1000000)
+                                                            {
+                                                                <text> @String.Format(cultureHN, "{0:n1***REMOVED***", @item.ValorContratado / 1000000) Millones</text>
+                                                        ***REMOVED***
+                                                            else
+                                                            {
+                                                <text> @String.Format(cultureHN, "{0:n1***REMOVED***", @item.ValorContratado)</text>
+                                                        ***REMOVED***
+                                                        </div>
+                                                    </div>
+                                                    </text>
+                                        ***REMOVED***
+                                    ***REMOVED***
+                                        else
+                                        {
+                                                <text>
+                                                    <div class="col-md-4">
+                                                        <div class="h6">- -</div>
+                                                        <div class="h4">0</div>
+                                                        <div class="h6">Valor</div>
+                                                        <div class="h4">- -</div>
+                                                    </div>
+                                                </text>
+                                    ***REMOVED***
+                                        @*<div class="col-md-4">
+                                                <div class="h6">Catálogo Electrónico</div>
+                                                <div class="h3">100</div>
+                                                <div class="h6">Valor</div>
+                                                <div class="h3">500.000.000</div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="h6">Difusión Directa de Contratos</div>
+                                                <div class="h3">100</div>
+                                                <div class="h6">Valor</div>
+                                                <div class="h3">500.000.000</div>
+                                            </div>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="alertCont alert-info" role="alert">Para evitar duplicaciones en los análisis, se recomienda utilizar las publicaciones de manera separada, usando los datos de <strong>ONCAE</strong> para análisis sobre licitaciones, y <strong>SEFIN</strong> para análisis de presupuesto y pago de contratos.</div>
+            </div>
+        </div>
 
+        </div>
 
+    </section>
 
+    <!-- NEWS AND SOCIAL MEDIA-->
+    <section class="sectionews">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="Cnews">
+                        <div class="section-heading heading-left">
+                            <a href="Noticias"><h2>Noticias</h2></a>
+                        </div>
+                        <div class="cards-News-container">
+                            @foreach (var noticia in await Orchard.GetRecentContentItemsByContentTypeAsync("BlogPost", 4))
+                            {
 
+                                <!--NOTICIA 3-->
+                                <div class="card mb-3">
+                                    <div class="row g-0">
+                                        <div class="col-md-4 col-lg-3">
+                                            @{
+                                                var imgpath = "img/Pic001.jpg";
+                                                if (noticia.Content.BlogPost.Image.Paths.Count != 0)
+                                                {
+                                                    imgpath = noticia.Content.BlogPost.Image.Paths[0];
+                                                    <img class="img-fluid" src=@Orchard.AssetUrl((string)imgpath) alt="...">
+                                            ***REMOVED***
+                                                else
+                                                {
+                                                    <img class="img-fluid" src=@imgpath alt="...">
+                                            ***REMOVED***
+                                        ***REMOVED***
+
+                                        </div>
+                                        <div class="col-md-8 col-lg-9">
+                                            <div class="card-body Noticia">
+                                                <a href="/Noticia/@noticia.ContentItemId"><span class="h4">@noticia</span></a>
+                                                <p class="card-text">@noticia.Content.BlogPost.Subtitle.Text</p>
+                                                <!--<p class="card-text"><small class="text-muted">Creado: @noticia.CreatedUtc</small></p>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        ***REMOVED***
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 section-graysoft">
+                    <div class="twitter">
+                        <div class="section-heading heading-left">
+                            <h2>Sigue la conversaci&oacute;n</h2>
+                        </div>
+                        <div class="section-twitter">
+                            <div class="content-twitter">
+                                <a class="twitter-timeline" data-height="770" href="https://twitter.com/GobiernoHN?ref_src=twsrc%5Etfw">Tweets by GobiernoHN</a>
+                                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <!--CONTACT US-->

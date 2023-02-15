@@ -28,87 +28,108 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 ***REMOVED***
 
 
-    [HttpGet("GetConsolidadoProgramasXCodEntidadAnio")]
-    public ConsolidadoProgramasEntidad GetConsolidadoProgramasXCodEntidadAnio(string anio, string codEntidad)
+    [HttpGet("GetDatosEntidadPorAnnio")]
+    public DatosEntidadAnio GetConsolidadoProgramasXCodEntidadAnio(string anio, string codEntidad)
     {
-      ConsolidadoProgramasEntidad objReturn = new ConsolidadoProgramasEntidad();
+            DatosEntidadAnio objReturn = new DatosEntidadAnio();
       try {
         EntidadContract entidad = new EntidadContract(_connection);
-        return entidad.GetConsolidadoProgramasXCodEntidadAnio(anio, codEntidad);
+        return entidad.GetDatosEntidadPorAnnio(anio, codEntidad);
   ***REMOVED***
       catch (Exception exception) {
 
   ***REMOVED***
       return objReturn;
 ***REMOVED***
-    [HttpGet("GetActividadesPlan")]
-    public List<ProyectosPerfilEntidad> GetActividadesPlan(string tipoPrograma, string anioEntidad, string codEntidad)
-    {
-      List<ProyectosPerfilEntidad> objReturn = new List<ProyectosPerfilEntidad>();
-      try {
-                int.TryParse(anioEntidad, out int anio);
-                objReturn= consolidadosEntidades.GetActividadesClasePrograma(tipoPrograma, anio, codEntidad);
-  ***REMOVED***
-      catch (Exception) {
 
-  ***REMOVED***
-      return objReturn;
-***REMOVED***
+        [HttpGet("GetProgramasByEntidad")]
+        public ModelEntidadData GetProgramasByEntidad(int annio, int codEntidad)
+        {
+            ModelEntidadData objReturn = new ModelEntidadData();
+            try
+            {
+                objReturn.infoProgramas = consolidadosEntidades.GetProgramasByEntidad(annio,codEntidad);
+                objReturn.Status = true;
+                return objReturn;
+        ***REMOVED***
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.Message;
+                return objReturn;
+        ***REMOVED***
 
-    [HttpGet("GetActividadesProgramaSustantivo")]
-    public List<ProyectosProgramas> GetActividadesProgramaSustantivo(string tipoPrograma, string anioEntidad, string codEntidad)
-    {
-      List<ProyectosProgramas> objReturn = new List<ProyectosProgramas>();
-      try {
-
-           int.TryParse(anioEntidad, out int anio);
-           objReturn = consolidadosEntidades.GetActividadesProgramaSustantivo(tipoPrograma, anio, codEntidad);
-
-  ***REMOVED***
-      catch (Exception) {
-
-  ***REMOVED***
-      return objReturn;
-***REMOVED***
-
-
-    [HttpGet("GetGraficaIndicadores")]
-    public List<TableIndicadorGraphics> GetGraficaIndicadores(string codIndicador, string anio, string codEntidad)
-    {
-      List<TableIndicadorGraphics> objReturn = new List<TableIndicadorGraphics>();
-      try {
-       
-        int.TryParse(codIndicador, out int codigoIndicador);
-        int.TryParse(anio, out int annio);
-        objReturn=consolidadosEntidades.GetGraficaIndicadores(codigoIndicador, annio, codEntidad);
-  ***REMOVED***
-      catch (Exception) {
-
-  ***REMOVED***
-      return objReturn;
-***REMOVED***
-
-    /// <summary>
-    /// sankey entidad
-    /// </summary>
-    /// <param name="codEntidad"></param>
-    /// <returns></returns>
-    [HttpGet("GetGraficaSankey")]
-    public ModelGraficaSankey GetGraficaSankey(string codEntidad)
-    {
-        ModelGraficaSankey objReturn = new ModelGraficaSankey();
-        try {
-            objReturn.distribucionObjetivos = consolidadosEntidades.GetGraficaSankey(codEntidad);
-            objReturn.Status = true;
-            return objReturn;
-    ***REMOVED***
-        catch (Exception exception) {
-            objReturn.Status = false;
-            objReturn.Message = "Error: " + exception.Message;
-            return objReturn;
     ***REMOVED***
 
-***REMOVED***
+        [HttpGet("GetActividadesByPrograma")]
+        public ModelEntidadData GetActividadesByPrograma(int annio, string codEntidad, int codPrograma)
+        {
+            ModelEntidadData objReturn = new ModelEntidadData();
+            try
+            {
+                objReturn.infograficoActividad = consolidadosEntidades.GetActividadByPrograma(annio, codEntidad, codPrograma);
+                objReturn.Status = true;
+                return objReturn;
+        ***REMOVED***
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.Message;
+                return objReturn;
+        ***REMOVED***
+
+    ***REMOVED***
+
+        [HttpGet("GetGastoByPrograma")]
+        public ModelEntidadData GetGastoByPrograma(int annio, int codEntidad, int codPrograma,string estado, string proceso)
+        {
+            ModelEntidadData objReturn = new ModelEntidadData();
+            try
+            {
+                objReturn.infograficoEntidad = consolidadosEntidades.GetGastoByPrograma(annio, codEntidad, codPrograma,estado,proceso);
+                
+                objReturn.Status = true;
+                return objReturn;
+        ***REMOVED***
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.Message;
+                return objReturn;
+        ***REMOVED***
+
+    ***REMOVED***
+
+        [HttpGet("GetRecursosPerGrupos")]
+        public ModelPresupuestoData GetRecursosPerGrupos(int anyo, int codEntidad)
+        {
+            Double total = 0;
+            List<InfoConsolidadoPresupuesto> info = new List<InfoConsolidadoPresupuesto>();
+            ModelPresupuestoData objReturn = new ModelPresupuestoData();
+            try
+            {
+                info = consolidadosEntidades.ObtenerRecursosPerGrupos(anyo, codEntidad);
+                if (info != null)
+                {
+                    foreach (InfoConsolidadoPresupuesto element in info)
+                    {
+                        total += element.rawValueDouble;
+                ***REMOVED***
+            ***REMOVED***
+
+                objReturn.TotalPresupuesto = total;
+                objReturn.InfoRecursos = info;
+                objReturn.Status = true;
+                return objReturn;
+        ***REMOVED***
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.Message;
+                return objReturn;
+        ***REMOVED***
+    ***REMOVED***
+
 
 ***REMOVED***
 ***REMOVED***

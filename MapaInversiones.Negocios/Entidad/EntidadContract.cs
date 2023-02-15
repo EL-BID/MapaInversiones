@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
+using PlataformaTransparencia.Modelos.Contratos;
 using PlataformaTransparencia.Modelos.Entidad;
 using PlataformaTransparencia.Negocios.Home;
 
@@ -12,8 +13,8 @@ namespace PlataformaTransparencia.Negocios.Entidad
   {
     private readonly TransparenciaDB _connection;
     public ModelEntidadData EntidadModel { get; set; ***REMOVED***
-  
-    public EntidadContract(TransparenciaDB connection)
+    public List<ContratosConsolidado> Consolidados { get; set; ***REMOVED***
+        public EntidadContract(TransparenciaDB connection)
     {
       EntidadModel = new ModelEntidadData();
       _connection = connection;
@@ -25,6 +26,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
         ConsolidadosNacionalesBLL objNegocioConsolidados = new ConsolidadosNacionalesBLL(_connection);
         EntidadModel = objNegocioConsolidados.ObtenerDatosEntidad(codEntidad,nombreEntidad, DateTime.Now.Year+1);
+        Consolidados = objNegocioConsolidados.ObtenerOrigenContratos(null, "ONCAE", codEntidad);
         Status = true;
 
   ***REMOVED***
@@ -44,20 +46,29 @@ namespace PlataformaTransparencia.Negocios.Entidad
         return string.Empty;
   ***REMOVED***
 ***REMOVED***
+        public DatosEntidadAnio GetDatosEntidadPorAnnio(string anioEntidad, string codEntidad)
+        {
+            int.TryParse(anioEntidad, out int anio);
+            ConsolidadosNacionalesBLL objNegocioConsolidados = new ConsolidadosNacionalesBLL(_connection);
+            return objNegocioConsolidados.GetDatosEntidadPorAnnio(anio, codEntidad);
+    ***REMOVED***
 
-    public ModelGraficaSankey GetGraficaSankey(string codEntidad)
-    {
-      ConsolidadosNacionalesBLL objNegocioConsolidados = new ConsolidadosNacionalesBLL(_connection);
-      return objNegocioConsolidados.GetGraficaSankey(codEntidad);
+
+        public List<InformationSource> ObtFuenteDatos()
+        {
+            try {
+                List<InformationSource> objReturn = new List<InformationSource>();
+                ConsolidadosNacionalesBLL objNegocioConsolidados = new ConsolidadosNacionalesBLL(_connection);
+                return objNegocioConsolidados.ObtFuenteDatos();
+        ***REMOVED***
+            catch (Exception)
+            {
+                return null;
+        ***REMOVED***
+ 
+            
+    ***REMOVED***
+
+
 ***REMOVED***
-
-    public ConsolidadoProgramasEntidad GetConsolidadoProgramasXCodEntidadAnio(string anioEntidad, string codEntidad)
-    {
-      int.TryParse(anioEntidad, out int anio);
-      ConsolidadosNacionalesBLL objNegocioConsolidados = new ConsolidadosNacionalesBLL(_connection);
-      return objNegocioConsolidados.GetConsolidadoProgramasXCodEntidadAnio(anio,codEntidad);
-***REMOVED***
-
-
-  ***REMOVED***
 ***REMOVED***

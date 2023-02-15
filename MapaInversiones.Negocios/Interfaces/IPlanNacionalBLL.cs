@@ -8,5 +8,6 @@ namespace PlataformaTransparencia.Negocios.Interfaces
   public interface IPlanNacionalBLL
   {
     List<ObjetivosGeneralPorEjeEstrategico> ObtenerObjetivosPorEjeEstrategico(int idEjeEstrategico);
+    List<InfoEntidad> ObtenerEntidadesPlanNacionalNoAlcaldias();
   ***REMOVED***
 ***REMOVED***

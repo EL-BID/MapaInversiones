@@ -37,10 +37,21 @@ namespace PlataformaTransparencia.Negocios
         public async Task<IEnumerable<Modelos.SolrResponse>> Search(string searchString, string Type, int start, int  sort, int rows)
         {
             int WordsCount= 0;
+            SolrQuery query2 = new SolrQuery("");
 
-            if (searchString != null) {
+            if (searchString != null || searchString != "") {
                 WordsCount = searchString.Split(" ").Count();
                 searchString = searchString.Replace(" ", "\\ ");
+                searchString = searchString.Replace("-", "\\-");
+
+                if (WordsCount > 1 || searchString.Contains('-'))
+                {
+                    query2 = new SolrQuery("metadata:" + '"' + searchString + '"');
+            ***REMOVED***
+                else
+                {
+                    query2 = new SolrQuery("metadata:" + searchString);
+            ***REMOVED***
         ***REMOVED***
 
             if (Type != null && Type != "undefined") {
@@ -54,14 +65,6 @@ namespace PlataformaTransparencia.Negocios
         ***REMOVED***;
 
             SolrQuery query = new SolrQuery('"'+searchString+ '"');
-            SolrQuery query2 = new SolrQuery("");
-
-            if (WordsCount > 1) {
-                query2 = new SolrQuery("metadata:"+'"' + searchString + '"');
-        ***REMOVED***
-            else {
-                query2 = new SolrQuery("metadata:*" + searchString + "*");
-        ***REMOVED***
 
             IEnumerable<Modelos.SolrResponse> results;
 

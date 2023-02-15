@@ -1,12 +1,15 @@
 ﻿@inject OrchardCore.IOrchardHelper Orchard
     <!--CONTACT US-->
-    <!-- Call to action-->
-    <section class="section-question">
+<!-- Call to action-->
+
+@if (ViewData["ShowContacts"] as bool? ?? true)
+{
+    <section class="section-gray">
         <div class="container">
             <div class="col-12 text-center">
                 <h3>&#191;No has encontrado lo que estabas buscando&#63;</h3>
                 <div class="section-btns justify-content-center py-3">
-                    <a href="/CentroAyuda?id=3" class="btn btn-cards">
+                    <a aria-label="Contactenos" href="/Contactanos" class="btn btn-cards">
                         <span>CONT&Aacute;CTANOS</span>
                     </a>
                 </div>
@@ -14,144 +17,156 @@
 
         </div>
     </section>
-    <footer class="footer">
-        <div class="footer-main">
-            <div class="container">
-                <div class="row items justify-content-center">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-12 item text-center">
-                        <!-- Begin company info -->
-                        <div class="footer-company-info">
-                            <div class="footer-company-top">
-                                <a href="/">
-                                    <img src="../img/logoMIVW.svg" alt="Logo Paraguay en resultados" />
-                                </a>
+
+***REMOVED***
 
 
+<footer class="footer">
+    <div class="footer-main">
+        <div class="container">
+            <div class="row items justify-content-lg-between justify-content-xs-center">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-12 item text-center">
+                    <!-- Begin company info -->
+                    <div class="footer-company-info">
+                        <div class="footer-company-top">
+                            <a href="/">
+                                <img src="../img/logoMIVW.svg" alt="Logo Honduras Participa" />
+                            </a>
+
+
+                        </div>
+
+                    </div>
+                    <!-- End company info -->
+
+                </div>
+                @{
+                    var menu = await Orchard.GetContentItemByHandleAsync("alias:second-menu");
+                    @foreach (var menuitem in menu.Content.MenuItemsListPart.MenuItems)
+                    {
+
+                        @if (@menuitem.LinkMenuItemPart.Name != null)
+                        {
+                            var enlace = @menuitem.LinkMenuItemPart.Url;
+                            var enlace_aux = "#!";
+                            if (enlace != "")
+                            {
+                                enlace_aux = enlace;
+                        ***REMOVED***
+                            <div class="col-lg-1 col-md-3 col-xs-12 item">
+                                <div class="footer-item">
+                                    <h6 class="footer-item-heading"><a href="@menuitem.LinkMenuItemPart.Url">@menuitem.LinkMenuItemPart.Name</a></h6>
+                                    <nav class="footer-nav">
+                                        @if (menuitem.MenuItemsListPart != null)
+                                        {
+
+                                            var cant = @menuitem.MenuItemsListPart.MenuItems.Count;
+                                            <ul class="footer-mnu">
+                                                @foreach (var submenu in menuitem.MenuItemsListPart.MenuItems)
+                                                {
+                                                    @if (@submenu.LinkMenuItemPart.Name != null)
+                                                    {
+                                                        var enlace_sub = @submenu.LinkMenuItemPart.Url;
+                                                        var enlace_sub_aux = "#!";
+                                                        if (enlace_sub != "")
+                                                        {
+                                                            enlace_sub_aux = enlace_sub;
+                                                    ***REMOVED***
+                                                        <li>
+                                                            <a href="@enlace_sub_aux" class="hover-link" data-title="@submenu.LinkMenuItemPart.Name">
+                                                                <span>@submenu.LinkMenuItemPart.Name</span>
+                                                            </a>
+                                                        </li>
+                                                ***REMOVED***
+                                            ***REMOVED***
+                                            </ul>
+
+                                    ***REMOVED***
+
+
+                                    </nav>
+                                </div>
                             </div>
 
-                        </div>
-                        <!-- End company info -->
-
-                    </div>
-                    @{
-                        var menu = await Orchard.GetContentItemByHandleAsync("alias:second-menu");
-                        @foreach (var menuitem in menu.Content.MenuItemsListPart.MenuItems)
-                        {
-
-                            @if (@menuitem.LinkMenuItemPart.Name != null)
-                            {
-                                var enlace = @menuitem.LinkMenuItemPart.Url;
-                                var enlace_aux = "#!";
-                                if (enlace != "")
-                                {
-                                    enlace_aux = enlace;
-                            ***REMOVED***
-                                <div class="col-xl-2 col-lg-2 col-md-3 col-7 item">
-                                    <div class="footer-item">
-                                        <h4 class="footer-item-heading"><a href="@menuitem.LinkMenuItemPart.Url">@menuitem.LinkMenuItemPart.Name</a></h4>
-                                        <nav class="footer-nav">
-                                            @if (menuitem.MenuItemsListPart != null)
-                                            {
-
-                                                var cant = @menuitem.MenuItemsListPart.MenuItems.Count;
-                                                <ul class="footer-mnu">
-                                                    @foreach (var submenu in menuitem.MenuItemsListPart.MenuItems)
-                                                    {
-                                                        @if (@submenu.LinkMenuItemPart.Name != null)
-                                                        {
-                                                            var enlace_sub = @submenu.LinkMenuItemPart.Url;
-                                                            var enlace_sub_aux = "#!";
-                                                            if (enlace_sub != "")
-                                                            {
-                                                                enlace_sub_aux = enlace_sub;
-                                                        ***REMOVED***
-                                                            <li>
-                                                                <a href="@enlace_sub_aux" class="hover-link" data-title="@submenu.LinkMenuItemPart.Name">
-                                                                    <span>@submenu.LinkMenuItemPart.Name</span>
-                                                                </a>
-                                                            </li>
-                                                    ***REMOVED***
-                                                ***REMOVED***
-                                                </ul>
-
-                                        ***REMOVED***
-
-
-                                        </nav>
-                                    </div>
-                                </div>
-
-                        ***REMOVED***
-
                     ***REMOVED***
+
                 ***REMOVED***
-                </div>
-                
+            ***REMOVED***
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="footer-company-links text-lg-end py-5">
-                            <!--<a href="#">Pol&iacute;tica de Privacidad</a>
-    <a href="#">T&eacute;rminos y Condiciones</a>
-                            <a href="/MarcoLegal">Marco Legal</a>-->
-                        </div>
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-company-links text-lg-center py-3">
+
+                        <a href="/Acercade">Acerca de Honduras Inversiones</a>
+                        <a href="/CentroAyuda?id=2">Centro de Ayuda</a>
+                        <a href="/MarcoLegal">Marco Legal</a>
+                        <a href="/Contactanos">Contáctenos</a>
+                        <a href="/PoliticasdePrivacidad">Pol&iacute;tica de Privacidad</a>
+                        <a href="/TerminosyCondiciones">T&eacute;rminos y Condiciones</a>
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="col-md-12 text-center mb-5">
-                    <a href="http://www.hacienda.gov.py/web-hacienda/index.php" target="_blank">
-                        <img src="~/img/Footer/logo-hacienda.png" />
-                    </a>
-                    <a href="https://www.stp.gov.py/v1/" target="_blank">
-                        <img src="~/img/Footer/stp_w.png" />
-                    </a>
-                    <a href="http://senac.gov.py/" target="_blank">
-                        <img src="~/img/Footer/logo_senac.png" />
-                    </a>
-                    <a href="https://www.mitic.gov.py/" target="_blank">
-                        <img src="~/img/Footer/logoMITIC.png" />
-                    </a>
-                    <a href="https://www.sen.gov.py/">
-                        <img src="~/img/Footer/logoSEN_white.png" />
-                    </a>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-md-12 text-center mb-5">
-                    <a href="https://www.agpe.gov.py/"target="_blank">
-                        <img src="~/img/Footer/logo_agpe.png" />
-                    </a>
-                    <a href="https://www.contrataciones.gov.py/"target="_blank">
-                        <img src="~/img/Footer/logo_dncpW.png" />
-                    </a>
-                    <a href="https://www.stp.gov.py/v1/spr/" target="_blank">
-                        <img src="~/img/Footer/spp.png" />
-                    </a>
-                    <a href="https://ppr.hacienda.gov.py/" target="_blank">
-                        <img src="~/img/Footer/Logo_PpR.png" />
-                    </a>
-                    <a href="http://snip.hacienda.gov.py/Snip_Web/portal/portalSNIP.html" target="_blank">
-                        <img src="~/img/Footer/logo-snip.png" />
-                    </a>
-                </div>
-                <div class="col-lg-12 text-center">
-                    <a href="https://www.open-contracting.org/es/data-standard/" target="_blank">
-                        <img src="~/img/Footer/logoOCP.png" />
-                    </a>
-                    <a href="https://www.iadb.org/" target="_blank">
-                        <img src="~/img/Footer/logo-bid.png" />
-                    </a>
-                    <a href="http://www.iadb.org/mapainversiones" target="_blank">
-                        <img src="~/img/Footer/logo-mapa-inversiones.png" />
-                    </a>
-                    <a href="http://www.presidencia.gov.py/" target="_blank">
-                        <img src="~/img/Footer/logo_presidencia.png" />
-                    </a>
-                </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <!--<div class="col-md-12 text-center mb-5">
+                <a href="http://www.hacienda.gov.py/web-hacienda/index.php" target="_blank">
+                    <img src="~/img/Footer/logo-hacienda.png" />
+                </a>
+                <a href="https://www.stp.gov.py/v1/" target="_blank">
+                    <img src="~/img/Footer/stp_w.png" />
+                </a>
+                <a href="http://senac.gov.py/" target="_blank">
+                    <img src="~/img/Footer/logo_senac.png" />
+                </a>
+                <a href="https://www.mitic.gov.py/" target="_blank">
+                    <img src="~/img/Footer/logoMITIC.png" />
+                </a>
+                <a href="https://www.sen.gov.py/">
+                    <img src="~/img/Footer/logoSEN_white.png" />
+                </a>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12 text-center mb-5">
+                <a href="https://www.agpe.gov.py/"target="_blank">
+                    <img src="~/img/Footer/logo_agpe.png" />
+                </a>
+                <a href="https://www.contrataciones.gov.py/"target="_blank">
+                    <img src="~/img/Footer/logo_dncpW.png" />
+                </a>
+                <a href="https://www.stp.gov.py/v1/spr/" target="_blank">
+                    <img src="~/img/Footer/spp.png" />
+                </a>
+                <a href="https://ppr.hacienda.gov.py/" target="_blank">
+                    <img src="~/img/Footer/Logo_PpR.png" />
+                </a>
+                <a href="http://snip.hacienda.gov.py/Snip_Web/portal/portalSNIP.html" target="_blank">
+                    <img src="~/img/Footer/logo-snip.png" />
+                </a>
+            </div>-->
+            <div class="col-lg-12 text-center">
+                <a href="https://www.presidencia.gob.hn/" target="_blank">
+                    <img alt="Logo Presidencia" src="~/img/Footer/logoHonduras.png" />
+                </a>
+                <a href="https://www.sefin.gob.hn/" target="_blank">
+                    <img alt="Secretaria de Finazas" src="~/img/Footer/logoHFinanzas.png" />
+                </a>
+                <a href="https://transparencia.se.gob.hn/" target="_blank">
+                    <img alt="Logo Trasnparencia" src="~/img/Footer/logoSDT.png" />
+                </a>
+                <a href="https://www.iadb.org/" target="_blank">
+                    <img alt="Logo iadb" src="~/img/Footer/logo-bid.png" />
+                </a>
+                <a href="http://www.iadb.org/mapainversiones" target="_blank">
+                    <img alt="Logo Mapainversiones" src="~/img/Footer/logo-mapa-inversiones.png" />
+                </a>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>

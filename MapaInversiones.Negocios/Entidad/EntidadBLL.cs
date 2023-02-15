@@ -23,144 +23,6 @@ namespace PlataformaTransparencia.Negocios.Entidad
     {
       _connection = connection;
 ***REMOVED***
-    public List<infograficoEje> GetGraficaSankey(string codEntidad)
-    {
-      var objReturn = new List<infograficoEje>();
-      //VinculacionPND_Presupuesto_x_Entidad_STP
-
-      var infoQuery = (from info in _connection.ConsultaVinculacionPNDPresupuestoXEntidadStp
-                       where info.CodNivelEntidad == codEntidad
-                       orderby info.CodEjeEstrategico, info.CodObjetivoEstrategico, info.CodObjetivoEspecifico
-                       select new {
-                         IdCodEje = info.CodEjeEstrategico.Value,
-                         EjeEstrategico = "eje|" + info.NombreEjeEstrategico,
-                         IdCodObjEst = info.CodObjetivoEstrategico.Value,
-                         NombreObjetivoEstrategico = "est|" + info.NombreObjetivoEstrategico,
-                         IdCodObjEsp = info.CodObjetivoEspecifico.Value,
-                         NombreObjetivoEspecifico = "esp|" + info.NombreObjetivoEspecifico,
-                         AportePresupuesto = info.AportePresupuestalAlObjetivo.Value
-                   ***REMOVED***
-                      ).Distinct().ToList();
-
-      infograficoEje objEje = null;
-      infograficoEstrategico objEstrategico = null;
-      infograficoEspecifico objEspecifico = null;
-
-      foreach (var fila in infoQuery) {
-        objEje = objReturn.Find(p => p.Id == fila.IdCodEje.ToString());
-        if (objEje == null) {
-          objEje = new infograficoEje();
-          objEje.Id = fila.IdCodEje.ToString();
-          objEje.Nombre = fila.EjeEstrategico;
-          objEje.presupuesto = fila.AportePresupuesto;
-
-          objEstrategico = objEje.Detalles.Find(p => p.Id == fila.IdCodObjEst.ToString());
-          if (objEstrategico == null) {
-            objEstrategico = new infograficoEstrategico();
-            objEstrategico.Id = fila.IdCodObjEst.ToString();
-            objEstrategico.Nombre = fila.NombreObjetivoEstrategico;
-            objEstrategico.presupuesto = fila.AportePresupuesto;
-
-            objEspecifico = objEstrategico.Detalles.Find(p => p.Id == fila.IdCodObjEsp.ToString());
-            if (objEspecifico == null) {
-              objEspecifico = new infograficoEspecifico();
-              objEspecifico.Id = fila.IdCodObjEsp.ToString();
-              objEspecifico.Nombre = fila.NombreObjetivoEspecifico;
-              objEspecifico.presupuesto = fila.AportePresupuesto;
-
-              objEstrategico.Detalles.Add(objEspecifico);
-
-        ***REMOVED***
-            else {
-              objEspecifico.presupuesto += fila.AportePresupuesto;
-
-        ***REMOVED***
-
-            objEje.Detalles.Add(objEstrategico);
-      ***REMOVED***
-          else {
-            objEstrategico.presupuesto += fila.AportePresupuesto;
-            objEspecifico = objEstrategico.Detalles.Find(p => p.Id == fila.IdCodObjEsp.ToString());
-            if (objEspecifico == null) {
-              objEspecifico = new infograficoEspecifico();
-              objEspecifico.Id = fila.IdCodObjEsp.ToString();
-              objEspecifico.Nombre = fila.NombreObjetivoEspecifico;
-              objEspecifico.presupuesto = fila.AportePresupuesto;
-
-              objEstrategico.Detalles.Add(objEspecifico);
-
-        ***REMOVED***
-            else {
-              objEspecifico.presupuesto += fila.AportePresupuesto;
-
-        ***REMOVED***
-
-      ***REMOVED***
-
-          objReturn.Add(objEje);
-    ***REMOVED***
-        else {
-          objEje.presupuesto += fila.AportePresupuesto;
-          objEstrategico = objEje.Detalles.Find(p => p.Id == fila.IdCodObjEst.ToString());
-          if (objEstrategico == null) {
-            objEstrategico = new infograficoEstrategico();
-            objEstrategico.Id = fila.IdCodObjEst.ToString();
-            objEstrategico.Nombre = fila.NombreObjetivoEstrategico;
-            objEstrategico.presupuesto = fila.AportePresupuesto;
-
-            objEspecifico = objEstrategico.Detalles.Find(p => p.Id == fila.IdCodObjEsp.ToString());
-            if (objEspecifico == null) {
-              objEspecifico = new infograficoEspecifico();
-              objEspecifico.Id = fila.IdCodObjEsp.ToString();
-              objEspecifico.Nombre = fila.NombreObjetivoEspecifico;
-              objEspecifico.presupuesto = fila.AportePresupuesto;
-
-              objEstrategico.Detalles.Add(objEspecifico);
-
-        ***REMOVED***
-            else {
-              objEspecifico.presupuesto += fila.AportePresupuesto;
-
-        ***REMOVED***
-
-            objEje.Detalles.Add(objEstrategico);
-      ***REMOVED***
-          else {
-            objEstrategico.presupuesto += fila.AportePresupuesto;
-            objEspecifico = objEstrategico.Detalles.Find(p => p.Id == fila.IdCodObjEsp.ToString());
-            if (objEspecifico == null) {
-              objEspecifico = new infograficoEspecifico();
-              objEspecifico.Id = fila.IdCodObjEsp.ToString();
-              objEspecifico.Nombre = fila.NombreObjetivoEspecifico;
-              objEspecifico.presupuesto = fila.AportePresupuesto;
-
-              objEstrategico.Detalles.Add(objEspecifico);
-
-        ***REMOVED***
-            else {
-              objEspecifico.presupuesto += fila.AportePresupuesto;
-
-        ***REMOVED***
-
-      ***REMOVED***
-
-
-    ***REMOVED***
-  ***REMOVED***
-
-      ///ordena primer nivel eje
-      var result = objReturn.OrderByDescending(x => x.presupuesto).ToList();
-      foreach (var item in result) {
-        //ordena nivel obj estrategico
-        item.Detalles = item.Detalles.OrderByDescending(x => x.presupuesto).ToList();
-        foreach (var item_estrateg in item.Detalles) {
-          //ordena nivel obj especifico
-          item_estrateg.Detalles = item_estrateg.Detalles.OrderByDescending(x => x.presupuesto).ToList();
-    ***REMOVED***
-  ***REMOVED***
-      return result;
-
-***REMOVED***
 
     private string ConvertirTextoMayusculaMinuscula(string texto)
     {
@@ -172,276 +34,569 @@ namespace PlataformaTransparencia.Negocios.Entidad
       return texto;
 ***REMOVED***
 
-    public List<ProyectosPerfilEntidad> GetActividadesClasePrograma(string clasePrograma, int anio, string codEntidad)
-    {
-      List<ProyectosPerfilEntidad> objReturn = new List<ProyectosPerfilEntidad>();
-      #region Genero los datos de la primera pestaña del perfil
-      //var proyectosHacienda = (from info in _connection.PresupuestoVigenteXSectorMinHaciendas
-      //                         where info.AnioPresupuesto == anio && info.CodNivelEntidad.ToUpper().Trim() == codEntidad.ToUpper().Trim() && info.ClasePrograma.ToUpper().Trim() == clasePrograma.ToUpper()
-      //                         select new {
-      //                           info.IdNegocioProyecto,
-      //                           info.NombreProyectoActividad,
-      //                           ResultadoInmediato = info.ResultadoInmediato.Replace("*", ""),
-      //                           info.PryClasificacion,
-      //                           PresupuestoVigente = info.PresupuestoVigente ?? 0,
-      //                           PresupuestoAvance = info.PresupuestoAvance ?? 0,
-      //                     ***REMOVED***).Distinct().ToList();
+        public List<infograficoPrograma> GetProgramasByEntidad(int annio,int codEntidad) {
+            List<infograficoPrograma> objReturn = new List<infograficoPrograma>();
+            var RecursosPerObjetoQuery = (from a in _connection.VwPresupuesto
+                                          where a.Periodo==annio && a.CodigoInstitucion == codEntidad
+                                          group a by new {a.CodigoPrograma,a.Programa ***REMOVED*** into g
+                                          select new infograficoPrograma
+                                          {
+                                                Id=g.Key.CodigoPrograma.Value,
+                                                Nombre=g.Key.Programa
+                                      ***REMOVED***).ToList();
 
-      //var proyectosHaciendaAgrupPorPresupuesto = (from proyectoHaciendaCentral in proyectosHacienda
-      //                                            group proyectoHaciendaCentral by new {
-      //                                              proyectoHaciendaCentral.IdNegocioProyecto,
-      //                                              proyectoHaciendaCentral.NombreProyectoActividad,
-      //                                              proyectoHaciendaCentral.ResultadoInmediato,
-      //                                              proyectoHaciendaCentral.PryClasificacion
-      //                                        ***REMOVED*** into proyecto
-      //                                            select new {
-      //                                              proyecto.Key.IdNegocioProyecto,
-      //                                              proyecto.Key.NombreProyectoActividad,
-      //                                              proyecto.Key.ResultadoInmediato,
-      //                                              proyecto.Key.PryClasificacion,
-      //                                              PresupAvance = proyecto.Sum(x => x.PresupuestoAvance),
-      //                                              PresupVigente = proyecto.Sum(x => x.PresupuestoVigente)
-      //                                        ***REMOVED***).Distinct().ToList();
+             objReturn = RecursosPerObjetoQuery;
 
-      var proyectosHaciendaAgrupPorPresupuesto = (from info in _connection.PresupuestoVigenteXSectorMinHaciendas
-                                                  where info.AnioPresupuesto == anio && info.CodNivelEntidad.ToUpper().Trim() == codEntidad.ToUpper().Trim() && info.ClasePrograma.ToUpper().Trim() == clasePrograma.ToUpper()
-                                                  group info by new {
-                                                    info.IdNegocioProyecto,
-                                                    info.NombreProyectoActividad,
-                                                    info.ResultadoInmediato,
-                                                    info.PryClasificacion
-                                              ***REMOVED*** into proyecto
-                                                  select new {
-                                                    proyecto.Key.IdNegocioProyecto,
-                                                    proyecto.Key.NombreProyectoActividad,
-                                                    proyecto.Key.ResultadoInmediato,
-                                                    proyecto.Key.PryClasificacion,
-                                                    PresupAvance = proyecto.Sum(x => x.PresupuestoAvance??0),
-                                                    PresupVigente = proyecto.Sum(x => x.PresupuestoVigente??0)
-                                              ***REMOVED***).ToList();
-
-      foreach (var proyectoHaciendaCentral in proyectosHaciendaAgrupPorPresupuesto) {
-        var indicadoresProyectoActividad = (from info in _connection.PresupuestoIndicadoresMinHaciendas
-                                            where info.AnioPresupuesto.HasValue && info.IdNegocioProyecto == proyectoHaciendaCentral.IdNegocioProyecto && info.AnioPresupuesto.Value == anio
-                                            select new {
-                                              CodigoIndicador = info.CodigoIndicador ?? 0,
-                                              info.NombreIndicador,
-                                              DescripcionIndicador = info.DescripcionIndicador.Replace("*", ""),
-                                              info.UnMedidaAnioBase,
-                                              info.UnidadMedidaTotal,
-                                              Fuente = info.IndFuente,
-                                              MetodoCalculo = info.IndMetcalculo,
-                                              Numerador = info.IndNumerador ?? 0,
-                                              Denominador = info.IndDenominador ?? 0,
-                                              ind_frecuen = info.IndFrecuen,
-                                              tipoIndicador = info.IndSupuestos,
-                                              nivel = info.IndFuente,
-                                              DescripcionPoblTotal = info.DescripcionPoblTotal,
-                                              indAnioBase = info.IndAniobase
-                                        ***REMOVED***
-                                            ).Distinct().ToList();
-        ProyectosPerfilEntidad nuevoProyecto = new ProyectosPerfilEntidad() { Indicadores = new List<IndicadorProyecto>() ***REMOVED***;
-        nuevoProyecto.NombreProyectoActividad = proyectoHaciendaCentral.NombreProyectoActividad == null ? string.Empty : ConvertirTextoMayusculaMinuscula(proyectoHaciendaCentral.NombreProyectoActividad);
-        nuevoProyecto.PresupuestoAvance = Math.Round(proyectoHaciendaCentral.PresupAvance / 1000000);
-        nuevoProyecto.PresupuestoVigente = Math.Round(proyectoHaciendaCentral.PresupVigente / 1000000, 0);
-        nuevoProyecto.Descripcion = proyectoHaciendaCentral.ResultadoInmediato == null ? string.Empty : ConvertirTextoMayusculaMinuscula(proyectoHaciendaCentral.ResultadoInmediato);
-        nuevoProyecto.Clasificacion = proyectoHaciendaCentral.PryClasificacion;
-        foreach (var indicadorProyectoActividad in indicadoresProyectoActividad) {
-          var avance = indicadorProyectoActividad.Denominador == 0 ? 0 : Math.Round(indicadorProyectoActividad.Numerador * 100 / indicadorProyectoActividad.Denominador, 2);
-          nuevoProyecto.Indicadores.Add(new IndicadorProyecto {
-            Avance = avance,
-            Codigo = indicadorProyectoActividad.CodigoIndicador,
-            Descripcion = indicadorProyectoActividad.DescripcionIndicador == null ? string.Empty : ConvertirTextoMayusculaMinuscula(indicadorProyectoActividad.DescripcionIndicador),
-            Nombre = indicadorProyectoActividad.NombreIndicador == null ? string.Empty : ConvertirTextoMayusculaMinuscula(indicadorProyectoActividad.NombreIndicador),
-            UnidadMedidaAnioBase = indicadorProyectoActividad.UnMedidaAnioBase == null ? string.Empty : indicadorProyectoActividad.UnMedidaAnioBase,
-            UnidadMedidaTotal = indicadorProyectoActividad.UnidadMedidaTotal == null ? string.Empty : indicadorProyectoActividad.UnidadMedidaTotal,
-            UnidadIndicador = "%",
-            Formula = indicadorProyectoActividad.MetodoCalculo == null ? string.Empty : ConvertirTextoMayusculaMinuscula(indicadorProyectoActividad.MetodoCalculo),
-            Fuente = indicadorProyectoActividad.Fuente == null ? string.Empty : ConvertirTextoMayusculaMinuscula(indicadorProyectoActividad.Fuente),
-            ind_frecuen = indicadorProyectoActividad.ind_frecuen,
-            tipoIndicador = indicadorProyectoActividad.tipoIndicador,
-            nivel = indicadorProyectoActividad.nivel,
-            DescripcionPoblTotal = indicadorProyectoActividad.DescripcionPoblTotal,
-            indAnioBase = indicadorProyectoActividad.indAnioBase
-      ***REMOVED***);
+            return objReturn;
+        
+        
     ***REMOVED***
-        objReturn.Add(nuevoProyecto);
-  ***REMOVED***
-      #endregion Genero los datos de la primera pestaña del perfil
-      return objReturn;
-***REMOVED***
+
+        public List<infograficoActividad> GetActividadByPrograma(int annio, string codEntidad, int codPrograma)
+        {
+            List<infograficoActividad> objReturn = new List<infograficoActividad>();
+
+            var query1 = (from pre in _connection.VwPresupuesto
+                          where (pre.Periodo == annio && Convert.ToInt32(pre.CodigoInstitucion)== Convert.ToInt32(codEntidad) && pre.CodigoPrograma== Convert.ToInt32(codPrograma))
+                          group pre by new {pre.Periodo,pre.CodigoInstitucion,pre.CodigoPrograma,pre.CodigoSubPrograma,pre.CodigoActividadObra,pre.ActividadObra,pre.CodigoObjetoDeGasto ***REMOVED*** into g
+                          select new 
+                          {
+                              periodo=g.Key.Periodo,
+                              codInstitucion= Convert.ToInt32(g.Key.CodigoInstitucion),
+                              codPrograma=g.Key.CodigoPrograma,
+                              codSubprograma=g.Key.CodigoSubPrograma,
+                              codActividad=g.Key.CodigoActividadObra,
+                              nomActividad= g.Key.ActividadObra,
+                              codObjeto=g.Key.CodigoObjetoDeGasto,
+                              asignado=(decimal)g.Sum(t => t.Vigente) / 1000000,
+                      ***REMOVED***);
 
 
+            var query2 = (from x in _connection.VWContratosXPresupuestoes
+                          where (x.Periodo == annio && Convert.ToInt32(x.CodigoInstitucion) == Convert.ToInt32(codEntidad) && x.CodigoPrograma == codPrograma)
+                          group x by new {x.Periodo,x.CodigoInstitucion,x.CodigoPrograma,x.CodigoSubPrograma, x.CodigoActividadObra,x.CodigoObjetoDeGasto,x.Ocid,x.IdBudget ***REMOVED*** into g
+                          select new 
+                          {
+                              periodo = g.Key.Periodo,
+                              codInstitucion = Convert.ToInt32(g.Key.CodigoInstitucion),
+                              codPrograma = g.Key.CodigoPrograma,
+                              codSubprograma = g.Key.CodigoSubPrograma,
+                              codActividad = g.Key.CodigoActividadObra,
+                              codObjeto = g.Key.CodigoObjetoDeGasto,
+                              ocid =g.Key.Ocid,
+                              contrato=g.Key.IdBudget
 
-    public List<ProyectosProgramas> GetActividadesProgramaSustantivo(string clasePrograma, int anio, string codEntidad)
-    {
-      //Presupuesto_Indicadores_MinHacienda
-      List<ProyectosProgramas> objReturn = new List<ProyectosProgramas>();
-      try {
-        #region Genero los datos de la segunda pestaña del perfil
-        ////var programaProyectosHaciendaSustantivos = (from info in _connection.PresupuestoVigenteXSectorMinHaciendas
-        ////                                            where info.AnioPresupuesto == anio && info.CodNivelEntidad.ToUpper().Trim() == codEntidad.ToUpper().Trim() && info.ClasePrograma.ToUpper().Trim() == clasePrograma.ToUpper() && info.CodigoPrograma.HasValue
-        ////                                            select new {
-        ////                                              NombrePrograma = info.NombrePrograma.Trim(),
-        ////                                              CodPrograma = info.CodigoPrograma.Value
-        ////                                        ***REMOVED***).Distinct().ToList();
-        var programaProyectosHaciendaSustantivos = (from info in _connection.PresupuestoVigenteXSectorMinHaciendas
-                                                     where info.PresupuestoVigente.HasValue && info.AnioPresupuesto == anio && info.CodNivelEntidad.ToUpper().Trim() == codEntidad.ToUpper().Trim() && info.ClasePrograma.ToUpper().Trim() == clasePrograma.ToUpper() && info.CodigoPrograma.HasValue
-                                                     group info by new {
-                                                       info.NombrePrograma,
-                                                       CodPrograma=info.CodigoPrograma.Value,
-                                                       Problematica= info.Problematica,
-                                                       ResultadoIntermedio= info.ResultadoIntermedio
-                                                 ***REMOVED*** into proyecto
-                                                    select new {
-                                                      NombrePrograma = proyecto.Key.NombrePrograma,
-                                                      CodPrograma = proyecto.Key.CodPrograma,
-                                                      PresupuestoAsignado= proyecto.Sum(x=>x.PresupuestoVigente??0),
-                                                      Problematica= proyecto.Key.Problematica,
-                                                      ResultadoIntermedio = proyecto.Key.ResultadoIntermedio
-                                                ***REMOVED***).ToList();
+                      ***REMOVED***);
 
 
-        foreach (var programa in programaProyectosHaciendaSustantivos) {
-          //var presupuestoAsignado = _connection.PresupuestoVigenteXSectorMinHaciendas.Where(x => x.NombrePrograma.Trim() == programa.NombrePrograma && x.CodNivelEntidad.ToUpper() == codEntidad.ToUpper().Trim() && x.AnioPresupuesto == anio).Sum(x => x.PresupuestoVigente);
-          //var problematicaPrograma = _connection.PresupuestoVigenteXSectorMinHaciendas.Where(x => x.NombrePrograma.Trim() == programa.NombrePrograma).Select(x => x.Problematica.Trim()).Distinct().FirstOrDefault();
-          //var resultadoIntemedio = _connection.PresupuestoVigenteXSectorMinHaciendas.Where(x => x.NombrePrograma.Trim() == programa.NombrePrograma).Select(x => x.ResultadoIntermedio.Trim()).Distinct().FirstOrDefault();
-          //var resultadoInmediato = _connection.PresupuestoVigenteXSectorMinHaciendas.Where(x => x.NombrePrograma.Trim() == programa.NombrePrograma).Select(x => x.ResultadoInmediato.Trim()).Distinct().FirstOrDefault();
-          //ProyectosProgramas nuevoProgramaProyecto = new ProyectosProgramas { NombrePrograma = programa.NombrePrograma == null ? string.Empty : ConvertirTextoMayusculaMinuscula(programa.NombrePrograma), PresupuestoAsignado = presupuestoAsignado.HasValue ? Math.Round(presupuestoAsignado.Value / 1000000, 0) : 0, Problematica = problematicaPrograma == null ? string.Empty : ConvertirTextoMayusculaMinuscula(problematicaPrograma), ResultadoInmediato = resultadoInmediato == null ? string.Empty : ConvertirTextoMayusculaMinuscula(resultadoInmediato), ResultadoIntermedio = resultadoIntemedio == null ? string.Empty : ConvertirTextoMayusculaMinuscula(resultadoIntemedio), Proyectos = new List<ProyectosPerfilEntidad>() ***REMOVED***;
-          ProyectosProgramas nuevoProgramaProyecto = new ProyectosProgramas { NombrePrograma = programa.NombrePrograma == null ? string.Empty : ConvertirTextoMayusculaMinuscula(programa.NombrePrograma), PresupuestoAsignado =  Math.Round(programa.PresupuestoAsignado / 1000000, 0), Problematica = programa.Problematica == null ? string.Empty : ConvertirTextoMayusculaMinuscula(programa.Problematica), ResultadoInmediato = string.Empty, ResultadoIntermedio = programa.ResultadoIntermedio == null ? string.Empty : ConvertirTextoMayusculaMinuscula(programa.ResultadoIntermedio), Proyectos = new List<ProyectosPerfilEntidad>() ***REMOVED***;
-          //var proyectosHaciendaSustantivos = (from info in _connection.PresupuestoVigenteXSectorMinHaciendas
-          //                                    where info.CodigoPrograma.HasValue && info.CodigoPrograma.Value == programa.CodPrograma && info.AnioPresupuesto == anio && info.CodNivelEntidad.ToUpper().Trim() == codEntidad.ToUpper().Trim() && info.ClasePrograma.ToUpper().Trim() == "SUSTANTIVO"
-          //                                    select new {
-          //                                      info.IdNegocioProyecto,
-          //                                      info.NombreProyectoActividad,
-          //                                      info.ResultadoInmediato,
-          //                                      info.PryClasificacion,
-          //                                      PresupuestoVigente = info.PresupuestoVigente ?? 0,
-          //                                      PresupuestoAvance = info.PresupuestoAvance ?? 0,
-          //                                ***REMOVED***).Distinct().ToList();
+            var query3 = (from presupuesto in query1
+                          from contratos in query2.Where(j => j.periodo == presupuesto.periodo)
+                             .Where(j => j.codInstitucion == presupuesto.codInstitucion)
+                             .Where(j => j.codPrograma == presupuesto.codPrograma)
+                             .Where(j => j.codActividad == presupuesto.codActividad)
+                             .Where(j => j.codObjeto == presupuesto.codObjeto)
+                          from detalle in _connection.VwContratosDetalles
+                          .Where(j => j.CodigoProceso == contratos.ocid)
+                          select new
+                          {
+                            codActividad=presupuesto.codActividad,
+                            nomActividad="act|" + presupuesto.nomActividad,
+                            codProceso=contratos.ocid,
+                            descProceso="proc|" + detalle.DescripcionProceso,
+                            estadoProceso=detalle.EstadoProceso,
+                            codContrato="contr|" + detalle.CodigoContrato,
+                            AportePresupuesto = detalle.ValorAdjudicado.Value
 
-          //var proyectosHaciendaSustantivoAgrupPorPresupuesto = (from proyectoHaciendaNoAsignable in proyectosHaciendaSustantivos
-          //                                                      group proyectoHaciendaNoAsignable by new {
-          //                                                        proyectoHaciendaNoAsignable.IdNegocioProyecto,
-          //                                                        proyectoHaciendaNoAsignable.NombreProyectoActividad,
-          //                                                        proyectoHaciendaNoAsignable.PryClasificacion,
-          //                                                        proyectoHaciendaNoAsignable.ResultadoInmediato
-          //                                                  ***REMOVED*** into proyecto
-          //                                                      select new {
-          //                                                        proyecto.Key.IdNegocioProyecto,
-          //                                                        proyecto.Key.NombreProyectoActividad,
-          //                                                        proyecto.Key.PryClasificacion,
-          //                                                        proyecto.Key.ResultadoInmediato,
-          //                                                        PresupAvance = proyecto.Sum(x => x.PresupuestoAvance),
-          //                                                        PresupVigente = proyecto.Sum(x => x.PresupuestoVigente)
-          //                                                  ***REMOVED***).Distinct().ToList();
+                      ***REMOVED***
+                          ).Distinct().OrderBy(x => x.nomActividad).
+                                    ThenBy(x => x.codProceso).
+                                    ThenBy(x => x.codContrato).ToList();
 
-          var proyectosHaciendaSustantivoAgrupPorPresupuesto = (from info in _connection.PresupuestoVigenteXSectorMinHaciendas
-                                                      where info.PresupuestoAvance.HasValue && info.CodigoPrograma.HasValue && info.CodigoPrograma.Value == programa.CodPrograma && info.AnioPresupuesto == anio && info.CodNivelEntidad.ToUpper().Trim() == codEntidad.ToUpper().Trim() && info.ClasePrograma.ToUpper().Trim() == "SUSTANTIVO"
-                                                      group info by new {
-                                                        info.IdNegocioProyecto,
-                                                        info.NombreProyectoActividad,
-                                                        info.PryClasificacion,
-                                                        info.ResultadoInmediato
-                                                  ***REMOVED*** into proyecto
-                                                      select new {
-                                                        proyecto.Key.IdNegocioProyecto,
-                                                        proyecto.Key.NombreProyectoActividad,
-                                                        proyecto.Key.ResultadoInmediato,
-                                                        proyecto.Key.PryClasificacion,
-                                                        PresupVigente = proyecto.Sum(x=>x.PresupuestoVigente??0),
-                                                        PresupAvance = proyecto.Sum(x=>x.PresupuestoAvance ?? 0),
-                                                  ***REMOVED***).ToList();
 
-          foreach (var proyectoHaciendaSustantivo in proyectosHaciendaSustantivoAgrupPorPresupuesto) {
-            var indicadoresProyectoActividad = (from info in _connection.PresupuestoIndicadoresMinHaciendas
-                                                where info.AnioPresupuesto.HasValue && info.IdNegocioProyecto == proyectoHaciendaSustantivo.IdNegocioProyecto && info.AnioPresupuesto.Value == anio
-                                                select new {
-                                                  CodigoIndicador = info.CodigoIndicador ?? 0,
-                                                  info.NombreIndicador,
-                                                  info.DescripcionIndicador,
-                                                  info.UnMedidaAnioBase,
-                                                  info.UnidadMedidaTotal,
-                                                  Fuente = info.IndFuente,
-                                                  MetodoCalculo = info.IndMetcalculo,
-                                                  Numerador = info.IndNumerador ?? 0,
-                                                  Denominador = info.IndDenominador ?? 0,
-                                                  ind_frecuen = info.IndFrecuen,
-                                                  tipoIndicador = info.IndSupuestos,
-                                                  nivel = info.IndFuente,
-                                                  DescripcionPoblTotal = info.DescripcionPoblTotal,
-                                                  indAnioBase = info.IndAniobase
-                                            ***REMOVED***
-                                                ).Distinct().ToList();
-            ProyectosPerfilEntidad nuevoProyecto = new ProyectosPerfilEntidad() { Indicadores = new List<IndicadorProyecto>() ***REMOVED***;
-            nuevoProyecto.NombreProyectoActividad = proyectoHaciendaSustantivo.NombreProyectoActividad == null ? string.Empty : ConvertirTextoMayusculaMinuscula(proyectoHaciendaSustantivo.NombreProyectoActividad);
-            nuevoProyecto.PresupuestoAvance = Math.Round(proyectoHaciendaSustantivo.PresupAvance / 1000000, 0);
-            nuevoProyecto.PresupuestoVigente = Math.Round(proyectoHaciendaSustantivo.PresupVigente / 1000000, 0);
-            nuevoProyecto.Descripcion = proyectoHaciendaSustantivo.ResultadoInmediato == null ? string.Empty : ConvertirTextoMayusculaMinuscula(proyectoHaciendaSustantivo.ResultadoInmediato);
-            nuevoProyecto.Clasificacion = proyectoHaciendaSustantivo.PryClasificacion;
-            foreach (var indicadorProyectoActividad in indicadoresProyectoActividad) {
-              var avance = indicadorProyectoActividad.Denominador == 0 ? 0 : Math.Round(indicadorProyectoActividad.Numerador * 100 / indicadorProyectoActividad.Denominador, 2);
-              nuevoProyecto.Indicadores.Add(new IndicadorProyecto {
-                Avance = avance,
-                Codigo = indicadorProyectoActividad.CodigoIndicador,
-                Descripcion = indicadorProyectoActividad.DescripcionIndicador == null ? string.Empty : ConvertirTextoMayusculaMinuscula(indicadorProyectoActividad.DescripcionIndicador),
-                Nombre = indicadorProyectoActividad.NombreIndicador == null ? string.Empty : ConvertirTextoMayusculaMinuscula(indicadorProyectoActividad.NombreIndicador),
-                UnidadMedidaAnioBase = indicadorProyectoActividad.UnMedidaAnioBase == null ? string.Empty : indicadorProyectoActividad.UnMedidaAnioBase,
-                UnidadMedidaTotal = indicadorProyectoActividad.UnidadMedidaTotal == null ? string.Empty : indicadorProyectoActividad.UnidadMedidaTotal,
-                Formula = indicadorProyectoActividad.MetodoCalculo == null ? string.Empty : ConvertirTextoMayusculaMinuscula(indicadorProyectoActividad.MetodoCalculo),
-                Fuente = indicadorProyectoActividad.Fuente == null ? string.Empty : ConvertirTextoMayusculaMinuscula(indicadorProyectoActividad.Fuente),
-                ind_frecuen = indicadorProyectoActividad.ind_frecuen,
-                tipoIndicador = indicadorProyectoActividad.tipoIndicador,
-                nivel = indicadorProyectoActividad.nivel,
-                DescripcionPoblTotal = indicadorProyectoActividad.DescripcionPoblTotal,
-                indAnioBase = indicadorProyectoActividad.indAnioBase
-          ***REMOVED***);
+            infograficoActividad objActividad = null;
+            infograficoProcesos objProcesos = null;
+            infograficoContratos objContratos = null;
+
+            foreach (var fila in query3)
+            {
+                objActividad = objReturn.Find(p => p.Id == fila.codActividad.ToString());
+                if (objActividad == null)
+                {
+                    objActividad = new infograficoActividad();
+                    objActividad.Id = fila.codActividad.ToString();
+                    objActividad.Nombre = fila.nomActividad;
+                    objActividad.presupuesto = fila.AportePresupuesto;
+                    //objActividad.avance = fila.Avance;
+
+                    objProcesos = objActividad.Detalles.Find(p => p.Id == fila.codActividad.ToString());
+                    if (objProcesos == null)
+                    {
+                        objProcesos = new infograficoProcesos();
+                        objProcesos.Id = fila.codProceso.ToString();
+                        objProcesos.Nombre = fila.descProceso;
+                        objProcesos.presupuesto = fila.AportePresupuesto;
+                        objProcesos.Estado = fila.estadoProceso;
+                        //objProcesos.avance = fila.Avance;
+
+                        objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato.ToString());
+                        if (objContratos == null)
+                        {
+                            objContratos = new infograficoContratos();
+                            objContratos.Id = fila.codContrato.ToString();
+                            objContratos.Nombre = fila.codContrato;
+                            objContratos.presupuesto = fila.AportePresupuesto;
+                            //objContratos.avance = fila.Avance;
+
+                            objProcesos.Detalles.Add(objContratos);
+
+                    ***REMOVED***
+                        else
+                        {
+                            objContratos.presupuesto += fila.AportePresupuesto;
+                            //objContratos.avance += fila.Avance;
+
+                    ***REMOVED***
+
+                        objActividad.Detalles.Add(objProcesos);
+                ***REMOVED***
+                    else
+                    {
+                        objProcesos.presupuesto += fila.AportePresupuesto;
+                        //objProcesos.avance += fila.Avance;
+
+                        objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato.ToString());
+                        if (objContratos == null)
+                        {
+                            objContratos = new infograficoContratos();
+                            objContratos.Id = fila.codContrato;
+                            objContratos.Nombre = fila.codContrato;
+                            objContratos.presupuesto = fila.AportePresupuesto;
+                            //objContratos.avance = fila.Avance;
+                                    
+                            objProcesos.Detalles.Add(objContratos);
+
+                    ***REMOVED***
+                        else
+                        {
+                            objContratos.presupuesto += fila.AportePresupuesto;
+                            //objContratos.avance += fila.Avance;
+                    ***REMOVED***
+
+                ***REMOVED***
+
+                    objReturn.Add(objActividad);
+            ***REMOVED***
+                else
+                {
+                    objActividad.presupuesto += fila.AportePresupuesto;
+                    objProcesos = objActividad.Detalles.Find(p => p.Id == fila.codProceso.ToString());
+                    if (objProcesos == null)
+                    {
+                        objProcesos = new infograficoProcesos();
+                        objProcesos.Id = fila.codProceso.ToString();
+                        objProcesos.Nombre = fila.descProceso;
+                        objProcesos.presupuesto = fila.AportePresupuesto;
+                        objProcesos.Estado = fila.estadoProceso;
+                        //objProcesos.avance = fila.Avance;
+
+                        objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato.ToString());
+                        if (objContratos == null)
+                        {
+                            objContratos = new infograficoContratos();
+                            objContratos.Id = fila.codContrato;
+                            objContratos.Nombre = fila.codContrato;
+                            objContratos.presupuesto = fila.AportePresupuesto;
+                            //objContratos.avance = fila.Avance;
+
+                            objProcesos.Detalles.Add(objContratos);
+
+                    ***REMOVED***
+                        else
+                        {
+                            objContratos.presupuesto += fila.AportePresupuesto;
+                            //objContratos.avance += fila.Avance;
+
+                    ***REMOVED***
+
+                        objActividad.Detalles.Add(objProcesos);
+                ***REMOVED***
+                    else
+                    {
+                        objProcesos.presupuesto += fila.AportePresupuesto;
+                        objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato);
+                        if (objContratos == null)
+                        {
+                            objContratos = new infograficoContratos();
+                            objContratos.Id = fila.codContrato.ToString();
+                            objContratos.Nombre = fila.codContrato;
+                            objContratos.presupuesto = fila.AportePresupuesto;
+                            //objContratos.avance = fila.Avance;
+
+                            objProcesos.Detalles.Add(objContratos);
+
+                    ***REMOVED***
+                        else
+                        {
+                            objContratos.presupuesto += fila.AportePresupuesto;
+                            //objContratos.avance += fila.Avance;
+                    ***REMOVED***
+
+                ***REMOVED***
+
+
+            ***REMOVED***
         ***REMOVED***
-            nuevoProgramaProyecto.Proyectos.Add(nuevoProyecto);
 
-      ***REMOVED***
-          objReturn.Add(nuevoProgramaProyecto);
+            ///ordena primer nivel actividad
+            var result = objReturn.OrderByDescending(x => x.presupuesto).ToList();
+            foreach (var item in result)
+            {
+                //ordena nivel proceso
+                item.Detalles = item.Detalles.OrderByDescending(x => x.presupuesto).ToList();
+                foreach (var item_actividad in item.Detalles)
+                {
+                    //ordena nivel cont
+                    item_actividad.Detalles = item_actividad.Detalles.OrderByDescending(x => x.presupuesto).ToList();
+            ***REMOVED***
+        ***REMOVED***
+            return result;
+
+
+
     ***REMOVED***
-        #endregion Genero los datos de la primera pestaña del perfil
-  ***REMOVED***
-      catch (Exception ex) {
 
-  ***REMOVED***
 
-      return objReturn;
+        public infograficoEntidad GetGastoByPrograma(int annio, int codEntidad, int codPrograma,string estado, string proceso)
+        {
+            String estado_aux = null;
+            String proceso_aux = null;
+            if (proceso != null && proceso.Trim() != "") { proceso_aux = proceso; ***REMOVED***
+            if (estado != null && estado.Trim() != "") { estado_aux = estado; ***REMOVED***
+
+
+            infograficoEntidad objReturn = new infograficoEntidad();
+
+            var query1 = (from pre in _connection.VwPresupuesto
+                          where (pre.Periodo == annio && pre.CodigoInstitucion== codEntidad && pre.CodigoPrograma == codPrograma)
+                          group pre by new { pre.Periodo, pre.CodigoInstitucion, pre.CodigoPrograma, pre.CodigoSubPrograma,pre.CodigoActividadObra, pre.CodigoGrupoDeGasto, pre.GrupoDeGasto, pre.CodigoObjetoDeGasto ***REMOVED*** into g
+                          select new
+                          {
+                              periodo = g.Key.Periodo,
+                              codInstitucion = g.Key.CodigoInstitucion.Value,
+                              codPrograma = g.Key.CodigoPrograma,
+                              codSubprograma = g.Key.CodigoSubPrograma,
+                              codGrupoGasto = g.Key.CodigoGrupoDeGasto,
+                              nomGrupoGasto = g.Key.GrupoDeGasto,
+                              codActividad= g.Key.CodigoActividadObra,
+                              codObjeto = g.Key.CodigoObjetoDeGasto,
+                              vigente = (decimal)g.Sum(t => t.Vigente),
+                              ejecutado=(decimal)g.Sum(t=>t.EjecucionDelMes)
+                      ***REMOVED***);
+            
+           
+
+            var query2 = (from x in _connection.VWContratosXPresupuestoes
+                          where (x.Periodo == annio && x.CodigoInstitucion == codEntidad && x.CodigoPrograma == codPrograma)
+                          group x by new { x.Periodo, x.CodigoInstitucion, x.CodigoPrograma, x.CodigoSubPrograma, x.CodigoActividadObra,x.CodigoObjetoDeGasto, x.Ocid, x.IdBudget ***REMOVED*** into g
+                          select new
+                          {
+                              periodo = g.Key.Periodo,
+                              codInstitucion = g.Key.CodigoInstitucion.Value,
+                              codPrograma = g.Key.CodigoPrograma,
+                              codSubprograma = g.Key.CodigoSubPrograma,
+                              codActividad = g.Key.CodigoActividadObra,
+                              codObjeto = g.Key.CodigoObjetoDeGasto,
+                              ocid = g.Key.Ocid,
+                              contrato = g.Key.IdBudget
+
+                      ***REMOVED***);
+
+            var query3 = (from presupuesto in query1
+                          from contratos in query2.Where(j => j.periodo == presupuesto.periodo)
+                             .Where(j => j.codInstitucion == presupuesto.codInstitucion)
+                             .Where(j => j.codPrograma == presupuesto.codPrograma)
+                             .Where(j => j.codActividad == presupuesto.codActividad)
+                             .Where(j => j.codObjeto == presupuesto.codObjeto)
+                          from detalle in _connection.VwContratosDetalles
+                          //where (detalle.EstadoProceso.Contains(estado_aux) || estado_aux == null)
+                          .Where(j => j.CodigoProceso == contratos.ocid)
+                          .Where(j=>j.DescripcionProceso.Contains(proceso_aux) || proceso_aux == null)
+                          .Where(j => j.EstadoProceso.Contains(estado_aux) || estado_aux == null)
+                          .Where (j=>j.OrigenInformacion.ToUpper().Contains("SEFIN"))
+                          select new
+                          {
+                              codGrupoGasto = presupuesto.codGrupoGasto,
+                              nomGrupoGasto = "grp|" + presupuesto.nomGrupoGasto,
+                              codProceso = contratos.ocid,
+                              descProceso = "proc|" + detalle.DescripcionProceso,
+                              estadoProceso = detalle.EstadoProceso,
+                              codContrato = "contr|" + detalle.CodigoContrato,
+                              AportePresupuesto = detalle.ValorAdjudicado.Value,
+                              MonedaContrato=detalle.MonedaContrato,
+                              UrlProceso=detalle.DocURL,
+                              ValorPlaneado=detalle.ValorPlaneado,
+                              ValorAdjudicado=detalle.ValorAdjudicado,
+                              ValorContratado=detalle.ValorContratado,
+                              Contratista=detalle.Contratista, 
+                              CodigoProveedor=detalle.CodigoProveedor
+                      ***REMOVED***
+                          ).Distinct().OrderBy(x => x.nomGrupoGasto).
+                                    ThenBy(x => x.codProceso).
+                                    ThenBy(x => x.codContrato).ToList();
+
+
+            var queryInfo = (from info in query1
+                             group info by new { info.codGrupoGasto, info.nomGrupoGasto ***REMOVED*** into g
+                             select new
+                          {
+                              codGrupoGasto = g.Key.codGrupoGasto,
+                              nomGrupoGasto = "grp|" + g.Key.nomGrupoGasto,
+                              vigente= (decimal)g.Sum(t => t.vigente),
+                              ejecutado= (decimal)g.Sum(t => t.ejecutado)
+                         ***REMOVED***
+                          ).Distinct().OrderBy(x => x.nomGrupoGasto).ToList();
+
+
+            List<string> estados = query3.Select(e => e.estadoProceso).Distinct().ToList();
+                infograficoGrupoGasto objGrupo = null;
+                infograficoProcesos objProcesos = null;
+                infograficoContratos objContratos = null;
+
+            foreach (var fila in queryInfo) {
+                objGrupo = objReturn.infoGasto.Find(p => p.Id == fila.codGrupoGasto.ToString());
+                    if (objGrupo == null)
+                    {
+                        objGrupo = new infograficoGrupoGasto();
+                        objGrupo.Id = fila.codGrupoGasto.ToString();
+                        objGrupo.Nombre = fila.nomGrupoGasto;
+                        objGrupo.presupuesto = (double)fila.vigente;
+                        objGrupo.ejecutado= (double)fila.ejecutado;
+
+
+                    objReturn.infoGasto.Add(objGrupo);
+                ***REMOVED***
+                    else {
+                        objGrupo.presupuesto += (double)fila.vigente;
+                        objGrupo.ejecutado += (double)fila.ejecutado;
+                ***REMOVED***
+
+            ***REMOVED***
+
+                foreach (var fila in query3)
+                {
+                    
+                    objGrupo = objReturn.infoGasto.Find(p => p.Id == fila.codGrupoGasto.ToString());
+                    if (objGrupo == null)
+                    {
+                        objGrupo = new infograficoGrupoGasto();
+                        objGrupo.Id = fila.codGrupoGasto.ToString();
+                        objGrupo.Nombre = fila.nomGrupoGasto;
+                        //objGrupo.presupuesto = fila.AportePresupuesto;
+                        //objGrupo.avance = fila.Avance;
+
+
+
+                    objProcesos = objGrupo.Detalles.Find(p => p.Id == fila.codGrupoGasto.ToString());
+                        if (objProcesos == null)
+                        {
+                            objProcesos = new infograficoProcesos();
+                            objProcesos.Id = fila.codProceso.ToString();
+                            objProcesos.Nombre = fila.descProceso;
+                            objProcesos.presupuesto = fila.AportePresupuesto;
+                            objProcesos.Estado = fila.estadoProceso;
+                            objProcesos.UrlProceso = fila.UrlProceso;
+                            //objProcesos.avance = fila.Avance;
+
+                            objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato.ToString());
+                            if (objContratos == null)
+                            {
+                                objContratos = new infograficoContratos();
+                                objContratos.Id = fila.codContrato.ToString();
+                                objContratos.Nombre = fila.codContrato;
+                                objContratos.moneda = fila.MonedaContrato;
+                                objContratos.contratista = fila.Contratista;
+                                objContratos.proveedor = fila.CodigoProveedor;
+                                objContratos.presupuesto = fila.AportePresupuesto;
+                                objContratos.valor_planeado = fila.ValorPlaneado.Value;
+                                objContratos.valor_adjudicado = fila.ValorAdjudicado.Value;
+                                objContratos.valor_contratado = fila.ValorContratado.Value;
+                                //objContratos.avance = fila.Avance;
+
+                                objProcesos.Detalles.Add(objContratos);
+
+                        ***REMOVED***
+                            else
+                            {
+                                objContratos.presupuesto += fila.AportePresupuesto;
+                                objContratos.valor_planeado += fila.ValorPlaneado.Value;
+                                objContratos.valor_adjudicado += fila.ValorAdjudicado.Value;
+                                objContratos.valor_contratado += fila.ValorContratado.Value;
+                                //objContratos.avance += fila.Avance;
+
+                        ***REMOVED***
+
+                            objGrupo.Detalles.Add(objProcesos);
+                    ***REMOVED***
+                        else
+                        {
+                            objProcesos.presupuesto += fila.AportePresupuesto;
+                            //objProcesos.avance += fila.Avance;
+
+                            objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato.ToString());
+                            if (objContratos == null)
+                            {
+                                objContratos = new infograficoContratos();
+                                objContratos.Id = fila.codContrato.ToString();
+                                objContratos.Nombre = fila.codContrato;
+                                objContratos.moneda = fila.MonedaContrato;
+                                objContratos.contratista = fila.Contratista;
+                                objContratos.proveedor = fila.CodigoProveedor;
+                                objContratos.presupuesto = fila.AportePresupuesto;
+                                objContratos.valor_planeado = fila.ValorPlaneado.Value;
+                                objContratos.valor_adjudicado = fila.ValorAdjudicado.Value;
+                                objContratos.valor_contratado = fila.ValorContratado.Value;
+                                //objContratos.avance = fila.Avance;
+
+                                objProcesos.Detalles.Add(objContratos);
+
+                        ***REMOVED***
+                            else
+                            {
+                                objContratos.presupuesto += fila.AportePresupuesto;
+                                objContratos.valor_planeado += fila.ValorPlaneado.Value;
+                                objContratos.valor_adjudicado += fila.ValorAdjudicado.Value;
+                                objContratos.valor_contratado += fila.ValorContratado.Value;
+                                //objContratos.avance += fila.Avance;
+                        ***REMOVED***
+
+                    ***REMOVED***
+
+                        objReturn.infoGasto.Add(objGrupo);
+                ***REMOVED***
+                    else
+                    {
+                        //objGrupo.presupuesto += fila.AportePresupuesto;
+                        objProcesos = objGrupo.Detalles.Find(p => p.Id == fila.codProceso.ToString());
+                        if (objProcesos == null)
+                        {
+                            objProcesos = new infograficoProcesos();
+                            objProcesos.Id = fila.codProceso.ToString();
+                            objProcesos.Nombre = fila.descProceso;
+                            //objProcesos.presupuesto = fila.AportePresupuesto;
+                            objProcesos.Estado = fila.estadoProceso;
+                            objProcesos.UrlProceso = fila.UrlProceso;
+                            //objProcesos.avance = fila.Avance;
+
+                            objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato.ToString());
+                            if (objContratos == null)
+                            {
+                                objContratos = new infograficoContratos();
+                                objContratos.Id = fila.codContrato.ToString();
+                                objContratos.Nombre = fila.codContrato;
+                                objContratos.moneda = fila.MonedaContrato;
+                                objContratos.contratista = fila.Contratista;
+                                objContratos.proveedor = fila.CodigoProveedor;
+                                objContratos.presupuesto = fila.AportePresupuesto;
+                                objContratos.valor_planeado = fila.ValorPlaneado.Value;
+                                objContratos.valor_adjudicado = fila.ValorAdjudicado.Value;
+                                objContratos.valor_contratado = fila.ValorContratado.Value;
+                                //objContratos.avance = fila.Avance;
+
+                                objProcesos.Detalles.Add(objContratos);
+
+                        ***REMOVED***
+                            else
+                            {
+                                objContratos.presupuesto += fila.AportePresupuesto;
+                                objContratos.valor_planeado += fila.ValorPlaneado.Value;
+                                objContratos.valor_adjudicado += fila.ValorAdjudicado.Value;
+                                objContratos.valor_contratado += fila.ValorContratado.Value;
+                                //objContratos.avance += fila.Avance;
+
+                        ***REMOVED***
+
+                            objGrupo.Detalles.Add(objProcesos);
+                    ***REMOVED***
+                        else
+                        {
+                            objProcesos.presupuesto += fila.AportePresupuesto;
+                            objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato);
+                            if (objContratos == null)
+                            {
+                                objContratos = new infograficoContratos();
+                                objContratos.Id = fila.codContrato.ToString();
+                                objContratos.Nombre = fila.codContrato;
+                                objContratos.moneda = fila.MonedaContrato;
+                                objContratos.contratista = fila.Contratista;
+                                objContratos.proveedor = fila.CodigoProveedor;
+                                objContratos.presupuesto = fila.AportePresupuesto;
+                                objContratos.valor_planeado = fila.ValorPlaneado.Value;
+                                objContratos.valor_adjudicado = fila.ValorAdjudicado.Value;
+                                objContratos.valor_contratado = fila.ValorContratado.Value;
+                                //objContratos.avance = fila.Avance;
+
+                                objProcesos.Detalles.Add(objContratos);
+
+                        ***REMOVED***
+                            else
+                            {
+                                objContratos.presupuesto += fila.AportePresupuesto;
+                                objContratos.valor_planeado += fila.ValorPlaneado.Value;
+                                objContratos.valor_adjudicado += fila.ValorAdjudicado.Value;
+                                objContratos.valor_contratado += fila.ValorContratado.Value;
+                                //objContratos.avance += fila.Avance;
+                        ***REMOVED***
+
+                    ***REMOVED***
+
+
+                ***REMOVED***
+            ***REMOVED***
+
+                ///ordena primer nivel actividad
+                var result = objReturn.infoGasto.OrderByDescending(x => x.presupuesto).ToList();
+                foreach (var item in result)
+                {
+                    //ordena nivel proceso
+                    item.Detalles = item.Detalles.OrderByDescending(x => x.presupuesto).ToList();
+                    foreach (var item_actividad in item.Detalles)
+                    {
+                        //ordena nivel cont
+                        item_actividad.Detalles = item_actividad.Detalles.OrderByDescending(x => x.presupuesto).ToList();
+                ***REMOVED***
+            ***REMOVED***
+
+                objReturn.infoGasto = result;
+                objReturn.programa.estados = estados;
+                objReturn.programa.Id = codPrograma;
+           
+
+            return objReturn;
+
+    ***REMOVED***
+
+        public List<InfoConsolidadoPresupuesto> ObtenerRecursosPerGrupos(int annio,int codEntidad)
+        {
+
+            List<InfoConsolidadoPresupuesto> objReturn = new List<InfoConsolidadoPresupuesto>();
+            var RecursosPerObjetoQuery = (from info in _connection.VwPresupuesto
+                                          where info.Periodo == annio && info.CodigoInstitucion==codEntidad
+                                          group info by new { info.GrupoDeGasto, info.ObjetoDeGasto ***REMOVED*** into g
+
+                                          select new InfoConsolidadoPresupuesto
+                                          {
+                                              labelGroup = g.Key.GrupoDeGasto,
+                                              label = g.Key.ObjetoDeGasto,
+                                              rawValueDouble = g.Sum(g => g.Vigente.Value),
+                                      ***REMOVED***).ToList();
+
+            objReturn = RecursosPerObjetoQuery;
+
+
+            return objReturn;
+
+    ***REMOVED***
+
+
 ***REMOVED***
-
-    public List<TableIndicadorGraphics> GetGraficaIndicadores(int codigoIndicador, int anio, string codEntidad)
-    {
-      //Año:[AnioPresupuesto]
-      //Meta Numerador: IND_METCALCULO
-      //Denominador: IND_DENOMINADOR
-      //Avance Numerador: IND_NUMERADOR
-      //% Meta del ID: IND_PORCMETA
-      //% Avance del ID:IND_PAVANCEUNITARIO
-
-      var data = (from info in _connection.PresupuestoIndicadoresMinHaciendas
-                  where info.IndNumerador.HasValue
-                  && info.IndDenominador.HasValue
-                  && info.CodigoIndicador.HasValue
-                  && info.AnioPresupuesto.HasValue
-                  && info.CodNivelEntidad == codEntidad
-                  && info.CodigoIndicador.Value == codigoIndicador
-                  && info.AnioPresupuesto.Value <= anio
-
-                  select new TableIndicadorGraphics {
-                    anio = info.AnioPresupuesto.Value,
-                    meta_numerador = info.IndMetcalculo,
-                    denominador = info.IndDenominador,
-                    avance_numerador = info.IndNumerador,
-                    porc_meta = info.IndPorcmeta,
-                    porc_avance = info.IndPavanceunitario
-              ***REMOVED***
-      ).Distinct().OrderBy(x => x.anio).ToList();
-
-      return data;
-***REMOVED***
-
-
-  ***REMOVED***
 ***REMOVED***

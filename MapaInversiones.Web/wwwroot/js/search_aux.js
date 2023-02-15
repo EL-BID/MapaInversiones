@@ -1,33 +1,33 @@
 ﻿$( function() {
  
-  $("#SearchString").autocomplete({
-      source: function (request, response) {
+  //$("#SearchString").autocomplete({
+  //    source: function (request, response) {
           
-          $.ajax({
-              type: 'GET',
-              contentType: "application/json; charset=utf-8",
-              dataType: "json",
-              url: "AutocompleteSearch/" + request.term,
-                cache: false,
-                /*ta: '{"keywords":"' + request.term + '"***REMOVED***',*/
-                success: function (data) {
-                    var datos = data;
-                        response($.map(datos, function (item) {
-                            return item.principal;
-                    ***REMOVED***
-                      ));
-              ***REMOVED***
-              error: function (response) {
-                  alert(response.responseText);
-             ***REMOVED***
-                failure: function (response) {
-                  alert(response.responseText);
-          ***REMOVED***
-        ***REMOVED***);
-      ***REMOVED***
-        delay: 300,
-        minLength: 5
-  ***REMOVED***);
+  //        $.ajax({
+  //            type: 'GET',
+  //            contentType: "application/json; charset=utf-8",
+  //            dataType: "json",
+  //            url: "AutocompleteSearch/" + request.term,
+  //              cache: false,
+  //              /*ta: '{"keywords":"' + request.term + '"***REMOVED***',*/
+  //              success: function (data) {
+  //                  var datos = data;
+  //                      response($.map(datos, function (item) {
+  //                          return item.principal;
+  //                  ***REMOVED***
+  //                    ));
+  //            ***REMOVED***
+  //            error: function (response) {
+  //                alert(response.responseText);
+  //           ***REMOVED***
+  //              failure: function (response) {
+  //                alert(response.responseText);
+  //        ***REMOVED***
+  //      ***REMOVED***);
+  //    ***REMOVED***
+  //      delay: 300,
+  //      minLength: 5
+  //***REMOVED***);
 
     //$('#HierarchySearch').click(function () {
     //    var val_sel = $(this).attr("data-title");
@@ -229,8 +229,8 @@ function getListResult(pagina, repaginar=false ) {
                             "<div class='card-body'>" +
                             "<a href='" + data[i].url + "' class='h5' title='" + data[i].nombreProyecto + "'>" + data[i].nombreProyecto + "</a>" +
                             "<div class='card-posted-in card-wide-item'>" +
-                            "<a href='' class='card-category' title='" + data[i].sector + "'>" + data[i].sector + "</a>" +
-                            "<a href='' class='card-category' title='" + data[i].type + "'> - " + data[i].type + "</a>" +
+                            "<span class='card-category' title='" + data[i].sector + "'>" + data[i].sector + "</span>" +
+                            "<span class='card-category' title='" + data[i].type + "'> - " + data[i].type + "</span>" +
                             "</div>" +
                             "</div>" +
                             "</div>"

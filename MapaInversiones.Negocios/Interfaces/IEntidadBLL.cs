@@ -9,12 +9,14 @@ namespace PlataformaTransparencia.Negocios.Entidad
 {
     public interface IEntidadBLL
     {
-        public List<infograficoEje> GetGraficaSankey(string codEntidad);
+        
+        public List<infograficoPrograma> GetProgramasByEntidad(int annio, int codEntidad);
 
-        public List<ProyectosPerfilEntidad> GetActividadesClasePrograma(string clasePrograma, int anio, string codEntidad);
-        public List<ProyectosProgramas> GetActividadesProgramaSustantivo(string clasePrograma, int anio, string codEntidad);
+        public List<infograficoActividad> GetActividadByPrograma(int annio, string codEntidad, int codPrograma);
 
-        List<TableIndicadorGraphics> GetGraficaIndicadores(int codigoIndicador, int anio, string codEntidad);
+        public infograficoEntidad GetGastoByPrograma(int annio, int codEntidad, int codPrograma, string estado, string proceso);
+
+        public List<InfoConsolidadoPresupuesto> ObtenerRecursosPerGrupos(int annio, int codEntidad);
 
 ***REMOVED***
 ***REMOVED***

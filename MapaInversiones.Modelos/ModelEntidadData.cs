@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using PlataformaTransparencia.Modelos.Contratos;
 using PlataformaTransparencia.Modelos.Entidad;
 using PlataformaTransparencia.Modelos.Plan;
 
@@ -12,14 +13,25 @@ namespace PlataformaTransparencia.Modelos
     public string Vision { get; set; ***REMOVED***
     public string NombreEntidad { get; set; ***REMOVED***
     public string CodigoEntidad { get; set; ***REMOVED***
-
+    public string UrlParticipacionCiudadana { get; set; ***REMOVED***
+        
     public List<RelacionEmisiorReceptor> RelacionEntidadObjetivos { get; set; ***REMOVED***
 
    public List<InfoEntidad> Entidades { get; set; ***REMOVED***
     public List<ProyectosPerfilEntidad> ProyectosHaciendaCentral { get; set; ***REMOVED***
     public List<ProyectosPerfilEntidad> ProyectosHaciendaNoAsignable { get; set; ***REMOVED***
     public List<ProyectosProgramas> ProyectosHaciendaSustantivo { get; set; ***REMOVED***
-  ***REMOVED***
+
+    public List<infograficoPrograma> infoProgramas { get; set; ***REMOVED***
+
+    public List<infograficoActividad> infograficoActividad { get; set; ***REMOVED***
+
+    public List<infograficoGrupoGasto> infograficoGasto { get; set; ***REMOVED***
+
+    public infograficoEntidad infograficoEntidad { get; set; ***REMOVED***
+
+
+***REMOVED***
 
   public class ProyectosPerfilEntidad
   {
@@ -89,5 +101,22 @@ namespace PlataformaTransparencia.Modelos
     public int TotalActividadesProgramaCentral { get; set; ***REMOVED***
     public int TotalProgramasSustantivos { get; set; ***REMOVED***
     public int TotalActividadesProgramasNoAsignables { get; set; ***REMOVED***
-  ***REMOVED***
+
+
+***REMOVED***
+
+    public class DatosEntidadAnio
+    {
+        public decimal? PresupuestoInicial { get; set; ***REMOVED***
+        public decimal? PresupuestoVigente { get; set; ***REMOVED***
+        public decimal? PresupuestoEjecutado { get; set; ***REMOVED***
+        public int FirmadosOncae { get; set; ***REMOVED***
+        public decimal? ValorOncae { get; set; ***REMOVED***
+        public int FirmadosSefin { get; set; ***REMOVED***
+        public decimal? ValorSefin { get; set; ***REMOVED***
+
+        public List<ContratistaData> DataContratos { get; set; ***REMOVED***
+***REMOVED***
+
+   
 ***REMOVED***

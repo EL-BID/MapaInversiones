@@ -128,9 +128,9 @@ a {
     background-color: transparent;
 ***REMOVED***
 
-a:hover {
-    color: #0056b3;
-    text-decoration: underline;
+    a:hover {
+        color: #61C3DB; /*#0056b3;*/
+        text-decoration: underline;
 ***REMOVED***
 
 a:not([href]):not([class]) {
@@ -4665,7 +4665,7 @@ html {
     width: 10px;
     height: 10px;
     margin: 0 8px;
-    background: var(--Bordertitle) /*#333*/;
+    background: #61c3db /* var(--Bordertitle)*/ /*#333*/;
     border-radius: 50%;
     opacity: .25;
     cursor: pointer;

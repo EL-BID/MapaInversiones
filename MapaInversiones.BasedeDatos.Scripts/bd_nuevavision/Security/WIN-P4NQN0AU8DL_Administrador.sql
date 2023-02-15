@@ -1,2 +1,0 @@
-﻿CREATE USER [WIN-P4NQN0AU8DL\Administrador] FOR LOGIN [WIN-P4NQN0AU8DL\Administrador];
-

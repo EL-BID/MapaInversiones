@@ -292,8 +292,7 @@ function GetIndicadoresXIdObjetivoEspecifico(idEje, idObjetivoEstrategico, idObj
         if (data[j].anioBase != null || data[j].anioBase != undefined) anioBase = data[j].anioBase;
         if (data[j].valorAnioBase != null || data[j].valorAnioBase != undefined) valorAnioBase = ConvertirNumeroNotacionPais('es-PY', data[j].valorAnioBase, 2);// data[j].valorAnioBase.formatDecimal(2, ',', '.').toString();
         if (meta2023 == "" && avance == 0) avance = "";
-        var unidadMedidaGrafica = ObtenerCodigoUnidadGrafica(unidadEscalamedicion);
-        
+
         cuerpoNuevoIndicador = '<div class="card-title" id="indicador_' + data[j].idIndicador + '">' +
                                 '<div class="row">' +
                                   '<div class="col-lg-10"><div class="h6">' + data[j].nombre + '</div></div>' +
@@ -328,9 +327,9 @@ function GetIndicadoresXIdObjetivoEspecifico(idEje, idObjetivoEstrategico, idObj
                                        '</div>' +
                                     '</div>' +
                                     '<div class="row" id="verGraph_' + data[j].idIndicador +'">' +
-          '<div class="col-12 text-center">' +
-          '<div class="btn btn-small btn-cards"' + ' onclick=ObtenerGraficaAvance(' + data[j].idIndicador + ',' + unidadMedidaGrafica + ')>' +
-                                            'Ver gráfico' +
+                                        '<div class="col-12 text-center">' +
+                                            '<div class="btn btn-small btn-cards" onclick=ObtenerGraficaAvance(' + data[j].idIndicador + ')>' +
+                                            'Ver gráfica' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
@@ -338,7 +337,7 @@ function GetIndicadoresXIdObjetivoEspecifico(idEje, idObjetivoEstrategico, idObj
                                     '<div class="row"  style="none" id="ocultarGraph_' + data[j].idIndicador +'">' +
                                         '<div class="col-12 text-center">' +
                                             '<div class="btn btn-small btn-cards" onclick=OcultarGraficaAvance(' + data[j].idIndicador + ')>' +
-                                                'Ocultar gráfico' +
+                                                'Ocultar gráfica' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>' +
@@ -376,37 +375,7 @@ function GetIndicadoresXIdObjetivoEspecifico(idEje, idObjetivoEstrategico, idObj
   ***REMOVED***);
 ***REMOVED***
 
-function ObtenerCodigoUnidadGrafica(unidadEscalaGrafica) {
-  if (unidadEscalaGrafica == "%") return "00";
-  else if (unidadEscalaGrafica == "Índice") return "01";
-  else if (unidadEscalaGrafica == "Q") return "02";
-  else if (unidadEscalaGrafica == "Tasa") return "03";
-  else if (unidadEscalaGrafica == "Razón") return "04";
-  else if (unidadEscalaGrafica == "Kva/año") return "05";
-  else if (unidadEscalaGrafica == "Horas") return "06";
-  else if (unidadEscalaGrafica == "Años") return "07";
-  else return "";
-***REMOVED***
-
-function ObtenerUnidadGrafica(codigoEscalaGrafica) {
-  if (codigoEscalaGrafica == "00") return "%";
-  else if (codigoEscalaGrafica == "01") return "Índice";
-  else if (codigoEscalaGrafica == "02") return "Q";
-  else if (codigoEscalaGrafica == "03") return "Tasa";
-  else if (codigoEscalaGrafica == "04") return "Razón";
-  else if (codigoEscalaGrafica == "05") return "Kva/año";
-  else if (codigoEscalaGrafica == "06") return "Horas";
-  else if (codigoEscalaGrafica == "07") return "Años";
-  else return "";
-***REMOVED***
-
-function ObtenerGraficaAvance(idIndicador, unidadEscalamedicion) {
-  unidadEscalamedicion = ObtenerUnidadGrafica(unidadEscalamedicion);
-  //if (unidadEscalamedicion == "00") unidadEscalamedicion = "%";
-  //if (unidadEscalamedicion == "Índice") unidadEscalamedicion = "";
-  //if (unidadEscalamedicion == "Q") unidadEscalamedicion = "";
-  //if (unidadEscalamedicion == "Tasa") unidadEscalamedicion = "";
-  //if (unidadEscalamedicion == "Razón") unidadEscalamedicion = "";
+function ObtenerGraficaAvance(idIndicador) {
   $.ajax({
     contentType: "application/json; charset=utf-8",
     type: "GET",
@@ -420,8 +389,8 @@ function ObtenerGraficaAvance(idIndicador, unidadEscalamedicion) {
 
       if (data.avancesIndicador != null) {
           $("#" + "verGraph_" + idIndicador).hide();
-        $("#" + "ocultarGraph_" + idIndicador).show();
-        loadLinePlotAvanceAnio(data.avancesIndicador, "divGraphAvance_" + idIndicador, unidadEscalamedicion);
+          $("#" + "ocultarGraph_" + idIndicador).show();
+      loadLinePlotAvanceAnio(data.avancesIndicador, "divGraphAvance_" + idIndicador);
 ***REMOVED***
 
   ***REMOVED***).fail(function (handleError) {
@@ -436,7 +405,7 @@ function OcultarGraficaAvance(idIndicador) {
     $("#" + "ocultarGraph_" + idIndicador).hide();
 ***REMOVED***
 
-function loadLinePlotAvanceAnio(objData, divContenedor, unidadMedida) {
+function loadLinePlotAvanceAnio(objData, divContenedor) {
   $("#" + divContenedor).empty();
   if (objData != undefined && objData != null) {
     new d3plus.LinePlot()
@@ -458,7 +427,7 @@ function loadLinePlotAvanceAnio(objData, divContenedor, unidadMedida) {
             return d["labelGroup"];
         ***REMOVED***
           tbody: [
-            ["Avance [" + unidadMedida + "]", function (d) { return ConvertirNumeroNotacionPais('es-PY', d["rawValueDouble"], 2) ***REMOVED***] //d["rawValueDouble"].formatMoney(2, '.', ',').toString()
+            ["% de avance", function (d) { return d["rawValueDouble"].formatMoney(2, ',', '.').toString() + " %" ***REMOVED***]
           ]
       ***REMOVED***
         lineMarkers: true,
@@ -466,10 +435,10 @@ function loadLinePlotAvanceAnio(objData, divContenedor, unidadMedida) {
           r: 3
       ***REMOVED***
         yConfig: {
-          title: "Avance [" + unidadMedida+"]",
+          title: "Avance",
           //scale: "sqrt"
           tickFormat: function (d) {
-            return ConvertirNumeroNotacionPais('es-PY', d, 2);
+            return d + "%";
       ***REMOVED***
       ***REMOVED***
         // lineLabels: true
@@ -1102,9 +1071,9 @@ function loadRecursosPorObjeto(objData,nivel) {
                                 cad += "<span>Objetivos Específicos (" + d.label_inf.length + ")</span></br>";
                         ***REMOVED***
                             if (Array.isArray(d.label_nivel4)) {
-                                cad += "<span>Entidades que aportan (" + d.label_nivel4.length + ")</span></br>";
+                                cad += "<span>Instituciones que aportan (" + d.label_nivel4.length + ")</span></br>";
                         ***REMOVED***
-                            cad += "<span>Recursos asignados PGN 2022 " + "₲ " + valor.formatMoney(0, ',', '.').toString() + " Millones" + "</span></br>";
+                            cad += "<span>Recursos asignados PGN 2022 " + "L " + valor.formatMoney(0, ',', '.').toString() + " Millones" + "</span></br>";
                             cad += "<span>Recursos ejecutados 0%</span>";
                             return cad;
                     ***REMOVED***]

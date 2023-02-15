@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace PlataformaTransparencia.Modulo.Principal.Views.Presupuesto
 {
-    public class PresupuestoGeneralModel : PageModel
+    public class PresupuestoNewModel : PageModel
     {
         public void OnGet()
         {

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
+using PlataformaTransparencia.Modelos.Contratos;
 using PlataformaTransparencia.Modelos.Entidad;
 using PlataformaTransparencia.Modelos.Plan;
 using PlataformaTransparencia.Negocios;
@@ -38,65 +39,86 @@ namespace PlataformaTransparencia.Negocios.Home
     {
       ModelEntidadData rta = new ModelEntidadData() { CodigoEntidad = codEntidad, NombreEntidad = nombreEntidad, ProyectosHaciendaCentral = new List<ProyectosPerfilEntidad>(), ProyectosHaciendaNoAsignable = new List<ProyectosPerfilEntidad>(), ProyectosHaciendaSustantivo = new List<ProyectosProgramas>(), RelacionEntidadObjetivos = new List<RelacionEmisiorReceptor>() ***REMOVED***;
       var data = (from info in _connection.CatalogoEntidades
-                  where info.CodNivelEntidad.ToUpper().Trim() == codEntidad.ToUpper().Trim()
+                  where info.CodigoInstitucion.ToUpper().Trim() == codEntidad.ToUpper().Trim()
                   select new {
                     info.Mision,
-                    info.Vision
+                    info.Vision,
+                    info.UrlParticipacionCiudadana
               ***REMOVED***
                  ).ToList();
       if (data.Count > 0) {
         rta.Mision = data.First().Mision == null ? string.Empty : ConvertirTextoMayusculaMinuscula(data.First().Mision);
-        rta.Vision = data.First().Vision == null ? string.Empty : ConvertirTextoMayusculaMinuscula(data.First().Vision);
-  ***REMOVED***
-      #region Genero el listado de otras entidades
-      var otrasEntidades = (from info in _connection.CatalogoEntidades
-                            where info.CodNivelEntidad.ToUpper().Trim() != codEntidad
+                rta.Vision = data.First().Vision == null ? string.Empty : ConvertirTextoMayusculaMinuscula(data.First().Vision);
+                rta.UrlParticipacionCiudadana = data.First().UrlParticipacionCiudadana == null ? string.Empty : data.First().UrlParticipacionCiudadana;
+        ***REMOVED***
+            #region Genero el listado de otras entidades
+            var otrasEntidades = (from info in _connection.CatalogoEntidades
+                                  where info.CodigoInstitucion.ToUpper().Trim() != codEntidad && info.Institucion != null && !info.Institucion.ToUpper().Contains("ALCALD")
                             select new InfoEntidad {
-                              CodEntidad = info.CodNivelEntidad,
-                              Nombre = info.NombreEntidad,
+                              CodEntidad = info.CodigoInstitucion,
+                              Nombre = info.Institucion,
                         ***REMOVED***
                             ).Distinct().OrderBy(x => x.Nombre).ToList();
       rta.Entidades = new List<InfoEntidad>(otrasEntidades.Count > 6 ? otrasEntidades.OrderBy(x => x.Nombre).Take(6) : otrasEntidades.OrderBy(x => x.Nombre));
-      #endregion
-      return rta;
+            #endregion
+            return rta;
 ***REMOVED***
 
+        public DatosEntidadAnio GetDatosEntidadPorAnnio(int anio, string codEntidad)
+        {
+            DatosEntidadAnio objReturn = new DatosEntidadAnio();
+
+             var presupuesto = (from info in _connection.VwPresupuesto
+                           where info.Periodo == anio && info.CodigoInstitucion.ToString() == codEntidad
+                           group info by new
+                           {
+                               info.CodigoInstitucion,
+                               info.Institucion,
+                               info.Periodo
+                       ***REMOVED*** into g
+                           select new DatosEntidadAnio
+                           {
+                               PresupuestoInicial = ((decimal)g.Sum(x => x.Aprobado.Value)),
+                               PresupuestoVigente = ((decimal)g.Sum(x => x.Vigente.Value)),
+                               PresupuestoEjecutado = ((decimal)g.Sum(x => x.EjecutadoAcumuladoAlMes.Value))
+
+                       ***REMOVED***
+            ).ToList();
+
+
+            objReturn.DataContratos = (from info in _connection.VwContratosDetalles
+                                  where info.AnioUltimaActualizacion == anio
+                                  && info.CodigoComprador == codEntidad
+                                   && info.ValorContratado != null
+                                  group info by new
+                                  {
+                                      info.CodigoComprador,
+                                      info.Comprador,
+                                      info.AnioUltimaActualizacion,
+                                      info.MonedaContrato,
+                                      info.OrigenInformacion
+                              ***REMOVED*** into g
+                                  select new ContratistaData
+                                  {
+                                      MonedaContrato=g.Key.MonedaContrato=="HNL"?"L": g.Key.MonedaContrato,
+                                      NumContratos = g.Count(),
+                                      ValorTotalContratos = ((double)g.Sum(x => x.ValorContratado.Value)),
+                                      OrigenInformacion=g.Key.OrigenInformacion
+
+                              ***REMOVED***
+                                ).ToList();
+
+                       if (presupuesto.Count > 0) 
+            {   objReturn.PresupuestoInicial = presupuesto[0].PresupuestoInicial;
+                objReturn.PresupuestoVigente = presupuesto[0].PresupuestoVigente;
+                objReturn.PresupuestoEjecutado = presupuesto[0].PresupuestoEjecutado;
+        ***REMOVED***
+
+            return objReturn;
+    ***REMOVED***
 
 
 
-    public ConsolidadoProgramasEntidad GetConsolidadoProgramasXCodEntidadAnio(int anio, string codEntidad)
-    {
-      ConsolidadoProgramasEntidad objReturn = new ConsolidadoProgramasEntidad();
-
-      var proyectos = (from info in _connection.PresupuestoVigenteXSectorMinHaciendas
-                       where info.AnioPresupuesto == anio && info.CodNivelEntidad.ToUpper().Trim() == codEntidad.ToUpper().Trim() //&& info.ClasePrograma.ToUpper().Trim() == "CENTRAL"
-                       select new {
-                         info.IdNegocioProyecto,
-                         info.ClasePrograma
-                   ***REMOVED***).Distinct().ToList();
-      var varProyectosByClasePrograma = (from proyecto in proyectos
-                                         group proyecto by new {
-                                           proyecto.ClasePrograma
-                                     ***REMOVED*** into proyectoAgrupado
-                                         select new {
-                                           proyectoAgrupado.Key.ClasePrograma,
-                                           Total = proyectoAgrupado.Count()
-                                     ***REMOVED***).ToList();
-
-      var proyectosSustantivos = (from info in _connection.PresupuestoVigenteXSectorMinHaciendas
-                                  where info.AnioPresupuesto == anio && info.CodNivelEntidad.ToUpper().Trim() == codEntidad.ToUpper().Trim() && (info.ClasePrograma.ToUpper().Trim() == "SUSTANTIVO" || info.ClasePrograma.ToUpper().Trim() == "SUSTANTIVOS")
-                                  select new {
-                                    info.NombrePrograma
-                              ***REMOVED***).Distinct().Count();
-      var totalActividadesProgramaCentral = varProyectosByClasePrograma.Where(x => x.ClasePrograma.ToUpper() == "CENTRAL" || x.ClasePrograma.ToUpper() == "CENTRALES").FirstOrDefault();
-      var totalProgramasSustantivos = varProyectosByClasePrograma.Where(x => x.ClasePrograma.ToUpper() == "SUSTANTIVOS" || x.ClasePrograma.ToUpper() == "SUSTANTIVO").FirstOrDefault();
-      var totalActividadesNoAsignables = varProyectosByClasePrograma.Where(x => x.ClasePrograma.ToUpper() == "NO ASIGNABLE" || x.ClasePrograma.ToUpper() == "NO ASIGNABLES").FirstOrDefault();
-      if (totalActividadesNoAsignables != null) objReturn.TotalActividadesProgramasNoAsignables = totalActividadesNoAsignables.Total;
-      if (totalProgramasSustantivos != null) objReturn.TotalProgramasSustantivos = proyectosSustantivos;
-      if (totalActividadesProgramaCentral != null) objReturn.TotalActividadesProgramaCentral = totalActividadesProgramaCentral.Total;
-
-      return objReturn;
-***REMOVED***
 
     private string ConvertirTextoMayusculaMinuscula(string texto)
     {
@@ -108,19 +130,32 @@ namespace PlataformaTransparencia.Negocios.Home
       return texto;
 ***REMOVED***
 
-    public ModelGraficaSankey GetGraficaSankey(string codEntidad)
-    {
-      ModelGraficaSankey objReturn = new ModelGraficaSankey();
-      return objReturn;
-***REMOVED***
 
     public string ObtenerNombreEntidad(string codEntidad)
     {
       var entidadSeleccionada = (from info in _connection.CatalogoEntidades
-                                 where info.CodNivelEntidad.ToUpper().Trim() == codEntidad.ToUpper().Trim()
+                                 where info.CodigoInstitucion.ToUpper().Trim() == codEntidad.ToUpper().Trim()
                                  select info).FirstOrDefault();
 
-      return entidadSeleccionada == null ? string.Empty : entidadSeleccionada.NombreEntidad;
+      return entidadSeleccionada == null ? string.Empty : entidadSeleccionada.Institucion;
+***REMOVED***
+
+    public  List<ContratosConsolidado>  ObtenerOrigenContratos(string? moneda, string? entidad, string? comprador) {
+            List<ContratosConsolidado> modelo = new List<ContratosConsolidado>();
+
+            modelo = (from contr in _connection.VwContratosDetalles
+                      where (contr.MonedaContrato == moneda|| moneda == null)
+                    && (contr.OrigenInformacion.Contains(entidad) || entidad == null)
+                    && (contr.CodigoComprador == comprador || comprador == null)
+                    && contr.ValorContratado != null
+                      group contr by new { contr.OrigenInformacion ***REMOVED*** into datos
+                    select new ContratosConsolidado
+                    {
+                        OrigenInformacion = datos.Key.OrigenInformacion
+
+                ***REMOVED***).Distinct().ToList();
+
+            return modelo;
 ***REMOVED***
 
     public ModelHomeData ObtenerDatosModeloInicio(bool esHome = true)
@@ -129,133 +164,25 @@ namespace PlataformaTransparencia.Negocios.Home
       if (!esHome) {
         return objReturn;
   ***REMOVED***
+            object moneda = "";
+            moneda = DBNull.Value;
+            int? maxyear = null;
+            maxyear = (from contr in _connection.VwContratosConsolidados
+                       where (contr.MonedaContrato == moneda.ToString() || moneda == DBNull.Value)
+                              && contr.ValorContratado != null
+                       orderby contr.Anio descending
+                       select contr.Anio).First();
 
+           int maxyear_entidades = _connection.VwPresupuesto.Max(x => x.Periodo.Value);
+      
+      objReturn.MaxAnnioContratos = maxyear.ToString();
       objReturn.Entidades = GetConsolidadoEntidades();
-
+      objReturn.MaxAnnioEntidades = maxyear_entidades.ToString();
+      objReturn.Consolidados = GetConsolidadoContratos();
 
       objReturn.Status = true;
 
       return objReturn;
-***REMOVED***
-
-
-    /// <summary>
-    /// Obtiene meta y avance Presupuesto Por Objetivo estratégico
-    /// </summary>
-    /// <param name="id">idObjEstrategico</param>
-    /// <returns></returns>
-    public List<InfoRecAsignadosPlan> GetRecursosAsigByObjEstrategico(int id)
-    {
-
-      //    var myData = [
-      //    { labelGroup: "Desarrollo sostenible", label: "meta", periodo: 2019, meta: 1000, porcentaje: -1 ***REMOVED***,
-      //    { labelGroup: "Desarrollo sostenible", label: "meta", periodo: 2020, meta: 5000 , porcentaje: -1***REMOVED***,
-      //    { labelGroup: "Desarrollo sostenible", label: "meta", periodo: 2021, meta: 3800 ,  porcentaje: -1 ***REMOVED***,
-      //    { labelGroup: "Desarrollo sostenible",label: "avance", periodo: 2019, meta: 800, porcentaje: 30 ***REMOVED***,
-      //    { labelGroup: "Desarrollo sostenible", label: "avance" , periodo: 2020, meta: 3200 , porcentaje: 30 ***REMOVED***,
-      //    { labelGroup: "Desarrollo sostenible", label: "avance" , periodo: 2021, meta: 3000 , porcentaje: 40 ***REMOVED***
-
-      //];
-
-
-      var objReturn = new List<InfoRecAsignadosPlan>();
-      var result = (from info in _connection.PndXEntidadesPresupuestoStp
-                    where info.CodObjetivoEstrategico == id
-                    group info by new {
-                      info.IdObjetivoEstrategico
-                        , info.CodObjetivoEstrategico
-                        , info.NombreObjetivoEstrategico
-                        , info.DescripcionObjetivoEstrategico
-                        , info.Año
-                ***REMOVED*** into g
-                    select new {
-                      nombreObj = g.Key.NombreObjetivoEstrategico,
-                      periodo = g.Key.Año.Value,
-                      avance = Math.Round((g.Sum(x => x.Ejecutado)).Value / 1000000, 0),
-                      meta = Math.Round((g.Sum(x => x.Planificado)).Value / 1000000, 0),
-                      porcentaje = Math.Round((g.Sum(x => x.Ejecutado)).Value / (g.Sum(x => x.Planificado)).Value, 2)
-
-                ***REMOVED***
-     ).ToList();
-
-
-      if (result.Count > 0) {
-        var aux_meta = result
-        .Select(step => new InfoRecAsignadosPlan {
-          labelGroup = step.nombreObj,
-          label = "META",
-          rawValue = step.meta,
-          periodo = step.periodo,
-          porcentaje = -1
-    ***REMOVED***).ToList();
-
-        var aux_avance = result
-       .Select(step => new InfoRecAsignadosPlan {
-         labelGroup = step.nombreObj,
-         label = "AVANCE",
-         rawValue = step.avance,
-         periodo = step.periodo,
-         porcentaje = step.porcentaje,
-   ***REMOVED***).ToList();
-
-        objReturn.AddRange(aux_meta);
-        objReturn.AddRange(aux_avance);
-
-  ***REMOVED***
-
-
-
-      return objReturn;
-
-
-***REMOVED***
-
-    /// <summary>
-    /// valor planificado-ejecutado agrupado por sectores
-    /// </summary>
-    /// <param name="id">CodObjetivoEstrategico</param>
-    /// <returns></returns>
-    public List<InformationGraphics> GetRecursosAsigPerSectoresByObjEstrateg(int id)
-    {
-      var objReturn = new List<InformationGraphics>();
-
-      var result = (from info in _connection.PndXEntidadesPresupuestoStp
-                    where info.CodObjetivoEstrategico == id
-                    group info by new {
-                      info.Sector
-                ***REMOVED*** into g
-                    select new {
-                      sector = g.Key.Sector,
-                      meta = (g.Sum(x => x.Planificado)).Value / 1000000,
-                      avance = (g.Sum(x => x.Ejecutado)).Value / 1000000
-
-                ***REMOVED***
-     ).ToList();
-
-
-      if (result.Count > 0) {
-        var aux_meta = result
-        .Select(step => new InfoRecAsignadosPlan {
-          labelGroup = "META",
-          label = step.sector,
-          rawValue = step.meta
-
-    ***REMOVED***).ToList();
-
-        var aux_avance = result
-       .Select(step => new InfoRecAsignadosPlan {
-         labelGroup = "AVANCE",
-         label = step.sector,
-         rawValue = step.avance
-   ***REMOVED***).ToList();
-
-        objReturn.AddRange(aux_meta);
-        objReturn.AddRange(aux_avance);
-
-  ***REMOVED***
-
-      return objReturn;
-
 ***REMOVED***
 
     /// <summary>
@@ -267,110 +194,110 @@ namespace PlataformaTransparencia.Negocios.Home
     {
       //Presupuesto_Vigente_x_Sector_MinHacienda
       var objReturn = new List<InfoEntidadesConsolida>();
-      var result = (from info in _connection.PresupuestoVigenteXSectorMinHaciendas
+
+        int maxyear = DateTime.Now.Year;
+            maxyear = _connection.VwPresupuesto.Max(x => x.Periodo.Value);
+
+
+            var result = (from info in _connection.VwPresupuesto
+                          where info.Periodo==maxyear
                     group info by new {
-                      info.CodNivelEntidad,
-                      info.NombreEntidad
+                      info.CodigoInstitucion,
+                      info.Institucion
                 ***REMOVED*** into g
                     select new InfoEntidadesConsolida {
-                      id = g.Key.CodNivelEntidad,
-                      labelGroup = g.Key.NombreEntidad,
-                      avance = g.Sum(x => x.PresupuestoAvance.Value),
-                      asignado = ((decimal)g.Sum(x => x.PresupuestoVigente.Value))
+                      id = g.Key.CodigoInstitucion.ToString(),
+                      labelGroup = g.Key.Institucion,
+                      avance = ((decimal)g.Sum(x => x.EjecucionDelMes.Value)),
+                      asignado = ((decimal)g.Sum(x => x.Vigente.Value))
                 ***REMOVED***
      ).ToList();
 
       if (result != null) {
         var long_aux = result.Count();
-        for (var i = 0; i < long_aux; i++) {
-          result[i].porcentaje = Math.Round(((decimal)(result[i].avance / result[i].asignado) * 100), 2);
-    ***REMOVED***
+                for (var i = 0; i < long_aux; i++)
+                {
+                    if (result[i].asignado > 0)
+                    {
+                        result[i].porcentaje = Math.Round(((decimal)(result[i].avance / result[i].asignado) * 100), 2);
+                ***REMOVED***
+                   
+                    
+            ***REMOVED***
 
-        if (long_aux >= 4) {
-          objReturn = result.OrderByDescending(x => x.porcentaje).Take(4).ToList();
+                if (long_aux >= 4) {
+          objReturn = result.OrderByDescending(x => x.avance).Take(4).ToList();
     ***REMOVED***
         else {
-          objReturn = result.OrderByDescending(x => x.porcentaje).Take(long_aux).ToList();
+          objReturn = result.OrderByDescending(x => x.avance).Take(long_aux).ToList();
     ***REMOVED***
 
 
   ***REMOVED***
 
-
-
       return objReturn;
 
 
 ***REMOVED***
 
-    /// <summary>
-    /// Obtiene entidades que aportan a un objetivo estrategico especifico
-    /// </summary>
-    /// <param name="id">cod obj estrategico</param>
-    /// <returns></returns>
-    public List<InfoEntidadesConsolida> GetConsolidadoEntidadesByObjEspecifico(int id_eje, int id)
+    public List<ContratosConsolidado> GetConsolidadoContratos()
     {
-      var objReturn = new List<InfoEntidadesConsolida>();
-      var result = (from info in _connection.ConsultaVinculacionPNDPresupuestoXEntidadStp
-                    where info.CodEjeEstrategico == id_eje && info.CodObjetivoEspecifico == id
-                    && info.Entidad != null && info.Entidad != ""
-                    group info by new {
-                      //info.IdEntidad,
-                      info.Entidad
-                ***REMOVED*** into g
-                    select new InfoEntidadesConsolida {
-                      //id=g.Key.IdEntidad,
-                      labelGroup = g.Key.Entidad,
-                      aporteObjetivo = g.Sum(x => x.AportePresupuestalAlObjetivo.Value)
-                ***REMOVED***
-      ).ToList();
+            //ModelContratosConsolidados modelo = new ModelContratosConsolidados();
+            var modelocontrato = new List<ContratosConsolidado>();
 
-      var long_aux = result.Count();
-      //if (long_aux >= 4) {
-      //    objReturn = result.OrderByDescending(x => x.aporteObjetivo).Take(4).ToList();
-      //***REMOVED***
-      //else {
-      //    objReturn = result.OrderByDescending(x => x.aporteObjetivo).Take(long_aux).ToList();
-      //***REMOVED***
-      objReturn = result.OrderByDescending(x => x.aporteObjetivo).Take(long_aux).ToList();
+            object moneda = "";
+            moneda = DBNull.Value; 
 
-      return objReturn;
+            int? maxyear = null;
+            maxyear = (from contr in _connection.VwContratosConsolidados
+                       where (contr.MonedaContrato == moneda.ToString() || moneda == DBNull.Value)
+                              && contr.ValorContratado != null
+                       orderby contr.Anio descending
+                       select contr.Anio).First();
+            modelocontrato = (from contr in _connection.VwContratosConsolidados
+                                   where (contr.MonedaContrato == moneda.ToString() || moneda == DBNull.Value)
+                                   && contr.ValorContratado != null
+                                   && contr.Anio == maxyear
+                                   orderby contr.Anio descending
+                                   group contr by new { contr.MonedaContrato, contr.OrigenInformacion ***REMOVED*** into datos
+                                   select new ContratosConsolidado
+                                   {
+                                       OrigenInformacion = datos.Key.OrigenInformacion,
+                                       MonedaContrato = datos.Key.MonedaContrato=="HNL"? "L": datos.Key.MonedaContrato,
+                                       ValorContratado = datos.Sum(x => x.ValorContratado),
+                                       NroContratos = datos.Sum(x => x.NroContratos),
+                               ***REMOVED***).Distinct().ToList();
 
+            return modelocontrato;
+ ***REMOVED***
 
-***REMOVED***
-
-
-    /// <summary>
-    /// Datos treemap presupuestado plan nacional
-    /// </summary>
-    /// <returns></returns>
-    public List<InfoRecAsignadosPlan> ObtenerRecursosPerPlanGroup()
+    public List<InformationSource> ObtFuenteDatos()
     {
+        List<InformationSource> objReturn = new List<InformationSource>();
+            var queryInfo = (from info in _connection.VwFuenteDeLosRescursos
+                             where (info.IdFuente == 1 || info.IdFuente == 2 || info.IdFuente == 3)
+                             group info by new
+                             {
+                                 info.IdFuente,
+                                 info.NombreFuente
+                         ***REMOVED*** into g
+                             select new InformationSource
+                             {
+                                 id = g.Key.IdFuente,
+                                 data=g.Key.NombreFuente,
+                                 FechaCorteData = g.Max(i => i.FechaCorteInformacion),
+                                 lastUpdate = g.Max(i => i.FechaActualizacionPlataforma)
+                         ***REMOVED***).ToList();
 
+            objReturn = queryInfo;
 
-      //Vinculacion_IndicadoresPND_Presupuesto_x_Entidades_STP
-      List<InfoRecAsignadosPlan> objReturn = new List<InfoRecAsignadosPlan>();
-      var RecursosPerObjetoQuery = (from info in _connection.ConsultaVinculacionPNDPresupuestoXEntidadStp
-                                    where info.CodEjeEstrategico != null && info.CodObjetivoEstrategico > 0 && info.CodObjetivoEspecifico > 0
-                                    && info.CodNivelEntidad.Trim() != "-"
-                                    orderby info.CodEjeEstrategico.Value, info.CodObjetivoEstrategico.Value
-                                    , info.CodObjetivoEspecifico.Value, info.Entidad ascending
-                                    select new InfoRecAsignadosPlan {
-                                      labelGroup = info.CodEjeEstrategico.Value.ToString() + "-" + info.NombreEjeEstrategico,
-                                      label = info.NombreObjetivoEstrategico,
-                                      label_inf = info.NombreObjetivoEspecifico,
-                                      label_nivel4 = info.Entidad,
-                                      rawValueDouble = info.AportePresupuestalAlObjetivo.HasValue ? info.AportePresupuestalAlObjetivo.Value : 0,
-                                      rawValue_asoc = info.CodEjeEstrategico.Value
-                                ***REMOVED***).ToList();
-
-      objReturn = RecursosPerObjetoQuery;
-
-
-      return objReturn;
+            return objReturn;
 
 ***REMOVED***
-    public List<HierarchyModel> GetSearchHierarchyModel()
+
+
+
+        public List<HierarchyModel> GetSearchHierarchyModel()
     {
       var objResultParamList = (from p in _connection.SearchResultParams
                                 select new SearchResultParamModel {
@@ -392,35 +319,6 @@ namespace PlataformaTransparencia.Negocios.Home
       return objReturn;
 ***REMOVED***
 
-    public List<ModelAvanceIndicador> GetHistoricoAvanceIndicador(int indicadorId)
-    {
-      //var objReturn = new List<ModelAvanceIndicador>();
-      //objReturn.Add(new ModelAvanceIndicador { label = "2012", rawValueDouble  = 57.7, labelGroup="Avance" ***REMOVED***);
-      //objReturn.Add(new ModelAvanceIndicador { label = "2013", rawValueDouble = 57.7, labelGroup = "Avance" ***REMOVED***);
-      //objReturn.Add(new ModelAvanceIndicador { label = "2014", rawValueDouble = 57.6, labelGroup = "Avance" ***REMOVED***);
-      //objReturn.Add(new ModelAvanceIndicador { label = "2015", rawValueDouble = 63.5, labelGroup = "Avance" ***REMOVED***);
-      //objReturn.Add(new ModelAvanceIndicador { label = "2016", rawValueDouble = 67.0, labelGroup = "Avance" ***REMOVED***);
-      //objReturn.Add(new ModelAvanceIndicador { label = "2017", rawValueDouble = 70.4, labelGroup = "Avance" ***REMOVED***);
-      //objReturn.Add(new ModelAvanceIndicador { label = "2018", rawValueDouble = 67.8, labelGroup = "Avance" ***REMOVED***);
-      //objReturn.Add(new ModelAvanceIndicador { label = "2019", rawValueDouble = 65.8, labelGroup = "Avance" ***REMOVED***);
-      //objReturn.Add(new ModelAvanceIndicador { label = "2020", rawValueDouble = 55.0, labelGroup = "Avance" ***REMOVED***);
-      //objReturn.Add(new ModelAvanceIndicador { label = "2021", rawValueDouble = 0.0, labelGroup = "Avance" ***REMOVED***);
-      //objReturn.Add(new ModelAvanceIndicador { label = "2022", rawValueDouble = 0.0, labelGroup = "Avance" ***REMOVED***);
-      var objReturn = (from info in _connection.HistoricoAvanceIndicadoresPNDStps
-                    where info.IdIndicador.HasValue && info.IdIndicador.Value == indicadorId
-                    && !string.IsNullOrEmpty(info.ValorAvance)
-                    select new ModelAvanceIndicador {
-                      label = info.AnioAvance,
-                      rawValueDouble = Convert.ToDouble(info.ValorAvance),
-                      labelGroup="Avance"
-                ***REMOVED***).Distinct().ToList();
-      for (int i = 0; i < objReturn.Count; i++) {
-        if (objReturn[i].rawValueDouble <= 0.0) {
-          objReturn.RemoveAt(i);
-          i--;
-    ***REMOVED***
-  ***REMOVED***
-      return objReturn;
-***REMOVED***
+
   ***REMOVED***
 ***REMOVED***

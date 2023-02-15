@@ -12,7 +12,7 @@
  */
 :root {
     --heading-font-family: 'Montserrat', sans-serif;
-    --heading-font-color: #08477A /*#5E7FB1*/;
+    --heading-font-color: #121212 /*#08477A*/ /*#5E7FB1*/;
     --font-family: 'Montserrat', sans-serif;
     --bs-blue: #0d6efd;
     --bs-indigo: #6610f2;
@@ -104,7 +104,7 @@ h1, .h1 {
 ***REMOVED***
 @media (min-width: 1200px) {
   h1, .h1 {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
   ***REMOVED***
 ***REMOVED***
 
@@ -2976,16 +2976,16 @@ textarea.form-control-lg {
   background-color: #0d6efd;
   border-color: #0d6efd;
 ***REMOVED***
-.btn-primary:hover {
-  color: #fff;
-  background-color: #0b5ed7;
-  border-color: #0a58ca;
+    .btn-primary:hover {
+        color: #fff;
+        background-color: #3191A7 /*#0b5ed7*/;
+        border-color: #0a58ca;
 ***REMOVED***
-.btn-check:focus + .btn-primary, .btn-primary:focus {
-  color: #fff;
-  background-color: #0b5ed7;
-  border-color: #0a58ca;
-  box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
+    .btn-check:focus + .btn-primary, .btn-primary:focus {
+        color: #fff;
+        background-color: #3191A7; /*#0b5ed7;*/
+        border-color: #0a58ca;
+        box-shadow: 0 0 0 0.25rem rgba(49, 132, 253, 0.5);
 ***REMOVED***
 .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
   color: #fff;
@@ -4324,7 +4324,7 @@ textarea.form-control-lg {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: transparent;
+    /*background-color: transparent;*/
     background-clip: border-box;
     border: none !important; /*1px solid rgba(0, 0, 0, 0.125);*/
     border-radius: 0.25rem;
@@ -4368,6 +4368,7 @@ textarea.form-control-lg {
 .BignumberAdv{ font-size: 3rem; font-weight: 600;
 
 .no-rounded{ border-radius:0!important; padding: 4px;***REMOVED***
+
 .card > hr {
   margin-right: 0;
   margin-left: 0;

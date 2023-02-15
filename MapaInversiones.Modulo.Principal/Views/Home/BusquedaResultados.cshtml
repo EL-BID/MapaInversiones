@@ -78,28 +78,38 @@
                     <div class="search-page-container">
                         @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" ***REMOVED***))
                         {
-                            <div class="form-field">
-                                <label for="page-field-search" class="form-field-label">Buscar...</label>
-                                <input type="search" class="form-field-input" name="SearchString" value="@Model.CadenaBusqueda" autocomplete="off" required="required" id="page-field-search">
-                                <input type="hidden" name="Type" value="@Model.Type" id="page-field-type">
-                                <button type="submit" class="search-btn"><i class="material-icons md-22">search</i></button>
-                            </div>
+
+                        <div class="form-field whiteSearch">
+                            <label for="page-field-search" class="form-field-label">Instituciones, Planes y programas, por ejemplo: Secretaría de Energía.</label>
+                            <button type="submit" class="buttonsearBTN"><span>Buscar</span></button>
+                            <input type="search" class="form-field-input" name="SearchString" value="@Model.CadenaBusqueda" autocomplete="off" required="required" id="page-field-search">
+                            <input type="hidden" name="Type" value="@Model.Type" id="page-field-type">
+                            <!--id="page-field-search"-->
+                        </div>
+
+
+                            <!--<div class="form-field">
+            <label for="page-field-search" class="form-field-label">Buscar...</label>
+            <input type="search" class="form-field-input" name="SearchString" value="@Model.CadenaBusqueda" autocomplete="off" required="required" id="page-field-search">
+            <input type="hidden" name="Type" value="@Model.Type" id="page-field-type">
+            <button type="submit" class="search-btn"><i class="material-icons md-22">search</i></button>
+        </div>-->
                     ***REMOVED***
-                        <p class="search-page-results-text">
-                            Se encontró <b> @Model.TotalResultados </b> resultado(s) que coniciden
+                    <p class="search-page-results-text">
+                        Se encontró <b> @Model.TotalResultados </b> resultado(s) que coniciden
 
 
-                            con <b id="cadenaBusqueda">
-                                "@Model.CadenaBusqueda"
-                            </b>
+                        con <b id="cadenaBusqueda">
+                            "@Model.CadenaBusqueda"
+                        </b>
 
-                            y filtrado por tipo  <b id="tipoRefine">
-                                "@Model.Type"
-                            </b>
+                        <!-- y filtrado por tipo  <b id="tipoRefine">
+         "@Model.Type"
+     </b>-->
 
 
 
-                        </p>
+                    </p>
                     </div>
                 </div>
             </div>
@@ -137,14 +147,14 @@
                                 @foreach (var Jerarquia in Model.ListaJerarquia)
                                 {
                                     <li class="sidebar-cat-item sidebar-cat-item-has-child">
-                                        <a href="#!" id="HierarchySearch" class="sidebar-cat-link hover-link" data-title="@Jerarquia.Hierarchy">
-                                            <span>@Jerarquia.Hierarchy</span>
+                                        <a href="#!" id="HierarchySearch" class="sidebar-cat-link hover-link" data-title="@Jerarquia.Hierarchy.Replace("Entidad","Institución")">
+                                            <span>@Jerarquia.Hierarchy.Replace("Entidad", "Institución")</span>
                                             <i class="material-icons md-22 sidebar-cat-icon">chevron_right</i>
                                         </a>
                                         <ul style="display: block;">
                                             @foreach (var type in @Jerarquia.ListaTipos)
                                             {
-                                                <li><a href="#!" id="TypeSearch" class="hover-link" data-title="@type.Type"><span>@type.Type</span></a></li>
+                                                <li><a href="#!" id="TypeSearch" class="hover-link" data-title="@type.Type.Replace("Entidad","Institución")"><span>@type.Type.Replace("Entidad","Institución")</span></a></li>
                                         ***REMOVED***
                                         </ul>
                                     </li>
@@ -182,8 +192,8 @@
                                 <div class="card-body">
                                     <a href="@item.Url" class="h5" title="@item.NombreProyecto">@item.NombreProyecto</a>
                                     <div class="card-posted-in card-wide-item">
-                                        <a href="#!" class="card-category" title="@item.Sector">@item.Sector</a>
-                                        <a href="#!" class="card-category" title="@item.Type"> - @item.Type</a>
+                                        <span class="card-category" title="@item.Sector">@item.Sector</span>
+                                        <span class="card-category" title="@item.Type"> - @item.Type</span>
                                     </div>
                                 </div>
 

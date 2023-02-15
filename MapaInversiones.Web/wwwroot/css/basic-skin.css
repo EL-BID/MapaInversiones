@@ -12,7 +12,7 @@
     --heading-line-height: 1.3;
     --main-color: #2c7ae7;
     --linkcolor: #08477A;
-    --el-gradient2: #3f8efc;
+    --el-gradient2: #DB473C; /* #00809d;*/ /*#235B74;*/
     --primary-color: #ffffff;
     --primary-bg-color: #F0F4F8;
     --secondary-color: #000000;
@@ -35,10 +35,18 @@
     --gray-section: #F1F9FC;
     --Stwitter: #fff;
     --Slogin: #D7EDF8;
-    --Mainquestions: #EBEFF2;
+    --Mainquestions: #D1F4FC;
     --Bordertitle: #9A1218;
-    --Borderblue: #6A91B0;
+    --Borderblue: #61C3DB;
     --bkBarButtoms: #F2F2F2;
+    /*Sections*/
+    --secgray: #F1F2F4;
+    /*header*/
+    --bkheadertop: #F8F9FA;
+    /*footer*/
+    --footermain: #88CFE0;
+    --bderfooterm: #E8B424;
+    --footerbtm: #969499;
 ***REMOVED***
 /* === CSS Table Of Content
 
@@ -49,6 +57,7 @@
     1.4 Typography
     1.4.1 Typography Plan Nacional 
     1.4.2 Typography Objetivos 
+    1.4.3 Typography Presupuestyo
 
 2. Components
     2.1 Accordion
@@ -67,6 +76,8 @@
     2.14 Bar Bottoms
     2.15 Overlay
     2.16 ODS
+    2.17 Contracts
+    2.18 Presupuesto
 
 3. Bloks
     3.1 Main banner
@@ -99,6 +110,7 @@
     4.6 Elements style
     4.7 PLAN NACIONAL
     4.8 CENTRO AYUDA
+    4.9 PerfilProyecto
 
 5. Cookie
 
@@ -144,6 +156,8 @@
     src: local("Material Icons Outlined"), url("../assets/fonts/material-design-icons/material-design-icons-outlined.woff2") format("woff2");
 ***REMOVED***
 
+
+
 /* 1.2 Base */
 * {
     box-sizing: border-box;
@@ -160,7 +174,10 @@ html {
 html, body {
     height: 100%;
 ***REMOVED***
-
+.politicas .card {
+    border: 1px solid #ccc!important; padding: 15px
+***REMOVED***
+.politicas .list-group-item{ display: flex; flex-direction: row; justify-content: flex-start***REMOVED***
 body {
     position: relative;
     font-size: 1rem;
@@ -196,6 +213,7 @@ main {
         opacity: 1;
 ***REMOVED***
 
+
 .main-inner {
     flex: 1 0 auto;
     overflow: hidden;
@@ -220,6 +238,14 @@ a {
     a:hover {
         text-decoration: none;
         color: var(--main-color);
+***REMOVED***
+
+.Noticia a {
+    color: #121212;
+***REMOVED***
+
+    .Noticia .h5 a:hover {
+        color: #949699 !important;
 ***REMOVED***
 
 code {
@@ -266,9 +292,72 @@ code {
     padding: 0;
     margin: 0;
 ***REMOVED***
-.h-75{ width:70%; margin: 0 auto; max-width:70%***REMOVED***
-/* Begin IE browser */
-.ie-browser {
+
+.navHdisplay{ display: contents;***REMOVED***
+
+.h-75 {
+    width: 70%;
+    margin: 0 auto;
+    max-width: 70%
+***REMOVED***
+.h120{ height: 140px;***REMOVED***
+.w-70 {
+    width: 70%;
+***REMOVED***
+.w-88{ width: 88%;***REMOVED***
+.w-90 {
+    width: 90%;
+***REMOVED***
+
+
+.ml-5{ margin-left: 5px;***REMOVED***
+.mh56{ min-height: 56px;***REMOVED***
+.mh72 {
+    min-height: 72px
+***REMOVED***
+
+.list-item{ padding: 4px;***REMOVED***
+
+.main-header {
+    display: flex;
+    /* justify-content: center; */
+    justify-content: space-around;
+    flex-wrap: wrap;
+    height: 140px;
+***REMOVED***
+
+.logoHinv {
+    text-align: left;
+    margin-top: 20px;
+***REMOVED***
+.logoHinv img {
+    height: 110px
+***REMOVED***
+
+.logoHinv img{ width: 180px;***REMOVED***
+
+.logoIntro {
+    text-align: center;
+    padding: 28px 0px;
+***REMOVED***
+    .logoIntro img {
+        width: 150px;
+***REMOVED***
+
+
+.objHidden {
+    /*visibility:collapse;*/
+    display: none
+***REMOVED***
+
+.objVisible {
+    /*visibility:visible;*/
+    display:  block
+***REMOVED***
+
+
+    /* Begin IE browser */
+    .ie-browser {
     display: table;
     width: 100%;
     height: 100%;
@@ -288,6 +377,10 @@ code {
 
 /* End IE browser */
 /* 1.3 Tables */
+
+.tablefont{font-size: 12px;***REMOVED***
+
+
 .head-axis .icon-eje {
     text-align: center
 ***REMOVED***
@@ -608,6 +701,33 @@ table {
 ***REMOVED***
 
 @media (max-width: 767.98px) {
+    
+    .politicas .list-group-item {
+        flex-direction: column;
+***REMOVED***
+    .logoHinv {
+        margin-right: 15px;
+***REMOVED***
+    .logoHinv img {
+        height: 80px !important;
+***REMOVED***
+    .footer-item-heading { text-align: left!important; border-bottom: 1px solid #fff;
+***REMOVED***
+    .footer-item{***REMOVED***
+    .footer-mnu .hover-link > span {
+        font-weight: 400;
+***REMOVED***
+    .footer-main .item {
+        margin-bottom: 15px
+***REMOVED***
+    .labelTit {
+        font-weight: 400 !important;
+***REMOVED***
+    .data1{ margin-right: 0px***REMOVED***
+    .headEnt {
+        flex-direction: column;
+***REMOVED***
+    .comparativeTable .panel-heading{ flex-direction: column;***REMOVED***
     h1, .h1 {
         font-size: 1.5rem;
 ***REMOVED***
@@ -665,7 +785,7 @@ table {
 ***REMOVED***
 
         .table-responsive table {
-            width: 650px;
+            /*width: 650px;*/
     ***REMOVED***
 
     .table-responsive-outer {
@@ -710,19 +830,19 @@ h1, .h1 {
 ***REMOVED***
 
 h2, .h2 {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
 ***REMOVED***
 
-h3, .h4 {
-    font-size: 1.6rem;
+h3, .h3{
+    font-size: 1.5rem;
 ***REMOVED***
 
 h4, .h4 {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
 ***REMOVED***
 
 h5, .h5 {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 600;
 ***REMOVED***
 
@@ -827,6 +947,12 @@ blockquote {
 .subtitle, .subtitle label {
     color: #fff;
     text-align: center;
+***REMOVED***
+
+    .subtitlechk {
+        color: #121212;
+        text-align: left;
+        font-weight: normal;
 ***REMOVED***
 
 /*1.4.2 Typography Objetivos */
@@ -946,30 +1072,45 @@ blockquote {
     box-shadow: -1px 5px 10px 0px rgba(0,0,0,0.16);
 ***REMOVED***
 
+/*Participacion*/
+.well{ padding: 4px;***REMOVED***
+
 /*1.4.3 Typography Home*/
 .card-entidad{***REMOVED***
-.Tagline {
+.card-entidad h3{ font-size: 1.2rem ***REMOVED***
+
+.Tagline{ padding-bottom: 1rem;***REMOVED***
+
+.Tagline h1 {
     color: var(--primary-color);
-    font-size: 1.5em;
     font-weight: 700;
-    padding-bottom: 1rem;
 ***REMOVED***
 
-    .Tagline span {
-        color: #E8B424;
-***REMOVED***
 
-.Tagline2 {
-    color: var(--primary-color);
-    font-size: 20px;
+
+.Tagline .h5 {
+    color: var(--primary-color) !important;
     font-weight: 600;
-    padding-bottom: 1rem;
-    font-style: italic;
 ***REMOVED***
 
+/*ico*/
+.icohonduras {
+    text-align: left;
+    border-bottom: 2px solid #88CDDE;
+    width: 73px;
+    margin-bottom: 8px;
+***REMOVED***
 
+/*1.4.4*/
 
+.banner-main-desc p, .banner-main-desc .h5 {
+    color: #fff;
+***REMOVED***
 
+.qGasto {
+    padding: 0.5rem 0rem;
+    color: #61C3DB;
+***REMOVED***
 
 
 @media (max-width: 767.98px) {
@@ -1106,6 +1247,18 @@ blockquote {
     line-height: .8em
 ***REMOVED***
 
+.alertCont {
+    position: relative;
+    padding: 0.75rem 1rem;
+    align-items: flex-start;
+    border-radius: var(--el-border-radius-min);
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 1.5rem 0;
+    overflow: hidden;
+***REMOVED***
+
     .alert::after {
         content: "";
         position: absolute;
@@ -1204,20 +1357,34 @@ blockquote {
 ***REMOVED***
 
 /* 2.3 Breadcrumb */
-.bread-crumbs {
-    position: relative;
-    padding: 1.125rem 0;
-    /*background-color: var(--primary-bg-color);*/
-    color: var(--primary-bg-color);
+.closeSesion{ border: 1px solid #ccc; padding: .75em; margin: 15px 0px; border-radius: 6px***REMOVED***
+    .closeSesion a{ display: block;***REMOVED***
+    .closeSesion:hover {
+        font-weight: 700
+***REMOVED***
+    .closeSesion i {
+        vertical-align: middle
+***REMOVED***
+    .bread-crumbs {
+        position: relative;
+        padding: 1.125rem 0;
+        /*background-color: var(--primary-bg-color);*/
+        color: var(--primary-bg-color);
 ***REMOVED***
 
+.black-text .bread-crumbs-list li a, .black-text .bread-crumbs-list li {
+    color: #000 !important
+***REMOVED***
+.black-text .bread-crumbs-list li a{
+    text-decoration: underline;
+***REMOVED***
 .bread-crumbs-list {
     position: relative;
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    font-size: 0.8rem;
+    font-size: .7rem;
     overflow: hidden;
     color: var(--primary-bg-color);
 ***REMOVED***
@@ -1268,31 +1435,42 @@ blockquote {
     flex-wrap: wrap;
     align-items: flex-start;
     margin: 0 0 -1.25rem -1.25rem;
+    
 ***REMOVED***
 
     .wrap-btn .btn {
         display: block;
         margin: 0 0 1.25rem 1.25rem;
+        font-weight: 600;
 ***REMOVED***
 
 .btn-cards {
     border: none;
-    background: #1997BE !important;
+    /*background: #1997BE !important;*/
     padding: 15px !important;
+***REMOVED***
+
+    .btn-cards span {
+        font-weight: 600;
 ***REMOVED***
 
 .btn-outlined {
     display: inline-block;
-    background: none;
+    background: none!important;
     border: 1px solid #1997be;
-    color: #1997be;
+    color: #000;
     margin-right: 15px;
 ***REMOVED***
 
+    .btn-outlined a, .btn-outlined a:hover {
+        color: #000;
+        font-weight: 600;
+***REMOVED***
+    .btn-outlined span{color: #000***REMOVED***
 
 .btn {
-    --ripple-width: 100%;
-    --ripple-time: 0.4s;
+    /*--ripple-width: 100%;
+    --ripple-time: 0.4s;*/
     position: relative;
     display: inline-block;
     text-align: center;
@@ -1302,12 +1480,33 @@ blockquote {
     color: var(--primary-color);
     fill: var(--primary-color);
     background: var(--el-gradient2);
-    background: linear-gradient(to right, var(--el-gradient1) 0%, var(--el-gradient2) 100%);
+    /*background: linear-gradient(to right, var(--el-gradient1) 0%, var(--el-gradient2) 100%);*/
     text-decoration: none;
     padding: 0.75em 1.75em;
     border-radius: var(--el-border-radius-min);
     outline: none;
     border: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all var(--ripple-time);
+***REMOVED***
+
+.btnOut {
+    --ripple-width: 100%;
+    --ripple-time: 0.4s;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: var(--font-weight);
+    font-family: var(--font-family), sans-serif;
+    color: var(--el-gradient2);
+    fill: var(--primary-color);
+    text-decoration: none;
+    padding: 0.75em 1.75em;
+    border-radius: var(--el-border-radius-min);
+    outline: none;
+    border: 1px solid var(--el-gradient2);
     cursor: pointer;
     overflow: hidden;
     transition: all var(--ripple-time);
@@ -1431,15 +1630,17 @@ blockquote {
         outline: none;
 ***REMOVED***
 
-    .btn:hover {
-        color: var(--primary-color);
-        fill: var(--primary-color);
+.btn:hover {
+    color: var(--primary-color);
+    fill: var(--primary-color);
+    background: #235B74;
 ***REMOVED***
 
-        .btn:hover .el-ripple-circle {
-            width: calc(var(--ripple-width) * 2.25);
-            padding-top: calc(var(--ripple-width) * 2.25);
-    ***REMOVED***
+    .btn:hover .el-ripple-circle {
+        width: calc(var(--ripple-width) * 2.25);
+        padding-top: calc(var(--ripple-width) * 2.25);
+        background: #235B74;
+***REMOVED***
 
 .btn-light {
     color: #000;
@@ -1526,7 +1727,7 @@ blockquote {
         width: 100%;
         transform: translateY(-100%);
         transition: all 0.4s;
-        color: var(--main-color);
+        color: #61C3DB/* var(--main-color);*/
 ***REMOVED***
 
     .hover-link > span {
@@ -1609,7 +1810,7 @@ blockquote {
     font-size: 1rem;
     text-decoration: none;
     color: var(--main-color);
-    fill: var(--main-color);
+    background-color: transparent;
 ***REMOVED***
 
 .botonera .btn-link a {
@@ -1634,7 +1835,7 @@ blockquote {
 
 .btn-top {
     position: fixed;
-    right: 15px;
+    right: 32px;
     bottom: -5rem;
     width: 2.5rem;
     height: 2.5rem;
@@ -1654,8 +1855,9 @@ blockquote {
     .btn-top i {
 ***REMOVED***
 
-.banner-main-title h1 {
-    color: #fff
+
+.banner-main-title h1, .banner-main-title h5 {
+color: #fff
 ***REMOVED***
 
 .actions-links {
@@ -2007,8 +2209,8 @@ textarea {
     opacity: 1;
     visibility: visible;
     transform: none;
-    padding-left: 40px;
-    background: url(../img/svg-icons/icon-search.svg) no-repeat 10px;
+    padding-left: 15px;
+    /*background: url(../img/svg-icons/icon-search.svg) no-repeat 10px;*/
 ***REMOVED***
 
 .form-btn {
@@ -2321,6 +2523,7 @@ textarea {
         font-size: 1.125rem;
         width: 1.125rem;
         height: 1.125rem;
+        color: #88CFE0;
 ***REMOVED***
 
     .material-icons.md-20 {
@@ -2503,7 +2706,7 @@ textarea {
 .m4 {
     background-image: url('../img/bg_linea4.svg') !important;
 ***REMOVED***
-.modal{ min-height: 50%; max-height: 65%***REMOVED***
+.modal{ min-height: 50%; /*max-height: 65%*/***REMOVED***
 .modal a.close-modal {
     top: 0px!important;
     right: 0px!important
@@ -2830,18 +3033,18 @@ textarea {
 ***REMOVED***
 
 .pBotonera {
-    background: var(--bkBarButtoms);
+    /*background: var(--bkBarButtoms);*/
     border-radius: 1.5rem;
     height: 35px;
     margin-bottom: 1rem;
     padding-left: 0px !important;
-    max-width: 325px;
+    max-width: 364px;
 ***REMOVED***
 #Avance .pBotonera, #GrupoGasto .pBotonera, #Presupuesto .pBotonera {
     max-width: 400px;
 ***REMOVED***
 .pBotonera span {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     margin-right: 1rem;
     font-weight: 600;
     padding: 8px 42px;
@@ -2849,12 +3052,12 @@ textarea {
 
 
 .pChart {
-    min-height: 600px;
+    min-height: 800px;
 ***REMOVED***
 
 
 .bg-active {
-    background: #5E7FB1 !important;
+    background: #61C3DB !important;
 ***REMOVED***
 
 .bg-noactive {
@@ -2870,6 +3073,7 @@ textarea {
     .pBotonera span {
         padding: 8px 15px;
 ***REMOVED***
+
 ***REMOVED***
 
     /*2.15 Overlay*/
@@ -2958,6 +3162,1058 @@ textarea {
     .wrap-convencion .c2 {
         background-color: #99C0D6
 ***REMOVED***
+
+/*2.17 contracts*/
+
+.contratos-Data {
+    text-align: center;
+    background-color: #F7F9FE;
+***REMOVED***
+
+.card-deck-wrapper {
+***REMOVED***
+
+.contratos-Data .card {
+    background-color: #fff;
+    -webkit-box-shadow: 0px 3px 6px 0px rgb(0 0 0 / 15%);
+    -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 3px 6px 0px rgb(0 0 0 / 15%);
+    border-radius: 3px;
+***REMOVED***
+    .card-deck {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+    justify-content: center
+***REMOVED***
+
+.data-contrato {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #f3f3f3;
+***REMOVED***
+
+.data-contrato .h4 {
+    font-weight: 600 !important;
+***REMOVED***
+
+
+.minhCont {
+    color: #DB473C;
+***REMOVED***
+
+.contratos-Data .card-header {
+    background-color: #F9F9F9;
+    border-bottom: none !important;
+***REMOVED***
+
+.contratos-Data .card span {
+    text-transform: none !important;
+    display: block;
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+***REMOVED***
+
+.contratos-Data .card span {
+    text-transform: none!important;
+    display: block;
+    padding-bottom: 0px!important;
+    padding-top: 0px!important;
+***REMOVED***
+.data-contrato .h3 {
+    font-weight: 600;
+    margin-top: 0px;
+***REMOVED***
+
+.contratos-Data .card-header {
+    font-size: 22px;
+    font-weight: 600;
+    padding: 15px;
+***REMOVED***
+
+.contratos-Data .card span {
+    text-transform: none !important;
+    display: block;
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+***REMOVED***
+
+.totalpages {
+    text-align: center;
+    width: 50%;
+    display: inline-block;
+***REMOVED***
+
+.pull-right {
+    float: right !important;
+    margin-left: 8px;
+***REMOVED***
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+***REMOVED***
+    /*options*/
+    .triggerForm {
+    padding: 15px 0px;
+    text-align: center;
+***REMOVED***
+
+    .triggerForm .btn {
+        border-radius: 5px;
+        display: inline-block;
+***REMOVED***
+
+    .triggerForm .btn {
+        width: 100%;
+***REMOVED***
+
+.contractList {
+    padding: 25px;
+***REMOVED***
+
+.bgSoftGray {
+    background-color: #EDF3F6;
+***REMOVED***
+
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+***REMOVED***
+
+.form-group {
+    margin-bottom: 15px;
+***REMOVED***
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 11px !important;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+***REMOVED***
+
+.input-lg {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+***REMOVED***
+
+input[type="search"] {
+    background: #fff;
+***REMOVED***
+
+.triggerForm .btn-link {
+    margin-top: 15px;
+    color: #000;
+    font-size: 11px;
+    background: none;
+***REMOVED***
+
+/*CArds Contract*/
+
+.whiteBg {
+    background-color: #fff;
+    color: #333;
+***REMOVED***
+
+.contractBox {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #eaeaea;
+    background-color: #fff;
+***REMOVED***
+
+.wrap-proceso .cotractName {
+    background-color: #656D79;
+    padding: 15px 0px 15px 15px;
+    border-left: 3px solid #f58220;
+    margin-bottom: 0px;
+    color: #fff;
+***REMOVED***
+
+.processName, .contractNumberRP {
+    padding: 10px;
+    background-color: #E9E9E9;
+    word-break:break-word;
+***REMOVED***
+
+
+#lblValorAsignacionPrograma{ margin: 15px;***REMOVED***
+#lblEncabezadoListadoGrupos{ text-align: center;***REMOVED***
+
+.cotractName {
+    width: 100%;
+***REMOVED***
+
+.cotractName .h4 {
+    color: #fff !important;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-top: 5px;
+***REMOVED***
+
+    .cotractName.contractSEFIN {
+        background-color: #2E90A8;
+***REMOVED***
+    .cotractName.contractONCAE {
+        background-color: #6694C0;
+***REMOVED***
+
+
+    .cotractName .small {
+        color: #fff !important
+***REMOVED***
+
+.processName .h4 {
+    font-size: 22px;
+    font-weight: 600;
+***REMOVED***
+
+.wrap-head-process {
+    padding: 0px;
+    background-color: #f3f3f3;
+    margin-bottom: 10px;
+***REMOVED***
+
+.contractData {
+    padding: 15px 15px 0px;
+***REMOVED***
+
+.wrap-head-process .border-b {
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 7px;
+    padding-top: 7px;
+***REMOVED***
+
+.contractData .amount_adj {
+    font-size: 14px;
+    font-weight: 700;
+***REMOVED***
+
+/*Panel */
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+***REMOVED***
+
+.panel-body {
+    padding: 15px;
+***REMOVED***
+
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+    color: inherit;
+***REMOVED***
+
+.panel-group .panel {
+    /*margin-bottom: 0;*/
+    border-radius: 4px;
+***REMOVED***
+
+.panel-group {
+    margin-bottom: 20px;
+***REMOVED***
+
+.panel-default {
+    border-color: #ddd;
+***REMOVED***
+
+.panel-group .panel-heading + .panel-collapse > .list-group, .panel-group .panel-heading + .panel-collapse > .panel-body {
+    border-top: 1px solid #ddd;
+***REMOVED***
+
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+    border-top-color: #ddd;
+***REMOVED***
+
+.panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+***REMOVED***
+
+.panel-group .panel-heading {
+    border-bottom: 0;
+***REMOVED***
+
+.panel-default > .panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+***REMOVED***
+
+    .panel-default > .panel-heading + .panel-collapse > .panel-body {
+        border-top-color: #ddd;
+        padding: 13px;
+***REMOVED***
+
+.panel-group .panel-footer {
+    border-top: 0;
+***REMOVED***
+
+.panel-footer {
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+***REMOVED***
+
+.border-b {
+    border-bottom: 1px solid #f3f3f3;
+***REMOVED***
+
+.collapse {
+    display: none;
+***REMOVED***
+    .collapse.in {
+        display: block;
+***REMOVED***
+
+.amount_adj {
+    font-weight: 600;
+    font-size: 18px;
+    display: block;
+    /* word-break: break-all; */
+***REMOVED***
+
+[role=button] {
+    cursor: pointer;
+***REMOVED***
+
+ /*Related Contracts*/
+
+.related-contracts {
+    margin-bottom: 15px;
+***REMOVED***
+
+    .related-contracts span.h4 {
+        display: block;
+        padding-left: 15px;
+        text-align: left;
+        padding-top: 15px;
+        font-weight: 700;
+        font-size: 16px;
+***REMOVED***
+
+    .related-contracts .h4 {
+        padding-bottom: 15px;
+***REMOVED***
+
+    .related-contracts .panel-heading {
+        background-color: #fff;
+        border-radius: 0px;
+***REMOVED***
+
+        .related-contracts .panel-heading h4 {
+            font-weight: 400;
+    ***REMOVED***
+
+    .related-contracts .panel-title a {
+        display: block;
+        color: #000;
+        text-decoration: underline;
+***REMOVED***
+
+    .related-contracts #accordion {
+        width: 100%;
+        max-width: 100%;
+        font-size: 12px;
+***REMOVED***
+
+    .related-contracts .panel-title a:hover {
+        color: #1997BE;
+***REMOVED***
+
+
+.paginacionContratos {
+    padding: 25px 0px;
+    text-align: center;
+***REMOVED***
+
+.mainTit_t1 {
+    font-size: 30px;
+    line-height: 40px;
+    text-shadow: 0 2px 2px 0 rgba(0,0,0,1);
+    font-weight: 400;
+    color: #fff;
+***REMOVED***
+
+.Submaintit {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff;
+    font-size: 14px;
+***REMOVED***
+
+.details {
+    margin-top: 50px;
+***REMOVED***
+
+.list-inline {
+    padding-left: 0;
+    margin-left: -5px;
+    list-style: none;
+***REMOVED***
+
+.details li {
+    margin: auto 45px;
+***REMOVED***
+
+.list-inline > li {
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+***REMOVED***
+
+.details li h2 {
+    color: #fff;
+***REMOVED***
+
+
+.details li h3 {
+    color: #fff;
+***REMOVED***
+
+.details li h4 {
+    color: #fff;
+***REMOVED***
+
+.details li h5 {
+    color: #fff;
+***REMOVED***
+
+.details li h6 {
+    color: #fff;
+***REMOVED***
+
+.details li span {
+    display: block;
+    text-align: center;
+    font-weight: 400;
+    color: #fff;
+***REMOVED***
+
+
+/*2.18 Presupuesto y entidad */
+/*.ico_press {
+    float: left;
+    margin-right: 0.5rem;
+    min-height: 150px;
+***REMOVED****/
+.text-dark, .text-dark .accordion, .text-dark .bread-crumbs-list, .text-dark .bread-crumbs-list li, .text-dark .bread-crumbs-list li a {
+    color: #212529 !important
+***REMOVED***
+.prescontainer {
+***REMOVED***
+    .presaprob{ max-width: 476px;
+                min-width: 150px;
+***REMOVED***
+
+    .prescontainer .h2, .prescontainer .h4 {
+        font-weight: 600;
+***REMOVED***
+
+.prescontainer-noborder {
+    padding: 10px 0px;
+    display: flex;
+***REMOVED***
+
+    .prescontainer .h1, .prescontainer-noborder .h1 {
+        font-weight: 600
+***REMOVED***
+     .prescontainer-noborder .h1 {
+        font-weight: 400
+***REMOVED***
+
+    .prescontainer .h5 {
+        font-weight: 400;
+        font-size: 1rem;
+***REMOVED***
+
+.progesscontainer {
+    border: 1px solid;
+    padding: 5px;
+***REMOVED***
+
+.grapbar {
+    margin: 34px 0px;
+***REMOVED***
+
+.grapbarBorder {
+    margin: 32px 0px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #949699;
+***REMOVED***
+
+.grapbarBorderL {
+    border-left: 1px solid #949699;
+***REMOVED***
+
+.pgreen {
+    color: #61C3DB !important;
+    border-color: #61C3DB;
+***REMOVED***
+
+.pgray {
+    color: #949699;
+    border-color: #949699;
+    padding-bottom: 12px;
+***REMOVED***
+
+
+.bg-proexec {
+    background-color: #61C3DB !important;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    transition: width .6s ease;
+    font-size: 1rem;
+    font-weight: 600;
+    
+***REMOVED***
+
+.bg-provig {
+    background-color: #949699 !important;
+***REMOVED***
+
+.oldpres .h2 {
+    font-size: 20px;
+    font-weight: 600;
+    /*color: #2E90A8 !important;*/
+    margin-bottom: 2px;
+***REMOVED***
+
+
+.oldpres .h6, .oldpres .h5 {
+    /*color: #2E90A8;*/
+***REMOVED***
+
+/*entidad*/
+
+.presini, .presvig, .presexc {
+    text-align: center;
+***REMOVED***
+
+    .presini .h1, .presvig .h1, .presexc .h1, .presini .h2, .presvig .h2, .presexc .h2 {
+        font-weight: 600;
+***REMOVED***
+
+    .presvig .h5, .presvig .h1, .presvig .h2 {
+        color: #33C0D4 !important;
+***REMOVED***
+
+    .presexc .h5, .presexc .h1, .presexc .h2 {
+        color: #6EA7B5 !important;
+***REMOVED***
+
+.card-bodycntos {
+    padding: 12px;
+***REMOVED***
+
+.card-body .h4{ font-weight:600;***REMOVED***
+
+
+.car-header {
+    background-color: #F9F9F9;
+    text-align: center;
+    padding: 1rem 1rem;
+***REMOVED***
+
+    .car-header img {
+        padding-bottom: 20px;
+***REMOVED***
+
+.car-content {
+    text-align: center;
+    padding: 1rem 1rem;
+***REMOVED***
+
+.ico_contra {
+    float: left;
+    min-height: 120px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+***REMOVED***
+
+.ico_contra img {
+    margin-bottom: 20px;
+***REMOVED***
+
+.info_contra {
+    text-align: center;
+***REMOVED***
+
+    .info_contra .h2 {
+        font-weight: 600
+***REMOVED***
+
+.cntosusd .h6, .cntosusd .h4 {
+    color: /*#6694C0;*/ #4679AC;
+***REMOVED***
+
+
+/*.cntosusd .h4{ font-weight: 600;***REMOVED****/
+
+.btn-part {
+    background: #33C0D4 !important;
+    padding: 8px 20px !important;
+***REMOVED***
+
+
+#divPagContratos, #divPagFichas {
+    margin: 25px;
+    text-align: center;
+***REMOVED***
+
+.pag_actual {
+    padding: 10px;
+    font-weight: 700;
+    color: #61C3DB;
+    font-size: 14px;
+***REMOVED***
+
+.paginaHome a {
+    cursor: pointer;
+    display: inline-block;
+    color: #fff;
+***REMOVED***
+
+#page_right {
+    float: right;
+***REMOVED***
+
+.paginacion {
+    padding: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    padding-bottom: 20px;
+    font-family: Montserrat;
+***REMOVED***
+
+.pull-left {
+    float: left !important;
+***REMOVED***
+
+
+/*Contratos entidades*/
+.ProgramCards {
+***REMOVED***
+    .ProgramCards .card {
+        margin-bottom: 1.2rem;
+        border: 1px solid #dfdfdf !important;
+        border-radius: 8px;
+        background-color: #656D78;
+        width: 100%;
+        padding: 15px;
+***REMOVED***
+
+.ProgramCards p { color: #FFF;***REMOVED***
+
+.content-select {
+    /*max-width: 250px;*/
+    position: relative;
+***REMOVED***
+
+    .content-select select {
+        display: inline-block;
+        width: 100%;
+        cursor: pointer;
+        padding: 7px 10px;
+        height: 44px;
+        background: #fff;
+        font-size: 1rem;
+        font-weight: 800;
+        color: #121212;
+        border-radius: 8px;
+***REMOVED***
+
+        .content-select select:hover {
+            /*background: #B1E8CD;*/
+    ***REMOVED***
+
+    .content-select i {
+        position: absolute;
+        right: 20px;
+        top: calc(50% - 13px);
+        width: 16px;
+        height: 16px;
+        display: block;
+        border-left: 2px solid #08477A;
+        border-bottom: 2px solid #08477A;
+        transform: rotate(-45deg); /* Giramos el cuadrado */
+        transition: all 0.25s ease;
+***REMOVED***
+
+    .content-select:hover i {
+        margin-top: 3px;
+***REMOVED***
+
+.content-selectProceso {
+    position: relative;
+***REMOVED***
+    .content-selectProceso i {
+        position: absolute;
+        right: 48px;
+        top: calc(50% - 13px);
+        width: 16px;
+        height: 16px;
+        display: block;
+        border-left: 2px solid #fff;
+        border-bottom: 2px solid #fff;
+        transform: rotate(-45deg); /* Giramos el cuadrado */
+        transition: all 0.25s ease;
+***REMOVED***
+    
+    /*2.19 Contratos presupuesto*/
+    .asigFin {
+        padding: 16px 0px;
+        text-align: center;
+***REMOVED***
+.actiGas { padding: 16px 0px 0px 0px;***REMOVED***
+.switchTable {
+    text-align: center;
+    margin-bottom: 12px;
+***REMOVED***
+
+.Options {
+    margin-top: 15px;
+***REMOVED***
+
+.vis-none {
+    display: none;
+***REMOVED***
+.switchTable a.activo {
+    background-color: #88CFE0 !important;
+    color: #48789E;
+    opacity: 1;
+    border-bottom: 3px solid #48789E;
+***REMOVED***
+
+.switchTable a.btn {
+    padding: 10px;
+    margin: 0px 10px;
+    text-align: center;
+    color: #000;
+    /*/border-bottom: 3px solid var(--secgray);*/
+    opacity: .8;
+    background-color: var(--secgray);
+    
+***REMOVED***
+
+.txt-bold {
+    font-weight: 700;
+***REMOVED***
+
+.comparativeTable .panel-body {
+    padding: 0px;
+***REMOVED***
+
+.comparativeTable .panel-heading {
+    background-color: #88CFE0 !important;
+    color: #fff !important;
+***REMOVED***
+
+
+.comparativeTable .labelTit, .comparativeTable .td1p {
+    color: #121212;
+***REMOVED***
+.comparativeTable #tabs, .comparativeTable #tabs-2, .comparativeTable #accordion {
+    width: 100% !important;
+    max-width: 100%;
+***REMOVED***
+
+.comparativeTable .mainData {
+    font-weight: bold;
+    word-break: break-word;
+***REMOVED***
+
+.comparativeTable .nivel22 .panel-default {
+    border: none;
+    margin: 15px;
+***REMOVED***
+
+.comparativeTable .nivel22 .panel-heading {
+    background-color: #88cfe06b !important;
+    color: #4C88B7;
+    border-bottom: 5px solid #4C88B7;
+    display: flex;
+***REMOVED***
+
+.btnPerfil {
+    padding: 12px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    height: 40px;
+    margin-top: 8px;
+***REMOVED***
+    .btnPerfil i {
+        font-weight: 600;
+        vertical-align: middle;
+        color: #08477A !important;
+***REMOVED***
+
+.comparativeTable .nivel22 .panel-title a, .comparativeTable .nivel22 .panel-title .labelTit, .comparativeTable .nivel22 .panel-title .td1p {
+    color: #000;
+***REMOVED***
+
+.comparativeTable .nivel33 .panel-default {
+    margin: 15px 0px 0px;
+    border: 1px solid #DFE3E6;
+***REMOVED***
+
+.comparativeTable .nivel33 span.h6 {
+    color: #000;
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 10px 15px;
+    background-color: #f3f3f3;
+***REMOVED***
+
+.comparativeTable .list-group-item {
+    background-color: transparent;
+    border-width: 0 0 1px 0px;
+***REMOVED***
+
+.comparativeTable .nivel33 .labelTit, .comparativeTable .nivel33 .td1p {
+    color: #000;
+***REMOVED***
+
+
+/*table2*/
+
+    .comparativeTableContratos .panel-body {
+    padding: 0px;
+***REMOVED***
+
+.comparativeTableContratos .panel-heading {
+    background-color: #656D78 !important;
+    color: #fff !important;
+***REMOVED***
+
+.comparativeTableContratos .labelTit, .comparativeTableContratos .td1p, .comparativeTableContratos .td1 {
+    color: #fff;
+    font-weight: bold;
+***REMOVED***
+
+.comparativeTableContratos #tabs, .comparativeTableContratos #tabs-2, .comparativeTableContratos #accordion {
+    width: 100% !important;
+    max-width: 100%;
+***REMOVED***
+
+.comparativeTableContratos .mainData {
+    font-weight: bold;
+    font-size: 14px;
+    padding-right: 25px;
+    min-width: 50% !important;
+    max-width: 30% !important;
+***REMOVED***
+
+.comparativeTableContratos .nivel22 .panel-default {
+    border: none;
+    margin: 15px;
+***REMOVED***
+
+.comparativeTableContratos .nivel22 .panel-heading {
+    background-color: #F2F2F2 !important;
+    color: #4C88B7;
+    border-bottom: 4px solid #949699;
+***REMOVED***
+
+.comparativeTableContratos .nivel22 .panel-title a, .comparativeTableContratos .nivel22 .panel-title .labelTit, .comparativeTableContratos .nivel22 .panel-title .td1p {
+    color: #000;
+***REMOVED***
+
+.comparativeTableContratos .nivel22 .panel-title .labelTit {
+    font-size: 14px;
+    color: #61C3DB;
+    padding-bottom: 12px;
+***REMOVED***
+.comparativeTableContratos .nivel22 .panel-title span{ font-weight: 600; padding-bottom: 8px;***REMOVED***
+
+
+.comparativeTableContratos .nivel33 .panel-default {
+    /*margin: 15px 0px 0px;*/
+    border: 1px solid #DFE3E6;
+***REMOVED***
+
+.comparativeTableContratos .nivel33 .panel-title a { 
+    font-weight: 600;
+***REMOVED***
+
+.comparativeTableContratos .nivel33 span.h6 {
+    color: #000;
+    display: block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 10px 15px;
+    background-color: #f3f3f3;
+***REMOVED***
+
+.comparativeTableContratos .nivel33 .panel-heading {
+    background-color: #fff !important;
+    color: #4C88B7;
+    border-bottom: none;
+***REMOVED***
+
+.comparativeTableContratos.list-group-item {
+    background-color: transparent;
+    border-width: 0 0 1px 0px;
+***REMOVED***
+
+.comparativeTableContratos .nivel33 .labelTit, .comparativeTableContratos .nivel33 .td1p {
+    color: #000;
+***REMOVED***
+
+/*Tremap presupuesto*/
+
+.panel-title a:hover { color: #fff; text-decoration: none;***REMOVED***
+
+.head {
+    display: flex;
+    flex-wrap: inherit;
+    align-content: space-between;
+    width: 100%;
+***REMOVED***
+
+.headEnt {
+    display: flex;
+    /*flex-wrap: wrap;*/
+    align-content: space-between;
+    width: 100%;
+***REMOVED***
+
+.headND {
+    /*display: flex;*/
+    flex-wrap: inherit;
+    align-content: space-between;
+    width: 100%;
+***REMOVED***
+
+.mainData {
+    font-size: 14px;
+    padding-right: 25px;
+    min-width: 30% !important;
+    max-width: 30% !important;
+***REMOVED***
+
+.mainDataEntidad {
+    font-size: 14px;
+    padding-right: 25px;
+    min-width: 20% !important;
+    max-width: 20% !important;
+***REMOVED***
+
+.data1 {
+    margin-right: 25px;
+    min-width: 20%;
+    max-width: 20%;
+***REMOVED***
+
+.data1a {
+    margin-right: 10px;
+    min-width: 10%;
+    max-width: 10%;
+***REMOVED***
+
+.summUp {
+    background: #e5e5e5;
+    padding: 16px;
+***REMOVED***
+
+.summUp .panel-title .head .data1 .labelTit, .summUp .panel-title .head .data1 .td1 {
+    color: #121212;
+***REMOVED***
+
+    .summUp .panel-title .head .data1a .labelTit, .summUp .panel-title .head .data1a .td1 {
+        color: #121212;
+***REMOVED***
+
+.labelTit {
+    font-size: 12px;
+    font-weight: 600
+***REMOVED***
+.labelTit, .td1p {
+    display: block;
+    color: #fff;
+***REMOVED***
+
+.td1{ color: #121212; font-weight: 600***REMOVED***
+
+
+/*mediaquery*/
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+
+    .data1 {
+        margin-right: 25px;
+        min-width: 100% !important;
+        max-width: 50% !important;
+***REMOVED***
+
+    .mainData {
+        font-size: 14px;
+        padding-right: 25px;
+        min-width: 0%;
+        max-width: 0%;
+***REMOVED***
+
+***REMOVED***
+
+
+/*2.20 Partipacion*/
+
+.tParticipe {***REMOVED***
+.tit-section {
+    text-align: center;
+***REMOVED***
+.tParticipe, .text-section {
+    padding: 25px 0px;
+    text-align: center;
+***REMOVED***
+
+.mh240{ min-height: 240px***REMOVED***
+
+
+
+
+
+
 /* === 3. Bloks === */
 /* 3.1 banner main */
 .intro {
@@ -2977,15 +4233,14 @@ textarea {
         overflow: hidden;
 ***REMOVED***
 
-    .intro-item {
-        position: relative;
-        display: flex;
-        align-items: center;
-        padding: 3.5rem 0;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        width: 100%;
+.intro-item {
+    position: relative;
+    display: flex;
+    padding: 3.5rem 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
 ***REMOVED***
 
         .intro-item .container {
@@ -3004,14 +4259,16 @@ textarea {
             opacity: 0.7;
     ***REMOVED***
 
-        .intro-item .section-desc {
-            margin-top: 1.75rem;
-    ***REMOVED***
+    .intro-item .section-desc {
+        margin: 1.75rem 0 1.75rem 0
+***REMOVED***
 
     .intro-content {
         width: 100%;
         max-width: 40.25rem;
-        padding: 0 0 3.75rem 6.25rem;
+        padding: 3.25rem;
+        background-color: rgba(255, 255, 255, .9);
+        border-radius: 5px;
 ***REMOVED***
 
         .intro-content.intro-content-center {
@@ -3086,13 +4343,13 @@ textarea {
 
     @media (max-width: 991.98px) {
         .intro-content {
-            padding-left: 0;
+            /*padding-left: 0;*/
             max-width: 25rem;
     ***REMOVED***
 ***REMOVED***
 
     @media only screen and (max-width: 767.98px), only screen and (min-width: 567px) and (max-width: 900px) and (orientation: landscape) {
-        .logo.logo-ico-widht-text { display: none
+        .logo.logo-ico-widht-text { /*display: none*/
     ***REMOVED***
         .intro-content {
             padding-bottom: 0;
@@ -3169,23 +4426,21 @@ textarea {
 ***REMOVED***
 
     /* 3.1.2 Services */
-    .logoIntro img {
-        margin-top: 22px; height: 65px
-***REMOVED***
 
-    .banner-main {
-        padding-top: 0px;
-        padding-bottom: 3rem;
-        /*background: linear-gradient(45deg, rgba(232,251,245,1) 0%, rgba(214,236,248,1) 100%);*/
-        background: url(../img/HeaderPage.jpg) no-repeat center;
-        background-size: cover;
+.banner-main {
+    /*padding-top: 0px;
+        padding-bottom: 3rem;*/
+    /*background: linear-gradient(45deg, rgba(232,251,245,1) 0%, rgba(214,236,248,1) 100%);*/
+    background: url(../img/HeaderPage.jpg) no-repeat center;
+    background-size: cover;
+    padding: 1rem;
 ***REMOVED***
 
 .banner-main-stp {
     padding-top: 0px;
     padding-bottom: 3rem;
     /*background: linear-gradient(45deg, rgba(232,251,245,1) 0%, rgba(214,236,248,1) 100%);*/
-    background: url(../img/HeaderPagesSTP.jpg) no-repeat center;
+    background: url(../img//headerBK.jpg) no-repeat center;
     background-size: cover;
 ***REMOVED***
 
@@ -3193,7 +4448,7 @@ textarea {
     padding-top: 0px;
     padding-bottom: 3rem;
     /*background: linear-gradient(45deg, rgba(232,251,245,1) 0%, rgba(214,236,248,1) 100%);*/
-    background: url(../img/HeaderPageAsc.jpg) no-repeat center;
+    background: url(../img/headerBK.jpg) no-repeat center;
     background-size: cover;
 ***REMOVED***
 
@@ -3202,10 +4457,13 @@ textarea {
         padding: 2rem 0px;
         text-align: center
 ***REMOVED***
-
-    .goals-main-info {
-        padding: 2rem 0px;
-        text-align: left
+.banner-main-info a{ color: #fff***REMOVED***
+.banner-main-info  {
+    color: #fff
+***REMOVED***
+.goals-main-info {
+    padding: 2rem 0px;
+    text-align: left
 ***REMOVED***
 
     .banner-main-title, .banner-main-title-blue {
@@ -3220,8 +4478,13 @@ textarea {
             color: var(--heading-font-color);
     ***REMOVED***
 
-    .banner-main-desc {
+    .banner-main-desc h6 {
         color: var( --primary-color);
+        font-weight:600;
+***REMOVED***
+.banner-main-desc h5 {
+    color: var( --primary-color);
+    font-weight: 600;
 ***REMOVED***
 
     .banner-main-desc-blue {
@@ -3231,6 +4494,7 @@ textarea {
     .navs-shortcuts {
         margin: 2rem 0;
         text-align: center;
+        position: relative;
 ***REMOVED***
 
         .navs-shortcuts a {
@@ -3242,7 +4506,7 @@ textarea {
 
             .navs-shortcuts a:hover {
                 color: #fff;
-                background-color: rgba(13, 40, 75, 0.73);
+                background-color: #61C3DB;
                 border-radius: 3px;
         ***REMOVED***
 
@@ -3260,10 +4524,10 @@ textarea {
             background-color: #003366;
     ***REMOVED***
 
-    .bg-white {
-        background-color: #003366 !important; /*#fff;*/
-        margin: 0px;
-        /*box-shadow: 0px 5px 5px #ccc;*/
+.bg-white {
+    background-color: #0B3660 !important; /*#fff;*/
+    margin: 0px;
+    /*box-shadow: 0px 5px 5px #ccc;*/
 ***REMOVED***
     /* 3.2 Services */
     .services {
@@ -3273,7 +4537,7 @@ textarea {
     .services-item {
         display: block;
         text-align: center;
-        padding: 3rem 1.5rem;
+        padding: 1.5rem;
         text-decoration: none;
 ***REMOVED***
 
@@ -3730,7 +4994,7 @@ textarea {
 
     /* 3.4 Counters */
     section {
-        padding: 2rem 0px;
+        padding: 1.25rem 0px;
         display: block
 ***REMOVED***
 
@@ -4082,7 +5346,94 @@ textarea {
         max-width: 21.875rem;
         margin-left: 15px;
 ***REMOVED***
+.gallery-col-carusel {
+    width: 28%;
+    max-width: 21.875rem;
+    margin-left: 15px;
+    background-color: #fff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+***REMOVED***
 
+.gallery-card .thumbnail {
+    position: relative;
+    display: block;
+    height: 24rem;
+    width: 100%;
+    overflow: hidden;
+***REMOVED***
+
+.gallery-card .enlace_img {
+    height: 24rem;
+    background-position: center center;
+    background-size: cover
+***REMOVED***
+
+.gallery-card .labelCategory {
+    height: 50px !important
+***REMOVED***
+
+.ic-gal {
+    margin-right: 8px
+***REMOVED***
+
+.desc-gal {
+    text-overflow: ellipsis
+***REMOVED***
+
+.text-elipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+***REMOVED***
+
+.btn-zoom {
+    position: absolute;
+    right: 10px;
+    bottom: 60px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255,255,255,.8);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 8px;
+    text-align: center;
+***REMOVED***
+
+    .btn-zoom:hover {
+        cursor: pointer
+***REMOVED***
+
+.ic-gal .material-icons.md-48 {
+    color: #9d1717 !important
+***REMOVED***
+
+.w4col .gallery-col-carusel {
+    width: 28%;
+    max-width: 21.875rem;
+***REMOVED***
+
+.w2col .gallery-col-carusel {
+    width: 80%;
+    max-width: 35rem;
+***REMOVED***
+
+.w4col .gallery-card {
+    width: 100%;
+    max-width: 21.875rem;
+***REMOVED***
+
+    .w4col .gallery-card .thumbnail {
+        height: 20rem
+***REMOVED***
+
+.w4col .labelCategory {
+    top: 85% !important
+***REMOVED***
+
+.w4col .labelCategory, .w2col .labelCategory {
+    padding-left: 8px;
+    padding-right: 8px
+***REMOVED***
     .project-author {
         display: flex;
         justify-content: center;
@@ -4633,9 +5984,13 @@ textarea {
         background-color: #003366 !important;
         color: #fff!important;
 ***REMOVED***
-div.focused-cat{ background-color: aliceblue***REMOVED***
+div.focused-cat{ background-color: aliceblue; /*visibility: hidden;*/***REMOVED***
 div.focused-glo{ border: 2px solid #003366; background-color: aliceblue; border-radius: 5px; font-weight: 700***REMOVED***
-.indice{ text-align: center; padding: 5px 8px***REMOVED***
+.wrap-letters{ display: flex; align-items: center; justify-content: center; flex-wrap: wrap***REMOVED***
+.indice {
+    text-align: center;
+    padding: 5px 8px
+***REMOVED***
 .wrap-ventajas .material-icons.md-48 {
     color: #fff
 ***REMOVED***
@@ -5567,8 +6922,7 @@ div.focused-glo{ border: 2px solid #003366; background-color: aliceblue; border-
 
     .section-questions {
         position: relative;
-        padding: 5rem 5rem 1rem 5rem;
-        background: var(--Mainquestions);
+        padding: 5rem 5rem 5rem 5rem;
 ***REMOVED***
 
         .section-questions h4 {
@@ -5638,9 +6992,18 @@ div.focused-glo{ border: 2px solid #003366; background-color: aliceblue; border-
         float: right
 ***REMOVED***
 
-    .card-category {
-        color: #333;
-        font-size: 11px
+
+.card-group > .card {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 8px !important;
+***REMOVED***
+
+
+.card-category {
+    color: #2E90A8;
+    font-size: 16px;
+    font-weight: 600;
 ***REMOVED***
 
     .justify-content-right {
@@ -5668,6 +7031,7 @@ div.focused-glo{ border: 2px solid #003366; background-color: aliceblue; border-
 
     .infogram {
         background: url(/img/Bkhomeslider.jpg);
+        background-size: cover;
 ***REMOVED***
 
 
@@ -5724,6 +7088,22 @@ div.focused-glo{ border: 2px solid #003366; background-color: aliceblue; border-
 
     /* 3.20 twitter*/
 
+.sectionews {
+    padding: 0 !important
+***REMOVED***
+.section-graysoft {
+    position: relative;
+    padding: 5rem 0;
+    background-color: #F8F8F8;
+***REMOVED***
+
+    .twitter{ width: 55%;***REMOVED***
+.section-twitter {
+    /*background: var(--Stwitter);*/
+    padding: 1rem;
+    /*max-height: 655px;*/
+***REMOVED***
+
     .content-twitter {
 ***REMOVED***
 
@@ -5737,9 +7117,9 @@ div.focused-glo{ border: 2px solid #003366; background-color: aliceblue; border-
             margin: 0.8rem;
     ***REMOVED***
 
-    .relatedInfo {
-        /*background-color: #f8f9fa;*/
-        background-color: #F1F1F1;
+.relatedInfo {
+    background-color: #f8f9fa;
+    /*background-color: #F1F1F1;*/
 ***REMOVED***
 
     .bg-gray2 {
@@ -5750,8 +7130,6 @@ div.focused-glo{ border: 2px solid #003366; background-color: aliceblue; border-
         background-color: transparent
 ***REMOVED***
 
-    .relatedInfo {
-***REMOVED***
 
         .relatedInfo .list-group i {
             float: right
@@ -5879,13 +7257,26 @@ div.focused-glo{ border: 2px solid #003366; background-color: aliceblue; border-
     .wrap-cta i {
 ***REMOVED***
 
+.card-headerdata {
+    padding: .5rem 1rem;
+    margin-bottom: 0;
+    background-color: rgb(186 227 248 / 22%);
+    border-bottom: 1pxsolidrgba(0,0,0,.125);
+***REMOVED***
 
+
+    /**3.24 News**/
+
+    .Cnews{width: 70%;
+          float: right;
+          padding: 5rem 0;
+***REMOVED***
 
     /* === 4. Layouts === */
     /* 4.1 Header */
     .header-top {
         position: relative;
-        /*background-color: #F1F3F5; /*var(--neutral-bg-color);*/
+        background-color: var(--bkheadertop);
         color: #000;
         padding: 0.625rem 0;
         font-size: 0.8rem;
@@ -6048,21 +7439,22 @@ div.focused-glo{ border: 2px solid #003366; background-color: aliceblue; border-
         left: 0;
         top: 0;
         width: 100%;
-        /*padding: 0.75rem 0;*/
-        background-color: #F3F3F3;
+        padding: 1rem 0;
+        background-color: #fff;
         font-size: 1rem;
         display: flex;
         align-items: center;
         z-index: 101;
         border-bottom: 4px solid var(--Borderblue);
         /*box-shadow: var(--header-box-shadow);*/
+        height: 212px;
 ***REMOVED***
 
         .header-fixed .logo {
             max-height: 2.25rem;
             height: 2.25rem;
     ***REMOVED***
-
+        
         .header-fixed .col-static {
             position: static;
     ***REMOVED***
@@ -6071,34 +7463,36 @@ div.focused-glo{ border: 2px solid #003366; background-color: aliceblue; border-
             position: relative;
     ***REMOVED***
 
-    .logo {
-        display: block;
-        text-decoration: none;
-        color: var(--text-primary);
-        opacity: 1;
-        font-size: 1.125rem;
-        font-family: var(--heading-font-family), sans-serif;
-        height: 3.5rem;
-        font-weight: bold;
+.logo {
+    display: /*block;*/ inline-block;
+    text-decoration: none;
+    color: var(--text-primary);
+    opacity: 1;
+    font-size: 1.125rem;
+    font-family: var(--heading-font-family), sans-serif;
+    height: 3.5rem;
+    font-weight: bold;
 ***REMOVED***
 
         .logo:hover {
             color: var(--text-primary);
     ***REMOVED***
 
-        .logo.logo-ico-widht-text {
-            display: flex;
-            /*align-items: center;*/
-    ***REMOVED***
+    .logo.logo-ico-widht-text {
+        /*display: flex;*/
+        /*align-items: center;*/
+***REMOVED***
 
         .logo .logo-ico {
             margin-right: 0.625rem;
     ***REMOVED***
 
-        .logo img {
-            max-height: 3.5rem;
-            max-width: 10rem;
-    ***REMOVED***
+    .logo img {
+        /*max-height: 3.5rem;
+            max-width: 12rem;*/
+        height: 104px;
+        width: auto;
+***REMOVED***
 
         .logo svg {
             display: block;
@@ -6113,11 +7507,6 @@ div.focused-glo{ border: 2px solid #003366; background-color: aliceblue; border-
 
     .logoRC {
         text-align: left;
-***REMOVED***
-
-    .logoIntro {
-        text-align: center;
-        padding: 15px 0px 25px 0px;
 ***REMOVED***
 ***REMOVED***
 
@@ -6429,29 +7818,33 @@ body.mob-main-mnu-open {
             font-family: var(--font-family), sans-serif;
     ***REMOVED***
         .main-mnu-list > li.main-mnu-item-has-child-activeTab {
-            background-color: #6a91b0;
+            background-color: #61C3DB; /*#6a91b0;*/
     ***REMOVED***
             .main-mnu-list > li.main-mnu-item-has-child-activeTab { color: #fff***REMOVED***
             .main-mnu-list > li.main-mnu-item-has-child, .main-mnu-list > li.main-mnu-item-has-child-activeTab {
                 padding-right: 0;
         ***REMOVED***
 
-            .main-mnu-list > li.main-mnu-item-has-child:hover, .main-mnu-list > li.main-mnu-item-has-child-activeTab:hover {
-                padding-right: 0;
-                background: #6A91B0;
-        ***REMOVED***
+                .main-mnu-list > li.main-mnu-item-has-child:hover, .main-mnu-list > li.main-mnu-item-has-child-activeTab:hover {
+                    padding-right: 0;
+                    background: #949699; /*#375169;*/
+            ***REMOVED***
 
             .main-mnu-list > li.main-mnu-item-has-child > a, .main-mnu-list > li.main-mnu-item-has-child-activeTab > a {
                 display: flex;
                 align-items: center;
         ***REMOVED***
 
-                .main-mnu-list > li.main-mnu-item-has-child > a i, .main-mnu-list > li.main-mnu-item-has-child-activeTab > a i {
+                .main-mnu-list > li.main-mnu-item-has-child > a i {
+                    color: #121212;
+            ***REMOVED***
+
+               .main-mnu-list > li.main-mnu-item-has-child-activeTab > a i {
                     margin-left: 0.25rem;
                     font-size: 1.125rem;
                     width: 1.125rem;
                     height: 1.125rem;
-                    color: var(--main-color);
+                    color: #fff;
                     transition: all 0.4s;
             ***REMOVED***
 
@@ -6820,6 +8213,69 @@ body.mob-main-mnu-open {
         .header-search-form .form-field .form-field-input {
             padding-right: 2.5rem;
     ***REMOVED***
+
+.whiteSearch {
+    height: 56px;
+    background: white;
+    padding: 4px;
+    border-radius: 8px;
+    text-align: left;
+***REMOVED***
+.whiteSearch input { border: none !important***REMOVED***
+.whiteSearch input[type="search"]{ width: 84% !important***REMOVED***
+.buttonsearBTN {
+    position: absolute;
+    border-radius: 8px;
+    background-color: #DB473C;
+    border: none;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.25s;
+    padding: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    width: 130px;
+    text-align: center;
+    display: flex;
+    cursor: pointer;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    vertical-align: middle;
+    justify-content: center;
+***REMOVED***
+
+    .buttonsearBTN span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+***REMOVED***
+
+        .buttonsearBTN span:after {
+            content: '»';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            right: -15px;
+            transition: 0.5s;
+    ***REMOVED***
+
+    .buttonsearBTN:hover span {
+        padding-right: 15px;
+***REMOVED***
+
+        .buttonsearBTN:hover span:after {
+            opacity: 1;
+            right: 0;
+    ***REMOVED***
+
+
+
+
+
 
 .header-search-btn,
 .search-btn {
@@ -7245,7 +8701,7 @@ body.mob-main-mnu-open {
 ***REMOVED***
 
         .sidebar-cat-item a:hover, .sidebar-cat-item a.active {
-            color: var(--main-color);
+            color: #61C3DB; /* var(--main-color);*/
     ***REMOVED***
 
     .sidebar-cat-item ul {
@@ -7287,11 +8743,7 @@ body.mob-main-mnu-open {
     padding: 4rem 0;
 ***REMOVED***
 
-.section-twitter {
-    background: var(--Stwitter);
-    padding: 1rem;
-    max-height: 655px;
-***REMOVED***
+
 
 .section-login {
     background: var(--Slogin);
@@ -7327,11 +8779,15 @@ body.mob-main-mnu-open {
     background-color: var(--cream-section);
 ***REMOVED***
 
+.section-white {
+    position: relative;
+    padding: 5rem 0;
+***REMOVED***
 
 .section-gray {
     position: relative;
     padding: 5rem 0;
-    background-color: #DFE3E6;
+    background-color: var(--secgray);
 ***REMOVED***
 
 .section-gray05 {
@@ -7359,7 +8815,7 @@ body.mob-main-mnu-open {
 ***REMOVED***
 
 .section-heading {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 ***REMOVED***
 
     .section-heading a:hover {
@@ -7395,7 +8851,7 @@ body.mob-main-mnu-open {
     margin: 1.25rem auto 0 auto;
     max-width: 35rem;
     color: var(--text-secondary);
-    font-size: 1.5rem;
+    /*font-size: 1.25rem;*/
 ***REMOVED***
 
 .section-btns {
@@ -7410,6 +8866,7 @@ body.mob-main-mnu-open {
     .section-btns .btn {
         margin-bottom: 1rem;
         margin-left: 1rem;
+        font-weight:600;
 ***REMOVED***
 
 .section-nav {
@@ -7527,7 +8984,7 @@ body.mob-main-mnu-open {
     max-width: 64rem;
     margin-left: auto;
     margin-right: auto;
-    padding: 2rem 0rem;
+    padding: 1rem 0rem;
 ***REMOVED***
 
 .search-page-list {
@@ -7574,9 +9031,10 @@ body.mob-main-mnu-open {
     ***REMOVED***
 
 .search-page-results-text {
-    margin-bottom: 0;
-    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 0rem;
     color: #fff;
+    font-size: 20px;
 ***REMOVED***
 
     .search-page-results-text b, .search-page-results-text strong {
@@ -7652,8 +9110,8 @@ body.mob-main-mnu-open {
 
 .footer-main {
     padding: 3rem 0 1rem 0;
-    background: #011c31;
-    border-top: 3px solid #E8B424;
+    background: var(--footermain);
+    /*border-top: 3px solid var(--bderfooterm);*/
     border-bottom: 1px solid #011c31;
 ***REMOVED***
 
@@ -7682,6 +9140,7 @@ body.mob-main-mnu-open {
 
     .footer-company-links a {
         padding-right: 10px;
+        margin: 8px 15px
 ***REMOVED***
 
 .footer-company-desc p {
@@ -7735,11 +9194,12 @@ body.mob-main-mnu-open {
 ***REMOVED***
 
 .footer-item-heading {
-    font-size: 1.10rem;
-    margin-bottom: 1.25rem;
+    font-size: 0.8rem;
+    margin-bottom: 1.5rem;
     opacity: 0.9;
     font-weight: bold;
     color: #fff;
+    text-align: center;
 ***REMOVED***
 
 .footer-mnu li {
@@ -7764,7 +9224,10 @@ body.mob-main-mnu-open {
 ***REMOVED***
 
 .footer-mnu .hover-link {
-    font-size: 0.80rem;
+    font-size: 0.65rem;
+***REMOVED***
+    .footer-mnu .hover-link > span {
+        font-weight: 600;
 ***REMOVED***
 
 .footer-contacts li {
@@ -7824,7 +9287,7 @@ body.mob-main-mnu-open {
 .footer-bottom {
     position: relative;
     padding: 3rem 0;
-    background: #022B4B;
+    background: var(--footerbtm);
 ***REMOVED***
 
     .footer-bottom::before {
@@ -7883,15 +9346,106 @@ body.mob-main-mnu-open {
     text-align: center;
 ***REMOVED***
 .progress-bar {
-    background-color: #84afda !important
+    background-color: #88CFE0 !important
 ***REMOVED***
 .footer-company-top a img {
-    height: 50px;
+    height: 70px;
     margin: 0px 0px 15px 0px;
 ***REMOVED***
 #contenidoActividades .card{ border: 1px solid #ccc***REMOVED***
 .colorbox-demo{ width:10px; height: 10px***REMOVED***
-@media (max-width: 767.98px) {
+.head-control, .botonera-action {
+    display: none
+***REMOVED***
+.wrap-side-links{ border-radius: 6px;***REMOVED***
+    .wrap-side-links .list-group-item a {
+        display: flex; flex-direction: row; justify-content:space-between
+***REMOVED***
+        .wrap-side-links .list-group-item a i{***REMOVED***
+
+        @media (max-width: 767.98px) {
+            .botonera-action{ display: flex; padding: 5rem 1rem; text-align: center; justify-content: center***REMOVED***
+        .botonera-action .btn-outlined {
+            border: 2px solid #DB473C;
+    ***REMOVED***
+            .botonera-action .btn-outlined * {
+                color: #DB473C
+        ***REMOVED***
+            .head-control {
+                display: flex;
+                justify-content: space-between;
+                padding: 0 1em;
+        ***REMOVED***
+        .head-control button{ background-color: transparent; border: none; ***REMOVED***
+            .head-control button span {
+                font-size: 15px
+        ***REMOVED***
+    #section-home .projects-list-view .title {
+        font-weight: 700;
+        text-align: left;
+        background-color: #f4f4f4;
+        border-bottom: 1px solid #ccc;
+***REMOVED***
+    #section-home #controls #map-view, #section-home .projects-list-view {
+        height: 680px; min-width: 290px;
+***REMOVED***
+    #section-home #controls .filter-group .txt{padding: 1em 1em 1em 0.4em!important ***REMOVED***
+    .main-header {
+        justify-content: left;
+        flex-wrap: nowrap
+***REMOVED***
+    .main-header img{ height: 70px; width: auto***REMOVED***
+    .intro {
+        min-height: auto
+***REMOVED***
+    .intro-item {
+        min-height: 17rem;
+        text-align: center
+***REMOVED***
+    .logo img {
+        height: 72px
+***REMOVED***
+    .h120{ height: auto***REMOVED***
+    .header-fixed{ height: 120px***REMOVED***
+    .banner-main-section .details li {
+        width: 90%;
+        margin: 15px auto;
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 8px;
+***REMOVED***
+    .goal-name .h4{ font-size: .8rem***REMOVED***
+    .banner-main-title h1 {
+       /* word-break: break-all*/
+***REMOVED***
+    .footer-company-links {
+        margin: 15px 0px 0px 0px
+***REMOVED***
+    .footer-company-links a {
+        display: block; margin: 8px 0px;
+***REMOVED***
+    .mainData, .data1 {
+        max-width: 100% !important
+***REMOVED***
+    .w-88 {
+        width: 100%
+***REMOVED***
+    .head {
+        display: block
+***REMOVED***
+
+    .headEnt {
+        display: flow-root;
+        /*flex-wrap: wrap;*/
+        align-content: space-between;
+        width: 100%;
+***REMOVED***
+
+    .comparativeTable .panel-heading {
+        flex-direction: column;
+***REMOVED***
+
+
     .footer-bottom img {
         margin: 1rem;
 ***REMOVED***
@@ -7921,7 +9475,7 @@ body.mob-main-mnu-open {
     .item-style {
         position: relative;
         background-color: var(--primary-color);
-        border-radius: 0px;
+        border-radius: 8px;
         overflow: hidden;
         color: var(--text-primary);
         height: 100%;
@@ -8193,7 +9747,52 @@ body.mob-main-mnu-open {
         border-top-right-radius: 12px;
         border-bottom-right-radius: 12px;
 ***REMOVED***
+
+    /*Fuente de Datos*/
+.section-dataFuente {
+    padding: 50px 0px;
+    color: #000;
+***REMOVED***
+
+    .section-dataFuente h6 {
+        font-size: 12px;
+        text-align: center;
+        margin-bottom: 25px;
+***REMOVED***
+
+.boxDataSource {
+    width: 40%;
+    margin: 0 auto 25px auto;
+    font-size: 12px;
+    text-align: center;
+    background-color: rgba(188, 224, 253, .03);
+***REMOVED***
+
+    .boxDataSource h4 {
+        padding: 5px;
+        font-size: 12px;
+        font-weight: 700;
+***REMOVED***
+
+.boxDataSourceDA {
+    margin: 0 auto 25px auto;
+    font-size: 12px;
+    background-color: rgba(188, 224, 253, .03);
+***REMOVED***
+
+    .boxDataSourceDA h4 {
+        padding: 5px;
+        font-size: 12px;
+        font-weight: 700;
+***REMOVED***
+
+
+.border-right {
+    border-right: 1px solid #001A66;
+***REMOVED***
+
     /* === 4.8 centro de ayuda=== */
+
     .categoriapregunta {
         border: 1px solid #ccc;
         padding: 0.5rem;
@@ -8225,21 +9824,327 @@ body.mob-main-mnu-open {
         color: #fff;
         text-align: left
 ***REMOVED***
-    /* === 5. Cookie === */
-    .cookie-message {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        padding: 1.25rem 1rem;
-        opacity: 0;
-        visibility: hidden;
-        color: var(--primary-color);
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
-        z-index: 111111;
-        transition: all 0.25s;
+
+    /*==== 4.9 Perfil Proyecto*/
+
+.mb-10{ margin-bottom: 10px;***REMOVED***
+
+
+.banner-main-section {
+    background-size: cover;
+    position: relative;
+    padding-top: 0px;
+    padding-bottom: 3rem;
+***REMOVED***
+
+.description-box {
+    background-color: #F5F6F7;
+    border-radius: 6px;
+    padding: 2rem
+***REMOVED***
+
+    .description-box .listDetail {
+        margin: 0px;
+        padding: 0px
+***REMOVED***
+
+    .description-box li {
+        list-style: none;
+        border-bottom: 1px solid #ccc !important;
+        padding: 8px 0px !important;
+        margin-bottom: 8px !important;
+        font-size: 0.875rem;
+***REMOVED***
+
+
+.benf {
+    padding-inline-start: 4px;
+***REMOVED***
+
+    .benf li {
+        list-style: none;
+        border-bottom: 0px solid #ccc !important;
+        padding: 4px 0px !important;
+        margin-bottom: 4px !important;
+        font-size: 14px;
+***REMOVED***
+
+    .description-box li:last-child {
+            border-bottom: 0 !important
+    ***REMOVED***
+
+    .description-box .text-desc {
+        display: block;
+        font-weight: 700
+***REMOVED***
+
+    .description-box .label-desc {
+        width: 45%;
+***REMOVED***
+
+    .description-box .label-benf {
+       font-weight: 600;
+       text-align: center;
+***REMOVED***
+
+.bIcon{ float: left; padding-right: 8px;***REMOVED***
+
+.dataGraph{
+    float: left;
+    margin-bottom: 12px;
+***REMOVED***
+
+.containerBox{ width:50%;***REMOVED***
+
+
+
+.heading-Project{ margin: 12px 0px 24px 0px***REMOVED***
+.heading-Project h5{ font-weight: 700 ***REMOVED***
+
+.containerBoxExec {
+    background-color: #F5F6F7;
+    padding: 12px;
+    margin-bottom: 20px;
+***REMOVED***
+
+.containerBoxExec label{ font-size: 14px; font-weight: normal;***REMOVED***
+.containerBoxExec > .form-group > .form-select {
+        font-size: 0.9rem;
+***REMOVED***
+
+    .stageBox .badge {
+        font-size: 10px;
+        text-transform: uppercase;
+        font-weight: 600;
+        border: 1px solid #777;
+        background-color: transparent;
+        color: #000;
+***REMOVED***
+
+.section-photos {
+    background: #F9F9FA;
+***REMOVED***
+
+.empty-gallery {
+    width: 100%;
+    /*padding: 6.5rem;*/
+    text-align: center;
+    font-size: 14px;
+***REMOVED***
+
+.carousel-control.left {
+    background-image: none;
+***REMOVED***
+
+.carousel-control.left {
+    background-image: none;
+***REMOVED***
+
+.user-form-login .light-bg {
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+***REMOVED***
+
+.light-bg {
+    background-color: #FFF;
+***REMOVED***
+
+.boxCompoActivities {
+    border: 1px solid #ccc;
+    padding: 25px;
+***REMOVED***
+
+.containerActivities .badge {
+    background-color: #6694C0;
+    border-radius: 0px;
+    min-width: 50px;
+***REMOVED***
+
+    .s2-section .thumbnail {
+        position: relative;
+        padding: 0px;
+        border: none;
+***REMOVED***
+
+.carousel {
+    margin-bottom: 0;
+    /* padding: 0 40px 30px 40px; */
+    padding: 0px 25px 19px 25px;
+    margin-top: 25px;
+***REMOVED***
+.mediumPics .carousel-inner {
+    min-height: 460px;
+***REMOVED***
+.mediumPics .thumbnail {
+    width: 100%;
+    height: 390px;
+***REMOVED***
+
+.enlace_img {
+    height: 400px;
+    background-size: cover !important;
+***REMOVED***
+
+.labelCategory {
+    padding: 3px;
+    position: absolute;
+    z-index: 11;
+    top: 20px;
+    left: 0px;
+    overflow: hidden;
+    color: #fff;
+    font-size: 10px;
+    text-transform: uppercase;
+    background-color: rgba(204,210,212,0.5);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+***REMOVED***
+
+.mediumPics .type5 .labelCategory {
+    height: 50px;
+    top: 88%;
+    /*padding-top: 15px;*/
+***REMOVED***
+
+
+.type4 .labelCategory, .type5 .labelCategory {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30px;
+    top: 88%;
+    color: #000;
+    font-weight: 400;
+    background-color: rgba(255,255,255,.7);
+    font-weight: bold;
+***REMOVED***
+
+
+/*Carrousel*/
+
+.carousel {
+    margin-bottom: 0;
+    /* padding: 0 40px 30px 40px; */
+    padding: 0px 25px 19px 25px;
+    margin-top: 25px;
+***REMOVED***
+
+
+
+
+.mediumPics .carousel-control {
+    top: 0;
+***REMOVED***
+
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+***REMOVED***
+
+.carousel-control {
+    left: -12px;
+    height: 40px;
+    width: 40px;
+    margin-top: 100px;
+***REMOVED***
+
+.carousel-control {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 15%;
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    filter: alpha(opacity=50);
+    opacity: .5;
+***REMOVED***
+
+    .carousel-control.left {
+        background-image: -webkit-linear-gradient(left,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);
+        background-image: -o-linear-gradient(left,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);
+        background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.5)),to(rgba(0,0,0,.0001)));
+        background-image: linear-gradient(to right,rgba(0,0,0,.5) 0,rgba(0,0,0,.0001) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+        background-repeat: repeat-x;
+***REMOVED***
+
+    .carousel-control.left {
+        background-image: none;
+***REMOVED***
+
+
+.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+    margin-left: -15px;
+***REMOVED***
+
+.carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next, .carousel-control .icon-prev {
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    font-size: 30px;
+***REMOVED***
+
+.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+    left: 50%;
+    margin-left: -10px;
+***REMOVED***
+
+.carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next, .carousel-control .icon-prev {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    display: inline-block;
+    margin-top: -10px;
+***REMOVED***
+
+.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+    margin-left: -15px;
+***REMOVED***
+
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+***REMOVED***
+
+.glyphicon-chevron-left:before {
+    content: "\e079";
+***REMOVED***
+.glyphicon-chevron-right:before {
+    content: "\e080";
+***REMOVED***
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+***REMOVED***
+
+
+/* === 5. Cookie === */
+.cookie-message {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 1.25rem 1rem;
+    opacity: 0;
+    visibility: hidden;
+    color: var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 111111;
+    transition: all 0.25s;
 ***REMOVED***
 
         .cookie-message::after {
@@ -8279,10 +10184,11 @@ body.mob-main-mnu-open {
         display: none
 ***REMOVED***
 @media only screen and (min-width: 1024px) {
-    .logo.logo-ico-widht-text{ display: none***REMOVED***
+    .logo.logo-ico-widht-text{ /*display: none*/***REMOVED***
 ***REMOVED***
     @media only screen and (max-width: 576px) {
-        .form-field-label{ font-size: .7rem***REMOVED***
+
+        .form-field-label{ font-size: .7rem; padding-right:100px***REMOVED***
         .section-questions {
             padding: 5rem 0px
     ***REMOVED***
@@ -8369,6 +10275,9 @@ body.mob-main-mnu-open {
         color: #5e7fb1;
         font-weight: 600;
 ***REMOVED***
+
+    .img20 { width: 20%;***REMOVED***
+    .img33 { width: 33%;***REMOVED***
 
     /* === 7. Media === */
     /*==========  Desktop First  ==========*/
@@ -8490,7 +10399,19 @@ body.mob-main-mnu-open {
         .section-heading {
             /*margin-bottom: 3.5rem;*/
     ***REMOVED***
-        .intro-item{padding: 0px***REMOVED***
+        .intro-item{padding: 0px;***REMOVED***
+        .infogram .intro-item {
+            min-height: auto
+    ***REMOVED***
+        .Cnews, .twitter {
+            width: 100%
+    ***REMOVED***
+
+        .whiteSearch{ height: 80px;***REMOVED***
+            .whiteSearch input[type="search"]{ width: 76% !important***REMOVED***
+            .buttonsearBTN {
+                width: auto
+        ***REMOVED***
         .section-desc {
             font-size: .8rem
     ***REMOVED***
@@ -8539,11 +10460,13 @@ body.mob-main-mnu-open {
     ***REMOVED***
 
         .tabs-nav {
-            flex-wrap: wrap;
+            /*flex-wrap: wrap;*/
             border: none;
             border-radius: var(--el-border-radius);
+            border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;
             background-color: var(--primary-bg-color);
             overflow: hidden;
+            border-bottom: 2px solid #2f9cc1;
     ***REMOVED***
 
             .tabs-nav li {
@@ -8565,7 +10488,9 @@ body.mob-main-mnu-open {
                     background-color: var(--main-color);
                     color: var(--primary-color);
             ***REMOVED***
-
+        .goals .tabs-nav li.active .h4, .goals .tabs-nav li .h4 {
+            font-size: .8rem; text-align: center;
+    ***REMOVED***
         .footer-mnu-line {
             justify-content: center;
     ***REMOVED***
@@ -8582,12 +10507,22 @@ body.mob-main-mnu-open {
         .footer-minimal .footer-links ul {
             justify-content: center;
     ***REMOVED***
+
+        .prescontainer {
+            display: grid;
+            margin-left: 0% !important;
+    ***REMOVED***
+
+        .ico_press {
+            display: none;
+    ***REMOVED***
 ***REMOVED***
 
     @media (max-width: 575.98px) {
         .header-fixed {
-            padding: 0.25rem 0.3125rem;
+            padding: 0.7rem 0.3125rem;
     ***REMOVED***
+        .intro-content{ max-width: 100%***REMOVED***
 
         .popup {
             padding: 2rem 1.5rem;
@@ -8607,4 +10542,3650 @@ body.mob-main-mnu-open {
 
     /*Hidden Elements*/
 
+/*MAP*/
+/*----  9. MAP view  ----- */
+.filter-mob-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0px;
+    background-color: #EDEDED
+***REMOVED***
+.mob-view{***REMOVED***
+
+#map-div .MicrosoftMapDrawing {
+    pointer-events: auto !important;
+***REMOVED***
+
+#map-div .MicrosoftMap .OverlaysTL {
+    position: absolute;
+    background: transparent;
+    border: none;
+    right: 0;
+    top: 15px;
+    left: auto;
+    width: 118px;
+***REMOVED***
+
+    #map-div .MicrosoftMap .OverlaysTL .NavBar_zoomControlContainer {
+        left: 0;
+        right: auto;
+        top: 6px;
+        width: 58px;
+        background: none;
+***REMOVED***
+
+        #map-div .MicrosoftMap .OverlaysTL .NavBar_zoomControlContainer .NavBar_zoomOut {
+            overflow: hidden;
+            display: inline-block;
+            text-indent: -99999em;
+            background-position: 0 -2134px;
+            width: 27px;
+            height: 27px;
+            text-align: left;
+    ***REMOVED***
+
+        #map-div .MicrosoftMap .OverlaysTL .NavBar_zoomControlContainer .NavBar_zoomIn {
+            overflow: hidden;
+            display: inline-block;
+            text-indent: -99999em;
+            background-position: 0 -2107px;
+            width: 27px;
+            height: 27px;
+            text-align: left;
+    ***REMOVED***
+
+    #map-div .MicrosoftMap .OverlaysTL .NavBar_compassControlContainer {
+        right: 15px;
+        top: 0;
+        width: auto;
+        background: none;
+        height: auto;
+***REMOVED***
+
+        #map-div .MicrosoftMap .OverlaysTL .NavBar_compassControlContainer .NavBar_compassFlat {
+            overflow: hidden;
+            display: inline-block;
+            text-indent: -99999em;
+            background-position: 0 -1390px;
+            width: 37px;
+            height: 37px;
+            text-align: left;
+    ***REMOVED***
+
+    #map-div .MicrosoftMap .OverlaysTL .NavBar_rotateLeft, #map-div .MicrosoftMap .OverlaysTL .NavBar_rotateRight {
+        display: none;
+***REMOVED***
+
+    #map-div .MicrosoftMap .OverlaysTL .NavBar_zoomDrop {
+        display: none !important;
+***REMOVED***
+
+#map-div .MicrosoftMap .Infobox {
+    width: auto;
+    height: auto;
+***REMOVED***
+
+    #map-div .MicrosoftMap .Infobox .infobox-stalk {
+        top: 100%;
+***REMOVED***
+
+#map-div .MicrosoftMap .inner-infobox {
+    position: absolute;
+    bottom: 100%;
+    background: #fff;
+    padding: 6px 10px;
+***REMOVED***
+
+#map-div .MicrosoftMap .pushpin-container {
+    position: relative;
+    cursor: inherit;
+    overflow: hidden;
+    pointer-events: all;
+    z-index: 99;
+    line-height: 0;
+***REMOVED***
+
+.bingmap-infobox-info {
+    position: absolute;
+    background: #fff;
+    padding: 12px 8px 8px 8px;
+    z-index: 999999;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    min-width: 140px;
+    margin-top: -20px;
+    margin-left: 15px;
+    max-width: 280px;
+    -moz-box-shadow: 0px 0px 7px 1px rgba(0,0,0,0.25);
+    -webkit-box-shadow: 0px 0px 7px 1px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 7px 1px rgba(0,0,0,0.25);
+***REMOVED***
+
+    .bingmap-infobox-info:after {
+        content: " ";
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+        border-right: 12px solid #fff;
+        position: absolute;
+        top: 10px;
+        right: 100%;
+        -webkit-filter: drop-shadow(-3px 0 5px rgba(0,0,0,0.15));
+***REMOVED***
+
+    .bingmap-infobox-info.to-the-left {
+        margin-left: 15px;
+***REMOVED***
+
+        .bingmap-infobox-info.to-the-left:after {
+            border-right: none;
+            border-left: 12px solid #fff;
+            right: auto;
+            left: 100%;
+            -webkit-filter: drop-shadow(4px 0 5px rgba(0,0,0,0.15));
+    ***REMOVED***
+
+    .bingmap-infobox-info.to-the-top {
+        margin-top: 20px;
+***REMOVED***
+
+        .bingmap-infobox-info.to-the-top:after {
+            bottom: 10px;
+            top: auto;
+    ***REMOVED***
+
+    .bingmap-infobox-info.bingmap-infobox-project {
+        min-width: 260px;
+        margin-top: 40px;
+***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-project.to-the-top {
+            margin-top: 100px;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-project.to-the-left {
+            margin-left: -31px;
+    ***REMOVED***
+
+    .bingmap-infobox-info.bingmap-infobox-group {
+        min-width: 260px;
+        margin-top: 54px;
+***REMOVED***
+
+    .bingmap-infobox-info.bingmap-infobox-group {
+        min-width: 208px;
+        width: 208px;
+***REMOVED***
+
+    .bingmap-infobox-info.bingmap-infobox-fiscalization {
+        min-width: 220px;
+        max-width: 420px;
+        margin-top: 76px;
+***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-fiscalization.polygon-type {
+            margin-top: 0;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-fiscalization.to-the-top {
+            margin-top: 140px;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-fiscalization.polygon-type.to-the-top {
+            margin-top: 0;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-fiscalization .title-divider {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.3em;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-fiscalization .title-type {
+            color: #00b5c6;
+            font-size: 0.8em;
+            padding: 0.3em;
+            display: block;
+            text-align: center;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-fiscalization .title, .bingmap-infobox-info.bingmap-infobox-fiscalization .period-years {
+            text-align: center;
+            color: #2f9cc1;
+            display: block;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-fiscalization .period-years {
+            padding: 0.5em;
+            border-bottom: 1px solid #ddd;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-fiscalization .fiscalizacion .number {
+            font-size: 2.5em;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-fiscalization .fiscalizacion .number, .bingmap-infobox-info.bingmap-infobox-fiscalization .fiscalizacion h4 {
+            text-align: center;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-fiscalization .gray-area {
+            margin: 15px -8px -8px;
+            padding: 10px;
+            overflow: hidden;
+            background-color: #F2F2F2;
+    ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-fiscalization .gray-area.tipoFis-Hidrocarburo .period.period-1 .percent, .bingmap-infobox-info.bingmap-infobox-fiscalization .gray-area.tipoFis-Mineral .period.period-1 .percent {
+                display: inline-block !important;
+        ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-fiscalization .gray-area .period h4 {
+                position: relative;
+                margin: 0 10px;
+        ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-fiscalization .gray-area .period .percent {
+                position: relative;
+                font-size: 0.5em;
+                top: -15px;
+                display: none;
+        ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-fiscalization .gray-area.total-periods-1 .period {
+                display: block;
+                text-align: center;
+        ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-fiscalization .gray-area.total-periods-2 {
+                text-align: center;
+        ***REMOVED***
+
+                .bingmap-infobox-info.bingmap-infobox-fiscalization .gray-area.total-periods-2 .period {
+                    *display: inline;
+                    display: inline-block;
+                    zoom: 1;
+                    vertical-align: top;
+                    text-align: center;
+            ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-fiscalization .gray-area.total-periods-3 .period {
+                *display: inline;
+                display: inline-block;
+                zoom: 1;
+                vertical-align: top;
+                width: 32%;
+                text-align: center;
+        ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-fiscalization .gray-area h4 {
+                font-size: 2.5em;
+        ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-fiscalization.new-infobox-fiscalization {
+            width: 250px;
+    ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-fiscalization.new-infobox-fiscalization .fiscalizacion h4 {
+                max-width: 200px;
+                margin: auto;
+        ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-fiscalization.new-infobox-fiscalization .gray-area {
+                padding: 10px 0;
+        ***REMOVED***
+
+                .bingmap-infobox-info.bingmap-infobox-fiscalization.new-infobox-fiscalization .gray-area .period {
+                    width: 48%;
+                    display: inline-block;
+                    vertical-align: middle;
+                    *vertical-align: auto;
+                    *zoom: 1;
+                    *display: inline;
+            ***REMOVED***
+
+                .bingmap-infobox-info.bingmap-infobox-fiscalization.new-infobox-fiscalization .gray-area .button {
+                    padding: 0.3em 0 0.4em;
+                    margin: 0.5em 0.5em 0 0.5em;
+            ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-fiscalization.new-infobox-fiscalization .infobox-fiscalizacion-all .period:first-child {
+                border-right: 1px solid #ccc;
+        ***REMOVED***
+
+    .bingmap-infobox-info.bingmap-infobox-production {
+        width: 200px;
+***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-production .inner-list {
+            overflow-y: auto;
+            max-height: 380px;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-production .title {
+            text-align: center;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-production .period {
+            color: #2f9cc1;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+            font-size: 1em;
+            margin: 0.7em 0 0.5em;
+            padding-bottom: 0.5em;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-production .font {
+            font-weight: 600;
+            margin: 0.5em 0;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-production .unit {
+            font-size: 0.75em;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-production .button {
+            margin-top: 1em;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-production .note {
+            color: #777;
+            font-size: 0.9em;
+            text-align: center;
+            margin-bottom: 1.2em;
+            font-weight: bold;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-production.to-the-top {
+            margin-top: 94px;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-production.to-the-left {
+            margin-left: -15px;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-production.polygon-type {
+            margin-top: -22px;
+            margin-left: 14px;
+    ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-production.polygon-type.to-the-top {
+                margin-top: 24px;
+        ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-production.polygon-type.to-the-left {
+                margin-left: -16px;
+        ***REMOVED***
+
+    .bingmap-infobox-info.bingmap-infobox-resource {
+        padding: 12px;
+        width: 240px;
+        margin-top: 40px;
+        margin-left: 10px;
+***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-resource.to-the-top {
+            margin-top: 97px;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-resource.to-the-left {
+            margin-left: -50px;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-resource.polygon-type {
+            margin-top: -20px;
+            margin-left: 14px;
+    ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-resource.polygon-type.to-the-top {
+                margin-top: 30px;
+        ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-resource.polygon-type.to-the-left {
+                margin-left: -50px;
+        ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-resource .inner-list {
+            overflow-y: auto;
+            max-height: 380px;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-resource .title {
+            text-align: center;
+            padding-bottom: 0.4em;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-resource .resource-name {
+            color: #2f9cc1;
+            font-size: 1.1em;
+            margin: 0.8em 0 -0.2em;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-resource .value {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 0.7em;
+            border-top: 1px solid #DFDFDF;
+            padding-top: 0.6em;
+            color: #444;
+            margin-bottom: 0.2em;
+    ***REMOVED***
+
+            .bingmap-infobox-info.bingmap-infobox-resource .value:first-child {
+                border-top: none;
+                margin-top: 0.3em;
+        ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-resource .name {
+            color: #666;
+            margin-bottom: 0.2em;
+            font-size: 0.9em;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-resource b {
+            font-weight: bold;
+            color: #444;
+    ***REMOVED***
+
+        .bingmap-infobox-info.bingmap-infobox-resource .help {
+            font-size: 13px;
+            color: #2f9cc1;
+    ***REMOVED***
+
+    .bingmap-infobox-info .title {
+        color: #2f9cc1;
+        font-size: 1.2em;
+        font-weight: normal;
+***REMOVED***
+
+    .bingmap-infobox-info .label {
+        font-size: 0.8em;
+        font-weight: 100;
+***REMOVED***
+
+    .bingmap-infobox-info .number {
+        font-weight: 500;
+        font-size: 1.1em;
+        margin-top: 0.5em;
+***REMOVED***
+
+    .bingmap-infobox-info .button {
+        padding: 0.3em 1em 0.4em;
+        display: block;
+        margin-top: 0.55em;
+        text-align: center;
+***REMOVED***
+
+    .bingmap-infobox-info .help-container {
+        display: none;
+        color: #444;
+        position: absolute;
+        left: 100%;
+        top: 40px;
+        -moz-box-shadow: 4px 0px 7px 1px rgba(0,0,0,0.25),inset 7px 0px 7px -7px rgba(0,0,0,0.25);
+        -webkit-box-shadow: 4px 0px 7px 1px rgba(0,0,0,0.25),inset 7px 0px 7px -7px rgba(0,0,0,0.25);
+        box-shadow: 4px 0px 7px 1px rgba(0,0,0,0.25),inset 7px 0px 7px -7px rgba(0,0,0,0.25);
+        z-index: 999;
+        background: #fff;
+        overflow: hidden;
+***REMOVED***
+
+        .bingmap-infobox-info .help-container .inner {
+            width: 210px;
+            padding: 22px 10px 30px;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            right: 0;
+            top: 0;
+    ***REMOVED***
+
+        .bingmap-infobox-info .help-container .word {
+            font-size: 1.2em;
+            border-bottom: 1px solid #dfdfdf;
+            padding: 0 12px 0.6em 12px;
+            margin-bottom: 0.6em;
+            text-align: center;
+    ***REMOVED***
+
+        .bingmap-infobox-info .help-container .description {
+            line-height: 1.3em;
+            max-height: 200px;
+            overflow: auto;
+            font-size: 0.9em;
+            padding: 0 0.6em;
+    ***REMOVED***
+
+        .bingmap-infobox-info .help-container .close-help {
+            font-family: icon;
+            color: #2f9cc1;
+            font-size: 16px;
+            position: absolute;
+            left: 185px;
+            top: 8px;
+            text-decoration: none;
+            display: none;
+            cursor: pointer;
+    ***REMOVED***
+
+        .bingmap-infobox-info .help-container.to-the-left {
+            -moz-box-shadow: -4px 0px 7px 1px rgba(0,0,0,0.25),inset -7px 0px 7px -7px rgba(0,0,0,0.25);
+            -webkit-box-shadow: -4px 0px 7px 1px rgba(0,0,0,0.25),inset -7px 0px 7px -7px rgba(0,0,0,0.25);
+            box-shadow: -4px 0px 7px 1px rgba(0,0,0,0.25),inset -7px 0px 7px -7px rgba(0,0,0,0.25);
+            left: auto;
+            right: 100%;
+    ***REMOVED***
+
+    .bingmap-infobox-info img {
+        max-width: 100%;
+        margin-top: 1em;
+***REMOVED***
+
+.beta-notification {
+    color: #fff;
+    font-size: 0.95em;
+    left: 0em;
+    position: absolute;
+    z-index: 999999;
+    top: 119px;
+***REMOVED***
+
+.beta-notification__header {
+    background: url("../img/icons/ribbon.png");
+    cursor: pointer;
+    height: 84px;
+    padding: 0.6em 2.5em;
+    position: relative;
+    width: 42px;
+    text-indent: -99999em;
+***REMOVED***
+
+    .beta-notification__header .icon {
+        display: none;
+        font-family: icon;
+        color: #B77E0F;
+        margin-right: 0.5em;
+        width: 1.14286em;
+        text-align: right;
+        padding-right: 0.28571em;
+***REMOVED***
+
+.beta-notification__description {
+    background: rgba(0,0,0,0.34);
+    line-height: 1.2;
+    font-weight: 100;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+***REMOVED***
+
+.beta-notification__description__inner {
+    color: #6F6F6F;
+    background: #fff;
+    position: relative;
+    top: 16%;
+    width: 500px;
+    margin: auto;
+***REMOVED***
+
+    .beta-notification__description__inner .beta-notification-header {
+        background: #FFE99D;
+        color: #999;
+        position: relative;
+        padding: 10px 20px;
+        font-size: 20px;
+        color: #444;
+        font-weight: bold;
+        box-shadow: 0px 3px 2px rgba(0,0,0,0.2);
+        z-index: 1;
+        position: relative;
+        margin-top: -100px;
+***REMOVED***
+
+        .beta-notification__description__inner .beta-notification-header i {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            text-indent: -99999em;
+            background-position: 0 -270px;
+            width: 26px;
+            height: 25px;
+            text-align: left;
+            margin: 5px 10px -5px;
+    ***REMOVED***
+
+    .beta-notification__description__inner p {
+        padding: 1em 1.2em;
+        font-size: 1.2em;
+***REMOVED***
+
+    .beta-notification__description__inner .align-center {
+        text-align: center;
+***REMOVED***
+
+    .beta-notification__description__inner span {
+        cursor: pointer;
+        background: #2f9cc1;
+        color: #fff;
+        display: inline-block;
+        vertical-align: middle;
+        *vertical-align: auto;
+        *zoom: 1;
+        *display: inline;
+        padding: 0.4em 0.5em;
+        margin: 0 1em 1em;
+        font-size: 1.5em;
+        text-decoration: none;
+***REMOVED***
+
+        .beta-notification__description__inner span:hover {
+            background: #58ca67;
+    ***REMOVED***
+
+#section-home .loader {
+    background: rgba(255,255,255,0.5);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+***REMOVED***
+
+    #section-home .loader:after {
+        background: url('../img/spinner.gif?1400252396') center center no-repeat;
+        content: "";
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        margin-left: -30px;
+        width: 60px;
+        height: 60px;
+***REMOVED***
+
+#section-home #map-div {
+    height: 680px;
+    width: 100%;
+    -moz-transition: height 0.3s linear;
+    -o-transition: height 0.3s linear;
+    -webkit-transition: height 0.3s linear;
+    transition: height 0.3s linear;
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    position: relative;
+    /*border-bottom: 3px solid #0077a2;*/
+    opacity: 1;
+***REMOVED***
+
+#section-home .landing-mode #map-div {
+    height: 656px;
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -moz-transition: height 0.3s linear;
+    -o-transition: height 0.3s linear;
+    -webkit-transition: height 0.3s linear;
+    transition: height 0.3s linear;
+    visibility: hidden;
+    opacity: 0;
+***REMOVED***
+
+#section-home .map-container { position: relative
+***REMOVED***
+
+    #section-home .map-container .filter-group[data-parameter="campoProyectoFiscalizacion"] .txt {
+        text-transform: capitalize;
+***REMOVED***
+
+    #section-home .map-container.fiscalizacion-mode .filter-group[data-parameter="tipoRecursoNaturalFiscalizacion"] {
+        display: none !important;
+***REMOVED***
+
+    #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo--1"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .option[data-subtipo="M"] {
+        display: block;
+***REMOVED***
+
+    #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo--1"] .facts .fact {
+        display: none;
+***REMOVED***
+
+        #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo--1"] .facts .fact[data-subtipo="1"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo--1"] .facts .fact[data-subtipo="-1"] {
+            display: block;
+    ***REMOVED***
+
+    #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo--1"] .graph-fiscalization-mineral {
+        width: 100%;
+***REMOVED***
+
+    #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .fact, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .fisc-camp-type-dep, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .fact, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .fisc-camp-type-dep, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .facts .fact, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .facts .fisc-camp-type-dep, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .graph-wrapper .fact, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .graph-wrapper .fisc-camp-type-dep {
+        display: none !important;
+***REMOVED***
+
+        #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .fact[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .fisc-camp-type-dep[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .fact[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .fisc-camp-type-dep[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .facts .fact[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .facts .fisc-camp-type-dep[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .graph-wrapper .fact[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .graph-wrapper .fisc-camp-type-dep[data-subtipo="M"] {
+            display: block !important;
+    ***REMOVED***
+
+    #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .option, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .option, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .facts .option, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .graph-wrapper .option {
+        display: none !important;
+***REMOVED***
+
+        #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .option[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .option[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .facts .option[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .graph-wrapper .option[data-subtipo="M"] {
+            display: block;
+    ***REMOVED***
+
+        #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .option.visible[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .option.visible[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .facts .option.visible[data-subtipo="M"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .graph-wrapper .option.visible[data-subtipo="M"] {
+            display: block !important;
+    ***REMOVED***
+
+    #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .graph-fiscalization-mineral {
+        width: 100% !important;
+***REMOVED***
+
+    #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-M"] .graph-fiscalization-hidrocarburos {
+        display: none !important;
+***REMOVED***
+
+    #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .fact, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .fisc-camp-type-dep, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .fact, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .fisc-camp-type-dep, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .facts .fact, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .facts .fisc-camp-type-dep, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .graph-wrapper .fact, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .graph-wrapper .fisc-camp-type-dep {
+        display: none !important;
+***REMOVED***
+
+        #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .fact[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .fisc-camp-type-dep[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .fact[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .fisc-camp-type-dep[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .facts .fact[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .facts .fisc-camp-type-dep[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .graph-wrapper .fact[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .graph-wrapper .fisc-camp-type-dep[data-subtipo="H"] {
+            display: block !important;
+    ***REMOVED***
+
+    #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .option, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .option, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .facts .option, #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .graph-wrapper .option {
+        display: none !important;
+***REMOVED***
+
+        #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .option[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .option[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .facts .option[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .graph-wrapper .option[data-subtipo="H"] {
+            display: block;
+    ***REMOVED***
+
+        #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="recursoNaturalFiscalizacion"] .option.visible[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .filter-group[data-parameter="campoProyectoFiscalizacion"] .option.visible[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .facts .option.visible[data-subtipo="H"], #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .graph-wrapper .option.visible[data-subtipo="H"] {
+            display: block !important;
+    ***REMOVED***
+
+    #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .graph-fiscalization-hidrocarburos {
+        width: 100% !important;
+***REMOVED***
+
+    #section-home .map-container.fiscalizacion-mode[data-option-subtipo="fiscalizacion-option-subtipo-H"] .graph-fiscalization-mineral {
+        display: none !important;
+***REMOVED***
+
+    #section-home .map-container.recursos-mode .legend-resources {
+        display: block;
+***REMOVED***
+.statistic-home-info, .home-description-aplication {
+    display: none;
+***REMOVED***
+#section-home .legend-resources {
+    display: none;
+    position: absolute;
+    top: 170px;
+    right: 15px;
+    background: #FFF;
+    z-index: 3;
+    border: 1px solid #CCC;
+    padding: 0.7em 0.8em;
+    line-height: 1.8em;
+    color: #444;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    -moz-box-shadow: 0 0 15px #888585;
+    -webkit-box-shadow: 0 0 15px #888585;
+    box-shadow: 0 0 15px #888585;
+***REMOVED***
+
+    #section-home .legend-resources svg {
+        vertical-align: middle;
+        margin-right: 0.2em;
+        position: relative;
+        top: -1px;
+***REMOVED***
+
+    #section-home .legend-resources .legend-resources_title {
+        text-transform: none;
+        padding-bottom: 0.5em;
+        border-bottom: 1px solid #CCC;
+        text-align: center;
+        margin-bottom: 0.7em;
+        font-size: 1.2em;
+***REMOVED***
+
+#section-home #controls {
+    display: block;
+    position: absolute;
+    min-height: 300px;
+    left: 5px;
+    margin-left: -496px;
+    top:0px;
+    bottom: 0px;
+    width: 250px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 1em;
+    z-index: 1;
+    -moz-transition: all 200ms linear;
+    -o-transition: all 200ms linear;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+    padding: 0;
+    /*border-bottom: 4px solid #fff; background: #fff;
+    background: rgba(255,255,255,1);*/
+***REMOVED***
+.wrap-controls {
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+***REMOVED***
+a.back {
+    padding: 8px;
+    display: block;
+    margin: 8px 0px 0px;
+    border: 1px solid #ccc;
+***REMOVED***
+.mob-view{***REMOVED***
+@media screen and (max-width: 992px) {
+    .btnCerrarListado{***REMOVED***
+    .modal-open {
+        overflow-y: hidden
+***REMOVED***
+    .modal-open .wrap-controls{ width: 90%***REMOVED***
+    .mob-wrapper .modal-content {
+        height: 95%
+***REMOVED***
+    #section-home #controls .reset-filters {
+        display: block
+***REMOVED***
+    .bread-crumbs-list li a, .bread-crumbs-list li {
+        font-size: 10px
+***REMOVED***
+    .hidden-xs {
+        display: none
+***REMOVED***
+    .filter-mob-container{text-align: center***REMOVED***
+    #section-home #controls .filter-group .filter-list{***REMOVED***
+    .mob-view {
+***REMOVED***
+    .mob-wrapper #controls .filter-group .filter-list {
+        left: 0px !important;
+        width: 100% !important;
+        z-index: 2;
+        top: 32px!important;
+***REMOVED***
+    #section-home #controls .filter-group.visible .txt:after {
+        transform: rotate(-90deg);
+***REMOVED***
+    .mob-view .wrap-controls {
+***REMOVED***
+    .wrap-filters #controls {
+        position: relative;
+        width: 95%;
+        height: 100%
+***REMOVED***
+    .wrap-filters #map-view {
+        padding: 0px!important
+***REMOVED***
+    .wrap-filters .wrap-controls{ box-shadow:none***REMOVED***
+    .wrap-filters .filter-group .txt { padding-top: 1em!important; padding-bottom: 1em!important
+***REMOVED***
+    .wrap-filters #filter-results {
+        display: none !important
+***REMOVED***
+    .wrap-filters.modal-body {
+        height:400px
+***REMOVED***
+    #section-home #controls .filter-group .options-container {
+        width: 93% !important
+***REMOVED***
+    /*map MOBILE*/
+    .scrollable-y {
+        overflow-y: scroll;
+        height: 400px
+***REMOVED***
+
+    #section-home #controls {
+        left: 0;
+        margin: 0px!important;
+        width: auto;
+        height: 100%;
+        left: 0px !important
+***REMOVED***
+
+    .mobileHidden {
+        display: none
+***REMOVED***
+
+***REMOVED***
+
+
+    .pagination {
+        display: inline-block
+***REMOVED***
+
+***REMOVED***
+.table-container .pagination a{ padding: .5rem; margin: 0 .5em;***REMOVED***
+.table-container .pagination a.active{ border: 1px solid #ccc***REMOVED***
+.projects-list-view-inner table td, .projects-list-view-inner table th {
+    padding: .5rem
+***REMOVED***
+thead td.name, thead td.value, thead td.type, thead td.status {
+    font-weight: 700
+***REMOVED***
+.projects-list-view-inner p.title {
+    font-size: 18px;
+    text-align: center;
+    font-weight: 700;
+    padding: .5rem;
+    background-color: #cbcbcb
+***REMOVED***
+#section-home #controls.list-mode {
+    width: 98%;
+    left: 0px;
+***REMOVED***
+
+#section-home #controls .toggle-controls {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    color: #2f9cc1;
+    z-index: 1;
+    height: 3em;
+    background-color: #fff;
+    overflow: hidden;
+    padding: 0 2em 0 0.5em;
+    text-decoration: none;
+    display: none;
+    min-width: 31px;
+    margin-left: -2px;
+***REMOVED***
+
+    #section-home #controls .toggle-controls .text {
+        overflow: hidden;
+        position: relative;
+        display: block;
+        font-size: 0.8em;
+        padding: 0.8em 0;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        width: 1px;
+        filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+        opacity: 0;
+        -moz-transition: width 200ms linear;
+        -o-transition: width 200ms linear;
+        -webkit-transition: width 200ms linear;
+        transition: width 200ms linear;
+***REMOVED***
+
+    #section-home #controls .toggle-controls:after {
+        content: "<";
+        position: absolute;
+        right: 42%;
+        color: #60cd6e;
+        font-family: icon;
+        font-size: 3em;
+        top: 50%;
+        margin-top: -0.55em;
+***REMOVED***
+
+    #section-home #controls .toggle-controls.collapsed:after {
+        content: ">";
+***REMOVED***
+
+    #section-home #controls .toggle-controls.hover:after {
+        right: 15%;
+***REMOVED***
+
+    #section-home #controls .toggle-controls.hover .text {
+        width: 70px;
+        filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+        opacity: 1;
+***REMOVED***
+
+#section-home #controls #filter-results {
+    display: none;
+***REMOVED***
+
+#section-home #controls .intro {
+    font-size: 24px;
+    font-weight: 100;
+    margin-bottom: 0.8em;
+    line-height: 1.2em;
+    display: none;
+***REMOVED***
+
+#section-home #controls .actions {
+    margin-bottom: 1.2em;
+***REMOVED***
+
+#section-home #controls .search-projects {
+    float: left;
+***REMOVED***
+
+#section-home #controls .search-resources {
+    float: right;
+***REMOVED***
+
+#section-home #controls .statistics {
+    text-align: center;
+    font-weight: 100;
+    color: #3d3d3d;
+***REMOVED***
+
+    #section-home #controls .statistics .subtitle-consolidated {
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: 500;
+        color: #757575;
+        padding: 0.6em 0 0.3em;
+***REMOVED***
+
+        #section-home #controls .statistics .subtitle-consolidated .hidden {
+            display: none;
+    ***REMOVED***
+
+    #section-home #controls .statistics .statistic-group {
+        overflow: hidden;
+***REMOVED***
+
+        #section-home #controls .statistics .statistic-group.collected-money .label {
+            border: none;
+    ***REMOVED***
+
+    #section-home #controls .statistics .label {
+        font-size: 21px;
+        padding-top: 0.5em;
+        margin-bottom: 0.1em;
+        border-top: 1px solid #d2d2d2;
+        width: 85%;
+        margin: auto;
+        display: block;
+***REMOVED***
+
+    #section-home #controls .statistics .money {
+        font-size: 30px;
+        margin-bottom: 0.5em;
+***REMOVED***
+
+        #section-home #controls .statistics .money:first-child {
+            margin-bottom: 0;
+            border: none;
+    ***REMOVED***
+
+    #section-home #controls .statistics .projects-approved {
+        display: none;
+***REMOVED***
+
+    #section-home #controls .statistics .projects-approved-not-visible {
+        display: block;
+***REMOVED***
+
+    #section-home #controls .statistics .approved-money {
+        display: none;
+***REMOVED***
+
+    #section-home #controls .statistics .approved-money-not-visible {
+        display: block;
+***REMOVED***
+
+    #section-home #controls .statistics.small {
+        text-align: left;
+***REMOVED***
+
+        #section-home #controls .statistics.small .subtitle-consolidated {
+            font-size: 1.1em;
+            padding: 1em 0 0.5em;
+            display: none;
+    ***REMOVED***
+
+        #section-home #controls .statistics.small .statistic-group {
+            border-top: 1px solid #d2d2d2;
+    ***REMOVED***
+
+            #section-home #controls .statistics.small .statistic-group.collected-money {
+                border: none;
+        ***REMOVED***
+
+        #section-home #controls .statistics.small .label {
+            margin: 0.1em 0 0.4em;
+            float: left;
+            width: 50%;
+            border: none;
+            font-size: 14px;
+    ***REMOVED***
+
+        #section-home #controls .statistics.small .money {
+            margin: 0.5em 0 0;
+            float: right;
+            width: 50%;
+            font-size: 14px;
+            text-align: right;
+    ***REMOVED***
+
+        #section-home #controls .statistics.small .total-sources {
+            display: none;
+    ***REMOVED***
+
+        #section-home #controls .statistics.small .projects-approved {
+            display: block;
+    ***REMOVED***
+
+        #section-home #controls .statistics.small .projects-approved-not-visible {
+            display: none;
+    ***REMOVED***
+
+        #section-home #controls .statistics.small .approved-money {
+            display: block;
+    ***REMOVED***
+
+        #section-home #controls .statistics.small .approved-money-not-visible {
+            display: none;
+    ***REMOVED***
+
+#section-home #controls #map-view {
+    padding: 10px 20px 10px 10px;
+***REMOVED***
+
+    #section-home #controls #map-view .info-tool {
+        margin-left: -80px;
+***REMOVED***
+
+#section-home #controls .tab-name {
+    display: block;
+    font-size: 1.5em;
+    padding: 0.5em 0;
+    text-transform: uppercase;
+***REMOVED***
+
+#section-home #controls .actions {
+    margin: 0 -25px 20px;
+    position: absolute;
+    right: -45px;
+    width: 70px;
+    background-color: #60cd6e;
+    top: 0;
+    height: 100%;
+    border: 2px solid #fff;
+    border-left: none;
+    display: none;
+***REMOVED***
+
+    #section-home #controls .actions a.button {
+        margin: 0.25em 0;
+        background: #fff;
+        padding: 0;
+        text-align: center;
+        color: #666;
+        position: relative;
+        height: 49px;
+        width: 100%;
+        outline: none;
+        border: 0;
+        text-decoration: none;
+***REMOVED***
+
+        #section-home #controls .actions a.button:after {
+            content: "";
+            overflow: hidden;
+            display: inline-block;
+            text-indent: -99999em;
+            background-position: 0 -1587px;
+            width: 10px;
+            height: 50px;
+            text-align: left;
+            top: 0;
+            left: -10px;
+            position: absolute;
+            display: block;
+    ***REMOVED***
+
+        #section-home #controls .actions a.button:before {
+            color: #60cd6e;
+            font-size: 2em !important;
+            line-height: 1em;
+    ***REMOVED***
+
+        #section-home #controls .actions a.button span {
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: 4px;
+            color: #60cd6e;
+            width: 100%;
+            font-size: 0.5em;
+            font-weight: bold;
+            /*font-family: Lato,sans-serif;*/
+    ***REMOVED***
+
+        #section-home #controls .actions a.button.inactive {
+            background: #60cd6e;
+    ***REMOVED***
+
+            #section-home #controls .actions a.button.inactive:after {
+                display: none;
+        ***REMOVED***
+
+            #section-home #controls .actions a.button.inactive:before {
+                color: #fff;
+        ***REMOVED***
+
+            #section-home #controls .actions a.button.inactive span {
+                color: #fff;
+        ***REMOVED***
+
+            #section-home #controls .actions a.button.inactive:hover {
+                color: #60cd6e !important;
+                background: #fff;
+        ***REMOVED***
+
+                #section-home #controls .actions a.button.inactive:hover:after {
+                    display: block;
+            ***REMOVED***
+
+                #section-home #controls .actions a.button.inactive:hover:before {
+                    color: #60cd6e !important;
+            ***REMOVED***
+
+                #section-home #controls .actions a.button.inactive:hover span {
+                    color: #60cd6e;
+                    background: #fff;
+            ***REMOVED***
+
+        #section-home #controls .actions a.button.search-proyectos {
+            margin-top: 60px;
+    ***REMOVED***
+
+#section-home #controls .buttons-filter-fiscalization a {
+    color: #333;
+    padding: 0.5em;
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    *zoom: 1;
+    *display: inline;
+***REMOVED***
+
+    #section-home #controls .buttons-filter-fiscalization a.active, #section-home #controls .buttons-filter-fiscalization a:hover {
+        background-color: #F2F2F2;
+        color: #00b5c6;
+***REMOVED***
+
+#section-home #controls .wrap-gray.wrap-gray-fiscalization {
+    background-color: #F2F2F2;
+    padding: 10px 20px 10px 10px;
+    margin: 0 -20px -10px -10px;
+***REMOVED***
+
+    #section-home #controls .wrap-gray.wrap-gray-fiscalization .txt {
+        background-color: #e5e5e5;
+        color: #555;
+***REMOVED***
+
+        #section-home #controls .wrap-gray.wrap-gray-fiscalization .txt.active, #section-home #controls .wrap-gray.wrap-gray-fiscalization .txt:hover {
+            background-color: #F2F2F2;
+            color: #00b5c6;
+    ***REMOVED***
+
+#section-home #controls #search {
+    overflow: hidden;
+    margin-bottom: 10px;
+    position: relative;
+    display: none !important;
+***REMOVED***
+
+    #section-home #controls #search input, #section-home #controls #search .button-search {
+        float: left;
+        font-size: 1.2em;
+        padding: 0 0.6em;
+        height: 36px;
+        line-height: 30px;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+***REMOVED***
+
+    #section-home #controls #search input {
+        width: 88%;
+        margin-right: -30px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+***REMOVED***
+
+        #section-home #controls #search input:focus {
+            border-color: #00b5c6;
+            outline: #00b5c6;
+    ***REMOVED***
+
+    #section-home #controls #search .button-search {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 14%;
+        border: 1px solid #00b5c6;
+        background-color: #00b5c6;
+        color: #fff;
+        text-align: left;
+        font-size: 1em;
+***REMOVED***
+
+        #section-home #controls #search .button-search:hover {
+            background: #00a2b2;
+    ***REMOVED***
+
+        #section-home #controls #search .button-search:after {
+            content: "!";
+            position: absolute;
+            right: 0.4em;
+            color: #fff;
+            font-family: icon;
+            font-size: 20px;
+            line-height: 1em;
+            padding: 0;
+            top: 50%;
+            margin-top: -0.5em;
+    ***REMOVED***
+
+#section-home #controls .reset-filters {
+    background: transparent;
+    color: #f25c5c;
+    border: 0;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    width: 100%;
+    position: relative;
+    padding: 0;
+    outline: none;
+    text-align: left;
+    display:inline-flex;
+    /*display: none;*/
+***REMOVED***
+
+    #section-home #controls .reset-filters:before {
+        content: "";
+        font-family: "icon";
+        position: absolute;
+        left: 0;
+        display: none;
+        speak: none;
+        top: 50%;
+        margin-top: -0.55em;
+        font-size: 1em;
+***REMOVED***
+
+    #section-home #controls .reset-filters:hover {
+        color: #f04444;
+***REMOVED***
+
+#section-home #controls .filters-group {
+    display: none;
+***REMOVED***
+
+    #section-home #controls .filters-group.visible {
+        display: block;
+***REMOVED***
+
+    #section-home #controls .filters-group.comunes {
+        display: block;
+***REMOVED***
+
+    #section-home #controls .filters-group.loading {
+        position: relative;
+***REMOVED***
+
+        #section-home #controls .filters-group.loading .filter-group {
+            content: "";
+    ***REMOVED***
+
+        #section-home #controls .filters-group.loading .txt {
+            background: transparent;
+            padding: 1.5em;
+    ***REMOVED***
+
+            #section-home #controls .filters-group.loading .txt:after {
+                content: "";
+                background: url('../img/bx_loader.gif?1400252396') center center no-repeat;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+        ***REMOVED***
+
+        #section-home #controls .filters-group.loading:hover .txt {
+            background-color: transparent;
+    ***REMOVED***
+
+#section-home #controls #filters-groups-list.loading:before {
+    content: " ";
+    background: #F2F2F2;
+    color: #888;
+    display: block;
+    padding: 1em;
+    font-size: 0.95em;
+    font-weight: 100;
+    text-align: center;
+    background: transparent url('../img/bx_loader.gif?1400252396') center center no-repeat;
+    height: 40px;
+***REMOVED***
+
+#section-home #controls .filter-group {
+    margin-bottom: 10px;
+    position: relative;
+***REMOVED***
+
+    #section-home #controls .filter-group .txt {
+        background: #F2F2F2;
+        color: #0D284B;
+        padding: 0.5em 1em 0.5em 0.4em;
+        font-weight: 600;
+        cursor: pointer;
+        -moz-transition: all 0.1s linear;
+        -o-transition: all 0.1s linear;
+        -webkit-transition: all 0.1s linear;
+        transition: all 0.1s linear; font-size: 12px;
+***REMOVED***
+
+        #section-home #controls .filter-group .txt .no-bold {
+            font-weight: 100;
+            filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=95);
+            opacity: 0.95;
+    ***REMOVED***
+
+        #section-home #controls .filter-group .txt:after {
+            content: ">";
+            font-family: icon;
+            position: absolute;
+            font-weight: 700;
+            right: 6px;
+            top: 3px;
+            font-size: 1.6em;
+            color: #235b74;
+    ***REMOVED***
+
+    #section-home #controls .filter-group .filter-list {
+        display: none;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        background: #E6E6E6;
+        width: 200px;
+        overflow: hidden;
+***REMOVED***
+
+    #section-home #controls .filter-group .options-container {
+        width: 180px;
+        margin: 10px;
+        position: relative;
+***REMOVED***
+
+    #section-home #controls .filter-group .filter {
+        background: #fff;
+        overflow: hidden;
+        color: #000;
+***REMOVED***
+
+        #section-home #controls .filter-group .filter input, #section-home #controls .filter-group .filter button {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            border: 1px solid #fff;
+            background: #fff;
+            height: 26px;
+            padding: 0;
+            font-size: 1em;
+    ***REMOVED***
+
+        #section-home #controls .filter-group .filter input {
+            width: 80%;
+            margin-right: -20px;
+            float: left;
+            padding-left: 8px;
+            font-size: 0.9em;
+    ***REMOVED***
+
+        #section-home #controls .filter-group .filter button {
+            width: 20%;
+            float: right;
+            color: #2f9cc1;
+            font-family: icon;
+            cursor: default;
+    ***REMOVED***
+
+    #section-home #controls .filter-group .options {
+        color: #000;
+        margin: 0.6em 0;
+        max-height: 250px;
+        overflow-y: visible;
+        overflow-x: hidden;
+        position: relative;
+***REMOVED***
+
+        #section-home #controls .filter-group .options.loading:after {
+            content: "Cargando...";
+            font-size: 0.8em;
+            text-align: center;
+            padding: 0.5em;
+    ***REMOVED***
+
+        #section-home #controls .filter-group .options.empty:after {
+            content: "Ingresa un nombre con por lo menos 3 letras";
+            font-size: 0.8em;
+            text-align: center;
+            padding: 0.5em;
+    ***REMOVED***
+
+        #section-home #controls .filter-group .options .option {
+            padding: 0.35em 0.6em 0.45em;
+            cursor: pointer;
+            font-size: 0.7em;
+    ***REMOVED***
+
+            #section-home #controls .filter-group .options .option:hover {
+                background-color: #dcdcdc;
+        ***REMOVED***
+
+            #section-home #controls .filter-group .options .option.important {
+                color: #2f9cc1;
+        ***REMOVED***
+
+            #section-home #controls .filter-group .options .option.selected {
+                color: #2f9cc1;
+                background-color: #d0e3d3;
+                font-weight: 400;
+        ***REMOVED***
+
+    #section-home #controls .filter-group:hover .txt {
+        background-color: #E6E6E6;
+***REMOVED***
+
+    #section-home #controls .filter-group.visible .txt {
+        background-color: #E6E6E6;
+        position: relative;
+***REMOVED***
+
+        #section-home #controls .filter-group.visible .txt:after {
+            content: "<";
+    ***REMOVED***
+
+    #section-home #controls .filter-group.visible .filter-list {
+        display: block;
+***REMOVED***
+
+    #section-home #controls .filter-group.selected .txt {
+        background-color: #2f9cc1;
+        font-weight: 400;
+        color: #fff;
+***REMOVED***
+
+        #section-home #controls .filter-group.selected .txt:after {
+            color: #fff;
+    ***REMOVED***
+
+        #section-home #controls .filter-group.selected .txt:hover {
+            color: #fff;
+            background-color: #2481a0;
+    ***REMOVED***
+
+#section-home #controls #filter-results {
+    background: #fff;
+    color: #235b74;
+    overflow: hidden;
+    font-size: 0.9em;
+    border: 1px solid #235b74;
+    font-weight: 600;
+***REMOVED***
+
+    #section-home #controls #filter-results .results {
+        float: none;
+        padding: 1em 0.5em 0;
+        width: 100%; text-align: center;
+***REMOVED***
+.results .value{ display: block; font-size: 20px***REMOVED***
+.results .text{ display: block; margin-bottom: 10px***REMOVED***
+.MicrosoftMap .NavBar_Container .NavBar_Button{ margin-top: 25px; margin-bottom: 0px!important***REMOVED***
+#section-home #controls #filter-results button {
+    float: none;
+    display: block;
+    height: 50px;
+    border: 1px solid #235b74;
+    background-color: #235b74;
+    color: #fff;
+    font-size: 0.8em;
+    padding: 0.07em 0.5em;
+    margin: 0;
+    width: 100%;
+***REMOVED***
+
+#section-home #map-view-options {
+    position: absolute;
+    top: 130px;
+    right: 50px;
+    z-index: 9;
+    min-width: 145px;
+    display: none;
+***REMOVED***
+
+    #section-home #map-view-options .change-view-mode {
+        display: none;
+        color: #fff;
+        background: #2f9cc1;
+        padding: 5px;
+        overflow: hidden;
+        font-size: 0.8em;
+        display: block;
+        margin-bottom: 3px;
+        text-decoration: none;
+***REMOVED***
+
+        #section-home #map-view-options .change-view-mode:hover {
+            background: #35a644;
+    ***REMOVED***
+
+        #section-home #map-view-options .change-view-mode .icon {
+            overflow: hidden;
+            display: inline-block;
+            text-indent: -99999em;
+            background-position: 0 -2052px;
+            width: 25px;
+            height: 24px;
+            text-align: left;
+            float: left;
+            margin-right: 10px;
+    ***REMOVED***
+
+    #section-home #map-view-options .select-period {
+        background: #e2f4e4;
+        border: 2px solid #2f9cc1;
+        color: #2f9cc1;
+        font-size: 0.9em;
+        position: relative;
+        cursor: pointer;
+***REMOVED***
+
+        #section-home #map-view-options .select-period.hidden {
+            display: none;
+    ***REMOVED***
+
+        #section-home #map-view-options .select-period .txt {
+            padding: 4px 30px 4px 18px;
+            position: relative;
+    ***REMOVED***
+
+            #section-home #map-view-options .select-period .txt:after {
+                content: "v";
+                font-family: "icon";
+                position: absolute;
+                right: 5px;
+                width: 1em;
+                height: 1em;
+                speak: none;
+                font-size: 1.2em;
+                top: 0.2em;
+        ***REMOVED***
+
+        #section-home #map-view-options .select-period .filter-list {
+            position: absolute;
+            top: 100%;
+            background: #fff;
+            border: 2px solid #2f9cc1;
+            width: 100%;
+            max-width: 100%;
+            left: -2px;
+            display: none;
+    ***REMOVED***
+
+            #section-home #map-view-options .select-period .filter-list .option {
+                padding: 0.4em 18px;
+        ***REMOVED***
+
+                #section-home #map-view-options .select-period .filter-list .option:hover {
+                    background: #e2f4e4;
+            ***REMOVED***
+
+                #section-home #map-view-options .select-period .filter-list .option.selected {
+                    background: #2f9cc1;
+                    color: #fff;
+            ***REMOVED***
+
 /*#contacto { visibility: hidden;***REMOVED****/
+
+/*LOADER*/
+.MIVloader,
+.MIVloader:after {
+    border-radius: 50%;
+    width: 10em;
+    height: 10em;
+***REMOVED***
+
+.MIVloader {
+    margin: 60px auto;
+    font-size: 10px;
+    position: relative;
+    /*text-indent: -9999em;*/
+    border-top: 1.1em solid rgba(0,255,255, 0.2);
+    border-right: 1.1em solid rgba(0,255,255, 0.2);
+    border-bottom: 1.1em solid rgba(0,255,255, 0.2);
+    border-left: 1.1em solid #00ffff;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: load8 1.1s infinite linear;
+    animation: load8 1.1s infinite linear;
+***REMOVED***
+
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+***REMOVED***
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+***REMOVED***
+***REMOVED***
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+***REMOVED***
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+***REMOVED***
+***REMOVED***
+
+#section-home #share {
+    padding-top: 1.2em;
+    display: none;
+***REMOVED***
+
+    #section-home #share .container-share {
+        height: 0;
+        overflow: hidden;
+        -moz-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+***REMOVED***
+
+        #section-home #share .container-share.show {
+            min-height: 48px;
+    ***REMOVED***
+
+    #section-home #share p {
+        cursor: pointer;
+        color: #00b5c6;
+        font-size: 12px;
+        margin-bottom: 0.6em;
+        position: relative;
+        display: block;
+***REMOVED***
+
+        #section-home #share p.show:after {
+            content: "^";
+    ***REMOVED***
+
+        #section-home #share p:after {
+            content: "v";
+            font-family: "icon";
+            position: absolute;
+            right: 0;
+            width: 1em;
+            height: 1em;
+            speak: none;
+            top: 50%;
+            margin-top: -0.55em;
+            font-size: 2em;
+    ***REMOVED***
+
+    #section-home #share .facebook {
+        overflow: hidden;
+        display: inline-block;
+        text-indent: -99999em;
+        background-position: 0 -178px;
+        width: 80px;
+        height: 22px;
+        text-align: left;
+***REMOVED***
+
+    #section-home #share .twitter {
+        overflow: hidden;
+        display: inline-block;
+        text-indent: -99999em;
+        background-position: 0 -2030px;
+        width: 70px;
+        height: 22px;
+        text-align: left;
+***REMOVED***
+
+    #section-home #share .email {
+        overflow: hidden;
+        display: inline-block;
+        text-indent: -99999em;
+        background-position: 0 -1368px;
+        width: 70px;
+        height: 22px;
+        text-align: left;
+***REMOVED***
+
+    #section-home #share .print {
+        overflow: hidden;
+        display: inline-block;
+        text-indent: -99999em;
+        background-position: 0 -1671px;
+        width: 80px;
+        height: 22px;
+        text-align: left;
+***REMOVED***
+
+#section-home #map-legend {
+    position: absolute;
+    right: 15px;
+    bottom: 25px;
+    z-index: 1;
+    position: absolute;
+    background: #fff;
+    border: 1px solid #bbb;
+    font-size: 0.7em;
+    padding: 0.6em 0.7em;
+    width: 184px;
+    display: none;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+***REMOVED***
+
+    #section-home #map-legend.fixed {
+        position: fixed;
+***REMOVED***
+
+    #section-home #map-legend .scale {
+        overflow: hidden;
+        display: inline-block;
+        text-indent: -99999em;
+        background-position: 0 -1845px;
+        width: 167px;
+        height: 10px;
+        text-align: left;
+***REMOVED***
+
+    #section-home #map-legend .vals {
+        text-align: right;
+        overflow: hidden;
+        margin: 5px 0 4px;
+        font-weight: bold;
+        color: #3d3d3d;
+***REMOVED***
+
+        #section-home #map-legend .vals .lower {
+            float: left;
+    ***REMOVED***
+
+#section-home .conoce-como {
+    font-size: 0.8em;
+***REMOVED***
+
+#section-home .content .select-period {
+    position: relative;
+    z-index: 2;
+***REMOVED***
+
+    #section-home .content .select-period.hidden {
+        display: none;
+***REMOVED***
+
+    #section-home .content .select-period .txt {
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+        padding: 0.15em 1.2em 0.15em 0.2em;
+***REMOVED***
+
+        #section-home .content .select-period .txt:after {
+            content: "v";
+            font-family: "icon";
+            position: absolute;
+            right: 0;
+            width: 1em;
+            height: 1em;
+            speak: none;
+            top: 50%;
+            margin-top: -0.55em;
+    ***REMOVED***
+
+    #section-home .content .select-period .decorator {
+        border: 1px solid #0077a2;
+        border-top: 0;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 0.25em;
+        left: 0;
+***REMOVED***
+
+    #section-home .content .select-period .filter-list {
+        width: auto !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        border: 1px solid #0077a2;
+        border-top: none;
+        background: #fff;
+***REMOVED***
+
+        #section-home .content .select-period .filter-list .inner {
+            display: block;
+    ***REMOVED***
+
+        #section-home .content .select-period .filter-list .option {
+            padding: 0.2em;
+            display: block;
+    ***REMOVED***
+
+            #section-home .content .select-period .filter-list .option:hover {
+                background: #defaff;
+        ***REMOVED***
+
+            #section-home .content .select-period .filter-list .option.selected {
+                background: #0091ab;
+                color: #fff;
+        ***REMOVED***
+
+#section-home .content .graph-wrapper {
+    zoom: 1;
+***REMOVED***
+
+    #section-home .content .graph-wrapper:after {
+        clear: both;
+        content: ".";
+        display: block;
+        font-size: 0;
+        height: 0;
+        line-height: 0;
+        visibility: hidden;
+***REMOVED***
+
+#section-home .content .graph-wrapper2, #section-home .content .graph-wrapper3 {
+    padding-bottom: 40px;
+***REMOVED***
+
+#section-home .content svg {
+    display: block;
+    margin: auto;
+***REMOVED***
+
+#section-home .content .label {
+    font-size: 22px;
+    color: #555;
+    text-align: center;
+    font-weight: 100;
+    max-width: 500px;
+    margin: 3em auto 2em;
+***REMOVED***
+
+#section-home .content .proy-sector, #section-home .content .prod-reg-res {
+    float: left;
+    width: 60%;
+***REMOVED***
+
+    #section-home .content .prod-reg-res svg {
+        -webkit-filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.25));
+        text-shadow: 0 0 4px #444;
+***REMOVED***
+
+#section-home .content .res-sector, #section-home .content .prod-res {
+    float: right;
+    width: 40%;
+    margin: auto auto 1em;
+***REMOVED***
+
+    #section-home .content .res-sector svg, #section-home .content .prod-res svg {
+        -webkit-filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.25));
+***REMOVED***
+
+    #section-home .content .prod-res .resource-elem {
+        padding-top: 0.8em;
+        color: #777;
+***REMOVED***
+
+        #section-home .content .prod-res .resource-elem:after {
+            border-bottom: 1px solid #DDD;
+            padding-top: 7px;
+            clear: both;
+            content: " ";
+            display: block;
+            margin: 0 20px;
+    ***REMOVED***
+
+    #section-home .content .prod-res .name {
+        float: left;
+***REMOVED***
+
+    #section-home .content .prod-res .value {
+        float: right;
+        text-align: right;
+        font-size: 0.9em;
+***REMOVED***
+
+#section-home .content .res-region, #section-home .content .prod-res-no {
+    float: left;
+    width: 45%;
+    margin: auto;
+***REMOVED***
+
+    #section-home .content .res-region svg, #section-home .content .prod-res-no svg {
+        text-shadow: 0 0 4px #444;
+        -webkit-filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.25));
+***REMOVED***
+
+    #section-home .content .prod-res-no svg {
+        text-shadow: none;
+        -webkit-filter: drop-shadow(0 0 0 #fff);
+***REMOVED***
+
+#section-home .content .res-depto, #section-home .content .prod-depto {
+    float: right;
+    width: 50%;
+    font-size: 0.8em;
+    color: #888;
+***REMOVED***
+
+#section-home .content #res-depto, #section-home .content #prod-depto {
+    zoom: 1;
+    padding: 1.6em 0 0;
+***REMOVED***
+
+    #section-home .content #res-depto:after, #section-home .content #prod-depto:after {
+        clear: both;
+        content: ".";
+        display: block;
+        font-size: 0;
+        height: 0;
+        line-height: 0;
+        visibility: hidden;
+***REMOVED***
+
+    #section-home .content #res-depto .col, #section-home .content #prod-depto .col {
+        width: 50%;
+***REMOVED***
+
+    #section-home .content #res-depto .depto-elem, #section-home .content #prod-depto .depto-elem {
+        padding: 0.3em 0.3em;
+        zoom: 1;
+        position: relative;
+***REMOVED***
+
+        #section-home .content #res-depto .depto-elem:after, #section-home .content #prod-depto .depto-elem:after {
+            clear: both;
+            content: ".";
+            display: block;
+            font-size: 0;
+            height: 0;
+            line-height: 0;
+            visibility: hidden;
+    ***REMOVED***
+
+        #section-home .content #res-depto .depto-elem:hover, #section-home .content #prod-depto .depto-elem:hover {
+            background: #defaff;
+            color: #0091ab;
+            position: relative;
+            z-index: 2;
+    ***REMOVED***
+
+            #section-home .content #res-depto .depto-elem:hover .bar, #section-home .content #prod-depto .depto-elem:hover .bar {
+                background: #E6E6E6;
+        ***REMOVED***
+
+            #section-home .content #res-depto .depto-elem:hover .graph-tooltip, #section-home .content #prod-depto .depto-elem:hover .graph-tooltip {
+                display: block;
+        ***REMOVED***
+
+    #section-home .content #res-depto .name, #section-home .content #prod-depto .name {
+        width: 150px;
+        float: left;
+***REMOVED***
+
+    #section-home .content #res-depto .bar, #section-home .content #prod-depto .bar {
+        margin-left: 152px;
+        margin-right: 25px;
+        margin-top: 0.4em;
+        background: #E6E6E6;
+***REMOVED***
+
+    #section-home .content #res-depto .fill, #section-home .content #prod-depto .fill {
+        height: 4px;
+        background: #0077a2;
+***REMOVED***
+
+    #section-home .content #res-depto .graph-tooltip, #section-home .content #prod-depto .graph-tooltip {
+        display: none;
+        position: absolute;
+        font-size: 1em;
+        color: #888;
+        margin-bottom: 5px;
+        min-width: 70px;
+***REMOVED***
+
+#section-home .content #res-resources-depto {
+    height: 450px;
+    padding-bottom: 4em;
+***REMOVED***
+
+@media all and (max-width: 992px) {
+    #section-home .content .proy-sector, #section-home .content .res-depto, #section-home .content .res-region, #section-home .content .res-sector {
+        float: none;
+        width: auto;
+***REMOVED***
+
+        #section-home .content .proy-sector .label, #section-home .content .res-depto .label, #section-home .content .res-region .label, #section-home .content .res-sector .label {
+            margin-bottom: 2em;
+    ***REMOVED***
+
+    #section-home .content .proy-sector {
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+***REMOVED***
+
+    #section-home .content .res-depto {
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+***REMOVED***
+***REMOVED***
+
+#section-home .content .fisc-hidro-type svg, #section-home .content .fisc-min-act svg {
+    -webkit-filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.15));
+    text-shadow: 0 0 3px #444;
+***REMOVED***
+
+#section-home .content .fisc-hidro-type, #section-home .content .fisc-min-act, #section-home .content .fisc-camp-type {
+    float: left;
+    width: 33.2%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 1em;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-show-hidrocarburos .graph-title {
+    display: none;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-show-hidrocarburos .graph-columns-group {
+    display: none;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-show-hidrocarburos .graph-columns-group.graph-fiscalization-hidrocarburos {
+        display: block;
+        width: 100%;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-show-mineral .graph-title {
+    display: none;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-show-mineral .graph-columns-group {
+    display: none;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-show-mineral .graph-columns-group.graph-fiscalization-mineral {
+        display: block;
+        width: 100%;
+***REMOVED***
+
+#section-home .content #bottom-graphs .highcharts-legend {
+    display: none;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-all .graph-columns-group {
+    display: block;
+    overflow: hidden;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-all .graph-fiscalization-hidrocarburos {
+    width: 100%;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-all .graph-fiscalization-hidrocarburos.lay-large .graph-columns.FiscalizacionPorHidrocarburo {
+        float: none;
+        width: 50%;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-all .graph-fiscalization-hidrocarburos.lay-large .graph-columns.FiscalizacionHidrocarburosPorActividad {
+        width: 100%;
+        float: none;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-all .graph-columns {
+    width: 50%;
+    float: left;
+    margin: auto;
+    display: block;
+    position: relative;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-all .graph-columns .no-data {
+        display: none;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-all .graph-columns.FiscalizacionHidrocarburosPorActividad {
+        display: block;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-all .graph-columns.data-bars-0 .graph-chart {
+        opacity: 0.25;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-all .graph-columns.data-bars-0 .no-data {
+        display: block;
+        background: url('../img/icons/no-data.png?1419908086') no-repeat center;
+        position: absolute;
+        z-index: 10;
+        top: 40%;
+        width: 100%;
+        text-align: center;
+        font-size: 2em;
+        height: 160px;
+        line-height: 160px;
+        opacity: 0.7;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-all .FiscalizacionPorMIieral {
+    width: 40%;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-all .FiscalizacionMineralesPorActividad {
+    width: 60%;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-all .FiscalizacionMineralesPorActividad {
+    width: 60%;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-all .graph-title {
+    display: block;
+    text-align: center;
+    font-size: 1.5em;
+    color: #555;
+    font-weight: 400;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-all .label {
+    font-size: 20px;
+    color: #555;
+    min-height: 41px;
+    text-align: center;
+    font-weight: 100;
+    max-width: 500px;
+    margin: 2em auto 1em;
+    min-height: 80px;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-all .highcharts-legend {
+    display: none;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-all .graph-extra-lables {
+    padding: 0 8px 0 40px;
+    z-index: 10;
+    position: relative;
+    top: -30px;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-all .graph-extra-lables .box-label {
+        float: left;
+        text-align: center;
+***REMOVED***
+
+        #section-home .content .graph-fiscalization-all .graph-extra-lables .box-label span {
+            display: block;
+            font-size: 12px;
+    ***REMOVED***
+
+            #section-home .content .graph-fiscalization-all .graph-extra-lables .box-label span.valor {
+                text-align: center;
+        ***REMOVED***
+
+                #section-home .content .graph-fiscalization-all .graph-extra-lables .box-label span.valor p {
+                    display: inline-block;
+                    border-top: 1px dotted #333;
+                    border-bottom: 1px dotted #333;
+                    padding: 3px;
+                    margin: 3px;
+            ***REMOVED***
+
+            #section-home .content .graph-fiscalization-all .graph-extra-lables .box-label span.percent {
+                font-size: 14px;
+        ***REMOVED***
+
+    #section-home .content .graph-fiscalization-all .graph-extra-lables.boxes-by-1 .box-label {
+        width: 100%;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-all .graph-extra-lables.boxes-by-2 .box-label {
+        width: 50%;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-all .graph-extra-lables.boxes-by-3 .box-label {
+        width: 33%;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-all .graph-extra-lables.boxes-by-4 .box-label {
+        width: 25%;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-all label {
+    margin-top: 1em;
+***REMOVED***
+
+#section-home .content .graph-fiscalization-all ul {
+    text-align: center;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-all ul li {
+        display: inline-block;
+        vertical-align: middle;
+        *vertical-align: auto;
+        *zoom: 1;
+        *display: inline;
+***REMOVED***
+
+        #section-home .content .graph-fiscalization-all ul li:before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            position: relative;
+            margin: 0 5px;
+    ***REMOVED***
+
+    #section-home .content .graph-fiscalization-all ul .fis-gr-hidrocarburo:before {
+        background: #FCA74D;
+***REMOVED***
+
+    #section-home .content .graph-fiscalization-all ul .fis-gr-mineral:before {
+        background: #FFF568;
+***REMOVED***
+
+#section-home .content .fisc-camp-type-dep {
+    padding-bottom: 3em;
+    position: relative;
+***REMOVED***
+
+    #section-home .content .fisc-camp-type-dep .no-data {
+        display: none;
+***REMOVED***
+
+    #section-home .content .fisc-camp-type-dep.data-bars-0 .graph-chart, #section-home .content .fisc-camp-type-dep.data-bars-false .graph-chart {
+        opacity: 0.25;
+***REMOVED***
+
+    #section-home .content .fisc-camp-type-dep.data-bars-0 .mask-graph, #section-home .content .fisc-camp-type-dep.data-bars-false .mask-graph {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+***REMOVED***
+
+    #section-home .content .fisc-camp-type-dep.data-bars-0 .no-data, #section-home .content .fisc-camp-type-dep.data-bars-false .no-data {
+        display: block;
+        background: url('../img/icons/no-data.png?1419908086') no-repeat center;
+        position: absolute;
+        z-index: 10;
+        top: 40%;
+        width: 100%;
+        text-align: center;
+        font-size: 2em;
+        height: 160px;
+        line-height: 160px;
+        opacity: 0.7;
+***REMOVED***
+
+#section-home .projects-list-view {
+    padding: 1.2em 0 0;
+***REMOVED***
+
+    #section-home .projects-list-view tr td {
+        /*word-break: break-word;*/
+        /*word-break: break-all;*/
+***REMOVED***
+
+    #section-home .projects-list-view tr.name {
+        width: 55%;
+***REMOVED***
+
+    #section-home .projects-list-view tr.type {
+        width: 15%;
+***REMOVED***
+
+    #section-home .projects-list-view tr.number {
+        width: 15%;
+***REMOVED***
+
+    #section-home .projects-list-view tr.state {
+        width: 15%;
+***REMOVED***
+
+    #section-home .projects-list-view .back {
+        display: inline-block;
+        color: #2f9cc1;
+        padding-left: 1.8em;
+        position: relative;
+        font-size: 0.9em;
+        text-decoration: none;
+        margin-left: .8em;
+***REMOVED***
+
+        #section-home .projects-list-view .back:after {
+            content: "<";
+            position: absolute;
+            top: 0;
+            left: 0.25em;
+            color: #2f9cc1;
+            font-family: icon;
+            font-size: 1.7em;
+    ***REMOVED***
+
+    #section-home .projects-list-view .pagination {
+        text-align: center;
+        color: #888;
+        margin-top: 1em;
+***REMOVED***
+
+        #section-home .projects-list-view .pagination a {
+            display: inline-block;
+            padding: 0.2em 0.4em 0.3em;
+            color: #2f9cc1;
+            text-decoration: none;
+            font-weight: 400;
+    ***REMOVED***
+
+            #section-home .projects-list-view .pagination a:hover {
+                background: #E6E6E6;
+                color: #888;
+        ***REMOVED***
+
+            #section-home .projects-list-view .pagination a.active {
+                color: #fff;
+                background-color: #2f9cc1;
+        ***REMOVED***
+
+    #section-home .projects-list-view .title {
+        text-transform: uppercase;
+        border-top: 1px solid #ededed;
+        margin: 1em 0 0;
+        font-weight: 400;
+        text-align: center;
+        font-size: 0.95em;
+        color: #636363;
+***REMOVED***
+
+    #section-home .projects-list-view .table-container table {
+        width: 100%;
+***REMOVED***
+
+    #section-home .projects-list-view .table-container .number {
+        text-align: left;
+***REMOVED***
+
+    #section-home .projects-list-view .table-container .odd {
+        background-color: #e2f4e4;
+***REMOVED***
+
+    #section-home .projects-list-view .table-container thead td {
+        padding: 0.3em 0.5em 0.4em;
+        border-bottom: 1px solid #d2d2d2;
+        font-weight: 400;
+        font-size: 1.1em;
+        text-align: center;
+        color: #636363;
+***REMOVED***
+
+        #section-home .projects-list-view .table-container thead td:first-child {
+            text-align: left;
+    ***REMOVED***
+
+    #section-home .projects-list-view .table-container tbody td {
+        padding: 0;
+***REMOVED***
+
+        #section-home .projects-list-view .table-container tbody td a {
+            display: block;
+            padding: 0.3em 0.5em 0.4em;
+            text-decoration: none;
+            color: #222;
+    ***REMOVED***
+
+    #section-home .projects-list-view .table-container tbody tr:hover td {
+        background-color: #2f9cc1;
+***REMOVED***
+
+        #section-home .projects-list-view .table-container tbody tr:hover td a {
+            color: #fff;
+    ***REMOVED***
+
+    #section-home .projects-list-view .table-container tbody .empty {
+        padding: 1em;
+***REMOVED***
+
+        #section-home .projects-list-view .table-container tbody .empty:hover {
+            background: #eee;
+    ***REMOVED***
+
+    #section-home .projects-list-view .table-container .loading-container tr:hover td {
+        background: none;
+***REMOVED***
+
+    #section-home .projects-list-view .table-container .loading {
+        background: url('../img/bx_loader.gif?1400252396') center center no-repeat;
+        height: 4em;
+***REMOVED***
+
+#section-home .facts {
+    zoom: 1;
+    margin: 4em 0;
+***REMOVED***
+
+    #section-home .facts:after {
+        clear: both;
+        content: ".";
+        display: block;
+        font-size: 0;
+        height: 0;
+        line-height: 0;
+        visibility: hidden;
+***REMOVED***
+
+    #section-home .facts .fact {
+        float: left;
+        width: 33.3%;
+        position: relative;
+***REMOVED***
+
+        #section-home .facts .fact .inner {
+            padding: 0 18px;
+    ***REMOVED***
+
+    #section-home .facts .decorator {
+        position: absolute;
+        left: -3px;
+        top: 0;
+        height: 75px;
+        width: 5px;
+        background: #ededed;
+***REMOVED***
+
+    #section-home .facts .fact:first-child .decorator {
+        display: none;
+***REMOVED***
+
+    #section-home .facts img {
+        float: left;
+***REMOVED***
+
+    #section-home .facts .text {
+        margin-left: 75px;
+        font-size: 0.9em;
+        line-height: 1.3em;
+***REMOVED***
+
+    #section-home .facts strong {
+        font-weight: 400;
+***REMOVED***
+
+    #section-home .facts .title {
+        font-weight: 400;
+        font-size: 1.1em;
+***REMOVED***
+
+.statistic-home-info, .home-description-aplication {
+    display: none;
+***REMOVED***
+
+#section-home .home-mode #controls {
+    width: 380px;
+    background-color: #F0F0F0;
+    border-bottom: 0;
+    border-radius: 5px;
+    color: #959595;
+    visibility: hidden;
+***REMOVED***
+
+    #section-home .home-mode #controls .wrap-controls {
+        display: none;
+***REMOVED***
+
+    #section-home .home-mode #controls .statistic-home-info {
+        display: block;
+***REMOVED***
+
+        #section-home .home-mode #controls .statistic-home-info .subtitle-consolidated {
+            background: #fff;
+            text-align: center;
+            padding: 0.5em;
+            font-size: 1.15em;
+            color: #666;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+    ***REMOVED***
+
+            #section-home .home-mode #controls .statistic-home-info .subtitle-consolidated:after {
+                content: "";
+                position: absolute;
+                left: 50%;
+                margin-left: -7px;
+                top: 100%;
+                border: 15px solid transparent;
+                border-top: 15px solid #fff;
+        ***REMOVED***
+
+            #section-home .home-mode #controls .statistic-home-info .subtitle-consolidated .close {
+                position: absolute;
+                top: 7px;
+                right: 5px;
+                overflow: hidden;
+                display: inline-block;
+                text-indent: -99999em;
+                background-position: 0 -18px;
+                width: 23px;
+                height: 23px;
+                text-align: left;
+        ***REMOVED***
+
+        #section-home .home-mode #controls .statistic-home-info .statistic-row {
+            border-bottom: 1px solid #ccc;
+            margin: 0.5em;
+    ***REMOVED***
+
+            #section-home .home-mode #controls .statistic-home-info .statistic-row:last-child {
+                border-bottom: 0;
+        ***REMOVED***
+
+            #section-home .home-mode #controls .statistic-home-info .statistic-row .label {
+                padding: 10px 20px;
+        ***REMOVED***
+
+            #section-home .home-mode #controls .statistic-home-info .statistic-row .money {
+                padding: 0 20px 10px;
+                font-size: 1.7em;
+                color: #666;
+        ***REMOVED***
+
+                #section-home .home-mode #controls .statistic-home-info .statistic-row .money#approved-projects-home {
+                    padding: 0 15px 10px;
+                    font-size: 3em;
+                    color: #2f9cc1;
+            ***REMOVED***
+
+#section-home .home-mode #infographic {
+    display: none;
+***REMOVED***
+
+#section-home .home-mode .home-description-aplication {
+    background: #ECF0F1;
+    display: block;
+    max-width: none;
+    margin: 0;
+    position: relative;
+    display: block;
+***REMOVED***
+
+    #section-home .home-mode .home-description-aplication:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        background: #fff;
+        top: 0;
+***REMOVED***
+
+    #section-home .home-mode .home-description-aplication .centered {
+        position: relative;
+        z-index: 10;
+***REMOVED***
+
+    #section-home .home-mode .home-description-aplication .video-area {
+        text-align: center;
+***REMOVED***
+
+        #section-home .home-mode .home-description-aplication .video-area h2 {
+            color: #0091ac;
+            padding: 1em 0 0.5em;
+            font-weight: 600;
+            font-size: 2.2em;
+    ***REMOVED***
+
+        #section-home .home-mode .home-description-aplication .video-area figure {
+            width: 560px;
+            height: 315px;
+            border: 10px solid #fff;
+            border-radius: 5px;
+    ***REMOVED***
+
+        #section-home .home-mode .home-description-aplication .video-area p {
+            text-align: center;
+            padding: 2em 11em;
+    ***REMOVED***
+
+    #section-home .home-mode .home-description-aplication .sections-area {
+        background: url('../img/landing_icons/pattern-dots.png?1419908086');
+        padding: 2em;
+***REMOVED***
+
+        #section-home .home-mode .home-description-aplication .sections-area article {
+            display: inline-block;
+            vertical-align: middle;
+            *vertical-align: auto;
+            *zoom: 1;
+            *display: inline;
+            width: 20%;
+            margin: 20px;
+            text-align: center;
+    ***REMOVED***
+
+            #section-home .home-mode .home-description-aplication .sections-area article h3 {
+                font-size: 1.3em;
+                text-transform: uppercase;
+                color: #2f9cc1;
+        ***REMOVED***
+
+            #section-home .home-mode .home-description-aplication .sections-area article p {
+                padding: 1em 0;
+                line-height: 1.5em;
+                color: #636363;
+        ***REMOVED***
+
+            #section-home .home-mode .home-description-aplication .sections-area article .btn-gray {
+                background: #555;
+                color: #fff;
+                display: inline-block;
+                vertical-align: middle;
+                *vertical-align: auto;
+                *zoom: 1;
+                *display: inline;
+                text-align: center;
+                padding: 0.5em 1.5em;
+                text-decoration: none;
+                font-weight: 700;
+        ***REMOVED***
+
+                #section-home .home-mode .home-description-aplication .sections-area article .btn-gray:hover {
+                    background: #3b3b3b;
+            ***REMOVED***
+
+.map-container.landing-mode #search #filter-results {
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    display: none;
+***REMOVED***
+
+.map-container.landing-mode .legend-resources {
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    display: none;
+***REMOVED***
+
+.map-container.landing-mode #infographic {
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    display: none;
+***REMOVED***
+
+.map-container.landing-mode #controls {
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+***REMOVED***
+
+.map-container.landing-mode .map-container__patron {
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=99);
+    opacity: 0.99;
+    z-index: 10;
+***REMOVED***
+
+.map-container.landing-mode .main-content {
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    display: block;
+    z-index: 11;
+***REMOVED***
+
+.map-container.landing-mode .map-container {
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    max-height: 1450px;
+***REMOVED***
+
+.map-container__patron {
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    background: url('../img/landing_icons/mapahome.jpg?1400252396') repeat;
+    height: 750px;
+    top: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    position: absolute;
+    width: auto;
+    z-index: -10000;
+    border-bottom: 4px solid #58CA67;
+***REMOVED***
+
+    .map-container__patron:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('../img/landing_icons/patronhome.png?1400252396') repeat;
+***REMOVED***
+
+.main-content {
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    width: 992px;
+    position: relative;
+    margin: auto;
+    margin-top: -37em;
+    display: none;
+***REMOVED***
+
+.main-content__title {
+    color: #5E5F5A;
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+***REMOVED***
+
+.main-content__type-filters {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 2em;
+    text-align: center;
+***REMOVED***
+
+.main-content__type-filters__list {
+    display: inline-block;
+    margin: 1em 2.5em;
+***REMOVED***
+
+.main-content__type-filters__link {
+    color: #5E5F5A;
+    font-weight: 100;
+    text-decoration: none;
+    text-transform: uppercase;
+***REMOVED***
+
+    .main-content__type-filters__link div {
+        background-color: #58ca67;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin: 0 auto;
+        margin-bottom: 0.5em;
+        -moz-border-radius: 50%;
+        -webkit-border-radius: 50%;
+        border-radius: 50%;
+***REMOVED***
+
+    .main-content__type-filters__link:hover div {
+        background-color: #6cd079;
+***REMOVED***
+
+.main-content__type-filters__link__project-icon {
+    background-image: url('../img/landing_icons/icoproyectos.png?1400252396');
+    width: 34px;
+    height: 30px;
+    padding: 1em 0.9em;
+***REMOVED***
+
+.main-content__type-filters__link__resources-icon {
+    background-image: url('../img/landing_icons/icorecursos.png?1400252396');
+    width: 31px;
+    height: 26px;
+    padding: 1.15em 0.976em;
+***REMOVED***
+
+.main-content__type-filters__link__production-icon {
+    background-image: url('../img/landing_icons/icoproduccion.png?1400252396');
+    width: 14px;
+    height: 33px;
+    padding: 0.9em 1.5em;
+***REMOVED***
+
+.main-content__type-filters__link_fiscalization-icon {
+    background-image: url('../img/landing_icons/icofiscalizacion.png?1400252396');
+    width: 29px;
+    height: 30px;
+    padding: 1em 1.039em;
+***REMOVED***
+
+.main-content__video {
+    border: 1px solid #09425d;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width: 750px;
+    height: 410px;
+    margin: 0 auto;
+    margin-top: 2em;
+***REMOVED***
+
+.main-content__description {
+    max-width: 800px;
+    margin: 3em auto;
+***REMOVED***
+
+    .main-content__description figure, .main-content__description .right-content {
+        display: inline-block;
+        vertical-align: middle;
+        *vertical-align: auto;
+        *zoom: 1;
+        *display: inline;
+        vertical-align: top;
+***REMOVED***
+
+    .main-content__description figure {
+        background: url('../img/landing_icons/thumb-video.png?1419908086') no-repeat center;
+        position: relative;
+        cursor: pointer;
+***REMOVED***
+
+        .main-content__description figure:after {
+            content: "";
+            overflow: hidden;
+            display: inline-block;
+            text-indent: -99999em;
+            background-position: 0 -41px;
+            width: 64px;
+            height: 64px;
+            text-align: left;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -20px 0 0 -15px;
+            opacity: 0.8;
+            width: 65px;
+    ***REMOVED***
+
+        .main-content__description figure:hover:after {
+            opacity: 1;
+    ***REMOVED***
+
+    .main-content__description .right-content {
+        width: 465px;
+***REMOVED***
+
+.main-content__description__text {
+    margin: 0 auto;
+    color: #636363;
+    line-height: 1.5em;
+    font-size: 1.2em;
+***REMOVED***
+
+.main-content__description__text-bold {
+    font-size: 2.5em;
+    font-weight: lighter;
+    margin-bottom: 0.3em;
+    color: #636363;
+***REMOVED***
+
+.main-content__notifications {
+    background: #fef4e8;
+    margin: 0 auto;
+    padding: 1em 1.5em;
+    margin-top: 2em;
+***REMOVED***
+
+.main-content__notifications__text {
+    color: #d9886a;
+    padding-left: 4em;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    text-transform: lowercase;
+    min-height: 32px;
+    background: url('../img/landing_icons/warning.png?1400252396') no-repeat;
+***REMOVED***
+
+.main-content__consolidated-data {
+    width: 665px;
+    margin: 2em auto 8em;
+    background-color: #fff;
+    border-radius: 6px;
+***REMOVED***
+
+.main-content__consolidated-data__title {
+    background: #0091AC;
+    color: #fff;
+    font-size: 1.5em;
+    text-align: center;
+    padding: 0.3em;
+    margin-bottom: 1em;
+    border-radius: 6px 6px 0 0;
+***REMOVED***
+
+.main-content__consolidated-data__aproved_projects {
+    border: 1px solid #D2D2D2;
+    display: table-cell;
+    text-align: center;
+    padding: 1.5em 1.8em;
+    vertical-align: middle;
+    max-width: 13em;
+***REMOVED***
+
+    .main-content__consolidated-data__aproved_projects .title {
+        color: #636363;
+        font-size: 1.1em;
+        margin-bottom: 1em;
+***REMOVED***
+
+    .main-content__consolidated-data__aproved_projects .number {
+        color: #58ca67;
+        font-size: 4em;
+***REMOVED***
+
+.main-content__consolidated-data__resources {
+    display: table-cell;
+    padding: 0 2em;
+***REMOVED***
+
+    .main-content__consolidated-data__resources .invested-resources {
+        padding-bottom: 0.5em;
+***REMOVED***
+
+        .main-content__consolidated-data__resources .invested-resources .title {
+            color: #636363;
+            font-size: 1.1em;
+            font-weight: 100;
+            max-width: 290px;
+            padding-bottom: 0.5em;
+    ***REMOVED***
+
+        .main-content__consolidated-data__resources .invested-resources .amount {
+            color: #0092ab;
+            font-size: 1.5em;
+    ***REMOVED***
+
+    .main-content__consolidated-data__resources .aproved-resources .title {
+        color: #636363;
+        font-size: 1.1em;
+        max-width: 290px;
+        font-weight: 100;
+        padding: 0.5em 0;
+***REMOVED***
+
+    .main-content__consolidated-data__resources .aproved-resources .amount {
+        color: #707070;
+        font-size: 1.5em;
+        padding-bottom: 0.5em;
+***REMOVED***
+
+    .main-content__consolidated-data__resources .total-val-resources .title {
+        color: #636363;
+        font-size: 1.1em;
+        font-weight: 100;
+        max-width: 90%;
+        padding-bottom: 0.5em;
+***REMOVED***
+
+    .main-content__consolidated-data__resources .total-val-resources .amount {
+        color: #707070;
+        font-size: 1.5em;
+***REMOVED***
+
+.modal .wrapper .content {
+    background-color: transparent;
+***REMOVED***
+
+.main-content__notifications {
+    z-index: 100;
+    position: relative;
+***REMOVED***
+
+.main-content__consolidated-data {
+    position: relative;
+***REMOVED***
+
+.main-content__consolidated-tabbed {
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+***REMOVED***
+
+    .main-content__consolidated-tabbed.show-tabbed {
+        display: block;
+***REMOVED***
+
+    .main-content__consolidated-tabbed .consolidated-tabbed {
+        position: relative;
+        color: #959595;
+***REMOVED***
+
+        .main-content__consolidated-tabbed .consolidated-tabbed .wrap-tab {
+            width: 85%;
+            margin: auto;
+    ***REMOVED***
+
+        .main-content__consolidated-tabbed .consolidated-tabbed:after {
+            content: "";
+            position: absolute;
+            top: -30px;
+            right: 50px;
+            border: 15px solid transparent;
+            border-bottom: 15px solid #fff;
+    ***REMOVED***
+
+        .main-content__consolidated-tabbed .consolidated-tabbed h2 {
+            color: #2f9cc1;
+            display: block;
+            font-size: 3em;
+            padding: 1.5em 1em;
+            font-size: 1.5em;
+            text-align: center;
+    ***REMOVED***
+
+        .main-content__consolidated-tabbed .consolidated-tabbed .btns-area {
+            border-top: 1px solid #d2d2d2;
+            border-bottom: 1px solid #d2d2d2;
+            text-align: justify;
+            margin: 1em 0;
+    ***REMOVED***
+
+            .main-content__consolidated-tabbed .consolidated-tabbed .btns-area a {
+                background: #2f9cc1;
+                text-align: center;
+                color: #fff;
+                display: inline-block;
+                vertical-align: middle;
+                *vertical-align: auto;
+                *zoom: 1;
+                *display: inline;
+                vertical-align: top;
+                margin: 1em 0 0;
+                padding: 0.4em 2em;
+                text-decoration: none;
+                width: 19%;
+        ***REMOVED***
+
+                .main-content__consolidated-tabbed .consolidated-tabbed .btns-area a:hover {
+                    background: #45c356;
+            ***REMOVED***
+
+            .main-content__consolidated-tabbed .consolidated-tabbed .btns-area .break {
+                display: inline-block;
+                vertical-align: middle;
+                *vertical-align: auto;
+                *zoom: 1;
+                *display: inline;
+                width: 30%;
+                height: 0;
+        ***REMOVED***
+
+        .main-content__consolidated-tabbed .consolidated-tabbed b {
+            font-weight: bold;
+            padding-bottom: 0.5em;
+            display: block;
+            color: #6f6f6f;
+    ***REMOVED***
+
+.i-tooltip {
+    content: "";
+    overflow: hidden;
+    display: inline-block;
+    text-indent: -99999em;
+    background-position: 0 -505px;
+    width: 15px;
+    height: 15px;
+    text-align: left;
+    position: relative;
+    top: 0;
+    right: -5px;
+    overflow: visible !important;
+    text-indent: 0 !important;
+***REMOVED***
+
+#header.tooltip, .tooltip {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    *vertical-align: auto;
+    *zoom: 1;
+    *display: inline;
+***REMOVED***
+
+    #header.tooltip .info-tool, .tooltip .info-tool {
+        display: none;
+        color: #0091AC;
+        z-index: 10;
+        position: absolute;
+        left: 50%;
+        margin: 0 0 0 -100px;
+        bottom: 110%;
+        background: #fff;
+        text-align: center;
+        width: 200px;
+        font-size: 0.7em;
+        /*font-family: Arial;*/
+        line-height: 1em;
+        padding: 8px;
+        opacity: 1;
+        text-transform: none;
+        border-radius: 3px;
+        font-weight: bold;
+        border: 1px solid silver;
+        word-break: break-word;
+***REMOVED***
+
+.hide {
+    display: none !important;
+***REMOVED***
+
+.home-mode + #footer .row .info, .home-mode + #footer .row .form-wrapper {
+    display: none;
+***REMOVED***
+
+/*Alet bootbox*/
+.table-container .pagination a{display: inline-block***REMOVED***
+.fade:not(.show) {
+    opacity: 1;
+    background-color: rgba(0,0,0,.7)
+***REMOVED***
+
+.modal-backdrop {
+    background-color: rgba(0,0,0,.5)
+***REMOVED***
+
+.modal-dialog {
+    transform: translate(0,1%) !important;
+***REMOVED***
+
+.MIVBox {
+    max-width: 900px;
+    margin: 0 auto;
+***REMOVED***
+/*COMENTARIOS*/
+/*Comentarios*/
+.Tcomments {
+    width: 100%;
+    margin: 0 auto;
+    padding: 15px 0px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+***REMOVED***
+
+    .Tcomments span {
+        font-weight: 600
+***REMOVED***
+
+.lcomments {
+    width: 350px;
+    margin: 0 auto;
+***REMOVED***
+
+.bkcomments {
+    width: 120px;
+    margin: 0 auto;
+***REMOVED***
+
+#divPadre1 {
+    width: 100%;
+    float: left;
+***REMOVED***
+
+.s2 .h2 {
+    font-size: 50px;
+    /*margin-left: 97px;*/
+    color: #5AB642;
+***REMOVED***
+
+.Comment {
+    width: 100%;
+    display: inline-block;
+***REMOVED***
+
+.User_comment {
+    float: left
+***REMOVED***
+
+.Gov_comment {
+    /*float: left;*/
+    padding: 5px 0px 15px 0px;
+    margin-left: 65px;
+***REMOVED***
+
+.Pic_user {
+    float: left;
+    width: 57px;
+    height: 57px;
+    margin-top: 20px
+***REMOVED***
+.dis-Inline{display: inline***REMOVED***
+.Post_user {
+    /*background: #EAEAEA;*/
+    padding: 15px;
+    margin-left: 64px;
+***REMOVED***
+
+.Post_name {
+    font-size: 14px;
+    text-align: left;
+    font-weight: bold;
+***REMOVED***
+
+.Post_txt {
+    font-size: 14px;
+    text-align: left;
+***REMOVED***
+
+.iduser {
+    font-weight: 600;
+***REMOVED***
+
+.Post_date {
+    font-size: 14px;
+    padding-top: 5px;
+    text-align: left;
+    border-top: 1px solid #ccc;
+***REMOVED***
+
+.Post_Gov {
+    background: #EAEAEA;
+    float: left;
+    padding: 5px;
+***REMOVED***
+
+.Pic_user img {
+    border-radius: 50%
+***REMOVED***
+
+
+/* section ADMIN*/
+#enlace_cierre {
+    padding: 8px 0;
+    border: 2px solid #DB473C; padding: .5em 1em; background-color: #fff!important
+***REMOVED***
+#enlace_cierre a {
+    display: block; color: #000
+***REMOVED***
+    #enlace_cierre *, #enlace_cierre a {
+        color: #000 !important
+***REMOVED***
+
+.BgTabs {
+    width: 550px;
+    margin: 0 auto;
+***REMOVED***
+
+.section-Admin .BgTabs {
+    width: 100%;
+    border-bottom: 3px solid #22B573;
+    overflow: hidden;
+    margin-top: 25px;
+    background-color: rgba(13,40,75,.5);
+***REMOVED***
+
+.section-Admin .TabAct {
+    margin: 0px;
+    background: #fff !important;
+    border-bottom: 3px solid #9d1717;
+    font-size: 14px;
+    font-weight: 700;
+***REMOVED***
+.wrap-admin-pf .TabAct .material-icons{
+    color: #9d1717!important
+***REMOVED***
+.wrap-admin-pf .TabBen .material-icons {
+    color: #08477A !important
+***REMOVED***
+.tabAct .material-icons {
+    color: #9d1717!important
+***REMOVED***
+.section-Admin .TabAct a, .section-faq .BgTabs a {
+    color: #fff
+***REMOVED***
+
+.section-faq .TabAct, .section-faq .TabBen {
+    font-size: 14px
+***REMOVED***
+
+.border-t-5 {
+    border-top: 5px solid #00A3D9
+***REMOVED***
+
+.section-Admin .TabBen {
+    background: none !important;
+    font-size: 14px;
+    font-weight: 700;
+***REMOVED***
+
+    .section-Admin .TabBen a {
+        color: #fff
+***REMOVED***
+
+        .section-Admin .TabBen a:hover {
+            color: #000 !important;
+            text-decoration: underline
+    ***REMOVED***
+
+.wrap-admin-pf .well {
+    margin-bottom: 15px;
+    color: #000;
+    overflow: inherit;
+     background-color: #f3f3f3;
+     padding: 15px 0px
+***REMOVED***
+
+.wrap-admin-pf .dataThumbnail {
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    color: #000
+***REMOVED***
+
+.wrap-admin-pf .boxImg .detailedLinks {
+    border: 1px solid #e9e9e9;
+    background-color: #e3e3e3;
+***REMOVED***
+
+.section-Admin .main-title {
+***REMOVED***
+.borderbox-Coments {
+    border: 1px solid #e3e3e3;
+    padding: 15px;
+    margin-bottom: 15px;
+***REMOVED***
+.btnPublicar p, .btnEliminaC p, .btnRespuesta p {
+    display: inline-block !important;
+***REMOVED***
+.wrap-admin-pf .User_comment {
+    float: none;  margin-bottom: 15px
+***REMOVED***
+.tipoBox p {
+    display: inline-block;
+    margin-left: 5px;
+***REMOVED***
+.btn p {
+    margin-bottom: 0px;
+***REMOVED***
+.dis_Inline{ display: inline***REMOVED***
+.tipoBox .radio {
+    margin-right: 15px;
+***REMOVED***
+.borderbox-Coments .btn-default {
+    background-color: #db473c;
+    color: #fff !important;
+    border-radius: 6px;
+    margin-right: 15px;
+***REMOVED***
+.section-comments .User_comment {
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: 25px;
+***REMOVED***
+.section-comments .Post_user {
+    margin-left: 0px;
+    background-color: #EAEAEA;
+***REMOVED***
+.TabAct {
+    color: #9d1717;
+    font-size: 20px;
+    text-transform: uppercase;
+    float: left;
+    height: 50px;
+    width: 240px;
+    margin: 0px 5px;
+    border-bottom: 3px solid #9d1717;
+***REMOVED***
+
+.tagM {
+    padding: 10px;
+    text-align: center;
+***REMOVED***
+
+.TabBen a:hover .tagM {
+    padding: 10px;
+    text-align: center;
+***REMOVED***
+
+.TabAct a {
+    color: #9d1717;
+***REMOVED***
+
+    .TabAct a:hover {
+        color: #9d1717;
+***REMOVED***
+
+.TabBen {
+    font-size: 20px;
+    text-transform: uppercase;
+    float: left;
+    height: 50px;
+    width: 300px;
+    background-color: transparent;
+***REMOVED***
+
+.wrap-tabs {
+    border-bottom: 1px solid #9d1717;
+***REMOVED***
+
+.section-faq .BgTabs {
+    /*width: 100%;*/
+    overflow: hidden;
+    margin-top: 25px;
+***REMOVED***
+
+.modal-header {
+    /*border-bottom: 2px solid #99C562;height: 30px;*/
+    padding: 3px !important;
+***REMOVED***
+
+.modal-content {
+    /*border-radius: 0px*/
+    margin-top: 50px;
+    /*background: #2f9cc1;*/
+***REMOVED***
+
+.modal-title {
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 5px;
+***REMOVED***
+
+.modal-footer {
+    text-align: left;
+    /*background-color: #eaeaea;*/
+***REMOVED***
+
+.bootbox-body {
+    text-align: center;
+    font-size: 1.5rem;
+***REMOVED***
+
+/* video background */
+#background-video {
+    height: 63vh;
+    width: 100vw;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+***REMOVED***

@@ -25,9 +25,11 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       return View();
 ***REMOVED***
 
-    public IActionResult Contactanos()
+    public IActionResult Contactanos(int? id=null)
     {
-      //return Index();
+
+      ViewData["tab"] = id;
+      ViewData["ShowContacts"] = false;
       return View();
 ***REMOVED***
     public IActionResult Acercade()
@@ -35,10 +37,18 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       return View();
 ***REMOVED***
 
-    public IActionResult MarcoLegal()
-    {
-        return View();
-***REMOVED***
+        public IActionResult MarcoLegal()
+        {
+            return View();
+    ***REMOVED***
+        public IActionResult PoliticasdePrivacidad()
+        {
+            return View();
+    ***REMOVED***
+        public IActionResult TerminosyCondiciones()
+        {
+            return View();
+    ***REMOVED***
 
 ***REMOVED***
 ***REMOVED***

@@ -55,8 +55,9 @@ namespace PlataformaTransparencia.Modelos
 
 ***REMOVED***
 
-    public class InfoRecAsignadosPlan : InformationGraphics { 
-       public int? periodo { get; set; ***REMOVED***
+    public class InfoRecAsignadosPlan : InformationGraphics
+    {
+        public int? periodo { get; set; ***REMOVED***
 ***REMOVED***
 
     public class InfoEntidadesConsolida : InformationGraphics
@@ -68,5 +69,63 @@ namespace PlataformaTransparencia.Modelos
         public decimal avance { get; set; ***REMOVED***
 
         public double aporteObjetivo { get; set; ***REMOVED***
+***REMOVED***
+
+    public class InfoProjectPerSector : InformationGraphics
+    {
+***REMOVED***
+    public class InfoResourcesPerDepartment : InformationGraphics
+    {
+***REMOVED***
+    public class InfoResourcesPerRegion : InformationGraphics
+    {
+***REMOVED***
+    public class InfoResourcesPerSector : InformationGraphics
+    {
+***REMOVED***
+    public class InfoProjectsPerEstado : InformationGraphics
+    {
+
+***REMOVED***
+    public class projectsCarteraTrans : InformationGraphics
+    {
+***REMOVED***
+    public class InfoTransferPerSector : InformationGraphics
+    {
+***REMOVED***
+    public class InfoContratosPerAnyo : InformationGraphics
+    {
+
+***REMOVED***
+
+    public class InfoSubsidiosPerDpto : InformationGraphics
+    {
+
+***REMOVED***
+
+    public class InfoRecursosBonificacionesPerEmpleo : InformationGraphics
+    {
+
+***REMOVED***
+
+    public class InfoFarmaciasPerGroup : InformationGraphics { ***REMOVED***
+
+    public class InfoRecAsignadosPresupuesto : InformationGraphics
+    {
+        public int? periodo { get; set; ***REMOVED***
+
+***REMOVED***
+
+    public class InfoConsolidadoPresupuesto : InformationGraphics
+    {
+        public double periodo { get; set; ***REMOVED***
+        public double vigente { get; set; ***REMOVED***
+        public double aprobado { get; set; ***REMOVED***
+
+        public double ejecutado { get; set; ***REMOVED***
+
+        public int Id { get; set; ***REMOVED***
+
+
 ***REMOVED***
 ***REMOVED***

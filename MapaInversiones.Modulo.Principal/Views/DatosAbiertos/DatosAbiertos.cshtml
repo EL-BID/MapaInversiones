@@ -33,9 +33,9 @@
                         <h1>Datos abiertos</h1>
                     </div>
                     <!--<div class="banner-main-desc">
-        <p>Explore y descargue datos públicos en formatos abiertos sobre información de presupuesto e indicadores del Plan Nacional de Desarrollo e información de presupuesto e indicadores de las Entidades y sus proyecto/actividad.</p>
+                        <p>Explore y descargue datos públicos en formatos abiertos sobre información de presupuesto e indicadores del Plan Nacional de Desarrollo e información de presupuesto e indicadores de las Entidades y sus proyecto/actividad.</p>
 
-    </div>-->
+                    </div>-->
 
                 </div>
 
@@ -49,89 +49,164 @@
 <!--DATOS PLANEACION-->
 <section class="section main-Content">
     <div class="container">
-        <div class="row justify-content-center">
-            @{
-                var datosplanificacion = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosPlanificacion");
-        ***REMOVED***
-            <div class="section-heading heading-left">
-                <h2>@datosplanificacion.Content.DatosAbiertos.Titulo.Text</h2>
-                <p>@Html.Raw(datosplanificacion.Content.HtmlBodyPart.Html)</p>
-            </div>
-        </div>
-        <div class="row justify-content-center items">
-            @foreach (var caja in datosplanificacion.Content.BagPart.ContentItems)
-            {
-                <div class="col-xl-6 col-md-6 col-12 item">
-                    <!-- Begin OpenData item -->
-                    <div class="services-item services-item-row item-style">
-                        <div class="services-item-info">
-                            <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
-                            <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
-                            <div class="actions-links">
-                                <a onclick="ga('send','event','Download','XLSX', this.href]);" target="_blank" href="@caja.DescargaDatosAbiertos.UrlBotonDiccionario.Url">
-                                    <span class="badge badge-pill badge-primary"> @caja.DescargaDatosAbiertos.UrlBotonDiccionario.Text</span>
-                                </a>
-                                <a onclick="ga('send','event','Download','CSV', this.href]);" target="_blank" href="@caja.DescargaDatosAbiertos.UrlBotonCVS.Url">
-                                    <span class="badge badge-pill badge-primary"> @caja.DescargaDatosAbiertos.UrlBotonCVS.Text</span>
-                                </a>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        @{
+                            var datospresupuesto = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosPresupuesto");
+                    ***REMOVED***
+                        <div class="card shadow border-0 card-entidad">
+                            <div class="card-body" id="boxpresupuesto" data-presupuesto="@datospresupuesto.Content.BagPart">
+                                <div class="row">
+                                    <div class="prescontainerdtb">
+                                        <div class="ico_press"></div>
+                                        <h4 class="services-item-heading">
+                                            @datospresupuesto.Content.DatosAbiertos.Titulo.Text
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row" style="display:none">
+                                    <h6 class="services-item-heading">Conjunto de datos</h6>
+                                    <div class="form-group subtitle">
+                                        <select class="form-select" id="datospresupuesto">
+                                            @foreach (var caja in datospresupuesto.Content.BagPart.ContentItems)
+                                            {
+                                                <option value="@caja.TitlePart.Title">@caja.TitlePart.Title</option>
+                                        ***REMOVED***
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h6 class="services-item-heading">Año</h6>
+                                    <div class="form-group subtitle">
+                                        <select class="form-select" aria-label="2022" id="annopresupuesto">
+                                        </select>
+                                    </div>
+                                    <div class="d-flex">
+                                        <h6 class="services-item-heading">Formato</h6>
+                                        <div class="form-group d-flex">
+                                            <div class="ml-3"> <input checked type="radio" id="formatopresupuesto" name="formatopresupuesto" value="CVS"><label class="subtitlechk" for="child">.csv</label></div>
+                                            <div class="ml-3"> <input type="radio" id="formatopresupuesto" name="formatopresupuesto" value="XLS"><label class="subtitlechk" for="child">.xls</label></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="text-center py-2">                                       
+                                            <a title="Descargar" onclick="descargar('annopresupuesto','formatopresupuesto');" class="btn btn-cards">
+                                                <span>Descargar</span>
+                                            </a>
+                                    </div>
+                                    <div class="text-center py-2">
+                                        <a title="Diccionario de Datos" href="#" class="btnOut btn-cards" id="idDicPresupuesto">
+                                            <span>Diccionario de Datos</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="boxDataSourceDA text-center">
+                                        <h4>Última actualización:  <span id="idUltimaActPresupuesto"></span></h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="boxDataSourceDA text-left">
+                                        <h4>Fuentes:<br /> <span id="FuentePresupuesto"></span></h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="boxDataSourceDA text-center">
+                                        <p>Datos suministrados por medio del Portal de Datos Abiertos de la Secretaría de Finanzas, mas detalles en <strong><a target="_blank" href="https://www.contratacionesabiertas.gob.hn/">sefin.gob.hn</a></strong></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="services-item-ico">
-                            <i class="material-icons material-icons-outlined md-48">cloud_download</i>
-                        </div>
-                    </div>
-                    
-                    <!-- End open data item -->
-                </div>
-        ***REMOVED***
-
-        </div>
-    </div>
-</section>
-
-
-<!--OA PRESUPUESTO-->
-<section class="section main-Content section-bg2">
-    <div class="container">
-        <div class="row justify-content-center">
-            @{
-                var datospresupuesto = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosPresupuesto");
-        ***REMOVED***
-            <div class="section-heading heading-left">
-                <h2>@datospresupuesto.Content.DatosAbiertos.Titulo.Text</h2>
-                <p>@Html.Raw(datospresupuesto.Content.HtmlBodyPart.Html)</p>
-            </div>
-        </div>
-        <div class="row justify-content-center items">
-            @foreach (var caja in datospresupuesto.Content.BagPart.ContentItems)
-            {
-                <div class="col-xl-6 col-md-6 col-12 item">
-                    <!-- Begin OpenData item -->
-                    <div class="services-item services-item-row item-style">
-                        <div class="services-item-info">
-                            <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
-                            <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
-                            <div class="actions-links">
-                                <a href="@caja.DescargaDatosAbiertos.UrlBotonDiccionario.Url">
-                                    <span class="badge badge-pill badge-primary"> @caja.DescargaDatosAbiertos.UrlBotonDiccionario.Text</span>
-                                </a>
-                                <a href="@caja.DescargaDatosAbiertos.UrlBotonCVS.Url">
-                                    <span class="badge badge-pill badge-primary"> @caja.DescargaDatosAbiertos.UrlBotonCVS.Text</span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="services-item-ico">
-                            <i class="material-icons material-icons-outlined md-48">cloud_download</i>
                         </div>
                     </div>
 
-                    <!-- End open data item -->
-                </div>
-        ***REMOVED***
+                    <div class="col-md-4">
+                        <div class="card shadow border-0 card-entidad">
+                            @{
+                                var datoscontratacion = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosContratacion");
+                        ***REMOVED***
 
+                            <div class="card-body" id="boxcontrato" data-contratos="@datoscontratacion.Content.BagPart">
+                                <div class="row">
+                                    <div class="prescontainerdtb">
+                                        <div class="ico_press"></div>
+                                        <h4 class="services-item-heading">
+                                            @datoscontratacion.Content.DatosAbiertos.Titulo.Text
+                                        </h4>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <h6 class="services-item-heading">Conjunto de datos</h6>
+                                    <div class="form-group subtitle">
+                                        <select class="form-select" id="datoscontratos">
+                                            @foreach (var caja in datoscontratacion.Content.BagPart.ContentItems)
+                                            {
+                                                <option value="@caja.TitlePart.Title">@caja.TitlePart.Title</option>
+                                        ***REMOVED***
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <h6 class="services-item-heading">Año</h6>
+                                    <div class="form-group subtitle">
+                                        <select class="form-select" id="annocontratos">
+                                        </select>
+                                    </div>
+                                    <div class="d-flex">
+                                        <h6 class="services-item-heading">Formato</h6>
+                                        <div class="form-group d-flex">
+                                            <div class="ml-3"> <input checked type="radio" id="formatocontrato" name="formatocontrato" value="CVS"><label class="subtitlechk" for="child">.csv</label></div>
+                                            <div class="ml-3"> <input type="radio" id="formatocontrato" name="formatocontrato" value="XLS"><label class="subtitlechk" for="child">.xls</label></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="text-center py-2">
+                                        <a title="Descargar" onclick="descargar('annocontratos','formatocontrato');" class="btn btn-cards">
+                                            <span>Descargar</span>
+                                        </a>
+                                    </div>
+                                    <div class="text-center py-2">
+                                        <a title="Diccionario de Datos" href="" class="btnOut btn-cards" id="idDicContratos">
+                                            <span>Diccionario de Datos</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="boxDataSourceDA text-center">
+                                        <h4>Última actualización: <span id="idUltimaActContratos"></span> </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="boxDataSourceDA text-left">
+                                        <h4>Fuentes:<br /> <span id="FuenteContratos"></span></h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="boxDataSourceDA text-center">
+                                        <p>Datos suministrados por medio del Portal de Datos Abiertos de la Secretaría de Finanzas, mas detalles en <strong><a target="_blank" href="https://www.contratacionesabiertas.gob.hn/">sefin.gob.hn</a></strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
     </div>
 </section>
+
+<script src="~/js/bootstrap/3.3.5/bootstrap.min.js" type="text/javascript"></script>
+<script src="~/js/Bootbox/bootbox.min.js" type="text/javascript"></script>
+
+<script src="~/js/DatosAbiertos_aux.js"></script>
 
 
 <!--OA entidades-->
@@ -145,68 +220,69 @@
         </div>
         <div class="row justify-content-center items">
             <div class="col-xl-6 col-md-6 col-12 item">-->
-                <!-- Begin OpenData item -->
-                <!--<a href="" class="services-item services-item-row item-style">
-                    <div class="services-item-info">
-                        <h4 class="services-item-heading">SPR - Total por Eje Reporte PND</h4>
-                        <div class="small services-item-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</div>
-                        <div class="actions-links">
+<!-- Begin OpenData item -->
+<!--<a href="" class="services-item services-item-row item-style">
+    <div class="services-item-info">
+        <h4 class="services-item-heading">SPR - Total por Eje Reporte PND</h4>
+        <div class="small services-item-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</div>
+        <div class="actions-links">
 
-                            <span class="badge badge-pill badge-primary"> Descargar JSON</span>
+            <span class="badge badge-pill badge-primary"> Descargar JSON</span>
 
-                            <span class="badge badge-pill badge-primary"> Descargar XLSX</span>
-                        </div>
-                    </div>
-                    <div class="services-item-ico">
-                        <i class="material-icons material-icons-outlined md-48">cloud_download</i>
-                    </div>
-
-                </a>-->
-                <!-- End open data item -->
-            <!--</div>
-            <div class="col-xl-6 col-md-6 col-12 item">-->
-                <!-- Begin OpenData item -->
-                <!--<a href="" class="services-item services-item-row item-style">
-                    <div class="services-item-info">
-                        <h4 class="services-item-heading">SPR - Total por Eje Reporte PND</h4>
-                        <div class="small">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</div>
-                        <div class="actions-links">
-
-                            <span class="badge badge-pill badge-primary"> Descargar JSON</span>
-
-                            <span class="badge badge-pill badge-primary"> Descargar XLSX</span>
-                        </div>
-                    </div>
-
-                    <div class="services-item-ico">
-                        <i class="material-icons material-icons-outlined md-48">cloud_download</i>
-                    </div>
-
-                </a>--><!-- End open data item -->
-            <!--</div>
-
+            <span class="badge badge-pill badge-primary"> Descargar XLSX</span>
         </div>
-        <div class="row justify-content-left items">
-            <div class="col-xl-6 col-md-6 col-12 item">-->
-                <!-- Begin OpenData item -->
-                <!--<a href="" class="services-item services-item-row item-style">
-                    <div class="services-item-info">
-                        <h4 class="services-item-heading">SPR - Total por Eje Reporte PND</h4>
-                        <div class="small">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</div>
-                        <div class="actions-links">
+    </div>
+    <div class="services-item-ico">
+        <i class="material-icons material-icons-outlined md-48">cloud_download</i>
+    </div>
 
-                            <span class="badge badge-pill badge-primary"> Descargar JSON</span>
+</a>-->
+<!-- End open data item -->
+<!--</div>
+<div class="col-xl-6 col-md-6 col-12 item">-->
+<!-- Begin OpenData item -->
+<!--<a href="" class="services-item services-item-row item-style">
+    <div class="services-item-info">
+        <h4 class="services-item-heading">SPR - Total por Eje Reporte PND</h4>
+        <div class="small">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</div>
+        <div class="actions-links">
 
-                            <span class="badge badge-pill badge-primary"> Descargar XLSX</span>
-                        </div>
-                    </div>
-                    <div class="services-item-ico">
-                        <i class="material-icons material-icons-outlined md-48">cloud_download</i>
-                    </div>
+            <span class="badge badge-pill badge-primary"> Descargar JSON</span>
 
-                </a>-->
-                <!-- End open data item -->
-            <!--</div>
+            <span class="badge badge-pill badge-primary"> Descargar XLSX</span>
+        </div>
+    </div>
+
+    <div class="services-item-ico">
+        <i class="material-icons material-icons-outlined md-48">cloud_download</i>
+    </div>
+
+</a>-->
+<!-- End open data item -->
+<!--</div>
+
+</div>
+<div class="row justify-content-left items">
+    <div class="col-xl-6 col-md-6 col-12 item">-->
+<!-- Begin OpenData item -->
+<!--<a href="" class="services-item services-item-row item-style">
+    <div class="services-item-info">
+        <h4 class="services-item-heading">SPR - Total por Eje Reporte PND</h4>
+        <div class="small">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</div>
+        <div class="actions-links">
+
+            <span class="badge badge-pill badge-primary"> Descargar JSON</span>
+
+            <span class="badge badge-pill badge-primary"> Descargar XLSX</span>
+        </div>
+    </div>
+    <div class="services-item-ico">
+        <i class="material-icons material-icons-outlined md-48">cloud_download</i>
+    </div>
+
+</a>-->
+<!-- End open data item -->
+<!--</div>
 
 
         </div>

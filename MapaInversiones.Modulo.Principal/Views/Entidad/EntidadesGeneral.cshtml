@@ -1,0 +1,236 @@
+﻿@model PlataformaTransparencia.Negocios.Entidad.EntidadContract
+@*PlataformaTransparencia.Modulo.Principal.Views.Entidad.perfilEntidadModel*@
+@section scripts
+{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/search_aux.js"></script>
+***REMOVED***
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+***REMOVED***
+@{
+    var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
+    var LabelDistPresupuesto = "";
+    var TituloDistPresupuesto = "";
+
+***REMOVED***
+@foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
+{
+    if (@etiqueta.AliasPart.Alias == "DistribucionNivelesAdministrativos")
+    {
+        LabelDistPresupuesto = @etiqueta.HtmlBodyPart.Html;
+        TituloDistPresupuesto = @etiqueta.TitlePart.Title;
+***REMOVED***
+
+***REMOVED***
+<head>
+    <style>
+
+        .node rect {
+            cursor: move;
+            fill-opacity: .8;
+            shape-rendering: crispEdges;
+    ***REMOVED***
+
+        .node text {
+            pointer-events: none;
+            /*text-shadow: 0 1px 0 #fff;*/
+    ***REMOVED***
+
+        .link {
+            fill: none;
+            stroke: #000;
+            stroke-opacity: .1;
+    ***REMOVED***
+
+            .link:hover {
+                stroke-opacity: .2;
+        ***REMOVED***
+
+        .arc text {
+            font: 12px sans-serif;
+            text-anchor: middle;
+            font-weight: bold;
+    ***REMOVED***
+
+        .arc path {
+            stroke: #fff;
+    ***REMOVED***
+
+        .toolTip {
+            position: absolute;
+            display: none;
+            width: auto;
+            height: auto;
+            background: none repeat scroll 0 0 white;
+            border: 0 none;
+            border-radius: 8px 8px 8px 8px;
+            box-shadow: -3px 3px 15px #888888;
+            color: black;
+            font: 12px sans-serif;
+            padding: 5px;
+            text-align: center;
+    ***REMOVED***
+    </style>
+</head>
+<body>
+    <!--MAIN BANNER-->
+    <section class="banner-main mb-0">
+
+        <div class="container">
+            <!-- Begin bread crumbs -->
+            <nav class="bread-crumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="bread-crumbs-list">
+                                <li>
+                                    <a href="/">Inicio</a>
+                                    <i class="material-icons md-18">chevron_right</i>
+                                </li>
+                                <li>Instituciones</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav><!-- End bread crumbs -->
+
+
+            <div class="row justify-content-center">
+
+                <div class="col-lg-8">
+                    <div class="banner-main-info pb-0">
+                        <div class="banner-main-title">
+                            <h1>Instituciones</h1>
+                        </div>
+                        <!--<div class="banner-main-desc">
+                        TEXTO ENTIDADES
+                    </div>-->
+
+                    </div>
+
+                </div>
+            </div>
+            <!--SELECT AÑO-->
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
+                    <!--YEAR FILTER-->
+                    <div class="form-group">
+                        <label style="color:white" for="input-select">Selecciona un año:</label>
+                        <select class="form-select" aria-label="Selecciona un año:" id="annioEntidad" onchange="seleccionoAnio(this);">
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--NAVIGATION ON PAGE-->
+        <!--<div class="row navs-shortcuts">
+        <div class="" id="navs-header">
+            <a class="btn-section" href="#Ejecucion">
+                <span class="ic-shortcut"><i class="material-icons md-24">grid_view</i></span>
+                <span class="text-btn">Distribución presupuestal</span>
+            </a>
+        </div>
+    </div>-->
+
+    </section>
+    <!--PRESUPUESTO ENTIDAD-->
+    <section class="section" id="Ejecucion">
+        <div class="container">
+            <div class="section-heading text-center">
+                <h3>@TituloDistPresupuesto</h3>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-body">
+                        <div class="section-heading heading-center">
+                            <p>@Html.Raw(LabelDistPresupuesto)</p>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-lg-12 section-heading heading-center" id="divTextoTabs">-->
+                </div>
+                <div></div>
+                <!-- VIEW OPTIONS-->
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="Options">
+                        <div class="switchTable" id="filtro_iconos" opc="">
+                        </div>
+                    </div>
+                </div>
+                <div id="divListadoRecursosObje">
+                    <!--TABLA COMPARATIVA-->
+                    <input type="hidden" id="migapanlistado" value="" />
+                    <div class="comparativeTable" id="divListado">
+
+                    </div>
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--RELATED INFO-->
+    <section class="relatedInfo">
+        <div class="container">
+            <!--LINKS OTRAS SECCIONES-->
+            <div class="row py-5">
+                <!--LEFT COLUMN-->
+                <div class="col-lg-8">
+                    <!--LINKS seccion infografia planificacion-->
+                    <h2>Conoce</h2>
+                    <div class="wrap-cta">
+                        <a href="/PresupuestoGeneral" target="_blank" class="py-5 mb-5 px-0">
+                            <div class="h4">Presupuestos de la República<i class="material-icons md-18">arrow_forward</i> </div>
+                        </a>
+                        <a href="/ProcesoPresupuesto" target="_blank" class="py-5 mb-5 px-0">
+                            <div class="h4">Presupuestos Ciudadanos<i class="material-icons md-18">arrow_forward</i> </div>
+                        </a>
+                    </div><br />
+                    <h2>Explora</h2>
+                    <div class="wrap-cta">
+                        <a href="../Entidades" class="py-5 mb-5 px-0">
+                            <div class="h4">Ir a Instituciones <i class="material-icons md-18">arrow_forward</i> </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="wrap-cta">
+                        <p class="card-title mb-4">Información suministrada por:</p>
+                        <a href="https://www.sefin.gob.hn/" target="_blank">
+                            <img class="img-fluid" src="../img/logoHaciendaB.png" alt="ir a SEFIN" />
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <div id="helpCenter"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+    <script src="js/entidades_gen_aux.js"></script>
+
+    <script>
+
+        window.onscroll = function () { myFunction() ***REMOVED***;
+
+        var header = document.getElementById("navs-header");
+        var sticky = header.offsetTop;
+
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+                header.classList.add("bg-white");
+        ***REMOVED*** else {
+                header.classList.remove("sticky");
+                header.classList.remove("bg-white");
+        ***REMOVED***
+    ***REMOVED***
+    </script>
+
+</body>

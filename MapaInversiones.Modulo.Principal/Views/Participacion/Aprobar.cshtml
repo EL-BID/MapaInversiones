@@ -1,0 +1,381 @@
+﻿@model PlataformaTransparencia.Modelos.ModelDataParticipacion
+@{
+    ViewBag.Title = "Aprobar Fotos y Comentarios";
+    ViewBag.SectionId = "section-projects";
+    ViewBag.ProjectsSelected = "selected";
+***REMOVED***
+
+<input type="hidden" id="hdNomUsuario" value="" />
+<input type="hidden" id="hdIdUsuario" value="" />
+<div class="wrap-admin-pf">
+    <!-- Navigation -->
+    <nav class="" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <!-- Begin bread crumbs -->
+                        <nav class="bread-crumbs">
+                            <div class="text-dark">
+                                <ul class="bread-crumbs-list">
+                                    <li>
+                                        <a href="/">Inicio</a>
+                                        <i class="material-icons md-18">chevron_right</i>
+                                    </li>
+                                    <li>Administrador</li>
+                                </ul>
+                            </div>
+                        </nav><!-- End bread crumbs -->
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-right py-3" id="divCloseSesion" style="display:none;">
+                            <a role="button" id="enlace_cierre" class="">Cerrar Sesión <i class="material-icons md-18">close</i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <!-- Landing Section -->
+    <section id="s0" class="section-logIn">
+        <div class="container">
+
+
+            <div class="userLogin blue_TranspBg">
+                <div class="row justify-content-center">
+
+                    <div class="col-md-4">
+                        <h1 class="text-center py-4">
+                            Administrador
+                        </h1>
+
+                        <div id="divUsuarioLog" style="display:none;">
+                            <p class="text-center">Debe ser usuario autorizado para ingresar</p>
+                            <p class="text-center">Por favor digita tus credenciales</p>
+                            <div id="divDatosLogin">
+                                <div class="form-group">
+                                    <label for="txtEmailLog" class="required">Email</label>
+                                    <input type="email" class="form-control" id="txtEmailLog" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="txtClaveLog" class="required">Password</label>
+                                    <input type="password" class="form-control" id="txtClaveLog" placeholder="">
+                                </div>
+                            </div>
+
+                            <div class="form-group text-center">
+                                <button type="button" class="btn btn-primary" id="btnIngresarUsuLog"> INGRESAR </button><br><br>
+                                @*<a href="" id="btnEnlaceOlvidoClave">Olvidé mi contraseña</a>*@
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+    <section id="secEncabezado section-Admin">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="text-center" id="divNomUsuarioLog"></h2>
+                    <span>Tienes </span> <span id="lblCantFotos"></span>  fotos y  <span id="lblCantComentarios"></span> <span> comentarios por revisar </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="">
+                    <div class="BgTabs">
+                        <div class="TabAct" id="divTabFotos"><div class="tagM"><a class="enlace_fotos" role="button" tipo="foto"> <i class="material-icons md-18">photo_library</i> Fotografías</a></div></div>
+                        <div class="TabBen" id="divTabComent"><div class="tagM"><a class="enlace_comentarios" role="button" tipo="comentario"> <i class="material-icons md-18">chat</i> Comentarios</a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="sec_Fotos" class="section-images section-Admin">
+        <div id="divFotos" class="objHidden whiteBg">
+            <div class="container">
+                <div class="row well">
+                    <div class="col-md-4">
+                        <div id="divFiltrosFotos" class="form-group">
+                            <label for="filtro_estados_foto">Estado</label>
+                            <select class="form-select" aria-label="Selecciona un estado:" id="filtro_estados_foto">
+                                <option value="1" name="pendiente">Pendientes aprobación</option>
+                                <option value="2" name="aprobada">Aprobadas</option>
+                                <option value="3" name="eliminada">Eliminadas</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 wrapComment objHidden" id="divDetImg" estado="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="divMensaje" class="empty-gallery objHidden">No se han encontrado resultados</div>
+                </div>
+                <div>
+                    <div id="divPaginacion" class="paginacion"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section id="sec_Comentarios" class="section-comments whiteBg">
+        <div id="divComentarios" class="objHidden">
+            <div class="container">
+                <div class="row well">
+                    <div class="col-md-4">
+                        <div id="divFiltrosAsoc" class="form-group">
+                            <label for="filtro_asociacion">Objeto de participación</label>
+                            <select class="form-select" aria-label="Selecciona Objeto" id="filtro_asociacion">
+                                @if (Model.filtrosAsociacion.Count() > 0)
+                                {
+                    @foreach (var item in Model.filtrosAsociacion)
+                    {
+    <option value="@item.id" name="@item.name">@item.name</option>***REMOVED******REMOVED***
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div id="divFiltrosComentarios" class="form-group">
+                            <label for="filtro_estados">Estado</label>
+                            <select class="form-select" aria-label="Estados" id="filtro_estados">
+                                @if (Model.filtrosEstado.Count() > 0)
+                                {
+                                    foreach (var item in Model.filtrosEstado)
+                                    {
+                    <option value="@item.id" name="@item.name">@item.name</option>***REMOVED***
+                            ***REMOVED***
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="objHidden" id="divDetComent" estado="" asoc="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="divMensaje2" class="text-center objHidden">No se han encontrado resultados</div>
+                </div>
+
+                <div class="row">
+                    <div id="divPaginacionComent" class="paginacion"></div>
+                </div>
+
+
+
+                <!--.Carousel-->
+
+            </div>
+
+        </div>
+
+    </section>
+    <div class="clearfix"></div>
+</div>
+<script src="~/Content/dist/js/lib/D3/d3.min.js" charset="utf-8"></script>
+<script src="~/content/dist/js/lib/D3/d3plus.js"></script>
+
+
+<script src="~/js/bootstrap/3.3.5/bootstrap.min.js" type="text/javascript"></script>
+<script src="~/js/Bootbox/bootbox.min.js" type="text/javascript"></script>
+
+
+<script src="~/js/aprobar_aux.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var submitIcon = $('.searchbox-icon');
+        var inputBox = $('.searchbox-input');
+        var searchBox = $('.searchbox2');
+        var isOpen = false;
+        submitIcon.click(function () {
+            if (isOpen == false) {
+                searchBox.addClass('searchbox-open');
+                inputBox.focus();
+                isOpen = true;
+        ***REMOVED*** else {
+                searchBox.removeClass('searchbox-open');
+                inputBox.focusout();
+                isOpen = false;
+        ***REMOVED***
+    ***REMOVED***);
+        submitIcon.mouseup(function () {
+            return false;
+    ***REMOVED***);
+        searchBox.mouseup(function () {
+            return false;
+    ***REMOVED***);
+        $(document).mouseup(function () {
+            if (isOpen == true) {
+                $('.searchbox-icon').css('display', 'block');
+                submitIcon.click();
+        ***REMOVED***
+    ***REMOVED***);
+***REMOVED***);
+    function buttonUp() {
+        var inputVal = $('.searchbox-input').val();
+        inputVal = $.trim(inputVal).length;
+        if (inputVal !== 0) {
+            $('.searchbox-icon').css('display', 'none');
+    ***REMOVED*** else {
+            $('.searchbox-input').val('');
+            $('.searchbox-icon').css('display', 'block');
+    ***REMOVED***
+***REMOVED***
+
+
+</script>
+<div class="modal fade" id="justificaModal" tabindex="-1" role="dialog" aria-labelledby="justificaModalLabel" aria-hidden="true" data-parameter="" data-type="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title" id="modalJustificaLabel"></h5>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <p for="txtJustificacion" id="textoGuia"></p>
+                        <textarea class="form-control" id="txtJustificacion" rows="4"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCancelarModal">Cancelar</button>
+                <button type="button" class="btn btn-success" id="btnAccionDenegar">Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="recategorizarModal" tabindex="-1" role="dialog" aria-labelledby="recategorizarModalLabel" aria-hidden="true" data-parameter="" data-type="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title" id="recategorizarModalLabel"></h5>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <p for="recategorizarModaltextoGuia" id="recategorizarModaltextoGuia"></p>
+                        <div id="divTipoComentario">
+                            <a class="btn btn-select btn-select-light mivCustom2">
+                                <input type="hidden" class="btn-select-input" id="sel_tipo_comentario" name="" value="" id_tipo="" />
+                                <span class="btn-select-value">Tipo</span>
+                                <span class="btn-select-arrow glyphicon glyphicon-chevron-down"></span>
+                                <ul id="filtro_TipoCometario">
+                                    <li id_tipo="" class="selected">Tipo</li>
+                                    @if (Model.tipo_comentario.Count() > 0)
+                                    {
+                                        foreach (var item in Model.tipo_comentario)
+                                        {<text>
+                                                <li id_tipo="@item.idTC">@item.nameTC</li>
+                                        </text>***REMOVED***
+                            ***REMOVED***
+                                </ul>
+                            </a>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal" id="btnCancelarrecategorizarModal">Cancelar</button>
+                <button type="button" class="btn btn-success" id="recategorizarModalGuardar">Guardar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="topoModal" tabindex="-1" role="dialog" aria-labelledby="topoModalLabel" aria-hidden="true" data-parameter="" data-type="">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title" style="font-weight:bold;" id="topoModalLabel"></h5>
+
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <p for="topoModaltextoGuia" id="topoModaltextoGuia"></p>
+                        <div id="divTipologiaComentario">
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="btnCancelartopoModal">Cancelar</button>
+                <button type="button" class="btn btn-success" id="topoModalGuardar">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".btn-select").each(function (e) {
+            var value = $(this).find("ul li.selected").html();
+            if (value != undefined) {
+                $(this).find(".btn-select-input").val(value);
+                $(this).find(".btn-select-value").html(value);
+        ***REMOVED***
+    ***REMOVED***);
+***REMOVED***);
+
+    $(document).on('click', '.btn-select', function (e) {
+        e.preventDefault();
+        var ul = $(this).find("ul");
+        if ($(this).hasClass("active")) {
+            if (ul.find("li").is(e.target)) {
+                var target = $(e.target);
+                target.addClass("selected").siblings().removeClass("selected");
+                var value = target.html();
+                $(this).find(".btn-select-input").val(value);
+                $(this).find(".btn-select-value").html(value);
+        ***REMOVED***
+            ul.hide();
+            $(this).removeClass("active");
+    ***REMOVED***
+        else {
+            $('.btn-select').not(this).each(function () {
+                $(this).removeClass("active").find("ul").hide();
+        ***REMOVED***);
+            ul.slideDown();
+            $(this).addClass("active");
+    ***REMOVED***
+***REMOVED***);
+
+    $(document).on('click', function (e) {
+        var target = $(e.target).closest(".btn-select");
+        if (!target.length) {
+            $(".btn-select").removeClass("active").find("ul").hide();
+    ***REMOVED***
+***REMOVED***);
+
+
+</script>
+
+
+@section DataBody {
+    data-profile='[{"idUsuParticipa":"@Model.id_usu_participa" , "nomUsuParticipa" : "@Model.nom_usu_participa"***REMOVED***]'
+***REMOVED***

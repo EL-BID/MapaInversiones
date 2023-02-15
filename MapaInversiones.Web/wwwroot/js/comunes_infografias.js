@@ -1,24 +1,20 @@
-﻿function obtListadoEntidades() {
-    $("#entidadesPlanNacional").empty();
+﻿function GetEntidadesPresupuesto() {
     $.ajax({
-        url: "api/serviciosplan/GetEntidadesPlanNacional",
+        url: "api/ServiciosPresupuestoNew/GetEntidadesPlanNacional",
         type: "GET",
         data: null,
 
 ***REMOVED***).done(function (data) {
-        var entidadPlanNacional = $("#entidadesPlanNacional");
-        var htmlList = "";
+        var entidadPlanNacional = document.getElementById("entidadesPlanNacional");
+        var htmlList = '';
         for (var i = 0; i < data.length; i++) {
-            htmlList += "<li class='list-group-item'><a href=" + '/PerfilEntidad?codEntidad=' + data[i].codEntidad + ">" + "<span>" + data[i].nombre + "</span><i class='material-icons md-18'>chevron_right</i></a></li>";
+            htmlList = htmlList + "<li class='list-group-item'><a href=" + '/PerfilEntidad?codEntidad=' + data[i].codEntidad + ">" + "<span>" + data[i].nombre + "</span><i class='material-icons md-18'>chevron_right</i></a></li>";
     ***REMOVED***
         if (data.length > 0)
-            htmlList += "<li class='list-group-item'><a href='/BusquedaResultados?Type=Entidad'>" + "<span>Ver todos</span><i class='material-icons md-18'>chevron_right</i></a></li>";
-        $("#entidadesPlanNacional").append(htmlList);
-
+            htmlList = htmlList + "<li class='list-group-item'><a href='/BusquedaResultados?Type=Entidad'>" + "<span>Ver todos</span><i class='material-icons md-18'>chevron_right</i></a></li>";
+        entidadPlanNacional.innerHTML = htmlList;
 ***REMOVED***).fail(function (handleError) {
-        $("#entidadesPlanNacional").empty();
+        // Some function
+        console.log(handleError);
 ***REMOVED***);
-
-
-
 ***REMOVED***

@@ -2113,6 +2113,23 @@
               "Position": "0"
         ***REMOVED***
       ***REMOVED***
+      ***REMOVED***
+        {
+          "PartName": "BagPart",
+          "Name": "BagPart",
+          "Settings": {
+            "ContentTypePartSettings": {
+              "DisplayName": "Bag",
+              "Description": "Provides a collection behavior for your content item."
+          ***REMOVED***
+            "GraphQLContentTypePartSettings": {***REMOVED***,
+            "BagPartSettings": {
+              "ContainedContentTypes": [
+                "LinkDatosAbiertos"
+              ]
+          ***REMOVED***
+            "ContentIndexSettings": {***REMOVED***
+      ***REMOVED***
     ***REMOVED***
       ]
   ***REMOVED***
@@ -2181,6 +2198,25 @@
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "1"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      ]
+  ***REMOVED***
+    {
+      "Name": "LinkDatosAbiertos",
+      "DisplayName": "LinkDatosAbiertos",
+      "Settings": {
+        "ContentTypeSettings": {***REMOVED***,
+        "FullTextAspectSettings": {***REMOVED***
+    ***REMOVED***
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "LinkDatosAbiertos",
+          "Name": "LinkDatosAbiertos",
+          "Settings": {
+            "ContentTypePartSettings": {
+              "Position": "0"
         ***REMOVED***
       ***REMOVED***
     ***REMOVED***
@@ -3200,12 +3236,20 @@
       ***REMOVED***
       ***REMOVED***
         {
-          "FieldName": "LinkField",
-          "Name": "UrlBotonCVS",
+          "FieldName": "TextField",
+          "Name": "Fuente",
           "Settings": {
             "ContentPartFieldSettings": {
-              "DisplayName": "Url Botón CVS",
-              "Position": "1"
+              "DisplayName": "Fuente"
+        ***REMOVED***
+      ***REMOVED***
+      ***REMOVED***
+        {
+          "FieldName": "TextField",
+          "Name": "Ultimaactualizacion",
+          "Settings": {
+            "ContentPartFieldSettings": {
+              "DisplayName": "Última actualización"
         ***REMOVED***
       ***REMOVED***
     ***REMOVED***
@@ -3226,7 +3270,43 @@
       ***REMOVED***
     ***REMOVED***
       ]
+  ***REMOVED***
+    {
+      "Name": "LinkDatosAbiertos",
+      "Settings": {***REMOVED***,
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Anno",
+          "Settings": {
+            "ContentPartFieldSettings": {
+              "DisplayName": "Año",
+              "Position": "0"
+        ***REMOVED***
+      ***REMOVED***
+      ***REMOVED***
+        {
+          "FieldName": "LinkField",
+          "Name": "EnlaceCVS",
+          "Settings": {
+            "ContentPartFieldSettings": {
+              "DisplayName": "Enlace CVS",
+              "Position": "1"
+        ***REMOVED***
+      ***REMOVED***
+      ***REMOVED***
+        {
+          "FieldName": "LinkField",
+          "Name": "EnlaceXLS",
+          "Settings": {
+            "ContentPartFieldSettings": {
+              "DisplayName": "Enlace XLS",
+              "Position": "2"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      ]
 ***REMOVED***
   ],
-  "Serial": 681
+  "Serial": 738
 ***REMOVED***
