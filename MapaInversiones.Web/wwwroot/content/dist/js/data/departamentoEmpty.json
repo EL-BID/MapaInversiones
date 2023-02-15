@@ -1,0 +1,9 @@
+{
+    "status": true,
+    "lastUpdated": 1234567890,
+    "type": "departamento",
+	"geojson": {
+		"type": "FeatureCollection",                                                                        
+		"features": []
+	}
+}

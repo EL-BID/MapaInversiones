@@ -1,0 +1,1372 @@
+﻿@model PlataformaTransparencia.Modelos.ModelHomeData
+<div class="wrap-map2" id="section-home">
+
+    <!-- homepage Section -->
+    <div id="intro" class="homepage">
+
+
+        <!--TAG LINE, ONLY VISIBLE ON MOBILE
+    <div class="col-md-12 visible-xs-block">
+        <p class="tagline">Plataforma de gestión de la información para mejorar la transparencia y la eficiencia de las inversiones públicas.</p>
+    </div>-->
+        <!--SEARCH section-->
+        @*<section class="search-wrap">
+            <div class="bgBlueOverlay">&nbsp;</div><!-- DON'T EREASE-->
+            <div class="container">
+                <div class="col-md-12">
+
+                    <div class="searchBox">
+                        <div id="search-home" class="search-body" style="display: none;">
+                            <div id="divNoEncontrado" class="no-search-results" style="display: none;"></div>
+                            <div class="search-results objHidden" id="divResultados">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+        <!-- Begin bread crumbs -->
+        <!--MAIN BANNER-->
+<section class="banner-main">
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li><a href="#!">Inversión Pública</a><i class="material-icons md-18">chevron_right</i></li>
+                            <li>Mapa de Inversión Pública</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                                <h1>Mapa de Inversión Pública</h1>
+                    </div>
+                    <div class="banner-main-desc">
+
+                        <p>
+                                    <strong>Los proyectos que se muestran a continuación son aquellos que cuentan con presupuesto vigente asignado en la gestión.</strong>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!--MAP CONTAINER-->
+        <section class="c-generalData hidden-xs">
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <div class="map-container proyectos-mode" data-option-subtipo="fiscalizacion-option-subtipo--1">
+
+                        <!-- MAP AND PATRON -->
+                        <div class="map-container old-landing-mode home-mode">
+                            <script>(function () { var el = document.querySelector('.home-mode'); if (el && location.hash.length > 3) { el.className = el.className.replace('home-mode', '') } })()</script>
+                            <div id="map-div"></div>
+                            <div class="map-container__patron"></div>
+                            <!-- CONTENT MAIN -->
+                            <div class="main-content">
+
+                                <ul class="main-content__type-filters">
+                                    <li class="main-content__type-filters__list"><a class="main-content__type-filters__link tooltip" href="#/proyectos"><div class="main-content__type-filters__link__project-icon"></div><span>@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_MenuHeader_Proyectos")</span><span class="info-tool">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Menu_tooltipsProyectos")</span></a></li>
+                                </ul>
+
+                                <div class="main-content__consolidated-data" Style="visibility: hidden; display: none;">
+                                    <h2 Style="visibility: hidden; display: none;" class="main-content__consolidated-data__title">Datos consolidados 2012 hacia adelante</h2>
+
+                                    <div class="main-content__consolidated-data__resources">
+                                        <div class="invested-resources">
+                                            <p class="title">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_RecursosInversion") <i class="i-tooltip tooltip"><span class="info-tool">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_TooltipRecursosPresupuestados")</span></i></p>
+                                            <p class="amount">
+                                                @if (!Model.CollectedMoney.Equals(0))
+                                                {
+                                    <text>@String.Format("{0:C0}", Model.CollectedMoney)</text> }
+                                                else
+                                                {
+                                    <text>@String.Format("{0:C0}", "0")</text>}
+                                            </p>
+                                        </div>
+
+                                        <div class="aproved-resources">
+                                            <p class="title">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_RecursosAprobadosSGR") <i class="i-tooltip tooltip"><span class="info-tool">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_TooltipRecursosAprobadosSGR")</span></i></p>
+                                            <p class="amount">@String.Format("{0:C0}", Model.ApprovedMoney)</p>
+                                        </div>
+                                        <div class="total-val-resources">
+                                            <p class="title">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_ValorTotalRecursos") <i class="i-tooltip tooltip"><span class="info-tool">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_TooltipRecursosAprobadosTotales")</span></i></p>
+                                            <p class="amount">@String.Format("{0:C0}", Model.ApprovedMoneyTotal)</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="main-content__consolidated-data__aproved_projects">
+                                        <p class="title">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_ProyectosAprobados") <i class="i-tooltip tooltip"><span class="info-tool">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_TooltipProyectosAprobados")</span></i></p>
+                                        <p class="number">   @String.Format("{0:N0}", Model.ApprovedProjects)</p>
+                                    </div>
+
+                                    <div class="main-content__consolidated-tabbed">
+
+                                        <div class="consolidated-tabbed tab-oversight">
+
+                                            <div class="wrap-tab">
+
+                                                <h2 class="title-tab">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_TabFiscalizacion_Titulo")</h2>
+
+                                                <p>@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_TabFiscalizacion_Descripcion")</p>
+
+                                                <div class="btns-area">
+                                                </div>
+
+                                                <b>@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_TabFiscalizacion_SubTitulo")</b>
+                                                <p>@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_TabFiscalizacion_DescripcionSubTitulo")</p>
+
+                                            </div>
+
+                                        </div><!-- end tab-oversight -->
+
+                                    </div><!-- main-content__consolidated-tabbed -->
+
+                                </div>
+                            </div>
+
+                            <!-- END CONTENT MAIN -->
+                            <!-- END MAP AND PATRON -->
+
+                            <div id="map-view-options">
+
+                                <a href="#" Style="visibility: hidden; display: none;" class="change-view-mode" data-bind="tap: toggleMode, attr:{ title: 'cambiar la visualización del mapa a' + (isRegion() ? 'departamentos' : 'regiones') } ">
+                                    <span class="icon"></span>
+                                    <span class="text" data-bind="html: isRegion() ? 'View by<br>Departments' : 'View by<br>region'">
+                                        View by<br> Region
+                                    </span>
+                                </a>
+                                <div id="map-select-list-period" data-bind="foreach: periods">
+                                    <div class="select-period extra" data-bind="css: { selected: active(), hidden: hidden }" title="elige un periodo para filtrar la información que muestra el mapa">
+                                        <div class="txt extra" data-bind="html: getNameStatus(), tap: toggleVisible">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_Periodos")</div>
+                                        <div class="filter-list">
+                                            <div class="options-container">
+                                                <div class="options" data-bind="foreach: options, tap: optionClicked">
+                                                    <div class="inner">
+                                                        <div class="option" data-bind="text: name, css: { selected: active() }, style: { display: visible() ? 'block' : 'none' }">
+                                                            @*2012 hacia adelante*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="map-legend">
+                                <span data-bind="text: 'Approved resources ( ' + scaleUnit() + ' dollars )'"></span>
+                                <!--ul data-bind="foreach: scales()">
+                                <li>
+                                    <span data-bind="text: val"></span>
+                                    <div class="color color1"  data-bind="css: 'color'+$index()"></div>
+                                </li>
+                            </ul-->
+                                <div class="vals">
+                                    <span class="value lower" data-bind="text: scalesLower()+scaleUnit()[0]">0</span>
+                                    <span class="value higher" data-bind="text: scalesLarger()+scaleUnit()[0]">10</span>
+                                </div>
+                                <div class="scale"></div>
+                            </div>
+                            <div class="legend-resources">
+                                <h3 class="legend-resources_title">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Recuros_TituloLeyenda")</h3>
+                                <!--div class="legend-resources_type-res legend-resources_type-region"> <span class="icon"></span> <span class="name">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Recursos_Leyenda_Region")</span> </div-->
+                                <div class="legend-resources_type-res legend-resources_type-department"> <span class="icon"></span> <span class="name">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Recursos_Leyenda_Departamento")</span> </div>
+                                <div class="legend-resources_type-res legend-resources_type-municipality"> <span class="icon"></span> <span class="name">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Recursos_Leyenda_Municipio")</span> </div>
+                            </div>
+
+
+                            <div id="controls">
+
+                                <div class="wrap-controls">
+
+                                    <a href="#" class="toggle-controls" id="toggle-controls" data-bind="css: {collapsed: !visible()}, event: {mouseenter: function(){$('#toggle-controls').addClass('hover')}, mouseleave: function(){$('#toggle-controls').removeClass('hover')}}">
+                                        <span class="text" data-bind="html: visible() ? 'Colapsar\n<br>\nBúsqueda' : 'Expandir\n<br>\nBúsqueda', tap: toggleVisible" title="colapasar/expandir búsqueda">Colapsar <br> Búsqueda</span>
+                                        <span class="safariFix"></span>
+                                    </a>
+
+                                    <div id="map-view">
+                                        <div class="tooltip">
+                                            <h1 class="tab-name" id="state-name" style="display: none" data-tooltip-proyectos='@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Menu_tooltipsProyectos")' data-tooltip-recursos='@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Menu_tooltipsRecursos")' data-tooltip-produccion='@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Menu_tooltipsProduccion")' data-tooltip-fiscalizacion='@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Menu_tooltipsFiscalizacion")'>Tab Name</h1>
+                                            <i class="info-tool"></i>
+                                        </div>
+                                        <h1 class="intro">
+                                            @ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_TituloPrincipal")
+                                        </h1>
+                                        <div id="search" style="display: none">
+                                            <input name="txt_Buscar" title="Search" type="text" placeholder="@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_TextoBusqueda")" data-bind="enterKey: search, value: query">
+                                            <button data-bind="tap: search" class="button-search">@*ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_BotonBuscar")*@</button>
+                                        </div>
+
+                                        <div id="reset-filters-wrapper" data-bind="style: {display: resetFilters() ? 'block' : 'none'}">
+                                            <button id="reset-filters" class="reset-filters" data-bind="tap: unselectAll"><i class="material-icons md-24">restart_alt</i> <span>Limpiar filtros</span></button>
+                                        </div>
+
+                                        <div class="buttons-filter-fiscalization" style="display: none">
+                                            <a href="" class="active all filter-to-todos" data-value="-1" data-text-filter="@ViewBag.TitulosHome.BuscarTituloPorLlave("Fiscalizacion_Vistas_lblTituloCampoRecursos")">Todos</a>
+                                            <a href="" class="filter-to-mineral" data-value="M" data-text-filter="@ViewBag.TitulosHome.BuscarTituloPorLlave("Fiscalizacion_Vistas_lblTituloCampoMineral")">Minería</a>
+                                            <a href="" class="filter-to-hidrocarburo" data-value="H" data-text-filter="@ViewBag.TitulosHome.BuscarTituloPorLlave("Fiscalizacion_Vistas_lblTituloCampoHidrocarburo")">Hidrocarburos</a>
+                                        </div>
+
+                                        <div class="wrap-gray">
+                                            <div id="filters-groups-list" class="loading">
+                                                <div class="filters-group loading" data-bind="foreach: filtersGroups.filters, css: { loading: filtersGroups.loading, visible: filtersGroups.visible }" aria-labelledby="s-filter-proyects">
+                                                    <div class="filter-group" data-bind="css: { selected: active() }, attr: {'data-type': seccionAplicativo, 'data-parameter': parameter}">
+                                                        <div class="txt enlace_filtro_mapa" data-bind="html: getNameStatus(), tap: toggleVisible">&nbsp;</div>
+                                                        <div class="filter-list">
+                                                            <div class="options-container">
+                                                                <div class="filter">
+                                                                    <input type="text" placeholder="Filtra" data-bind="event: { keyup: filterOptions }, attr: {'placeholder': 'Filtra' }"> <button data-bind="tap: filterOptions"><i class="material-icons md-24">filter_alt</i></button>
+                                                                </div>
+                                                                <div class="options" data-bind="foreach: options, tap: optionClicked, css: extraClasses">
+                                                                    <div class="inner">
+                                                                        <div class="option" data-bind="text: getName(), css: { important: important(), selected: active(), visible: visible() }, style: { display: visible() ? 'block' : 'none' }, attr: {'data-subtipo': getSubTipo(), 'data-value': getValue()}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="filter-resources hidden" aria-labelledby="s-filter-resources"></div>
+                                            <div id="filter-results" style="display: none">
+                                                <div class="results">
+                                                    <span class="value">@Model.ApprovedProjects</span>
+                                                    <span class="text">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_LabelResultadosEncontrados")</span>
+                                                </div>
+                                                <button>@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_LinkVerListado")</button>
+                                            </div>
+                                            <div class="statistics hidden" style="display: none">
+                                                <h2 class="subtitle-consolidated">
+                                                    @*@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_DatosConsolidados")*@
+                                                    <span id="filters-stats-list-info" data-bind="foreach: periods">
+                                                        <span data-bind="css: { selected: active(), hidden: hidden }">
+                                                            <span class="txt extra" data-bind="html: getNameDefault(), tap: toggleVisible">
+                                                                @*<span>2012 hacia adelante</span>*@
+                                                            </span>
+                                                        </span>
+                                                    </span>
+                                                </h2>
+                                                <div style="visibility: hidden; display: none;" class="statistic-group collected-money">
+                                                    <div class="label">
+                                                        @ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_RecursosInversion")
+                                                    </div>
+                                                    <div class="money" id="collected-money">
+                                                        @if (!Model.CollectedMoney.Equals(0))
+                                                        {
+                                            <text>@String.Format("{0:C0}", Model.CollectedMoney)</text> }
+                                                        else
+                                                        {
+                                            <text>@String.Format("{0:C0}", "0")</text>}
+                                                    </div>
+                                                </div>
+                                                <div style="visibility: hidden; display: none;" class="statistic-group approved-money approved-money-not-visible">
+                                                    <div class="label">
+                                                        @ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_RecursosAprobados")
+                                                    </div>
+                                                    <div class="money" id="approved-money-home">
+                                                        @String.Format("{0:C0}", Model.ApprovedMoney)
+                                                    </div>
+                                                </div>
+                                                <div style="visibility: hidden; display: none;" class="statistic-group approved-money">
+                                                    <div class="label">
+                                                        @ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_RecursosAprobadosSGR")
+                                                    </div>
+                                                    <div class="money" id="approved-money">
+                                                        @String.Format("{0:C0}", Model.ApprovedMoney)
+                                                    </div>
+                                                </div>
+                                                <div style="visibility: hidden; display: none;" class="statistic-group projects-approved projects-approved-not-visible">
+                                                    <div class="label">
+                                                        @ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_ProyectosAprobados")
+                                                    </div>
+                                                    <div class="money" id="approved-projects-home">
+                                                        @String.Format("{0:N0}", Model.ApprovedProjects)
+                                                    </div>
+                                                </div>
+                                                <div style="visibility: hidden; display: none;" class="statistic-group projects-approved">
+                                                    <div class="label">
+                                                        @ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_Busqueda_ProyectosAprobados")
+                                                    </div>
+                                                    <div class="money" id="approved-projects">
+                                                        @String.Format("{0:N0}", Model.ApprovedProjects)
+                                                    </div>
+                                                </div>
+                                                <div style="visibility: hidden; display: none;" class="statistic-group total-sources">
+                                                    <div class="label">
+                                                        @ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_ValorTotalRecursos")
+                                                    </div>
+                                                    <div class="money" id="total-sources">
+                                                        @String.Format("{0:C0}", Model.ApprovedMoneyTotal)
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*<div id="share">
+                                                <p>@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_CompartirBusqueda")</p>
+                                                <div class="container-share">
+                                                    <a href="" class="facebook" target="_blank">facebook</a>
+                                                    <a href="" class="twitter" target="_blank">twitter</a>
+                                                    <a href="#" class="email" data-share-by-email="yeah" target="_blank">email</a>
+                                                    <a href="#" class="print">print</a>
+                                                </div>
+                                            </div>*@
+                                        </div><!-- wrap-gray -->
+
+                                    </div><!-- END MAP VIEW -->
+
+                                    <div id="projects-list-view" class="projects-list-view hidden">
+                                        <div class="projects-list-view-inner">
+                                            <a href="#" class="back">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_VerLista")</a>
+                                            <p class="title">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_NumeroResultadosEncontrados")</p>
+                                            <div class="table-container">
+                                                <table>
+                                                    <colgroup>
+                                                        <col class="col-name">
+                                                        <col class="col-value">
+                                                        <col class="col-state">
+                                                    </colgroup>
+                                                    <thead>
+                                                        <tr>
+                                                            <td class="name" width="55%">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_ResultadosEncontradosNombre")</td>
+                                                            <td class="value" width="15%">Ejecutor</td>
+                                                            <td class="type" style="text-align: left" width="15%">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_ResultadosEncontradosValor")</td>
+                                                            <td class="status" width="15%">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_ResultadosEncontradosEstado")</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody data-bind="foreach: projects()" style="font-size: .80em">
+                                                        <tr data-bind="css: {odd: $index()%2 == 1}">
+                                                            <td class="name" width="40%"><a data-bind="attr: {href: url}, text:name"></a></td>
+                                                            <td class="type" width="25%"><a data-bind="attr: {href: url}, text:ejecutor"></a></td>
+                                                            <td class="number" width="20%"><a data-bind="attr: {href: url}, text:'L ' + Intl.NumberFormat('en-US').format(value).replace('L', 'L ')"></a></td>
+                                                            <td class="status" width="15%"><a data-bind="attr: {href: url}, text:state"></a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tbody data-bind="visible: (projects().length == 0 ) && !loading">
+                                                        <tr>
+                                                            <td colspan="4" class="empty">
+                                                                <div class="empty">
+                                                                    There is not data
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tbody data-bind="visible: loading" class="loading-container">
+                                                        <tr>
+                                                            <td colspan="4">
+                                                                <div class="loading">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="pagination"></div>
+                                            </div>
+                                        </div>
+
+                                    </div><!-- END LIST VIEW -->
+
+                                </div><!-- wrap controls -->
+
+                                <div class="statistic-home-info">
+                                    <h2 class="subtitle-consolidated">Datos consolidados<a href="#/proyectos" class="close"></a></h2>
+                                    <div class="statistic-row projects-approved">
+
+                                        <div class="label">
+                                            <p class="title">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_ProyectosAprobados") <i class="i-tooltip tooltip"><span class="info-tool">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_TooltipProyectosAprobados")</span></i></p>
+                                        </div>
+                                        <div class="money" id="approved-projects-home">
+                                            <p class="number">@String.Format("{0:N0}", Model.ApprovedProjects)</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="statistic-row approved-money">
+
+                                        <div class="label">
+                                            <p class="title">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_RecursosAprobadosSGR") <i class="i-tooltip tooltip"><span class="info-tool">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_TooltipRecursosAprobadosSGR")</span></i></p>
+                                        </div>
+                                        <div class="money" id="approved-money-home">
+
+                                            <p class="amount">@String.Format("{0:C1}", Model.ApprovedMoney / 1000000000000) Billones de guaraníes</p>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="statistic-row total-sources">
+                                        <div class="label">
+                                            <p class="title">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_ValorTotalRecursos") <i class="i-tooltip tooltip"><span class="info-tool">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_TooltipRecursosAprobadosTotales")</span></i></p>
+                                        </div>
+                                        <div class="money" id="total-sources">
+                                            <p class="amount">@String.Format("{0:C1}", Model.ApprovedMoneyTotal / 1000000000000) Billones de guaraníes</p>
+                                        </div>
+                                    </div>
+                                </div><!-- end statistic-home-info -->
+
+                            </div><!-- ENDS  CONTROLS -->
+
+                            <div Style="visibility: hidden; display: none;" class="centered content" id="infographic">
+                                <div class="txt-right">
+                                    <a href="/Como-funciona/" class="button conoce-como">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DebajoMapa_ComoSeCalculan")</a>
+                                    <a Style="visibility: hidden; display: none;" href=@ViewBag.TitulosHome.BuscarTituloPorLlave("URL_Historico_Rendiciones") target="_blank" class="button conoce-como">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DebajoMapa_RendicionCuentas")</a>
+                                </div>
+                                <h2 class="title-1">
+                                    @ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_TituloPrincipal")
+                                    <span id="info-select-list-period" data-bind="foreach: periods">
+                                        <span class="select select-period extra" data-bind="css: { selected: active(), hidden: hidden }" id="info-select-period">
+                                            <span class="txt extra" data-bind="html: getNameDefault(), tap: toggleVisible">
+                                                @*<span>2012 en adelante</span>*@
+                                            </span>
+                                            <span class="filter-list">
+                                                <span class="options-container">
+                                                    <span class="options" data-bind="foreach: options, tap: optionClicked">
+                                                        <span class="inner">
+                                                            <span class="option" data-bind="text: name, css: { selected: active() }, style: { display: visible() ? 'block' : 'none' }">
+                                                                @*2012 en adelante*@
+                                                            </span>
+                                                        </span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                            <span class="decorator"></span>
+                                        </span>
+                                    </span>
+                                </h2>
+
+                                <div id="top-graphs"></div>
+
+                                <div class="clear"></div>
+                                <h3 Style="visibility: hidden; display: none;" class="title-2"><span>@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_TituloDatosNacionales")</span></h3>
+                                <div Style="visibility: hidden; display: none;" class="facts" data-facts='@foreach (var item in Model.Facts){<text>{"subtipo": "@item.subTipo", "icon": "@item.icon", "phrase": "@Html.Raw(item.phrase)","type": "@item.title"}||</text>}'>
+
+                                </div>
+
+                                <div id="bottom-graphs"></div>
+
+                                <div class="clear"></div>
+
+                            </div><!-- infographic -->
+
+                            <div class="main-content__description home-description-aplication">
+
+                                @*<div class="centered">
+
+                                    <div class="video-area">
+                                        <h2 class="main-content__description__text-bold">Conoce que es Mapa Regalías</h2>
+                                        <figure class="get-video-regalias"></figure>
+                                        <p class="main-content__description__text">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Label_lblTitulo2")</p>
+
+                                    </div><!-- video area -->
+
+                                </div><!-- centered -->*@
+
+
+
+                            </div><!-- end home-description-aplication -->
+
+                        </div><!-- map container -->
+
+                    </div><!-- map container -->
+                </div>
+
+
+            </div>
+        </section>
+
+
+
+
+    </div>
+</div>
+<!--RELATED INFO-->
+<section class="relatedInfo">
+    <div class="container">
+        <!--LINKS OTRAS SECCIONES-->
+        <div class="row py-5">
+            <!--LEFT COLUMN-->
+            <div class="col-lg-8">
+                <!--LINKS seccion infografia planificacion-->
+                <h2>Conoce</h2>
+                <div class="wrap-cta">
+                    <a href="/PresupuestoGeneral" target="_blank" class="py-5 mb-5 px-0">
+                        <div class="h4">Presupuestos de la República<i class="material-icons md-18">arrow_forward</i> </div>
+                    </a>
+                    <a href="/ProcesoPresupuesto" target="_blank" class="py-5 mb-5 px-0">
+                        <div class="h4">Presupuestos Ciudadanos<i class="material-icons md-18">arrow_forward</i> </div>
+                    </a>
+                </div><br />
+                <h2>Explora</h2>
+                <div class="wrap-cta">
+                    <a href="../Entidades" class="py-5 mb-5 px-0">
+                        <div class="h4">Ir a Instituciones <i class="material-icons md-18">arrow_forward</i> </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="wrap-cta">
+                    <p class="card-title mb-4">Información suministrada por:</p>
+                    <a href="https://www.sefin.gob.hn/" target="_blank">
+                        <img class="img-fluid" src="../img/logoHaciendaB.png" alt="ir a SEFIN" />
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<div class="clearfix"></div>
+
+@section Scripts {
+
+    <script src="~/Content/dist/js/lib/D3/d3.min.js" charset="utf-8"></script>
+    <script src="~/content/dist/js/lib/D3/d3plus.full.min.js"></script>
+
+    <script type="html/x-handlebars" id="template-infobox-info">
+        <div class="bingmap-infobox-info">
+            <h3 class="title">{{=it.name}}</h3>
+            <p class="number">{{=it.projectNumber}}</p>
+            <p class="label">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_InfoboxGeografia_lblNoProyectos")</p>
+            <p class="number">{{=it.approvedMoney.toCurrency()}}</p>
+            <p class="label">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_InfoboxGeografia_lblValor")</p>
+            {{? it.projectNumber}}
+            <a class="button" href="#">Seleccionar</a>
+            {{?}}
+        </div>
+    </script>
+    <script type="html/x-handlebars" id="template-infobox-project">
+        <div class="bingmap-infobox-info bingmap-infobox-project">
+            <h3 class="title">{{=it.name}}</h3>
+@*            {{?it.image}}
+            <img src="{{=it.image}}" alt="{{=it.name}}">
+            {{?}}
+*@            <p class="number">{{=it.value.toCurrency()}}</p>
+            <p class="label">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_InfoboxUnProyecto_lblValor")</p>
+            <p class="number">{{=it.state}}</p>
+            <p class="label">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_InfoboxUnProyecto_lblEstado")</p>
+            <p class="number">{{=it.location}}</p>
+            <p class="label">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_InfoboxUnProyecto_lblLocalizacion")</p>
+            <a class="button" href="{{=it.url}}">Ver más</a>
+        </div>
+    </script>
+    <script type="html/x-handlebars" id="template-infobox-group">
+        <div class="bingmap-infobox-info bingmap-infobox-group">
+                <p>Proyectos ubicados en el mismo sitio.</p>
+                <a href="#" class="button">Ver lista</a>
+        </div>
+    </script>
+    <script type="html/x-handlebars" id="template-facts">
+        {{~it.facts :fact:index}}
+        <div class="fact" data-subtipo="{{=fact.subtipo}}">
+            <div class="inner">
+                <div class="decorator"></div>
+                <img src="{{=fact.icon}}">
+                <div class="text">
+                    <div class="phrase">{{=fact.phrase}}</div>
+                </div>
+            </div>
+        </div>
+        {{~}}
+    </script>
+    <script type="html/x-handlebars" id="template-graph-resdepto">
+        <div class="col">
+            {{~it.array :value:index}}
+            <div class="depto-elem">
+                <div class="name">
+                    {{=value.label}}
+                </div>
+                <div class="bar">
+                    <div class="fill" style="width:{{=value.valuePercent}}"></div>
+                </div>
+                <div class="graph-tooltip">{{=value.value}}, {{=value.rawValue.toCurrency()}}</div>
+            </div>
+
+            {{? index == ~~(it.array.length/2) }}
+        </div>
+        <div class="col">
+            {{?}}
+            {{~}}
+        </div>
+    </script>
+    <script type="html/x-doT-template" id="template-graph-prod-res">
+        {{~it.array :value:index}}
+        <div class="resource-elem">
+            <div class="name">
+                {{=value.Label}}
+            </div>
+            <div class="value">{{=value.Valor.toCurrency().substring(1)}} <span class="unit">{{=value.LabelExtendido}}</span></div>
+        </div>
+        {{~}}
+    </script>
+    <script type="html/x-doT-template" id="top-graphs-projects">
+        <div class="graph-wrapper">
+            <div class="proy-sector">
+                <h3 class="label label-proy-sector">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_ProyectosSector")</h3>
+                <div id="proy-sector"></div>
+            </div>
+            <div class="res-sector">
+                <h3 class="label label-res-sector">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_RecursosSector")</h3>
+                <div id="res-sector"></div>
+            </div>
+        </div>
+    </script>
+    <script type="html/x-doT-template" id="bottom-graphs-projects">
+        <div class="graph-wrapper graph-wrapper2">
+            <div class="res-region">
+                <h3 class="label label-res-region">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_RecursosRegion")</h3>
+                <div id="res-region"></div>
+            </div>
+            <div class="res-depto">
+                <h3 class="label label-res-depto">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_DatosConsolidados_RecursosDepartamento")</h3>
+                <div id="res-depto"></div>
+            </div>
+        </div>
+    </script>
+
+
+    <script type='text/javascript' src='//www.bing.com/api/maps/mapcontrol?callback=loadMap'></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/dist/js/libs.min.js")" data-main="@Url.Content("~/Content/dist/js/main.js")"></script>
+
+
+    @if (ViewBag.MostrarAlertaIE8 == true)
+    {
+        <script type="text/javascript">
+            //Validación IE8
+            var userAgent = navigator.userAgent.toLowerCase();
+            if (/msie/.test(userAgent) &&
+                parseFloat((userAgent.match(/.*(?:rv|ie)[\/: ](.+?)([ \);]|$)/) || [])[1]) < 9) {
+                alert("Mapa Inversiones funciona mejor en navegadores modernos, por favor actualiza tu Internet Explorer.");
+            }
+        </script>
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".btn-select").each(function (e) {
+                var value = $(this).find("ul li.selected").html();
+                if (value != undefined) {
+                    $(this).find(".btn-select-input").val(value);
+                    $(this).find(".btn-select-value").html(value);
+                }
+            });
+        });
+
+        $(document).on('click', '.btn-select', function (e) {
+            //e.preventDefault();
+            var ul = $(this).find("ul");
+
+            if ($(this).hasClass("active")) {
+                if (ul.find("li").is(e.target)) {
+                    var target = $(e.target);
+                    target.addClass("selected").siblings().removeClass("selected");
+                    var value = target.html();
+                    $(this).find(".btn-select-input").val(value);
+                    $(this).find(".btn-select-value").html(value);
+                }
+                ul.hide();
+                $(this).removeClass("active");
+            }
+            else {
+                $('.btn-select').not(this).each(function () {
+                    $(this).removeClass("active").find("ul").hide();
+                });
+                ul.slideDown(300);
+                $(this).addClass("active");
+            }
+        });
+
+        $(document).on('click', function (e) {
+            var target = $(e.target).closest(".btn-select");
+            if (!target.length) {
+                $(".btn-select").removeClass("active").find("ul").hide();
+            }
+        });
+
+
+    </script>
+    <script>
+
+        function sleep(milliseconds) {
+            var start = new Date().getTime();
+            for (var i = 0; i < 1e7; i++) {
+                if ((new Date().getTime() - start) > milliseconds) {
+                    break;
+                }
+                alert(i);
+            }
+        }
+
+        //sleep(13000);
+    </script>
+
+
+
+}
+
+@section DataBody {
+    data-periods='[{"name":"2012", "id":1},{"name":"2011", "id":2},{"name":"2010", "id":3}]'
+    data-projectsPerSector='[@foreach (var sector in @Model.ProjectsPerSector)
+    {<text> {"label":"@sector.label", "value": "@sector.value", "rawValue": @sector.rawValue}@if (sector != @Model.ProjectsPerSector.Last())
+    {<text>,</text>}</text>}]'
+    data-resourcesPerSector='[@foreach (var sector in @Model.ResourcesPerSector)
+    {<text>{"label":"@sector.label", "value": "@sector.value", "rawValue": @sector.rawValue.ToString("N0").Replace(".", string.Empty)}@if (sector != @Model.ResourcesPerSector.Last())
+    {<text>,</text>}</text>}]'
+    data-resourcesPerRegion='[@foreach (var sector in @Model.ResourcesPerRegion)
+    {<text>{"label":"@sector.label", "value": "@sector.value", "rawValue": @sector.rawValue.ToString("N0").Replace(".", string.Empty)}@if (sector != @Model.ResourcesPerRegion.Last())
+    {<text>,</text>}</text>}]'
+    data-resourcesPerDepartment='[@foreach (var sector in @Model.ResourcesPerDepartment)
+    {<text>{"label":"@sector.label", "value": "@sector.value", "rawValue": @sector.rawValue.ToString("N0").Replace(".", string.Empty)}@if (sector != @Model.ResourcesPerDepartment.Last())
+    {<text>,</text>}</text>}]'
+    data-deparmentProjectData='[@foreach (var sector in @Model.DepartmentProjectData)
+    {<text> {"id": "@sector.departmentId","nombre": "@sector.nombre","projectNumber": @sector.projectNumber, "url_imag_peq":"@sector.url_img_peq","approvedMoney": @sector.approvedMoney.ToString("N0").Replace(".", string.Empty)}@if (sector != @Model.DepartmentProjectData.Last())
+    {<text>,</text>}</text>}]'
+    data-municipioProjectData='[@foreach (var sector in @Model.MunicipioProjectData)
+    {<text> {"id": "@sector.MunicipioId","nombre": "@sector.nombre","projectNumber": @sector.projectNumber, "url_imag_peq":"@sector.url_img_peq","approvedMoney": @sector.approvedMoney.ToString("N0").Replace(".", string.Empty)}@if (sector != @Model.MunicipioProjectData.Last())
+    {<text>,</text>}</text>}]'
+    data-proyectoProjectData='[@foreach (var sector in @Model.ProyectosAprobados)
+    {<text> {"IdProyecto": "@sector.IdProyecto","NombreProyecto": "@sector.NombreProyecto","cantidadFotos": @sector.cantidadFotos, "approvedTotalMoney": @sector.approvedTotalMoney.ToString("N0").Replace(".", string.Empty),"NombreMunicipio" : "@sector.NombreMunicipio" , "UrlImagen" : "@sector.UrlImagen" , "MesInicioProyecto" : "@sector.MesInicioProyecto" , "AnioInicioProyecto" : "@sector.AnioInicioProyecto" , "MesFinProyecto" : "@sector.MesFinProyecto" , "AnioFinProyecto" : "@sector.AnioFinProyecto" , "NombreSector": "@sector.NombreSector","porcentajeGastado":"@sector.porcentajeGastado","MeGusta":"@sector.Megusta","Comentarios":"@sector.Comentarios","FechaInicioProyecto":"@sector.FechaInicioProyecto"}@if (sector != @Model.ProyectosAprobados.Last())
+    {<text>,</text>}</text>}]'
+
+    data-regionProjectData='[@foreach (var sector in @Model.RegionProjectData)
+    {<text> {"id": "@sector.regionId", "projectNumber": @sector.projectNumber, "approvedMoney": @sector.approvedMoney.ToString("N0").Replace(".", string.Empty)}@if (sector != @Model.RegionProjectData.Last())
+    {<text>,</text>}</text>}]'
+    data-periods-default-text=""
+    data-busqueda='@Model.cadenaBuscador'
+    data-location='[{}]'
+
+
+}
+
+
+<script type="text/javascript">
+    $(function () {
+
+        "use strict";
+
+        // Main navigation & mega menu
+        // ----------------------------------------------------------------
+
+        // Global menu variables
+
+        var objSearch = $('.search-wrapper'),
+            objLogin = $('.login-wrapper'),
+            objCart = $('.cart-wrapper'),
+            objMenu = $('.floating-menu'),
+            objMenuLink = $('.floating-menu a'),
+            $search = $('.open-search'),
+            $login = $('.open-login'),
+            $cart = $('.open-cart'),
+            $menu = $('.open-menu'),
+            $openDropdown = $('.open-dropdown'),
+            $close = $('.close-menu'),
+            $settingsItem = $('.nav-settings .nav-settings-list li');
+
+        // Open/close login
+
+        $login.on('click', function () {
+            toggleOpen($(this));
+            objLogin.toggleClass('open');
+            closeSearch();
+            closeCart();
+        });
+
+        // Open/close search bar
+
+        $search.on('click', function () {
+            toggleOpen($(this));
+            objSearch.toggleClass('open');
+            objSearch.find('input').focus();
+            closeLogin();
+            closeCart();
+        });
+
+        // Open/close cart
+
+        $cart.on('click', function () {
+            toggleOpen($(this));
+            objCart.toggleClass('open');
+            closeLogin();
+            closeSearch();
+        });
+
+        // Settings language & currency dropdown
+
+        $settingsItem.on('click', function () {
+            var $value = $(this).closest('.nav-settings').find('.nav-settings-value');
+            $value.text($(this).text());
+        });
+
+
+        // Mobile menu open/close
+
+        $menu.on('click', function () {
+            objMenu.addClass('expanded');
+            closeSearch();
+            closeLogin();
+            closeCart();
+        });
+
+        // Floating menu hyperlink
+        if ($('nav').hasClass('navbar-single-page')) {
+            objMenuLink.on('click', function () {
+                objMenu.removeClass('expanded');
+            });
+        }
+
+        // Open dropdown/megamenu
+
+        $openDropdown.on('click', function (e) {
+
+            e.preventDefault();
+
+            var liParent = $(this).parent().parent(),
+                liDropdown = liParent.find('.navbar-dropdown');
+
+            liParent.toggleClass('expanded');
+
+            if (liParent.hasClass('expanded')) {
+                liDropdown.slideDown();
+            }
+            else {
+                liDropdown.slideUp();
+            }
+        });
+
+        // Close menu (mobile)
+
+        $close.on('click', function () {
+            $('nav').find('.expanded').removeClass('expanded');
+            $('nav').find('.navbar-dropdown').slideUp();
+        });
+
+        // Global functions
+
+        function toggleOpen(el) {
+            $(el).toggleClass('open');
+        }
+
+        function closeSearch() {
+            objSearch.removeClass('open');
+            $search.removeClass('open');
+        }
+        function closeLogin() {
+            objLogin.removeClass('open');
+            $login.removeClass('open');
+        }
+        function closeCart() {
+            objCart.removeClass('open');
+            $cart.removeClass('open');
+        }
+
+        // Sticky header
+        // ----------------------------------------------------------------
+
+        var navbarFixed = $('nav.navbar-fixed');
+
+        // When reload page - check if page has offset
+        if ($(document).scrollTop() > 94) {
+            navbarFixed.addClass('navbar-sticked');
+        }
+        // Add sticky menu on scroll
+        $(document).on('bind ready scroll', function () {
+            var docScroll = $(document).scrollTop();
+            if (docScroll >= 10) {
+                navbarFixed.addClass('navbar-sticked');
+            } else {
+                navbarFixed.removeClass('navbar-sticked');
+            }
+        });
+
+        // Tooltip
+        // ----------------------------------------------------------------
+
+        $('[data-toggle="tooltip"]').tooltip()
+
+        // Main popup
+        // ----------------------------------------------------------------
+
+        $('.mfp-open').magnificPopup({
+            type: 'inline',
+            fixedContentPos: false,
+            fixedBgPos: true,
+            overflowY: 'auto',
+            closeBtnInside: true,
+            preloader: false,
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in',
+            callbacks: {
+                open: function () {
+                    // wait on popup initalization
+                    // then load owl-carousel
+                    $('.popup-main .owl-carousel').hide();
+                    setTimeout(function () {
+                        $('.popup-main .owl-carousel').slideDown();
+                    }, 500);
+                }
+            }
+        });
+
+        // Main popup gallery
+        // ----------------------------------------------------------------
+
+        $('.open-popup-gallery').magnificPopup({
+            delegate: 'a',
+            type: 'image',
+            tLoading: 'Loading image #%curr%...',
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0, 1] // Will preload 0 - before current, and 1 after the current image
+            },
+            fixedContentPos: false,
+            fixedBgPos: true,
+            overflowY: 'auto',
+            closeBtnInside: true,
+            preloader: false,
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+
+
+        // Frontpage slider
+        // ----------------------------------------------------------------
+
+        var arrowIcons = [
+            '<span class="icon icon-chevron-left"></span>',
+            '<span class="icon icon-chevron-right"></span>'
+        ];
+
+        $.each($(".owl-slider"), function (i, n) {
+
+            $(n).owlCarousel({
+                autoHeight: false,
+                navigation: true,
+                navigationText: arrowIcons,
+                items: 1,
+                singleItem: true,
+                addClassActive: true,
+                transitionStyle: "fadeUp",
+                afterMove: animatetCaptions,
+                //autoPlay: 8000,
+                autoPlay: false,
+                stopOnHover: false
+            });
+
+            animatetCaptions();
+
+            function animatetCaptions(event) {
+                "use strict";
+                var activeItem = $(n).find('.owl-item.active'),
+                    timeDelay = 100;
+                $.each(activeItem.find('.animated'), function (j, m) {
+                    var item = $(m);
+                    item.css('animation-delay', timeDelay + 'ms');
+                    timeDelay = timeDelay + 180;
+                    item.addClass(item.data('animation'));
+                    setTimeout(function () {
+                        item.removeClass(item.data('animation'));
+                    }, 2000);
+                });
+            }
+
+            if ($(n).hasClass('owl-slider-fullscreen')) {
+                $('.header-content .item').height($(window).height());
+            }
+        });
+
+        // Quote carousel
+        // ----------------------------------------------------------------
+
+        $.each($(".quote-carousel"), function (i, n) {
+            $(n).owlCarousel({
+                navigation: true, // Show next and prev buttons
+                slideSpeed: 300,
+                items: 3,
+                paginationSpeed: 400,
+                singleItem: false,
+                navigationText: arrowIcons,
+                itemsDesktop: [1199, 3],
+                itemsDesktopSmall: [979, 3],
+                itemsTablet: [768, 1],
+                itemsTabletSmall: false,
+                itemsMobile: [479, 1],
+                autoPlay: 3000,
+                stopOnHover: true
+            });
+        });
+
+        // Icon slider
+        // ----------------------------------------------------------------
+
+
+        $.each($(".owl-icons"), function (i, n) {
+            $(n).owlCarousel({
+                autoHeight: false,
+                pagination: false,
+                navigation: true,
+                navigationText: arrowIcons,
+                items: 7,
+                itemsDesktop: [1450, 6],
+                itemsDesktopSmall: [1180, 5],
+                itemsTablet: [992, 4],
+                itemsTabletSmall: [768, 3],
+                itemsMobile: [590, 2],
+                addClassActive: true,
+                autoPlay: 5500,
+                stopOnHover: true
+            });
+        });
+
+        $.each($(".owl-icons-xs"), function (i, n) {
+            $(n).owlCarousel({
+                autoHeight: false,
+                pagination: false,
+                navigation: true,
+                navigationText: arrowIcons,
+                items: 3,
+                itemsDesktop: [1199, 3],
+                itemsDesktopSmall: [979, 3],
+                itemsTablet: [768, 2],
+                itemsTabletSmall: false,
+                itemsMobile: [479, 2],
+                addClassActive: true,
+                autoPlay: 5500,
+                stopOnHover: true
+            });
+        });
+
+        //Product slider
+        $.each($(".owl-product-gallery"), function (i, n) {
+            $(n).owlCarousel({
+                //transitionStyle: "fadeUp",
+                autoHeight: true,
+                slideSpeed: 800,
+                navigation: true,
+                navigationText: arrowIcons,
+                pagination: true,
+                items: 1,
+                singleItem: true
+            });
+        });
+
+
+        // Scroll to top
+        // ----------------------------------------------------------------
+
+        var $wrapper = $('.wrapper');
+        $wrapper.append($("<div class='scroll-top'><i class='icon icon-chevron-up'></i></div>"));
+
+        var $scrollbtn = $('.scroll-top');
+
+        $(document).on('ready scroll', function () {
+            var docScrollTop = $(document).scrollTop(),
+                docScrollBottom = $(window).scrollTop() + $(window).height() == $(document).height();
+
+            if (docScrollTop >= 150) {
+                $scrollbtn.addClass('visible');
+            } else {
+                $scrollbtn.removeClass('visible');
+            }
+            if (docScrollBottom) {
+                $scrollbtn.addClass('active');
+            }
+            else {
+                $scrollbtn.removeClass('active');
+            }
+        });
+
+        $scrollbtn.on('click', function () {
+            $('html,body').animate({
+                scrollTop: $('body').offset().top
+            }, 1000);
+            return false;
+        });
+
+        // Product color var
+        // ----------------------------------------------------------------
+
+        $.each($('.product-colors'), function (i, n) {
+            var $btn = $('.color-btn');
+            $btn.on('click', function () {
+                $(this).parent().find($btn).removeClass('checked');
+                $(this).addClass('checked');
+            });
+        });
+
+        // Tabsy images
+        // ----------------------------------------------------------------
+
+        var tabsyImg = $('.tabsy .tabsy-images > div'),
+            tabsyLink = $('.tabsy .tabsy-links figure');
+
+        // apply images to parent background
+        tabsyImg.each(function (i, n) {
+            $(n).css('background-image', 'url(' + $(n).find('img').attr('src') + ')');
+        });
+
+        tabsyLink.on('mouseenter', function () {
+            var self = $(this),
+                tabID = self.attr('data-image');
+            tabsyLink.removeClass('current');
+            tabsyImg.removeClass('current');
+            self.addClass('current');
+            self.closest('.tabsy').find("#" + tabID).addClass('current');
+        });
+
+
+
+
+        // Add to favorites list / product list
+        // ----------------------------------------------------------------
+
+        $('.add-favorite').on('click', function () {
+            $(this).toggleClass("added");
+        });
+
+        $('.info-box-addto').on('click', function () {
+            $(this).toggleClass('added');
+        });
+
+        // Filters toggle functions
+        // ----------------------------------------------------------------
+
+        // Check if some filter boxes has class active
+        // then show hidden filters
+        $('.filters .filter-box').each(function () {
+            if ($(this).hasClass('active')) {
+                $(this).find('.filter-content').show();
+            }
+        });
+
+        // Toggle filter function
+        $('.filters .title').on('click', function (e) {
+            var $this = $(this),
+                $parent = $this.parent();
+            $parent.toggleClass('active');
+
+            if ($parent.hasClass('active')) {
+                $parent.find('.filter-content').slideDown(300);
+            }
+            else {
+                $parent.find('.filter-content').slideUp(200);
+            }
+        });
+
+        // Update filter results - close dropdown filters
+        // ----------------------------------------------------------------
+
+        $('.filters .filter-update').on('click', function (e) {
+            $(this).closest('.filter-box')
+                .removeClass('active')
+                .find('.filter-content').slideUp(200);
+        });
+
+        // Show hide filters (only for mobile)
+        // ----------------------------------------------------------------
+
+        $('.toggle-filters-mobile').on('click', function () {
+            $('.filters').addClass('active');
+        });
+        $('.toggle-filters-close').on('click', function () {
+            $('.filters').removeClass('active');
+            $('html,body').animate({
+                scrollTop: $('body').offset().top
+            }, 800);
+            return false;
+        });
+
+
+        // Strecher accordion
+        // ----------------------------------------------------------------
+
+        var $strecherItem = $('.stretcher-item');
+        $strecherItem.on({
+            mouseenter: function (e) {
+                $(this).addClass('active');
+                $(this).siblings().addClass('inactive');
+            },
+            mouseleave: function (e) {
+                $(this).removeClass('active');
+                $(this).siblings().removeClass('inactive');
+            }
+        });
+
+        // Blog image caption
+        // ----------------------------------------------------------------
+
+        var $blogImage = $('.blog-post-text img');
+        $blogImage.each(function () {
+            var $this = $(this);
+            $this.wrap('<span class="blog-image"></span>');
+            if ($this.attr("alt")) {
+                var caption = this.alt;
+                var link = $this.attr('data');
+                $this.after('<span class="caption">' + caption + '</span>');
+            }
+        });
+
+        // Coupon code
+        // ----------------------------------------------------------------
+
+        $(".form-coupon").hide();
+        $("#couponCodeID").on('click', function () {
+            if ($(this).is(":checked")) {
+                $(".form-coupon").fadeIn();
+            } else {
+                $(".form-coupon").fadeOut();
+            }
+        });
+
+        // Checkout login / register
+        // ----------------------------------------------------------------
+
+        var loginWrapper = $('.login-wrapper'),
+            loginBtn = loginWrapper.find('.btn-login'),
+            regBtn = loginWrapper.find('.btn-register'),
+            signUp = loginWrapper.find('.login-block-signup'),
+            signIn = loginWrapper.find('.login-block-signin');
+
+        loginBtn.on('click', function () {
+            signIn.slideDown();
+            signUp.slideUp();
+        });
+
+        regBtn.on('click', function () {
+            signIn.slideUp();
+            signUp.slideDown();
+        });
+
+        // Range slider
+        // ----------------------------------------------------------------
+
+        $("#range-price-slider").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 2000,
+            //grid: true,
+            from: 500,
+            to: 1500,
+            prefix: "$"
+            //force_edges: true
+        });
+
+        // Team members hover effect
+        // ----------------------------------------------------------------
+
+        var $member = $('.team article');
+        $member.on({
+            mouseenter: function (e) {
+                $member.addClass('inactive');
+                $(this).addClass('active');
+            },
+            mouseleave: function (e) {
+                $member.removeClass('inactive');
+                $(this).removeClass('active');
+            }
+        });
+
+        // Toggle contact form
+        // ----------------------------------------------------------------
+
+        $('.open-form').on('click', function () {
+            var $this = $(this),
+                parent = $this.parent();
+            parent.toggleClass('active');
+            if (parent.hasClass('active')) {
+                $this.text($this.data('text-close'));
+                $('.contact-form').slideDown();
+            }
+            else {
+                $this.text($this.data('text-open'));
+                $('.contact-form').slideUp();
+            }
+
+        });
+
+        // Single page navigation (scroll to)
+        // ----------------------------------------------------------------
+
+
+        if ($('nav').hasClass('navbar-single-page')) {
+
+            var $singleHyperlink = $('.navigation-main a');
+
+            $singleHyperlink.on('click', function () {
+
+                $singleHyperlink.removeClass('current');
+
+                $(this).addClass('current');
+
+                $('html, body').animate({
+                    scrollTop: $($(this).attr('href')).offset().top - $('.navigation-main').height()
+                }, 500);
+                return false;
+            });
+
+            // Magnific popup scroll to content
+            // ----------------------------------------------------------------
+
+            $('.mfp-open-scrollto').on('click', function () {
+                $('html,body').animate({
+                    scrollTop: $('.mfp-content').offset().top - 200
+                }, 300);
+                return false;
+            });
+        }
+
+    });
+
+    $(window).on('load', function () {
+
+        // Set timeout for page loader
+
+        setTimeout(function () {
+            $('.page-loader').addClass('loaded');
+        }, 1000);
+
+
+        // Adjust height of tabsy gallery
+
+        if ($(window).width() > 992) {
+            $(window).on('resize', function () {
+                adjustTabsyHeight();
+            });
+
+            adjustTabsyHeight();
+
+            // Height function
+
+            function adjustTabsyHeight() {
+                var navheight = $('nav').height(),
+                    icoheight = $('.owl-icons-wrapper').height();
+
+                // Set tabsy height
+                $('.tabsy-wrapper-intro .tabsy figure').css("height", $(window).height() - navheight - icoheight);
+
+            }
+        }
+
+    });
+
+
+
+
+</script>

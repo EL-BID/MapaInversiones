@@ -2113,6 +2113,23 @@
               "Position": "0"
             }
           }
+        },
+        {
+          "PartName": "BagPart",
+          "Name": "BagPart",
+          "Settings": {
+            "ContentTypePartSettings": {
+              "DisplayName": "Bag",
+              "Description": "Provides a collection behavior for your content item."
+            },
+            "GraphQLContentTypePartSettings": {},
+            "BagPartSettings": {
+              "ContainedContentTypes": [
+                "LinkDatosAbiertos"
+              ]
+            },
+            "ContentIndexSettings": {}
+          }
         }
       ]
     },
@@ -2181,6 +2198,25 @@
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "1"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Name": "LinkDatosAbiertos",
+      "DisplayName": "LinkDatosAbiertos",
+      "Settings": {
+        "ContentTypeSettings": {},
+        "FullTextAspectSettings": {}
+      },
+      "ContentTypePartDefinitionRecords": [
+        {
+          "PartName": "LinkDatosAbiertos",
+          "Name": "LinkDatosAbiertos",
+          "Settings": {
+            "ContentTypePartSettings": {
+              "Position": "0"
             }
           }
         }
@@ -3200,12 +3236,20 @@
           }
         },
         {
-          "FieldName": "LinkField",
-          "Name": "UrlBotonCVS",
+          "FieldName": "TextField",
+          "Name": "Fuente",
           "Settings": {
             "ContentPartFieldSettings": {
-              "DisplayName": "Url Botón CVS",
-              "Position": "1"
+              "DisplayName": "Fuente"
+            }
+          }
+        },
+        {
+          "FieldName": "TextField",
+          "Name": "Ultimaactualizacion",
+          "Settings": {
+            "ContentPartFieldSettings": {
+              "DisplayName": "Última actualización"
             }
           }
         }
@@ -3226,7 +3270,43 @@
           }
         }
       ]
+    },
+    {
+      "Name": "LinkDatosAbiertos",
+      "Settings": {},
+      "ContentPartFieldDefinitionRecords": [
+        {
+          "FieldName": "TextField",
+          "Name": "Anno",
+          "Settings": {
+            "ContentPartFieldSettings": {
+              "DisplayName": "Año",
+              "Position": "0"
+            }
+          }
+        },
+        {
+          "FieldName": "LinkField",
+          "Name": "EnlaceCVS",
+          "Settings": {
+            "ContentPartFieldSettings": {
+              "DisplayName": "Enlace CVS",
+              "Position": "1"
+            }
+          }
+        },
+        {
+          "FieldName": "LinkField",
+          "Name": "EnlaceXLS",
+          "Settings": {
+            "ContentPartFieldSettings": {
+              "DisplayName": "Enlace XLS",
+              "Position": "2"
+            }
+          }
+        }
+      ]
     }
   ],
-  "Serial": 681
+  "Serial": 738
 }

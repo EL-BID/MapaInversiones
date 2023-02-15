@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title></title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+      <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+
+      <!-- jQuery reference. Used to make parsing the GeoJSON file easier. -->
+      <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
+
+      <script type="text/javascript">
+          var map;
+          function GetMap() {
+              // Initialize the map
+              map = new Microsoft.Maps.Map(document.getElementById("myMap"), { credentials: "Ah7mafuzHQjBcBfHXRNcyucmUVbzczI7SPzmWvoXhIxnDH-4fUcSKiPpR2kcDZLn" });
+
+              //Register and load the GeoRSS Module
+              // Microsoft.Maps.registerModule("GeoJSONModule", "scripts/GeoJSONModule.js");
+              // DONT forget to use minified in production 
+              Microsoft.Maps.registerModule("GeoJSONModule", "scripts/minified/GeoJSONModule.min.js");
+              Microsoft.Maps.loadModule("GeoJSONModule");
+          }
+
+          function LoadGeoJSON(url) {
+              // map.entities.clear();
+
+              //Define default shape options
+
+              var polylineOptions = {
+                  strokeColor: new Microsoft.Maps.Color(156, 0, 0, 255)
+              };
+
+              var polygonOptions = {
+                  fillColor: new Microsoft.Maps.Color(156, 0, 0, 255),
+                  strokeColor: new Microsoft.Maps.Color(156, 0, 255, 0)
+              };
+
+              new GeoJSONModule().ImportGeoJSON(url, GeoJSONImportedCallback, { polylineOptions: polylineOptions, polygonOptions: polygonOptions });
+          }
+
+          function GeoJSONImportedCallback(items, bounds) {
+              map.entities.push(items);
+
+              map.setView({ bounds: bounds });
+
+              //Advance functionalities can be added here such as adding event handlers.
+          }
+      </script>
+   </head>
+   <body onload="GetMap();">
+        <div id='myMap' style="position:relative; width:600px; height:600px;"></div>   
+       <input type="button" value="Simple Feature Collection" onclick="LoadGeoJSON('/Data/SimpleFeatureCollection.js')"/>
+       <input type="button" value="Point" onclick="LoadGeoJSON('Data/Point.js')"/>
+       <input type="button" value="Line String" onclick="LoadGeoJSON('Data/LineString.js')"/>
+       <input type="button" value="Polygon" onclick="LoadGeoJSON('Data/Polygon.js')"/>
+   </body>
+</html>

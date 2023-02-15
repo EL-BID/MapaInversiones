@@ -7,6 +7,7 @@ using AngleSharp.Dom.Events;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PlataformaTransparencia.Infrastructura.DataModels;
+using PlataformaTransparencia.Modelos.Contratos;
 using PlataformaTransparencia.Negocios;
 using PlataformaTransparencia.Negocios.BLL.Contracts;
 using PlataformaTransparencia.Negocios.Home;
@@ -22,6 +23,7 @@ namespace Module1.Controllers
         private ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> _solr;
         private IConsolidadosNacionalesBLL consolidadosNacionales;
 
+        public List<ContratosConsolidado> Consolidados { get; set; }
 
 
         public HomeController(ILogger<HomeController> logger, TransparenciaDB connection, ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> solr, IConsolidadosNacionalesBLL consolidadosNacionalesBLL)
@@ -179,5 +181,19 @@ namespace Module1.Controllers
             return View();
         }
 
+        public ActionResult ProcesoCiclo()
+        {
+            return View();
+        }
+
+        public ActionResult ProcesoGastos()
+        {
+            return View();
+        }
+
+        public ActionResult ProcesoIngresos()
+        {
+            return View();
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using PlataformaTransparencia.Modelos.Contratos;
 using PlataformaTransparencia.Modelos.Entidad;
 using PlataformaTransparencia.Modelos.Plan;
 
@@ -12,14 +13,25 @@ namespace PlataformaTransparencia.Modelos
     public string Vision { get; set; }
     public string NombreEntidad { get; set; }
     public string CodigoEntidad { get; set; }
-
+    public string UrlParticipacionCiudadana { get; set; }
+        
     public List<RelacionEmisiorReceptor> RelacionEntidadObjetivos { get; set; }
 
    public List<InfoEntidad> Entidades { get; set; }
     public List<ProyectosPerfilEntidad> ProyectosHaciendaCentral { get; set; }
     public List<ProyectosPerfilEntidad> ProyectosHaciendaNoAsignable { get; set; }
     public List<ProyectosProgramas> ProyectosHaciendaSustantivo { get; set; }
-  }
+
+    public List<infograficoPrograma> infoProgramas { get; set; }
+
+    public List<infograficoActividad> infograficoActividad { get; set; }
+
+    public List<infograficoGrupoGasto> infograficoGasto { get; set; }
+
+    public infograficoEntidad infograficoEntidad { get; set; }
+
+
+    }
 
   public class ProyectosPerfilEntidad
   {
@@ -89,5 +101,22 @@ namespace PlataformaTransparencia.Modelos
     public int TotalActividadesProgramaCentral { get; set; }
     public int TotalProgramasSustantivos { get; set; }
     public int TotalActividadesProgramasNoAsignables { get; set; }
-  }
+
+
+    }
+
+    public class DatosEntidadAnio
+    {
+        public decimal? PresupuestoInicial { get; set; }
+        public decimal? PresupuestoVigente { get; set; }
+        public decimal? PresupuestoEjecutado { get; set; }
+        public int FirmadosOncae { get; set; }
+        public decimal? ValorOncae { get; set; }
+        public int FirmadosSefin { get; set; }
+        public decimal? ValorSefin { get; set; }
+
+        public List<ContratistaData> DataContratos { get; set; }
+    }
+
+   
 }

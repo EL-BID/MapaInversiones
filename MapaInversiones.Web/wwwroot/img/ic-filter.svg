@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="icon_sliders" data-name="icon / sliders" d="M20,20a.947.947,0,0,1-1-1V15H17a1,1,0,0,1,0-2h6a1,1,0,0,1,0,2H21v4A.947.947,0,0,1,20,20Zm-8,0a.947.947,0,0,1-1-1V10a1,1,0,0,1,2,0v9A.947.947,0,0,1,12,20ZM4,20a.947.947,0,0,1-1-1V13H1a1,1,0,1,1,0-2H7a1,1,0,0,1,0,2H5v6A.947.947,0,0,1,4,20Zm16-9a.947.947,0,0,1-1-1V1a1,1,0,1,1,2,0v9A.947.947,0,0,1,20,11ZM4,9A.947.947,0,0,1,3,8V1A.947.947,0,0,1,4,0,.947.947,0,0,1,5,1V8A.947.947,0,0,1,4,9ZM15,7H9A.947.947,0,0,1,8,6,.947.947,0,0,1,9,5h2V1a1,1,0,1,1,2,0V5h2a.947.947,0,0,1,1,1A.947.947,0,0,1,15,7Z" transform="translate(0 0)"/>
+    </clipPath>
+  </defs>
+  <g id="ic-filter" transform="translate(-143 61)">
+    <g id="icon_arrow_sliders" data-name="icon / arrow / sliders" transform="translate(147 -56)">
+      <g id="Group_263" data-name="Group 263">
+        <path id="icon_sliders-2" data-name="icon / sliders" d="M20,20a.947.947,0,0,1-1-1V15H17a1,1,0,0,1,0-2h6a1,1,0,0,1,0,2H21v4A.947.947,0,0,1,20,20Zm-8,0a.947.947,0,0,1-1-1V10a1,1,0,0,1,2,0v9A.947.947,0,0,1,12,20ZM4,20a.947.947,0,0,1-1-1V13H1a1,1,0,1,1,0-2H7a1,1,0,0,1,0,2H5v6A.947.947,0,0,1,4,20Zm16-9a.947.947,0,0,1-1-1V1a1,1,0,1,1,2,0v9A.947.947,0,0,1,20,11ZM4,9A.947.947,0,0,1,3,8V1A.947.947,0,0,1,4,0,.947.947,0,0,1,5,1V8A.947.947,0,0,1,4,9ZM15,7H9A.947.947,0,0,1,8,6,.947.947,0,0,1,9,5h2V1a1,1,0,1,1,2,0V5h2a.947.947,0,0,1,1,1A.947.947,0,0,1,15,7Z" transform="translate(0 0)"/>
+      </g>
+    </g>
+    <g id="Rectangle_2390" data-name="Rectangle 2390" opacity="0">
+      <rect id="Rectangle_2390-2" data-name="Rectangle 2390" width="32" height="32" transform="translate(143 -61)" fill="#fff"/>
+      <path id="Rectangle_2390_-_Outline" data-name="Rectangle 2390 - Outline" d="M1,1V31H31V1H1M0,0H32V32H0Z" transform="translate(143 -61)" fill="#707070"/>
+    </g>
+  </g>
+</svg>

@@ -666,9 +666,9 @@ function loadRecursosPorObjeto(objData, divContenedor, agrupador,profundidad) {
                                 cad += "<span>Obj Específicos (" + d.label_inf.length + ")</span></br>";
                             }
                             if (Array.isArray(d.label_nivel4)) {
-                                cad += "<span>Entidades que aportan (" + d.label_nivel4.length + ")</span></br>";
+                                cad += "<span>Instituciones que aportan (" + d.label_nivel4.length + ")</span></br>";
                             }
-                            cad += "<span>Recursos asig. " + "₲ " + valor.formatMoney(0, ',', '.').toString() + " Millones" + "</span></br>";
+                            cad += "<span>Recursos asig. " + "L " + valor.formatMoney(0, ',', '.').toString() + " Millones" + "</span></br>";
                             return cad;
                         }]
                     ]
@@ -937,7 +937,7 @@ function loadRecursosPorObjetoOld(objData, divContenedor, tipo_desglose) {
                 "number": function (number, params) {
                     var formatted = d3plus.number.format(number, params);
                     if (params.key === "rawValue") {
-                        return "₲ " + numberWithCommas(parseFloat(number / 1000000).toFixed(0)) + " Millones";
+                        return "L " + numberWithCommas(parseFloat(number / 1000000).toFixed(0)) + " Millones";
                     }
                     if (params.key === "share") {
                         return d3.round(number, 2) + " %";

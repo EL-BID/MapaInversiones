@@ -55,8 +55,9 @@ namespace PlataformaTransparencia.Modelos
 
     }
 
-    public class InfoRecAsignadosPlan : InformationGraphics { 
-       public int? periodo { get; set; }
+    public class InfoRecAsignadosPlan : InformationGraphics
+    {
+        public int? periodo { get; set; }
     }
 
     public class InfoEntidadesConsolida : InformationGraphics
@@ -68,5 +69,63 @@ namespace PlataformaTransparencia.Modelos
         public decimal avance { get; set; }
 
         public double aporteObjetivo { get; set; }
+    }
+
+    public class InfoProjectPerSector : InformationGraphics
+    {
+    }
+    public class InfoResourcesPerDepartment : InformationGraphics
+    {
+    }
+    public class InfoResourcesPerRegion : InformationGraphics
+    {
+    }
+    public class InfoResourcesPerSector : InformationGraphics
+    {
+    }
+    public class InfoProjectsPerEstado : InformationGraphics
+    {
+
+    }
+    public class projectsCarteraTrans : InformationGraphics
+    {
+    }
+    public class InfoTransferPerSector : InformationGraphics
+    {
+    }
+    public class InfoContratosPerAnyo : InformationGraphics
+    {
+
+    }
+
+    public class InfoSubsidiosPerDpto : InformationGraphics
+    {
+
+    }
+
+    public class InfoRecursosBonificacionesPerEmpleo : InformationGraphics
+    {
+
+    }
+
+    public class InfoFarmaciasPerGroup : InformationGraphics { }
+
+    public class InfoRecAsignadosPresupuesto : InformationGraphics
+    {
+        public int? periodo { get; set; }
+
+    }
+
+    public class InfoConsolidadoPresupuesto : InformationGraphics
+    {
+        public double periodo { get; set; }
+        public double vigente { get; set; }
+        public double aprobado { get; set; }
+
+        public double ejecutado { get; set; }
+
+        public int Id { get; set; }
+
+
     }
 }

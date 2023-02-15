@@ -1,0 +1,9 @@
+{
+    "status": true,
+    "lastUpdated": 1234567890,
+    "type": "municipio",
+	"geojson": {
+		"type": "FeatureCollection",
+		"features": []
+	}
+}

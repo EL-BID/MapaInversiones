@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TieredCompilation>true</TieredCompilation>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<DebugSymbols>False</DebugSymbols>
+		<DebugType>None</DebugType>
+	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="wwwroot\js\**" />
+	  <Content Remove="wwwroot\js\**" />
+	  <EmbeddedResource Remove="wwwroot\js\**" />
+	  <None Remove="wwwroot\js\**" />
+	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="linq2db.AspNet" Version="3.3.0" />
+    <PackageReference Include="linq2db.SqlServer" Version="3.3.0" />
+    <PackageReference Include="OrchardCore.Application.Cms.Targets" Version="1.0.0-rc2-13450" />
+    <PackageReference Include="OrchardCore.Application.Mvc.Targets" Version="1.0.0-rc2-13450" />
+    <PackageReference Include="SolrNet" Version="1.0.19" />
+    <PackageReference Include="SolrNet.Core" Version="1.0.19" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MapaInversiones.Infrastructura\PlataformaTransparencia.Infrastructura.csproj" />
+    <ProjectReference Include="..\MapaInversiones.Modelos\PlataformaTransparencia.Modelos.csproj" />
+    <ProjectReference Include="..\MapaInversiones.Modulo.Noticias\PlataformaTransparencia.Modulo.Noticias.csproj" />
+    <ProjectReference Include="..\MapaInversiones.Modulo.Principal\PlataformaTransparencia.Modulo.Principal.csproj" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

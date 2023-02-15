@@ -1,0 +1,64 @@
+﻿@model PlataformaTransparencia.Modelos.ModelProjectProfile
+    @{
+    ViewBag.Title = "Verificar Cuenta";
+    ViewBag.SectionId = "section-projects";
+    ViewBag.ProjectsSelected = "selected";
+    }
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Mapa Inversiones - Verifica Cuenta</title>
+
+
+    </head>
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-bottom" class="section-Admin">
+        <section id="s0" class="section-logIn">
+            <div class="container">
+                <div class="row text-center">
+                    @if (@Model.id_usu_participa != null)
+                    {
+                    <text>
+                        <h2>@Model.nom_usu_participa, su correo ha sido Verificado</h2>
+                        <div class="clear"></div>
+                        <div class="form-group text-center">
+                            <button type="button" class="btn btn-primary" id="btnSigVerifica"> SIGUIENTE </button><br><br>
+
+                        </div>
+                    </text>
+                    }
+                    else
+                    {
+                    <text><h2>Error en verificación de cuenta: @Model.error_msg</h2></text>
+                    }
+
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnSigVerifica").click(function () {
+            var id_proy = @Model.idproject;
+            var url = "/";
+            if (id_proy != "" && id_proy != null) {
+                url = "/perfilproyecto/" + id_proy + "#s5";
+            }
+           
+            window.location.href = url;
+
+        });
+    });
+
+
+</script>
+

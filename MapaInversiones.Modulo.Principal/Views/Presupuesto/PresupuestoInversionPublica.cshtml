@@ -1,0 +1,776 @@
+﻿@page
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--MAIN BANNER-->
+<section class="banner-main">
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li><a href="#!">Inversión Pública</a><i class="material-icons md-18">chevron_right</i></li>
+                            <li>Presupuesto en Inversión Pública 2023</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h1>Presupuesto en Inversión Pública 2023</h1>
+                    </div>
+                    <div class="banner-main-desc">
+
+                        <p>
+                        El monto de inversión pública total para el año 2023, asciende a L 71,847.0 millones; de los cuales L 23,613.9 millones han sido priorizados para proyectos de inversión pública que se ejecutarán dentro del Programa de Inversiones Públicas (PIP); los restantes L 48,233.1 millones serán destinados a programas sociales del Gobierno.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--OBJETIVO ESTRATEGICO-->
+<!--1.Qué es el Presupuesto General de la Nación-->
+<section class="section" id="s0">
+    <div class="container">
+        <div class="section-heading">
+            <h2 class="text-center">
+                Inversión Pública por Sector
+            </h2>
+            <div class="section-subheading">
+                <p>Para el año 2023, la <strong>inversión pública</strong> asciende a un total de <strong>L 23,613.8 millones.</strong> A nivel sectorial se concentra mayormente en el <strong>Sector de Energía</strong> con una inversión de <strong>L 5,823.8 millones (25%)</strong>; seguido por el sector <strong>Protección Social</strong> con <strong>L 3,735.1 millones, 16% del monto total</strong>; el <strong>Sector Carreteras</strong> por su parte, absorbe el <strong>16% (L 3,871.7 millones) para la rehabilitación, construcción y ampliación de tramos,</strong>  seguido del <strong>Sector Salud con L 2,210.1 (9%), Seguridad Alimentaria con un monto de L 1,692.1 millones  (7%)</strong>, y en menor proporción el resto de los sectores.</p>
+            </div>
+            
+        </div>
+        <div class="wrap-content">
+            <div id="divGraphBarras" width="100%" height="auto"></div>
+        </div>
+    </div>
+</section>
+<section class="section-gray" id="s1">
+    <div class="container">
+        <div class="section-heading text-center">
+            <h2>Inversión Pública Según Fuente de Financiamiento y Organismo Financiador</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @*<p>Las mayores inversiones para el 2023 provienen de <strong>crédito externo, por un monto de L 20,737.45 millones.</strong><br /><br /> Asimismo, se contará con financiamiento proveniente de <strong>Donaciones externas por el orden de L 1,267.3 millones</strong> y <strong>L 1,609.14 millones de Fondos Nacionales.</strong> Para la ejecución <strong>125 Proyectos de Inversión Pública.</strong></p>*@
+                <p>Las mayores inversiones para el 2023 provienen de <strong>crédito externo, por un monto de L 20,737.5 millones.</strong><br /><br /> Asimismo, se contará con financiamiento proveniente de <strong>Donaciones externas por el orden de L 1,267.3 millones</strong> y <strong>L 1,609.1 millones de Fondos Nacionales.</strong> Para la ejecución <strong>125 Proyectos de Inversión Pública.</strong></p>
+            </div>
+            <div class="col-md-6">
+                <div class="table-responsive">
+                    <table class="table table-sm tablefont">
+                        <thead>
+                            <tr class="table-light">
+                                <th class="small" scope="col">FUENTE/ORGANISMO</th>
+                                <th class="small" scope="col">MONTO (Millones de Lempiras)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-info">
+                                <th class="table-info">TESORO NACIONAL</th>
+                                <td>1,269.0</td>
+                            </tr>
+                            <tr>
+                                <td>TESORERÍA GENERAL DE LA REPÚBLICA - EFECTIVO</td>
+                                <td>1,269.0</td>
+                            </tr>
+                            <tr class="table-info">
+                                <th scope="row">RECURSOS PROPIOS</th>
+                                <td>
+                                    340.2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>RECURSOS GENERADOS </td>
+                                <td>
+                                    340.2
+                                </td>
+                            </tr>
+                            <tr class="table-info">
+                                <th scope="row">CRÉDITO EXTERNO</th>
+                                <td>
+                                    20,737.5
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ESPAÑA</td>
+                                <td>
+                                    1,024.0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    AGENCIA INTERNACIONAL DEL JAPÓN
+                                </td>
+                                <td>
+                                    611.6
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    KREDISTANTAL FUR WIEDERAUFBAU (GOBIERNO ALEMÁN)
+                                </td>
+                                <td>
+                                    58.2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    ASOCIACIÓN INTERNACIONAL DE FOMENTO
+                                </td>
+                                <td>
+                                    3,237.8
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    BANCO CENTROAMERICANO DE INTEGRACIÓN ECONÓMICA
+                                </td>
+                                <td>
+                                    1,447.7
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    BANCO INTERAMERICANO DE DESARROLLO
+                                </td>
+                                <td>
+                                    4,547.5
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    INTERNATIONAL FUND FOR AGRICULTURAL DEVELOPMENT (FIDA)
+                                </td>
+                                <td>
+                                    183.6
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    EXPORT IMPORT BANK - INDIA
+                                </td>
+                                <td>
+                                    187.4
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    OPEC FUND FOR INTERNATIONAL DEVELOPMENT
+                                </td>
+                                <td>
+                                    123.7
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Otros Organismos Financieros
+                                </td>
+                                <td>
+                                    9,301.9
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    CASSA DEPOSSITI E PRESTITI S.P.A.
+                                </td>
+                                <td>
+                                    14.0
+                                </td>
+                            </tr>
+                            <tr class="table-info">
+                                <th scope="row">
+                                    DONACIONES EXTERNAS
+                                </th>
+                                <td>
+                                    1,267.3
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    TAIWAN (REPÚBLICA CHINA NACIONALISTA)
+                                </td>
+                                <td>
+                                    9.2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    AGENCIA INTERNACIONAL PARA EL DESARROLLO
+                                </td>
+                                <td>
+                                    109.7
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    KREDISTANTAL FUR WIEDERAUFBAU (GOBIERNO ALEMÁN)
+                                </td>
+                                <td>
+                                    227.4
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    ASOCIACIÓN INTERNACIONAL DE FOMENTO
+                                </td>
+                                <td>
+                                    23.7
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    BANCO INTERAMERICANO DE DESARROLLO
+                                </td>
+                                <td>
+                                    180.6
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    COMUNIDAD ECONÓMICA EUROPEA
+                                </td>
+                                <td>
+                                    21.7
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Varios Organismos
+                                </td>
+                                <td>
+                                    695.0
+                                </td>
+                            </tr>
+                            <tr class="table-success">
+                                <th scope="row">
+                                    Total general
+                                </th>
+                                <td>
+                                    23,613.9
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section" id="s2">
+    <div class="container">
+        <div class="section-heading">
+            <div class="section-subheading">
+                <h2 class="text-center">
+                    Proporción de la Inversión Pública por Institución
+                </h2>
+                <p>A nivel institucional, la <strong>inversión pública</strong> se concentra en <strong>6 instituciones</strong> que representarán el <strong>79% del Presupuesto 2023</strong>. Proporcionalmente, la <strong>Empresa Nacional de Energía Eléctrica asume el 25% de la inversión</strong>; seguida de la <strong>Secretaría de Infraestructura y Transporte y la Red Solidaria con un 16% cada una</strong>; continúan la <strong>Secretaría de Agricultura y Ganadería y la Secretaría de Salud con un 8% del total de la inversión cada una</strong>; y el <strong>Fondo Hondureño de Inversión Social con un 6% del total.</strong></p>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div id="divGraphDona" style="height:auto;width:auto;"></div>
+                </div>
+                <!--<div class="col-md-4">
+                    <table class="table table-sm tablefont">
+                        <thead>
+                            <tr class="table-light">
+                                <th class="small" scope="col">INSTITUCIÓN</th>
+                                <th class="small text-center" scope="col">MONTO<br/>(Millones de Lempiras)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Fondo Hondureño de Inversión Social
+                                </td>
+                                <td>
+                                    1,493.7
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Secretaría de la Presidencia
+                                </td>
+                                <td>
+                                    25.7
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Servicio de Administración de Rentas
+                                </td>
+                                <td>
+                                    173.4
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Instituto Nacional Penitenciario (INP)
+                                </td>
+                                <td>
+                                    181.1
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Secretaría de Educación
+                                </td>
+                                <td>
+                                    483.9
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Secretaría de Salud
+                                </td>
+                                <td>
+                                    1,843.3
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Secretaría de Seguridad
+                                </td>
+                                <td>
+                                    200.4
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Secretaría de Finanzas
+                                </td>
+                                <td>
+                                    253.3
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Secretaría de Recursos Naturales y Ambiente (MI AMBIENTE+)
+                                </td>
+                                <td>
+                                    725.0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                Registro Nacional de las Personas
+                                </td>
+                                <td>
+                                    22.0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Administración Aduanera de Honduras (AAH)
+                                </td>
+                                <td>
+                                    45.0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Secretaría de Infraestructura y Transporte
+                                </td>
+                                <td>
+                                    3,871.7
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Secretaría de Desarrollo Social (SEDESOL)
+                                </td>
+                                <td>
+                                    12.8
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Comisión Nacional del Deporte Honduras (CONDEPOR)
+                                </td>
+                                <td>
+                                    232.7
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Red Solidaria
+                                </td>
+                                <td>
+                                    3,833.2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   Instituto Nacional de Formación Profesional (INFOP)
+                                </td>
+                                <td>
+                                    47.7
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Instituto Hondureño de Antropología e Historia
+                                </td>
+                                <td>
+                                    5.2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Universidad Nacional de Ciencias Forestales (UNACIFOR)
+                                </td>
+                                <td>
+                                    5.8
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Universidad Nacional de Agricultura
+                                </td>
+                                <td>
+                                    37.5
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   Hospital Escuela Universitario (HEU)
+                                </td>
+                                <td>
+                                    127.1
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Empresa Nacional de Energía Eléctrica
+                                </td>
+                                <td>
+                                    5,823.8
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Universidad Nacional de Agricultura
+                                </td>
+                                <td>
+                                    37.5
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Empresa Nacional Portuaria
+                                </td>
+                                <td>
+                                    78.8
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Empresa Hondureña de Telecomunicaciones (HONDUTEL)
+                                </td>
+                                <td>
+                                    400.0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Instituto Hondureño de Mercadeo Agricola (IHMA)
+                                </td>
+                                <td>
+                                    98.8
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    0807 - Suplidora Nacional de Productos Básicos (BANASUPRO)
+                                </td>
+                                <td>
+                                    197.6
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Empresa de Correos de Honduras (HONDUCOR)
+                                </td>
+                                <td>
+                                    3.4
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   Alcaldia Municipal del Distrito Central
+                                </td>
+                                <td>
+                                    309.9
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Varias Instituciones</td>
+                                <td>
+                                    695.0
+                                </td>
+                            </tr>
+                            <tr class="table-success">
+                                <th scope="row">
+                                    Total general
+                                </th>
+                                <td>
+                                    23,613.9
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>-->
+                <div class="col-md-4">
+                    <table class="table table-sm tablefont">
+                        <thead>
+                            <tr class="table-light">
+                                <th class="small" scope="col">INSTITUCIÓN</th>
+                                <th class="small text-center" scope="col">MONTO<br />(Millones de Lempiras)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Empresa Nacional de Energía Eléctrica
+                                </td>
+                                <td>
+                                    5.823,8
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Secretaría de Infraestructura y Transporte
+                                </td>
+                                <td>
+                                    3.871,7
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Red Solidaria
+                                </td>
+                                <td>
+                                    173.4
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Secretaría de Agricultura y Ganadería
+                                </td>
+                                <td>
+                                    1.861,0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Secretaría de Salud
+                                </td>
+                                <td>
+                                    1.843,3
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Fondo Hondureño de Inversion Social
+                                </td>
+                                <td>
+                                    1.493,7
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Secretaría de Recursos Naturales y Ambiente (MI AMBIENTE+)
+                                </td>
+                                <td>
+                                    725,0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   Secretaría de Educación
+                                </td>
+                                <td>
+                                    483,9
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Registro Nacional de las Personas
+                                </td>
+                                <td>
+                                    400
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Empresa Hondureña de Telecomunicaciones (HONDUTEL)
+                                </td>
+                                <td>
+                                    400,0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Otras Instituciones
+                                </td>
+                                <td>
+                                    2.878,4
+                                </td>
+                            </tr>
+                            <tr class="table-success">
+                                <th scope="row">
+                                    Total general
+                                </th>
+                                <td>
+                                    23,613.9
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section-gray" id="s3">
+    <div class="container">
+        <div class="row">
+            <div class="section-subheading">
+                <h2 class="text-center">Inversión Pública por Departamento</h2>
+                <p>A nivel departamental, se concentra el <strong>74% (L 17,519.6 millones)</strong> en los Departamentos de <strong>Francisco Morazán, Cortés, Olancho, El Paraíso y Santa Bárbara</strong>; el siguiente <strong>15% (L 3,584.1 millones)</strong> corresponden a las asignaciones previstas para los Departamentos de <strong>Yoro, Copán, Intibucá, Comayagua y Ocotepeque</strong>; el restante <strong>11% (L 2,510.2 millones)</strong> se distribuyen en <strong>Colón,Lempira, Valle, Choluteca, Atlántida, La Paz, Islas de la Bahía y Gracias a Dios.</strong></p>
+            </div>
+        </div>
+        <div id="divTreemap" style="height:auto;width:auto;"></div>
+        <div class="col-md-12">
+            <div class="alertCont alert-info" role="alert">
+                “Fuente: Censo 2013 INE-Honduras<br />***</br>Para el Año 2023, se consideran 123 Proyectos de Inversión los cuales cuentan con intervención en los diferentes Departamentos.</br>***</br>
+                
+                El porcentaje mostrado en el departamento de <strong>Francisco Morazán</strong> es variable, debido que algunos proyectos de inversión, se encuentran en proceso de <strong>pre inversión</strong> por lo que no tienen definida su localización geográfica al momento de la formulación presupuestaria; por lo que las instituciones formulan su presupuesto en su sede.</div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-10 gy-4">
+                <div class="cardR shadow border-0 h-100">
+                    <div class="card-body">
+                        <h4 class="text-center">Inversión Pública por Departamento, Institución y Proyecto</h4>
+                        <p class="text-center">Conoce el de detalle de los proyectos a nivel de departamento e institución descargando el siguiente archivo PDF.</p>
+                        <div class="section-btns justify-content-center">
+                            <a aria-label="Contactenos" href="/Documentos/InversionesPublicas2023.pdf" class="btn btn-cards" target="_blank">
+                                <span>Descargar Archivo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardR shadow border-0 h-100">
+                    <div class="card-body">
+                        <h4 class="text-center">Inversión en Programas Sociales para el 2023</h4>
+                        <p class="text-center">La inversión en programas sociales para el 2023 asciende a L 48,233.1 millones, que representan el 67.1% de la Inversión Pública Total para el año 2023. Estas intervenciones comprenden créditos agrícolas, becas para estudiantes, matrícula gratis, subsidios a la energía eléctrica y combustibles, merienda escolar, bono tecnológico, transferencias municipales y a Organizaciones No Gubernamentales.</p>
+                        <div class="section-btns justify-content-center">
+                            <a aria-label="Contactenos" href="/Documentos/Inversion_Programas_Sociales_2023.pdf" class="btn btn-cards" target="_blank">
+                                <span>Descargar Archivo</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--RELATED INFO-->
+<section class="relatedInfo">
+    <div class="container">
+        <!--LINKS OTRAS SECCIONES-->
+        <div class="row py-5">
+            <!--LEFT COLUMN-->
+            <div class="col-lg-8">
+                <!--LINKS seccion infografia planificacion-->
+                <h2>Conoce</h2>
+                <div class="wrap-cta">
+                    <a href="/PresupuestoGeneral" target="_blank" class="py-5 mb-5 px-0">
+                        <div class="h4">Presupuestos de la República<i class="material-icons md-18">arrow_forward</i> </div>
+                    </a>
+                    <a href="/ProcesoPresupuesto" target="_blank" class="py-5 mb-5 px-0">
+                        <div class="h4">Presupuestos Ciudadanos<i class="material-icons md-18">arrow_forward</i> </div>
+                    </a>
+                </div><br />
+                <h2>Explora</h2>
+                <div class="wrap-cta">
+                    <a href="../Entidades" class="py-5 mb-5 px-0">
+                        <div class="h4">Ir a Instituciones <i class="material-icons md-18">arrow_forward</i> </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="wrap-cta">
+                    <p class="card-title mb-4">Información suministrada por:</p>
+                    <a href="https://www.sefin.gob.hn/" target="_blank">
+                        <img class="img-fluid" src="../img/logoHaciendaB.png" alt="ir a SEFIN" />
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- Call to action-->
+<!--HELP CENTER SHORTCUT-->
+<div id="helpCenter"></div>
+<script src="js/comunes_infografias.js"></script>
+<script src="~/js/lib/D3/d3.min.js" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+<script src="~/js/graficos_aux.js"></script>
+<script>
+    $(document).ready(function () {
+        GetEntidadesPresupuesto();
+    });
+
+    window.onscroll = function () { myFunction() };
+
+    var header = document.getElementById("navs-header");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+            header.classList.add("bg-white");
+        } else {
+            header.classList.remove("sticky");
+            header.classList.remove("bg-white");
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
