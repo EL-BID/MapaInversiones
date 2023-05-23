@@ -2,6 +2,7 @@
 ![analytics image (flat)](https://raw.githubusercontent.com/vitr/google-analytics-beacon/master/static/badge-flat.gif)
 ![analytics](https://www.google-analytics.com/collect?v=1&cid=555&t=pageview&ec=repo&ea=open&dp=/MapaInversiones/readme&dt=&tid=UA-4677001-16)
 
+
 # MapaInversiones
 ---
 Los objetivos principales de la plataforma son:
