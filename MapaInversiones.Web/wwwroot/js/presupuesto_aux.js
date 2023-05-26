@@ -463,7 +463,7 @@ function getStrBarrasPerPeriodo(result, anyo_actual) {
         var vigente = result[i].vigente;
 
         var porcentaje_ejecutado = (Math.round((ejecutado / vigente) * 100, 1)).toString() + "%";
-        var porcentaje_vigente = (Math.round((vigente / vigente) * 100, 1)).toString() + "%";
+        /*var porcentaje_vigente = (Math.round((vigente / vigente) * 100, 1)).toString() + "%";*/
 
         if (aprobado != null && aprobado != undefined) {
             aprobado = (aprobado / 1000000).formatMoney(1, '.', ',').toString();
