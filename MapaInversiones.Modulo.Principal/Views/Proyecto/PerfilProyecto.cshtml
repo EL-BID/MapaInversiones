@@ -104,12 +104,12 @@
                                             if (@item.Tipo == "MUNICIPIO")
                                             {
                                                 <li>@item.Nombre ,</li>
-                                                //<a class="enlace_ficha" role="button" tipo="@item.Tipo" location_id="@item.IdMunicipio"></a>
+                                               
                                         ***REMOVED***
                                             else if (@item.Tipo == "DEPARTAMENTO" || @item.Tipo == "REGION")
                                             {
                                                 <li>@item.Nombre ,</li>
-                                                //<a class="enlace_ficha" role="button" tipo="@item.Tipo" location_id="@item.IdDepartamento"></a>
+                                               
                                         ***REMOVED***
                                             else
                                             {
@@ -122,12 +122,12 @@
                                             if (@item.Tipo == "MUNICIPIO" || @item.Tipo == "COUNTY")
                                             {
                                                 <li>@item.Nombre</li>
-                                                //<a class="enlace_ficha" role="button" tipo="@item.Tipo" location_id="@item.IdMunicipio"></a>
+                                                
                                         ***REMOVED***
                                             else if (@item.Tipo == "DEPARTAMENTO" || @item.Tipo == "REGION")
                                             {
                                                 <li>@item.Nombre</li>
-                                                //<a class="enlace_ficha" role="button" tipo="@item.Tipo" location_id="@item.IdDepartamento"></a>
+                                               
                                         ***REMOVED***
                                             else
                                             {
@@ -150,12 +150,12 @@
                                                 @if (@item.Tipo == "MUNICIPIO" || @item.Tipo == "COUNTY")
                                                 {
                                                     <li>@item.Nombre ,</li>
-                                                    //<a class="enlace_ficha" role="button" tipo="@item.Tipo" location_id="@item.IdMunicipio"></a>
+                                                    
                                             ***REMOVED***
                                                 else if (@item.Tipo == "DEPARTAMENTO" || @item.Tipo == "REGION")
                                                 {
                                                     <li>@item.Nombre ,</li>
-                                                    //<a class="enlace_ficha" role="button" tipo="@item.Tipo" location_id="@item.IdDepartamento"></a>
+                                                   
                                             ***REMOVED***
                                                 else
                                                 {
@@ -163,9 +163,7 @@
                                             ***REMOVED***
                                             </text>
                                     ***REMOVED***
-                                        //else {
-                                        //    beneficiarios += "<li>@item.Nombre</li>";
-                                        //***REMOVED***
+
                                         beneficiarios += ""+@item.Nombre+", ";
                                         count++;
                                 ***REMOVED***
@@ -212,10 +210,7 @@
                     <span class="ic-shortcut"><i class="material-icons md-24">feed</i></span>
                     <span class="text-btn">Información General</span>
                 </a>
-                @*<a class="btn-section" href="#s2">
-                        <span class="ic-shortcut"><i class="material-icons md-24">ballot</i></span>
-                        <span class="text-btn">Entregables</span>
-                    </a>*@
+
                 <a class="btn-section" href="#s2">
                     <span class="ic-shortcut"><i class="material-icons md-24">earbuds</i></span>
                     <span class="text-btn">Proceso de Contratación</span>
@@ -228,10 +223,7 @@
                     <span class="ic-shortcut"><i class="material-icons md-24">speaker_notes</i></span>
                     <span class="text-btn">Participación Ciudadana</span>
                 </a>
-                @*<a class="btn-section" href="#s3" id="btnGenPdfProy">
-                        <span class="ic-shortcut"><i class="material-icons md-24">sim_card_download</i></span>
-                        <span class="text-btn">Descargar Pdf</span>
-                    </a>*@
+
             </div>
         </div>
     </section>
@@ -255,18 +247,7 @@
                                         <span class="label-desc">Institución Ejecutora Principal</span>
                                         <span class="text-desc">@Model.ProjectInformation.NombreActor</span>
                                     </li>
-                                    @*<li class="data-list">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <span class="label-desc">Etapa</span>
-                                                    <span class="text-desc">@Model.ProjectInformation.Etapa</span>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <span class="label-desc">Fase</span>
-                                                    <span class="text-desc">@Model.ProjectInformation.Fase</span>
-                                                </div>
-                                            </div>
-                                        </li>*@
+                                   
                                     <li class="data-list">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -303,39 +284,13 @@
                                         </li>
                                         </text>
                                  ***REMOVED***
-                                    @*<li class="data-list">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h5 class="label-benf">Beneficiarios</h5>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="bIcon">
-                                                        <img src="../img/svg-icons/BmanPP.svg" />
-                                                    </div>
-                                                    <span class="label-benf">Hombres</span>
-                                                    <span class="text-desc">@Model.ProjectInformation.NumBeneficHombres</span>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="bIcon">
-                                                        <img src="../img/svg-icons/BmanWM.svg" />
-                                                    </div>
-                                                    <span class="label-benf">Mujeres</span>
-                                                    <span class="text-desc">@Model.ProjectInformation.NumBeneficMujeres</span>
-                                                </div>
-                                            </div>
-                                        </li>*@
+                                  
                                 </ul>
                             </div>
 
                         </div>
                     </div>
-                    <!--<div class="card description-box" id="divContainerActores">
-                        <div class="section-heading-Project">
-                            <h4 class="mb-3">Actores del Proyecto</h4>
-                        </div>
-                        <div class="form-group subtitle" id="divGruposActores"></div>
-                        <div id="listActPerGrupo"></div>
-                    </div>-->
+
                 </div>
                 <!--GRAPH SIDE-->
                 <div class="col-lg-8">
@@ -493,22 +448,6 @@
 
 
 
-                                        @*<tr>
-                                            <th scope="row">193</th>
-                                            <td>
-                                            Técnicos agropecuarios con conocimientos y habilidades técnicas innovadoras y climáticamente inteligentes proveen servicios de asistencia técnica de alto nivel al finalizar el proyecto año 2024.
-                                            </td>
-                                            <td>1350</td>
-                                            <td>Documento</td>
-                                            </tr>
-                                            <tr>
-                                            <th scope="row">193</th>
-                                            <td>
-                                            Técnicos agropecuarios con conocimientos y habilidades técnicas innovadoras y climáticamente inteligentes proveen servicios de asistencia técnica de alto nivel al finalizar el proyecto año 2024.
-                                            </td>
-                                            <td>1350</td>
-                                            <td>Documento</td>
-                                            </tr>*@
 
                                     </tbody>
                                 </table>
@@ -554,27 +493,7 @@
                 <div class="col-md-3">
 
                     <form class="contractList bgSoftGray">
-                        @*<div class="form-group">
-                                <label class="year" for="year">Año</label>
-                                <select class="form-control" id="top_contratos_periodos"></select>
 
-                            </div>*@
-                        @*<div class="form-group">
-                                <label class="year" for="year">Estado</label>
-                                <select class="form-control" id="top_contratos_estados">
-                                    <option value="">Todos los Estados</option>
-                                    @if (Model.Consolidados.Count > 0)
-                                    {
-                                        foreach (var item in Model.Consolidados)
-                                        {
-                                            <text>
-                                                <option value="@item.EstadoContrato">@item.EstadoContrato</option>
-                                            </text>
-                                    ***REMOVED***
-                                ***REMOVED***
-                                </select>
-
-                            </div>*@
                         <div class="form-group">
                             <label class="year" for="entidad">Año</label>
                             <label class="origen" for="top_origen_informacion">Fuente de Datos</label>
@@ -601,162 +520,7 @@
                     <!--ESTRUCTURA HTML PARA TOMAR COMO REFERENCIA-->
                     <!--CIERRE DE ESTRUCTURA-->
                     <div class="wrap-proceso whiteBg" id="srcContratos">
-                        @*<div class="contractBox">
-                                <div class="cotractName contractONCAE">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-12">
-                                            <span class="small">Obra</span>
-                                            <div class="clearfix"></div>
-                                            <span class="h4">Lote 1 “Equipo Generador de la Central Hidroeléctrica Cañaveral (Adquisición e instalación de los Equipos Principales y Auxiliares)”  (Obras Civiles Asociadas)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="processName">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <span class="small">Fuente de Financiamiento</span>
-                                            <div class="clearfix"></div>
-                                            <span class="h4">Crédito Externo</span>
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                            <span class="small">Monto</span>
-                                            <div class="clearfix"></div>
-                                            <span class="h4">L 433.395.229,75</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wrap-head-process">
-                                    <div class="contractData">
-                                        <div class="row border-b">
-                                            <div class="col-xs-4 col-md-2">
-                                                <span class="small">Convenio</span>
-                                                <span class="amount_adj">BCIE 2177</span>
-                                            </div>
-                                            <div class="col-md-6 offset-md-4">
-                                                <span class="small">Tipo de Proceso</span>
-                                                <span class="amount_adj">LICITACIÓN PÚBLICA INTERNACIONAL (LPI)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contractBox">
-                                <div class="cotractName contractONCAE">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-12">
-                                            <span class="small">Obra</span>
-                                            <div class="clearfix"></div>
-                                            <span class="h4">Lote 1 “Equipo Generador de la Central Hidroeléctrica Cañaveral (Adquisición e instalación de los Equipos Principales y Auxiliares)”  (Obras Civiles Asociadas)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="processName">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <span class="small">Fuente de Financiamiento</span>
-                                            <div class="clearfix"></div>
-                                            <span class="h4">Crédito Externo</span>
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                            <span class="small">Monto</span>
-                                            <div class="clearfix"></div>
-                                            <span class="h4">L 433.395.229,75</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wrap-head-process">
-                                    <div class="contractData">
-                                        <div class="row border-b">
-                                            <div class="col-xs-4 col-md-2">
-                                                <span class="small">Convenio</span>
-                                                <span class="amount_adj">BCIE 2177</span>
-                                            </div>
-                                            <div class="col-md-6 offset-md-4">
-                                                <span class="small">Tipo de Proceso</span>
-                                                <span class="amount_adj">LICITACIÓN PÚBLICA INTERNACIONAL (LPI)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contractBox">
-                                <div class="cotractName contractONCAE">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-12">
-                                            <span class="small">Obra</span>
-                                            <div class="clearfix"></div>
-                                            <span class="h4">Lote 1 “Equipo Generador de la Central Hidroeléctrica Cañaveral (Adquisición e instalación de los Equipos Principales y Auxiliares)”  (Obras Civiles Asociadas)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="processName">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <span class="small">Fuente de Financiamiento</span>
-                                            <div class="clearfix"></div>
-                                            <span class="h4">Crédito Externo</span>
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                            <span class="small">Monto</span>
-                                            <div class="clearfix"></div>
-                                            <span class="h4">L 433.395.229,75</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wrap-head-process">
-                                    <div class="contractData">
-                                        <div class="row border-b">
-                                            <div class="col-xs-4 col-md-2">
-                                                <span class="small">Convenio</span>
-                                                <span class="amount_adj">BCIE 2177</span>
-                                            </div>
-                                            <div class="col-md-6 offset-md-4">
-                                                <span class="small">Tipo de Proceso</span>
-                                                <span class="amount_adj">LICITACIÓN PÚBLICA INTERNACIONAL (LPI)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contractBox">
-                                <div class="cotractName contractONCAE">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-12">
-                                            <span class="small">Obra</span>
-                                            <div class="clearfix"></div>
-                                            <span class="h4">Lote 1 “Equipo Generador de la Central Hidroeléctrica Cañaveral (Adquisición e instalación de los Equipos Principales y Auxiliares)”  (Obras Civiles Asociadas)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="processName">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <span class="small">Fuente de Financiamiento</span>
-                                            <div class="clearfix"></div>
-                                            <span class="h4">Crédito Externo</span>
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                            <span class="small">Monto</span>
-                                            <div class="clearfix"></div>
-                                            <span class="h4">L 433.395.229,75</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="wrap-head-process">
-                                    <div class="contractData">
-                                        <div class="row border-b">
-                                            <div class="col-xs-4 col-md-2">
-                                                <span class="small">Convenio</span>
-                                                <span class="amount_adj">BCIE 2177</span>
-                                            </div>
-                                            <div class="col-md-6 offset-md-4">
-                                                <span class="small">Tipo de Proceso</span>
-                                                <span class="amount_adj">LICITACIÓN PÚBLICA INTERNACIONAL (LPI)</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>*@
+                      
                     </div>
 
                     <div id="divPagContratos" class="">
@@ -1299,20 +1063,10 @@
             if (files.length > 0)
             {
               console.log("Entró por files:");
-                //using(var ms = new MemoryStream())
-                //{
-                //  files[0].CopyTo(ms);
-                //  var fileBytes = ms.ToArray();
-                //  string s = Convert.ToBase64String(fileBytes);
-                //  console.log("Imagen:" + s);
-                //  // act on the Base64 data
-                //***REMOVED***
+
 
                 if (files[0].size < maxFileSize) {
-                    /*data.append("UploadedImage", files[0]);
-                    data.append("DescripcionImage", $('#tbDescripcion').val());
-                    data.append("LocationImage", $('#filtro_AreaFotoUsuUpload option:selected').val());*/
-                    //data.append("ProjectImage",@Model.idproject);
+
                   console.log(files[0]);
 
 

@@ -56,7 +56,7 @@
 	// to configure GetSchemaOptions properties, add them here, before load metadata call
 	GetSchemaOptions.GetProcedures  = true;
 
-	LoadSqlServerMetadata("LAPTOP-EKMJ5OLS,61344", "MapaInversionesC4D", "MapaInversiones", "M4p41nv3rs10n3s");
+	LoadSqlServerMetadata("ip,port", "MapaInversionesC4D", "MapaInversiones", "P4ss");
 
 //	LoadSqlServerMetadata(".", "MyDatabase"); // Integrated Security
 //	LoadSqlServerMetadata(string connectionString);

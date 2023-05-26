@@ -1416,7 +1416,7 @@ function validaEmail(cadena) {
 ***REMOVED***
 
 function validaEnteroMayorCero(cadena) {
-    if (cadena.match(/^[1-9]+[0-9]*$/)) {
+    if (cadena.match(/^[1-9]*$/)) {
         return true;
 ***REMOVED*** else {
         return false;

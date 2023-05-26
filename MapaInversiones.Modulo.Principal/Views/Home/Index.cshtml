@@ -71,16 +71,6 @@
                     </div>
 
             ***REMOVED***
-                <!--<div class="form-recommendations">
-                    <div class="row">
-                        <div class="searchtxt col-lg-3">B&uacute;squedas m&aacute;s populares</div>
-                        <div class="col-auto">
-                            <div class="badge rounded-pill Outlinetagw"><a href="#">Mi primer empleo</a></div>
-                            <div class="badge rounded-pill Outlinetagw"><a href="#">Subsidios</a></div>
-                            <div class="badge rounded-pill Outlinetagw"><a href="#">STP</a></div>
-                        </div>
-                    </div>
-                </div>-->
                 <div id="search-home" class="search-body">
                     <div id="divNoEncontrado" class="no-search-results" style="display: none;">No se han encontrado resultados</div>
                     <div class="search-results objHidden" id="divResultados">
@@ -108,22 +98,7 @@
                <div class="intro-item" data-flickity-bg-lazyload="@Orchard.AssetUrl((string)ruta_aux,200,200,OrchardCore.Media.Processing.ResizeMode.Crop)">
                     <div class="container">
                         <div class="row">
-                            <!--<div class="col">
-                                <div class="intro-content">
-                                    <div class="section-heading shm-none">
-                                        <h2>@item.DisplayText</h2>
-                                        <p class="section-desc">@Html.Raw(item.HtmlBodyPart.Html)</p>
-                                    </div>
 
-                                    <div class="wrap-btn intro-btns">
-                                        <a href="@item.LinkMenuItemPart.Url" class="btn btn-cards ripple">
-                                            <span>@item.LinkMenuItemPart.Name</span>
-                                            <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
-                                        </a>
-
-                                    </div>
-                                </div>
-                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -170,7 +145,6 @@
                         <div class="section-heading heading-left">
                             
 
-                            <!--<div class="section-subheading">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et</div>-->
                         </div>
 
                     </div>
@@ -183,9 +157,6 @@
 
                                     <div class="intro-content">
                                         <div class="section-heading shm-none">
-                                            <!--<span class="h3 text-bold">
-                                                Para la etapa de formulación o elaboración del presupuesto, se detalla un cronograma de trabajo que establece tiempos y responsabilidades para las instituciones participantes del Poder Ejecutivo específicamente Presidente de la República y Ministro
-                                            </span>-->
                                             <h2>
                                                 Conoce el Mapa de Inversión Pública
                                             </h2>
@@ -203,12 +174,7 @@
                                                 </span>
                                                 <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
                                             </a>
-                                            <!--<a href="/DesarrolloSostenible" class="btn btn-cards">
-                                                    <span>
-                                                        Vinculaci&oacute;n PGN &#8211; ODS
-                                                    </span>
-                                                    <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
-                                            </a>-->
+
 
                                         </div>
                                     </div>
@@ -340,122 +306,117 @@
                 <h2>Contratos por Fuente de Datos </h2>
                 <h3>Año @Model.MaxAnnioContratos</h3>
             </div>
-           <div class="row">
-            <div class="col-md-4">
-                <div class="card shadow border-0 h-100">
-                    <div class="car-deck">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card shadow border-0 h-100">
+                        <div class="car-deck">
                             <div class="card-headerdata  text-center">
                                 <img class="img-fluid img20" src="../img/logoHaciendaB.png" alt="ir a Secretaria tecnica de planeación" />
-                        </div>
-                        <div class="car-bodycntos">
-                            <div class="car-content">
-                                <div class="info_contra" id="dataSEFIN">
-                                    @if (Sefin.Count() > 0)
-                                    {
-                                        foreach (var item in Sefin)
-                                        {
-                                            <text>
-                                                <div class="h6">Órdenes de Pago SEFIN</div>
-                                                <div class="h4"> @String.Format(cultureHN, "{0:n0***REMOVED***", @item.NroContratos)</div>
-                                                <div class="h6">Valor</div>
-                                                <div class="h4">
-                                                    @item.MonedaContrato
-                                                    @if (@item.ValorContratado >= 1000000)
-                                                    {
-                                                        <text> @String.Format(cultureHN, "{0:n1***REMOVED***", @item.ValorContratado / 1000000) Millones</text>
-                                                ***REMOVED***
-                                                    else
-                                                    {
-                                            <text> @String.Format(cultureHN, "{0:n1***REMOVED***", @item.ValorContratado)</text>
-                                                ***REMOVED***
-                                                </div>
-                                                </text>
-                                    ***REMOVED***
-                                ***REMOVED***
-                                    else
-                                    {
-                                            <text>
-                                                <div class="h6">Órdenes de Pago SEFIN</div>
-                                                <div class="h4">0</div>
-                                                <div class="h6">Valor</div>
-                                                <div class="h4">- -</div>
-                                            </text>
-
-                                ***REMOVED***
-                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="card shadow border-0 h-100">
-                    <div class="car-deck">
-                            <div class="card-headerdata  text-center">
-                                <img class="img-fluid img20" src="../img/LogoOncaet.png" alt="ir a Secretaria tecnica de planeación" />
-                        </div>
-                        <div class="car-bodycntos">
-                            <div class="car-content">
-                                <div class="info_contra">
-                                        <div class="row justify-content-center" id="dataONCAE">
-                                        @if (Oncae.Count() > 0)
+                            <div class="car-bodycntos">
+                                <div class="car-content">
+                                    <div class="info_contra" id="dataSEFIN">
+                                        @if (Sefin.Count() > 0)
                                         {
-                                            foreach (var item in Oncae)
+                                            foreach (var item in Sefin)
                                             {
                                                 <text>
-                                                    <div class="col-md-4">
-                                                        <div class="h6">@item.OrigenInformacion.Replace("Oncae - ", "").Replace("ONCAE - ", "").Replace("Catalogo Electrónico", "Catálogo Electrónico")</div>
-                                                        <div class="h4"> @String.Format(cultureHN, "{0:n0***REMOVED***", @item.NroContratos)</div>
-                                                        <div class="h6">Valor</div>
-                                                        <div class="h4">
-                                                            @item.MonedaContrato
-                                                            @if (@item.ValorContratado >= 1000000)
-                                                            {
-                                                                <text> @String.Format(cultureHN, "{0:n1***REMOVED***", @item.ValorContratado / 1000000) Millones</text>
-                                                        ***REMOVED***
-                                                            else
-                                                            {
+                                                    <div class="h6">Órdenes de Pago SEFIN</div>
+                                                    <div class="h4"> @String.Format(cultureHN, "{0:n0***REMOVED***", @item.NroContratos)</div>
+                                                    <div class="h6">Valor</div>
+                                                    <div class="h4">
+                                                        @item.MonedaContrato
+                                                        @if (@item.ValorContratado >= 1000000)
+                                                        {
+                                                            <text> @String.Format(cultureHN, "{0:n1***REMOVED***", @item.ValorContratado / 1000000) Millones</text>
+                                        ***REMOVED***
+                                            else
+                                            {
                                                 <text> @String.Format(cultureHN, "{0:n1***REMOVED***", @item.ValorContratado)</text>
-                                                        ***REMOVED***
-                                                        </div>
+                                        ***REMOVED***
                                                     </div>
                                                     </text>
+                                            ***REMOVED***
                                         ***REMOVED***
-                                    ***REMOVED***
-                                        else
-                                        {
+                                            else
+                                            {
                                                 <text>
-                                                    <div class="col-md-4">
-                                                        <div class="h6">- -</div>
-                                                        <div class="h4">0</div>
-                                                        <div class="h6">Valor</div>
-                                                        <div class="h4">- -</div>
-                                                    </div>
+                                                    <div class="h6">Órdenes de Pago SEFIN</div>
+                                                    <div class="h4">0</div>
+                                                    <div class="h6">Valor</div>
+                                                    <div class="h4">- -</div>
                                                 </text>
-                                    ***REMOVED***
-                                        @*<div class="col-md-4">
-                                                <div class="h6">Catálogo Electrónico</div>
-                                                <div class="h3">100</div>
-                                                <div class="h6">Valor</div>
-                                                <div class="h3">500.000.000</div>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <div class="h6">Difusión Directa de Contratos</div>
-                                                <div class="h3">100</div>
-                                                <div class="h6">Valor</div>
-                                                <div class="h3">500.000.000</div>
-                                            </div>*@
+
+                                        ***REMOVED***
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-8">
+                    <div class="card shadow border-0 h-100">
+                        <div class="car-deck">
+                            <div class="card-headerdata  text-center">
+                                <img class="img-fluid img20" src="../img/LogoOncaet.png" alt="ir a Secretaria tecnica de planeación" />
+                            </div>
+                            <div class="car-bodycntos">
+                                <div class="car-content">
+                                    <div class="info_contra">
+                                        <div class="row justify-content-center" id="dataONCAE">
+                                            @if (Oncae.Count() > 0)
+                                            {
+                                                foreach (var item in Oncae)
+                                                {
+                                                    <text>
+                                                        <div class="col-md-4">
+                                                            <div class="h6">@item.OrigenInformacion.Replace("Oncae - ", "").Replace("ONCAE - ", "").Replace("Catalogo Electrónico", "Catálogo Electrónico")</div>
+                                                            <div class="h4"> @String.Format(cultureHN, "{0:n0***REMOVED***", @item.NroContratos)</div>
+                                                            <div class="h6">Valor</div>
+                                                            <div class="h4">
+                                                                @item.MonedaContrato
+                                                                @if (@item.ValorContratado >= 1000000)
+                                                                {
+                                                                    <text> @String.Format(cultureHN, "{0:n1***REMOVED***", @item.ValorContratado / 1000000) Millones</text>
+                                            ***REMOVED***
+                                                else
+                                                {
+                                                    <text> @String.Format(cultureHN, "{0:n1***REMOVED***", @item.ValorContratado)</text>
+                                            ***REMOVED***
+                                                            </div>
+                                                        </div>
+                                                        </text>
+                                                ***REMOVED***
+                                            ***REMOVED***
+                                                else
+                                                {
+                                                    <text>
+                                                        <div class="col-md-4">
+                                                            <div class="h6">- -</div>
+                                                            <div class="h4">0</div>
+                                                            <div class="h6">Valor</div>
+                                                            <div class="h4">- -</div>
+                                                        </div>
+                                                    </text>
+                                            ***REMOVED***
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="alertCont alert-info" role="alert">Para evitar duplicaciones en los análisis, se recomienda utilizar las publicaciones de manera separada, usando los datos de <strong>ONCAE</strong> para análisis sobre licitaciones, y <strong>SEFIN</strong> para análisis de presupuesto y pago de contratos.</div>
+                </div>
+                <div class="section-btns justify-content-center py-5">
+                    <a title="Ir a Contratación Pública" href="/contratos?moneda=HNL" class="btn btn-cards">
+                        <span>Ir a Contratación Pública</span>
+                        <span class="el-ripple-circle" style="left: 326.5px; top: 313px;"></span>
+                    </a>
+                </div>
             </div>
-            <div class="col-md-12">
-                <div class="alertCont alert-info" role="alert">Para evitar duplicaciones en los análisis, se recomienda utilizar las publicaciones de manera separada, usando los datos de <strong>ONCAE</strong> para análisis sobre licitaciones, y <strong>SEFIN</strong> para análisis de presupuesto y pago de contratos.</div>
-            </div>
-        </div>
 
         </div>
 

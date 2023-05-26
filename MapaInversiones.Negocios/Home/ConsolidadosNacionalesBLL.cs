@@ -167,6 +167,11 @@ namespace PlataformaTransparencia.Negocios.Home
             object moneda = "";
             moneda = DBNull.Value;
             int? maxyear = null;
+            var yyy = (from contr in _connection.VwContratosConsolidados
+                       where (contr.MonedaContrato == moneda.ToString() || moneda == DBNull.Value)
+                              && contr.ValorContratado != null
+                       orderby contr.Anio descending
+                       select contr.Anio);
             maxyear = (from contr in _connection.VwContratosConsolidados
                        where (contr.MonedaContrato == moneda.ToString() || moneda == DBNull.Value)
                               && contr.ValorContratado != null

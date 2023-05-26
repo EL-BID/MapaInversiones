@@ -4,21 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 ***REMOVED***
 @{
-    // var TextMoneda = "";
+
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
-    @*       var LabelContratista = "";
-            var TituloContratista = "";
 
-    ***REMOVED***
-        @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
-        {
-            if (@etiqueta.AliasPart.Alias == "Contratista")
-            {
-                LabelContratista = @etiqueta.HtmlBodyPart.Html;
-                TituloContratista = @etiqueta.TitlePart.Title;
-        ***REMOVED***
-
-    ***REMOVED****@
 
 System.IFormatProvider cultureHN =
 new System.Globalization.CultureInfo("es-HN");
@@ -56,96 +44,15 @@ new System.Globalization.CultureInfo("es-HN");
                         <h4 class="mainTit_t1 text-center">@Model.Contratista</h4>
                         <h4 class="text-center Submaintit">Código Proveedor</h4>
                     </div>
-                    <!--<div class="banner-main-desc">
-                <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                </p>
-
-            </div>-->
+              
 
                 </div>
             </div>
-            <!--<div class="col-md-10 offset-1">
-        <div class="col-md-12">
-            <ul class="list-inline details">
-                <li>
-
-                    <span class="h2"> @Model.Contratista</span>
-
-                    <span>Código Proveedor</span>
-                </li>
-                @if (Model.Data.Count > 0)
-                {
-                    foreach (var item in Model.Data)
-                    {
-                        <text>
-                            <li class="inline-item">
-                                <span class="h2">
-                                    @if (@item.MonedaContrato == "USD")
-                                    {<text>USD$</text> ***REMOVED***
-                    else
-                    { <text>L</text>***REMOVED***
-
-                                    @if (@item.ValorTotalContratos >= 1000000)
-                                    {<text> double.Parse((@item.ValorTotalContratos / 1000000), System.Globalization.CultureInfo.InvariantCulture) Millones</text>***REMOVED***
-                                else
-                                {<text> @String.Format("{0:0.#***REMOVED***", @item.ValorTotalContratos)</text>***REMOVED***
-                                </span>
-                                <span>Valor total de contratos</span>
-                            </li>
-                            <li class="inline-item">
-                                @if (@item.NumContratos > 0)
-                                {
-                                    <span class="h2"> @item.NumContratos</span>
-                            ***REMOVED***
-                                <span>Número de Contratos</span>
-                            </li>
-                            </text>
-                    ***REMOVED***
-                ***REMOVED***
-
-            </ul>
-        </div>
-    </div>-->
 
         </div>
 
     </div>
-    <!--NAVIGATION ON PAGE
-    <div class="row navs-shortcuts">
 
-        <div class="" id="navs-header">
-            <a class="btn-section" href="#Distribucion">
-                <span class="ic-shortcut"><i class="material-icons md-24">calendar_view_month</i></span>
-                <span class="text-btn">Distribución</span>
-            </a>
-            <a class="btn-section" href="#Avance">
-                <span class="ic-shortcut"><i class="material-icons md-24">waterfall_chart</i></span>
-                <span class="text-btn">Avance</span>
-            </a>
-            <a class="btn-section" href="#GrupoGasto">
-                <span class="ic-shortcut"><i class="material-icons md-24">payments</i></span>
-                <span class="text-btn">Grupo de Gasto</span>
-            </a>
-            <a class="btn-section" href="#Presupuesto">
-                <span class="ic-shortcut"><i class="material-icons md-24">stacked_bar_chart</i></span>
-                <span class="text-btn">Presupuesto</span>
-            </a>
-            <a class="btn-section" href="#AvanceTiempo">
-                <span class="ic-shortcut"><i class="material-icons md-24">timeline</i></span>
-                <span class="text-btn">Avance Presupuestal</span>
-            </a>
-            <a class="btn-section" href="#DistribucionProgramas">
-                <span class="ic-shortcut"><i class="material-icons md-24">donut_large</i></span>
-                <span class="text-btn">Programas</span>
-            </a>
-            <a class="btn-section" href="#DistribucionObjetoGasto">
-                <span class="ic-shortcut"><i class="material-icons md-24">donut_small</i></span>
-                <span class="text-btn">Objeto de Gasto</span>
-            </a>
-
-        </div>
-    </div>-->
 </section>
 @{
 
@@ -160,7 +67,7 @@ new System.Globalization.CultureInfo("es-HN");
     <div class="container">
         <div class="section-heading heading-center">
             <h3>Contratos por Fuente de Datos</h3>
-            <!--<div class="section-subheading"></div>-->
+
         </div>
         <div class="row">
             <div class="col-md-4">
@@ -255,18 +162,6 @@ new System.Globalization.CultureInfo("es-HN");
                                                     </div>
                                                 </text>
                                         ***REMOVED***
-                                        @*<div class="col-md-4">
-                                        <div class="h6">Catálogo Electrónico</div>
-                                        <div class="h3">100</div>
-                                        <div class="h6">Valor</div>
-                                        <div class="h3">500.000.000</div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="h6">Difusión Directa de Contratos</div>
-                                        <div class="h3">100</div>
-                                        <div class="h6">Valor</div>
-                                        <div class="h3">500.000.000</div>
-                                    </div>*@
                                     </div>
                                 </div>
                             </div>
@@ -278,149 +173,7 @@ new System.Globalization.CultureInfo("es-HN");
                 <div class="alertCont alert-info" role="alert">Para evitar duplicaciones en los análisis, se recomienda utilizar las publicaciones de manera separada, usando los datos de <strong>ONCAE</strong> para análisis sobre licitaciones, y <strong>SEFIN</strong> para análisis de presupuesto y pago de contratos.</div>
             </div>
         </div>
-        @*<div class="row">
-                @if (Sefin.Count() > 0)
-                {
-                    foreach (var item in Sefin)
-                    {
-                        <text>
-                            <div class="col-md-6">
-                                <div class="card shadow border-0 h-100">
-                                    <div class="car-deck">
-                                        <div class="card-bodycntos">
-                                            <div class="car-content">
-                                                <div class="ico_contra">
-                                                    <img class="img-fluid" src="../img/logoHaciendaB.png" alt="ir a Secretaria tecnica de planeación" />
-                                                </div>
-                                                <div class="info_contra">
-                                                    <div class="h6">Contratos según SEFIN</div>
-                                                    <div class="h2" id="FirmadosHNL">@item.NumContratos</div>
-                                                    <div class="h6">Valor contratos</div>
-                                                    <div class="h2" id="ValorHNL">@item.MonedaContrato
-                                                            @if (@item.ValorTotalContratos >= 1000000)
-                                                            {
-                                                                <text> @String.Format("{0:n0***REMOVED***", @item.ValorTotalContratos / 1000000) Millones</text>
-                                                        ***REMOVED***
-                                                            else
-                                                            {
-                                                                <text> @String.Format("{0:n0***REMOVED***", @item.ValorTotalContratos)</text>
-                                                        ***REMOVED***</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </text>
-
-                        cambiolinea += 1;
-                        if (cambiolinea >= 2)
-                        {
-
-                            cambiolinea = 0;
-                        @:</div>
-                        @: <div class="row">
-
-                    ***REMOVED***
-
-                ***REMOVED***
-
-            ***REMOVED***
-                else
-                {
-                    <div class="col-md-6">
-                        <div class="card shadow border-0 h-100">
-                            <div class="car-deck">
-                                <div class="card-bodycntos">
-                                    <div class="car-content">
-                                        <div class="ico_contra">
-                                            <img class="img-fluid" src="../img/logoHaciendaB.png" alt="ir a Secretaria tecnica de planeación" />
-                                        </div>
-                                        <div class="info_contra">
-                                            <div class="h6">Contratos según SEFIN</div>
-                                            <div class="h2" id="FirmadosHNL">0</div>
-                                            <div class="h6">Valor contratos</div>
-                                            <div class="h2" id="ValorHNL">- -</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            ***REMOVED***
-
-                @if (Oncae.Count() > 0)
-                {
-                    foreach (var item in Oncae)
-                    {
-                        <text>
-                            <div class="col-md-6">
-                                <div class="card shadow border-0 h-100">
-                                    <div class="car-deck">
-                                        <div class="card-bodycntos">
-                                            <div class="car-content cntosusd">
-                                                <div class="ico_contra">
-                                                    <img class="img-fluid" src="../img/LogoOncae.png" alt="ir a Secretaria tecnica de planeación" />
-                                                </div>
-                                                <div class="info_contra">
-                                                    <div class="h6">Contratos según ONCAE</div>
-                                                    <div class="h2" id="FirmadosOncae">@item.NumContratos</div>
-                                                    <div class="h6">Valor contratos</div>
-                                                    <div class="h2" id="ValorOncae">@item.MonedaContrato
-                                                            @if (@item.ValorTotalContratos >= 1000000)
-                                                            {
-                                                                <text> @String.Format("{0:n0***REMOVED***", @item.ValorTotalContratos / 1000000) Millones</text>
-                                                        ***REMOVED***
-                                                            else
-                                                            {
-                                                                <text> @String.Format("{0:n0***REMOVED***", @item.ValorTotalContratos)</text>
-                                                        ***REMOVED***</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </text>
-
-                        cambiolinea += 1;
-                        if (cambiolinea >= 2)
-                        {
-
-                            cambiolinea = 0;
-                            @:</div>
-                            @: <div class="row">
-
-                    ***REMOVED***
-
-                ***REMOVED***
-
-
-            ***REMOVED***
-                else
-                {
-                    <div class="col-md-6">
-                        <div class="card shadow border-0 h-100">
-                            <div class="car-deck">
-                                <div class="card-bodycntos">
-                                    <div class="car-content cntosusd">
-                                        <div class="ico_contra">
-                                            <img class="img-fluid" src="../img/LogoOncae.png" alt="ir a Secretaria tecnica de planeación" />
-                                        </div>
-                                        <div class="info_contra">
-                                            <div class="h6">Contratos según ONCAE</div>
-                                            <div class="h2" id="FirmadosOncae">0</div>
-                                            <div class="h6">Valor contratos</div>
-                                            <div class="h2" id="ValorOncae">- -</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            ***REMOVED***
-
-            </div>*@
+        
     </div>
 </section>
 <div class="clearfix"></div>
@@ -434,8 +187,6 @@ new System.Globalization.CultureInfo("es-HN");
                     <div class="PeopleWorkChart canon_title" id="title_divGraphContratosCantidad">
                         <h2 class="Sec-title text-center">CANTIDADES DE CONTRATOS Y ÓRDENES DE PAGO POR AÑO</h2>
                     </div>
-
-                    @*<svg width="100%" height="280px" id="divGraphContratosCantidad"></svg>*@
                     <div width="80%" height="400px" id="divGraphContratosCantidad">
                     </div>
                 </div>
@@ -454,7 +205,6 @@ new System.Globalization.CultureInfo("es-HN");
                         <h2 class="Sec-title">VALOR DE CONTRATOS Y ÓRDENES DE PAGO POR AÑO</h2>
                     </div>
 
-                    @*<svg width="100%" height="280px" id="divGraphContratosValor"></svg>*@
                     <div width="80%" height="400px" id="divGraphContratosValor">
 
                     </div>
@@ -495,23 +245,6 @@ new System.Globalization.CultureInfo("es-HN");
                         </select>
                     </div>
 
-                    @*<div class="form-group">
-                            <label class="year" for="entidad">Entidad</label>
-
-                            <input type="search" data-results="search-home" data-search="home" id="entidad" class="search-input form-control input-lg" autocomplete="on" placeholder="Entidad">
-
-                            <div id="search-home" class="search-body">
-                                <div id="divNoEncontrado" class="no-search-results" style="display: none;">No se han encontrado entidades</div>
-
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="year" for="proceso">Palabra Clave</label>
-
-                            <input type="search" data-results="search-home" data-search="home" id="proceso" class="search-input form-control input-lg" autocomplete="on" placeholder="Ventilador, reactivos, etc.">
-
-                        </div>*@
                     <div class="triggerForm">
                         <input type="button" class="btn btn-primary" value="Buscar" id="btn-buscar" disabled=""><div class="clearfix"></div>
                         <a class="btn btn-link" id="btnLimpiar" disabled="disabled">LIMPIAR FILTROS</a>
@@ -583,22 +316,6 @@ new System.Globalization.CultureInfo("es-HN");
 
 <input id="contratista" name="contratista" type="hidden" value="@Model.Contratista">
 
-<script>
-    //window.onscroll = function () { myFunction() ***REMOVED***;
-
-    ////var header = document.getElementById("navs-header");
-    ////var sticky = header.offsetTop;
-
-    //function myFunction() {
-    //    //if (window.pageYOffset > sticky) {
-    //    //    header.classList.add("sticky");
-    //    //    header.classList.add("bg-white");
-    //    //***REMOVED*** else {
-    //    //    header.classList.remove("sticky");
-    //    //    header.classList.remove("bg-white");
-    //    //***REMOVED***
-    //***REMOVED***
-</script>
 <script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
 <script src="js/contratista_aux.js"></script>
 <script src="https://d3js.org/d3.v4.min.js"></script>

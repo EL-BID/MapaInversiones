@@ -8,7 +8,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 
         function maskPosition(element, noLoader) {
             var maskElem = $('<div class="mask"><div class="bg"></div>' +
-                (!noLoader ? '<div class="icon"></div>' : '<div class="icon"></div>') + '<div>'),
+                '<div class="icon"></div>' + '<div>'),
                 position = element.offset(),
                 Wmask = element[0].offsetWidth,
                 Hmask = element[0].offsetHeight;
@@ -31,7 +31,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             $("#hdIdUsuario").val(projectPerfil[0].idUsuParticipa);
             $("#hdNomUsuario").val(projectPerfil[0].nomUsuParticipa);
             if ($("#hdIdUsuario").val() != "") {
-                validaSesionUsu($("#hdIdUsuario").val());
+                validaSesionUsu();
         ***REMOVED*** else {
                 $("#divNomUsuarioLog").text("");
                 $("#hdNomUsuario").val("");
@@ -1723,7 +1723,7 @@ function validaEmail(cadena) {
 ***REMOVED***
 
 function validaEnteroMayorCero(cadena) {
-    if (cadena.match(/^[1-9]+[0-9]*$/)) {
+    if (cadena.match(/^[1-9]*$/)) {
         return true;
 ***REMOVED*** else {
         return false;
