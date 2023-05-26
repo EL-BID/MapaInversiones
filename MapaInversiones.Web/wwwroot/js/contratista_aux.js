@@ -37,17 +37,6 @@ function getGraficasAll() {
 ***REMOVED***
 
 function configuraEnlaceContratista() {
-    //$(".enlace_contratista").click(function () {
-    //    var ruc = $(this).attr('data-parameter');
-    //    var dataValue = $(this).attr('data-parameter'),
-    //        dataType = $(this).attr('data-type').toLowerCase();
-    //    document.cookie = "ruc=" + ruc + ";path=/;";
-    //    var url = "/contratista?" + dataType + "=" + dataValue;
-    //    window.location.href = url;
-
-    //***REMOVED***);
-
-
 ***REMOVED***
 
 function getUrlParameter(name) {
@@ -81,7 +70,6 @@ function getInfoGraficaContratosPerAnyo() {
                 $("#secCantidadContrato").css("display", "");
                 $("#divContenedorContratosCantidad").css("display", "");
                 $("#divGraphContratosCantidad").css("display", "");
-                //barra_vertical("divGraphContratosCantidad", contratos_anyo_data, "CANTIDAD DE CONTRATOS POR AÑO", "#0382B9", "Contratos");
                 loadBarChartUnidades(contratos_anyo_data,"divGraphContratosCantidad");
         ***REMOVED*** else {
                 $("#secCantidadContrato").css("display", "none");
@@ -255,11 +243,9 @@ function loadBarChartDinero(objData, divContenedor) {
                     fontsize: "2px",
                     size: "2px"
               ***REMOVED***
-                // legend: false
         ***REMOVED***)
             .barPadding(0)
             .groupPadding(50)
-            // .stacked(true)
             .colorScale(["#4DE0E3", "#3899CD"])
             .height(400)
             .render();
@@ -288,7 +274,7 @@ function cambiarTipoTexto(cadena) {
 
 
 function getAnnio() {
-    //debugger;
+  
     var params_usu = { "Contratista": ruc_contratista ***REMOVED***;
     $.ajax({
         type: 'GET',
@@ -299,7 +285,7 @@ function getAnnio() {
         data: params_usu,
         success: function (data) {
             deshabilita(true);
-            //alert(JSON.stringify(data));
+
 
             var items_result = data.detalles;
             var annios = [];
@@ -316,8 +302,6 @@ function getAnnio() {
 
             $('#top_contratos_periodos').html(select).fadeIn();
             if (items_result.length > 0) {
-                //$("#top_contratos_periodos").val(items_result[items_result.length - 1].valor.toString());
-                //$("#top_contratos_periodos").attr("default", items_result[items_result.length - 1].valor.toString());
                 getContratos($("#top_contratos_periodos option:selected").val(), ruc_contratista, $("#top_origen_informacion option:selected").val(), 1, cant_contratos);
                 getGraficasAll();
         ***REMOVED*** else {
@@ -364,7 +348,7 @@ $("#btn-buscar").click(function () {
     if (!disableClick) {
         deshabilita(true);
         getContratos($("#top_contratos_periodos option:selected").val(), ruc_contratista, $("#top_origen_informacion option:selected").val(), 1, cant_contratos);
-        //getGraficasAll();
+
 ***REMOVED***
 
 ***REMOVED***);
@@ -421,7 +405,7 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
                 .text(i)
     ***REMOVED*** else {
             var pag_enlace = divPag.append("a")
-                //.attr("id", "page_left")
+
                 .attr("class", "page_left")
                 .attr("role", "button")
                 .attr("data-page", i)
@@ -437,7 +421,7 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
 ***REMOVED***
 
     if (pag_actual < totalPag) {
-        //(totalPag - pag_actual) > cant_por_linea
+  
         if (fin < totalPag) {
             var pag_enlace_der = divPag.append("a")
                 .attr("id", "page_right")
@@ -454,7 +438,7 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
 
         deshabilita(true);
-        //$('#divPagContratos').attr('disabled', 'disabled');
+
         d3.select("#divProyectos").empty();
         pagina_actual = $(this).attr("data-page");
 
@@ -462,45 +446,7 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
 ***REMOVED***);
 
 ***REMOVED***
-//function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
-//    var pag_actual = parseInt(actual);
-//    pagina_actual = pag_actual;
-//    var pagesHTML = '';
-//    $("#divPagContratos").empty();
-//    var divPag = d3.select("#divPagContratos")
-//    if (pag_actual > 1 && total >= cant_por_pag) {
-//        var pag_enlace = divPag.append("a")
-//            .attr("id", "page_left")
-//            .attr("class", "pull-left")
-//            .attr("data-page", pag_actual - 1)
-//        pag_enlace.append("span")
-//            .attr("class", "glyphicon glyphicon-arrow-left")
-//        pag_enlace.append("text")
-//            .text(" Anterior")
-//***REMOVED***
-//    divPag.append("span")
-//        .attr("class", "totalpages")
-//        .text("Página " + actual + " de " + totalPag)
 
-//    if (pag_actual < totalPag) {
-//        if ((total - (pag_actual * cant_por_pag)) > 0) {
-//            var pag_enlace_der = divPag.append("a")
-//                .attr("id", "page_right")
-//                .attr("class", "pull-right")
-//                .attr("data-page", pag_actual + 1)
-//                .text("Próximo ")
-//            pag_enlace_der.append("span")
-//                .attr("class", "glyphicon glyphicon-arrow-right")
-//    ***REMOVED***
-//***REMOVED***
-
-//    $('#page_right,#page_left').bind('click', function () {
-//        d3.select("#divProyectos").empty();
-//        pagina_actual = $(this).attr("data-page");
-//        getContratos($("#top_contratos_periodos option:selected").val(), ruc_contratista, $("#top_origen_informacion option:selected").val(),pagina_actual, cant_por_pag);
-//***REMOVED***);
-
-//***REMOVED***
 
 function getContratos(annio, ruc, origen, pagina, registros) {
 
@@ -543,19 +489,12 @@ function getContratos(annio, ruc, origen, pagina, registros) {
                         if (proceso != info[i].codigoProceso.toString() || origen!= info[i].origenInformacion.toString()) {
                             if (i > 0) //Cambio de proceso
                             {
-                                //fin = '<div class="row text-center">'
-                                //    + '<div class="col-xs-12 col-md-12"><a href="' + referencia + '" target="_blank" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span class="txt_small">Conozca mas de este proceso</span></a></div>'
-                                //    + '</div></div>';
                                 data += inicioLuis + inicio + fila + finLuis + fin + '</div></div>' + finLuis;
                                 fila = "";
                                 inicio = "";
                                 fin = "";
                         ***REMOVED***
-                            // referencia = info[i].DocURL.toString();
-                            // referencia = info[i].DocURL.toString();
-                            //adjudicacion = info[i].urlResumenAdjudicacion;
-                            //invitados = info[i].urlInvitados;
-                           
+                          
                             if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" ***REMOVED*** else { stilo = "contractSEFIN" ***REMOVED***
                             inicio = '<div class="contractNumber"><span class="">Código proceso: </span> <span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div>'
                                 + ' <div class="wrap-head-process">'
@@ -612,12 +551,11 @@ function getContratos(annio, ruc, origen, pagina, registros) {
                             origen = info[i].origenInformacion.toString();
                            
                     ***REMOVED***
-                        // if (info[i].CodigoContrato){
+
                         fila += '<div class="panel panel-default">'
                             + '            <div class="panel-heading" role="tab" id="headingOne' + i + '">'
                             + '                <h4 class="panel-title">'
                             + '                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapse' + i + '">';
-                       // if (info[i].COVID19 === 1 || info[i].COVID19 === 2) { fila += '                        <span class="badge"><img src="../../../content/img/covid/ic_mini.png" alt="iconoCOVID"> Covid-19</span>'; ***REMOVED***
                         if (info[i].codigoContrato) { fila += '                        Código de contratación:  ' + info[i].codigoContrato.toString() + ''; ***REMOVED*** else { fila += '                      Pendiente emisión código contratación  ' ***REMOVED***
                         var moneda = '';//'L';
                         if (info[i].monedaContrato.toString()) {
@@ -686,17 +624,14 @@ function getContratos(annio, ruc, origen, pagina, registros) {
                             fila += '                    <div class="btn btn-outlined"><a href="' + info[i].docURL.toString() + '" target="_blank"> Conozca mas de este proceso <span class="glyphicon glyphicon-arrow-right"></span></a></div>';
                     ***REMOVED***
                         if (info[i].codigoContrato) {
-                           // fila += '                    <a href="../../../contratista/contratoprofile/?CodigoContrato=' + info[i].CodigoContrato.toString() + '" class="btn btn-primary btn-primary btn-participe"><span class="glyphicon glyphicon-comment"></span> Hacer comentario al contrato</a>';
                     ***REMOVED***
                         fila += '       </div>'
                             + '            </div>'
                             + '        </div>';
-                        //+ '  </div>';
+     
                 ***REMOVED***
                     data += inicioLuis + inicio + fila + '</div></div>' + finLuis;
-                    //data += '<div class="row text-center">'
-                    //    + '<div class="col-xs-12 col-md-12"><a href="' + referencia + '" target="_blank" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span class="txt_small">Conozca mas de este proceso</span></a></div>'
-                    //    + '</div></div>' + finLuis;
+
 
                     $("#srcContratos").html(data);
                     if (scrol >= 1) {

@@ -80,12 +80,12 @@ function getAnnio(moneda, nombreProceso = null) {
                 data: filtros,
                 success: function (data) {
                     deshabilita(true);
-                    //alert(JSON.stringify(data));
+ 
 
                     var items_result = data.detalles;
                     var annios = [];
                     var select = "";
-                   // select = select + '<option value="0">Todos</option>';
+
                     for (var i = 0; i < items_result.length; i++) {
 
                         if (!annios.includes(items_result[i].valor.toString())) {
@@ -98,7 +98,6 @@ function getAnnio(moneda, nombreProceso = null) {
                     $('#top_contratos_periodos').html(select).fadeIn();
                     if (items_result.length > 0) {
                         $("#top_contratos_periodos").val($('#maxyear').val());
-                        //$("#top_contratos_periodos").attr("default", items_result[items_result.length - 1].valor.toString());
                         getContratos($("#top_contratos_periodos option:selected").val(), 1, cant_contratos, $("#top_origen_informacion option:selected").val(), "", $('#proceso').val(), $("#moneda").val());
 
                 ***REMOVED*** else {
@@ -135,7 +134,6 @@ function getAnnio(moneda, nombreProceso = null) {
         $("#btnLimpiar").click(function () {
             if (!disableClick) {
                 $("#top_contratos_periodos").val(0);
-                //$("#top_contratos_estados").val("");
                 $("#top_origen_informacion").val("");
                 $("#entidad").val("");
                 $("#proceso").val("");
@@ -153,50 +151,6 @@ function getAnnio(moneda, nombreProceso = null) {
 
     ***REMOVED***);
 
-
-//function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
-//    var pag_actual = parseInt(actual);
-//    pagina_actual = pag_actual;
-//    var pagesHTML = '';
-//    $("#divPagContratos").empty();
-//    var divPag = d3.select("#divPagContratos")
-//    if (pag_actual > 1 && total >= cant_por_pag) {
-//        var pag_enlace = divPag.append("a")
-//            .attr("id", "page_left")
-//            .attr("class", "pull-left")
-//            .attr("data-page", pag_actual - 1)
-//        //pag_enlace.append("span")
-//        //    .attr("class", "glyphicon glyphicon-arrow-left")
-//        //pag_enlace.append("text")
-//        //    .text(" Anterior")
-//        pag_enlace.append("i")
-//            .text("arrow_back")
-//            .attr("class", "material-icons md-18")
-//***REMOVED***
-//    divPag.append("span")
-//        .attr("class", "totalpages")
-//        .text("Página " + actual + " de " + totalPag)
-
-//    if (pag_actual < totalPag) {
-//        if ((total - (pag_actual * cant_por_pag)) > 0) {
-//            var pag_enlace_der = divPag.append("a")
-//                .attr("id", "page_right")
-//                .attr("class", "pull-right")
-//                .attr("data-page", pag_actual + 1)
-//                //.text("Próximo ")
-//            pag_enlace_der.append("i")
-//                .text("arrow_forward")
-//                .attr("class", "material-icons md-18")
-//    ***REMOVED***
-//***REMOVED***
-
-//    $('#page_right,#page_left').bind('click', function () {
-//        d3.select("#divProyectos").empty();
-//        pagina_actual = $(this).attr("data-page");
-//        getContratos($("#top_contratos_periodos option:selected").val(), pagina_actual, cant_por_pag, $("#top_origen_informacion option:selected").val(), $('#entidad').val(), $('#proceso').val());
-//***REMOVED***);
-
-//***REMOVED***
 
    function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
             var pag_actual = parseInt(actual);
@@ -266,7 +220,6 @@ function getAnnio(moneda, nombreProceso = null) {
         ***REMOVED***
 
             if (pag_actual < totalPag) {
-                //(totalPag - pag_actual) > cant_por_linea
                 if (fin < totalPag) {
                     var pag_enlace_der = divPag.append("a")
                         .attr("id", "page_right")
@@ -283,7 +236,6 @@ function getAnnio(moneda, nombreProceso = null) {
             $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
                
                 deshabilita(true);
-                //$('#divPagContratos').attr('disabled', 'disabled');
                 d3.select("#divProyectos").empty();
                 pagina_actual = $(this).attr("data-page");
 
@@ -524,12 +476,11 @@ function getAnnio(moneda, nombreProceso = null) {
                                 + '               <div class="panel-footer" style="align:center">';
 
                                 if (info[i].codigoContrato) {
-                                  //  filaconfirma += '                    <a href="../../contratista/contratoprofile/?CodigoContrato=' + info[i].codigoContrato.toString() + '" class="btn btn-primary btn-primary btn-participe"><span class="glyphicon glyphicon-comment"></span> Hacer comentario al contrato</a>';
                             ***REMOVED***
                                 filaconfirma += '                 </div>'
                                 + '            </div>'
                                 + '        </div>';
-                                //+ '  </div>';
+                              
                         ***REMOVED***
 
 
@@ -627,9 +578,7 @@ $("#entidad").on("keyup", function (event) {
     delay: 300,
     minLength: 1,
     select: function (event, ui) {
-        //$(this).val(ui.item.Nombre).next().val(ui.item.Id);
-        //$("#divResultados").html("");
-        //return false;
+
 ***REMOVED***
 ***REMOVED***).bind('blur onblur', function () {
     if ($(this).val() == "") {

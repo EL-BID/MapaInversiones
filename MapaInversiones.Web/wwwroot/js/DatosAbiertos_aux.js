@@ -47,14 +47,7 @@ function descargar(sel, rad) {
 ***REMOVED***
     if ((url == undefined) || (url == "") || (url == null) || (url == "null")) {
         alert('No existe set de datos en el formato seleccionado');
-        //bootbox.alert({
-        //    message: 'No existe set de datos en el formato seleccionado',
-        //    buttons: {
-        //        ok: {
-        //            label: 'Aceptar'
-        //    ***REMOVED***
-        //***REMOVED***
-        //***REMOVED***);
+
 ***REMOVED***
     else {
         window.location.href = url;
