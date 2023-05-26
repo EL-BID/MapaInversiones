@@ -332,8 +332,8 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             if (!Array.isArray(_arr1) || !Array.isArray(_arr2) || _arr1.length !== _arr2.length)
                 return false;
 
-            let arr1 = _arr1.sort();
-            let arr2 = _arr2.sort();
+            //let arr1 = _arr1.sort();  ordenar en caso de no estar seguros que vienen en el mismo orden
+            //let arr2 = _arr2.sort();
 
             for (var i = 0; i < arr1.length; i++) {
 
