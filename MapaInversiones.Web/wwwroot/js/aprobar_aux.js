@@ -1,13 +1,13 @@
-﻿var projectPerfil = JSON.parse(document.body.getAttribute('data-profile'));
-var anyo_actual = (new Date).getFullYear();
-var logoresponde = "";
-var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
+﻿let projectPerfil = JSON.parse(document.body.getAttribute('data-profile'));
+let anyo_actual = (new Date).getFullYear();
+let logoresponde = "";
+let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 
 
         InicializaDatos();
 
         function maskPosition(element, noLoader) {
-            var maskElem = $('<div class="mask"><div class="bg"></div>' +
+            let maskElem = $('<div class="mask"><div class="bg"></div>' +
                 '<div class="icon"></div>' + '<div>'),
                 position = element.offset(),
                 Wmask = element[0].offsetWidth,
@@ -60,25 +60,30 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
         ***REMOVED***);
 
             $("#btnAccionDenegar").click(function () {
-                var tipo = $("#justificaModal").attr("data-type");
-                var obj_param = $("#justificaModal").attr("data-parameter");
+                let tipo = $("#justificaModal").attr("data-type");
+                let obj_param = $("#justificaModal").attr("data-parameter");
+
+                var idusuario = ""
+                var IdProyecto = ""
+                var textoJustifica = ""
+               
 
                 if (tipo == "comentario") {
-                    var idcoment = $("#" + obj_param).attr('idcoment');
-                    var idusuario = $("#" + obj_param).attr('idusuario');
-                    var IdProyecto = $("#" + obj_param).attr('idproyecto');
-                    var idasociacion = ($("#" + obj_param).attr('idasociacion'));
-                    var idprograma = ($("#" + obj_param).attr('idprograma'));
-                    var codigoContrato = ($("#" + obj_param).attr('codigoContrato'));
-                    var textoJustifica = $("#txtJustificacion").val();
-                    UpdateComentario('4', idcoment, idusuario, IdProyecto, idasociacion, idprograma, codigoContrato, textoJustifica);
+                     let idcoment = $("#" + obj_param).attr('idcoment');
+                     idusuario = $("#" + obj_param).attr('idusuario');
+                     IdProyecto = $("#" + obj_param).attr('idproyecto');
+                     let idasociacion = ($("#" + obj_param).attr('idasociacion'));
+                     let idprograma = ($("#" + obj_param).attr('idprograma'));
+                     let codigoContrato = ($("#" + obj_param).attr('codigoContrato'));
+                     textoJustifica = $("#txtJustificacion").val();
+                     UpdateComentario('4', idcoment, idusuario, IdProyecto, idasociacion, idprograma, codigoContrato, textoJustifica);
             ***REMOVED***
                 if (tipo == "foto") {
-                    var tipoFoto = $("#" + obj_param).attr('tipofoto');
-                    var idFoto = $("#" + obj_param).attr('idfoto');
-                    var IdProyecto = $("#" + obj_param).attr('idproyecto');
-                    var idusuario = $("#" + obj_param).attr('idusuario');
-                    var textoJustifica = $("#txtJustificacion").val();
+                     let tipoFoto = $("#" + obj_param).attr('tipofoto');
+                     let  idFoto = $("#" + obj_param).attr('idfoto');
+                     IdProyecto = $("#" + obj_param).attr('idproyecto');
+                     idusuario = $("#" + obj_param).attr('idusuario');
+                    textoJustifica = $("#txtJustificacion").val();
                     guardarAprobado('E', tipoFoto, idFoto, IdProyecto, idusuario, textoJustifica);
             ***REMOVED***
                 $('#justificaModal').modal('hide');
@@ -87,11 +92,11 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 
 
             $("#recategorizarModalGuardar").click(function () {
-                var obj_param = $("#recategorizarModal").attr("data-parameter");
-                var idcoment = $("#" + obj_param).attr('idcoment');
-                var id_tipo = $("#filtro_TipoCometario li.selected").attr("id_tipo");
+                let obj_param = $("#recategorizarModal").attr("data-parameter");
+                let idcoment = $("#" + obj_param).attr('idcoment');
+                let id_tipo = $("#filtro_TipoCometario li.selected").attr("id_tipo");
                 if (id_tipo == "" || id_tipo == undefined) {
-                    formularioOK = false;
+                    let formularioOK = false;
                     bootbox.alert("Seleccione un tipo de comentario");
             ***REMOVED***
                 else {
@@ -327,8 +332,8 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             if (!Array.isArray(_arr1) || !Array.isArray(_arr2) || _arr1.length !== _arr2.length)
                 return false;
 
-            var arr1 = _arr1.concat().sort();
-            var arr2 = _arr2.concat().sort();
+            let arr1 = _arr1.sort();
+            let arr2 = _arr2.sort();
 
             for (var i = 0; i < arr1.length; i++) {
 

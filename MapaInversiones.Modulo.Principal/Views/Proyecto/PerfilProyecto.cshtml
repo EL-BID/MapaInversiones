@@ -80,11 +80,6 @@
                             </h2>
                         </div>
                         <div class="banner-main-desc">
-                            @*<div class="sub_t0_gray text-center">
-                                    <ul class="list-inline optionList">
-                                        <li><span class="glyphicon glyphicon-comment"></span><text id="spComentarios">Comments(@Model.ProjectInformation.contComentarios)</text></li>
-                                    </ul>
-                                </div>*@
                             <h6 class="sub_t1_red text-center">
                                 SECTOR
                                 <br />
@@ -194,10 +189,7 @@
                                     <h6>Tasa de Cambio</h6>
                                 </li>
                         ***REMOVED***
-                            <!--<li>
-                                <h3>@Model.ProjectInformation.avance_financiero %</h3>
-                                <h6>Avance Financiero</h6>
-                            </li>-->
+
                         </ul>
                     </div>
                 </div>
@@ -236,7 +228,7 @@
                     <div class="card description-box mb-10">
                         <div class="section-heading-Project">
                             <div class="row">
-                                <div class="col-md-2"><img src="../img/svg-icons/ico_infoproyecto.svg" /></div>
+                                <div class="col-md-2"><img src="../img/svg-icons/ico_infoproyecto.svg" alt="informacion proyecto"/></div>
                                 <div class="col-md-10">
                                     <h4 class="mb-3">Información General del Proyecto</h4>
                                 </div>
@@ -299,7 +291,7 @@
                             <div class="card shadow border-0 card-entidad">
                                 <div class="card-body">
                                     <div class="heading-Project">
-                                        <h5><img src="../img/svg-icons/ICO_desc.svg" />Descripción</h5>
+                                        <h5><img src="../img/svg-icons/ICO_desc.svg" alt="ico desc" />Descripción</h5>
                                     </div>
                                     <span class="text-desc">@Model.ProjectInformation.descripcion</span>
                                 </div>
@@ -311,7 +303,7 @@
                             <div class="card shadow border-0 card-entidad">
                                 <div class="card-body">
                                     <div class="heading-Project">
-                                        <h5><img src="../img/svg-icons/ICO_obj.svg" />Objetivo General</h5>
+                                        <h5><img src="../img/svg-icons/ICO_obj.svg" alt="ico obj" />Objetivo General</h5>
                                     </div>
                                     <span class="text-desc">@Model.ProjectInformation.objGeneral</span>
                                 </div>
@@ -323,7 +315,7 @@
                             <div class="card shadow border-0 card-entidad">
                                 <div class="card-body">
                                     <div class="heading-Project">
-                                        <h5><img src="../img/svg-icons/ICO_Avance.svg" /> Avance Financiero Acumulado</h5>
+                                        <h5><img src="../img/svg-icons/ICO_Avance.svg"  alt="ico avance"/> Avance Financiero Acumulado</h5>
                                     </div>
                                     <div class="containerGraph" style="width:auto;height:auto;" id="divGraphAvanceFinanciero"></div>
                                 </div>
@@ -335,7 +327,7 @@
                             <div class="card shadow border-0 card-entidad">
                                 <div class="card-body">
                                     <div class="heading-Project">
-                                        <h5><img src="../img/svg-icons/ICO_Presu.svg" /> Ejecución Presupuestal Anual</h5>
+                                        <h5><img src="../img/svg-icons/ICO_Presu.svg" alt="ico presu"/> Ejecución Presupuestal Anual</h5>
                                     </div>
                                     <div class="containerBoxExec">
                                         <label for="filtro_periodo">Seleccione el periodo de análisis</label>
@@ -368,7 +360,7 @@
                                 <div class="card shadow border-0 card-entidad">
                                     <div class="card-body">
                                         <div class="heading-Project">
-                                            <h5><img src="../img/svg-icons/ICO_compo.svg" /> Componentes y Actividades</h5>
+                                            <h5><img src="../img/svg-icons/ICO_compo.svg"  alt="ico compo"/> Componentes y Actividades</h5>
                                             <p>Seleccione el componente del cual desea visualizar las actividades asociadas</p>
                                         </div>
                                         <div class="containerBoxExec">
@@ -423,6 +415,7 @@
                         <div class="card shadow border-0 card-entidad">
                             <div class="card-body">
                                 <table class="table table-striped tablefont">
+                                    <caption>tabla entregables</caption>
                                     <thead>
                                         <tr>
                                             @* <th scope="col">Código</th>*@
@@ -868,7 +861,7 @@
                     <div class="light-bg">
                         <div id="divConfirmaEnvio" style="display:none;">
                             <div class="p-3 text-center">
-                                <img src="~/content/img/location/icSuccess.jpg" /><br><br>
+                                <img src="~/content/img/location/icSuccess.jpg" alt="success"/><br><br>
                                 <span class="h3 orangeLink" id="txtMsgConfirmaEnvio"></span><br>
                                 <span class="h4">Tu comentario será publicado cuando el administrador lo verifique</span>
                                 <div class="closeSesion"><a href="../../" class="btn btn-default">Comentar otro proyecto</a></div>
