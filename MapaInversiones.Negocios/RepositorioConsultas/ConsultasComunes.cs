@@ -89,7 +89,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
         public List<InfoProyectos> ObtenerProyectosConsistentesMapListMode(FiltroBusquedaProyecto filtros, ref int page)
         {
             Func<InfoProyectos, bool> predicate = null;
-            List<DataModels.Proyecto> list = new List<DataModels.Proyecto>();
+            List<Infrastructura.DataModels.Proyecto> list = new List<Infrastructura.DataModels.Proyecto>();
             List<InfoProyectos> listInfo = new List<InfoProyectos>();
             string search = string.Empty;
 
