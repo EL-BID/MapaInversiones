@@ -59,12 +59,6 @@
 	  <None Include="wwwroot\js\jquery-ui-range\jquery-ui.min.js" />
 	  <None Include="wwwroot\js\jquery.popupoverlay.js" />
 	  <None Include="wwwroot\js\jquery\jquery.min.js" />
-	  <None Include="wwwroot\js\lib\D3\d3-queue.min.js" />
-	  <None Include="wwwroot\js\lib\D3\d3.js" />
-	  <None Include="wwwroot\js\lib\D3\d3.min.js" />
-	  <None Include="wwwroot\js\lib\D3\site.js" />
-	  <None Include="wwwroot\js\lib\D3\topojson.js" />
-	  <None Include="wwwroot\js\lib\D3\topojson.min.js" />
 	  <None Include="wwwroot\js\lozad\lozad.min.js" />
 	  <None Include="wwwroot\js\plan_aux.js" />
 	  <None Include="wwwroot\js\presupuesto_aux.js" />
@@ -91,6 +85,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\content\dist\js\" />
+    <Folder Include="wwwroot\js\lib\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

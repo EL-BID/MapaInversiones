@@ -18,7 +18,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 {
     public class ConsolidadosNacionalesBLL
     {
-        private List<DataModels.Proyecto> lstProyectosConsistentes;
+        private List<Infrastructura.DataModels.Proyecto> lstProyectosConsistentes;
         private List<EnteTerritorial> lstDepartamentosIni;
         private List<EnteTerritorial> lstMunicipiosIni;
         private List<InfoProyectos> lstProyectosAprobados;
@@ -45,7 +45,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
         public ConsolidadosNacionalesBLL()
         {
-            this.lstProyectosConsistentes = new List<DataModels.Proyecto>();
+            this.lstProyectosConsistentes = new List<Infrastructura.DataModels.Proyecto>();
             this.lstDepartamentosIni = new List<EnteTerritorial>();
             this.lstMunicipiosIni = new List<EnteTerritorial>();
             this.lstProyectosAprobados = new List<InfoProyectos>();
@@ -650,7 +650,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
         #region GRAFICAS DATOS CONSOLIDADOS
 
-        public List<InfoResourcesPerDepartment> ObtenerRecursosPorDepartamento(List<DataModels.Proyecto> listProyectos)
+        public List<InfoResourcesPerDepartment> ObtenerRecursosPorDepartamento(List<Infrastructura.DataModels.Proyecto> listProyectos)
         {
             List<InfoResourcesPerDepartment> objReturn = new List<InfoResourcesPerDepartment>();
 
@@ -705,7 +705,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             return objReturn;
     ***REMOVED***
 
-        public List<InfoResourcesPerRegion> ObtenerRecursosPorRegion(List<DataModels.Proyecto> listProyectos)
+        public List<InfoResourcesPerRegion> ObtenerRecursosPorRegion(List<Infrastructura.DataModels.Proyecto> listProyectos)
         {
             List<InfoResourcesPerRegion> objReturn = new List<InfoResourcesPerRegion>();
 
@@ -739,7 +739,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             return objReturn;
     ***REMOVED***
 
-        public List<InfoResourcesPerSector> ObtenerRecursosPorSector(List<DataModels.Proyecto> listProyectos)
+        public List<InfoResourcesPerSector> ObtenerRecursosPorSector(List<Infrastructura.DataModels.Proyecto> listProyectos)
         {
             List<InfoResourcesPerSector> objReturn = new List<InfoResourcesPerSector>();
 
@@ -772,7 +772,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
     ***REMOVED***
 
-        public List<InfoProjectPerSector> ObtenerProyectosPorSector(List<DataModels.Proyecto> listProyectos)
+        public List<InfoProjectPerSector> ObtenerProyectosPorSector(List<Infrastructura.DataModels.Proyecto> listProyectos)
         {
             List<InfoProjectPerSector> objReturn = new List<InfoProjectPerSector>();
             //Obtiene el número total de proyectos con el fin de tener el dato para los porcentajes
