@@ -5,7 +5,7 @@
     <div id="intro" class="homepage">
 
 
-        <!--TAG LINE, ONLY VISIBLE ON MOBILE
+        <!--
     <div class="col-md-12 visible-xs-block">
         <p class="tagline">Plataforma de gestión de la información para mejorar la transparencia y la eficiencia de las inversiones públicas.</p>
     </div>-->
@@ -191,12 +191,6 @@
                             </div>
                             <div id="map-legend">
                                 <span data-bind="text: 'Approved resources ( ' + scaleUnit() + ' dollars )'"></span>
-                                <!--ul data-bind="foreach: scales()">
-                                <li>
-                                    <span data-bind="text: val"></span>
-                                    <div class="color color1"  data-bind="css: 'color'+$index()"></div>
-                                </li>
-                            </ul-->
                                 <div class="vals">
                                     <span class="value lower" data-bind="text: scalesLower()+scaleUnit()[0]">0</span>
                                     <span class="value higher" data-bind="text: scalesLarger()+scaleUnit()[0]">10</span>
@@ -205,7 +199,6 @@
                             </div>
                             <div class="legend-resources">
                                 <h3 class="legend-resources_title">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Recuros_TituloLeyenda")</h3>
-                                <!--div class="legend-resources_type-res legend-resources_type-region"> <span class="icon"></span> <span class="name">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Recursos_Leyenda_Region")</span> </div-->
                                 <div class="legend-resources_type-res legend-resources_type-department"> <span class="icon"></span> <span class="name">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Recursos_Leyenda_Departamento")</span> </div>
                                 <div class="legend-resources_type-res legend-resources_type-municipality"> <span class="icon"></span> <span class="name">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Recursos_Leyenda_Municipio")</span> </div>
                             </div>
