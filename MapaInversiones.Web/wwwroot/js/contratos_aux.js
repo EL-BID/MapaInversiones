@@ -475,8 +475,6 @@ function getAnnio(moneda, nombreProceso = null) {
                                 filaconfirma += '                </div>'
                                 + '               <div class="panel-footer" style="align:center">';
 
-                                if (info[i].codigoContrato) {
-                            ***REMOVED***
                                 filaconfirma += '                 </div>'
                                 + '            </div>'
                                 + '        </div>';

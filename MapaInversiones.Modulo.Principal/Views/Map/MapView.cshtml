@@ -354,18 +354,18 @@
                                                     </thead>
                                                     <thead>
                                                         <tr>
-                                                            <td class="name hidden-xs" width="55%">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_ResultadosEncontradosNombre")</td>
-                                                            <td class="value hidden-xs" width="15%">Ejecutor</td>
-                                                            <td class="type hidden-xs" style="text-align: left" width="15%">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_ResultadosEncontradosValor")</td>
-                                                            <td class="status hidden-xs" width="15%">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_ResultadosEncontradosEstado")</td>
+                                                            <th class="name hidden-xs" style="width:55%">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_ResultadosEncontradosNombre")</th>
+                                                            <th class="value hidden-xs" style="width:15%">Ejecutor</th>
+                                                            <th class="type hidden-xs" style="text-align: left; width:15%">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_ResultadosEncontradosValor")</th>
+                                                            <th class="status hidden-xs" style="width:15%">@ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_ResultadosEncontradosEstado")</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody data-bind="foreach: projects()" style="font-size: .80em">
                                                         <tr data-bind="css: {odd: $index()%2 == 1***REMOVED***">
-                                                            <td class="name" width="40%"><a data-bind="attr: {href: url***REMOVED***, text:name"></a></td>
-                                                            <td class="type hidden-xs" width="25%"><a data-bind="attr: {href: url***REMOVED***, text:ejecutor"></a></td>
-                                                            <td class="number hidden-xs" width="20%"><a data-bind="attr: {href: url***REMOVED***, text:value.toCurrency()"></a></td>
-                                                            <td class="status hidden-xs" width="15%"><a data-bind="attr: {href: url***REMOVED***, text:state"></a></td>
+                                                            <td class="name" style="width:40%"><a data-bind="attr: {href: url***REMOVED***, text:name"></a></td>
+                                                            <td class="type hidden-xs" style="width:25%"><a data-bind="attr: {href: url***REMOVED***, text:ejecutor"></a></td>
+                                                            <td class="number hidden-xs" style="width:20%"><a data-bind="attr: {href: url***REMOVED***, text:value.toCurrency()"></a></td>
+                                                            <td class="status hidden-xs" style="width:15%"><a data-bind="attr: {href: url***REMOVED***, text:state"></a></td>
                                                         </tr>
                                                     </tbody>
                                                     <tbody data-bind="visible: (projects().length == 0 ) && !loading">
