@@ -8,7 +8,7 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+    box-sizing: inherit;
 ***REMOVED***
 
 html {
@@ -16,6 +16,8 @@ html {
     line-height: 1.15;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    -ms-overflow-style: scrollbar;
 ***REMOVED***
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
@@ -55,7 +57,6 @@ p {
 
 abbr[title],
 abbr[data-original-title] {
-    text-decoration: underline;
     -webkit-text-decoration: underline dotted;
     text-decoration: underline dotted;
     cursor: help;
@@ -329,7 +330,7 @@ template {
  * Copyright 2011-2021 The Bootstrap Authors
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- */
+
 html {
     box-sizing: border-box;
     -ms-overflow-style: scrollbar;
@@ -340,6 +341,7 @@ html {
 *::after {
     box-sizing: inherit;
 ***REMOVED***
+ */
 
 .container,
 .container-fluid,

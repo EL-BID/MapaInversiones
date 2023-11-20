@@ -172,7 +172,7 @@
                 </div>
 
             </div>
-            </div>
+        </div>
 
 
 
@@ -181,7 +181,7 @@
     <!--PROGRAMAS - ACTIVIDADES- INDICADORES-->
     <section class="section" id="presupuestoentidad">
         <div class="container">
-           
+
             <div class="section-heading text-center">
                 <h2>Presupuesto de la Institución</h2>
             </div>
@@ -221,29 +221,29 @@
                 </ul>
                 <div id="contentTabTipoContratos" class="tabs-container">
                     <div class="main-Content py-5" id="divSectionSefin">
-                        
-                            <div id="divProgramas">
+
+                        <div id="divProgramas">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="loadingAsignacion" class="asigFin" style="display:none">
+                                    <h2 id="lblValorAsignacionPrograma"></h2>
+                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div id="loadingAsignacion" class="asigFin" style="display:none">
-                                        <h2 id="lblValorAsignacionPrograma"></h2>
+                            <!--CONTRACT-LIST-->
+                            <div class="col-lg-12">
+                                <!--ESTRUCTURA HTML PARA TOMAR COMO REFERENCIA-->
+                                <!--CIERRE DE ESTRUCTURA-->
+                                <div class="h5" id="lblEncabezadoListadoGrupos" style="display:none">Grupos de Gasto</div>
+                                <div class="">
+                                    <input type="hidden" id="migapanlistado" value="" />
+                                    <div class="comparativeTableContratos" id="divListado">
                                     </div>
                                 </div>
-                                <!--CONTRACT-LIST-->
-                                <div class="col-lg-12">
-                                    <!--ESTRUCTURA HTML PARA TOMAR COMO REFERENCIA-->
-                                    <!--CIERRE DE ESTRUCTURA-->
-                                    <div class="h5" id="lblEncabezadoListadoGrupos" style="display:none">Grupos de Gasto</div>
-                                    <div class="">
-                                        <input type="hidden" id="migapanlistado" value="" />
-                                        <div class="comparativeTableContratos" id="divListado">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--END CONTAINER-->
                             </div>
-                        
+                            <!--END CONTAINER-->
+                        </div>
+
                     </div>
                     <div lass="main-Content py-5" id="divSectionONCAE">
                         <div class="py-5">
@@ -263,9 +263,9 @@
                                                     {
                                                         if (@item.OrigenInformacion.ToUpper().Contains("ONCAE"))
                                                         {
-                                    <text>
-                                        <option value="@item.OrigenInformacion">@item.OrigenInformacion.ToUpper()</option>
-                                    </text>***REMOVED***
+                                                            <text>
+                                                                <option value="@item.OrigenInformacion">@item.OrigenInformacion.ToUpper()</option>
+                                                            </text>***REMOVED***
                                                 ***REMOVED***
 
                                             ***REMOVED***
@@ -368,7 +368,7 @@
 
                     </div>
                     <div class="section-body">
-         
+
                         <p>@Html.Raw(@LabelDistPresupuesto)</p>
 
                     </div>
@@ -411,10 +411,10 @@
                                 </div>
                             </div>
                         </div>
-                        </text>
-                ***REMOVED***
-             </text>
+                </text>
         ***REMOVED***
+                    </text>
+            ***REMOVED***
         </div>
     </section>
 
@@ -427,7 +427,7 @@
                 <div class="section-subheading">
                     <p>En este espacio podrás tener una interacción rápida con las autoridades sobre la información de la plataforma. A través del <strong>Portal Único de Transparencia</strong> podrás hacer comentarios y sugerencias, recibir respuestas y conocer la participación realizada por otras personas.</p>
                     <div class="text-center">
-                        <a href="https://portalunico.iaip.gob.hn/" target="_blank"><img src="/img/PortalGray.jpg" alt="Logo Portal Unico de Transparecia" /></a>
+                        <a href="https://portalunico.iaip.gob.hn/" target="_blank" rel="noopener"><img src="/img/PortalGray.jpg" alt="Logo Portal Unico de Transparecia" /></a>
                     </div>
                     <p>Es muy fácil hacer tu comentario, sigue estos pasos y participa!</p>
                 </div>
@@ -508,7 +508,7 @@
                 <div class="section-subheading">
                     <p>Recuerda que todos los ciudadanos tienen el derecho de acceso a la información pública, si quieres información adicional puedes solicitarla <br />haciendo clic en el logo del <strong>Sistema de Información Electrónico de Honduras (SIELHO) del Instituto de Acceso a la Información Pública.</strong></p>
                     <div class="text-center">
-                        <a href="https://sielho.iaip.gob.hn/inicio/" target="_blank"><img class="img-fluid" src="/img/Shielo.png" alt="shielo" /></a>
+                        <a href="https://sielho.iaip.gob.hn/inicio/" target="_blank" rel="noopener"><img class="img-fluid" src="/img/Shielo.png" alt="shielo" /></a>
                     </div>
                 </div>
             </div>
@@ -552,8 +552,8 @@
     </section>
     <!--HELP CENTER SHORTCUT-->
     <div id="helpCenter"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-K5kTaSleRCemypwx4QXtGBNyBHE3K9sK5IFL3UkZ3aOAGvXIFgAIvfS/jDzXrWvM" crossorigin="anonymous"></script>
     <script src="js/entidad_aux.js"></script>
 
     <script>
