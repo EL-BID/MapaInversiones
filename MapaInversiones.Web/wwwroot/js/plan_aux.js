@@ -12,10 +12,10 @@ var objetivos;
 function inicializaDatos() {
   $("#NombreEje").text("Eje 1:" + $(".btn-section").attr('nomb'));
   $("#DescripcionEje").text($(".btn-section").attr('desc'));
-  valores = [6, 6, 4, 3, 2, 2, 1];
+  var valores = [6, 6, 4, 3, 2, 2, 1];
   cuantoGasto(valores);
-  serie1 = [36.1, 37.3, 36.8, 49.7, 44.0, 41.3, 38.6, 43.7, 41.2, 37.9, 35.1, 34.7, 32.4, 26.9, 23.9, 24.5, 28.6];
-  serie2 = [18.8, 17.7, 16.7, 24.4, 21.2, 18.3, 16.5, 23.7, 23.2, 19.0, 18.8, 19.4, 18.0, 13.8, 10.2, 10.1, 9.3];
+  var serie1 = [36.1, 37.3, 36.8, 49.7, 44.0, 41.3, 38.6, 43.7, 41.2, 37.9, 35.1, 34.7, 32.4, 26.9, 23.9, 24.5, 28.6];
+  var serie2 = [18.8, 17.7, 16.7, 24.4, 21.2, 18.3, 16.5, 23.7, 23.2, 19.0, 18.8, 19.4, 18.0, 13.8, 10.2, 10.1, 9.3];
   Evolution(serie1, serie2);
   $(".btn-section").click(function () {
     $("#NombreEje").text("Eje " + $(this).attr('eje') + ": " + $(this).attr('nomb'));
@@ -1112,9 +1112,9 @@ Number.prototype.formatMoney = function (c, d, t) {
     c = isNaN(c = Math.abs(c)) ? 2 : c,
     d = d == undefined ? "." : d,
     t = t == undefined ? "," : t,
-    s = n < 0 ? "-" : "",
-    i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-    j = (j = i.length) > 3 ? j % 3 : 0;
+   var s = n < 0 ? "-" : "",
+   var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+   var j = (j = i.length) > 3 ? j % 3 : 0;
   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 ***REMOVED***;
 
@@ -1123,9 +1123,9 @@ Number.prototype.formatDecimal = function (c, d, t) {
     c = isNaN(c = Math.abs(c)) ? 2 : c,
     d = d == undefined ? "." : d,
     t = t == undefined ? "," : t,
-    s = n < 0 ? "-" : "",
-    i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-    j = (j = i.length) > 3 ? j % 3 : 0;
+   var s = n < 0 ? "-" : "",
+   var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+   var j = (j = i.length) > 3 ? j % 3 : 0;
   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 ***REMOVED***;
 

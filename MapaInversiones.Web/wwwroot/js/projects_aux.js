@@ -4,7 +4,7 @@ var avance_financiero = (parseFloat(projectPerfil[0].avance_financiero.replace("
 //var actoresGlobal = JSON.parse(document.body.getAttribute('data-actores'));
 var cant_contratos = 10;
 var scrol = 0;
-
+var pagina_Actual = 0;
 InicializaDatos();
 graficarAvance("divGraphAvanceFinanciero", avance_financiero);
 
@@ -1101,9 +1101,9 @@ Number.prototype.formatMoney = function (c, d, t) {
         c = isNaN(c = Math.abs(c)) ? 2 : c,
         d = d == undefined ? "." : d,
         t = t == undefined ? "," : t,
-        s = n < 0 ? "-" : "",
-        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-        j = (j = i.length) > 3 ? j % 3 : 0;
+       var s = n < 0 ? "-" : "",
+       var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+       var j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 ***REMOVED***;
 
@@ -1399,7 +1399,7 @@ function AddNuevaCuentaUsuario() {
 function validaClaveUsu(cadena) {
     //que tenga mayusculas, numeros,de 8 digitos al menos
     var clave = new RegExp(/^(?=(?:.*\d){1***REMOVED***)(?=(?:.*[A-Z]){1***REMOVED***)\S{8,***REMOVED***$/);
-    valida = clave.test(cadena);
+    var valida = clave.test(cadena);
     return valida;
 ***REMOVED***
 
@@ -1644,8 +1644,8 @@ Number.prototype.formatMoney = function (c, d, t) {
         c = isNaN(c = Math.abs(c)) ? 2 : c,
         d = d == undefined ? "." : d,
         t = t == undefined ? "," : t,
-        s = n < 0 ? "-" : "",
-        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-        j = (j = i.length) > 3 ? j % 3 : 0;
+      var  s = n < 0 ? "-" : "",
+      var  i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+      var  j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 ***REMOVED***;

@@ -4,7 +4,7 @@ var globales = [];
 var globales_tab = [];
 var cantXPagina = 6;
 inicializaDatos();
-
+var pagina_Actual = 0;
 
 GetRecursosPorNivel(anyo_actual);
 
@@ -61,9 +61,10 @@ function getDataTab(nom_tab) {
         var pagina_actual = 1;
         var ini_data = ((pagina_actual - 1) * cantXPagina);
         var fin_data = (pagina_actual * cantXPagina) - 1;
-        var data_pagina = arr = jQuery.grep(globales_tab, function (n, i) {
+        var data_pagina = jQuery.grep(globales_tab, function (n, i) {
             return (i >= ini_data && i <= fin_data);
     ***REMOVED***);
+        var arr = data_pagina;
         getEstructuraInfograficoPerEntidad(data_pagina, pagina_actual);
 
 ***REMOVED***
@@ -343,9 +344,10 @@ function dibujarPagNumeradas(actual, total, totalPag) {
         pagina_actual = $(this).attr("data-page");
         var ini_data = ((pagina_actual - 1) * cantXPagina);
         var fin_data = (pagina_actual * cantXPagina) - 1;
-        var data_pagina = arr = jQuery.grep(globales_tab, function (n, i) {
+        var data_pagina = jQuery.grep(globales_tab, function (n, i) {
             return (i >= ini_data && i <= fin_data);
     ***REMOVED***);
+        var arr = data_pagina;
         $("#divListado").empty();
         getEstructuraInfograficoPerEntidad(data_pagina, pagina_actual);
 ***REMOVED***);
@@ -363,11 +365,11 @@ function monedaSimbolo(codigo) {
 
 Number.prototype.formatMoney = function (c, d, t) {
     var n = this,
-        c = isNaN(c = Math.abs(c)) ? 2 : c,
-        d = d == undefined ? "." : d,
-        t = t == undefined ? "," : t,
-        s = n < 0 ? "-" : "",
-        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-        j = (j = i.length) > 3 ? j % 3 : 0;
+       c = isNaN(c = Math.abs(c)) ? 2 : c,
+       d = d == undefined ? "." : d,
+       t = t == undefined ? "," : t,
+      var s = n < 0 ? "-" : "",
+      var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+      var j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 ***REMOVED***;

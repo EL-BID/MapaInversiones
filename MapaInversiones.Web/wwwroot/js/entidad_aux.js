@@ -3,7 +3,8 @@ getAnnios();
 inicializaDatos();
 var pestaniaSeleccionada = 1;
 var scrol = 0;
-
+var pagina_Actual = 0;
+var globales = [];
 function seleccionoAnio(sel) {
     var anioEntidad = sel.options[sel.selectedIndex].text;
     GetDatosPorAnnio(anioEntidad);
@@ -67,8 +68,8 @@ function GetDatosPorAnnio(anio) {
 
   ***REMOVED***).done(function (data) {
 
-      existeOncae = 0;
-      existeSefin = 0;
+      var existeOncae = 0;
+      var existeSefin = 0;
       for (var i = 0; i < data.dataContratos.length; i++) {
 
           if (data.dataContratos[i].origenInformacion.toUpperCase().includes('ONCAE')) {
@@ -814,9 +815,9 @@ Number.prototype.formatMoney = function (c, d, t) {
     c = isNaN(c = Math.abs(c)) ? 2 : c,
     d = d == undefined ? "." : d,
     t = t == undefined ? "," : t,
-    s = n < 0 ? "-" : "",
-    i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-    j = (j = i.length) > 3 ? j % 3 : 0;
+   var s = n < 0 ? "-" : "",
+   var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+   var j = (j = i.length) > 3 ? j % 3 : 0;
   return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 ***REMOVED***;
 
@@ -851,7 +852,7 @@ function getContratos(annio, pagina, registros, estado, entidad, proceso, origen
                     var info = result.data;
                     var proceso = "";
                     var entidad = "";
-                    var filaproceso = "";
+                    var filasinfirma = "";
                     var referencia = "";
                     var data = "";
                     var fila = "";
@@ -860,6 +861,7 @@ function getContratos(annio, pagina, registros, estado, entidad, proceso, origen
                     var finLuis = '</div>';
                     var inicio = "";
                     var fin = "";
+                    var stilo = "";
                     $("#srcContratos").html("");
                     for (var i = 0; i < info.length; i++) {
                         if (i > 0 && entidad == info[i].comprador.toString() && proceso != info[i].codigoProceso.toString()) {

@@ -2,7 +2,7 @@
         var cant_graficas = 5;
         var cant_contratos = 20;
         var scrol = 0;
-
+var pagina_Actual = 0;
 
         inicializaDatos();
 
@@ -53,9 +53,9 @@ Number.prototype.formatMoney = function (c, d, t) {
         c = isNaN(c = Math.abs(c)) ? 2 : c,
         d = d == undefined ? "." : d,
         t = t == undefined ? "," : t,
-        s = n < 0 ? "-" : "",
-        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-        j = (j = i.length) > 3 ? j % 3 : 0;
+       var s = n < 0 ? "-" : "",
+       var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+       var j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 ***REMOVED***;
 
@@ -270,7 +270,7 @@ function getAnnio(moneda, nombreProceso = null) {
                             var info = result.data;
                             var proceso = "";
                             var entidad = "";
-                            var filaproceso = "";
+                            var filasinfirma = "";
                             var referencia = "";
                             var data = "";
                             var fila = "";
@@ -279,6 +279,7 @@ function getAnnio(moneda, nombreProceso = null) {
                             var finLuis = '</div>';
                             var inicio = "";
                             var fin = "";
+                            var stilo = "";
                             $("#srcContratos").html("");
                             for (var i = 0; i < info.length; i++) {
                                 if (i > 0 && entidad == info[i].comprador.toString() && proceso != info[i].codigoProceso.toString()) {
@@ -602,8 +603,8 @@ $("#top_contratos_periodos").change(function () {
         success: function (result) {
             if (result.status == true) {
 
-                existeOncae = 0;
-                existeSefin = 0;
+                var existeOncae = 0;
+                var existeSefin = 0;
                 $('#dataONCAE').empty();
                 $('#dataSEFIN').empty();
                 for (var i = 0; i < result.consolidados.length; i++) {

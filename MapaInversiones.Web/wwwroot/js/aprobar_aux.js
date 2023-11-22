@@ -2,7 +2,7 @@
 let anyo_actual = (new Date).getFullYear();
 let logoresponde = "";
 let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
-
+var pagina_Actual = 0;
 
         InicializaDatos();
 
@@ -1333,7 +1333,7 @@ function ObtenerImgAprobCant() {
 
 
         function ObtenerComentarios(estado, asociacion, pagina) {
-            tipocomentario = 0;
+            var tipocomentario = 0;
                     var param = {
                         "page": pagina,
                         "estado": estado,

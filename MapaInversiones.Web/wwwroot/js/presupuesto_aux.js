@@ -2,9 +2,10 @@
 inicializaDatos();
 //Treemap primera grafica Distribucion del presupuesto
 var globales = [];
+var globales_org = [];
 var globales_gasto = [];
 var globales_entidad = [];
-
+var pagina_Actual = 0;
 var cantXPagina = 6;
 var anyo_actual = $("#annioPresupuesto option:selected").val();
 
@@ -1246,9 +1247,10 @@ function ObtenerDatosListadoPerGasto(periodo) {
                             var pagina_actual = 1;
                             var ini_data = ((pagina_actual - 1) * cantXPagina);
                             var fin_data = (pagina_actual * cantXPagina) - 1;
-                            var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
+                            var data_pagina = jQuery.grep(globales_gasto, function (n, i) {
                                 return (i >= ini_data && i <= fin_data);
                         ***REMOVED***);
+                            var arr = data_pagina;
                             getEstructuraInfografico(data_pagina, pagina_actual);
                     ***REMOVED*** else {
                             $("#divListado").html("<span class='lblErrorNoData'>Información No Disponible</span>");
@@ -1299,9 +1301,10 @@ function ObtenerDatosListadoPerEntidad(periodo) {
                             var pagina_actual = 1;
                             var ini_data = ((pagina_actual - 1) * cantXPagina);
                             var fin_data = (pagina_actual * cantXPagina) - 1;
-                            var data_pagina = arr = jQuery.grep(globales_entidad, function (n, i) {
+                            var data_pagina = jQuery.grep(globales_entidad, function (n, i) {
                                 return (i >= ini_data && i <= fin_data);
                         ***REMOVED***);
+                            var arr = data_pagina;
                             getEstructuraInfograficoPerEntidad(data_pagina,1);
                     ***REMOVED*** else {
                             $("#divListado").html("<span class='lblErrorNoData'>Información No Disponible</span>");
@@ -1404,6 +1407,7 @@ function getEstructuraInfografico(datos, pagina) {
     var total_presupuesto = 0;
     var periodo_aux = 0;
     var total_porc_ejecucion = 0;
+    var total_porc_ejecutado = 0;
 
     total_avance = globales_gasto.reduce((sum, currentValue) => {
         return sum + currentValue.avance;
@@ -1963,7 +1967,7 @@ function getEstructuraInfograficoPerEntidad(datos,pagina) {
 
 function dibujarPagNumeradasPerGasto(actual, total, totalPag) {
     var pag_actual = parseInt(actual);
-    var pagina_actual = pag_actual;
+    pagina_actual = pag_actual;
     var pagesHTML = '';
     var cant_por_pag = 6;
     var cant_por_linea = 10;
@@ -2016,9 +2020,10 @@ function dibujarPagNumeradasPerGasto(actual, total, totalPag) {
         pagina_actual = $(this).attr("data-page");
         var ini_data = ((pagina_actual - 1) * cantXPagina);
         var fin_data = (pagina_actual * cantXPagina) - 1;
-        var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
+        var data_pagina = jQuery.grep(globales_gasto, function (n, i) {
             return (i >= ini_data && i <= fin_data);
     ***REMOVED***);
+        var arr = data_pagina;
         $("#divListado").empty();
         getEstructuraInfografico(data_pagina, pagina_actual);
 ***REMOVED***);
@@ -2080,9 +2085,10 @@ function dibujarPagNumeradasPerEntidad(actual, total, totalPag) {
         pagina_actual = $(this).attr("data-page");
         var ini_data = ((pagina_actual - 1) * cantXPagina);
         var fin_data = (pagina_actual * cantXPagina) - 1;
-        var data_pagina = arr = jQuery.grep(globales_entidad, function (n, i) {
+        var data_pagina = jQuery.grep(globales_entidad, function (n, i) {
             return (i >= ini_data && i <= fin_data);
     ***REMOVED***);
+        var arr = data_pagina;
         $("#divListado").empty();
         getEstructuraInfograficoPerEntidad(data_pagina, pagina_actual);
 ***REMOVED***);
@@ -2195,8 +2201,8 @@ Number.prototype.formatMoney = function (c, d, t) {
         c = isNaN(c = Math.abs(c)) ? 2 : c,
         d = d == undefined ? "." : d,
         t = t == undefined ? "," : t,
-        s = n < 0 ? "-" : "",
-        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-        j = (j = i.length) > 3 ? j % 3 : 0;
+       var s = n < 0 ? "-" : "",
+       var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+       var j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 ***REMOVED***;
