@@ -978,7 +978,7 @@ function ObtenerImgAprobar(estado, pagina) {
 
         function dibujarPag(actual, total, totalPag) {
             var pag_actual = parseInt(actual);
-            pagina_actual = pag_actual;
+            var pagina_actual = pag_actual;
             var pagesHTML = '';
             var cant_por_pag = 16;
             $("#divPaginacion").html("");
@@ -1010,7 +1010,7 @@ function ObtenerImgAprobar(estado, pagina) {
         ***REMOVED***
 
             $('.page_left').bind('click', function () {
-                pagina_actual = $(this).attr("data-page");
+                var pagina_actual = $(this).attr("data-page");
                 ObtenerImgAprobar("", pagina_actual);
         ***REMOVED***);
 
@@ -1092,7 +1092,7 @@ function ObtenerImgAprobar(estado, pagina) {
         ***REMOVED***
 
             $('#page_right,#page_left,.page_left').bind('click', function () {
-                pagina_actual = $(this).attr("data-page");
+                var pagina_actual = $(this).attr("data-page");
                 var estado = $("#divDetImg").attr("estado");
                 ObtenerImgAprobar(estado, pagina_actual);
         ***REMOVED***);
@@ -1176,7 +1176,7 @@ function ObtenerImgAprobar(estado, pagina) {
         ***REMOVED***
 
             $('#page_right,#page_left,.page_left').bind('click', function () {
-                pagina_actual = $(this).attr("data-page");
+                var pagina_actual = $(this).attr("data-page");
                 var estado = $("#divDetComent").attr("estado");
                 var asociacion = $("#divDetComent").attr("asoc");
                 $("#divDetComent").html("");
@@ -1190,7 +1190,7 @@ function ObtenerImgAprobar(estado, pagina) {
 
         function dibujaPaginacion(actual, total, totalPag) {
             var pag_actual = parseInt(actual);
-            pagina_actual = pag_actual;
+            var pagina_actual = pag_actual;
             var pagesHTML = '';
             var cant_por_pag = 2;
             $("#divPaginacion").html("");
@@ -1224,7 +1224,7 @@ function ObtenerImgAprobar(estado, pagina) {
 
             $('#page_right,#page_left').bind('click', function () {
                 d3.select("#divDetImg").html("");
-                pagina_actual = $(this).attr("data-page");
+                var pagina_actual = $(this).attr("data-page");
                 ObtenerImgAprobar("", pagina_actual);
         ***REMOVED***);
 
