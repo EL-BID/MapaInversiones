@@ -3,7 +3,6 @@ getAnnios();
 inicializaDatos();
 var pestaniaSeleccionada = 1;
 var scrol = 0;
-var pagina_Actual = 0;
 var globales = [];
 function seleccionoAnio(sel) {
     var anioEntidad = sel.options[sel.selectedIndex].text;
@@ -1129,9 +1128,10 @@ $("#btnBuscarO").click(function () {
 ***REMOVED***
 
 ***REMOVED***);
+
 function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     var pag_actual = parseInt(actual);
-    pagina_actual = pag_actual;
+    var pagina_actual = pag_actual;
     var pagesHTML = '';
     var cant_por_linea = 10;
 
@@ -1215,7 +1215,7 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
         deshabilita(true);
         //$('#divPagContratos').attr('disabled', 'disabled');
         d3.select("#divProyectos").empty();
-        pagina_actual = $(this).attr("data-page");
+        var pagina_actual = $(this).attr("data-page");
         getContratos($("#annioEntidad option:selected").val(), pagina_actual, cant_contratos, $("#top_contratos_estados option:selected").val(), $("#entidad").val(), $('#procesoo').val(), $("#top_origen_informacion option:selected").val());
 ***REMOVED***);
 

@@ -4,7 +4,6 @@ var globales = [];
 var globales_tab = [];
 var cantXPagina = 6;
 inicializaDatos();
-var pagina_Actual = 0;
 
 GetRecursosPorNivel(anyo_actual);
 
@@ -341,7 +340,7 @@ function dibujarPagNumeradas(actual, total, totalPag) {
     $("#divPagFichas").html(pag_enlace);
 
     $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
-        pagina_actual = $(this).attr("data-page");
+        var pagina_actual = $(this).attr("data-page");
         var ini_data = ((pagina_actual - 1) * cantXPagina);
         var fin_data = (pagina_actual * cantXPagina) - 1;
         var data_pagina = jQuery.grep(globales_tab, function (n, i) {

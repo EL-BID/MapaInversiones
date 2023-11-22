@@ -3,7 +3,6 @@ var contratos_valor_data = undefined;
 var contratos_tipo_local = undefined;
 var contratos_tipo_regional = undefined;
 var contratos_tipo_all = undefined;
-var pagina_Actual = 0;
 var contratistaData = JSON.parse($('#secInfoContratos').attr('data-contratista'));
 var ruc_contratista = null;
 
@@ -355,7 +354,7 @@ $("#btn-buscar").click(function () {
 
 function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     var pag_actual = parseInt(actual);
-    pagina_actual = pag_actual;
+    var pagina_actual = pag_actual;
     var pagesHTML = '';
     var cant_por_linea = 10;
 
@@ -440,7 +439,7 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
         deshabilita(true);
 
         d3.select("#divProyectos").empty();
-        pagina_actual = $(this).attr("data-page");
+        var pagina_actual = $(this).attr("data-page");
 
         getContratos($("#top_contratos_periodos option:selected").val(), ruc_contratista, $("#top_origen_informacion option:selected").val(), pagina_actual, cant_por_pag);
 ***REMOVED***);

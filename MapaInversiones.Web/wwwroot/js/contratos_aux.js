@@ -2,7 +2,6 @@
         var cant_graficas = 5;
         var cant_contratos = 20;
         var scrol = 0;
-var pagina_Actual = 0;
 
         inicializaDatos();
 
@@ -154,7 +153,7 @@ function getAnnio(moneda, nombreProceso = null) {
 
    function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
             var pag_actual = parseInt(actual);
-            pagina_actual = pag_actual;
+            var pagina_actual = pag_actual;
             var pagesHTML = '';
             var cant_por_linea = 10;
 
@@ -237,7 +236,7 @@ function getAnnio(moneda, nombreProceso = null) {
                
                 deshabilita(true);
                 d3.select("#divProyectos").empty();
-                pagina_actual = $(this).attr("data-page");
+                var pagina_actual = $(this).attr("data-page");
 
                 getContratos($("#top_contratos_periodos option:selected").val(), pagina_actual, cant_por_pag, $("#top_origen_informacion option:selected").val(), $('#entidad').val(), $('#proceso').val());
         ***REMOVED***);

@@ -4,7 +4,7 @@ var avance_financiero = (parseFloat(projectPerfil[0].avance_financiero.replace("
 //var actoresGlobal = JSON.parse(document.body.getAttribute('data-actores'));
 var cant_contratos = 10;
 var scrol = 0;
-var pagina_Actual = 0;
+
 InicializaDatos();
 graficarAvance("divGraphAvanceFinanciero", avance_financiero);
 
@@ -1004,7 +1004,7 @@ $("#top_origen_informacion").change(function () {
 
 function dibujaPaginacion(actual, total, totalPag, cant_por_pag) {
     var pag_actual = parseInt(actual);
-    pagina_actual = pag_actual;
+    var pagina_actual = pag_actual;
     var pagesHTML = '';
     var cant_por_linea = 10;
 
@@ -1089,7 +1089,7 @@ function dibujaPaginacion(actual, total, totalPag, cant_por_pag) {
         deshabilita(true);
         //$('#divPagContratos').attr('disabled', 'disabled');
         //d3.select("#divProyectos").empty();
-        pagina_actual = $(this).attr("data-page");
+        var pagina_actual = $(this).attr("data-page");
         getProcesosContratacion($("#top_origen_informacion option:selected").val(), $("#top_origen_semestre option:selected").val(), pagina_actual, cant_contratos, projectPerfil[0].id_project);
 
 ***REMOVED***);
