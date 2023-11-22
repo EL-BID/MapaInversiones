@@ -2,7 +2,7 @@
 let anyo_actual = (new Date).getFullYear();
 let logoresponde = "";
 let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
-var pagina_Actual = 0;
+
 
         InicializaDatos();
 

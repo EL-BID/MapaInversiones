@@ -5,7 +5,6 @@ var globales = [];
 var globales_org = [];
 var globales_gasto = [];
 var globales_entidad = [];
-var pagina_Actual = 0;
 var cantXPagina = 6;
 var anyo_actual = $("#annioPresupuesto option:selected").val();
 
@@ -1967,7 +1966,7 @@ function getEstructuraInfograficoPerEntidad(datos,pagina) {
 
 function dibujarPagNumeradasPerGasto(actual, total, totalPag) {
     var pag_actual = parseInt(actual);
-    pagina_actual = pag_actual;
+    var pagina_actual = pag_actual;
     var pagesHTML = '';
     var cant_por_pag = 6;
     var cant_por_linea = 10;
@@ -2017,7 +2016,7 @@ function dibujarPagNumeradasPerGasto(actual, total, totalPag) {
     $("#divPagFichas").html(pag_enlace);
 
     $('#page_right_gasto,#page_left_gasto,.page_left_gasto,.page_right_gasto').bind('click', function () {
-        pagina_actual = $(this).attr("data-page");
+        var pagina_actual = $(this).attr("data-page");
         var ini_data = ((pagina_actual - 1) * cantXPagina);
         var fin_data = (pagina_actual * cantXPagina) - 1;
         var data_pagina = jQuery.grep(globales_gasto, function (n, i) {
@@ -2082,7 +2081,7 @@ function dibujarPagNumeradasPerEntidad(actual, total, totalPag) {
     $("#divPagFichas").html(pag_enlace);
 
     $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
-        pagina_actual = $(this).attr("data-page");
+        var pagina_actual = $(this).attr("data-page");
         var ini_data = ((pagina_actual - 1) * cantXPagina);
         var fin_data = (pagina_actual * cantXPagina) - 1;
         var data_pagina = jQuery.grep(globales_entidad, function (n, i) {
