@@ -346,20 +346,6 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             return listaFiltros;
         }
 
-        //internal decimal ObtenerPresupuestoTotalSegunFiltroProyectos(FiltroBusquedaProyecto filtroProyectos)
-        //{
-        //    FiltroBusquedaRecursos filtroRecursos = new FiltroBusquedaRecursos();
-        //    if (filtroProyectos.CodigosRegion.Count > 0)
-        //        filtroRecursos.CodigoRegion = filtroProyectos.CodigosRegion.First();
-        //    if (filtroProyectos.CodigosDepartamentos.Count > 0)
-        //        filtroRecursos.CodigoDepartamento = filtroProyectos.CodigosDepartamentos.First();
-        //    if (filtroProyectos.CodigosMunicipios.Count > 0)
-        //        filtroRecursos.CodigoMunicipio = filtroProyectos.CodigosMunicipios.First();
-        //    filtroRecursos.Periodos = filtroProyectos.fechasEjecucion;
-
-        //    return Convert.ToDecimal(RepositorioRecursos.ObtenerPresupuestoPorRegionPorFiltros(filtroRecursos).Sum(p => p.ValorPresupuesto));
-        //}
-
         #region INFOGRAFICA
 
         internal static List<ConsolidateRegionsProjects> ObtenerInfograficoPorRegiones(List<PlataformaTransparencia.Infrastructura.DataModels.Proyecto> listProyectos)
@@ -594,57 +580,6 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         #endregion
 
         #region INFO GENERAL PARAMETRIZABLE
-
-        //public List<Fact> ObtenerDatosDeInformacionNacional()
-        //{
-        //    List<Fact> FactsList = new List<Fact>();
-        //    try {
-
-        //        ///Query que obtiene los datos de hechos
-        //        ///Genera el listado de Facts
-        //        var FactsListQuery = (from facts in DataModel.ResumenEstadisticasNacionals
-        //                              select new {
-        //                                  icon = facts.RutaIcono,
-        //                                  query = facts.ConsultaSQL,
-        //                                  phrase = facts.Descripcion,
-        //                                  seccion = facts.SeccionAplicativo
-
-        //                              });
-        //        ///para cada ítem, se genera la consulta y el resultado
-        //        foreach (var item in FactsListQuery) {
-        //            List<string> query = new List<string>();
-        //            ///Variable para el query
-        //            string returnedQueryValue = string.Empty;
-        //            ///Si el query no tiene data, permite pasar sin realizar consulta
-        //            if (!string.IsNullOrEmpty(item.query)) {                            ///ejecución del query
-        //                query = DataModel.Database.SqlQuery<string>(item.query).ToList();
-        //            }
-        //            else {
-        //                query = new List<string>();
-        //            }
-        //            ///si el query retorna datos se obtiene la consulta
-        //            ///Observación: La consulta debe retornar siempre una cantidad y debe llegar en 
-        //            ///string. en el query se debe utilizar la sentencia CONVERT().
-        //            if (query.Count() > 0) {
-        //                returnedQueryValue = query.First().ToString();
-        //            }
-
-        //            FactsList.Add(
-        //                       new Fact {
-        //                           icon = item.icon,
-        //                           phrase = item.phrase.Replace(CommonConstants.ReplaceTokenFactQuery, returnedQueryValue),
-        //                           title = item.seccion.Split('_').Length > 1 ? item.seccion.Split('_')[0] : item.seccion,
-        //                           subTipo = item.seccion.Split('_').Length > 1 ? item.seccion.Split('_')[1] : null
-        //                       }
-        //                    );
-        //        }
-        //    }
-        //    catch (Exception ex) {
-        //        LogHelper.GenerateLog(ex);
-        //    }
-        //    System.Diagnostics.Trace.WriteLine("Obtenida los Datos De Informacion Nacional");
-        //    return FactsList;
-        //}
 
         #endregion
 
@@ -1128,43 +1063,6 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             return objReturn;
         }
 
-
-        //public ModelContratistaData ObtenerDatosContratista(string ruc)
-        //{
-        //    ModelContratistaData objReturn = new ModelContratistaData();
-        //    if (string.IsNullOrEmpty(ruc))
-        //        return objReturn;
-        //    objReturn.ruc = ruc;
-
-        //    List<VwContratosPerfilContratistaSinPrograma> lstContratistas = ConsultasComunes.ObtenerDatosContratista(ruc);
-        //    if (lstContratistas.Count > 0) {
-        //        objReturn.nomContratista = lstContratistas[0].Contratista;
-        //        objReturn.numContratos = lstContratistas[0].NumContratos;
-        //        objReturn.valorContratos = lstContratistas[0].ValorTotalContratos;
-        //    }
-
-        //    //objReturn.Status = true;
-
-        //    return objReturn;
-        //}
-
-        //public ModelContratistaData ObtenerDatosContratos()
-        //{
-        //    ModelContratistaData objReturn = new ModelContratistaData();
-
-        //    EncabezadoContratos lstContratistas = ConsultasComunes.ObtenerDatosContratos();
-
-        //    // objReturn.nomContratista = lstContratistas[0].Contratista;
-        //    objReturn.numContratos = lstContratistas.NumContratos;
-        //    objReturn.valorContratos = lstContratistas.ValorTotalContratos;
-
-
-        //    //objReturn.Status = true;
-
-        //    objReturn.listEncabezadoContratosCancelados = ConsultasComunes.ObtenerDatosContratosCancelados();
-
-        //    return objReturn;
-        //}
 
     }
 
