@@ -131,9 +131,6 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             Func<PlataformaTransparencia.Infrastructura.DataModels.Proyecto, bool> predicate = null;
             List<PlataformaTransparencia.Infrastructura.DataModels.Proyecto> list = new List<Infrastructura.DataModels.Proyecto>();
             string search = string.Empty;
-            //string criterioEstadosPendientes = ArchivoRecursosNegocioMapaInversiones.CriterioEstadosPendientesSegunHistorico;
-            //string criterioEstadosEjecucion = ArchivoRecursosNegocioMapaInversiones.CriterioEstadosEjecucion;
-            //string criterioEstadosEjecutados = ArchivoRecursosNegocioMapaInversiones.CriterioEstadosEjecutado;
 
             string key = "ObtenerProyectosConsistentes" + ObtenerKeyPorEstadoFiltro(filtros);
             if (!ShortCacheHelper.Get<List<PlataformaTransparencia.Infrastructura.DataModels.Proyecto>>(key, out list)) {
@@ -709,9 +706,6 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             //bool obtenerPendientesSegunHistorico = false;
             IEnumerable<InfoProyectos> list = null;
             string search = string.Empty;
-            //string criterioEstadosPendientes = ArchivoRecursosNegocioMapaInversiones.CriterioEstadosPendientesSegunHistorico;
-            //string criterioEstadosEjecucion = ArchivoRecursosNegocioMapaInversiones.CriterioEstadosEjecucion;
-            //string criterioEstadosEjecutados = ArchivoRecursosNegocioMapaInversiones.CriterioEstadosEjecutado;
 
             string key = "ObtenerInfoProyectos" + ObtenerKeyPorEstadoFiltro(filtros, true);
             if (!ShortCacheHelper.Get<IEnumerable<InfoProyectos>>(key, out list)) {
@@ -930,7 +924,6 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                     default:
                         break;
             ***REMOVED***
-                //codigosFaltantes.AddRange(codigosEntesTerritoriales.TakeWhile(et => !(consolidados.Contains(et))));
 
                 if (codigosEntesTerritoriales.Count > 0) {
                     foreach (var item in codigosEntesTerritoriales) {
@@ -1133,24 +1126,6 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                 return contratista;
         ***REMOVED***
     ***REMOVED***
-
-        //public static EncabezadoContratos ObtenerDatosContratos()
-        //{
-        //    EncabezadoContratos objreturn = new EncabezadoContratos();
-
-        //    int? numContratosParameter = 0;
-        //    long? valContratosParameter = 0;
-        //    using (var db = new TransparenciaDB()) {
-
-        //        db.EncabezadoContratosRP(ref numContratosParameter, ref valContratosParameter);
-        //        objreturn.NumContratos = int.Parse(numContratosParameter.Value.ToString());
-        //        objreturn.ValorTotalContratos = long.Parse(valContratosParameter.Value.ToString());
-        //***REMOVED***
-
-        //    return objreturn;
-
-        //***REMOVED***
-
 
         public static List<EncabezadoContratosCancelados> ObtenerDatosContratosCancelados()
         {
@@ -1398,14 +1373,6 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             return Expression.Lambda<Func<T, bool>>(combined, param);
 
     ***REMOVED***
-
-        //public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> expr1,
-        //                                                     Expression<Func<T, bool>> expr2)
-        //{
-        //    var invokedExpr = Expression.Invoke(expr2, expr1.Parameters.Cast<Expression>());
-        //    return Expression.Lambda<Func<T, bool>>
-        //          (Expression.AndAlso(expr1.Body, invokedExpr), expr1.Parameters);
-        //***REMOVED***
 
         // Helper class to replace all parameters with the specified one
         public class ParameterReplacer : ExpressionVisitor

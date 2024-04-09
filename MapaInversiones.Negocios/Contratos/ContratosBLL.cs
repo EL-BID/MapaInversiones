@@ -183,83 +183,6 @@ namespace PlataformaTransparencia.Negocios.Contratos
                 _objreturn.CantidadTotalRegistros = 0;
         ***REMOVED***
 
-            //var consulta = (from cont in _connection.VwContratosDetalles
-            //                where
-            //                (cont.AnioUltimaActualizacion == Annio || Annio == null)
-            //                && (cont.MonedaContrato.Contains(Moneda) || Moneda == null)
-            //                && (cont.Comprador.Contains(NombreEntidad) || NombreEntidad == null)
-            //                && (cont.EstadoProceso.Contains(Estado) || Estado == null)
-            //                && (cont.CodigoProceso.TrimStart().Contains(NombreProceso) || cont.DescripcionProceso.Contains(NombreProceso) || NombreProceso == null)
-            //                && (cont.CodigoProveedor.Contains(CodigoProveedor) || CodigoProveedor == null)
-            //                && (cont.OrigenInformacion.Contains(OrigenInformacion) || OrigenInformacion == null)
-            //                && cont.ValorContratado != null
-            //                let NUMBER = Sql.Ext.DenseRank().Over().OrderBy(cont.Comprador).ThenBy(cont.CodigoProceso).ThenBy(cont.OrigenInformacion).ToValue()
-            //                where
-            //                NUMBER > ((filtros.NumeroPagina - 1) * filtros.RegistrosPorPagina - 1)
-            //                && NUMBER <= (filtros.NumeroPagina * filtros.RegistrosPorPagina)
-            //                select new ContratosData
-            //                {
-            //                    AnioUltimaActualizacion = cont.AnioUltimaActualizacion,
-            //                    DescripcionProceso = cont.DescripcionProceso,
-            //                    EstadoProceso = cont.EstadoProceso,
-            //                    CodigoContrato = cont.CodigoContrato,
-            //                    CodigoProceso = cont.CodigoProceso,
-            //                    CodigoProveedor = cont.CodigoProveedor,
-            //                    Contratista = cont.Contratista,
-            //                    ValorPlaneado = cont.ValorPlaneado,
-            //                    ValorAdjudicado = cont.ValorAdjudicado,
-            //                    ValorContratado = cont.ValorContratado,
-            //                    MonedaContrato = cont.MonedaContrato,
-            //                    UrlContrato = cont.UrlContrato,
-            //                    CodigoComprador = cont.CodigoComprador,
-            //                    Comprador = cont.Comprador,
-            //                    EntidadOrigenFondos = cont.EntidadOrigenFondos,
-            //                    OrigenFondos = cont.OrigenFondos,
-            //                    DocURL = cont.DocURL,
-            //                    OrigenInformacion = cont.OrigenInformacion
-
-            //            ***REMOVED***
-            //                 );
-
-
-            //var consulta =  (from cont in _connection.VwContratosDetalles
-            //                                  where
-            //                                  (cont.AnioUltimaActualizacion == Annio || Annio == null)
-            //                                  && (cont.MonedaContrato.Contains(Moneda) || Moneda == null)
-            //                                  && (cont.Comprador.Contains(NombreEntidad) || NombreEntidad == null)
-            //                                  && (cont.EstadoProceso.Contains(Estado) || Estado == null)
-            //                                  && (cont.CodigoProceso.TrimStart().Contains(NombreProceso) || cont.DescripcionProceso.Contains(NombreProceso) || NombreProceso == null)
-            //                                  && (cont.CodigoProveedor == CodigoProveedor || CodigoProveedor == null)
-            //                                  && (cont.OrigenInformacion.Contains(OrigenInformacion) || OrigenInformacion == null)
-            //                                  && cont.ValorContratado != null
-            //                                  let NUMBER = Sql.Ext.DenseRank().Over().OrderBy(cont.Comprador).ThenBy(cont.CodigoProceso).ThenBy(cont.OrigenInformacion).ToValue()
-            //                                  where
-            //                                  NUMBER > ((filtros.NumeroPagina - 1) * filtros.RegistrosPorPagina)
-            //                                  && NUMBER <= (filtros.NumeroPagina * filtros.RegistrosPorPagina)
-            //                                  select new ContratosData
-            //                                  {
-            //                                      AnioUltimaActualizacion = cont.AnioUltimaActualizacion,
-            //                                      DescripcionProceso = cont.DescripcionProceso,
-            //                                      EstadoProceso = cont.EstadoProceso,
-            //                                      CodigoContrato = cont.CodigoContrato,
-            //                                      CodigoProceso = cont.CodigoProceso,
-            //                                      CodigoProveedor = cont.CodigoProveedor,
-            //                                      Contratista = cont.Contratista,
-            //                                      ValorPlaneado = cont.ValorPlaneado,
-            //                                      ValorAdjudicado = cont.ValorAdjudicado,
-            //                                      ValorContratado = cont.ValorContratado,
-            //                                      MonedaContrato = cont.MonedaContrato,
-            //                                      UrlContrato = cont.UrlContrato,
-            //                                      CodigoComprador = cont.CodigoComprador,
-            //                                      Comprador = cont.Comprador,
-            //                                      EntidadOrigenFondos = cont.EntidadOrigenFondos,
-            //                                      OrigenFondos = cont.OrigenFondos,
-            //                                      DocURL = cont.DocURL,
-            //                                      OrigenInformacion = cont.OrigenInformacion
-
-            //                              ***REMOVED***
-            //                 );
-
             _objreturn.Data = (from cont in _connection.VwContratosDetalles
                                where
                                (cont.AnioUltimaActualizacion == Annio || Annio == null)
@@ -372,18 +295,6 @@ namespace PlataformaTransparencia.Negocios.Contratos
                                        NroContratos = datos.Sum(x => x.NroContratos),
                                ***REMOVED***).Distinct().ToList();
 
-            //var aglo = (from contr in _connection.VwContratosConsolidados
-            //            where (contr.MonedaContrato == moneda.ToString() || moneda == null)
-            //            && contr.ValorContratado != null
-            //            && contr.Anio == annio
-            //            orderby contr.Anio descending
-            //            select new ContratosConsolidado
-            //            {
-            //                OrigenInformacion = contr.OrigenInformacion,
-            //                MonedaContrato = contr.MonedaContrato,
-            //                ValorContratado = contr.ValorContratado,
-            //                NroContratos = contr.NroContratos,
-            //        ***REMOVED***).Distinct();
             return _objreturn;
 
 

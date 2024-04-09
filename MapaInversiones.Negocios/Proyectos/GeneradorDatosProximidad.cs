@@ -128,32 +128,6 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         ***REMOVED***
     ***REMOVED***
 
-        //private objectProjectsSearchMapProject GenerarDataProyectoIndividual2(InfoProyectos infoProyectos)
-        //{
-        //    objectProjectsSearchMapProject retonroProyecto = new objectProjectsSearchMapProject();
-
-        //    retonroProyecto.name = infoProyectos.NombreProyecto.ToUpper();
-        //    retonroProyecto.state = infoProyectos.State;
-        //    retonroProyecto.image = BusquedasProyectosBLL.GenerarUrlImagenProyecto(infoProyectos.IdProyecto);
-        //    retonroProyecto.url = string.Format(CommonConstants.ServicesLink, infoProyectos.IdProyecto);
-        //    retonroProyecto.value = Math.Round(infoProyectos.Value);
-        //    retonroProyecto.approvedTotalMoney = Math.Round(infoProyectos.approvedTotalMoney);
-        //    retonroProyecto.type = CommonConstants.ProjectsEnSingular;
-        //    retonroProyecto.latitude = (decimal)infoProyectos.Geography.Latitude;
-        //    retonroProyecto.longitude = (decimal)infoProyectos.Geography.Longitude;
-
-        //    //Si en el campo de la georefrenciacion viene el codigo de un municipio entonces se muestra el nombre
-        //    var municipios = ConsultasComunes.ObtenerMunicipio(new List<string>() { infoProyectos.Location ***REMOVED***);
-        //    if (municipios.Count > 0)
-        //        retonroProyecto.location = municipios.FirstOrDefault().NombreMunicipio;
-        //    else
-        //        retonroProyecto.location = string.Empty;
-        //    TotalCantidadProyectos++;//juanka
-        //    TotalValorRegalias += retonroProyecto.value;
-        //    TotalValorTodasLasFuentes += retonroProyecto.approvedTotalMoney;
-
-        //    return retonroProyecto;
-        //***REMOVED***
 
         private objectProjectsSearchMapProject GenerarDataProyectoIndividual(InfoProyectos infoProyectos)
         {

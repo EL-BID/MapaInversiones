@@ -30,7 +30,6 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
   /// </summary>
   public partial class TransparenciaDB : LinqToDB.Data.DataConnection
   {
-    //Inicio: Nuevas tablas perfil de entidad
     public ITable<consulta_VinculacionIndicadoresPNDXEntidadesStp> VinculacionIndicadoresPNDXEntidadesStps0 { get { return this.GetTable<consulta_VinculacionIndicadoresPNDXEntidadesStp>(); ***REMOVED*** ***REMOVED***
     public ITable<Actor> Actors { get { return this.GetTable<Actor>(); ***REMOVED*** ***REMOVED***
     public ITable<ActorXProyecto> ActorXProyectos { get { return this.GetTable<ActorXProyecto>(); ***REMOVED*** ***REMOVED***
@@ -405,30 +404,6 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
   ***REMOVED***
 
 
-  [Table(Schema = "dbo", Name = "ContratosEjecucionFinanciera")]
-  public partial class ContratosEjecucionFinanciera
-  {
-    [PrimaryKey(1), NotNull] public string CodigoContrato { get; set; ***REMOVED*** // varchar(30)
-    [PrimaryKey(12), NotNull] public int TipoPrograma { get; set; ***REMOVED*** // int
-    [PrimaryKey(5), NotNull] public int ObjetoGasto { get; set; ***REMOVED*** // int
-    [PrimaryKey(3), NotNull] public int SubPrograma { get; set; ***REMOVED*** // int
-    [PrimaryKey(7), NotNull] public int FuenteFinanciamiento { get; set; ***REMOVED*** // int
-    [PrimaryKey(8), NotNull] public int CodigoEntidad { get; set; ***REMOVED*** // int
-    [PrimaryKey(2), NotNull] public int CodigoPrograma { get; set; ***REMOVED*** // int
-    [PrimaryKey(4), NotNull] public int CodigoProyecto { get; set; ***REMOVED*** // int
-    [PrimaryKey(9), NotNull] public string CodigoDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public int? CodigoNivel { get; set; ***REMOVED*** // int
-    [PrimaryKey(10), NotNull] public int AnioContrato { get; set; ***REMOVED*** // int
-    [PrimaryKey(6), NotNull] public int CodigoFinanciador { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string IdProceso { get; set; ***REMOVED*** // varchar(150)
-    [Column, Nullable] public DateTime? FechaFinalizacionContrato { get; set; ***REMOVED*** // datetime2(7)
-    [Column, Nullable] public DateTime? FechaInicioContrato { get; set; ***REMOVED*** // datetime2(7)
-    [Column, Nullable] public long? MontoAUtilizar { get; set; ***REMOVED*** // bigint
-    [PrimaryKey(11), NotNull] public string CodigoFinanciero { get; set; ***REMOVED*** // varchar(30)
-    [Column, Nullable] public DateTime? FechaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public bool? RegistroActivo { get; set; ***REMOVED*** // bit
-  ***REMOVED***
-
   [Table(Schema = "dbo", Name = "DatosAdicionalesAprobacion")]
   public partial class DatosAdicionalesAprobacion
   {
@@ -598,35 +573,6 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// </summary>
     [Association(ThisKey = "IdUnidadMedida", OtherKey = "IdUnidadMedida", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Entregable_UnidadMedida", BackReferenceName = "Entregables")]
     public UnidadMedida UnidadMedida { get; set; ***REMOVED***
-
-    #endregion
-  ***REMOVED***
-
-  [Table(Schema = "dbo", Name = "EntidadContrato")]
-  public partial class EntidadContrato
-  {
-    [PrimaryKey, NotNull] public string Codigo { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public string Nombre { get; set; ***REMOVED*** // varchar(150)
-
-    #region Associations
-
-    /// <summary>
-    /// FK_Proceso_EntidadContrato2_BackReference
-    /// </summary>
-    [Association(ThisKey = "Codigo", OtherKey = "CodigoProveedor", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Proceso> FkProcesoEntidadContrato2BackReferences { get; set; ***REMOVED***
-
-    /// <summary>
-    /// FK_Proceso_EntidadContrato1_BackReference
-    /// </summary>
-    [Association(ThisKey = "Codigo", OtherKey = "CodigoComprador", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Proceso> ProcesoEntidadContratos { get; set; ***REMOVED***
-
-    /// <summary>
-    /// FK_Proceso_EntidadContrato_BackReference
-    /// </summary>
-    [Association(ThisKey = "Codigo", OtherKey = "CodigoEntidadConvocante", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Proceso> Procesos { get; set; ***REMOVED***
 
     #endregion
   ***REMOVED***
@@ -1008,13 +954,6 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     [Column, Nullable] public string NombreFuente { get; set; ***REMOVED*** // nvarchar(150)
     [Column, NotNull] public string Descripcion { get; set; ***REMOVED*** // nvarchar(500)
     [Column, NotNull] public DateTime FechaActualizacionFuente { get; set; ***REMOVED*** // datetime
-  ***REMOVED***
-
-  [Table(Schema = "dbo", Name = "FuenteFinancieraPrograma")]
-  public partial class FuenteFinancieraPrograma
-  {
-    [Column("codigoFuenteFinanciamiento"), PrimaryKey, NotNull] public int CodigoFuenteFinanciamiento { get; set; ***REMOVED*** // int
-    [Column("descripcionFuenteFinanciamiento"), NotNull] public string DescripcionFuenteFinanciamiento { get; set; ***REMOVED*** // varchar(50)
   ***REMOVED***
 
   [Table(Schema = "dbo", Name = "FuncionamientoSitio")]
@@ -1639,63 +1578,6 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     [Column(), Nullable] public decimal? Presupuesto { get; set; ***REMOVED*** // numeric(38, 0)
   ***REMOVED***
 
-  [Table(Schema = "dbo", Name = "Procesos")]
-  public partial class Proceso
-  {
-    [Column(), PrimaryKey(2), NotNull] public string IdProceso { get; set; ***REMOVED*** // varchar(150)
-    [Column(), Nullable] public string CodigoContrato { get; set; ***REMOVED*** // varchar(30)
-    [Column("ocid"), PrimaryKey(3), NotNull] public string Ocid { get; set; ***REMOVED*** // varchar(50)
-    [Column(), Nullable] public DateTime? FechaPublicacion { get; set; ***REMOVED*** // datetime2(7)
-    [Column(), Nullable] public string Publicador { get; set; ***REMOVED*** // varchar(250)
-    [Column(), Nullable] public DateTime? FechaFotoProceso { get; set; ***REMOVED*** // datetime2(7)
-    [Column(), Nullable] public DateTime? FechaDeEmisionCodContracto { get; set; ***REMOVED*** // datetime2(7)
-    [Column(), Nullable] public string CodigoEntidadConvocante { get; set; ***REMOVED*** // varchar(30)
-    [Column(), Nullable] public string CategoriaContratacion { get; set; ***REMOVED*** // varchar(200)
-    [Column(), Nullable] public string EstadoProceso { get; set; ***REMOVED*** // varchar(30)
-    [Column(), Nullable] public string IdOferta { get; set; ***REMOVED*** // varchar(30)
-    [Column(), Nullable] public string DescripcionOferta { get; set; ***REMOVED*** // varchar(300)
-    [Column(), Nullable] public string MetodoContratacion { get; set; ***REMOVED*** // varchar(300)
-    [Column(), Nullable] public string CodigoComprador { get; set; ***REMOVED*** // varchar(30)
-    [Column(), Nullable] public string DuracionContrato { get; set; ***REMOVED*** // varchar(3)
-    [Column(), Nullable] public DateTime? FechaFinContrato { get; set; ***REMOVED*** // datetime2(7)
-    [Column(), Nullable] public DateTime? FechaInicioContrato { get; set; ***REMOVED*** // datetime2(7)
-    [Column(), PrimaryKey(5), NotNull] public string CodigoProveedor { get; set; ***REMOVED*** // varchar(30)
-    [Column("uriProceso"), Nullable] public string UriProceso { get; set; ***REMOVED*** // varchar(324)
-    [Column("Es_Covid"), NotNull] public int EsCovid { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public DateTime? FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column("codigo_BPIN"), PrimaryKey(4), NotNull] public string CodigoBpin { get; set; ***REMOVED*** // varchar(50)
-    [Column("urlResumenAdjudicacion"), Nullable] public string UrlResumenAdjudicacion { get; set; ***REMOVED*** // varchar(250)
-    [Column("urlProveedoresAdjudicados"), Nullable] public string UrlProveedoresAdjudicados { get; set; ***REMOVED*** // varchar(250)
-    [Column("urlProveedoresOferentes"), Nullable] public string UrlProveedoresOferentes { get; set; ***REMOVED*** // varchar(250)
-    [Column("urlDocumentosAdjudicacion"), Nullable] public string UrlDocumentosAdjudicacion { get; set; ***REMOVED*** // varchar(250)
-    [Column(), Nullable] public string UrlpreciosReferencia { get; set; ***REMOVED*** // varchar(250)
-    [Column(), Nullable] public string UrlInvitados { get; set; ***REMOVED*** // varchar(250)
-    [Column("idprocesojson"), PrimaryKey(1), NotNull] public string Idprocesojson { get; set; ***REMOVED*** // varchar(250)
-    [Column(), PrimaryKey(6), NotNull] public string AwardId { get; set; ***REMOVED*** // varchar(250)
-
-    #region Associations
-
-    /// <summary>
-    /// FK_Proceso_EntidadContrato1
-    /// </summary>
-    [Association(ThisKey = "CodigoComprador", OtherKey = "Codigo", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Proceso_EntidadContrato1", BackReferenceName = "ProcesoEntidadContratoes")]
-    public EntidadContrato FkProcesoEntidadContrato1 { get; set; ***REMOVED***
-
-    /// <summary>
-    /// FK_Proceso_EntidadContrato2
-    /// </summary>
-    [Association(ThisKey = "CodigoProveedor", OtherKey = "Codigo", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Proceso_EntidadContrato2", BackReferenceName = "FkProcesoEntidadContrato2BackReferences")]
-    public EntidadContrato FkProcesoEntidadContrato2 { get; set; ***REMOVED***
-
-    /// <summary>
-    /// FK_Proceso_EntidadContrato
-    /// </summary>
-    [Association(ThisKey = "CodigoEntidadConvocante", OtherKey = "Codigo", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Proceso_EntidadContrato", BackReferenceName = "Procesoes")]
-    public EntidadContrato ProcesoEntidadContrato { get; set; ***REMOVED***
-
-    #endregion
-  ***REMOVED***
-
   [Table(Schema = "dbo", Name = "Produccion")]
   public partial class Produccion
   {
@@ -1880,12 +1762,6 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public IEnumerable<ProgramaEjecucionContrato> ProgramaEjecucionContratos { get; set; ***REMOVED***
 
     /// <summary>
-    /// FK_ProgramaMetasFinancieras_Programa_BackReference
-    /// </summary>
-    [Association(ThisKey = "Id", OtherKey = "IdPrograma", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<ProgramaMetasFinanciera> ProgramaMetasFinancieras { get; set; ***REMOVED***
-
-    /// <summary>
     /// FK_ProgramaMetasFisicas_Programa_BackReference
     /// </summary>
     [Association(ThisKey = "Id", OtherKey = "IdPrograma", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
@@ -1927,34 +1803,6 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_ProgramaEjecucionContrato_Programa
     /// </summary>
     [Association(ThisKey = "IdPrograma", OtherKey = "Id", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_ProgramaEjecucionContrato_Programa", BackReferenceName = "ProgramaEjecucionContratoes")]
-    public Programa Programa { get; set; ***REMOVED***
-
-    #endregion
-  ***REMOVED***
-
-  [Table(Schema = "dbo", Name = "ProgramaMetasFinancieras")]
-  public partial class ProgramaMetasFinanciera
-  {
-    [Column(), PrimaryKey(1), NotNull] public DateTime FechaMeta { get; set; ***REMOVED*** // datetime
-    [Column("idPrograma"), PrimaryKey(2), NotNull] public int IdPrograma { get; set; ***REMOVED*** // int
-    [Column(), PrimaryKey(3), NotNull] public int CodigoProducto { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public string NombreProducto { get; set; ***REMOVED*** // varchar(100)
-    [Column(), PrimaryKey(4), NotNull] public int CodigoObjeto { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public string NombreObjeto { get; set; ***REMOVED*** // varchar(80)
-    [Column(), PrimaryKey(5), NotNull] public int Fuente { get; set; ***REMOVED*** // int
-    [Column(), PrimaryKey(6), NotNull] public int Financiador { get; set; ***REMOVED*** // int
-    [Column(), PrimaryKey(7), NotNull] public int CodigoDepartamento { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public decimal? Meta { get; set; ***REMOVED*** // numeric(15, 0)
-    [Column(), Nullable] public decimal? Avance { get; set; ***REMOVED*** // numeric(15, 0)
-    [Column(), Nullable] public DateTime? FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column("codigosnip"), Nullable] public string Codigosnip { get; set; ***REMOVED*** // varchar(60)
-
-    #region Associations
-
-    /// <summary>
-    /// FK_ProgramaMetasFinancieras_Programa
-    /// </summary>
-    [Association(ThisKey = "IdPrograma", OtherKey = "Id", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_ProgramaMetasFinancieras_Programa", BackReferenceName = "ProgramaMetasFinancieras")]
     public Programa Programa { get; set; ***REMOVED***
 
     #endregion
@@ -3786,23 +3634,6 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.CodigoContrato == CodigoContrato);
 ***REMOVED***
 
-    public static ContratosEjecucionFinanciera Find(this ITable<ContratosEjecucionFinanciera> table, string CodigoContrato, int TipoPrograma, int ObjetoGasto, int SubPrograma, int FuenteFinanciamiento, int CodigoEntidad, int CodigoPrograma, int CodigoProyecto, string CodigoDepartamento, int AnioContrato, int CodigoFinanciador, string CodigoFinanciero)
-    {
-      return table.FirstOrDefault(t =>
-          t.CodigoContrato == CodigoContrato &&
-          t.TipoPrograma == TipoPrograma &&
-          t.ObjetoGasto == ObjetoGasto &&
-          t.SubPrograma == SubPrograma &&
-          t.FuenteFinanciamiento == FuenteFinanciamiento &&
-          t.CodigoEntidad == CodigoEntidad &&
-          t.CodigoPrograma == CodigoPrograma &&
-          t.CodigoProyecto == CodigoProyecto &&
-          t.CodigoDepartamento == CodigoDepartamento &&
-          t.AnioContrato == AnioContrato &&
-          t.CodigoFinanciador == CodigoFinanciador &&
-          t.CodigoFinanciero == CodigoFinanciero);
-***REMOVED***
-
     public static DatosAdicionalesAprobacion Find(this ITable<DatosAdicionalesAprobacion> table, int IdDatoAdicional)
     {
       return table.FirstOrDefault(t =>
@@ -3837,12 +3668,6 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return table.FirstOrDefault(t =>
           t.IdDepartamento == IdDepartamento &&
           t.IdMunicipio == IdMunicipio);
-***REMOVED***
-
-    public static EntidadContrato Find(this ITable<EntidadContrato> table, string Codigo)
-    {
-      return table.FirstOrDefault(t =>
-          t.Codigo == Codigo);
 ***REMOVED***
 
     public static EntidadesEjecutorasGesProy Find(this ITable<EntidadesEjecutorasGesProy> table, string NIT, char DigitoVerificacion)
@@ -3940,12 +3765,6 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return table.FirstOrDefault(t =>
           t.IdFuente == IdFuente);
-***REMOVED***
-
-    public static FuenteFinancieraPrograma Find(this ITable<FuenteFinancieraPrograma> table, int CodigoFuenteFinanciamiento)
-    {
-      return table.FirstOrDefault(t =>
-          t.CodigoFuenteFinanciamiento == CodigoFuenteFinanciamiento);
 ***REMOVED***
 
     public static FuncionamientoSitio Find(this ITable<FuncionamientoSitio> table, int IDFuncionamientoSitio)
@@ -4098,17 +3917,6 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.FinVigencia == FinVigencia);
 ***REMOVED***
 
-    public static Proceso Find(this ITable<Proceso> table, string IdProceso, string Ocid, string CodigoProveedor, string CodigoBpin, string Idprocesojson, string AwardId)
-    {
-      return table.FirstOrDefault(t =>
-          t.IdProceso == IdProceso &&
-          t.Ocid == Ocid &&
-          t.CodigoProveedor == CodigoProveedor &&
-          t.CodigoBpin == CodigoBpin &&
-          t.Idprocesojson == Idprocesojson &&
-          t.AwardId == AwardId);
-***REMOVED***
-
     public static Produccion Find(this ITable<Produccion> table, int IdProduccion)
     {
       return table.FirstOrDefault(t =>
@@ -4143,18 +3951,6 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return table.FirstOrDefault(t =>
           t.Id == Id);
-***REMOVED***
-
-    public static ProgramaMetasFinanciera Find(this ITable<ProgramaMetasFinanciera> table, DateTime FechaMeta, int IdPrograma, int CodigoProducto, int CodigoObjeto, int Fuente, int Financiador, int CodigoDepartamento)
-    {
-      return table.FirstOrDefault(t =>
-          t.FechaMeta == FechaMeta &&
-          t.IdPrograma == IdPrograma &&
-          t.CodigoProducto == CodigoProducto &&
-          t.CodigoObjeto == CodigoObjeto &&
-          t.Fuente == Fuente &&
-          t.Financiador == Financiador &&
-          t.CodigoDepartamento == CodigoDepartamento);
 ***REMOVED***
 
     public static ProgramaMetasFisica Find(this ITable<ProgramaMetasFisica> table, int IdPrograma, int CodigoProyecto, int CodigoProducto, DateTime FechaMeta)

@@ -67,11 +67,6 @@ namespace PlataformaTransparencia.Negocios.Project
                 this.ModelProjectProfile.medios_participacion = part.ObtenerMotivosProyAsync();
                 this.ModelProjectProfile.tipo_comentario = part.ObtenerTipoComentarioAsync();
 
-                //bussines.GetListImagesbyId(this.ModelProjectProfile, projectId);
-                //bussines.GetOtherProjectsbyId(this.ModelProjectProfile, projectId);
-                //bussines.GetProgressProject(this.ModelProjectProfile, projectId);
-
-                //bussines.GetSourcesByProject(this.ModelProjectProfile, projectId);
                 this.Status = true;
 
         ***REMOVED***

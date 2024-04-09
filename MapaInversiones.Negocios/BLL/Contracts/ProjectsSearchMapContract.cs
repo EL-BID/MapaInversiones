@@ -52,16 +52,6 @@ namespace PlataformaTransparencia.Negocios.Contracts
             ModelDataProjectsSearchMap objReturn = null;
 
 
-            //this.DataProjectSearchMap = new ModelDataProjectsSearchMap();
-            //this.DataProjectSearchMap.objects.Add(new ObjectProjectsSearchMapGeography() { id = "50", type = "departamento", total = 5, approvedTotalMoney = 155555, value = 34455555656 ***REMOVED***);
-            //this.DataProjectSearchMap.objects.Add(new ObjectProjectsSearchMapGeography() { id = "01", type = "region", total = 24, approvedTotalMoney = 67654443223, value = 9747325235532 ***REMOVED***);
-            //this.DataProjectSearchMap.approvedMoney = 383323232323 * Convert.ToDecimal((new Random().Next(4)));
-            //this.DataProjectSearchMap.approvedMoneyTotal = Convert.ToDecimal(383323232323 * 1.2);
-            //this.DataProjectSearchMap.approvedProjects = 523 + Convert.ToDecimal((new Random().Next(80)));
-            //this.DataProjectSearchMap.collectedMoney = Convert.ToDecimal(383323232323 * 1.4);
-            //this.DataProjectSearchMap.Status = true;
-            //return;
-
             try
             {
                 string key = "BusquedaTabProyectos" + _consultasComunes.ObtenerKeyPorEstadoFiltro(filtro, true);
@@ -80,16 +70,6 @@ namespace PlataformaTransparencia.Negocios.Contracts
                     this.DataProjectSearchMap.approvedProjects = cantidadProyectos;
                     //this.DataProjectSearchMap.collectedMoney = new ConsolidadosNacionalesBLL().ObtenerPresupuestoTotalSegunFiltroProyectos(filtro);
                     this.DataProjectSearchMap.totalProjectsNumber = cantidadProyectos;
-                    //if (this.DataProjectSearchMap.objects.Count<objectProjectsSearchMap>() == 0)
-                    //{
-                    //    this.DataProjectSearchMap.objects = new List<objectProjectsSearchMap>();
-                    //    this.DataProjectSearchMap.Message = "La Consulta de proyectos  retorna datos  en ceros";
-                    //    this.DataProjectSearchMap.objects = list;
-                    //    this.DataProjectSearchMap.approvedMoney = Math.Round(valorRegalias);
-                    //    this.DataProjectSearchMap.approvedMoneyTotal = Math.Round(valorTotalRegalias);
-                    //    this.DataProjectSearchMap.approvedProjects = Math.Round(valorTotalRegalias);
-                    //    this.DataProjectSearchMap.totalProjectsNumber = cantidadProyectos;
-                    //***REMOVED***
                     ShortCacheHelper.Add(this.DataProjectSearchMap, key);
             ***REMOVED***
                 else

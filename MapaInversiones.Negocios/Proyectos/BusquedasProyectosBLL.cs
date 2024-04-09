@@ -522,8 +522,6 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       else
         System.Diagnostics.Debug.WriteLine("Obtenida los infograficos depto del cache corto");
 
-      //CollectedMoney = 0;//Recursos presupuestados para inversión SGR -- No se tienen valores del dinero presupuestado pues no hay cargue de los origenes de las agencias
-
       return objReturn;
 ***REMOVED***
 
@@ -1452,10 +1450,6 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       List<itemActores> objReturn = new List<itemActores>();
       using (var DataModel = new TransparenciaDB())
       {
-        //Select a.IDProyecto,a.IDActor,a.IdRol,b.NombreActor actor, c.NombreRol grupo from ActorXProyecto a
-        // inner join Actor b on a.IDActor = b.IdActor
-        // inner join Rol c on a.IDRol = c.IdRol And b.IDRol = c.IdRol
-        //where a.IDProyecto = 22102
         objReturn = (from info in DataModel.ActorXProyectos
                      join actores in DataModel.Actors on info.IDActor equals actores.IdActor
                      join grupos in DataModel.Rols on new { x1 = info.IDRol, x2 = actores.IDRol ***REMOVED*** equals new { x1 = grupos.IdRol, x2 = grupos.IdRol ***REMOVED***

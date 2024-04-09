@@ -1096,18 +1096,6 @@ function dibujaPaginacion(actual, total, totalPag, cant_por_pag) {
 
 ***REMOVED***
 
-Number.prototype.formatMoney = function (c, d, t) {
-    var n = this,
-        c = isNaN(c = Math.abs(c)) ? 2 : c,
-        d = d == undefined ? "." : d,
-        t = t == undefined ? "," : t,
-       var s = n < 0 ? "-" : "",
-       var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-       var j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-***REMOVED***;
-
-
 function iniUsuarioLog() {
     $("#hdIdUsuario").val(projectPerfil[0].idUsuParticipa);
     $("#hdNomUsuario").val(projectPerfil[0].nomUsuParticipa);
@@ -1640,12 +1628,12 @@ function validaCamposOblig(contenedor) {
 
 
 Number.prototype.formatMoney = function (c, d, t) {
-    var n = this,
-        c = isNaN(c = Math.abs(c)) ? 2 : c,
-        d = d == undefined ? "." : d,
-        t = t == undefined ? "," : t,
-      var  s = n < 0 ? "-" : "",
-      var  i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-      var  j = (j = i.length) > 3 ? j % 3 : 0;
+    var n = this;
+    var c = isNaN(c = Math.abs(c)) ? 2 : c;
+    var d = d == undefined ? "." : d;
+    var t = t == undefined ? "," : t;
+    var s = n < 0 ? "-" : "";
+    var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "";
+    var j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 ***REMOVED***;
