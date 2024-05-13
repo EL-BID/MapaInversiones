@@ -154,7 +154,7 @@ Para el manejo de datos se utiliza LINQ2DB, por lo cual, en caso de ser necesari
 - SQL Server Integration Services: Herramienta ETL (Extraction, Transformation, Loading) que nos permitirá captar datos de fuentes heterogéneas, convertirlos a datos compatibles con nuestras reglas de negocio e incorporarlos a nuestras bases de datos (Incluido en la licencia de SQL server estándar).
 - Internet information server (IIS): Servidor de aplicaciones web, se requiere la versión 10 o superior.
 - .NET core 3.1 es una actualización en contexto de .NET Framework 4. Este aplica las optimizaciones realizadas por el proveedor sobre el CLR (Common language runtime)
-- Bing maps Api. Suscripción a Bing maps account (Bing Maps Key valida): Api de servicios geoespaciales para la implementación de soluciones con georreferenciación.
+- Bing Maps API. Suscripción a Bing maps account (Bing Maps Key valida): Api de servicios geoespaciales para la implementación de soluciones con georreferenciación.
 - Microsoft Visual Studio 2019 o superior: IDE de desarrollo.
 - Orchard Core framework 1.0: Web content management (WCM) Que permite la administración de contenido en la plataforma ademas de ofrecer un marco de aplicación para crear aplicaciones modulares en ASP.NET Core. (https://github.com/OrchardCMS/OrchardCore)
 - Apache Solr 8.0.0: Motor de búsqueda e in:
@@ -167,13 +167,12 @@ Para el manejo de datos se utiliza LINQ2DB, por lo cual, en caso de ser necesari
 - [Juan Cruz Vieyra](https://www.linkedin.com/in/juan-cruz-vieyra-345b253/ "Juan Cruz Vieyra")
 - [Sebastian del Hoyo](https://www.linkedin.com/in/sebastiandelhoyo/ "Sebastian del Hoyo")
 - [José Niño](https://www.linkedin.com/in/jose-ni%C3%B1o-a2a8a731/ "José Niño")
-- [Liliana Cañas Baquero](https://www.linkedin.com/in/liliana-ca%C3%B1as-baquero-977056137/ "Liliana Cañas Baquero")
+- [Jorge Ortiz Claverol](https://www.linkedin.com/in/jmocpy/ "Jorge Ortiz Claverol")
 - [Diego Hernan Perez Jaramillo](mailto:diperez@uniandes.edu.co  "Diego Hernan Perez Jaramillo")
 - [Álvaro González Hernández](mailto:alvarogh_22@hotmail.com  "Álvaro González Hernández")
 - [Wilson Muñoz Camelo](https://www.linkedin.com/in/wilson-mu%C3%B1oz-camelo-24b11324/ "Wilson Muñoz Camelo")
 - [David Olaciregui](https://www.linkedin.com/in/david-olaciregui-35196015/ "David Olaciregui")
 - [Anyela Milena Chavarro Muñoz ](https://www.linkedin.com/in/anyela-milena-chavarro-mu%C3%B1oz-0a79a524/ "Anyela Milena Chavarro Muñoz ")
-- [Julian Alberto Castiblanco Palacios](mailto:juliancastiblancop@gmail.com "Julian Alberto Castiblanco Palacios")
 - [Vladimiro Bellini](https://www.linkedin.com/in/vladimirobellini/ "Vladimiro Bellini")
 - [Andrés Felipe Villamizar Vecino](mailto:villamizarvecino@hotmail.com "Andrés Felipe Villamizar Vecino")
 - [Diana Villamizar](https://www.linkedin.com/in/diana-villamizar-4737762a/ "Diana Villamizar")
