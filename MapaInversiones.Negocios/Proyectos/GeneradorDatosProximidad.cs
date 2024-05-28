@@ -50,13 +50,13 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             decimal longitudDer = bottomRight[1];
 
             if (latitudSuperior > 16.54M)
-                latitudSuperior = 16.54M;//Punto mas al norte de Honduras
+                latitudSuperior = 16.54M;//Punto mas al norte del país del mapa
             if (latitudInferior < 12.9M)
-                latitudInferior = 12.9M;//Punto mas al sur de Honduras
+                latitudInferior = 12.9M;//Punto mas al sur del pais 
             if (longitudIzq < -89.4M)
-                longitudIzq = -89.4M;//Punto mas al Oeste de Honduras
+                longitudIzq = -89.4M;//Punto mas al Oeste
             if (longitudDer > -83.0M)
-                longitudDer = -83.0M;//Punto mas al este de Honduras
+                longitudDer = -83.0M;//Punto mas al est
 
             decimal incrementoLatitud = Math.Abs(latitudSuperior - latitudInferior) / segmentosCuadricula;
             decimal incrementoLongitud = Math.Abs(longitudIzq - longitudDer) / segmentosCuadricula;
