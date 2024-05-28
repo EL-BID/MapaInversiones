@@ -74,7 +74,7 @@ new System.Globalization.CultureInfo("es-HN");
                 <div class="card shadow border-0 h-100">
                     <div class="car-deck">
                         <div class="card-header text-center">
-                            <img class="img-fluid" src="../img/logoHaciendaB.png" alt="ir a Secretaria tecnica de planeación" />
+                            <img class="img-fluid" src="../img/logoHaciendaP.png" alt="ir a Secretaria tecnica de planeación" />
                         </div>
                         <div class="car-bodycntos">
                             <div class="car-content">
@@ -84,7 +84,7 @@ new System.Globalization.CultureInfo("es-HN");
                                         foreach (var item in Sefin)
                                         {
                                             <text>
-                                                <div class="h6">Órdenes de Pago SEFIN</div>
+                                                <div class="h6">Órdenes de Pago</div>
                                                 <div class="h4"> @String.Format(cultureHN, "{0:n0***REMOVED***", @item.NumContratos)</div>
                                                 <div class="h6">Valor</div>
                                                 <div class="h4">
@@ -104,7 +104,7 @@ new System.Globalization.CultureInfo("es-HN");
                                         else
                                         {
                                             <text>
-                                                <div class="h6">Órdenes de Pago SEFIN</div>
+                                                <div class="h6">Órdenes de Pago</div>
                                                 <div class="h4">0</div>
                                                 <div class="h6">Valor</div>
                                                 <div class="h4">- -</div>
@@ -121,7 +121,7 @@ new System.Globalization.CultureInfo("es-HN");
                 <div class="card shadow border-0 h-100">
                     <div class="car-deck">
                         <div class="card-header text-center">
-                            <img class="img-fluid" src="../img/LogoOncaet.png" alt="ir a Secretaria tecnica de planeación" />
+                            <img class="img-fluid" src="../img/LogoOtraEntidadt.png" alt="ir a Secretaria" />
                         </div>
                         <div class="car-bodycntos">
                             <div class="car-content">
@@ -133,7 +133,7 @@ new System.Globalization.CultureInfo("es-HN");
                                             {
                                                 <text>
                                                     <div class="col-md-4">
-                                                        <div class="h6">@item.OrigenInformacion.Replace("Oncae - Catalogo Electrónico", "Oncae - Catálogo Electrónico").Replace("Oncae - ", "").Replace("ONCAE - ", "").Replace("ONCAE - Catalogo Electrónico", "ONCAE - Catálogo Electrónico")</div>
+                                                        <div class="h6">@item.OrigenInformacion.Replace("Oncae - Catalogo Electrónico", "Catálogo Electrónico").Replace("Oncae - ", "").Replace("ONCAE - ", "").Replace("ONCAE - Catalogo Electrónico", "Catálogo Electrónico")</div>
                                                         <div class="h4"> @String.Format(cultureHN, "{0:n0***REMOVED***", @item.NumContratos)</div>
                                                         <div class="h6">Valor</div>
                                                         <div class="h4">
@@ -170,7 +170,7 @@ new System.Globalization.CultureInfo("es-HN");
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="alertCont alert-info" role="alert">Para evitar duplicaciones en los análisis, se recomienda utilizar las publicaciones de manera separada, usando los datos de <strong>ONCAE</strong> para análisis sobre licitaciones, y <strong>SEFIN</strong> para análisis de presupuesto y pago de contratos.</div>
+                <div class="alertCont alert-info" role="alert">Para evitar duplicaciones en los análisis, se recomienda utilizar las publicaciones de manera separada, usando los datos de <strong>ENTIDAD 2</strong> para análisis sobre licitaciones, y <strong>ENTIDAD 1</strong> para análisis de presupuesto y pago de contratos.</div>
             </div>
         </div>
         
@@ -289,11 +289,11 @@ new System.Globalization.CultureInfo("es-HN");
                 <div class="wrap-cta py-5">
                     <div class="wrap-cta py-5">
                         <p class="card-title mb-4">Información suministrada por:</p>
-                        <a href="https://www.sefin.gob.hn/" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="../img/logoHaciendaB.png" alt="ir a Secretaria tecnica de planeación" />
+                        <a href="https://www.dominioentidad.com/" target="_blank" rel="noopener">
+                            <img class="img-fluid" src="../img/logoHaciendaP.png" alt="ir a Secretaria" />
                         </a>
-                        <a href="https://www.oncae.gob.hn/" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="../img/LogoOncaet.png" alt="ir a Secretaria tecnica de planeación" />
+                        <a href="https://www.dominioentidad2.com/" target="_blank" rel="noopener">
+                            <img class="img-fluid" src="../img/LogoOtraEntidad.png" alt="ir a Secretaria" />
                         </a>
 
                     </div>
@@ -316,7 +316,7 @@ new System.Globalization.CultureInfo("es-HN");
 
 <input id="contratista" name="contratista" type="hidden" value="@Model.Contratista">
 
-<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-K5kTaSleRCemypwx4QXtGBNyBHE3K9sK5IFL3UkZ3aOAGvXIFgAIvfS/jDzXrWvM" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
 <script src="js/contratista_aux.js"></script>
 <script src="https://d3js.org/d3.v4.min.js" integrity="sha384-1EOYqz4UgZkewWm70NbT1JBUXSQpOIS2AaJy6/evZH+lXOrt9ITSJbFctNeyBoIJ" crossorigin="anonymous"></script>
 

@@ -312,7 +312,7 @@ function getAnnio(moneda, nombreProceso = null) {
                                         + '				<span class="h4">' + info[i].origenFondos.toString() + '</span>  </div>'
                                         + '			<div class="col-xs-12 col-md-6">'
                                         + '				<span class="small">Fuente de Datos</span><div class="clearfix"></div>'
-                                        + '				<span class="h4">' + info[i].origenInformacion.toString().toUpperCase().replace("ONCAE - CATALOGO ELECTRÓNICO","ONCAE - CATÁLOGO ELECTRÓNICO") + '</span>  </div> '
+                                        + '				<span class="h4">' + info[i].origenInformacion.toString().toUpperCase().replace("ONCAE - CATALOGO ELECTRÓNICO","CATÁLOGO ELECTRÓNICO") + '</span>  </div> '
                                         + '      </div> '
 							            + '	</div>'
 							            + '<div class="contractNumberRP"><span class="">Código proceso: </span>'

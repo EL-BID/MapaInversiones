@@ -23,7 +23,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
             try {
                 string fromAddress = Convert.ToString(configuration["EmailSettings:from"]);
 
-                mMailMessage.From = new MailAddress(fromAddress, "MapaInversiones Honduras (No Reply)");
+                mMailMessage.From = new MailAddress(fromAddress, "MapaInversiones (No Reply)");
 
                 vecCorreos = corrEnv.Split(';');
                 for (int i = 0; i <= vecCorreos.Length - 1; i++) {

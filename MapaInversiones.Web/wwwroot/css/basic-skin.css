@@ -341,7 +341,8 @@ code {
     padding: 28px 0px;
 ***REMOVED***
     .logoIntro img {
-        width: 150px;
+        width: 300px;
+        height: 90px;
 ***REMOVED***
 
 
@@ -1094,7 +1095,7 @@ blockquote {
 ***REMOVED***
 
 /*ico*/
-.icohonduras {
+.icopais{
     text-align: left;
     border-bottom: 2px solid #88CDDE;
     width: 73px;

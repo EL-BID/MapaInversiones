@@ -521,7 +521,7 @@ function getContratos(annio, ruc, origen, pagina, registros) {
                                 inicio += ''
                                     + '         <div class="row border-b">'
                                     + '             <div class="col-xs-12 col-md-12"><span class="txt_small">Fuente de Datos</span><span class="amount_adj">';
-                                inicio += info[i].origenInformacion.toString().toUpperCase().replace("ONCAE - CATALOGO ELECTRÓNICO", "ONCAE - CATÁLOGO ELECTRÓNICO");
+                                inicio += info[i].origenInformacion.toString().toUpperCase().replace("ONCAE - CATALOGO ELECTRÓNICO", "CATÁLOGO ELECTRÓNICO");
                                 inicio += '</span></div>'
                                     + '         </div>';
                         ***REMOVED***

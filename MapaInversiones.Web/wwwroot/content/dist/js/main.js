@@ -1232,7 +1232,7 @@ define('app/network/Services', ['./urlsMap',
 			root = DEBUG_MODE ? '' : window.location.protocol + '//' + window.location.host
 		// root = 'http://172.16.78.69:29579'
 
-		window.appVersion = { Name: 'Mapa Regalias', Version: '0.3.2' ***REMOVED***;
+		window.appVersion = { Name: 'MapaInversiones', Version: '0.9' ***REMOVED***;
 
 		//console.info(window.appVersion)
 
@@ -8875,15 +8875,15 @@ require([
 			// Update SM
 			$('#share .facebook').attr('href', 'http://www.facebook.com/sharer.php?u=' +
 				shareURL + '&t=Sistema%20General%20de%20Regalías')
-			$('#share .twitter').attr('href', 'http://twitter.com/intent/tweet?\
+			$('#share .twitter').attr('href', 'http://X.com/intent/tweet?\
 			text=' +
-				encodeURIComponent('Realizé una búsqueda en @Regalias_gov ') +
+				encodeURIComponent('Realizé una búsqueda en @x_gobierno ') +
 				'&url=' +
-				shareURL + '&t=Sistema%20General%20de%20Regalías')
+				shareURL + '&t=Sistema%20de%20Regalías%20del%20País')
 			$('#share .email').attr('href',
 				'mailto:amigo@email.com?\
-			subject=Sistema General de Regalías&\
-			body=Realizé una búsqueda en Sistema General de  Regalías: ' +
+			subject=Sistema de Regalías del País&\
+			body=Realizé una búsqueda en Sistema de Regalías del País: ' +
 				shareURL)
 		***REMOVED***
 

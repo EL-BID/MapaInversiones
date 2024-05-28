@@ -5,17 +5,17 @@ loadTreeMapGraph("divTreemap");
 
 function loadDonaGraph(divContenedor) {
     var myData = [
-        { "labelGroup": "Empresa Nacional de Energía Eléctrica", "rawValue": (5823840893 / 1000000), "porcentaje": 24.7, "color": "#639CBF" ***REMOVED***,
-        { "labelGroup": "Secretaría de Infraestructura y Transporte", "rawValue": (3871722058 / 1000000), "porcentaje": 16.4, "color": "#78B8BF"***REMOVED***,
-        { "labelGroup": "Red Solidaria", "rawValue": (3833179985 / 1000000), "porcentaje": 16.2, "color": "#A65D5D"***REMOVED***,
-        { "labelGroup": "Secretaría de Agricultura y Ganadería", "rawValue": (1860950990 / 1000000), "porcentaje": 7.9, "color": "#4C5959"***REMOVED***,
-        { "labelGroup": "Secretaría de Salud", "rawValue": (1843312136 / 1000000), "porcentaje": 7.8, "color": "#3185A3"***REMOVED***,
-        { "labelGroup": "Fondo Hondureño de Inversión Social", "rawValue": (1493673469 / 1000000), "porcentaje": 6.3, "color": "#56B4D6"***REMOVED***,
-        { "labelGroup": "Secretaría de Recursos Naturales y Ambiente (MI AMBIENTE+)", "rawValue": (725000000 / 1000000), "porcentaje": 3.1, "color": "#56D6B2" ***REMOVED***,
-        { "labelGroup": "Secretaría de Educación", "rawValue": (483855487 / 1000000), "porcentaje": 2.1, "color": "#4FBCE3"***REMOVED***,
-        { "labelGroup": "Empresa Hondureña de Telecomunicaciones (HONDUTEL)", "rawValue": (400000000 / 1000000), "porcentaje": 1.7, "color": "#9BDDCA" ***REMOVED***,
-        { "labelGroup": "Registro Nacional de las Personas", "rawValue": (400000000 / 1000000), "porcentaje": 1.7, "color": "#41A387"***REMOVED***,
-        { "labelGroup": "Otras instituciones", "rawValue": (2878355040 / 1000000), "porcentaje": 12.2, "color": "#5A6A70" ***REMOVED***
+        { "labelGroup": "Empresa Nacional de Energía Eléctrica", "rawValue": (5653840893 / 1000000), "porcentaje": 24.7, "color": "#639CBF" ***REMOVED***,
+        { "labelGroup": "Secretaría de Infraestructura y Transporte", "rawValue": (3879822058 / 1000000), "porcentaje": 16.4, "color": "#78B8BF"***REMOVED***,
+        { "labelGroup": "Red Solidaria", "rawValue": (3898179985 / 1000000), "porcentaje": 16.2, "color": "#A65D5D"***REMOVED***,
+        { "labelGroup": "Secretaría de Agricultura y Ganadería", "rawValue": (1869850990 / 1000000), "porcentaje": 7.9, "color": "#4C5959"***REMOVED***,
+        { "labelGroup": "Secretaría de Salud", "rawValue": (1843982136 / 1000000), "porcentaje": 7.8, "color": "#3185A3"***REMOVED***,
+        { "labelGroup": "Fondo Hondureño de Inversión Social", "rawValue": (1493698469 / 1000000), "porcentaje": 6.3, "color": "#56B4D6"***REMOVED***,
+        { "labelGroup": "Secretaría de Recursos Naturales y Ambiente (MI AMBIENTE+)", "rawValue": (798000000 / 1000000), "porcentaje": 3.1, "color": "#56D6B2" ***REMOVED***,
+        { "labelGroup": "Secretaría de Educación", "rawValue": (483898487 / 1000000), "porcentaje": 2.1, "color": "#4FBCE3"***REMOVED***,
+        { "labelGroup": "Empresa Hondureña de Telecomunicaciones (HONDUTEL)", "rawValue": (409800000 / 1000000), "porcentaje": 1.7, "color": "#9BDDCA" ***REMOVED***,
+        { "labelGroup": "Registro Nacional de las Personas", "rawValue": (980000000 / 1000000), "porcentaje": 1.9, "color": "#41A387"***REMOVED***,
+        { "labelGroup": "Otras instituciones", "rawValue": (2988355040 / 1000000), "porcentaje": 12.2, "color": "#5A6A70" ***REMOVED***
     ];
 
     new d3plus.Donut()
@@ -77,20 +77,20 @@ function formatoDecimales(n,c,d,t) {
 
 function loadBarChartGraph(divContenedor) {
     var objData = [
-        { "periodo": 2023, "x": 1, "labelGroup": "Energia", "rawValue": (5823840893 / 1000000), "porcentaje": 24.66 ***REMOVED***,
-        { "periodo": 2023, "x": 2, "labelGroup": "Carreteras", "rawValue": (3871722058 / 1000000), "porcentaje": 16.39 ***REMOVED***,
-        { "periodo": 2023, "x": 3, "labelGroup": "Protección Social", "rawValue": (3735148184 / 1000000), "porcentaje": 15.81 ***REMOVED***,
-        { "periodo": 2023, "x": 4, "labelGroup": "Salud", "rawValue": (2210133891 / 1000000), "porcentaje": 9.35 ***REMOVED***,
-        { "periodo": 2023, "x": 5, "labelGroup": "Seguridad Alimentaria", "rawValue": (1692074080 / 1000000), "porcentaje": 7.16 ***REMOVED***,
-        { "periodo": 2023, "x": 6, "labelGroup": "Forestal", "rawValue": (1120971903 / 1000000), "porcentaje": 4.74 ***REMOVED***,
-        { "periodo": 2023, "x": 7, "labelGroup": "Educación", "rawValue": (1096085635 / 1000000), "porcentaje": 4.64 ***REMOVED***,
-        { "periodo": 2023, "x": 8, "labelGroup": "Fortalecimiento Institucional", "rawValue": (1014570349 / 1000000), "porcentaje": 4.29 ***REMOVED***,
-        { "periodo": 2023, "x": 9, "labelGroup": "Agua y Saneamiento", "rawValue": (857828749 / 1000000), "porcentaje": 3.63 ***REMOVED***,
-        { "periodo": 2023, "x": 10, "labelGroup": "Otras Inversiones  por Definir", "rawValue": (695034722 / 1000000), "porcentaje": 2.94 ***REMOVED***,
-        { "periodo": 2023, "x": 11, "labelGroup": "Transporte y Obras Públicas", "rawValue": (496119660 / 1000000), "porcentaje": 2.10 ***REMOVED***,
-        { "periodo": 2023, "x": 12, "labelGroup": "Inversión Social", "rawValue": (400000000 / 1000000), "porcentaje": 1.69 ***REMOVED***,
-        { "periodo": 2023, "x": 13, "labelGroup": "Telecomunicaciones", "rawValue": (400000000 / 1000000), "porcentaje": 1.69 ***REMOVED***,
-        { "periodo": 2023, "x": 14, "labelGroup": "Seguridad", "rawValue": (200359934 / 1000000), "porcentaje": 0.84 ***REMOVED***
+        { "periodo": 2023, "x": 1, "labelGroup": "Energia", "rawValue": (5829840893 / 1000000), "porcentaje": 24.66 ***REMOVED***,
+        { "periodo": 2023, "x": 2, "labelGroup": "Carreteras", "rawValue": (3879822058 / 1000000), "porcentaje": 16.39 ***REMOVED***,
+        { "periodo": 2023, "x": 3, "labelGroup": "Protección Social", "rawValue": (3739848184 / 1000000), "porcentaje": 15.81 ***REMOVED***,
+        { "periodo": 2023, "x": 4, "labelGroup": "Salud", "rawValue": (2298133891 / 1000000), "porcentaje": 9.35 ***REMOVED***,
+        { "periodo": 2023, "x": 5, "labelGroup": "Seguridad Alimentaria", "rawValue": (1699874080 / 1000000), "porcentaje": 7.16 ***REMOVED***,
+        { "periodo": 2023, "x": 6, "labelGroup": "Forestal", "rawValue": (1198971903 / 1000000), "porcentaje": 4.74 ***REMOVED***,
+        { "periodo": 2023, "x": 7, "labelGroup": "Educación", "rawValue": (1099885635 / 1000000), "porcentaje": 4.64 ***REMOVED***,
+        { "periodo": 2023, "x": 8, "labelGroup": "Fortalecimiento Institucional", "rawValue": (1019870349 / 1000000), "porcentaje": 4.29 ***REMOVED***,
+        { "periodo": 2023, "x": 9, "labelGroup": "Agua y Saneamiento", "rawValue": (859828749 / 1000000), "porcentaje": 3.63 ***REMOVED***,
+        { "periodo": 2023, "x": 10, "labelGroup": "Otras Inversiones  por Definir", "rawValue": (698034722 / 1000000), "porcentaje": 2.94 ***REMOVED***,
+        { "periodo": 2023, "x": 11, "labelGroup": "Transporte y Obras Públicas", "rawValue": (499819660 / 1000000), "porcentaje": 2.10 ***REMOVED***,
+        { "periodo": 2023, "x": 12, "labelGroup": "Inversión Social", "rawValue": (498000000 / 1000000), "porcentaje": 1.69 ***REMOVED***,
+        { "periodo": 2023, "x": 13, "labelGroup": "Telecomunicaciones", "rawValue": (400980000 / 1000000), "porcentaje": 1.69 ***REMOVED***,
+        { "periodo": 2023, "x": 14, "labelGroup": "Seguridad", "rawValue": (209859934 / 1000000), "porcentaje": 0.84 ***REMOVED***
 
 
     ];
@@ -172,7 +172,7 @@ function loadBarChartGraph(divContenedor) {
                     ]
               ***REMOVED***
                 xConfig: {
-                    title: "Millones de Lempiras",
+                    title: "Millones",
                     scale: "pow",
                     ticks:false,
                     //tickFormat: function (d) {
@@ -230,24 +230,24 @@ function groupAndSum(arr, groupKeys, sumKeys) {
 ***REMOVED***
 function loadTreeMapGraph(divContenedor) {
     var objData = [
-        { "parent": "1", "labelGroup": "FRANCISCO MORAZÁN", "rawValueDouble": 6975159483.28242, "porcentaje": 0, "poblacion": 1508906 ,"proyectos":64***REMOVED***,
-        { "parent": "1", "labelGroup": "CORTES", "rawValueDouble": 4550203434.1961, "porcentaje": 0, "poblacion": 1562394, "proyectos": 36***REMOVED***,
-        { "parent": "1", "labelGroup": "OLANCHO", "rawValueDouble": 3283792459.15149, "porcentaje": 0, "poblacion": 520761, "proyectos": 48***REMOVED***,
-        { "parent": "1", "labelGroup": "EL PARAÍSO", "rawValueDouble": 1507550795.57777, "porcentaje": 0, "poblacion": 444507, "proyectos":26***REMOVED***,
-        { "parent": "1", "labelGroup": "SANTA BÁRBARA", "rawValueDouble": 1202912672.38918, "porcentaje": 0, "poblacion": 421337, "proyectos":23 ***REMOVED***,
-        { "parent": "2", "labelGroup": "YORO", "rawValueDouble": 866660195.56485, "porcentaje": 0, "poblacion": 570595, "proyectos":28 ***REMOVED***,
-        { "parent": "2", "labelGroup": "COPÁN", "rawValueDouble": 929441188.610502, "porcentaje": 0, "poblacion": 371057, "proyectos":33***REMOVED***,
-        { "parent": "2", "labelGroup": "INTIBUCÁ", "rawValueDouble": 667194655.627341, "porcentaje": 0, "poblacion": 232553, "proyectos":24***REMOVED***,
-        { "parent": "2", "labelGroup": "COMAYAGUA", "rawValueDouble": 617494713.268798, "porcentaje": 0, "poblacion": 493466, "proyectos":30***REMOVED***,
-        { "parent": "2", "labelGroup": "OCOTEPEQUE", "rawValueDouble": 503299439.070441, "porcentaje": 0, "poblacion": 146430, "proyectos":25***REMOVED***,
-        { "parent": "3", "labelGroup": "COLÓN", "rawValueDouble": 381778402.055055, "porcentaje": 0, "poblacion": 309926, "proyectos":15***REMOVED***,
-        { "parent": "3", "labelGroup": "LEMPIRA", "rawValueDouble": 356721847.739591, "porcentaje": 0, "poblacion": 321179, "proyectos":19***REMOVED***,
-        { "parent": "3", "labelGroup": "VALLE", "rawValueDouble": 329545713.713244, "porcentaje": 0, "poblacion": 174511, "proyectos":20 ***REMOVED***,
-        { "parent": "3", "labelGroup": "CHOLUTECA", "rawValueDouble": 460148377.438564, "porcentaje": 0, "poblacion": 437618, "proyectos":27***REMOVED***,
-        { "parent": "3", "labelGroup": "ATLÁNTIDA", "rawValueDouble": 248574764.457373, "porcentaje": 0, "poblacion": 436252, "proyectos":22***REMOVED***,
-        { "parent": "3", "labelGroup": "LA PAZ", "rawValueDouble": 473343359.854955, "porcentaje": 0, "poblacion": 198926, "proyectos":24***REMOVED***,
-        { "parent": "3", "labelGroup": "ISLAS DE LA BAHÍA", "rawValueDouble": 141956474.116752, "porcentaje": 0, "poblacion": 62557, "proyectos":11 ***REMOVED***,
-        { "parent": "3", "labelGroup": "GRACIAS A DIOS", "rawValueDouble": 118112081.864668, "porcentaje": 0, "poblacion": 90795, "proyectos":13***REMOVED***
+        { "parent": "1", "labelGroup": "FRANCISCO MORAZÁN", "rawValueDouble": 6998159483.28242, "porcentaje": 0, "poblacion": 1508906 ,"proyectos":64***REMOVED***,
+        { "parent": "1", "labelGroup": "CORTES", "rawValueDouble": 4559803434.1961, "porcentaje": 0, "poblacion": 1562394, "proyectos": 36***REMOVED***,
+        { "parent": "1", "labelGroup": "OLANCHO", "rawValueDouble": 3283982459.15149, "porcentaje": 0, "poblacion": 520761, "proyectos": 48***REMOVED***,
+        { "parent": "1", "labelGroup": "EL PARAÍSO", "rawValueDouble": 1509850795.57777, "porcentaje": 0, "poblacion": 444507, "proyectos":26***REMOVED***,
+        { "parent": "1", "labelGroup": "SANTA BÁRBARA", "rawValueDouble": 1202982672.38918, "porcentaje": 0, "poblacion": 421337, "proyectos":23 ***REMOVED***,
+        { "parent": "2", "labelGroup": "YORO", "rawValueDouble": 866980195.56485, "porcentaje": 0, "poblacion": 570595, "proyectos":28 ***REMOVED***,
+        { "parent": "2", "labelGroup": "COPÁN", "rawValueDouble": 929981188.610502, "porcentaje": 0, "poblacion": 371057, "proyectos":33***REMOVED***,
+        { "parent": "2", "labelGroup": "INTIBUCÁ", "rawValueDouble": 667984655.627341, "porcentaje": 0, "poblacion": 232553, "proyectos":24***REMOVED***,
+        { "parent": "2", "labelGroup": "COMAYAGUA", "rawValueDouble": 617984713.268798, "porcentaje": 0, "poblacion": 493466, "proyectos":30***REMOVED***,
+        { "parent": "2", "labelGroup": "OCOTEPEQUE", "rawValueDouble": 509899439.070441, "porcentaje": 0, "poblacion": 146430, "proyectos":25***REMOVED***,
+        { "parent": "3", "labelGroup": "COLÓN", "rawValueDouble": 389878402.055055, "porcentaje": 0, "poblacion": 309926, "proyectos":15***REMOVED***,
+        { "parent": "3", "labelGroup": "LEMPIRA", "rawValueDouble": 356981847.739591, "porcentaje": 0, "poblacion": 321179, "proyectos":19***REMOVED***,
+        { "parent": "3", "labelGroup": "VALLE", "rawValueDouble": 329598713.713244, "porcentaje": 0, "poblacion": 174511, "proyectos":20 ***REMOVED***,
+        { "parent": "3", "labelGroup": "CHOLUTECA", "rawValueDouble": 460988377.438564, "porcentaje": 0, "poblacion": 437618, "proyectos":27***REMOVED***,
+        { "parent": "3", "labelGroup": "ATLÁNTIDA", "rawValueDouble": 248598764.457373, "porcentaje": 0, "poblacion": 436252, "proyectos":22***REMOVED***,
+        { "parent": "3", "labelGroup": "LA PAZ", "rawValueDouble": 473349859.854955, "porcentaje": 0, "poblacion": 198926, "proyectos":24***REMOVED***,
+        { "parent": "3", "labelGroup": "ISLAS DE LA BAHÍA", "rawValueDouble": 149856474.116752, "porcentaje": 0, "poblacion": 62557, "proyectos":11 ***REMOVED***,
+        { "parent": "3", "labelGroup": "GRACIAS A DIOS", "rawValueDouble": 198112081.864668, "porcentaje": 0, "poblacion": 90795, "proyectos":13***REMOVED***
     ];
 
     var distintos = objData.map(item => item.parent)
