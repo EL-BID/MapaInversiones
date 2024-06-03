@@ -96,26 +96,26 @@ El listado también se restringe a solo la información del contratista, y sus p
 
 Este cuadro resumen muestra los gastos de las 4 entidades principales (en orden descendente de ejecución), así como el botón para ver la información detallada de todas las entidades. Al hacer clic en el botón “Ver todas las entidades” se visualizará el listado de estas, mostrando los resultados específicos de todas las entidades que se encuentren indexadas.
 
- > ![Resumen Presupuesto gasto entidades](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Presupuestoentidades.png)
+- > ![Resumen Presupuesto gasto entidades](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Presupuestoentidades.png)
 
 Al hacer clic en “Ver todas las entidades”, como se ve en la siguiente imagen, el botón entrega una búsqueda con el filtro por defecto en “Entidad”, con lo cual se puede acceder a cualquiera de las Entidades y llegar al perfil correspondiente a cada una de las mismas.
 
- > ![Encabezado entidades gobierno](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/EncabezadoEntidades.png)
+- > ![Encabezado entidades gobierno](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/EncabezadoEntidades.png)
 
 El perfil de entidades inicia con un encabezado que permite seleccionar el año del cual se desea revisar la información, junto con un menú fijo, que permite ir de manera rápida a cada una de las secciones de la página.
 
- > ![Encabezado entidades seleccionada](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Encabezadoentidadseleccionada.png)
+- > ![Encabezado entidades seleccionada](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Encabezadoentidadseleccionada.png)
 
 
 La sección de misión y visión, como su nombre lo indica, muestra la información que se tenga en la base de datos respecto a esos dos tópicos relacionados con la entidad.
 
 Más abajo, en la siguiente sección muestra un gráfico Sankey, el cual muestra cómo se relacionan los ejes, objetivos generales y específicos, con el plan nacional de desarrollo.
 
- > ![Mision y vision entidad seleccionada](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/misionyvision.png)
+- > ![Mision y vision entidad seleccionada](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/misionyvision.png)
 
 Por último, en el perfil de entidad se encuentra una sección donde se encuentran indicadores, actividades y proyectos presupuestarios, de los diferentes programas según la clasificación de los mismos.
 
- > ![Programas entidad seleccionada](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Programasentidad.png)
+- > ![Programas entidad seleccionada](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Programasentidad.png)
 
 
 
@@ -128,31 +128,31 @@ La siguiente sección de la página principal muestra una sección dividida. En 
 
 En la parte izquierda se encuentra “sigue la conversación”, en donde se encuentra un widget de Twitter para ver los últimos mensajes publicados por la entidad en esa red social.
 
- > ![Seccion Noticias](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Noticias.png)
+- > ![Seccion Noticias](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Noticias.png)
 
 Más adelante el usuario encontrará dos secciones, la primera que muestra el enlace que lo envía a la sección de “Centro de ayuda”, allí puede encontrar tres secciones, una de preguntas frecuentes, otra con un glosario de términos relacionados, y por último a un formato de contacto que sirve para enviar una opinión correo configurado en la aplicación
 
 La siguiente sección es un menú de pie de página, mostrando nuevamente las diferentes secciones de la aplicación. Adicional, después del menú existe una sección que muestra los diferentes logos de las entidades participantes.
 
- > ![Acceso centro de ayuda](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Centrodeayuda.png)
+- > ![Acceso centro de ayuda](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Centrodeayuda.png)
 
 ## BACK - Administrador<br/><br/>
 
 Por esta opción de /admin es donde se pueden administrar los contenidos generados por medio de Orchard Core como el centro de ayuda, es decir, categorías, preguntas frecuentes, glosario y el formulario de contáctenos; los elementos de datos abiertos de inversión y proyectos; las noticias y otros componentes importantes, como los banners, anuncios y menús.<br/><br/>
 
- > ![Administrador plataforma mapainversiones](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Back.png)<br/><br/>
+- > ![Administrador plataforma mapainversiones](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Back.png)<br/><br/>
 
 ### Etiquetas de las gráficas.<br/>
 
 Para hacer más eficiente en tiempo y esfuerzo el cambio de los textos asociados a las gráficas y otros textos como notas, se incluyó dentro del gestor de contenidos un tipo de contenido llamado Etiqueta que es llamado dentro de los perfiles y donde se puede tener un título y un texto HTML. Para llegar al gestor hay que entrar con un usuario que tenga permisos de administrador, y entrar a la sección correspondiente.
 
- > ![Administrador plataforma mapainversiones](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Editaretiquetas.png)
+- > ![Administrador plataforma mapainversiones](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Editaretiquetas.png)
 
 
 
 Para realizar un llamado se generan variables en cada uno de los perfiles de acuerdo al alias dado a cada etiqueta y se hace llamado al título y al contenido HTML.
 
- > ![Llamado variables](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Llamadovariables.png)
+- > ![Llamado variables](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Llamadovariables.png)
 
 
 
@@ -162,13 +162,13 @@ Finalmente, con el equipo de diseño se genera el div donde se va a visualizar l
 
 En el centro de ayuda se cuenta con tres divisiones, preguntas frecuentes, glosario y contáctenos. Para este último elemento se creó un tipo de contenido llamado mensaje donde se definen los campos que posteriormente se van a llenar.
 
- > ![Formulario de contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Formcontacto.png) 
+- > ![Formulario de contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Formcontacto.png) 
 
 
 
 Posteriormente se crea el Workflow o flujo de trabajo correspondiente donde se indica que pasa luego de que el formulario es enviado por el método post desde la página web.
 
- > ![Diagrama de flujo de trabajo del formulario de contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Workflow.png) 
+- > ![Diagrama de flujo de trabajo del formulario de contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Workflow.png) 
 
 
 
@@ -176,13 +176,13 @@ Después, se crea en la página web el formulario con el llamado al Workflow y l
 
 De igual manera se generan los espacios para mostrar los mensajes de confirmación de envío, o de error en el proceso según corresponda a los resultados del workflow.
 
- > ![Implementación del formulario de contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Formulatioimplementado.png) 
+- > ![Implementación del formulario de contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Formulatioimplementado.png) 
 
 
 
 Como característica de seguridad en los formularios se utiliza la etiqueta @Html.AntiForgeryToken() en el formulario, la misma se utiliza para Validar Token el Antifalsificación, para asegurar que los valores del formulario no se hayan modificado.
 
- > ![Formulario de contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Contacto.png) 
+- > ![Formulario de contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Contacto.png) 
 
 
 
@@ -192,6 +192,6 @@ En el momento que se realizó la instalación en el servidor de producción se g
 
 Se ajustó la página de noticias para incluir la imagen que se carga dentro del blog post en el gestor de contenido y realizar el llamado con la función Orchard.MarkdownToHtmlAsync, con el fin de mantener el estilo HTML utilizado en el gestor de contenido.
 
- > ![Ejemplo de implementación de noticias](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Noticiasblog.png) 
+- > ![Ejemplo de implementación de noticias](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Noticiasblog.png) 
 
 
