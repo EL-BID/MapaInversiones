@@ -148,14 +148,13 @@ Para hacer más eficiente en tiempo y esfuerzo el cambio de los textos asociados
 
  > ![Administrador plataforma mapainversiones](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Editaretiquetas.png)
 
-<center>*Imagen 22. Etiqueta de las gráficas*</center><br/><br/>
 
 
 Para realizar un llamado se generan variables en cada uno de los perfiles de acuerdo al alias dado a cada etiqueta y se hace llamado al título y al contenido HTML.
 
  > ![Llamado variables](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Llamadovariables.png)
 
-<center>*Imagen 23. Llamado al tipo de contenido relacionado*</center><br/><br/>
+
 
 Finalmente, con el equipo de diseño se genera el div donde se va a visualizar la información para que el mismo corresponda a la imagen del sitio.
 
@@ -165,13 +164,13 @@ En el centro de ayuda se cuenta con tres divisiones, preguntas frecuentes, glosa
 
  > ![Formulario de contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Formcontacto.png) 
 
-<center>*Imagen 24. Tipo de contenido mensajes de contacto*></center><br/><br/>
+
 
 Posteriormente se crea el Workflow o flujo de trabajo correspondiente donde se indica que pasa luego de que el formulario es enviado por el método post desde la página web.
 
  > ![Diagrama de flujo de trabajo del formulario de contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Workflow.png) 
 
-<center>*Imagen 25. Diagrama de flujo de trabajo del formulario de contacto*</center><br/><br/
+
 
 Después, se crea en la página web el formulario con el llamado al Workflow y los campos correspondientes, donde se cuenta con la validación de los campos requeridos y la estructura de acuerdo al diseño planteado.
 
@@ -179,13 +178,13 @@ De igual manera se generan los espacios para mostrar los mensajes de confirmaci�
 
  > ![Implementación del formulario de contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Formulatioimplementado.png) 
 
-<center>*Imagen 26. Implementación del formulario de contacto*</center><br/><br/>
+
 
 Como característica de seguridad en los formularios se utiliza la etiqueta @Html.AntiForgeryToken() en el formulario, la misma se utiliza para Validar Token el Antifalsificación, para asegurar que los valores del formulario no se hayan modificado.
 
  > ![Formulario de contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Contacto.png) 
 
-<center>*Imagen 27. Formulario de contacto*</center><br/><br/>
+
 
 En el momento que se realizó la instalación en el servidor de producción se genera un error en el llamado al workflow, por esta razón se ocultó la parte del formulario de contáctenos y solo se dejaron las preguntas frecuentes y el glosario en el centro de ayuda. Se realizaron los ajustes para no mostrar la sección correspondiente y también se agregaron clases para resaltar el elemento seleccionado actualmente, ya sea una pregunta o una palabra del glosario.
 
@@ -195,4 +194,4 @@ Se ajustó la página de noticias para incluir la imagen que se carga dentro del
 
  > ![Ejemplo de implementación de noticias](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/manual/Noticiasblog.png) 
 
-<center>*Imagen 28. Ejemplo de implementación de noticias*</center>
+
