@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8" />
+    <title>InvestmentMap - Institution profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="UI design framework basado en Bootstrap 5.0" name="description" />
+    <meta content="Luis Mendez, Enrique Oyaga" name="author" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- Bootstrap Css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<!--Custom css style-->
+	<link href="css/basic-skin.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <!-- Material design Icons Css -->
+	<link rel="preload" href="/assets/fonts/material-design-icons/material-design-icons.woff2" as="font" type="font/woff2" crossorigin="">
+	<link rel="preload" href="/assets/fonts/material-design-icons/material-design-icons-outlined.woff2" as="font" type="font/woff2" crossorigin="">
+	
+</head>
+
+<body class="homepage">
+<!-- Begin mobile main menu -->
+<nav class="mob-main-mnu">
+        <div class="mob-main-mnu-content">
+    <ul class="mob-main-mnu-list">
+<li>
+
+<a href="#!">Inicio</a>
+                        <div class="mmm-btn"><i class="material-icons md-24">expand_more</i></div>
+</li>
+<li>
+
+	<a href="#!">Presupuesto</a>
+		<div class="mmm-btn"><i class="material-icons md-24">expand_more</i></div> 
+		<div class="mob-main-submnu">
+			<div class="mob-main-submnu-item">
+				<ul>
+					<li>
+						<a href="/PresupuestoGeneral" data-title="Presupuesto de Inversiones Públicas">
+							<span>Presupuesto de Inversiones Públicas</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+	</div> 
+</li>
+<li>
+
+<a href="#!">Inversión pública</a>
+                        <div class="mmm-btn"><i class="material-icons md-24">expand_more</i></div> <div class="mob-main-submnu">
+    <div class="mob-main-submnu-item">
+        <ul>
+<li>
+    <a href="/MapView" data-title="Mapa de Inversión Pública">
+        <span>Mapa de Inversión Pública</span>
+    </a>
+</li><li>
+    <a href="/BusquedaResultados?Type=Provincia" data-title="Provincias">
+        <span>Provincias</span>
+    </a>
+</li><li>
+    <a href="/BusquedaResultados?Type=Municipio" data-title="Municipios">
+        <span>Municipios</span>
+    </a>
+</li><li>
+    <a href="/contratos" data-title="Contratos">
+        <span>Contratos</span>
+    </a>
+</li>        </ul>
+    </div>
+</div> </li><li>
+
+<a href="#!">Gestión de emergencias</a>
+    <div class="mmm-btn"><i class="material-icons md-24">expand_more</i></div> <div class="mob-main-submnu">
+    <div class="mob-main-submnu-item">
+        <ul>
+			<li>
+				<a href="/PresupuestoGeneralEmergencia" data-title="Presupuesto General">
+					<span>Presupuesto General</span>
+				</a>
+			</li><li>
+				<a href="/Emergencia?emergencia=5" data-title="Lluvias 2023">
+					<span>Lluvias 2023</span>
+				</a>
+			</li><li>
+				<a href="/Emergencia?emergencia=2" data-title="Huracán Fiona">
+					<span>Huracán Fiona</span>
+				</a>
+			</li>        </ul>
+				</div>
+			</div> </li><li>
+
+			<a href="/DatosAbiertos" data-title="Datos Abiertos">
+				<span>Datos Abiertos</span>
+			</a></li><li>
+
+			<a href="/ParticipacionCiudadana" data-title="Participación Ciudadana">
+				<span>Participación Ciudadana</span>
+			</a></li>    </ul>         </div>
+					<div class="mob-main-mnu-footer">
+						<p>Con el apoyo del Banco Interamericano de Desarrollo - BID</p>
+					</div>
+    </nav>
+<!-- END mobile main menu -->
+	
+	
+	
+<!-- Begin HEADER -->	
+<header id="header" class="header">
+    <!-- TOP HEADER -->
+    <nav class="header-top">
+        <div class="container-fluid">
+            <div class="row justify-content-end">
+                <div class="col-auto">
+                    <div class="header-top-links">
+                        <!-- secondary pages -->
+                        <ul class="nav">
+
+                            <li class="nav-item">
+                                <a href="/Acercade" title="Acerca de MapaInversiones">
+                                    Acerca de MapaInversiones Republica Dominicana
+                                </a>
+                            </li>
+                            <!--<li class="nav-item">
+        <a href="/CentroAyuda?id=1" title="Centro de Ayuda">
+            Glosario
+        </a>
+    </li>-->
+                            <li class="nav-item">
+                                <a href="/CentroAyuda?id=2" title="Centro de Ayuda">
+                                    Centro de Ayuda
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/MarcoLegal" title="Marco Legal">
+                                    Marco Legal
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Contactanos" title="Contáctenos">
+                                    Contáctenos
+                                </a>
+                            </li>
+                            <!--<li class="nav-item">
+        <a href="#" title="log in">
+            Log in
+        </a>
+    </li>-->
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- End header top -->
+    <!-- Begin header fixed -->
+
+    <nav class="header-fixed">
+        <div class="wrap-head">
+            <div class="container-fluid">
+               <div class="row flex-nowrap align-items-center justify-content-between">
+                <div class="col-auto d-block d-lg-none header-fixed-col">
+                    <div class="main-mnu-btn">
+                        <span class="bar bar-1"></span>
+                        <span class="bar bar-2"></span>
+                        <span class="bar bar-3"></span>
+                        <span class="bar bar-4"></span>
+                    </div>
+                </div>
+                <div class="main-header col-md-12 header-fixed-col">
+                     <!-- Begin logo -->
+                    <div class="logoHinv">
+                        <a href="/" class="logo-ico-widht-text" title="MapaInversiones República Dominicana">
+                            <img class="img-fluid" src="img/logoMIV.svg" alt="Logo MapaInversiones">
+                        </a>						
+                    </div>
+
+                </div>
+
+            </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg col-auto col-static header-fixed-col main-navigation-bar">
+                        <div class="row flex-nowrap align-items-center justify-content-end">
+                            <div class="col-auto header-fixed-col d-none d-lg-block col-static">
+                                <!-- Begin main menu -->
+                                <nav class="main-mnu">
+                                        <ul class="main-mnu-list">
+                                                    <li class="main-mnu-item-has-child">
+
+                                                            <a href="/" data-title="Inicio">
+                                                                <span>Inicio</span>
+                                                                <i class="material-icons">expand_more</i>
+                                                            </a>
+                                                    </li>
+                                                    <li class="main-mnu-item-has-child">
+
+                                                            <a data-title="Presupuesto">
+                                                                <span>Presupuesto</span>
+                                                                <i class="material-icons">expand_more</i>
+                                                            </a>
+                                                                <ul>
+                                                                            <li>
+                                                                                <a href="/PresupuestoGeneral" data-title="Presupuesto de Inversiones Públicas">
+                                                                                    <span>Presupuesto de Inversiones Públicas</span>
+                                                                                </a>
+                                                                            </li>
+                                                                </ul>
+                                                    </li>
+                                                    <li class="main-mnu-item-has-child">
+
+                                                            <a href="/MapView" data-title="Inversión pública">
+                                                                <span>Inversión pública</span>
+                                                                <i class="material-icons">expand_more</i>
+                                                            </a>
+                                                                <ul>
+                                                                            <li>
+                                                                                <a href="/MapView" data-title="Mapa de Inversión Pública">
+                                                                                    <span>Mapa de Inversión Pública</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="/BusquedaResultados?Type=Provincia" data-title="Provincias">
+                                                                                    <span>Provincias</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="/BusquedaResultados?Type=Municipio" data-title="Municipios">
+                                                                                    <span>Municipios</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="/contratos" data-title="Contratos">
+                                                                                    <span>Contratos</span>
+                                                                                </a>
+                                                                            </li>
+                                                                </ul>
+                                                    </li>
+                                                    <li class="main-mnu-item-has-child">
+
+                                                            <a data-title="Gestión de emergencias">
+                                                                <span>Gestión de emergencias</span>
+                                                                <i class="material-icons">expand_more</i>
+                                                            </a>
+                                                                <ul>
+                                                                            <li>
+                                                                                <a href="/PresupuestoGeneralEmergencia" data-title="Presupuesto General">
+                                                                                    <span>Presupuesto General</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="/Emergencia?emergencia=5" data-title="Lluvias 2023">
+                                                                                    <span>Lluvias 2023</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="/Emergencia?emergencia=2" data-title="Huracán Fiona">
+                                                                                    <span>Huracán Fiona</span>
+                                                                                </a>
+                                                                            </li>
+                                                                </ul>
+                                                    </li>
+                                                    <li class="main-mnu-item-has-child">
+
+                                                            <a href="/DatosAbiertos" data-title="Datos Abiertos">
+                                                                <span>Datos Abiertos</span>
+                                                            </a>
+                                                    </li>
+                                                    <li class="main-mnu-item-has-child">
+
+                                                            <a href="/ParticipacionCiudadana" data-title="Participación Ciudadana">
+                                                                <span>Participación Ciudadana</span>
+                                                            </a>
+                                                    </li>
+                                        </ul>
+                                </nav>
+                                <!-- End main menu -->
+                            </div>
+                            <div class="col-auto header-fixed-col col-static">
+                                <!-- Begin header actions -->
+                                <ul class="header-actions">
+                                    <!-- Begin header search -->
+                                    <li>
+                                        <div class="header-search">
+                                            <div class="header-action-icon header-search-ico">
+                                                <i class="material-icons md-22 header-search-ico-search">search</i>
+                                                <i class="material-icons md-22 header-search-ico-close">close</i>
+                                            </div>
+                                            <form action="#!" method="post" class="header-search-form">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-field">
+                                                                <label for="field-search" class="form-field-label">Search...</label>
+                                                                <input type="search" class="form-field-input" name="Search" value="" autocomplete="off" required="required" id="field-search">
+                                                                <button type="submit" class="header-search-btn"><i class="material-icons md-22">search</i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </li><!-- End header search -->
+                                    <!-- Begin header navbar -->
+                                    <li class="d-block d-lg-none">
+                                        <div class="header-navbar">
+                                            <div class="header-navbar-btn">
+                                                <i class="material-icons md-24">more_vert</i>
+                                            </div>
+                                            <ul class="header-navbar-content">
+
+                                                <li>
+                                                    <a href="#!" title="About InvestmentMap">
+                                                        About InvestmentMap
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#!" title="LinkedIn">
+                                                        Help center
+                                                    </a>
+                                                </li>
+                                                    <li>
+                                                        <a href="/Login" title="Log in">
+                                                            Log in
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/Register" title="Create an account">
+                                                            New users
+                                                        </a>
+                                                    </li>
+
+                                            </ul>
+                                        </div>
+
+                                    </li><!-- End header navbar -->
+                                </ul><!-- End header actions -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End header fixed -->
+</header>
+<!-- END header -->	
+	
+<main>
+	<!-- begin main banner -->
+    <section class="banner-main mb-0">
+
+        <div class="container">
+            <!-- Begin bread crumbs -->
+            <nav class="bread-crumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="bread-crumbs-list">
+                                <li>
+                                    <a href="/">Inicio</a>
+                                    <i class="material-icons md-18">chevron_right</i>
+                                </li>
+                                <li><a href="/BusquedaResultados">Resultados de búsqueda</a><i class="material-icons md-18">chevron_right</i></li>
+                                <li>COMITE EJECUTOR DE INFRAESTRUCTA EN ZONAS TURISTICAS (CEIZTUR)</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <input type="hidden" id="codigoEntidadId" value="0213-01-0002">
+                </div>
+            </nav><!-- End bread crumbs -->
+
+
+            <div class="row justify-content-center">
+
+                <div class="col-lg-8">
+                    <div class="banner-main-info pb-0">
+                        <div class="banner-main-title">
+                            <h1>COMITE EJECUTOR DE INFRAESTRUCTA EN ZONAS TURISTICAS (CEIZTUR)</h1>
+                        </div>
+                        <div class="banner-main-desc">
+                            <span class="h5">Institución</span>
+                        </div>
+
+                    </div>
+
+                   
+
+                </div>
+                <!--NAVIGATION ON PAGE-->
+                
+        <div class="row navs-shortcuts">
+
+            <div class="" id="navs-header">
+
+                        <a class="btn-section" href="#presupuestoentidad">
+                    <span class="ic-shortcut"><i class="material-icons md-24">device_hub</i></span>
+                    <span class="text-btn">Presupuesto de la Institución</span>
+                </a>
+                <a class="btn-section" href="#trazabilidad">
+                    <span class="ic-shortcut"><i class="material-icons md-24">grid_view</i></span>
+                    <span class="text-btn">Trazabilidad de los recursos</span>
+                </a>
+               <!-- SE OCULTAN PROVISIONALMENTE <a class="btn-section" href="#participa">
+                    <span class="ic-shortcut"><i class="material-icons md-24">feedback</i></span>
+                    <span class="text-btn">Participación Ciudadana</span>
+                </a>
+                <a class="btn-section" href="#Shielo">
+                    <span class="ic-shortcut"><i class="material-icons md-24">live_help</i></span>
+                    <span class="text-btn">Proyectos Destacados</span>
+
+                         </a>-->
+               
+            </div>
+        </div>
+                
+                <!--FIN NAVIGATION ON PAGE-->
+            </div>
+            </div>
+
+    </section>
+	<!-- ===============end main banner========================== -->	
+    <!-- begin institution budget -->
+	<section class="section" id="presupuestoentidad">
+        <div class="container">
+           
+            <div class="section-heading heading-left">
+                <h2>Presupuesto de la Institución</h2>
+            </div>
+            <!--SELECT AÑO-->
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
+                    <!--YEAR FILTER-->
+                    <div class="form-group">
+                        <label for="annioEntidad">Selecciona un año:</label>
+                        <select class="form-select" aria-label="Selecciona un año:" id="annioEntidad" onchange="seleccionoAnio($('#annioEntidad option:selected').val());">
+
+                                    <option value="2024">2024</option>
+                                    
+                                    <option value="2023">2023</option>
+                                                            </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row py-4 justify-content-center" id="divResumen">
+                <div class="col-lg-4 mb-3">
+                    <div class="card h-100 shadow border-0 card-entidad b1">
+                        <div class="card-body">
+                            <div class="wrap-desc-entidad">
+                                <div class="h5">Presupuesto Vigente</div>
+                                <div class="h1" id="PresupuestoVigente">RD$ 4,416.52 millones </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3 ">
+                    <div class="card h-100 shadow border-0 card-entidad b2">
+                        <div class="card-body">
+                            <div class="wrap-desc-entidad">
+                                <div class="h5">Presupuesto Ejecutado</div>
+                                <div class="h1" id="PresupuestoEjecutado">RD$ 208.85 millones</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card h-100 shadow border-0 card-entidad b3">
+                        <div class="card-body">
+                            <div class="wrap-desc-entidad">
+                                <div class="h5">% Ejecutado</div>
+                                <div class="h1" id="PorcEjecutado">4.73  %</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+	
+    <!-- ===============end institution budget========================== -->
+    <!--begin TRACEABILITY-->
+<section class="section" id="trazabilidad">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading heading-left">
+                        <h2>Trazabilidad de recursos</h2>
+                    </div>
+                    <div class="desc-heading"><p>Conoce como se están usando los fondos, ¿en qué se gasta?, ¿en qué se invierte el dinero? y controla los procesos contractuales de la institución.</p></div>
+                </div>
+
+            </div>
+            <!--TABS SUBPROGRAMAS Y PROYECTOS-->
+            <div class="tabs goals">
+                <ul id="tabTipoPrograma" class="tabs-nav">
+                    <li class="enlace_tipo_contrato active" id="analisis">
+                        <div class="goal-number"></div>
+                        <div class="goal-name"><div class="h4">Análisis institución</div></div>
+                    </li>
+                    <li id="inversion" class="enlace_tipo_contrato">
+                        <div class="goal-number"></div>
+                        <div class="goal-name"><div class="h4">Inversión</div></div>
+                    </li>
+                     <li id="procesos" class="enlace_tipo_contrato">
+                        <div class="goal-number"></div>
+                        <div class="goal-name"><div class="h4">Procesos</div></div>
+                    </li>
+                    <li id="contratos" class="enlace_tipo_contrato">
+                        <div class="goal-number"></div>
+                        <div class="goal-name"><div class="h4">Contratos</div></div>
+                    </li>
+                </ul>
+                <div id="contentTabTipoPrograma" class="tabs-container mt-5">
+                    <div class="comparativeTable" id="divAnalisis" style="display: block;">
+
+                        <div class="container">
+                            <div class="row py-4">
+                                <div class="col-12">
+                                    <div class="">
+                                        <h3>Distribución del presupuesto</h3>
+                                        <div class="section-subheading">
+                                            <p>La distribución del presupuesto varía según las necesidades y prioridades específicas de la institución. <span class="text-bold">Haz clic en cada uno de los recuadros para conocer con mayor detalle las categorías de distribución.</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="offset-1 col-md-10 col-sm-10">
+                                    <div class="pChart">
+                                        <div id="divGraphPerFuncion" style="position: relative;"><svg class="d3plus-viz" aria-hidden="true" aria-labelledby="d3e3162c-a7e6-60d3-024e-95c659c64528-title d3e3162c-a7e6-60d3-024e-95c659c64528-desc" role="img" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" opacity="1" height="500px" style="height: 500px; display: inline; width: 1144.98px; cursor: auto;" width="1144.98px"><title id="d3e3162c-a7e6-60d3-024e-95c659c64528-title"></title><desc id="d3e3162c-a7e6-60d3-024e-95c659c64528-desc"></desc><g class="d3plus-viz-back" transform=""></g><g transform="translate(0, 0)" class="d3plus-viz-title"></g><g transform="translate(0, 0)" class="d3plus-viz-subtitle"></g><g transform="translate(0, 0)" class="d3plus-viz-total"></g><g transform="translate(0, 0)" class="d3plus-Treemap"><g class="d3plus-Rect-group"><g class="d3plus-Rect-shape" opacity="1"><rect class="d3plus-Shape d3plus-Rect d3plus-id-SERVICIOS-ECONOMICOS" transform="
+        translate(394.5,250)
+        scale(1)
+        rotate(0)" aria-label="1. SERVICIOS ECONÓMICOS, 3044050055.6000004." role="presentation" opacity="1" shape-rendering="geometricPrecision" pointer-events="visiblePainted" width="787" height="498" x="-393.5" y="-249" fill="#A65D5D" fill-opacity="1" rx="0" ry="0" stroke="rgb(152, 85, 85)" stroke-dasharray="0" stroke-linecap="butt" stroke-opacity="1" stroke-width="0" vector-effect="non-scaling-stroke"></rect><rect class="d3plus-Shape d3plus-Rect d3plus-id-SERVICIOS-SOCIALES" transform="
+        translate(966.5,243)
+        scale(1)
+        rotate(0)" aria-label="2. SERVICIOS SOCIALES, 1333059899.75." role="presentation" opacity="1" shape-rendering="geometricPrecision" pointer-events="visiblePainted" width="355" height="484" x="-177.5" y="-242" fill="#4C5959" fill-opacity="1" rx="0" ry="0" stroke="rgb(70, 81, 81)" stroke-dasharray="0" stroke-linecap="butt" stroke-opacity="1" stroke-width="0" vector-effect="non-scaling-stroke"></rect><rect class="d3plus-Shape d3plus-Rect d3plus-id-SERVICIOS--GENERALES" transform="
+        translate(891.5,492.5)
+        scale(1)
+        rotate(0)" aria-label="3. SERVICIOS  GENERALES, 22782379." role="presentation" opacity="1" shape-rendering="geometricPrecision" pointer-events="visiblePainted" width="205" height="13" x="-102.5" y="-6.5" fill="#78B8BF" fill-opacity="1" rx="0" ry="0" stroke="rgb(110, 168, 175)" stroke-dasharray="0" stroke-linecap="butt" stroke-opacity="1" stroke-width="0" vector-effect="non-scaling-stroke"></rect><rect class="d3plus-Shape d3plus-Rect d3plus-id-PROTECCION-DEL-MEDIO-AMBIENTE" transform="
+        translate(1069.5,492.5)
+        scale(1)
+        rotate(0)" aria-label="4. PROTECCIÓN DEL MEDIO AMBIENTE, 16625779.03." role="presentation" opacity="1" shape-rendering="geometricPrecision" pointer-events="visiblePainted" width="149" height="13" x="-74.5" y="-6.5" fill="#639CBF" fill-opacity="1" rx="0" ry="0" stroke="rgb(91, 143, 175)" stroke-dasharray="0" stroke-linecap="butt" stroke-opacity="1" stroke-width="0" vector-effect="non-scaling-stroke"></rect></g><g class="d3plus-Rect-image" opacity="1"></g><g class="d3plus-Rect-text" opacity="1"><g class="d3plus-textBox" id="d3plus-textBox-SERVICIOS-ECONOMICOS_0" transform="translate(6, 1.1999999999999993) rotate(0, 393.5, 229)" style="pointer-events: none;"><text dominant-baseline="alphabetic" opacity="1" aria-hidden="false" dir="ltr" fill="#f7f7f7" stroke="transparent" stroke-width="0" text-anchor="start" font-family="'Montserrat'" font-size="40px" font-weight="400" x="0px" y="40px" style="baseline-shift: 0%; opacity: 1; font-family: Montserrat; font-size: 40px; font-weight: 400;">SERVICIOS ECONÓMICOS</text></g><g class="d3plus-textBox" id="d3plus-textBox-SERVICIOS-ECONOMICOS_1" transform="translate(6, 451.76) rotate(0, 393.5, 25)" style="pointer-events: none;"><text dominant-baseline="alphabetic" opacity="1" aria-hidden="false" dir="ltr" fill="#f7f7f7" stroke="transparent" stroke-width="0" text-anchor="middle" font-family="'Montserrat'" font-size="32px" font-weight="400" x="388.5px" y="32px" style="baseline-shift: 0%; opacity: 1; font-family: Montserrat; font-size: 32px; font-weight: 400;">68.9%</text></g><g class="d3plus-textBox" id="d3plus-textBox-SERVICIOS-SOCIALES_0" transform="translate(794, 1.1999999999999993) rotate(0, 177.5, 222)" style="pointer-events: none;"><text dominant-baseline="alphabetic" opacity="1" aria-hidden="false" dir="ltr" fill="#f7f7f7" stroke="transparent" stroke-width="0" text-anchor="start" font-family="'Montserrat'" font-size="40px" font-weight="400" x="0px" y="40px" style="baseline-shift: 0%; opacity: 1; font-family: Montserrat; font-size: 40px; font-weight: 400;">SERVICIOS</text><text dominant-baseline="alphabetic" opacity="1" aria-hidden="false" dir="ltr" fill="#f7f7f7" stroke="transparent" stroke-width="0" text-anchor="start" font-family="'Montserrat'" font-size="40px" font-weight="400" x="0px" y="88px" style="baseline-shift: 0%; opacity: 1; font-family: Montserrat; font-size: 40px; font-weight: 400;">SOCIALES</text></g><g class="d3plus-textBox" id="d3plus-textBox-SERVICIOS-SOCIALES_1" transform="translate(794, 437.76) rotate(0, 177.5, 25)" style="pointer-events: none;"><text dominant-baseline="alphabetic" opacity="1" aria-hidden="false" dir="ltr" fill="#f7f7f7" stroke="transparent" stroke-width="0" text-anchor="middle" font-family="'Montserrat'" font-size="32px" font-weight="400" x="172.5px" y="32px" style="baseline-shift: 0%; opacity: 1; font-family: Montserrat; font-size: 32px; font-weight: 400;">30.2%</text></g></g><g class="d3plus-Rect-hover"></g><g class="d3plus-Rect-active"></g></g></g></svg></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row py-4">
+                                <div class="col-12">
+                                    <div class="">
+                                        <h3>¿En que gasta la entidad?</h3>
+                                        <div class="section-subheading">
+                                            <p>Conoce las principales categorías del gasto institucional tales como Infraestructura, personal, operaciones, etc. <span class="text-bold">Posiciona el cursor sobre cada sector de la gráfica para tener información más detallada.</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-lg-3">
+                                    <div class="group-expenditure" id="divTxtGrupoGasto"><div class="box" style="background:linear-gradient(to right, #639CBF 20px, #f2f2f2 0) !important;"><div class="h3">RD$ 3.619.995.763,7</div><div class="desc-item-expenditure">INFRAESTRUCTURA</div><div class="wrap-expenditure-link"></div></div><div class="box" style="background:linear-gradient(to right, #78B8BF 20px, #f2f2f2 0) !important;"><div class="h3">RD$ 715.766.200,8</div><div class="desc-item-expenditure">OBRAS EN EDIFICACIONES</div><div class="wrap-expenditure-link"></div></div><div class="box" style="background:linear-gradient(to right, #A65D5D 20px, #f2f2f2 0) !important;"><div class="h3">RD$ 53.990.661,8</div><div class="desc-item-expenditure">MOBILIARIO Y EQUIPO</div><div class="wrap-expenditure-link"></div></div><div class="box" style="background:linear-gradient(to right, #4C5959 20px, #f2f2f2 0) !important;"><div class="h3">RD$ 26.765.487,1</div><div class="desc-item-expenditure">OTROS SERVICIOS NO INCLUIDOS EN CONCEPTOS ANTERIORES</div><div class="wrap-expenditure-link"></div></div></div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="pChart">
+                                        <div id="divGraphPerGrupoGasto" style="height: auto; width: auto; position: relative;"><svg class="d3plus-viz" aria-hidden="true" aria-labelledby="012596ea-c427-bce0-67fd-13abcd6a6e0f-title 012596ea-c427-bce0-67fd-13abcd6a6e0f-desc" role="img" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" opacity="1" height="665px" style="height: 665px; display: inline; width: 792.484px;" width="792.484px"><title id="012596ea-c427-bce0-67fd-13abcd6a6e0f-title"></title><desc id="012596ea-c427-bce0-67fd-13abcd6a6e0f-desc"></desc><g class="d3plus-viz-back" transform=""></g><g transform="translate(0, 0)" class="d3plus-viz-title"></g><g transform="translate(0, 0)" class="d3plus-viz-subtitle"></g><g transform="translate(0, 0)" class="d3plus-viz-total"></g><g transform="translate(396.242, 332.5)" class="d3plus-Pie"><g class="d3plus-Path-group"><g class="d3plus-Path-shape" opacity="1"><path class="d3plus-Shape d3plus-Path d3plus-id-INFRAESTRUCTURA" transform="
+        translate(0,0)
+        scale(1)
+        rotate(0)" aria-label="1. 81,96%, 3619995763.72." role="presentation" opacity="1" shape-rendering="geometricPrecision" pointer-events="visiblePainted" d="M1.859,-332.495A332.5,332.5,0,1,1,-305.043,-132.307L-152.889,-65.3A166.25,166.25,0,1,0,1.859,-166.24Z" fill="#639CBF" fill-opacity="1" rx="0" ry="0" stroke="rgb(91, 143, 175)" stroke-dasharray="0" stroke-linecap="butt" stroke-opacity="1" stroke-width="0" vector-effect="non-scaling-stroke"></path><path class="d3plus-Shape d3plus-Path d3plus-id-OBRAS-EN-EDIFICACIONES" transform="
+        translate(0,0)
+        scale(1)
+        rotate(0)" aria-label="2. 16,21%, 715766200.81." role="presentation" opacity="1" shape-rendering="geometricPrecision" pointer-events="visiblePainted" d="M-303.545,-135.709A332.5,332.5,0,0,1,-46.315,-329.259L-24.077,-164.497A166.25,166.25,0,0,0,-151.391,-68.702Z" fill="#78B8BF" fill-opacity="1" rx="0" ry="0" stroke="rgb(110, 168, 175)" stroke-dasharray="0" stroke-linecap="butt" stroke-opacity="1" stroke-width="0" vector-effect="non-scaling-stroke"></path><path class="d3plus-Shape d3plus-Path d3plus-id-MOBILIARIO-Y-EQUIPO" transform="
+        translate(0,0)
+        scale(1)
+        rotate(0)" aria-label="3. 1,22%, 53990661.76." role="presentation" opacity="1" shape-rendering="geometricPrecision" pointer-events="visiblePainted" d="M-42.631,-329.756A332.5,332.5,0,0,1,-17.756,-332.026L-9.806,-165.961A166.25,166.25,0,0,0,-20.393,-164.994Z" fill="#A65D5D" fill-opacity="1" rx="0" ry="0" stroke="rgb(152, 85, 85)" stroke-dasharray="0" stroke-linecap="butt" stroke-opacity="1" stroke-width="0" vector-effect="non-scaling-stroke"></path><path class="d3plus-Shape d3plus-Path d3plus-id-OTROS-SERVICIOS-NO-INCLUIDOS-EN-CONCEPTOS-ANTERIORES" transform="
+        translate(0,0)
+        scale(1)
+        rotate(0)" aria-label="4. 0,61%, 26765487.09." role="presentation" opacity="1" shape-rendering="geometricPrecision" pointer-events="visiblePainted" d="M-14.042,-332.203A332.5,332.5,0,0,1,-1.859,-332.495L-1.859,-166.24A166.25,166.25,0,0,0,-6.093,-166.138Z" fill="#4C5959" fill-opacity="1" rx="0" ry="0" stroke="rgb(70, 81, 81)" stroke-dasharray="0" stroke-linecap="butt" stroke-opacity="1" stroke-width="0" vector-effect="non-scaling-stroke"></path></g><g class="d3plus-Path-image" opacity="1"></g><g class="d3plus-Path-text" opacity="1"><g class="d3plus-textBox" id="d3plus-textBox-INFRAESTRUCTURA_0" transform="translate(-109.09805067919726, 207.9278224940906) rotate(0, 99.1949435042404, 66.12996233616026)" style="pointer-events: none;"><text dominant-baseline="alphabetic" opacity="1" aria-hidden="false" dir="ltr" fill="#555555" stroke="transparent" stroke-width="0" text-anchor="middle" font-family="Roboto" font-size="50px" font-weight="400" x="94.1949435042404px" y="50px" style="baseline-shift: 0%; opacity: 1; font-family: Roboto; font-size: 50px; font-weight: 400;">81,96%</text></g><g class="d3plus-textBox" id="d3plus-textBox-OBRAS-EN-EDIFICACIONES_0" transform="translate(-213.46493087494798, -227.47605667570156) rotate(0, 71.99924354096596, 47.99949569397731)" style="pointer-events: none;"><text dominant-baseline="alphabetic" opacity="1" aria-hidden="false" dir="ltr" fill="#555555" stroke="transparent" stroke-width="0" text-anchor="middle" font-family="Roboto" font-size="42px" font-weight="400" x="66.99924354096596px" y="42px" style="baseline-shift: 0%; opacity: 1; font-family: Roboto; font-size: 42px; font-weight: 400;">16,21%</text></g><g class="d3plus-textBox" id="d3plus-textBox-MOBILIARIO-Y-EQUIPO_0" transform="translate(-33.604394967974514, -311.19424374827304) rotate(0, 10.249945015055886, 10.249945015055886)" style="pointer-events: none;"><text dominant-baseline="alphabetic" opacity="1" aria-hidden="false" dir="ltr" fill="#f7f7f7" stroke="transparent" stroke-width="0" text-anchor="middle" font-family="Roboto" font-size="8px" font-weight="400" x="5.249945015055886px" y="8px" style="baseline-shift: 0%; opacity: 1; font-family: Roboto; font-size: 8px; font-weight: 400;"></text></g></g><g class="d3plus-Path-hover"></g><g class="d3plus-Path-active"></g></g></g></svg></div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row py-4">
+                                <div class="col-12">
+                                    <div class="">
+                                        <h3>Modalidad de procesos adelantados por la institución</h3>
+                                        <div class="section-subheading">
+                                            <p>Las siguientes son las diferentes modalidades en las que se han adelantados procesos en la institución<span class="text-bold"></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="offset-1 col-md-10 col-sm-10">
+                                    <div class="pChart">
+                                        <div id="divGraphProcesos" style="min-height:500px;min-width:80px;width:960px;"><svg width="1264.6666666666665" height="632.3333333333333"><g transform="translate(80,5)"><g class="y axis"><g class="tick" transform="translate(0,452)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" transform="translate(-2,-30)" style="text-anchor: end;"><tspan x="0" y="0" dy="0.32em">Licitación</tspan><tspan x="0" y="0" dy="1.4200000000000002em">Pública</tspan><tspan x="0" y="0" dy="2.52em">Nacional</tspan></text></g><g class="tick" transform="translate(0,161)" style="opacity: 1;"><line x2="0" y2="0"></line><text dy=".32em" x="-3" y="0" transform="translate(-2,-30)" style="text-anchor: end;"><tspan x="0" y="0" dy="0.32em"></tspan><tspan x="0" y="0" dy="1.4200000000000002em">Comparación</tspan><tspan x="0" y="0" dy="2.52em">de Precios</tspan></text></g><path class="domain" d="M0,0H0V612.3333333333333H0"></path></g><g><rect class="bar" y="321" height="242" x="0" width="163.5238095238095"></rect><text class="label" y="442" x="166.5238095238095">1</text></g><g><rect class="bar" y="30" height="242" x="0" width="1144.6666666666665"></rect><text class="label" y="151" x="1147.6666666666665">7</text></g></g></svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comparativeTable" id="divInversionSection" style="display: none;">
+                        <div id="divProgramas"><div class="row"><div class="col-md-12"><div class="ProgramCards"><div class="card h-100"><p>Seleccione un Programa</p><div class="content-select"><select id="selectProgramas"><option value="13">Fomento y desarrollo de infraestructuras turísticas</option></select><i></i></div></div></div></div></div></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="loadingAsignacion" class="asigFin">
+                                    <h3 id="lblValorAsignacionPrograma"><div class="row justify-content-center"><div class="col-md-10"><div class="row"><div class="presini col-md-4"><span class="h5">Presupuesto Vigente</span><div class="clearfix"></div><span class="h2"><span class="">RD$ 4.416,5 Millones</span></span></div><div class="presini col-md-4"><span class="h5">Presupuesto Ejecutado</span><div class="clearfix"></div><span class="h2"><span class="">RD$ 208,8 Millones</span></span></div><div class="presexc col-md-3"><span class="h5">Porcentaje de Ejecución</span><div class="clearfix"></div><span class="h2">4,7%</span></div></div></div></div></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="divInversion">
+							<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+								<div class="panel panel-default "><div class="panel-heading" role="tab" id="headingOne_0_0"><div class="panel-title d-flex"><a class="w-90 collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_0_0" aria-expanded="false" aria-controls="collapseOne_0_0"><div class="head"><div class="data0 mainData"><div class="badge badge-outlined"><span class="labelTit">CÓDIGO BPIN: <strong>15083</strong></span></div><br><span class="td1">RECONSTRUCCIÓN DEL MALECÓN DEL MUNICIPIO DE SANTA BARBARA DE SAMANÁ, PROVINCIA  SAMANÁ</span></div><div class="data1"><span class="labelTit">Valor Proyecto</span><span class="td1">RD$ 376,18 Millones</span></div><div class="data1"><span class="labelTit">Avance Financiero</span><span class="td1">53,39%</span></div><div class="actions-links"><span class="badge badge-pill badge-primary">Ver líneas presupuestales</span></div></div></a><div class="actions-links"><a target="_blank" href="/PerfilProyecto/5825" class="text - small"><span class="badge badge-pill badge-primary"> Ver Perfil del Proyecto</span></a></div></div></div><div id="collapseOne_0_0" class="panel-collapse nivel1 collapse" role="tabpanel" aria="" -="" labeltitledby="headingOne_0_0" item="RECONSTRUCCIÓN DEL MALECÓN DEL MUNICIPIO DE SANTA BARBARA DE SAMANÁ, PROVINCIA  SAMANÁ" aria-expanded="false" style="height: 0px;"><div class="panel-body"><div class="panel-group nivel22" id="accordion_l2_0_0" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_0_0"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_0_0" href="#c2_0_0" aria-expanded="true" aria-controls="collapseOne_0_0"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Infraestructura terrestre y obras anexas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 57,8 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 58 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 18 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">30,7%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_0_1" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_0_1"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_0_1" href="#c2_1_0" aria-expanded="true" aria-controls="collapseOne_0_0"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras de energía</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 2,5 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 3 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_0_2" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_0_2"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_0_2" href="#c2_2_0" aria-expanded="true" aria-controls="collapseOne_0_0"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras hidraúlicas y sanitarias</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 104,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 151 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 12 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">8,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_0_3" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_0_3"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_0_3" href="#c2_3_0" aria-expanded="true" aria-controls="collapseOne_0_0"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras urbanísticas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 4,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 4 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">8,8%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_0_4" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_0_4"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_0_4" href="#c2_4_0" aria-expanded="true" aria-controls="collapseOne_0_0"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Otros Mobiliarios y Equipos no Identificados Precedentemente</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 2,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 2 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_0_5" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_0_5"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_0_5" href="#c2_5_0" aria-expanded="true" aria-controls="collapseOne_0_0"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Supervisión de infraestructura terrestre y obras anexas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 5,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 5 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="row align-items-center"></div></div><div class="col-md-12 text-center"><div class="actions-links"><a class="enlacecontratosasoc0" onclick="clickbotoncontratosasoc(0)" data-parameter="15083"><span class="badge badge-pill badge-primary"> Ver Contratos Asociados</span></a></div></div></div></div></div><div class="panel panel-default "><div class="panel-heading" role="tab" id="headingOne_1_6"><div class="panel-title d-flex"><a class="w-90" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_1_6" aria-expanded="true" aria-controls="collapseOne_1_6"><div class="head"><div class="data0 mainData"><div class="badge badge-outlined"><span class="labelTit">CÓDIGO BPIN: <strong>15086</strong></span></div><br><span class="td1">CONSTRUCCIÓN MALECON  EN EL DISTRITO MUNICIPAL CALETA, PROVINCIA  LA ROMANA</span></div><div class="data1"><span class="labelTit">Valor Proyecto</span><span class="td1">RD$ 93,39 Millones</span></div><div class="data1"><span class="labelTit">Avance Financiero</span><span class="td1">74,11%</span></div><div class="actions-links"><span class="badge badge-pill badge-primary">Ver líneas presupuestales</span></div></div></a><div class="actions-links"><a target="_blank" href="/PerfilProyecto/6022" class="text - small"><span class="badge badge-pill badge-primary"> Ver Perfil del Proyecto</span></a></div></div></div><div id="collapseOne_1_6" class="panel-collapse collapse nivel1" role="tabpanel" aria="" -="" labeltitledby="headingOne_1_6" item="CONSTRUCCIÓN MALECON  EN EL DISTRITO MUNICIPAL CALETA, PROVINCIA  LA ROMANA"><div class="panel-body"><div class="panel-group nivel22" id="accordion_l2_1_6" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_1_6"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_1_6" href="#c2_6_0" aria-expanded="true" aria-controls="collapseOne_1_6"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Infraestructura terrestre y obras anexas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 24,2 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 22 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 12 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">56,8%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_1_7" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_1_7"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_1_7" href="#c2_7_0" aria-expanded="true" aria-controls="collapseOne_1_6"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras urbanísticas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 0,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="row align-items-center"></div></div><div class="col-md-12 text-center"><div class="actions-links"><a class="enlacecontratosasoc1" onclick="clickbotoncontratosasoc(1)" data-parameter="15086"><span class="badge badge-pill badge-primary"> Ver Contratos Asociados</span></a></div></div></div></div><div class="panel panel-default "><div class="panel-heading" role="tab" id="headingOne_2_8"><div class="panel-title d-flex"><a class="w-90" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_2_8" aria-expanded="true" aria-controls="collapseOne_2_8"><div class="head"><div class="data0 mainData"><div class="badge badge-outlined"><span class="labelTit">CÓDIGO BPIN: <strong>15087</strong></span></div><br><span class="td1">REMODELACIÓN DE LAS INFRAESTRUCTURAS RECREATIVAS EN EL MALECÓN DE SAN PEDRO DE MACORÍS</span></div><div class="data1"><span class="labelTit">Valor Proyecto</span><span class="td1">RD$ 279,99 Millones</span></div><div class="data1"><span class="labelTit">Avance Financiero</span><span class="td1">39,06%</span></div><div class="actions-links"><span class="badge badge-pill badge-primary">Ver líneas presupuestales</span></div></div></a><div class="actions-links"><a target="_blank" href="/PerfilProyecto/6023" class="text - small"><span class="badge badge-pill badge-primary"> Ver Perfil del Proyecto</span></a></div></div></div><div id="collapseOne_2_8" class="panel-collapse collapse nivel1" role="tabpanel" aria="" -="" labeltitledby="headingOne_2_8" item="REMODELACIÓN DE LAS INFRAESTRUCTURAS RECREATIVAS EN EL MALECÓN DE SAN PEDRO DE MACORÍS"><div class="panel-body"><div class="panel-group nivel22" id="accordion_l2_2_8" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_2_8"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_2_8" href="#c2_8_0" aria-expanded="true" aria-controls="collapseOne_2_8"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Infraestructura terrestre y obras anexas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 124,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 129 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 6 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">4,5%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_2_9" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_2_9"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_2_9" href="#c2_9_0" aria-expanded="true" aria-controls="collapseOne_2_8"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras de energía</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 2,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 2 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 1 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">27,1%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_2_10" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_2_10"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_2_10" href="#c2_10_0" aria-expanded="true" aria-controls="collapseOne_2_8"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras hidraúlicas y sanitarias</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 6,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 6 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 3 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">45,4%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_2_11" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_2_11"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_2_11" href="#c2_11_0" aria-expanded="true" aria-controls="collapseOne_2_8"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras para edificación no residencial</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 0,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 10 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_2_12" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_2_12"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_2_12" href="#c2_12_0" aria-expanded="true" aria-controls="collapseOne_2_8"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras urbanísticas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 8,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 10 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_2_13" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_2_13"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_2_13" href="#c2_13_0" aria-expanded="true" aria-controls="collapseOne_2_8"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Otros Mobiliarios y Equipos no Identificados Precedentemente</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 2,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 2 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_2_14" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_2_14"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_2_14" href="#c2_14_0" aria-expanded="true" aria-controls="collapseOne_2_8"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Servicios técnicos y profesionales</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 1,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 1 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_2_15" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_2_15"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_2_15" href="#c2_15_0" aria-expanded="true" aria-controls="collapseOne_2_8"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Supervisión de infraestructura terrestre y obras anexas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 3,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 3 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="row align-items-center"></div></div><div class="col-md-12 text-center"><div class="actions-links"><a class="enlacecontratosasoc2" onclick="clickbotoncontratosasoc(2)" data-parameter="15087"><span class="badge badge-pill badge-primary"> Ver Contratos Asociados</span></a></div></div></div></div><div class="panel panel-default "><div class="panel-heading" role="tab" id="headingOne_3_16"><div class="panel-title d-flex"><a class="w-90" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_3_16" aria-expanded="true" aria-controls="collapseOne_3_16"><div class="head"><div class="data0 mainData"><div class="badge badge-outlined"><span class="labelTit">CÓDIGO BPIN: <strong>15092</strong></span></div><br><span class="td1">REMODELACIÓN  MALECON   MUNICIPIO  SANTO DOMINGO ESTE, PROVINCIA SANTO DOMINGO</span></div><div class="data1"><span class="labelTit">Valor Proyecto</span><span class="td1">RD$ 645,30 Millones</span></div><div class="data1"><span class="labelTit">Avance Financiero</span><span class="td1">46,59%</span></div><div class="actions-links"><span class="badge badge-pill badge-primary">Ver líneas presupuestales</span></div></div></a><div class="actions-links"><a target="_blank" href="/PerfilProyecto/6035" class="text - small"><span class="badge badge-pill badge-primary"> Ver Perfil del Proyecto</span></a></div></div></div><div id="collapseOne_3_16" class="panel-collapse collapse nivel1" role="tabpanel" aria="" -="" labeltitledby="headingOne_3_16" item="REMODELACIÓN  MALECON   MUNICIPIO  SANTO DOMINGO ESTE, PROVINCIA SANTO DOMINGO"><div class="panel-body"><div class="panel-group nivel22" id="accordion_l2_3_16" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_3_16"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_3_16" href="#c2_16_0" aria-expanded="true" aria-controls="collapseOne_3_16"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Infraestructura terrestre y obras anexas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 218,2 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 89 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_3_17" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_3_17"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_3_17" href="#c2_17_0" aria-expanded="true" aria-controls="collapseOne_3_16"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras de energía</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 20,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 20 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_3_18" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_3_18"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_3_18" href="#c2_18_0" aria-expanded="true" aria-controls="collapseOne_3_16"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras hidraúlicas y sanitarias</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 0,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_3_19" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_3_19"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_3_19" href="#c2_19_0" aria-expanded="true" aria-controls="collapseOne_3_16"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras para edificación no residencial</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 49,8 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 50 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_3_20" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_3_20"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_3_20" href="#c2_20_0" aria-expanded="true" aria-controls="collapseOne_3_16"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Servicios técnicos y profesionales</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 0,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 1 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_3_21" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_3_21"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_3_21" href="#c2_21_0" aria-expanded="true" aria-controls="collapseOne_3_16"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Supervisión de infraestructura terrestre y obras anexas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 5,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 5 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="row align-items-center"></div></div><div class="col-md-12 text-center"><div class="actions-links"><a class="enlacecontratosasoc3" onclick="clickbotoncontratosasoc(3)" data-parameter="15092"><span class="badge badge-pill badge-primary"> Ver Contratos Asociados</span></a></div></div></div></div><div class="panel panel-default "><div class="panel-heading" role="tab" id="headingOne_4_22"><div class="panel-title d-flex"><a class="w-90" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_4_22" aria-expanded="true" aria-controls="collapseOne_4_22"><div class="head"><div class="data0 mainData"><div class="badge badge-outlined"><span class="labelTit">CÓDIGO BPIN: <strong>15131</strong></span></div><br><span class="td1">RECONSTRUCCIÓN DE PLAZA DE VENDEDORES EN EL PUEBLO LOS PESCADORES, MUNICIPIO LAS TERRENAS, PROVINCIA SAMANA</span></div><div class="data1"><span class="labelTit">Valor Proyecto</span><span class="td1">RD$ 243,33 Millones</span></div><div class="data1"><span class="labelTit">Avance Financiero</span><span class="td1">29,28%</span></div><div class="actions-links"><span class="badge badge-pill badge-primary">Ver líneas presupuestales</span></div></div></a><div class="actions-links"><a target="_blank" href="/PerfilProyecto/6030" class="text - small"><span class="badge badge-pill badge-primary"> Ver Perfil del Proyecto</span></a></div></div></div><div id="collapseOne_4_22" class="panel-collapse collapse nivel1" role="tabpanel" aria="" -="" labeltitledby="headingOne_4_22" item="RECONSTRUCCIÓN DE PLAZA DE VENDEDORES EN EL PUEBLO LOS PESCADORES, MUNICIPIO LAS TERRENAS, PROVINCIA SAMANA"><div class="panel-body"><div class="panel-group nivel22" id="accordion_l2_4_22" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_4_22"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_4_22" href="#c2_22_0" aria-expanded="true" aria-controls="collapseOne_4_22"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Infraestructura terrestre y obras anexas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 24,4 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 24 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 2 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">9,9%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_4_23" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_4_23"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_4_23" href="#c2_23_0" aria-expanded="true" aria-controls="collapseOne_4_22"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras de energía</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 19,1 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 19 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">2,5%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_4_24" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_4_24"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_4_24" href="#c2_24_0" aria-expanded="true" aria-controls="collapseOne_4_22"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras hidraúlicas y sanitarias</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 23,5 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 24 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,1%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_4_25" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_4_25"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_4_25" href="#c2_25_0" aria-expanded="true" aria-controls="collapseOne_4_22"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras para edificación no residencial</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 91,3 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 91 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 5 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">5,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_4_26" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_4_26"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_4_26" href="#c2_26_0" aria-expanded="true" aria-controls="collapseOne_4_22"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras urbanísticas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 6,1 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 6 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_4_27" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_4_27"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_4_27" href="#c2_27_0" aria-expanded="true" aria-controls="collapseOne_4_22"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Servicios técnicos y profesionales</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 2,9 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 3 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_4_28" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_4_28"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_4_28" href="#c2_28_0" aria-expanded="true" aria-controls="collapseOne_4_22"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Supervisión e inspección de obras en edificaciones</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 4,4 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 4 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="row align-items-center"></div></div><div class="col-md-12 text-center"><div class="actions-links"><a class="enlacecontratosasoc4" onclick="clickbotoncontratosasoc(4)" data-parameter="15131"><span class="badge badge-pill badge-primary"> Ver Contratos Asociados</span></a></div></div></div></div><div class="panel panel-default "><div class="panel-heading" role="tab" id="headingOne_5_29"><div class="panel-title d-flex"><a class="w-90" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne_5_29" aria-expanded="true" aria-controls="collapseOne_5_29"><div class="head"><div class="data0 mainData"><div class="badge badge-outlined"><span class="labelTit">CÓDIGO BPIN: <strong>15243</strong></span></div><br><span class="td1">CONSTRUCCIÓN VÍA DE ACCESO A LA PLAYA ESTILLERO, D. M. EL LIMÓN, PROVINCIA SAMANÁ</span></div><div class="data1"><span class="labelTit">Valor Proyecto</span><span class="td1">RD$ 46,22 Millones</span></div><div class="data1"><span class="labelTit">Avance Financiero</span><span class="td1">18,39%</span></div><div class="actions-links"><span class="badge badge-pill badge-primary">Ver líneas presupuestales</span></div></div></a><div class="actions-links"><a target="_blank" href="/PerfilProyecto/6104" class="text - small"><span class="badge badge-pill badge-primary"> Ver Perfil del Proyecto</span></a></div></div></div><div id="collapseOne_5_29" class="panel-collapse collapse nivel1" role="tabpanel" aria="" -="" labeltitledby="headingOne_5_29" item="CONSTRUCCIÓN VÍA DE ACCESO A LA PLAYA ESTILLERO, D. M. EL LIMÓN, PROVINCIA SAMANÁ"><div class="panel-body"><div class="panel-group nivel22" id="accordion_l2_5_29" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_5_29"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_5_29" href="#c2_29_0" aria-expanded="true" aria-controls="collapseOne_5_29"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Infraestructura terrestre y obras anexas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 24,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 24 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 4 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">18,5%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_5_30" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_5_30"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_5_30" href="#c2_30_0" aria-expanded="true" aria-controls="collapseOne_5_29"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Obras de energía</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 0,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 4 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_5_31" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_5_31"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_5_31" href="#c2_31_0" aria-expanded="true" aria-controls="collapseOne_5_29"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Servicios técnicos y profesionales</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 0,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="panel-group nivel22" id="accordion_l2_5_32" role="tablist" aria-multiselectable="true"><div class="panel panel-default"><div class="panel-heading" role="tab" id="headLevel2_5_32"><div class="panel-title w-88"><a role="button" data-toggle="collapse" data-parent="#accordion_l2_5_32" href="#c2_32_0" aria-expanded="true" aria-controls="collapseOne_5_29"><div class="head"><div class="data1 mainData"><span class="labelTit">Objeto de gasto</span><span class="td1p">Supervisión de infraestructura terrestre y obras anexas</span></div><div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1p">RD$ 0,0 Millones</span></div><div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1p">RD$ 1 Millones</span></div><div class="data1"><span class="labelTit">Ejecución Acumulada</span><span class="td1p">RD$ 0 Millones</span></div><div class="data1a"><span class="labelTit">% Ejecución</span><span class="">0,0%</span></div></div></a></div></div></div></div><div class="row align-items-center"></div></div><div class="col-md-12 text-center"><div class="actions-links"><a class="enlacecontratosasoc5" onclick="clickbotoncontratosasoc(5)" data-parameter="15243"><span class="badge badge-pill badge-primary"> Ver Contratos Asociados</span></a></div></div></div></div><div id="divPagFichas"><span class="pag_actual" data-page="1"><text>1</text></span><a class="page_left" role="button" data-page="2"><span class="glyphicon"><text class="paginacion">2</text></span></a><a class="page_left" role="button" data-page="3"><span class="glyphicon"><text class="paginacion">3</text></span></a><a class="page_left" role="button" data-page="4"><span class="glyphicon"><text class="paginacion">4</text></span></a><a class="page_left" role="button" data-page="5"><span class="glyphicon"><text class="paginacion">5</text></span></a><a class="page_left" role="button" data-page="6"><span class="glyphicon"><text class="paginacion">6</text></span></a><a class="page_left" role="button" data-page="7"><span class="glyphicon"><text class="paginacion">7</text></span></a><a class="page_left" role="button" data-page="8"><span class="glyphicon"><text class="paginacion">8</text></span></a><a class="page_left" role="button" data-page="9"><span class="glyphicon"><text class="paginacion">9</text></span></a><a class="page_left" role="button" data-page="10"><span class="glyphicon"><text class="paginacion">10</text></span></a></div></div>
+                        
+                    </div>
+                    <div class="comparativeTable" id="divProcesosSection" style="display: none;">
+                        <div id="divProcesos"><div class="card-entidades-group"><div id="proceso_0" class="card d-flex"><div class="headEnt"><div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>CEIZTUR-CCC-LPN-2023-0004</strong></span><span class="td1">¿Construcción de Estacionamiento Vehicular para Visitantes de la Playa Bayahíbe Provincia La Altagracia¿ </span></div><div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">Proceso adjudicado y celebrado </span></div> <div class="data1"><span class="labelTit">Modalidad</span><span class="td1">Licitación Pública Nacional </span></div><div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">RD$ 202,000,073.00 </span></div></div><div class="btn-action"><div class="btnPerfil"><a target="_blank" href="https://comunidad.comprasdominicana.gob.do//Public/Tendering/OpportunityDetail/Index?noticeUID=DO1.NTC.1288901" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>VER PROCESO</span></a></div></div></div><div id="proceso_1" class="card d-flex"><div class="headEnt"><div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>CEIZTUR-CCC-CP-2023-0028</strong></span><span class="td1">Reconstrucción del Malecón de Haina Playa Gringo Municipio Bajos de Haina Provincia San Cristobal </span></div><div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">Proceso adjudicado y celebrado </span></div> <div class="data1"><span class="labelTit">Modalidad</span><span class="td1">Comparación de Precios </span></div><div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">RD$ 99,000,000.00 </span></div></div><div class="btn-action"><div class="btnPerfil"><a target="_blank" href="https://comunidad.comprasdominicana.gob.do//Public/Tendering/OpportunityDetail/Index?noticeUID=DO1.NTC.1306440" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>VER PROCESO</span></a></div></div></div><div id="proceso_2" class="card d-flex"><div class="headEnt"><div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>CEIZTUR-CCC-CP-2023-0029</strong></span><span class="td1">Reconstrucción de las Calles del Municipio de Sosúa Provincia Puerto Plata </span></div><div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">Proceso adjudicado y celebrado </span></div> <div class="data1"><span class="labelTit">Modalidad</span><span class="td1">Comparación de Precios </span></div><div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">RD$ 88,000,000.00 </span></div></div><div class="btn-action"><div class="btnPerfil"><a target="_blank" href="https://comunidad.comprasdominicana.gob.do//Public/Tendering/OpportunityDetail/Index?noticeUID=DO1.NTC.1307145" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>VER PROCESO</span></a></div></div></div><div id="proceso_3" class="card d-flex"><div class="headEnt"><div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>CEIZTUR-CCC-CP-2023-0034</strong></span><span class="td1">Reconstrucción de las Vías del Distrito Municipal Arroyo Barril Provincia Samaná </span></div><div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">Proceso adjudicado y celebrado </span></div> <div class="data1"><span class="labelTit">Modalidad</span><span class="td1">Comparación de Precios </span></div><div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">RD$ 52,833,780.59 </span></div></div><div class="btn-action"><div class="btnPerfil"><a target="_blank" href="https://comunidad.comprasdominicana.gob.do//Public/Tendering/OpportunityDetail/Index?noticeUID=DO1.NTC.1312001" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>VER PROCESO</span></a></div></div></div><div id="proceso_4" class="card d-flex"><div class="headEnt"><div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>CEIZTUR-CCC-CP-2024-0008</strong></span><span class="td1">Reconstrucción Calles Colón Eugenio María de Hostos y Callejón de Regina Ciudad Colonial Distrito Nacional </span></div><div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">Proceso desierto </span></div> <div class="data1"><span class="labelTit">Modalidad</span><span class="td1">Comparación de Precios </span></div><div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">RD$ 66,000,000.00 </span></div></div><div class="btn-action"><div class="btnPerfil"><a target="_blank" href="https://comunidad.comprasdominicana.gob.do//Public/Tendering/OpportunityDetail/Index?noticeUID=DO1.NTC.1370962" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>VER PROCESO</span></a></div></div></div><div id="proceso_5" class="card d-flex"><div class="headEnt"><div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>CEIZTUR-CCC-CP-2024-0006</strong></span><span class="td1">Reconstrucción de las Calles del Casco Urbano en el Municipio San Felipe Provincia Puerto Plata </span></div><div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">Proceso adjudicado y celebrado </span></div> <div class="data1"><span class="labelTit">Modalidad</span><span class="td1">Comparación de Precios </span></div><div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">RD$ 88,330,000.00 </span></div></div><div class="btn-action"><div class="btnPerfil"><a target="_blank" href="https://comunidad.comprasdominicana.gob.do//Public/Tendering/OpportunityDetail/Index?noticeUID=DO1.NTC.1369052" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>VER PROCESO</span></a></div></div></div><div id="proceso_6" class="card d-flex"><div class="headEnt"><div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>CEIZTUR-CCC-CP-2024-0004</strong></span><span class="td1">Construcción de Verja Perimetral en el Santuario Nacional Santo Cristo de los Milagros Municipio de Bayaguana Provincia Monte Plata </span></div><div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">Cancelado </span></div> <div class="data1"><span class="labelTit">Modalidad</span><span class="td1">Comparación de Precios </span></div><div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">RD$ 61,730,000.00 </span></div></div><div class="btn-action"><div class="btnPerfil"><a target="_blank" href="https://comunidad.comprasdominicana.gob.do//Public/Tendering/OpportunityDetail/Index?noticeUID=DO1.NTC.1367650" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>VER PROCESO</span></a></div></div></div><div id="proceso_7" class="card d-flex"><div class="headEnt"><div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>CEIZTUR-CCC-CP-2024-0005</strong></span><span class="td1">Reconstrucción Plaza Marcelino Marte (Canito) Guayacanes Provincia San Pedro de Macorís </span></div><div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">Proceso adjudicado y celebrado </span></div> <div class="data1"><span class="labelTit">Modalidad</span><span class="td1">Comparación de Precios </span></div><div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">RD$ 32,700,000.00 </span></div></div><div class="btn-action"><div class="btnPerfil"><a target="_blank" href="https://comunidad.comprasdominicana.gob.do//Public/Tendering/OpportunityDetail/Index?noticeUID=DO1.NTC.1368241" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>VER PROCESO</span></a></div></div></div></div></div>
+                        <div id="divPagFichasPro"><span class="pag_actual" data-page="1"><text>1</text></span></div>
+                    </div>
+                    <div class="comparativeTable" id="divListadoContratos" style="display: none;">
+                        <div class="container">
+                            <div class="section-heading text-center">
+                                <h3>Buscador Contratos</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-12 col-sm-12">
+
+                                    <form class="contractList bgSoftGray">
+
+                                        <div class="form-group">
+                                            <label class="year" for="entidad">Proveedor</label>
+
+                                            <input type="search" data-results="search-home" data-search="home" id="entidad" class="search-input form-control input-lg ui-autocomplete-input" autocomplete="off" placeholder="Proveedor">
+
+                                            <div id="search-home" class="search-body">
+                                                <div id="divNoEncontrado" class="no-search-results" style="display: none;">No se han encontrado proveedores</div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="year" for="proceso">Palabra Clave </label>
+
+                                            <input type="search" data-results="search-home" data-search="home" id="proceso" class="search-input form-control input-lg" autocomplete="on" placeholder="Servicio, salud, nacional, etc." value="">
+
+                                        </div>
+                                        <div class="triggerForm">
+                                            <input type="button" class="btn btn-primary" value="Buscar" id="btn-buscar"><div class="clearfix"></div>
+                                            <a class="btn btn-link text-center" id="btnLimpiar">LIMPIAR FILTROS</a>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <!--CONTRACT-LIST-->
+                                <div class="col-lg-8">
+                                    <h5 style="text-align: left"><span class="bpinfilter" id="spanfiltrado" hidden="">Filtrado por BPIN</span></h5>
+                                    <!--ESTRUCTURA HTML PARA TOMAR COMO REFERENCIA-->
+                                    <!--CIERRE DE ESTRUCTURA-->
+                                    <div class="wrap-proceso whiteBg" id="srcContratos"><div class="contractBox"><div class="contractNumberRP"><span class="text-bold NoResultC">No se encuentran resultados con los filtros solicitados</span></div></div></div>
+                                    <div id="divPagContratos" class=""></div>
+
+                                </div>
+                                <!--END CONTAINER-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                
+
+                    
+            </div>
+        </div>
+</section>       
+
+   
+    <!-- ============================END TRACEABILITY===================== -->
+
+	
+<!-- Begin CALL TO ACTION -CONTACT US -->	
+<section class="section border-t-1">
+  <div class="container">
+      <div class="col-12 text-center">
+          <h3>¿No has encontrado lo que estabas buscando?</h3>
+          <div class="section-btns justify-content-center py-3">
+              <a aria-label="Contactenos" href="/Contactanos" class="btn btn-cards">
+                  <span>CONTÁCTANOS</span>
+              </a>
+          </div>
+      </div>
+
+  </div>
+</section>
+<!-- ==============END CALL TO ACTION -CONTACT US====================== -->			
+
+<!-- Begin FOOTER -->		
+<footer class="footer">
+	<!--Top footer-->
+    <div class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <!-- Begin company info -->
+                    <div class="footer-company-info">
+                        <div class="footer-company-top">
+                            <a href="/">
+                                <img class="img-fluid" src="img/logoMIV.svg" alt="Logo MapaInversiones">
+                            </a>
+
+
+                        </div>
+
+                    </div>
+                    <!-- End company info -->
+
+                </div>
+                <div class="col-lg-7">
+                    <div class="items">
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="/">Inicio</a></p>
+                                        <nav class="footer-nav">
+<ul class="footer-mnu">
+                                                </ul>
+
+
+                                        </nav>
+                                    </div>
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="">Presupuesto</a></p>
+                                        <nav class="footer-nav">
+<ul class="footer-mnu">
+                                                            <li>
+                                                                <a href="/PresupuestoGeneral" class="hover-link" data-title="Presupuesto de Inversiones Públicas">
+                                                                    <span>Presupuesto de Inversiones Públicas</span>
+                                                                </a>
+                                                            </li>
+                                                </ul>
+
+
+                                        </nav>
+                                    </div>
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="/MapView">Inversión pública</a></p>
+                                        <nav class="footer-nav">
+<ul class="footer-mnu">
+                                                            <li>
+                                                                <a href="/MapView" class="hover-link" data-title="Mapa de Inversión Pública">
+                                                                    <span>Mapa de Inversión Pública</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/BusquedaResultados?Type=Provincia" class="hover-link" data-title="Provincias">
+                                                                    <span>Provincias</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/BusquedaResultados?Type=Municipio" class="hover-link" data-title="Municipios">
+                                                                    <span>Municipios</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/contratos" class="hover-link" data-title="Contratos">
+                                                                    <span>Contratos</span>
+                                                                </a>
+                                                            </li>
+                                                </ul>
+
+
+                                        </nav>
+                                    </div>
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="">Gestión de emergencias</a></p>
+                                        <nav class="footer-nav">
+<ul class="footer-mnu">
+                                                            <li>
+                                                                <a href="/PresupuestoGeneralEmergencia" class="hover-link" data-title="Presupuesto General">
+                                                                    <span>Presupuesto General</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/Emergencia?emergencia=5" class="hover-link" data-title="Lluvias 2023">
+                                                                    <span>Lluvias 2023</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/Emergencia?emergencia=2" class="hover-link" data-title="Huracán Fiona">
+                                                                    <span>Huracán Fiona</span>
+                                                                </a>
+                                                            </li>
+                                                </ul>
+
+
+                                        </nav>
+                                    </div>
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="/DatosAbiertos">Datos Abiertos</a></p>
+                                        <nav class="footer-nav">
+
+
+                                        </nav>
+                                    </div>
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="/ParticipacionCiudadana">Participación Ciudadana</a></p>
+                                        <nav class="footer-nav">
+
+
+                                        </nav>
+                                    </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-company-links text-lg-center py-5">
+
+                        <a href="/Acercade">Acerca de MapaInversiones República Dominicana</a>
+                        <a href="/CentroAyuda?id=2">Centro de Ayuda</a>
+                        <a href="/MarcoLegal">Marco Legal</a>
+                        <a href="/Contactanos">Contáctenos</a>
+                        <a href="/PoliticasdePrivacidad">Política de Privacidad</a>
+                        <a href="/TerminosyCondiciones">Términos y Condiciones</a>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+	<!--bottom footer-->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 justify-content-center">
+
+                    <a href="https://www.iadb.org/" target="_blank">
+                        <img alt="Logo iadb" class="img-fluid" src="img/Footer/logo-bid.png">
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>	
+</main>		
+<!-- ==============END FOOTER====================== -->		
+	
+
+	
+<!-- JAVASCRIPT -->
+<script src="libs/jquery/jquery.min.js"></script>
+<script src="js/lozad.min.js"></script>
+	
+<script src="js/device.js"></script>	
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/bg-lazyload.js"></script>	
+<script src="libs/jquery/jquery.min.js"></script>
+<script src="js/flickity.pkgd.min.js"></script>	
+<script src="js/flickity-imagesloaded.js"></script>		
+<script src="js/flickity-fade.js"></script>	
+<script src="js/custom.js"></script>		
+</body>
+
+</html>
