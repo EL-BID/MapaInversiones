@@ -1,0 +1,73 @@
+// stylelint-disable declaration-no-important
+
+// Margin and Padding
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    @each $prop, $abbrev in (margin: m, padding: p) {
+      @each $size, $length in $spacers {
+        .#{$abbrev***REMOVED***#{$infix***REMOVED***-#{$size***REMOVED*** { #{$prop***REMOVED***: $length !important; ***REMOVED***
+        .#{$abbrev***REMOVED***t#{$infix***REMOVED***-#{$size***REMOVED***,
+        .#{$abbrev***REMOVED***y#{$infix***REMOVED***-#{$size***REMOVED*** {
+          #{$prop***REMOVED***-top: $length !important;
+    ***REMOVED***
+        .#{$abbrev***REMOVED***r#{$infix***REMOVED***-#{$size***REMOVED***,
+        .#{$abbrev***REMOVED***x#{$infix***REMOVED***-#{$size***REMOVED*** {
+          #{$prop***REMOVED***-right: $length !important;
+    ***REMOVED***
+        .#{$abbrev***REMOVED***b#{$infix***REMOVED***-#{$size***REMOVED***,
+        .#{$abbrev***REMOVED***y#{$infix***REMOVED***-#{$size***REMOVED*** {
+          #{$prop***REMOVED***-bottom: $length !important;
+    ***REMOVED***
+        .#{$abbrev***REMOVED***l#{$infix***REMOVED***-#{$size***REMOVED***,
+        .#{$abbrev***REMOVED***x#{$infix***REMOVED***-#{$size***REMOVED*** {
+          #{$prop***REMOVED***-left: $length !important;
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+
+    // Negative margins (e.g., where `.mb-n1` is negative version of `.mb-1`)
+    @each $size, $length in $spacers {
+      @if $size != 0 {
+        .m#{$infix***REMOVED***-n#{$size***REMOVED*** { margin: -$length !important; ***REMOVED***
+        .mt#{$infix***REMOVED***-n#{$size***REMOVED***,
+        .my#{$infix***REMOVED***-n#{$size***REMOVED*** {
+          margin-top: -$length !important;
+    ***REMOVED***
+        .mr#{$infix***REMOVED***-n#{$size***REMOVED***,
+        .mx#{$infix***REMOVED***-n#{$size***REMOVED*** {
+          margin-right: -$length !important;
+    ***REMOVED***
+        .mb#{$infix***REMOVED***-n#{$size***REMOVED***,
+        .my#{$infix***REMOVED***-n#{$size***REMOVED*** {
+          margin-bottom: -$length !important;
+    ***REMOVED***
+        .ml#{$infix***REMOVED***-n#{$size***REMOVED***,
+        .mx#{$infix***REMOVED***-n#{$size***REMOVED*** {
+          margin-left: -$length !important;
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+
+    // Some special margin utils
+    .m#{$infix***REMOVED***-auto { margin: auto !important; ***REMOVED***
+    .mt#{$infix***REMOVED***-auto,
+    .my#{$infix***REMOVED***-auto {
+      margin-top: auto !important;
+***REMOVED***
+    .mr#{$infix***REMOVED***-auto,
+    .mx#{$infix***REMOVED***-auto {
+      margin-right: auto !important;
+***REMOVED***
+    .mb#{$infix***REMOVED***-auto,
+    .my#{$infix***REMOVED***-auto {
+      margin-bottom: auto !important;
+***REMOVED***
+    .ml#{$infix***REMOVED***-auto,
+    .mx#{$infix***REMOVED***-auto {
+      margin-left: auto !important;
+***REMOVED***
+  ***REMOVED***
+***REMOVED***

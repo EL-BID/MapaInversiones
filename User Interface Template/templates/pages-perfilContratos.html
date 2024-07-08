@@ -1,0 +1,1152 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+      <meta charset="utf-8" />
+    <title>Mapa Inversiones - Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="UI design framework basado en Bootstrap 4.5" name="description" />
+    <meta content="Luis Mendez, Enrique Oyaga" name="author" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <!-- Bootstrap Css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+	<!--Custom css style-->
+	<link href="css/basic-skin.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <!-- Material design Icons Css -->
+	<link rel="preload" href="/assets/fonts/material-design-icons/material-design-icons.woff2" as="font" type="font/woff2" crossorigin="">
+	<link rel="preload" href="/assets/fonts/material-design-icons/material-design-icons-outlined.woff2" as="font" type="font/woff2" crossorigin="">
+	
+</head>
+
+<body class="homepage">
+<!-- Begin mobile main menu -->
+<nav class="mob-main-mnu">
+        <div class="mob-main-mnu-content">
+    <ul class="mob-main-mnu-list">
+<li>
+
+<a href="#!">Inicio</a>
+                        <div class="mmm-btn"><i class="material-icons md-24">expand_more</i></div>
+</li>
+<li>
+
+	<a href="#!">Presupuesto</a>
+		<div class="mmm-btn"><i class="material-icons md-24">expand_more</i></div> 
+		<div class="mob-main-submnu">
+			<div class="mob-main-submnu-item">
+				<ul>
+					<li>
+						<a href="/PresupuestoGeneral" data-title="Presupuesto de Inversiones Públicas">
+							<span>Presupuesto de Inversiones Públicas</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+	</div> 
+</li>
+<li>
+
+<a href="#!">Inversión pública</a>
+                        <div class="mmm-btn"><i class="material-icons md-24">expand_more</i></div> <div class="mob-main-submnu">
+    <div class="mob-main-submnu-item">
+        <ul>
+<li>
+    <a href="/MapView" data-title="Mapa de Inversión Pública">
+        <span>Mapa de Inversión Pública</span>
+    </a>
+</li><li>
+    <a href="/BusquedaResultados?Type=Provincia" data-title="Provincias">
+        <span>Provincias</span>
+    </a>
+</li><li>
+    <a href="/BusquedaResultados?Type=Municipio" data-title="Municipios">
+        <span>Municipios</span>
+    </a>
+</li><li>
+    <a href="/contratos" data-title="Contratos">
+        <span>Contratos</span>
+    </a>
+</li>        </ul>
+    </div>
+</div> </li><li>
+
+<a href="#!">Gestión de emergencias</a>
+    <div class="mmm-btn"><i class="material-icons md-24">expand_more</i></div> <div class="mob-main-submnu">
+    <div class="mob-main-submnu-item">
+        <ul>
+			<li>
+				<a href="/PresupuestoGeneralEmergencia" data-title="Presupuesto General">
+					<span>Presupuesto General</span>
+				</a>
+			</li><li>
+				<a href="/Emergencia?emergencia=5" data-title="Lluvias 2023">
+					<span>Lluvias 2023</span>
+				</a>
+			</li><li>
+				<a href="/Emergencia?emergencia=2" data-title="Huracán Fiona">
+					<span>Huracán Fiona</span>
+				</a>
+			</li>        </ul>
+				</div>
+			</div> </li><li>
+
+			<a href="/DatosAbiertos" data-title="Datos Abiertos">
+				<span>Datos Abiertos</span>
+			</a></li><li>
+
+			<a href="/ParticipacionCiudadana" data-title="Participación Ciudadana">
+				<span>Participación Ciudadana</span>
+			</a></li>    </ul>         </div>
+					<div class="mob-main-mnu-footer">
+						<p>Con el apoyo del Banco Interamericano de Desarrollo - BID</p>
+					</div>
+    </nav>
+<!-- END mobile main menu -->
+	
+	
+	
+<!-- Begin HEADER -->	
+<header id="header" class="header">
+    <!-- TOP HEADER -->
+    <nav class="header-top">
+        <div class="container-fluid">
+            <div class="row justify-content-end">
+                <div class="col-auto">
+                    <div class="header-top-links">
+                        <!-- secondary pages -->
+                        <ul class="nav">
+
+                            <li class="nav-item">
+                                <a href="/Acercade" title="Acerca de MapaInversiones">
+                                    Acerca de MapaInversiones Republica Dominicana
+                                </a>
+                            </li>
+                            <!--<li class="nav-item">
+        <a href="/CentroAyuda?id=1" title="Centro de Ayuda">
+            Glosario
+        </a>
+    </li>-->
+                            <li class="nav-item">
+                                <a href="/CentroAyuda?id=2" title="Centro de Ayuda">
+                                    Centro de Ayuda
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/MarcoLegal" title="Marco Legal">
+                                    Marco Legal
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/Contactanos" title="Contáctenos">
+                                    Contáctenos
+                                </a>
+                            </li>
+                            <!--<li class="nav-item">
+        <a href="#" title="log in">
+            Log in
+        </a>
+    </li>-->
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- End header top -->
+    <!-- Begin header fixed -->
+
+    <nav class="header-fixed">
+        <div class="wrap-head">
+            <div class="container-fluid">
+               <div class="row flex-nowrap align-items-center justify-content-between">
+                <div class="col-auto d-block d-lg-none header-fixed-col">
+                    <div class="main-mnu-btn">
+                        <span class="bar bar-1"></span>
+                        <span class="bar bar-2"></span>
+                        <span class="bar bar-3"></span>
+                        <span class="bar bar-4"></span>
+                    </div>
+                </div>
+                <div class="main-header col-md-12 header-fixed-col">
+                    <!-- Begin logo -->
+                    <div class="logoHinv">
+                        <a href="/" class="logo-ico-widht-text" title="MapaInversiones República Dominicana">
+                            <img class="img-fluid" src="img/logoMIV.svg" alt="Logo MapaInversiones">
+                        </a>						
+                    </div>
+
+                </div>
+
+            </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg col-auto col-static header-fixed-col main-navigation-bar">
+                        <div class="row flex-nowrap align-items-center justify-content-end">
+                            <div class="col-auto header-fixed-col d-none d-lg-block col-static">
+                                <!-- Begin main menu -->
+                                <nav class="main-mnu">
+                                        <ul class="main-mnu-list">
+                                                    <li class="main-mnu-item-has-child">
+
+                                                            <a href="/" data-title="Inicio">
+                                                                <span>Inicio</span>
+                                                                <i class="material-icons">expand_more</i>
+                                                            </a>
+                                                    </li>
+                                                    <li class="main-mnu-item-has-child">
+
+                                                            <a data-title="Presupuesto">
+                                                                <span>Presupuesto</span>
+                                                                <i class="material-icons">expand_more</i>
+                                                            </a>
+                                                                <ul>
+                                                                            <li>
+                                                                                <a href="/PresupuestoGeneral" data-title="Presupuesto de Inversiones Públicas">
+                                                                                    <span>Presupuesto de Inversiones Públicas</span>
+                                                                                </a>
+                                                                            </li>
+                                                                </ul>
+                                                    </li>
+                                                    <li class="main-mnu-item-has-child">
+
+                                                            <a href="/MapView" data-title="Inversión pública">
+                                                                <span>Inversión pública</span>
+                                                                <i class="material-icons">expand_more</i>
+                                                            </a>
+                                                                <ul>
+                                                                            <li>
+                                                                                <a href="/MapView" data-title="Mapa de Inversión Pública">
+                                                                                    <span>Mapa de Inversión Pública</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="/BusquedaResultados?Type=Provincia" data-title="Provincias">
+                                                                                    <span>Provincias</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="/BusquedaResultados?Type=Municipio" data-title="Municipios">
+                                                                                    <span>Municipios</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="/contratos" data-title="Contratos">
+                                                                                    <span>Contratos</span>
+                                                                                </a>
+                                                                            </li>
+                                                                </ul>
+                                                    </li>
+                                                    <li class="main-mnu-item-has-child">
+
+                                                            <a data-title="Gestión de emergencias">
+                                                                <span>Gestión de emergencias</span>
+                                                                <i class="material-icons">expand_more</i>
+                                                            </a>
+                                                                <ul>
+                                                                            <li>
+                                                                                <a href="/PresupuestoGeneralEmergencia" data-title="Presupuesto General">
+                                                                                    <span>Presupuesto General</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="/Emergencia?emergencia=5" data-title="Lluvias 2023">
+                                                                                    <span>Lluvias 2023</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="/Emergencia?emergencia=2" data-title="Huracán Fiona">
+                                                                                    <span>Huracán Fiona</span>
+                                                                                </a>
+                                                                            </li>
+                                                                </ul>
+                                                    </li>
+                                                    <li class="main-mnu-item-has-child">
+
+                                                            <a href="/DatosAbiertos" data-title="Datos Abiertos">
+                                                                <span>Datos Abiertos</span>
+                                                            </a>
+                                                    </li>
+                                                    <li class="main-mnu-item-has-child">
+
+                                                            <a href="/ParticipacionCiudadana" data-title="Participación Ciudadana">
+                                                                <span>Participación Ciudadana</span>
+                                                            </a>
+                                                    </li>
+                                        </ul>
+                                </nav>
+                                <!-- End main menu -->
+                            </div>
+                            <div class="col-auto header-fixed-col col-static">
+                                <!-- Begin header actions -->
+                                <ul class="header-actions">
+                                    <!-- Begin header search -->
+                                    <li>
+                                        <div class="header-search">
+                                            <div class="header-action-icon header-search-ico">
+                                                <i class="material-icons md-22 header-search-ico-search">search</i>
+                                                <i class="material-icons md-22 header-search-ico-close">close</i>
+                                            </div>
+                                            <form action="#!" method="post" class="header-search-form">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-field">
+                                                                <label for="field-search" class="form-field-label">Search...</label>
+                                                                <input type="search" class="form-field-input" name="Search" value="" autocomplete="off" required="required" id="field-search">
+                                                                <button type="submit" class="header-search-btn"><i class="material-icons md-22">search</i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </li><!-- End header search -->
+                                    <!-- Begin header navbar -->
+                                    <li class="d-block d-lg-none">
+                                        <div class="header-navbar">
+                                            <div class="header-navbar-btn">
+                                                <i class="material-icons md-24">more_vert</i>
+                                            </div>
+                                            <ul class="header-navbar-content">
+
+                                                <li>
+                                                    <a href="#!" title="About InvestmentMap">
+                                                        About InvestmentMap
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#!" title="LinkedIn">
+                                                        Help center
+                                                    </a>
+                                                </li>
+                                                    <li>
+                                                        <a href="/Login" title="Log in">
+                                                            Log in
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/Register" title="Create an account">
+                                                            New users
+                                                        </a>
+                                                    </li>
+
+                                            </ul>
+                                        </div>
+
+                                    </li><!-- End header navbar -->
+                                </ul><!-- End header actions -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End header fixed -->
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-Q4H714KM4Z"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); ***REMOVED***
+        gtag('js', new Date());
+
+        gtag('config', 'G-Q4H714KM4Z');
+    </script>
+</header>
+<!-- END header -->	
+	
+<main>
+    <section class="banner-main">
+
+        <div class="container">
+            <!-- Begin bread crumbs -->
+            <nav class="bread-crumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="bread-crumbs-list">
+                                <li>
+                                    <a href="\">Inicio</a>
+                                    <i class="material-icons md-18">chevron_right</i>
+                                </li>
+                                <li>Contratación Pública</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav><!-- End bread crumbs -->
+    
+    
+            <div class="row justify-content-center">
+    
+                <div class="col-lg-8">
+                    <div class="banner-main-info">
+                        <div class="banner-main-title mb-0">
+                            <h1>Contratación Pública</h1>
+                        </div>
+                        <div class="banner-main-desc">
+                            <!--<p>
+                                
+                            </p>-->
+                            <p>Explore los procesos contractuales y consulte información esencial de cada contrato y contratista.</p>
+                        </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+    
+            <!--SELECT AÑO-->
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
+                    <!--YEAR FILTER-->
+                    <div class="form-group">
+                        <label for="top_contratos_periodos">Selecciona un año:</label>
+                        <select class="form-select">
+                            <option>2024</option>
+                            <option>2023</option>
+                            <option>2022</option>
+                            <option>2021</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+       
+    </section>
+    
+    <section class="section" id="secInfoContratos">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h2>Filtros</h2>
+                    <form class="contractList bgSoftGray">
+                        <div class="form-group">
+                            <label class="year" for="entidad">Institución</label>
+    
+                            <input type="search" data-results="search-home" data-search="home" id="entidad" class="search-input form-control input-lg" autocomplete="on" placeholder="Institución">
+    
+                            <div id="search-home" class="search-body">
+                                <div id="divNoEncontrado" class="no-search-results" style="display: none;">No se han encontrado instituciones</div>
+    
+                            </div>
+                        </div>
+                        <div class="form-group" hidden="true">
+                            <label class="origen" for="top_origen_informacion">Fuente de Datos</label>
+                            <select class="form-select" id="top_origen_informacion">
+                                <option value="">Todos</option>
+    
+                                            <option value="0">PROYECTOS</option>
+                                        
+                                            <option value="1">COVID-19</option>
+                                        
+                                            <option value="2">FIONA</option>
+                                        
+                                            <option value="3">LLUVIAS</option>
+                                        
+                                            <option value="5">LLUVIAS 2023</option>
+                                                                </select>
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="year" for="proceso">Proceso Palabra Clave </label>
+    
+                            <input type="search" data-results="search-home" data-search="home" id="proceso" class="search-input form-control input-lg" autocomplete="on" placeholder="Código ó Ventilador, reactivos, etc.">
+    
+                        </div>
+                        <div class="triggerForm">
+                            <input type="button" class="btn btn-primary" value="Buscar" id="btn-buscar" disabled=""><div class="clearfix"></div>
+                            <a class="btn btn-link text-center" id="btnLimpiar" disabled="disabled">LIMPIAR FILTROS</a>
+                        </div>
+    
+                    </form>
+    
+                </div>
+                <!--CONTRACT-LIST-->
+                <div class="col-lg-8">
+
+                    <div class="wrap-proceso whiteBg" id="srcContratos">
+						
+					<!--begin CONTRACT PROCESS BOX-->
+                        <div class="contractBox">
+                            <div class="cotractName contractSEFIN">
+                                <div class="row"><div class="col-xs-12 col-md-12">
+                                    <span class="small">Entidad</span><div class="clearfix">
+                                </div>                 
+                                <span class="h4">Consejo Nacional para el VIH y el SIDA</span> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contractNumberRP">
+                        <span class="">Código proceso: </span>	
+                        <span class="text-bold">CONAVIHSIDA-CCC-CP-2024-0002</span>
+                    </div>
+                    <div class="contractNumberRP">
+                        <span class="">Proceso: </span>	
+                        <span class="text-bold">Asistencia Técnica para la actualización del Sistema de Registro de Poblaciones Claves (SRPC)</span>
+                    </div>
+                    <div class="wrap-head-process">
+                        <div class="contractData">
+                            <div class="row border-b">
+                                <div class="col-xs-12 col-md-4">
+                                    <span class="txt_small">Estado del proceso</span>
+                                    <span class="amount_adj">Proceso adjudicado y celebrado</span>
+                                </div>
+                                <div class="col-xs-6 col-md-4">
+                                    <span class="txt_small">Monto Estimado</span> 
+                                    <span class="amount_adj"> 1,920,000.00 </span>
+                                </div>			    
+                                <div class="col-xs-6 col-md-2">				   
+                                    <span class="txt_small">Moneda</span>				   
+                                    <span class="amount_adj"> DOP </span>			    
+                                </div>			
+                            </div>		
+                            <div class="row border-b">			
+                                <div class="col-xs-12 col-md-4">		    
+                                    <span class="txt_small">Fecha de Inicio</span>         
+                                    <span class="amount_adj">2024-02-01</span>			    
+                                </div>			<div class="col-xs-12 col-md-4">		    
+                                    <span class="txt_small">Fecha estimada de adjudicación</span>         
+                                    <span class="amount_adj">2024-02-26</span>			    
+                                </div>	
+                            </div>	
+                        </div>
+                    </div>
+                    <div class="clearfix"></div> 
+						<div class="related-contracts">     
+                        <span class="h4">Contratos de Proyectos asociados a este proceso:</span>
+							<!--RELATED CONTRACTS-->
+                         <div class="accordion-list">
+                            <div class="accordion-item">
+                                <div class="accordion-trigger">Código de contratación: CONAVIHSIDA-2024-xx2309</div>
+                                <div class="accordion-content content">
+                                    <div class="row border-b">                        
+                                        <div class="col-md-12"><span class="small"> CONTRATO</span>
+                                            <span class="amount_adj">Asistencia Técnica para la actualización del Sistema de Registro de Poblaciones Claves (SRPC)</span>
+                                        </div>                   
+                                     </div>        
+                                     <div class="row border-b">                        
+                                        <div class="col-md-4">                            
+                                            <span class="small"> RAZÓN SOCIAL<span>                            
+                                                <a role="button" class="enlace_contratista" data-type="CONTRATISTA" data-parameter="34374"><span class="amount_adj">
+                                                    <i class="material-icons md-22">shortcut</i> Dominios Virtuales en Internet (DOVINET) SRL</span></a>                        
+                                                </span>
+                                            </span>
+                                        </div>                        
+                                        <div class="col-md-4">
+                                            <span class="small"> TIPO DE DOCUMENTO</span><span class="amount_adj">R</span>
+                                        </div>                        
+                                        <div class="col-md-4"><span class="small"> NÚMERO DE DOCUMENTO</span>
+                                            <span class="amount_adj">34374</span></div>                    
+                                        </div>                    
+                                        <div class="row border-b">                        
+                                            <div class="col-xs-6 col-md-6"><span class="small"> VALOR CONTRATADO</span>
+                                                <span class="amount_adj"> RD$ 1,900,000.00</span>
+                                            </div>                       
+                                             <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span>
+                                                <span class="amount_adj"> DOP </span>
+                                            </div>                    
+                                        </div>                    
+                                        <div class="row border-b">                        
+                                            <div class="col-xs-6 col-md-3">
+                                                <span class="small">FECHA DE INICIO CONTRATO</span>                                                                     
+                                                <span class="amount_adj">2024-03-05                                                                      
+                                                </span>
+                                            </div>                        
+                                                <div class="col-xs-6 col-md-3"><span class="small">FECHA DE FIN CONTRATO</span>
+                                                    <span class="amount_adj">2024-07-09        </span>
+                                                </div>                        
+                                                <div class="col-xs-6 col-md-3">
+                                                    <span class="small">Fecha de INICIO EJECUCIÓN</span>
+                                                    <span class="amount_adj">2024-03-22        </span>
+                                                </div>                        
+                                                <div class="col-xs-6 col-md-3">
+                                                    <span class="small">Fecha de FIN EJECUCIÓN</span>
+                                                    <span class="amount_adj">2024-07-31        </span>
+                                                </div>                    
+                                            </div> 
+									    <div class="" style="align:center">                    
+                                            <a href="../../contrato?codcontrato=CONAVIHSIDA-2024-00009" class="btn btn-primary btn-participe">
+                                                <i class="material-icons md-22">add_comment</i> Hacer comentario al contrato</a>                 
+                                        </div> 
+                                </div>               
+
+
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-trigger">Código de contratación: CONAVIHSIDA-2024-445635</div>
+                                <div class="accordion-content content">
+                                    <div class="row border-b">                        
+                                        <div class="col-md-12"><span class="small"> CONTRATO</span>
+                                            <span class="amount_adj">Asistencia Técnica para la actualización del Sistema de Registro de Poblaciones Claves (SRPC)</span>
+                                        </div>                   
+                                     </div>        
+                                     <div class="row border-b">                        
+                                        <div class="col-md-4">                            
+                                            <span class="small"> RAZÓN SOCIAL<span>                            
+                                                <a role="button" class="enlace_contratista" data-type="CONTRATISTA" data-parameter="34374"><span class="amount_adj">
+                                                    <i class="material-icons md-22">shortcut</i> Dominios Virtuales en Internet (DOVINET) SRL</span></a>                        
+                                                </span>
+                                            </span>
+                                        </div>                        
+                                        <div class="col-md-4">
+                                            <span class="small"> TIPO DE DOCUMENTO</span><span class="amount_adj">R</span>
+                                        </div>                        
+                                        <div class="col-md-4"><span class="small"> NÚMERO DE DOCUMENTO</span>
+                                            <span class="amount_adj">34374</span></div>                    
+                                        </div>                    
+                                        <div class="row border-b">                        
+                                            <div class="col-xs-6 col-md-6"><span class="small"> VALOR CONTRATADO</span>
+                                                <span class="amount_adj"> RD$ 1,900,000.00</span>
+                                            </div>                       
+                                             <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span>
+                                                <span class="amount_adj"> DOP </span>
+                                            </div>                    
+                                        </div>                    
+                                        <div class="row border-b">                        
+                                            <div class="col-xs-6 col-md-3">
+                                                <span class="small">FECHA DE INICIO CONTRATO</span>                                                                     
+                                                <span class="amount_adj">2024-03-05                                                                      
+                                                </span>
+                                            </div>                        
+                                                <div class="col-xs-6 col-md-3"><span class="small">FECHA DE FIN CONTRATO</span>
+                                                    <span class="amount_adj">2024-07-09        </span>
+                                                </div>                        
+                                                <div class="col-xs-6 col-md-3">
+                                                    <span class="small">Fecha de INICIO EJECUCIÓN</span>
+                                                    <span class="amount_adj">2024-03-22        </span>
+                                                </div>                        
+                                                <div class="col-xs-6 col-md-3">
+                                                    <span class="small">Fecha de FIN EJECUCIÓN</span>
+                                                    <span class="amount_adj">2024-07-31        </span>
+                                                </div>                    
+                                            </div> 
+									    <div class="" style="align:center">                    
+                                            <a href="../../contrato?codcontrato=CONAVIHSIDA-2024-00009" class="btn btn-primary btn-participe">
+                                                <i class="material-icons md-22">add_comment</i> Hacer comentario al contrato</a>                 
+                                        </div> 
+                                </div>               
+
+
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-trigger">Código de contratación: CONAVIHSIDA-2024-11113</div>
+                                <div class="accordion-content content">
+                                    <div class="row border-b">                        
+                                        <div class="col-md-12"><span class="small"> CONTRATO</span>
+                                            <span class="amount_adj">Asistencia Técnica para la actualización del Sistema de Registro de Poblaciones Claves (SRPC)</span>
+                                        </div>                   
+                                     </div>        
+                                     <div class="row border-b">                        
+                                        <div class="col-md-4">                            
+                                            <span class="small"> RAZÓN SOCIAL<span>                            
+                                                <a role="button" class="enlace_contratista" data-type="CONTRATISTA" data-parameter="34374"><span class="amount_adj">
+                                                    <i class="material-icons md-22">shortcut</i> Dominios Virtuales en Internet (DOVINET) SRL</span></a>                        
+                                                </span>
+                                            </span>
+                                        </div>                        
+                                        <div class="col-md-4">
+                                            <span class="small"> TIPO DE DOCUMENTO</span><span class="amount_adj">R</span>
+                                        </div>                        
+                                        <div class="col-md-4"><span class="small"> NÚMERO DE DOCUMENTO</span>
+                                            <span class="amount_adj">34374</span></div>                    
+                                        </div>                    
+                                        <div class="row border-b">                        
+                                            <div class="col-xs-6 col-md-6"><span class="small"> VALOR CONTRATADO</span>
+                                                <span class="amount_adj"> RD$ 1,900,000.00</span>
+                                            </div>                       
+                                             <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span>
+                                                <span class="amount_adj"> DOP </span>
+                                            </div>                    
+                                        </div>                    
+                                        <div class="row border-b">                        
+                                            <div class="col-xs-6 col-md-3">
+                                                <span class="small">FECHA DE INICIO CONTRATO</span>                                                                     
+                                                <span class="amount_adj">2024-03-05                                                                      
+                                                </span>
+                                            </div>                        
+                                                <div class="col-xs-6 col-md-3"><span class="small">FECHA DE FIN CONTRATO</span>
+                                                    <span class="amount_adj">2024-07-09        </span>
+                                                </div>                        
+                                                <div class="col-xs-6 col-md-3">
+                                                    <span class="small">Fecha de INICIO EJECUCIÓN</span>
+                                                    <span class="amount_adj">2024-03-22        </span>
+                                                </div>                        
+                                                <div class="col-xs-6 col-md-3">
+                                                    <span class="small">Fecha de FIN EJECUCIÓN</span>
+                                                    <span class="amount_adj">2024-07-31        </span>
+                                                </div>                    
+                                            </div> 
+									    <div class="" style="align:center">                    
+                                            <a href="../../contrato?codcontrato=CONAVIHSIDA-2024-00009" class="btn btn-primary btn-participe">
+                                                <i class="material-icons md-22">add_comment</i> Hacer comentario al contrato</a>                 
+                                        </div> 
+                                </div>               
+
+
+                            </div>
+                        </div>	
+						</div>
+
+
+                </div>
+					<!-- =============end CONTRACT PROCESS BOX========== -->
+						
+					<!--begin CONTRACT PROCESS BOX-->
+                        <div class="contractBox">
+                            <div class="cotractName contractSEFIN">
+                                <div class="row"><div class="col-xs-12 col-md-12">
+                                    <span class="small">Entidad</span><div class="clearfix">
+                                </div>                 
+                                <span class="h4">Consejo Nacional para el VIH y el SIDA</span> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contractNumberRP">
+                        <span class="">Código proceso: </span>	
+                        <span class="text-bold">CONAVIHSIDA-CCC-CP-2024-0002</span>
+                    </div>
+                    <div class="contractNumberRP">
+                        <span class="">Proceso: </span>	
+                        <span class="text-bold">Asistencia Técnica para la actualización del Sistema de Registro de Poblaciones Claves (SRPC)</span>
+                    </div>
+                    <div class="wrap-head-process">
+                        <div class="contractData">
+                            <div class="row border-b">
+                                <div class="col-xs-12 col-md-4">
+                                    <span class="txt_small">Estado del proceso</span>
+                                    <span class="amount_adj">Proceso adjudicado y celebrado</span>
+                                </div>
+                                <div class="col-xs-6 col-md-4">
+                                    <span class="txt_small">Monto Estimado</span> 
+                                    <span class="amount_adj"> 1,920,000.00 </span>
+                                </div>			    
+                                <div class="col-xs-6 col-md-2">				   
+                                    <span class="txt_small">Moneda</span>				   
+                                    <span class="amount_adj"> DOP </span>			    
+                                </div>			
+                            </div>		
+                            <div class="row border-b">			
+                                <div class="col-xs-12 col-md-4">		    
+                                    <span class="txt_small">Fecha de Inicio</span>         
+                                    <span class="amount_adj">2024-02-01</span>			    
+                                </div>			<div class="col-xs-12 col-md-4">		    
+                                    <span class="txt_small">Fecha estimada de adjudicación</span>         
+                                    <span class="amount_adj">2024-02-26</span>			    
+                                </div>	
+                            </div>	
+                        </div>
+                    </div>
+                    <div class="clearfix"></div> 
+						<div class="related-contracts">     
+                        <span class="h4">Contratos de Proyectos asociados a este proceso:</span>
+							<!--RELATED CONTRACTS-->
+                         <div class="accordion-list">
+                            <div class="accordion-item">
+                                <div class="accordion-trigger">Código de contratación: CONAVIHSIDA-2024-xx2309</div>
+                                <div class="accordion-content content">
+                                    <div class="row border-b">                        
+                                        <div class="col-md-12"><span class="small"> CONTRATO</span>
+                                            <span class="amount_adj">Asistencia Técnica para la actualización del Sistema de Registro de Poblaciones Claves (SRPC)</span>
+                                        </div>                   
+                                     </div>        
+                                     <div class="row border-b">                        
+                                        <div class="col-md-4">                            
+                                            <span class="small"> RAZÓN SOCIAL<span>                            
+                                                <a role="button" class="enlace_contratista" data-type="CONTRATISTA" data-parameter="34374"><span class="amount_adj">
+                                                    <i class="material-icons md-22">shortcut</i> Dominios Virtuales en Internet (DOVINET) SRL</span></a>                        
+                                                </span>
+                                            </span>
+                                        </div>                        
+                                        <div class="col-md-4">
+                                            <span class="small"> TIPO DE DOCUMENTO</span><span class="amount_adj">R</span>
+                                        </div>                        
+                                        <div class="col-md-4"><span class="small"> NÚMERO DE DOCUMENTO</span>
+                                            <span class="amount_adj">34374</span></div>                    
+                                        </div>                    
+                                        <div class="row border-b">                        
+                                            <div class="col-xs-6 col-md-6"><span class="small"> VALOR CONTRATADO</span>
+                                                <span class="amount_adj"> RD$ 1,900,000.00</span>
+                                            </div>                       
+                                             <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span>
+                                                <span class="amount_adj"> DOP </span>
+                                            </div>                    
+                                        </div>                    
+                                        <div class="row border-b">                        
+                                            <div class="col-xs-6 col-md-3">
+                                                <span class="small">FECHA DE INICIO CONTRATO</span>                                                                     
+                                                <span class="amount_adj">2024-03-05                                                                      
+                                                </span>
+                                            </div>                        
+                                                <div class="col-xs-6 col-md-3"><span class="small">FECHA DE FIN CONTRATO</span>
+                                                    <span class="amount_adj">2024-07-09        </span>
+                                                </div>                        
+                                                <div class="col-xs-6 col-md-3">
+                                                    <span class="small">Fecha de INICIO EJECUCIÓN</span>
+                                                    <span class="amount_adj">2024-03-22        </span>
+                                                </div>                        
+                                                <div class="col-xs-6 col-md-3">
+                                                    <span class="small">Fecha de FIN EJECUCIÓN</span>
+                                                    <span class="amount_adj">2024-07-31        </span>
+                                                </div>                    
+                                            </div> 
+									    <div class="" style="align:center">                    
+                                            <a href="../../contrato?codcontrato=CONAVIHSIDA-2024-00009" class="btn btn-primary btn-participe">
+                                                <i class="material-icons md-22">add_comment</i> Hacer comentario al contrato</a>                 
+                                        </div> 
+                                </div>               
+
+
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-trigger">Código de contratación: CONAVIHSIDA-2024-445635</div>
+                                <div class="accordion-content content">
+                                    <div class="row border-b">                        
+                                        <div class="col-md-12"><span class="small"> CONTRATO</span>
+                                            <span class="amount_adj">Asistencia Técnica para la actualización del Sistema de Registro de Poblaciones Claves (SRPC)</span>
+                                        </div>                   
+                                     </div>        
+                                     <div class="row border-b">                        
+                                        <div class="col-md-4">                            
+                                            <span class="small"> RAZÓN SOCIAL<span>                            
+                                                <a role="button" class="enlace_contratista" data-type="CONTRATISTA" data-parameter="34374"><span class="amount_adj">
+                                                    <i class="material-icons md-22">shortcut</i> Dominios Virtuales en Internet (DOVINET) SRL</span></a>                        
+                                                </span>
+                                            </span>
+                                        </div>                        
+                                        <div class="col-md-4">
+                                            <span class="small"> TIPO DE DOCUMENTO</span><span class="amount_adj">R</span>
+                                        </div>                        
+                                        <div class="col-md-4"><span class="small"> NÚMERO DE DOCUMENTO</span>
+                                            <span class="amount_adj">34374</span></div>                    
+                                        </div>                    
+                                        <div class="row border-b">                        
+                                            <div class="col-xs-6 col-md-6"><span class="small"> VALOR CONTRATADO</span>
+                                                <span class="amount_adj"> RD$ 1,900,000.00</span>
+                                            </div>                       
+                                             <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span>
+                                                <span class="amount_adj"> DOP </span>
+                                            </div>                    
+                                        </div>                    
+                                        <div class="row border-b">                        
+                                            <div class="col-xs-6 col-md-3">
+                                                <span class="small">FECHA DE INICIO CONTRATO</span>                                                                     
+                                                <span class="amount_adj">2024-03-05                                                                      
+                                                </span>
+                                            </div>                        
+                                                <div class="col-xs-6 col-md-3"><span class="small">FECHA DE FIN CONTRATO</span>
+                                                    <span class="amount_adj">2024-07-09        </span>
+                                                </div>                        
+                                                <div class="col-xs-6 col-md-3">
+                                                    <span class="small">Fecha de INICIO EJECUCIÓN</span>
+                                                    <span class="amount_adj">2024-03-22        </span>
+                                                </div>                        
+                                                <div class="col-xs-6 col-md-3">
+                                                    <span class="small">Fecha de FIN EJECUCIÓN</span>
+                                                    <span class="amount_adj">2024-07-31        </span>
+                                                </div>                    
+                                            </div> 
+									    <div class="" style="align:center">                    
+                                            <a href="../../contrato?codcontrato=CONAVIHSIDA-2024-00009" class="btn btn-primary btn-participe">
+                                                <i class="material-icons md-22">add_comment</i> Hacer comentario al contrato</a>                 
+                                        </div> 
+                                </div>               
+
+
+                            </div>
+                            <div class="accordion-item">
+                                <div class="accordion-trigger">Código de contratación: CONAVIHSIDA-2024-11113</div>
+                                <div class="accordion-content content">
+                                    <div class="row border-b">                        
+                                        <div class="col-md-12"><span class="small"> CONTRATO</span>
+                                            <span class="amount_adj">Asistencia Técnica para la actualización del Sistema de Registro de Poblaciones Claves (SRPC)</span>
+                                        </div>                   
+                                     </div>        
+                                     <div class="row border-b">                        
+                                        <div class="col-md-4">                            
+                                            <span class="small"> RAZÓN SOCIAL<span>                            
+                                                <a role="button" class="enlace_contratista" data-type="CONTRATISTA" data-parameter="34374"><span class="amount_adj">
+                                                    <i class="material-icons md-22">shortcut</i> Dominios Virtuales en Internet (DOVINET) SRL</span></a>                        
+                                                </span>
+                                            </span>
+                                        </div>                        
+                                        <div class="col-md-4">
+                                            <span class="small"> TIPO DE DOCUMENTO</span><span class="amount_adj">R</span>
+                                        </div>                        
+                                        <div class="col-md-4"><span class="small"> NÚMERO DE DOCUMENTO</span>
+                                            <span class="amount_adj">34374</span></div>                    
+                                        </div>                    
+                                        <div class="row border-b">                        
+                                            <div class="col-xs-6 col-md-6"><span class="small"> VALOR CONTRATADO</span>
+                                                <span class="amount_adj"> RD$ 1,900,000.00</span>
+                                            </div>                       
+                                             <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span>
+                                                <span class="amount_adj"> DOP </span>
+                                            </div>                    
+                                        </div>                    
+                                        <div class="row border-b">                        
+                                            <div class="col-xs-6 col-md-3">
+                                                <span class="small">FECHA DE INICIO CONTRATO</span>                                                                     
+                                                <span class="amount_adj">2024-03-05                                                                      
+                                                </span>
+                                            </div>                        
+                                                <div class="col-xs-6 col-md-3"><span class="small">FECHA DE FIN CONTRATO</span>
+                                                    <span class="amount_adj">2024-07-09        </span>
+                                                </div>                        
+                                                <div class="col-xs-6 col-md-3">
+                                                    <span class="small">Fecha de INICIO EJECUCIÓN</span>
+                                                    <span class="amount_adj">2024-03-22        </span>
+                                                </div>                        
+                                                <div class="col-xs-6 col-md-3">
+                                                    <span class="small">Fecha de FIN EJECUCIÓN</span>
+                                                    <span class="amount_adj">2024-07-31        </span>
+                                                </div>                    
+                                            </div> 
+									    <div class="" style="align:center">                    
+                                            <a href="../../contrato?codcontrato=CONAVIHSIDA-2024-00009" class="btn btn-primary btn-participe">
+                                                <i class="material-icons md-22">add_comment</i> Hacer comentario al contrato</a>                 
+                                        </div> 
+                                </div>               
+
+
+                            </div>
+                        </div>	
+						</div>
+
+
+                </div>
+					<!-- =============end CONTRACT PROCESS BOX========== -->						
+                <!--END CONTAINER-->
+            		</div>
+					
+		<!-- BEGIN PAGINATION -->
+					<div id="divPagContratos">
+						<span class="pag_actual">
+							<text>1</text>
+						</span>
+						<a class="page_left" role="button" data-page="2">
+							<text class="paginacion">2</text>
+						</a>
+						<a class="page_left" role="button" data-page="3">
+
+							<text class="paginacion">3</text>
+						</a>
+							<a class="page_left" role="button" data-page="4">
+
+							<text class="paginacion">4</text>
+						</a>
+					</div>
+    <!-- ===============END PAGINATION====================== -->
+        		</div>
+		</div>
+	  </div>
+</section>
+
+
+<!-- Begin CALL TO ACTION -CONTACT US -->	
+<section class="section border-t-1">
+  <div class="container">
+      <div class="col-12 text-center">
+          <h3>¿No has encontrado lo que estabas buscando?</h3>
+          <div class="section-btns justify-content-center py-3">
+              <a aria-label="Contactenos" href="" class="btn btn-cards">
+                  <span>CONTÁCTANOS</span>
+              </a>
+          </div>
+      </div>
+
+  </div>
+</section>
+<!-- ==============END CALL TO ACTION -CONTACT US====================== -->			
+
+<!-- Begin FOOTER -->		
+<footer class="footer">
+	<!--Top footer-->
+    <div class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5">
+                    <!-- Begin company info -->
+                    <div class="footer-company-info">
+                        <div class="footer-company-top">
+                            <a href="/">
+                                <img class="img-fluid" src="img/logoMIV.svg" alt="Logo MapaInversiones">
+                            </a>
+
+
+                        </div>
+
+                    </div>
+                    <!-- End company info -->
+
+                </div>
+                <div class="col-lg-7">
+                    <div class="items">
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="/">Inicio</a></p>
+                                        <nav class="footer-nav">
+<ul class="footer-mnu">
+                                                </ul>
+
+
+                                        </nav>
+                                    </div>
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="">Presupuesto</a></p>
+                                        <nav class="footer-nav">
+<ul class="footer-mnu">
+                                                            <li>
+                                                                <a href="/PresupuestoGeneral" class="hover-link" data-title="Presupuesto de Inversiones Públicas">
+                                                                    <span>Presupuesto de Inversiones Públicas</span>
+                                                                </a>
+                                                            </li>
+                                                </ul>
+
+
+                                        </nav>
+                                    </div>
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="/MapView">Inversión pública</a></p>
+                                        <nav class="footer-nav">
+<ul class="footer-mnu">
+                                                            <li>
+                                                                <a href="/MapView" class="hover-link" data-title="Mapa de Inversión Pública">
+                                                                    <span>Mapa de Inversión Pública</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/BusquedaResultados?Type=Provincia" class="hover-link" data-title="Provincias">
+                                                                    <span>Provincias</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/BusquedaResultados?Type=Municipio" class="hover-link" data-title="Municipios">
+                                                                    <span>Municipios</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/contratos" class="hover-link" data-title="Contratos">
+                                                                    <span>Contratos</span>
+                                                                </a>
+                                                            </li>
+                                                </ul>
+
+
+                                        </nav>
+                                    </div>
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="">Gestión de emergencias</a></p>
+                                        <nav class="footer-nav">
+<ul class="footer-mnu">
+                                                            <li>
+                                                                <a href="/PresupuestoGeneralEmergencia" class="hover-link" data-title="Presupuesto General">
+                                                                    <span>Presupuesto General</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/Emergencia?emergencia=5" class="hover-link" data-title="Lluvias 2023">
+                                                                    <span>Lluvias 2023</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/Emergencia?emergencia=2" class="hover-link" data-title="Huracán Fiona">
+                                                                    <span>Huracán Fiona</span>
+                                                                </a>
+                                                            </li>
+                                                </ul>
+
+
+                                        </nav>
+                                    </div>
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="/DatosAbiertos">Datos Abiertos</a></p>
+                                        <nav class="footer-nav">
+
+
+                                        </nav>
+                                    </div>
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="/ParticipacionCiudadana">Participación Ciudadana</a></p>
+                                        <nav class="footer-nav">
+
+
+                                        </nav>
+                                    </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-company-links text-lg-center py-5">
+
+                        <a href="/Acercade">Acerca de MapaInversiones República Dominicana</a>
+                        <a href="/CentroAyuda?id=2">Centro de Ayuda</a>
+                        <a href="/MarcoLegal">Marco Legal</a>
+                        <a href="/Contactanos">Contáctenos</a>
+                        <a href="/PoliticasdePrivacidad">Política de Privacidad</a>
+                        <a href="/TerminosyCondiciones">Términos y Condiciones</a>
+                        
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+	<!--bottom footer-->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 justify-content-center">
+                    <!--<a href="https://www.presidencia.gob.do/" target="_blank">
+                        <img alt="Logo Presidencia República Dominicana" class="img-fluid" src="img/logoEntidad.svg">
+                    </a>
+                    <a href="https://www.hacienda.gob.do/" target="_blank">
+                        <img alt="Logo Ministerio de Hacienda" class="img-fluid" src="img/logoEntidad2.svg">
+                    </a>
+                    <a href="https://mepyd.gob.do/" target="_blank">
+                        <img alt="Logo Ministerio de MEPyD" class="img-fluid" src="img/logoEntidad0.svg">
+                    </a>
+                    <a href="https://www.dgcp.gob.do/" target="_blank">
+                        <img alt="Logo Dirección general de contrataciones públicas" class="img-fluid" src="img/logoEntidad3.svg">
+                    </a>
+                    <br>-->
+                    <a href="https://www.iadb.org/" target="_blank">
+                        <img alt="Logo iadb" class="img-fluid" src="img/Footer/logo-bid.png">
+                    </a>
+                    <a href="http://www.iadb.org/mapainversiones" target="_blank">
+                        <img alt="Logo Mapainversiones" class="img-fluid" src="img/Footer/logo-mapa-inversiones.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>	
+</main>		
+<!-- ==============END FOOTER====================== -->		
+	
+
+	
+<!-- JAVASCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="libs/jquery/jquery.min.js"></script>
+<script src="js/lozad.min.js"></script>
+	
+<script src="js/device.js"></script>
+<script src="js/flickity.pkgd.min.js"></script>	
+<script src="js/flickity-imagesloaded.js"></script>		
+<script src="js/flickity-fade.js"></script>	
+<script src="js/custom.js"></script>		
+</body>
+
+</html>

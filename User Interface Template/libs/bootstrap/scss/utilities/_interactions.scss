@@ -1,0 +1,5 @@
+// stylelint-disable declaration-no-important
+
+@each $value in $user-selects {
+  .user-select-#{$value***REMOVED*** { user-select: $value !important; ***REMOVED***
+***REMOVED***

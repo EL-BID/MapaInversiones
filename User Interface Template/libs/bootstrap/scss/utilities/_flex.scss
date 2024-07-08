@@ -1,0 +1,51 @@
+// stylelint-disable declaration-no-important
+
+// Flex variation
+//
+// Custom styles for additional flex alignment options.
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .flex#{$infix***REMOVED***-row            { flex-direction: row !important; ***REMOVED***
+    .flex#{$infix***REMOVED***-column         { flex-direction: column !important; ***REMOVED***
+    .flex#{$infix***REMOVED***-row-reverse    { flex-direction: row-reverse !important; ***REMOVED***
+    .flex#{$infix***REMOVED***-column-reverse { flex-direction: column-reverse !important; ***REMOVED***
+
+    .flex#{$infix***REMOVED***-wrap         { flex-wrap: wrap !important; ***REMOVED***
+    .flex#{$infix***REMOVED***-nowrap       { flex-wrap: nowrap !important; ***REMOVED***
+    .flex#{$infix***REMOVED***-wrap-reverse { flex-wrap: wrap-reverse !important; ***REMOVED***
+    .flex#{$infix***REMOVED***-fill         { flex: 1 1 auto !important; ***REMOVED***
+    .flex#{$infix***REMOVED***-grow-0       { flex-grow: 0 !important; ***REMOVED***
+    .flex#{$infix***REMOVED***-grow-1       { flex-grow: 1 !important; ***REMOVED***
+    .flex#{$infix***REMOVED***-shrink-0     { flex-shrink: 0 !important; ***REMOVED***
+    .flex#{$infix***REMOVED***-shrink-1     { flex-shrink: 1 !important; ***REMOVED***
+
+    .justify-content#{$infix***REMOVED***-start   { justify-content: flex-start !important; ***REMOVED***
+    .justify-content#{$infix***REMOVED***-end     { justify-content: flex-end !important; ***REMOVED***
+    .justify-content#{$infix***REMOVED***-center  { justify-content: center !important; ***REMOVED***
+    .justify-content#{$infix***REMOVED***-between { justify-content: space-between !important; ***REMOVED***
+    .justify-content#{$infix***REMOVED***-around  { justify-content: space-around !important; ***REMOVED***
+
+    .align-items#{$infix***REMOVED***-start    { align-items: flex-start !important; ***REMOVED***
+    .align-items#{$infix***REMOVED***-end      { align-items: flex-end !important; ***REMOVED***
+    .align-items#{$infix***REMOVED***-center   { align-items: center !important; ***REMOVED***
+    .align-items#{$infix***REMOVED***-baseline { align-items: baseline !important; ***REMOVED***
+    .align-items#{$infix***REMOVED***-stretch  { align-items: stretch !important; ***REMOVED***
+
+    .align-content#{$infix***REMOVED***-start   { align-content: flex-start !important; ***REMOVED***
+    .align-content#{$infix***REMOVED***-end     { align-content: flex-end !important; ***REMOVED***
+    .align-content#{$infix***REMOVED***-center  { align-content: center !important; ***REMOVED***
+    .align-content#{$infix***REMOVED***-between { align-content: space-between !important; ***REMOVED***
+    .align-content#{$infix***REMOVED***-around  { align-content: space-around !important; ***REMOVED***
+    .align-content#{$infix***REMOVED***-stretch { align-content: stretch !important; ***REMOVED***
+
+    .align-self#{$infix***REMOVED***-auto     { align-self: auto !important; ***REMOVED***
+    .align-self#{$infix***REMOVED***-start    { align-self: flex-start !important; ***REMOVED***
+    .align-self#{$infix***REMOVED***-end      { align-self: flex-end !important; ***REMOVED***
+    .align-self#{$infix***REMOVED***-center   { align-self: center !important; ***REMOVED***
+    .align-self#{$infix***REMOVED***-baseline { align-self: baseline !important; ***REMOVED***
+    .align-self#{$infix***REMOVED***-stretch  { align-self: stretch !important; ***REMOVED***
+  ***REMOVED***
+***REMOVED***

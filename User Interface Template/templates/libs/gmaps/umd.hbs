@@ -1,0 +1,19 @@
+"use strict";
+(function(root, factory) {
+  if(typeof exports === 'object') {
+    module.exports = factory({{{cjsDependencies***REMOVED******REMOVED******REMOVED***);
+  ***REMOVED***
+  else if(typeof define === 'function' && define.amd) {
+    define({{#if amdModuleId***REMOVED******REMOVED***'{{amdModuleId***REMOVED******REMOVED***', {{/if***REMOVED******REMOVED***[{{{amdDependencies***REMOVED******REMOVED******REMOVED***], factory);
+  ***REMOVED***
+  else {
+    root.{{globalAlias***REMOVED******REMOVED*** = factory({{{globalDependencies***REMOVED******REMOVED******REMOVED***);
+  ***REMOVED***
+
+
+***REMOVED***(this, function({{dependencies***REMOVED******REMOVED***) {
+
+{{{code***REMOVED******REMOVED******REMOVED***
+
+return {{objectToExport***REMOVED******REMOVED***;
+***REMOVED***));

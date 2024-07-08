@@ -1,0 +1,3 @@
+/*! Select2 4.0.13 | https://github.com/select2/select2/blob/master/LICENSE.md */
+
+!function(){if(jQuery&&jQuery.fn&&jQuery.fn.select2&&jQuery.fn.select2.amd)var n=jQuery.fn.select2.amd;n.define("select2/i18n/zh-TW",[],function(){return{inputTooLong:function(n){return"請刪掉"+(n.input.length-n.maximum)+"個字元"***REMOVED***,inputTooShort:function(n){return"請再輸入"+(n.minimum-n.input.length)+"個字元"***REMOVED***,loadingMore:function(){return"載入中…"***REMOVED***,maximumSelected:function(n){return"你只能選擇最多"+n.maximum+"項"***REMOVED***,noResults:function(){return"沒有找到相符的項目"***REMOVED***,searching:function(){return"搜尋中…"***REMOVED***,removeAllItems:function(){return"刪除所有項目"***REMOVED******REMOVED******REMOVED***),n.define,n.require***REMOVED***();

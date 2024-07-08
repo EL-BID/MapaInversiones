@@ -1,0 +1,75 @@
+// stylelint-disable property-disallowed-list, declaration-no-important
+
+//
+// Border
+//
+
+.border         { border: $border-width solid $border-color !important; ***REMOVED***
+.border-top     { border-top: $border-width solid $border-color !important; ***REMOVED***
+.border-right   { border-right: $border-width solid $border-color !important; ***REMOVED***
+.border-bottom  { border-bottom: $border-width solid $border-color !important; ***REMOVED***
+.border-left    { border-left: $border-width solid $border-color !important; ***REMOVED***
+
+.border-0        { border: 0 !important; ***REMOVED***
+.border-top-0    { border-top: 0 !important; ***REMOVED***
+.border-right-0  { border-right: 0 !important; ***REMOVED***
+.border-bottom-0 { border-bottom: 0 !important; ***REMOVED***
+.border-left-0   { border-left: 0 !important; ***REMOVED***
+
+@each $color, $value in $theme-colors {
+  .border-#{$color***REMOVED*** {
+    border-color: $value !important;
+  ***REMOVED***
+***REMOVED***
+
+.border-white {
+  border-color: $white !important;
+***REMOVED***
+
+//
+// Border-radius
+//
+
+.rounded-sm {
+  border-radius: $border-radius-sm !important;
+***REMOVED***
+
+.rounded {
+  border-radius: $border-radius !important;
+***REMOVED***
+
+.rounded-top {
+  border-top-left-radius: $border-radius !important;
+  border-top-right-radius: $border-radius !important;
+***REMOVED***
+
+.rounded-right {
+  border-top-right-radius: $border-radius !important;
+  border-bottom-right-radius: $border-radius !important;
+***REMOVED***
+
+.rounded-bottom {
+  border-bottom-right-radius: $border-radius !important;
+  border-bottom-left-radius: $border-radius !important;
+***REMOVED***
+
+.rounded-left {
+  border-top-left-radius: $border-radius !important;
+  border-bottom-left-radius: $border-radius !important;
+***REMOVED***
+
+.rounded-lg {
+  border-radius: $border-radius-lg !important;
+***REMOVED***
+
+.rounded-circle {
+  border-radius: 50% !important;
+***REMOVED***
+
+.rounded-pill {
+  border-radius: $rounded-pill !important;
+***REMOVED***
+
+.rounded-0 {
+  border-radius: 0 !important;
+***REMOVED***

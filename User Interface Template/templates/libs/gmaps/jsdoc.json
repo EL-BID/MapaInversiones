@@ -1,0 +1,17 @@
+{
+  "source": {
+    "include": [ "./lib" ],
+    "includePattern": ".js$"
+***REMOVED***
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "markdown": {
+    "hardwrap": true
+***REMOVED***
+  "opts": {
+    "template": "node_modules/docdash",
+    "recurse": true,
+    "destination": "./docs"
+  ***REMOVED***
+***REMOVED***

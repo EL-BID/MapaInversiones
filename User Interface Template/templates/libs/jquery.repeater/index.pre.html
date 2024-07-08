@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Repeater</title>
+    <title>jquery.repeater</title>
+    <style>
+    html, body {
+        font-family: Helvetica, Arial, sans-serif;
+        color: rgb(80, 80, 80);
+***REMOVED***
+    </style>
+</head>
+<body>
+    <h2>Repeater</h2>
+    <!-- @include repeater.html -->
+    <h2>Nested</h2>
+    <!-- @include nested-repeater.html -->
+    <script src="jquery-1.11.1.js"></script>
+    <script src="jquery.repeater.js"></script>
+    <script>
+    $(document).ready(function () {
+        'use strict';
+
+        $('.repeater').repeater({
+            defaultValues: {
+                'textarea-input': 'foo',
+                'text-input': 'bar',
+                'select-input': 'B',
+                'checkbox-input': ['A', 'B'],
+                'radio-input': 'B'
+          ***REMOVED***
+            show: function () {
+                $(this).slideDown();
+          ***REMOVED***
+            hide: function (deleteElement) {
+                if(confirm('Are you sure you want to delete this element?')) {
+                    $(this).slideUp(deleteElement);
+            ***REMOVED***
+          ***REMOVED***
+            ready: function (setIndexes) {
+
+        ***REMOVED***
+    ***REMOVED***);
+
+        window.outerRepeater = $('.outer-repeater').repeater({
+            isFirstItemUndeletable: true,
+            defaultValues: { 'text-input': 'outer-default' ***REMOVED***,
+            show: function () {
+                console.log('outer show');
+                $(this).slideDown();
+          ***REMOVED***
+            hide: function (deleteElement) {
+                console.log('outer delete');
+                $(this).slideUp(deleteElement);
+          ***REMOVED***
+            repeaters: [{
+                isFirstItemUndeletable: true,
+                selector: '.inner-repeater',
+                defaultValues: { 'inner-text-input': 'inner-default' ***REMOVED***,
+                show: function () {
+                    console.log('inner show');
+                    $(this).slideDown();
+              ***REMOVED***
+                hide: function (deleteElement) {
+                    console.log('inner delete');
+                    $(this).slideUp(deleteElement);
+            ***REMOVED***
+        ***REMOVED***]
+    ***REMOVED***);
+***REMOVED***);
+    </script>
+</body>
+</html>
