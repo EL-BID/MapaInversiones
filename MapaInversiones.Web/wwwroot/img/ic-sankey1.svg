@@ -1,0 +1,22 @@
+<svg id="ic-sankey1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="38.312" height="49.244" viewBox="0 0 38.312 49.244">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_4146" data-name="Rectangle 4146" width="38.312" height="49.244" fill="none"/>
+    </clipPath>
+  </defs>
+  <rect id="Rectangle_4144" data-name="Rectangle 4144" width="14.513" height="40.955" transform="translate(0.323 0.323)" fill="#f9f5ee"/>
+  <g id="Group_4533" data-name="Group 4533" transform="translate(0 0)">
+    <g id="Group_4532" data-name="Group 4532" clip-path="url(#clip-path)">
+      <path id="Path_27728" data-name="Path 27728" d="M-.5-.5H15.013V41.455H-.5ZM14.013.5H.5V40.455H14.013Z" transform="translate(0.323 0.323)" fill="#ff9e22"/>
+    </g>
+  </g>
+  <rect id="Rectangle_4147" data-name="Rectangle 4147" width="14.513" height="5.551" transform="translate(0.323 43.37)" fill="#f9f5ee"/>
+  <g id="Group_4535" data-name="Group 4535" transform="translate(0 0)">
+    <g id="Group_4534" data-name="Group 4534" clip-path="url(#clip-path)">
+      <path id="Path_27729" data-name="Path 27729" d="M-.5-.5H15.013V6.052H-.5ZM14.013.5H.5V5.052H14.013Z" transform="translate(0.323 43.369)" fill="#ff9e22"/>
+      <path id="Path_27721" data-name="Path 27721" d="M17.134,24.125a4.4,4.4,0,1,1-4.4-4.4,4.4,4.4,0,0,1,4.4,4.4" transform="translate(-2.952 -6.985)" fill="#ff9e22"/>
+      <path id="Path_27722" data-name="Path 27722" d="M24,49.222a1.484,1.484,0,0,1-1.427-1.028L15.912,28.242a1.5,1.5,0,0,1,1.425-1.979l20.489.043a1.5,1.5,0,0,1,1.075,2.55L33.8,34.1a.21.21,0,0,0,.019.311l8.873,6.6a1.513,1.513,0,0,1,.258,2.117l-4.127,5.236a1.5,1.5,0,0,1-2.106.253L28.038,42.44a.238.238,0,0,0-.151-.063.209.209,0,0,0-.2.134L25.4,48.273a1.494,1.494,0,0,1-1.4.948" transform="translate(-5.606 -9.299)" fill="#ff9e22"/>
+      <path id="Path_27723" data-name="Path 27723" d="M16.983,26.555h0L37.47,26.6a.857.857,0,0,1,.613,1.454l-5.1,5.248a.857.857,0,0,0,.078,1.265l8.891,6.618a.857.857,0,0,1,.137,1.2l-4.127,5.235a.856.856,0,0,1-1.2.145l-8.7-6.2a.857.857,0,0,0-1.324.359l-2.29,5.762a.857.857,0,0,1-1.609-.045L16.17,27.683a.857.857,0,0,1,.813-1.128m0-1.292h0a2.149,2.149,0,0,0-2.038,2.83l6.666,19.952a2.149,2.149,0,0,0,4.035.112l2.084-5.246L36,48.8a2.147,2.147,0,0,0,2.982-.384l4.127-5.235a2.155,2.155,0,0,0-.342-3.006l-.018-.015-.019-.014-8.468-6.3,4.752-4.892a2.148,2.148,0,0,0-1.537-3.646Z" transform="translate(-5.252 -8.945)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

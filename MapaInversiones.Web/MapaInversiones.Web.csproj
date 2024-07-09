@@ -1,93 +1,534 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <TieredCompilation>true</TieredCompilation>
-    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c95693ee-f6a6-49c3-aa53-f5b69b3f66c9</UserSecretsId>
   </PropertyGroup>
-	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<DebugSymbols>False</DebugSymbols>
-		<DebugType>None</DebugType>
-	</PropertyGroup>
-	<ItemGroup>
-	  <Content Remove="wwwroot\aprobar_aux.js" />
-	  <Content Remove="wwwroot\comunes.js" />
-	  <Content Remove="wwwroot\comunes_infografias.js" />
-	  <Content Remove="wwwroot\contratista_aux.js" />
-	  <Content Remove="wwwroot\contratos_aux.js" />
-	  <Content Remove="wwwroot\custom.js" />
-	  <Content Remove="wwwroot\czm-chat-support.min.js" />
-	  <Content Remove="wwwroot\DatosAbiertos_aux.js" />
-	  <Content Remove="wwwroot\device.js" />
-	  <Content Remove="wwwroot\entidades_gen_aux.js" />
-	  <Content Remove="wwwroot\entidad_aux.js" />
-	  <Content Remove="wwwroot\filtro_aux.js" />
-	  <Content Remove="wwwroot\graficos_aux.js" />
-	  <Content Remove="wwwroot\home_aux.js" />
-	  <Content Remove="wwwroot\jquery.popupoverlay.js" />
-	  <Content Remove="wwwroot\plan_aux.js" />
-	  <Content Remove="wwwroot\presupuesto_aux.js" />
-	  <Content Remove="wwwroot\projects_aux.js" />
-	  <Content Remove="wwwroot\projects_aux.js.bak" />
-	  <Content Remove="wwwroot\sankey.js" />
-	  <Content Remove="wwwroot\scripts.js" />
-	  <Content Remove="wwwroot\search_aux.js" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Include="wwwroot\js\aprobar_aux.js" />
-	  <None Include="wwwroot\js\Bootbox\bootbox.min.js" />
-	  <None Include="wwwroot\js\bootstrap\3.3.5\bootstrap.min.js" />
-	  <None Include="wwwroot\js\comunes_infografias.js" />
-	  <None Include="wwwroot\js\contratista_aux.js" />
-	  <None Include="wwwroot\js\contratos_aux.js" />
-	  <None Include="wwwroot\js\custom.js" />
-	  <None Include="wwwroot\js\czm-chat-support.min.js" />
-	  <None Include="wwwroot\js\DatosAbiertos_aux.js" />
-	  <None Include="wwwroot\js\device.js" />
-	  <None Include="wwwroot\js\entidades_gen_aux.js" />
-	  <None Include="wwwroot\js\entidad_aux.js" />
-	  <None Include="wwwroot\js\filtro_aux.js" />
-	  <None Include="wwwroot\js\flickity\bg-lazyload.js" />
-	  <None Include="wwwroot\js\flickity\flickity-fade.js" />
-	  <None Include="wwwroot\js\flickity\flickity-fade.scss" />
-	  <None Include="wwwroot\js\flickity\flickity-imagesloaded.js" />
-	  <None Include="wwwroot\js\flickity\flickity.pkgd.js" />
-	  <None Include="wwwroot\js\flickity\flickity.pkgd.min.js" />
-	  <None Include="wwwroot\js\flickity\flickity.scss" />
-	  <None Include="wwwroot\js\graficos_aux.js" />
-	  <None Include="wwwroot\js\home_aux.js" />
-	  <None Include="wwwroot\js\jquery-ui-range\jquery-ui.min.js" />
-	  <None Include="wwwroot\js\jquery.popupoverlay.js" />
-	  <None Include="wwwroot\js\jquery\jquery.min.js" />
-	  <None Include="wwwroot\js\lozad\lozad.min.js" />
-	  <None Include="wwwroot\js\plan_aux.js" />
-	  <None Include="wwwroot\js\presupuesto_aux.js" />
-	  <None Include="wwwroot\js\projects_aux.js" />
-	  <None Include="wwwroot\js\sankey.js" />
-	  <None Include="wwwroot\js\scripts.js" />
-	  <None Include="wwwroot\js\search_aux.js" />
-	</ItemGroup>
+
   <ItemGroup>
+    <PackageReference Include="OrchardCore.Application.Cms.Core.Targets" Version="1.5.0" />
     <PackageReference Include="linq2db.AspNet" Version="3.3.0" />
     <PackageReference Include="linq2db.SqlServer" Version="3.3.0" />
-    <PackageReference Include="OrchardCore.Application.Cms.Targets" Version="1.0.0-rc2-13450" />
-    <PackageReference Include="OrchardCore.Application.Mvc.Targets" Version="1.0.0-rc2-13450" />
+    <PackageReference Include="Quartz.AspNetCore" Version="3.8.1" />
     <PackageReference Include="SolrNet" Version="1.0.19" />
     <PackageReference Include="SolrNet.Core" Version="1.0.19" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\MapaInversiones.Infrastructura\PlataformaTransparencia.Infrastructura.csproj" />
-    <ProjectReference Include="..\MapaInversiones.Modelos\PlataformaTransparencia.Modelos.csproj" />
-    <ProjectReference Include="..\MapaInversiones.Modulo.Noticias\PlataformaTransparencia.Modulo.Noticias.csproj" />
-    <ProjectReference Include="..\MapaInversiones.Modulo.Principal\PlataformaTransparencia.Modulo.Principal.csproj" />
+    <ResolvedFileToPublish Update="App_Data\tenants.json">
+      <RelativePath>App_Data\tenants.json</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\appsettings.json">
+      <RelativePath>App_Data\appsettings.json</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\DataProtection-Keys\key-d0f0fa23-d801-469d-9eb1-6b7708124f7c.xml">
+      <RelativePath>App_Data\key-d0f0fa23-d801-469d-9eb1-6b7708124f7c.xml</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\ContentDefinition.json">
+      <RelativePath>App_Data\ContentDefinition.json</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\IdentityModel-Encryption-Certificates\b214b395-6175-44d2-a409-fa3577146acc.pfx">
+      <RelativePath>App_Data\b214b395-6175-44d2-a409-fa3577146acc.pfx</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\IdentityModel-Encryption-Certificates\b214b395-6175-44d2-a409-fa3577146acc.pwd">
+      <RelativePath>App_Data\b214b395-6175-44d2-a409-fa3577146acc.pwd</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\IdentityModel-Signing-Certificates\8040ca03-a9f7-43e1-b065-e636e6580f6f.pfx">
+      <RelativePath>App_Data\8040ca03-a9f7-43e1-b065-e636e6580f6f.pfx</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\IdentityModel-Signing-Certificates\8040ca03-a9f7-43e1-b065-e636e6580f6f.pwd">
+      <RelativePath>App_Data\8040ca03-a9f7-43e1-b065-e636e6580f6f.pwd</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\DataProtection-Keys\key-1caae0db-36eb-4880-8c83-eb28121f30f3.xml">
+      <RelativePath>App_Data\key-1caae0db-36eb-4880-8c83-eb28121f30f3.xml</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\Not1hnd.png">
+      <RelativePath>App_Data\Not1hnd.png</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\Not2hnd.png">
+      <RelativePath>App_Data\Not2hnd.png</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\Slider.jpg">
+      <RelativePath>App_Data\Slider.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\Slider001.jpg">
+      <RelativePath>App_Data\Slider001.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\SliderContratosB.jpg">
+      <RelativePath>App_Data\SliderContratosB.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\SliderPresupuesto.jpg">
+      <RelativePath>App_Data\SliderPresupuesto.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\Slidercasa.jpg">
+      <RelativePath>App_Data\Slidercasa.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\slide-map-link.jpg">
+      <RelativePath>App_Data\slide-map-link.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\not3.jpg">
+      <RelativePath>App_Data\not3.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\not2.jpg">
+      <RelativePath>App_Data\not2.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\SliderContratos.jpg">
+      <RelativePath>App_Data\SliderContratos.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\Slider0023jpg.jpg">
+      <RelativePath>App_Data\Slider0023jpg.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\not1.jpg">
+      <RelativePath>App_Data\not1.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\NoticiaHonduras.PNG">
+      <RelativePath>App_Data\NoticiaHonduras.PNG</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\SliderInversion.jpg">
+      <RelativePath>App_Data\SliderInversion.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\4.jpg">
+      <RelativePath>App_Data\4.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\Slider001.jpg">
+      <RelativePath>App_Data\Slider001.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\Slider002.jpg">
+      <RelativePath>App_Data\Slider002.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\SliderPresidenta4.jpg">
+      <RelativePath>App_Data\SliderPresidenta4.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\2.jpg">
+      <RelativePath>App_Data\2.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\3.jpg">
+      <RelativePath>App_Data\3.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\SliderPresupuesto.jpg">
+      <RelativePath>App_Data\SliderPresupuesto.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\about\1.jpg">
+      <RelativePath>App_Data\1.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\logos\envato.jpg">
+      <RelativePath>App_Data\envato.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\logos\themeforest.jpg">
+      <RelativePath>App_Data\themeforest.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\logos\designmodo.jpg">
+      <RelativePath>App_Data\designmodo.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\logos\creative-market.jpg">
+      <RelativePath>App_Data\creative-market.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\portfolio\02-full.jpg">
+      <RelativePath>App_Data\02-full.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\portfolio\03-full.jpg">
+      <RelativePath>App_Data\03-full.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\portfolio\05-full.jpg">
+      <RelativePath>App_Data\05-full.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\portfolio\04-full.jpg">
+      <RelativePath>App_Data\04-full.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\portfolio\01-full.jpg">
+      <RelativePath>App_Data\01-full.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\portfolio\06-full.jpg">
+      <RelativePath>App_Data\06-full.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\team\2.jpg">
+      <RelativePath>App_Data\2.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\team\3.jpg">
+      <RelativePath>App_Data\3.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\Media\team\1.jpg">
+      <RelativePath>App_Data\1.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\DataProtection-Keys\key-149e4586-a573-4897-ab92-e0ad7dd0732b.xml">
+      <RelativePath>App_Data\key-149e4586-a573-4897-ab92-e0ad7dd0732b.xml</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\favicon.ico">
+      <RelativePath>App_Data\favicon.ico</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\css\site.css">
+      <RelativePath>App_Data\site.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\js\site.js">
+      <RelativePath>App_Data\site.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\.placeholder">
+      <RelativePath>App_Data\.placeholder</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\is-cache\9\1\a\c\6\f\5\3\6\4\4\8\91ac6f536448.png">
+      <RelativePath>App_Data\91ac6f536448.png</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\is-cache\9\1\a\c\6\f\5\3\6\4\4\8\91ac6f536448.meta">
+      <RelativePath>App_Data\91ac6f536448.meta</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\is-cache\9\b\0\9\6\6\9\4\9\0\f\b\9b09669490fb.png">
+      <RelativePath>App_Data\9b09669490fb.png</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\is-cache\9\b\0\9\6\6\9\4\9\0\f\b\9b09669490fb.meta">
+      <RelativePath>App_Data\9b09669490fb.meta</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\is-cache\6\a\3\b\1\2\9\2\d\f\1\7\6a3b1292df17.meta">
+      <RelativePath>App_Data\6a3b1292df17.meta</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\is-cache\6\a\3\b\1\2\9\2\d\f\1\7\6a3b1292df17.jpg">
+      <RelativePath>App_Data\6a3b1292df17.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\is-cache\8\b\6\a\4\f\6\a\2\a\8\8\8b6a4f6a2a88.jpg">
+      <RelativePath>App_Data\8b6a4f6a2a88.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\is-cache\8\b\6\a\4\f\6\a\2\a\8\8\8b6a4f6a2a88.meta">
+      <RelativePath>App_Data\8b6a4f6a2a88.meta</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\is-cache\e\f\c\0\3\b\8\e\a\3\6\7\efc03b8ea367.meta">
+      <RelativePath>App_Data\efc03b8ea367.meta</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\is-cache\e\f\c\0\3\b\8\e\a\3\6\7\efc03b8ea367.jpg">
+      <RelativePath>App_Data\efc03b8ea367.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\is-cache\2\a\d\d\7\0\4\9\8\d\0\0\2add70498d00.meta">
+      <RelativePath>App_Data\2add70498d00.meta</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\is-cache\2\a\d\d\7\0\4\9\8\d\0\0\2add70498d00.jpg">
+      <RelativePath>App_Data\2add70498d00.jpg</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\LICENSE">
+      <RelativePath>App_Data\LICENSE</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css">
+      <RelativePath>App_Data\bootstrap.min.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css">
+      <RelativePath>App_Data\bootstrap-grid.rtl.min.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css">
+      <RelativePath>App_Data\bootstrap-utilities.rtl.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map">
+      <RelativePath>App_Data\bootstrap-grid.rtl.min.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map">
+      <RelativePath>App_Data\bootstrap.rtl.min.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map">
+      <RelativePath>App_Data\bootstrap.rtl.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css">
+      <RelativePath>App_Data\bootstrap-reboot.rtl.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map">
+      <RelativePath>App_Data\bootstrap-reboot.min.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css">
+      <RelativePath>App_Data\bootstrap-utilities.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map">
+      <RelativePath>App_Data\bootstrap-reboot.rtl.min.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap.css">
+      <RelativePath>App_Data\bootstrap.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map">
+      <RelativePath>App_Data\bootstrap-utilities.min.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map">
+      <RelativePath>App_Data\bootstrap-grid.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css">
+      <RelativePath>App_Data\bootstrap-grid.min.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css">
+      <RelativePath>App_Data\bootstrap.rtl.min.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap.css.map">
+      <RelativePath>App_Data\bootstrap.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map">
+      <RelativePath>App_Data\bootstrap-grid.rtl.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map">
+      <RelativePath>App_Data\bootstrap.min.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css">
+      <RelativePath>App_Data\bootstrap-reboot.min.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map">
+      <RelativePath>App_Data\bootstrap-utilities.rtl.min.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css">
+      <RelativePath>App_Data\bootstrap.rtl.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map">
+      <RelativePath>App_Data\bootstrap-utilities.rtl.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map">
+      <RelativePath>App_Data\bootstrap-reboot.rtl.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css">
+      <RelativePath>App_Data\bootstrap-reboot.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css">
+      <RelativePath>App_Data\bootstrap-utilities.min.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css">
+      <RelativePath>App_Data\bootstrap-grid.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map">
+      <RelativePath>App_Data\bootstrap-utilities.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css">
+      <RelativePath>App_Data\bootstrap-utilities.rtl.min.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css">
+      <RelativePath>App_Data\bootstrap-reboot.rtl.min.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map">
+      <RelativePath>App_Data\bootstrap-grid.min.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css">
+      <RelativePath>App_Data\bootstrap-grid.rtl.css</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map">
+      <RelativePath>App_Data\bootstrap-reboot.css.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js">
+      <RelativePath>App_Data\bootstrap.esm.min.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js">
+      <RelativePath>App_Data\bootstrap.esm.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js">
+      <RelativePath>App_Data\bootstrap.bundle.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map">
+      <RelativePath>App_Data\bootstrap.bundle.min.js.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map">
+      <RelativePath>App_Data\bootstrap.bundle.js.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map">
+      <RelativePath>App_Data\bootstrap.esm.js.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\js\bootstrap.js">
+      <RelativePath>App_Data\bootstrap.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js">
+      <RelativePath>App_Data\bootstrap.bundle.min.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js">
+      <RelativePath>App_Data\bootstrap.min.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map">
+      <RelativePath>App_Data\bootstrap.esm.min.js.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\js\bootstrap.js.map">
+      <RelativePath>App_Data\bootstrap.js.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map">
+      <RelativePath>App_Data\bootstrap.min.js.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\jquery\dist\jquery.min.js">
+      <RelativePath>App_Data\jquery.min.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\jquery\dist\jquery.min.map">
+      <RelativePath>App_Data\jquery.min.map</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\jquery\dist\jquery.js">
+      <RelativePath>App_Data\jquery.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\jquery\LICENSE.txt">
+      <RelativePath>App_Data\LICENSE.txt</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js">
+      <RelativePath>App_Data\jquery.validate.unobtrusive.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js">
+      <RelativePath>App_Data\jquery.validate.unobtrusive.min.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt">
+      <RelativePath>App_Data\LICENSE.txt</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\jquery-validation\LICENSE.md">
+      <RelativePath>App_Data\LICENSE.md</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\jquery-validation\dist\jquery.validate.min.js">
+      <RelativePath>App_Data\jquery.validate.min.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\jquery-validation\dist\additional-methods.js">
+      <RelativePath>App_Data\additional-methods.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\jquery-validation\dist\additional-methods.min.js">
+      <RelativePath>App_Data\additional-methods.min.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
+    <ResolvedFileToPublish Update="App_Data\Sites\Default\wwwroot\lib\jquery-validation\dist\jquery.validate.js">
+      <RelativePath>App_Data\jquery.validate.js</RelativePath>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </ResolvedFileToPublish>
   </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="wwwroot\content\dist\js\" />
-    <Folder Include="wwwroot\js\lib\" />
+    <ProjectReference Include="..\MapaInversiones.Infrastructura\PlataformaTransparencia.Infrastructura.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\MapaInversiones.Modelos\PlataformaTransparencia.Modelos.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\MapaInversiones.Modulo.Noticias\PlataformaTransparencia.Modulo.Noticias.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\MapaInversiones.Modulo.Principal\PlataformaTransparencia.Modulo.Principal.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\MapaInversiones.Negocios\PlataformaTransparencia.Negocios.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
-
+  <ItemGroup>
+    <Content Update="wwwroot\img\svg-icons\DESCONOCIDO.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\svg-icons\EJECUCION.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\svg-icons\FINANCIADOS.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\svg-icons\PARALIZADO.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\svg-icons\REEVALUACION.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\svg-icons\REEVALUCION.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
-
 </Project>

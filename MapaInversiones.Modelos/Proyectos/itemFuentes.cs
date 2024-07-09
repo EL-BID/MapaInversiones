@@ -12,4 +12,10 @@ namespace PlataformaTransparencia.Modelos.Proyectos
         public decimal ValorPresupuesto { get; set; }
         public decimal ValorEjecutado { get; set; }
     }
+    public class Item
+    {
+        public string Id { get; set; }
+        public string Nombre { get; set; } = string.Empty;
+        public int Valor { get; set; }
+    }
 }

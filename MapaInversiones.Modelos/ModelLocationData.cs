@@ -150,6 +150,15 @@ namespace PlataformaTransparencia.Modelos
         private List<Fact> facts = new List<Fact>();
 
 
+        public List<InfoLocationSectorGen> Datossectores
+        {
+            get { return datossectores; }
+            set { datossectores = value; }
+        }
+        private List<InfoLocationSectorGen> datossectores = new List<InfoLocationSectorGen>();
+
+        public List<string> Anios { get; set; }
+
     }
 
 }

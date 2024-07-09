@@ -31,86 +31,10 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       consolidadoPresupuesto = presupuestoNewBLL;
     }
 
-    [HttpGet("GetRecursosPerNivel")]
-    public ModelPresupuestoData GetRecursosPerNivel(int anyo)
-    {
-      Double total_aprobado = 0;
-      Double total_vigente = 0;
-      Double total_ejecutado = 0;
-      List<itemNiveles> objGrupo = new List<itemNiveles>();
-      int total_entidades = 0;
-
-
-      List<InfoConsolidadoPresupuesto> info = new List<InfoConsolidadoPresupuesto>();
-      ModelPresupuestoData objReturn = new ModelPresupuestoData();
-      try
-      {
-        info = consolidadoPresupuesto.ObtenerRecursosPerNivel(anyo);
-        if (info != null)
-        {
-          total_vigente = info.Sum(item => item.vigente);
-          total_aprobado = info.Sum(item => item.aprobado);
-          total_ejecutado = info.Sum(item => item.ejecutado);
-
-          objGrupo = (from t in info
-                      group t by new { t.labelGroup }
-                 into grp
-                      select new itemNiveles
-                      {
-                        labelGroup = grp.Key.labelGroup,
-                        cantidad = grp.Count()
-                      }).ToList();
-
-          total_entidades = (from t in info
-                             group t by new { t.label }
-                 ).ToList().Count();
-
-          objReturn.ConsolidadoNiveles = objGrupo;
-          objReturn.totalCantidades = total_entidades;
-
-
-        }
-
-        objReturn.TotalPresupuesto = total_vigente;
-        objReturn.TotalAprobado = total_aprobado;
-        objReturn.TotalEjecutado = total_ejecutado;
-        objReturn.InfoRecursos = info;
-        objReturn.Status = true;
-        return objReturn;
-      }
-      catch (Exception exception)
-      {
-        objReturn.Status = false;
-        objReturn.Message = "Error: " + exception.Message;
-        return objReturn;
-      }
-    }
-
-
-    [HttpGet("GetRecursosPerOrganismo")]
-    public ModelPresupuestoData GetRecursosPerOrganismo(int anyo)
-    {
-      Double total = 0;
-      ModelPresupuestoData objReturn = new ModelPresupuestoData();
-      try
-      {
-        objReturn.InfoRecursos = consolidadoPresupuesto.ObtenerRecursosPerOrganismo(anyo);
-        objReturn.TotalPresupuesto = total;
-        objReturn.Status = true;
-        return objReturn;
-      }
-      catch (Exception exception)
-      {
-        objReturn.Status = false;
-        objReturn.Message = "Error: " + exception.Message;
-        return objReturn;
-      }
-    }
-
     [HttpGet("GetConsolidadoPeriodos")]
     public ModelPresupuestoData GetConsolidadoPeriodos(int anyo)
     {
-      Double total = 0;
+      Decimal total = 0;
       ModelPresupuestoData objReturn = new ModelPresupuestoData();
       try
       {
@@ -127,265 +51,201 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       }
     }
 
-    [HttpGet("ObtenerInfoPerGrupoDeGasto")]
-    public ModelPresupuestoData ObtenerInfoPerGrupoDeGasto(string filtro_periodos, int anyo, string filtro_gasto)
-    {
-      List<int> filtro_aux = new List<int>();
-      List<String> filtro_aux_gasto = new List<String>();
-      ModelPresupuestoData Presupuesto = new ModelPresupuestoData();
-      try
-      {
-        if (filtro_periodos != null && filtro_periodos != "")
+        [HttpGet("GetRecursosPerfinalidad")]
+        public ModelPresupuestoData GetRecursosPerfinalidad(int anyo)
         {
-          int mos = 0;
-          var intList = filtro_periodos.Split(',')
-          .Select(m => { int.TryParse(m, out mos); return mos; })
-          .Where(m => m != 0)
-          .ToList();
-          filtro_aux = intList;
-        }
-        else
-        {
-          filtro_aux.Add(anyo);
-        }
-
-        if (filtro_gasto != null && filtro_gasto != "")
-        {
-          var cadList = filtro_gasto.Split(',')
-         .Select(m => { return m; })
-         .Where(m => m != "")
-         .Distinct().ToList();
-          filtro_aux_gasto = cadList;
+            List<itemNiveles> objGrupo = new List<itemNiveles>();
+            List<InfoConsolidadoPresupuesto> info = new List<InfoConsolidadoPresupuesto>();
+            ModelPresupuestoData objReturn = new ModelPresupuestoData();
+            try
+            {
+                info = consolidadoPresupuesto.GetRecursosPerfinalidad(anyo);
+                objReturn.InfoRecursos = info;
+                objReturn.Status = true;
+                return objReturn;
+            }
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.Message;
+                return objReturn;
+            }
         }
 
-        Presupuesto.InfoRecursos = consolidadoPresupuesto.ObtenerInfoPerGrupoDeGasto(filtro_aux, anyo, filtro_aux_gasto);
-        Presupuesto.Status = true;
-        return Presupuesto;
-      }
-      catch (Exception exception)
-      {
-        Presupuesto.Status = false;
-        Presupuesto.Message = "Error: " + exception.Message;
-        Presupuesto = null;
-        return Presupuesto;
-      }
-    }
-
-
-    [HttpGet("GetEntidadesPlanNacional")]
-    public List<InfoEntidad> GetEntidadesPlanNacional()
-    {
-      List<InfoEntidad> objReturn = new List<InfoEntidad>();
-      try
-      {
-        objReturn = consolidadoPresupuesto.ObtenerEntidadesPlanNacional();
-        return objReturn;
-      }
-      catch (Exception)
-      {
-        return objReturn;
-      }
-    }
-
-    [HttpGet("GetEntidadesPlanNacionalNoAlcaldias")]
-    public List<InfoEntidad> GetEntidadesPlanNacionalNoAlcaldias()
-    {
-      List<InfoEntidad> objReturn = new List<InfoEntidad>();
-      try
-      {
-        objReturn = consolidadoPresupuesto.ObtenerEntidadesPlanNacionalNoAlcaldias();
-        return objReturn;
-      }
-      catch (Exception)
-      {
-        return objReturn;
-      }
-    }
-
-    [HttpGet("GetInfograficoGasto")]
-    public ModelPresupuestoData GetInfograficoGasto(int annio)
-    {
-      ModelPresupuestoData objReturn = new ModelPresupuestoData();
-      try
-      {
-        objReturn.InfograficoPerGasto = consolidadoPresupuesto.GetInfograficoPerGasto(annio);
-        objReturn.Status = true;
-        return objReturn;
-      }
-      catch (Exception exception)
-      {
-        objReturn.Status = false;
-        objReturn.Message = "Error: " + exception.Message;
-        return objReturn;
-      }
-    }
-
-
-    [HttpGet("GetInfograficoPerEntidad")]
-    public ModelPresupuestoData GetInfograficoPerEntidad(int annio)
-    {
-      ModelPresupuestoData objReturn = new ModelPresupuestoData();
-      try
-      {
-        objReturn.InfograficoPerGasto = consolidadoPresupuesto.GetInfograficoPerEntidad(annio);
-        objReturn.Status = true;
-        return objReturn;
-      }
-      catch (Exception exception)
-      {
-        objReturn.Status = false;
-        objReturn.Message = "Error: " + exception.Message;
-        return objReturn;
-      }
-    }
-
-
-    [HttpGet("getVersionesPerAnyo")]
-    public ModelPresupuestoData getVersionesPerAnyo(int anyo)
-    {
-      ModelPresupuestoData objReturn = new ModelPresupuestoData();
-      try
-      {
-        objReturn.versiones = (from pre in _connection.VwPresupuestoVersiones
-                               where pre.AnioPresupuesto == anyo
-                               orderby pre.NombreVersion descending
-                               select new itemVersiones
-                               {
-                                 CodigoVersion = pre.CodigoVersion,
-                                 NombreVersion = pre.NombreVersion
-                               }).Distinct().ToList();
-        objReturn.Status = true;
-        return objReturn;
-      }
-      catch (Exception exception)
-      {
-        objReturn.Status = false;
-        objReturn.Message = "Error: " + exception.Message;
-        return objReturn;
-      }
-
-    }
-
-
-
-    [HttpGet("GetComparativePerVersiones")]
-    public ModelPresupuestoData GetComparativePerVersiones(string filtro, int anyo)
-    {
-      List<int> filtro_aux = new List<int>();
-      ModelPresupuestoData Presupuesto = new ModelPresupuestoData();
-      try
-      {
-        if (filtro != null && filtro != "")
+        [HttpGet("ObtenerSectoresPerNombre")]
+        public ModelPresupuestoData ObtenerSectoresPerNombre(int anyo)
         {
-          int mos = 0;
-          var intList = filtro.Split(',')
-          .Select(m => { int.TryParse(m, out mos); return mos; })
-          .Where(m => m != 0)
-          .ToList();
-          filtro_aux = intList;
-        }
-        else
-        {
-          filtro_aux.Add(anyo);
-        }
-
-        Presupuesto.InfoGrafica = consolidadoPresupuesto.GetComparativePerVersiones(filtro_aux, anyo);
-        Presupuesto.Status = true;
-        return Presupuesto;
-      }
-      catch (Exception exception)
-      {
-        Presupuesto.Status = false;
-        Presupuesto.Message = "Error: " + exception.Message;
-        Presupuesto = null;
-        return Presupuesto;
-      }
-    }
-
-    [HttpGet("ObtenerInfoPerFuncionesGob")]
-    public ModelPresupuestoData ObtenerInfoPerFuncionesGob(string filtro_periodos, int anyo, string filtro_func)
-    {
-      List<int> filtro_aux = new List<int>();
-      List<string> filtro_aux_func = new List<string>();
-      ModelPresupuestoData Presupuesto = new ModelPresupuestoData();
-      try
-      {
-        if (filtro_periodos != null && filtro_periodos != "")
-        {
-          int mos = 0;
-          var intList = filtro_periodos.Split(',')
-          .Select(m => { int.TryParse(m, out mos); return mos; })
-          .Where(m => m != 0)
-          .ToList();
-          filtro_aux = intList;
-        }
-        else
-        {
-          filtro_aux.Add(anyo);
-        }
-
-        if (filtro_func != null && filtro_func != "")
-        {
-          var cadList = filtro_func.Split(',')
-         .Select(m => { return m; })
-         .Where(m => m != "")
-         .Distinct().ToList();
-          filtro_aux_func = cadList;
+            ModelPresupuestoData Presupuesto = new ModelPresupuestoData();
+            try
+            {
+                Presupuesto.sectores = consolidadoPresupuesto.ObtenerSectoresPerNombre(anyo);
+                Presupuesto.Status = true;
+                return Presupuesto;
+            }
+            catch (Exception exception)
+            {
+                Presupuesto.Status = false;
+                Presupuesto.Message = "Error: " + exception.Message;
+                Presupuesto = null;
+                return Presupuesto;
+            }
         }
 
 
-        Presupuesto.InfoRecursos = consolidadoPresupuesto.ObtenerInfoPerFuncionesGob(filtro_aux, anyo, filtro_aux_func);
-        Presupuesto.Status = true;
-        return Presupuesto;
-      }
-      catch (Exception exception)
-      {
-        Presupuesto.Status = false;
-        Presupuesto.Message = "Error: " + exception.Message;
-        Presupuesto = null;
-        return Presupuesto;
-      }
+        [HttpGet("ObtDistribucionBySectorFuentes")]
+        public ModelPresupuestoData ObtDistribucionBySectorFuentes(int anyo, string opcion,string tipo)
+
+        {
+
+            ModelPresupuestoData objReturn = new ModelPresupuestoData();
+            try
+            {
+                List<InfograficoFuentes_Nivel_1> info = consolidadoPresupuesto.ObtDistribucionBySectorFuentes(anyo, opcion,tipo);
+                decimal totalPresupuesto = info.Sum(item => item.presupuesto);
+                decimal totalEjecutado = info.Sum(item => item.avance);
+                objReturn.distribucionItemsByFuente = info;
+                objReturn.TotalPresupuesto = totalPresupuesto;
+                objReturn.TotalEjecutado = totalEjecutado;
+                objReturn.Status = true;
+                return objReturn;
+            }
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.Message;
+                return objReturn;
+            }
+        }
+
+        [HttpGet("ObtenerOrganismosPerNombre")]
+        public ModelPresupuestoData ObtenerOrganismosPerNombre(int anyo)
+        {
+            ModelPresupuestoData Presupuesto = new ModelPresupuestoData();
+            try
+            {
+                Presupuesto.organismos = consolidadoPresupuesto.ObtenerOrganismosPerNombre(anyo);
+                Presupuesto.Status = true;
+                return Presupuesto;
+            }
+            catch (Exception exception)
+            {
+                Presupuesto.Status = false;
+                Presupuesto.Message = "Error: " + exception.Message;
+                Presupuesto = null;
+                return Presupuesto;
+            }
+        }
+
+
+        [HttpGet("GetInfograficoPerEntidad")]
+        public ModelPresupuestoData GetInfograficoPerEntidad(int annio, string id,string tipo)
+        {
+            ModelPresupuestoData objReturn = new ModelPresupuestoData();
+            try
+            {
+                objReturn.InfograficoPerEntidad = consolidadoPresupuesto.GetInfograficoPerEntidad(annio, id,tipo);
+                objReturn.Status = true;
+                return objReturn;
+            }
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.Message;
+                return objReturn;
+            }
+        }
+
+        [HttpGet("BarChartEntidades")]
+        public ModelPresupuestoData BarChartEntidades(int anyo, string filtro)
+        {
+            ModelPresupuestoData Presupuesto = new ModelPresupuestoData();
+            List<string> filtro_aux_sec = new List<string>();
+            try
+            {
+                if (filtro != null && filtro != "")
+                {
+                    var cadList = filtro.Split('|')
+                    .Select(m => { return m; })
+                    .Where(m => m != "")
+                    .Distinct().ToList();
+                    filtro_aux_sec = cadList;
+                }
+                Presupuesto.InfoRecursos = consolidadoPresupuesto.ObtenerGastoEntidades(anyo, filtro_aux_sec);
+                Presupuesto.Status = true;
+                return Presupuesto;
+            }
+            catch (Exception exception)
+            {
+                Presupuesto.Status = false;
+                Presupuesto.Message = "Error: " + exception.Message;
+                Presupuesto = null;
+                return Presupuesto;
+            }
+        }
+
+        [HttpGet("ObtenerEntidadesPerNombre")]
+        public ModelPresupuestoData ObtenerEntidadesPerNombre(int anyo)
+        {
+            ModelPresupuestoData Presupuesto = new ModelPresupuestoData();
+            try
+            {
+                Presupuesto.entidades = consolidadoPresupuesto.ObtenerEntidadesPerNombre(anyo);
+                Presupuesto.Status = true;
+                return Presupuesto;
+            }
+            catch (Exception exception)
+            {
+                Presupuesto.Status = false;
+                Presupuesto.Message = "Error: " + exception.Message;
+                Presupuesto = null;
+                return Presupuesto;
+            }
+        }
+
+        [HttpGet("BarChartTiempoEntidades")]
+        public ModelPresupuestoData BarChartTiempoEntidades(int anyo, string filtro)
+        {
+            ModelPresupuestoData Presupuesto = new ModelPresupuestoData();
+            List<string> filtro_aux_sec = new List<string>();
+            try
+            {
+                if (filtro != null && filtro != "")
+                {
+                    var cadList = filtro.Split('|')
+                    .Select(m => { return m; })
+                    .Where(m => m != "")
+                    .Distinct().ToList();
+                    filtro_aux_sec = cadList;
+                }
+                Presupuesto.InfoRecursos = consolidadoPresupuesto.ObtenerGastoPerTiempoEntidades(anyo, filtro_aux_sec);
+                Presupuesto.Status = true;
+                return Presupuesto;
+            }
+            catch (Exception exception)
+            {
+                Presupuesto.Status = false;
+                Presupuesto.Message = "Error: " + exception.Message;
+                Presupuesto = null;
+                return Presupuesto;
+            }
+        }
+
+        [HttpGet("GetInfograficoPerProyecto")]
+        public ModelPresupuestoData GetInfograficoPerProyecto(int annio, string id)
+        {
+            ModelPresupuestoData objReturn = new ModelPresupuestoData();
+            try
+            {
+                objReturn.proyectosInv = consolidadoPresupuesto.GetInfograficoPerProyecto(annio, id);
+                objReturn.Status = true;
+                return objReturn;
+            }
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.Message;
+                return objReturn;
+            }
+        }
     }
-
-
-    [HttpGet("ObtenerFuncionesPerNombre")]
-    public ModelPresupuestoData ObtenerFuncionesPerNombre(string filtro, int anyo)
-    {
-      ModelPresupuestoData Presupuesto = new ModelPresupuestoData();
-      try
-      {
-        Presupuesto.funciones = consolidadoPresupuesto.ObtenerFuncionesPerNombre(filtro, anyo);
-        Presupuesto.Status = true;
-        return Presupuesto;
-      }
-      catch (Exception exception)
-      {
-        Presupuesto.Status = false;
-        Presupuesto.Message = "Error: " + exception.Message;
-        Presupuesto = null;
-        return Presupuesto;
-      }
-    }
-
-    [HttpGet("ObtenerGrupoGastoPerNombre")]
-    public ModelPresupuestoData ObtenerGrupoGastoPerNombre(int anyo)
-    {
-      ModelPresupuestoData Presupuesto = new ModelPresupuestoData();
-      try
-      {
-        Presupuesto.gruposGasto = consolidadoPresupuesto.ObtenerGrupoGastoPerNombre(anyo);
-        Presupuesto.Status = true;
-        return Presupuesto;
-      }
-      catch (Exception exception)
-      {
-        Presupuesto.Status = false;
-        Presupuesto.Message = "Error: " + exception.Message;
-        Presupuesto = null;
-        return Presupuesto;
-      }
-    }
-
-
-  }
 }

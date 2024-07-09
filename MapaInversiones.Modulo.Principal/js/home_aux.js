@@ -1,6 +1,5 @@
 ﻿GetProyectoById();
 
-//alert("holaaaa");
 
 function GetProyectoById() {
     $.ajax({

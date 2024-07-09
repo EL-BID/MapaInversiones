@@ -22,7 +22,7 @@ namespace PlataformaTransparencia.Negocios.BLL.Contracts
         {
             try {
 
-                ConsolidadosNacionalesBLL objNegocioConsolidados = new ConsolidadosNacionalesBLL(_connection);
+                HomeBLL objNegocioConsolidados = new HomeBLL(_connection);
                 this.HomeModel = objNegocioConsolidados.ObtenerDatosModeloInicio(esHome);
                 this.Status = true;
 

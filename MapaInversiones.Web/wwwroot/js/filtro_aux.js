@@ -32,7 +32,7 @@ $("#entidad").on("keyup", function (event) {
                 } else {
                     $("#divNoEncontrado").hide();
                     response($.map(datos.funciones, function (item) {
-                        //x alert(item);
+
                         return {
                             label: item.label,
                             value: item.label
@@ -54,9 +54,7 @@ $("#entidad").on("keyup", function (event) {
     delay: 300,
     minLength: 1,
     select: function (event, ui) {
-        //$(this).val(ui.item.Nombre).next().val(ui.item.Id);
-        //$("#divResultados").html("");
-        //return false;
+
     }
 }).bind('blur onblur', function () {
     if ($(this).val() == "") {

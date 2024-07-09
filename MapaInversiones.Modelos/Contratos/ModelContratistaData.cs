@@ -9,5 +9,7 @@ namespace PlataformaTransparencia.Modelos.Contratos
         public List<ContratistaData> Data { get; set; }
         public string  Contratista { get; set; }
         public List<string> OrigenInformacion { get; set; }
+        public List<ContratosConsolidado> Consolidados { get; set; }
+
     }
 }

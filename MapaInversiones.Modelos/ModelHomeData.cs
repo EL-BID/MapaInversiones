@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using PlataformaTransparencia.Modelos.Comunes;
 using PlataformaTransparencia.Modelos.Contratos;
-using PlataformaTransparencia.Modelos.Plan;
+using PlataformaTransparencia.Modelos.Home;
+using PlataformaTransparencia.Modelos.OrganismoFinanciador;
 using PlataformaTransparencia.Modelos.Proyectos;
 
 namespace PlataformaTransparencia.Modelos
@@ -166,7 +166,7 @@ namespace PlataformaTransparencia.Modelos
         public List<InfoProyectos> priorityProjects { get; set; }
         public List<InfoEntidadesConsolida> Entidades { get; set; }
 
-        public List<InfoRecAsignadosPlan> RecursosPerObjeto { get; set; }
+        public List<InfoRecAsignadosPresupuesto> RecursosPerObjeto { get; set; }
 
         public List<InfoRecAsignadosPlan> RecursosAsignados { get; set; }
 
@@ -178,5 +178,31 @@ namespace PlataformaTransparencia.Modelos
 
         public string MaxAnnioEntidades { get; set; }
 
+        public int maxAnnioPresupuesto { get; set; }
+
+        /// <summary>
+        /// Arreglo con objetos representando el grafico de proyectos por sector - obras
+        /// </summary>
+        public List<InfoProjectPerSector> ProjectsPerSectorGroup
+        {
+            get { return projectsPerSectorGroup; }
+            set { projectsPerSectorGroup = value; }
+        }
+        private List<InfoProjectPerSector> projectsPerSectorGroup = new List<InfoProjectPerSector>();
+
+
+        public itemConteoProjects countOngoingProjects { get;set; }
+
+        public InfoPresupuestoEncabezado valPresupuestoEncabezado { get; set; }
+
+        public List<string> aniospresupuesto = new List<string>();
+
+        public List<InfoFuentesporAnnio> fuentesporAnnios = new List<InfoFuentesporAnnio>();
+
+        public InfoPresupuestoEncabezado contprocesoscontratos { get; set; }
+
+        public List<InfoOrganismosFinan> OrganismosFinanciadores = new List<InfoOrganismosFinan>();
+
+        public ModelDataConsolidadoFinanciador ConsolidadoOrganismoFinanciador { get; set; } = new();
     }
 }

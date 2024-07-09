@@ -792,7 +792,7 @@ define([
 		   		
 			})
 
-		   	console.log(dataTemp[ data[i].Nombre+data[i].Tipo ], dataTemp[ data[i].Nombre+data[i].Tipo ].showNoData)
+		   	//console.log(dataTemp[ data[i].Nombre+data[i].Tipo ], dataTemp[ data[i].Nombre+data[i].Tipo ].showNoData)
 
 			
 		}

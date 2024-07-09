@@ -28,6 +28,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                                     filtro.CodigosMunicipios.FirstOrDefault(),
                                                                     filtro.CodigosSector.FirstOrDefault(),
                                                                     filtro.CodigosOrgFinanciador.FirstOrDefault(),
+                                                                    filtro.CodigosEntidadEjecutora.FirstOrDefault(),
                                                                     filtro.ContieneNombreProyecto,
                                                                     Utilitarios.Utilidades.ListaToCsv(filtro.fechasEjecucion),
                                                                     filtro.CodigosEstado.FirstOrDefault()).ToList();
@@ -48,6 +49,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                                     filtro.CodigosMunicipios.FirstOrDefault(),
                                                                     filtro.CodigosSector.FirstOrDefault(),
                                                                     filtro.CodigosOrgFinanciador.FirstOrDefault(),
+                                                                    filtro.CodigosEntidadEjecutora.FirstOrDefault(),
                                                                     filtro.ContieneNombreProyecto,
                                                                     Utilitarios.Utilidades.ListaToCsv(filtro.fechasEjecucion),
                                                                     filtro.CodigosEstado.FirstOrDefault()).ToList();
@@ -67,6 +69,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                                         filtro.CodigosMunicipios.FirstOrDefault(),
                                                                         filtro.CodigosSector.FirstOrDefault(),
                                                                         filtro.CodigosOrgFinanciador.FirstOrDefault(),
+                                                                        filtro.CodigosEntidadEjecutora.FirstOrDefault(),
                                                                         filtro.ContieneNombreProyecto,
                                                                         Utilitarios.Utilidades.ListaToCsv(filtro.fechasEjecucion),
                                                                         filtro.CodigosEstado.FirstOrDefault()).ToList();
@@ -87,6 +90,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                                         filtro.CodigosMunicipios.FirstOrDefault(),
                                                                         filtro.CodigosSector.FirstOrDefault(),
                                                                         filtro.CodigosOrgFinanciador.FirstOrDefault(),
+                                                                        filtro.CodigosEntidadEjecutora.FirstOrDefault(),
                                                                         filtro.ContieneNombreProyecto,
                                                                         Utilitarios.Utilidades.ListaToCsv(filtro.fechasEjecucion),
                                                                         filtro.CodigosEstado.FirstOrDefault()).ToList();
@@ -108,6 +112,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                                     filtro.CodigosMunicipios.FirstOrDefault(),
                                                                     filtro.CodigosSector.FirstOrDefault(),
                                                                     filtro.CodigosOrgFinanciador.FirstOrDefault(),
+                                                                    filtro.CodigosEntidadEjecutora.FirstOrDefault(),
                                                                     filtro.ContieneNombreProyecto,
                                                                     Utilitarios.Utilidades.ListaToCsv(filtro.fechasEjecucion),
                                                                     filtro.CodigosEstado.FirstOrDefault()).ToList();

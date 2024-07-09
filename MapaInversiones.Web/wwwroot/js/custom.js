@@ -468,7 +468,7 @@
 
 		btnHover: function() {
 
-			var btns = document.querySelectorAll(".btn, .el-ripple"),
+			var btns = document.querySelectorAll(".el-ripple"),
 				btn = [];
 
 			btns.forEach(function(element, index) {

@@ -20,14 +20,11 @@ namespace PlataformaTransparencia.Modelos.Contratos
 
         public string OrigenInformacion { get; set; }
 
+        public string? CodigoContrato { get; set; }
 
-        //public int IdProyecto { get; set; }
-        //public int IdPrograma { get; set; }
-        //public int COVID19 { get; set; }
+        public string? CodigoProceso { get; set; }
 
-
-        //public string CodigoContrato { get; set; }
-
+        public string? IdProyecto { get; set; }
 
     }
 }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
 
@@ -29,12 +29,12 @@
     <PackageReference Include="Bet.Extensions.Wkhtmltopdf" Version="1.0.4" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-    <PackageReference Include="OrchardCore.Contents" Version="1.0.0-rc2-13450" />
-    <PackageReference Include="OrchardCore.Forms" Version="1.0.0-rc2-13450" />
-    <PackageReference Include="OrchardCore.Media" Version="1.0.0-rc2-13450" />
-    <PackageReference Include="OrchardCore.Module.Targets" Version="1.0.0-rc2-13450" />
-    <PackageReference Include="OrchardCore.Mvc.Core" Version="1.0.0-rc2-13450" />
-    <PackageReference Include="OrchardCore.Taxonomies" Version="1.0.0-rc2-13450" />
+    <PackageReference Include="OrchardCore.Contents" Version="1.5.0" />
+    <PackageReference Include="OrchardCore.Forms" Version="1.5.0" />
+    <PackageReference Include="OrchardCore.Media" Version="1.5.0" />
+    <PackageReference Include="OrchardCore.Module.Targets" Version="1.5.0" />
+    <PackageReference Include="OrchardCore.Mvc.Core" Version="1.5.0" />
+    <PackageReference Include="OrchardCore.Taxonomies" Version="1.5.0" />
     <PackageReference Include="PdfSharpCore" Version="1.3.40" />
     <PackageReference Include="SolrNet" Version="1.0.19" />
     <PackageReference Include="SolrNet.Microsoft.DependencyInjection" Version="1.0.19" />
@@ -44,6 +44,10 @@
     <ProjectReference Include="..\MapaInversiones.Infrastructura\PlataformaTransparencia.Infrastructura.csproj" />
     <ProjectReference Include="..\MapaInversiones.Modelos\PlataformaTransparencia.Modelos.csproj" />
     <ProjectReference Include="..\MapaInversiones.Negocios\PlataformaTransparencia.Negocios.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\PresupuestoEmergencia\" />
   </ItemGroup>
 
 </Project>

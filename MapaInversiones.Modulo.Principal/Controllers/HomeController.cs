@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AngleSharp.Dom.Events;
+//using AngleSharp.Dom.Events;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PlataformaTransparencia.Infrastructura.DataModels;
@@ -14,37 +14,37 @@ using PlataformaTransparencia.Negocios.Home;
 using SolrNet;
 using SolrNet.Commands.Parameters;
 
-namespace Module1.Controllers
+namespace PlataformaTransparencia.Modulo.Principal.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly TransparenciaDB _connection;
         private ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> _solr;
-        private IConsolidadosNacionalesBLL consolidadosNacionales;
+        private IHomeBLL consolidadosHome;
 
         public List<ContratosConsolidado> Consolidados { get; set; }
 
 
-        public HomeController(ILogger<HomeController> logger, TransparenciaDB connection, ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> solr, IConsolidadosNacionalesBLL consolidadosNacionalesBLL)
+        public HomeController(ILogger<HomeController> logger, TransparenciaDB connection, ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> solr, IHomeBLL consolidadosHomeBLL)
         {
             _logger = logger;
             _connection = connection;
             _solr = solr;
-            consolidadosNacionales = consolidadosNacionalesBLL;
+            consolidadosHome = consolidadosHomeBLL;
         }
         public ActionResult Index()
         {
             HomeContract homeContract = new HomeContract(_connection);
             homeContract.Fill();
             return View(homeContract.HomeModel);
-            //return View();
+  
         }
 
         [HttpGet("Search/{SearchString}")]
-        public async Task<List<PlataformaTransparencia.Modelos.SolrResponse>> SearchAsync(string SearchString = "", string Type = "", int start = 0, int sort=0, int rows = 10)
+        public async Task<List<PlataformaTransparencia.Modelos.SolrResponse>> SearchAsync(string SearchString = "", string Type = "", string Id = "", int start = 0, int sort=0, int rows = 10)
         {
-            return (List<PlataformaTransparencia.Modelos.SolrResponse>)await new MySolrRepository(_solr).Search(SearchString, Type, start, sort, rows);
+            return (List<PlataformaTransparencia.Modelos.SolrResponse>)await new MySolrRepository(_solr).Search(SearchString, Type, Id, start, sort, rows);
         }
 
 
@@ -55,9 +55,9 @@ namespace Module1.Controllers
         }
 
         [HttpGet]
-        public ViewResult BusquedaResultados(string SearchString = "", string Type="", int start = 0, int sort=0, int rows = 10)
+        public ViewResult BusquedaResultados(string SearchString = "", string Type="", string Id = "", int start = 0, int sort=0, int rows = 10)
         {
-            var ListResultadosBusqueda = SearchAsync(SearchString, Type, start, sort, rows).Result;
+            var ListResultadosBusqueda = SearchAsync(SearchString, Type, Id, start, sort, rows).Result;
             var busquedaViewModel = new PlataformaTransparencia.Modelos.ResultadoBusquedaViewModel {
                 CadenaBusqueda = SearchString,
                 Type = Type
@@ -66,7 +66,6 @@ namespace Module1.Controllers
             foreach (var item in ListResultadosBusqueda) {
                 var busquedaItem = new PlataformaTransparencia.Modelos.ResultadoBusquedaItem() {
                     NombreProyecto = item.Principal,
-                    //Id = item.Id,
                     IdSector = item.IdSector,
                     Sector = item.Descripcion,
                     Url = item.Url,
@@ -77,7 +76,7 @@ namespace Module1.Controllers
             }
             busquedaViewModel.TotalResultados = (ListResultadosBusqueda.Count>0 ? ListResultadosBusqueda[0].numFound : busquedaViewModel.ListaResultados.Count);
             busquedaViewModel.Type= (Type!="" ? Type : "");
-            busquedaViewModel.ListaJerarquia = consolidadosNacionales.GetSearchHierarchyModel();
+            busquedaViewModel.ListaJerarquia = consolidadosHome.GetSearchHierarchyModel();
             return View(busquedaViewModel);
         }
 
@@ -88,9 +87,9 @@ namespace Module1.Controllers
         }
 
         [HttpGet("BusquedaAsync")]
-        public async Task<List<PlataformaTransparencia.Modelos.ResultadoBusquedaItem>> BusquedaAsync(string SearchString = "", string Type = "", int start = 0, int sort = 0, int rows = 10)
+        public async Task<List<PlataformaTransparencia.Modelos.ResultadoBusquedaItem>> BusquedaAsync(string SearchString = "", string Type = "", string Id = "", int start = 0, int sort = 0, int rows = 10)
         {
-            List<PlataformaTransparencia.Modelos.SolrResponse> ListResultadosBusqueda = (List<PlataformaTransparencia.Modelos.SolrResponse>)await new MySolrRepository(_solr).Search(SearchString, Type, start, sort, rows);
+            List<PlataformaTransparencia.Modelos.SolrResponse> ListResultadosBusqueda = (List<PlataformaTransparencia.Modelos.SolrResponse>)await new MySolrRepository(_solr).Search(SearchString, Type, Id, start, sort, rows);
             var busquedaViewModel = new PlataformaTransparencia.Modelos.ResultadoBusquedaViewModel {
                 CadenaBusqueda = SearchString,
                 Type = Type
@@ -100,7 +99,6 @@ namespace Module1.Controllers
             foreach (var item in ListResultadosBusqueda) {
                 var busquedaItem = new PlataformaTransparencia.Modelos.ResultadoBusquedaItem() {
                     NombreProyecto = item.Principal,
-                    //Id = item.Id,
                     IdSector = item.IdSector,
                     Sector = item.Descripcion,
                     Url = item.Url,
@@ -110,7 +108,7 @@ namespace Module1.Controllers
                 busquedaViewModel.ListaResultados.Add(busquedaItem);
             }
             busquedaViewModel.TotalResultados =  (ListResultadosBusqueda.Count>0 ? ListResultadosBusqueda[0].numFound : busquedaViewModel.ListaResultados.Count);
-            busquedaViewModel.ListaJerarquia = consolidadosNacionales.GetSearchHierarchyModel();
+            busquedaViewModel.ListaJerarquia = consolidadosHome.GetSearchHierarchyModel();
             return busquedaViewModel.ListaResultados;
         }
 
@@ -138,62 +136,10 @@ namespace Module1.Controllers
             return View();
         }
 
-        public ActionResult PlanODS()
-        {
-            return View();
-        }
-
-        public ActionResult PlanificacionParaguay()
-        {
-            return View();
-        }
-
-        public ActionResult PresupuestoResultados()
-        {
-            return View();
-        }
-
-        public ActionResult DesarrolloSostenible()
-        {
-            return View();
-        }
-
-        public ActionResult POI()
-        {
-            return View();
-        }
-
-        public ActionResult PND() {
-            return View();
-        }
-
-        public ActionResult Plansectorial()
-        {
-            return View();
-        }
-        public ActionResult PEI()
-        {
-            return View();
-        }
-
-        public ActionResult PDT()
-        {
-            return View();
-        }
-
         public ActionResult ProcesoCiclo()
         {
             return View();
         }
 
-        public ActionResult ProcesoGastos()
-        {
-            return View();
-        }
-
-        public ActionResult ProcesoIngresos()
-        {
-            return View();
-        }
     }
 }

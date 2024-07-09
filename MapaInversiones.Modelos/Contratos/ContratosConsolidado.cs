@@ -12,7 +12,8 @@ namespace PlataformaTransparencia.Modelos.Contratos
 		public string MonedaContrato { get; set; } // varchar(5)
 		public double? ValorContratado { get; set; } // bigint
 		public int? NroContratos { get; set; } // int
-		public string OrigenInformacion { get; set; }
+        public string OrigenInformacion { get; set; } // varchar(20)
+        public int CodigoOrigenInformacion { get; set; } // int
 
-	}
+    }
 }

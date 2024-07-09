@@ -11,5 +11,6 @@ namespace PlataformaTransparencia.Modelos.Proyectos
         public int IdProyecto { get; set; } // int
         public int? NumeroPagina { get; set; }
         public int? RegistrosPorPagina { get; set; }
+        public string? NombreProceso { get; set; }
     }
 }
