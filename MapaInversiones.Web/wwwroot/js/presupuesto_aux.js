@@ -438,7 +438,7 @@ function ObtenerOrganismosPeriodo(anyo_actual) {
 
                 configuraSelectOrganismoSankey();
                 if (global_tab == "organismo") {
-                    getOrganismosXFuenteIni(anyo_actual);
+                    getOrganismosXFuenteIni();
             ***REMOVED***
  
 
