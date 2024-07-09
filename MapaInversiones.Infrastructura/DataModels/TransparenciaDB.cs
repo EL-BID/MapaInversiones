@@ -76,7 +76,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public ITable<SearchResultParam> SearchResultParams { get { return this.GetTable<SearchResultParam>(); ***REMOVED*** ***REMOVED***
     public ITable<Sector> Sectors { get { return this.GetTable<Sector>(); ***REMOVED*** ***REMOVED***
     public ITable<SeguimientoEsquemaFinanciacionProyecto> SeguimientoEsquemaFinanciacionProyectos { get { return this.GetTable<SeguimientoEsquemaFinanciacionProyecto>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwSubsidiosCovidConsolidado> VwSubsidiosCovidConsolidadoes { get { return this.GetTable<VwSubsidiosCovidConsolidado>(); ***REMOVED*** ***REMOVED***
+    public ITable<VwSubsidiosEmergenciaConsolidado> VwSubsidiosEmergenciaConsolidadoes { get { return this.GetTable<VwSubsidiosEmergenciaConsolidado>(); ***REMOVED*** ***REMOVED***
     public ITable<SeguimientoMetaIndicadorProducto> SeguimientoMetaIndicadorProductos { get { return this.GetTable<SeguimientoMetaIndicadorProducto>(); ***REMOVED*** ***REMOVED***
     public ITable<TipoComentario> TipoComentarios { get { return this.GetTable<TipoComentario>(); ***REMOVED*** ***REMOVED***
     public ITable<UnidadMedida> UnidadMedidas { get { return this.GetTable<UnidadMedida>(); ***REMOVED*** ***REMOVED***
@@ -2770,8 +2770,8 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     [Column("param"), Nullable] public string Param { get; set; ***REMOVED*** // varchar(250)
   ***REMOVED***
 
-    [Table(Schema = "dbo", Name = "VwSubsidiosCovidConsolidado", IsView = true)]
-    public partial class VwSubsidiosCovidConsolidado
+    [Table(Schema = "dbo", Name = "VwSubsidiosEmergenciaConsolidado", IsView = true)]
+    public partial class VwSubsidiosEmergenciaConsolidado
     {
         [Column(), NotNull] public int Id { get; set; ***REMOVED*** // int
         [Column("origen"), NotNull] public string Origen { get; set; ***REMOVED*** // varchar(15)
