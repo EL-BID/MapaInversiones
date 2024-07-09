@@ -1166,16 +1166,12 @@
             var data = new FormData();
             var maxFileSize = 1048576; // 1MB ->  1024 * 1024
           var files = $("#fileUpload").get(0).files;
-          console.log("Entro por clic:");
             // Add the uploaded image content to the form data collection
             if (files.length > 0)
             {
 
 
                 if (files[0].size < maxFileSize) {
-
-                  console.log(files[0]);
-
 
                   var reader = new FileReader();
                   const fileByteArray = [];

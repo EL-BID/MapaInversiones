@@ -490,7 +490,7 @@ function cargardatosorganismos(idfuente) {
                             htmldivorganismos += '    </div>';
                     ***REMOVED***
                 ***REMOVED***
-                    console.log("result.ConsolidadoOrganismoFinanciador", result);
+
 
                     $("#divorganismos").html(htmldivorganismos);
             ***REMOVED***

@@ -199,7 +199,7 @@ function GetRecursosPorNivelYAnio(annio, estado) {
 function GetListadoProyectos(institucionesPorPagina) {
 
     $("#divListadoInstituciones").html("");
-    //console.log("Total instituciones por página:", institucionesPorPagina.length);
+
     var html_list = '<div class="card-entidades-group">';
     for (var i = 0; i < institucionesPorPagina.length; i++) {
 
@@ -228,19 +228,15 @@ function GetListadoProyectos(institucionesPorPagina) {
 
 function dibujarPagNumeradas(paginaActual) {
     var totalNumber = proyectos.length;
-    var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
-    //console.log("TotalNumber:", totalNumber);
-    //console.log("Total pages:", totalPages);
-    //console.log("CantXPagina:", cantXPagina);
+
     if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
         totalPages = totalPages + 1;
 ***REMOVED***
     var pagActual = parseInt(paginaActual);
-    //var pagesHTML = '';
-    //var cant_por_pag = 6;
+
     var totalNumerosPaginador = 10;
     $("#divPagFichas").html("");
-    //var divPag = $("#divPagFichas")
+
     var pagEnlace = "";
 
     var cociente = Math.floor(pagActual / totalNumerosPaginador);
@@ -281,7 +277,7 @@ function dibujarPagNumeradas(paginaActual) {
             pagEnlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
     ***REMOVED***
 ***REMOVED***
-    //console.log("pagEnlace", pagEnlace);
+
     $("#divPagFichas").html(pagEnlace);
 
     $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {

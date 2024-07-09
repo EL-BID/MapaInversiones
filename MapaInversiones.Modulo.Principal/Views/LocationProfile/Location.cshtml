@@ -577,7 +577,7 @@
             ***REMOVED***
         ***REMOVED***).done(function (data) {
                 dataLocation = data;
-                console.log("data",data);
+
                 $("#s0").empty();
                 var geneInfoProjByState = '<div class="container"> <div class="section-heading heading-left"><h2>Información general</h2></div><div class="row py-2 contadores">';
                 if (data != undefined && data.totalProjectsByState != null) {
@@ -980,13 +980,8 @@
         ***REMOVED***
     ***REMOVED***
         function getYearsAndStatusProjectsByFuntionalGroup(functional, projectsByFuntionalGroup) {
-            //console.log("projectsByFuntionalGroup", projectsByFuntionalGroup);
             if (projectsByFuntionalGroup != null && projectsByFuntionalGroup.length > 0) {
-                //$("#yearProject").empty();
-                //$("#statusProject").empty();
                 $("#entitiesProject").empty();
-                //let years = [];
-                //let status = [];
                 let entities = [];
                 for (var i = 0; i < projectsByFuntionalGroup.length; i++) {
                     if (projectsByFuntionalGroup[i].grupoFuncional == functional) {

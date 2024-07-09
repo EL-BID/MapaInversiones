@@ -4861,7 +4861,6 @@ dusa_popover.open = function(panels, active_panel_id, url, embed_url, build) {
               ***REMOVED***)
                   tblData.push(newArr);
             ***REMOVED***)
-                // console.log(headers, tblData);
 
                 /*
                  *  Table Headers
@@ -5384,16 +5383,6 @@ window.onload = function() {
 
       return false;
 ***REMOVED***
-
-    // Enter
-    // if (d3.event.keyCode === 13) {
-    //   var curr_el = d3.select(this).select("a.search-item:focus").node() || document.querySelectorAll("a.search-item")[0];
-    //   console.log(curr_el)
-    //   if(!curr_el){
-    //     // var search_txt = d3.select(this).property("value");
-    //     // window.location = "/search/?q="+encodeURIComponent(search_txt);
-    //   ***REMOVED***
-    // ***REMOVED***
 
   ***REMOVED***);
 
