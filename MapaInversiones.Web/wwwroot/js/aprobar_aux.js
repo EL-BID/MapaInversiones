@@ -1185,7 +1185,7 @@ function ObtenerImgAprobar(estado, pagina) {
 
         function dibujaPaginacion(actual, total, totalPag) {
             var pag_actual = parseInt(actual);
-            pagina_actual = pag_actual;
+            var pagina_actual = pag_actual;
             var pagesHTML = '';
             var cant_por_pag = 2;
             $("#divPaginacion").html("");
@@ -1332,7 +1332,7 @@ function ObtenerImgAprobCant() {
 
 
         function ObtenerComentarios(estado, asociacion, pagina) {
-            tipocomentario = 0;
+            var tipocomentario = 0;
                     var param = {
                         "page": pagina,
                         "estado": estado,

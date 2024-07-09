@@ -361,7 +361,7 @@ $("#btn-buscar").click(function () {
 
 function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     var pag_actual = parseInt(actual);
-    pagina_actual = pag_actual;
+    var pagina_actual = pag_actual;
     var pagesHTML = '';
     var cant_por_linea = 10;
 
@@ -507,7 +507,7 @@ function getContratos(annio, ruc, origen, pagina, registros) {
                                 urlProceso = info[i].docURL;
                             }
 
-                           
+                            var stilo = "";
                             if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" } else { stilo = "contractSEFIN" }
                             inicio = '<div class="contractNumber"><span class="">Código proceso: </span> <span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div>'
                                 + ' <div class="wrap-head-process">'
