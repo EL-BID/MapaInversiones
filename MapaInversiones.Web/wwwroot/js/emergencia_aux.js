@@ -437,8 +437,6 @@ $('#enlace_procesos').click(function () {
 })
 
 $('#enlace_presupuesto_emergencia').click(function () {
-    console.log("tipoemergencia")
-    console.log("tipoemergencia", $('#tipoemergencia').val());
     window.location.href = "/EmergenciaPresupuesto?emergencia=" + $('#tipoemergencia').val();
 })
 
