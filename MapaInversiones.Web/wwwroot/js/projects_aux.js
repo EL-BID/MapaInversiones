@@ -892,6 +892,7 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                     var data = "";
                     var fila = "";
                     var filaconfirma = "";
+                    var filasinfirma = "";
                     var inicioLuis = '<div class="contractBox">';
                     var finLuis = '</div>';
                     var inicio = "";
@@ -913,6 +914,7 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                                 inicio = "";
                                 fin = "";
                         ***REMOVED***
+                            var stilo = "";
                             if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" ***REMOVED*** else { stilo = "contractSEFIN" ***REMOVED***
                             inicio = '<div class="cotractName ' + stilo + '"><div class="row"><div class="col-xs-12 col-md-12"><span class="small">Entidad</span><div class="clearfix"></div>'
                                 + '                 <span class="h4">' + info[i].comprador.toString() + '</span>'
@@ -1688,7 +1690,7 @@ Number.prototype.formatMoney = function (c, d, t) {
 
 function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     var pag_actual = parseInt(actual);
-    pagina_actual = pag_actual;
+    var pagina_actual = pag_actual;
     var pagesHTML = '';
     var cant_por_linea = 10;
 

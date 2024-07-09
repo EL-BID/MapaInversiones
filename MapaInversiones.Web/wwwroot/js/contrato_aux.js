@@ -69,6 +69,7 @@
                             var data = "";
                             var fila = "";
                             var filaconfirma = "";
+                            var filasinfirma = "";
                             var inicioLuis = '<div class="contractBox">';
                             var finLuis = '</div>';
                             var inicio = "";
@@ -90,6 +91,7 @@
                                         inicio = "";
                                         fin = "";
                                 ***REMOVED***
+                                    var stilo = "";
                                     if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" ***REMOVED*** else { stilo = "contractSEFIN" ***REMOVED***
                                     inicio = '<div class="cotractName ' + stilo+'"><div class="row"><div class="col-xs-12 col-md-12"><span class="small">Entidad</span><div class="clearfix"></div>'
                                         + '                 <span class="h4">' + info[i].comprador.toString() + '</span>'

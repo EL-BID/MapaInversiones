@@ -2,6 +2,8 @@
 define(function (require) {
 
     function cortarTexto(texto, numMaxCaract) {
+        var textoCortado = "";
+        var ultimoEspacio = -1;
         if (texto.length < numMaxCaract) {
             textoCortado = texto;
     ***REMOVED*** else {
@@ -174,7 +176,7 @@ define(function (require) {
                     .attr("class", "flexContainer")
                     .attr("id", div_contenedor.toString())
         ***REMOVED***
-            for (i = 0; i < contador; i++) {
+            for (var i = 0; i < contador; i++) {
                 var nom_ficha = "ficha_" + i.toString();
                 div_aux_fila.append("div")
                     .attr("class", "flex-item")
