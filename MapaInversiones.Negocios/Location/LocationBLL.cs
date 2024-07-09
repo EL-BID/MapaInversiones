@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
 using System.Linq;
 using PlataformaTransparencia.Modelos.Proyectos;
 using PlataformaTransparencia.Modelos.Location;
 using static PlataformaTransparencia.Modelos.ModelLocationData;
+using Microsoft.Extensions.Configuration;
+using static PlataformaTransparencia.Negocios.StaticStructs.LocationType;
 
 namespace PlataformaTransparencia.Negocios.Location
 {
@@ -15,254 +15,167 @@ namespace PlataformaTransparencia.Negocios.Location
         /// <summary>
         /// Capa de negocio para funciones perfil Localizacon 
         /// </summary>
-
-        public LocationBLL()
+        private IConfiguration _configuration;
+        public LocationBLL(IConfiguration configuration)
         {
+            _configuration = configuration;
     ***REMOVED***
 
-        public ModelLocationData ObtenerDatosLocalizacionInicio(string location_id, string type)
+        public ModelHeaderLocalitacionProfileData GetHeaderLocationProfile(string locationId, string type)
         {
-            ModelLocationData objReturn = new ModelLocationData() { nomLocation = string.Empty, Encabezado = new Modelos.Location.InfoLocationGen { CantProyectos = 0, Costo = 0, Duracion = 0 ***REMOVED*** ***REMOVED***;
-            if (string.IsNullOrEmpty(location_id)) return objReturn;
-            type = string.IsNullOrEmpty(type) ? "COUNTY" : type;
-            objReturn.location_id = location_id;
-            objReturn.nomLocation = GetNameLocationByIdType(location_id, type);
-            objReturn.descLocation = type.ToUpper();
-            objReturn.tipo = type;
-            objReturn.ProyectosEjecucion = GetInvestingProjects(location_id, type);
-            objReturn.Encabezado = GetInfoLocation(location_id, type);
-            objReturn.ProjectsPerEstado = GetProjectsByState(location_id, type);
-            objReturn.ProjectsPerSectorGroup = GetProjectsBySector(location_id, type);
-            if (objReturn.ProjectsPerSectorGroup.Count > 0)
+            locationId ??= string.Empty;
+            type ??= string.Empty;
+            locationId = locationId != string.Empty ? locationId.Trim() : locationId;
+            ModelHeaderLocalitacionProfileData objReturn = new() { LocationId = locationId, Type = type, Name = GetNameLocationByIdType(locationId, type) ***REMOVED***;
+            List<InfoProyectos> projectsByLocation = GetInvestingProjectsByLocationIdAndTypeLocation(locationId, type);
+            objReturn.IsProvince = type.ToUpper().Trim() == Department.Name || type.ToUpper().Trim() == Province.Name;
+            if (projectsByLocation.Count > 0)
             {
-                objReturn.sectorPrincipal = objReturn.ProjectsPerSectorGroup[0].labelGroup;
+                objReturn.NumberProjects = projectsByLocation.Count;
+                objReturn.AverageDurationProjects = projectsByLocation.Select(x => x.AnioFinProyecto - x.AnioInicioProyecto).Average();
+                objReturn.AverageCostProjects = projectsByLocation.Select(x => x.VlrTotalProyectoFuenteRegalias).Average() / 1000000;
         ***REMOVED***
-
-            //#region FILTROS
-            ////habilitar en caso de no usarse web api, sino carga directa desde el controlador
-            ////objReturn.Filtros = addFiltroProyectos();
-            //#endregion
-
-            //#region PROYXSECTOR
-            //objReturn.ProjectsPerSectorGroup = ObtenerProyectosPorSectorGroup(filtro_busqueda);
-            ////objReturn.nomLocation = "MUNICIPIO";
-
-            objReturn.Status = true;
+            objReturn.UrlImage = $"../GaleriaEnteTerritorial/XL/{objReturn.LocationId***REMOVED***_XL.jpg"; //url('../GaleriaEnteTerritorial/XL/DistritoNacional_XL.jpg')
+            objReturn.Locations = GetChildsLocations(locationId, type);
             return objReturn;
     ***REMOVED***
-        private List<InfoProjectPerSector> GetProjectsBySector(string location_id, string type)
+        private static List<itemFilters> GetChildsLocations(string locationId, string type)
         {
-
-            var defaultRta = new List<InfoProjectPerSector>();
-
-            using (var DataModel = new TransparenciaDB())
+            if (string.IsNullOrEmpty(locationId)) return new();
+            List<itemFilters> rta = new();
+            using var DataModel = new TransparenciaDB();
+            switch (type.ToUpper().Trim())
             {
-
-                if (string.IsNullOrEmpty(type) || string.IsNullOrEmpty(location_id)) return defaultRta;
-                if (type.ToUpper() == "REGION")
-                {
-                    var localizacionSeleccionada = (from info in DataModel.VwSectorProyectosDeptoInvs
-                                                    where info.IdDepartamento == location_id
-                                                    orderby info.NumeroProyectosSect descending
-                                                    select new InfoProjectPerSector
-                                                    {
-                                                        label = info.NombreEstado,
-                                                        labelGroup = info.NombreSector,
-                                                        rawValue = ((decimal)info.NumeroProyectosSect),
-                                                        value = (info.NumeroProyectosSect).ToString()
-                                                ***REMOVED***).ToList();
-                    return localizacionSeleccionada ?? defaultRta;
-            ***REMOVED***
-                else if (type.ToUpper() == "COUNTY")
-                {
-                    var localizacionSeleccionada = (from info in DataModel.VwSectorProyectosInvs
-                                                    where info.IdMunicipio == location_id
-                                                    orderby info.NumeroProyectosSect descending
-                                                    select new InfoProjectPerSector
-                                                    {
-                                                        label = info.NombreEstado,
-                                                        labelGroup = info.NombreSector,
-                                                        rawValue = ((decimal)info.NumeroProyectosSect),
-                                                        value = (info.NumeroProyectosSect).ToString()
-                                                ***REMOVED***).ToList();
-                    return localizacionSeleccionada ?? defaultRta;
-            ***REMOVED***
-                else return defaultRta;
+                case Province.Name:
+                case Department.Name:
+                    rta = (from info in DataModel.ProyectoXEntidadTerritorials
+                           join ente in DataModel.EnteTerritorials on info.IdMunicipio equals ente.IdMunicipio
+                           where info.IdDepartamento == locationId
+                           select new itemFilters
+                           {
+                               value = info.IdMunicipio,
+                               name = ente.NombreMunicipio
+                       ***REMOVED***).Distinct().OrderBy(x => x.name).ToList();
+                    break;
+        ***REMOVED***
+            rta.Insert(0, new itemFilters { name = "TODOS", value = "0", subTipo = string.Empty ***REMOVED***);
+            return rta;
+    ***REMOVED***
+        private static string GetNameLocationByIdType(string locationId, string type)
+        {
+            locationId ??= string.Empty;
+            type ??= string.Empty;
+            using var DataModel = new TransparenciaDB();
+            switch (type.ToUpper().Trim())
+            {
+                case Province.Name:
+                case Department.Name:
+                    var locationLevelOne = (from info in DataModel.EnteTerritorials
+                                            where (info.Tipo.ToUpper().Trim() == Department.Name || info.Tipo.ToUpper().Trim() == Province.Name) && info.IdDepartamento == locationId
+                                            select info).FirstOrDefault();
+                    return locationLevelOne == null ? string.Empty : locationLevelOne.NombreDepartamento;
+                case District.Name:
+                case Municipality.Name:
+                    var locationLevelTwo = (from info in DataModel.EnteTerritorials
+                                            where info.IdMunicipio == locationId
+                                            select info).FirstOrDefault();
+                    return locationLevelTwo == null ? string.Empty : locationLevelTwo.NombreMunicipio;
+                default:
+                    return string.Empty;
         ***REMOVED***
     ***REMOVED***
-
-        private List<InfoProjectsPerEstado> GetProjectsByState(string location_id, string type)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="locationId"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private static List<InfoProyectos> GetInvestingProjectsByLocationIdAndTypeLocation(string locationId, string type)
         {
-            var defaultRta = new List<InfoProjectsPerEstado>();
-            using (var DataModel = new TransparenciaDB())
+            locationId ??= string.Empty;
+            type ??= string.Empty;
+            using var DataModel = new TransparenciaDB();
+            switch (type.ToUpper().Trim())
             {
-
-                if (string.IsNullOrEmpty(type) || string.IsNullOrEmpty(location_id)) return defaultRta;
-                if (type.ToUpper() == "REGION")
-                {
-                    var localizacionSeleccionada = (from info in DataModel.VwEstadoProyectosDeptoInvs
-                                                    where info.IdDepartamento == location_id
-                                                    select new InfoProjectsPerEstado
-                                                    {
-                                                        label = info.NombreEstado,
-                                                        rawValue = ((decimal)info.NumeroProyectos),
-                                                        value = ((decimal)info.NumeroProyectos).ToString()
-                                                ***REMOVED***).ToList();
-                    return localizacionSeleccionada ?? defaultRta;
-            ***REMOVED***
-                else if (type.ToUpper() == "COUNTY")
-                {
-                    var localizacionSeleccionada = (from info in DataModel.VwEstadoProyectosInvs
-                                                    where info.IdMunicipio == location_id
-                                                    select new InfoProjectsPerEstado
-                                                    {
-                                                        label = info.NombreEstado,
-                                                        rawValue = ((decimal)info.NumeroProyectos),
-                                                        value = ((decimal)info.NumeroProyectos).ToString()
-                                                ***REMOVED***).ToList();
-                    return localizacionSeleccionada == null ? defaultRta : localizacionSeleccionada;
-            ***REMOVED***
-                else return defaultRta;
+                case District.Name:
+                case Municipality.Name:
+                    List<InfoProyectos> projectsByDistrict = (from info in DataModel.VwProyectosAprobadosInvs
+                                                              join pxe in DataModel.ProyectoXEntidadTerritorials on info.IdProyecto equals pxe.IdProyecto
+                                                              join sector in DataModel.Sectors on info.IdSector equals sector.IdSector
+                                                              join ente in DataModel.EnteTerritorials on pxe.IdMunicipio equals ente.IdMunicipio
+                                                              join histEstado in DataModel.HistoriaEstados on info.IdProyecto equals histEstado.IdProyecto
+                                                              join estado in DataModel.Estados on histEstado.IdEstado equals estado.IdEstado
+                                                              where ente.IdMunicipio == locationId
+                                                              select new InfoProyectos
+                                                              {
+                                                                  IdProyecto = info.IdProyecto,
+                                                                  NombreProyecto = info.NombreProyecto.Replace("\r\n", "").Replace("\n", "").Replace("\r", ""),
+                                                                  VlrTotalProyectoFuenteRegalias = info.VlrTotalProyectoFuenteRegalias,
+                                                                  VlrTotalProyectoTodasLasFuentes = info.VlrTotalProyectoTodasLasFuentes,
+                                                                  PartidaPresupuestaria = string.Empty,//info.PartidaPresupuestaria,
+                                                                  State = estado.NombreEstado,
+                                                                  UrlImagen = info.URLImagen,
+                                                                  NombreMunicipio = ente.NombreMunicipio,
+                                                                  NombreSector = sector.NombreSector,
+                                                                  IdSector = sector.IdSector,
+                                                                  cantidadFotos = info.NumeroImagenes,
+                                                                  MesInicioProyecto = info.MesInicioProyecto,
+                                                                  AnioInicioProyecto = info.AnioInicioProyecto,
+                                                                  MesFinProyecto = info.MesFinProyecto,
+                                                                  AnioFinProyecto = info.AnioFinProyecto,
+                                                                  FechaInicioProyecto = info.FechaInicioProyecto,
+                                                                  Megusta = info.MeGusta,
+                                                                  Comentarios = info.Comentarios,
+                                                                  IdDepartamento = pxe.IdDepartamento,
+                                                                  IdMunicipio = ente.IdMunicipio,
+                                                                  CodigoSnip = info.CodigoSNIP, //string.Empty,// info.CodigoSNIP,
+                                                                  porcentajeGastado = (decimal)info.AvanceFinanciero,
+                                                                  EntidadEjecutora = info.EntidadEjecutora,
+                                                                  IdEntidadEjecutora = info.IdEntidadEjecutora.ToString()
+                                                          ***REMOVED***).ToList();
+                    if (projectsByDistrict != null && projectsByDistrict.Count > 0) projectsByDistrict = projectsByDistrict.DistinctBy(x => x.IdProyecto).ToList();
+                    return projectsByDistrict;
+                case Province.Name:
+                case Department.Name:
+                    List<InfoProyectos> projectsByProvince = (from info in DataModel.VwProyectosAprobadosInvs
+                                                              join pxe in DataModel.ProyectoXEntidadTerritorials on info.IdProyecto equals pxe.IdProyecto
+                                                              join sector in DataModel.Sectors on info.IdSector equals sector.IdSector
+                                                              join ente in DataModel.EnteTerritorials on pxe.IdDepartamento equals ente.IdDepartamento
+                                                              join histEstado in DataModel.HistoriaEstados on info.IdProyecto equals histEstado.IdProyecto
+                                                              join estado in DataModel.Estados on histEstado.IdEstado equals estado.IdEstado
+                                                              where ente.IdDepartamento == locationId && pxe.IdMunicipio == ente.IdMunicipio && ente.Tipo != null && (ente.Tipo.ToUpper().Trim() == Department.ChildLocation.Type || ente.Tipo.ToUpper().Trim() == Province.ChildLocation.Type || ente.Tipo.ToUpper().Trim() == Department.Name || ente.Tipo.ToUpper().Trim() == Province.Name)
+                                                              select new InfoProyectos
+                                                              {
+                                                                  IdProyecto = info.IdProyecto,
+                                                                  NombreProyecto = info.NombreProyecto.Replace("\r\n", "").Replace("\n", "").Replace("\r", ""),
+                                                                  VlrTotalProyectoFuenteRegalias = info.VlrTotalProyectoFuenteRegalias,
+                                                                  VlrTotalProyectoTodasLasFuentes = info.VlrTotalProyectoTodasLasFuentes,
+                                                                  PartidaPresupuestaria = string.Empty,//info.PartidaPresupuestaria,
+                                                                  State = estado.NombreEstado,
+                                                                  UrlImagen = info.URLImagen,
+                                                                  NombreMunicipio = ente.NombreMunicipio,
+                                                                  NombreSector = sector.NombreSector,
+                                                                  IdSector = sector.IdSector,
+                                                                  cantidadFotos = info.NumeroImagenes,
+                                                                  MesInicioProyecto = info.MesInicioProyecto,
+                                                                  AnioInicioProyecto = info.AnioInicioProyecto,
+                                                                  MesFinProyecto = info.MesFinProyecto,
+                                                                  AnioFinProyecto = info.AnioFinProyecto,
+                                                                  FechaInicioProyecto = info.FechaInicioProyecto,
+                                                                  Megusta = info.MeGusta,
+                                                                  Comentarios = info.Comentarios,
+                                                                  IdDepartamento = pxe.IdDepartamento,
+                                                                  IdMunicipio = ente.IdMunicipio,
+                                                                  CodigoSnip = info.CodigoSNIP, //string.Empty,
+                                                                  porcentajeGastado = (decimal)info.AvanceFinanciero,
+                                                                  EntidadEjecutora = info.EntidadEjecutora,
+                                                                  IdEntidadEjecutora = info.IdEntidadEjecutora.ToString()
+                                                          ***REMOVED***).ToList();
+                    if (projectsByProvince != null && projectsByProvince.Count > 0) projectsByProvince = projectsByProvince.DistinctBy(x => x.IdProyecto).ToList();
+                    return projectsByProvince;
+                default:
+                    return new List<InfoProyectos>();
         ***REMOVED***
-    ***REMOVED***
-
-        private Modelos.Location.InfoLocationGen GetInfoLocation(string location_id, string type)
-        {
-            using (var DataModel = new TransparenciaDB())
-            {
-                var defaultRta = new Modelos.Location.InfoLocationGen { CantProyectos = 0, Costo = 0, Duracion = 0, IdDepartamento = string.Empty, IdMunicipio = string.Empty, urlImgXL = string.Empty ***REMOVED***;
-                if (string.IsNullOrEmpty(type) || string.IsNullOrEmpty(location_id)) return defaultRta;
-                if (type.ToUpper() == "REGION")
-                {
-                    var localizacionSeleccionada = (from info in DataModel.VwInformacionGeneralPerfilLocalizacionDeptos
-                                                    join galeria in DataModel.VwGaleriaEntidadesTerritorialesDepartamentos on info.IdDepartamento equals galeria.IdDepartamento
-                                                    where info.IdDepartamento == location_id
-                                                    select new Modelos.Location.InfoLocationGen
-                                                    {
-                                                        IdDepartamento = info.IdDepartamento,
-                                                        Costo = Math.Round((decimal)info.ValorPromedioProyecto, 2),
-                                                        Duracion = Math.Round((decimal)info.DuracionPromedioProyectos, 2),
-                                                        CantProyectos = Math.Round((decimal)info.NumeroProyectos, 2),
-                                                        urlImgXL = galeria.UrlImageGrande
-                                                ***REMOVED***).FirstOrDefault();
-                    return localizacionSeleccionada == null ? defaultRta : localizacionSeleccionada;
-            ***REMOVED***
-                else if (type.ToUpper() == "COUNTY")
-                {
-                    var localizacionSeleccionada = (from info in DataModel.VwInformacionGeneralPerfilLocalizacions
-                                                    join galeria in DataModel.VwGaleriaEntidadesTerritorialesMunicipios on info.IdMunicipio equals galeria.IdMunicipio
-                                                    where info.IdMunicipio == location_id
-                                                    select new Modelos.Location.InfoLocationGen
-                                                    {
-                                                        IdDepartamento = info.IdDepartamento,
-                                                        IdMunicipio = info.IdMunicipio,
-                                                        Costo = Math.Round((decimal)info.ValorPromedioProyecto, 2),
-                                                        Duracion = Math.Round((decimal)info.DuracionPromedioProyectos, 2),
-                                                        CantProyectos = Math.Round((decimal)info.NumeroProyectos, 2),
-                                                        urlImgXL = galeria.UrlImageGrande
-                                                ***REMOVED***).FirstOrDefault();
-                    return localizacionSeleccionada == null ? defaultRta : localizacionSeleccionada;
-            ***REMOVED***
-                else return defaultRta;
-        ***REMOVED***
-    ***REMOVED***
-
-        private string GetNameLocationByIdType(string location_id, string type)
-        {
-            if (string.IsNullOrEmpty(type) || string.IsNullOrEmpty(location_id)) return string.Empty;
-            string tipoFiltro = string.Empty;
-            using (var DataModel = new TransparenciaDB())
-            {
-
-                if (type.ToUpper() == "REGION")
-                {
-                    tipoFiltro = "DEPARTAMENTO";
-                    var localizacionSeleccionada = (from info in DataModel.EnteTerritorials
-                                                    where info.Tipo.ToUpper().Trim() == tipoFiltro && info.IdDepartamento == location_id
-                                                    select info).FirstOrDefault();
-                    return localizacionSeleccionada == null ? string.Empty : localizacionSeleccionada.NombreDepartamento;
-            ***REMOVED***
-                else if (type.ToUpper() == "COUNTY")
-                {
-                    tipoFiltro = "MUNICIPIO";
-                    var localizacionSeleccionada = (from info in DataModel.EnteTerritorials
-                                                    where info.Tipo.ToUpper().Trim() == tipoFiltro && info.IdMunicipio == location_id
-                                                    select info).FirstOrDefault();
-                    return localizacionSeleccionada == null ? string.Empty : localizacionSeleccionada.NombreMunicipio;
-            ***REMOVED***
-                else return string.Empty;
-        ***REMOVED***
-    ***REMOVED***
-
-        private List<InfoProyectos> GetInvestingProjects(string location_id, string type)
-        {
-            if (type == null || location_id == null) return new List<InfoProyectos>();
-
-            using (var DataModel = new TransparenciaDB())
-            {
-
-                if (type.ToUpper() == "REGION")
-                {
-                    var localizacionSeleccionada = (from info in DataModel.VwProyectosAprobadosInvs
-                                                    join pxe in DataModel.ProyectoXEntidadTerritorials on info.IdProyecto equals pxe.IdProyecto
-                                                    join sector in DataModel.Sectors on info.IdSector equals sector.IdSector
-                                                    join ente in DataModel.EnteTerritorials on pxe.IdDepartamento equals ente.IdDepartamento
-                                                    join histEstado in DataModel.HistoriaEstados on info.IdProyecto equals histEstado.IdProyecto
-                                                    where ente.IdDepartamento == location_id && histEstado.IdEstado == 3 //pxe.IdMunicipio == ente.IdMunicipio
-                                                    select new InfoProyectos
-                                                    {
-                                                        IdProyecto = info.IdProyecto,
-                                                        NombreProyecto = info.NombreProyecto.Replace("\r\n", "").Replace("\n", "").Replace("\r", ""),
-                                                        VlrTotalProyectoFuenteRegalias = info.VlrTotalProyectoFuenteRegalias,
-                                                        porcentajeGastado = (decimal)info.AvanceFinanciero,
-                                                        //NombreMunicipio = ente.NombreMunicipio,
-                                                        UrlImagen = info.URLImagen,
-                                                        NombreSector = sector.NombreSector,
-                                                        IdSector = sector.IdSector,
-                                                        cantidadFotos = info.NumeroImagenes,
-                                                        MesInicioProyecto = info.MesInicioProyecto,
-                                                        AnioInicioProyecto = info.AnioInicioProyecto,
-                                                        MesFinProyecto = info.MesFinProyecto,
-                                                        AnioFinProyecto = info.AnioFinProyecto,
-                                                        FechaInicioProyecto = info.FechaInicioProyecto,
-                                                        Megusta = info.MeGusta,
-                                                        Comentarios = info.Comentarios,
-                                                        IdDepartamento = pxe.IdDepartamento
-                                                ***REMOVED***).Distinct().ToList();
-                    return localizacionSeleccionada;
-            ***REMOVED***
-                else if (type.ToUpper() == "COUNTY")
-                {
-                    var localizacionSeleccionada = (from info in DataModel.VwProyectosAprobadosInvs
-                                                    join pxe in DataModel.ProyectoXEntidadTerritorials on info.IdProyecto equals pxe.IdProyecto
-                                                    join sector in DataModel.Sectors on info.IdSector equals sector.IdSector
-                                                    join ente in DataModel.EnteTerritorials on pxe.IdMunicipio equals ente.IdMunicipio
-                                                    join histEstado in DataModel.HistoriaEstados on info.IdProyecto equals histEstado.IdProyecto
-                                                    where ente.IdMunicipio == location_id && histEstado.IdEstado == 3 //pxe.IdMunicipio == ente.IdMunicipio
-                                                    select new InfoProyectos
-                                                    {
-                                                        IdProyecto = info.IdProyecto,
-                                                        NombreProyecto = info.NombreProyecto,
-                                                        VlrTotalProyectoFuenteRegalias = info.VlrTotalProyectoFuenteRegalias,
-                                                        porcentajeGastado = (decimal)info.AvanceFinanciero,
-                                                        NombreMunicipio = ente.NombreMunicipio,
-                                                        UrlImagen = info.URLImagen,
-                                                        NombreSector = sector.NombreSector,
-                                                        IdSector = sector.IdSector,
-                                                        cantidadFotos = info.NumeroImagenes,
-                                                        MesInicioProyecto = info.MesInicioProyecto,
-                                                        AnioInicioProyecto = info.AnioInicioProyecto,
-                                                        MesFinProyecto = info.MesFinProyecto,
-                                                        AnioFinProyecto = info.AnioFinProyecto,
-                                                        FechaInicioProyecto = info.FechaInicioProyecto,
-                                                        Megusta = info.MeGusta,
-                                                        Comentarios = info.Comentarios,
-                                                        IdDepartamento = pxe.IdDepartamento
-                                                ***REMOVED***).ToList();
-                    return localizacionSeleccionada;
-            ***REMOVED***
-        ***REMOVED***
-            return new List<InfoProyectos>();
     ***REMOVED***
 
         /// <summary>
@@ -283,10 +196,194 @@ namespace PlataformaTransparencia.Negocios.Location
                            ***REMOVED***).OrderBy(p => p.nombre).ToList();
         ***REMOVED***
             return lstSectores;
-
     ***REMOVED***
 
+        public LocationProfileDetailData GetDetailLocationProfileByLocationIdAndTypeLocation(string locationId, string typeLocation, string jurisdictionId)
+        {
+            locationId ??= string.Empty;
+            typeLocation ??= string.Empty;
+            locationId = locationId != string.Empty ? locationId.Trim() : string.Empty;
+            typeLocation = typeLocation != string.Empty ? typeLocation.Trim() : string.Empty;
+            List<InfoProyectos> projects = GetInvestingProjectsByLocationIdAndTypeLocation(locationId, typeLocation);
+            List<Item> locations = GetInvestingProjectsLocationsByLocationIdAndType(locationId, typeLocation);
+            List<LocationProfileChild> childrenLocations = GetInvestingProjectsChildrenLocationsByLocationIdAndType(typeLocation, projects, locations);
+            List<InfoProjectPerSector> projectBySectors = GetInvestingProjectsSectorsByInvestingProjectsInLocation(projects);
+            Item parentLocation = GetParentLocationByLocationIdAndTypeLocation(locationId, typeLocation);
+            List<LocationProfileChild> locationsRelated = GetLocationRelatedByParentLocationAndTypeLocation(parentLocation, locationId, typeLocation);
+            LocationProfileDetailData objReturn = new()
+            {
+                GeneralInformacion = new LocationProfileGeneralInformation { UrlImage = $"../img/d-{locationId***REMOVED***.svg", IsChildLocationEnable = childrenLocations != null && childrenLocations.Count > 0, ParentLocationName = parentLocation == null ? string.Empty : parentLocation.Nombre, ChildLocationName = GetChildLocationNameByTypeLocation(typeLocation) ***REMOVED***,
+                TotalProjectsByState = GetTotalProjectsByState(projects),
+                ProjectsByLocation = projects,
+                LocationChilds = childrenLocations,
+                ProjectsBySector = projectBySectors,
+                ProjectsByFunctional = new(),
+                ProjectsByFunctionalGroup = new(),
+                LocationsRelated = locationsRelated,
+                Status = true
+        ***REMOVED***;
+            return objReturn;
+    ***REMOVED***
 
+        private static string GetChildLocationNameByTypeLocation(string typeLocation)
+        {
+            switch (typeLocation.ToUpper().Trim())
+            {
+                case Province.Name:
+                case Department.Name:
+                    return $"{Municipality.Name***REMOVED***S";
+                default:
+                    return string.Empty;
+        ***REMOVED***
+    ***REMOVED***
 
+        private static List<LocationProfileChild> GetLocationRelatedByParentLocationAndTypeLocation(Item parentLocation, string locationId, string typeLocation)
+        {
+            if (parentLocation == null || string.IsNullOrEmpty(parentLocation.Id)) return new();
+            locationId ??= string.Empty;
+            typeLocation ??= string.Empty;
+            using (var DataModel = new TransparenciaDB())
+            {
+                switch (typeLocation.ToUpper().Trim())
+                {
+                    case District.Name:
+                    case Municipality.Name:
+                        List<LocationProfileChild> rta = (from info in DataModel.EnteTerritorials
+                                                          where info.IdDepartamento == parentLocation.Id && info.IdMunicipio != locationId && info.Tipo != null && (info.Tipo.ToUpper().Trim() == Department.ChildLocation.Type || info.Tipo.ToUpper().Trim() == Province.ChildLocation.Type)
+                                                          select new LocationProfileChild
+                                                          {
+                                                              Id = info.IdMunicipio,
+                                                              Name = info.NombreMunicipio
+                                                      ***REMOVED***).Distinct().ToList();
+                        for (int i = 0; i < rta.Count; i++)
+                        {
+                            var projectsByLocation = GetInvestingProjectsByLocationIdAndTypeLocation(rta[i].Id, typeLocation);
+                            rta[i].TotalProjects = projectsByLocation.Count;
+                    ***REMOVED***
+                        return rta;
+            ***REMOVED***
+        ***REMOVED***
+            return new();
+    ***REMOVED***
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="locationId"></param>
+        /// <param name="typeLocation"></param>
+        /// <returns></returns>
+        private static Item GetParentLocationByLocationIdAndTypeLocation(string locationId, string typeLocation)
+        {
+            using (var DataModel = new TransparenciaDB())
+            {
+                switch (typeLocation.ToUpper().Trim())
+                {
+                    case District.Name:
+                    case Municipality.Name:
+                        return (from info in DataModel.EnteTerritorials
+                                where info.IdMunicipio == locationId
+                                select new Item
+                                {
+                                    Id = info.IdDepartamento,
+                                    Nombre = info.NombreDepartamento
+                            ***REMOVED***).FirstOrDefault();
+            ***REMOVED***
+        ***REMOVED***
+            return null;
+    ***REMOVED***
+
+        private List<InfoProjectPerSector> GetInvestingProjectsSectorsByInvestingProjectsInLocation(List<InfoProyectos> projects)
+        {
+            if (projects == null || (projects != null && projects.Count == 0)) return new();
+            List<InfoProjectPerSector> rta = (from project in projects
+                                              group project by new { project.State, project.NombreSector ***REMOVED*** into g
+                                              select new InfoProjectPerSector
+                                              {
+                                                  label = g.Key.NombreSector,
+                                                  labelGroup = g.Key.State,
+                                                  rawValue = g.Count(),
+                                                  value = g.Count().ToString()
+                                          ***REMOVED***).OrderByDescending(x => x.rawValue).ToList();
+            return rta;
+    ***REMOVED***
+
+        private static List<LocationProfileChild> GetInvestingProjectsChildrenLocationsByLocationIdAndType(string typeLocation, List<InfoProyectos> projects, List<Item> locations)
+        {
+            typeLocation ??= string.Empty;
+            if (projects == null || (projects != null && projects.Count == 0)) return new();
+            if (locations == null || (locations != null && locations.Count == 0)) return new();
+            List<LocationProfileChild> rta = new();
+            switch (typeLocation.ToUpper().Trim())
+            {
+                case Province.Name:
+                case Department.Name:
+                    List<LocationProfileChild> childrenLocations = (from project in projects
+                                                                    group project by new { project.IdMunicipio, project.NombreMunicipio ***REMOVED*** into g
+                                                                    select new LocationProfileChild
+                                                                    {
+                                                                        Id = g.Key.IdMunicipio,
+                                                                        Name = g.Key.NombreMunicipio,
+                                                                        TotalProjects = g.Count()
+                                                                ***REMOVED***).ToList();
+                    if (childrenLocations.Count > 0)
+                    {
+                        if (locations.Count > 0)
+                        {
+                            rta = (from location in locations
+                                   join childrenLocation in childrenLocations on location.Id equals childrenLocation.Id into g
+                                   from loc in g.DefaultIfEmpty()
+                                   select new LocationProfileChild
+                                   {
+                                       Id = location.Id,
+                                       Name = location.Nombre,
+                                       TotalProjects = loc?.TotalProjects ?? 0
+                               ***REMOVED***).ToList();
+                    ***REMOVED***
+                        //objReturn.GeneralInformacion.IsChildLocationEnable = true;
+                        //objReturn.GeneralInformacion.ChildLocationName = typeLocation.ToUpper().Trim() == Province.Name ? Province.ChildLocation.Name : Department.ChildLocation.Name;
+                        //objReturn.LocationChilds = new List<LocationProfileChild>(locationChildren.OrderBy(x => x.Name));
+                ***REMOVED***
+                    break;
+        ***REMOVED***
+            return rta;
+    ***REMOVED***
+
+        private static List<Item> GetInvestingProjectsLocationsByLocationIdAndType(string locationId, string type)
+        {
+            locationId ??= string.Empty;
+            type ??= string.Empty;
+            List<Item> rta = new();
+            using (var DataModel = new TransparenciaDB())
+            {
+                switch (type.ToUpper().Trim())
+                {
+                    case Province.Name:
+                    case Department.Name:
+                        rta = (from info in DataModel.EnteTerritorials
+                               where info.IdDepartamento == locationId && info.Tipo != null && (info.Tipo.ToUpper().Trim() == Department.ChildLocation.Type || info.Tipo.ToUpper().Trim() == Province.ChildLocation.Type)
+                               select new Item
+                               {
+                                   Id = info.IdMunicipio,
+                                   Nombre = info.NombreMunicipio
+                           ***REMOVED***).Distinct().ToList();
+                        break;
+            ***REMOVED***
+        ***REMOVED***
+            return rta;
+    ***REMOVED***
+
+        private static List<TotalProjectByState> GetTotalProjectsByState(List<InfoProyectos> projects)
+        {
+            if (projects == null || projects.Count == 0) return new();
+            List<TotalProjectByState> rta = (from project in projects
+                                             group project by new { project.State ***REMOVED*** into g
+                                             select new TotalProjectByState
+                                             {
+                                                 StateName = g.Key.State,
+                                                 TotalProjects = g.Count(),
+                                         ***REMOVED***).ToList();
+            if (rta != null && rta.Count > 0) rta = rta.OrderBy(x => x.StateName).ToList();
+            return rta;
+    ***REMOVED***
 ***REMOVED***
 ***REMOVED***

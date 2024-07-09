@@ -4,7 +4,7 @@
 
 @if (ViewData["ShowContacts"] as bool? ?? true)
 {
-    <section class="section-gray">
+    <section class="section border-t-1">
         <div class="container">
             <div class="col-12 text-center">
                 <h3>&#191;No has encontrado lo que estabas buscando&#63;</h3>
@@ -24,13 +24,13 @@
 <footer class="footer">
     <div class="footer-main">
         <div class="container">
-            <div class="row items justify-content-lg-between justify-content-xs-center">
-                <div class="col-xl-12 col-lg-12 col-md-12 col-12 item text-center">
+            <div class="row">
+                <div class="col-lg-5">
                     <!-- Begin company info -->
                     <div class="footer-company-info">
                         <div class="footer-company-top">
                             <a href="/">
-                                <img src="../img/logoMIVW.svg" alt="Logo" />
+                                <img class="img-fluid" src="/img/logoMIV.svg" alt="Logo MapaInversiones">
                             </a>
 
 
@@ -40,74 +40,79 @@
                     <!-- End company info -->
 
                 </div>
-                @{
-                    var menu = await Orchard.GetContentItemByHandleAsync("alias:second-menu");
-                    @foreach (var menuitem in menu.Content.MenuItemsListPart.MenuItems)
-                    {
-
-                        @if (@menuitem.LinkMenuItemPart.Name != null)
+                <div class="col-lg-7">
+                    <div class="items">
+                        @{
+                        var menu = await Orchard.GetContentItemByHandleAsync("alias:second-menu");
+                        @foreach (var menuitem in menu.Content.MenuItemsListPart.MenuItems)
                         {
-                            var enlace = @menuitem.LinkMenuItemPart.Url;
-                            var enlace_aux = "#!";
-                            if (enlace != "")
+
+                            @if (@menuitem.LinkMenuItemPart.Name != null)
                             {
-                                enlace_aux = enlace;
-                        ***REMOVED***
-                            <div class="col-lg-1 col-md-3 col-xs-12 item">
-                                <div class="footer-item">
-                                    <h6 class="footer-item-heading"><a href="@menuitem.LinkMenuItemPart.Url">@menuitem.LinkMenuItemPart.Name</a></h6>
-                                    <nav class="footer-nav">
-                                        @if (menuitem.MenuItemsListPart != null)
-                                        {
+                                var enlace = @menuitem.LinkMenuItemPart.Url;
+                                var enlace_aux = "#!";
+                                if (enlace != "")
+                                {
+                                    enlace_aux = enlace;
+                            ***REMOVED***
+                            
+                                    <div class="item">
+                                            <p class="footer-item-heading"><a href="@menuitem.LinkMenuItemPart.Url">@menuitem.LinkMenuItemPart.Name</a></p>
+                                        <nav class="footer-nav">
+                                            @if (menuitem.MenuItemsListPart != null)
+                                            {
 
-                                            var cant = @menuitem.MenuItemsListPart.MenuItems.Count;
-                                            <ul class="footer-mnu">
-                                                @foreach (var submenu in menuitem.MenuItemsListPart.MenuItems)
-                                                {
-                                                    @if (@submenu.LinkMenuItemPart.Name != null)
+                                                var cant = @menuitem.MenuItemsListPart.MenuItems.Count;
+                                                <ul class="footer-mnu">
+                                                    @foreach (var submenu in menuitem.MenuItemsListPart.MenuItems)
                                                     {
-                                                        var enlace_sub = @submenu.LinkMenuItemPart.Url;
-                                                        var enlace_sub_aux = "#!";
-                                                        if (enlace_sub != "")
+                                                        @if (@submenu.LinkMenuItemPart.Name != null)
                                                         {
-                                                            enlace_sub_aux = enlace_sub;
+                                                            var enlace_sub = @submenu.LinkMenuItemPart.Url;
+                                                            var enlace_sub_aux = "#!";
+                                                            if (enlace_sub != "")
+                                                            {
+                                                                enlace_sub_aux = enlace_sub;
+                                                        ***REMOVED***
+                                                            <li>
+                                                                <a href="@enlace_sub_aux" class="hover-link" data-title="@submenu.LinkMenuItemPart.Name">
+                                                                    <span>@submenu.LinkMenuItemPart.Name</span>
+                                                                </a>
+                                                            </li>
                                                     ***REMOVED***
-                                                        <li>
-                                                            <a href="@enlace_sub_aux" class="hover-link" data-title="@submenu.LinkMenuItemPart.Name">
-                                                                <span>@submenu.LinkMenuItemPart.Name</span>
-                                                            </a>
-                                                        </li>
                                                 ***REMOVED***
-                                            ***REMOVED***
-                                            </ul>
+                                                </ul>
 
-                                    ***REMOVED***
+                                        ***REMOVED***
 
 
-                                    </nav>
-                                </div>
-                            </div>
+                                        </nav>
+                                    </div>
+                            
+
+                        ***REMOVED***
 
                     ***REMOVED***
-
-                ***REMOVED***
-            ***REMOVED***
+                    ***REMOVED***
+                    </div>
+                </div>
             </div>
 
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="footer-company-links text-lg-center py-3">
+                    <div class="footer-company-links text-lg-center py-5">
 
-                        <a href="/Acercade">Acerca Inversiones</a>
+                        <a href="/Acercade">Acerca de MapaInversiones</a>
                         <a href="/CentroAyuda?id=2">Centro de Ayuda</a>
                         <a href="/MarcoLegal">Marco Legal</a>
                         <a href="/Contactanos">Contáctenos</a>
                         <a href="/PoliticasdePrivacidad">Pol&iacute;tica de Privacidad</a>
                         <a href="/TerminosyCondiciones">T&eacute;rminos y Condiciones</a>
-
+                        
                     </div>
+
                 </div>
             </div>
         </div>
@@ -115,17 +120,26 @@
 
     <div class="footer-bottom">
         <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 justify-content-center">
+                    <a href="#" target="_blank" rel="noopener">
+                        <img alt="Logo Gobierno" class="img-fluid" src="~/img/logoEntidad.svg" />
+                    </a>
+                    <a href="#" target="_blank" rel="noopener">
+                        <img alt="Logo Entidad" class="img-fluid" src="~/img/logoEntidad2.svg" />
+                    </a>
+                    <a href="#" target="_blank" rel="noopener">
+                        <img alt="Logo Logo Entidad" class="img-fluid" src="~/img/logoEntidad0.svg" />
+                    </a>
+                    <a href="#" target="_blank" rel="noopener">
+                        <img alt="Logo Logo Entidad" class="img-fluid" src="~/img/logoEntidad3.svg" />
+                    </a>
+                    <br />
 
-            <div class="col-lg-12 text-center">
-                <a href="https://www.presidenciapais.com/" target="_blank" rel="noopener">
-                    <img alt="Logo Presidencia" src="~/img/Footer/logoPais.png" />
-                </a>
-                <a href="https://www.iadb.org/" target="_blank" rel="noopener">
-                    <img alt="Logo iadb" src="~/img/Footer/logo-bid.png" />
-                </a>
-                <a href="http://www.iadb.org/mapainversiones" target="_blank" rel="noopener">
-                    <img alt="Logo Mapainversiones" src="~/img/Footer/logo-mapa-inversiones.png" />
-                </a>
+                    <a href="#" target="_blank" rel="noopener">
+                        <img alt="Logo Mapainversiones" class="img-fluid footerMIV" src="~/img/Footer/logo-mapa-inversiones.png" />
+                    </a>
+                </div>
             </div>
         </div>
     </div>

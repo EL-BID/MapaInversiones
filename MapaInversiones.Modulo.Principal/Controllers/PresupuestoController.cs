@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
+using PlataformaTransparencia.Modelos.Comunes;
 using PlataformaTransparencia.Modelos.Presupuesto;
+using PlataformaTransparencia.Negocios.BLL.Contracts;
+using PlataformaTransparencia.Negocios.Comunes;
 
 namespace PlataformaTransparencia.Modulo.Principal.Controllers
 {
@@ -25,7 +29,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       _connection = connection;
       Configuration = configuration;
 
-    ***REMOVED***
+***REMOVED***
 
     public IActionResult Index()
     {
@@ -38,55 +42,49 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       return View();
 ***REMOVED***
 
-        
+
     public ActionResult PresupuestoInversionPublica()
+    {
+      return View();
+***REMOVED***
+
+    public ActionResult prueba()
     {
         return View();
 ***REMOVED***
 
-    public IActionResult PresupuestoGeneral()
+        public IActionResult PresupuestoGeneral()
     {
-            
             ModelPresupuestoData modelo = new ModelPresupuestoData();
-            //int anyo_actual = DateTime.Now.Year;  //deshabilitado 6 ene 2023
-            int anyo_actual = Convert.ToInt32(Configuration["AnyoActualParameter"]); ;
-            int limite = anyo_actual - 3;
+            var _sector = Request.Query["sector"];
 
-            List<int> periodos = new List<int>();
-
-            for (int i = anyo_actual; i >= limite; i = i - 1)
+            using (var DataModel = new TransparenciaDB())
             {
-                periodos.Add(i);
+
+                var grupos = (from pre in _connection.VwPresupuesto
+                             join ct in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals ct.Periodo
+                             group ct by ct.Año into g
+                             select new Period
+                             {
+                                id=g.Key,
+                                name=g.Key.ToString()
+                         ***REMOVED***).Distinct().OrderByDescending(x => x.id).ToList();
+                modelo.periodos = grupos;
+
         ***REMOVED***
-            modelo.periodos = periodos;
-
-
-            //VersionesPresupuesto
-            modelo.versiones = (from pre in _connection.VwPresupuestoVersiones
-                                where pre.AnioPresupuesto==anyo_actual
-                            orderby pre.NombreVersion descending
-                            select new itemVersiones
-                            {
-                                CodigoVersion = pre.CodigoVersion,
-                                NombreVersion=pre.NombreVersion
-                        ***REMOVED***).Distinct().ToList();
-
-
-            modelo.funciones = (from pre in _connection.VwPresupuesto
-                                where pre.Periodo == anyo_actual
-                                orderby pre.Funcion
-                                select new InformationGraphics
-                                {
-                                    label=pre.Funcion
-                             ***REMOVED***).Distinct().ToList();
+            modelo.Sector = _sector;
 
             ViewData["ruta"] = "Presupuesto";
-        return View(modelo);
+            return View(modelo);
+
+
+           
 ***REMOVED***
 
-        public ActionResult ElaboraPresupuesto()
-        {
-            return View();
-    ***REMOVED***
+  
+    public ActionResult ElaboraPresupuesto()
+    {
+      return View();
 ***REMOVED***
+  ***REMOVED***
 ***REMOVED***

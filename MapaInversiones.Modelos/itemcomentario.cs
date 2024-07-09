@@ -29,13 +29,15 @@ namespace PlataformaTransparencia.Modelos
         public Nullable<int> ComentarioRelacionado { get; set; ***REMOVED***
         public Nullable<bool> Anonimo { get; set; ***REMOVED***
         public int IdEstadoRelacionado { get; set; ***REMOVED***
-        //Auxiliar
+
         public int UsuarioComenta { get; set; ***REMOVED***
         public string textoJustifica { get; set; ***REMOVED***
         public int IdTipologia { get; set; ***REMOVED***
         public string Tipologia { get; set; ***REMOVED***
         public int Relacion { get; set; ***REMOVED***
-
+        public Nullable<int> TipoSubsidio { get; set; ***REMOVED***
+        public string NombreSubsidio { get; set; ***REMOVED***
+        public string CodigoContrato { get; set; ***REMOVED***
 
 ***REMOVED***
 ***REMOVED***

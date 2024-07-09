@@ -1,0 +1,370 @@
+﻿@model PlataformaTransparencia.Modelos.ModelContratistaData
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+***REMOVED***
+@{
+    var enlace = "";
+    var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
+    var LabelContratos = "";
+    var TituloContratos = "";
+    System.IFormatProvider culture =
+        new System.Globalization.CultureInfo("es-RD");
+***REMOVED***
+@foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
+{
+    if (@etiqueta.AliasPart.Alias == "TituloContratosEmergencia" + @Model.tipoEmergencia)
+    {
+        LabelContratos = @etiqueta.HtmlBodyPart.Html;
+        TituloContratos = @etiqueta.TitlePart.Title;
+***REMOVED***
+***REMOVED***
+ 
+
+<section id="s0" class="banner-main">
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>Emergencias</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title mb-0" id="nomLocation">
+                        <h1>@TituloContratos</h1>
+                       
+                        @if (@Model.nombreUnidadCompra != "" && @Model.nombreUnidadCompra is not null)
+                        {
+                            enlace = "entidad=" + @Model.nombreUnidadCompra + "&emergencia=" + @Model.tipoEmergencia;
+                            <h1>Entidad : @Model.nombreUnidadCompra</h1>
+                    ***REMOVED***
+                        else{
+
+                            enlace = "emergencia=" + @Model.tipoEmergencia;
+                    ***REMOVED***
+
+                    </div>
+                    <div class="banner-main-desc">
+                        <p>Productos bienes y servicios</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</section>
+
+<section class="contratos-Data">
+    <div class="container">
+        <div class="wrap-contract-cards">
+            <div class="card blue-card">
+                <div class="card-title tit-left">
+                    <h2 class="h3">Procesos de compra</h2>
+                    <!-- trigger-explanation -->
+                    <div class="btn btn-link" id="info-process2" role="button" data-toggle="modal" data-target="#info-process">
+                        <i class="material-icons md-28">info</i>
+                    </div>
+                </div>
+                <!--modal explicación procesos-->
+                <div id="info-process" class="modal fade" role="dialog">
+                    <div class="modal-dialog mw800" style="margin-top:0px;margin-bottom:0px;">
+
+                        <!-- Modal content-->
+                        <div class="modal-content text-left">
+                            <div class="modal-header"><h3 class="text-center">Los procesos y sus estados</h3></div>
+                            <div class="modal-body" style="padding:0px;">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><span class="text-bold">Publicado</span>Proceso en etapa inicial de convocatoria que aun no ha alcanzado la etapa de apertura de ofertas</li>
+                                    <li class="list-group-item"><span class="text-bold">Sobres estan abriendose</span>Proceso en etapa actual de apertura de ofertas</li>
+                                    <li class="list-group-item"><span class="text-bold">Sobres abiertos o aperturados</span>Proceso cuya etapa de apertura de ofertas ya culminó</li>
+                                    <li class="list-group-item"><span class="text-bold">Proceso con etapa cerrada</span>Proceso en fase de evaluación para adjudicación</li>
+                                    <li class="list-group-item"><span class="text-bold">Proceso Adjudicado y Celebrado</span>Proceso donde ya se conoce la persona fisica o jurídica que resultó adjudicataria del procedimiento de compras</li>
+                                    <li class="list-group-item"><span class="text-bold">Proceso desierto</span>Proceso de compra sin recepción de ofertas a la fecha de cierre de recepción de ofertas</li>
+                                    <li class="list-group-item"><span class="text-bold">Proceso cancelado</span>Proceso de compra interrumpido por la unidad de compra por razones internas o propias expuestas en el procedimiento de compra</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <span class="label">Procesos de compra</span>
+                            <span class="bigNumber">@Model.numProcesos</span>
+                        </div>
+                        <div class="col-lg-8">
+                            <span class="label">Monto total procesos de compra</span>
+                            <span class="bigNumber">RD $ @String.Format("{0:n2***REMOVED***", @Model.valorProcesos)</span>
+                        </div>
+                    </div>
+                    <div class="wrap-estados">
+                        @foreach (var item in Model.listTotalProcesos)
+                        {
+
+                            <div class="item-estado">
+                                <span class="label">@item.EstadoProceso</span>
+
+                                <span class="bigNumber">@item.NroProcesos</span>
+
+                            </div>
+
+                    ***REMOVED***
+                    </div>
+
+                </div>
+            </div>
+            <div class="card blue-card soft-blue-card">
+                <div class="card-title tit-left">
+                    <h2 class="h3">Contratos</h2>
+                    <!-- trigger-explanation -->
+                    <div class="btn btn-link" id="info-process3" role="button" data-toggle="modal" data-target="#info-contract">
+                        <i class="material-icons md-28">info</i>
+                    </div>
+
+                </div>
+               
+                <!--modal explicación contratos-->
+                <div id="info-contract" class="modal fade" role="dialog">
+                    <div class="modal-dialog mw800" style="margin-top:0px;margin-bottom:0px;">
+
+                        <!-- Modal content-->
+                        <div class="modal-content text-left">
+                            <div class="modal-header"><h3 class="text-center">Los contratos y sus estados</h3></div>
+                            <div class="modal-body" style="padding:0px;">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><span class="text-bold">Activo</span>Contrato adjudicado en ejecución</li>
+                                    <li class="list-group-item">
+                                        <span class="text-bold">Modificado</span>Contrato modificado o afectado por adenda. Los tipos de adenda en el al Contrato, Reducción del valor del Contrato, Prórroga de Tiempo del Contrato, Incumplimientos al Contrato.
+                                    </li>
+                                    <li class="list-group-item">
+                                        <span class="text-bold">En Edición</span>Contrato en etapa de revisión por parte de la entidad contratante
+                                    </li>
+                                    <li class="list-group-item"><span class="text-bold">Cancelado</span>Contrato no ejecutado por razones institucionales</li>
+                                    <li class="list-group-item"><span class="text-bold">Rescindido</span>Contrato que inició ejecución y que posteriormente la entidad contratante por razones institucionales decide revocar</li>
+                                    <li class="list-group-item"><span class="text-bold">Cerrado</span>Contrato cuya ejecución ya finalizó</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <span class="label">Contratos</span>
+                            <span class="bigNumber">@Model.numContratos</span>
+                        </div>
+                        <div class="col-lg-8">
+                            <span class="label">Monto total contratos</span>
+                            <span class="bigNumber">RD $ @String.Format("{0:n2***REMOVED***", @Model.valorContratos)</span>
+                        </div>
+                    </div>
+                    <div class="wrap-estados">
+                        @foreach (var item in Model.listTotalContratos)
+                        {
+                            <div class="item-estado">
+                                <span class="label">@item.EstadoContrato</span>
+
+                                <span class="bigNumber">@item.NroContratos</span>
+
+                            </div>
+
+                    ***REMOVED***
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="clearfix"></div>
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                    <div class="card d-flex pCancelado">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-4 d-flex">
+                                    <h2 class="h3">
+                                        Procesos cancelados y desiertos <br/><text>@Model.nombreUnidadCompra</text>
+                                    </h2>
+                                    <div class="toolProcess">
+                                        <span class="tooltippop"><a id="toolProcesosCancelados" data-container="body" data-toggle="popover" class="glyphicon glyphicon-info-sign toolTipa pop" title="" data-content=""></a></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="txt-small">Procesos cancelados y desiertos</div>
+                                    <span class="bigNumber">@Model.numProcesosCancelados</span>
+
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="txt-small">Procesos cancelados y desiertos</div>
+                                    <span class="bigNumber">$ @String.Format("{0:n0***REMOVED***", @Model.valProcesosCancelados / 1000000) Millones</span>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="cta-wrapper">
+                                        <a class="btn btn-outlined" href="/ProcesosCanceladosEmergencia?@enlace">
+                                            Ver procesos cancelados y desiertos <i class="material-icons md-28">navigate_next</i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+      
+
+    </div>
+
+</section>
+<!-- CONTRATOS -->
+<section id="secInfoContratos" class="s-contratosProcesos whiteBg">
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="headTit tit-left mb-0">
+                    <h2>Procesos y contratos</h2>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <!--FILTERS-->
+                <form class="contractList bgSoftGray p15">
+                    <div class="form-group" id="grpentidad">
+                        <label class="year" for="entidadfiona">Entidad</label>
+                        <input type="search" data-results="search-home" data-search="home" id="entidadfiona" class="search-input form-control input-lg ui-autocomplete-input" autocomplete="off" placeholder="Entidad">
+                        <div id="search-home" class="search-body">
+                            <div id="divNoEncontradoFiona" class="no-search-results" style="display: none;">No se han encontrado entidades</div>
+                        </div>
+                    </div>
+ 
+                    <div class="form-group">
+                        <label class="year" for="year">Estado</label>
+                        <select class="form-control" id="top_contratista_estados">
+                            <option value="">Todos</option>
+                            @if (Model.listEstadosContratos.Count > 0)
+                            {
+                                foreach (var item in Model.listEstadosContratos)
+                                {
+                                    <text>
+                                    <option value="@item.EstadoContrato">@item.Nombre</option>
+                                    </text>
+                            ***REMOVED***
+                        ***REMOVED***
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="year" for="proceso">Artículos comprados</label><br />
+                        <p class="text-bold small">Materiales, servicios, por ejemplo: Construcción, Cascos, colchones, madera, mosquiteros, etc.</p>
+                        @* @Model.codigoProceso *@    <input type="search" value="" data-results="search-home" data-search="home" id="proceso" class="search-input form-control input-lg" autocomplete="on" placeholder="Digite palabra clave">
+                    </div>
+                    <div class="triggerForm">
+                        <input type="button" class="btn btn-primary" value="Buscar" id="btn-buscar"><div class="clearfix"></div>
+                        <a class="btn btn-link" id="btnLimpiar">LIMPIAR FILTROS</a>
+                    </div>
+
+
+                </form>
+                <br />
+                <div class="link_external disNone">
+                    <span> Información suministrada por:</span>
+                    <a href="#" target="_blank" rel="noopener"><img class="wp70" title="ir a la Dirección General de Contrataciones Públicas (DGCP)" src="../img/logo_dgcp.png"></a>
+                    <br>
+                    <div class="sepH"></div>
+                    <br>
+                    <p>Para mayor información consulte:</p>
+                    <a href="#" target="_blank" rel="noopener"><img class="img-fluid" title="ir al portal transaccional" src="../img/logo_trasaccional.jpg"></a>
+                    <br>
+                    <div class="sepH"></div>
+                    <br>
+                    <p class="text-center">Powered by:</p>
+                    <a href="#" target="_blank" rel="noopener"><img class="wp70" title="conocer mas de Estándar de Datos para las Contrataciones Abiertas (OCDS)" src="../img/logo_entidad7.jpg"></a>
+                </div>
+
+            </div>
+            <div class="col-lg-9">
+                <!--CONTRACT-LIST-->
+                <div class="wrap-proceso whiteBg" id="srcContratos">
+                </div>
+                <div id="divPagContratos" class="paginacionContratos">
+                </div>
+            </div>
+
+        </div>
+        <!--END CONTAINER-->
+    </div>
+</section>
+
+<!--RELATED INFO-->
+<section class="relatedInfo">
+    <div class="container">
+        <!--LINKS OTRAS SECCIONES-->
+        <div class="row">
+            <!--LEFT COLUMN-->
+            <div class="col-lg-8">
+                <!--LINKS seccion infografia planificacion-->
+
+                <div class="wrap-cta py-5">
+                    <div class="wrap-cta py-5">
+                        <p class="card-title mb-4">Información suministrada por:</p>
+                        <a href="#" target="_blank" rel="noopener">
+                            <img class="img-fluid" src="../img/logo-dgcp.svg" alt="ir a Secretaria tecnica de planeación">
+                        </a>
+
+                    </div>
+                    <div class="wrap-cta py-5">
+                        <p class="card-title mb-4">Powered by:</p>
+                        <a href="#" target="_blank" rel="noopener">
+                            <img class="img-fluid" src="../img/logo_entidad7.jpg" alt="ir a OCP">
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<input type="hidden" id="tipoemergencia" value="@Model.tipoEmergencia" />
+<input type="hidden" id="hdnentidad" value="@Model.nombreUnidadCompra" />
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha384-EZJUCwX9EfOmrML5/1WejmhFx/azi54nnVfOndPu+VTQKOHabXXC9eS7VFdkLz0V" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+<script src="js/contratosemergencias_aux.js"></script>
+<script src="https://d3js.org/d3.v4.min.js" integrity="sha384-1EOYqz4UgZkewWm70NbT1JBUXSQpOIS2AaJy6/evZH+lXOrt9ITSJbFctNeyBoIJ" crossorigin="anonymous"></script>
+
+
+
+
+@section DataBody {
+            data-unidadcompra='[{"unidadcompra":"@Model.nombreUnidadCompra"***REMOVED***]',
+        data-tipoEmergencia='[{"tipoEmergencia":"@Model.tipoEmergencia"***REMOVED***]'
+
+
+***REMOVED***
+

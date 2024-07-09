@@ -1136,7 +1136,7 @@ String.prototype.score = function(abbreviation, fuzziness) {
 			x1 = x1.replace(rgx, '$1' + separator + '$2')
 			index ++
 		***REMOVED***
-		return 'L' + x1 + x2;
+		return 'B/.' + x1 + x2;
 	***REMOVED***
 	// Assigning this to Number prototype for letting use it inside templates
 	Number.prototype.toCurrency = toCurrency

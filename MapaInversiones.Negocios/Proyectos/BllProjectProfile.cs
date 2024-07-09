@@ -111,9 +111,9 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         /// </summary>
         /// <param name="IdProject">Es el id del proyecto.</param>
         /// <returns>Informacion del proyecto con Id</returns>
-        public PlataformaTransparencia.Modelos.Project GetProjectInformation(int IdProject)
+        public Modelos.Project GetProjectInformation(int IdProject)
         {
-            var defaultElement = new PlataformaTransparencia.Modelos.Project();
+            Modelos.Project defaultElement = new ();
             var infoProyecto = (from aprobadosInv in DataModel.VwProyectosAprobadosInvs
                                 join project in DataModel.Proyectos on aprobadosInv.IdProyecto equals project.IdProyecto
                                 join historiaEstado in DataModel.HistoriaEstados on project.IdProyecto equals historiaEstado.IdProyecto
@@ -123,8 +123,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                 join ActorXProyecto in DataModel.ActorXProyectos on aprobadosInv.IdProyecto equals ActorXProyecto.IDProyecto
                                 join Actor in DataModel.Actors on ActorXProyecto.IDActor equals Actor.IdActor
                                 where project.IdProyecto == IdProject
-
-                               select new PlataformaTransparencia.Modelos.Project()
+                               select new Modelos.Project()
                                {
                                     ProjectId = project.IdProyecto,
                                     BPIN = project.CodigoBPIN,
@@ -137,35 +136,25 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                     TotalValueAll = project.VlrTotalProyectoTodasLasFuentes,
                                     Status = estados.NombreEstado.Trim(),
                                     IdStatus = estados.IdEstado,
-                                    avance_financiero = aprobadosInv.AvanceFinanciero.Value,
+                                    avance_financiero = aprobadosInv.AvanceFinanciero.Value/100,
                                     contMegusta = aprobadosInv.MeGusta,
                                     contComentarios = aprobadosInv.Comentarios,
                                     duracion = Convert.ToDecimal(aprobadosInv.DuracionProyecto),
-                                    NumBeneficHombres = aprobadosInv.NumeroBeneficiariosHombres.Value,
-                                    NumBeneficMujeres = aprobadosInv.NumeroBeneficiariosMujeres.Value,
-                                    Moneda = aprobadosInv.Moneda,
-                                    IDMoneda = aprobadosInv.IDMoneda,
-                                    TasaCambio = aprobadosInv.TasaCambio,
                                     Etapa = etapa.NombreEtapa,
                                     Fase = fase.NombreFase,
                                     NombreActor = Actor.NombreActor,
                                     TipoDeProyecto=project.TipoDeProyecto,
                                     objGeneral = project.ObjetivoGeneral,
-                                    descripcion = project.Descripcion,
 
                            ***REMOVED***).DefaultIfEmpty(defaultElement).FirstOrDefault();
-
-
-            PlataformaTransparencia.Modelos.Project objReturn = new PlataformaTransparencia.Modelos.Project();
+            Modelos.Project objReturn = new();
             if (infoProyecto!=null) {
-               
-                List<ActorFicha> beneficiarios_aux = new List<ActorFicha>();
-                List<ActorFicha> beneficiarios_munic = new List<ActorFicha>();
-                List<ActorFicha> beneficiarios_encabezado = new List<ActorFicha>();
-
+                List<ActorFicha> beneficiarios_aux = new();
+                List<ActorFicha> beneficiarios_munic = new();
+                List<ActorFicha> beneficiarios_encabezado = new();
                 if (infoProyecto.TipoDeProyecto.ToUpper().Equals("NACIONAL"))
                 {
-                    var munic_query = (from municipio in RepositorioConsultas.ConsultasComunes.ObtenerMunicipio(null)
+                    var munic_query = (from municipio in ConsultasComunes.ObtenerMunicipio(null)
                                        select new ActorFicha
                                        {
                                            Nombre = municipio.NombreMunicipio + " (" + municipio.NombreDepartamento + ")",
@@ -193,14 +182,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             ***REMOVED***
                 infoProyecto.EntesBeneficiados = beneficiarios_munic;
                 objReturn = infoProyecto;
-
         ***REMOVED***
-            
-
-            
             return objReturn;
-            
-
     ***REMOVED***
 
         public List<Period> ObtenerPeriodosFuentes(int Id)
@@ -350,9 +333,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
             listYears = (from specifObjetive in DataModel.ObjetivoEspecificos
                          join product in DataModel.Productos on specifObjetive.IdObjetivoEspecifico equals product.IdObjetivoEspecifico
-                         //join activities in DataModel.Actividad on product.IdProducto equals activities.IdProducto
                          join indicators in DataModel.MetaIndicadorProductos on product.IdProducto equals indicators.IdProducto
-                         //join tracing in DataModel.SeguimientoMetaIndicadorProducto on product.IdProducto equals tracing.IdProducto
                          where specifObjetive.IdProyecto == IdProject
                          select indicators.FechaInicioMeta.Year).Distinct().ToList();
 
@@ -361,7 +342,6 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
                 var queryMetrics = (from specifObjetive in DataModel.ObjetivoEspecificos
                                     join product in DataModel.Productos on specifObjetive.IdObjetivoEspecifico equals product.IdObjetivoEspecifico
-                                    //join activities in DataModel.Actividad on product.IdProducto equals activities.IdProducto
                                     join indicators in DataModel.MetaIndicadorProductos on product.IdProducto equals indicators.IdProducto
                                     join tracing in DataModel.SeguimientoMetaIndicadorProductos
                                      on
@@ -384,13 +364,11 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                     where specifObjetive.IdProyecto == IdProject && indicators.FechaInicioMeta.Year == year
                                     from seguimiento in MetricasConSeguimiento.DefaultIfEmpty()
                                     select new Metric {
-                                        //activities = activities.DescripcionActividad,
                                         name = indicators.NombreIndicador,
                                         current = seguimiento != null ? seguimiento.ValorReportado : 0,
                                         goal = indicators.ValorMeta,
                                         product = product.NombreProducto,
                                         goalDescription = specifObjetive.NombreObjetivoEspecifico,
-                                        //PorcentajeEjecutado = Convert.ToInt32((indicators.ValorMeta - (seguimiento != null ? seguimiento.ValorReportado : 0)) / indicators.ValorMeta)
                                         UnidadDeMedida = product.UnidadProducto
                                 ***REMOVED***).Distinct().ToList();
                 metricsbyYear = queryMetrics;
@@ -461,33 +439,6 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             return RepositorioProyectos.ObtenerURLAuditoriaVisiblePorProyecto(projectId);
     ***REMOVED***
 
-        //public bool InsertFotoProyecto(DataModels.Foto objFoto)
-        //{
-        //    try {
-
-        //        DataModel.Fotos
-                    
-        //            .Add(
-        //                new DataModels.Foto() {
-        //                    IdProyecto = objFoto.IdProyecto,
-        //                    RutaFotoGrande = objFoto.RutaFotoGrande,
-        //                    RutaFotoMediano = objFoto.RutaFotoMediano,
-        //                    RutaFotoPequeno = objFoto.RutaFotoPequeno,
-        //                    Descripcion = objFoto.Descripcion,
-        //                    FechaUltimaModificacion = DateTime.Now,
-        //                    ConsecutivoCarga = 3,
-        //                    Modificadopor = "MapaiService",
-        //                    Fecha = DateTime.Now,
-        //                    Aprobado = true,
-        //                    Eliminado = false
-        //            ***REMOVED***);
-
-        //        DataModel.SaveChanges();
-        //        return true;
-        //***REMOVED***
-        //    catch (Exception ex) {
-        //        return false;
-        //***REMOVED***
-        //***REMOVED***
+     
 ***REMOVED***
 ***REMOVED***

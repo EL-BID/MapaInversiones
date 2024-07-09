@@ -8,7 +8,7 @@ namespace PlataformaTransparencia.Modelos.Proyectos
     {
         public int IdentificadorFase { get; set; ***REMOVED***
         public string Fase { get; set; ***REMOVED***
-        public string CodComponente { get; set; ***REMOVED***
+        public int CodComponente { get; set; ***REMOVED***
         public string Componente { get; set; ***REMOVED***
         public int idProducto { get; set; ***REMOVED***
         public string Producto { get; set; ***REMOVED***

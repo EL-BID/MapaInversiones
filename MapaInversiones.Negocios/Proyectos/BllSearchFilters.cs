@@ -86,14 +86,13 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             List<itemsFilterGeography> queryResults = new List<itemsFilterGeography>();
             List<itemsFilterGeography> list2 = new List<itemsFilterGeography>();
             List<itemsFilterGeography> list3 = new List<itemsFilterGeography>();
-            var source = (from RegionFilters in ConsultasComunes.ObtenerRegiones(null) select new { name = RegionFilters.NombreRegion, value = RegionFilters.IdRegion, topLeft = RegionFilters.TopLeft, bottomRight = RegionFilters.BottomRight ***REMOVED***).ToList();
+            var source = (from RegionFilters in ConsultasComunes.ObtenerRegiones(null) select new { name = RegionFilters.NombreRegion, value = RegionFilters.IdRegion, /*topLeft = RegionFilters.TopLeft, bottomRight = RegionFilters.BottomRight*/ ***REMOVED***).ToList();
             if (source.Count() > 0) {
                 foreach (var typef in source) {
                     itemsFilterGeography item = new itemsFilterGeography {
                         name = typef.name,
                         value = typef.value,
-                        //topLeft = this.GenerateCoordinateData(typef.topLeft),
-                        //bottomRight = this.GenerateCoordinateData(typef.bottomRight)
+
                 ***REMOVED***;
                     queryResults.Add(item);
             ***REMOVED***
@@ -102,7 +101,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         ***REMOVED***
             var list5 = (from DepartmentsFilters in ConsultasComunes.ObtenerDepartamentos(null)
                          orderby DepartmentsFilters.NombreDepartamento
-                         select new { name = DepartmentsFilters.NombreDepartamento, value = DepartmentsFilters.IdDepartamento, topLeft = DepartmentsFilters.TopLeft, bottomRight = DepartmentsFilters.BottomRight, dependsOn = new DependsOn { id = DepartmentsFilters.IdRegion, type = "region" ***REMOVED*** ***REMOVED***).ToList();
+                         select new { name = DepartmentsFilters.NombreDepartamento, value = DepartmentsFilters.IdDepartamento, /*topLeft = DepartmentsFilters.TopLeft, bottomRight = DepartmentsFilters.BottomRight,*/ dependsOn = new DependsOn { id = DepartmentsFilters.IdRegion, type = "region" ***REMOVED*** ***REMOVED***).ToList();
             if (list5.Count() > 0) {
                 foreach (var type in list5) {
                     itemsFilterGeography geography2 = new itemsFilterGeography {
@@ -119,14 +118,13 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         ***REMOVED***
             var list7 = (from MunicipalityFilter in ConsultasComunes.ObtenerMunicipio(null)
                          orderby MunicipalityFilter.NombreMunicipio
-                         select new { name = MunicipalityFilter.NombreMunicipio, departmentName = MunicipalityFilter.NombreDepartamento, value = MunicipalityFilter.IdMunicipio, topLeft = MunicipalityFilter.TopLeft, bottomRight = MunicipalityFilter.BottomRight, dependsOn = new DependsOn { id = MunicipalityFilter.IdDepartamento, type = "departamento" ***REMOVED*** ***REMOVED***).ToList();
+                         select new { name = MunicipalityFilter.NombreMunicipio, departmentName = MunicipalityFilter.NombreDepartamento, value = MunicipalityFilter.IdMunicipio, /*topLeft = MunicipalityFilter.TopLeft, bottomRight = MunicipalityFilter.BottomRight,*/ dependsOn = new DependsOn { id = MunicipalityFilter.IdDepartamento, type = "departamento" ***REMOVED*** ***REMOVED***).ToList();
             if (list7.Count() > 0) {
                 foreach (var type2 in list7) {
                     itemsFilterGeography geography3 = new itemsFilterGeography {
                         name = type2.name + ", " + type2.departmentName,
                         value = type2.value,
-                        //bottomRight = this.GenerateCoordinateData(type2.bottomRight),
-                        //topLeft = this.GenerateCoordinateData(type2.topLeft),
+
                         dependsOn = new List<DependsOn> { type2.dependsOn ***REMOVED***
                 ***REMOVED***;
                     list3.Add(geography3);
@@ -143,6 +141,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             List<itemFilters> list2 = new List<itemFilters>();
             List<itemFilters> list3 = new List<itemFilters>();
             List<itemFilters> list4 = new List<itemFilters>();
+            List<itemFilters> list5 = new List<itemFilters>();
+
             var source = (from StateFilters in DataModel.Estados select new { name = StateFilters.NombreEstado, value = StateFilters.IdEstado ***REMOVED***).ToList();
             if (source.Count() > 0) {
                 foreach (var typee in source) {
@@ -155,9 +155,9 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                 DataFilters.filters.Add(this.FillSimpleFilters(GenericEnumerators.FilterKindEnumeration.ProyectState, queryResults));
                 System.Diagnostics.Trace.WriteLine("Obtenidos la lista del filtro de estados para proyectos.");
         ***REMOVED***
-            var list5 = (from SectorFilters in DataModel.Sectors select new { name = SectorFilters.NombreSector, value = SectorFilters.IdSector ***REMOVED***).ToList();
-            if (list5.Count() > 0) {
-                foreach (var typee2 in list5) {
+            var list6 = (from SectorFilters in DataModel.Sectors select new { name = SectorFilters.NombreSector, value = SectorFilters.IdSector ***REMOVED***).ToList();
+            if (list6.Count() > 0) {
+                foreach (var typee2 in list6) {
                     itemFilters filters2 = new itemFilters {
                         name = typee2.name,
                         value = typee2.value.ToString()
@@ -168,17 +168,33 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                 System.Diagnostics.Trace.WriteLine("Obtenidos la lista del filtro de sectores de proyectos.");
         ***REMOVED***
 
-            var list6 = (from OrgFinanciadorFilters in DataModel.CatalogoOrganismoFinanciadors select new { name = OrgFinanciadorFilters.OrganismoFinanciador, value = OrgFinanciadorFilters.IdOrganismoFinanciador ***REMOVED***).ToList();
-            if (list6.Count() > 0) {
-                foreach (var item in list6) {
-                    itemFilters filters3 = new itemFilters {
+            var list7 = (from Fuente in DataModel.Fuentes select new { name = Fuente.NombreTipoEntidad, value = Fuente.IdTipoEntidad ***REMOVED***).ToList();
+            if (list7.Count > 0) {
+                foreach (var item in list7) {
+                    itemFilters filters4 = new itemFilters {
                         name = item.name,
                         value = item.value.ToString()
                 ***REMOVED***;
-                    list4.Add(filters3);
+                    list4.Add(filters4);
             ***REMOVED***
                 DataFilters.filters.Add(this.FillSimpleFilters(GenericEnumerators.FilterKindEnumeration.ProyectOrgFinanciador, list4));
                 System.Diagnostics.Trace.WriteLine("Obtenidos la lista del filtro de organismo financiador de proyectos.");
+        ***REMOVED***
+
+            var list8 = (from EntidadEjecutoraFilters in DataModel.VwEntidadEjecutoras select new { name = EntidadEjecutoraFilters.NombreEntidad, value = EntidadEjecutoraFilters.IdEntidad ***REMOVED***).ToList();
+            if (list8.Count > 0)
+            {
+                foreach (var item in list8)
+                {
+                    itemFilters filters5 = new itemFilters
+                    {
+                        name = item.name,
+                        value = item.value.ToString()
+                ***REMOVED***;
+                    list5.Add(filters5);
+            ***REMOVED***
+                DataFilters.filters.Add(this.FillSimpleFilters(GenericEnumerators.FilterKindEnumeration.ProyectoEntidadEjecutora, list5));
+                System.Diagnostics.Trace.WriteLine("Obtenidos la lista del filtro de entidades ejecutoras.");
         ***REMOVED***
             DataFilters.filters.Add(FiltrosTotalesBLL.ObtenerFiltrosPeriodosAplicativo(GenericEnumerators.SeccionFuncionalAplicativo.Proyectos, "periods"));
     ***REMOVED***

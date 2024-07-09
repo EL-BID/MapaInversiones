@@ -17,7 +17,8 @@ namespace PlataformaTransparencia.Modelos.Comunes
             ProyectSector =1,
             ProyectType =2,
             ProyectPeriod =3,
-            ProyectOrgFinanciador = 4
+            ProyectOrgFinanciador = 4,
+            ProyectoEntidadEjecutora = 5
     ***REMOVED***
 
         public enum SearchType

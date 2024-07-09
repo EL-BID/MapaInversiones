@@ -16,9 +16,9 @@ using PlataformaTransparencia.Negocios.Interfaces;
 
 namespace PlataformaTransparencia.Negocios.Proyectos
 {
-    public class ConsolidadosNacionalesBLL
+    public class ConsolidadosNacionalesBLL : IConsolidadosNacionalesBLL
     {
-        private List<Infrastructura.DataModels.Proyecto> lstProyectosConsistentes;
+        private List<DataModels.Proyecto> lstProyectosConsistentes;
         private List<EnteTerritorial> lstDepartamentosIni;
         private List<EnteTerritorial> lstMunicipiosIni;
         private List<InfoProyectos> lstProyectosAprobados;
@@ -45,7 +45,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
         public ConsolidadosNacionalesBLL()
         {
-            this.lstProyectosConsistentes = new List<Infrastructura.DataModels.Proyecto>();
+            this.lstProyectosConsistentes = new List<DataModels.Proyecto>();
             this.lstDepartamentosIni = new List<EnteTerritorial>();
             this.lstMunicipiosIni = new List<EnteTerritorial>();
             this.lstProyectosAprobados = new List<InfoProyectos>();
@@ -127,14 +127,17 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             FiltroBusquedaProyecto filtro_busqueda = new FiltroBusquedaProyecto();
 
             List<EnteTerritorial> lstDepartamentos = ConsultasComunes.ObtenerDepartamentos(codigo_filtro);
-            if (lstDepartamentos.Count > 0) {
+            if (lstDepartamentos.Count > 0)
+            {
                 filtro_busqueda.CodigosDepartamentos = codigo_filtro;
                 objReturn.tipo = "DEPARTAMENTO";
                 objReturn.nomLocation = lstDepartamentos[0].NombreDepartamento;
         ***REMOVED***
-            else {
+            else
+            {
                 List<EnteTerritorial> lstMunicipio = ConsultasComunes.ObtenerMunicipio(codigo_filtro);
-                if (lstMunicipio.Count > 0) {
+                if (lstMunicipio.Count > 0)
+                {
                     filtro_busqueda.CodigosMunicipios = codigo_filtro;
                     objReturn.tipo = "MUNICIPIO";
                     objReturn.parent_nombre = lstMunicipio[0].NombreDepartamento;
@@ -143,7 +146,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                     objReturn.nomLocation = lstMunicipio[0].NombreMunicipio;
 
             ***REMOVED***
-                else {
+                else
+                {
                     return objReturn;
             ***REMOVED***
         ***REMOVED***
@@ -152,7 +156,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             #region PROYECTOS_EN_EJECUCION
             List<int> codigo_estado = new List<int>();
             string key_estado_proy = Configuration["EstadoProyEjecucion"].ToString();
-            if (!string.IsNullOrEmpty(key_estado_proy)) {
+            if (!string.IsNullOrEmpty(key_estado_proy))
+            {
                 codigo_estado.Add(Int32.Parse(key_estado_proy));
         ***REMOVED***
 
@@ -165,8 +170,10 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             objReturn.descLocation = objReturn.tipo;
             Modelos.Location.InfoLocationGen enc_aux = new Modelos.Location.InfoLocationGen();
             enc_aux = ObtenerInfoLocation(filtro_busqueda);
-            if (enc_aux == null) {
-                objReturn.Encabezado = new Modelos.Location.InfoLocationGen() {
+            if (enc_aux == null)
+            {
+                objReturn.Encabezado = new Modelos.Location.InfoLocationGen()
+                {
                     urlImgXL = "",
                     IdMunicipio = "",
                     IdDepartamento = "",
@@ -175,7 +182,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                     CantProyectos = 0
             ***REMOVED***;
         ***REMOVED***
-            else {
+            else
+            {
                 objReturn.Encabezado = enc_aux;
         ***REMOVED***
 
@@ -196,7 +204,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             #region PROYXSECTOR
             objReturn.ProjectsPerSectorGroup = ObtenerProyectosPorSectorGroup(filtro_busqueda);
             //objReturn.nomLocation = "MUNICIPIO";
-            if (objReturn.ProjectsPerSectorGroup.Count > 0) {
+            if (objReturn.ProjectsPerSectorGroup.Count > 0)
+            {
                 objReturn.sectorPrincipal = objReturn.ProjectsPerSectorGroup[0].labelGroup;
         ***REMOVED***
 
@@ -220,7 +229,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             FiltroBusquedaProyecto filtro_busqueda = new FiltroBusquedaProyecto();
             List<Modelos.Comunes.Departamento> lstDepartamentos = ConsultasComunes.ObtenerDepartamentosPorSectores(codigo_filtro);
             lstDepartamentos.Add(new Modelos.Comunes.Departamento { IdDepartamento = "0", NombreDepartamento = "Proyectos Nacionales" ***REMOVED***);
-            if (sector_id != null) {
+            if (sector_id != null)
+            {
                 //filtro_busqueda.CodigosSector = codigo_filtro;
                 objReturn.tipo = "SECTOR";
                 //objReturn.nomLocation = sector_id;
@@ -228,7 +238,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             #region PROYECTOS_EN_EJECUCION
             List<int> codigo_estado = new List<int>();
             string key_estado_proy = Configuration["EstadoProyEjecucion"].ToString();
-            if (!string.IsNullOrEmpty(key_estado_proy)) {
+            if (!string.IsNullOrEmpty(key_estado_proy))
+            {
                 codigo_estado.Add(Int32.Parse(key_estado_proy));
         ***REMOVED***
             filtro_busqueda.CodigosEstado = codigo_estado;
@@ -240,8 +251,10 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             InfoLocationSectorGen enc_aux = new InfoLocationSectorGen();
             enc_aux = ObtenerInfoLocationSectores(sector_id);
 
-            if (enc_aux == null) {
-                objReturn.EncabezadoSector = new InfoLocationSectorGen() {
+            if (enc_aux == null)
+            {
+                objReturn.EncabezadoSector = new InfoLocationSectorGen()
+                {
                     IdDepartamento = "",
                     IdSector = "",
                     Costo = 0,
@@ -251,7 +264,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                     nomSector = ""
             ***REMOVED***;
         ***REMOVED***
-            else {
+            else
+            {
                 objReturn.EncabezadoSector = enc_aux;
         ***REMOVED***
 
@@ -273,45 +287,34 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             //var costoProyectoXDepartamentoDadoSector = ObtenerCostoProyectosPorDepartamentoDadoSector(sector_id);
 
             //objReturn.nomLocation = "MUNICIPIO";
-            if (objReturn.ProjectsPerSectorGroup.Count > 0) {
+            if (objReturn.ProjectsPerSectorGroup.Count > 0)
+            {
                 var departamentosXNumeroProyectosAprobadosYEjecucion = (from ppsg in objReturn.ProjectsPerSectorGroup
                                                                         where ppsg.label.ToUpper().Trim() == "EN EJECUCIÓN" || ppsg.label.ToUpper().Trim() == "APROBADO"
                                                                         group ppsg by ppsg.labelGroup into g
-                                                                        select new {
+                                                                        select new
+                                                                        {
                                                                             Dpto = g.Key,
                                                                             Total = g.Sum(x => x.rawValue)
                                                                     ***REMOVED***).ToList().OrderByDescending(x => x.Total);
-                if (departamentosXNumeroProyectosAprobadosYEjecucion.Any()) {
+                if (departamentosXNumeroProyectosAprobadosYEjecucion.Any())
+                {
                     var maxProy = departamentosXNumeroProyectosAprobadosYEjecucion.Max(y => y.Total);
                     var w = 0;
                     var totalreg = departamentosXNumeroProyectosAprobadosYEjecucion.Count();
                     //decimal totalInversion = 0;
                     objReturn.sectorPrincipal = string.Empty;
-                    while (w < totalreg) {
-                        if (departamentosXNumeroProyectosAprobadosYEjecucion.ElementAt(w).Total >= maxProy) {
+                    while (w < totalreg)
+                    {
+                        if (departamentosXNumeroProyectosAprobadosYEjecucion.ElementAt(w).Total >= maxProy)
+                        {
                             objReturn.sectorPrincipal = objReturn.sectorPrincipal == string.Empty ? departamentosXNumeroProyectosAprobadosYEjecucion.ElementAt(w).Dpto : objReturn.sectorPrincipal + "," + departamentosXNumeroProyectosAprobadosYEjecucion.ElementAt(w).Dpto;
                     ***REMOVED***
                         w++;
                 ***REMOVED***
                     objReturn.CostoProyectosDpto = Math.Round(maxProy * 100 / departamentosXNumeroProyectosAprobadosYEjecucion.Sum(x => x.Total), 2).ToString(); ; //  Math.Round(((totalInversion / (costoProyectoXDepartamentoDadoSector.Sum(x => x.rawValue))) * 100), 2).ToString();
             ***REMOVED***
-                //else if (costoProyectoXDepartamentoDadoSector.Any())
-                //{
-                //  decimal totalInversion = 0;
-                //  foreach (var cpdds in costoProyectoXDepartamentoDadoSector)
-                //  {
-                //    if (cpdds.rawValue > totalInversion)
-                //    {
-                //      totalInversion = cpdds.rawValue;
-                //      objReturn.sectorPrincipal = cpdds.label;
-                //***REMOVED***
-                //    else if (cpdds.rawValue > totalInversion)
-                //    {
-                //      objReturn.sectorPrincipal = objReturn.sectorPrincipal == string.Empty ? cpdds.label : objReturn.sectorPrincipal + " ," + objReturn.sectorPrincipal;
-                //***REMOVED***
-                //  ***REMOVED***
-                //  objReturn.CostoProyectosDpto = Math.Round(((totalInversion / (costoProyectoXDepartamentoDadoSector.Sum(x => x.rawValue))) * 100), 2).ToString();
-                //***REMOVED***
+             
         ***REMOVED***
             #endregion
             objReturn.Status = true;
@@ -332,8 +335,10 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             SearchFilters.ObtenerFiltrosEspecificosParaProyectos(DataFilters);
             DataFilters.Status = true;
 
-            for (int i = 0; i < DataFilters.filters.Count; i++) {
-                for (int j = 0; j < DataFilters.filters[i].items.Count; j++) {
+            for (int i = 0; i < DataFilters.filters.Count; i++)
+            {
+                for (int j = 0; j < DataFilters.filters[i].items.Count; j++)
+                {
                     ModelLocationData.cad_filtro filtro_new = new ModelLocationData.cad_filtro();
                     filtro_new.item_value = DataFilters.filters[i].items[j].value;
                     filtro_new.item_name = DataFilters.filters[i].items[j].name;
@@ -346,6 +351,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             return listaFiltros;
     ***REMOVED***
 
+
+
         #region INFOGRAFICA
 
         internal static List<ConsolidateRegionsProjects> ObtenerInfograficoPorRegiones(List<PlataformaTransparencia.Infrastructura.DataModels.Proyecto> listProyectos)
@@ -353,24 +360,26 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
             List<ConsolidateRegionsProjects> objReturn = new List<ConsolidateRegionsProjects>();
 
-                var ProjectsPerSectorQuery = (from proyecto in listProyectos
-                                              join pxe in DataModel.ProyectoXEntidadTerritorials
-                                                  on proyecto.IdProyecto equals pxe.IdProyecto
-                                              join region in DataModel.EnteTerritorials
-                                                  on new { idDepartamento = pxe.IdDepartamento.Trim(), idMunicipio = pxe.IdMunicipio.Trim() ***REMOVED*** equals new { idDepartamento = region.IdDepartamento.Trim(), idMunicipio = region.IdMunicipio.Trim() ***REMOVED***
-                                              select new {
-                                                  projectId = proyecto.IdProyecto,
-                                                  regionId = region.IdRegion,
-                                                  approvedMoney = Math.Round(proyecto.VlrTotalProyectoFuenteRegalias),
-                                                  approvedTotalMoney = Math.Round(proyecto.VlrTotalProyectoTodasLasFuentes),
-                                          ***REMOVED***).Distinct().GroupBy(a => a.regionId).Select(b =>
-                                           new ConsolidateRegionsProjects {
-                                               regionId = b.Key.Trim(),
-                                               approvedMoney = Math.Round(b.Sum(c => (decimal)c.approvedMoney)),
-                                               approvedTotalMoney = Math.Round(b.Sum(d => (decimal)d.approvedTotalMoney)),
-                                               projectNumber = b.Select(e => e.projectId).Count()
-                                       ***REMOVED***).Distinct(new PredicateEqualityComparer<ConsolidateRegionsProjects>((x, y) => x.regionId == y.regionId));
-                objReturn = ProjectsPerSectorQuery.ToList();
+            var ProjectsPerSectorQuery = (from proyecto in listProyectos
+                                          join pxe in DataModel.ProyectoXEntidadTerritorials
+                                              on proyecto.IdProyecto equals pxe.IdProyecto
+                                          join region in DataModel.EnteTerritorials
+                                              on new { idDepartamento = pxe.IdDepartamento.Trim(), idMunicipio = pxe.IdMunicipio.Trim() ***REMOVED*** equals new { idDepartamento = region.IdDepartamento.Trim(), idMunicipio = region.IdMunicipio.Trim() ***REMOVED***
+                                          select new
+                                          {
+                                              projectId = proyecto.IdProyecto,
+                                              regionId = region.IdRegion,
+                                              approvedMoney = Math.Round(proyecto.VlrTotalProyectoFuenteRegalias),
+                                              approvedTotalMoney = Math.Round(proyecto.VlrTotalProyectoTodasLasFuentes),
+                                      ***REMOVED***).Distinct().GroupBy(a => a.regionId).Select(b =>
+                                       new ConsolidateRegionsProjects
+                                       {
+                                           regionId = b.Key.Trim(),
+                                           approvedMoney = Math.Round(b.Sum(c => (decimal)c.approvedMoney)),
+                                           approvedTotalMoney = Math.Round(b.Sum(d => (decimal)d.approvedTotalMoney)),
+                                           projectNumber = b.Select(e => e.projectId).Count()
+                                   ***REMOVED***).Distinct(new PredicateEqualityComparer<ConsolidateRegionsProjects>((x, y) => x.regionId == y.regionId));
+            objReturn = ProjectsPerSectorQuery.ToList();
             System.Diagnostics.Trace.WriteLine("Obtenidos los infograficos de Regiones");
 
             return objReturn;
@@ -385,11 +394,13 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                               on proyecto.IdProyecto equals pxe.IdProyecto
                                           join departamento in ConsultasComunes.ObtenerDepartamentos(null)
                                              on pxe.IdDepartamento.Trim() equals departamento.IdDepartamento.Trim()
-                                          group proyecto by new {
+                                          group proyecto by new
+                                          {
                                               departamento.IdDepartamento,
                                               departamento.NombreDepartamento
                                       ***REMOVED*** into g
-                                          select new ConsolidatedDepartmentProjects {
+                                          select new ConsolidatedDepartmentProjects
+                                          {
                                               departmentId = g.Key.IdDepartamento.ToString().Trim(),
                                               nombre = g.Key.NombreDepartamento.ToString(),
                                               approvedMoney = Math.Round(g.Distinct(new PredicateEqualityComparer<Infrastructura.DataModels.Proyecto>((x, y) => x.IdProyecto == y.IdProyecto)).Sum(p => p.VlrTotalProyectoFuenteRegalias)),
@@ -410,7 +421,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             var result = DataModel.ObtenerListaDepartamentosHome().ToList();
 
             var dep_query = (from Departamento in result
-                             select new ConsolidatedDepartmentProjects {
+                             select new ConsolidatedDepartmentProjects
+                             {
                                  departmentId = Departamento.IdDepartamento.ToString().Trim(),
                                  nombre = Departamento.NombreDepartamento.ToString(),
                                  url_img_peq = Departamento.UrlImagePequenia.ToString(),
@@ -419,7 +431,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                  projectNumber = (int)Departamento.projectNumber
                          ***REMOVED***);
 
-            if (dep_query.Count() > 0) {
+            if (dep_query.Count() > 0)
+            {
                 objReturn = dep_query.ToList();
         ***REMOVED***
 
@@ -433,7 +446,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             var result = DataModel.ObtenerListaMunicipiosHome().ToList();
 
             var dep_query = (from municipio in result
-                             select new ProyectoConsolidadoPorMunicipio {
+                             select new ProyectoConsolidadoPorMunicipio
+                             {
                                  MunicipioId = municipio.IdMunicipio.ToString().Trim(),
                                  nombre = municipio.NombreMunicipio.ToString(),
                                  url_img_peq = municipio.UrlImagePequenia.ToString(),
@@ -442,7 +456,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                  projectNumber = (int)municipio.projectNumber
                          ***REMOVED***);
 
-            if (dep_query.Count() > 0) {
+            if (dep_query.Count() > 0)
+            {
                 objReturn = dep_query.ToList();
         ***REMOVED***
 
@@ -460,7 +475,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                              join galeria in DataModel.VwGaleriaEntidadesTerritorialesDepartamentos
                              on departamento.IdDepartamento equals galeria.IdDepartamento
                              //.Where(w => w.IdDepartamento == departamento.IdDepartamento).DefaultIfEmpty()
-                             select new {
+                             select new
+                             {
                                  departamento.IdDepartamento,
                                  departamento.NombreDepartamento,
                                  galeria.UrlImagePequenia
@@ -471,12 +487,14 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                               on proyecto.IdProyecto equals pxe.IdProyecto
                                           join departamento in dep_query
                                              on pxe.IdDepartamento.Trim() equals departamento.IdDepartamento.Trim()
-                                          group proyecto by new {
+                                          group proyecto by new
+                                          {
                                               departamento.IdDepartamento,
                                               departamento.NombreDepartamento,
                                               departamento.UrlImagePequenia
                                       ***REMOVED*** into g
-                                          select new ConsolidatedDepartmentProjects {
+                                          select new ConsolidatedDepartmentProjects
+                                          {
                                               departmentId = g.Key.IdDepartamento.ToString().Trim(),
                                               nombre = g.Key.NombreDepartamento.ToString(),
                                               url_img_peq = g.Key.UrlImagePequenia.ToString(),
@@ -485,10 +503,12 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                               projectNumber = g.Distinct(new PredicateEqualityComparer<InfoProyectos>((x, y) => x.IdProyecto == y.IdProyecto)).Count()
                                       ***REMOVED***).Distinct(new PredicateEqualityComparer<ConsolidatedDepartmentProjects>((x, y) => (x.departmentId == y.departmentId)));
             //***REMOVED***);
-            if (ProjectsPerSectorQuery.Count() > 10) {
+            if (ProjectsPerSectorQuery.Count() > 10)
+            {
                 objReturn = ProjectsPerSectorQuery.ToList().GetRange(0, 10);
         ***REMOVED***
-            else {
+            else
+            {
                 objReturn = ProjectsPerSectorQuery.ToList();
         ***REMOVED***
 
@@ -508,12 +528,14 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                              on pxe.IdMunicipio.Trim() equals municipio.IdMunicipio.Trim()
                                           where (filtro.CodigosDepartamentos.Contains(pxe.IdDepartamento) || filtro.CodigosDepartamentos.Count == 0)
                                           //group proyecto by municipio.IdMunicipio into g
-                                          group proyecto by new {
+                                          group proyecto by new
+                                          {
                                               municipio.IdMunicipio,
                                               municipio.NombreMunicipio
                                       ***REMOVED*** into g
 
-                                          select new ProyectoConsolidadoPorMunicipio {
+                                          select new ProyectoConsolidadoPorMunicipio
+                                          {
                                               MunicipioId = g.Key.IdMunicipio.ToString().Trim(),
                                               nombre = g.Key.NombreMunicipio.ToString().Trim(),
                                               approvedMoney = Math.Round(g.Distinct(new PredicateEqualityComparer<Infrastructura.DataModels.Proyecto>((x, y) => x.IdProyecto == y.IdProyecto)).Sum(p => p.VlrTotalProyectoFuenteRegalias)),
@@ -534,7 +556,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             var munic_query = (from municipio in ConsultasComunes.ObtenerMunicipio(null)
                                join galeria in DataModel.VwGaleriaEntidadesTerritorialesMunicipios
                                on municipio.IdMunicipio equals galeria.IdMunicipio
-                               select new {
+                               select new
+                               {
                                    municipio.IdMunicipio,
                                    municipio.NombreMunicipio,
                                    galeria.UrlImagePequenia
@@ -548,13 +571,15 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                              on pxe.IdMunicipio.Trim() equals municipio.IdMunicipio.Trim()
                                           where (filtro.CodigosDepartamentos.Contains(pxe.IdDepartamento) || filtro.CodigosDepartamentos.Count == 0)
                                           //group proyecto by municipio.IdMunicipio into g
-                                          group proyecto by new {
+                                          group proyecto by new
+                                          {
                                               municipio.IdMunicipio,
                                               municipio.NombreMunicipio,
                                               municipio.UrlImagePequenia
                                       ***REMOVED*** into g
 
-                                          select new ProyectoConsolidadoPorMunicipio {
+                                          select new ProyectoConsolidadoPorMunicipio
+                                          {
                                               MunicipioId = g.Key.IdMunicipio.ToString().Trim(),
                                               nombre = g.Key.NombreMunicipio.ToString().Trim(),
                                               url_img_peq = g.Key.UrlImagePequenia.ToString(),
@@ -564,10 +589,12 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                       ***REMOVED***).Distinct(new PredicateEqualityComparer<ProyectoConsolidadoPorMunicipio>((x, y) => (x.MunicipioId == y.MunicipioId)))
                                           ;
 
-            if (ProjectsPerSectorQuery.Count() > 10) {
+            if (ProjectsPerSectorQuery.Count() > 10)
+            {
                 objReturn = ProjectsPerSectorQuery.ToList().GetRange(0, 10);
         ***REMOVED***
-            else {
+            else
+            {
                 objReturn = ProjectsPerSectorQuery.ToList();
         ***REMOVED***
 
@@ -581,11 +608,13 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
         #region INFO GENERAL PARAMETRIZABLE
 
+       
+
         #endregion
 
         #region GRAFICAS DATOS CONSOLIDADOS
 
-        public List<InfoResourcesPerDepartment> ObtenerRecursosPorDepartamento(List<Infrastructura.DataModels.Proyecto> listProyectos)
+        public List<InfoResourcesPerDepartment> ObtenerRecursosPorDepartamento(List<DataModels.Proyecto> listProyectos)
         {
             List<InfoResourcesPerDepartment> objReturn = new List<InfoResourcesPerDepartment>();
 
@@ -601,7 +630,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                              into JoinPxeDpto
                                           from departamento in JoinPxeDpto.DefaultIfEmpty()
                                           group proyecto by departamento.NombreDepartamento into g
-                                          select new InfoResourcesPerDepartment {
+                                          select new InfoResourcesPerDepartment
+                                          {
                                               label = (g.Key.Trim()),
                                               rawValue = Math.Round(g.Distinct().Sum(p => p.VlrTotalProyectoFuenteRegalias)),
                                               value = string.Empty
@@ -613,7 +643,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
             //Obtiene el valor total de fuente regalias con el fin de tener el dato para los porcentajes
             decimal sumaTotal = Convert.ToDecimal(ProjectsPerSectorQuery.Sum(p => p.rawValue));
-            foreach (var registro in ProjectsPerSectorQuery) {
+            foreach (var registro in ProjectsPerSectorQuery)
+            {
                 registro.value = ManejoPorcentajes.ValorPorcentajeString(sumaTotal, registro.rawValue);
         ***REMOVED***
 
@@ -622,10 +653,13 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                    select departamentos.NombreDepartamento).ToList();
             List<string> IdListado = new List<string>();
             IdListado = ProjectsPerSectorQuery.Select(d => d.label).ToList();
-            foreach (var item in IdDepartamentos) {
-                if (!(IdListado.Contains(item))) {
+            foreach (var item in IdDepartamentos)
+            {
+                if (!(IdListado.Contains(item)))
+                {
                     ProjectsPerSectorQuery.Add(
-                            new InfoResourcesPerDepartment {
+                            new InfoResourcesPerDepartment
+                            {
                                 label = item,
                                 rawValue = 0,
                                 value = "0"
@@ -640,7 +674,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             return objReturn;
     ***REMOVED***
 
-        public List<InfoResourcesPerRegion> ObtenerRecursosPorRegion(List<Infrastructura.DataModels.Proyecto> listProyectos)
+        public List<InfoResourcesPerRegion> ObtenerRecursosPorRegion(List<DataModels.Proyecto> listProyectos)
         {
             List<InfoResourcesPerRegion> objReturn = new List<InfoResourcesPerRegion>();
 
@@ -651,7 +685,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                           join region in DataModel.EnteTerritorials
                                               on new { idDepartamento = pxe.IdDepartamento.Trim(), idMunicipio = pxe.IdMunicipio.Trim() ***REMOVED*** equals new { idDepartamento = region.IdDepartamento.Trim(), idMunicipio = region.IdMunicipio.Trim() ***REMOVED***
                                           group proyecto by region.NombreRegion into g
-                                          select new InfoResourcesPerRegion {
+                                          select new InfoResourcesPerRegion
+                                          {
                                               label = g.Key.Trim(),
                                               rawValue = Math.Round(Convert.ToDecimal(g.Distinct().Sum(p => p.VlrTotalProyectoFuenteRegalias))),
                                               value = string.Empty//Aqui va el porccentaje como string
@@ -664,7 +699,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             //CMC: o > 1 o = 0  significa siempre ya que no puede haber negativos
             //if (ProjectsPerSectorQuery.Count > 1 || ProjectsPerSectorQuery.Count == 0)
             //{
-            foreach (var registro in ProjectsPerSectorQuery) {
+            foreach (var registro in ProjectsPerSectorQuery)
+            {
                 registro.value = ManejoPorcentajes.ValorPorcentajeString(sumaTotal, registro.rawValue);
         ***REMOVED***
 
@@ -674,7 +710,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             return objReturn;
     ***REMOVED***
 
-        public List<InfoResourcesPerSector> ObtenerRecursosPorSector(List<Infrastructura.DataModels.Proyecto> listProyectos)
+        public List<InfoResourcesPerSector> ObtenerRecursosPorSector(List<DataModels.Proyecto> listProyectos)
         {
             List<InfoResourcesPerSector> objReturn = new List<InfoResourcesPerSector>();
 
@@ -683,7 +719,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                           join sectores in DataModel.Sectors on
                                              projects.IdSector equals sectores.IdSector
                                           group projects by sectores.NombreSector into g
-                                          select new InfoResourcesPerSector {
+                                          select new InfoResourcesPerSector
+                                          {
                                               label = g.Key.Trim(),
                                               rawValue = Math.Round(Convert.ToDecimal(g.Sum(p => p.VlrTotalProyectoFuenteRegalias))),
                                               value = string.Empty
@@ -695,10 +732,12 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             //Se muestra bien su hay más de un dato o no se muestra si no hay datos
             //if (ProjectsPerSectorQuery.Count > 1 || ProjectsPerSectorQuery.Count == 0) // O sea siempre
             //{
-            foreach (var item in ProjectsPerSectorQuery) {
+            foreach (var item in ProjectsPerSectorQuery)
+            {
                 item.value = ManejoPorcentajes.ValorPorcentajeString(sumaTotal, item.rawValue);
                 decimal valorPorcentaje = Convert.ToDecimal(item.value.Replace("%", string.Empty).Trim());
-                if (valorPorcentaje > Convert.ToDecimal(ArchivoRecursosNegocioMapaInversiones.PorcentajeProyectosPorSectorMostrtar)) {
+                if (valorPorcentaje > Convert.ToDecimal(ArchivoRecursosNegocioMapaInversiones.PorcentajeProyectosPorSectorMostrtar))
+                {
                     objReturn.Add(item);
             ***REMOVED***
         ***REMOVED***
@@ -707,7 +746,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
     ***REMOVED***
 
-        public List<InfoProjectPerSector> ObtenerProyectosPorSector(List<Infrastructura.DataModels.Proyecto> listProyectos)
+        public List<InfoProjectPerSector> ObtenerProyectosPorSector(List<DataModels.Proyecto> listProyectos)
         {
             List<InfoProjectPerSector> objReturn = new List<InfoProjectPerSector>();
             //Obtiene el número total de proyectos con el fin de tener el dato para los porcentajes
@@ -719,16 +758,19 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                          join sectores in DataModel.Sectors on
                                             projects.IdSector equals sectores.IdSector
                                          group sectores by sectores.NombreSector into g
-                                         select new InfoProjectPerSector {
+                                         select new InfoProjectPerSector
+                                         {
                                              label = g.Key.Trim(),
                                              rawValue = g.Count(),
                                              value = ManejoPorcentajes.ValorPorcentajeString(cantidadTotalProyectos, g.Count())
                                      ***REMOVED***;
 
             // Descartar los menores al porcertaje dado
-            foreach (var item in ProjectsPerSectorQuery.OrderBy(p => p.label)) {
+            foreach (var item in ProjectsPerSectorQuery.OrderBy(p => p.label))
+            {
                 decimal valorPorcentaje = Convert.ToDecimal(item.value.Replace("%", string.Empty).Trim());
-                if (valorPorcentaje > Convert.ToDecimal(ArchivoRecursosNegocioMapaInversiones.PorcentajeProyectosPorSectorMostrtar)) {
+                if (valorPorcentaje > Convert.ToDecimal(ArchivoRecursosNegocioMapaInversiones.PorcentajeProyectosPorSectorMostrtar))
+                {
                     objReturn.Add(item);
             ***REMOVED***
         ***REMOVED***
@@ -743,22 +785,26 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         public List<InfoProjectsPerEstado> ObtenerProyectosPorEstado(FiltroBusquedaProyecto filtros)
         {
             List<InfoProjectsPerEstado> objReturn = new List<InfoProjectsPerEstado>();
-            if (filtros.CodigosDepartamentos.Count > 0) {
+            if (filtros.CodigosDepartamentos.Count > 0)
+            {
                 //departamentos
                 var ProjectsPerEstadoQuery = (from projects in DataModel.VwEstadoProyectosDeptoInvs
                                               where ((filtros.CodigosDepartamentos.Contains(projects.IdDepartamento) && (filtros.CodigosMunicipios.Count == 0)))
-                                              select new InfoProjectsPerEstado {
+                                              select new InfoProjectsPerEstado
+                                              {
                                                   label = projects.NombreEstado,
                                                   rawValue = ((decimal)projects.NumeroProyectos),
                                                   value = ((decimal)projects.NumeroProyectos).ToString()
                                           ***REMOVED***);
                 objReturn = ProjectsPerEstadoQuery.ToList();
         ***REMOVED***
-            else {
+            else
+            {
                 //municipios
                 var ProjectsPerEstadoQuery = (from projects in DataModel.VwEstadoProyectosInvs
                                               where ((filtros.CodigosMunicipios.Contains(projects.IdMunicipio) && (filtros.CodigosDepartamentos.Count == 0)))
-                                              select new InfoProjectsPerEstado {
+                                              select new InfoProjectsPerEstado
+                                              {
                                                   label = projects.NombreEstado,
                                                   rawValue = ((decimal)projects.NumeroProyectos),
                                                   value = ((decimal)projects.NumeroProyectos).ToString()
@@ -773,21 +819,24 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
         public List<InfoProjectsPerEstado> ObtenerProyectosEstadoPorSector(string sectorId)
         {
-            List<InfoProjectsPerEstado> objReturn = new List<InfoProjectsPerEstado>();
+            List<InfoProjectsPerEstado> objReturn = new();
 
             var datosEstadoSector = (from proyecto in DataModel.Proyectos
                                      join historiaEstado in DataModel.HistoriaEstados on proyecto.IdProyecto equals historiaEstado.IdProyecto
                                      join estado in DataModel.Estados on historiaEstado.IdEstado equals estado.IdEstado
                                      where proyecto.IdSector.ToString() == sectorId
-                                     select new {
+                                     select new
+                                     {
                                          estado.NombreEstado,
                                          proyecto.IdProyecto
                                  ***REMOVED***).ToList();
-            if (datosEstadoSector.Any()) {
+            if (datosEstadoSector.Any())
+            {
                 var ProjectsPerEstadoQuery = (from estado in datosEstadoSector
                                               group estado by estado.NombreEstado into g
                                               orderby g.Key ascending
-                                              select new InfoProjectsPerEstado {
+                                              select new InfoProjectsPerEstado
+                                              {
                                                   label = g.Key,
                                                   rawValue = g.Count(),
                                                   value = g.Count().ToString()
@@ -801,22 +850,26 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         {
             List<InfoProjectsPerEstado> objReturn = new List<InfoProjectsPerEstado>();
 
-            if (filtros.CodigosDepartamentos.Count > 0) {
+            if (filtros.CodigosDepartamentos.Count > 0)
+            {
                 //departamentos
                 var ProjectsPerEstadoQuery = (from projects in DataModel.VwEstadoProyectosDeptoInvs
                                               where ((filtros.CodigosDepartamentos.Contains(projects.IdDepartamento) && (filtros.CodigosMunicipios.Count == 0)))
-                                              select new InfoProjectsPerEstado {
+                                              select new InfoProjectsPerEstado
+                                              {
                                                   label = projects.NombreEstado,
                                                   rawValue = ((decimal)projects.NumeroProyectos),
                                                   value = ((decimal)projects.NumeroProyectos).ToString()
                                           ***REMOVED***);
                 objReturn = ProjectsPerEstadoQuery.ToList();
         ***REMOVED***
-            else {
+            else
+            {
                 //municipios
                 var ProjectsPerEstadoQuery = (from projects in DataModel.VwEstadoProyectosInvs
                                               where ((filtros.CodigosMunicipios.Contains(projects.IdMunicipio) && (filtros.CodigosDepartamentos.Count == 0)))
-                                              select new InfoProjectsPerEstado {
+                                              select new InfoProjectsPerEstado
+                                              {
                                                   label = projects.NombreEstado,
                                                   rawValue = ((decimal)projects.NumeroProyectos),
                                                   value = ((decimal)projects.NumeroProyectos).ToString()
@@ -838,21 +891,24 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             var proyectosXEstadoIdDpto = (from vistaSectorEnte in DataModel.VwSectorListadoPorDeptoInvs
                                           join estado in DataModel.Estados on vistaSectorEnte.IdEstado equals estado.IdEstado
                                           where vistaSectorEnte.IdSector.ToString() == sectorId
-                                          select new {
+                                          select new
+                                          {
                                               vistaSectorEnte.IdDepartamento,
                                               estado.NombreEstado,
                                               vistaSectorEnte.IdProyecto
                                       ***REMOVED***).ToArray();
             var proyectosXEstadoNombreDpto = (from proyEstadoIdDpto in proyectosXEstadoIdDpto
                                               join dpto in lstDepartamentos on proyEstadoIdDpto.IdDepartamento equals dpto.IdDepartamento
-                                              select new {
+                                              select new
+                                              {
                                                   dpto.NombreDepartamento,
                                                   proyEstadoIdDpto.NombreEstado,
                                                   proyEstadoIdDpto.IdProyecto
                                           ***REMOVED***).ToArray();
             var numProyectosXEstadoNombreDpto = (from proyEstadoNombreDpto in proyectosXEstadoNombreDpto
                                                  group proyEstadoNombreDpto by new { proyEstadoNombreDpto.NombreDepartamento, proyEstadoNombreDpto.NombreEstado ***REMOVED*** into g
-                                                 select new InfoProjectPerSector {
+                                                 select new InfoProjectPerSector
+                                                 {
                                                      label = g.Key.NombreEstado,
                                                      labelGroup = g.Key.NombreDepartamento,
                                                      rawValue = g.Count(),
@@ -869,19 +925,22 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                         join proyectoEstado in DataModel.HistoriaEstados on proyecto.IdProyecto equals proyectoEstado.IdProyecto
                                         join estado in DataModel.Estados on proyectoEstado.IdEstado equals estado.IdEstado
                                         where proyecto.IdSector.ToString() == sectorId
-                                        select new {
+                                        select new
+                                        {
                                             proyecto.IdProyecto,
                                             estado.NombreEstado
                                     ***REMOVED***).Distinct().ToArray();
 
             List<InfoProjectPerSector> proyectosSinEnteTerritorial = new List<InfoProjectPerSector>();
-            for (int j = 0; j < todosProyectosSector.Length; j++) {
+            for (int j = 0; j < todosProyectosSector.Length; j++)
+            {
                 if (!proyectosSectorConEnteTerritorial.Contains(todosProyectosSector[j].IdProyecto))
                     proyectosSinEnteTerritorial.Add(new InfoProjectPerSector { label = todosProyectosSector[j].NombreEstado, rawValue = todosProyectosSector[j].IdProyecto ***REMOVED***);
         ***REMOVED***
             var numProyectosNacionalesXEstado = (from proyNac in proyectosSinEnteTerritorial
                                                  group proyNac by proyNac.label into g
-                                                 select new InfoProjectPerSector {
+                                                 select new InfoProjectPerSector
+                                                 {
                                                      labelGroup = "Proyectos Nacionales",
                                                      label = g.Key,
                                                      rawValue = g.Count(),
@@ -907,28 +966,32 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                                  join proyectoEntidadTerritorial in DataModel.ProyectoXEntidadTerritorials on proyecto.IdProyecto equals proyectoEntidadTerritorial.IdProyecto
                                                  join enteTerritorial in DataModel.EnteTerritorials on proyectoEntidadTerritorial.IdDepartamento equals enteTerritorial.IdDepartamento
                                                  where enteTerritorial.IdMunicipio == proyectoEntidadTerritorial.IdMunicipio && proyecto.IdSector.ToString() == sectorId && proyecto.VlrTotalProyectoTodasLasFuentes > 0
-                                                 select new {
+                                                 select new
+                                                 {
                                                      Departamento = enteTerritorial.NombreDepartamento,
                                                      CostoProyecto = (proyecto.VlrTotalProyectoTodasLasFuentes / 1000000),
                                                      proyecto.IdProyecto
                                              ***REMOVED***).Distinct().ToList();
             var costoUnitarioProyecto = (from proyecto in costoProjectsPerSectoresQuery
                                          group proyecto by proyecto.IdProyecto into g
-                                         select new {
+                                         select new
+                                         {
                                              IdProyecto = g.Key,
                                              CostoProyecto = g.Average(x => x.CostoProyecto),
                                              NumeroBeneficiarios = g.Count()
                                      ***REMOVED***).Distinct().ToList();
             var costoUnitarioProyectoDpto = (from cup in costoUnitarioProyecto
                                              join cppsq in costoProjectsPerSectoresQuery on cup.IdProyecto equals cppsq.IdProyecto
-                                             select new {
+                                             select new
+                                             {
                                                  cppsq.Departamento,
                                                  CostoProyecto = (decimal)cup.CostoProyecto / cup.NumeroBeneficiarios
                                          ***REMOVED***).ToArray();
 
             var rta = (from cppsq in costoUnitarioProyectoDpto
                        group cppsq by cppsq.Departamento into g
-                       select new InfoProjectPerSector {
+                       select new InfoProjectPerSector
+                       {
                            label = g.Key,
                            rawValue = g.Sum(x => x.CostoProyecto),
                            value = (g.Sum(y => y.CostoProyecto)).ToString()
@@ -942,20 +1005,23 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                         join proyectoEstado in DataModel.HistoriaEstados on proyecto.IdProyecto equals proyectoEstado.IdProyecto
                                         join estado in DataModel.Estados on proyectoEstado.IdEstado equals estado.IdEstado
                                         where proyecto.IdSector.ToString() == sectorId
-                                        select new {
+                                        select new
+                                        {
                                             proyecto.IdProyecto,
                                             estado.NombreEstado
                                     ***REMOVED***).Distinct().ToArray();
 
             List<int> proyectosSectorSinEnteTerritorial = new List<int>();
-            for (int j = 0; j < todosProyectosSector.Length; j++) {
+            for (int j = 0; j < todosProyectosSector.Length; j++)
+            {
                 if (!proyectosSectorConEnteTerritorial.Contains(todosProyectosSector[j].IdProyecto))
                     proyectosSectorSinEnteTerritorial.Add(todosProyectosSector[j].IdProyecto);
         ***REMOVED***
 
             var costoProyectosNacionales = (from proyecto in DataModel.Proyectos
                                             join proyectoSectorNacional in proyectosSectorSinEnteTerritorial on proyecto.IdProyecto equals proyectoSectorNacional
-                                            select new {
+                                            select new
+                                            {
                                                 Departamento = "Proyectos Nacionales",
                                                 CostoProyecto = proyecto.VlrTotalProyectoTodasLasFuentes
                                         ***REMOVED***).ToArray().Sum(x => x.CostoProyecto) / 1000000;
@@ -974,12 +1040,14 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         {
             List<InfoProjectPerSector> objReturn = new List<InfoProjectPerSector>();
 
-            if (filtros.CodigosDepartamentos.Count > 0) {
+            if (filtros.CodigosDepartamentos.Count > 0)
+            {
                 //departamento
                 var ProjectsPerSectoresQuery = (from sectores in DataModel.VwSectorProyectosDeptoInvs
                                                 where ((filtros.CodigosDepartamentos.Contains(sectores.IdDepartamento) && (filtros.CodigosMunicipios.Count == 0)))
                                                 orderby sectores.NumeroProyectosSect descending
-                                                select new InfoProjectPerSector {
+                                                select new InfoProjectPerSector
+                                                {
                                                     label = sectores.NombreEstado,
                                                     labelGroup = sectores.NombreSector,
                                                     rawValue = ((decimal)sectores.NumeroProyectosSect),
@@ -989,12 +1057,14 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                 objReturn = ProjectsPerSectoresQuery.ToList();
 
         ***REMOVED***
-            else {
+            else
+            {
                 //municipio
                 var ProjectsPerSectoresQuery = (from sectores in DataModel.VwSectorProyectosInvs
                                                 where (filtros.CodigosMunicipios.Contains(sectores.IdMunicipio) && (filtros.CodigosDepartamentos.Count == 0))
                                                 orderby sectores.NumeroProyectosSect descending
-                                                select new InfoProjectPerSector {
+                                                select new InfoProjectPerSector
+                                                {
                                                     label = sectores.NombreEstado,
                                                     labelGroup = sectores.NombreSector,
                                                     rawValue = ((decimal)sectores.NumeroProyectosSect),
@@ -1014,7 +1084,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
             var queryInfo = (from perfilSector in DataModel.VwInformacionGeneralPerfilSectors
                              where perfilSector.IdSector.ToString() == sector
-                             select new InfoLocationSectorGen {
+                             select new InfoLocationSectorGen
+                             {
                                  nomSector = perfilSector.NombreSector,
                                  Costo = Math.Round((decimal)perfilSector.ValorPromedioProyecto, 2),
                                  Duracion = Math.Round((decimal)perfilSector.DuracionPromedioProyectos, 2),
@@ -1028,13 +1099,15 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         public Modelos.Location.InfoLocationGen ObtenerInfoLocation(FiltroBusquedaProyecto filtros)
         {
             Modelos.Location.InfoLocationGen objReturn = new Modelos.Location.InfoLocationGen();
-            if (filtros.CodigosDepartamentos.Count > 0) {
+            if (filtros.CodigosDepartamentos.Count > 0)
+            {
 
                 var queryInfo = (from perfil in DataModel.VwInformacionGeneralPerfilLocalizacionDeptos
                                  from galeria in DataModel.VwGaleriaEntidadesTerritorialesDepartamentos
                                  .Where(w => w.IdDepartamento == perfil.IdDepartamento).DefaultIfEmpty()
                                  where ((filtros.CodigosDepartamentos.Contains(perfil.IdDepartamento)))
-                                 select new Modelos.Location.InfoLocationGen {
+                                 select new Modelos.Location.InfoLocationGen
+                                 {
                                      IdDepartamento = perfil.IdDepartamento,
                                      Costo = Math.Round((decimal)perfil.ValorPromedioProyecto, 2),
                                      Duracion = Math.Round((decimal)perfil.DuracionPromedioProyectos, 2),
@@ -1043,13 +1116,15 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                              ***REMOVED***).FirstOrDefault();
                 objReturn = queryInfo;
         ***REMOVED***
-            else if (filtros.CodigosMunicipios.Count > 0) {
+            else if (filtros.CodigosMunicipios.Count > 0)
+            {
 
                 var queryInfo = (from perfil in DataModel.VwInformacionGeneralPerfilLocalizacions
                                  from galeria in DataModel.VwGaleriaEntidadesTerritorialesMunicipios
                                  .Where(w => w.IdMunicipio == perfil.IdMunicipio).DefaultIfEmpty()
                                  where (filtros.CodigosMunicipios.Contains(perfil.IdMunicipio))
-                                 select new Modelos.Location.InfoLocationGen {
+                                 select new Modelos.Location.InfoLocationGen
+                                 {
                                      IdDepartamento = perfil.IdDepartamento,
                                      IdMunicipio = perfil.IdMunicipio,
                                      Costo = Math.Round((decimal)perfil.ValorPromedioProyecto, 2),
@@ -1061,6 +1136,140 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
         ***REMOVED***
             return objReturn;
+    ***REMOVED***
+
+
+        public ModelContratistaData ObtenerDatosContratista(string ruc)
+        {
+            ModelContratistaData objReturn = new ModelContratistaData();
+            if (string.IsNullOrEmpty(ruc))
+                return objReturn;
+            objReturn.ruc = ruc;
+
+            List<VwContratosPerfilContratistaSinPrograma> lstContratistas = ConsultasComunes.ObtenerDatosContratista(ruc);
+            if (lstContratistas.Count > 0)
+            {
+                objReturn.nomContratista = lstContratistas[0].Contratista;
+                objReturn.numContratos = lstContratistas[0].NumContratos;
+                objReturn.valorContratos = lstContratistas[0].ValorTotalContratos;
+        ***REMOVED***
+
+            //objReturn.Status = true;
+
+            return objReturn;
+    ***REMOVED***
+
+        public ModelContratistaData ObtenerDatosContratos()
+        {
+            ModelContratistaData objReturn = new ModelContratistaData();
+
+            EncabezadoContratos lstContratistas = ConsultasComunes.ObtenerDatosContratos();
+
+            // objReturn.nomContratista = lstContratistas[0].Contratista;
+            objReturn.numContratos = lstContratistas.NumContratos;
+            objReturn.valorContratos = lstContratistas.ValorTotalContratos;
+
+
+            //objReturn.Status = true;
+
+            objReturn.listEncabezadoContratosCancelados = ConsultasComunes.ObtenerDatosContratosCancelados();
+
+            return objReturn;
+    ***REMOVED***
+
+        public List<InfoProyectos> GetProyectosNacionales()
+        {
+            List<InfoProyectos> objReturn = new List<InfoProyectos>();
+            objReturn = (from info in DataModel.VwProyectosAprobadosInvs
+                         join sector in DataModel.Sectors on info.IdSector equals sector.IdSector
+                         where info.VlrTotalProyectoFuenteRegalias > 0 && info.TipoProyecto == "NACIONAL"
+                         select new InfoProyectos
+                         {
+                             IdProyecto = info.IdProyecto,
+                             NombreProyecto = info.NombreProyecto.Replace("\r\n", "").Replace("\n", "").Replace("\r", ""),
+                             approvedTotalMoney = info.VlrTotalProyectoFuenteRegalias,
+                             porcentajeGastado = (decimal)info.AvanceFinanciero,
+                             UrlImagen = info.URLImagen,
+                             NombreSector = sector.NombreSector,
+                             IdSector = sector.IdSector,
+                             cantidadFotos = info.NumeroImagenes,
+                             MesInicioProyecto = info.MesInicioProyecto,
+                             AnioInicioProyecto = info.AnioInicioProyecto,
+                             MesFinProyecto = info.MesFinProyecto,
+                             AnioFinProyecto = info.AnioFinProyecto,
+                             FechaInicioProyecto = info.FechaInicioProyecto,
+                             Megusta = info.MeGusta,
+                             Comentarios = info.Comentarios,
+                     ***REMOVED***).ToList();
+            if (objReturn.Count > 8)
+            {
+                objReturn = objReturn.Take(8).ToList();
+        ***REMOVED***
+
+            return objReturn;
+
+    ***REMOVED***
+
+        public List<InfoProyectos> GetProyectosNacionalesfiltro(string campo)
+        {
+            List<InfoProyectos> objReturn = new List<InfoProyectos>();
+            if (campo == "montodesc")
+            {
+                objReturn = (from info in DataModel.VwProyectosAprobadosInvs
+                             join sector in DataModel.Sectors on info.IdSector equals sector.IdSector
+                             where info.VlrTotalProyectoFuenteRegalias > 0 && info.TipoProyecto == "NACIONAL"
+                             orderby info.VlrTotalProyectoFuenteRegalias descending
+                             select new InfoProyectos
+                             {
+                                 IdProyecto = info.IdProyecto,
+                                 NombreProyecto = info.NombreProyecto.Replace("\r\n", "").Replace("\n", "").Replace("\r", ""),
+                                 approvedTotalMoney = info.VlrTotalProyectoFuenteRegalias,
+                                 porcentajeGastado = (decimal)info.AvanceFinanciero,
+                                 UrlImagen = info.URLImagen,
+                                 NombreSector = sector.NombreSector,
+                                 IdSector = sector.IdSector,
+                                 cantidadFotos = info.NumeroImagenes,
+                                 MesInicioProyecto = info.MesInicioProyecto,
+                                 AnioInicioProyecto = info.AnioInicioProyecto,
+                                 MesFinProyecto = info.MesFinProyecto,
+                                 AnioFinProyecto = info.AnioFinProyecto,
+                                 FechaInicioProyecto = info.FechaInicioProyecto,
+                                 Megusta = info.MeGusta,
+                                 Comentarios = info.Comentarios,
+                         ***REMOVED***).ToList();
+        ***REMOVED***
+            else if (campo == "montoasc")
+            {
+                objReturn = (from info in DataModel.VwProyectosAprobadosInvs
+                             join sector in DataModel.Sectors on info.IdSector equals sector.IdSector
+                             where info.VlrTotalProyectoFuenteRegalias > 0 && info.TipoProyecto == "NACIONAL"
+                             orderby info.VlrTotalProyectoFuenteRegalias ascending
+                             select new InfoProyectos
+                             {
+                                 IdProyecto = info.IdProyecto,
+                                 NombreProyecto = info.NombreProyecto.Replace("\r\n", "").Replace("\n", "").Replace("\r", ""),
+                                 approvedTotalMoney = info.VlrTotalProyectoFuenteRegalias,
+                                 porcentajeGastado = (decimal)info.AvanceFinanciero,
+                                 UrlImagen = info.URLImagen,
+                                 NombreSector = sector.NombreSector,
+                                 IdSector = sector.IdSector,
+                                 cantidadFotos = info.NumeroImagenes,
+                                 MesInicioProyecto = info.MesInicioProyecto,
+                                 AnioInicioProyecto = info.AnioInicioProyecto,
+                                 MesFinProyecto = info.MesFinProyecto,
+                                 AnioFinProyecto = info.AnioFinProyecto,
+                                 FechaInicioProyecto = info.FechaInicioProyecto,
+                                 Megusta = info.MeGusta,
+                                 Comentarios = info.Comentarios,
+                         ***REMOVED***).ToList();
+        ***REMOVED***
+            if (objReturn.Count > 8)
+            {
+                objReturn = objReturn.Take(8).ToList();
+        ***REMOVED***
+
+            return objReturn;
+
     ***REMOVED***
 
 

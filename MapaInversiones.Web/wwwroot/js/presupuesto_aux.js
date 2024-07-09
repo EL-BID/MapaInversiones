@@ -1,417 +1,180 @@
 ﻿var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
-inicializaDatos();
+var porc_agrup_organismos = 50;
+var etiqueta_nivel3_organismos = "OTROS PROYECTOS";
+var porc_agrup_sectores = 30;
+var etiqueta_nivel_3_sectores = "OTROS PROYECTOS";
+
 //Treemap primera grafica Distribucion del presupuesto
 var globales = [];
-var globales_org = [];
 var globales_gasto = [];
 var globales_entidad = [];
+var globales_proy = [];
+var grafica = null;
+var longitud_tooltip = 120;
+var global_vigente = 0;
+//---sankey------------
+var global_sankey = [];
+var global_agrupado = [];
+var global_otros = [];
+var global_ini = [];
+var miga_pan = "";
+$("#btnAtras").hide();
+var global_tab = "";
+//----------------------
+
 var cantXPagina = 6;
 var anyo_actual = $("#annioPresupuesto option:selected").val();
+inicializaDatos();
+configuraSelectPeriodo();
+//-------------------------------------------------
 
-if ($("#chk_gasto_" + anyo_actual).length > 0) {
-    document.getElementById("chk_gasto_" + anyo_actual).checked = true;
-***REMOVED***
-
-if ($("#chk_func_" + anyo_actual).length > 0) {
-    document.getElementById("chk_func_" + anyo_actual).checked = true;
-***REMOVED***
-
-getConsolidadoPeriodosNew(anyo_actual);
-//----------------------------------------
-ObtenerFuncionesPeriodo(anyo_actual);
-getFuncionesGobiernoGraphic();
-//----------------------------------------
-getVersionesIniPerAnyo(anyo_actual);
-//----------------------------------------
-ObtenerGruposGastoPerPeriodo(anyo_actual);
-getGrupoGastoGraphic();
-
-//----------------------------------------
-GetRecursosPorNivel(anyo_actual);
-//----------------------------------------
-ObtenerDatosListadoPerGasto(anyo_actual);
-//----------------------------------------
-//GetEntidadesPresupuesto();
-//GetEntidadesPresupuestoNoAlcaldias();
-
-
+GetRecursosPorFinalidad(anyo_actual);
+//-------------------------------------------------
+ObtenerSectoresPeriodo(anyo_actual);
+ObtenerOrganismosPeriodo(anyo_actual);
+configuraSelectDesglose();
+//--------------------------------------------------
+ObtenerEntidadesPeriodo(anyo_actual);
+GetGastoEntidadesGraphic();
+GetGastoEntidadesTiempoGraphic();
+//--------------------------------------------------
 function inicializaDatos() {
-    configuraTabRecursos();
-    configuraCheckFunciones();
-    configuraCheckGasto();
-    configuraSelectPeriodo();
-    $("#annioPresupuestoText").html("" + $("#annioPresupuesto option:selected").val());
-    configuraFiltro_DesgloseIconos();
-    configuraSelectVersiones();
-    configuraSelectFunciones();
-    
-***REMOVED***
 
-function getVersionesIni() {
-    var base_sel = $("#versionBase option:eq(0)").val();
-
-    if ($("#versionBase").children.length > 0) {
-        $("#versionBase option:eq(0)").attr("selected", "selected");
-***REMOVED***
-    if ($("#versionComparacion").children.length > 1) {
-        //$('#versionComparacion option[value=' + base_sel + ']').hide();
-        $("#versionComparacion option:eq(1)").attr("selected", "selected");
-
-***REMOVED***
-    getDataVersiones();
-***REMOVED***
-
-
-function getFuncionesIni() {
-    if ($("#funcionesId").children.length > 0) {
-        $("#funcionesId option:eq(0)").attr("selected", "selected");
-***REMOVED***
-    if ($("#funcionesId_2").children.length > 0) {
-        $("#funcionesId_2 option:eq(0)").attr("selected", "selected");
-
-***REMOVED***
-    if ($("#funcionesId_3").children.length > 0) {
-        $("#funcionesId_3 option:eq(0)").attr("selected", "selected");
-
-***REMOVED***
-    if ($("#funcionesId_4").children.length > 0) {
-        $("#funcionesId_4 option:eq(0)").attr("selected", "selected");
-
-***REMOVED***
-    if ($("#funcionesId_5").children.length > 0) {
-        $("#funcionesId_5 option:eq(0)").attr("selected", "selected");
-
-***REMOVED***
-    //getFuncionesGobiernoGraphic();
-***REMOVED***
-
-function getGruposGastoIni() {
-    $(".selectGasto").each(function () {
-        //$(this).addClass("foo");
-        if ($(this).children.length > 0) {
-            var id = $(this).attr("id");
-            var str = id + "option:eq(0)";
-            $(str).attr("selected", "selected");
-    ***REMOVED***
-***REMOVED***);
-
-    
-***REMOVED***
-
-
-function configuraSelectFunciones() {
-    $('.selectFuncion').on('change', function () {
-        getFuncionesGobiernoGraphic("btn");
-***REMOVED***);
-
-
-$('#btnCompararFunc').click(function (e) {
-        var cont = 0;
-        $(".selectFuncion option:selected").each(function () {
-            if ($(this).val() != "") {
-                cont += 1;
-        ***REMOVED***
-    ***REMOVED***);
-        if (cont == 0) {
-            alert("Debe seleccionar al menos 1 función");
-    ***REMOVED*** else {
-            getFuncionesGobiernoGraphic("btn");
-    ***REMOVED***
-        //getFuncionesGobiernoGraphic("btn");
-***REMOVED***);
-***REMOVED***
-
-function configuraSelectGrupos() {
-    $(".selectGasto").on("change", function () {
-        getGrupoGastoGraphic("btn");
-***REMOVED***);
-***REMOVED***
-
-
-function configuraFiltro_DesgloseIconos() {
-    $(".tipo_grafica").click(function (e) {
-        $("#divPagFichas").html("");
-        var tipo = $(this).attr('codigo');
-        $(".tipo_grafica").removeClass("activo");
-        $(this).addClass("activo");
-        $("#filtro_iconos").attr("opc", tipo);
-         if (tipo == "gasto") {
-            ObtenerDatosListadoPerGasto(anyo_actual);
-
-    ***REMOVED*** else {
-            ObtenerDatosListadoPerEntidad(anyo_actual);
-    ***REMOVED***
-
-***REMOVED***);
-***REMOVED***
-
-
-function getFuncionesGobiernoGraphic(origen) {
-    var cont = 0;
-    var periodos = "";
-    $("input:checkbox[class=chk_gasto_func]:checked").each(function () {
-        periodos += $(this).val() + ",";
-***REMOVED***);
-    periodos = periodos.replace(/,\s*$/, "");
-
-    var funciones = "";
-    $(".selectFuncion option:selected").each(function () {
-        funciones += $(this).val() + ",";
-        if ($(this).val() != "") {
-            cont += 1;
-    ***REMOVED***
-***REMOVED***);
-    funciones = funciones.replace(/,\s*$/, "");
-    if (origen == "btn") {
-        if (cont == 0) {
-            $("#topGruposFuncionesGob").text("Top Funciones");
-    ***REMOVED*** else {
-            $("#topGruposFuncionesGob").text("Comparativo Funciones");
-    ***REMOVED***
-        GetGrupoDeFuncionesGob(periodos, anyo_actual, funciones);
-
-***REMOVED*** else {
-        $("#topGruposFuncionesGob").text("Top Funciones");
-        GetGrupoDeFuncionesGob(periodos, anyo_actual, null);
-***REMOVED***
-    
+    anyo_actual = $("#annioPresupuesto option:selected").val()
+    $("#annioPresupuestoText").html(anyo_actual);
+    getConsolidadoPeriodosNew(anyo_actual);
 
 ***REMOVED***
 
-function getGrupoGastoGraphic(origen) {
-    var cont = 0;
-    var periodos = "";
-    $("input:checkbox[class=chk_gasto]:checked").each(function () {
-        periodos += $(this).val() + ",";
-***REMOVED***);
-    periodos = periodos.replace(/,\s*$/, "");
-    var select_gasto = "";
-    $(".selectGasto option:selected").each(function () {
-        select_gasto += $(this).val() + ",";
-        if ($(this).val() != "") {
-            cont += 1;
-    ***REMOVED***
-***REMOVED***);
-    select_gasto = select_gasto.replace(/,\s*$/, "");
-
-    if (origen == "btn") {
-        if (cont == 0) {
-            $("#topGruposG").text("Top Grupos");
-    ***REMOVED*** else {
-            $("#topGruposG").text("Comparativo Grupos");
-    ***REMOVED***
-        GetGrupoDeGasto(periodos, anyo_actual, select_gasto);
-
-***REMOVED*** else {
-        $("#topGruposG").text("Top Grupos");
-        GetGrupoDeGasto(periodos, anyo_actual, null);
-***REMOVED***
-
-    //GetGrupoDeGasto(periodos,anyo_actual,select_gasto);
-
-***REMOVED***
-
-function configuraCheckFunciones() {
-    $('.chk_gasto_func').click(function () {
-        var cont = 0;
-        $(".selectFuncion option:selected").each(function () {
-            if ($(this).val() != "") {
-                cont += 1;
-        ***REMOVED***
-    ***REMOVED***);
-        if (cont == 0) {
-            getFuncionesGobiernoGraphic();
-    ***REMOVED*** else {
-            getFuncionesGobiernoGraphic("btn");
-    ***REMOVED*** 
-        //getFuncionesGobiernoGraphic();
-
-***REMOVED***);
-***REMOVED***
-
-function configuraCheckGasto() {
-    $('.chk_gasto').click(function () {
-        var cont = 0;
-        $(".selectGasto option:selected").each(function () {
-            if ($(this).val() != "") {
-                cont += 1;
-        ***REMOVED***
-    ***REMOVED***);
-        if (cont == 0) {
-            getGrupoGastoGraphic();
-    ***REMOVED*** else {
-            getGrupoGastoGraphic("btn");
-    ***REMOVED***
-***REMOVED***);
-***REMOVED***
-
-function configuraSelectPeriodo(){
+function configuraSelectPeriodo() {
     $('#annioPresupuesto').on('change', function () {
+
         anyo_actual = this.value;
-        $(".chk_gasto").prop("checked", false);
-        $(".chk_gasto_func").prop("checked", false);
-
-
         $("#annioPresupuestoText").html("" + anyo_actual);
-        if ($("#chk_gasto_" + anyo_actual).length > 0) {
-            document.getElementById("chk_gasto_" + anyo_actual).checked = true;
-    ***REMOVED***
-
-        if ($("#chk_func_" + anyo_actual).length > 0) {
-            document.getElementById("chk_func_" + anyo_actual).checked = true;
-    ***REMOVED***
-
-
-        $("#versionBase").empty();
-        $("#versionComparacion").empty();
-
+         //------------------------------------------------
         getConsolidadoPeriodosNew(anyo_actual);
-        $("#divGraphVersiones").empty();
-        getVersionesIniPerAnyo(anyo_actual);
-        getFuncionesGobiernoGraphic();
-        getGrupoGastoGraphic();
-        GetRecursosPorNivel(anyo_actual);
-        ObtenerDatosListadoPerGasto(anyo_actual);
-        ObtenerFuncionesPeriodo(anyo_actual);
-        ObtenerGruposGastoPerPeriodo(anyo_actual);
+        GetRecursosPorFinalidad(anyo_actual);
+        ObtenerSectoresPeriodo(anyo_actual);
+        ObtenerOrganismosPeriodo(anyo_actual);
+        ObtenerEntidadesPeriodo(anyo_actual);
+        GetGastoEntidadesGraphic();
+        GetGastoEntidadesTiempoGraphic();
 
+        if (global_tab == "") {
+            $(".enlace_tab").first().click();
+    ***REMOVED*** else {
+            if (global_tab == "sector") {
+                $(".enlace_tab").first().click();
+        ***REMOVED*** else {
+                $(".enlace_tab").eq(1).click();
+        ***REMOVED***
+    ***REMOVED***
+        
+        
 ***REMOVED***)
 
 ***REMOVED***
 
-function ObtenerFuncionesPeriodo(anyo_actual){
-    $("#funcionesId").empty();
-    $("#funcionesId_2").empty();
-    $("#funcionesId_3").empty();
-    $("#funcionesId_4").empty();
-    $("#funcionesId_5").empty();
-    
-    $.ajax({
-        contentType: "application/json; charset=utf-8",
-        url: "api/ServiciosPresupuestoNew/ObtenerFuncionesPerNombre",
-        type: "GET",
-        data: {
-            anyo: anyo_actual,
-            filtro:null
-    ***REMOVED***
-***REMOVED***).done(function (data) {
-        var result = data.funciones;
-        var str_cad = "";
-        if (result != null) {
-            if (result.length > 0) {
-                str_cad += '<option value="">Seleccione una función del gobierno</option>';
-                for (var i = 0; i < result.length; i++) {
-                    str_cad += '<option value="' + result[i].label + '">' + result[i].label + '</option>';
-            ***REMOVED***
-                $("#funcionesId").html(str_cad);
-                $("#funcionesId_2").html(str_cad);
-                $("#funcionesId_3").html(str_cad);
-                $("#funcionesId_4").html(str_cad);
-                $("#funcionesId_5").html(str_cad);
-                getFuncionesIni();
-                $("#btnCompararFunc").attr("disabled", false);
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
-        alert("Error " + xhr.status + "_" + thrownError);
+function getGraficoPerTipoVista() {
+    var tipoVista = $('input[name="tipoVistaSankey"]:checked').val();
+    if (tipoVista == "extendida") {
+        global_ini =
+        {
+            "links": global_sankey.links_nivel,
+            "nodes": global_sankey.nodes_nivel,
+            "cant_nodos": global_sankey.cant_nodos_nivel
+
+    ***REMOVED***;
+***REMOVED*** else {
+
+        global_ini =
+        {
+            "links": global_agrupado.links,
+            "nodes": global_agrupado.nodes,
+            "cant_nodos": global_agrupado.cant
+
+    ***REMOVED***;
+***REMOVED***
+    ///--------cargue de datos
+    $("#sankey_basic").html("");
+    graphSankey(global_ini);
+
+
+***REMOVED***
+
+
+function configSelectVistaSankey() {
+    $('input[name="tipoVistaSankey"]').change(function () {
+        getGraficoPerTipoVista();
 ***REMOVED***);
 
 ***REMOVED***
 
-function ObtenerGruposGastoPerPeriodo(anyo_actual) {
-    $("#divGastoCombos").empty();
+function configuraSelectDesglose() {
+    $('.enlace_tab').on('click', function () {
+        $('.enlace_tab').each(function (i, obj) {
+            $(obj).removeClass("active");
+    ***REMOVED***);
 
-    $.ajax({
-        contentType: "application/json; charset=utf-8",
-        url: "api/ServiciosPresupuestoNew/ObtenerGrupoGastoPerNombre",
-        type: "GET",
-        data: {
-            anyo: anyo_actual,
-            filtro: null
-    ***REMOVED***
-***REMOVED***).done(function (data) {
-        var result = data.gruposGasto;
-        var str_cad = "";
-        if (result != null) {
-            if (result.length > 0) {
-                for (var i = 0; i < result.length; i++) {
-                    str_cad += '<div class="form-group">';
-                    str_cad += '<div class="form-group subtitle">';
-                    if (i == 0) {
-                        str_cad += '<label for="funcionesId" style="color:black;float:left;">Seleccionar Grupos de Gasto</label>';
+        $(this).addClass("active");
+        var id = this.id;
+        if (id == "tab_perSector") {
+           
+            $("#divPerOrganismoTab").hide();
+            $("#ProyectosListado").hide();
+            $("#divPerSectorTab").show();
+            $("#divProyectosPerOrganismo").hide();
+            getSectoresXFuenteIni();
+            
 
-                ***REMOVED***
-                    
-                    str_cad += '<select class="form-select selectGasto" aria-label="Selecciona un grupo:" id="GrupoId_' + i + '">';
-                    for (var j = 0; j < result.length; j++) {
-                        if (j == 0) {
-                            str_cad += '<option value="">Seleccione un grupo de gasto</option>';
-                    ***REMOVED***
-                        str_cad += '<option value="' + result[j].label + '">' + result[j].label + '</option>';
-                ***REMOVED***
-                    str_cad += '</select>';
-                    str_cad += '</div>';
-                    str_cad += '</div>';
-            ***REMOVED***
-                $("#divGastoCombos").html(str_cad);
-                configuraSelectGrupos();
-                getGruposGastoIni();
-                
-        ***REMOVED***
+    ***REMOVED*** else {
+            ///xOrganismo
+            
+            $("#divPerOrganismoTab").show();
+            $("#divPerSectorTab").hide();
+            $("#divInstitucionesPerSector").hide();
+           
+            $("#divProyectosPerOrganismo").show();
+            getOrganismosXFuenteIni();
     ***REMOVED***
-***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
-        alert("Error " + xhr.status + "_" + thrownError);
+***REMOVED***);
+***REMOVED***
+
+function configuraSankeyTipoVista() {
+    $('#sankeyBtnCompacta').on('click', function () {
+        var data = global_ini;
+        $("#sankey_basic").html("");
+        graphSankey(global_ini);
+***REMOVED***);
+
+    $('#sankeyBtnExtendida').on('click', function () {
+
 ***REMOVED***);
 
 ***REMOVED***
 
-function getVersionesIniPerAnyo(anyo_actual) {
-    $("#versionBase").empty();
-    $("#versionComparacion").empty();
-    $.ajax({
-        contentType: "application/json; charset=utf-8",
-        url: "api/ServiciosPresupuestoNew/getVersionesPerAnyo",
-        type: "GET",
-        data: {
-            anyo: anyo_actual
-    ***REMOVED***
-***REMOVED***).done(function (data) {
-        var result = data.versiones;
-        var str_cad = "";
-        if (result != null) {
-            if (result.length > 0) {
-                for (var i = 0; i < result.length; i++) 
-                {
-                    str_cad += '<option value="' + result[i].codigoVersion + '">' + result[i].nombreVersion + '</option>';
-            ***REMOVED***
-                $("#versionBase").html(str_cad);
-                $("#versionComparacion").html(str_cad);
-                getVersionesIni();
-                
+function configuraSelectSectorSankey() {
 
-        ***REMOVED*** 
-    ***REMOVED***
-***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
-        alert("Error " + xhr.status + "_" + thrownError);
+    $('#filter_sector_sankey').on('change', function () {
+        var base_sel = $('#filter_sector_sankey option:selected').attr("value");
+        //sankey fuentes
+        ObtenerDatosPerSectores(anyo_actual, base_sel, "sector");
+        //-------------------------------------
 ***REMOVED***);
 
-    
 ***REMOVED***
 
-function getDataVersiones() {
-    var versiones = "";
-    $(".selVersiones").each(function () {
-        versiones += $(this).val() + ",";
-***REMOVED***);
-    versiones = versiones.replace(/,\s*$/, "");
-    
-    GetGrupoDeGastoPerVersiones(versiones, anyo_actual);
-***REMOVED***
 
-function configuraSelectVersiones() {
-    $('#versionBase,#versionComparacion').bind("change", function (event) {
-        getDataVersiones();
+function configuraSelectOrganismoSankey() {
+
+    $('#filter_organismo_sankey').on('change', function () {
+        var base_sel = $('#filter_organismo_sankey option:selected').attr("value");
+        //sankey fuentes
+
+        ObtenerDatosPerOrganismos(anyo_actual, base_sel, "organismo");
+        //-------------------------------------
 ***REMOVED***);
+
 ***REMOVED***
 
 
@@ -428,371 +191,105 @@ function getConsolidadoPeriodosNew(anyo_actual) {
         var result = data.infoConsolidado;
         var str_cad = "";
         if (result != null) {
-            if (result.length > 0) {
-                getStrBarrasPerPeriodo(result, anyo_actual);
-        ***REMOVED*** else {
-                $("#divDatosConsolidado").html("<span class='lblErrorNoData'>Información No Disponible</span>");
+             getStrBarrasPerPeriodo(result, anyo_actual);
+    ***REMOVED*** else {
 
-        ***REMOVED***
-            
-
+            $("#divDatosConsolidado").html("<span class='lblErrorNoData'>Información No Disponible</span>");
     ***REMOVED***
 ***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
         alert("Error " + xhr.status + "_" + thrownError);
 ***REMOVED***);
-
 
 ***REMOVED***
 
 function getStrBarrasPerPeriodo(result, anyo_actual) {
-    var cantxfila = 3;
-    var bandera = false;
-    var k = 0;
-    var str_cad = "";
-    str_cad += '<div class="row">';
-    str_cad += '<div class="col-md-12">';
-    str_cad += '<div class="card shadow border-0 card-entidad ">';
-    str_cad += '<div class="card-body">';
+    var total_aprobado = 0;
+    var total_ejecutado = 0;
+    var total_vigente = 0;
+   
+    if (result != null) {
+            total_aprobado += result.aprobado / 1000000;
+            total_ejecutado += result.ejecutado / 1000000;
+            total_vigente += result.vigente / 1000000;
 
+        global_vigente = total_vigente;
+        $("#lblValorAprobado").text("$ " + formatMoney(total_aprobado, 0, '.', ',').toString());
+        $("#lblValorEjecutado").text("$ " + formatMoney(total_ejecutado, 0, '.', ',').toString() + " M");
+        $("#lblValorVigente").text("$ " + formatMoney(total_vigente, 0, '.', ',').toString() + " M");
+        $("#lblEtiquetaMoneda").text("Millones de pesos dominicanos");
 
-    for (var i = 0; i < result.length; i++) {
-        var residuo = (i - 1) % cantxfila;
-        var periodo = result[i].periodo;
-        var aprobado = result[i].aprobado;
-        var ejecutado = result[i].ejecutado;
-        var vigente = result[i].vigente;
+***REMOVED***
 
-        var porcentaje_ejecutado = (Math.round((ejecutado / vigente) * 100, 1)).toString() + "%";
-        /*var porcentaje_vigente = (Math.round((vigente / vigente) * 100, 1)).toString() + "%";*/
+***REMOVED***
 
-        if (aprobado != null && aprobado != undefined) {
-            aprobado = (aprobado / 1000000).formatMoney(1, '.', ',').toString();
-    ***REMOVED***
-
-        if (ejecutado != null && ejecutado != undefined) {
-            ejecutado = (ejecutado / 1000000).formatMoney(1, '.', ',').toString();
-    ***REMOVED***
-
-        if (vigente != null && vigente != undefined) {
-            vigente = (vigente / 1000000).formatMoney(1, '.', ',').toString();
-    ***REMOVED***
-
-
-        if (periodo == anyo_actual) {
-            str_cad += '<div class="row">';
-            str_cad += '<div class="col-md-8 offset-3 prescontainer">';
-            str_cad += '<div class="ico_press">';
-            str_cad += '<img src="../img/svg-icons/ico_Lempiras.svg" />';
-            str_cad += '</div>';
-            str_cad += '<span class="h4">Año ' + result[i].periodo + '</span></br>';
-            str_cad += '<span class="h3">Presupuesto aprobado</span></br>';
-            str_cad += '<span class="h2">L ' + aprobado + ' Millones</span></br></br>';
-            str_cad += '<span class="h4">Presupuesto Vigente</span></br>';
-            str_cad += '<span class="h3">L ' + vigente + ' Millones</span></br>';
-            str_cad += '</div>';
-            str_cad += '</div>';
-            str_cad += '<div class="row">';
-            str_cad += '<div class="col-md-12">';
-            str_cad += '<div class="grapbarBorder">';
-            //str_cad += '<div class="h5 pgray text-center">Presupuesto Vigente: L ' + vigente + ' Millones  </div>';
-            str_cad += '<div class="row">';
-            str_cad += '<div class="col-md-3">';
-            str_cad += '<span class="h4 pgreen text-center ">Presupuesto Ejecutado</br><strong>L ' + ejecutado + ' Millones</strong></span>';
-            str_cad += '</div>';
-            str_cad += '<div class="col-md-9">';
-            str_cad += '<div class="progesscontainer pgreen">';
-            str_cad += '<div class="progress" style="height: 24px;">';
-            str_cad += '<div class="bg-proexec" role="progressbar" style="width: ' + porcentaje_ejecutado + ';" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> ' + porcentaje_ejecutado + '</div>';
-            str_cad += '</div>';
-            str_cad += '</div>';
-            str_cad += '</div>';
-            str_cad += '</div>';
-            
-            
-
-            //str_cad += '<div class="grapbar">';
-            //str_cad += '<div class="h6 pgray">Presupuesto Vigente: L ' + vigente + ' Millones</div>';
-            //str_cad += '<div class="progesscontainer pgray">';
-            //str_cad += '<div class="progress" style="height: 24px;">';
-            //str_cad += '<div class="bg-provig" role="progressbar" style="width: ' + porcentaje_vigente + ';" aria-valuemin="0" aria-valuemax="100"></div>';
-            //str_cad += '</div>';
-            //str_cad += '</div>';
-            //str_cad += '</div>';
-            str_cad += '</div>';
-            str_cad += '</div>';
-            str_cad += '</div>';
-    ***REMOVED***
-        else {
-            
-            if (residuo == 0) {
-                k = 0;
-                str_cad += '<div class="row justify-content-center">';
+function GetRecursosPorFinalidad(anyo) {
+    $("#divGraphPerFuncion").empty();
+        $.ajax({
+            contentType: "application/json; charset=utf-8",
+            url: "api/ServiciosPresupuestoNew/GetRecursosPerFinalidad",
+            type: "GET",
+            data: {
+                anyo: anyo
         ***REMOVED***
-
-            str_cad += '<div class="col-md-4 prescontainer oldpres">';
-            str_cad += '<span class="h5 oldpres"><strong>Año ' + result[i].periodo + '</strong></span></br>';
-            str_cad += '<span class="h5 oldpres"><strong>Presupuesto aprobado</strong></span></br>';
-            str_cad += '<span class="h5 oldpres"><strong>L ' + aprobado + ' Millones</strong></span></br>';
-
-            str_cad += '<div class="grapbar">';
-            str_cad += '<span class="h5 pgray"><strong>Presupuesto Vigente</strong></br><strong>L ' + vigente + ' Millones</strong></strong></br></br>';
-            str_cad += '<div class="h5 pgreen">Presupuesto Ejecutado</br><strong>L ' + ejecutado + ' Millones</strong></div></br>';
-                str_cad += '<div class="progesscontainer pgreen">';
-                str_cad += '<div class="progress" style="height: 24px;">';
-                str_cad += '<div class="bg-proexec" role="progressbar"  style="width: ' + porcentaje_ejecutado + ';" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="lblporc"> ' + porcentaje_ejecutado + '</span></div>';
-                str_cad += '</div>';
-                str_cad += '</div>';
-
-                //tr_cad += '<div class="grapbar">';
-                //str_cad += '<div class="progesscontainer pgray">';
-                //str_cad += '<div class="progress" style="height: 24px;">';
-                //str_cad += '<div class="bg-provig" role="progressbar" style="width: ' + porcentaje_vigente + ';" aria-valuemin="0" aria-valuemax="100"></div>';
-                //str_cad += '</div>';
-                //str_cad += '</div>';
-                //str_cad += '</div>';
-                str_cad += '</div>';
-                str_cad += '</div>';
-
-                k = k + 1;
-
-            if (k == cantxfila) {
-                str_cad += '</div>';
+    ***REMOVED***).done(function (data) {
+            if (data.infoRecursos != null) {
+                globales = data.infoRecursos;
+                loadRecursosPerFinalidad(globales);
         ***REMOVED***
-
-    ***REMOVED***
-
-        
-
-***REMOVED***
-
-    str_cad += '</div>';
-    str_cad += '</div>';
-    str_cad += '</div>';
-    str_cad += '</div>';
-    //str_cad += '</div>';
+    ***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+            alert("Error " + xhr.status + "_" + thrownError);
+    ***REMOVED***);
 
 
-    $("#divDatosConsolidado").html(str_cad);
 
-***REMOVED***
-
-function getConsolidadoPeriodos(anyo_actual) {
-    $.ajax({
-        contentType: "application/json; charset=utf-8",
-        url: "api/ServiciosPresupuestoNew/GetConsolidadoPeriodos",
-        type: "GET"
-***REMOVED***).done(function (data) {
-        var result = data.infoConsolidado;
-        var str_cad = "";
-        if (result != null) {
-            for (var i = 0; i < result.length; i++) {
-                var periodo = result[i].periodo;
-                var aprobado = result[i].aprobado;
-                var ejecutado = result[i].ejecutado;
-                var vigente = result[i].vigente;
-
-                var porcentaje_ejecutado = (Math.round((ejecutado / aprobado) * 100, 1)).toString() + "%";
-                var porcentaje_vigente = (Math.round((vigente / aprobado) * 100, 1)).toString() + "%";
-
-                if (aprobado != null && aprobado != undefined) {
-                    aprobado = (aprobado / 1000000).formatMoney(1, '.', ',').toString();
-            ***REMOVED***
-
-                if (ejecutado != null && ejecutado != undefined) {
-                    ejecutado = (ejecutado / 1000000).formatMoney(1, '.', ',').toString();
-            ***REMOVED***
-
-                if (vigente != null && vigente != undefined) {
-                    vigente = (vigente / 1000000).formatMoney(1, '.', ',').toString();
-            ***REMOVED***
-
-                if (i == result.length - 1) {
-                    str_cad += '<div class="prescontainer">';
-            ***REMOVED*** else {
-                    str_cad += '<div class="prescontainer-noborder">';
-            ***REMOVED***
-                
-                str_cad += '<div class="col-md-4">';
-                if (periodo == anyo_actual) {
-                    str_cad += '<div class="h5">Año ' + result[i].periodo + '</div>';
-                    str_cad += '<div class="h1">L ' + aprobado + ' Millones</div>';
-                    str_cad += '<div class="h4">Presupuesto aprobado</div>';
-            ***REMOVED*** else {
-                    str_cad += '<div class="h5 oldpres">Año ' + result[i].periodo + '</div>';
-                    str_cad += '<div class="h1 oldpres">L ' + aprobado + ' Millones</div>';
-                    str_cad += '<div class="h4 oldpres">Presupuesto aprobado</div>';
-
-            ***REMOVED***
-                
-                str_cad += '</div>';
-                str_cad += '<div class="col-md-8">';
-                str_cad += '<div class="grapbar">';
-                str_cad += '<div class="h6 ">Presupuesto Ejecutado: L ' + ejecutado + ' Millones</div>';
-                str_cad += '<div class="progress" style="height: 30px;">';
-                str_cad += '<div class="bg-proexec" role="progressbar" style="width: ' + porcentaje_ejecutado   + ';" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>';
-                str_cad += '</div>';
-                str_cad += '</div>';
-                str_cad += '<div class="grapbar">';
-                str_cad += '<div class="h6 progvig">Presupuesto Vigente: L ' + vigente + ' Millones</div>';
-                str_cad += '<div class="progress" style="height: 30px;">';
-                str_cad += '<div class="bg-provig" role="progressbar" style="width: ' + porcentaje_vigente + ';" aria-valuemin="0" aria-valuemax="100"></div>';
-                str_cad += '</div>';
-                str_cad += '</div>';
-                str_cad += '</div>';
-                str_cad += '</div>';
-        ***REMOVED***
-
-            $("#divDatosConsolidado").html(str_cad);
-
-    ***REMOVED***
-***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
-        alert("Error " + xhr.status + "_" + thrownError);
-***REMOVED***);
-***REMOVED***
-
-function configuraTabRecursos() {
-    $('#todosOrganismo').click(function () {
-        if ($(this).hasClass("bg-noactive")) {
-            $(this).removeClass("bg-noactive");
-            $(this).addClass("bg-active");
-            $("#todosNivel").removeClass("bg-active");
-            $("#todosNivel").addClass("bg-noactive");
-    ***REMOVED***
-        globales_org = [];
-        GetRecursosPorOrganismo(anyo_actual);
-       
-***REMOVED***);
-    $('#todosNivel').click(function () {
-        if ($(this).hasClass("bg-noactive")) {
-            $(this).removeClass("bg-noactive");
-            $(this).addClass("bg-active");
-            $("#todosOrganismo").removeClass("bg-active");
-            $("#todosOrganismo").addClass("bg-noactive");
-    ***REMOVED***
-        globales = [];
-        GetRecursosPorNivel(anyo_actual);
-***REMOVED***);
-***REMOVED***
-
-function GetGrupoDeFuncionesGob(periodos, annio,filtro) {
-    $.ajax({
-        contentType: 'application/json; charset=utf-8',
-        url: "api/ServiciosPresupuestoNew/ObtenerInfoPerFuncionesGob",
-        type: "GET",
-        data: {
-            filtro_periodos: periodos,
-            anyo: annio,
-            filtro_func:filtro
-
-    ***REMOVED***
-
-***REMOVED***).done(function (data) {
-        var result = data.infoRecursos;
-        loadBarChartFuncionesGob(result, "divGraphFuncionesGob");
-***REMOVED***).fail(function (handleError) {
-        // Some function
-        console.log(handleError);
-***REMOVED***);
-***REMOVED***
-
-function GetGrupoDeGasto(periodos,annio,grupos) {
-    $.ajax({
-        contentType: 'application/json; charset=utf-8',
-        url: "api/ServiciosPresupuestoNew/ObtenerInfoPerGrupoDeGasto",
-        type: "GET",
-        data: {
-            filtro_periodos: periodos,
-            anyo: annio,
-            filtro_gasto:grupos
-    ***REMOVED***
-
-***REMOVED***).done(function (data) {
-        var result = data.infoRecursos;
-        loadBarChartGrupoDeGasto(result, "divGraphGrupoGasto");
-***REMOVED***).fail(function (handleError) {
-        // Some function
-        console.log(handleError);
-***REMOVED***);
-***REMOVED***
-
-
-function GetRecursosPorNivel(anyo) {
-    $.ajax({
-        contentType: "application/json; charset=utf-8",
-        url: "api/ServiciosPresupuestoNew/GetRecursosPerNivel",
-        type: "GET",
-        data: {
-            anyo: anyo
-    ***REMOVED***
-***REMOVED***).done(function (data) {
-        if (data.infoRecursos != null) {
-            globales = data.infoRecursos;
-            $("#divGraphRecursosObj").empty();
-            $("#totalPresupuestoValue").html("L " + ((data.totalPresupuesto) / 1000000).formatMoney(1, '.', ',').toString() + " Millones");
-            loadRecursosPorObjetoNivel(data.infoRecursos, 0);
-    ***REMOVED***
-***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
-        alert("Error " + xhr.status + "_" + thrownError);
-***REMOVED***);
 
 ***REMOVED***
 
 
-function GetRecursosPorOrganismo(anyo) {
-    $.ajax({
-        contentType: "application/json; charset=utf-8",
-        url: "api/ServiciosPresupuestoNew/GetRecursosPerOrganismo",
-        type: "GET",
-        data: {
-            anyo: anyo
-    ***REMOVED***
-***REMOVED***).done(function (data) {
-        if (data.infoRecursos != null) {
-            globales_org = data.infoRecursos;
-            $("#divGraphRecursosObj").empty();
-            loadRecursosPorObjetoPerOrganismo(data.infoRecursos, 0);
-    ***REMOVED***
-***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
-        alert("Error " + xhr.status + "_" + thrownError);
-***REMOVED***);
-
-***REMOVED***
-
-//graficoTreemapRecursosxNiveles
-function assignColor(indice) {
-    var colores_default = ["#7CBAC9", "#FBC99A", "#57BEC3", "#F7B6A7"];
-    return colores_default[indice];
-***REMOVED***
-
-function assignColorBarras(item) {
-    var colores_default = ['#89CFE0', '#276D7E', '#FDD36A','#FBC99A'];
-    return colores_default[item];
-
-***REMOVED***
-
-function assignColorBarrasFunc(item) {
-    var colores_default = ['#ED6A60', '#7CBAC9', '#F7B6A7', '#DD89B9'];
-    return colores_default[item];
-
-***REMOVED***
-
-function assignColorBarrasVersiones(item) {
-    var colores_default = ['#7CBAC9', '#F7B6A7', '#FBC99A', '#ED6A60', '#F6B5C4','#42B073'];
-    return colores_default[item];
-
-***REMOVED***
-
-function random(min, max) {
-    return Math.floor((Math.random() * (max - min + 1)) + min);
-***REMOVED***
-
-function loadRecursosPorObjetoPerOrganismo(objData, nivel) {
+function loadRecursosPerFinalidad(objData) {
+    $("#divGraphPerFuncion").empty();
+    var titulo = "Otros";
+    var textoExpandir = "Clic para expandir";
+    var limitePorc = 0.03;
+    var data_filter = [];
     if (objData != undefined && objData != null) {
+          data_filter = objData;
+        
+        var sumaTotal = data_filter.reduce(function (acumulador, elemento) {
+            return acumulador + elemento.rawValueDouble;
+      ***REMOVED*** 0);
+        for (var i = 0; i < data_filter.length; i++) {
+            data_filter[i].labelGroup = data_filter[i].labelGroup.replace(",", " ");
+            data_filter[i].label = data_filter[i].label.replace(",", " ");
+
+            data_filter[i].rawValueDouble = parseFloat(data_filter[i].rawValueDouble);
+            data_filter[i].porcentaje = (((data_filter[i].rawValueDouble / sumaTotal) * 100)).toFixed(2);
+    ***REMOVED***
+
+        var paleta = {
+            colores: [
+                "#e6e6e6",
+                "#c4e5ee",
+                "#fcd96c",
+                "#3e5174",
+                "#ea5670",
+                "#999999",
+                "#1c717f",
+                "#64b5e2",
+                "#7fcbdc",
+                "#e7753d"
+            ]
+    ***REMOVED***;
+
+        function colorPorPosicion(posicion) {
+            return paleta.colores[posicion % paleta.colores.length];
+    ***REMOVED***
+
         var distintos = objData.map(item => item.labelGroup)
             .filter((value, index, self) => self.indexOf(value) === index);
 
-        var grafica = new d3plus.Treemap()
-            .select("#divGraphRecursosObj")
+        grafica = new d3plus.Treemap()
+            .select("#divGraphPerFuncion")
 
             .shapeConfig({
                 labelConfig: {
@@ -800,31 +297,17 @@ function loadRecursosPorObjetoPerOrganismo(objData, nivel) {
                     align: "center",
                     size: 6,
                     transform: "capitalize"
+              ***REMOVED***
+                fill: function (d, i) {
+                    return colorPorPosicion(i);
             ***REMOVED***
-                , fill: function (d, index) {
-
-                    var index_aux = distintos.indexOf(d.labelGroup);
-                    return assignColor(index_aux);
-            ***REMOVED***
-        ***REMOVED***)
-            .on("click", function (d) {
-                var current = grafica.depth();
-                $(".d3plus-viz-back").click(function () {
-                    var depth_aux = grafica.depth();
-                    console.log("btn_atras|| nivel " + nivel + " || depth" + depth_aux);
-                    $("#divGraphRecursosObj").attr("nivel", depth_aux.toString());
-                    if (depth_aux == nivel) {
-                        $("#divGraphRecursosObj").empty();
-                        loadRecursosPorObjetoPerOrganismo(globales_org, 0);
-                ***REMOVED***
-            ***REMOVED***);
         ***REMOVED***)
             .translate(function (d) {
                 var traduc_aux = d;
                 if (d === "Back" || d === "back") {
                     traduc_aux = "Atrás";
             ***REMOVED*** else if (d === "Click to Expand") {
-                    traduc_aux = "Clic para Expandir";
+                    traduc_aux = "Clic para expandir";
             ***REMOVED*** else if (d === "No Data Available") {
                     traduc_aux = "Información No Disponible";
             ***REMOVED*** else {
@@ -833,37 +316,34 @@ function loadRecursosPorObjetoPerOrganismo(objData, nivel) {
                 return traduc_aux;
         ***REMOVED***)
             .config({
-                data: objData,
-                groupBy: ["labelGroup", "label"],
+                data: data_filter,
+                groupBy: ["labelGroup","label"],
+                height: 500,
                 tooltipConfig: {
                     title: function (d) {
                         var depth_aux = grafica.depth();
-                        var longitud = 80;
-                        var cad = d.labelGroup;
+                        var longitud_tooltip = 80;
+                        var cad = '';
                         switch (depth_aux) {
-                            case 1:
+                            case 0:
                                 cad = d.labelGroup;
                                 break;
-                            case 2:
+                            case 1:
                                 cad = d.label;
                                 break;
-                            case 3:
-                                cad = d.label_inf;
-                                break;
-                            case 4:
-                                cad = d.label_nivel4;
-                                break;
                             default:
                                 cad = d.labelGroup;
                     ***REMOVED***
-
+                        if (cad.length > longitud_tooltip) {
+                            cad = cad.substr(0, longitud_tooltip) + "...";
+                    ***REMOVED***
                         return cad;
                   ***REMOVED***
                     tbody: [
                         [function (d) {
                             var valor = d["rawValueDouble"] / 1000000;
                             var cad = "";
-                            cad += "<span>Recursos asignados " + "L " + valor.formatMoney(0, '.', ',').toString() + " Millones" + "</span></br>";
+                            cad += "<span>Presupuesto Vigente " + "$ " + formatMoney(valor,0, '.', ',').toString() + " Millones" + "</span></br>";
                             return cad;
                     ***REMOVED***]
                     ]
@@ -873,1159 +353,1567 @@ function loadRecursosPorObjetoPerOrganismo(objData, nivel) {
             ***REMOVED***
         ***REMOVED***)
             .sum("rawValueDouble")
-            .depth(nivel)
+            .depth(0)
             .legend(false)
             .render();
 ***REMOVED***
 
 ***REMOVED***
 
-function loadRecursosPorObjetoNivel(objData, nivel) {
-    $("#todosNivel").text("Nivel");
-    if (objData != undefined && objData != null) {
+function ObtenerSectoresPeriodo(anyo_actual) {
 
-        var distintos = objData.map(item => item.labelGroup)
-            .filter((value, index, self) => self.indexOf(value) === index);
-        var grafica = new d3plus.Treemap()
-            .select("#divGraphRecursosObj")
-            
-            .shapeConfig({
-                labelConfig: {
-                    fontFamily: "'Montserrat', sans-serif",
-                    align: "center",
-                    size: 6,
-                    transform: "capitalize"
+    $.ajax({
+        contentType: "application/json; charset=utf-8",
+        url: "api/ServiciosPresupuestoNew/ObtenerSectoresPerNombre",
+        type: "GET",
+        data: {
+            anyo: anyo_actual
+    ***REMOVED***
+***REMOVED***).done(function (data) {
+        var result = data.sectores;
+        var str_cad = "";
+        var cad_sector = "";
+        if (result != null) {
+            var cant_sectores = result.length;
+            var maximo = 5;
+            if (result.length > 0) {
+
+                for (var i = 0; i < result.length; i++) {
+
+                    cad_sector += '<option value="' + result[i].idSector + '">' + result[i].label + '</option>';
             ***REMOVED***
-                , fill: function (d, index) {
 
-                    var index = distintos.indexOf(d.labelGroup);
-                    return assignColor(index);
+                $("#filter_sector_sankey").html(cad_sector);
+                configuraSelectSectorSankey();
+                if (global_tab == "sector" || global_tab=="") {
+                    getSectoresXFuenteIni();
+            ***REMOVED***
+
+
+        ***REMOVED***
+    ***REMOVED***
+***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+        alert("Error " + xhr.status + "_" + thrownError);
+***REMOVED***);
+
+***REMOVED***
+
+function getSectoresXFuenteIni() {
+    if ($("#filter_sector_sankey").children.length > 0) {
+        var base_sel = $("#filter_sector_sankey option:eq(0)").attr("value");
+        if (base_sel != null) {
+            $("#filter_sector_sankey option:eq(0)").attr("selected", "selected");
+            $("#filter_sector_sankey").val(base_sel);
+            ObtenerDatosPerSectores(anyo_actual, base_sel,"sector");
+
+    ***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+
+
+
+function ObtenerOrganismosPeriodo(anyo_actual) {
+
+    $.ajax({
+        contentType: "application/json; charset=utf-8",
+        url: "api/ServiciosPresupuestoNew/ObtenerOrganismosPerNombre",
+        type: "GET",
+        data: {
+            anyo: anyo_actual
+    ***REMOVED***
+***REMOVED***).done(function (data) {
+        var result = data.organismos;
+        var str_cad = "";
+        var cad_aux = "";
+        if (result != null) {
+            var organismos = result;
+            if (result.length > 0) {
+                for (var i = 0; i < result.length; i++) {
+                    cad_aux += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+            ***REMOVED***
+
+                $("#filter_organismo_sankey").html(cad_aux);
+
+                configuraSelectOrganismoSankey();
+                if (global_tab == "organismo") {
+                    getOrganismosXFuenteIni(anyo_actual);
+            ***REMOVED***
+ 
+
+        ***REMOVED***
+    ***REMOVED***
+***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+        alert("Error " + xhr.status + "_" + thrownError);
+***REMOVED***);
+
+***REMOVED***
+
+function getOrganismosXFuenteIni() {
+    if ($("#filter_organismo_sankey").children.length > 0) {
+        var base_sel = $("#filter_organismo_sankey option:eq(0)").attr("value");
+        if (base_sel != null) {
+            $("#filter_organismo_sankey option:eq(0)").attr("selected", "selected");
+            $("#filter_organismo_sankey").val(base_sel);
+            ObtenerDatosPerOrganismos(anyo_actual, base_sel, "organismo");
+
+    ***REMOVED***
+
+***REMOVED***
+***REMOVED***
+
+function ObtenerDatosPerOrganismos(anyo, opcion, tipo) {
+    global_tab = "organismo";
+    global_sankey = [];
+    miga_pan = "";
+    $("#divPagFichas").html("");
+    $("#divListado_proy").empty();
+    $("#sankey_basic").html(loader_proy);
+
+    $.ajax({
+        contentType: "application/json; charset=utf-8",
+        url: "api/ServiciosPresupuestoNew/ObtDistribucionBySectorFuentes",
+        type: "GET",
+        data: {
+            anyo: anyo,
+            opcion: opcion,
+            tipo: tipo
+      ***REMOVED***
+        success: function (result) {
+            if (result.status == true) {
+                var data = result.distribucionItemsByFuente;
+                var total_vigente = result.totalPresupuesto;
+                var total_ejecutado = result.totalEjecutado;
+                if (data.length > 0) {
+                    var datos_all = obtMatrizData(data, 3, 3);
+                    global_sankey = datos_all;
+                    //----------------------------------------------
+                    var filterAgrupados = agruparNodos(datos_all);
+                    global_agrupado = filterAgrupados;
+
+                    var tipoVista = $('input[name="tipoVistaSankey"]:checked').val();
+                    if (tipoVista == "extendida") {
+                        
+                        global_ini =
+                        {
+                            "links": global_sankey.links_nivel,
+                            "nodes": global_sankey.nodes_nivel,
+                            "cant_nodos": global_sankey.cant_nodos_nivel
+
+                    ***REMOVED***;
+                ***REMOVED*** else {
+                        global_ini =
+                        {
+                            "links": global_agrupado.links,
+                            "nodes": global_agrupado.nodes,
+                            "cant_nodos": global_agrupado.cant
+
+                    ***REMOVED***;
+                ***REMOVED***
+
                     
+
+
+                    if (total_vigente != null) {
+                        if (total_vigente > 0) {
+                            var porcentaje = ((total_ejecutado / total_vigente) * 100).toFixed(2);
+                    ***REMOVED***
+
+                        $("#totalSankeyPerOrganismo").html("$ " + formatMoney(total_vigente / 1, 2, '.', ',').toString() + " Millones");
+                        $("#PorcEjecPerOrganismo").html(porcentaje.toString() + "%");
+                ***REMOVED***
+                    $("#sankey_basic").html("");
+                    graphSankey(global_ini);
+                    configSelectVistaSankey();
+                    ObtenerDatosListadoPerProyectos(anyo_actual);
+
+            ***REMOVED*** else {
+                    $("#sankey_basic").html("");
+                    $("#divInstitucionesPerSector").hide();
+                    $(".wrap_sankey").hide();
             ***REMOVED***
+
+        ***REMOVED*** else {
+                alert("Error: " + result.message, function () {
+                    $("#sankey_basic").html("");
+                    $("#divInstitucionesPerSector").hide();
+                    $(".wrap_sankey").hide();
+            ***REMOVED***);
+        ***REMOVED***
+
+      ***REMOVED***
+        error: function (response) {
+            alert(response.responseText);
+      ***REMOVED***
+        failure: function (response) {
+            alert(response.responseText);
+    ***REMOVED***
+***REMOVED***);
+***REMOVED***
+
+function agruparNodos(objData) {
+    var flagAgrupador_n1 = false;
+    var flagAgrupador_n2 = false;
+    var flagAgrupador_n3 = false;
+    var flagAgrupador_n4 = false;
+    var valAgrupador_n2 = 0;
+    var valAgrupador_n1 = 0;
+    var valAgrupador_n3 = 0;
+    var valAgrupador_n4 = 0;
+    var obj_aux = { "links": [], "nodes": [] ***REMOVED***;
+    var obj_otros_aux = { "links": [], "nodes": [] ***REMOVED***;
+    var obj_otros_n2_aux = { "links": [], "nodes": [] ***REMOVED***;
+    var obj_otros_n3_aux = { "links": [], "nodes": [] ***REMOVED***;
+    var obj_otros_n4_aux = { "links": [], "nodes": [] ***REMOVED***;
+    var cantElemAdd = 0;
+    var numAgrupador = 0;
+    var cant = 0;
+    var cant_aux = 0;
+    //---------------------------
+    var porc_agrupamiento = 0;
+    var etiqueta_nivel_agrupado = "OTROS";
+    if (global_tab == "sector") {
+        porc_agrupamiento = porc_agrup_sectores;
+        etiqueta_nivel_agrupado = etiqueta_nivel_3_sectores;
+***REMOVED*** else {
+        porc_agrupamiento = porc_agrup_organismos;
+        etiqueta_nivel_agrupado = etiqueta_nivel3_organismos;
+***REMOVED***
+
+    
+
+    var nodeRows=objData.links.sort(function (a, b) {
+        var sourceA = a.source.toLowerCase();
+        var sourceB = b.source.toLowerCase();
+        if (sourceA < sourceB) {
+            return -1;
+    ***REMOVED***
+        if (sourceA > sourceB) {
+            return 1;
+    ***REMOVED***
+        return 0;
+***REMOVED***);
+
+    ///n3-----------------------------------------------------------------------
+    if (global_tab == "organismo") {
+        var contAgrupados = 0;
+        var filtrados_n3 = $.grep(nodeRows, function (obj) {
+            return obj.target.split('|')[0] === 'n3';
+    ***REMOVED***);
+        const suma_grupo_n3 = groupAndSum(filtrados_n3, ['source'], ['value']).sort((a, b) => Number(a.target) - Number(b.target));
+        //----------------------------------------------------------------------
+
+        nodeRows.forEach(function (row) {
+            var nivel = row.target.split('|')[0];
+            var origen = row.source;
+            var destino = row.target;
+            var valor = row.value;
+            var padre = row.rama;
+
+            var valor_grupo = $.grep(suma_grupo_n3, function (obj) {
+                return obj.source === origen;
+        ***REMOVED***);
+            var mayorValor = filtrados_n3.reduce(function (max, elemento) {
+                if (elemento.source === origen && elemento.value > max) {
+                    return elemento.value;
+            ***REMOVED*** else {
+                    return max;
+            ***REMOVED***
+          ***REMOVED*** -Infinity);
+
+            var porc = 0;
+            if (nivel == "n3") {
+                if (mayorValor > 0) {
+                    porc = Math.round((valor / mayorValor) * 100, 0);
+            ***REMOVED***
+
+                if (porc >= porc_agrup_organismos) {
+
+                    var obj_links_aux = { rama: padre, source: origen, target: destino, value: valor ***REMOVED***
+                    obj_aux.links.push(obj_links_aux);
+                    var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                    if (test_origen == false) {
+                        var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                            return obj.name === origen;
+                    ***REMOVED***);
+                        obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                        cant_aux += 1;
+                ***REMOVED***
+                    var test_destino = obj_aux.nodes.some(item => item.name === destino);
+                    if (test_destino == false) {
+                        var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                            return obj.name === destino;
+                    ***REMOVED***);
+                        obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                        cant_aux += 1;
+                ***REMOVED***
+
+            ***REMOVED*** else {
+                    ///--------------------------
+                    
+                    flagAgrupador_n3 = true;
+                    valAgrupador_n3 += row.value;
+                    var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                        return obj.name === destino;
+                ***REMOVED***);
+                    var otros_links_aux = {rama:padre, source: origen, target: destino, value: valor, id: nodo_espejo[0].id ***REMOVED***
+                    obj_otros_n3_aux.links.push(otros_links_aux);
+            ***REMOVED***
+
+
+        ***REMOVED*** else {
+                var obj_links_aux = { rama: padre, source: origen, target: destino, value: valor ***REMOVED***
+                obj_aux.links.push(obj_links_aux);
+                var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                if (test_origen == false) {
+                    var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                        return obj.name === origen;
+                ***REMOVED***);
+                    obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                    cant_aux += 1;
+            ***REMOVED***
+                var test_destino = obj_aux.nodes.some(item => item.name === destino);
+                if (test_destino == false) {
+                    var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                        return obj.name === destino;
+                ***REMOVED***);
+                    obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                    cant_aux += 1;
+            ***REMOVED***
+        ***REMOVED***
+    ***REMOVED***);
+        if (flagAgrupador_n3 == true) {
+                const suma_otros_n3 = groupAndSumWithCounts(obj_otros_n3_aux.links, ['source'], ['value']);
+                    var g1 = 0;
+            suma_otros_n3.forEach(function (row) {
+                        
+                        var origen = row.source;
+                        var destino = row.target;
+                        var new_destino = "";
+                        var valor = row.value;
+                        var conteoGrupo = row.count;
+
+                        if (conteoGrupo > 1) {
+                            var idsConcatenados = concatenarIds(obj_otros_n3_aux.links, origen);
+
+                            new_destino = "n3|" + etiqueta_nivel_agrupado + "|" + g1;
+
+                            var obj_links_aux = { source: origen, target: new_destino, value: valor ***REMOVED***
+                            obj_aux.links.push(obj_links_aux);
+
+                            var test_destino = obj_aux.nodes.some(item => item.name === new_destino);
+                            if (test_destino == false) {
+                                obj_aux.nodes.push({ name: new_destino, id: idsConcatenados ***REMOVED***);
+                                cant_aux += 1;
+                        ***REMOVED***
+
+
+                    ***REMOVED*** else {
+                            ///1 solo elemento incumple el criterio
+                            var link_espejo = $.grep(obj_otros_n3_aux.links, function (obj) {
+                                return obj.source === origen;
+                        ***REMOVED***);
+                            if (link_espejo.length > 0) {
+                                obj_aux.links.push(link_espejo[0]);
+                                var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                                if (test_origen == false) {
+                                    var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                        return obj.name === origen;
+                                ***REMOVED***);
+                                    obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                                    cant_aux += 1;
+                            ***REMOVED***
+                                var test_destino = obj_aux.nodes.some(item => item.name === link_espejo[0].target);
+                                if (test_destino == false) {
+                                    var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                        return obj.name === link_espejo[0].target;
+                                ***REMOVED***);
+                                    obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                                    cant_aux += 1;
+                            ***REMOVED***
+                        ***REMOVED***
+
+                    ***REMOVED***
+
+                        g1 += 1;
+                        //-----------------------------
+
+                ***REMOVED***)
+    ***REMOVED***
+
+***REMOVED*** else {
+        //tab_sectores
+        var filtrados_n4 = $.grep(nodeRows, function (obj) {
+            return obj.target.split('|')[0] === 'n4';
+    ***REMOVED***);
+        const suma_grupo_n4 = groupAndSum(filtrados_n4, ['source'], ['value']).sort((a, b) => Number(a.target) - Number(b.target));
+        //----------------------------------------------------------------------
+
+        nodeRows.forEach(function (row) {
+            var nivel = row.target.split('|')[0];
+            var origen = row.source;
+            var destino = row.target;
+            var valor = row.value;
+
+
+            var valor_grupo = $.grep(suma_grupo_n4, function (obj) {
+                return obj.source === origen;
+        ***REMOVED***);
+            var mayorValor = filtrados_n4.reduce(function (max, elemento) {
+                if (elemento.source === origen && elemento.value > max) {
+                    return elemento.value;
+            ***REMOVED*** else {
+                    return max;
+            ***REMOVED***
+          ***REMOVED*** -Infinity);
+
+            var porc = 0;
+            if (nivel == "n4") {
+                if (mayorValor > 0) {
+
+                    porc = Math.round((valor / mayorValor) * 100, 0);
+            ***REMOVED***
+
+                if (porc >= porc_agrup_sectores) {
+                    var obj_links_aux = { source: origen, target: destino, value: valor ***REMOVED***
+                    obj_aux.links.push(obj_links_aux);
+                    var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                    if (test_origen == false) {
+                        var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                            return obj.name === origen;
+                    ***REMOVED***);
+                        obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                        cant_aux += 1;
+                ***REMOVED***
+                    var test_destino = obj_aux.nodes.some(item => item.name === destino);
+                    if (test_destino == false) {
+                        var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                            return obj.name === destino;
+                    ***REMOVED***);
+                        obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                        cant_aux += 1;
+                ***REMOVED***
+
+            ***REMOVED*** else {
+                    ///--------------------------
+                    flagAgrupador_n4 = true;
+                    valAgrupador_n4 += row.value;
+                    var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                        return obj.name === destino;
+                ***REMOVED***);
+                    var otros_links_aux = { source: origen, target: destino, value: valor, id: nodo_espejo[0].id ***REMOVED***
+                    obj_otros_n4_aux.links.push(otros_links_aux);
+            ***REMOVED***
+        ***REMOVED*** else {
+                var obj_links_aux = { source: origen, target: destino, value: valor ***REMOVED***
+                obj_aux.links.push(obj_links_aux);
+                var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                if (test_origen == false) {
+                    var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                        return obj.name === origen;
+                ***REMOVED***);
+                    obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                    cant_aux += 1;
+            ***REMOVED***
+                var test_destino = obj_aux.nodes.some(item => item.name === destino);
+                if (test_destino == false) {
+                    var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                        return obj.name === destino;
+                ***REMOVED***);
+                    obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                    cant_aux += 1;
+            ***REMOVED***
+        ***REMOVED***
+    ***REMOVED***);
+        if (flagAgrupador_n4 == true) {
+            const suma_otros_n4 = groupAndSumWithCounts(obj_otros_n4_aux.links, ['source'], ['value']);
+            var g1 = 0;
+            suma_otros_n4.forEach(function (row) {
+                var origen = row.source;
+                var destino = row.target;
+                var new_destino = "";
+                var valor = row.value;
+                var conteoGrupo = row.count;
+
+
+                if (conteoGrupo > 1) {
+                    var idsConcatenados = concatenarIds(obj_otros_n4_aux.links, origen);
+
+                    new_destino = "n4|" + etiqueta_nivel_agrupado + "|" + g1;
+
+                    var obj_links_aux = { source: origen, target: new_destino, value: valor ***REMOVED***
+                    obj_aux.links.push(obj_links_aux);
+
+                    var test_destino = obj_aux.nodes.some(item => item.name === new_destino);
+                    if (test_destino == false) {
+                        obj_aux.nodes.push({ name: new_destino, id: idsConcatenados ***REMOVED***);
+                        cant_aux += 1;
+                ***REMOVED***
+
+            ***REMOVED*** else {
+                    ///1 solo elemento incumple el criterio
+                    var link_espejo = $.grep(obj_otros_n4_aux.links, function (obj) {
+                        return obj.source === origen;
+                ***REMOVED***);
+                    if (link_espejo.length > 0) {
+                        obj_aux.links.push(link_espejo[0]);
+                        var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                        if (test_origen == false) {
+                            var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                return obj.name === origen;
+                        ***REMOVED***);
+                            obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                            cant_aux += 1;
+                    ***REMOVED***
+                        var test_destino = obj_aux.nodes.some(item => item.name === link_espejo[0].target);
+                        if (test_destino == false) {
+                            var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                return obj.name === link_espejo[0].target;
+                        ***REMOVED***);
+                            obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                            cant_aux += 1;
+                    ***REMOVED***
+                ***REMOVED***
+
+            ***REMOVED***
+
+                g1 += 1;
+                //-----------------------------
+        ***REMOVED***)
+    ***REMOVED***
+***REMOVED***
+   var dataNew_agrupados =
+        {
+            "links": obj_aux.links,
+            "nodes": obj_aux.nodes,
+            "cant_nodos": cant_aux
+
+    ***REMOVED***;
+
+    return dataNew_agrupados;
+
+***REMOVED***
+
+function concatenarIds(linksArray, sourceValue) {
+    var idsConcatenados = "";
+    linksArray.forEach(function (link) {
+        if (link.source === sourceValue) {
+            if (link.id != undefined && link.id!="") {
+                idsConcatenados += link.id + "*";
+        ***REMOVED***
+    ***REMOVED***
+***REMOVED***);
+
+    idsConcatenados = idsConcatenados.slice(0, -1);
+    return idsConcatenados;
+***REMOVED***
+
+function graphSankey(datos) {
+    $("#btnAtras").hide();
+    $(".wrap_sankey").show();
+    var units = "millones";
+
+    var sizeAux = recalcularSize(datos);
+    var margin = sizeAux.margin;
+    var width = sizeAux.width;
+    var height = sizeAux.height;
+
+    var format = function (d) {
+        return "RD $ " + formatMoney(d,2, '.', ',') + " " + units;
+  ***REMOVED***
+        color = d3.scale.category20();
+
+    // append the svg canvas to the page
+    var svg = d3.select("#sankey_basic").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    draw(datos);
+
+    // Set the sankey diagram properties
+    function draw(obj_info) {
+        var link = svg.append("g");
+        var nodes = svg.append("g");
+        var path;
+        var sizeAux = recalcularSize(obj_info);
+        var margin = sizeAux.margin;
+        var width = sizeAux.width;
+        var height = sizeAux.height;
+
+        var sankey = d3.sankey()
+            .nodeWidth(30)
+            .nodePadding(25)
+            .size([width, height]);
+
+        path = sankey.link();
+        var graph = obj_info;
+        var nodeMap = {***REMOVED***;
+        graph.nodes.forEach(function (x) {
+            nodeMap[x.name] = x;
+    ***REMOVED***);
+        graph.links = graph.links.map(function (x) {
+            return {
+                source: nodeMap[x.source],
+                target: nodeMap[x.target],
+                value: x.value
+        ***REMOVED***
+    ***REMOVED***);
+
+        sankey
+            .nodes(graph.nodes)
+            .links(graph.links)
+            .layout(32);
+
+        sankey.relayout();
+
+        // add in the links
+        link.selectAll(".link")
+            .data(graph.links)
+            .enter().append("path")
+            .attr("class", "link")
+            .transition().duration(750)
+            .attr("d", path)
+            .style("stroke-width", function (d) {
+                return Math.max(1, d.dy);
+        ***REMOVED***)
+            //.sort(function (a, b) { return b.dy - a.dy; ***REMOVED***);
+
+        // add the link titles
+        link.selectAll(".link").append("title")
+            .text(function (d) {
+                var vec_origen = d.source.name.split("|");
+                var vec_destino = d.target.name.split("|");
+                var origen = d.source.name;
+                var destino = d.target.name;
+                if (vec_origen.length > 0) {
+                    origen = vec_origen[1];
+            ***REMOVED***
+                if (vec_destino.length > 0) {
+                    destino = vec_destino[1];
+            ***REMOVED***
+                var cadena_aux = origen + " --> " + destino + "\n" + format(d.value);
+                
+
+                return cadena_aux;
+
+        ***REMOVED***);
+        sankey.relayout();
+
+
+
+        // add in the nodes
+        var node = nodes.selectAll(".node")
+            .data(graph.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
         ***REMOVED***)
             .on("click", function (d) {
-                var current = grafica.depth();
-                if (current == 1) {
-                    $("#todosNivel").text("Entidad");
+                var prueba = d;
+                if (d3.event.defaultPrevented) return;
+                var selection = d.name;
+                var vecSelect = d.name.split("|");
+                var vec_Origen = d.targetLinks;
 
-            ***REMOVED*** else {
-                    $("#todosNivel").text("Nivel");
+                if (vecSelect[0] == "n1") {
+                    var filteredData = $.grep(global_sankey.links, function (element) {
+                        return element.source === selection;
+                ***REMOVED***);
+                    if (filteredData.length > 0) {
+                        update(d);
+                ***REMOVED***
+
+
+            ***REMOVED*** else if (vecSelect[0] == "n3") {
+                    if (global_tab == "organismo") {
+                        //proyectos de inversion--navega hacia el perfil de proy
+                        var idProy = d.id;
+
+                        if (idProy != undefined) {
+                            if (idProy != "") {
+                                var vecProy = idProy.split("*");
+                                if (vecProy.length > 1) {
+                                    var idProyBuscador = idProy.replace(/\*/g, ',');
+                                    var enlace_url = "../../BusquedaResultados?Id=" + idProyBuscador;
+                                    window.open(enlace_url, "_blank");
+                            ***REMOVED*** else {
+                                    var enlace_url = "../../perfilProyecto/" + idProy;
+                                    window.open(enlace_url, "_blank");
+                            ***REMOVED***
+                        ***REMOVED***
+                     ***REMOVED*** 
+                ***REMOVED*** else {
+                        var filteredData = $.grep(global_sankey.links, function (element) {
+                            return element.source === selection;
+                    ***REMOVED***);
+                        if (filteredData.length > 0) {
+                            update(d);
+                    ***REMOVED***
+                ***REMOVED***
+
+
+            ***REMOVED*** else if (vecSelect[0] == "n4") {
+                        if (global_tab == "sector") {
+                            //proyectos de inversion--navega hacia el perfil
+                            var idProy = d.id;
+                            if (idProy != undefined) {
+                                if (idProy != "") {
+                                    var vecProy = idProy.split("*");
+                                    if (vecProy.length > 1) {
+                                        var idProyBuscador = idProy.replace(/\*/g, ',');
+                                        var enlace_url = "../../BusquedaResultados?Id=" + idProyBuscador;
+                                        window.open(enlace_url, "_blank");
+                                ***REMOVED*** else {
+                                        var enlace_url = "../../perfilProyecto/" + idProy;
+                                        window.open(enlace_url, "_blank");
+                                ***REMOVED***
+                            ***REMOVED***
+                        ***REMOVED*** 
+                    ***REMOVED*** else {
+                            var idProy = d.id;
+                            
+                            var filteredData = $.grep(global_sankey.links, function (element) {
+                                return element.source === selection;
+                        ***REMOVED***);
+                            if (filteredData.length > 0) {
+                                update(d);
+                        ***REMOVED***
+                    ***REMOVED***
+
+          ***REMOVED*** else {
+                       
+                        var filteredData = $.grep(global_sankey.links, function (element) {
+                            return element.source === selection;
+                    ***REMOVED***);
+                        if (filteredData.length > 0) {
+                            update(d);
+                    ***REMOVED***
             ***REMOVED***
+        ***REMOVED***)
+            
 
-                $(".d3plus-viz-back").click(function () {
-                    var depth_aux = grafica.depth();
-                    //console.log("btn_atras|| nivel " + nivel + " || depth" + depth_aux);
-                    $("#divGraphRecursosObj").attr("nivel", depth_aux.toString());
-                    if (depth_aux == 1) {
-                        $("#todosNivel").text("Entidad");
+        // add the rectangles for the nodes
+        node.append("rect")
+            .attr("height", function (d) {
+                
+                if (d.dy < 3) {
+                    return 3;
+            ***REMOVED*** else {
+                    return d.dy;
+            ***REMOVED***
+        ***REMOVED***)
+            .attr("width", function (d) {
+                return sankey.nodeWidth();
+        ***REMOVED***)
+            .style("fill", function (d) {
+                return d.color = color(d.name.replace(/ .*/, ""));
+        ***REMOVED***)
+            .style("stroke", function (d) {
+                return d3.rgb(d.color).darker(2);
+
+        ***REMOVED***)
+            .append("title")
+            .text(function (d) {
+                vec_nodo = d.name.split("|");
+                var texto_nodo = d.name;
+                if (vec_nodo.length > 0) {
+                    texto_nodo = vec_nodo[1];
+            ***REMOVED***
+                return texto_nodo + "\n" + format(d.value);
+                
+
+        ***REMOVED***);
+
+        // add in the title for the nodes
+        node.append("text")
+            .attr("x", -6)
+            .attr("y", function (d) { return d.dy / 2; ***REMOVED***)
+            .attr("dy", ".2em")
+            .style("font-size", "10px")
+            .attr("text-anchor", "end")
+            .attr("transform", null)
+            .html(function (d) {
+                var x = d3.select(this).attr("x");
+                var y = d3.select(this).attr("dy");
+                var longitud = 60;
+                vec_nodo = d.name.split("|");
+                var texto_nodo = d.name;
+                if (vec_nodo.length > 0) {
+                    var cad_aux = vec_nodo[1];
+                    var tipo = vec_nodo[0];
+                    var new_cad = "";
+                    if (cad_aux.length > longitud) {
+                        new_cad = cad_aux.substring(0, longitud) + "...";
 
                 ***REMOVED*** else {
-                        $("#todosNivel").text("Nivel");
+                        new_cad = cad_aux;
                 ***REMOVED***
 
-                    if (depth_aux == nivel) {
-                        $("#divGraphRecursosObj").empty();
-                        loadRecursosPorObjetoNivel(globales, 0);
+            ***REMOVED***
+                var t = "<tspan>" + new_cad + "</tspan>";
+                return new_cad;
+                
+        ***REMOVED***)
+            .filter(function (d) { return d.x < width / 4; ***REMOVED***)
+            .attr("x", 6 + sankey.nodeWidth())
+            .attr("text-anchor", "start");
+        sankey.relayout();
+
+
+***REMOVED***
+
+    // the function for moving the nodes
+    function dragmove(d) {
+        d3.select(this).attr("transform",
+            "translate(" + (
+                d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
+            ) + "," + (
+                d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
+            ) + ")");
+        sankey.relayout();
+        link.attr("d", path);
+***REMOVED***
+
+    function obtenerHijosYnietosConMismaRama(source, data,nivel) {
+        var resultado = [];
+
+        // Función recursiva para obtener los hijos y nietos del nodo source
+        function obtenerHijosYnietosRecursivo(nodo) {
+            var hijos = data.filter(function (item) {
+                var vecOrigen = item.source.split("|");
+                if (vecOrigen.length > 0) {
+                    if (vecOrigen[0] != "n1") {
+                        return item.source === nodo.target && item.rama === source; // Filtrar por mismo valor de rama
+                ***REMOVED*** else {
+                        return item.source === nodo.target
+                ***REMOVED***
+            ***REMOVED***
+                
+                
+        ***REMOVED***);
+
+            hijos.forEach(function (hijo) {
+                // Agregar el hijo actual al resultado
+                resultado.push(hijo);
+                if (!hijo.target.startsWith(nivel)) {
+                    // Llamar recursivamente para obtener los nietos del hijo actual
+                    obtenerHijosYnietosRecursivo(hijo);
+            ***REMOVED***
+                
+        ***REMOVED***);
+    ***REMOVED***
+
+        // Buscar los hijos y nietos del nodo source
+        obtenerHijosYnietosRecursivo({ target: source, rama: source.rama ***REMOVED***); // Pasar el valor de rama del nodo inicial
+
+        return resultado;
+***REMOVED***
+
+
+
+    function obtenerHijosYnietos(source, data, nivel) {
+        var filtrados = data.filter(function (item) {
+            return item.source === source;
+    ***REMOVED***);
+
+        var resultado = [];
+        filtrados.forEach(function (filtrado) {
+            resultado.push(filtrado);
+            if (!filtrado.target.startsWith(nivel)) {
+                resultado = resultado.concat(obtenerHijosYnietos(filtrado.target, data,nivel));
+        ***REMOVED***
+    ***REMOVED***);
+
+        return resultado;
+***REMOVED***
+
+
+
+
+    function update(d) {
+
+        var numAgrupador = 5;
+        var cantElemAdd = 0;
+        
+        var flagAgrupador = false;
+        var flagAgrupador_n3 = false;
+        var flagAgrupador_n4 = false;
+        var valAgrupador = 0;
+        var valAgrupador_n3 = 0;
+        var valAgrupador_n4 = 0;
+
+        var selection = d.name;
+        var vecSelect = selection.split("|");
+
+        var cant_padres = d.targetLinks.length;
+        var cant_hijos = d.sourceLinks.length;
+        var cant = global_ini.cant_nodos;
+        var cant_aux = 0;
+        var opcion = 3;
+        //------------------------------------------------
+        var obj_otros_n3_aux = { "links": [], "nodes": [] ***REMOVED***;
+        var obj_otros_n4_aux = { "links": [], "nodes": [] ***REMOVED***;
+        var porc_agrupamiento = 0;
+        var etiqueta_nivel_agrupado = "OTROS";
+        if (global_tab == "sector") {
+            porc_agrupamiento = porc_agrup_sectores;
+            etiqueta_nivel_agrupado = etiqueta_nivel_3_sectores;
+    ***REMOVED*** else {
+            porc_agrupamiento = porc_agrup_organismos;
+            etiqueta_nivel_agrupado = etiqueta_nivel3_organismos;
+    ***REMOVED***
+        //-----------------------------------------------
+
+        if (selection != null && selection != "") {
+            var obj_aux = { "links": [], "nodes": [] ***REMOVED***;
+            var test_miga = miga_pan.includes(selection);
+            if (test_miga == false) {
+                miga_pan += selection + "*";
+        ***REMOVED***
+            
+            const regex = /\*+$/g;
+            const result = miga_pan.replace(regex, '');
+            if (opcion == 3) {
+                cant = 0;
+
+
+                if (vecSelect[0] == "n1") {
+                    var filteredData = obtenerHijosYnietosConMismaRama(selection, global_sankey.links, "n4|");
+                    filteredData.forEach(function (row) {
+                        var nivel = row.target.split('|')[0];
+                        var origen = row.source;
+                        var destino = row.target;
+                        var valor = row.value;
+
+                        var obj_links_aux = { source: origen, target: destino, value: valor ***REMOVED***
+                        obj_aux.links.push(obj_links_aux);
+                        var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                        if (test_origen == false) {
+                            var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                return obj.name === origen;
+                        ***REMOVED***);
+                            obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                            cant_aux += 1;
+                    ***REMOVED***
+                        var test_destino = obj_aux.nodes.some(item => item.name === destino);
+                        if (test_destino == false) {
+                            var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                return obj.name === destino;
+                        ***REMOVED***);
+                            obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                            cant_aux += 1;
+                    ***REMOVED***
+
+
+
+                ***REMOVED***);
+
+            ***REMOVED*** else if (vecSelect[0] == "n3") {
+                    //ultimo nivel
+                    var vecMiga = result.split("*");
+                    if (vecMiga.length > 0) {
+                        vecMiga.forEach(function (item) {
+                            var obj_miga = item;
+                            if (obj_miga.split("|")[0] == "n2") {
+                                var filteredData = $.grep(global_sankey.links, function (element) {
+                                    return element.target === selection && element.source === item;
+                            ***REMOVED***);
+                                if (global_tab == "organismo") {
+                                    //va a proyectos
+                                    const suma_grupo_n3 = groupAndSum(filteredData, ['source'], ['value']).sort((a, b) => Number(a.target) - Number(b.target));
+                                    //----------------------------------------------------------------------
+
+                                    filteredData.forEach(function (row) {
+                                        var nivel = row.target.split('|')[0];
+                                        var origen = row.source;
+                                        var destino = row.target;
+                                        var valor = row.value;
+
+                                        var valor_grupo = $.grep(suma_grupo_n3, function (obj) {
+                                            return obj.source === origen;
+                                    ***REMOVED***);
+                                        var mayorValor = filteredData.reduce(function (max, elemento) {
+                                            if (elemento.source === origen && elemento.value > max) {
+                                                return elemento.value;
+                                        ***REMOVED*** else {
+                                                return max;
+                                        ***REMOVED***
+                                      ***REMOVED*** -Infinity);
+
+                                        var porc = 0;
+                                        if (mayorValor > 0) {
+
+                                            porc = Math.round((valor / mayorValor) * 100, 0);
+                                    ***REMOVED***
+
+                                        if (porc >= porc_agrup_organismos) {
+                                            var obj_links_aux = { source: origen, target: destino, value: valor ***REMOVED***
+                                            obj_aux.links.push(obj_links_aux);
+                                            var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                                            if (test_origen == false) {
+                                                var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                                    return obj.name === origen;
+                                            ***REMOVED***);
+                                                obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                                                cant_aux += 1;
+                                        ***REMOVED***
+                                            var test_destino = obj_aux.nodes.some(item => item.name === destino);
+                                            if (test_destino == false) {
+                                                var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                                    return obj.name === destino;
+                                            ***REMOVED***);
+                                                obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                                                cant_aux += 1;
+                                        ***REMOVED***
+
+                                    ***REMOVED*** else {
+                                            ///--------------------------
+                                            flagAgrupador_n3 = true;
+                                            valAgrupador_n3 += row.value;
+                                            var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                                return obj.name === destino;
+                                        ***REMOVED***);
+                                            var otros_links_aux = { source: origen, target: destino, value: valor, id: nodo_espejo[0].id ***REMOVED***
+                                            obj_otros_n3_aux.links.push(otros_links_aux);
+                                    ***REMOVED***
+
+                                ***REMOVED***);
+                                    if (flagAgrupador_n3 == true) {
+                                        const suma_otros_n3 = groupAndSumWithCounts(obj_otros_n3_aux.links, ['source'], ['value']);
+                                        var g1 = 0;
+                                        suma_otros_n3.forEach(function (row) {
+
+                                            var origen = row.source;
+                                            var destino = row.target;
+                                            var new_destino = "";
+                                            var valor = row.value;
+                                            var conteoGrupo = row.count;
+
+
+                                            if (conteoGrupo > 1) {
+                                                var idsConcatenados = concatenarIds(obj_otros_n3_aux.links, origen);
+
+                                                new_destino = "n3|" + etiqueta_nivel_agrupado + "|" + g1;
+
+                                                var obj_links_aux = { source: origen, target: new_destino, value: valor ***REMOVED***
+                                                obj_aux.links.push(obj_links_aux);
+
+                                                var test_destino = obj_aux.nodes.some(item => item.name === new_destino);
+                                                if (test_destino == false) {
+                                                    obj_aux.nodes.push({ name: new_destino, id: idsConcatenados ***REMOVED***);
+                                                    cant_aux += 1;
+                                            ***REMOVED***
+
+
+                                        ***REMOVED*** else {
+                                                ///1 solo elemento incumple el criterio
+                                                var link_espejo = $.grep(obj_otros_n3_aux.links, function (obj) {
+                                                    return obj.source === origen;
+                                            ***REMOVED***);
+                                                if (link_espejo.length > 0) {
+                                                    obj_aux.links.push(link_espejo[0]);
+                                                    var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                                                    if (test_origen == false) {
+                                                        var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                                            return obj.name === origen;
+                                                    ***REMOVED***);
+                                                        obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                                                        cant_aux += 1;
+                                                ***REMOVED***
+                                                    var test_destino = obj_aux.nodes.some(item => item.name === link_espejo[0].target);
+                                                    if (test_destino == false) {
+                                                        var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                                            return obj.name === link_espejo[0].target;
+                                                    ***REMOVED***);
+                                                        obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                                                        cant_aux += 1;
+                                                ***REMOVED***
+                                            ***REMOVED***
+
+                                        ***REMOVED***
+
+                                            g1 += 1;
+                        //-----------------------------
+
+                                            
+
+                                    ***REMOVED***)
+
+                                ***REMOVED***
+
+                            ***REMOVED***
+
+
+                        ***REMOVED*** else {
+
+                                //clic en 3 nivel directamente sin haber pasado antes x nivel 2 --> va a detalle de 4 nivel
+                                var nodeRows = global_sankey.links.filter(a => a.source == selection);
+                                const suma_grupo_n4 = groupAndSum(nodeRows, ['source'], ['value']).sort((a, b) => Number(a.target) - Number(b.target));
+                                //----------------------------------------------------------------------
+
+                                nodeRows.forEach(function (row) {
+                                    var nivel_destino = row.target.split('|')[0];
+                                    var origen = row.source;
+                                    var destino = row.target;
+                                    var valor = row.value;
+
+                                    var valor_grupo = $.grep(suma_grupo_n4, function (obj) {
+                                        return obj.source === origen;
+                                ***REMOVED***);
+                                    var mayorValor = nodeRows.reduce(function (max, elemento) {
+                                        if (elemento.source === origen && elemento.value > max) {
+                                            return elemento.value;
+                                    ***REMOVED*** else {
+                                            return max;
+                                    ***REMOVED***
+                                  ***REMOVED*** -Infinity);
+
+                                    var porc = 0;
+                                    if (nivel_destino == "n4") {
+                                        //proyectos de inversion
+                                        if (mayorValor > 0) {
+
+                                            porc = Math.round((valor / mayorValor) * 100, 0);
+                                    ***REMOVED***
+
+                                        if (porc >= porc_agrup_sectores) {
+                                            var obj_links_aux = { source: origen, target: destino, value: valor ***REMOVED***
+                                            obj_aux.links.push(obj_links_aux);
+                                            var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                                            if (test_origen == false) {
+                                                var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                                    return obj.name === origen;
+                                            ***REMOVED***);
+                                                obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                                                cant_aux += 1;
+                                        ***REMOVED***
+                                            var test_destino = obj_aux.nodes.some(item => item.name === destino);
+                                            if (test_destino == false) {
+                                                var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                                    return obj.name === destino;
+                                            ***REMOVED***);
+                                                obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                                                cant_aux += 1;
+                                        ***REMOVED***
+
+                                    ***REMOVED*** else {
+                                            ///--------------------------
+                                            flagAgrupador_n4 = true;
+                                            valAgrupador_n4 += row.value;
+                                            var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                                return obj.name === destino;
+                                        ***REMOVED***);
+                                            var otros_links_aux = { source: origen, target: destino, value: valor, id: nodo_espejo[0].id ***REMOVED***
+                                            obj_otros_n4_aux.links.push(otros_links_aux);
+
+
+                                    ***REMOVED***
+                                ***REMOVED***
+
+                            ***REMOVED***);
+                                if (flagAgrupador_n4 == true) {
+                                    const suma_otros_n4 = groupAndSumWithCounts(obj_otros_n4_aux.links, ['source'], ['value']);
+                                    var g1 = 0;
+                                    suma_otros_n4.forEach(function (row) {
+                                        var origen = row.source;
+                                        var destino = row.target;
+                                        var new_destino = "";
+                                        var valor = row.value;
+                                        var conteoGrupo = row.count;
+
+                                        if (conteoGrupo > 1) {
+                                            var idsConcatenados = concatenarIds(obj_otros_n4_aux.links, origen);
+
+                                            new_destino = "n4|" + etiqueta_nivel_agrupado + "|" + g1;
+
+                                            var obj_links_aux = { source: origen, target: new_destino, value: valor ***REMOVED***
+                                            obj_aux.links.push(obj_links_aux);
+
+                                            var test_destino = obj_aux.nodes.some(item => item.name === new_destino);
+                                            if (test_destino == false) {
+                                                obj_aux.nodes.push({ name: new_destino, id: idsConcatenados ***REMOVED***);
+                                                cant_aux += 1;
+                                        ***REMOVED***
+
+
+                                    ***REMOVED*** else {
+                                            ///1 solo elemento incumple el criterio
+                                            var link_espejo = $.grep(obj_otros_n4_aux.links, function (obj) {
+                                                return obj.source === origen;
+                                        ***REMOVED***);
+                                            if (link_espejo.length > 0) {
+                                                obj_aux.links.push(link_espejo[0]);
+                                                var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                                                if (test_origen == false) {
+                                                    var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                                        return obj.name === origen;
+                                                ***REMOVED***);
+                                                    obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                                                    cant_aux += 1;
+                                            ***REMOVED***
+                                                var test_destino = obj_aux.nodes.some(item => item.name === link_espejo[0].target);
+                                                if (test_destino == false) {
+                                                    var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                                        return obj.name === link_espejo[0].target;
+                                                ***REMOVED***);
+                                                    obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                                                    cant_aux += 1;
+                                            ***REMOVED***
+                                        ***REMOVED***
+
+                                    ***REMOVED***
+
+                                        g1 += 1;
+                                        //-----------------------------
+                                ***REMOVED***)
+
+                            ***REMOVED***
+
+                        ***REMOVED***
+
+                    ***REMOVED***)
+                ***REMOVED***
+
+            ***REMOVED*** else if (vecSelect[0] != "n4") {
+
+                    var nodeRows = [];
+                    var vecMiga = result.split("*");
+                    if (vecMiga.length > 1) {
+                        nodeRows = $.grep(global_sankey.links, function (element) {
+                            return element.rama === vecMiga[0] && element.source === selection;
+                    ***REMOVED***);
+                ***REMOVED*** else {
+                        nodeRows = $.grep(global_sankey.links, function (element) {
+                            return element.source === selection;
+                    ***REMOVED***);
                 ***REMOVED***
                     
-            ***REMOVED***);
-        ***REMOVED***)
-            .translate(function (d) {
-                var traduc_aux = d;
-                if (d === "Back" || d === "back") {
-                    traduc_aux = "Atrás";
-            ***REMOVED*** else if (d === "Click to Expand") {
-                    traduc_aux = "Clic para expandir por Instituciones";
-            ***REMOVED*** else if (d === "No Data Available") {
-                    traduc_aux = "Información No Disponible";
-            ***REMOVED***else {
-                    traduc_aux = d;
-            ***REMOVED***
-                return traduc_aux;
-        ***REMOVED***)
-            .config({
-                data:objData,
-                groupBy: ["labelGroup", "label"],
-                tooltipConfig: {
-                    title: function (d) {
-                        var depth_aux = grafica.depth();
-                        var longitud = 80;
-                        var cad = d.labelGroup;
-                        switch (depth_aux) {
-                            case 1:
-                                cad = "Entidad: " + d.label;
-                                break;
-                            default:
-                                cad = d.labelGroup;
-                    ***REMOVED***
+                    if (nodeRows.length > 0) {
+                        nodeRows.forEach(function (row) {
+                            var origen = row.source;
+                            var destino = row.target;
+                            var valor = row.value;
 
-                        return cad;
-                  ***REMOVED***
-                    tbody: [
-                        [function (d) {
-                            var valor = d["rawValueDouble"] / 1000000;
-                            var cad = "";
-                            cad += "<span>Recursos asignados " + "L " + valor.formatMoney(0, '.', ',').toString() + " Millones" + "</span></br>";
-                            return cad;
-                    ***REMOVED***]
-                    ]
-              ***REMOVED***
-                yConfig: {
-                    title: "",
-            ***REMOVED***
-        ***REMOVED***)
-            .sum("rawValueDouble")
-            .depth(nivel)
-            .legend(false)
-            .render();
-***REMOVED***
+                            var test_links = obj_aux.links.some(item => item.source === origen && item.target === destino);
+                            if (test_links == false) {
+                                var obj_links_aux = { source: origen, target: destino, value: valor ***REMOVED***
+                                obj_aux.links.push(obj_links_aux);
+                        ***REMOVED***
 
-***REMOVED***
+                            var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                            if (test_origen == false) {
+                                var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                    return obj.name === origen;
+                            ***REMOVED***);
+                                obj_aux.nodes.push({ name: origen, id: nodo_espejo[0].id ***REMOVED***);
+                                cant_aux += 1;
+                        ***REMOVED***
+                            var test_destino = obj_aux.nodes.some(item => item.name === destino);
+                            var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                return obj.name === destino;
+                        ***REMOVED***);
+                            if (test_destino == false) {
+                                obj_aux.nodes.push({ name: destino, id: nodo_espejo[0].id ***REMOVED***);
+                                cant_aux += 1;
+                        ***REMOVED***
 
 
-function loadBarChartFuncionesGob(objData, divContenedor) {
-    $("#" + divContenedor).empty();
-    if (objData != undefined && objData != null) {
-            var distintos = objData.map(item => item.periodo)
-            .filter((value, index, self) => self.indexOf(value) === index);
+                    ***REMOVED***);
 
-        var ordenado = objData.sort(function (a, b) {
-            if (a.periodo > b.periodo)
-                return 1;
-            if (a.periodo < b.periodo)
-                return -1;
-            return 0;
-    ***REMOVED***);
-       
-
-        new d3plus.BarChart()
-            .select("#" + divContenedor)
-            .translate(function (d) {
-                var traduc_aux = d;
-                if (d === "Back" || d === "back") {
-                    traduc_aux = "Atrás";
-            ***REMOVED*** else if (d === "Click to Expand") {
-                    traduc_aux = "Clic para Expandir";
-            ***REMOVED*** else if (d === "No Data Available") {
-                    traduc_aux = "Información No Disponible";
-            ***REMOVED*** else {
-                    traduc_aux = d;
-            ***REMOVED***
-                return traduc_aux;
-        ***REMOVED***)
-            .config({
-                data: ordenado,
-                groupBy: "periodo",
-                legendPosition: 'bottom',
-                x: "labelGroup",
-                y: "rawValue",
-                shapeConfig: {
-                    fill: function (d, index) {
-                        var valor_aux = 0;
-                        if (d.periodo != null && d.periodo != "") {
-                            valor_aux = parseInt(d.periodo);
-                    ***REMOVED***
-
-                        var index = distintos.indexOf(valor_aux);
-                        return assignColorBarrasFunc(index);
-
-                  ***REMOVED***
-                    labelConfig: {
-                        fontFamily: "'Montserrat', sans-serif",
-                        align: "center",
-                        size: 6,
-                        transform: "capitalize",
-                        fontMin: 4,
-                        fontMax: 8
                 ***REMOVED***
 
-              ***REMOVED***
-                tooltipConfig: {
-                    title: function (d) {
-                        return d["labelGroup"] + " " + d["periodo"];
-                  ***REMOVED***
-                    tbody: [
-                        [function (d) {
-                            var cad_aux = "L " + d["rawValue"].formatMoney(1, '.', ',').toString() + " Millones";
-                            if (d["porcentaje"] != undefined && d["porcentaje"] != null) {
-                                cad_aux = "L " + d["rawValue"].formatMoney(1, '.', ',').toString() + " Millones" + " <strong>(" + d["porcentaje"].formatMoney(1, '.', ',').toString() + " %)</strong>";
-                        ***REMOVED***
-                            return cad_aux;
-
-                    ***REMOVED***]
-                    ]
-              ***REMOVED***
-                yConfig: {
-                    title: "Presupuesto aprobado en Millones de L",
-                    //ticks: [],
-                    scale: "pow",
-                    tickFormat: function (d) {
-                        var auxiliar = d.formatMoney(0, '.', ',').toString();
-                        return (auxiliar);
-                  ***REMOVED***
-                    xConfig: {
-                        title: "Funciones de gobierno",
-                        fontsize: "2px",
-                        size: "2px"
-                  ***REMOVED***
-                    legend: false
-            ***REMOVED***
-            ***REMOVED***
-            )
-            .barPadding(0)
-            .groupPadding(12)
-            .render();
-***REMOVED***
-
-
-***REMOVED***
-
-
-
-function loadBarChartGrupoDeGasto(objData, divContenedor) {
-    var distintos = objData.map(item => item.periodo)
-        .filter((value, index, self) => self.indexOf(value) === index);
-
-    $("#" + divContenedor).empty();
-    if (objData != undefined && objData != null) {
-        var ordenado = objData.sort(function (a, b) {
-            if (a.periodo > b.periodo)
-                return 1;
-            if (a.periodo < b.periodo)
-                return -1;
-            return 0;
-    ***REMOVED***);
-        new d3plus.BarChart()
-            .select("#" + divContenedor)
-            .translate(function (d) {
-                var traduc_aux = d;
-                if (d === "Back" || d === "back") {
-                    traduc_aux = "Atrás";
-            ***REMOVED*** else if (d === "Click to Expand") {
-                    traduc_aux = "Clic para Expandir";
-            ***REMOVED*** else if (d === "No Data Available") {
-                    traduc_aux = "Información No Disponible";
             ***REMOVED*** else {
-                    traduc_aux = d;
-            ***REMOVED***
-                return traduc_aux;
-        ***REMOVED***)
-            .config({
-                data: ordenado,
-                groupBy: "periodo",
-                legendPosition: 'bottom',
-                 x: "labelGroup",
-                 y: "rawValue",
-                shapeConfig: {
-                    fill: function (d, index) {
-                        var valor_aux = 0;
-                        if (d.periodo != undefined && d.periodo != null && d.periodo != "") {
-                            valor_aux = parseInt(d.periodo);
-                    ***REMOVED***
-                        var index = distintos.indexOf(valor_aux);
-                        return assignColorBarras(index);
+                    var filteredData = obtenerHijosYnietosConMismaRama(selection, global_sankey.links, "n3|");
+                    filteredData.forEach(function (row) {
+                        var nivel = row.target.split('|')[0];
+                        var origen = row.source;
+                        var destino = row.target;
+                        var valor = row.value;
 
-                  ***REMOVED***
-                    labelConfig: {
-                        fontFamily: "'Montserrat', sans-serif",
-                        align: "center",
-                        size: 6,
-                        transform: "capitalize",
-                        fontMin: 4,
-                        fontMax: 8
+                        var obj_links_aux = { source: origen, target: destino, value: valor ***REMOVED***
+                        obj_aux.links.push(obj_links_aux);
+                        var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                        if (test_origen == false) {
+                            var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                return obj.name === origen;
+                        ***REMOVED***);
+                            obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                            cant_aux += 1;
+                    ***REMOVED***
+                        var test_destino = obj_aux.nodes.some(item => item.name === destino);
+                        if (test_destino == false) {
+                            var nodo_espejo = $.grep(global_sankey.nodes, function (obj) {
+                                return obj.name === destino;
+                        ***REMOVED***);
+                            obj_aux.nodes.push({ name: nodo_espejo[0].name, id: nodo_espejo[0].id ***REMOVED***);
+                            cant_aux += 1;
+                    ***REMOVED***
+
+
+
+                ***REMOVED***);
+
+            ***REMOVED***
+
+                    
+                    if (cant_aux > cant) {
+                        cant = cant_aux;
                 ***REMOVED***
 
-              ***REMOVED***
-                tooltipConfig: {
-                    title: function (d) {
-                        return d["labelGroup"] + " " + d["periodo"];
-                  ***REMOVED***
-                    tbody: [
-                        [function (d) {
+                    var dataNew =
+                    {
+                        "links": obj_aux.links,
+                        "nodes": obj_aux.nodes,
+                        "cant_nodos": cant
 
-                            var cad_aux = "L " + d["rawValue"].formatMoney(1, '.', ',').toString() + " Millones";
-                            if (d["porcentaje"] != undefined && d["porcentaje"] != null) {
-                                cad_aux = "L " + d["rawValue"].formatMoney(1, '.', ',').toString() + " Millones " + "<strong>(" + d["porcentaje"].formatMoney(1, '.', ',').toString() + " %) </strong>";
-                        ***REMOVED***
-                           
-                            return cad_aux;
-                    ***REMOVED***]
-                    ]
-              ***REMOVED***
-                yConfig: {
-                    title: "Presupuesto Ejecutado en Millones de L",
-                    //ticks: [],
-                    scale: "pow",
-                    tickFormat: function (d) {
-                        var auxiliar = d.formatMoney(0, '.', ',').toString();
-                        return (auxiliar);
+                ***REMOVED***;
+                    global_ini = dataNew;
+
+
+
+                    $("#sankey_basic").empty();
+                    graphSankey(dataNew);
+
+
+                    $("#btnAtras").click(function () {
+                        $("#sankey_basic").empty();
+                        miga_pan = "";
+                        getGraficoPerTipoVista();
                         
+                ***REMOVED***)
+                    $("#btnAtras").show();
+
+
+        ***REMOVED*** else {
+                if (cant_hijos == 0) {
+                    var nodeRows = global_sankey.links.filter(a => a.source == selection);
+                    if (nodeRows.length > 0) {
+
+                        var obj_aux = { "links": [], "nodes": [] ***REMOVED***;
+                        obj_aux =
+                        {
+                            "links": global_sankey.links_nivel,
+                            "nodes": global_sankey.nodes_nivel,
+
+                    ***REMOVED***;
+
+                        nodeRows.forEach(function (row) {
+                            var origen = row.source;
+                            var destino = row.target;
+                            var valor = row.value;
+                            var obj_links_aux = { source: origen, target: destino, value: valor ***REMOVED***
+                            obj_aux.links.push(obj_links_aux);
+                            var test_origen = obj_aux.nodes.some(item => item.name === origen);
+                            if (test_origen == false) {
+                                obj_aux.nodes.push({ name: origen ***REMOVED***);
+                                cant_aux += 1;
+                        ***REMOVED***
+                            var test_destino = obj_aux.nodes.some(item => item.name === destino);
+                            if (test_destino == false) {
+                                obj_aux.nodes.push({ name: destino ***REMOVED***);
+                                cant_aux += 1;
+                        ***REMOVED***
+                    ***REMOVED***);
+
+                        if (cant_aux > cant) {
+                            cant = cant_aux;
+                    ***REMOVED***
+
+                        var dataNew =
+                        {
+                            "links": obj_aux.links,
+                            "nodes": obj_aux.nodes,
+                            "cant_nodos": cant
+
+                    ***REMOVED***;
+
+                        global_ini = dataNew;
+
+                        $("#sankey_basic").empty();
+                        graphSankey(dataNew);
                 ***REMOVED***
-              ***REMOVED***
-                xConfig: {
-                    title: "Grupo de Gasto",
-                    fontsize: "2px",
-                    size: "2px"
-              ***REMOVED***
-                legend: false
-        ***REMOVED***)
-            .barPadding(0)
-            .groupPadding(12)
-            .render();
-***REMOVED***
+            ***REMOVED***
+                else {
+                    miga_pan = "";
+                    $("#sankey_basic").empty();
+                    var obj_aux =
+                    {
+                        "links": global_sankey.links_nivel,
+                        "nodes": global_sankey.nodes_nivel,
+                        "cant_nodos": cant
+                ***REMOVED***;
+                    graphSankey(obj_aux);
+
+            ***REMOVED***
+        ***REMOVED***
 
 
-***REMOVED***
 
-function GetEntidadesPresupuesto() {
-    $.ajax({
-        url: "api/ServiciosPresupuestoNew/GetEntidadesPlanNacional",
-        type: "GET",
-        data: null,
-
-***REMOVED***).done(function (data) {
-        var entidadPlanNacional = document.getElementById("entidadesPlanNacional");
-        var htmlList = '';
-        for (var i = 0; i < data.length; i++) {
-           htmlList = htmlList + "<li class='list-group-item'><a href=" + '/PerfilEntidad?codEntidad=' + data[i].codEntidad + ">" + "<span>" + data[i].nombre + "</span><i class='material-icons md-18'>chevron_right</i></a></li>";
     ***REMOVED***
-        if (data.length > 0)
-            htmlList = htmlList + "<li class='list-group-item'><a href='/BusquedaResultados?Type=Entidad'>" + "<span>Ver todos</span><i class='material-icons md-18'>chevron_right</i></a></li>";
-        entidadPlanNacional.innerHTML = htmlList;
-***REMOVED***).fail(function (handleError) {
-        // Some function
-        console.log(handleError);
-***REMOVED***);
+
 ***REMOVED***
 
-function GetEntidadesPresupuestoNoAlcaldias() {
-    $.ajax({
-        url: "api/ServiciosPresupuestoNew/GetEntidadesPlanNacionalNoAlcaldias",
-        type: "GET",
-        data: null,
+    //------------------------------------
 
-***REMOVED***).done(function (data) {
-        var entidadPlanNacional = document.getElementById("entidadesPlanNacional");
-        var htmlList = '';
-        for (var i = 0; i < data.length; i++) {
-            htmlList = htmlList + "<li class='list-group-item'><a href=" + '/PerfilEntidad?codEntidad=' + data[i].codEntidad + ">" + "<span>" + data[i].nombre + "</span><i class='material-icons md-18'>chevron_right</i></a></li>";
+
+
+***REMOVED***
+
+function recalcularSize(datos) {
+    var height_aux = 0;
+    var width_aux = 1050;
+    var units = "millones";
+    var cant_elementos = 8;
+    var factor_multiplicador = 25;
+    if (datos != undefined && datos != null) {
+        var cant_aux = datos.cant_nodos;
+        if (cant_aux != undefined) {
+            if (parseInt(cant_aux) < cant_elementos) {
+                factor_multiplicador = 20;
+        ***REMOVED*** else {
+                cant_elementos = cant_aux;
+        ***REMOVED***
+    ***REMOVED*** else {
+            cant_elementos = (datos.nodes.length/1);
+
     ***REMOVED***
-        if (data.length > 0)
-            htmlList = htmlList + "<li class='list-group-item'><a href='/BusquedaResultados?Type=Entidad'>" + "<span>Ver todos</span><i class='material-icons md-18'>chevron_right</i></a></li>";
-        entidadPlanNacional.innerHTML = htmlList;
-***REMOVED***).fail(function (handleError) {
-        // Some function
-        console.log(handleError);
-***REMOVED***);
+***REMOVED***
+
+    let isMobile = window.matchMedia("only screen and (max-width: 765px)").matches;
+
+    if ($(window).innerWidth() <= width || isMobile) {
+        width_aux = 1050;
+
+***REMOVED*** else {
+        width_aux = $(".container").innerWidth();
+***REMOVED***
+
+    var margin = { top: 10, right: 10, bottom: 10, left: 10 ***REMOVED***,
+        width = width_aux - 20 - margin.left - margin.right,
+        height = ((cant_elementos) * factor_multiplicador) - margin.top - margin.bottom;
+
+    return alturas = { "margin": margin, width: width, height: height ***REMOVED***;
 ***REMOVED***
 
 
-
-function ObtenerDatosListadoPerGasto(periodo) {
+function ObtenerDatosListadoPerEntidad(periodo, tipo) {
+    $("#divProyectosPerOrganismo").hide();
+  
     $("#divPagFichas").html("");
     $("#divListado").empty();
     $("#divListado").html(loader_proy);
-    //var periodo = $('#filtro_desglose_periodo  li.selected').attr('codigo');
+    $("#divInstitucionesPerSector").show();
+    var sectorSel = $("#filter_sector_sankey option:selected").val();
+    var organismoSel = $("#filter_organismo_sankey option:selected").val();
+    var id = "";
+    if (tipo == "sector") {
+        id = sectorSel;
+***REMOVED*** else {
+        id = organismoSel;
+***REMOVED***
     if (periodo != undefined && periodo != "") {
-        var params_usu = { "annio": periodo ***REMOVED***;
+        if (sectorSel != undefined && sectorSel != "") {
+            var params_usu = { "annio": periodo, "id": id ,"tipo":tipo***REMOVED***;
 
-        $.ajax({
-            type: 'GET',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            url: "/api/ServiciosPresupuestoNew/GetInfograficoGasto",
-            cache: false,
-            data: params_usu,
-            success: function (result) {
-                if (result.status == true) {
-                    var data = result.infograficoPerGasto;
-                    if (data != null) {
-                        
-                        if (data.length > 0) {
-                            globales_gasto = data;
-                            var pagina_actual = 1;
-                            var ini_data = ((pagina_actual - 1) * cantXPagina);
-                            var fin_data = (pagina_actual * cantXPagina) - 1;
-                            var data_pagina = jQuery.grep(globales_gasto, function (n, i) {
-                                return (i >= ini_data && i <= fin_data);
-                        ***REMOVED***);
-                            var arr = data_pagina;
-                            getEstructuraInfografico(data_pagina, pagina_actual);
+            $.ajax({
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "/api/ServiciosPresupuestoNew/GetInfograficoPerEntidad",
+                cache: false,
+                data: params_usu,
+                success: function (result) {
+                    if (result.status == true) {
+                        var data = result.infograficoPerEntidad;
+                        if (data != null) {
+                            if (data.length > 0) {
+                                globales_entidad = data;
+                                var pagina_actual = 1;
+                                var ini_data = ((pagina_actual - 1) * cantXPagina);
+                                var fin_data = (pagina_actual * cantXPagina) - 1;
+                                var data_pagina = arr = jQuery.grep(globales_entidad, function (n, i) {
+                                    return (i >= ini_data && i <= fin_data);
+                            ***REMOVED***);
+                                getEstructuraInfograficoPerEntidad(data_pagina, 1);
+                        ***REMOVED*** else {
+                                $("#divListado").html("<span class='lblErrorNoData'>Información No Disponible</span>");
+                        ***REMOVED***
                     ***REMOVED*** else {
                             $("#divListado").html("<span class='lblErrorNoData'>Información No Disponible</span>");
                     ***REMOVED***
+
+
                 ***REMOVED*** else {
-                        $("#divListado").html("<span class='lblErrorNoData'>Información No Disponible</span>");
+                        alert("Error: " + result.message, function () {
+
+                    ***REMOVED***);
                 ***REMOVED***
-                    
 
-            ***REMOVED*** else {
-                    alert("Error: " + result.message, function () {
-
-                ***REMOVED***);
+              ***REMOVED***
+                error: function (response) {
+                    alert(response.responseText);
+              ***REMOVED***
+                failure: function (response) {
+                    alert(response.responseText);
             ***REMOVED***
-
-          ***REMOVED***
-            error: function (response) {
-                alert(response.responseText);
-          ***REMOVED***
-            failure: function (response) {
-                alert(response.responseText);
-        ***REMOVED***
-    ***REMOVED***);
-***REMOVED***
-
-***REMOVED***
-
-function ObtenerDatosListadoPerEntidad(periodo) {
-    $("#divPagFichas").html("");
-    $("#divListado").empty();
-    $("#divListado").html(loader_proy);
-    if (periodo != undefined && periodo != "") {
-        var params_usu = { "annio": periodo ***REMOVED***;
-
-        $.ajax({
-            type: 'GET',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            url: "/api/ServiciosPresupuestoNew/GetInfograficoPerEntidad",
-            cache: false,
-            data: params_usu,
-            success: function (result) {
-                if (result.status == true) {
-                    var data = result.infograficoPerGasto;
-                    if (data != null) {
-                        if (data.length > 0) {
-                            globales_entidad = data;
-                            var pagina_actual = 1;
-                            var ini_data = ((pagina_actual - 1) * cantXPagina);
-                            var fin_data = (pagina_actual * cantXPagina) - 1;
-                            var data_pagina = jQuery.grep(globales_entidad, function (n, i) {
-                                return (i >= ini_data && i <= fin_data);
-                        ***REMOVED***);
-                            var arr = data_pagina;
-                            getEstructuraInfograficoPerEntidad(data_pagina,1);
-                    ***REMOVED*** else {
-                            $("#divListado").html("<span class='lblErrorNoData'>Información No Disponible</span>");
-                    ***REMOVED***
-                ***REMOVED*** else {
-                        $("#divListado").html("<span class='lblErrorNoData'>Información No Disponible</span>");
-                ***REMOVED***
-
-
-            ***REMOVED*** else {
-                    alert("Error: " + result.message, function () {
-
-                ***REMOVED***);
-            ***REMOVED***
-
-          ***REMOVED***
-            error: function (response) {
-                alert(response.responseText);
-          ***REMOVED***
-            failure: function (response) {
-                alert(response.responseText);
-        ***REMOVED***
-    ***REMOVED***);
-***REMOVED***
-
-***REMOVED***
-
-
-function seteaListado() {
-    $('#accordion .collapse').removeClass("in");
-    $("#divGraphRecursosObj").hide();
-    $("#divListadoRecursosObje").show();
-    $(".boxCompoDesglose").hide();
-    $(".boxTituloListado").show();
-    $("#sankey_basic").empty();
-    //seleccionar tab abierto
-    var lstNiveles = $("#migapanlistado").val();
-    var arrayNiv = lstNiveles.split(",");
-    var nom_nivel = "";
-    var longitud = arrayNiv.length;
-
-    if (longitud > 0) {
-
-        for (var i = 0; i < longitud; i++) {
-            nom_nivel = arrayNiv[i].toUpperCase();
-            switch (i) {
-                case 0:
-                    var id = $(".nivel1[gasto='" + nom_nivel + "']").attr("id");
-                    var obj = $("#" + id);
-                    if (obj.length > 0) {
-                        obj.addClass("in");
-                ***REMOVED***
-                    break;
-                case 1:
-                    var id = $(".nivel2[entidad='" + nom_nivel + "']").attr("id");
-                    var obj = $("#" + id);
-                    if (obj.length > 0) {
-                        obj.addClass("in");
-                ***REMOVED***
-
-                    break;
-                case 2:
-                    var id = $(".nivel3[actividad='" + nom_nivel + "']").attr("id");
-                    var obj = $("#" + id);
-                    if (obj.length > 0) {
-                        obj.addClass("in");
-                ***REMOVED***
-                    break;
-                default:
-                    $('#accordion .collapse').removeClass("in");
-                // code block
-                //$('#accordion .collapse').removeClass("in");
-        ***REMOVED***
-
+        ***REMOVED***);
     ***REMOVED***
 
-
-
-***REMOVED*** else {
-        $('#accordion .collapse').removeClass("in");
 ***REMOVED***
-
 
 ***REMOVED***
 
-function monedaSimbolo(codigo) {
-    var moneda = [];
-    moneda["USD"] = "USD$";
-    moneda["HND"] = "L";
+function getEstructuraInfograficoPerEntidad(datos, pagina) {
 
-    return moneda[codigo];
-***REMOVED***
-
-function getEstructuraInfografico(datos, pagina) {
-    var i_aux = 0;
-    var j_aux = 0;
-    var k_aux = 0;
-    //var l = 0;
-    var total_avance = 0;
-    var total_presupuesto = 0;
-    var periodo_aux = 0;
-    var total_porc_ejecucion = 0;
-    var total_porc_ejecutado = 0;
-
-    total_avance = globales_gasto.reduce((sum, currentValue) => {
-        return sum + currentValue.avance;
-  ***REMOVED*** 0);
-
-    total_presupuesto = globales_gasto.reduce((sum, currentValue) => {
-        return sum + currentValue.presupuesto;
-  ***REMOVED*** 0);
-
-    total_porc_ejecucion = globales_gasto.reduce((sum, currentValue) => {
-        return sum + currentValue.porc_ejecutado;
-  ***REMOVED*** 0);
-
-    total_porc_ejecutado = total_presupuesto == 0 ? 0 : total_avance * 100 / total_presupuesto;
-
-
-    var html_str = '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
+    var html_list = '<div class="card-entidades-group">';
     for (var i = 0; i < datos.length; i++) {
-        if (datos[i].periodos != undefined) {
-            if (datos[i].periodos.length > 0) {
-                periodo_aux = datos[i].periodos[0];
-        ***REMOVED***
-    ***REMOVED***
-        var nomCollapse = "collapseOne_" + i_aux.toString() + "_" + j_aux.toString();
-        var nomHeading = "headingOne_" + i_aux.toString() + "_" + j_aux.toString();
-        //total_avance += datos[i].avance;
-        //total_presupuesto += datos[i].presupuesto;
-        var gasto_nom = datos[i].nombre;
         var porc_ejecutado = 0;
         if (datos[i].presupuesto > 0) {
-            porc_ejecutado = (datos[i].avance / datos[i].presupuesto) * 100;
-    ***REMOVED***
-
-        if (gasto_nom.split("|").length > 0) {
-            gasto_nom = gasto_nom.split("|")[1];
-    ***REMOVED***
-
-        html_str += '<div class="panel panel-default ">';
-        html_str += '<div class="panel-heading" role="tab" id="' + nomHeading + '">';
-        html_str += '<div class="panel-title w-88">';
-        html_str += '<a role="button" data-toggle="collapse" data-parent="#accordion" href="#' + nomCollapse + '" aria-expanded="true" aria-controls="' + nomCollapse + '">';
-        html_str += '<div class="head">';
-        html_str += '<div class="data1 mainData">';
-        html_str += '<span class="labelTit">Grupo de gasto</span>';
-        html_str += '<span class="td1">' + gasto_nom + '</span>';
-        html_str += '</div>';
-        html_str += '<div class="data1">';
-        html_str += '<span class="labelTit">Presupuesto Vigente</span>';
-        if (datos[i].presupuesto / 1000000 > 1) {
-            html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].presupuesto / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-    ***REMOVED*** else {
-            html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].presupuesto / 1).formatMoney(0, '.', ',').toString() + ' </span>';
-    ***REMOVED***
-
-        html_str += '</div>';
-        html_str += '<div class="data1">';
-        html_str += '<span class="labelTit">Ejecutado</span>';
-        if (datos[i].avance / 1000000 > 1) {
-            html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].avance / 1000000).formatMoney(1, '.', ',').toString() + ' Millones </span>';
-    ***REMOVED*** else {
-            html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].avance / 1).formatMoney(0, '.', ',').toString() + '  </span>';
-    ***REMOVED***
-
-        html_str += '</div>';
-
-        html_str += '<div class="data1">';
-        html_str += '<span class="labelTit">% Ejecución</span>';
-        html_str += '<span class="td1">' + porc_ejecutado.formatMoney(1, '.', ',').toString() + '</span>';
-        html_str += '</div>';
-        //------------------
-        html_str += '<h6 class="btnPerfil badge bg-light text-dark"><i class="material-icons md-18">info_outline</i> Ver Detalle</h6>';
-        //------------------
-        html_str += '</div >';
-
-        html_str += '</a>';
-        html_str += '</div>';
-
-
-        html_str += '</div>';
-
-        html_str += '<div id = "' + nomCollapse + '" class="panel-collapse collapse nivel1" role = "tabpanel" aria - labelTitledby="' + nomHeading + '" item = "' + datos[i].nombre.toUpperCase() + '" >';
-        html_str += '<div class="panel-body">';
-
-        //NIVEL 2
-        var vec_entidad = datos[i].detalles;
-        for (var j = 0; j < vec_entidad.length; j++) {
-            var nomNivel2 = "accordion_l2_" + i_aux.toString() + "_" + j_aux.toString();
-            var headNivel2 = "headLevel2_" + i_aux.toString() + "_" + j_aux.toString();
-            var panelHijo2 = "c2_" + j_aux.toString() + "_" + k_aux.toString();
-            var nomHeadLevel3 = "headLevel3_" + j_aux.toString() + "_" + k_aux.toString();
-            var entidad_nom = vec_entidad[j].nombre;
-            if (entidad_nom.split("|").length > 0) {
-                entidad_nom = entidad_nom.split("|")[1];
-        ***REMOVED***
-            var porc_ejecutado = 0;
             if (datos[i].presupuesto > 0) {
-                porc_ejecutado = (vec_entidad[j].avance / vec_entidad[j].presupuesto) * 100;
+                porc_ejecutado = (datos[i].avance / datos[i].presupuesto) * 100;
         ***REMOVED***
-
-            html_str += '<div class="panel-group nivel22" id="' + nomNivel2 + '" role="tablist" aria-multiselectable="true">';
-            html_str += '<div class="panel panel-default">';
-            //heading
-            html_str += '<div class="panel-heading" role="tab" id="' + headNivel2 + '">';
-            html_str += '<div class="panel-title w-88">';
-            html_str += '<a role = "button" data-toggle="collapse" data-parent="#' + nomNivel2 + '" href = "#' + panelHijo2 + '" aria-expanded="true" aria-controls="' + nomCollapse + '">';
-            html_str += '<div class="head">';
-
-            html_str += '<div class="data1 mainData">';
-            html_str += '<span class="labelTit">Institución</span>';
-            html_str += '<span class="td1p">' + entidad_nom + '</span>';
-            html_str += '</div>';
-
-            html_str += '<div class="data1">';
-            html_str += '<span class="labelTit">Presupuesto Vigente</span>';
-            if (vec_entidad[j].presupuesto / 1000000 > 1) {
-                html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_entidad[j].presupuesto / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-        ***REMOVED*** else {
-                html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_entidad[j].presupuesto / 1).formatMoney(0, '.', ',').toString() + '</span>';
-        ***REMOVED***
-            html_str += '</div>';
-
-            html_str += '<div class="data1">';
-            html_str += '<span class="labelTit">Ejecutado</span>';
-            if (vec_entidad[j].avance / 1000000 > 1) {
-                html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_entidad[j].avance / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-        ***REMOVED*** else {
-                html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_entidad[j].avance / 1).formatMoney(0, '.', ',').toString() + '</span>';
-        ***REMOVED***
-
-            html_str += '</div>';
-
-            html_str += '<div class="data1a">';
-            html_str += '<span class="labelTit">% Ejecución</span>';
-            html_str += '<span class="">' + porc_ejecutado.formatMoney(1, '.', ',').toString() + '</span>';
-            html_str += '</div>';
-            html_str += '<h6 class="btnPerfil badge bg-light text-dark"><i class="material-icons md-18">info_outline</i> Ver Detalle</h6>';
-
-            html_str += '</div>';//head
-            html_str += '</a>';
-            html_str += '</div>';
-            html_str += '<span class="btnPerfil badge bg-light text-dark"><a target="_blank" href="/PerfilEntidad?codEntidad=' + vec_entidad[j].id + '">Ir Perfil Institución <i class="material-icons md-18">chevron_right</i></a></span>';
-            html_str += '</div>';
-            //body
-            html_str += '<div id="' + panelHijo2 + '" class="panel-collapse collapse level3 nivel2" role="tabpanel" aria-labelledby="' + nomHeadLevel3 + '" entidad="' + vec_entidad[j].nombre.toUpperCase() + '">';
-            html_str += '<div class="panel-body">';
-            //< !--NIVEL 3-- >
-            var vec_actividad = vec_entidad[j].detalles;
-            for (var k = 0; k < vec_actividad.length; k++) {
-
-                var actividad_nom = vec_actividad[k].nombre;
-
-                if (actividad_nom.split("|").length > 0) {
-                    actividad_nom = actividad_nom.split("|")[1];
-            ***REMOVED***
-
-                var porc_ejecutado = 0;
-                if (datos[i].presupuesto > 0) {
-                    porc_ejecutado = (vec_actividad[k].avance / vec_actividad[k].presupuesto) * 100;
-            ***REMOVED***
-
-                var nomNivel3 = "accordion_l3_" + j_aux.toString() + "_" + k_aux.toString();
-                var nomCnivel3 = "c3_" + j_aux.toString() + "_" + k_aux.toString();
-
-                html_str += '<div class="panel-group nivel33" id="' + nomNivel3 + '" role="tablist" aria-multiselectable="true">';
-                html_str += '<div class="panel panel-default">';
-                html_str += '<div class="panel-body">';
-                html_str += '<span class="h6">Actividad</span>';
-                html_str += '<ul class="list-group">';
-                html_str += '<li class="list-group-item">';
-                html_str += '<div class="head">';
-                html_str += '<div class="data1 mainData">';
-                html_str += '<span class="td1p">' + actividad_nom + '</span>';
-                html_str += '</div>';
-                html_str += '<div class="data1">';
-                html_str += '<span class="labelTit">Presupuesto Vigente</span>';
-                if (vec_actividad[k].presupuesto / 1000000 > 1) {
-                    html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_actividad[k].presupuesto / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-            ***REMOVED*** else {
-                    html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_actividad[k].presupuesto / 1).formatMoney(0, '.', ',').toString() + '</span>';
-            ***REMOVED***
-
-                html_str += '</div>';
-                html_str += '<div class="data1">';
-                html_str += '<span class="labelTit">Ejecutado</span>';
-                if (vec_actividad[k].avance / 1000000 > 1) {
-                    html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_actividad[k].avance / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-            ***REMOVED*** else {
-                    html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_actividad[k].avance / 1).formatMoney(0, '.', ',').toString() + '</span>';
-            ***REMOVED***
-                html_str += '</div>';
-
-                html_str += '<div class="data1">';
-                html_str += '<span class="labelTit">% Ejecución</span>';
-                html_str += '<span class="">' + porc_ejecutado.formatMoney(1, '.', ',').toString() + '</span>';
-                html_str += '</div>';
-
-                html_str += '</div>';
-                html_str += '</li>';
-                html_str += '</ul>';
-                html_str += '</div>';
-
-                html_str += '</div>';
-                html_str += '</div>';
-                k_aux = k_aux + 1;
-
-        ***REMOVED***
-
-            html_str += '</div>';
-            html_str += '</div>';
-
-            html_str += '</div>';
-
-            html_str += '</div>';
-            j_aux = j_aux + 1;
-
     ***REMOVED***
 
-        html_str += '</div>';
-        html_str += '</div>';
+        var nom_institucion = datos[i]['nombre'];
+        var cod_institucion = datos[i]['codigo'];
+        var presup_aprobado = datos[i]['aprobado'] / 1000000;
+        var presup_vigente = datos[i]['presupuesto'] / 1000000;
+        var presup_ejecutado = datos[i]['avance'] / 1000000;
 
-        html_str += '</div>';
-
-        i_aux = i_aux + 1;
-
+        html_list += '<div id="institucion_' + i.toString() + '" class="card d-flex">';
+        html_list += '<div class="headEnt">';
+        html_list += '<div class="data1 mainDataEntidad">';
+        html_list += '<span class="td1">' + nom_institucion + ' </span>';
+        html_list += '</div>';
+        html_list += '<div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1">$ ' + formatMoney(presup_aprobado,2, '.', ',').toString() + ' Millones</span ></div > ';
+        html_list += '<div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1">$ ' + formatMoney(presup_vigente,2, '.', ',').toString() + ' Millones</span></div>';
+        html_list += '<div class="data1"><span class="labelTit">Presupuesto Ejecutado</span><span class="td1">$' + formatMoney(presup_ejecutado,2, '.', ',').toString() + ' Millones</span></div>';
+        html_list += '<div class="data1"><span class="labelTit">Porcentaje de Ejecución</span><span class="td1">' + formatMoney(porc_ejecutado,2, '.', ',').toString() + '%' + '</span></div>';
+        html_list += '</div>';
+        html_list += '<div class="btn-action">';
+        html_list += '<div class="btnPerfil">';
+        html_list += '<a target="_blank" href="/PerfilEntidad?codEntidad=' + datos[i].id + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br /> <span>Ver institución</span></a>';
+        html_list += '</div>';
+        html_list += '</div>';
+        html_list += '</div>';
 ***REMOVED***
-    html_str += "</div>";
-
-
+    html_list += '</div>';
     ///----------------
-    html_str += '<div id="divPagFichas"></div>';
+    html_list += '<div id="divPagFichas"></div>';
     ///----------------
 
-    html_str += '<div id="divTotales" class="summUp">';
-    html_str += '<div class="panel-title">';
-    html_str += '<div class="head">';
-    html_str += '<div class="data1 mainData">';
-    html_str += '<span class="labelTit">&nbsp;</span>';
-    html_str += '<span class="td1">Totales Generales</span>';
-    html_str += '</div>';
-    html_str += '<div class="data1">';
-    html_str += '<span class="labelTit">Presupuesto Vigente</span>';
-    if (total_presupuesto / 1000000 > 1) {
-        html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_presupuesto / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-***REMOVED*** else {
-        html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_presupuesto / 1).formatMoney(0, '.', ',').toString() + '</span>';
-***REMOVED***
-
-    //html_str += '<span class="td1">' + total_presupuesto / 1000000  + ' Millones</span>';
-    html_str += '</div>';
-    html_str += '<div class="data1">';
-    html_str += '<span class="labelTit">Ejecutado</span>';
-    if (total_avance / 1000000 > 1) {
-        html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_avance / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-***REMOVED*** else {
-        html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_avance / 1).formatMoney(0, '.', ',').toString() + '</span>';
-***REMOVED***
-    //--------------------------
-    html_str += '</div>';    
-    html_str += '<div class="data1">';
-    html_str += '<span class="labelTit">% Ejecución</span>';
-    html_str += '<span class="td1">' + total_porc_ejecutado.formatMoney(1, '.', ',').toString() + ' % </span>';
-    html_str += '</div>';
-
-    //html_str += '<span class="td1">' + total_avance / 1000000 + 'Millones</span>';
-    html_str += '</div>';
-    html_str += '</div>';
-    html_str += '</div>';
-    html_str += '</div>';
-
-    $("#divListado").html(html_str);
-    var totalNumber = globales_gasto.length;
-    var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
-    if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
-        totalPages = totalPages + 1;
-***REMOVED***
-    dibujarPagNumeradasPerGasto(pagina, totalNumber, totalPages);
-
-***REMOVED***
-
-
-function getEstructuraInfograficoPerEntidad(datos,pagina) {
-    var i_aux = 0;
-    var j_aux = 0;
-    var k_aux = 0;
-    //var l = 0;
-    var total_avance = 0;
-    var total_presupuesto = 0;
-    var periodo_aux = 0;
-    var total_porc_ejecutado = 0;
-
-    total_avance = globales_entidad.reduce((sum, currentValue) => {
-        return sum + currentValue.avance;
-  ***REMOVED*** 0);
-
-    total_presupuesto = globales_entidad.reduce((sum, currentValue) => {
-        return sum + currentValue.presupuesto;
-  ***REMOVED*** 0);
-
-    total_porc_ejecutado = total_presupuesto == 0 ? 0 : total_avance * 100 / total_presupuesto;
-
-    var html_str = '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
-    for (var i = 0; i < datos.length; i++) {
-        if (datos[i].periodos != undefined) {
-            if (datos[i].periodos.length > 0) {
-                periodo_aux = datos[i].periodos[0];
-        ***REMOVED***
-    ***REMOVED***
-        var nomCollapse = "collapseOne_" + i_aux.toString() + "_" + j_aux.toString();
-        var nomHeading = "headingOne_" + i_aux.toString() + "_" + j_aux.toString();
-        //total_avance += datos[i].avance;
-        //total_presupuesto += datos[i].presupuesto;
-        var gasto_nom = datos[i].nombre;
-        var porc_ejecutado = 0;
-        if (datos[i].presupuesto > 0) {
-            porc_ejecutado = (datos[i].avance / datos[i].presupuesto) * 100;
-    ***REMOVED***
-
-        if (gasto_nom.split("|").length > 0) {
-            gasto_nom = gasto_nom.split("|")[1];
-    ***REMOVED***
-
-        html_str += '<div class="panel panel-default">';
-        html_str += '<div class="panel-heading d-flex" role="tab" id="' + nomHeading + '">';
-        html_str += '<div class="panel-title w-88">';
-        html_str += '<a role="button" data-toggle="collapse" data-parent="#accordion" href="#' + nomCollapse + '" aria-expanded="true" aria-controls="' + nomCollapse + '">';
-        html_str += '<div class="headEnt">';
-        html_str += '<div class="data1 mainDataEntidad">';
-        html_str += '<span class="labelTit">Institución</span>';
-        html_str += '<span class="td1">' + gasto_nom + '</span>';
-        html_str += '</div>';
-        html_str += '<div class="data1">';
-        html_str += '<span class="labelTit">Presupuesto Vigente</span>';
-        if (datos[i].presupuesto / 1000000 > 1) {
-            html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].presupuesto / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-    ***REMOVED*** else {
-            html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].presupuesto / 1).formatMoney(0, '.', ',').toString() + ' </span>';
-    ***REMOVED***
-
-        html_str += '</div>';
-        html_str += '<div class="data1">';
-        html_str += '<span class="labelTit">Ejecutado</span>';
-        if (datos[i].avance / 1000000 > 1) {
-            html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].avance / 1000000).formatMoney(1, '.', ',').toString() + ' Millones </span>';
-    ***REMOVED*** else {
-            html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].avance / 1).formatMoney(0, '.', ',').toString() + '  </span>';
-    ***REMOVED***
-
-        html_str += '</div>';
-
-        html_str += '<div class="data1">';
-        html_str += '<span class="labelTit">% Ejecución</span>';
-        html_str += '<span class="td1">' + porc_ejecutado.formatMoney(1, '.', ',').toString() + '</span>';
-        html_str += '</div>';
-        //------------------
-        html_str += '<h6 class="btnPerfil badge bg-light text-dark"><i class="material-icons md-18">info_outline</i> Ver Detalle</h6>';
-        //------------------
-        html_str += '</div >';
-        html_str += '</a>';
-        html_str += '</div>';
-        html_str += '<span class="btnPerfil badge bg-light text-dark"><a target="_blank" href="/PerfilEntidad?codEntidad=' + datos[i].id + '">Ir Perfil Institución <i class="material-icons md-18">chevron_right</i></a></span>';
-        html_str += '</div>';
-
-        html_str += '<div id = "' + nomCollapse + '" class="panel-collapse collapse nivel1" role = "tabpanel" aria - labelTitledby="' + nomHeading + '" item = "' + datos[i].nombre.toUpperCase() + '" >';
-        html_str += '<div class="panel-body">';
-
-        //NIVEL 2
-        var vec_entidad = datos[i].detalles;
-        for (var j = 0; j < vec_entidad.length; j++) {
-            var nomNivel2 = "accordion_l2_" + i_aux.toString() + "_" + j_aux.toString();
-            var headNivel2 = "headLevel2_" + i_aux.toString() + "_" + j_aux.toString();
-            var panelHijo2 = "c2_" + j_aux.toString() + "_" + k_aux.toString();
-            var nomHeadLevel3 = "headLevel3_" + j_aux.toString() + "_" + k_aux.toString();
-            var entidad_nom = vec_entidad[j].nombre;
-            if (entidad_nom.split("|").length > 0) {
-                entidad_nom = entidad_nom.split("|")[1];
-        ***REMOVED***
-            var porc_ejecutado = 0;
-            if (datos[i].presupuesto > 0) {
-                porc_ejecutado = (vec_entidad[j].avance / vec_entidad[j].presupuesto) * 100;
-        ***REMOVED***
-
-            html_str += '<div class="panel-group nivel22" id="' + nomNivel2 + '" role="tablist" aria-multiselectable="true">';
-            html_str += '<div class="panel panel-default">';
-            //heading
-            html_str += '<div class="panel-heading" role="tab" id="' + headNivel2 + '">';
-            html_str += '<div class="panel-title w-90">';
-            html_str += '<a role = "button" data-toggle="collapse" data-parent="#' + nomNivel2 + '" href = "#' + panelHijo2 + '" aria-expanded="true" aria-controls="' + nomCollapse + '">';
-            html_str += '<div class="head">';
-            html_str += '<div class="data1 mainData">';
-            html_str += '<span class="labelTit">Grupo de gasto</span>';
-            html_str += '<span class="td1p">' + entidad_nom + '</span>';
-            html_str += '</div>';
-            html_str += '<div class="data1">';
-            html_str += '<span class="labelTit">Presupuesto Vigente</span>';
-            if (vec_entidad[j].presupuesto / 1000000 > 1) {
-                html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_entidad[j].presupuesto / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-        ***REMOVED*** else {
-                html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_entidad[j].presupuesto / 1).formatMoney(0, '.', ',').toString() + '</span>';
-        ***REMOVED***
-
-            html_str += '</div>';
-            html_str += '<div class="data1">';
-            html_str += '<span class="labelTit">Ejecutado</span>';
-            if (vec_entidad[j].avance / 1000000 > 1) {
-                html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_entidad[j].avance / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-        ***REMOVED*** else {
-                html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_entidad[j].avance / 1).formatMoney(0, '.', ',').toString() + '</span>';
-        ***REMOVED***
-
-            html_str += '</div>';
-
-            html_str += '<div class="data1">';
-            html_str += '<span class="labelTit">% Ejecución</span>';
-            html_str += '<span class="">' + porc_ejecutado.formatMoney(1, '.', ',').toString() + '</span>';
-            html_str += '</div>';
-            //------------------
-            html_str += '<h6 class="btnPerfil badge bg-light text-dark"><i class="material-icons md-18">info_outline</i> Ver Detalle</h6>';
-        //------------------
-
-            html_str += '</div>';
-            html_str += '</a>';
-            html_str += '</div>';
-            html_str += '</div>';
-            //body
-            html_str += '<div id="' + panelHijo2 + '" class="panel-collapse collapse level3 nivel2" role="tabpanel" aria-labelledby="' + nomHeadLevel3 + '" entidad="' + vec_entidad[j].nombre.toUpperCase() + '">';
-            html_str += '<div class="panel-body">';
-            //< !--NIVEL 3-- >
-            var vec_actividad = vec_entidad[j].detalles;
-            for (var k = 0; k < vec_actividad.length; k++) {
-
-                var actividad_nom = vec_actividad[k].nombre;
-
-                if (actividad_nom.split("|").length > 0) {
-                    actividad_nom = actividad_nom.split("|")[1];
-            ***REMOVED***
-
-                var porc_ejecutado = 0;
-                if (datos[i].presupuesto > 0) {
-                    porc_ejecutado = (vec_actividad[k].avance / vec_actividad[k].presupuesto) * 100;
-            ***REMOVED***
-
-                var nomNivel3 = "accordion_l3_" + j_aux.toString() + "_" + k_aux.toString();
-                var nomCnivel3 = "c3_" + j_aux.toString() + "_" + k_aux.toString();
-
-                html_str += '<div class="panel-group nivel33" id="' + nomNivel3 + '" role="tablist" aria-multiselectable="true">';
-                html_str += '<div class="panel panel-default">';
-                html_str += '<div class="panel-body">';
-                html_str += '<span class="h6">Actividad</span>';
-                html_str += '<ul class="list-group">';
-                html_str += '<li class="list-group-item">';
-                html_str += '<div class="head">';
-                html_str += '<div class="data1 mainData">';
-                html_str += '<span class="td1p">' + actividad_nom + '</span>';
-                html_str += '</div>';
-                html_str += '<div class="data1">';
-                html_str += '<span class="labelTit">Presupuesto Vigente</span>';
-                if (vec_actividad[k].presupuesto / 1000000 > 1) {
-                    html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_actividad[k].presupuesto / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-            ***REMOVED*** else {
-                    html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_actividad[k].presupuesto / 1).formatMoney(0, '.', ',').toString() + '</span>';
-            ***REMOVED***
-
-                html_str += '</div>';
-                html_str += '<div class="data1">';
-                html_str += '<span class="labelTit">Ejecutado</span>';
-                if (vec_actividad[k].avance / 1000000 > 1) {
-                    html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_actividad[k].avance / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-            ***REMOVED*** else {
-                    html_str += '<span class="td1p">' + monedaSimbolo("HND") + ' ' + (vec_actividad[k].avance / 1).formatMoney(0, '.', ',').toString() + '</span>';
-            ***REMOVED***
-                html_str += '</div>';
-
-                html_str += '<div class="data1">';
-                html_str += '<span class="labelTit">% Ejecución</span>';
-                html_str += '<span class="">' + porc_ejecutado.formatMoney(1, '.', ',').toString() + '</span>';
-                html_str += '</div>';
-
-                html_str += '</div>';
-                html_str += '</li>';
-                html_str += '</ul>';
-                html_str += '</div>';
-
-                html_str += '</div>';
-                html_str += '</div>';
-                k_aux = k_aux + 1;
-
-        ***REMOVED***
-
-            html_str += '</div>';
-            html_str += '</div>';
-
-            html_str += '</div>';
-
-            html_str += '</div>';
-            j_aux = j_aux + 1;
-
-    ***REMOVED***
-
-        html_str += '</div>';
-        html_str += '</div>';
-
-        html_str += '</div>';
-
-        i_aux = i_aux + 1;
-
-***REMOVED***
-    html_str += "</div>";
-
-    ///----------------
-    html_str += '<div id="divPagFichas"></div>';
-    ///----------------
-
-    html_str += '<div id="divTotales" class="summUp">';
-    html_str += '<div class="panel-title">';
-    html_str += '<div class="head">';
-    html_str += '<div class="data1 mainData">';
-    html_str += '<span class="labelTit">&nbsp;</span>';
-    html_str += '<span class="td1">Totales Generales</span>';
-    html_str += '</div>';
-    html_str += '<div class="data1">';
-    html_str += '<span class="labelTit">Presupuesto Vigente</span>';
-    if (total_presupuesto / 1000000 > 1) {
-        html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_presupuesto / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-***REMOVED*** else {
-        html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_presupuesto / 1).formatMoney(0, '.', ',').toString() + '</span>';
-***REMOVED***
-
-    //html_str += '<span class="td1">' + total_presupuesto / 1000000  + ' Millones</span>';
-    html_str += '</div>';
-    html_str += '<div class="data1">';
-    html_str += '<span class="labelTit">Ejecutado</span>';
-    if (total_avance / 1000000 > 1) {
-        html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_avance / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-***REMOVED*** else {
-        html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_avance / 1).formatMoney(0, '.', ',').toString() + '</span>';
-***REMOVED***
-    html_str += '</div>';
-    html_str += '<div class="data1">';
-    html_str += '<span class="labelTit">% Ejecución</span>';
-    html_str += '<span class="td1">' + total_porc_ejecutado.formatMoney(1, '.', ',').toString() + ' % </span>';
-    html_str += '</div>';
-    //html_str += '<span class="td1">' + total_avance / 1000000 + 'Millones</span>';
-    html_str += '</div>';
-    html_str += '</div>';
-    html_str += '</div>';
-    html_str += '</div>';
-
-    $("#divListado").html(html_str);
+    $("#divListado").html(html_list);
     var totalNumber = globales_entidad.length;
     var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
     if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
         totalPages = totalPages + 1;
 ***REMOVED***
     dibujarPagNumeradasPerEntidad(pagina, totalNumber, totalPages);
-
-***REMOVED***
-
-function dibujarPagNumeradasPerGasto(actual, total, totalPag) {
-    var pag_actual = parseInt(actual);
-    var pagina_actual = pag_actual;
-    var pagesHTML = '';
-    var cant_por_pag = 6;
-    var cant_por_linea = 10;
-    $("#divPagFichas").html("");
-    var divPag = $("#divPagFichas")
-    var pag_enlace = "";
-
-    var cociente = Math.floor(pag_actual / cant_por_linea);
-    var residuo = pag_actual % cant_por_linea;
-    var inicio = 1;
-    if (residuo == 0) {
-        inicio = (pag_actual - cant_por_linea) + 1;
-***REMOVED*** else {
-        inicio = (cociente * cant_por_linea) + 1;
-***REMOVED***
-
-    var fin = inicio + (cant_por_linea - 1);
-    if (totalPag < cant_por_linea) {
-        fin = totalPag;
-***REMOVED***
-    if (fin > totalPag) {
-        fin = totalPag;
-***REMOVED***
-    if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
-        pag_enlace += '<a id="page_left_gasto" role="button" class="material-icons md-24" data-page="' + (inicio - cant_por_linea) + '"><span class="">chevron_left</span></a>';
-***REMOVED***
-
-
-    for (var i = inicio; i <= fin; i++) {
-
-        if (i == pag_actual) {
-            pag_enlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
-    ***REMOVED*** else {
-            pag_enlace += '<a class="page_left_gasto" role="button" data-page="' + i + '">';
-            pag_enlace += '<span class="glyphicon"><text class="paginacion">' + i + '</text></span>';
-            pag_enlace += '</a>';
-    ***REMOVED***
-
-***REMOVED***
-
-    if (pag_actual < totalPag) {
-        if (fin < totalPag) {
-            pag_enlace += '<a id="page_right_gasto" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
-    ***REMOVED***
-***REMOVED***
-
-    $("#divPagFichas").html(pag_enlace);
-
-    $('#page_right_gasto,#page_left_gasto,.page_left_gasto,.page_right_gasto').bind('click', function () {
-        var pagina_actual = $(this).attr("data-page");
-        var ini_data = ((pagina_actual - 1) * cantXPagina);
-        var fin_data = (pagina_actual * cantXPagina) - 1;
-        var data_pagina = jQuery.grep(globales_gasto, function (n, i) {
-            return (i >= ini_data && i <= fin_data);
-    ***REMOVED***);
-        var arr = data_pagina;
-        $("#divListado").empty();
-        getEstructuraInfografico(data_pagina, pagina_actual);
-***REMOVED***);
 
 ***REMOVED***
 
@@ -2081,13 +1969,12 @@ function dibujarPagNumeradasPerEntidad(actual, total, totalPag) {
     $("#divPagFichas").html(pag_enlace);
 
     $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
-        var pagina_actual = $(this).attr("data-page");
+        pagina_actual = $(this).attr("data-page");
         var ini_data = ((pagina_actual - 1) * cantXPagina);
         var fin_data = (pagina_actual * cantXPagina) - 1;
-        var data_pagina = jQuery.grep(globales_entidad, function (n, i) {
+        var data_pagina = arr = jQuery.grep(globales_entidad, function (n, i) {
             return (i >= ini_data && i <= fin_data);
     ***REMOVED***);
-        var arr = data_pagina;
         $("#divListado").empty();
         getEstructuraInfograficoPerEntidad(data_pagina, pagina_actual);
 ***REMOVED***);
@@ -2095,76 +1982,694 @@ function dibujarPagNumeradasPerEntidad(actual, total, totalPag) {
 ***REMOVED***
 
 
-function GetGrupoDeGastoPerVersiones(versiones, annio) {
-    $.ajax({
-        contentType: 'application/json; charset=utf-8',
-        url: "api/ServiciosPresupuestoNew/GetComparativePerVersiones",
-        type: "GET",
-        data: {
-            filtro: versiones,
-            anyo: annio
+function ObtenerDatosListadoPerProyectos(periodo) {
+    //$("#Instituciones").hide();
+    $("#divInstitucionesPerSector").hide();
+    $("#divPagFichas_proy").html("");
+    $("#divListado_proy").empty();
+    $("#divListado_proy").html(loader_proy);
+    $("#divProyectosPerOrganismo").show();
+    
+    
+    var id_organismo = $("#filter_organismo_sankey option:selected").val();
+    
+    if (periodo != undefined && periodo != "") {
+        if (id_organismo != undefined && id_organismo != "") {
+            var params_usu = { "annio": periodo, "id": id_organismo ***REMOVED***;
+
+            $.ajax({
+                type: 'GET',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                url: "/api/ServiciosPresupuestoNew/GetInfograficoPerProyecto",
+                cache: false,
+                data: params_usu,
+                success: function (result) {
+                    if (result.status == true) {
+                        var data = result.proyectosInv;
+                        if (data != null) {
+                            if (data.length > 0) {
+                                //---------------------------------------
+                                    globales_proy = data;
+                                //-----------------------------------------
+                                    var pagina_actual = 1;
+                                    var ini_data = ((pagina_actual - 1) * cantXPagina);
+                                    var fin_data = (pagina_actual * cantXPagina) - 1;
+                                    var data_pagina = arr = jQuery.grep(globales_proy, function (n, i) {
+                                        return (i >= ini_data && i <= fin_data);
+                                ***REMOVED***);
+                                    getEstructuraInfograficoPerProyecto(data_pagina, 1);
+                                //--------------------------------------------------------
+                                
+                        ***REMOVED*** else {
+                                $("#divListado_proy").html("<span class='lblErrorNoData'>Información No Disponible</span>");
+                        ***REMOVED***
+                    ***REMOVED*** else {
+                            $("#divListado_proy").html("<span class='lblErrorNoData'>Información No Disponible</span>");
+                    ***REMOVED***
+
+
+                ***REMOVED*** else {
+                        alert("Error: " + result.message, function () {
+
+                    ***REMOVED***);
+                ***REMOVED***
+
+              ***REMOVED***
+                error: function (response) {
+                    alert(response.responseText);
+              ***REMOVED***
+                failure: function (response) {
+                    alert(response.responseText);
+            ***REMOVED***
+        ***REMOVED***);
     ***REMOVED***
 
-***REMOVED***).done(function (data) {
-        var result = data.infoGrafica;
-        loadBarChartVersiones(result, "divGraphVersiones");
-***REMOVED***).fail(function (handleError) {
-        // Some function
-        console.log(handleError);
+***REMOVED***
+***REMOVED***
+
+function getEstructuraInfograficoPerProyecto(datos, pagina) {
+
+
+        var html_list = '<div class="card-entidades-group">';
+        for (var i = 0; i < datos.length; i++) {
+            var nombre = datos[i].nombre;
+            var idProyecto = parseFloat(datos[i].id);
+
+            html_list += '<div id="proy_' + i.toString() + '" class="card d-flex">';
+            html_list += '<div class="headEnt">';
+            html_list += '<div class="data1 mainDataEntidad">';
+            html_list += '<span class="td1">' + nombre + ' </span>';
+            html_list += '</div>';
+            html_list += '<div class="data1b"><span class="labelTit">Monto financiado</span><span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 ***REMOVED***).format(datos[i].vigente) + ' M</span></div>';
+            html_list += '<div class="data1b"><span class="labelTit">Monto ejecutado</span><span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 ***REMOVED***).format(datos[i].ejecutado) + ' M</span></div>';
+            html_list += '<div class="data1b"><span class="labelTit">Avance financiero</span><span class="td1">' + datos[i].avanceFinancieroOrganismo + '%</span></div>';
+            html_list += '<div class="data1b"><span class="labelTit">Estado</span><span class="td1">' + datos[i].estado + '</span></div>';
+            html_list += '<div class="btn-action">';
+            html_list += '<div class="btnPerfil">';
+            if (idProyecto > 0) {
+                html_list += '<a target="_blank" href="../projectprofile/' + idProyecto + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>Ver proyecto</span></a>';
+        ***REMOVED***
+            html_list += '</div>';
+            html_list += '</div>';
+            html_list += '</div>';  ///fin headEnt
+
+            html_list += '</div>';  ///fin div proy
+
+    ***REMOVED***
+        html_list += '</div>';
+        ///----------------
+        html_list += '<div id="divPagFichas_proy"></div>';
+        ///----------------
+
+        $("#divListado_proy").html(html_list);
+        var totalNumber = globales_proy.length;
+        var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
+        if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
+            totalPages = totalPages + 1;
+    ***REMOVED***
+        dibujarPagNumeradasPerProyectos(pagina, totalNumber, totalPages);
+
+***REMOVED***
+
+
+    
+
+function dibujarPagNumeradasPerProyectos(actual, total, totalPag) {
+    var pag_actual = parseInt(actual);
+    var pagina_actual = pag_actual;
+    var pagesHTML = '';
+    var cant_por_pag = 6;
+    var cant_por_linea = 20;
+    $("#divPagFichas_proy").html("");
+    var divPag = $("#divPagFichas_proy")
+    var pag_enlace = "";
+
+    var cociente = Math.floor(pag_actual / cant_por_linea);
+    var residuo = pag_actual % cant_por_linea;
+    var inicio = 1;
+    if (residuo == 0) {
+        inicio = (pag_actual - cant_por_linea) + 1;
+***REMOVED*** else {
+        inicio = (cociente * cant_por_linea) + 1;
+***REMOVED***
+
+    var fin = inicio + (cant_por_linea - 1);
+    if (totalPag < cant_por_linea) {
+        fin = totalPag;
+***REMOVED***
+    if (fin > totalPag) {
+        fin = totalPag;
+***REMOVED***
+    if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
+        pag_enlace += '<a id="page_left_proy" role="button" class="material-icons md-24" data-page="' + (inicio - cant_por_linea) + '"><span class="">chevron_left</span></a>';
+***REMOVED***
+
+
+    for (var i = inicio; i <= fin; i++) {
+
+        if (i == pag_actual) {
+            pag_enlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
+    ***REMOVED*** else {
+            pag_enlace += '<a class="page_left_proy" role="button" data-page="' + i + '">';
+            pag_enlace += '<span class="glyphicon"><text class="paginacion">' + i + '</text></span>';
+            pag_enlace += '</a>';
+    ***REMOVED***
+
+***REMOVED***
+
+    if (pag_actual < totalPag) {
+        if (fin < totalPag) {
+            pag_enlace += '<a id="page_right_proy" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
+    ***REMOVED***
+***REMOVED***
+
+    $("#divPagFichas_proy").html(pag_enlace);
+
+    $('#page_right_proy,#page_left_proy,.page_left_proy,.page_right_proy').bind('click', function () {
+        pagina_actual = $(this).attr("data-page");
+        var ini_data = ((pagina_actual - 1) * cantXPagina);
+        var fin_data = (pagina_actual * cantXPagina) - 1;
+        var data_pagina = arr = jQuery.grep(globales_proy, function (n, i) {
+            return (i >= ini_data && i <= fin_data);
+    ***REMOVED***);
+        $("#divListado_proy").empty();
+        getEstructuraInfograficoPerProyecto(data_pagina, pagina_actual);
+***REMOVED***);
+
+***REMOVED***
+
+///------------SECTORES TAB--------------------------
+function ObtenerDatosPerSectores(anyo, opcion, tipo) {
+    global_tab = "sector";
+    global_sankey = [];
+    miga_pan = "";
+    $("#sankey_basic").html(loader_proy);
+    $.ajax({
+        contentType: "application/json; charset=utf-8",
+        url: "api/ServiciosPresupuestoNew/ObtDistribucionBySectorFuentes",
+        type: "GET",
+        data: {
+            anyo: anyo,
+            opcion: opcion,
+            tipo:tipo
+      ***REMOVED***
+        success: function (result) {
+            if (result.status == true) {
+                var data = result.distribucionItemsByFuente;
+                var total_vigente = result.totalPresupuesto;
+                var total_ejecutado = result.totalEjecutado;
+                if (data.length > 0) {
+                    var datos_all = obtMatrizData(data, 3, 4);
+                    global_sankey = datos_all;
+                    //----------------------------------------------
+                    var datos_iniciales = 
+                    {
+                        "links": global_sankey.links_nivel,
+                        "nodes": global_sankey.nodes_nivel,
+                        "cant_nodos": global_sankey.cant_nodos_nivel
+
+                ***REMOVED***;
+
+                    var filterAgrupados = agruparNodos(datos_iniciales);
+                    global_agrupado = filterAgrupados;
+
+                    var tipoVista = $('input[name="tipoVistaSankey"]:checked').val();
+                    if (tipoVista == "extendida") {
+                        global_ini = datos_iniciales;
+                        
+                ***REMOVED*** else {
+                        global_ini =
+                        {
+                            "links": global_agrupado.links,
+                            "nodes": global_agrupado.nodes,
+                            "cant_nodos": global_agrupado.cant
+
+                    ***REMOVED***;
+                ***REMOVED***
+
+
+                    if (total_vigente != null) {
+
+                        if (total_vigente > 0) {
+                            var porcentaje = ((total_ejecutado / total_vigente) * 100).toFixed(2);
+                    ***REMOVED***
+
+                        $("#totalSankeyPerSector").text("$ " + formatMoney(total_vigente / 1, 2, '.', ',').toString() + " Millones");
+                        $("#PorcEjecPerSector").text(porcentaje.toString() + "%");
+
+                ***REMOVED***
+                    $("#sankey_basic").html("");
+
+                    graphSankey(global_ini);
+                    $("#divInstitucionesPerSector").show();
+                    ObtenerDatosListadoPerEntidad(anyo_actual, "sector");
+                    configuraSankeyTipoVista();
+            ***REMOVED*** else {
+                    $("#sankey_basic").html("");
+
+            ***REMOVED***
+
+        ***REMOVED*** else {
+                alert("Error: " + result.message, function () {
+                    $("#sankey_basic").html("");
+            ***REMOVED***);
+        ***REMOVED***
+
+      ***REMOVED***
+        error: function (response) {
+            alert(response.responseText);
+      ***REMOVED***
+        failure: function (response) {
+            alert(response.responseText);
+    ***REMOVED***
 ***REMOVED***);
 ***REMOVED***
 
-function loadBarChartVersiones(objData, divContenedor) {
-    var distintos = objData.map(item => item.labelGroup)
-        .filter((value, index, self) => self.indexOf(value) === index);
+
+
+
+
+function obtMatrizData(data, nivel_inicial, nivel_detalle) {
+    var cant_nodos_1 = 0;
+    var cant_nodos_2 = 0;
+    var cant_nodos_3 = 0;
+    var cant_nodos_4 = 0;
+    var cant_nodos_all = 0;
+    var cant_nodos_nivel = 0;
+
+    var obj_nodos = [];
+    var obj_links = [];
+    var obj_links_ini = [];
+    var obj_nodos_nivel = [];
+    var obj_links_nivel = [];
+
+
+    $.each(data, function (key, value) {
+        //NomNivel1
+
+        var test = false;
+        var obj_aux = { name: value.nombre ***REMOVED***;
+        var nom_Nivel1 = value.nombre;
+        var id_Nivel1 = value.id;
+        if (nivel_detalle >= 1) {
+            obj_nodos.push(obj_aux);
+    ***REMOVED***
+
+        if (nivel_inicial >= 1) {
+            obj_nodos_nivel.push(obj_aux);
+    ***REMOVED***
+
+        cant_nodos_1 += 1;
+        $.each(value.detalles, function (key, value) {
+            //NomNivel2
+
+            var nom_Nivel2 = value.nombre;
+            var valor_Nivel2 = (value.presupuesto / 1);
+            var id_Nivel2 = value.id;
+
+            test = obj_nodos.some(item => item.name === value.nombre);
+            if (test == false) {
+                obj_aux = { name: value.nombre, id:value.id ***REMOVED***;
+                if (nivel_detalle >= 2) {
+                    obj_nodos.push(obj_aux);
+            ***REMOVED***
+
+                if (nivel_inicial >= 2) {
+                    obj_nodos_nivel.push(obj_aux);
+            ***REMOVED***
+
+                cant_nodos_2 += 1;
+        ***REMOVED***
+            if (nivel_detalle >= 2) {
+                var objIndex = obj_links.findIndex((obj => obj.target == nom_Nivel2 && obj.source == nom_Nivel1));
+                if (objIndex > -1) {
+                    obj_links[objIndex].value = obj_links[objIndex].value + valor_Nivel2;
+            ***REMOVED*** else {
+                    var obj_links_aux = { source: nom_Nivel1, target: nom_Nivel2, value: valor_Nivel2 ***REMOVED***
+                    obj_links.push(obj_links_aux);
+            ***REMOVED***
+        ***REMOVED***
+
+            if (nivel_inicial >= 2) {
+                var objIndex_nivel = obj_links_nivel.findIndex((obj => obj.target == nom_Nivel2 && obj.source == nom_Nivel1));
+                if (objIndex_nivel > -1) {
+                    obj_links_nivel[objIndex_nivel].value = obj_links_ini[objIndex_nivel].value + valor_Nivel2;
+            ***REMOVED*** else {
+                    var obj_links_aux_nivel = { source: nom_Nivel1, target: nom_Nivel2, value: valor_Nivel2 ***REMOVED***
+                    obj_links_nivel.push(obj_links_aux_nivel);
+            ***REMOVED***
+        ***REMOVED***
+            $.each(value.detalles, function (key, value) {
+                //NomNivel3
+
+                var nom_Nivel3 = value.nombre;
+                var id_Nivel3 = value.id;
+
+                var valor_Nivel3 = (value.presupuesto / 1);
+                test = obj_nodos.some(item => item.name === value.nombre);
+                if (test == false) {
+                    obj_aux = { name: value.nombre, id: value.id ***REMOVED***;
+                    if (nivel_detalle >= 3) {
+                        obj_nodos.push(obj_aux);
+                ***REMOVED***
+
+                    if (nivel_inicial >= 3) {
+                        obj_nodos_nivel.push(obj_aux);
+                ***REMOVED***
+
+                    cant_nodos_3 += 1;
+            ***REMOVED***
+
+                if (nivel_detalle >= 3) {
+                    var objIndex = obj_links.findIndex((obj => obj.target == nom_Nivel3 && obj.source == nom_Nivel2));
+                    if (objIndex > -1) {
+                        obj_links[objIndex].value = obj_links[objIndex].value + valor_Nivel3;
+                ***REMOVED*** else {
+                        var obj_links_aux = { rama: nom_Nivel1, source: nom_Nivel2, target: nom_Nivel3, value: valor_Nivel3 ***REMOVED***
+                        obj_links.push(obj_links_aux);
+                ***REMOVED***
+            ***REMOVED***
+
+                if (nivel_inicial >= 3) {
+                    var objIndex_nivel = obj_links_nivel.findIndex((obj => obj.target == nom_Nivel3 && obj.source == nom_Nivel2));
+                    if (objIndex_nivel > -1) {
+                        obj_links_nivel[objIndex_nivel].value = obj_links_nivel[objIndex_nivel].value + valor_Nivel3;
+                ***REMOVED*** else {
+                        var obj_links_aux = { rama: nom_Nivel1, source: nom_Nivel2, target: nom_Nivel3, value: valor_Nivel3 ***REMOVED***
+                        obj_links_nivel.push(obj_links_aux);
+                ***REMOVED***
+
+
+            ***REMOVED***
+
+
+
+                $.each(value.detalles, function (key, value) {
+                    //NomNivel4 -->Objeto gasto detalle
+
+                    var nom_Nivel4 = value.nombre;
+                    var valor_Nivel4 = (value.presupuesto / 1);
+                    var id_Nivel4 = value.id;
+                    test = obj_nodos.some(item => item.name === value.nombre);
+                    if (test == false) {
+                        obj_aux = { name: value.nombre,id: value.id ***REMOVED***;
+                        if (nivel_detalle >= 4) {
+                            obj_nodos.push(obj_aux);
+                    ***REMOVED***
+
+                        if (nivel_inicial >= 4) {
+                            obj_nodos_nivel.push(obj_aux);
+
+                    ***REMOVED***
+                        cant_nodos_4 += 1;
+                ***REMOVED***
+
+                    if (nivel_detalle >= 4) {
+                        var objIndex = obj_links.findIndex((obj => obj.target == nom_Nivel4 && obj.source == nom_Nivel3));
+                        if (objIndex > -1) {
+                            obj_links[objIndex].value = obj_links[objIndex].value + valor_Nivel4;
+                    ***REMOVED*** else {
+                            obj_links_aux = { rama: nom_Nivel2, source: nom_Nivel3, target: nom_Nivel4, value: valor_Nivel4 ***REMOVED***
+                            obj_links.push(obj_links_aux);
+                    ***REMOVED***
+                ***REMOVED***
+
+
+                    if (nivel_inicial >= 4) {
+                        var objIndex_nivel = obj_links_nivel.findIndex((obj => obj.target == nom_Nivel4 && obj.source == nom_Nivel3));
+                        if (objIndex_nivel > -1) {
+                            obj_links_nivel[objIndex_nivel].value = obj_links_nivel[objIndex_nivel].value + valor_Nivel4;
+                    ***REMOVED*** else {
+                            var obj_links_aux = { rama: nom_Nivel2, source: nom_Nivel3, target: nom_Nivel4, value: valor_Nivel4 ***REMOVED***
+                            obj_links_nivel.push(obj_links_aux);
+                    ***REMOVED***
+                ***REMOVED***
+
+
+
+
+            ***REMOVED***);
+
+
+        ***REMOVED***);
+
+
+
+    ***REMOVED***);
+***REMOVED***);
+
+    cant_nodos_all = cant_nodos_1;
+    if (cant_nodos_2 > cant_nodos_all) {
+        cant_nodos_all = cant_nodos_2;
+***REMOVED***
+    if (cant_nodos_3 > cant_nodos_all) {
+        cant_nodos_all = cant_nodos_3;
+***REMOVED***
+    if (cant_nodos_4 > cant_nodos_all) {
+        cant_nodos_all = cant_nodos_4;
+***REMOVED***
+
+
+    cant_nodos_nivel = cant_nodos_1;
+    if (nivel_inicial >= 2) {
+        if (cant_nodos_2 > cant_nodos_nivel) {
+            cant_nodos_nivel = cant_nodos_2;
+    ***REMOVED***
+***REMOVED***
+    if (nivel_inicial >= 3) {
+        if (cant_nodos_3 > cant_nodos_nivel) {
+            cant_nodos_nivel = cant_nodos_3;
+    ***REMOVED***
+***REMOVED***
+
+
+
+    var datos_final =
+    {
+        "links": obj_links,
+        "nodes": obj_nodos,
+        "nodes_nivel": obj_nodos_nivel,
+        "links_nivel": obj_links_nivel,
+        "cant_nodos_all": cant_nodos_all,
+        "cant_nodos_nivel": cant_nodos_nivel
+
+
+***REMOVED***;
+
+    return datos_final;
+
+***REMOVED***
+
+
+function groupAndSum(arr, groupKeys, sumKeys) {
+    return Object.values(
+        arr.reduce((acc, curr) => {
+            const group = groupKeys.map(k => curr[k]).join('-');
+            acc[group] = acc[group] || Object.fromEntries(
+                groupKeys.map(k => [k, curr[k]]).concat(sumKeys.map(k => [k, 0])));
+            sumKeys.forEach(k => acc[group][k] += curr[k]);
+            return acc;
+
+      ***REMOVED*** {***REMOVED***)
+    );
+***REMOVED***
+
+function groupAndCount(arr, groupKeys) {
+    return Object.values(
+        arr.reduce((acc, curr) => {
+            const group = groupKeys.map(k => curr[k]).join('-');
+            acc[group] = acc[group] || Object.fromEntries(
+                groupKeys.map(k => [k, curr[k]])); // Quitamos 'count' aquí
+            acc[group]['count'] = (acc[group]['count'] || 0) + 1; // Incrementamos 'count' en lugar de asignar 1
+            return acc;
+      ***REMOVED*** {***REMOVED***)
+    );
+***REMOVED***
+
+
+function groupAndSumWithCounts(arr, groupKeys, sumKeys) {
+    return Object.values(
+        arr.reduce((acc, curr) => {
+            const group = groupKeys.map(k => curr[k]).join('-');
+            acc[group] = acc[group] || Object.fromEntries(
+                groupKeys.map(k => [k, curr[k]]) // Mantenemos las claves de agrupación sin inicializar en 0
+                    .concat(sumKeys.map(k => [k, 0])) // Inicializamos las claves de sumKeys en 0
+                    .concat([['count', 0]])); // Añadimos una clave 'count' para contar los elementos por grupo
+            sumKeys.forEach(k => acc[group][k] += curr[k]); // Sumamos los valores por grupo
+            acc[group]['count']++; // Incrementamos el contador de elementos por grupo
+            return acc;
+      ***REMOVED*** {***REMOVED***)
+    );
+***REMOVED***
+
+function ObtenerEntidadesPeriodo(anyo_actual) {
+
+    $.ajax({
+        contentType: "application/json; charset=utf-8",
+        url: "api/ServiciosPresupuestoNew/ObtenerEntidadesPerNombre",
+        type: "GET",
+        data: {
+            anyo: anyo_actual,
+            filtro: null
+    ***REMOVED***
+***REMOVED***).done(function (data) {
+        var result = data.entidades;
+        var str_cad = "";
+        var cad_sector = "";
+        if (result != null) {
+            var cant_sectores = result.length;
+            var maximo = 5;
+            if (result.length > 0) {
+                str_html = "";
+                str_cad += '<option value="">Seleccione una institución</option>';
+                for (var i = 0; i < result.length; i++) {
+                    str_cad += '<option value="' + result[i].label + '">' + result[i].label + '</option>';
+                    cad_sector += '<option value="' + result[i].label + '">' + result[i].label + '</option>';
+            ***REMOVED***
+                if (cant_sectores > 0) {
+                    for (var j = 0; j < result.length; j++) {
+                        if (j < maximo) {
+                            var nombre = "entidadesId_" + j.toString();
+                            str_html += '<div class="form-group">';
+                            str_html += '<div class="form-group subtitle">';
+                            str_html += '<label for="' + nombre + '" style="color:black;float:left;">Seleccionar una institución</label>';
+                            str_html += '<select class="form-select selectEntidad" aria-label="Seleccione una institución:" id="' + nombre + '">';
+                            str_html += str_cad;
+                            str_html += '</select>';
+                            str_html += '</div>';
+                            str_html += '</div>';
+
+
+                            //$("#funcionesId_" + j.toString()).html(str_cad);
+                    ***REMOVED***
+                ***REMOVED***
+                    $("#divContenedorEntidades").html(str_html);
+                    getEntidadesIni();
+                    configuraSelectEntidades();
+
+                    ////----grafico pagado
+                    $("#divContenedorEntidadesPag").html(str_html);
+                    configuraSelectEntidadesGasto();
+            ***REMOVED***
+
+
+        ***REMOVED***
+    ***REMOVED***
+***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+        alert("Error " + xhr.status + "_" + thrownError);
+***REMOVED***);
+
+***REMOVED***
+
+function configuraSelectEntidadesGasto() {
+    $('#divContenedorEntidadesPag .selectEntidad').on('change', function () {
+        GetGastoEntidadesTiempoGraphic("btn");
+***REMOVED***);
+
+***REMOVED***
+
+function getEntidadesIni() {
+    $(".selectEntidad").each(function () {
+
+        if ($(this).children.length > 0) {
+            var id = $(this).attr("id");
+            var str = id + "option:eq(0)";
+            $(str).attr("selected", "selected");
+    ***REMOVED***
+***REMOVED***);
+
+***REMOVED***
+
+function configuraSelectEntidades() {
+    $('.selectEntidad').on('change', function () {
+        GetGastoEntidadesGraphic("btn");
+***REMOVED***);
+
+***REMOVED***
+
+function GetGastoEntidadesGraphic(origen) {
+    var entidades = "";
+    var cont = 0;
+    $("#divContenedorEntidades .selectEntidad option:selected").each(function () {
+
+        if ($(this).val() != "") {
+            entidades += $(this).val() + "|";
+            cont += 1;
+    ***REMOVED***
+***REMOVED***);
+    entidades = entidades.replace(/\|([^|]*)$/, '$1');
+    if (cont == 0) {
+        $("#topEntidadesG").text("Top instituciones");
+***REMOVED*** else {
+        $("#topEntidadesG").text("Comparativo instituciones");
+***REMOVED***
+    GetGastoEntidades(anyo_actual, entidades);
+***REMOVED***
+
+
+function GetGastoEntidades(annio, filtro) {
+    $("#divGraphBarChartGastoEntidades").empty();
+    var tipo_dato = "top";
+    $.ajax({
+        url: "api/ServiciosPresupuestoNew/BarChartEntidades/",
+        type: "GET",
+        data: {
+            anyo: annio,
+            filtro: filtro
+    ***REMOVED***
+
+***REMOVED***).done(function (data) {
+        var result = data;
+        var result = data.infoRecursos;
+        $("#divGraphBarChartGastoEntidades").empty();
+        loadBarChartEntidades(result, "divGraphBarChartGastoEntidades");
+
+***REMOVED***).fail(function (handleError) {
+
+***REMOVED***);
+***REMOVED***
+
+function loadBarChartEntidades(objData, divContenedor, tipo) {
+
+    var rotacion = "";
+    if (tipo == "all") {
+        rotacion = "vertical";
+***REMOVED***
 
     $("#" + divContenedor).empty();
     if (objData != undefined && objData != null) {
         new d3plus.BarChart()
             .select("#" + divContenedor)
-            .translate(function (d) {
-                var traduc_aux = d;
-                if (d === "Back" || d === "back") {
-                    traduc_aux = "Atrás";
-            ***REMOVED*** else if (d === "Click to Expand") {
-                    traduc_aux = "Clic para Expandir";
-            ***REMOVED*** else if (d === "No Data Available") {
-                    traduc_aux = "Información No Disponible";
-            ***REMOVED*** else {
-                    traduc_aux = d;
-            ***REMOVED***
-                return traduc_aux;
-        ***REMOVED***)
             .config({
                 data: objData,
-                groupBy: "labelGroup",
-                legendPosition: 'bottom',
-                x: "label",
-                y: "rawValue",
+                groupBy: ["label", "labelGroup"],
+                type: "bar",
+                x: "rawValue",
+                y: "label",
+                discrete: 'y',
+                //height: 650,
                 shapeConfig: {
-                    fill: function (d, index) {
-                        var index = distintos.indexOf(d.labelGroup);
-                        return assignColorBarrasVersiones(index);
-                  ***REMOVED***
+                    //label: false,
                     labelConfig: {
-                        fontFamily: "'Montserrat', sans-serif",
-                        align: "center",
-                        size: 6,
-                        transform: "capitalize",
                         fontMin: 4,
                         fontMax: 8
+                  ***REMOVED*** fill: function (d, index) {
+                        var prueba = d;
+                        return assignColorBarrasAvance(d["labelGroup"]);
                 ***REMOVED***
 
               ***REMOVED***
                 tooltipConfig: {
                     title: function (d) {
-                        //return d["labelGroup"] + " " + d["label"];
+
+                        return "Presupuesto " + d["labelGroup"];
                   ***REMOVED***
                     tbody: [
                         [function (d) {
-                            var cad_aux = "L " + d["rawValue"].formatMoney(1, '.', ',').toString() + " Millones";
+                            var cad_aux = "$ " + formatMoney(["rawValue"],1, '.', ',').toString() + " Millones";
                             if (d["porcentaje"] != undefined && d["porcentaje"] != null) {
-                                cad_aux = "L " + d["rawValue"].formatMoney(1, '.', ',').toString() + " Millones" + " <strong>(" + d["porcentaje"].formatMoney(1, '.', ',').toString() + " %)</strong>";
+                                cad_aux = "$ " + formatMoney(d["rawValue"],1, '.', ',').toString() + " Millones";
                         ***REMOVED***
 
                             return cad_aux;
@@ -2172,36 +2677,165 @@ function loadBarChartVersiones(objData, divContenedor) {
                     ]
               ***REMOVED***
                 yConfig: {
-                    title: "Presupuesto en Millones de L",
-                    //ticks: [],
-                    scale: "pow",
-                    tickFormat: function (d) {
-                        var auxiliar = d.formatMoney(0, '.', ',').toString();
-                        return (auxiliar);
-                ***REMOVED***
+                    title: ""
               ***REMOVED***
                 xConfig: {
-                    title: "Grupo de Gasto",
                     fontsize: "2px",
-                    size: "2px"
+                    size: "2px",
+                    labelRotation: rotacion,
+                    title: "Millones de pesos dominicanos"
               ***REMOVED***
                 legend: false
         ***REMOVED***)
             .barPadding(0)
-            .groupPadding(12)
+            .groupPadding(10)
             .render();
 ***REMOVED***
+***REMOVED***
 
+function assignColorBarrasAvance(indice) {
+    var color_aux = "#cccccc";
+    if (indice.toUpperCase() == "VIGENTE") {
+        color_aux = '#3590cf';
+***REMOVED*** else {
+        color_aux = '#e78e06';
+***REMOVED***
+
+    return color_aux;
 
 ***REMOVED***
 
-Number.prototype.formatMoney = function (c, d, t) {
-    n = this;
-    c = isNaN(c = Math.abs(c)) ? 2 : c;
-    d = d == undefined ? "." : d;
-    t = t == undefined ? "," : t;
-    let s = n < 0 ? "-" : "";
-    let i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "";
-    var j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+function GetGastoEntidadesTiempoGraphic(origen) {
+    var cont = 0;
+    var entidades = "";
+    $("#divContenedorEntidadesPag .selectEntidad option:selected").each(function () {
+
+        if ($(this).val() != "") {
+            entidades += $(this).val() + "|";
+            cont += 1;
+    ***REMOVED***
+***REMOVED***);
+
+    entidades = entidades.replace(/\|([^|]*)$/, '$1');
+    if (origen == "btn") {
+        if (cont == 0) {
+            $("#topEntidadesPag").text("Top instituciones");
+    ***REMOVED*** else {
+            $("#topEntidadesPag").text("Comparativo instituciones");
+    ***REMOVED***
+        GetGastoTiempoEntidades(anyo_actual, entidades);
+
+***REMOVED*** else {
+        $("#topEntidadesPag").text("Top instituciones");
+        GetGastoTiempoEntidades(anyo_actual, null);
+***REMOVED***
+
+***REMOVED***
+
+function GetGastoTiempoEntidades(annio, filtro) {
+    var tipo_dato = "top";
+    $.ajax({
+        url: "api/ServiciosPresupuestoNew/BarChartTiempoEntidades/",
+        type: "GET",
+        data: {
+            anyo: annio,
+            filtro: filtro
+    ***REMOVED***
+
+***REMOVED***).done(function (data) {
+        var result = data.infoRecursos;
+
+        $("#grafico_lineas").empty();
+        LoadLineEntidadesPerTiempo(result, "grafico_lineas");
+
+***REMOVED***).fail(function (handleError) {
+
+***REMOVED***);
+***REMOVED***
+
+function LoadLineEntidadesPerTiempo(objData, divContenedor) {
+    var configuracion = {
+        height: 400,
+        data: objData,
+        groupBy: "labelGroup",
+        lineLabels: true,
+        shapeConfig: {
+            Line: {
+                strokeLinecap: "square",
+                strokeWidth: 2,
+                type: "line",
+                curve: "linear",
+                label(d) {
+                    return d["labelGroup"];
+            ***REMOVED***
+        ***REMOVED***
+      ***REMOVED***
+        tooltipConfig: {
+            title: function (d) {
+                return d["labelGroup"];
+          ***REMOVED***
+            tbody: [
+                ["Pagado:", function (d) { return "$ " + d["rawValue"].formatMoney(2, '.', ',').toString() + " Millones" ***REMOVED***]
+            ]
+      ***REMOVED***
+        lineMarkers: true,
+        lineMarkerConfig: {
+            fill: "blue",
+            r: 3
+
+      ***REMOVED***
+        x: "label",
+        y: "rawValue",
+        yConfig: {
+            title: "Millones de pesos dominicanos",
+      ***REMOVED***
+        xConfig: {
+            title: "Meses",
+            tickFormat: function (value) {
+                var cad_mes = getNomMes(value);
+                return cad_mes;
+             
+        ***REMOVED***
+
+      ***REMOVED***
+        legend: false
 ***REMOVED***;
+
+    new d3plus.LinePlot()
+        .config(configuracion)
+        .select("#" + divContenedor)
+        .render();
+
+***REMOVED***
+
+function getNomMes(index) {
+    var item = index - 1;
+    var nombresMeses = [
+        "Ene",
+        "Feb",
+        "Mar",
+        "Abr",
+        "May",
+        "Jun",
+        "Jul",
+        "Ago",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dic"
+    ];
+    var cad_abreviatura = nombresMeses[item];
+    return cad_abreviatura;
+
+***REMOVED***
+
+function formatMoney(number, c, d, t) {
+    var n = number,
+        c = isNaN(c = Math.abs(c)) ? 2 : c,
+        d = d == undefined ? "." : d,
+        t = t == undefined ? "," : t,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+***REMOVED***

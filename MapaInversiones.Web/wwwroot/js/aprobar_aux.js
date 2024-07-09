@@ -1,14 +1,14 @@
-﻿let projectPerfil = JSON.parse(document.body.getAttribute('data-profile'));
-let anyo_actual = (new Date).getFullYear();
-let logoresponde = "";
-let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
+﻿var projectPerfil = JSON.parse(document.body.getAttribute('data-profile'));
+var anyo_actual = (new Date).getFullYear();
+var logoresponde = "";
+var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 
 
         InicializaDatos();
 
         function maskPosition(element, noLoader) {
-            let maskElem = $('<div class="mask"><div class="bg"></div>' +
-                '<div class="icon"></div>' + '<div>'),
+            var maskElem = $('<div class="mask"><div class="bg"></div>' +
+                (!noLoader ? '<div class="icon"></div>' : '<div class="icon"></div>') + '<div>'),
                 position = element.offset(),
                 Wmask = element[0].offsetWidth,
                 Hmask = element[0].offsetHeight;
@@ -60,30 +60,25 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
         ***REMOVED***);
 
             $("#btnAccionDenegar").click(function () {
-                let tipo = $("#justificaModal").attr("data-type");
-                let obj_param = $("#justificaModal").attr("data-parameter");
-
-                var idusuario = ""
-                var IdProyecto = ""
-                var textoJustifica = ""
-               
+                var tipo = $("#justificaModal").attr("data-type");
+                var obj_param = $("#justificaModal").attr("data-parameter");
 
                 if (tipo == "comentario") {
-                     let idcoment = $("#" + obj_param).attr('idcoment');
-                     idusuario = $("#" + obj_param).attr('idusuario');
-                     IdProyecto = $("#" + obj_param).attr('idproyecto');
-                     let idasociacion = ($("#" + obj_param).attr('idasociacion'));
-                     let idprograma = ($("#" + obj_param).attr('idprograma'));
-                     let codigoContrato = ($("#" + obj_param).attr('codigoContrato'));
-                     textoJustifica = $("#txtJustificacion").val();
-                     UpdateComentario('4', idcoment, idusuario, IdProyecto, idasociacion, idprograma, codigoContrato, textoJustifica);
+                    var idcoment = $("#" + obj_param).attr('idcoment');
+                    var idusuario = $("#" + obj_param).attr('idusuario');
+                    var IdProyecto = $("#" + obj_param).attr('idproyecto');
+                    var idasociacion = ($("#" + obj_param).attr('idasociacion'));
+                    var idprograma = ($("#" + obj_param).attr('idprograma'));
+                    var codigoContrato = ($("#" + obj_param).attr('codigoContrato'));
+                    var textoJustifica = $("#txtJustificacion").val();
+                    UpdateComentario('4', idcoment, idusuario, IdProyecto, idasociacion, idprograma, codigoContrato, textoJustifica);
             ***REMOVED***
                 if (tipo == "foto") {
-                     let tipoFoto = $("#" + obj_param).attr('tipofoto');
-                     let  idFoto = $("#" + obj_param).attr('idfoto');
-                     IdProyecto = $("#" + obj_param).attr('idproyecto');
-                     idusuario = $("#" + obj_param).attr('idusuario');
-                    textoJustifica = $("#txtJustificacion").val();
+                    var tipoFoto = $("#" + obj_param).attr('tipofoto');
+                    var idFoto = $("#" + obj_param).attr('idfoto');
+                    var IdProyecto = $("#" + obj_param).attr('idproyecto');
+                    var idusuario = $("#" + obj_param).attr('idusuario');
+                    var textoJustifica = $("#txtJustificacion").val();
                     guardarAprobado('E', tipoFoto, idFoto, IdProyecto, idusuario, textoJustifica);
             ***REMOVED***
                 $('#justificaModal').modal('hide');
@@ -92,11 +87,11 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 
 
             $("#recategorizarModalGuardar").click(function () {
-                let obj_param = $("#recategorizarModal").attr("data-parameter");
-                let idcoment = $("#" + obj_param).attr('idcoment');
-                let id_tipo = $("#filtro_TipoCometario li.selected").attr("id_tipo");
+                var obj_param = $("#recategorizarModal").attr("data-parameter");
+                var idcoment = $("#" + obj_param).attr('idcoment');
+                var id_tipo = $("#filtro_TipoCometario li.selected").attr("id_tipo");
                 if (id_tipo == "" || id_tipo == undefined) {
-                    let formularioOK = false;
+                    formularioOK = false;
                     bootbox.alert("Seleccione un tipo de comentario");
             ***REMOVED***
                 else {
@@ -115,24 +110,24 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 
 
         function inicializaFiltrosFotos() {
-            var obj = $("#filtro_estados_foto li:eq(0)");
+            var obj = $("#filtro_estados_foto option:eq(0)");
             var obj_valor = obj.attr("value");
             var obj_texto = obj.text();
-            $("#filterbyFoto").find(".btn-select-input").val(obj_valor);
-            $("#filterbyFoto").find(".btn-select-value").html(obj_texto);
+            $("#filtro_estados_foto").find(".btn-select-input").val(obj_valor);
+            $("#filtro_estados_foto").find(".btn-select-value").html(obj_texto);
     ***REMOVED***
 
         function inicializaFiltrosComent() {
-            var obj_estado = $("#filtro_estados li:eq(0)");
+            var obj_estado = $("#filtro_estados option:eq(0)");
             var obj_estado_valor = obj_estado.attr("value");
             var obj_estado_texto = obj_estado.text();
-            $("#filterbyEstado").find(".btn-select-input").val(obj_estado_valor);
-            $("#filterbyEstado").find(".btn-select-value").html(obj_estado_texto);
-            var obj_asoc = $("#filtro_asociacion li:eq(0)");
+            $("#filtro_estados").find(".btn-select-input").val(obj_estado_valor);
+            $("#filtro_estados").find(".btn-select-value").html(obj_estado_texto);
+            var obj_asoc = $("#filtro_asociacion option:eq(0)");
             var obj_asoc_valor = obj_asoc.attr("value");
             var obj_asoc_texto = obj_asoc.text();
-            $("#filterbyAsoc").find(".btn-select-input").val(obj_asoc_valor);
-            $("#filterbyAsoc").find(".btn-select-value").html(obj_asoc_texto);
+            $("#filtro_asociacion").find(".btn-select-input").val(obj_asoc_valor);
+            $("#filtro_asociacion").find(".btn-select-value").html(obj_asoc_texto);
     ***REMOVED***
 
         function configurarEnlaceTabs() {
@@ -142,8 +137,8 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                     $("#divTabFotos").attr("class", "TabBen");
                     $("#divFotos").hide();
                     inicializaFiltrosComent();
-                    var estado = $("#filterbyEstado option:selected").val();
-                    var asociacion = $("#filterbyAsoc option:selected").val();
+                    var estado = $("#filtro_estados option:selected").val();
+                    var asociacion = $("#filtro_asociacion option:selected").val();
                     $("#divDetComent").html("");
                     $("#divDetComent").html(loader_proy);
                     ObtenerComentarios(estado, asociacion, 1);
@@ -158,7 +153,7 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                     $("#divTabComent").attr("class", "TabBen");
                     $("#divComentarios").hide();
                     inicializaFiltrosFotos();
-                    var estado = $("#filterbyFoto").find(".btn-select-input").attr("value");
+                    var estado = $("#filtro_estados_foto option:selected").val();
                     ObtenerImgAprobar(estado, 1);
                     ObtenerComentariosCant();
                     ObtenerImgAprobCant();
@@ -168,8 +163,8 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
     ***REMOVED***
 
         function configuraFiltros() {
-            $('#filtro_estados li').bind('click onclick', function () {
-                var val_Sel = $(this).attr("value");
+            $('#filtro_estados').on('change', function () {
+                var val_Sel = this.value;
                 var opc_asoc = $("#divDetComent").attr("asoc");
                 if (val_Sel != "") {
                     $("#divDetComent").html("");
@@ -181,8 +176,8 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 
         ***REMOVED***);
 
-            $('#filtro_asociacion li').bind('click onclick', function () {
-                var val_sel = $(this).attr("value");
+            $('#filtro_asociacion').on('change', function () {
+                var val_sel = this.value;
                 var opc_estado = $("#divDetComent").attr("estado");
                 if (val_sel != "") {
                     $("#divDetComent").html("");
@@ -194,8 +189,8 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 
         ***REMOVED***);
 
-            $('#filtro_estados_foto li').bind('click onclick', function () {
-                var val_Sel = $(this).attr("value");
+            $('#filtro_estados_foto').on('change', function () {
+                var val_Sel = this.value;
                 if (val_Sel != "") {
                     ObtenerImgAprobar(val_Sel, 1);
             ***REMOVED*** else {
@@ -332,8 +327,10 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             if (!Array.isArray(_arr1) || !Array.isArray(_arr2) || _arr1.length !== _arr2.length)
                 return false;
 
-            //let arr1 = _arr1.sort();  ordenar en caso de no estar seguros que vienen en el mismo orden
-            //let arr2 = _arr2.sort();
+            var arr1 = _arr1.concat().sort((a, b) => isFinite(a[0]) - isFinite(b[0])
+                || a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' ***REMOVED***));
+            var arr2 = _arr2.concat().sort((a, b) => isFinite(a[0]) - isFinite(b[0])
+                || a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' ***REMOVED***));
 
             for (var i = 0; i < arr1.length; i++) {
 
@@ -356,7 +353,6 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             $("#recategorizarModalLabel").text(titulo);
             $("#recategorizarModaltextoGuia").text(texto);
 
-            event.preventDefault();
             jQuery.noConflict();
             $('#recategorizarModal').modal('show');
             $("#recategorizarModal").on('hide.bs.modal', function () {
@@ -375,7 +371,6 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             $("#topoModalLabel").text(titulo);
             $("#topoModaltextoGuia").text(texto);
 
-            event.preventDefault();
             jQuery.noConflict();
             $('#topoModal').modal('show');
             $("#topoModal").on('hide.bs.modal', function () {
@@ -478,7 +473,7 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 
                         /*------------------------*/
                         inicializaFiltrosFotos();
-                        var estado = $("#filterbyFoto").find(".btn-select-input").attr("value");
+                        var estado = $("#filtro_estados_foto option:selected").val();
                         ObtenerImgAprobar(estado, 1);
                         /*------------------------*/
 
@@ -557,7 +552,7 @@ let loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 
                                 /*------------------------*/
                                 inicializaFiltrosFotos();
-                                var estado = $("#filterbyFoto").find(".btn-select-input").attr("value");
+                                var estado = $("#filtro_estados_foto option:selected").val();
                                 ObtenerImgAprobar(estado, 1);
                                 /*------------------------*/
                                 ObtenerImgAprobCant();
@@ -978,7 +973,7 @@ function ObtenerImgAprobar(estado, pagina) {
 
         function dibujarPag(actual, total, totalPag) {
             var pag_actual = parseInt(actual);
-            var pagina_actual = pag_actual;
+            pagina_actual = pag_actual;
             var pagesHTML = '';
             var cant_por_pag = 16;
             $("#divPaginacion").html("");
@@ -1010,7 +1005,7 @@ function ObtenerImgAprobar(estado, pagina) {
         ***REMOVED***
 
             $('.page_left').bind('click', function () {
-                var pagina_actual = $(this).attr("data-page");
+                pagina_actual = $(this).attr("data-page");
                 ObtenerImgAprobar("", pagina_actual);
         ***REMOVED***);
 
@@ -1092,7 +1087,7 @@ function ObtenerImgAprobar(estado, pagina) {
         ***REMOVED***
 
             $('#page_right,#page_left,.page_left').bind('click', function () {
-                var pagina_actual = $(this).attr("data-page");
+                pagina_actual = $(this).attr("data-page");
                 var estado = $("#divDetImg").attr("estado");
                 ObtenerImgAprobar(estado, pagina_actual);
         ***REMOVED***);
@@ -1176,7 +1171,7 @@ function ObtenerImgAprobar(estado, pagina) {
         ***REMOVED***
 
             $('#page_right,#page_left,.page_left').bind('click', function () {
-                var pagina_actual = $(this).attr("data-page");
+                pagina_actual = $(this).attr("data-page");
                 var estado = $("#divDetComent").attr("estado");
                 var asociacion = $("#divDetComent").attr("asoc");
                 $("#divDetComent").html("");
@@ -1190,7 +1185,7 @@ function ObtenerImgAprobar(estado, pagina) {
 
         function dibujaPaginacion(actual, total, totalPag) {
             var pag_actual = parseInt(actual);
-            var pagina_actual = pag_actual;
+            pagina_actual = pag_actual;
             var pagesHTML = '';
             var cant_por_pag = 2;
             $("#divPaginacion").html("");
@@ -1224,7 +1219,7 @@ function ObtenerImgAprobar(estado, pagina) {
 
             $('#page_right,#page_left').bind('click', function () {
                 d3.select("#divDetImg").html("");
-                var pagina_actual = $(this).attr("data-page");
+                pagina_actual = $(this).attr("data-page");
                 ObtenerImgAprobar("", pagina_actual);
         ***REMOVED***);
 
@@ -1271,11 +1266,15 @@ function ObtenerImgAprobCant() {
                 $("#tipologia_old_" + idcomentario).remove();
         ***REMOVED***
 
-            var param = "idcomentario=" + idcomentario;
-            var url = "/api/ServiciosParticipacion/GetTipologiaComentario";
-            Services.projectsList(url + "?" + param)
-                .done(function (data) {
-                    $("#divTipologiaComentario").show();
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "/api/ServiciosParticipacion/GetTipologiaComentario",
+                type: "GET",
+                data: {
+                    idcomentario: idcomentario
+            ***REMOVED***
+        ***REMOVED***).done(function (data) {
+                $("#divTipologiaComentario").show();
                     //---------------------------------------------
                     var div_com = d3.select("#divTipologiaComentario")
                     $("#divTipologiaComentario").html("");
@@ -1287,9 +1286,9 @@ function ObtenerImgAprobCant() {
                         div_content.attr("id", "divPost_" + idcomentario)
                         let tipologia_old = [];
                         for (var cont = 0; cont < data.itemcomentario.length; cont++) {
-                            var IdTipologia = data.itemcomentario[cont].IdTipologia;
-                            var Tipologia = data.itemcomentario[cont].Tipologia;
-                            var Relacion = data.itemcomentario[cont].Relacion;
+                            var IdTipologia = data.itemcomentario[cont].idTipologia;
+                            var Tipologia = data.itemcomentario[cont].tipologia;
+                            var Relacion = data.itemcomentario[cont].relacion;
 
                             var div_fila = div_content.append("div")
                                 .attr("class", "row")
@@ -1333,7 +1332,7 @@ function ObtenerImgAprobCant() {
 
 
         function ObtenerComentarios(estado, asociacion, pagina) {
-            var tipocomentario = 0;
+            tipocomentario = 0;
                     var param = {
                         "page": pagina,
                         "estado": estado,
@@ -1347,329 +1346,331 @@ function ObtenerImgAprobCant() {
                         url: "/api/ServiciosParticipacion/GetCometAprobar",
                         cache: false,
                         data: param,
-                        success: function (data)     {
-                            $("#divDetComent").attr("estado", estado);
-                            $("#divDetComent").attr("asoc", asociacion);
-
-                            var totalComentAprob = data.totalNumber;
-                            var totalPag = data.totalPages;
-                            $("#divComentarios").show();
-                            //---------------------------------------------
-                            var div_com = d3.select("#divDetComent")
-                            $("#divDetComent").show();
-                            $("#divDetComent").html("");
-                            if (data.itemcomentario.length > 0) {
-                                $("#divMensaje2").hide();
-
-                                for (var cont = 0; cont < data.itemcomentario.length; cont++) {
-                                    var id_comentario = data.itemcomentario[cont].idComentario;
-                                    var id_padre = data.itemcomentario[cont].comentarioRelacionado;
-                                    var d = new Date(data.itemcomentario[cont].fechaCreacion);
-                                    var fecha_actual = new Date();
-                                    var fecha_aux = pad(d.getDate(), 2) + "/" + pad(parseInt((d.getMonth()) + 1), 2) + "/" + d.getFullYear();
-                                    var difM = fecha_actual - d; // diferencia en milisegundos
-                                    var dif_dias = Math.trunc((difM / (1000 * 60 * 60 * 24))); // diferencia en dias
-                                    var idtextarea = "txtModera" + data.itemcomentario[cont].idComentario;
-                                    var idtextareaR = "txtRespuesta" + data.itemcomentario[cont].idComentario;
-                                    var encabezado = "";
-                                    var encabezado_aux = "";
-                                    var entidad_aux = "";
-                                    var entidad = "";
-                                    var municipio = "-";
-                                    if (data.itemcomentario[cont].nom_municipio != null) {
-                                        municipio = data.itemcomentario[cont].nom_municipio + " - " + data.itemcomentario[cont].nom_departamento;
-                                ***REMOVED***
-                                    var respuesta_aux = "Respuesta:";
-                                    if (data.itemcomentario[cont].nom_municipio != null) {
-                                        encabezado = data.itemcomentario[cont].nom_municipio + " - ";
-                                ***REMOVED***
-
-                                    if (data.itemcomentario[cont].idAsociacion == 3) {
-                                        entidad_aux = "CONTRATO";
-                                        encabezado_aux = "Contrato";
-                                        encabezado = data.itemcomentario[cont].codigoContrato;
-                                        logoresponde = "/content/img/PCM_Haciendapy.jpg";
-
-                                ***REMOVED*** else if (data.itemcomentario[cont].idAsociacion == 2) {
-                                        entidad_aux = "PROGRAMA";
-                                        encabezado_aux = "Programa";
-                                        encabezado = data.itemcomentario[cont].nombrePrograma;
-                                        logoresponde = "/content/img/PCM_Haciendapy.jpg";
-
-                                ***REMOVED*** else {
-                                        var nombreproy = data.itemcomentario[cont].nombreProyecto;
-                                        if (nombreproy != null) {
-                                            entidad_aux = "PROYECTO";
-                                            encabezado_aux = "Proyecto";
-                                            encabezado = nombreproy.toString();
-                                            logoresponde = "/content/img/PCM_profile.jpg";
-                                    ***REMOVED***
-                                ***REMOVED***
-                                    var textocomentario = "";
-                                    if (data.itemcomentario[cont].comentarioOriginal) {
-                                        textocomentario = data.itemcomentario[cont].comentarioOriginal.toString();
-                                ***REMOVED***
-                                    if (id_padre == null) {
-                                        var div_content = div_com.append("div")
-                                            .attr("class", "borderbox-Coments")
-                                        var div_fila = div_content.append("div")
-                                            .attr("class", "row")
-                                        var div_col = div_fila.append("div")
-                                            .attr("class", "col-md-12")
-                                        var div_info = div_col.append("div")
-                                            .attr("class", "Post_txt")
-
-                                        if (entidad_aux.toUpperCase() == "PROYECTO") {
-                                            div_info.append("a")
-                                                .attr("href", "../../projectprofile/" + data.itemcomentario[cont].idProyecto)
-                                                .attr("target", "_blank")
-                                                .append("span")
-                                                .attr("class", "text-bold")
-                                                .text(encabezado_aux)
-
-                                                .append("p")
-                                                .text(encabezado)
-                                    ***REMOVED***
-
-                                        if (entidad_aux.toUpperCase() == "PROGRAMA") {
-                                            div_info.append("a")
-                                                .attr("href", "../../covid/PerfilPrograma/?programa_id=" + data.itemcomentario[cont].idPrograma)
-                                                .attr("target", "_blank")
-                                                .append("span").attr("class", "text-bold").text(encabezado_aux)
-
-                                                .append("p").text(encabezado)
-                                    ***REMOVED***
-
-                                        if (entidad_aux.toUpperCase() == "CONTRATO") {
-                                            div_info.append("a")
-                                                .attr("href", "../../contratista/contratoprofile/?CodigoContrato=" + data.itemcomentario[cont].codigoContrato)
-                                                .attr("target", "_blank")
-                                                .append("span").attr("class", "text-bold").text(encabezado_aux)
-
-                                                .append("p").text(encabezado)
-                                    ***REMOVED***
-
-                                        var nombremostrar = "";
-                                        var emailmostrar = "";
-                                
-                                        if (data.itemcomentario[cont].email_usuario != undefined) {
-                                            emailmostrar = data.itemcomentario[cont].email_usuario.toString();
-                                    ***REMOVED***
-                                        if (data.itemcomentario[cont].nom_usuario != undefined) {
-                                            nombremostrar = data.itemcomentario[cont].nom_usuario.toString();
-                                    ***REMOVED***
-
-                                        if (data.itemcomentario[cont].anonimo) {
-                                            nombremostrar = "Anónimo"
-                                            emailmostrar = "Anónimo"
-                                    ***REMOVED***
-                                        var div_fila_aux = div_info.append("div")
-                                            .attr("class", "row")
-                                        var div_col1 = div_fila_aux.append("div")
-                                            .attr("class", "col-xs-4 col-md-4")
-                                        div_col1.append("span").attr("class", "text-bold").text("Fecha de Comentario:")
-                                        div_col1.append("p").text(fecha_aux + " ")
-                                            .append("span").attr("class", "badge").text("Hace " + dif_dias.toString() + " días")
-                                        var div_col2 = div_fila_aux.append("div")
-                                            .attr("class", "col-xs-4 col-md-4")
-                                        div_col2.append("span").attr("class", "text-bold").text("Desde donde escribe:")
-                                        div_col2.append("p").text(municipio)
-                                        var div_col3 = div_fila_aux.append("div")
-                                            .attr("class", "col-xs-4 col-md-4")
-                                        div_col3.append("span").attr("class", "text-bold").text("Estado:")
-                                        div_col3.append("p").text(data.itemcomentario[cont].nombreEstado.toString())
-                                        var div_fila_aux3 = div_info.append("div")
-                                            .attr("class", "row")
-                                        var div_col31 = div_fila_aux3.append("div")
-                                            .attr("class", "col-xs-6 col-md-4")
-                                        div_col31.append("span").attr("class", "text-bold").text("Nombre del Usuario:")
-                                        div_col31.append("p").text(nombremostrar)
-                                        var div_col32 = div_fila_aux3.append("div")
-                                            .attr("class", "col-xs-6 col-md-4")
-                                        div_col32.append("span").attr("class", "text-bold").text("Correo electrónico:")
-                                        div_col32.append("p").text(emailmostrar)
-                                        var div_col33 = div_fila_aux3.append("div")
-                                            .attr("class", "col-xs-6 col-md-4")
-                                        div_col33.append("span").attr("class", "text-bold").text("Género del Usuario:")
-                                        div_col33.append("p").text(data.itemcomentario[cont].genero_usuario)
-
-                                        var div_fila_aux2 = div_info.append("div")
-                                            .attr("class", "row")
-                                        var div_col23 = div_fila_aux2.append("div")
-                                            .attr("class", "col-xs-6 col-md-4")
-                                        div_col23.append("span").attr("class", "text-bold").text("Rol del Usuario:")
-                                        div_col23.append("p").text(data.itemcomentario[cont].rol_usuario)
-
-                                        var div_col21 = div_fila_aux2.append("div")
-                                            .attr("class", "col-xs-6 col-md-4")
-                                        div_col21.append("span").attr("class", "text-bold").text("Tipo de Comentario:")
-                                        div_col21.append("p").text(data.itemcomentario[cont].nombreTipoComentario)
-                                            .append("a").attr("class", "btn btn-link ")
-                                            .attr("idcoment", data.itemcomentario[cont].idComentario)
-                                            .attr("idTipoComentario", data.itemcomentario[cont].idTipoComentario)
-                                            .attr("id", "btnRecategorizar" + data.itemcomentario[cont].idTipoComentario)
-                                            .attr("role", "button")
-                                            .text("Recategorizar")
-                                        var div_col22 = div_fila_aux2.append("div")
-                                            .attr("class", "col-xs-6 col-md-4")
-                                        div_col22.append("span").attr("class", "text-bold").text("Tipología:")
-                                        div_col22.append("p").append("a").attr("class", "btn btn-link")
-                                            .attr("idcoment", data.itemcomentario[cont].idComentario)
-                                            .attr("id", "btnTipologia" + data.itemcomentario[cont].idComentario)
-                                            .attr("role", "button")
-                                            .text("Asignar Tipo de comentario")
+                        success: function (data) {
 
 
-                                        var div_fila2 = div_content.append("div")
-                                            .attr("class", "row")
-                                        var div_col4 = div_fila2.append("div")
-                                            .attr("class", "col-md-12")
-                                        var div_coment = div_col4.append("div")
-                                            .attr("class", "User_comment")
-                                        var usr_poster = div_coment.append("div")
-                                            .attr("class", "Post_user")
-                                        var usr_txt = usr_poster.append("div")
-                                            .attr("class", "Post_txt")
-                                            .append("p").text(" " + textocomentario)
-                                        var div_resp_ant = div_coment.append("div")
-                                            .attr("class", "respuestas_ant")
-                                            .attr("id", "divPadre_" + id_comentario)
+                    $("#divDetComent").attr("estado", estado);
+                    $("#divDetComent").attr("asoc", asociacion);
 
-                                ***REMOVED***
-                                    else {
+                    var totalComentAprob = data.totalNumber;
+                    var totalPag = data.totalPages;
+                    $("#divComentarios").show();
+                    //---------------------------------------------
+                    var div_com = d3.select("#divDetComent")
+                    $("#divDetComent").show();
+                    $("#divDetComent").html("");
+                    if (data.itemcomentario.length > 0) {
+                        $("#divMensaje2").hide();
 
-                                        var dividcomm = "#divPadre_" + id_padre;
-                                        var div_res = d3.select(dividcomm)
-                                        div_res.append("span")
-                                            .attr("class", "text-bold")
-                                            .text("Respuestas anteriores")
-                                        var div_gov = div_res.append("div")
-                                            .attr("class", "Gov_comment")
-                                        var usr_pic = div_gov.append("div")
-                                            .attr("class", "Pic_user")
-                                            .append("img")
-                                            .attr("src", logoresponde)
-                                        var usr_poster = div_gov.append("div")
-                                            .attr("class", "Post_user")
-                                        var usr_txt = usr_poster.append("div")
-                                            .attr("class", "Post_txt")
-                                            .append("text").text(" " + textocomentario)
-                                        var usr_date = usr_poster.append("div")
-                                            .attr("class", "Post_date")
-                                            .append("text").text("Fecha de Publicación: " + fecha_aux)
-                                ***REMOVED***
-
-
-                                    if (id_padre == null) {
-                                        var div_btn = div_col4.append("div")
-                                        if (data.itemcomentario[cont].IdEstado == 1) {
-                                            var div_det2 = div_btn.append("div")
-                                                .attr("class", "btnPublicar btn btn-default")
-                                                .attr("id", "btnPublicar" + data.itemcomentario[cont].idComentario)
-                                                .attr("role", "button")
-                                                .attr("idcoment", data.itemcomentario[cont].idComentario)
-                                                .attr("idusuario", data.itemcomentario[cont].idUsuario)
-                                                .attr("idproyecto", data.itemcomentario[cont].idProyecto)
-                                                .attr("idasociacion", data.itemcomentario[cont].idAsociacion)
-                                                .attr("idprograma", data.itemcomentario[cont].idPrograma)
-                                                .attr("codigoContrato", data.itemcomentario[cont].codigoContrato)
-                                            div_det2.append("span")
-                                                .attr("class", "glyphicon glyphicon-ok")
-                                            div_det2.append("p")
-                                                .text("Publicar")
-                                    ***REMOVED***
-                                        if (data.itemcomentario[cont].IdEstado != 4) {
-                                            var div_det1 = div_btn.append("div")
-                                                .attr("class", "btnEliminaC btn btn-default")
-                                                .attr("id", "btnEliminaC" + data.itemcomentario[cont].idComentario)
-                                                .attr("role", "button")
-                                                .attr("idcoment", data.itemcomentario[cont].idComentario)
-                                                .attr("idusuario", data.itemcomentario[cont].idUsuario)
-                                                .attr("idproyecto", data.itemcomentario[cont].idProyecto)
-                                                .attr("idasociacion", data.itemcomentario[cont].idAsociacion)
-                                                .attr("idprograma", data.itemcomentario[cont].idPrograma)
-                                                .attr("codigoContrato", data.itemcomentario[cont].codigoContrato)
-
-                                            div_det1.append("span")
-                                                .attr("class", "glyphicon glyphicon-remove")
-                                            div_det1.append("p")
-                                                .text("No Publicar")
-
-                                            //Respuesta
-
-                                            if (data.itemcomentario[cont].idEstado != 4) {
-                                                if (data.itemcomentario[cont].idEstado >= 5) {
-                                                    respuesta_aux = "Ampliar Respuesta:"
-                                            ***REMOVED***
-                                        ***REMOVED***
-                                            var div_fila3 = div_content.append("div")
-                                                .attr("class", "row")
-                                            var div_col5 = div_fila3.append("div")
-                                                .attr("class", "col-md-12")
-                                            var div_respuesta = div_col5.append("div")
-                                                .attr("class", "User_comment mt25")
-                                            var div_col4 = div_respuesta.append("div")
-                                            div_col4.append("span").attr("class", "text-bold").text(respuesta_aux)
-                                            var texto_rpta = div_col4.append("div")
-                                                .append("textarea")
-                                                .attr("id", idtextareaR)
-                                                .attr("rows", "4")
-                                                .attr("class", "form-control")
-                                            var tipobox = div_respuesta.append("div")
-                                                .attr("class", "tipoBox")
-                                            var labelbox1 = tipobox.append("div")
-                                                .attr("class", "radio dis_Inline")
-                                            var label1 = labelbox1.append("label")
-                                            label1.append("input").attr("type", "radio").attr("name", "optionsRadios" + idtextareaR)
-                                                .attr("id", "option1" + idtextareaR).attr("value", "option1").attr("checked", "true")
-                                            label1.append("p").text("Respuesta parcial")
-                                            var labelbox2 = tipobox.append("div")
-                                                .attr("class", "radio dis_Inline")
-                                            var label2 = labelbox2.append("label")
-                                            label2.append("input").attr("type", "radio").attr("name", "optionsRadios" + idtextareaR)
-                                                .attr("id", "option2" + idtextareaR).attr("value", "option2")
-                                            label2.append("p").text("Respuesta final")
-
-                                            var div_btn_contenedor = div_col5.append("div")
-                                            var div_btn = div_btn_contenedor.append("div")
-                                                .attr("class", "btnRespuesta btn btn-default")
-                                                .attr("id", "btnRespuesta" + data.itemcomentario[cont].idComentario)
-                                                .attr("role", "button")
-                                                .attr("idcoment", data.itemcomentario[cont].idComentario)
-                                                .attr("idproyecto", data.itemcomentario[cont].idProyecto)
-                                                .attr("idusuario", data.itemcomentario[cont].idUsuario)
-                                                .attr("idasociacion", data.itemcomentario[cont].idAsociacion)
-                                                .attr("idprograma", data.itemcomentario[cont].idPrograma)
-                                                .attr("codigoContrato", data.itemcomentario[cont].codigoContrato)
-
-                                            div_btn.append("i")
-                                                .attr("class", "material-icons md-18")
-                                            div_btn.append("p")
-                                                .text("Publicar Respuesta")
-                                    ***REMOVED***
-                                ***REMOVED***
-
-                                    configuraBtns(data.itemcomentario[cont].IdComentario);
-                            ***REMOVED***
-
-                                dibujarPagNumeradasComent(pagina, totalComentAprob, totalPag);
-
-                        ***REMOVED*** else {
-                                $("#divPaginacionComent").html("");
-                                $("#divPaginacionComent").hide();
-                                $("#divMensaje2").show();
-                                $("#divDetComent").show();
-
+                        for (var cont = 0; cont < data.itemcomentario.length; cont++) {
+                            var id_comentario = data.itemcomentario[cont].idComentario;
+                            var id_padre = data.itemcomentario[cont].comentarioRelacionado;
+                            var d = new Date(data.itemcomentario[cont].fechaCreacion);
+                            var fecha_actual = new Date();
+                            var fecha_aux = pad(d.getDate(), 2) + "/" + pad(parseInt((d.getMonth()) + 1), 2) + "/" + d.getFullYear();
+                            var difM = fecha_actual - d; // diferencia en milisegundos
+                            var dif_dias = Math.trunc((difM / (1000 * 60 * 60 * 24))); // diferencia en dias
+                            var idtextarea = "txtModera" + data.itemcomentario[cont].idComentario;
+                            var idtextareaR = "txtRespuesta" + data.itemcomentario[cont].idComentario;
+                            var encabezado = "";
+                            var encabezado_aux = "";
+                            var entidad_aux = "";
+                            var entidad = "";
+                            var municipio = "-";
+                            if (data.itemcomentario[cont].nom_municipio != null) {
+                                municipio = data.itemcomentario[cont].nom_municipio + " - " + data.itemcomentario[cont].nom_departamento;
+                        ***REMOVED***
+                            var respuesta_aux = "Respuesta:";
+                            if (data.itemcomentario[cont].nom_municipio != null) {
+                                encabezado = data.itemcomentario[cont].nom_municipio + " - ";
                         ***REMOVED***
 
-                            //if ($('#divComentarios').data('mask'))
-                            //    $('#divComentarios').data('mask').fadeOut(function () {
-                            //        $(this).remove();
+                            if (data.itemcomentario[cont].idAsociacion == 3) {
+                                entidad_aux = "CONTRATO";
+                                encabezado_aux = "Contrato";
+                                encabezado = data.itemcomentario[cont].codigoContrato;
+                                logoresponde = "/content/img/PCM_Haciendapy.jpg";
 
-                            //***REMOVED***);
+                        ***REMOVED*** else if (data.itemcomentario[cont].idAsociacion == 2) {
+                                entidad_aux = "PROGRAMA";
+                                encabezado_aux = "Programa";
+                                encabezado = data.itemcomentario[cont].nombrePrograma;
+                                logoresponde = "/content/img/PCM_Haciendapy.jpg";
+
+                        ***REMOVED*** else {
+                                var nombreproy = data.itemcomentario[cont].nombreProyecto;
+                                if (nombreproy != null) {
+                                    entidad_aux = "PROYECTO";
+                                    encabezado_aux = "Proyecto";
+                                    encabezado = nombreproy.toString();
+                                    logoresponde = "/content/img/PCM_profile.jpg";
+                            ***REMOVED***
+                        ***REMOVED***
+                            var textocomentario = "";
+                            if (data.itemcomentario[cont].comentarioOriginal) {
+                                textocomentario = data.itemcomentario[cont].comentarioOriginal.toString();
+                        ***REMOVED***
+                            if (id_padre == null) {
+                                var div_content = div_com.append("div")
+                                    .attr("class", "borderbox-Coments")
+                                var div_fila = div_content.append("div")
+                                    .attr("class", "row")
+                                var div_col = div_fila.append("div")
+                                    .attr("class", "col-md-12")
+                                var div_info = div_col.append("div")
+                                    .attr("class", "Post_txt")
+
+                                if (entidad_aux.toUpperCase() == "PROYECTO") {
+                                    div_info.append("a")
+                                        .attr("href", "../../projectprofile/" + data.itemcomentario[cont].idProyecto)
+                                        .attr("target", "_blank")
+                                        .append("span")
+                                        .attr("class", "text-bold")
+                                        .text(encabezado_aux)
+
+                                        .append("p")
+                                        .text(encabezado)
+                            ***REMOVED***
+
+                                if (entidad_aux.toUpperCase() == "PROGRAMA") {
+                                    div_info.append("a")
+                                        .attr("href", "../../covid/PerfilPrograma/?programa_id=" + data.itemcomentario[cont].idPrograma)
+                                        .attr("target", "_blank")
+                                        .append("span").attr("class", "text-bold").text(encabezado_aux)
+
+                                        .append("p").text(encabezado)
+                            ***REMOVED***
+
+                                if (entidad_aux.toUpperCase() == "CONTRATO") {
+                                    div_info.append("a")
+                                        .attr("href", "../../contrato/?CodigoContrato=" + data.itemcomentario[cont].codigoContrato)
+                                        .attr("target", "_blank")
+                                        .append("span").attr("class", "text-bold").text(encabezado_aux)
+
+                                        .append("p").text(encabezado)
+                            ***REMOVED***
+
+                                var nombremostrar = "";
+                                var emailmostrar = "";
+                                
+                                if (data.itemcomentario[cont].email_usuario != undefined) {
+                                    emailmostrar = data.itemcomentario[cont].email_usuario.toString();
+                            ***REMOVED***
+                                if (data.itemcomentario[cont].nom_usuario != undefined) {
+                                    nombremostrar = data.itemcomentario[cont].nom_usuario.toString();
+                            ***REMOVED***
+
+                                if (data.itemcomentario[cont].anonimo) {
+                                    nombremostrar = "Anónimo"
+                                    emailmostrar = "Anónimo"
+                            ***REMOVED***
+                                var div_fila_aux = div_info.append("div")
+                                    .attr("class", "row")
+                                var div_col1 = div_fila_aux.append("div")
+                                    .attr("class", "col-xs-4 col-md-4")
+                                div_col1.append("span").attr("class", "text-bold").text("Fecha de Comentario:")
+                                div_col1.append("p").text(fecha_aux + " ")
+                                    .append("span").attr("class", "badge").text("Hace " + dif_dias.toString() + " días")
+                                var div_col2 = div_fila_aux.append("div")
+                                    .attr("class", "col-xs-4 col-md-4")
+                                div_col2.append("span").attr("class", "text-bold").text("Desde donde escribe:")
+                                div_col2.append("p").text(municipio)
+                                var div_col3 = div_fila_aux.append("div")
+                                    .attr("class", "col-xs-4 col-md-4")
+                                div_col3.append("span").attr("class", "text-bold").text("Estado:")
+                                div_col3.append("p").text(data.itemcomentario[cont].nombreEstado.toString())
+                                var div_fila_aux3 = div_info.append("div")
+                                    .attr("class", "row")
+                                var div_col31 = div_fila_aux3.append("div")
+                                    .attr("class", "col-xs-6 col-md-4")
+                                div_col31.append("span").attr("class", "text-bold").text("Nombre del Usuario:")
+                                div_col31.append("p").text(nombremostrar)
+                                var div_col32 = div_fila_aux3.append("div")
+                                    .attr("class", "col-xs-6 col-md-4")
+                                div_col32.append("span").attr("class", "text-bold").text("Correo electrónico:")
+                                div_col32.append("p").text(emailmostrar)
+                                var div_col33 = div_fila_aux3.append("div")
+                                    .attr("class", "col-xs-6 col-md-4")
+                                div_col33.append("span").attr("class", "text-bold").text("Género del Usuario:")
+                                div_col33.append("p").text(data.itemcomentario[cont].genero_usuario)
+
+                                var div_fila_aux2 = div_info.append("div")
+                                    .attr("class", "row")
+                                var div_col23 = div_fila_aux2.append("div")
+                                    .attr("class", "col-xs-6 col-md-4")
+                                div_col23.append("span").attr("class", "text-bold").text("Rol del Usuario:")
+                                div_col23.append("p").text(data.itemcomentario[cont].rol_usuario)
+
+                                var div_col21 = div_fila_aux2.append("div")
+                                    .attr("class", "col-xs-6 col-md-4")
+                                div_col21.append("span").attr("class", "text-bold").text("Tipo de Comentario:")
+                                div_col21.append("p").text(data.itemcomentario[cont].nombreTipoComentario)
+                                    .append("a").attr("class", "btn btn-link ")
+                                    .attr("idcoment", data.itemcomentario[cont].idComentario)
+                                    .attr("idTipoComentario", data.itemcomentario[cont].idTipoComentario)
+                                    .attr("id", "btnRecategorizar" + data.itemcomentario[cont].idTipoComentario)
+                                    .attr("role", "button")
+                                    .text("Recategorizar")
+                                var div_col22 = div_fila_aux2.append("div")
+                                    .attr("class", "col-xs-6 col-md-4")
+                                div_col22.append("span").attr("class", "text-bold").text("Tipología:")
+                                div_col22.append("p").append("a").attr("class", "btn btn-link")
+                                    .attr("idcoment", data.itemcomentario[cont].idComentario)
+                                    .attr("id", "btnTipologia" + data.itemcomentario[cont].idComentario)
+                                    .attr("role", "button")
+                                    .text("Asignar Tipo de comentario")
+
+
+                                var div_fila2 = div_content.append("div")
+                                    .attr("class", "row")
+                                var div_col4 = div_fila2.append("div")
+                                    .attr("class", "col-md-12")
+                                var div_coment = div_col4.append("div")
+                                    .attr("class", "User_comment")
+                                var usr_poster = div_coment.append("div")
+                                    .attr("class", "Post_user")
+                                var usr_txt = usr_poster.append("div")
+                                    .attr("class", "Post_txt")
+                                    .append("p").text(" " + textocomentario)
+                                var div_resp_ant = div_coment.append("div")
+                                    .attr("class", "respuestas_ant")
+                                    .attr("id", "divPadre_" + id_comentario)
+
+                        ***REMOVED***
+                            else {
+
+                                var dividcomm = "#divPadre_" + id_padre;
+                                var div_res = d3.select(dividcomm)
+                                div_res.append("span")
+                                    .attr("class", "text-bold")
+                                    .text("Respuestas anteriores")
+                                var div_gov = div_res.append("div")
+                                    .attr("class", "Gov_comment")
+                                var usr_pic = div_gov.append("div")
+                                    .attr("class", "Pic_user")
+                                    .append("img")
+                                    .attr("src", logoresponde)
+                                var usr_poster = div_gov.append("div")
+                                    .attr("class", "Post_user")
+                                var usr_txt = usr_poster.append("div")
+                                    .attr("class", "Post_txt")
+                                    .append("text").text(" " + textocomentario)
+                                var usr_date = usr_poster.append("div")
+                                    .attr("class", "Post_date")
+                                    .append("text").text("Fecha de Publicación: " + fecha_aux)
+                        ***REMOVED***
+
+
+                            if (id_padre == null) {
+                                var div_btn = div_col4.append("div")
+                                if (data.itemcomentario[cont].idEstado == 1) {
+                                    var div_det2 = div_btn.append("div")
+                                        .attr("class", "btnPublicar btn btn-default")
+                                        .attr("id", "btnPublicar" + data.itemcomentario[cont].idComentario)
+                                        .attr("role", "button")
+                                        .attr("idcoment", data.itemcomentario[cont].idComentario)
+                                        .attr("idusuario", data.itemcomentario[cont].idUsuario)
+                                        .attr("idproyecto", data.itemcomentario[cont].idProyecto)
+                                        .attr("idasociacion", data.itemcomentario[cont].idAsociacion)
+                                        .attr("idprograma", data.itemcomentario[cont].idPrograma)
+                                        .attr("codigoContrato", data.itemcomentario[cont].codigoContrato)
+                                    div_det2.append("span")
+                                        .attr("class", "glyphicon glyphicon-ok")
+                                    div_det2.append("p")
+                                        .text("Publicar")
+                            ***REMOVED***
+                                if (data.itemcomentario[cont].idEstado != 4) {
+                                    var div_det1 = div_btn.append("div")
+                                        .attr("class", "btnEliminaC btn btn-default")
+                                        .attr("id", "btnEliminaC" + data.itemcomentario[cont].idComentario)
+                                        .attr("role", "button")
+                                        .attr("idcoment", data.itemcomentario[cont].idComentario)
+                                        .attr("idusuario", data.itemcomentario[cont].idUsuario)
+                                        .attr("idproyecto", data.itemcomentario[cont].idProyecto)
+                                        .attr("idasociacion", data.itemcomentario[cont].idAsociacion)
+                                        .attr("idprograma", data.itemcomentario[cont].idPrograma)
+                                        .attr("codigoContrato", data.itemcomentario[cont].codigoContrato)
+
+                                    div_det1.append("span")
+                                        .attr("class", "glyphicon glyphicon-remove")
+                                    div_det1.append("p")
+                                        .text("No Publicar")
+
+                                    //Respuesta
+
+                                    if (data.itemcomentario[cont].idEstado != 4) {
+                                        if (data.itemcomentario[cont].idEstado >= 5) {
+                                            respuesta_aux = "Ampliar Respuesta:"
+                                    ***REMOVED***
+                                ***REMOVED***
+                                    var div_fila3 = div_content.append("div")
+                                        .attr("class", "row")
+                                    var div_col5 = div_fila3.append("div")
+                                        .attr("class", "col-md-12")
+                                    var div_respuesta = div_col5.append("div")
+                                        .attr("class", "User_comment mt25")
+                                    var div_col4 = div_respuesta.append("div")
+                                    div_col4.append("span").attr("class", "text-bold").text(respuesta_aux)
+                                    var texto_rpta = div_col4.append("div")
+                                        .append("textarea")
+                                        .attr("id", idtextareaR)
+                                        .attr("rows", "4")
+                                        .attr("class", "form-control")
+                                    var tipobox = div_respuesta.append("div")
+                                        .attr("class", "tipoBox")
+                                    var labelbox1 = tipobox.append("div")
+                                        .attr("class", "radio dis_Inline")
+                                    var label1 = labelbox1.append("label")
+                                    label1.append("input").attr("type", "radio").attr("name", "optionsRadios" + idtextareaR)
+                                        .attr("id", "option1" + idtextareaR).attr("value", "option1").attr("checked", "true")
+                                    label1.append("p").text("Respuesta parcial")
+                                    var labelbox2 = tipobox.append("div")
+                                        .attr("class", "radio dis_Inline")
+                                    var label2 = labelbox2.append("label")
+                                    label2.append("input").attr("type", "radio").attr("name", "optionsRadios" + idtextareaR)
+                                        .attr("id", "option2" + idtextareaR).attr("value", "option2")
+                                    label2.append("p").text("Respuesta final")
+
+                                    var div_btn_contenedor = div_col5.append("div")
+                                    var div_btn = div_btn_contenedor.append("div")
+                                        .attr("class", "btnRespuesta btn btn-default")
+                                        .attr("id", "btnRespuesta" + data.itemcomentario[cont].idComentario)
+                                        .attr("role", "button")
+                                        .attr("idcoment", data.itemcomentario[cont].idComentario)
+                                        .attr("idproyecto", data.itemcomentario[cont].idProyecto)
+                                        .attr("idusuario", data.itemcomentario[cont].idUsuario)
+                                        .attr("idasociacion", data.itemcomentario[cont].idAsociacion)
+                                        .attr("idprograma", data.itemcomentario[cont].idPrograma)
+                                        .attr("codigoContrato", data.itemcomentario[cont].codigoContrato)
+
+                                    div_btn.append("i")
+                                        .attr("class", "material-icons md-18")
+                                    div_btn.append("p")
+                                        .text("Publicar Respuesta")
+                            ***REMOVED***
+                        ***REMOVED***
+
+                            configuraBtns(data.itemcomentario[cont].idComentario);
+                    ***REMOVED***
+
+                        dibujarPagNumeradasComent(pagina, totalComentAprob, totalPag);
+
+                ***REMOVED*** else {
+                        $("#divPaginacionComent").html("");
+                        $("#divPaginacionComent").hide();
+                        $("#divMensaje2").show();
+                        $("#divDetComent").show();
+
+                ***REMOVED***
+
+                    //if ($('#divComentarios').data('mask'))
+                    //    $('#divComentarios').data('mask').fadeOut(function () {
+                    //        $(this).remove();
+
+                    //***REMOVED***);
 
                     ***REMOVED***
-                ***REMOVED***);
+            ***REMOVED***);
     ***REMOVED***
 
         function CambiaTipologiaComentario(idcomentario, tipologia) {
@@ -1726,7 +1727,7 @@ function validaEmail(cadena) {
 ***REMOVED***
 
 function validaEnteroMayorCero(cadena) {
-    if (cadena.match(/^[1-9]*$/)) {
+    if (cadena.match(/^[1-9]+[0-9]*$/)) {
         return true;
 ***REMOVED*** else {
         return false;

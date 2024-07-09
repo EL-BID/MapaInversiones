@@ -1,8 +1,6 @@
 ﻿@page
 @inject OrchardCore.IOrchardHelper Orchard
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; ***REMOVED***
 
 <!--MAIN BANNER-->
 <section class="banner-main">
@@ -17,8 +15,7 @@
                                 <a href="\">Inicio</a>
                                 <i class="material-icons md-18">chevron_right</i>
                             </li>
-                            <li><a href="#!">Presupuestos</a><i class="material-icons md-18">chevron_right</i></li>
-                            <li>Presupuestos Ciudadanos</li>
+                            <li>¿Cómo se elabora el presupuesto y cuál es su Marco Normativo?</li>
                         </ul>
                     </div>
                 </div>
@@ -31,94 +28,304 @@
             <div class="col-lg-8">
                 <div class="banner-main-info">
                     <div class="banner-main-title">
-                        <h1>Presupuestos Ciudadanos</h1>
+                        <h1>¿Cómo se elabora el Presupuesto General del Estado y cuál es su Marco Normativo?</h1>
                     </div>
                     <div class="banner-main-desc">
-
-                        <p>El Presupuesto Ciudadano es una iniciativa del Gobierno dirigida a toda la ciudadanía hondureña que se presenta como un documento no técnico del presupuesto cuya intención es que las personas conozcan los planes del gobierno y estos sean más claros y transparentes.</p>
-
+                        <p>El proceso para elaborar el presupuesto está definido por un marco normativo, en el cual se alienan los recursos financieros y los planes institucionales para atender las necesidades de la sociedad civil.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </section>
-    <!--OBJETIVO ESTRATEGICO-->
-    <!--1.Qué es el Presupuesto General de la Nación-->
-    <section>
-        <div class="container">
-            <div class="row">
-            <div class="col-lg-12 embed-responsive embed-responsive-16by9">
-                <iframe title="Presupuesto Ciudadano" class="embed-responsive-item" id="pciuda" style="border: none; width: 100%; margin-left: auto; margin-right: auto;" src="https://pportalgobierno.com/" width="1400" height="1400" allowfullscreen="allowfullscreen">
-                        <br />
-                    </iframe>
+</section>
+<!--PRESUPUESTO-->
+<!--1.Qué es el Presupuesto General del Estado-->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="section-heading text-center">
+                    <h2>Actividades para la aprobación del presupuesto</h2>
                 </div>
+            </div>
+
+        </div>
+        <!-- etapa 1-->
+        <div class="row-etapa blue-phase">
+            <div class="wrap-stage">
+                <div class="img-container"><img src="img/ic-stage1.svg" alt="icono decorativo relacionado a Fase 1 del presupuesto" /></div>
+                <h3>Programación y formulación</h3>
+            </div>
+            <div class="wrap-task">
+                <div class="entidad-related">MEF-DIPRENA</div>
+                <div class="img-container"></div>
+                <span class="h5">FASE 1</span>
+                <ul>
+                    <li>Formulación MFMP</li>
+                    <li>Programación MGMP y Política Presupuestaria, visión del MPMP</li>
+                </ul>
+            </div>
+            <div class="wrap-task">
+                <div class="entidad-related">INSTITUCIONES</div>
+                <div class="img-container"></div>
+                <span class="h5">FASE 2</span>
+                <ul>
+                    <li>
+                        Formulación MPMP institucional MMD, POA, PBR- plurianual
+                    </li>
+                </ul>
             </div>
         </div>
-    </section>
-<!--RELATED INFO-->
-<section class="relatedInfo">
-    <div class="container">
-        <!--LINKS OTRAS SECCIONES-->
-        <div class="row py-5">
-            <!--LEFT COLUMN-->
-            <div class="col-lg-8">
-                <!--LINKS seccion infografia planificacion-->
-                <h2>Conoce</h2>
-                <div class="wrap-cta">
-                    <a href="/PresupuestoGeneral" target="_blank" class="py-5 mb-5 px-0">
-                        <div class="h4">Presupuestos de la República<i class="material-icons md-18">arrow_forward</i> </div>
-                    </a>
-                    <a href="/ProcesoPresupuesto" target="_blank" class="py-5 mb-5 px-0">
-                        <div class="h4">Presupuestos Ciudadanos<i class="material-icons md-18">arrow_forward</i> </div>
-                    </a>
-                </div><br />
-                <h2>Explora</h2>
-                <div class="wrap-cta">
-                    <a href="../Entidades" class="py-5 mb-5 px-0">
-                        <div class="h4">Ir a Instituciones <i class="material-icons md-18">arrow_forward</i> </div>
-                    </a>
-                </div>
+        <!-- etapa 2-->
+        <div class="row-etapa orange-phase">
+            <div class="wrap-stage">
+                <div class="img-container"><img src="img/ic-stage2.svg" alt="icono decorativo relacionado a Fase 2 del presupuesto" /></div>
+                <h3>Discusión y aprobación</h3>
             </div>
-            <div class="col-lg-4">
-                <div class="wrap-cta">
-                    <p class="card-title mb-4">Información suministrada por:</p>
-                    <a href="https://www.dominioentidad.com/" target="_blank" rel="noopener" >
-                        <img class="img-fluid" src="../img/logoHaciendaP.png" alt="ir a SEFIN" />
-                </div>
+            <div class="wrap-task">
+                <div class="entidad-related">MEF-DIPRENA</div>
+                <div class="img-container"></div>
+                <span class="h5">FASE 3</span>
+                <p>Vistas presupuestarias, instituciones en el MEF/DIPRENA</p>
 
+            </div>
+            <div class="wrap-task">
+                <div class="entidad-related">MEF-DIPRENA</div>
+                <div class="img-container"></div>
+                <span class="h5">FASE 4</span>
+                <p>Presentación del Borrador del Proyecto de Presupuesto General del Estado al equipo fiscal y Aprobación del Ministro</p>
+            </div>
+            <div class="wrap-task">
+                <div class="entidad-related">ORGANO EJECUTIVO</div>
+                <div class="img-container"></div>
+                <span class="h5">FASE 5</span>
+                <p>Aprobación al consejo de Gabinete del Proyecto de PGE</p>
+            </div>
+            <div class="wrap-task">
+                <div class="entidad-related">ORGANO LEGISLATIVO</div>
+                <div class="img-container"></div>
+                <span class="h5">FASE 6</span>
+                <p>Vistas presupuestarias comisión de presupuesto con las entidades públicas</p>
+            </div>
+        </div>
+
+        <!-- etapa 3-->
+        <div class="row-etapa orange-phase">
+            <div class="wrap-stage vis-hidden">
+                <div class="img-container"><img src="img/ic-stage3.svg" alt="icono decorativo relacionado a Fase 3 del presupuesto" /></div>
+                <h3></h3>
+            </div>
+            <div class="wrap-task">
+                <div class="entidad-related">MEF-DIPRENA</div>
+                <div class="img-container"></div>
+                <span class="h5">FASE 7</span>
+                <p>Modificación, Aprobación o Rechazo del PGE</p>
+            </div>
+            <div class="wrap-task">
+                <div class="entidad-related">INSTITUCIONES</div>
+                <div class="img-container"></div>
+                <span class="h5">FASE 8</span>
+                <p>Sanción y publicación del PGE en la gaceta oficial</p>
             </div>
         </div>
 
     </div>
 </section>
 
-    <!-- Call to action-->
-    <!--HELP CENTER SHORTCUT-->
-    <div id="helpCenter"></div>
-    <script src="js/comunes_infografias.js"></script>
+<!--CICLO PRESUPUESTARIO-->
+<!--2.el ciclo presupuestario-->
+<section class="section section-bg3 bg-docs">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="section-heading text-center">
+                    <h2>Marco Normativo que sustenta el Sistema Presupuestario</h2>
+                </div>
+                <p>El marco normativo presupuestario es un conjunto de leyes, decretos y políticas que establecen las normas y principios que deben seguirse, para garantizar la eficiencia, la transparencia y la equidad. </p>
+            </div>
+        </div>
+        <div class="row justify-content-center py-3 linked-docs">
+            <div class="col-lg-9">
 
-    <script>
-        $(document).ready(function () {
-            //GetEntidadesPresupuesto();
-            GetEntidadesPresupuestoNoAlcaldias();
-    ***REMOVED***);
+                <div class="row justify-content-center">
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow h-100">
+                            <span class="h6">Constitución Política de la República de Panamá de 1972</span>
+                            <a class="btn btn-cards btn-outlined" href="#" target="_blank">
+                                <span>Ver documento</span>
+                                <i class="material-icons md-24">open_in_new</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow h-100">
+                            <span class="h6">Código Fiscal de la República de Panamá</span>
+                            <a class="btn btn-cards btn-outlined" href="#" target="_blank">
+                                <span>Ver documento</span>
+                                <i class="material-icons md-24">open_in_new</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow h-100">
+                            <span class="h6">
+                                Ley Orgánica de la Contraloría General de la República
+                            </span>
+                            <a class="btn btn-cards btn-outlined" href="#" target="_blank">
+                                <span>Ver documento</span>
+                                <i class="material-icons md-24">open_in_new</i>
+                            </a>
+                        </div>
+                    </div>
 
-        window.onscroll = function () { myFunction() ***REMOVED***;
+                </div>
+                <div class="row justify-content-center py-3">
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow h-100">
+                            <span class="h6">
+                                Ley 97  que crea el Ministerio de Economía y Finanzas.
+                            </span>
+                            <a class="btn btn-cards btn-outlined" href="#" target="_blank">
+                                <span>Ver documento</span>
+                                <i class="material-icons md-24">open_in_new</i>
+                            </a>
+                        </div>
 
-        var header = document.getElementById("navs-header");
-        var sticky = header.offsetTop;
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow h-100">
+                            <span class="h6">
+                                Decreto Ley de  7 de julio  de 2009 que crea el Consejo Económico Nacional (CENA).
+                            </span>
+                            <a class="btn btn-cards btn-outlined" href="#" target="_blank">
+                                <span>Ver documento</span>
+                                <i class="material-icons md-24">open_in_new</i>
+                            </a>
+                        </div>
 
-        function myFunction() {
-            if (window.pageYOffset > sticky) {
-                header.classList.add("sticky");
-                header.classList.add("bg-white");
-        ***REMOVED*** else {
-                header.classList.remove("sticky");
-                header.classList.remove("bg-white");
-        ***REMOVED***
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow h-100">
+                            <span class="h6">
+                                Ley N°20 de 7 de mayo de 2002 que dicta medidas de Reactivación Económica y de Responsabilidad Fiscal.
+                            </span>
+                            <a class="btn btn-cards btn-outlined" href="#" target="_blank">
+                                <span>Ver documento</span>
+                                <i class="material-icons md-24">open_in_new</i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row justify-content-center py-3">
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow h-100">
+                            <span class="h6">
+                                Ley 34 de 5 de junio de 2008 de Responsabilidad Social Fiscal (LRSF).
+                            </span>
+                            <a class="btn btn-cards btn-outlined" href="#" target="_blank">
+                                <span>Ver documento</span>
+                                <i class="material-icons md-24">open_in_new</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow h-100">
+                            <span class="h6">
+                                Decreto Ejecutivo No. 50 de 26 de junio de 2009 (Reglamentación de LRSF).
+                            </span>
+                            <a class="btn btn-cards btn-outlined" href="#" target="_blank">
+                                <span>Ver documento</span>
+                                <i class="material-icons md-24">open_in_new</i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow h-100">
+                            <span class="h6">
+                                Reglamentación del Procedimiento en el trámite de las Modificaciones al PGE (Traslados, se encuentra en confección para el 2020 por parte del MEF).
+                            </span>
+                            <a class="btn btn-cards btn-outlined" href="#" target="_blank">
+                                <span>Ver documento</span>
+                                <i class="material-icons md-24">open_in_new</i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row justify-content-left py-3">
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow h-100">
+                            <span class="h6">
+                                Ley 110 del 12 de noviembre de 2019 – Ley PGE de la vigencia fiscal 2020.
+                            </span>
+                            <a class="btn btn-cards btn-outlined" href="#" target="_blank">
+                                <span>Ver documento</span>
+                                <i class="material-icons md-24">open_in_new</i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+</section>
+
+<!--TE PUEDE INTERESAR-->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="section-heading text-center">
+                <h2>Te puede Interesar...</h2>
+            </div>
+        </div>
+        <div class="row justify-content-right">
+            <div class="col-lg-8">
+                <p class="h3">¿Sabías que el sector Salud es el sector con mayor asignación presupuestal en 2023?</p>
+                <p>Conoce el monto asignado y explora más sectores con su respectiva asignación presupuestal.</p>
+                <a class="btn btn-cards">
+                    <span>Ver presupuesto 2023</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to action-->
+<!--HELP CENTER SHORTCUT-->
+<div id="helpCenter"></div>
+<script src="js/comunes_infografias.js"></script>
+
+<script>
+    $(document).ready(function () {
+        //GetEntidadesPresupuesto();
+        GetEntidadesPresupuestoNoAlcaldias();
+***REMOVED***);
+
+    window.onscroll = function () { myFunction() ***REMOVED***;
+
+    var header = document.getElementById("navs-header");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+            header.classList.add("bg-white");
+    ***REMOVED*** else {
+            header.classList.remove("sticky");
+            header.classList.remove("bg-white");
     ***REMOVED***
-    </script>
+***REMOVED***
+</script>
 
 
 

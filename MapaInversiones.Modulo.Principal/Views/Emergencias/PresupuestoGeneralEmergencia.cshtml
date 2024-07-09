@@ -1,0 +1,273 @@
+﻿@model PlataformaTransparencia.Modelos.Emergencia.ModelPresupuestoGeneralEmergenciaData
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+***REMOVED***
+ @{
+    var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
+    var LabelContratos = "";
+    var TituloContratos = "";
+    System.IFormatProvider culture =
+        new System.Globalization.CultureInfo("es-RD");
+***REMOVED***
+@foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
+{
+    if (@etiqueta.AliasPart.Alias == "PresupuestoGeneralEmergencias")
+    {
+        LabelContratos = @etiqueta.HtmlBodyPart.Html;
+        TituloContratos = @etiqueta.TitlePart.Title;
+***REMOVED***
+***REMOVED***
+
+
+
+
+<head>
+    <style>
+    .node rect {
+        cursor: move;
+        fill-opacity: .8;
+        shape-rendering: crispEdges;
+***REMOVED***
+
+    .node text {
+        pointer-events: none;
+        /*text-shadow: 0 1px 0 #fff;*/
+***REMOVED***
+
+    .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .1;
+***REMOVED***
+
+        .link:hover {
+            stroke-opacity: .2;
+    ***REMOVED***
+
+    .arc text {
+        font: 12px sans-serif;
+        text-anchor: middle;
+        font-weight: bold;
+***REMOVED***
+
+    .arc path {
+        stroke: #fff;
+***REMOVED***
+
+    .toolTip {
+        position: absolute;
+        display: none;
+        width: auto;
+        height: auto;
+        background: none repeat scroll 0 0 white;
+        border: 0 none;
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font: 12px sans-serif;
+        padding: 5px;
+        text-align: center;
+***REMOVED***
+</style
+</head>
+
+<section id="s0" class="banner-main">
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>Emergencias  <i class="material-icons md-18">chevron_right</i></li>
+                            <li>Presupuesto General</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+        <!-- Landing Section -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h1 id="nomLocation">Presupuesto <span id="anioPresupuestoEmergencias"> </span> General Emergencias</h1>
+                       
+                    </div>
+                   <div class="banner-main-desc">
+                        <p>Productos bienes y servicios</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+        </div>
+</section>
+
+        <section class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <div class="section-heading heading-left">
+                           <h2>Presupuesto</h2>
+                        </div>
+                         <div class="banner-main-desc">
+                            <p>La apropiación presupuestal cubre la atención de todas las emergencias incluyendo huracanes y lluvias a nivel general y por  institución</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="headTit mb-0">
+                <div class="row justify-content-center">
+                    <div class="col-lg-2 text-center">
+                        <div class="form-group">
+                            <label for="filtro_desglose_proc form-control">Año a Consultar</label>
+
+                            <select class="form-select selDesgloseProc" aria-label="Selecciona un año" id="filtro_anio_pres_general" onchange="anioChanged()">
+                                @foreach (var item in Model.Anios)
+                                {
+                                    <option value=@item> @item</option>
+                            ***REMOVED***
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row-cards-stacked-alert">
+                        <div class="wrap-data-contract text-center">
+                            <span class="bigNumber" id="presupuestoAsignadoPorAnio"></span>
+                            <span class="label">Presupuesto asignado</span>
+                        </div>
+                        <div class="wrap-data-contract text-center">
+                            <span class="bigNumber" id="presupuestoEjecutadoPorAnio"></span>
+                            <span class="label">Presupuesto ejecutado</span>
+                        </div>
+                        <div class="wrap-data-contract text-center">
+                            <span class="bigNumber" id="porcentajeEjecutadoPorAnio"></span>
+                            <span class="label">% Ejecutado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+
+            <div class="row">
+                    <div class="col-lg-10">
+                        <div class="section-heading heading-left">
+                           <h2>Presupuesto <span id="anioPresupuestoEjecutadoEmergencias"> </span> Ejecutado por Emergencia</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="headTit mb-0">
+                    
+                </div>
+                <!--PROCESOS CON MAYORES ADJUDICACIONES Y CONTRATOS-->
+                <div class="row section">
+                    <div class="col-lg-12">
+                        <div class="card-carusel-wrap">
+                            <div id="divResumenProcesos" class="project-carusel carouselData" data-flickity='{"initialIndex": 0, "pageDots": false, "groupCells": true, "contain": true, "prevNextButtons": true , "freeScroll":true,"wrapAround":false, "setGallerySize": false ***REMOVED***'></div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                
+
+            </div>
+        </section>
+        <section class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading heading-left">
+                                <h2>Presupuesto <span id="anioPresupuestoEntidad"> </span> para atender emergencias asignado por entidad</h2>
+                           </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- VIEW OPTIONS-->
+                        <div id="divPresupuestoGeneralAsignado">
+                            <!--TABLA COMPARATIVA-->
+                            <input type="hidden" id="migapanlistado" value="" />
+                            <div class="comparativeTable" id="divPresupuestoGeneralAsignadoPorEntidad">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--GRAFICA TREEMAP-->
+        <section id="secGrafica">
+            <div class="container">
+                <div class="col-md-12">
+                         <div class="section-heading heading-left">
+                          <h2>Organismo Financiador</h2>
+                        </div>
+                         <div class="banner-main-desc">
+                            <p>Explora la distribución de las fuentes internas y externas de los recursos, destinados a cubrir todas las emergencias incluyendo huracanes y lluvias</p>
+                        </div>
+                    </div>
+                <div id="contenido">
+                    <!--PRESUPUESTO Y AVANCE-->
+                    <div class="wrap_avance">
+                        <!--OPCIONES GRAFICA-->
+                        <div id="divOptionsGraficaPresupuestoGeneral">
+                          
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="wrap_sankey">
+                                        <div id="sankey_presupuesto_general" style="width: 100%; height: auto;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--CIERRE DIV CONTENIDO-->
+                </div>
+            </div>
+        </section>
+
+
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<link rel="stylesheet" href="js/jquery-ui-range/jquery-ui.min.jsjquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+<script src="js/presupuestogeneralemergencia_aux.js"></script>
+<script src="~/Content/dist/js/lib/D3/d3.min.js" charset="utf-8"></script>
+<script src="~/content/dist/js/lib/D3/d3plus.js"></script>
+<script src="~/content/dist/js/sankey.js"></script>
+
+
+@section DataBody {
+        data-presupuestoGeneralPerAnio='[@foreach (var item in @Model.PresupuestoGeneralPorAnios)
+    {
+        <text>
+            {"anio":"@item.Anio","presupuestoAsignado":"@item.PresupuestoAsignado", "presupuestoEjecutado": "@item.PresupuestoEjecutado", "porcentajeAvance": "@item.PorcentajeAvance"***REMOVED***@if (item != @Model.PresupuestoGeneralPorAnios.Last())
+            {
+                <text>,</text>
+        ***REMOVED***
+        </text>
+***REMOVED***]'
+
+        data-presupuestoEjecutadoPorEmergencias='[@foreach (var item in @Model.PresupuestoEjecutadoPorEmergencias)
+    {
+        <text>
+            {"anio":"@item.Anio","nombre":"@item.Nombre", "presupuestoEjecutado": "@item.PresupuestoEjecutado", "enlace": "@item.Enlace"***REMOVED***@if (item != @Model.PresupuestoEjecutadoPorEmergencias.Last())
+            {
+                <text>,</text>
+        ***REMOVED***
+        </text>
+***REMOVED***]'
+
+***REMOVED***
+

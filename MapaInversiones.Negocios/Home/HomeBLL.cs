@@ -1,0 +1,410 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using DataModels;
+using LinqToDB.DataProvider.Informix;
+using PlataformaTransparencia.Infrastructura.DataModels;
+using PlataformaTransparencia.Modelos;
+using PlataformaTransparencia.Modelos.Proyectos;
+using PlataformaTransparencia.Modelos.Home;
+using PlataformaTransparencia.Negocios.RepositorioConsultas;
+using ModelContratistaData = PlataformaTransparencia.Modelos.ModelContratistaData;
+using PlataformaTransparencia.Modelos.Comunes;
+using LinqToDB;
+using System.Security.Cryptography;
+using SolrNet.Utils;
+
+namespace PlataformaTransparencia.Negocios.Home
+{
+  public class HomeBLL : IHomeBLL
+  {
+    /// <summary>
+    /// Capa de negocio para funciones Home - Page principal
+    /// </summary>
+
+    private readonly TransparenciaDB _connection;
+
+    public HomeBLL(TransparenciaDB connection)
+    {
+      _connection = connection;
+***REMOVED***
+
+    public ModelContratistaData ObtenerDatosContratosGestion(int? tipoEmergencia, string Entidad = null)
+    {
+      ModelContratistaData objReturn = new();
+      int? numProcesosCancelados = 0;
+      decimal? valProcesosCancelados = 0;
+      objReturn.listTotalContratos = ConsultasComunes.ObtenerEncabezadoGestionContratos(tipoEmergencia, Entidad);
+      objReturn.listTotalProcesos = ConsultasComunes.ObtenerEncabezadoProcesosGestionContratos(out numProcesosCancelados, out valProcesosCancelados, tipoEmergencia, Entidad);
+      objReturn.numProcesosCancelados = numProcesosCancelados;
+      objReturn.valProcesosCancelados = valProcesosCancelados;
+      objReturn.numContratos = objReturn.listTotalContratos.Sum(a => a.NroContratos);
+      objReturn.valorContratos = objReturn.listTotalContratos.Sum(a => a.ValorContratado);
+      objReturn.numProcesos = objReturn.listTotalProcesos.Sum(a => a.NroProcesos);
+      objReturn.valorProcesos = (decimal?)objReturn.listTotalProcesos.Sum(a => a.ValorProceso);
+      return objReturn;
+***REMOVED***
+
+    public ModelHomeData ObtenerDatosModeloInicio(bool esHome = true)
+    {
+      ModelHomeData objReturn = new();
+      if (!esHome)
+      {
+        return objReturn;
+  ***REMOVED***
+
+      string maxPeriod_presupuesto = _connection.VwPresupuesto.Max(x => x.Periodo).ToString().Substring(0, 4);
+      int anyo_max;
+            if (int.TryParse(maxPeriod_presupuesto, out anyo_max) ==false) {
+                anyo_max = 0; 
+        ***REMOVED***
+
+      objReturn.countOngoingProjects = GetCantProyActivos();
+      objReturn.valPresupuestoEncabezado = GetCantidadesPresupuesto();
+      objReturn.aniospresupuesto = GetAniosPresupuesto();
+      objReturn.fuentesporAnnios = GetFuentesAniosPresupuesto();
+      objReturn.MaxAnnioContratos = objReturn.valPresupuestoEncabezado.AnioActual.ToString();
+      objReturn.MaxAnnioEntidades = maxPeriod_presupuesto.ToString();
+      objReturn.Entidades = GetConsolidadoEntidades();
+      objReturn.contprocesoscontratos = GetContadorProcesosContratos(anyo_max);
+
+            objReturn.Status = true;
+
+      return objReturn;
+***REMOVED***
+
+        /// <summary>
+        /// Funcion que retorna las n primeras entidades con mayor valor vigente para el año más actual, pendiente definir la cantidad de entidades
+        /// </summary>
+        /// <returns></returns>
+        public List<InfoEntidadesConsolida> GetConsolidadoEntidades()
+        {
+
+            var objReturn = new List<InfoEntidadesConsolida>();
+
+            int maxyear = DateTime.Now.Year;
+            maxyear = _connection.VwPresupuesto.Max(x => x.Periodo);
+
+
+            var result = (from info in _connection.VwPresupuesto
+                          where info.Periodo == maxyear
+                          group info by new
+                          {
+                              info.CodigoInstitucion,
+                              info.Institucion
+
+                      ***REMOVED*** into g
+                          select new InfoEntidadesConsolida
+                          {
+                              id = g.Key.CodigoInstitucion.ToString(),
+                              labelGroup = g.Key.Institucion,
+                              label="",
+                              avance = ((decimal)g.Sum(x => x.EjecucionAcumulada)),
+                              asignado = ((decimal)g.Sum(x => x.Vigente))
+                      ***REMOVED***
+     ).ToList();
+
+            if (result != null)
+            {
+                var long_aux = result.Count();
+                for (var i = 0; i < long_aux; i++)
+                {
+                    if (result[i].asignado > 0)
+                    {
+                        result[i].porcentaje = Math.Round(((decimal)(result[i].avance / result[i].asignado) * 100), 2);
+                ***REMOVED***
+            ***REMOVED***
+
+                if (long_aux >= 8)
+                {
+                    objReturn = result.OrderByDescending(x => x.avance).Take(8).ToList();
+            ***REMOVED***
+                else
+                {
+                    objReturn = result.OrderByDescending(x => x.avance).Take(long_aux).ToList();
+            ***REMOVED***
+        ***REMOVED***
+
+            return objReturn;
+
+
+    ***REMOVED***
+
+
+        public itemConteoProjects GetCantProyActivos()
+    {
+      itemConteoProjects objReturn = new();
+      var consulta = (from info in _connection.VwProyectosAprobadosInvs
+                      join he in _connection.HistoriaEstados
+                      on info.IdProyecto equals he.IdProyecto
+                      where he.ActualSiNo == true
+                      where he.IdEstado == 1
+                      select new InfoProyectos
+                      {
+                        IdProyecto = info.IdProyecto,
+                        approvedTotalMoney = info.VlrTotalProyectoFuenteRegalias
+                  ***REMOVED***).Distinct().ToList();
+
+      objReturn.cantidad = consulta.Count();
+      objReturn.costo = (double)consulta.Sum(x => x.approvedTotalMoney);
+
+      return objReturn;
+
+***REMOVED***
+
+        public InfoPresupuestoEncabezado GetCantidadesPresupuesto()
+        {
+            InfoPresupuestoEncabezado objReturn = new();
+            var consulta = (from info in _connection.VwPresupuesto
+                            join ct in _connection.CatalogoTiempoes
+                            on info.Periodo.ToString() equals ct.Periodo
+                            group info by new { ct.Año ***REMOVED*** into g
+
+                            select new
+                            {
+                                Anio = g.Key.Año,
+                                AprobadoTotal = g.Sum(x => x.Vigente)
+                        ***REMOVED***).OrderByDescending(x => x.Anio).ToList();
+
+            objReturn.AnioActual = consulta[0].Anio;
+            objReturn.PresupuestoActual = (double)consulta[0].AprobadoTotal; 
+            objReturn.AnioAnterior = consulta[1].Anio;
+            objReturn.PresupuestoAnterior = (double)consulta[1].AprobadoTotal;
+            objReturn.Porcentaje = (100-(objReturn.PresupuestoActual * 100/objReturn.PresupuestoAnterior))*-1;
+            return objReturn;
+
+    ***REMOVED***
+
+        public InfoPresupuestoEncabezado GetContadorProcesosContratos(int periodo)
+        {
+            InfoPresupuestoEncabezado objReturn = new();
+            var consulta = (from info in _connection.VwProcesosXProyectosInstitucionesAnios
+                            where info.EstadoProceso == "Proceso adjudicado y celebrado"
+                            && info.AnioPresupuesto==periodo
+                            select new 
+                            {
+                                procesos = info.Codigoproceso
+                        ***REMOVED***).Distinct().ToList();
+            var consulta2 = (from info in _connection.VwContratosXProyectosInstitucionesAnios
+                             where info.EstadoContrato == "Activo"
+                            && info.AnioPresupuesto==periodo
+                            select new
+                            {
+                                bpin = info.Bpin
+                        ***REMOVED***).Distinct().ToList();
+            var consulta3 = (from info in _connection.VwContratosXProyectosInstitucionesAnios
+                             
+                             where info.EstadoContrato == "Cerrado"
+                             select new
+                             {
+                                 bpin = info.Bpin
+                         ***REMOVED***).Distinct().ToList();
+
+            objReturn.CantProcesosAdjudicados = consulta.Count();
+            objReturn.CantContratosActivos = consulta2.Count(); ;
+            objReturn.CantContratosCerrados = consulta3.Count(); ;
+           
+            return objReturn;
+
+    ***REMOVED***
+        
+
+        public List<string> GetAniosPresupuesto()
+        {
+            List<string> objReturn = new List<string>();
+             objReturn = (from info in _connection.VwPresupuesto
+                            join ct in _connection.CatalogoTiempoes
+                            on info.Periodo.ToString() equals ct.Periodo
+                            group info by new { ct.Año ***REMOVED*** into g
+                            orderby g.Key.Año descending
+                            select  g.Key.Año.ToString()
+                            ).ToList();
+            return objReturn;
+    ***REMOVED***
+
+        public List<InfoFuentesporAnnio> GetFuentesAniosPresupuesto()
+        {
+            //Use mathround para corregir un error del json de comas, revisar como arreglarlo
+            List <InfoFuentesporAnnio> objReturn = new();
+            var consulta = (from info in _connection.VwPresupuesto
+                            join ct in _connection.CatalogoTiempoes
+                            on info.Periodo.ToString() equals ct.Periodo
+                            group info by new { ct.Año,info.CodigoFuenteDeFinanciamiento,info.FuenteDeFinanciamiento
+                        ***REMOVED*** into g
+                            select new InfoFuentesporAnnio
+                            {
+                                Anio = g.Key.Año,
+                                CodigoFuente = g.Key.CodigoFuenteDeFinanciamiento,
+                                Fuente = g.Key.FuenteDeFinanciamiento,
+                                ValorAprobado = Math.Round(g.Sum(x => x.Aprobado.Value)),
+                                ValorVigente = Math.Round(g.Sum(x => x.Vigente.Value))
+                        ***REMOVED***).OrderByDescending(x => x.Anio).ThenByDescending(x => x.ValorVigente).ToList();
+            objReturn = consulta;
+            return objReturn;
+
+    ***REMOVED***
+
+        public List<InfoProyectos> GetProyectosPrioritarios()
+    {
+      List<InfoProyectos> objReturn = new();
+      var query = (from info in _connection.VwProyectosAprobadosInvs
+                   where info.VlrTotalProyectoFuenteRegalias > 0
+                   orderby info.VlrTotalProyectoFuenteRegalias descending
+                   select new InfoProyectos
+                   {
+                     IdProyecto = info.IdProyecto,
+                     NombreProyecto = info.NombreProyecto.Replace("\r\n", "").Replace("\n", "").Replace("\r", ""),
+                     approvedTotalMoney = info.VlrTotalProyectoFuenteRegalias,
+                     porcentajeGastado = info.AvanceFinanciero.Value,
+                     UrlImagen = info.URLImagen,
+                     NombreSector = info.NombreSector,
+                     IdSector = info.IdSector,
+                     cantidadFotos = info.NumeroImagenes,
+                     MesInicioProyecto = info.MesInicioProyecto,
+                     AnioInicioProyecto = info.AnioInicioProyecto,
+                     MesFinProyecto = info.MesFinProyecto,
+                     AnioFinProyecto = info.AnioFinProyecto,
+                     FechaInicioProyecto = info.FechaInicioProyecto,
+                     Megusta = info.MeGusta,
+                     Comentarios = info.Comentarios
+               ***REMOVED***).Take(10).ToList();
+
+
+      if (query.Count > 0)
+      {
+        objReturn = query;
+  ***REMOVED***
+
+      return objReturn;
+
+***REMOVED***
+
+    public List<InfoProjectPerSector> ObtenerProyectoPorSectorGroupHome(int anyo)
+    {
+
+      itemEstado obj_aux = new();
+      List<InfoProjectPerSector> objReturn = new();
+
+            var ProjectsPerSectoresQuery = (from presupuesto in _connection.VwPresupuesto
+                                            join ct in _connection.CatalogoTiempoes on presupuesto.Periodo.ToString() equals ct.Periodo
+                                            join iconos in _connection.VwEstadoImagenes on presupuesto.Sector equals iconos.NombreSector
+                                            where ct.Año==anyo
+                                            group new { presupuesto,iconos ***REMOVED*** by new {
+                                                presupuesto.Sector,
+                                                iconos.ImgSector,
+                                                presupuesto.IdSector
+                                        ***REMOVED*** into g
+                                           select new InfoProjectPerSector
+                                          {
+                                              url_imagen = "/img/" + g.Key.ImgSector,
+                                              idSector = g.Max(x => x.iconos.MostrarSector) == 1 ? g.Key.IdSector : 0,
+                                              label = g.Key.Sector,
+                                              labelGroup = g.Max(x => x.iconos.MostrarSector) == 1 ? g.Key.Sector : "OTROS",
+                                              rawValue = ((decimal)g.Sum(x => x.presupuesto.Vigente.Value)),
+                                              ordenGroup = g.Max(x=>x.iconos.MostrarSector) == 1 ? 0 : 1,
+                                              orden= g.Max(x => x.iconos.MostrarSector)
+                                       ***REMOVED***).OrderByDescending(x => x.rawValue).ToList();
+
+
+
+            objReturn = ProjectsPerSectoresQuery;
+            return objReturn;
+
+***REMOVED***
+
+        public List<InfoOrganismosFinan> ObtenerOrganismosPorFuenteHome(string Annio, int IdFuente)
+        {
+            List<InfoOrganismosFinan> objReturn = new List<InfoOrganismosFinan>();
+            var consulta1 = (from info in _connection.VwPresupuesto
+                            join ct in _connection.CatalogoTiempoes
+                            on info.Periodo.ToString() equals ct.Periodo
+                            where info.CodigoFuenteDeFinanciamiento == IdFuente
+                            where ct.Año.ToString() == Annio
+                            group info by new
+                            {
+                                ct.Año,
+                                info.CodigoOrganismoFinanciador,
+                                info.OrganismoFinanciador
+                        ***REMOVED*** into g
+                            select new InfoOrganismosFinan
+                            {
+                                Anio = g.Key.Año,
+                                CodigoOrganismoFinanciador = g.Key.CodigoOrganismoFinanciador,
+                                OrganismoFinanciador = g.Key.OrganismoFinanciador,
+                                ValorAprobado = ((double)g.Sum(x => x.Aprobado.Value)),
+                                ValorVigente = ((double)g.Sum(x => x.Vigente.Value))
+                        ***REMOVED***);
+            
+            var consulta2 = (from info in _connection.VwPresupuestoXProyInvs
+                             join ct in _connection.CatalogoTiempoes
+                            on info.Periodo.ToString() equals ct.Periodo
+                            where info.CodigoFuenteDeFinanciamiento == IdFuente
+                            where ct.Año.ToString() == Annio
+                            group info by new
+                            {
+                                ct.Año,
+                                info.CodigoOrganismoFinanciador,
+                                info.OrganismoFinanciador,
+                        ***REMOVED*** into g
+                            select new InfoOrganismosFinan
+                            {
+                                Anio = g.Key.Año,
+                                CodigoOrganismoFinanciador = g.Key.CodigoOrganismoFinanciador,
+                                OrganismoFinanciador = g.Key.OrganismoFinanciador,
+                                NumeroProyectos = (double)(g.Select(m => new { m.Bpin, m.Nombreproyecto, m.IdProyecto ***REMOVED***)).Distinct().Count()
+                        ***REMOVED***);
+            var consulta = (from c1 in consulta1
+                            from c2 in consulta2.LeftJoin(pr => pr.CodigoOrganismoFinanciador == c1.CodigoOrganismoFinanciador)
+                            select new InfoOrganismosFinan
+                            {
+                                Anio = c1.Anio,
+                                CodigoOrganismoFinanciador = c1.CodigoOrganismoFinanciador,
+                                OrganismoFinanciador = c1.OrganismoFinanciador,
+                                ValorAprobado = c1.ValorAprobado,
+                                ValorVigente = c1.ValorVigente,
+                                NumeroProyectos = c2.NumeroProyectos,
+                        ***REMOVED***).OrderByDescending(x => x.Anio).ThenByDescending(x => x.ValorAprobado).ToList();
+
+                            
+            objReturn = consulta;
+            return objReturn;
+
+    ***REMOVED***
+
+
+
+
+        public List<HierarchyModel> GetSearchHierarchyModel()
+    {
+      var objResultParamList = (from p in _connection.SearchResultParams
+                                select new SearchResultParamModel
+                                {
+                                  Hierarchy = p.Hierarchy,
+                                  Type = p.Type,
+                                  Id = p.Id,
+                                  Url = p.Url,
+                                  Param = p.Param
+                            ***REMOVED***).ToList();
+
+      var objReturn = new List<HierarchyModel>();
+
+      foreach (var item in objResultParamList)
+      {
+        if (!objReturn.Exists(x => x.Hierarchy.Equals(item.Hierarchy)))
+        {
+          objReturn.Add(new HierarchyModel { Hierarchy = item.Hierarchy, ListaTipos = (from p in objResultParamList where p.Hierarchy.Equals(item.Hierarchy) select new TypeModel { Type = p.Type ***REMOVED***).ToList() ***REMOVED***);
+    ***REMOVED***
+  ***REMOVED***
+
+      return objReturn;
+***REMOVED***
+    public class itemEstado
+    {
+      public int orden { get; set; ***REMOVED***
+      public string nombre { get; set; ***REMOVED***
+      public string alias { get; set; ***REMOVED***
+***REMOVED***
+
+
+  ***REMOVED***
+***REMOVED***

@@ -1,0 +1,292 @@
+﻿@model PlataformaTransparencia.Modelos.OrganismoFinanciador.ModelDetalleFinanciador
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+***REMOVED***
+<head>
+    <style>
+        .node rect {
+            cursor: pointer;
+            fill-opacity: .8;
+            shape-rendering: crispEdges;
+    ***REMOVED***
+
+            .node rect:hover {
+                fill: #CF2E2E
+        ***REMOVED***
+
+        .node text {
+            pointer-events: none;
+            /*text-shadow: 0 1px 0 #fff;*/
+    ***REMOVED***
+
+        .link {
+            fill: none;
+            stroke: #000;
+            stroke-opacity: .1;
+    ***REMOVED***
+
+            .link:hover {
+                stroke-opacity: .2;
+        ***REMOVED***
+
+        .arc text {
+            font: 12px sans-serif;
+            text-anchor: middle;
+            font-weight: bold;
+    ***REMOVED***
+
+        .arc path {
+            stroke: #fff;
+    ***REMOVED***
+
+        .toolTip {
+            position: absolute;
+            display: none;
+            width: auto;
+            height: auto;
+            background: none repeat scroll 0 0 white;
+            border: 0 none;
+            border-radius: 8px 8px 8px 8px;
+            box-shadow: -3px 3px 15px #888888;
+            color: red;
+            font: 12px sans-serif;
+            padding: 5px;
+            text-align: center;
+    ***REMOVED***
+
+        .seccion-breadcrumb {
+            display: none;
+    ***REMOVED***
+
+    </style>
+</head>
+<section class="banner-main">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>@Model.Nombre</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title mb-0">
+                        <h1>@Model.Nombre</h1>
+                    </div>
+                    <div class="banner-main-desc">
+                        <span class="h5">Organismo Financiador</span>
+                    </div>
+                    <div id="codigo_financiador" hidden>
+                        @Model.Codigo
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!--SELECT AÑO-->
+        <div class="row justify-content-center">
+            <div class="col-lg-4">
+                <!--YEAR FILTER-->
+                <div class="form-group">
+                    <label for="top_contratos_periodos">Selecciona un año:</label>
+                    <select class="form-select" id="anios_financiador" onchange="anioSeleccionadoFinanciador(this);">
+                        @if (Model.Anios.Count() > 0)
+                        {
+                            foreach (var item in Model.Anios)
+                            {
+                                if (item == Model.AnioSelected)
+                                {
+                                    <text>
+                                    <option value="@item" selected>@item</option>
+                                    </text>
+                            ***REMOVED***
+                                else
+                                {
+                                    <text>
+                                    <option value="@item">@item</option>
+                                    </text>
+                            ***REMOVED***
+                        ***REMOVED***
+                    ***REMOVED***
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<!--Inicio Contenido Pagina-->
+<section class="section">
+    <div class="container">
+        <div class="section-heading heading-left">
+            <h2 class="mb-0">
+                Información general
+            </h2>
+        </div>
+        <!--NuevaEstructura 2-->
+        <div class="row justify-content-center py-4 mb-4">
+            <div class="col-lg-10">
+                <div id="detalleMontoProyectosOrganismoFinanciador" class="row justify-content-center mb-4">
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-12 text-center">
+                        <h4>Estado de los proyectos </h4>
+                        <div id="detalleEstadoProyectosOrganismoFinanciador" class="row justify-content-center py-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Fin Nueva Estructura 2-->
+        <!---NuevaEstrucutura-->
+        <section class="section">
+            <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading heading-left">
+                    <h2 class="mb-0">
+                        Sectores con proyectos financiados
+                    </h2>
+                </div>
+                <div class="section-subheading">
+                    <p>Haz clic en cada uno de los recuadros (sectores) para conocer el número de proyectos financiados.</p>
+                </div>
+                <div class="row">
+                    <div class="offset-1 col-md-10 col-sm-10">
+                        <div class="pChart">
+                            <div id="divGraphSectorPorFinanciadorAnio"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+        <section class="section">
+            <div class="row mt-4">
+                <div class="col-lg-12">
+                    <div class="section-heading heading-left">
+                        <h2 class="mb-0">
+                            Trazabilidad del presupuesto
+                        </h2>
+                    </div>
+                    <div class="section-subheading">
+                        <p>Conoce el flujo de los recursos aportados desde su orígen hasta los proyectos que se están financiando con dichos recursos. </p>
+                    </div>
+                   @* <div> Aca la grafica</div>*@
+                    <div class="row justify-content-center mt-4 mb-4" id="divPerOrganismoTab">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card shadow border-0 card-entidad">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <span class="h4">Monto Financiado</span><br />
+                                            <span class="presvalor2" id="totalSankeyPerOrganismo"></span>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <span class="h4">Ejecutado</span><br />
+                                            <span class="presvalor2" id="PorcEjecPerOrganismo"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="hint-help">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-4">
+                                        <div class="wrap-hint-section">
+                                            <div class="wrap-icon-hint">
+                                                <img src="../img/ic-sankey1.svg" alt="icono decorativo relacionado a la acción" />
+                                            </div>
+                                            <div class="text-hint">
+                                                <span class="text-bold">Haz clic en cada columna</span> para identificar rápidamente la distribución de recursos en las diferentes etapas (Sector, Institución y proyectos de inversión).
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="wrap-hint-section">
+                                            <div class="wrap-icon-hint"><img src="../img/ic-sankey2.svg" alt="icono decorativo relacionado a desplazar el cursor" /></div>
+                                            <div class="text-hint">
+                                                <span class="text-bold">Desplaza el cursor sobre las lineas que conectan las columnas</span> para conocer el monto de los recursos que fluyen entre si.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--VISTA EXTENDIDA O COMPACTA-->
+                            <div class="control-switch" style="display:none;">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="tipoVistaSankey" id="vistaExtendida" value="extendida">
+                                    <label class="form-check-label" for="vistaExtendida">Vista extendida</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="tipoVistaSankey" id="vistaCompacta" value="compacta" checked>
+                                    <label class="form-check-label" for="vistaCompacta">Vista compacta</label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 mt-4 mb-4">
+                            <div class="wrap_sankey">
+                                <div class="quick-hint">
+                                    <div id="miDiv">
+                                        <span class="text-bold">Haz clic en cada columna para identificar la distribución de recursos.</span>
+                                        <div class="arrow-clip"><img src="../img/black-arrow-down.svg" alt="haga clic en las columnas" /></div>
+                                    </div>
+                                </div>
+                                <button id="btnAtras">Atrás</button>
+                                <div id="sankey_basic" style="width: 100%; height: auto;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="tabs-container">
+                            <div class="main-Content py-5">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h4 id="lst_proyectos_sector" class="mb-2 prestitle">Listado de proyectos financiados por este organismo</h4>
+                                        <!--Listado-->
+                                        <div id="table_proyectos_financiador_annio" class="comparativeTable">
+                                        </div>
+                                        <!--Fin Listado-->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="divPaginator"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</section>
+<!--Fin contenido Pagina-->
+@section Scripts {
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+    <script src="/content/dist/js/sankey.js"></script>
+    <script src="js/detalle_financiador_aux.js"></script>
+***REMOVED***

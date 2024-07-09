@@ -6,15 +6,19 @@ using Microsoft.Extensions.Logging;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
 using PlataformaTransparencia.Modelos.Comunes;
+using PlataformaTransparencia.Modelos.Proyectos;
 using PlataformaTransparencia.Negocios.Comunes;
 using PlataformaTransparencia.Negocios.Project;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing.Imaging;
 
 namespace PlataformaTransparencia.Modulo.Principal.Controllers
 {
@@ -100,6 +104,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 if (!string.IsNullOrEmpty(parameters["IdProyecto"]))
                 {
                     var itemcomentario = part.ObtenerComentariosProyAsync(Int32.Parse(parameters["IdProyecto"]));
+                    objReturn.itemcomentario = itemcomentario;
+                    objReturn.Status = true;
+            ***REMOVED***
+
+        ***REMOVED***
+            else if (parameters.Keys.Contains<string>("CodigoContrato"))
+            {
+                if (!string.IsNullOrEmpty(parameters["CodigoContrato"]))
+                {
+                    var itemcomentario = part.ObtenerComentariosContAsync(parameters["CodigoContrato"]);
                     objReturn.itemcomentario = itemcomentario;
                     objReturn.Status = true;
             ***REMOVED***
@@ -253,48 +267,45 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         {
             string url_local = obtUrlLocal();
             string key = "";
-            //key += SHA256Encripta(id_usuario) + "_p_" + id_proyecto.ToString() + "_p_" + id_programa.ToString() + "_p_" + CodigoContrato;
-            key += SHA256Encripta(id_usuario) + "_p_" + id_proyecto.ToString();
+            key += SHA256Encripta(id_usuario) + "_p_" + id_proyecto.ToString() + "_p_" + id_programa.ToString() + "_p_" + CodigoContrato;
             string path_aux = Path.Combine(_hostingEnvironment.WebRootPath, "content", "img", "logoMIV.png");
-            //string path = HttpContext.Current.Server.MapPath(@"../../content/img/logoMIV.png"); // my logo is placed in images folder
-            //LinkedResource logo = new LinkedResource(path_aux);
-            //logo.ContentId = "companylogo";
+ 
 
             string mensaje = "";
             mensaje += "<html>";
             mensaje += "<head>";
-            mensaje += "<title>Participa- Notificaciones</title>";
-            mensaje += "<style>a{color:#fff; text-decoration:underline***REMOVED***";
-            mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#0A0629;***REMOVED***";
+            mensaje += "<title>MapaInversiones - Notificaciones</title>";
+            mensaje += "<style>a{color:#0D3B59; text-decoration:underline***REMOVED***";
+            mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;***REMOVED***";
             mensaje += "</style>";
             mensaje += "</head>";
-            mensaje += "<body style=\"background-color:#0A0629; font-family:'Arial', Helvetica, sans-serif; border-top:2px solid #0A0629; margin:0; padding:0\">";
-            mensaje += "<div style=\"background:#f9f9f9; width:700px; color:#0A0629; margin:0 auto\">";
+            mensaje += "<body style=\"background-color:#fff; font-family:'Arial', Helvetica, sans-serif; margin:0; padding:0\">";
+            mensaje += "<div style=\"background:#ffffff; width:700px; color:#0D284B; margin:0 auto\">";
             mensaje += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">";
-            mensaje += "<tr><td style=\"text-align:left;height:80px; padding-left:15px; border-bottom:3px solid #E14D20; \"><a href=\"\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"Mapa Inversiones \" width=\"200px\"/></a></td>";
+            mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:3px solid #ccc; \"><a href=\"\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"Mapa Inversiones\" width=\"280px\"/></a></td>";
             mensaje += "</tr>";
             mensaje += "<tr><td><div style=\"width:100%; margin:0 auto; text-align:center\">";
             mensaje += "<table width=\"100%\" style=\"text-align:left\">";
-            mensaje += "<tr><td colspan=\"2\"><h2 style=\"text-align:center; font-size:40px; font-weight:bold; margin-top:10px; margin-bottom:10px\">Verifica tu Cuenta</h2></td></tr>";
+            mensaje += "<tr><td colspan=\"2\"><h2 style=\"text-align:center; font-size:40px; font-weight:bold; margin-top:10px; margin-bottom:0px\">Verifica tu Cuenta</h2></td></tr>";
             mensaje += "<tr>";
-            mensaje += "<td valign=\"bottom\"><img src=\"" + url_local + "/content/img/icono.jpg\" alt=\"Icono de Notificacion Participa\" width=\"250px\"/></td>";
+            mensaje += "<td valign=\"bottom\"><img src=\"" + url_local + "/content/img/icono.jpg\" alt=\"Icono de Notificacion MapaInversiones\" width=\"250px\"/></td>";
             mensaje += "<td style=\"padding-left:25px\">";
-            mensaje += "<p>Te has Registrado, para participar debes validar tu correo</p>";
-            mensaje += "<p style=\"text-align:left; margin:50px auto\"><a href=\"" + url_local + "/VerificaCuenta/" + key + "\" style=\"background-color:#E14D20; color:#fff; padding:15px 25px; border:3px solid #D0441C\">Verificar Cuenta</a></p>";
-            mensaje += "<table style=\"width:100%; margin:15px auto; text-align:center; border:1px solid #ccc; padding:5px; font-style:italic; font-size:12px\">";
-            mensaje += "<tr><td><img src=\"" + url_local + "/content/img/iconoReminder.jpg\" style=\"float:left; margin-bottom:15px; display:block; width:50px\"/></td>";
-            mensaje += "<td><p style=\"text-align:left\"> Recuerda, las opiniones publicadas pueden ser anónimas </p></td>";
+            mensaje += "<p>Te has Registrado en MapaInversiones, para participar debes validar tu correo</p>";
+            mensaje += "<p style=\"text-align:left; margin:50px auto\"><a href=\"" + url_local + "/VerificaCuenta/" + key + "\" style=\"background-color:#2e528d; color:#fff; padding:15px 25px;\">Verificar Cuenta</a></p>";
+            mensaje += "<table style=\"width:100%; text-align:center; border:1px solid #ccc; padding:5px; font-style:italic; font-size:12px\">";
+            mensaje += "<tr><td><img src=\"" + url_local + "/content/img/iconoReminder.jpg\" style=\"float:left; margin-bottom:5px; display:block; width:50px\"/></td>";
+            mensaje += "<td><p style=\"text-align:left\"> Recuerda, las opiniones publicadas en MapaInversiones pueden ser anónimas </p></td>";
             mensaje += "</tr>";
             mensaje += "</table>";
             mensaje += "</td>";
             mensaje += "</tr>";
             mensaje += "</table>";
             mensaje += "</div></td></tr>";
-            mensaje += "<tr><td style=\"background-color:#141839 ; text-align:center; padding:10px 0px\">";
-            mensaje += "<a href=\"" + url_local + "\"><img src=\"" + url_local + "/content/img/LogosFooter_email.jpg\"/></a> </td></tr>";
-            mensaje += "</table>";
+            mensaje += "<tr><td style=\"text-align:center; padding:40px 0px\">";
+            mensaje += "<img src=\"" + url_local + "/content/img/footer.jpg\"/> </td></tr>";
+            mensaje += "</tbody></table>";
             mensaje += "</div>";
-            mensaje += "<table style=\"width:700px; margin:0 auto; font-size:11px; color:#241588\"><tr><td style=\"text-align:center\">";
+            mensaje += "<table style=\"width:700px; margin:0 auto; font-size:11px;\"><tr><td style=\"text-align:center\">";
             mensaje += "TODOS LOS DERECHOS RESERVADOS</td></tr></table>";
             mensaje += "</body>";
             mensaje += "</html>";
@@ -311,7 +322,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         {
             ModelDataParticipacion objReturn = new ModelDataParticipacion();
             ParticipacionCiudadana part = new ParticipacionCiudadana(_connection);
-            string outTxt = part.GuardarComentario(params_com.IdUsuario, params_com.IdProyecto, params_com.IdAsociacion, params_com.IdTipoComentario, params_com.ComentarioOriginal, params_com.Anonimo, params_com.IdEstado, params_com.ComentarioRelacionado, params_com.id_departamento, params_com.id_municipio);
+            string outTxt = part.GuardarComentario(params_com.IdUsuario, params_com.IdProyecto, params_com.IdAsociacion, params_com.IdTipoComentario, params_com.ComentarioOriginal, params_com.Anonimo, params_com.IdEstado, params_com.ComentarioRelacionado, params_com.id_departamento, params_com.id_municipio, params_com.CodigoContrato, params_com.TipoSubsidio);
             string[] separador = new string[] { "<||>" ***REMOVED***;
             var idUsuario = HttpContext.Session.GetString("IdUsuario");
             var result = outTxt.Split(separador, StringSplitOptions.None);
@@ -377,12 +388,9 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             string urlproyecto = "";
             if (IdAsociacion == 3)
             {
-                urlproyecto = url_local + "/contratista/contratoprofile/?CodigoContrato=" + CodigoContrato;
+                urlproyecto = url_local + "/contrato?codcontrato=" + CodigoContrato;
         ***REMOVED***
-            else if (IdAsociacion == 2)
-            {
-                urlproyecto = url_local + "/covid/PerfilPrograma/?programa_id=" + IdPrograma;
-        ***REMOVED***
+            
             else if (IdAsociacion == 1)
             {
                 urlproyecto = url_local + "/PerfilProyecto/" + idproyecto;
@@ -391,25 +399,25 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             string mensaje = "";
             mensaje += "<html>";
             mensaje += "<head>";
-            mensaje += "<title>Participa - ";
+            mensaje += "<title>MapaInversiones - ";
             mensaje += titulo;
             mensaje += "</title>";
-            mensaje += "<style>a{color:#fff; text-decoration:underline***REMOVED***";
-            mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#0A0629;***REMOVED***";
+            mensaje += "<style>a{color:#0D3B59; text-decoration:underline***REMOVED***";
+            mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;***REMOVED***";
             mensaje += "</style>";
             mensaje += "</head>";
-            mensaje += "<body style=\"background-color:#0A0629; font-family:'Arial', Helvetica, sans-serif; border-top:2px solid #0A0629; margin:0; padding:0\">";
-            mensaje += "<div style=\"background:#f9f9f9; width:700px; color:#0A0629; margin:0 auto\">";
+            mensaje += "<body style=\"background-color:#fff; font-family:'Arial', Helvetica, sans-serif; margin:0; padding:0\">";
+            mensaje += "<div style=\"background:#ffffff; width:700px; color:#0D284B; margin:0 auto\">";
             mensaje += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">";
-            mensaje += "<tr><td style=\"text-align:left;height:80px; padding-left:15px; border-bottom:1px solid #E14D20; \"><a href=\"\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"Participa\" width=\"200px\"/></a></td>";
+            mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:1px solid #ccc; \"><a href=\"" + url_local + "\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"MapaInversiones\" width=\"280px\"/></a></td>";
             mensaje += "</tr>";
             mensaje += "<tr><td><div style=\"width:100%; margin:0 auto; text-align:center\">";
             mensaje += "<table width=\"100%\" style=\"text-align:left\">";
-            mensaje += "<tr><td colspan=\"2\"><h2 style=\"text-align:center; font-size:35px; font-weight:bold; margin-top:10px; margin-bottom:10px\">";
+            mensaje += "<tr><td colspan=\"2\"><h2 style=\"text-align:center; font-size:40px; font-weight:bold; margin-top:40px; margin-bottom:40px\">";
             mensaje += saludo;
             mensaje += "</h2></td></tr>";
             mensaje += "<tr>";
-            mensaje += "<td><img src=\"" + url_local + "/content/img/icono2.jpg\" alt=\"Icono de Notificación Participa\" width=\"250px\"/></td>";
+            mensaje += "<td><img src=\"" + url_local + "/content/img/icono2.jpg\" alt=\"Icono de Notificación MapaInversiones\" width=\"250px\"/></td>";
             mensaje += "<td style=\"padding-left:25px\">";
             mensaje += "<p>";
             mensaje += txtmensaje;
@@ -434,7 +442,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             {
                 mensaje += "<table style=\"width:100%; margin:15px auto; text-align:center; border:1px solid #ccc; padding:5px; font-style:italic; font-size:12px\">";
                 mensaje += "<tr><td><img src=\"" + url_local + "/content/img/iconoReminder.jpg\" style=\"float:left; margin-bottom:15px; display:block; width:50px\"/></td>";
-                mensaje += "<td><p style=\"text-align:left\"> Se informa que los comentarios de su participación antes de ser publicados son validados por Participa. Si desea, su opinión puede ser anónima. </p></td>";
+                mensaje += "<td><p style=\"text-align:left\"> Se informa que los comentarios de su participación antes de ser publicados son validados por MapaInversiones. Si desea, su opinión puede ser anónima. </p></td>";
                 mensaje += "</tr>";
                 mensaje += "</table>";
         ***REMOVED***
@@ -442,11 +450,11 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             mensaje += "</tr>";
             mensaje += "</table>";
             mensaje += "</div></td></tr>";
-            mensaje += "<tr><td style=\"background-color:#141839 ; text-align:center; padding:10px 0px\">";
-            mensaje += "<a href=\"" + url_local + "\"><img src=\"" + url_local + "/content/img/LogosFooter_email.jpg\"/></a> </td></tr>";
-            mensaje += "</table>";
+            mensaje += "<tr><td style=\"text-align:center; \" colspan=\"2\">";
+            mensaje += "<img src=\"" + url_local + "/content/img/footer.jpg\"/></td></tr>";
+            mensaje += "</tbody></table>";
             mensaje += "</div>";
-            mensaje += "<table style=\"width:700px; color:#241588; margin:0 auto; font-size:11px\"><tr><td style=\"text-align:center\"><br />TODOS LOS DERECHOS RESERVADOS</td></tr></table>";
+            mensaje += "<table style=\"width:700px; margin:0 auto; font-size:11px\"><tbody><tr><td style=\"text-align:center\"><br />TODOS LOS DERECHOS RESERVADOS</td></tr></tbody></table>";
             mensaje += "</body>";
             mensaje += "</html>";
 
@@ -566,35 +574,35 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 mensaje += "<html>";
                 mensaje += "<head>";
                 mensaje += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />";
-                mensaje += "<title>Participa - Notificaciones</title>";
-                mensaje += "<style>a{color:#fff; text-decoration:underline***REMOVED***";
-                mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#0A0629;***REMOVED***";
+                mensaje += "<title>MapaInversiones - Notificaciones</title>";
+                mensaje += "<style>a{color:#0D3B59; text-decoration:underline***REMOVED***";
+                mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;***REMOVED***";
                 mensaje += "</style>";
                 mensaje += "</head>";
-                mensaje += "<body style=\"background-color:#0A0629; font-family:'Arial', Helvetica, sans-serif; border-top:2px solid #0A0629; margin:0; padding:0\">";
-                mensaje += "<div style=\"background:#f9f9f9; width:700px; color:#0A0629; margin:0 auto\">";
+                mensaje += "<body style=\"background-color:#fff; font-family:'Arial', Helvetica, sans-serif; border-top:2px; margin:0; padding:0\">";
+                mensaje += "<div style=\"background:#ffffff; width:700px; color:#0D284B; margin:0 auto\">";
                 mensaje += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">";
-                mensaje += "<tr><td style=\"text-align:left;height:80px; padding-left:15px; border-bottom:1px solid #E14D20; \"><a href=\"\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"Logo Participa\" width=\"200px\"/></a></td>";
+                mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:1px solid #ccc; \"><a href=\"" + url_local + "\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"Logo MapaInversiones\" width=\"280px\"/></a></td>";
                 mensaje += "</tr>";
-                mensaje += "<tr><td><div style=\"width:95%; margin:0 auto; text-align:center\">";
+                mensaje += "<tr><td><div style=\"width:90%; margin:0 auto; text-align:center\">";
                 mensaje += "<table width=\"100%\" style=\"text-align:left\">";
-                mensaje += "<tr><td colspan=\"2\"><h2 style=\"text-align:center; font-size:35px; font-weight:bold; margin-bottom:10px; margin-top:10px\">Restablecimiento de Clave</h2></td></tr>";
+                mensaje += "<tbody><tr><td colspan=\"2\"><h2 style=\"text-align:center; font-size:40px; font-weight:bold; margin-bottom:40px; margin-top:40px\">Restablecimiento de Clave</h2></td></tr>";
                 mensaje += "<tr>";
-                mensaje += "<td valign=\"bottom\"><img src=\"" + url_local + "/content/img/icono3.jpg\" alt=\"Icono de Notificacion Participa\" width=\"250px\"/></td>";
+                mensaje += "<td valign=\"bottom\"><img src=\"" + url_local + "/content/img/icono3.jpg\" alt=\"Icono de Notificacion MapaInversiones\" width=\"250px\"/></td>";
                 mensaje += "<td style=\"padding-left:25px\">";
-                mensaje += "<p>Participa le informa que su solicitud de restablecimiento de clave ha sido iniciada</p>";
+                mensaje += "<p>MapaInversiones le informa que su solicitud de restablecimiento de clave ha sido iniciada</p>";
                 mensaje += "<p>Por favor ingrese el siguiente código en el sitio web para continuar en el proceso</p>";
-                mensaje += "<div style=\"border:1px solid #cccccc;background-color:#fff; color:#E14D20; font-weight:bold; font-size:30px; text-align:center; padding:15px\">" + codigo_verifica + "</div>";
+                mensaje += "<div style=\"background-color:#fff; color:#0D3B59; font-weight:bold; font-size:30px; text-align:center; padding:15px\">" + codigo_verifica + "</div>";
                 mensaje += "<p style=\"text-align:center\">Gracias por usar nuestros servicios</p>";
                 mensaje += "</td>";
                 mensaje += "</tr>";
-                mensaje += "</table>";
+                mensaje += "</tbody></table>";
                 mensaje += "</div></td></tr>";
-                mensaje += "<tr><td style=\"background-color:#141839; text-align:center; padding:10px 0px\">";
-                mensaje += "<a href=\"" + url_local + "\"><img src=\"" + url_local + "/content/img/LogosFooter_email.jpg\"/></a> </td></tr>";
-                mensaje += "</table>";
+                mensaje += "<tr><td style=\"text-align:center; padding:40px 0px\">";
+                mensaje += "<a href=\"" + url_local + "\"><img src=\"" + url_local + "/content/img/footer.jpg\"/></a> </td></tr>";
+                mensaje += "</tbody></table>";
                 mensaje += "</div>";
-                mensaje += "<table style=\"width:700px; margin:0 auto; color:#241588; font-size:11px\"><tr><td style=\"text-align:center\">TODOS LOS DERECHOS RESERVADOS</td></tr></table>";
+                mensaje += "<table style=\"width:700px; margin:0 auto; font-size:11px\"><tbody><tr><td style=\"text-align:center\">TODOS LOS DERECHOS RESERVADOS</td></tr></tbody></table>";
                 mensaje += "</body>";
                 mensaje += "</html>";
                 CorreoController instanciaControladorCorreo = new CorreoController(Configuration);
@@ -838,5 +846,185 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         ***REMOVED***
             return objReturn;
     ***REMOVED***
+
+
+        [HttpPost("SubirArchivo")]
+        [IgnoreAntiforgeryTokenAttribute]
+        public object SubirArchivo([FromBody] ItemSubirImagen params_img)
+        {
+            string mensaje = string.Empty;
+            string id_usuario_aux = "";
+            ModelDataParticipacion objReturn = new ModelDataParticipacion();
+            ParticipacionCiudadana part = new ParticipacionCiudadana(_connection);
+            try
+            {
+                if (HttpContext.Session.GetString("IdUsuario") != null)
+                {
+                    id_usuario_aux = HttpContext.Session.GetString("IdUsuario");
+            ***REMOVED***
+                if (params_img != null && params_img.UploadedImage != null && params_img.UploadedImage.Length > 0 && int.TryParse(id_usuario_aux, out int idUsuario))
+                {
+                    var stream = new MemoryStream(params_img.UploadedImage);
+                    System.Drawing.Image img = Image.FromStream(stream);
+                    if (img != null)
+                    {
+                        Random aleatorio = new Random();
+                        var fileName = params_img.ProjectImage + "_" + id_usuario_aux + "_" + DateTime.Now.Year + "_" + DateTime.Now.Month + "_" + DateTime.Now.Day + "_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + DateTime.Now.Second + "_" + DateTime.Now.Millisecond + "-" + aleatorio.Next(0, 1000);
+                        ImageFormat frmt;
+                        #region Defino el formato de la imagen
+                        if (ImageFormat.Png.Equals(img.RawFormat))
+                        {
+                            fileName += ".png";
+                            frmt = ImageFormat.Png;
+                    ***REMOVED***
+                        else if (ImageFormat.Bmp.Equals(img.RawFormat))
+                        {
+                            fileName += ".bmp";
+                            frmt = ImageFormat.Bmp;
+                    ***REMOVED***
+                        else if (ImageFormat.Emf.Equals(img.RawFormat))
+                        {
+                            fileName += ".emf";
+                            frmt = ImageFormat.Emf;
+                    ***REMOVED***
+                        else if (ImageFormat.Exif.Equals(img.RawFormat))
+                        {
+                            fileName += ".exif";
+                            frmt = ImageFormat.Exif;
+                    ***REMOVED***
+                        else if (ImageFormat.Gif.Equals(img.RawFormat))
+                        {
+                            fileName += ".gif";
+                            frmt = ImageFormat.Gif;
+                    ***REMOVED***
+                        else if (ImageFormat.Icon.Equals(img.RawFormat))
+                        {
+                            fileName += ".icon";
+                            frmt = ImageFormat.Icon;
+                    ***REMOVED***
+                        else if (ImageFormat.Jpeg.Equals(img.RawFormat))
+                        {
+                            fileName += ".jpeg";
+                            frmt = ImageFormat.Jpeg;
+                    ***REMOVED***
+                        else if (ImageFormat.MemoryBmp.Equals(img.RawFormat))
+                        {
+                            fileName += ".memoryBmp";
+                            frmt = ImageFormat.MemoryBmp;
+                    ***REMOVED***
+                        else if (ImageFormat.Tiff.Equals(img.RawFormat))
+                        {
+                            fileName += ".tiff";
+                            frmt = ImageFormat.Tiff;
+                    ***REMOVED***
+                        else if (ImageFormat.Wmf.Equals(img.RawFormat))
+                        {
+                            fileName += ".wmf";
+                            frmt = ImageFormat.Wmf;
+                    ***REMOVED***
+                        else
+                        {
+                            frmt = null;
+                    ***REMOVED***
+                        #endregion  Defino el formato de la imagen
+                        if (frmt != null)
+                        {
+
+                            string path = Environment.CurrentDirectory + "\\wwwroot\\Images\\";
+                            string pathBd = "/Images";
+                            if (!Directory.Exists(path))
+                            {
+                                Directory.CreateDirectory(path);
+                        ***REMOVED***
+                            path += fileName;
+                            img.Save(path, frmt);
+                            if (int.TryParse(params_img.ProjectImage, out int idProyecto))
+                            {
+                                string[] datosMunDep = params_img.LocationImage.Split('-');
+                                if (datosMunDep.Length > 1)
+                                {
+                                    string salidaIngresoRegisto = part.RegistrarNuevaFotoUsuario(params_img.DescripcionImage, pathBd + "/" + fileName, datosMunDep[1], datosMunDep[0], idProyecto, idUsuario);
+                                    if (salidaIngresoRegisto == "0<||>")
+                                    {
+                                        try
+                                        {
+                                            string ancho_new = Configuration.GetValue<string>("sizeFotosUsuario");
+                                            if (!string.IsNullOrEmpty(ancho_new))
+                                            {
+                                                CambiarTamanoImagen(Convert.ToInt16(ancho_new), stream, path);
+                                                mensaje = "0<||>El archivo se guardó exitosamente, su foto será visualizada una vez el administrador valide los datos";
+                                        ***REMOVED***
+                                            else
+                                            {
+                                                mensaje = "-1<||>El archivo NO se guardó exitosamente,falta configuracion de tamaño máximo ";
+                                        ***REMOVED***
+
+                                    ***REMOVED***
+                                        catch (Exception ex)
+                                        {
+                                            mensaje = "-1<||>El archivo NO se guardó exitosamente, se presentó un problema con la imagen puede ser el tipo de imagen o el tamaño de esta.\nDetalles del error\n" + ex.Message;
+                                    ***REMOVED***
+                                ***REMOVED***
+                                    else mensaje = "-1<||>No fue posible almacenar el registro de la foto en la base de datos";
+                            ***REMOVED***
+                                else mensaje = "-1<||>No fue posible capturar la ubicación donde se va a reportar la foto";
+                        ***REMOVED***
+                            //***REMOVED***
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***
+                else
+                {
+                    mensaje = "-1<||>No hay archivos para guardar";
+            ***REMOVED***
+
+        ***REMOVED***
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
+        ***REMOVED***
+            objReturn.Status = true;
+            objReturn.Message = mensaje;
+            return objReturn;
+    ***REMOVED***
+
+
+        /// <summary>
+        /// Ejemplo copiado de internet. 
+        /// Fuente: https://forums.asp.net/t/1576697.aspx?File+Upload+and+resize+image+with+MVC+
+        /// </summary>
+        /// <param name="imageSize"></param>
+        /// <param name="filePath"></param>
+        /// <param name="outputPath"></param>
+        private void CambiarTamanoImagen(int imageSize, Stream filePath, string outputPath)
+        {
+            var image = System.Drawing.Image.FromStream(filePath);
+            int thumbnailSize = imageSize;
+            int newWidth, newHeight;
+            if (image.Width > image.Height)
+            {
+                newWidth = thumbnailSize;
+                newHeight = image.Height * thumbnailSize / image.Width;
+        ***REMOVED***
+            else
+            {
+                newWidth = image.Width * thumbnailSize / image.Height;
+                newHeight = thumbnailSize;
+        ***REMOVED***
+            var thumbnailBitmap = new Bitmap(newWidth, newHeight);
+            var thumbnailGraph = Graphics.FromImage(thumbnailBitmap);
+            thumbnailGraph.CompositingQuality = CompositingQuality.HighQuality;
+            thumbnailGraph.SmoothingMode = SmoothingMode.HighQuality;
+            thumbnailGraph.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            var imageRectangle = new System.Drawing.Rectangle(0, 0, newWidth, newHeight);
+            thumbnailGraph.DrawImage(image, imageRectangle);
+            thumbnailBitmap.Save(outputPath, image.RawFormat);
+            thumbnailGraph.Dispose();
+            thumbnailBitmap.Dispose();
+            image.Dispose();
+    ***REMOVED***
+
+
 ***REMOVED***
 ***REMOVED***

@@ -20,6 +20,8 @@ using PlataformaTransparencia.Negocios.Interfaces;
 using LinqToDB.Data;
 using Proyecto = PlataformaTransparencia.Infrastructura.DataModels.Proyecto;
 using PlataformaTransparencia.Modelos.Reportes;
+using PlataformaTransparencia.Modelos.Contratos;
+using SolrNet;
 
 namespace PlataformaTransparencia.Negocios.Proyectos
 {
@@ -39,7 +41,6 @@ namespace PlataformaTransparencia.Negocios.Proyectos
     {
       Configuration = configuration;
       ConsultasComunes = consultasComunes;
-      //RepositorioProyectos.Init(connection);
 ***REMOVED***
 
     public async Task<ProyectoPdf> ObtenerDataProyectoPdfAsync(int idProyecto)
@@ -47,6 +48,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       ProyectoPdf proyecto = await ConsultasComunes.ObtenerDataProyectoPdfAsync(idProyecto);
       return proyecto;
 ***REMOVED***
+
 
     public List<objectProjectsSearchMap> ObtenerPinesDeProyectosPorFiltro(FiltroBusquedaProyecto filtro, out decimal totalDineroAprobado,
         out int totalNumeroProyectosAprobados, out decimal totalDineroAprobadoOtrasFuentes)
@@ -65,7 +67,6 @@ namespace PlataformaTransparencia.Negocios.Proyectos
               lstProyectos,
               filtro
               )
-          //).Distinct(new PredicateEqualityComparer<objectProjectsSearchMap>((x, y) => ((x.latitude == y.latitude) && ((x.longitude == y.longitude)))))
           );
 
       totalDineroAprobado = generador.TotalValorRegalias;
@@ -111,14 +112,14 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                   new objectProjectsSearchMapProject
                   {
                     location = item.id.ToString(),//usado como key, por si un proyecto tiene 2 estados actuales
-                                  name = item.name,//nombre Proyecto
-                                  state = item.state,//estado
-                                  type = CommonConstants.ProjectsEnSingular,
+                    name = item.name,//nombre Proyecto
+                    state = item.state,//estado
+                    type = CommonConstants.ProjectsEnSingular,
                     value = Math.Round(item.value),//VlrTotalProyectoFuenteRegalias
-                                  url = GenerateProjectUrl(item.id),
+                    url = GenerateProjectUrl(item.id),
                     ejecutor = item.EntidadEjecutora
-                                  //image = BusquedasProyectosBLL.GenerarUrlImagenProyecto(item.id)
-                            ***REMOVED***);
+                    //image = BusquedasProyectosBLL.GenerarUrlImagenProyecto(item.id)
+              ***REMOVED***);
         ***REMOVED***
       ***REMOVED***
           valorTotalTodasFuentes = 0;//objReturn.Sum(p => p.totalValue);
@@ -181,6 +182,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
               filtro.CodigosMunicipios.Count() > 0 ||
               filtro.CodigosRegion.Count() > 0 ||
               filtro.CodigosSector.Count() > 0 ||
+              //  filtro.CodigosEntidadEjecutora.Count() > 0 ||
               filtro.ContieneNombreProyecto.Count() > 0 ||
               !filtro.FechasPorDefecto;
       int ZoomMaxValue = int.Parse(Configuration["ZommMaxValueVisualization"]);
@@ -299,6 +301,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
               filtro.CodigosMunicipios.Count() > 0 ||
               filtro.CodigosRegion.Count() > 0 ||
               filtro.CodigosSector.Count() > 0 ||
+              // filtro.CodigosEntidadEjecutora.Count() > 0 ||
               filtro.CodigosOrgFinanciador.Count() > 0 ||
               filtro.ContieneNombreProyecto.Count() > 0 ||
               !filtro.FechasPorDefecto;
@@ -521,6 +524,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
   ***REMOVED***
       else
         System.Diagnostics.Debug.WriteLine("Obtenida los infograficos depto del cache corto");
+
+      //CollectedMoney = 0;//Recursos presupuestados para inversión SGR -- No se tienen valores del dinero presupuestado pues no hay cargue de los origenes de las agencias
 
       return objReturn;
 ***REMOVED***
@@ -778,23 +783,33 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                              ***REMOVED***).OrderBy(p => p.name).ToListAsync();
 
         List<ItemFilter> lstOrgFinanciador = new List<ItemFilter>();
-        var instituciones = await (from maestro in db.GetTable<CatalogoOrganismoFinanciador>()
-                                       select new ItemFilter
-                                       {
-                                         name = maestro.OrganismoFinanciador,
-                                         value = maestro.IdOrganismoFinanciador.ToString()
-                                   ***REMOVED***).OrderBy(p => p.name).ToListAsync();
+        var instituciones = await (from maestro in db.GetTable<Fuente>()
+                                   select new ItemFilter
+                                   {
+                                     name = maestro.NombreTipoEntidad,
+                                     value = maestro.IdTipoEntidad.ToString()
+                               ***REMOVED***).OrderBy(p => p.name).ToListAsync();
         var institucionesValue = instituciones.Select(x => x.value).Distinct().ToList();
-        if (instituciones.Count > 0 && institucionesValue.Count>0)
+        if (instituciones.Count > 0 && institucionesValue.Count > 0)
         {
           //for (int w = 0; w < lstOrgFinanciador.Count; w++)
           //  lstOrgFinanciador[w].name = lstOrgFinanciador[w].name.Replace("\r\n", string.Empty).Replace("\n\r", string.Empty);
           for (int w = 0; w < institucionesValue.Count; w++)
           {
-            ItemFilter organismo= instituciones.Where(x => x.value == institucionesValue[w]).FirstOrDefault();
+            ItemFilter organismo = instituciones.Where(x => x.value == institucionesValue[w]).FirstOrDefault();
             if (organismo != null) lstOrgFinanciador.Add(organismo);
       ***REMOVED***
     ***REMOVED***
+
+        var lstEntidadEjecutora = await (from maestro in db.GetTable<VwEntidadEjecutora>()
+                                         select new ItemFilter
+                                         {
+                                           name = maestro.NombreEntidad,
+                                           value = maestro.IdEntidad.ToString()
+                                     ***REMOVED***).OrderBy(p => p.name).ToListAsync();
+
+        var lstEntidadEjecutoraFinal = lstEntidadEjecutora.Select(a => new { a.name, a.value ***REMOVED***).Distinct().ToList();
+
         filtros.Add(new
         {
           name = CommonLabel.StateLabel,
@@ -828,6 +843,17 @@ namespace PlataformaTransparencia.Negocios.Proyectos
           items = lstOrgFinanciador
     ***REMOVED***);
 
+        //filtros.Add(new
+        //{
+        //    name = CommonLabel.EntidadEjecutoraLabel,
+        //    parameter = CommonConstants.EntidadEjecutora,
+        //    esMultiple = false,
+        //    usaServicioAjax = false,
+        //    urlServicioAjax = default(string),
+        //    seccionAplicativo = GenericEnumerators.SeccionFuncionalAplicativo.Proyectos.ToString(),
+        //    items = lstEntidadEjecutoraFinal
+        //***REMOVED***);
+
         filtros.Add(FiltrosTotalesBLL.ObtenerFiltrosPeriodosAplicativo(GenericEnumerators.SeccionFuncionalAplicativo.Proyectos, "periods"));
   ***REMOVED***
 
@@ -856,29 +882,29 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       return objReturn;
 ***REMOVED***
 
-        public static List<itemEntregable> ObtenerEntregablesProyecto(int Id)
-        {
-            var objReturn = new List<itemEntregable>();
-            using (var DataModel = new TransparenciaDB())
-            {
+    public static List<itemEntregable> ObtenerEntregablesProyecto(int Id)
+    {
+      var objReturn = new List<itemEntregable>();
+      using (var DataModel = new TransparenciaDB())
+      {
 
-                objReturn = (from entregable in DataModel.Entregables
-                             join unidad in DataModel.UnidadMedidas
-                             on entregable.IdUnidadMedida equals  unidad.IdUnidadMedida
-                             where entregable.IdProyecto == Id
-                             select new itemEntregable
-                             {
-                                 IdEntregable=entregable.IdEntregable,
-                                 IdProyecto = entregable.IdProyecto,
-                                 EntregableColumn=entregable.EntregableColumn,
-                                 Cantidad = entregable.Cantidad,
-                                 IdUnidadMedida = entregable.IdUnidadMedida,
-                                 NombreUnidadMedida = unidad.NombreUnidadMedida
-                         ***REMOVED***).ToList();
-        ***REMOVED***
-            return objReturn;
-    ***REMOVED***
-        public static async Task<List<Images>> ObtenerImagenesParaProyectoAsync(int Id)
+        objReturn = (from entregable in DataModel.Entregables
+                     join unidad in DataModel.UnidadMedidas
+                     on entregable.IdUnidadMedida equals unidad.IdUnidadMedida
+                     where entregable.IdProyecto == Id
+                     select new itemEntregable
+                     {
+                       IdEntregable = entregable.IdEntregable,
+                       IdProyecto = entregable.IdProyecto,
+                       EntregableColumn = entregable.EntregableColumn,
+                       Cantidad = entregable.Cantidad,
+                       IdUnidadMedida = entregable.IdUnidadMedida,
+                       NombreUnidadMedida = unidad.NombreUnidadMedida
+                 ***REMOVED***).ToList();
+  ***REMOVED***
+      return objReturn;
+***REMOVED***
+    public static async Task<List<Images>> ObtenerImagenesParaProyectoAsync(int Id)
     {
       var objReturn = new List<Images>();
       using (var DataModel = new TransparenciaDB())
@@ -1304,7 +1330,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                       IdTipoEntidad = fuente.IdTipoEntidad,
                                       IdEntidad = fuente.IdEntidad
                                 ***REMOVED***
-                                              //join seguimientoEsquemaFinanciacionProyecto in DataModel.SeguimientoEsquemaFinanciacionProyecto
+                                    //join seguimientoEsquemaFinanciacionProyecto in DataModel.SeguimientoEsquemaFinanciacionProyecto
                                     join seguimientoEsquemaFinanciacionProyecto in DataModel.SeguimientoEsquemaFinanciacionProyectos
                                     on new
                                     {
@@ -1429,16 +1455,15 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       List<itemFuentes> objReturn = new List<itemFuentes>();
       using (var DataModel = new TransparenciaDB())
       {
-
-        objReturn = (from fuentes in DataModel.VwFuenteFinanciacions
-                     where fuentes.IdProyecto == id_proy && fuentes.Vigencia == idPeriodo
+        objReturn = (from fuentes in DataModel.VwFuentesFinanciacions2024
+                     where fuentes.IdProyecto == id_proy && fuentes.Periodo.HasValue && fuentes.Periodo.Value == idPeriodo
                      select new itemFuentes
                      {
                        Id = fuentes.IdFuenteFinanciacion,
                        Nombre = fuentes.OrganismoFinanciador + "-" + fuentes.FuenteFinanciacion,
-                       Porcentaje = fuentes.PresupuestoVigente > 0 ? Math.Round(((fuentes.PresupuestoPagado / fuentes.PresupuestoVigente) * 100), 2) : 0,
-                       ValorEjecutado = fuentes.PresupuestoPagado,
-                       ValorPresupuesto = fuentes.PresupuestoVigente
+                       Porcentaje = fuentes.ValorVigente.HasValue && fuentes.ValorEjecutado.HasValue && fuentes.ValorVigente.Value > 0 ? Math.Round(((fuentes.ValorEjecutado.Value / fuentes.ValorVigente.Value) * 100), 2) : 0,
+                       ValorEjecutado = fuentes.ValorEjecutado??0,
+                       ValorPresupuesto = fuentes.ValorVigente??0
                  ***REMOVED***).OrderBy(p => p.Id).ToList();
   ***REMOVED***
       return objReturn;
@@ -1450,6 +1475,10 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       List<itemActores> objReturn = new List<itemActores>();
       using (var DataModel = new TransparenciaDB())
       {
+        //Select a.IDProyecto,a.IDActor,a.IdRol,b.NombreActor actor, c.NombreRol grupo from ActorXProyecto a
+        // inner join Actor b on a.IDActor = b.IdActor
+        // inner join Rol c on a.IDRol = c.IdRol And b.IDRol = c.IdRol
+        //where a.IDProyecto = 22102
         objReturn = (from info in DataModel.ActorXProyectos
                      join actores in DataModel.Actors on info.IDActor equals actores.IdActor
                      join grupos in DataModel.Rols on new { x1 = info.IDRol, x2 = actores.IDRol ***REMOVED*** equals new { x1 = grupos.IdRol, x2 = grupos.IdRol ***REMOVED***
@@ -1464,10 +1493,52 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                  ***REMOVED***).OrderBy(x => x.Categoria).ThenBy(y => y.nomActor).ToList();
   ***REMOVED***
       return objReturn;
-
 ***REMOVED***
+    public static List<Period> ObtenerAniosFuentesFinanciacionPorProyecto(int id)
+    {
+      List<Period> rta = new();
+      using (var DataModel = new TransparenciaDB())
+      {
+        //Informacion basica del proyecto SACAMOS: 
+        rta = (from fuente in DataModel.VwFuentesFinanciacions2024
+               where fuente.IdProyecto == id
+               && fuente.Periodo.HasValue
+               select new Period
+               {
+                 id = fuente.Periodo.Value,
+                 name = fuente.Periodo.Value.ToString()
+           ***REMOVED***).Distinct().ToList();
+  ***REMOVED***
+      if (rta.Count > 1) rta = new List<Period>(rta.OrderBy(x => x.id));
+      return rta;
+***REMOVED***
+    public static List<ModeloAvanceFinancieroPorComponenteProducto> ObtenerAvanceFisicoPorComponenteProductoFaseProyecto(int id)
+    {
+      List<ModeloAvanceFinancieroPorComponenteProducto> objReturn = new();
+      using (var DataModel = new TransparenciaDB())
+      {
+        objReturn = (from transferencias in DataModel.VwSeguimientoAvanceFisicoes
+                           where transferencias.IdProyecto == id
+                           select new ModeloAvanceFinancieroPorComponenteProducto
+                           {
+                             IdentificadorFase = transferencias.IdFase,
+                             Fase = transferencias.Fase,
+                             CodComponente = transferencias.IdComponente.HasValue? transferencias.IdComponente.Value: 0,
+                             Componente = transferencias.Componente,
+                             idProducto = transferencias.IdProducto,
+                             Producto = transferencias.Producto,
+                             UnidadProducto = transferencias.UnidadProducto,
+                             Meta = transferencias.MetaProgramada,
+                             Ejecutado = transferencias.MetaEjecutada,
+                             AvanceFisico = transferencias.PorcentajeAvanceFisico
+                       ***REMOVED***
+                          ).OrderBy(m => new { m.IdentificadorFase, m.CodComponente, m.idProducto ***REMOVED***).ToList();
 
-
+        foreach (var obj in objReturn)
+          obj.Componente = obj.Componente.Replace("\"", string.Empty);
+  ***REMOVED***
+      return objReturn;
+***REMOVED***
     public ModelProcesoContratacionAnios ObtenerAnniosProcesoContratacion(int? IdProyecto)
     {
       ModelProcesoContratacionAnios _objreturn = new ModelProcesoContratacionAnios();
@@ -1475,14 +1546,13 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       if (IdProyecto != null && IdProyecto != 0) { IdProyect = IdProyecto; ***REMOVED***
       using (var DataModel = new TransparenciaDB())
       {
-        _objreturn.Detalles = (from cont in DataModel.OrdenCompraProyectoes
+        _objreturn.Detalles = (from cont in DataModel.VwContratosXProyectoInvDetalles
                                where (cont.IdProyecto == IdProyect || IdProyect == null)
-                               group cont by new { cont.Annio, cont.Semestre ***REMOVED*** into g
-                               orderby g.Key.Annio, g.Key.Semestre descending
+                               group cont by new { cont.AnioUltimaActualizacion***REMOVED*** into g
+                               orderby g.Key.AnioUltimaActualizacion descending
                                select new AnioProcesoContratacion
                                {
-                                 anio = g.Key.Annio,
-                                 semestre = g.Key.Semestre
+                                 anio = (int)g.Key.AnioUltimaActualizacion
                            ***REMOVED***).Distinct().OrderBy(x => x.anio).ThenBy(y => y.semestre).ToList();
   ***REMOVED***
       return _objreturn;
@@ -1492,64 +1562,80 @@ namespace PlataformaTransparencia.Negocios.Proyectos
     {
       ModelProcesosContratacionData _objreturn = new ModelProcesosContratacionData();
       int? Annio = null;
-      int? Semestre = null;
       int? IdProyecto = null;
+        String NombreProceso = null;
+       
 
 
       if (filtros.Annio > 0) { Annio = filtros.Annio; ***REMOVED***
-      if (filtros.Semestre > 0) { Semestre = filtros.Semestre; ***REMOVED***
       if (filtros.IdProyecto > 0) { IdProyecto = filtros.IdProyecto; ***REMOVED***
+      if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; ***REMOVED***
       using (var DataModel = new TransparenciaDB())
       {
-        try
-        {
+                try
+                {
+                    _objreturn.CantidadTotalRegistros = (from cont in DataModel.VwContratosXProyectoInvDetalles
+                    where (cont.AnioUltimaActualizacion == Annio || Annio == null)
+                                                           && (cont.DescripcionProceso.Contains(NombreProceso)
+                                                            || cont.CodigoProceso.TrimStart() == NombreProceso || NombreProceso == null)
+                                                           && (cont.IdProyecto == IdProyecto || IdProyecto == null)
+                                                           && cont.ValorContratado != 0
+                                                            && cont.CodigoOrigenInformacion == 0
+                                                         let NUMBER = Sql.Ext.DenseRank().Over().OrderBy(cont.Comprador).ThenBy(cont.CodigoProceso).ThenBy(cont.OrigenInformacion).ToValue()
+                                                         orderby NUMBER descending
+                                                         select NUMBER
+                                   ).First();
+            ***REMOVED***
+                catch
+                {
+                    _objreturn.CantidadTotalRegistros = 0;
+            ***REMOVED***
 
-          var prueba = (from cont in DataModel.OrdenCompraProyectoes
-                        where (cont.Annio == Annio || Annio == null)
-               && (cont.Semestre == Semestre || Semestre == null)
-                && (cont.IdProyecto == IdProyecto || IdProyecto == null)
-                        let NUMBER = Sql.Ext.DenseRank().Over().OrderBy(cont.IdProyecto).ThenBy(cont.Obra).ToValue()
-                        orderby NUMBER descending
-                        select NUMBER
-                         ).First();
-          _objreturn.CantidadTotalRegistros = (from cont in DataModel.OrdenCompraProyectoes
-                                               where (cont.Annio == Annio || Annio == null)
-                                      && (cont.Semestre == Semestre || Semestre == null)
-                                       && (cont.IdProyecto == IdProyecto || IdProyecto == null)
-                                               let NUMBER = Sql.Ext.DenseRank().Over().OrderBy(cont.IdProyecto).ThenBy(cont.Obra).ToValue()
-                                               orderby NUMBER descending
-                                               select NUMBER
-                         ).First();
-    ***REMOVED***
-        catch
-        {
-          _objreturn.CantidadTotalRegistros = 0;
-    ***REMOVED***
+                _objreturn.Data = (from cont in DataModel.VwContratosXProyectoInvDetalles
+                                   where
+                                   (cont.AnioUltimaActualizacion == Annio || Annio == null)
+                                   && (cont.DescripcionProceso.Contains(NombreProceso)
+                                   || cont.CodigoProceso.TrimStart() == NombreProceso || NombreProceso == null)
+                                  && (cont.IdProyecto == IdProyecto || IdProyecto == null)
+                                   && cont.ValorContratado != 0
+                                    && cont.CodigoOrigenInformacion == 0
+                                   let NUMBER = Sql.Ext.DenseRank().Over().OrderBy(cont.Comprador).ThenBy(cont.CodigoProceso).ThenBy(cont.OrigenInformacion).ToValue()
+                                   where
+                                   NUMBER > ((filtros.NumeroPagina - 1) * filtros.RegistrosPorPagina)
+                                   && NUMBER <= (filtros.NumeroPagina * filtros.RegistrosPorPagina)
+                                   select new ContratosData
+                                   {
+                                       AnioUltimaActualizacion = cont.AnioUltimaActualizacion,
+                                       DescripcionProceso = cont.DescripcionProceso,
+                                       EstadoProceso = cont.EstadoProceso,
+                                       CodigoContrato = cont.CodigoContrato,
+                                       CodigoProceso = cont.CodigoProceso,
+                                       CodigoProveedor = cont.CodigoProveedor,
+                                       TipoCodigoProveedor = cont.TipoCodigoProveedor,
+                                       Contratista = cont.Contratista,
+                                       ValorPlaneado = (double)cont.ValorPlaneado,
+                                       ValorAdjudicado = cont.ValorAdjudicado,
+                                       ValorContratado = (double)cont.ValorContratado,
+                                       MonedaContrato = cont.MonedaContrato,
+                                       UrlContrato = cont.UrlContrato,
+                                       CodigoComprador = cont.CodigoComprador,
+                                       Comprador = cont.Comprador,
+                                       DocURL = cont.DocURL,
+                                       OrigenInformacion = cont.OrigenInformacion,
+                                       FechaInicioContrato = cont.FechaInicioContrato,
+                                       FechaFinContrato = cont.FechaFinContrato,
+                                       FechaInicioEjecucionContrato = cont.FechaInicioEjecucionContrato,
+                                       FechaFinEjecucionContrato = cont.FechaFinEjecucionContrato,
+                                       FechaEstimadaAdjudicacion = cont.FechaEstimadaAdjudicacion,
+                                       FechaIncioPublicacionProceso = cont.FechaIncioPublicacionProceso,
+                                       FechaInicioRecepcionOfertas = cont.FechaInicioRecepcionOfertas,
+                                       DescripcionContrato = cont.DescripcionContrato
 
-        _objreturn.Data = (from cont in DataModel.OrdenCompraProyectoes
-                           where (cont.Annio == Annio || Annio == null)
-                                      && (cont.Semestre == Semestre || Semestre == null)
-                                       && (cont.IdProyecto == IdProyecto || IdProyecto == null)
-                           let NUMBER = Sql.Ext.DenseRank().Over().OrderBy(cont.IdProyecto).ThenBy(cont.Obra).ToValue()
-                           where
-                           NUMBER > ((filtros.NumeroPagina - 1) * filtros.RegistrosPorPagina)
-                           && NUMBER <= (filtros.NumeroPagina * filtros.RegistrosPorPagina)
-                           select new ProcesosContratacionData
-                           {
-                             IdOrdenCompraProyecto = cont.IdOrdenCompraProyecto,
-                             Annio = cont.Annio,
-                             Semestre = cont.Semestre,
-                             IdProyecto = cont.IdProyecto,
-                             Convenio = cont.Convenio,
-                             Tipoproceso = cont.Tipoproceso,
-                             Obra = cont.Obra,
-                             Fuente = cont.Fuente,
-                             Monto = cont.Monto
+                               ***REMOVED***
+                                 ).ToList();
 
-                       ***REMOVED***
-                         ).ToList();
 
-  ***REMOVED***
+        ***REMOVED***
       return _objreturn;
 ***REMOVED***
 

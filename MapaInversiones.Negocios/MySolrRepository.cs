@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using PlataformaTransparencia.Modelos.Proyectos;
+using System;
+using System.Security.Cryptography;
 
 namespace PlataformaTransparencia.Negocios
 {
@@ -34,53 +36,53 @@ namespace PlataformaTransparencia.Negocios
             return results;
     ***REMOVED***
 
-        public async Task<IEnumerable<Modelos.SolrResponse>> Search(string searchString, string Type, int start, int  sort, int rows)
+        public async Task<IEnumerable<Modelos.SolrResponse>> Search(string searchString = "", string Type = "", string Id="", int start = 0, int sort = 0, int rows = 20)
         {
-            int WordsCount= 0;
-            SolrQuery query2 = new SolrQuery("");
+            int WordsCount = 0;
+            SolrQueryResults<Modelos.SolrResponse> SolrResponse;
 
-            if (searchString != null || searchString != "") {
+            if (!String.IsNullOrEmpty(searchString))
+            {
                 WordsCount = searchString.Split(" ").Count();
                 searchString = searchString.Replace(" ", "\\ ");
                 searchString = searchString.Replace("-", "\\-");
-
-                if (WordsCount > 1 || searchString.Contains('-'))
-                {
-                    query2 = new SolrQuery("metadata:" + '"' + searchString + '"');
-            ***REMOVED***
-                else
-                {
-                    query2 = new SolrQuery("metadata:" + searchString);
-            ***REMOVED***
         ***REMOVED***
 
-            if (Type != null && Type != "undefined") {
+            if (Type != null && Type != "undefined")
+            {
                 Type = Type.Replace(" ", "\\ ");
         ***REMOVED***
 
-            QueryOptions query_options = new QueryOptions {
+            QueryOptions query_options = new QueryOptions
+            {
                 StartOrCursor = new StartOrCursor.Start(start),
                 Rows = rows,
-                OrderBy = { new SortOrder("principal",(Order) sort) ***REMOVED***  //Order.ASC
+                OrderBy = { new SortOrder("principal", (Order)sort) ***REMOVED***  //Order.ASC
         ***REMOVED***;
 
-            SolrQuery query = new SolrQuery('"'+searchString+ '"');
+            SolrQuery query = new SolrQuery('"' + searchString + '"');
+            SolrQuery query2 = new SolrQuery("metadata:" + '"' + searchString + '"');
 
             IEnumerable<Modelos.SolrResponse> results;
 
-            if (Type != null && Type.Length > 0 && Type != "undefined") {
+            if (Type != null && Type.Length > 0 && Type != "undefined")
+            {
                 SolrQuery query3 = new SolrQuery("type:" + Type);
-                var rta = await _solr.QueryAsync((query | query2) & query3, query_options);
-                results = rta;
-                if (results.Count() > 0) { results.ElementAt(0).numFound = rta.NumFound; ***REMOVED***
+                SolrResponse = await _solr.QueryAsync((query | query2) & query3, query_options);
         ***REMOVED***
-            else {
-                var rta = await _solr.QueryAsync(query | query2, query_options);
-                results = rta;
-                if (results.Count() > 0) { results.ElementAt(0).numFound = rta.NumFound; ***REMOVED***
+            else if (!String.IsNullOrEmpty(Id))
+            {
+                Id = "(" + Id.Replace(",", " OR ") + ")";
+                SolrQuery query4 = new SolrQuery("id:" + Id);
+                SolrResponse = await _solr.QueryAsync(query4, query_options);
+        ***REMOVED***
+            else
+            {
+                SolrResponse = await _solr.QueryAsync(query | query2, query_options);
         ***REMOVED***
 
-           
+            results = SolrResponse;
+            if (results.Count() > 0) { results.ElementAt(0).numFound = SolrResponse.NumFound; ***REMOVED***
 
             return results;
     ***REMOVED***
@@ -92,7 +94,6 @@ namespace PlataformaTransparencia.Negocios
             QueryOptions query_options = new QueryOptions {
                 StartOrCursor = new StartOrCursor.Start(0),
                 Rows = 10//,
-                //OrderBy = { new SortOrder("principal", Order.ASC) ***REMOVED***
         ***REMOVED***;
 
             SolrQuery query = new SolrQuery(searchString);

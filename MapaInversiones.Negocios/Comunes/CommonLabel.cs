@@ -58,6 +58,10 @@ namespace PlataformaTransparencia.Negocios.Comunes
             set { orgFinanciadorLabel = value; ***REMOVED***
     ***REMOVED***
 
+        private static string entidadEjecutoraLabel;
+        public static string EntidadEjecutoraLabel { get => entidadEjecutoraLabel; set => entidadEjecutoraLabel = value; ***REMOVED***
+
+
         public static string TypeLabel {get; set;***REMOVED***     
                
         public static string StatusLabel {get; set;***REMOVED***     
@@ -134,6 +138,9 @@ namespace PlataformaTransparencia.Negocios.Comunes
                                     break;
                                 case "OrgFinanciadorLabel":
                                     OrgFinanciadorLabel = item.Texto;
+                                    break;
+                                case "EntidadEjecutoraLabel":
+                                    EntidadEjecutoraLabel = item.Texto;
                                     break;
                                 case "TypeLabel":
                                     TypeLabel = item.Texto;

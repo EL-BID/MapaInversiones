@@ -1,0 +1,249 @@
+﻿@model PlataformaTransparencia.Modelos.OrganismoFinanciador.ModelDataOrganismoFinanciador
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+***REMOVED***
+<section class="banner-main">
+
+<div class="container">
+    <!-- Begin bread crumbs -->
+    <nav class="bread-crumbs">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="bread-crumbs-list">
+                        <li>
+                            <a href="\">Inicio</a>
+                            <i class="material-icons md-18">chevron_right</i>
+                        </li>
+                            <li>Fuentes de financiación y Organismos financiadores</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End bread crumbs -->
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title mb-0">
+                        <h1>Fuentes de financiación y Organismos financiadores</h1>
+                    </div>
+                    <div class="banner-main-desc">
+                        <p><span class="text-bold">Las fuentes de financiación</span> del presupuesto de inversiones corresponden al origen de los recursos financieros, <span class="text-bold">los Organismos financiadores</span> son las entidades que proporcionan los fondos para la financiación de programas y/o proyectos específicos. </p>
+                        <p class="text-bold">Conoce a continuación los organismos que financian los proyectos de inversión a lo largo del territorio nacional, los proyectos financiados, montos financiados, etc.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!--SELECT AÑO-->
+        <div class="row justify-content-center">
+            <div class="col-lg-4">
+                <!--YEAR FILTER-->
+                <div class="form-group">
+                    <label for="anios_organismo_financiador">Selecciona un año:</label>
+                    <select class="form-select" id="anios_organismo_financiador" onchange="anioSeleccionado(this);">
+                        @if (Model.Anios.Count() > 0)
+                        {
+                            foreach (var item in Model.Anios)
+                            {
+                                <text>
+                                <option value="@item">@item</option>
+                                </text>
+                        ***REMOVED***
+                    ***REMOVED***
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </div>
+     
+</section>
+<!--Inicio Contenido Pagina-->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--Tbs-->
+                <div class="tabs goals">
+                    <ul id="tabOrganismoFinanciador" class="tabs-nav">
+                        <li id="instituDescen" class="enlace_nivel_administracion active" onclick="organismoFinanciadorSelected('10')">
+                            <div class="goal-number"></div>
+                            <div class="goal-name"><div class="h4">FONDO GENERAL</div></div>
+                        </li>
+                        <li id="intermeFinancieros" class="enlace_nivel_administracion" onclick="organismoFinanciadorSelected('60')">
+                            <div class="goal-number"></div>
+                            <div class="goal-name"><div class="h4">CRÉDITO EXTERNO</div></div>
+                        </li>
+                        <li id="emprPublicas" class="enlace_nivel_administracion" onclick="organismoFinanciadorSelected('50')">
+                            <div class="goal-number"></div>
+                            <div class="goal-name"><div class="h4">CRÉDITO INTERNO</div></div>
+                        </li>
+                        <li id="gobCentral" class="enlace_nivel_administracion" onclick="organismoFinanciadorSelected('20')">
+                            <div class="goal-number"></div>
+                            <div class="goal-name"><div class="h4">FONDOS CON DESTINO ESPECÍFICO</div></div>
+                        </li>
+                        <li id="intermeFinancieros" class="enlace_nivel_administracion" onclick="organismoFinanciadorSelected('70')">
+                            <div class="goal-number"></div>
+                            <div class="goal-name"><div class="h4">DONACIÓN EXTERNA</div></div>
+                        </li>
+                    </ul>
+                    <!--Consolidado organismos-->
+                    <div class="col-lg-4 mb-5"></div>
+                    <div class="row">
+                        <div class="col-lg-4 mb-3">
+                            <div class="card h-100 shadow border-0 card-entidad">
+                                <div class="card-body">
+                                    <div class="wrap-desc-entidad d-flex">
+                                        <div class="ic-wrap">
+                                            <img src="../img/svg-icons/ICO-Org-001.svg" alt="Icono decorativo Organismo Financiador" />
+                                        </div>
+                                        <div class="desc-data">
+                                            <div id="totalFinanciadores" class="organismoN">0</div>
+                                            <div class="executeV">Organismos financiadores</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-3">
+                            <div class="card h-100 shadow border-0 card-entidad">
+                                <div class="card-body">
+                                    <div class="wrap-desc-entidad d-flex">
+                                        <div class="ic-wrap">
+                                            <img src="../img/svg-icons/ICO-Org-002.svg" alt="Icono decorativo Organismo Financiador" />
+                                        </div>
+                                        <div class="desc-data">
+                                            <div id="totalProyectosFinanciados" class="organismoN">0</div>
+                                            <div class="executeV">Proyectos financiados</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-3">
+                            <div class="card h-100 shadow border-0 card-entidad">
+                                <div class="card-body">
+                                    <div class="wrap-desc-entidad d-flex">
+                                        <div class="ic-wrap">
+                                            <img src="../img/svg-icons/ICO-Org-003.svg" alt="Icono decorativo Organismo Financiador" />
+                                        </div>
+                                        <div class="desc-data">
+                                            <div id="totalAportado" class="organismoN">$0 M.</div>
+                                            <div class="executeV">Total aportado</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Fin Sonsolidado Organismos-->
+                    <!--Inicia Lista de Organismos-->
+                    <div class="tabs-container">
+                        <div class="main-Content py-5">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!--Listado-->
+                                        <div class="section-heading heading-left">
+                                        <h2 class="mb-0">Listado de organismos financiadores</h2>
+                                        </div>
+                                        <div id="table_financiadores" class="comparativeTable">
+                                        </div>
+                                    <!--Fin Listado-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p><strong>Nota:</strong> Un proyecto puede ser financiado por más de un organismo financiador, por lo tanto, el total de proyectos financiados según la fuente no siempre va a coincidir con la suma de los proyectos por organismo financiador.</p>
+                    <!--Fin Lista de Organismos-->
+                </div>
+                <!--endTbs-->
+            </div>
+        </div>
+    </div>
+    
+</section>
+<!--Fin contenido Pagina-->
+
+@section Scripts {
+    <script language="javascript">
+        var anio = $("#anios_organismo_financiador option:selected").val();
+        var codigoFuente = '10';
+        inicializarDatos();
+        function inicializarDatos() {
+            obtenerOrganismoFinanciador(anio, codigoFuente);
+    ***REMOVED***
+        function organismoFinanciadorSelected(codigoFuenteSeleccionado) {
+            codigoFuente = codigoFuenteSeleccionado;
+            obtenerOrganismoFinanciador(anio, codigoFuente);
+    ***REMOVED***
+        function anioSeleccionado(sel) {
+            anio = sel.options[sel.selectedIndex].text;
+            obtenerOrganismoFinanciador(anio, codigoFuente);
+    ***REMOVED***
+        function obtenerOrganismoFinanciador(anio, codigoFuente) {
+            $("#divDatosConsolidado").empty();
+            $.ajax({
+                contentType: "application/json; charset=utf-8",
+                url: "api/ServiciosOrganismoFinanciador/GetOrganismosFinanciadoresPorAnioAndCodigoFuente",
+                type: "GET",
+                data: {
+                    anio: anio,
+                    codigofuente: codigoFuente
+            ***REMOVED***
+        ***REMOVED***).done(function (data) {
+                //console.log("data", data);
+                $("#totalFinanciadores").empty();
+                $("#totalFinanciadores").html(data.totalFinanciadores);
+                $("#totalProyectosFinanciados").empty();
+                $("#totalProyectosFinanciados").html(data.totalProyectosFinanciados);
+                $("#totalAportado").empty();
+                $("#totalAportado").html("RD " + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 ***REMOVED***).format(data.totalAportado) + " M");
+                let dataTable = "";
+                for (var i = 0; i < data.financiadores.length; i++) {
+                    let estadosProyectos="";
+                    for (var j = 0; j < data.financiadores[i].estados.length;j++)
+                    {
+                        if (data.financiadores[i].estados[j].id!="-1")
+                        {
+                            estadosProyectos= estadosProyectos +
+                            '<div class="data1b">' +
+                                '<span class="labelTit">' +data.financiadores[i].estados[j].nombre + '</span>' +
+                                '<span class="td1">' + data.financiadores[i].estados[j].valor + '</span>' +
+                             '</div>' ;
+                    ***REMOVED***
+                ***REMOVED***
+                    dataTable = dataTable + '<div class="card-entidades-group">' +
+                        '<div class="card d-flex">' +
+                        '<div class="headEnt">' +
+                        '<div class="data1 mainDataEntidad">' +
+                        '<span class="td1">' + data.financiadores[i].nombre + '</span>' +
+                        '</div>' +
+                        '<div class="data1">' +
+                        '<span class="labelTit">Monto financiado</span>' +
+                        '<span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 ***REMOVED***).format(data.financiadores[i].montoFinanciado) + ' M</span>' +
+                        '</div>' +
+                        estadosProyectos +
+                        '<div class="btn-action">' +
+                        '<div class="btnPerfil">' +
+                        '<a target="_blank" rel="noopener" href="FinancialOrganizationDetail?id=' + data.financiadores[i].codigoOrganismo + '&anio=' + anio + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>Ver organismo</span></a>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div >';
+            ***REMOVED***
+                $("#table_financiadores").empty();
+                $("#table_financiadores").html(dataTable);
+        ***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+                alert("Error 1 " + xhr.status + "_" + thrownError);
+        ***REMOVED***);
+    ***REMOVED***
+    </script>
+***REMOVED***

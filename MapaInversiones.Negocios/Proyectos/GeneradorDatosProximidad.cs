@@ -49,14 +49,14 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             decimal latitudInferior = bottomRight[0];
             decimal longitudDer = bottomRight[1];
 
-            if (latitudSuperior > 16.54M)
-                latitudSuperior = 16.54M;//Punto mas al norte del país del mapa
-            if (latitudInferior < 12.9M)
-                latitudInferior = 12.9M;//Punto mas al sur del pais 
-            if (longitudIzq < -89.4M)
-                longitudIzq = -89.4M;//Punto mas al Oeste
-            if (longitudDer > -83.0M)
-                longitudDer = -83.0M;//Punto mas al est
+            if (latitudSuperior > 19.9M)
+                latitudSuperior = 19.9M;//Punto mas al Oeste
+            if (latitudInferior < 17.58M)
+                latitudInferior = 17.58M;//Punto mas al Este
+            if (longitudIzq < -71.96M)
+                longitudIzq = -71.96M;//Punto mas al Norte
+            if (longitudDer > -68.15M)
+                longitudDer = -68.15M;//Punto mas al oeste
 
             decimal incrementoLatitud = Math.Abs(latitudSuperior - latitudInferior) / segmentosCuadricula;
             decimal incrementoLongitud = Math.Abs(longitudIzq - longitudDer) / segmentosCuadricula;
@@ -128,7 +128,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         ***REMOVED***
     ***REMOVED***
 
-
+      
         private objectProjectsSearchMapProject GenerarDataProyectoIndividual(InfoProyectos infoProyectos)
         {
             objectProjectsSearchMapProject retonroProyecto = new objectProjectsSearchMapProject();

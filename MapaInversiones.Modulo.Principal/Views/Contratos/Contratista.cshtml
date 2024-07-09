@@ -4,12 +4,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 ***REMOVED***
 @{
-
+    // var TextMoneda = "";
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
+    @*       var LabelContratista = "";
+            var TituloContratista = "";
 
+    ***REMOVED***
+        @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
+        {
+            if (@etiqueta.AliasPart.Alias == "Contratista")
+            {
+                LabelContratista = @etiqueta.HtmlBodyPart.Html;
+                TituloContratista = @etiqueta.TitlePart.Title;
+        ***REMOVED***
 
-System.IFormatProvider cultureHN =
-new System.Globalization.CultureInfo("es-HN");
+    ***REMOVED****@
+
+System.IFormatProvider culture =
+new System.Globalization.CultureInfo("es-RD");
 ***REMOVED***
 <section class="banner-main">
     <div class="container">
@@ -36,190 +48,132 @@ new System.Globalization.CultureInfo("es-HN");
 
             <div class="col-lg-8">
                 <div class="banner-main-info">
-                    <div class="banner-main-title">
-                        <h3 class="text-center Submaintit">CONTRATISTA</h3>
-                        <h2 class="mainTit_t1 text-center" id="nomLocation">@Model.Data[0].Contratista</h2>
-                    </div>
-                    <div class="banner-main-title">
-                        <h4 class="mainTit_t1 text-center">@Model.Contratista</h4>
-                        <h4 class="text-center Submaintit">Código Proveedor</h4>
-                    </div>
-              
+                @if (Model.Data.Count > 0)
+                    {
+                        <div class="banner-main-title mb-0 text-center">
+                            <h1 class="mainTit_t1" id="nomLocation">@Model.Data[0].Contratista</h1>
+                            <span class="h6 sub_t1_red">CONTRATISTA</span>
 
+                        </div>
+                        <div class="banner-main-desc py-4 text-center">
+                            
+                            <ul class="list-inline details">
+                                <li>
+                                    <span class="h2 text-center">@Model.Contratista</span>
+                                    <span class="text-center">RNC/Cédula</span>
+                                </li>
+                                <li>
+                                    <span class="h2 text-center">@Model.Data.Sum(l => l.NumContratos)</span>
+                                    <span class="text-center">Número de Contratos</span>
+                                </li>
+                                <li>
+                                    <span class="h2 text-center">
+                                        $
+                                        @if (Model.Data.Sum(l => l.ValorTotalContratos) >= 1000000)
+                                        {
+                                            <text> @String.Format(culture, "{0:n0***REMOVED***",((double)((double)@Model.Data.Sum(l => l.ValorTotalContratos) / (double)1000000)))  Millones</text>
+                                    ***REMOVED***
+                                        else
+                                        {
+                                            <text> @String.Format(culture, "{0:n0***REMOVED***",(@Model.Data.Sum(l => l.ValorTotalContratos)))</text>
+                                    ***REMOVED***
+                                    </span>
+                                    <span class="text-center">Valor total de contratos  </span>
+                                </li>
+
+
+                            </ul>
+                             
+                            
+                            
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <div class="col-lg-4">
+                                <div class="form-group mb-5">
+                                    <label for="tipo-contrato">Tipo de Contrato</label>
+                                    <select class="form-select" id="tipo-contrato">
+                                        @foreach (var item in Model.Consolidados)
+                                        {
+                                            if (@item.CodigoOrigenInformacion == -1)
+                                            {
+                                                <text>
+                                                <option selected value="">@item.OrigenInformacion (@item.NroContratos)</option>
+                                                </text>
+                                        ***REMOVED***
+                                            else
+                                            {
+                                                <text>
+                                                <option value="@item.CodigoOrigenInformacion">@item.OrigenInformacion (@item.NroContratos)</option>
+                                                </text>
+                                        ***REMOVED***
+                                    ***REMOVED***
+
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                ***REMOVED***
+                    else{
+                    <div class="banner-main-desc">
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                        </p>
+
+                    </div>
+                ***REMOVED***
                 </div>
             </div>
 
         </div>
 
     </div>
-
-</section>
-@{
-
-
-    var Sefin = Model.Data.Where(o => o.OrigenInformacion.ToUpper().Contains("SEFIN"));
-
-    var Oncae = Model.Data.Where(o => o.OrigenInformacion.ToUpper().Contains("ONCAE"));
-
-
-***REMOVED***
-<section class="section">
-    <div class="container">
-        <div class="section-heading heading-center">
-            <h3>Contratos por Fuente de Datos</h3>
-
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card shadow border-0 h-100">
-                    <div class="car-deck">
-                        <div class="card-header text-center">
-                            <img class="img-fluid" src="../img/logoHaciendaP.png" alt="ir a Secretaria tecnica de planeación" />
-                        </div>
-                        <div class="car-bodycntos">
-                            <div class="car-content">
-                                <div class="info_contra">
-                                    @if (Sefin.Count() > 0)
-                                    {
-                                        foreach (var item in Sefin)
-                                        {
-                                            <text>
-                                                <div class="h6">Órdenes de Pago</div>
-                                                <div class="h4"> @String.Format(cultureHN, "{0:n0***REMOVED***", @item.NumContratos)</div>
-                                                <div class="h6">Valor</div>
-                                                <div class="h4">
-                                                    @item.MonedaContrato
-                                                    @if (@item.ValorTotalContratos >= 1000000)
-                                                    {
-                                                        <text> @String.Format(cultureHN, "{0:n2***REMOVED***", (@item.ValorTotalContratos / 1000000)) Millones</text>
-                                    ***REMOVED***
-                                        else
-                                        {
-                                            <text> @String.Format(cultureHN, "{0:n2***REMOVED***", @item.ValorTotalContratos)</text>
-                                    ***REMOVED***
-                                                </div>
-                                                </text>
-                                        ***REMOVED***
-                                    ***REMOVED***
-                                        else
-                                        {
-                                            <text>
-                                                <div class="h6">Órdenes de Pago</div>
-                                                <div class="h4">0</div>
-                                                <div class="h6">Valor</div>
-                                                <div class="h4">- -</div>
-                                            </text>
-
-                                    ***REMOVED***
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="card shadow border-0 h-100">
-                    <div class="car-deck">
-                        <div class="card-header text-center">
-                            <img class="img-fluid" src="../img/LogoOtraEntidadt.png" alt="ir a Secretaria" />
-                        </div>
-                        <div class="car-bodycntos">
-                            <div class="car-content">
-                                <div class="info_contra">
-                                    <div class="row justify-content-center">
-                                        @if (Oncae.Count() > 0)
-                                        {
-                                            foreach (var item in Oncae)
-                                            {
-                                                <text>
-                                                    <div class="col-md-4">
-                                                        <div class="h6">@item.OrigenInformacion.Replace("Oncae - Catalogo Electrónico", "Catálogo Electrónico").Replace("Oncae - ", "").Replace("ONCAE - ", "").Replace("ONCAE - Catalogo Electrónico", "Catálogo Electrónico")</div>
-                                                        <div class="h4"> @String.Format(cultureHN, "{0:n0***REMOVED***", @item.NumContratos)</div>
-                                                        <div class="h6">Valor</div>
-                                                        <div class="h4">
-                                                            @item.MonedaContrato
-                                                            @if (@item.ValorTotalContratos >= 1000000)
-                                                            {
-                                                                <text> @String.Format(cultureHN, "{0:n2***REMOVED***", @item.ValorTotalContratos / 1000000) Millones</text>
-                                        ***REMOVED***
-                                            else
-                                            {
-                                                <text> @String.Format(cultureHN, "{0:n2***REMOVED***", @item.ValorTotalContratos)</text>
-                                        ***REMOVED***
-                                                        </div>
-                                                    </div>
-                                                    </text>
-                                            ***REMOVED***
-                                        ***REMOVED***
-                                            else
-                                            {
-                                                <text>
-                                                    <div class="col-md-4">
-                                                        <div class="h6">- -</div>
-                                                        <div class="h4">0</div>
-                                                        <div class="h6">Valor</div>
-                                                        <div class="h4">- -</div>
-                                                    </div>
-                                                </text>
-                                        ***REMOVED***
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="alertCont alert-info" role="alert">Para evitar duplicaciones en los análisis, se recomienda utilizar las publicaciones de manera separada, usando los datos de <strong>ENTIDAD 2</strong> para análisis sobre licitaciones, y <strong>ENTIDAD 1</strong> para análisis de presupuesto y pago de contratos.</div>
-            </div>
-        </div>
-        
-    </div>
+    <!--NAVIGATION ON PAGE-->
 </section>
 <div class="clearfix"></div>
-<section id="secCantidadContrato" class="section-gray">
+<section id="secCantidadContrato" class="section">
     <div class="container">
         <!-- CANTIDADES DE CONTRATOS POR AÑO-->
         <div class="row" id="divContenedorContratosCantidad" style="display:none;">
             <div class="empty" id="divGraphContratosCantidadCa" style="display:none;">Cargando...</div>
-            <div class="col-md-12 Divider">
-                <div class="text-center centered">
-                    <div class="PeopleWorkChart canon_title" id="title_divGraphContratosCantidad">
-                        <h2 class="Sec-title text-center">CANTIDADES DE CONTRATOS Y ÓRDENES DE PAGO POR AÑO</h2>
-                    </div>
+            <div class="section-heading heading-left" id="title_divGraphContratosCantidad">
+                <h2 class="mb-3">Cantidades de contratos por año</h2>
+
+             </div>
+                <div class="wrap-svggrraph">
+                    @*<svg width="100%" height="280px" id="divGraphContratosCantidad"></svg>*@
                     <div width="80%" height="400px" id="divGraphContratosCantidad">
-                    </div>
                 </div>
             </div>
 
         </div>
+    </div>
 </section>
 <section id="secValorContrato" class="section-gray">
     <div class="container">
         <!-- VALOR DE CONTRATOS POR AÑO-->
         <div class="row" id="divContenedorContratosValor" style="display:none;">
             <div class="empty" id="divGraphContratosValorCa" style="display:none;">Cargando...</div>
-            <div class="col-md-12 Divider">
-                <div class="text-center centered">
-                    <div class="PeopleWorkChart canon_title" id="title_divGraphContratosValor">
-                        <h2 class="Sec-title">VALOR DE CONTRATOS Y ÓRDENES DE PAGO POR AÑO</h2>
-                    </div>
 
-                    <div width="80%" height="400px" id="divGraphContratosValor">
-
-                    </div>
-                </div>
+            <div class="section-heading heading-left" id="title_divGraphContratosValor">
+                <h2 class="mb-3">Valor de contratos por año</h2>
+             </div>
+            <div class="wrap-svggrraph">
+                @*<svg width="100%" height="280px" id="divGraphContratosValor"></svg>*@
+                <div width="80%" height="400px" id="divGraphContratosValor"></div>
             </div>
         </div>
+    </div>
 </section>
 <div class="clearfix"></div>
 <section class="section" id="secInfoContratos" data-contratista='[{"contratista_id":"@Model.Contratista"***REMOVED***]'>
     <div class="container">
-        <div class="section-heading">
-            <h2>Buscador Contratos</h2>
+        <div class="section-heading heading-left">
+            <h2 class="mb-4">Buscador Contratos</h2>
         </div>
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-3">
 
                 <form class="contractList bgSoftGray">
                     <div class="form-group">
@@ -227,22 +181,6 @@ new System.Globalization.CultureInfo("es-HN");
                         <select class="form-select" id="top_contratos_periodos"></select>
 
 
-                    </div>
-                    <div class="form-group">
-                        <label class="origen" for="top_origen_informacion">Fuente de Datos</label>
-                        <select class="form-select" id="top_origen_informacion">
-                            <option value="">Todos</option>
-                            @if (Model.OrigenInformacion.Count > 0)
-                            {
-                                foreach (var item in Model.OrigenInformacion)
-                                {
-                                    <text>
-                                        <option value="@item">@item.Trim().ToUpper().Replace("ONCAE - CATALOGO ELECTRÓNICO", "ONCAE - CATÁLOGO ELECTRÓNICO")</option>
-                                    </text>
-                            ***REMOVED***
-
-                        ***REMOVED***
-                        </select>
                     </div>
 
                     <div class="triggerForm">
@@ -254,7 +192,7 @@ new System.Globalization.CultureInfo("es-HN");
 
             </div>
             <!--CONTRACT-LIST-->
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <!--ESTRUCTURA HTML PARA TOMAR COMO REFERENCIA-->
                 <!--CIERRE DE ESTRUCTURA-->
                 <div class="wrap-proceso whiteBg" id="srcContratos">
@@ -277,35 +215,22 @@ new System.Globalization.CultureInfo("es-HN");
             <!--LEFT COLUMN-->
             <div class="col-lg-8">
                 <!--LINKS seccion infografia planificacion-->
-                <h2>Conoce</h2>
-                <div class="wrap-cta py-5">
-                    <a href="../ProcesoPresupuesto" class="py-5 mb-5 px-0">
-                        <div class="h3">El Proceso Presupuestario <i class="material-icons md-18">arrow_forward</i> </div>
-                    </a>
-                </div>
+                <h2>Otros contratistas</h2>
+                
 
                 <!--LINKS seccion infografia planificacion-->
 
                 <div class="wrap-cta py-5">
                     <div class="wrap-cta py-5">
                         <p class="card-title mb-4">Información suministrada por:</p>
-                        <a href="https://www.dominioentidad.com/" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="../img/logoHaciendaP.png" alt="ir a Secretaria" />
-                        </a>
-                        <a href="https://www.dominioentidad2.com/" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="../img/LogoOtraEntidad.png" alt="ir a Secretaria" />
+                        <a href="https://www.dgcp.gob.do/" target="_blank" rel="noopener">
+                            <img class="img-fluid" src="../img/logo-dgcp.svg" alt="ir a Secretaria de planeación" />
                         </a>
 
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <h2>Explora</h2>
-                <p>Los presupuestos de las instituciones</p>
-                <ul id="entidadesPlanNacional" class="list-group list-group-flush">
-                </ul>
 
-            </div>
         </div>
 
     </div>

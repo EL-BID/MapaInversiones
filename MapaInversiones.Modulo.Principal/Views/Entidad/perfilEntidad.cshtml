@@ -1,5 +1,4 @@
-﻿@model PlataformaTransparencia.Negocios.Entidad.EntidadContract
-@*PlataformaTransparencia.Modulo.Principal.Views.Entidad.perfilEntidadModel*@
+﻿@model PlataformaTransparencia.Modelos.Entidad.ModelEntidadData
 
 @inject OrchardCore.IOrchardHelper Orchard
 @{
@@ -14,8 +13,6 @@
     var TituloContratosFirmadosEntidadEntidad = "";
     var LabelDistPresupuesto = "";
     var TituloDistPresupuesto = "";
-
-
 ***REMOVED***
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
@@ -36,8 +33,7 @@
         TituloDistPresupuesto = @etiqueta.TitlePart.Title;
 ***REMOVED***
 ***REMOVED***
-<head >
-    <title>Perfil Entidad</title>
+<head>
     <style>
 
         .node rect {
@@ -103,12 +99,12 @@
                                     <i class="material-icons md-18">chevron_right</i>
                                 </li>
                                 <li><a href="/BusquedaResultados">Resultados de búsqueda</a><i class="material-icons md-18">chevron_right</i></li>
-                                <li>@Model.EntidadModel.NombreEntidad</li>
+                                <li>@Model.NombreEntidad</li>
 
                             </ul>
                         </div>
                     </div>
-                    <input type="hidden" id="codigoEntidadId" value="@Model.EntidadModel.CodigoEntidad" />
+                    <input type="hidden" id="codigoEntidadId" value="@Model.CodigoEntidad" />
                 </div>
             </nav><!-- End bread crumbs -->
 
@@ -118,168 +114,253 @@
                 <div class="col-lg-8">
                     <div class="banner-main-info pb-0">
                         <div class="banner-main-title">
-                            <h1>@Model.EntidadModel.NombreEntidad</h1>
+                            <h1>@Model.NombreEntidad</h1>
                         </div>
                         <div class="banner-main-desc">
-
+                            <span class="h5">Institución</span>
                         </div>
 
                     </div>
 
-                    <!--SELECT AÑO-->
-                    <div class="row justify-content-center">
-                        <div class="col-lg-4">
-                            <!--YEAR FILTER-->
-                            <div class="form-group">
-                                <label style="color:white" for="input-select">Selecciona un año:</label>
-                                <select class="form-select" aria-label="Selecciona un año:" id="annioEntidad" onchange="seleccionoAnio(this);">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                   
 
                 </div>
                 <!--NAVIGATION ON PAGE-->
-                <div class="row navs-shortcuts">
+                
+        <div class="row navs-shortcuts">
 
-                    <div class="" id="navs-header">
+            <div class="" id="navs-header">
+
                         <a class="btn-section" href="#presupuestoentidad">
-                            <span class="ic-shortcut"><i class="material-icons md-24">chrome_reader_mode</i></span>
-                            <span class="text-btn">Presupuesto</span>
-                        </a>
-                        <a class="btn-section" href="#contratosentidad">
-                            <span class="ic-shortcut"><i class="material-icons md-24">device_hub</i></span>
-                            <span class="text-btn">Contratos</span>
-                        </a>
-                        <a class="btn-section" href="#Distribucion">
-                            <span class="ic-shortcut"><i class="material-icons md-24">grid_view</i></span>
-                            <span class="text-btn">Distribución por Grupo</span>
-                        </a>
-                        <a class="btn-section" href="#participa">
-                            <span class="ic-shortcut"><i class="material-icons md-24">feedback</i></span>
-                            <span class="text-btn">Participación Ciudadana</span>
-                        </a>
-                        <a class="btn-section" href="#Shielo">
-                            <span class="ic-shortcut"><i class="material-icons md-24">live_help</i></span>
-                            <span class="text-btn">Solicitar información</span>
+                    <span class="ic-shortcut"><i class="material-icons md-24">device_hub</i></span>
+                    <span class="text-btn">Presupuesto de la Institución</span>
+                </a>
+                <a class="btn-section" href="#trazabilidad">
+                    <span class="ic-shortcut"><i class="material-icons md-24">grid_view</i></span>
+                    <span class="text-btn">Trazabilidad de los recursos</span>
+                </a>
+               
+            </div>
+        </div>
+                
+                <!--FIN NAVIGATION ON PAGE-->
+            </div>
+            </div>
 
-                        </a>
-                        <a class="btn-section" href="/ProcesoPresupuesto" target="_blank">
-                            <span class="ic-shortcut"><i class="material-icons md-24">supervisor_account</i></span>
-                            <span class="text-btn">Presupuestos Ciudadanos</span>
-                        </a>
+    </section>
+    <!--PRESUPUESTO INSTITUCION-->
+    <section class="section" id="presupuestoentidad">
+        <div class="container">
+           
+            <div class="section-heading heading-left">
+                <h2>Presupuesto de la Institución</h2>
+            </div>
+            <!--SELECT AÑO-->
+            <div class="row justify-content-center">
+                <div class="col-lg-4">
+                    <!--YEAR FILTER-->
+                    <div class="form-group">
+                        <label for="annioEntidad">Selecciona un año:</label>
+                        <select class="form-select" aria-label="Selecciona un año:" id="annioEntidad" onchange="seleccionoAnio($('#annioEntidad option:selected').val());">
+                            @if (Model.Annios.Count() > 0)
+                            {
+                                foreach (var item in Model.Annios)
+                                {
+                                    <text>
+                                    <option value="@item">@item</option>
+                                    </text>
+                            ***REMOVED***
+                        ***REMOVED***
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row py-4 justify-content-center" id="divResumen">
+                <div class="col-lg-4 mb-3">
+                    <div class="card h-100 shadow border-0 card-entidad b1">
+                        <div class="card-body">
+                            <div class="wrap-desc-entidad">
+                                <div class="h5">Presupuesto Vigente</div>
+                                <div class="h1" id="PresupuestoVigente">$ @String.Format("{0:n2***REMOVED***", (@Model.PresupuestoVigenteAnnioDisplay / 1000000)) millones </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3 ">
+                    <div class="card h-100 shadow border-0 card-entidad b2">
+                        <div class="card-body">
+                            <div class="wrap-desc-entidad">
+                                <div class="h5">Presupuesto Ejecutado</div>
+                                <div class="h1" id="PresupuestoEjecutado">$ @String.Format("{0:n2***REMOVED***", (@Model.PresupuestoEjecutadoAnnioDisplay / 1000000)) millones</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="card h-100 shadow border-0 card-entidad b3">
+                        <div class="card-body">
+                            <div class="wrap-desc-entidad">
+                                <div class="h5">% Ejecutado</div>
+                                <div class="h1" id="PorcEjecutado">@String.Format("{0:n2***REMOVED***", (@Model.PorcEjecutadoAnnioDisplay))  %</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
             </div>
         </div>
-
-
-
-
     </section>
-    <!--PROGRAMAS - ACTIVIDADES- INDICADORES-->
-    <section class="section" id="presupuestoentidad">
+    <section class="section" id="trazabilidad">
         <div class="container">
-
-            <div class="section-heading text-center">
-                <h2>Presupuesto de la Institución</h2>
-            </div>
-            <div class="row py-2">
-                <div class="col-md-4 presini">
-                    <div class="h5">Presupuesto Aprobado</div>
-                    <div class="h1" id="PresupuestoInicial"></div>
-                </div>
-                <div class="col-md-4 presvig">
-                    <div class="h5">Presupuesto Vigente</div>
-                    <div class="h1" id="PresupuestoVigente"></div>
-                </div>
-                <div class="col-md-4 presexc">
-                    <div class="h5">Presupuesto Ejecutado</div>
-                    <div class="h1" id="PresupuestoEjecutado"></div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="section-heading heading-center mb-3">
-
+     @*                <div class="section-heading heading-center mb-3"> 
+                        <!--<h3>@TituloDistribucionPresupuestalEntidad</h3>
+                <div class="section-subheading">@Html.Raw(LabelDistribucionPresupuestalEntidad)</div>-->
+                    </div> *@
+                    <div class="section-heading heading-left">
+                        <h2>Trazabilidad de recursos</h2>
                     </div>
+                    <div class="desc-heading"><p>Conoce como se están usando los fondos, ¿en qué se gasta?, ¿en qué se invierte el dinero? y controla los procesos contractuales de la institución.</p></div>
                 </div>
 
             </div>
-            <!--TABS TIPOS DE CONTRATOS-->
+            <!--TABS SUBPROGRAMAS Y PROYECTOS-->
             <div class="tabs goals">
-                <ul id="tabTipoContratos" class="tabs-nav">
-                    <li class="active enlace_tipo_contrato" id="liSEFIN">
+                <ul id="tabTipoPrograma" class="tabs-nav">
+                    <li class="active enlace_tipo_contrato" id="analisis">
                         <div class="goal-number"></div>
-                        <div class="goal-name"><div class="h4">Distribución Presupuestal y Contratación</div></div>
+                        <div class="goal-name"><div class="h4">Análisis institución</div></div>
                     </li>
-                    <li id="liONCAE" class="enlace_tipo_contrato">
+                    <li id="inversion" class="enlace_tipo_contrato">
                         <div class="goal-number"></div>
-                        <div class="goal-name"><div class="h4">Contratación</div></div>
+                        <div class="goal-name"><div class="h4">Inversión</div></div>
+                    </li>
+                     <li id="procesos" class="enlace_tipo_contrato">
+                        <div class="goal-number"></div>
+                        <div class="goal-name"><div class="h4">Procesos</div></div>
+                    </li>
+                    <li id="contratos" class="enlace_tipo_contrato">
+                        <div class="goal-number"></div>
+                        <div class="goal-name"><div class="h4">Contratos</div></div>
                     </li>
                 </ul>
-                <div id="contentTabTipoContratos" class="tabs-container">
-                    <div class="main-Content py-5" id="divSectionSefin">
+                <div id="contentTabTipoPrograma" class="tabs-container mt-5">
+                    <div class="comparativeTable" id="divAnalisis">
 
-                        <div id="divProgramas">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div id="loadingAsignacion" class="asigFin" style="display:none">
-                                    <h2 id="lblValorAsignacionPrograma"></h2>
-                                </div>
-                            </div>
-                            <!--CONTRACT-LIST-->
-                            <div class="col-lg-12">
-                                <!--ESTRUCTURA HTML PARA TOMAR COMO REFERENCIA-->
-                                <!--CIERRE DE ESTRUCTURA-->
-                                <div class="h5" id="lblEncabezadoListadoGrupos" style="display:none">Grupos de Gasto</div>
-                                <div class="">
-                                    <input type="hidden" id="migapanlistado" value="" />
-                                    <div class="comparativeTableContratos" id="divListado">
+                        <div class="container">
+                            <div class="row py-4">
+                                <div class="col-12">
+                                    <div class="">
+                                        <h3>Distribución del presupuesto</h3>
+                                        <div class="section-subheading">
+                                            <p>La distribución del presupuesto varía según las necesidades y prioridades específicas de la institución. <span class="text-bold">Haz clic en cada uno de los recuadros para conocer con mayor detalle las categorías de distribución.</span></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <!--END CONTAINER-->
+
+                            <div class="row">
+                                <div class="offset-1 col-md-10 col-sm-10">
+                                    <div class="pChart">
+                                        <div id="divGraphPerFuncion"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row py-4">
+                                <div class="col-12">
+                                    <div class="">
+                                        <h3>¿En que gasta la entidad?</h3>
+                                        <div class="section-subheading">
+                                            <p>Conoce las principales categorías del gasto institucional tales como Infraestructura, personal, operaciones, etc. <span class="text-bold">Posiciona el cursor sobre cada sector de la gráfica para tener información más detallada.</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-lg-3">
+                                    <div class="group-expenditure" id="divTxtGrupoGasto">
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="pChart">
+                                        <div id="divGraphPerGrupoGasto" style="height:auto;width:auto;"></div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row py-4">
+                                <div class="col-12">
+                                    <div class="">
+                                        <h3>Modalidad de procesos adelantados por la institución</h3>
+                                        <div class="section-subheading">
+                                            <p>Las siguientes son las diferentes modalidades en las que se han adelantados procesos en la institución<span class="text-bold"></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="offset-1 col-md-10 col-sm-10">
+                                    <div class="pChart">
+                                        <div id="divGraphProcesos" style="min-height:500px;min-width:80px;width:960px;">&nbsp;</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="comparativeTable" id="divInversionSection">
+                        <div id="divProgramas"></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="loadingAsignacion" class="asigFin" >
+                                    <h3 id="lblValorAsignacionPrograma"></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="divInversion"></div>
+                        
+                    </div>
+                    <div class="comparativeTable" id="divProcesosSection">
+                        <div id="divProcesos"></div>
+                        <div id="divPagFichasPro"></div>
 
                     </div>
-                    <div lass="main-Content py-5" id="divSectionONCAE">
-                        <div class="py-5">
+                    <div class="comparativeTable" id="divListadoContratos">
+                        <div class="container">
+                            <div class="section-heading text-center">
+                                <h3>Buscador Contratos</h3>
+                            </div>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-lg-3 col-md-12 col-sm-12">
 
                                     <form class="contractList bgSoftGray">
-                                        <input type="hidden" id="entidad" value="@Model.EntidadModel.CodigoEntidad" />
+
                                         <div class="form-group">
-                                            <label class="origen" for="top_origen_informacion">Fuente de Datos</label>
-                                            <select class="form-control" id="top_origen_informacion">
-                                                <option value="">Todos</option>
+                                            <label class="year" for="entidad">Proveedor</label>
 
-                                                @if (Model.Consolidados != null)
-                                                {
-                                                    foreach (var item in Model.Consolidados)
-                                                    {
-                                                        if (@item.OrigenInformacion.ToUpper().Contains("ONCAE"))
-                                                        {
-                                                            <text>
-                                                                <option value="@item.OrigenInformacion">@item.OrigenInformacion.ToUpper()</option>
-                                                            </text>***REMOVED***
-                                                ***REMOVED***
+                                            <input type="search" data-results="search-home" data-search="home" id="entidad" class="search-input form-control input-lg" autocomplete="on" placeholder="Proveedor">
 
-                                            ***REMOVED***
-                                            </select>
+                                            <div id="search-home" class="search-body">
+                                                <div id="divNoEncontrado" class="no-search-results" style="display: none;">No se han encontrado proveedores</div>
+
+                                            </div>
                                         </div>
+
                                         <div class="form-group">
                                             <label class="year" for="proceso">Palabra Clave </label>
 
-                                            <input type="search" data-results="search-home" data-search="home" id="procesoo" class="search-input form-control input-lg" autocomplete="on" placeholder="Código ó Ventilador, reactivos, etc." value="">
+                                            <input type="search" data-results="search-home" data-search="home" id="proceso" class="search-input form-control input-lg" autocomplete="on" placeholder="Servicio, salud, nacional, etc." value="">
 
                                         </div>
                                         <div class="triggerForm">
-                                            <input type="button" class="btn btn-primary" value="Buscar" id="btnBuscarO" disabled=""><div class="clearfix"></div>
-                                            <a class="btn btn-link text-center" id="btnLimpiarO" disabled="disabled">LIMPIAR FILTROS</a>
+                                            <input type="button" class="btn btn-primary" value="Buscar" id="btn-buscar" disabled=""><div class="clearfix"></div>
+                                            <a class="btn btn-link text-center" id="btnLimpiar" disabled="disabled">LIMPIAR FILTROS</a>
                                         </div>
 
                                     </form>
@@ -287,6 +368,7 @@
                                 </div>
                                 <!--CONTRACT-LIST-->
                                 <div class="col-lg-8">
+                                    <h5 style="text-align: left"><span class="bpinfilter" id="spanfiltrado" hidden>Filtrado por BPIN</span></h5>
                                     <!--ESTRUCTURA HTML PARA TOMAR COMO REFERENCIA-->
                                     <!--CIERRE DE ESTRUCTURA-->
                                     <div class="wrap-proceso whiteBg" id="srcContratos">
@@ -298,262 +380,25 @@
                                 <!--END CONTAINER-->
                             </div>
                         </div>
+
                     </div>
                 </div>
+                
+
+                    
             </div>
         </div>
-    </section>
-    <!--CONTRATOS DE LA ENTIDAD-->
-    <section class="section-gray" id="contratosentidad">
-        <div class="container">
-            <div class="section-heading heading-center">
-                <h3>@TituloContratosFirmadosEntidadEntidad</h3>
-                <div class="section-subheading">@Html.Raw(LabelContratosFirmadosEntidad)</div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card shadow border-0 h-100">
-                            <div class="car-deck">
-                                <div class="card-header text-center">
-                                    <img class="img-fluid" src="../img/logoHaciendaP.png" alt="ir a Secretaria tecnica de planeación" />
-                                </div>
-                                <div class="car-bodycntos">
-                                    <div class="car-content">
-                                        <div class="info_contra" id="dataSEFIN">
-                                            <div class="h6">Órdenes de Pago</div>
-                                            <div class="h4">0</div>
-                                            <div class="h6">Valor</div>
-                                            <div class="h4">- -</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card shadow border-0 h-100">
-                            <div class="car-deck">
-                                <div class="card-header text-center">
-                                    <img class="img-fluid" src="../img/LogoOtraEntidadt.png" alt="ir a Secretaria tecnica de planeación" />
-                                </div>
-                                <div class="car-bodycntos">
-                                    <div class="car-content">
-                                        <div class="info_contra">
-                                            <div class="row justify-content-center" id="dataONCAE">
-                                                <div class="col-md-4">
-                                                    <div class="h6">Contratos ONCAE</div>
-                                                    <div class="h4">0</div>
-                                                    <div class="h6">Valor</div>
-                                                    <div class="h4">- -</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="alertCont alert-info" role="alert">Para evitar duplicaciones en los análisis, se recomienda utilizar las publicaciones de manera separada, usando los datos de <strong>ENTIDAD 2</strong> para análisis sobre licitaciones, y <strong>ENTIDAD 1</strong> para análisis de presupuesto y pago de contratos.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section" id="Distribucion">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="section-heading">
-                        <h2>@TituloDistPresupuesto</h2>
-
-                    </div>
-                    <div class="section-body">
-
-                        <p>@Html.Raw(@LabelDistPresupuesto)</p>
-
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="graph-container" id="divContenedorGrafica1" style="padding-right: 10px; padding-left: 5px; padding-top: 5px;">
-                        <div class="pBotonera" style="display:none">
-                            <span class="btn badge rounded-pill bg-active" id="todosGrupo" cons="0">Por Grupo</span>
-                        </div>
-                        <div class="pChart">
-                            <div id="divGraphRecursosObj">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section-dataFuente">
-        <div class="container">
-            <h6 style="min-height: 0px;">FUENTES DE LOS DATOS</h6>
-            @if (ViewBag.dataSource != null)
-            {
-                <text>
-
-                    @foreach (var source in @ViewBag.dataSource)
-                    {
-                        <text>
-                        <div class="boxDataSource">
-                            <h4 class="text-center">@source.data</h4>
-                            <div class="row">
-                                <div class="col-md-6 col-xs-6 border-right">
-                                    <span class="t1">&uacute;ltima actualizaci&oacute;n</span>
-                                    <span>@source.lastUpdate.ToShortDateString()</span>
-                                </div>
-                                <div class="col-md-6 col-xs-6">
-                                    <span class="t1">Corte de los datos</span>
-                                    <span>@source.FechaCorteData.ToShortDateString()</span>
-                                </div>
-                            </div>
-                        </div>
-                </text>
-        ***REMOVED***
-                    </text>
-            ***REMOVED***
-        </div>
-    </section>
+</section>
 
 
-    <section class="section-gray" id="participa">
-        <div class="container">
-            <div class="section-heading heading-center">
-
-                <h3>Participación Ciudadana</h3>
-                <div class="section-subheading">
-                    <p>En este espacio podrás tener una interacción rápida con las autoridades sobre la información de la plataforma.</p>
-                    <div class="text-center">
-                        <a href="https://dominioautoridad.com/" target="_blank" rel="noopener"><img src="/img/PortalGray.jpg" alt="Logo Transparecia" /></a>
-                    </div>
-                    <p>Es muy fácil hacer tu comentario, sigue estos pasos y participa!</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card shadow border-0 ">
-                            <div class="car-deck">
-                                <div class="card-body">
-                                    <div class="car-content mh240">
-                                        <div class="tit-section">
-                                            <h3>PASO 1</h3>
-                                        </div>
-                                        <div class="text-section">
-                                            Haz clic en el botón que dice <strong>Participa aquí</strong>, el cual te llevara a la página de la institució que está en el <strong>Portal Único de Transparencia.</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card shadow border-0">
-                            <div class="car-deck">
-                                <div class="card-body">
-                                    <div class="car-content  mh240">
-                                        <div class="tit-section">
-                                            <h3>PASO 2</h3>
-                                        </div>
-                                        <div class="text-section">
-                                            En la página del <strong>Portal Único de Transparencia</strong>, ubica el botón de <strong>Participación Ciudadana</strong> y haz click. 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card shadow border-0">
-                            <div class="car-deck">
-                                <div class="card-body">
-                                    <div class="car-content  mh240">
-                                        <div class="tit-section">
-                                            <h3>PASO 3</h3>
-                                        </div>
-                                        <div class="text-section">
-                                            Dentro de la sección de <strong>participación ciudadana</strong> haz click en <strong>Puedes hacer tu sugerencia aquí</strong>, y se desplegará un formulario donde podrás realizar tu comentario.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 text-center gy-4">
-                    <div class="btn btn-cards">
-                        <a href="@Model.EntidadModel.UrlParticipacionCiudadana" class="btn btn-cards" target="_blank">
-                            <span>Participa aquí</span>
-                            <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9"><use xlink:href="img/sprite.svg#arrow-right"></use></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="section" id="Shielo">
-        <div class="container">
-            <div class="section-heading heading-center">
-
-                <h3>¿Quieres solicitar información adicional?</h3>
-                <div class="section-subheading">
-                    <p>Recuerda que todos los ciudadanos tienen el derecho de acceso a la información pública, si quieres información adicional puedes solicitarla <br />haciendo clic en el logo del <strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </strong></p>
-                    <div class="text-center">
-                        <a href="https://entidaddeinformacion.com/home/" target="_blank" rel="noopener"><img class="img-fluid" src="/img/Shielo.png" alt="shielo" /></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--RELATED INFO-->
-    <section class="relatedInfo">
-        <div class="container">
-            <!--LINKS OTRAS SECCIONES-->
-            <div class="row py-5">
-                <!--LEFT COLUMN-->
-                <div class="col-lg-8">
-                    <!--LINKS seccion infografia planificacion-->
-                    <h2>Conoce</h2>
-                    <div class="wrap-cta">
-                        <a href="/PresupuestoGeneral" target="_blank" class="py-5 mb-5 px-0">
-                            <div class="h4">Presupuestos de la República<i class="material-icons md-18">arrow_forward</i> </div>
-                        </a>
-                        <a href="/ProcesoPresupuesto" target="_blank" class="py-5 mb-5 px-0">
-                            <div class="h4">Presupuestos Ciudadanos<i class="material-icons md-18">arrow_forward</i> </div>
-                        </a>
-                    </div><br />
-                    <h2>Explora</h2>
-                    <div class="wrap-cta">
-                        <a href="../Entidades" class="py-5 mb-5 px-0">
-                            <div class="h4">Ir a Instituciones <i class="material-icons md-18">arrow_forward</i> </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="wrap-cta">
-                        <p class="card-title mb-4">Información suministrada por:</p>
-                        <a href="https://www.dominioentidad.com/" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="../img/logoHaciendaP.png" alt="ir a entidad" />
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </section>
     <!--HELP CENTER SHORTCUT-->
     <div id="helpCenter"></div>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha384-EZJUCwX9EfOmrML5/1WejmhFx/azi54nnVfOndPu+VTQKOHabXXC9eS7VFdkLz0V" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+
     <script src="js/entidad_aux.js"></script>
 
     <script>
@@ -573,7 +418,29 @@
         ***REMOVED***
     ***REMOVED***
     </script>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+    ***REMOVED***
 
+        .bar {
+            fill: #5f89ad;
+    ***REMOVED***
+
+        .axis {
+            font-size: 13px;
+    ***REMOVED***
+
+            .axis path,
+            .axis line {
+                fill: none;
+                display: none;
+        ***REMOVED***
+
+        .label {
+            font-size: 13px;
+    ***REMOVED***
+    </style>
 </body>
 
 

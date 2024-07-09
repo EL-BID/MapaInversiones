@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha384-KcyRSlC9FQog/lJsT+QA8AUIFBgnwKM7bxm7/YaX+NTr4D00npYawrX0h+oXI3a2" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha384-JPbtLYL10d/Z1crlc6GGGGM3PavCzzoUJ1UxH0bXHOfguWHQ6XAWrIzW+MBGGXe5" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="js/search_aux.js"></script>
+    <script type="text/javascript" src="~/js/search_aux.js"></script>
 ***REMOVED***
 @inject OrchardCore.IOrchardHelper Orchard
 @{
@@ -27,8 +27,7 @@
 
 ***REMOVED***
 <head>
-    <title>Entidades</title>
-       <style>
+    <style>
 
         .node rect {
             cursor: move;
@@ -107,6 +106,9 @@
                         <div class="banner-main-title">
                             <h1>Instituciones</h1>
                         </div>
+                        <!--<div class="banner-main-desc">
+                        TEXTO ENTIDADES
+                    </div>-->
 
                     </div>
 
@@ -130,95 +132,179 @@
     <!--PRESUPUESTO ENTIDAD-->
     <section class="section" id="Ejecucion">
         <div class="container">
-            <div class="section-heading text-center">
-                <h3>@TituloDistPresupuesto</h3>
+            <div class="section-heading">
+                <h2>@TituloDistPresupuesto</h2>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-body">
-                        <div class="section-heading heading-center">
+                        <div class="section-heading">
                             <p>@Html.Raw(LabelDistPresupuesto)</p>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div></div>
-            <!-- VIEW OPTIONS-->
-            <div class="col-md-10 col-md-offset-1">
-                <div class="Options">
-                    <div class="switchTable" id="filtro_iconos" opc="">
+                <!--tabs instituciones por clasificacion administracion-->
+                <div class="tabs goals">
+                    <ul id="tabTipoContratos" class="tabs-nav">
+                        <li class="enlace_tipo_contrato active" id="instituDescen">
+                            <div class="goal-number"></div>
+                            <div class="goal-name"><div class="h4">Instituciones descentralizadas</div></div>
+                        </li>
+                        <li id="gobCentral" class="enlace_tipo_contrato">
+                            <div class="goal-number"></div>
+                            <div class="goal-name"><div class="h4">Gobierno central</div></div>
+                        </li>
+                        <li id="emprPublicas" class="enlace_tipo_contrato">
+                            <div class="goal-number"></div>
+                            <div class="goal-name"><div class="h4">Empresas públicas</div></div>
+                        </li>
+                        <li id="intermeFinancieros" class="enlace_tipo_contrato">
+                            <div class="goal-number"></div>
+                            <div class="goal-name"><div class="h4">Intermediarios financieros</div></div>
+                        </li>
+
+                    </ul>
+                    <!--Cards body-->
+                    <div class="col-lg-3 mb-5"></div>
+                    <div class="row">
+                        <div class="col-lg-3 mb-3">
+                            <div class="card h-100 shadow border-0 card-entidad">
+                                <div class="card-body">
+                                    <div class="wrap-desc-entidad d-flex">
+                                        <div class="ic-wrap">
+                                            <img src="../img/ic-institucion.svg" alt="icono decorativo realcionado a una institucion" />
+                                        </div>
+                                        <div class="desc-data">
+                                            <div class="executeN">30</div>
+                                            <div class="executeV">Instituciones</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 mb-3">
+                            <div class="card h-100 shadow border-0 card-entidad">
+                                <div class="card-body">
+                                    <div class="wrap-desc-entidad d-flex">
+                                        <div class="ic-wrap">
+                                            <img src="../img/ic-budget.svg" alt="icono decorativo realcionado a bolsa de dinero" />
+                                        </div>
+                                        <div class="desc-data">
+                                            <div class="executeV">Total recursos asignados</div>
+                                            <div class="executeN">B/. 2,692 millones</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Cards body-->
+                    <!--FIN tabs instituciones por clasificacion administracion-->
+                    <div id="contentTabTipoInstituciones" class="tabs-container">
+                        <div class="main-Content py-5" id="divSectionSefin" style="display: block;">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!--listado instituciones -->
+                                    <div class="comparativeTable" id="divListadoInstituciones">
+                                        <div class="card-entidades-group">
+                                            <div class="card d-flex">
+                                                <div class="headEnt">
+                                                    <div class="data1 mainDataEntidad">
+                                                        <span class="td1">Caja seguro social</span>
+                                                    </div>
+                                                    <div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1">B/. XXXXXXX Millones</span></div>
+                                                    <div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1">B/. XXXXXXX Millones</span></div>
+                                                    <div class="data1"><span class="labelTit">Presupuesto Ejecutado</span><span class="td1">B/. XXXXXXX Millones</span></div>
+                                                    <div class="data1"><span class="labelTit">Porcentaje de Ejecución</span><span class="td1">53%</span></div>
+                                                </div>
+                                                <div class="btn-action">
+                                                    <div class="btnPerfil">
+                                                        <a target="_blank" rel="noopener" href="/PerfilEntidad?codEntidad=400" class="text-small"><i class="material-icons md-18">arrow_forward</i><br /> <span>Ver entidad</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="card d-flex">
+                                                <div class="headEnt">
+                                                    <div class="data1 mainDataEntidad">
+                                                        <span class="td1">Autoridad nacional de descentralización</span>
+                                                    </div>
+                                                    <div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1">B/. XXXXXXX Millones</span></div>
+                                                    <div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1">B/. XXXXXXX Millones</span></div>
+                                                    <div class="data1"><span class="labelTit">Presupuesto Ejecutado</span><span class="td1">B/. XXXXXXX Millones</span></div>
+                                                    <div class="data1"><span class="labelTit">Porcentaje de Ejecución</span><span class="td1">53%</span></div>
+                                                </div>
+                                                <div class="btn-action">
+                                                    <div class="btnPerfil">
+                                                        <a target="_blank" rel="noopener" href="/PerfilEntidad?codEntidad=400"><i class="material-icons md-18">arrow_forward</i><br /><span>Ver entidad </span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card d-flex">
+                                                <div class="headEnt">
+                                                    <div class="data1 mainDataEntidad">
+                                                        <span class="td1">Instituto para la formación y aprovechamiento de recursos humanos</span>
+                                                    </div>
+                                                    <div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1">B/. XXXXXXX Millones</span></div>
+                                                    <div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1">B/. XXXXXXX Millones</span></div>
+                                                    <div class="data1"><span class="labelTit">Presupuesto Ejecutado</span><span class="td1">B/. XXXXXXX Millones</span></div>
+                                                    <div class="data1"><span class="labelTit">Porcentaje de Ejecución</span><span class="td1">53%</span></div>
+                                                </div>
+                                                <div class="btn-action">
+                                                    <div class="btnPerfil">
+                                                        <a target="_blank" rel="noopener" href="/PerfilEntidad?codEntidad=400"><i class="material-icons md-18">arrow_forward</i><br /> <span>Ver entidad</span></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--FIN listado instituciones -->
+                                </div>
+                                <!--END CONTAINER-->
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!--PAGINACION: en caso el listado sea superior a 12 items aparece la paginación-->
+                <nav class="pagination">
+                    <ul id="ulPaginacion" class="pagination-list" refine="" actual="0" anterior="0" anteriorb="0" inicial="0" siguiente="0" siguienteb="0" final="0" rows="10" paginasimp="10">
+
+
+                        <li class="pagination-item-arrow pagination-item-arrow-first pagination-item-disabled material-icons md-24" pagina="fp">chevron_left</li>
+                        <li pagina="0" class="paginacion active">1</li>
+                        <li pagina="0" class="paginacion">2</li>
+                        <li pagina="0" class="paginacion">3</li>
+                        <li class="pagination-item-arrow pagination-item-arrow-next material-icons md-24 pagination-item-disabled" pagina="ap">chevron_right</li>
+
+                    </ul><!-- End pagination -->
+                </nav>
+
             </div>
-            <div id="divListadoRecursosObje">
-                <!--TABLA COMPARATIVA-->
-                <input type="hidden" id="migapanlistado" value="" />
-                <div class="comparativeTable" id="divListado">
+                <!-- VIEW OPTIONS-->
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="Options">
+                        <div class="switchTable" id="filtro_iconos" opc="">
+                        </div>
+                    </div>
+                </div>
+                <div id="divListadoRecursosObje">
+                    <!--TABLA COMPARATIVA-->
+                    <input type="hidden" id="migapanlistado" value="" />
+                    <div class="comparativeTable" id="divListado">
+
+                    </div>
+                    
 
                 </div>
-
-
-            </div>
         </div>
-        </div>
+        
     </section>
-    <!--RELATED INFO-->
-    <section class="relatedInfo">
-        <div class="container">
-            <!--LINKS OTRAS SECCIONES-->
-            <div class="row py-5">
-                <!--LEFT COLUMN-->
-                <div class="col-lg-8">
-                    <!--LINKS seccion infografia planificacion-->
-                    <h2>Conoce</h2>
-                    <div class="wrap-cta">
-                        <a href="/PresupuestoGeneral" target="_blank" class="py-5 mb-5 px-0">
-                            <div class="h4">Presupuestos de la República<i class="material-icons md-18">arrow_forward</i> </div>
-                        </a>
-                        <a href="/ProcesoPresupuesto" target="_blank" class="py-5 mb-5 px-0">
-                            <div class="h4">Presupuestos Ciudadanos<i class="material-icons md-18">arrow_forward</i> </div>
-                        </a>
-                    </div><br />
-                    <h2>Explora</h2>
-                    <div class="wrap-cta">
-                        <a href="../Entidades" class="py-5 mb-5 px-0">
-                            <div class="h4">Ir a Instituciones <i class="material-icons md-18">arrow_forward</i> </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="wrap-cta">
-                        <p class="card-title mb-4">Información suministrada por:</p>
-                        <a href="https://www.dominioentidad.com/" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="../img/logoHaciendaP.png" alt="ir a SEFIN" />
-                    </div>
 
-                </div>
-            </div>
-
-        </div>
-    </section>
     <div id="helpCenter"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
     <script src="js/entidades_gen_aux.js"></script>
 
-    <script>
 
-        window.onscroll = function () { myFunction() ***REMOVED***;
-
-        var header = document.getElementById("navs-header");
-        var sticky = header.offsetTop;
-
-        function myFunction() {
-            if (window.pageYOffset > sticky) {
-                header.classList.add("sticky");
-                header.classList.add("bg-white");
-        ***REMOVED*** else {
-                header.classList.remove("sticky");
-                header.classList.remove("bg-white");
-        ***REMOVED***
-    ***REMOVED***
-    </script>
 
 </body>

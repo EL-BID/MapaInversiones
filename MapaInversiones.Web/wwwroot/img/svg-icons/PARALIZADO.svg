@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="83" height="80" viewBox="0 0 83 80">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_3886" data-name="Rectangle 3886" width="75" height="75" fill="#203c73"/>
+    </clipPath>
+    <clipPath id="clip-ICO-Org-007">
+      <rect width="83" height="80"/>
+    </clipPath>
+  </defs>
+  <g id="ICO-Org-007" clip-path="url(#clip-ICO-Org-007)">
+    <rect width="83" height="80" fill="#fff"/>
+    <g id="Group_4360" data-name="Group 4360" transform="translate(4 3)" clip-path="url(#clip-path)">
+      <path id="Path_20644" data-name="Path 20644" d="M19.088,44.162H7.423A1.225,1.225,0,0,1,6.2,42.939V6.6A1.225,1.225,0,0,1,7.423,5.38H19.088A1.22,1.22,0,0,1,20.312,6.6V42.939a1.22,1.22,0,0,1-1.223,1.223M8.647,41.711H17.86V7.832H8.647Z" transform="translate(24.244 21.056)" fill="#203c73"/>
+      <path id="Path_20645" data-name="Path 20645" d="M13.256,16.108a7.058,7.058,0,1,1,7.061-7.061,7.068,7.068,0,0,1-7.061,7.061m0-11.665a4.606,4.606,0,1,0,4.6,4.6,4.61,4.61,0,0,0-4.6-4.6" transform="translate(24.244 7.793)" fill="#203c73"/>
+      <path id="Path_20646" data-name="Path 20646" d="M37.5,75A37.5,37.5,0,1,1,75,37.5,37.54,37.54,0,0,1,37.5,75m0-72.543A35.046,35.046,0,1,0,72.548,37.5,35.089,35.089,0,0,0,37.5,2.452" transform="translate(0 0.001)" fill="#203c73"/>
+    </g>
+  </g>
+</svg>

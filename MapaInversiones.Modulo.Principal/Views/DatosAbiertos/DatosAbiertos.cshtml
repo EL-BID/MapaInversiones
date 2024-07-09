@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 ***REMOVED***
 <!--MAIN BANNER-->
-<section class="banner-main-asc mb-0">
+<section class="banner-main mb-0">
 
     <div class="container">
         <!-- Begin bread crumbs -->
@@ -32,259 +32,484 @@
                     <div class="banner-main-title">
                         <h1>Datos abiertos</h1>
                     </div>
-                    <!--<div class="banner-main-desc">
-                        <p>Explore y descargue datos públicos en formatos abiertos sobre información de presupuesto e indicadores del Plan Nacional de Desarrollo e información de presupuesto e indicadores de las Entidades y sus proyecto/actividad.</p>
-
-                    </div>-->
-
+                    
                 </div>
 
             </div>
 
         </div>
+        <div class="row navs-shortcuts">
+
+            <div class="" id="navs-header2">
+
+                <a class="btn-section" href="#s1">
+                    <span class="ic-shortcut"><i class="material-icons md-24">info</i></span>
+                    <span class="text-btn">¿Qué son los datos abiertos?</span>
+                </a>
+                <a class="btn-section" href="#s2">
+                    <span class="ic-shortcut"><i class="material-icons md-24">supervisor_account</i></span>
+                    <span class="text-btn">¿Porqué son importantes los datos abiertos?</span>
+                </a>
+                <a class="btn-section" href="#s3">
+                    <span class="ic-shortcut"><i class="material-icons md-24">cloud_download</i></span>
+                    <span class="text-btn">Conjuntos de datos disponibles</span>
+                </a>
+
+            </div>
+        </div>
     </div>
 
 </section>
 
-<!--DATOS PLANEACION-->
-<section class="section main-Content">
+
+<div class="clearfix"></div>
+<section class="section" id="s1">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        @{
-                            var datospresupuesto = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosPresupuesto");
-                    ***REMOVED***
-                        <div class="card shadow border-0 card-entidad">
-                            <div class="card-body" id="boxpresupuesto" data-presupuesto="@datospresupuesto.Content.BagPart">
-                                <div class="row">
-                                    <div class="prescontainerdtb">
-                                        <div class="ico_press"></div>
-                                        <h4 class="services-item-heading">
-                                            @datospresupuesto.Content.DatosAbiertos.Titulo.Text
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="row" style="display:none">
-                                    <h6 class="services-item-heading">Conjunto de datos</h6>
-                                    <div class="form-group subtitle">
-                                        <select class="form-select" id="datospresupuesto">
-                                            @foreach (var caja in datospresupuesto.Content.BagPart.ContentItems)
-                                            {
-                                                <option value="@caja.TitlePart.Title">@caja.TitlePart.Title</option>
-                                        ***REMOVED***
+        <div class="section-heading heading-left">
+            <h2>¿Qué son los datos abiertos?</h2>
+        </div>
+        <div class="desc-heading">
+            <p>
+                <span class="text-bold">Los datos abiertos son datos que cualquier persona puede utilizar, reutilizar y redistribuir libremente, sujetos únicamente, como máximo, al requisito de atribuirlos y compartirlos por igual.</span>
+                Los datos abiertos pueden ser una herramienta valiosa para las inversiones públicas al brindar a los tomadores de decisiones acceso a información más completa y precisa. Esto puede ayudar a garantizar que las inversiones se realicen en áreas donde más se necesitan y pueden tener el mayor impacto.
+            </p>
+        </div>
 
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h6 class="services-item-heading">Año</h6>
-                                    <div class="form-group subtitle">
-                                        <select class="form-select" aria-label="2022" id="annopresupuesto">
-                                        </select>
-                                    </div>
-                                    <div class="d-flex">
-                                        <h6 class="services-item-heading">Formato</h6>
-                                        <div class="form-group d-flex">
-                                            <div class="ml-3"> <input checked type="radio" id="formatopresupuesto" name="formatopresupuesto" value="CVS"><label class="subtitlechk" for="child">.csv</label></div>
-                                            <div class="ml-3"> <input type="radio" id="formatopresupuesto" name="formatopresupuesto" value="XLS"><label class="subtitlechk" for="child">.xls</label></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="text-center py-2">                                       
-                                            <a title="Descargar" onclick="descargar('annopresupuesto','formatopresupuesto');" class="btn btn-cards">
-                                                <span>Descargar</span>
-                                            </a>
-                                    </div>
-                                    <div class="text-center py-2">
-                                        <a title="Diccionario de Datos" href="#" class="btnOut btn-cards" id="idDicPresupuesto">
-                                            <span>Diccionario de Datos</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="boxDataSourceDA text-center">
-                                        <h4>Última actualización:  <span id="idUltimaActPresupuesto"></span></h4>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="boxDataSourceDA text-left">
-                                        <h4>Fuentes:<br /> <span id="FuentePresupuesto"></span></h4>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="boxDataSourceDA text-center">
-                                        <p>Datos suministrados por medio del Portal de Datos Abiertos de la Secretaría xxxxxs, mas detalles en <strong><a target="_blank" href="https://www.contratacionesdatosabiertos.com/">entidad datos abiertos</a></strong></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    </div>
+</section>
+<section class="" id="s2">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="section-heading heading-left">
+                <h2>¿Porqué son importantes los datos abiertos?</h2>
+            </div>
+            <div class="row justify-content-center align-items-center my-3">
+                <div class="col-lg-3 text-center">
+                    <img class="img-fluid" src="../img/ic-info-OP.svg" alt="Imagen decorativa" />
+                </div>
+                <div class="col-lg-6">
+                    <p>Los datos abiertos son importantes porque promueven la transparencia, la toma de decisiones informada, la innovación y los beneficios económicos y sociales. Al hacer que los datos gubernamentales sean más accesibles al público, podemos crear una sociedad más informada, equitativa y próspera.</p>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="wrap-cards importance-op">
+            <div class="cardR shadow border-0 h-100 aos-init aos-animate" data-aos="zoom-in-up">
+                <div class="card-body">
+                    <div class="text-desc">
+                        <p class="h4">
+                            Transparencia y rendición de cuentas
+                        </p>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-p1"><span>+</span></button>
                     </div>
+                </div>
+            </div>
 
-                    <div class="col-md-4">
-                        <div class="card shadow border-0 card-entidad">
-                            @{
-                                var datoscontratacion = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosContratacion");
-                        ***REMOVED***
+            <div class="cardR shadow border-0 h-100 aos-init aos-animate" data-aos="zoom-in-up">
+                <div class="card-body">
+                    <div class="text-desc">
+                        <p class="h4">
+                            Toma de decisiones basadas en datos
+                        </p>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-p2"><span>+</span></button>
+                    </div>
+                </div>
+            </div>
 
-                            <div class="card-body" id="boxcontrato" data-contratos="@datoscontratacion.Content.BagPart">
-                                <div class="row">
-                                    <div class="prescontainerdtb">
-                                        <div class="ico_press"></div>
-                                        <h4 class="services-item-heading">
-                                            @datoscontratacion.Content.DatosAbiertos.Titulo.Text
-                                        </h4>
-                                    </div>
-                                </div>
+            <div class="cardR shadow border-0 h-100 aos-init aos-animate" data-aos="zoom-in-up">
+                <div class="card-body">
+                    <div class="text-desc">
+                        <p class="h4">
+                            Beneficios económicos
+                        </p>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-p3"><span>+</span></button>
+                    </div>
+                </div>
+            </div>
 
-                                <div class="row">
-                                    <h6 class="services-item-heading">Conjunto de datos</h6>
-                                    <div class="form-group subtitle">
-                                        <select class="form-select" id="datoscontratos">
-                                            @foreach (var caja in datoscontratacion.Content.BagPart.ContentItems)
-                                            {
-                                                <option value="@caja.TitlePart.Title">@caja.TitlePart.Title</option>
-                                        ***REMOVED***
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <h6 class="services-item-heading">Año</h6>
-                                    <div class="form-group subtitle">
-                                        <select class="form-select" id="annocontratos">
-                                        </select>
-                                    </div>
-                                    <div class="d-flex">
-                                        <h6 class="services-item-heading">Formato</h6>
-                                        <div class="form-group d-flex">
-                                            <div class="ml-3"> <input checked type="radio" id="formatocontrato" name="formatocontrato" value="CVS"><label class="subtitlechk" for="child">.csv</label></div>
-                                            <div class="ml-3"> <input type="radio" id="formatocontrato" name="formatocontrato" value="XLS"><label class="subtitlechk" for="child">.xls</label></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="text-center py-2">
-                                        <a title="Descargar" onclick="descargar('annocontratos','formatocontrato');" class="btn btn-cards">
-                                            <span>Descargar</span>
-                                        </a>
-                                    </div>
-                                    <div class="text-center py-2">
-                                        <a title="Diccionario de Datos" href="" class="btnOut btn-cards" id="idDicContratos">
-                                            <span>Diccionario de Datos</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="boxDataSourceDA text-center">
-                                        <h4>Última actualización: <span id="idUltimaActContratos"></span> </h4>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="boxDataSourceDA text-left">
-                                        <h4>Fuentes:<br /> <span id="FuenteContratos"></span></h4>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="boxDataSourceDA text-center">
-                                        <p>Datos suministrados por medio del Portal de Datos Abiertos de la Secretaría xxxxxs, mas detalles en <strong><a target="_blank" href="https://www.contratacionesdatosabiertos.com/">entidad datos abiertos</a></strong></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="cardR shadow border-0 h-100 aos-init aos-animate" data-aos="zoom-in-up">
+                <div class="card-body">
+                    <div class="text-desc">
+                        <p class="h4">
+                            Beneficios sociales
+                        </p>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal-p4"><span>+</span></button>
                     </div>
                 </div>
             </div>
         </div>
 
+    </div>
+
+</section>
+<!--MODAL 1-->
+<div id="modal-p1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Transparencia y rendición de cuentas</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <p>Los datos abiertos brindan a los ciudadanos acceso a información sobre cómo y en qué se invierten los recursos públicos. Esta transparencia permite a los ciudadanos ejercer control sobre las instituciones, ejecución del gasto público, compras, contrataciones, etc.</p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!--MODAL 2-->
+<div id="modal-p2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Toma de decisiones basadas en datos</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <p>El acceso a datos gubernamentales abiertos permite a los ciudadanos tomar decisiones informadas sobre todo, desde dónde vivir hasta cómo votar. También puede ayudar a las empresas y emprendedores a tomar mejores decisiones proporcionándoles datos sobre el mercado y las necesidades de la comunidad.</p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!--MODAL 3-->
+<div id="modal-p3" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Beneficios económicos</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <p>Los datos abiertos pueden tener beneficios económicos al promover el emprendimiento y la innovación, además de proporcionar información valiosa a empresas e inversores. También puede reducir los costos para las agencias gubernamentales al proporcionar un medio más eficiente de recopilación e intercambio de datos.</p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!--MODAL 4-->
+<div id="modal-p4" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Beneficios sociales</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <p>Los datos abiertos se pueden utilizar para abordar cuestiones sociales, como identificar áreas de necesidad de servicios sociales o rastrear la propagación de enfermedades. También puede ayudar a promover la equidad y la justicia al brindar acceso a datos sobre demografía y servicios públicos.</p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<section class="section op-available" id="s3">
+    <div class="container">
+        <div class="section-heading heading-left">
+            <h2>Conjuntos de datos disponibles</h2>
+        </div>
+        @{
+            var datospresupuesto = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosPresupuesto");
+            var esconde = "";
+            if (datospresupuesto.Content.BagPart.ContentItems.First == null)
+            {
+                esconde = "hidden";
+        ***REMOVED***
+
+    ***REMOVED***
+        <!--DATOS PRESUPUESTO-->
+        <div class="main-Content" @esconde>
+            <div class="container my-4">
+                <div class="row justify-content-center">
+
+                    <div class="section-heading heading-left">
+                        <h3>@datospresupuesto.Content.DatosAbiertos.Tituloamostrar.Text</h3>
+                        <p>@Html.Raw(datospresupuesto.Content.HtmlBodyPart.Html)</p>
+                    </div>
+
+                </div>
+                <div class="row justify-content-left items">
+                    @foreach (var caja in datospresupuesto.Content.BagPart.ContentItems)
+                    {
+                        var idfuente = @caja.DescargaDatosAbiertos.IdentificadorFuente.Value;
+                        var classdivfuente = "fuente" + idfuente;
+                        <div class="col-xl-6 col-md-6 col-12 item">
+                            <!-- Begin OpenData item -->
+                            <div class="services-item services-item-row item-style">
+                                <div class="services-item-info">
+                                    <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
+                                    <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
+                                    <div class="@classdivfuente" param="@idfuente"></div>
+                                    @foreach (var links in caja.BagPart.ContentItems)
+                                    {
+
+                                        <div class="actions-links">
+                                           
+                                            <a href="@links.LinkDatosAbiertos.EnlaceCVS.Url" target="_blank" rel="noopener noreferrer">
+                                                <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceCVS.Text</span>
+                                            </a>
+                                            <a href="@links.LinkDatosAbiertos.Diccionariodedatos.Url" target="_blank" rel="noopener noreferrer">
+                                                <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.Diccionariodedatos.Text</span>
+                                            </a>
+                                        </div>
+                                ***REMOVED***
+                                </div>
+
+                            </div>
+
+                            <!-- End open data item -->
+                        </div>
+                ***REMOVED***
+
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+        @{
+            var datosproyectos = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosProyectos");
+            var esconde4 = "";
+            if (datosproyectos.Content.BagPart.ContentItems.First == null)
+            {
+                esconde4 = "hidden";
+        ***REMOVED***
+
+    ***REMOVED***
+        <!--DATOS PROYECTOS-->
+        <div class="main-Content" @esconde4>
+            <div class="container my-4">
+                <div class="row justify-content-center">
+
+                    <div class="section-heading heading-left">
+                        <h3>@datosproyectos.Content.DatosAbiertos.Tituloamostrar.Text</h3>
+                        <p>@Html.Raw(datosproyectos.Content.HtmlBodyPart.Html)</p>
+                    </div>
+
+                </div>
+                <div class="row justify-content-left items">
+                    @foreach (var caja in datosproyectos.Content.BagPart.ContentItems)
+                    {
+                        var idfuente = @caja.DescargaDatosAbiertos.IdentificadorFuente.Value;
+                        var classdivfuente = "fuente" + idfuente;
+                        <div class="col-xl-6 col-md-6 col-12 item">
+                            <!-- Begin OpenData item -->
+                            <div class="services-item services-item-row item-style">
+                                <div class="services-item-info">
+                                    <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
+                                    <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
+                                    <div class="@classdivfuente" param="@idfuente"></div>
+                                    @foreach (var links in caja.BagPart.ContentItems)
+                                    {
+
+                                        <div class="actions-links">
+                                            @*<a href="@links.LinkDatosAbiertos.EnlaceXLS.Url" target="_blank" rel="noopener noreferrer">
+                                                <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceXLS.Text</span>
+                                            </a>*@
+                                            <a href="@links.LinkDatosAbiertos.EnlaceCVS.Url" target="_blank" rel="noopener noreferrer">
+                                                <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceCVS.Text</span>
+                                            </a>
+                                            <a href="@links.LinkDatosAbiertos.Diccionariodedatos.Url" target="_blank" rel="noopener noreferrer">
+                                                <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.Diccionariodedatos.Text</span>
+                                            </a>
+                                        </div>
+                                ***REMOVED***
+                                </div>
+
+                            </div>
+
+                            <!-- End open data item -->
+                        </div>
+                ***REMOVED***
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="clearfix"></div>
+        @{
+            var datosPresupestoEmergencias = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosPresupuestoEmergencias");
+            var esconde5 = "";
+            if (datosPresupestoEmergencias == null || datosPresupestoEmergencias.Content.BagPart.ContentItems.First == null) esconde5 = "hidden";
+            if (datosPresupestoEmergencias != null)
+            {
+                <!--DATOS PRESUPUESTO EMERGENCIAS-->
+                <div class="main-Content" @esconde5>
+                    <div class="container my-4">
+                        <div class="row justify-content-center">
+
+                            <div class="section-heading heading-left">
+                                <h3>@datosPresupestoEmergencias.Content.DatosAbiertos.Tituloamostrar.Text</h3>
+                                <p>@Html.Raw(datosPresupestoEmergencias.Content.HtmlBodyPart.Html)</p>
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-left items">
+                            @foreach (var caja in datosPresupestoEmergencias.Content.BagPart.ContentItems)
+                            {
+                                var idfuente = @caja.DescargaDatosAbiertos.IdentificadorFuente.Value;
+                                var classdivfuente = "fuente" + idfuente;
+                                <div class="col-xl-6 col-md-6 col-12 item">
+                                    <!-- Begin OpenData item -->
+                                    <div class="services-item services-item-row item-style">
+                                        <div class="services-item-info">
+                                            <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
+                                            <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
+                                            <div class="@classdivfuente" param="@idfuente"></div>
+                                            @foreach (var links in caja.BagPart.ContentItems)
+                                            {
+
+                                                <div class="actions-links">
+                                                    <a href="@links.LinkDatosAbiertos.EnlaceCVS.Url" target="_blank" rel="noopener noreferrer">
+                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceCVS.Text</span>
+                                                    </a>
+                                                    <a href="@links.LinkDatosAbiertos.Diccionariodedatos.Url" target="_blank" rel="noopener noreferrer">
+                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.Diccionariodedatos.Text</span>
+                                                    </a>
+                                                </div>
+                                        ***REMOVED***
+                                        </div>
+                                    </div>
+                                    <!-- End open data item -->
+                                </div>
+                        ***REMOVED***
+                        </div>
+                    </div>
+                </div>
+        ***REMOVED***
+    ***REMOVED***
+       
+
+        <div class="clearfix"></div>
+        @{
+            var datosLluvias = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosLLuvias");
+            var esconde6 = "";
+            if (datosLluvias==null || datosLluvias.Content.BagPart.ContentItems.First == null)esconde6 = "hidden";
+            if (datosLluvias != null)
+            {
+                <!--DATOS LLUVIAS-->
+                <div class="main-Content" @esconde6>
+                    <div class="container my-4">
+                        <div class="row justify-content-center">
+
+                            <div class="section-heading heading-left">
+                                <h3>@datosLluvias.Content.DatosAbiertos.Tituloamostrar.Text</h3>
+                                <p>@Html.Raw(datosLluvias.Content.HtmlBodyPart.Html)</p>
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-left items">
+                            @foreach (var caja in datosLluvias.Content.BagPart.ContentItems)
+                            {
+                                var idfuente = @caja.DescargaDatosAbiertos.IdentificadorFuente.Value;
+                                var classdivfuente = "fuente" + idfuente;
+                                <div class="col-xl-6 col-md-6 col-12 item">
+                                    <!-- Begin OpenData item -->
+                                    <div class="services-item services-item-row item-style">
+                                        <div class="services-item-info">
+                                            <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
+                                            <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
+                                            <div class="@classdivfuente" param="@idfuente"></div>
+                                            @foreach (var links in caja.BagPart.ContentItems)
+                                            {
+
+                                                <div class="actions-links">
+                                                    <a href="@links.LinkDatosAbiertos.EnlaceCVS.Url" target="_blank" rel="noopener noreferrer">
+                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceCVS.Text</span>
+                                                    </a>
+                                                    <a href="@links.LinkDatosAbiertos.Diccionariodedatos.Url" target="_blank" rel="noopener noreferrer">
+                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.Diccionariodedatos.Text</span>
+                                                    </a>
+                                                </div>
+                                        ***REMOVED***
+                                        </div>
+                                    </div>
+                                    <!-- End open data item -->
+                                </div>
+                        ***REMOVED***
+                        </div>
+                    </div>
+                </div>
+        ***REMOVED***
+    ***REMOVED***
+      
+
+        <div class="clearfix"></div>
+        @{
+            var datosFiona = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosFiona");
+            var esconde7 = "";
+            if (datosFiona== null || datosFiona.Content.BagPart.ContentItems.First == null) esconde7 = "hidden";
+            if (datosFiona != null)
+            {
+                <!--DATOS FIONA-->
+                <div class="main-Content" @esconde7>
+                    <div class="container my-4">
+                        <div class="row justify-content-center">
+
+                            <div class="section-heading heading-left">
+                                <h3>@datosFiona.Content.DatosAbiertos.Tituloamostrar.Text</h3>
+                                <p>@Html.Raw(datosLluvias.Content.HtmlBodyPart.Html)</p>
+                            </div>
+
+                        </div>
+                        <div class="row justify-content-left items">
+                            @foreach (var caja in datosFiona.Content.BagPart.ContentItems)
+                            {
+                                var idfuente = @caja.DescargaDatosAbiertos.IdentificadorFuente.Value;
+                                var classdivfuente = "fuente" + idfuente;
+                                <div class="col-xl-6 col-md-6 col-12 item">
+                                    <!-- Begin OpenData item -->
+                                    <div class="services-item services-item-row item-style">
+                                        <div class="services-item-info">
+                                            <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
+                                            <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
+                                            <div class="@classdivfuente" param="@idfuente"></div>
+                                            @foreach (var links in caja.BagPart.ContentItems)
+                                            {
+
+                                                <div class="actions-links">
+                                                    <a href="@links.LinkDatosAbiertos.EnlaceCVS.Url" target="_blank" rel="noopener noreferrer">
+                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceCVS.Text</span>
+                                                    </a>
+                                                    <a href="@links.LinkDatosAbiertos.Diccionariodedatos.Url" target="_blank" rel="noopener noreferrer">
+                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.Diccionariodedatos.Text</span>
+                                                    </a>
+                                                </div>
+                                        ***REMOVED***
+                                        </div>
+                                    </div>
+                                    <!-- End open data item -->
+                                </div>
+                        ***REMOVED***
+                        </div>
+                    </div>
+                </div>
+        ***REMOVED***
+    ***REMOVED***
 
     </div>
 </section>
 
-<script src="~/js/bootstrap/3.3.5/bootstrap.min.js" type="text/javascript"></script>
+
+
 <script src="~/js/Bootbox/bootbox.min.js" type="text/javascript"></script>
 
 <script src="~/js/DatosAbiertos_aux.js"></script>
-
-
-<!--OA entidades-->
-<!--<section class="section main-Content">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="section-heading heading-left">
-                <h2>Entidades</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut aliquam massa. Morbi maximus ullamcorper aliquet. Suspendisse lectus libero, ultrices eu diam ac, sodales vehicula erat. Maecenas in dapibus lorem. Nam pretium feugiat eros, quis ornare ipsum dignissim quis.</p>
-            </div>
-        </div>
-        <div class="row justify-content-center items">
-            <div class="col-xl-6 col-md-6 col-12 item">-->
-<!-- Begin OpenData item -->
-<!--<a href="" class="services-item services-item-row item-style">
-    <div class="services-item-info">
-        <h4 class="services-item-heading">SPR - Total por Eje Reporte PND</h4>
-        <div class="small services-item-desc">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</div>
-        <div class="actions-links">
-
-            <span class="badge badge-pill badge-primary"> Descargar JSON</span>
-
-            <span class="badge badge-pill badge-primary"> Descargar XLSX</span>
-        </div>
-    </div>
-    <div class="services-item-ico">
-        <i class="material-icons material-icons-outlined md-48">cloud_download</i>
-    </div>
-
-</a>-->
-<!-- End open data item -->
-<!--</div>
-<div class="col-xl-6 col-md-6 col-12 item">-->
-<!-- Begin OpenData item -->
-<!--<a href="" class="services-item services-item-row item-style">
-    <div class="services-item-info">
-        <h4 class="services-item-heading">SPR - Total por Eje Reporte PND</h4>
-        <div class="small">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</div>
-        <div class="actions-links">
-
-            <span class="badge badge-pill badge-primary"> Descargar JSON</span>
-
-            <span class="badge badge-pill badge-primary"> Descargar XLSX</span>
-        </div>
-    </div>
-
-    <div class="services-item-ico">
-        <i class="material-icons material-icons-outlined md-48">cloud_download</i>
-    </div>
-
-</a>-->
-<!-- End open data item -->
-<!--</div>
-
-</div>
-<div class="row justify-content-left items">
-    <div class="col-xl-6 col-md-6 col-12 item">-->
-<!-- Begin OpenData item -->
-<!--<a href="" class="services-item services-item-row item-style">
-    <div class="services-item-info">
-        <h4 class="services-item-heading">SPR - Total por Eje Reporte PND</h4>
-        <div class="small">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.</div>
-        <div class="actions-links">
-
-            <span class="badge badge-pill badge-primary"> Descargar JSON</span>
-
-            <span class="badge badge-pill badge-primary"> Descargar XLSX</span>
-        </div>
-    </div>
-    <div class="services-item-ico">
-        <i class="material-icons material-icons-outlined md-48">cloud_download</i>
-    </div>
-
-</a>-->
-<!-- End open data item -->
-<!--</div>
-
-
-        </div>
-    </div>
-</section>-->

@@ -31,18 +31,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 ***REMOVED***
     public IActionResult PlanNacional()
     {
-      //ModelPlanData modelo = new ModelPlanData();
-      ////List<EjeEstrategico> listEje = new List<EjeEstrategico>();
-      //modelo.EjesEstrategicos = (from ejes in _connection.EjeEstrategicoes
-      //                           where ejes.PlanId == 9
-      //                           select new EjeEstrategico {
-      //                             Nombre = ejes.Nombre,
-      //                             Descripcion = ejes.Descripcion,
-      //                             Id = ejes.Id
-      //                       ***REMOVED***).ToList();
-      //ViewData["EjesEstrategicos"] = modelo.EjesEstrategicos;
-      //modelo.Ejes = listEje;
-      //return View(modelo);
       ViewData["ruta"] = "Planificación";
       return View();
 ***REMOVED***

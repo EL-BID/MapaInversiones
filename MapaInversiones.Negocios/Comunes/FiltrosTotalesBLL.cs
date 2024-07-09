@@ -20,9 +20,6 @@ namespace PlataformaTransparencia.Negocios.BLL.Comunes
             try {
                 objNegocioFiltros.GenerateGeographicFilters(objReturn);//Trae los filtros geograficos {Region/Dpto/Municipio***REMOVED***                
                 objNegocioFiltros.ObtenerFiltrosEspecificosParaProyectos(objReturn);
-                //objReturn.filters.AddRange(BusquedaRecursosBLL.ObtenerFiltrosEspecificosParaRecursos());//Trae Fuentes (Tipo de Recursos y Periodos para recursos)
-                //objReturn.filters.AddRange(BusquedaProduccionBLL.ObtenerFiltrosEspecificosParaProduccion());//Trae Fuentes (Tipo de Recursos y Periodos para recursos)
-                //objReturn.filters.AddRange(BusquedaFiscalizacionBLL.ObtenerFiltrosEspecificosParaFiscalizacion());//
 
                 objReturn.Status = true;
         ***REMOVED***

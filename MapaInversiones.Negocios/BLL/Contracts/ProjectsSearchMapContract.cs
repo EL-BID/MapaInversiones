@@ -25,6 +25,7 @@ namespace PlataformaTransparencia.Negocios.Contracts
         private List<int> sectors = new List<int>();
         private List<int> status = new List<int>();
         private List<int> orgFinanciador = new List<int>();
+        private List<int> entidadEjecutora = new List<int>();
         private List<decimal> topleft = new List<decimal>();
         private int zoom = -1;
         private List<int> programa = new List<int>();
@@ -51,7 +52,6 @@ namespace PlataformaTransparencia.Negocios.Contracts
             decimal valorTotalRegalias = 0M;
             ModelDataProjectsSearchMap objReturn = null;
 
-
             try
             {
                 string key = "BusquedaTabProyectos" + _consultasComunes.ObtenerKeyPorEstadoFiltro(filtro, true);
@@ -68,8 +68,8 @@ namespace PlataformaTransparencia.Negocios.Contracts
                     this.DataProjectSearchMap.approvedMoney = Math.Round(valorRegalias);
                     this.DataProjectSearchMap.approvedMoneyTotal = Math.Round(valorTotalRegalias);
                     this.DataProjectSearchMap.approvedProjects = cantidadProyectos;
-                    //this.DataProjectSearchMap.collectedMoney = new ConsolidadosNacionalesBLL().ObtenerPresupuestoTotalSegunFiltroProyectos(filtro);
                     this.DataProjectSearchMap.totalProjectsNumber = cantidadProyectos;
+
                     ShortCacheHelper.Add(this.DataProjectSearchMap, key);
             ***REMOVED***
                 else
@@ -120,9 +120,13 @@ namespace PlataformaTransparencia.Negocios.Contracts
                 {
                     this.status = (from n in parameters["estado"].Split(new char[] { ',' ***REMOVED***) select int.Parse(n)).ToList<int>();
             ***REMOVED***
-                if (parameters.Keys.Contains<string>("orgFinanciador"))
+                if (parameters.Keys.Contains<string>("orgfinanciador"))
                 {
-                    this.orgFinanciador = (from n in parameters["orgFinanciador"].Split(new char[] { ',' ***REMOVED***) select int.Parse(n)).ToList<int>();
+                    this.orgFinanciador = (from n in parameters["orgfinanciador"].Split(new char[] { ',' ***REMOVED***) select int.Parse(n)).ToList<int>();
+            ***REMOVED***
+                if (parameters.Keys.Contains<string>("entidadejecutora"))
+                {
+                    this.orgFinanciador = (from n in parameters["entidadejecutora"].Split(new char[] { ',' ***REMOVED***) select int.Parse(n)).ToList<int>();
             ***REMOVED***
                 if (parameters.Keys.Contains<string>("query"))
                 {
@@ -163,13 +167,13 @@ namespace PlataformaTransparencia.Negocios.Contracts
 
         private FiltroBusquedaProyecto ObtenerFiltroPorParametros()
         {
-            return new FiltroBusquedaProyecto(this.zoom, this.regions, this.departments, this.municipalities, this.sectors, this.status, this.orgFinanciador, this.periods, this.filtroNombreProyecto, this.topleft, this.bottomrigth, this.programa);
+            return new FiltroBusquedaProyecto(this.zoom, this.regions, this.departments, this.municipalities, this.sectors, this.status, this.orgFinanciador, this.entidadEjecutora, this.periods, this.filtroNombreProyecto, this.topleft, this.bottomrigth, this.programa);
     ***REMOVED***
 
         // Properties
         public ModelDataProjectsSearchMap DataProjectSearchMap { get; set; ***REMOVED***
 
-        //public BusquedasProyectosBLL objBussinesRf { get; set; ***REMOVED***
+
 ***REMOVED***
 
 

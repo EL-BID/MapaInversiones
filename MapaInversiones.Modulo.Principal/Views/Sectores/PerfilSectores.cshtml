@@ -1,0 +1,392 @@
+﻿@model PlataformaTransparencia.Modelos.ModelLocationData
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+***REMOVED***
+@{
+    var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
+    var LabelSector = "";
+    var TituloSector = "";
+    System.IFormatProvider culture =
+        new System.Globalization.CultureInfo("es-RD");
+***REMOVED***
+@foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
+{
+    if (@etiqueta.AliasPart.Alias == "Sector")
+    {
+        LabelSector = @etiqueta.HtmlBodyPart.Html;
+        TituloSector = @etiqueta.TitlePart.Title;
+***REMOVED***
+***REMOVED***
+    
+    <!-- Landing Section -->
+<section id="s0" class="banner-main">
+
+        <div class="container">
+
+            <!-- Begin bread crumbs -->
+            <nav class="bread-crumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="bread-crumbs-list">
+                                <li>
+                                    <a href="\">Inicio</a>
+                                    <i class="material-icons md-18">chevron_right</i>
+                                </li>
+                            <li>Sector @Model.EncabezadoSector.nomSector</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="banner-main-info">
+                <div class="banner-main-title">
+                    <h1>@Model.EncabezadoSector.nomSector</h1>
+                </div>
+                <div class="banner-main-desc">
+                    <p>SECTOR</p>
+                    <input id="idSector" name="idSector" type="hidden" value="@Model.location_id">
+                    <input id="idDepto" name="idDepto" type="hidden" value="@Model.ProjectsPerSectorGroup.OrderByDescending(x => x.rawValue).ToList()[0].alias">
+                </div>
+                
+            </div>
+            <div class="col-md-12 text-center">
+
+                <ul class="list-inline details">
+                    <li>
+                        <span class="h3 text-center">$ @String.Format("{0:n0***REMOVED***", @Model.EncabezadoSector.Costo)</span>
+                        <span class="text-center h6">Valor total proyectos</span>
+                    </li>
+                    <li>
+                        <span class="h3 text-center">@String.Format("{0:n2***REMOVED***", @Model.EncabezadoSector.Duracion) Años</span>
+                        <span class="text-center h6">Duración promedio del proyecto</span>
+                    </li>
+                    <li>
+                        <span class="h3 text-center">@String.Format("{0:n0***REMOVED***", @Model.EncabezadoSector.CantProyectos)</span>
+                        <span class="text-center h6">Número de Proyectos</span>
+                    </li>
+
+
+                </ul>
+
+            </div>
+       
+        </div>
+        </div>
+
+    <div class="row navs-shortcuts">
+        <div class="" id="navs-header">
+            <a class="btn-section" href="#s1">
+                <span class="ic-shortcut"><i class="material-icons md-24">feed</i></span>
+                <span class="text-btn">Información General</span>
+            </a>
+            <a class="btn-section" href="#s2">
+                <span class="ic-shortcut"><i class="material-icons md-24">earbuds</i></span>
+                <span class="text-btn">Proyecto por ente territorial</span>
+            </a>
+            <a class="btn-section" href="#s3">
+                <span class="ic-shortcut"><i class="material-icons md-24">collections</i></span>
+                <span class="text-btn">Proyectos en ejecución</span>
+            </a>
+            <a class="btn-section" href="#s4">
+                <span class="ic-shortcut"><i class="material-icons md-24">speaker_notes</i></span>
+                <span class="text-btn">Explora otros sectores</span>
+            </a>
+        </div>
+    </div>
+</section>
+<style>
+    .box {
+        margin: 10px;
+        width: 200px;
+        height: 100px;
+        border-radius: 3px;
+        background: linear-gradient(to right, #38b8cd 8px, #f2f2f2 0);
+        box-shadow: 0 5px 5px #e4dcdc;
+        padding-top :22px;
+        padding-left : 26px;
+***REMOVED***
+</style>
+<section class="s1E-section whiteBg" id="s1">
+    <div class="container">
+        <div class="row sep mb-4">
+            <div class="section-heading heading-left">
+                <h2>Información General</h2>
+            </div>
+            <div class="row col-md-8" id="divTxtTodosProy">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="s1E-section whiteBg" id="s2">
+    <div class="container">
+        <div class="row sep mb-4">
+            <div class="section-heading heading-left">
+                <h2>Proyectos por ente territorial</h2>
+            </div>
+            <div class="section-heading heading-center">
+                <h5>Seleccione un ente territorial</h5>
+            </div>
+            <div class="section-heading heading-center" id="divGraphProySector">
+
+            </div>
+        </div>
+
+        <div class="row sep mb-8">
+            <div class="col-lg-6 mb-3">
+                <h5 id="deptoproyecto">Proyectos en @Model.ProjectsPerSectorGroup.OrderByDescending(x => x.rawValue).ToList()[0].labelGroup</h5>
+                <span style="font-style: italic;">Se muestra por defecto el ente territorial con mayor número de proyectos</span>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group mb-5">
+                    <label for="tipo-contrato">Año</label>
+                    <select class="form-select" id="anioProyecto">
+                       
+
+
+                    </select>
+                </div>
+
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group mb-5">
+                    <label for="tipo-contrato">Estado</label>
+                    <select class="form-select" id="estadoProyecto">
+
+                        <option selected value="">TODOS</option>
+                        <option value="1">EJECUCIÓN</option>
+                        <option  value="2">PARALIZADO</option>
+                        <option  value="3">REEVALUACIÓN</option>
+                        
+                    </select>
+                </div>
+
+            </div>
+        </div>
+        <div class="comparativeTable" id="divListadoInstituciones">
+
+        </div>
+        <div id="divPagFichas"></div>
+    </div>
+</section>
+<style>
+
+    
+/*PROJECT CAROUSEL*/
+.thumbnail {
+    position: relative
+***REMOVED***
+
+.carousel {
+    margin-bottom: 0;
+    /*padding: 0 40px 30px 40px;*/
+    padding: 0px 25px 19px 25px;
+    margin-top: 25px;
+***REMOVED***
+/* The controlsy */
+.carousel-control {
+    left: -12px;
+    height: 40px;
+    width: 40px !important;
+    /*margin-top: 5vw;*/
+    opacity: 1;
+    border-radius: 50%;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+***REMOVED***
+
+.carousel-inner {
+    min-height: 250px; /*temporary style*/
+***REMOVED***
+
+.carousel-control.left {
+    background-image: none;
+    background-color: #9D1717
+***REMOVED***
+
+.carousel-control i {
+    color: #fff !important;
+    font-size: inherit;
+    width: auto
+***REMOVED***
+
+.glyphicon-menu-left:before, .glyphicon-menu-right:before {
+    font-size: 50px;
+***REMOVED***
+
+.carousel-control.right {
+    /*right: -12px;*/ background: #9D1717
+***REMOVED***
+
+.carousel-indicators {
+    right: 50%;
+    top: auto;
+    bottom: -10px;
+    margin-right: -19px;
+***REMOVED***
+
+    .carousel-indicators li {
+***REMOVED***
+
+    .carousel-indicators .active {
+***REMOVED***
+
+.tabs{display: flex; justify-content: center***REMOVED***
+.tab-link {
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 8px 25px;
+    border: 1px solid #D5D5D5;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    margin-right: 15px;
+    border-bottom-color: #D5D5D5;
+    border-bottom-width: 1px;
+***REMOVED***
+.tab-link.current {
+    margin-bottom: -1px;
+    border-bottom-width: 2px;
+    border-bottom-color: #FCFCFC !important;
+***REMOVED***
+.pCancelado {
+    border: 1px solid #8CC3F4;
+    background-color: #F6F8F9;
+    border-radius: 9px!important; margin: 15px!important;
+***REMOVED***
+.table-striped {
+    background-color: #fff;
+    border: 1px solid #2E528D
+***REMOVED***
+.table-striped thead {
+    background-color: #2E528D;
+    color: #fff;
+    font-weight: 700;
+    border-top-left-radius: 6px;
+    border-bottom: 0px;
+***REMOVED***
+.table-striped thead th {
+    font-weight: 700!important;
+***REMOVED***
+.acciones .card{ max-width:33%***REMOVED***
+.wrap-contract-cards .card-title { display: flex; align-items:center
+***REMOVED***
+
+.enlace_ficha {
+    margin-top: 17px;
+    display: block
+***REMOVED***
+.enlace_ficha_inversiones {
+    margin-top: 17px;
+    display: block
+***REMOVED***
+
+
+.dropdown .glyphicon {
+    margin-left: 5px
+***REMOVED***
+
+</style>
+<section id="s3" class="s2-section">
+    <div class="container" id="">
+        <div class="row">
+            <div class="col-md-7">
+                <h2>Proyectos en Ejecución Sectores</h2>
+            </div>
+            <!--FILTERS-->
+            <div class="col-md-5">
+                <div class="filtersBox">
+                    <div class="row">
+                        @*<div class="col-xs-12 col-md-6" id="divFiltrosFichaOrdena">*@
+                    </div>
+                    <div class="col-xs-12 col-md-6" id="divFiltrosFichaDepartamento">
+                        <!--Estaba divFiltrosFichaSector -->
+                    </div>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="divContenedorFichas" class="project-carusel" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true, "autoPlay": 8000 ***REMOVED***'>
+                    </div>
+                    <!--END MAQUETA BASICA PROJECTOS-->
+                    <div id="divNoEncontradoEjec" class="no-search-results objHidden">No se encontraron resultados</div>
+                    <div id="divNoExistenEjec" class="no-search-results objHidden">
+                        No se encontraron resultados
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div id="divNoEncontradoEjec" class="no-search-results objHidden">No se han encontrado resultados</div>
+    <div id="divNoExistenEjec" class="no-search-results objHidden">No existen proyectos en Ejecución.</div>
+
+</section>
+
+<section class="s1E-section whiteBg" id="s4">
+    <div class="container">
+        <div class="row sep mb-4">
+            <div class="section-heading heading-left">
+                <h2>Explora otros Sectores</h2>
+            </div>
+            <div class="" id="">
+               <div class="row sep mb-8">
+                <div class="info-cards" id="divContentSectores" >
+                        @foreach (var sector in @Model.Datossectores)
+                        {
+                            <text>
+                                <div id="div_0" class="card category-proy category_sector" location_id="@sector.nomSector" location_cant="@sector.CantProyectos">
+                                    <div class="wrap-ic-category">
+                                        <img src="@("/img/"+sector.UrlImgXL)" alt="@("icono "+sector.nomSector)">
+                                    </div><span class="h5"><a href="/PerfilSector?id=@sector.IdSector">@sector.nomSector</span><span class="number-proy">@sector.CantProyectos proyectos</span>
+                                </div>
+                            </text>
+                    ***REMOVED***
+                    
+                   
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="/Content/dist/js/lib/D3/d3.min.js" charset="utf-8"></script>
+<script src="/content/dist/js/lib/D3/d3plus.js"></script>
+<script src="js/sectores_aux.js"></script>
+
+@section DataBody {
+    data-projectsPerEstado='[@foreach (var estado in @Model.ProjectsPerEstado)
+    {
+        <text>
+            {"label":"@estado.label", "value": "@estado.value", "rawValue": @estado.rawValue***REMOVED***@if (estado != @Model.ProjectsPerEstado.Last())
+            {
+                <text>,</text>
+        ***REMOVED***
+        </text>
+***REMOVED***]'
+    data-projectsPerSectorGroup='[@foreach (var grupo_sector in @Model.ProjectsPerSectorGroup)
+    {
+        <text>
+            {"labelGroup": "@grupo_sector.labelGroup" , "label":"@grupo_sector.label", "value": "@grupo_sector.value", "rawValue": @grupo_sector.rawValue, "alias": "@grupo_sector.alias"***REMOVED***@if (grupo_sector != @Model.ProjectsPerSectorGroup.Last())
+            {
+                <text>,</text>
+        ***REMOVED***
+        </text>
+***REMOVED***]'
+    data-proyectoProjectData='[@foreach (var proy in @Model.ProyectosEjecucion)
+    {
+        <text>
+            {"IdDepartamento":"@proy.IdDepartamento",  "IdProyecto": "@proy.IdProyecto","NombreProyecto": "@proy.NombreProyecto","cantidadFotos": @proy.cantidadFotos, "approvedTotalMoney": "@proy.approvedTotalMoney.ToString("N0").Replace(",", string.Empty)","NombreMunicipio" : "@proy.NombreMunicipio" , "UrlImagen" : "@proy.UrlImagen" , "MesInicioProyecto" : "@proy.MesInicioProyecto" , "AnioInicioProyecto" : "@proy.AnioInicioProyecto" , "MesFinProyecto" : "@proy.MesFinProyecto" , "AnioFinProyecto" : "@proy.AnioFinProyecto" , "NombreSector": "@proy.NombreSector", "IdSector": "@proy.IdSector","porcentajeGastado":"@proy.porcentajeGastado","Megusta":"@proy.Megusta","Comentarios":"@proy.Comentarios","FechaInicioProyecto":"@proy.FechaInicioProyecto"***REMOVED***@if (proy != @Model.ProyectosEjecucion.Last())
+            {
+                <text>,</text>
+        ***REMOVED***
+        </text>
+***REMOVED***]'
+***REMOVED***

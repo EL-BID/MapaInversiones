@@ -16,7 +16,7 @@ namespace PlataformaTransparencia.Modelos.Proyectos
             this.InicializarValoresDefecto();
     ***REMOVED***
 
-        public FiltroBusquedaProyecto(int zoom, List<string> lstCodigosRegion, List<string> lstCodigosDptos, List<string> lstCodigosMunicipios, List<int> lstCodigosSector, List<int> lstCodigosEstado, List<int> lstCodigosOrgFinanciador, List<int> lstAños, string nombreProyecto, List<decimal> puntosTopLeft, List<decimal> puntosBottomRight, List<int> lstCodigoPrograma)
+        public FiltroBusquedaProyecto(int zoom, List<string> lstCodigosRegion, List<string> lstCodigosDptos, List<string> lstCodigosMunicipios, List<int> lstCodigosSector, List<int> lstCodigosEstado, List<int> lstCodigosOrgFinanciador, List<int> lstCodigosEntidadEjecutora, List<int> lstAños, string nombreProyecto, List<decimal> puntosTopLeft, List<decimal> puntosBottomRight, List<int> lstCodigoPrograma)
         {
             this.InicializarValoresDefecto();
             this.CodigosRegion = lstCodigosRegion;
@@ -25,6 +25,7 @@ namespace PlataformaTransparencia.Modelos.Proyectos
             this.CodigosSector = lstCodigosSector;
             this.CodigosOrgFinanciador = lstCodigosOrgFinanciador;
             this.CodigosEstado = lstCodigosEstado;
+            this.CodigosEntidadEjecutora = lstCodigosEntidadEjecutora;
             this.Zoom = zoom;
             this.TopLeft = puntosTopLeft;
             this.BottomRight = puntosBottomRight;
@@ -49,6 +50,7 @@ namespace PlataformaTransparencia.Modelos.Proyectos
             this.CodigosSector = new List<int>();
             this.CodigosOrgFinanciador = new List<int>();
             this.CodigosEstado = new List<int>();
+            this.CodigosEntidadEjecutora = new List<int>();
             this.fechasEjecucion = new List<int>();
             PeriodoDeTiempo tiempo = new PeriodoDeTiempo();
             this.fechasEjecucion.AddRange(tiempo.FechasEjecucion);
@@ -68,7 +70,10 @@ namespace PlataformaTransparencia.Modelos.Proyectos
         public List<string> CodigosRegion { get; set; ***REMOVED***
 
         public List<int> CodigosSector { get; set; ***REMOVED***
+
         public List<int> CodigosOrgFinanciador { get; set; ***REMOVED***
+
+        public List<int> CodigosEntidadEjecutora { get; set; ***REMOVED***
 
         public string ContieneNombreProyecto { get; set; ***REMOVED***
 

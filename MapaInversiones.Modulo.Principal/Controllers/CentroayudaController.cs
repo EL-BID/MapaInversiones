@@ -8,11 +8,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 {
   public class CentroayudaController : Controller
   {
-    //public IActionResult Index()
-    //{
-    //  return View();
-    //***REMOVED***
-    
     public IActionResult Index(int id)
     {
       try {

@@ -53,66 +53,70 @@ Los objetivos principales de la plataforma son:
 
 #### Usuario
 Cuando el usuario ingresa a la página inicial o índex de MapaInversiones, y observar un encabezado que se compone de una parte superior que contiene los enlaces a secciones como, “Acerca de” del sitio, marco legal, centro de ayuda y contáctenos. A continuación, se encuentra con los logos del sitio.
-En el menú de la parte superior podrá acceder a secciones como, inversión pública, presupuesto, instituciones, participación ciudadana, contratación pública, la posibilidad de ir a una sección donde se pueden descargar los archivos de datos abiertos, y un glosario.
+En el menú de la parte superior podrá acceder a secciones que pueden variar según la configuración en el WCM, y pueden ser por ejemplo, inversión pública, presupuesto, instituciones, participación ciudadana, emergencias, contratación pública, la posibilidad de ir a una sección donde se pueden descargar los archivos de datos abiertos, y un glosario.
+
+![buscador](/MapaInversiones.Web/media/encabezado.jpg "buscador")
+
 
 Lo siguiente en pantalla es un buscador configurado en un servidor Apache Solr y que indexa la diferente información que ofrece el sitio web.
 
-![buscador](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/buscador.jpg "buscador")
+![buscador](/MapaInversiones.Web/media/buscadornew.jpg "buscador")
 
-También encontrará la sección de banner y anuncios, la cual sirve mostrar imágenes, para resaltar los aspectos principales del sitio, y redirigir la navegación de los usuarios a tópicos específicos, como en el caso de la siguiente imagen, a las del ciclo presupuestario, a descargar una ley, y a revisar las diferentes fuentes de financiación.
+También cualquier versión puede tener la sección de banner y anuncios, la cual sirve mostrar imágenes, para resaltar los aspectos principales del sitio, y redirigir la navegación de los usuarios a tópicos específicos, como en el caso de la siguiente imagen, a las del ciclo presupuestario, a descargar una ley, y a revisar las diferentes fuentes de financiación.
 
-![carrusel](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/carrusel.jpg "carrusel")
+![carrusel](/MapaInversiones.Web/media/carrusel.jpg "carrusel")
 
-La siguiente sección presenta un enlace a una de las principales y primeras características que se desarrollaron de la Plataforma, el cual es el Mapa de Inversión Publica. Además de esta sección, también es posible ir al mapa por el menú de la parte superior, mencionado con anterioridad.
+La siguiente sección presenta un Mapa de Inversión Publica, para explorar la información correspondiente a los proyectos por cada una de las regiones. Además de esta sección, también es posible ir al mapa por el menú de la parte superior, mencionado con anterioridad.
 
-![enlace mapa de inversión](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/enlacemapa.jpg "enlace mapa de inversión")
+![enlace mapa de inversión](/MapaInversiones.Web/media/maparesumen.jpg "enlace mapa de inversión")
 
+La sprincipal sección y unade las primeras características que se desarrollaron de la Plataforma, es el Mapa de Inversión Publica. Este puede ser accedido de diferentes formas, en algunos paises beneficiarios se puede por un enlace generado por medio del WCM, pero en todas es posible ir al mapa por el menú de la parte superior, mencionado con anterioridad.
 Una vez se ingrese al enlace, como se ve en la siguiente imagen, Mapa de Inversión presenta en la parte izquierda un filtro por diferentes características, estas sirven para ir reduciendo la cantidad de elementos mostrados en el mismo.
 
-![mapa de inversión](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/mapa.jpg "mapa de inversión")
+![mapa de inversión](/MapaInversiones.Web/media/mapa.jpg "mapa de inversión")
 
-Los siguientes elementos con los que el usuario puede interactuar, son las fichas resumen. Las primeras de estas muestran algunas preguntas con su respuesta, relacionadas con los presupuestos ciudadanos, y un botón que envía a la sección correspondiente. 
+Uno de los elementos con los que el usuario puede interactuar, son las fichas resumen. Las primeras de estas muestran algunas preguntas con su respuesta, relacionadas con los presupuestos ciudadanos, y un botón que envía a la sección correspondiente. 
 
-![fichas presupuesto ciudadano](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/fichapresupuestociudadano.jpg "fichas presupuesto ciudadano")
+![fichas presupuesto ciudadano](/MapaInversiones.Web/media/fichapresupuestociudadano.jpg "fichas presupuesto ciudadano")
 
-Después el usuario encontrara otras fichas con el presupuesto ejecutado por institución, junto con el enlace para ir a la sección de Presupuestos por Instituciones.
+Después el usuario puede encontrar otras fichas con el presupuesto ejecutado por institución, junto con el enlace para ir a la sección de Presupuestos por Instituciones.
 
-![fichas presupuesto por institucion](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/presupuestointitucion.jpg "fichas presupuesto por institución")
+![fichas presupuesto por institucion](/MapaInversiones.Web/media/presupuestointitucion.jpg "fichas presupuesto por institución")
 
-La ultimas fichas resumen son las correspondientes a los contratos, en el caso del país de ejemplo la fuente de datos proviene de dos fuentes diferentes.
+Dad la utilidad del WCM tambien el usuario puede encontrar fichas resumen como lo son las correspondientes a los contratos, en el caso del país de ejemplo la fuente de datos proviene de dos fuentes diferentes.
 
-![contratos](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/contratos.jpg "contratos")
+![contratos](/MapaInversiones.Web/media/contratos.jpg "contratos")
 
 La siguiente sección de la página principal muestra una sección dividida. En la parte de la izquierda aparece un listado de noticias, las cuales se configuran desde el administrador de contenido, en estas secciones pueden ver las 4 noticias más recientes, ver una imagen, el titulo y un pequeño resumen o subtitulo, junto con la fecha publicación, en la parte del título de noticias redirige a la sección completa de noticias, donde se pueden ver todas las que han sido publicadas.
 
-En la parte izquierda se encuentra “sigue la conversación”, en donde se encuentra un widget de Twitter para ver los últimos mensajes publicados por la entidad en esa red social.
+En la parte izquierda, que se ha incorporado en alguno de los paises donde se ha instalado MapaInversiones, se encuentra “sigue la conversación”, en donde se encuentra un widget de Twitter para ver los últimos mensajes publicados por la entidad en esa red social.
 
-![noticias](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/noticias.jpg "noticias")
+![noticias](/MapaInversiones.Web/media/noticias.jpg "noticias")
 
 Mas adelante el usuario encontrara la sección que envía a formato de contacto que sirve para enviar una opinión correo configurado en la aplicación.
 
-![contacto](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/contacto.jpg "contacto")
+![contacto](/MapaInversiones.Web/media/contacto.jpg "contacto")
 
 La siguiente sección es un menú de pie de página, mostrando nuevamente las diferentes secciones de la aplicación. Adicional, al final existe otro apartado que muestra los diferentes logos de las entidades participantes.
 
-![pie de pagina](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/pie.jpg "pie de página")
+![pie de pagina](/MapaInversiones.Web/media/pie.jpg "pie de página")
 
 #### Administrador
 En la aplicación existe un usuario creado en el gestor de contenido Orchard que es el encargado de la administración del sitio, por la opción de /admin, es posible administrar los contenidos como el de ayuda, es decir, categorías, preguntas frecuentes, glosario y el formulario de contáctenos.
 
-![administrador](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/media/admin.jpg "administrador")
+![administrador](/MapaInversiones.Web/media/admin.jpg "administrador")
 
 Adicional a esto también es posible subir los enlaces a los elementos de datos abiertos de inversión y proyectos, además de crear, editar y publicar las noticias y otros componentes importantes, como los banners, anuncios y menú.
 Otro elemento importante que puede configurar el administrador y hacer más eficiente en tiempo y esfuerzo el cambio de los textos asociados a las gráficas y otros textos como notas, es el contenido “Etiqueta”, que es llamado dentro de los perfiles y donde se puede tener un título y un texto HTML.
 
 #### Manual
-Para una descripción más detallada de cada uno de los elementos que pueden encontrar los usuarios de la aplicación, por favor revisar el  [Manual de Usuarios](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Manuales/Manual%20usuarios%20MapaInversiones.pdf).
+Para una descripción más detallada de cada uno de los elementos que pueden encontrar los usuarios de la aplicación, por favor revisar el  [Manual de Usuarios](/MapaInversiones.Manuales/Mapainversiones.md).
  	
 ## Guía de instalación
 ---
 
 #### Bases de Datos
-Esta herramienta tiene su base de datos creada en Microsoft SQL Server 2019, para facilitar su despliegue, se puede descargar la base datos llamada [MapaInversionesC4D](https://drive.google.com/file/d/1hrtEo49edL5iGPirOYZfegb9qqyooXgQ/view?usp=sharing), al publicarla se pueden realizar los pasos necesarios para la conexión al servidor, creación de la base de datos, y creación de todas las tablas necesarias. Para mayor detalle puede consultar el [Manual de Instalación de Base de Datos](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Manuales/Despliegue%20de%20la%20base%20de%20datos%20ofuscados.pdf).
+Esta herramienta tiene su base de datos creada en Microsoft SQL Server 2019, para facilitar su despliegue, se puede descargar la base datos llamada [MapaInversionesC4D](https://drive.google.com/file/d/1hrtEo49edL5iGPirOYZfegb9qqyooXgQ/view?usp=sharing), al publicarla se pueden realizar los pasos necesarios para la conexión al servidor, creación de la base de datos, y creación de todas las tablas necesarias. Para mayor detalle puede consultar el [Manual de Instalación de Base de Datos](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Manuales/Despliegue de la base de datos ofuscados.pdf).
 
 Una vez creada la base de datos con sus tablas y datos, es necesario cambiar la configuración de la conexión en los archivos appsettings.json que se encuentran en [App_Data/Sites/Default/appsettings.json](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/App_Data/Sites/Default/appsettings.json) y [MapaInversiones.Web/appsettings.json](https://github.com/EL-BID/MapaInversiones/blob/main/MapaInversiones.Web/appsettings.json).
 
@@ -154,7 +158,7 @@ Para el manejo de datos se utiliza LINQ2DB, por lo cual, en caso de ser necesari
 - SQL Server Integration Services: Herramienta ETL (Extraction, Transformation, Loading) que nos permitirá captar datos de fuentes heterogéneas, convertirlos a datos compatibles con nuestras reglas de negocio e incorporarlos a nuestras bases de datos (Incluido en la licencia de SQL server estándar).
 - Internet information server (IIS): Servidor de aplicaciones web, se requiere la versión 10 o superior.
 - .NET core 3.1 es una actualización en contexto de .NET Framework 4. Este aplica las optimizaciones realizadas por el proveedor sobre el CLR (Common language runtime)
-- Bing Maps API. Suscripción a Bing maps account (Bing Maps Key valida): Api de servicios geoespaciales para la implementación de soluciones con georreferenciación.
+- Bing maps Api. Suscripción a Bing maps account (Bing Maps Key valida): Api de servicios geoespaciales para la implementación de soluciones con georreferenciación.
 - Microsoft Visual Studio 2019 o superior: IDE de desarrollo.
 - Orchard Core framework 1.0: Web content management (WCM) Que permite la administración de contenido en la plataforma ademas de ofrecer un marco de aplicación para crear aplicaciones modulares en ASP.NET Core. (https://github.com/OrchardCMS/OrchardCore)
 - Apache Solr 8.0.0: Motor de búsqueda e in:
@@ -167,12 +171,13 @@ Para el manejo de datos se utiliza LINQ2DB, por lo cual, en caso de ser necesari
 - [Juan Cruz Vieyra](https://www.linkedin.com/in/juan-cruz-vieyra-345b253/ "Juan Cruz Vieyra")
 - [Sebastian del Hoyo](https://www.linkedin.com/in/sebastiandelhoyo/ "Sebastian del Hoyo")
 - [José Niño](https://www.linkedin.com/in/jose-ni%C3%B1o-a2a8a731/ "José Niño")
-- [Jorge Ortiz Claverol](https://www.linkedin.com/in/jmocpy/ "Jorge Ortiz Claverol")
+- [Liliana Cañas Baquero](https://www.linkedin.com/in/liliana-ca%C3%B1as-baquero-977056137/ "Liliana Cañas Baquero")
 - [Diego Hernan Perez Jaramillo](mailto:diperez@uniandes.edu.co  "Diego Hernan Perez Jaramillo")
 - [Álvaro González Hernández](mailto:alvarogh_22@hotmail.com  "Álvaro González Hernández")
 - [Wilson Muñoz Camelo](https://www.linkedin.com/in/wilson-mu%C3%B1oz-camelo-24b11324/ "Wilson Muñoz Camelo")
 - [David Olaciregui](https://www.linkedin.com/in/david-olaciregui-35196015/ "David Olaciregui")
 - [Anyela Milena Chavarro Muñoz ](https://www.linkedin.com/in/anyela-milena-chavarro-mu%C3%B1oz-0a79a524/ "Anyela Milena Chavarro Muñoz ")
+- [Julian Alberto Castiblanco Palacios](mailto:juliancastiblancop@gmail.com "Julian Alberto Castiblanco Palacios")
 - [Vladimiro Bellini](https://www.linkedin.com/in/vladimirobellini/ "Vladimiro Bellini")
 - [Andrés Felipe Villamizar Vecino](mailto:villamizarvecino@hotmail.com "Andrés Felipe Villamizar Vecino")
 - [Diana Villamizar](https://www.linkedin.com/in/diana-villamizar-4737762a/ "Diana Villamizar")
@@ -182,7 +187,7 @@ Para el manejo de datos se utiliza LINQ2DB, por lo cual, en caso de ser necesari
 
 ## Licencia 
 ---
-Licencia BID [LICENSE](https://github.com/EL-BID/MapaInversiones/blob/main/License.md)
+Licencia BID [LICENSE](/License.md)
 
 ## Limitación de responsabilidades
 

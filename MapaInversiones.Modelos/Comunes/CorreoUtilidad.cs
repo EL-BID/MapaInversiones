@@ -23,7 +23,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
             try {
                 string fromAddress = Convert.ToString(configuration["EmailSettings:from"]);
 
-                mMailMessage.From = new MailAddress(fromAddress, "MapaInversiones (No Reply)");
+                mMailMessage.From = new MailAddress(fromAddress, "MapaInversiones(No Reply)");
 
                 vecCorreos = corrEnv.Split(';');
                 for (int i = 0; i <= vecCorreos.Length - 1; i++) {
@@ -49,8 +49,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
                     mMailMessage.Attachments.Add(oAttch2);
             ***REMOVED***
 
-                //Configuration configurationFile = WebConfigurationManager.OpenWebConfiguration("~/");
-                //MailSettingsSectionGroup mailSettings = (MailSettingsSectionGroup)configurationFile.GetSectionGroup("system.net/mailSettings");
+
                 
                 int port = 0;
                 string host = "";
@@ -62,13 +61,6 @@ namespace PlataformaTransparencia.Modelos.Comunes
                 password = Convert.ToString(configuration["EmailSettings:password"]);
                 username = Convert.ToString(configuration["EmailSettings:username"]);
 
-                //if (mailSettings != null) {
-                //    port = mailSettings.Smtp.Network.Port;
-                //    host = mailSettings.Smtp.Network.Host;
-                //    password = mailSettings.Smtp.Network.Password;
-                //    username = mailSettings.Smtp.Network.UserName;
-
-                //***REMOVED***
                 SmtpClient mSmtpClient = new SmtpClient(host, port);
                 mSmtpClient.UseDefaultCredentials = false;
 
@@ -120,7 +112,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
         {
             // retorna true o false   
             return Regex.IsMatch(sMail, "^([\\w-]+\\.)*?[\\w-]+@[\\w-]+\\.([\\w-]+\\.)*?[\\w]+$");
-            //"^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4***REMOVED***)$")
+
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***

@@ -63,6 +63,15 @@ namespace PlataformaTransparencia.Modelos.Comunes
         /// <summary>
         /// "tipo"
         /// </summary>
+        public const string EntidadEjecutora = "entidadejecutora";
+        /// <summary>
+        /// Constante para las etiquetas de los servicios para 
+        /// "Sector del proyecto"
+        /// </summary>
+        public const string EntidadEjecutoraLabel = "Entidad Ejecutora";
+        /// <summary>
+        /// "tipo"
+        /// </summary>
         public const string Type = "tipo";
         /// <summary>
         /// Constante para las etiquetas de los servicios para 
@@ -362,6 +371,9 @@ namespace PlataformaTransparencia.Modelos.Comunes
 
         public const string NombreFiltroFiscalizacion_EtapaCampoProyecto = "etapaCampo";
         public const string NombreFiltroFiscalizacion_EstadoJuridicoCampoProyecto = "estadoJuridicoCampo";
+
+
+        public const string EstadoProyEjecucion = "2";
 
 
 ***REMOVED***

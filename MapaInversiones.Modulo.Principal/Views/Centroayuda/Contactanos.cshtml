@@ -7,6 +7,10 @@
 
 ***REMOVED***
 
+@*@{ 
+  ViewData["ShowContacts"] = false;
+***REMOVED****@
+
 <!--MAIN BANNER-->
 <section class="banner-main-asc mb-0">
 
@@ -37,8 +41,6 @@
                         <h1>Contáctenos</h1>
                     </div>
                     <div class="banner-main-desc">
-                        <!--<p>Lorem ipsum dolor sit amet consectetur adipiscing elit, rutrum vulputate fermentum ullamcorper litora vel, suspendisse ac consequat rhoncus lectus ligula.</p>-->
-
                     </div>
 
                 </div>
@@ -53,12 +55,12 @@
 <section class="">
     <div class="container">
 
-        
+
         <!--CONTACT FORM-->
         <div class="sect-tab contacto" id="contacto">
             <div class="row justify-content-center">
                 <div class="section-heading text-center">
-                    <span class="h4">Inversiones mejora continuamente. Envía tus comentarios o sugerencias aquí.</span>
+                    <span class="h4">Envía tus comentarios o sugerencias aquí.</span>
                 </div>
                 @if (ViewBag.tab == null || ViewBag.tab == 3)
                 {
@@ -67,7 +69,7 @@
                             <small>Los campos marcados con (*) son obligatorios</small>
                         </div>
 
-                        <form action="/workflows/Invoke?token=CfDJ8AEGa0OSVyJCnv9eg1ZZ_2YXIMd_IDtnz8UwjOizkWB52nX81g_t1YAVkTsXx_88kAl3Ng5ZupwZ--_qLc638u84pXh5JkYQ8l9M7eX15rT-ouJKdOEOGKPXT6DXu3SCFZBtP2PGZhqTWHAyVw5uEGDBoXaP3voBQ1wn6F8pKc-ejtUZreSNyrUPol5c5Z1zSLVe9w3dGKd45SKXSPNyWSmKMwHPKXyBCdhWR3s2ETQS" method="post" class="contact-form">
+                        <form action="/workflows/Invoke?token=CfDJ8NnyCMrGXLhJts3STD4i_-tQ9q4J9tzcGiIgqc2L-4-SrsiSg-XnuwS2UZUgGH841rjzwiaj8rvFlYBjEVTadZb1zqIsAsmyxg1uCud-So3D_ahQilZmPafsoAA4SRFCEG2o3gr0nXA_5zLzKDCwCYXW_GhmNwngpwC7bjg3yxBhbWPXFx51mZdAvG4SvGqA44W24ZkzR_gT5ed-v1dwFAdlQFpc4FOHazeoauz5qwMl" method="post" class="contact-form">
 
                             <!-- Begin hidden Field for send form -->
                             <input type="hidden" name="form_subject" value="Contact form">
@@ -81,7 +83,7 @@
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <div class="form-field">
-                                        <label for="contact-name" class="form-label">Apellido *</label>
+                                        <label for="contact--last-name" class="form-label">Apellido *</label>
                                         <input type="text" class="form-field-input" name="Apellido" value="" autocomplete="off" required="required" id="contact--last-name">
                                     </div>
                                 </div>
@@ -159,5 +161,6 @@
             </div>
         </div>
     </div>
+
 </section>
 

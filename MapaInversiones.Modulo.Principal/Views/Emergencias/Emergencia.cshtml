@@ -1,0 +1,688 @@
+﻿@model PlataformaTransparencia.Modelos.Emergencia.ModelHomeEmergencias
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+***REMOVED***
+@{
+    var decreto = "";
+    var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
+    var LabelEmergencias = "";
+    var TituloEmergencias = "";
+    var LabelEmergenciasTab1 = "";
+    var TituloEmergenciasTab1 = "";
+    var LabelEmergenciasTab2 = "";
+    var TituloEmergenciasTab2 = "";
+    var LabelEmergenciasTab3 = "";
+    var TituloEmergenciasTab3 = "";
+    var LabelDecreto = "";
+    var TituloDecreto = "";
+    System.IFormatProvider culture =
+    new System.Globalization.CultureInfo("es-RD");
+***REMOVED***
+@foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
+{
+    if (@etiqueta.AliasPart.Alias == "Emergencia" + Model.TipoEmergencia)
+    {
+        LabelEmergencias = @etiqueta.HtmlBodyPart.Html;
+        TituloEmergencias = @etiqueta.TitlePart.Title;
+***REMOVED***
+
+    if (@etiqueta.AliasPart.Alias == "EmergenciaTab1_" + Model.TipoEmergencia)
+    {
+        LabelEmergenciasTab1 = @etiqueta.HtmlBodyPart.Html;
+        TituloEmergenciasTab1 = @etiqueta.TitlePart.Title;
+***REMOVED***
+        if (@etiqueta.AliasPart.Alias == "EmergenciaTab2_" + Model.TipoEmergencia)
+    {
+        LabelEmergenciasTab2 = @etiqueta.HtmlBodyPart.Html;
+        TituloEmergenciasTab2 = @etiqueta.TitlePart.Title;
+***REMOVED***
+    if (@etiqueta.AliasPart.Alias == "EmergenciaTab3_" + Model.TipoEmergencia)
+    {
+        LabelEmergenciasTab3 = @etiqueta.HtmlBodyPart.Html;
+        TituloEmergenciasTab3 = @etiqueta.TitlePart.Title;
+***REMOVED***
+    if (@etiqueta.AliasPart.Alias == "EmergenciaDecreto" + Model.TipoEmergencia)
+    {
+        LabelDecreto = @etiqueta.HtmlBodyPart.Html;
+        TituloDecreto = @etiqueta.TitlePart.Title;
+***REMOVED***
+***REMOVED***
+
+
+<!--HEADER-->
+<section id="s0" class="banner-main s0-section">
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li><a href="#!">Emergencias</a><i class="material-icons md-18">chevron_right</i></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+
+                <div class="banner-main-info">
+                    <div class="banner-main-title mb-0">
+                        <h1>
+
+                            <text> @TituloEmergencias</text>
+                           
+                        </h1>
+
+                        <p> Conozca el uso de los recursos asociados a la gestión emergencias</p>
+
+                    </div>
+
+                    <div class="banner-main-desc">
+                        <form class="">
+                            <div class="row">
+
+                                @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" ***REMOVED***))
+                                {
+                                    <div class="form-field whiteSearch mb-4" id="contentSearchDiv">
+                                        <label for="SearchString" class="form-field-label">
+                                            Contratos, Contratistas y Entidades, por ejemplo: Secretaría
+                                            de Energía.
+                                        </label>
+                                        <button type="submit" class="buttonsearBTN" title="Click para Iniciar Buqueda">
+                                            <i class="material-icons md-22">search</i> <span class="d-none d-sm-inline">Buscar</span>
+                                        </button>
+                                        <input type="search" class="form-field-input" name="SearchString" id="SearchString" value=""
+                                               autocomplete="off" required="required">
+                                        <!--id="page-field-search"-->
+                                    </div>
+
+                            ***REMOVED***
+
+
+                            </div>
+                            <div id="search-home" class="search-body">
+                                <div id="divNoEncontrado" class="no-search-results" style="display: none;">No se han encontrado resultados</div>
+                                <div class="search-results objHidden" id="divResultados">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+
+
+<!--CIFRAS CONSOLIDADAS-->
+<section class="section">
+    <div class="container">
+        <div class="section-heading heading-left">
+            <h2>Cifras consolidadas</h2>
+        </div>
+
+        <!--TABS-->
+        <ul class="tabs tabData">
+            <li class="tab-link current" data-tab="tab-2">Procesos de compras</li>
+            <li class="tab-link" data-tab="tab-1">Contratos</li>
+            <li class="tab-link" data-tab="tab-3">Ejecución</li>
+
+        </ul>
+
+        <!--CONTENIDO PROCESOS DE COMPRAS-->
+        <div id="tab-2" class="tab-content current">
+            <div class="wrap-content-gen">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <p class="text-center text-bold p15">
+                           @TituloEmergenciasTab1
+                        </p>
+                    </div>
+                </div>
+                <!--DATOS MACRO-->
+                <div class="row-cards-stacked">
+                    <div class="card d-flex justify-content-center">
+                        <div class="wrap-data-contract">
+                            <span class="label">
+                                Procesos de compra
+                            </span>
+                            <span class="bigNumber" id="numContratos">
+                                @Model.resumenDatosContratos.numProcesos
+                            </span>
+                        </div>
+                        <div class="wrap-data-contract">
+                            <span class="label">
+                                Monto total procesos de compra
+                            </span>
+                            <span class="bigNumber" id="valProcesos">
+                                $ @String.Format("{0:n2***REMOVED***", (@Model.resumenDatosContratos.valorProcesos / 1000000)) millones
+                            </span>
+                        </div>
+                        <div class="cta-wrapper text-center p25">
+                            <div class="btn btn-primary" id="enlace_procesos" data-entidad="">Ver entidades y procesos de compra <i class="material-icons md-22">chevron_right</i></div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--COMPRAS REALIZADAS-->
+                <div class="row section justify-content-center">
+                    <div class="col-lg-10">
+                        <h3 class="text-center mb25 h4">Instituciones y sus procesos de compras</h3>
+                        <p class="text-left"><text>Distribución porcentual de los procedimientos realizados por el Estado Dominicano en base al monto estimado de compra en el marco del @TituloDecreto de emergencia , visto por Institución autorizada a realizar compras de emergencia y por distribución porcentual de los artículos estimados a adquirir bajo la emisión de este decreto</text></p>
+
+                    </div>
+
+
+                    <div class="col-lg-4">
+
+                        <div class="form-group">
+                            <label for="filtro_desglose_proc form-control">Ver desglose por:</label>
+                            <select class="form-select selDesgloseProc" aria-label="Selecciona un desglose:" id="filtro_desglose_proc">
+                                <option value="entidad">Entidad</option>
+                                <option value="articulo">Artículos</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="btnback btn" style="display:none;">
+                            <div id="btnVolver"><a><i class="material-icons md-22">chevron_left</i>&nbsp; Atrás</a></div>
+                        </div>
+                        <div class="grafica-container text-center">
+                            <div id="divGraphRecursosProcesos"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--PROCESOS CON MAYORES ADJUDICACIONES Y CONTRATOS-->
+                <div class="row section">
+                    <div class="col-lg-12">
+                        <h3 class="text-center mb25 h4">Procesos de compra con mayor valor asignado</h3>
+                        <div class="card-carusel-wrap">
+                            <div id="divResumenProcesos" class="project-carusel carouselData" data-flickity='{ "initialIndex": 0, "pageDots": false, "groupCells": true, "contain": true, "prevNextButtons": true , "freeScroll":true,"wrapAround":false ***REMOVED***'>
+                                @foreach (var item in Model.resumenDatosContratos.listUnidadCompra)
+                                {
+                                    <div class="carousel-cell col-lg-3">
+                                        <!--Card 1-->
+                                        <div class="card">
+                                            <div class="card-header">@item.Entidad</div>
+                                            <div class="card-body d-flex">
+                                                <div class="wrap-data-contract">
+                                                    <span class="label">
+                                                        Contratos adjudicados
+                                                    </span>
+                                                    <span class="bigNumber">
+                                                        @item.NroContratos
+                                                    </span>
+                                                </div>
+                                                <div class="wrap-data-contract">
+                                                    <span class="label">
+                                                        Monto total contratado
+                                                    </span>
+                                                    <span class="bigNumber">
+                                                        $ @String.Format("{0:n2***REMOVED***", (item.ValorContratado / 1000000)) millones
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <a class="btn btn-outlined" href="/ContratosEmergencia?entidad=@item.Entidad&emergencia=@Model.TipoEmergencia">Más información  <i class="material-icons md-22">chevron_right</i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            ***REMOVED***
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--CONTENIDO CONTRATOS-->
+        <div id="tab-1" class="tab-content">
+            <div class="wrap-content-gen">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <p class="text-center p15 text-bold">
+                             @TituloEmergenciasTab2  @* @Html.Raw(TituloEmergenciasTab2) *@
+                           @*  Resumen total de los contratos válidos asociados a los procedimientos de compras realizados en el marco del decreto XXXxxx para procedimientos de contratación de emergencia. *@
+                            @* @ViewBag.TitulosHome.BuscarTituloPorLlave("Gestion_Proceso_lblcontrato" + Model.TipoEmergencia) *@
+                        </p>
+
+                    </div>
+                </div>
+                <!--DATOS MACRO-->
+                <div class="row-cards-stacked">
+                    <div class="card d-flex justify-content-center">
+                        <div class="wrap-data-contract">
+                            <span class="label">
+                                Total Contratos
+                            </span>
+                            <span class="bigNumber" id="numContratos">
+                                @Model.resumenDatosContratos.numContratos
+                            </span>
+                        </div>
+                        <div class="wrap-data-contract">
+                            <span class="label">
+                                Valor total contratos
+                            </span>
+                            <span class="bigNumber" id="valContratos">
+                                $ @String.Format("{0:n2***REMOVED***", (@Model.resumenDatosContratos.valorContratos / 1000000)) millones
+                            </span>
+                        </div>
+                        <div class="cta-wrapper text-center p25">
+                            <div class="btn btn-primary" id="enlace_contratos" data-entidad="">Ver contratos <i class="material-icons md-22">chevron_right</i></div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--COMPRAS REALIZADAS-->
+                <div class="row section justify-content-center">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <h3 class="text-center mb25 h4">Compras realizadas</h3>
+                        <p class="text-left">Distribución porcentual de las contrataciones realizadas por el Estado dominicano en base a los contratos oficializados en el marco del @TituloDecreto, por Institución autorizada a realizar compras de emergencia y por distribución porcentual de los artículos comprados bajo la emisión de este decreto</p>
+                    </div>
+                    <div class="col-lg-4 justify-content-center">
+                        <div class="form-group">
+                            <label for="filtro_desglose">Ver desglose por:</label>
+                            <select class="form-select selDesglose" aria-label="Selecciona un desglose:" id="filtro_desglose">
+                                <option value="entidad">Entidad</option>
+                                <option value="articulo">Artículos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-10 justify-content-center">
+                        <div class="btnback btn" style="display:none;">
+                            <div id="btnVolverContr"><a><i class="material-icons md-22">chevron_left</i>&nbsp; Atrás</a></div>
+                        </div>
+                        <div class="grafica-container text-center">
+                            <div id="divGraphRecursosObj"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--CONTRATISTAS CON MAYORES ADJUDICACIONES Y CONTRATOS-->
+                <div class="row section">
+                    <div class="col-lg-12">
+                        <h3 class="text-center mb25 h4">Contratistas y contratos con mayor valor adjudicado</h3>
+                        <div class="card-carusel-wrap">
+                            <div id="divResumenContratos" class="project-carusel carouselData" data-flickity='{"initialIndex": 0, "pageDots": false, "groupCells": true, "contain": true, "prevNextButtons": true , "freeScroll":true,"wrapAround":false ***REMOVED***'>
+                                @foreach (var item in Model.resumenDatosContratos.listContratista)
+                                {
+                                    <div class="carousel-cell col-lg-3">
+                                        <!--Card 1-->
+                                        <div class="card">
+                                            <div class="card-header">@item.nombre</div>
+                                            <div class="card-body d-flex">
+                                                <div class="wrap-data-contract">
+                                                    <span class="label">
+                                                        Contratos adjudicados
+                                                    </span>
+                                                    <span class="bigNumber">
+                                                        @item.NumContratos
+                                                    </span>
+                                                </div>
+                                                <div class="wrap-data-contract">
+                                                    <span class="label">
+                                                        Monto total contratado
+                                                    </span>
+                                                    <span class="bigNumber">
+                                                        $ @String.Format("{0:n2***REMOVED***", (item.ValorTotalContratos / 1000000)) millones
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer" >
+                                                <a class="btn btn-outlined" href="/contratista?contratista=@item.ruc">Más información  <i class="material-icons md-22">chevron_right</i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            ***REMOVED***
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+        <!--Presupuesto-->
+        <div id="tab-3" class="tab-content">
+            <div class="wrap-content-gen">
+                <div class="row">
+                    <div class="col-lg-12 justify-content-center">
+                        <p class="text-center p15 text-bold">
+                           @TituloEmergenciasTab3
+                        </p>
+                    </div>
+                </div>
+                <!--DATOS MACRO-->
+                <div class="row-cards-stacked">
+                    <div class="card d-flex justify-content-center">
+                        <div class="wrap-data-contract">
+                            <span class="label">
+                                Total ejecutado
+                            </span>
+                            <span class="bigNumber" id="valContratos">
+                                $ @String.Format("{0:n2***REMOVED***", (@Model.resumenDatosContratos.valorEjecutado / 1000000)) millones
+                            </span>
+                        </div>
+                        <div class="cta-wrapper text-center p25">
+                            <div class="btn btn-primary" id="enlace_presupuesto_emergencia" data-entidad=""><a href=@String.Concat("/EmergenciaPresupuesto?emergencia=",@Model.TipoEmergencia)>Ver detalle ejecución <i class="material-icons md-22">chevron_right</i></a></div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--COMPRAS REALIZADAS-->
+                <!--CONTRATISTAS CON MAYORES ADJUDICACIONES Y CONTRATOS-->
+            </div>
+        </div>
+        <nav>
+            <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab">
+                <!-- Tabs -->
+                <a href="#" class="tab active" data-toggle-target=".tab-content-1"></a>
+                <a href="#" class="tab" data-toggle-target=".tab-content-2"></a>
+                <a href="#" class="tab" data-toggle-target=".tab-content-3"></a>
+
+            </div>
+        </nav>
+
+        <div class="tab-content tab-content-1 active">
+        </div>
+
+        <div class="tab-content tab-content-2">
+        </div>
+
+        <div class="tab-content tab-content-3">
+        </div>
+
+
+    </div>
+</section>
+
+<!--ACCIONES DE ATENCION-->
+<section class="section bgSoft-blue acciones">
+    <div class="container">
+        <div class="section-heading heading-left">
+            <h2>Acciones para la gestión de la emergencia</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+
+                <p class="text-bold">El gobierno ha impulsado una serie iniciativas como respuesta oportuna a las demarcaciones afectadas por la emergencia, para mitigar el nivel de vulnerabilidad creciente que pone en peligro la seguridad, salud, alimentación e integridad de las familias que perdieron sus viviendas, pertenencias y medios de subsistencia.</p>
+                <p>Mediante la declaración de estado de emergencia en las 8 provincias mayormente afectadas por la emergencia, se otorgó autorización a 21 instituciones del Estado para poder realizar de forma inmediata, compras y contrataciones de bienes y servicios destinados a la ayuda humanitaria, rescate, provisión de medicamentos y alimentos, restablecimiento del sistema energético, aprovisionamiento de agua, asistencia social, construcción y reconstrucción de las obras afectadas en las provincias, entre otros. </p>
+                <p>El Gobierno ha impulsado una serie iniciativas y ha entregado fondos especiales directamente a los ayuntamientos y distritos municipales de las 8 provincias declaradas en estado de emergencia, para la limpieza, recuperación y asistencia ciudadana de las mismas.</p>
+
+
+            </div>
+            <div class="col-lg-5">
+                <p class="text-bold">Los recursos e iniciativas puestas en marcha como respuesta a los daños causados por la emergencia se han concentrado en:</p>
+                <div class="row-cards">
+                    <!--STEP 1-->
+                    <div class="card a1">
+                        <div class="big-step">1</div>
+                        <div class="desc-step">
+                            <span class="h4">Reconstrucción y reparación</span>
+                            <p>de la infraestructura afectada</p>
+                        </div>
+                    </div>
+                    <!--STEP 2-->
+                    <div class="card a2">
+                        <div class="big-step">2</div>
+                        <div class="desc-step">
+                            <span class="h4">Adquisición de alimentos y otros bienes</span>
+                            <p>para entregar a los hogares afectados (como zinc, madera, enseres del hogar y provisiones, raciones de alimentos, colchones)</p>
+                        </div>
+                    </div>
+                    <!--STEP 3-->
+                    <div class="card a3">
+                        <div class="big-step">3</div>
+                        <div class="desc-step">
+                            <span class="h4">Apoyo a los productores</span>
+                            <p>para el restablecimiento de la agricultura en las zonas afectadas, al ser uno de los principales sectores productivos, y medio de subsistencia del país.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!--CONVOCATORIAS SE OCULTA MOMENTANEAMENTE-->
+@*<section class="section">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <div class="col-lg-6">
+                        <img class="img-responsive float-R" alt="Imagen decorativa representativa a convocatorias publicas" src="~/content/img/img-emergencia1.svg" />
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="headTit tit-left mb-0">
+                            <h2>Convocatorias</h2>
+                        </div>
+                        <p>Consulte las convocatorias vigentes en el marco de la emergencia</p>
+                        <div class="btn btn-primary">Consultar <span class="glyphicon glyphicon-arrow-right"></span></div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+<!--CONTROL CIUDADANO-->
+<section class="section">
+    <div class="container">
+        <div class="section-heading heading-left">
+            <h2>Control ciudadano</h2>
+        </div>
+        <div class="row justify-content-center">
+            <!--Participa-->
+            <div class="col-lg-4 tParticipe">
+                <div class="card wrap-participe">
+                    <div class="card-header"> <span class="h4">Participa</span></div>
+                    <div class="card-body">
+                        <div class="wrap-icon"><img src="img/ic_control1.svg" alt="imagen decorativa relacionada a participación ciudadana"></div>
+                        <div class="text-section">
+                            <p>
+                                En una interacción rápida con las autoridades sobre la información de la plataforma, podrás hacer comentarios, preguntas, recomendaciones, recibir respuestas y conocer la participación realizada por otras personas.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-center">
+                            <a class="btn btn-outlined" id="divEnlaceParticipaCon" href="/Participa/Comentarios/">Contratos <i class="material-icons md-22">chevron_right</i></a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--mas imformación-->
+            <div class="col-lg-4 tParticipe">
+                <div class="card wrap-participe">
+                    <div class="card-header">
+                        <span class="h4">Solicita más información</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="wrap-icon"><img src="img/ic_control2.svg" alt="icono decorativo relacionado a solicitar más información"></div>
+                        <div class="text-section">
+                            <p>
+                                Gracias al libre acceso a la información pública y la transparencia gubernamental puedes realizar solicitudes de información pública específica y detallada a las instituciones responsables.
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-center">
+                            <a class="btn btn-outlined" href="https://saip.gob.do/apps/sip/?step=one" target="_blank" rel="noopener"> Solicitar <i class="material-icons md-22">chevron_right</i></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!--MARCO LEGAL-->
+<section class="section bg-50">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6">
+                <div class="wrap-external">
+                    <div class="row">
+                        <div class="col-lg-4"><img class="img-responsive float-R" alt="Imagen decorativa representativa proceso de compras" src="~/img/img-emergencia2.svg" /></div>
+                        <div class="col-lg-8">
+                            <div class="headTit tit-left mb-0">
+                                <h2>Conozca</h2>
+                            </div>
+                            <p>Proceso para realizar compras de emergencia deacuerdo a la circular DGCP44-PNP-2022-0005</p>
+                            <div class="btn btn-primary"><a href="https://www.dgcp.gob.do/wp-content/uploads/page/Circ005.pdf" target="_blank" rel="noopener">Ver <i class="material-icons md-22">chevron_right</i> </a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="wrap-external">
+                    <div class="row">
+                        <div class="col-lg-4"><img class="img-responsive float-R" alt="Imagen decorativa" src="~/img/img-emergencia3.svg" /></div>
+                        <div class="col-lg-8">
+                            <div class="headTit tit-left mb-0">
+                                <h2>Marco legal y normativo</h2>
+                            </div>
+                            <p>Conozca el decreto en el cual se declara de emergencia las compras y contrataciones de bienes y servicios para ser utilizadas en las labores de ayuda humanitaria.</p>
+                            <div class="btn btn-primary">
+                                @if (TituloDecreto != null && TituloDecreto.Split(" ").Count() > 1)
+                                {
+                                    decreto = @TituloDecreto.Split(" ")[1];
+                            ***REMOVED***
+
+                                <a href="https://presidencia.gob.do/decretos/@decreto" target="_blank" rel="noopener">Ver <i class="material-icons md-22">chevron_right</i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<input type="hidden" id="tipoemergencia" value="@Model.TipoEmergencia" />
+
+
+<script>
+    var url1 = '@System.Configuration.ConfigurationManager.AppSettings["URLSoloInversion_1"]';
+    var url2 = '@System.Configuration.ConfigurationManager.AppSettings["URLSoloInversion_2"]';
+
+    if (window.location.host == url1 || window.location.host == url2) {
+        document.getElementById('navigationTabs').style.display = 'none';
+***REMOVED***
+</script>
+
+<script src="~/js/flickity/flickity.pkgd.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+<script src="js/emergencia_aux.js"></script>
+
+@section DataBody {
+
+        @* data-contrato='[{"CodigoContrato":"@Model.resumenDatosContratos.listUnidadCompra"***REMOVED***]' *@
+        data-contrato='[{"CodigoContrato":"@Model.resumenDatosContratos.listUnidadCompra"***REMOVED***]'
+
+        data-resourcesPerContratos='[@foreach (var item in @Model.InfoRecursosContratos)
+    {
+        <text>
+            {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "rawValue": "@item.rawValue"***REMOVED***@if (item != @Model.InfoRecursosContratos.Last())
+            {
+                <text>,</text>
+        ***REMOVED***
+        </text>
+***REMOVED***]'
+
+        data-resourcesPerProcesos='[@foreach (var item in @Model.InfoRecursosProcesos)
+    {
+        <text>
+            {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "rawValue": "@item.rawValue"***REMOVED***@if (item != @Model.InfoRecursosProcesos.Last())
+            {
+                <text>,</text>
+        ***REMOVED***
+        </text>
+***REMOVED***]'
+
+***REMOVED***
+
+
+<script>
+    $(document).ready(function () {
+
+        ///tabs
+        var $carousel = $('.carouselData').flickity({
+            "initialIndex": 0,
+            "pageDots": false,
+            "groupCells": true,
+            "contain": true,
+            "prevNextButtons": true,
+            "freeScroll": true,
+            "wrapAround": false
+    ***REMOVED***);
+
+        var cellElements = $carousel.flickity('getCellElements');
+
+        if (cellElements.length > 0) {
+            $carousel.flickity('resize');
+    ***REMOVED***
+
+        $('ul.tabs li').click(function () {
+            var tab_id = $(this).attr('data-tab');
+            $('ul.tabs li').removeClass('current');
+            $('.tab-content').removeClass('current');
+
+            $(this).addClass('current');
+            $("#" + tab_id).addClass('current');
+
+            var $carousel = $('.carouselData').flickity({
+                "initialIndex": 0,
+                "pageDots": false,
+                "groupCells": true,
+                "contain": true,
+                "prevNextButtons": true,
+                "freeScroll": true,
+                "wrapAround": false
+
+        ***REMOVED***);
+            var cellElements = $carousel.flickity('getCellElements');
+
+        $carousel.flickity('resize');
+
+
+    ***REMOVED***)
+
+***REMOVED***)
+</script>
+<script>
+    $('.tab').on('click', function (evt) {
+        evt.preventDefault();
+        $(this).toggleClass('active');
+        var sel = this.getAttribute('data-toggle-target');
+        $('.tab-content').removeClass('active').filter(sel).addClass('active');
+***REMOVED***);
+
+</script>

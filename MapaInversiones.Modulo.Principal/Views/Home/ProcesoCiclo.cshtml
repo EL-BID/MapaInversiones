@@ -1,8 +1,6 @@
 ﻿@page
 @inject OrchardCore.IOrchardHelper Orchard
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; ***REMOVED***
 
 <!--MAIN BANNER-->
 <section class="banner-main">
@@ -17,8 +15,7 @@
                                 <a href="\">Inicio</a>
                                 <i class="material-icons md-18">chevron_right</i>
                             </li>
-                            <li><a href="#!">Presupuesto</a><i class="material-icons md-18">chevron_right</i></li>
-                            <li>Presupuesto Ciudadano</li>
+                            <li>¿Qué es presupuesto y en qué consiste el ciclo presupuestario?</li>
                         </ul>
                     </div>
                 </div>
@@ -28,90 +25,293 @@
 
         <div class="row justify-content-center">
 
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <div class="banner-main-info">
                     <div class="banner-main-title">
-                        <h2>Presupuesto Ciudadano</h2>
+                        <h1>¿Qué es presupuesto y en qué consiste el ciclo presupuestario?</h1>
                     </div>
-                    <div class="banner-main-desc">
 
-
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--PRESUPUESTO-->
+<!--1.Qué es el Presupuesto General del Estado-->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="section-heading text-center">
+                    <h2>¿Qué es presupuesto?</h2>
+                </div>
+                <p>El presupuesto es la estimación de los ingresos y la autorización máxima de los gastos que podrán comprometer las instituciones del Gobierno Central, instituciones descentralizadas, empresas públicas e intermediarios financieros para ejecutar sus programas, proyectos y lograr los objetivos y metas institucionales de acuerdo a las políticas del Gobierno en materia de desarrollo económico y social. </p>
+                <p class="h5 text-center py-3">Presupuesto es tomar decisiones entre:</p>
+                <div class="row justify-content-center">
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow h-100">
+                            <div class="img-container">
+                                <img src="img/ic-d1.svg" alt="icono decorativo" />
+                            </div>
+                            <span class="h6">Alternativas de gastos</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow">
+                            <div class="img-container">
+                                <img src="img/ic-d2.svg" alt="icono decorativo" />
+                            </div>
+                            <span class="h6">Satisfacción de necesidades</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card blue-card text-center shadow h-100">
+                            <div class="img-container">
+                                <img src="img/ic-d3.svg" alt="icono decorativo" />
+                            </div>
+                            <span class="h6">Disponibilidad de recursos</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!--OBJETIVO ESTRATEGICO-->
-<!--1.Qué es el Presupuesto General de la Nación-->
-<section>
+
+<!--CICLO PRESUPUESTARIO-->
+<!--2.el ciclo presupuestario-->
+<section class="section-bg2 budget-cycle">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <iframe title="Proceso Presupuestario" id="pciuda" style="border: none; width: 100%; margin-left: auto; margin-right: auto;" src="https://procesosentidad.com/proceso-presupuestario/" width="1400" height="1400"  allowfullscreen="allowfullscreen">
-                    <br />
-                </iframe>
+        <div class="row justify-content-center">
+            <div class="section-heading text-center py-5">
+                <h2>El ciclo presupuestario</h2>
             </div>
         </div>
-    </div>
-</section>
-<!--RELATED INFO-->
-<section class="relatedInfo">
-    <div class="container">
-        <!--LINKS OTRAS SECCIONES-->
-        <div class="row">
-            <!--LEFT COLUMN-->
+        <div class="row justify-content-center">
             <div class="col-lg-8">
-                <!--LINKS seccion infografia planificacion-->
-                <h2>Conoce</h2>
-                <div class="wrap-cta py-5">
-                    <a href="../PresupuestoGeneral" class="py-5 mb-5 px-0">
-                        <div class="h3">Presupuesto General la República<i class="material-icons md-18">arrow_forward</i> </div>
-                    </a>
+                <div class="graph-arrows">
+                    <div class="circle-stage pos1">
+                        <div class="img-container"><img src="img/ic-stage1.svg" alt="icono decorativo relacionado a Fase 1 del presupuesto" /></div>
+                        <h3>Programación y formulación</h3>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><span>+</span></button>
+                    </div>
+                    <div class="circle-stage pos2">
+                        <div class="img-container"><img src="img/ic-stage2.svg" alt="icono decorativo relacionado a Fase 2 del presupuesto" /></div>
+                        <h3>Discusión <br />y Aprobación</h3>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2"><span>+</span></button>
+
+                    </div>
+                    <div class="circle-stage pos3">
+                        <div class="img-container"><img src="img/ic-stage3.svg" alt="icono decorativo relacionado a Fase 3 del presupuesto" /></div>
+                        <h3>Ejecución</h3>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal3"><span>+</span></button>
+
+                    </div>
+                    <div class="circle-stage pos4">
+                        <div class="img-container"><img src="img/ic-stage4.svg" alt="icono decorativo relacionado a Fase 4 del presupuesto" /></div>
+                        <h3>Seguimiento y Evaluación</h3>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal4"><span>+</span></button>
+
+                    </div>
+                    <div class="circle-stage pos5">
+                        <div class="img-container"><img src="img/ic-stage5.svg" alt="icono decorativo relacionado a Fase 5 del presupuesto" /></div>
+                        <h3>Cierre y Liquidación</h3>
+                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal5"><span>+</span></button>
+
+                    </div>
                 </div>
 
-                <!--LINKS seccion infografia planificacion-->
-
-                <div class="wrap-cta py-5">
-                    <p class="card-title mb-4">Información suministrada por:</p>
-                    <a href="https://www.dominoentidad.com/" target="_blank" rel="noopener" >
-                        <img class="img-fluid" src="../img/logoHaciendaP.png" alt="ir a Secretaria" />
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <h2>Explora</h2>
-                <p>Instituciones y sus planes operativos</p>
-                <ul id="entidadesPlanNacional" class="list-group list-group-flush">
-                </ul>
 
             </div>
         </div>
-
     </div>
 </section>
+
+<!--TE PUEDE INTERESAR-->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="section-heading">
+                <h2>Te puede Interesar...</h2>
+            </div>
+        </div>
+        <div class="row justify-content-right">
+            <div class="col-lg-8">
+                <p class="h3">¿Sabías que el sector Salud es el sector con mayor asignación presupuestal en 2023?</p>
+                <p>Conoce el monto asignado y explora más sectores con su respectiva asignación presupuestal.</p>
+                <a class="btn btn-cards" href="/PresupuestoGeneral" target="_self">
+                    <span>Ver presupuesto 2023</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="popup1" class="popup_style popup_style_wide popup_style_sally open_popup" style="display:none;">
+    <div class="popup">
+        <div class="popup_content">
+            <h4 class="popup_title">Modal Header</h4>
+            <div class="content">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum perferendis autem sed. In consectetur deserunt vero mollitia fuga est facere, incidunt quis, ipsa officia odit. Ut repudiandae ad eveniet cum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis ratione eos, accusantium corrupti cupiditate voluptatum iure sequi nostrum atque ipsam omnis? Facere tenetur nam quae eligendi quod dolorum illum mollitia.</p>
+            </div>
+        </div>
+        <div class="popup1_close popup_close"><i class="material-icons md-24">close</i></div>
+    </div>
+</div>
+
+<!--MODAL 1-->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Programación y formulación: </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>Transformar objetivos y metas de mediano plazo en objetivos y metas anuales o de corto plazo.</li>
+                    <li>Fijar objetivos, metas y políticas que orientan la asignación de recursos para lograr resultados.</li>
+                    <li>Concretar los anteproyectos de presupuesto de las instituciones y el proyecto de Presupuesto General de Estado.</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!--MODAL 2-->
+<div id="myModal2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Discusión y Aprobación </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>Verificar si los anteproyectos institucionales y el proyecto de Presupuesto General del Estado tienen relación y coherencia con los objetivos del Gobierno, con la política presupuestaria y el Programa Fiscal</li>
+                    <li>Aprobar la asignación del gasto de funcionamiento e inversión y la correspondiente proyección de ingresos.</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!--MODAL 3-->
+<div id="myModal3" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Ejecución: </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <p>Gestión de conjunto de decisiones y acciones operativas, administrativas y financieras para la realización de los programas y proyectos contemplados en el Presupuesto General del Estado.</p>
+                <p>La Fase de Ejecución se realiza en tres etapas secuenciales: Compromiso, Devengado y Pagado. Se desarrolla de la siguiente manera: </p>
+                <ul>
+                    <li>MEF/DIPRENA, evalua y asigna recursos presupuestarios.</li>
+                    <li>La Asamblea, aprueba los presupuestos.</li>
+                    <li>La Contraloría General de la República, fiscaliza y refrenda los actos administrativos y financieros (manejo de fondos).</li>
+                    <li>Tesorería, realiza los pagos autorizados de acuerdo al flujo de caja.</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!--MODAL 4-->
+<div id="myModal4" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Seguimiento y Evaluación:</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>Verificar si la ejecución se está llevando a cabo de acuerdo con los programas, proyectos y decisiones, identificar problemas y solucionarlos.</li>
+                    <li>Verificar los resultados obtenidos y logros alcanzados, con oportunidad y a costos razonables, reajustando los programas si es indispensable.</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!--MODAL 5-->
+<div id="myModal5" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Cierre y Liquidación:</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <ul>
+                    <li>Finalizada la vigencia anual después de la cual no se registra recaudación de ingresos ni se realizan gastos devengados con cargo al presupuesto clausurado.</li>
+                    <li>Conocer los resultados de la ejecución presupuestaria de ingresos y gastos y la situación financiera del Sector Público. </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
 <!-- Call to action-->
 <!--HELP CENTER SHORTCUT-->
 <div id="helpCenter"></div>
 <script src="js/comunes_infografias.js"></script>
 
 <script>
-        $(document).ready(function () {
-            GetEntidadesPresupuesto();
-    ***REMOVED***);
+    $(document).ready(function () {
+        GetEntidadesPresupuestoNoAlcaldias();
+***REMOVED***);
 
-        window.onscroll = function () { myFunction() ***REMOVED***;
+    window.onscroll = function () { myFunction() ***REMOVED***;
 
-        var header = document.getElementById("navs-header");
-        var sticky = header.offsetTop;
+    var header = document.getElementById("navs-header");
+    var sticky = header.offsetTop;
 
-        function myFunction() {
-            if (window.pageYOffset > sticky) {
-                header.classList.add("sticky");
-                header.classList.add("bg-white");
-        ***REMOVED*** else {
-                header.classList.remove("sticky");
-                header.classList.remove("bg-white");
-        ***REMOVED***
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+            header.classList.add("bg-white");
+    ***REMOVED*** else {
+            header.classList.remove("sticky");
+            header.classList.remove("bg-white");
     ***REMOVED***
+***REMOVED***
 </script>
+
+
+
+
+
+
+
+
+
+
+
+

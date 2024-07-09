@@ -1,21 +1,136 @@
-﻿loadBarChartGraph("divGraphBarras");
-loadDonaGraph("divGraphDona");
-loadTreeMapGraph("divTreemap");
+﻿
 
+prueba3();
+
+function prueba3() {
+    const width = 400;
+    const height = 300;
+    const radius = Math.min(width, height) / 2;
+    var labelr = radius + 30;
+
+    d3.select("#divGraphDonaPerFuentes")
+        .append("g")
+        .attr("transform", "translate(100,100)");
+
+    var input = [
+        { name: "CRÉDITO INTERNO", size: "10", color:"#4040b0" ***REMOVED***,
+        { name: "DONACION EXTERNA", size: "9", color:"#06a7d6" ***REMOVED***,
+        { name: "FONDO GENERAL", size: "5", color: "#f8fb54" ***REMOVED***,
+        { name: "CREDITO EXTERNO", size: "3", color: "#ff8975" ***REMOVED***,
+        { name: "FONDOS CON DESTINO ESPECÍFICO", size: "2", color: "#ff0024" ***REMOVED***
+    ];
+
+    const colores = ["#4040b0", "#06a7d6", "#f8fb54", "#ff8975", "#ff0024"];
+
+    const colorScale = d3.scaleOrdinal()
+        .domain(d3.range(colores.length)) // Dominio basado en la longitud del array de colores
+        .range(colores); // Rango de colores
+
+    const angulo = d3.scaleLinear()
+        .domain([0, 180]) // Limita el ángulo de 0 a 180 grados
+        .range([0, Math.PI * 2]); // Convierte el rango a radianes
+
+    var angleGen = d3.pie()
+        .startAngle(angulo(-45))
+        .endAngle(angulo(45))
+        .padAngle(.05)
+        .value((d) => d.size)
+        .sortValues((a, b) => a < b ? 1 : -1);
+
+    var data = angleGen(input);
+
+
+    var arcGen = d3.arc()
+        .innerRadius(50)
+        .outerRadius(90);
+
+    const labelRadius = arcGen.outerRadius()() * 0.8;
+    const arcLabel = d3.arc()
+        .innerRadius(labelRadius)
+        .outerRadius(labelRadius);
+
+
+    d3.select("#divGraphDonaPerFuentes g")
+        .selectAll("path")
+        .data(data)
+        .enter()
+        .append("path")
+        .attr("d", arcGen)
+        .attr("fill", (d, i) => colorScale(i))
+        .attr("stroke", "gray")
+        .attr("stroke-width", 1);
+
+    const textEl = d3.select("#divGraphDonaPerFuentes")
+        .selectAll("newText")
+        .data(data)
+        .enter()
+        .append("text")
+        .attr("x", function (d) {
+            return d3.pointRadial((d.startAngle + d.endAngle - 0.1) / 2, (50 + 90) / 2)[0];
+    ***REMOVED***)
+        .attr("y", d => d3.pointRadial((d.startAngle + d.endAngle -0.1 )/2, (50 + 90) / 2)[1])
+        .attr("text-anchor", d => {
+
+            return "middle";
+    ***REMOVED***)
+        .text(d => "T")
+        .attr("font-size", "10px")
+        .attr("fill", "black")
+        .attr("transform", "translate(100,100)")
+        
+
+   
+
+***REMOVED***
+
+
+
+
+function prueba() {
+    var data = [
+        { label: 'A', value: 10 ***REMOVED***,
+        { label: 'B', value: 15 ***REMOVED***,
+        { label: 'C', value: 8 ***REMOVED***
+        
+    ];
+
+    var width_aux = 400;
+    var height_aux = 300; //this is the double because are showing just the half of the pie
+    var radius = Math.min(width_aux, height_aux) / 2;
+
+    var donut = new d3plus.Donut()
+        .select("#grafico")
+        .config({
+            data: data,
+            groupBy: "label",
+            height: height_aux,
+            width: width_aux,
+            innerRadius: 50,
+            outerRadius:-10,
+            legend: false,
+            value: "value",
+            startAngle: Math.PI / 4,
+            endAngle:7 * Math.PI / 4,
+            padAngle:.05
+
+    ***REMOVED***)
+        .render();
+
+***REMOVED***
 
 function loadDonaGraph(divContenedor) {
     var myData = [
-        { "labelGroup": "Empresa Nacional de Energía Eléctrica", "rawValue": (5653840893 / 1000000), "porcentaje": 24.7, "color": "#639CBF" ***REMOVED***,
-        { "labelGroup": "Secretaría de Infraestructura y Transporte", "rawValue": (3879822058 / 1000000), "porcentaje": 16.4, "color": "#78B8BF"***REMOVED***,
-        { "labelGroup": "Red Solidaria", "rawValue": (3898179985 / 1000000), "porcentaje": 16.2, "color": "#A65D5D"***REMOVED***,
-        { "labelGroup": "Secretaría de Agricultura y Ganadería", "rawValue": (1869850990 / 1000000), "porcentaje": 7.9, "color": "#4C5959"***REMOVED***,
-        { "labelGroup": "Secretaría de Salud", "rawValue": (1843982136 / 1000000), "porcentaje": 7.8, "color": "#3185A3"***REMOVED***,
-        { "labelGroup": "Fondo Hondureño de Inversión Social", "rawValue": (1493698469 / 1000000), "porcentaje": 6.3, "color": "#56B4D6"***REMOVED***,
-        { "labelGroup": "Secretaría de Recursos Naturales y Ambiente (MI AMBIENTE+)", "rawValue": (798000000 / 1000000), "porcentaje": 3.1, "color": "#56D6B2" ***REMOVED***,
-        { "labelGroup": "Secretaría de Educación", "rawValue": (483898487 / 1000000), "porcentaje": 2.1, "color": "#4FBCE3"***REMOVED***,
-        { "labelGroup": "Empresa Hondureña de Telecomunicaciones (HONDUTEL)", "rawValue": (409800000 / 1000000), "porcentaje": 1.7, "color": "#9BDDCA" ***REMOVED***,
-        { "labelGroup": "Registro Nacional de las Personas", "rawValue": (980000000 / 1000000), "porcentaje": 1.9, "color": "#41A387"***REMOVED***,
-        { "labelGroup": "Otras instituciones", "rawValue": (2988355040 / 1000000), "porcentaje": 12.2, "color": "#5A6A70" ***REMOVED***
+        { "labelGroup": "Empresa Nacional de Energía Eléctrica", "rawValue": (5823840893 / 1000000), "porcentaje": 24.7, "color": "#639CBF" ***REMOVED***,
+        { "labelGroup": "Secretaría de Infraestructura y Transporte", "rawValue": (3871722058 / 1000000), "porcentaje": 16.4, "color": "#78B8BF"***REMOVED***,
+        { "labelGroup": "Red Solidaria", "rawValue": (3833179985 / 1000000), "porcentaje": 16.2, "color": "#A65D5D"***REMOVED***,
+        { "labelGroup": "Secretaría de Agricultura y Ganadería", "rawValue": (1860950990 / 1000000), "porcentaje": 7.9, "color": "#4C5959"***REMOVED***,
+        { "labelGroup": "Secretaría de Salud", "rawValue": (1843312136 / 1000000), "porcentaje": 7.8, "color": "#3185A3"***REMOVED***,
+        { "labelGroup": "Fondo Hondureño de Inversión Social", "rawValue": (1493673469 / 1000000), "porcentaje": 6.3, "color": "#56B4D6"***REMOVED***,
+        { "labelGroup": "Secretaría de Recursos Naturales y Ambiente (MI AMBIENTE+)", "rawValue": (725000000 / 1000000), "porcentaje": 3.1, "color": "#56D6B2" ***REMOVED***,
+        { "labelGroup": "Secretaría de Educación", "rawValue": (483855487 / 1000000), "porcentaje": 2.1, "color": "#4FBCE3"***REMOVED***,
+        { "labelGroup": "Empresa Hondureña de Telecomunicaciones (HONDUTEL)", "rawValue": (400000000 / 1000000), "porcentaje": 1.7, "color": "#9BDDCA" ***REMOVED***,
+        { "labelGroup": "Registro Nacional de las Personas", "rawValue": (400000000 / 1000000), "porcentaje": 1.7, "color": "#41A387"***REMOVED***,
+        { "labelGroup": "Otras instituciones", "rawValue": (2878355040 / 1000000), "porcentaje": 12.2, "color": "#5A6A70" ***REMOVED***
     ];
 
     new d3plus.Donut()
@@ -26,14 +141,15 @@ function loadDonaGraph(divContenedor) {
             groupBy: "labelGroup",
             label: d => d["porcentaje"] + "%",
             height: 665,
-            //innerRadius: 50,
             padAngle: 0.01,
             legend: true,
             legendPosition: function () {
                 return this._width > this._height ? "right" : "bottom";
           ***REMOVED***
             value: "rawValue",
-            color: "color",
+            color: function (d,index) {
+                return assignColorPaleta(index);
+          ***REMOVED***
             tooltipConfig: {
                 title: function (d) {
                     return d["labelGroup"];
@@ -68,29 +184,29 @@ function formatoDecimales(n,c,d,t) {
         c = isNaN(c = Math.abs(c)) ? 2 : c,
         d = d == undefined ? "." : d,
         t = t == undefined ? "," : t,
-       s = n < 0 ? "-" : "",
-       i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-       j = (j = i.length) > 3 ? j % 3 : 0;
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 
 ***REMOVED***
 
 function loadBarChartGraph(divContenedor) {
     var objData = [
-        { "periodo": 2023, "x": 1, "labelGroup": "Energia", "rawValue": (5829840893 / 1000000), "porcentaje": 24.66 ***REMOVED***,
-        { "periodo": 2023, "x": 2, "labelGroup": "Carreteras", "rawValue": (3879822058 / 1000000), "porcentaje": 16.39 ***REMOVED***,
-        { "periodo": 2023, "x": 3, "labelGroup": "Protección Social", "rawValue": (3739848184 / 1000000), "porcentaje": 15.81 ***REMOVED***,
-        { "periodo": 2023, "x": 4, "labelGroup": "Salud", "rawValue": (2298133891 / 1000000), "porcentaje": 9.35 ***REMOVED***,
-        { "periodo": 2023, "x": 5, "labelGroup": "Seguridad Alimentaria", "rawValue": (1699874080 / 1000000), "porcentaje": 7.16 ***REMOVED***,
-        { "periodo": 2023, "x": 6, "labelGroup": "Forestal", "rawValue": (1198971903 / 1000000), "porcentaje": 4.74 ***REMOVED***,
-        { "periodo": 2023, "x": 7, "labelGroup": "Educación", "rawValue": (1099885635 / 1000000), "porcentaje": 4.64 ***REMOVED***,
-        { "periodo": 2023, "x": 8, "labelGroup": "Fortalecimiento Institucional", "rawValue": (1019870349 / 1000000), "porcentaje": 4.29 ***REMOVED***,
-        { "periodo": 2023, "x": 9, "labelGroup": "Agua y Saneamiento", "rawValue": (859828749 / 1000000), "porcentaje": 3.63 ***REMOVED***,
-        { "periodo": 2023, "x": 10, "labelGroup": "Otras Inversiones  por Definir", "rawValue": (698034722 / 1000000), "porcentaje": 2.94 ***REMOVED***,
-        { "periodo": 2023, "x": 11, "labelGroup": "Transporte y Obras Públicas", "rawValue": (499819660 / 1000000), "porcentaje": 2.10 ***REMOVED***,
-        { "periodo": 2023, "x": 12, "labelGroup": "Inversión Social", "rawValue": (498000000 / 1000000), "porcentaje": 1.69 ***REMOVED***,
-        { "periodo": 2023, "x": 13, "labelGroup": "Telecomunicaciones", "rawValue": (400980000 / 1000000), "porcentaje": 1.69 ***REMOVED***,
-        { "periodo": 2023, "x": 14, "labelGroup": "Seguridad", "rawValue": (209859934 / 1000000), "porcentaje": 0.84 ***REMOVED***
+        { "periodo": 2023, "x": 1, "labelGroup": "Energia", "rawValue": (5823840893 / 1000000), "porcentaje": 24.66 ***REMOVED***,
+        { "periodo": 2023, "x": 2, "labelGroup": "Carreteras", "rawValue": (3871722058 / 1000000), "porcentaje": 16.39 ***REMOVED***,
+        { "periodo": 2023, "x": 3, "labelGroup": "Protección Social", "rawValue": (3735148184 / 1000000), "porcentaje": 15.81 ***REMOVED***,
+        { "periodo": 2023, "x": 4, "labelGroup": "Salud", "rawValue": (2210133891 / 1000000), "porcentaje": 9.35 ***REMOVED***,
+        { "periodo": 2023, "x": 5, "labelGroup": "Seguridad Alimentaria", "rawValue": (1692074080 / 1000000), "porcentaje": 7.16 ***REMOVED***,
+        { "periodo": 2023, "x": 6, "labelGroup": "Forestal", "rawValue": (1120971903 / 1000000), "porcentaje": 4.74 ***REMOVED***,
+        { "periodo": 2023, "x": 7, "labelGroup": "Educación", "rawValue": (1096085635 / 1000000), "porcentaje": 4.64 ***REMOVED***,
+        { "periodo": 2023, "x": 8, "labelGroup": "Fortalecimiento Institucional", "rawValue": (1014570349 / 1000000), "porcentaje": 4.29 ***REMOVED***,
+        { "periodo": 2023, "x": 9, "labelGroup": "Agua y Saneamiento", "rawValue": (857828749 / 1000000), "porcentaje": 3.63 ***REMOVED***,
+        { "periodo": 2023, "x": 10, "labelGroup": "Otras Inversiones  por Definir", "rawValue": (695034722 / 1000000), "porcentaje": 2.94 ***REMOVED***,
+        { "periodo": 2023, "x": 11, "labelGroup": "Transporte y Obras Públicas", "rawValue": (496119660 / 1000000), "porcentaje": 2.10 ***REMOVED***,
+        { "periodo": 2023, "x": 12, "labelGroup": "Inversión Social", "rawValue": (400000000 / 1000000), "porcentaje": 1.69 ***REMOVED***,
+        { "periodo": 2023, "x": 13, "labelGroup": "Telecomunicaciones", "rawValue": (400000000 / 1000000), "porcentaje": 1.69 ***REMOVED***,
+        { "periodo": 2023, "x": 14, "labelGroup": "Seguridad", "rawValue": (200359934 / 1000000), "porcentaje": 0.84 ***REMOVED***
 
 
     ];
@@ -172,12 +288,10 @@ function loadBarChartGraph(divContenedor) {
                     ]
               ***REMOVED***
                 xConfig: {
-                    title: "Millones",
+                    title: "Millones de Lempiras",
                     scale: "pow",
                     ticks:false,
-                    //tickFormat: function (d) {
-                    //    return " ";
-                    //***REMOVED***
+
               ***REMOVED***
                 yConfig: {
                     title: "Sectores",
@@ -197,8 +311,7 @@ function loadBarChartGraph(divContenedor) {
 function assignColorPaleta(indice) {
     var color_aux = "#CCCCCC";
     var col_sel = color_aux;
-    var colores_default = ["#639CBF", "#78B8BF", "#A65D5D", "#4C5959", "#78B8BF", "#56B4D6", "#56D6B2", "#4FBCE3", "#9BDDCA", "#41A387", "#5A6A70", "#3185A3",
-    "#387CA6", "#96D2D9", "#F2E8C9", "#728EA6", "#BACDD9", "#F2E4DC", "#B0C1D9", "#88A5BF", "#D9BFA9", "#F29863", "#F2C1AE", "#BF9C99"];
+    var colores_default = ['#78B8BF', '#639CBF', '#78B8BF"', '#4C5959', '#56B4D6'];
     if (indice < colores_default.length) {
         col_sel = colores_default[indice];
 ***REMOVED***
@@ -230,24 +343,24 @@ function groupAndSum(arr, groupKeys, sumKeys) {
 ***REMOVED***
 function loadTreeMapGraph(divContenedor) {
     var objData = [
-        { "parent": "1", "labelGroup": "FRANCISCO MORAZÁN", "rawValueDouble": 6998159483.28242, "porcentaje": 0, "poblacion": 1508906 ,"proyectos":64***REMOVED***,
-        { "parent": "1", "labelGroup": "CORTES", "rawValueDouble": 4559803434.1961, "porcentaje": 0, "poblacion": 1562394, "proyectos": 36***REMOVED***,
-        { "parent": "1", "labelGroup": "OLANCHO", "rawValueDouble": 3283982459.15149, "porcentaje": 0, "poblacion": 520761, "proyectos": 48***REMOVED***,
-        { "parent": "1", "labelGroup": "EL PARAÍSO", "rawValueDouble": 1509850795.57777, "porcentaje": 0, "poblacion": 444507, "proyectos":26***REMOVED***,
-        { "parent": "1", "labelGroup": "SANTA BÁRBARA", "rawValueDouble": 1202982672.38918, "porcentaje": 0, "poblacion": 421337, "proyectos":23 ***REMOVED***,
-        { "parent": "2", "labelGroup": "YORO", "rawValueDouble": 866980195.56485, "porcentaje": 0, "poblacion": 570595, "proyectos":28 ***REMOVED***,
-        { "parent": "2", "labelGroup": "COPÁN", "rawValueDouble": 929981188.610502, "porcentaje": 0, "poblacion": 371057, "proyectos":33***REMOVED***,
-        { "parent": "2", "labelGroup": "INTIBUCÁ", "rawValueDouble": 667984655.627341, "porcentaje": 0, "poblacion": 232553, "proyectos":24***REMOVED***,
-        { "parent": "2", "labelGroup": "COMAYAGUA", "rawValueDouble": 617984713.268798, "porcentaje": 0, "poblacion": 493466, "proyectos":30***REMOVED***,
-        { "parent": "2", "labelGroup": "OCOTEPEQUE", "rawValueDouble": 509899439.070441, "porcentaje": 0, "poblacion": 146430, "proyectos":25***REMOVED***,
-        { "parent": "3", "labelGroup": "COLÓN", "rawValueDouble": 389878402.055055, "porcentaje": 0, "poblacion": 309926, "proyectos":15***REMOVED***,
-        { "parent": "3", "labelGroup": "LEMPIRA", "rawValueDouble": 356981847.739591, "porcentaje": 0, "poblacion": 321179, "proyectos":19***REMOVED***,
-        { "parent": "3", "labelGroup": "VALLE", "rawValueDouble": 329598713.713244, "porcentaje": 0, "poblacion": 174511, "proyectos":20 ***REMOVED***,
-        { "parent": "3", "labelGroup": "CHOLUTECA", "rawValueDouble": 460988377.438564, "porcentaje": 0, "poblacion": 437618, "proyectos":27***REMOVED***,
-        { "parent": "3", "labelGroup": "ATLÁNTIDA", "rawValueDouble": 248598764.457373, "porcentaje": 0, "poblacion": 436252, "proyectos":22***REMOVED***,
-        { "parent": "3", "labelGroup": "LA PAZ", "rawValueDouble": 473349859.854955, "porcentaje": 0, "poblacion": 198926, "proyectos":24***REMOVED***,
-        { "parent": "3", "labelGroup": "ISLAS DE LA BAHÍA", "rawValueDouble": 149856474.116752, "porcentaje": 0, "poblacion": 62557, "proyectos":11 ***REMOVED***,
-        { "parent": "3", "labelGroup": "GRACIAS A DIOS", "rawValueDouble": 198112081.864668, "porcentaje": 0, "poblacion": 90795, "proyectos":13***REMOVED***
+        { "parent": "1", "labelGroup": "FRANCISCO MORAZÁN", "rawValueDouble": 6975159483.28242, "porcentaje": 0, "poblacion": 1508906 ,"proyectos":64***REMOVED***,
+        { "parent": "1", "labelGroup": "CORTES", "rawValueDouble": 4550203434.1961, "porcentaje": 0, "poblacion": 1562394, "proyectos": 36***REMOVED***,
+        { "parent": "1", "labelGroup": "OLANCHO", "rawValueDouble": 3283792459.15149, "porcentaje": 0, "poblacion": 520761, "proyectos": 48***REMOVED***,
+        { "parent": "1", "labelGroup": "EL PARAÍSO", "rawValueDouble": 1507550795.57777, "porcentaje": 0, "poblacion": 444507, "proyectos":26***REMOVED***,
+        { "parent": "1", "labelGroup": "SANTA BÁRBARA", "rawValueDouble": 1202912672.38918, "porcentaje": 0, "poblacion": 421337, "proyectos":23 ***REMOVED***,
+        { "parent": "2", "labelGroup": "YORO", "rawValueDouble": 866660195.56485, "porcentaje": 0, "poblacion": 570595, "proyectos":28 ***REMOVED***,
+        { "parent": "2", "labelGroup": "COPÁN", "rawValueDouble": 929441188.610502, "porcentaje": 0, "poblacion": 371057, "proyectos":33***REMOVED***,
+        { "parent": "2", "labelGroup": "INTIBUCÁ", "rawValueDouble": 667194655.627341, "porcentaje": 0, "poblacion": 232553, "proyectos":24***REMOVED***,
+        { "parent": "2", "labelGroup": "COMAYAGUA", "rawValueDouble": 617494713.268798, "porcentaje": 0, "poblacion": 493466, "proyectos":30***REMOVED***,
+        { "parent": "2", "labelGroup": "OCOTEPEQUE", "rawValueDouble": 503299439.070441, "porcentaje": 0, "poblacion": 146430, "proyectos":25***REMOVED***,
+        { "parent": "3", "labelGroup": "COLÓN", "rawValueDouble": 381778402.055055, "porcentaje": 0, "poblacion": 309926, "proyectos":15***REMOVED***,
+        { "parent": "3", "labelGroup": "LEMPIRA", "rawValueDouble": 356721847.739591, "porcentaje": 0, "poblacion": 321179, "proyectos":19***REMOVED***,
+        { "parent": "3", "labelGroup": "VALLE", "rawValueDouble": 329545713.713244, "porcentaje": 0, "poblacion": 174511, "proyectos":20 ***REMOVED***,
+        { "parent": "3", "labelGroup": "CHOLUTECA", "rawValueDouble": 460148377.438564, "porcentaje": 0, "poblacion": 437618, "proyectos":27***REMOVED***,
+        { "parent": "3", "labelGroup": "ATLÁNTIDA", "rawValueDouble": 248574764.457373, "porcentaje": 0, "poblacion": 436252, "proyectos":22***REMOVED***,
+        { "parent": "3", "labelGroup": "LA PAZ", "rawValueDouble": 473343359.854955, "porcentaje": 0, "poblacion": 198926, "proyectos":24***REMOVED***,
+        { "parent": "3", "labelGroup": "ISLAS DE LA BAHÍA", "rawValueDouble": 141956474.116752, "porcentaje": 0, "poblacion": 62557, "proyectos":11 ***REMOVED***,
+        { "parent": "3", "labelGroup": "GRACIAS A DIOS", "rawValueDouble": 118112081.864668, "porcentaje": 0, "poblacion": 90795, "proyectos":13***REMOVED***
     ];
 
     var distintos = objData.map(item => item.parent)
@@ -258,7 +371,7 @@ function loadTreeMapGraph(divContenedor) {
   ***REMOVED*** 0);
 
     $.each(objData, function (key, item) {
-        //console.log(item.com);
+
         var porc_aux = (item.rawValueDouble / sumaTotal) * 100;
         item.porcentaje = porc_aux;
 ***REMOVED***);
@@ -277,7 +390,6 @@ function loadTreeMapGraph(divContenedor) {
                     size: 6,
                     transform: "capitalize"
               ***REMOVED*** fill: function (d, index) {
-                    //var index = distintos.indexOf(d["parent"]); 
                     return assignColorPaleta(index);
 
             ***REMOVED***
@@ -331,12 +443,12 @@ function loadTreeMapGraph(divContenedor) {
 
 
 Number.prototype.formatMoney = function (c, d, t) {
-    n = this;
-    c = isNaN(c = Math.abs(c)) ? 2 : c;
-    d = d == undefined ? "." : d;
-    t = t == undefined ? "," : t;
-    let s = n < 0 ? "-" : "";
-    let i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "";
-    var j = (j = i.length) > 3 ? j % 3 : 0;
+    var n = this,
+        c = isNaN(c = Math.abs(c)) ? 2 : c,
+        d = d == undefined ? "." : d,
+        t = t == undefined ? "," : t,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 ***REMOVED***;

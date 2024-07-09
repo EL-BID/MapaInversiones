@@ -10,7 +10,6 @@ using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
 using PlataformaTransparencia.Negocios.Project;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using PlataformaTransparencia.Negocios.Proyectos;
@@ -45,21 +44,18 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       _consultasComunes = consultasComunes;
 ***REMOVED***
 
-    //public object GestorTitulos { get; private set; ***REMOVED***
-
     public IActionResult PerfilProyecto(int Id)
     {
              string id_usuario_aux;
          string nom_usuario_aux;
         id_usuario_aux = HttpContext.Session.GetString("IdUsuario");
             nom_usuario_aux = HttpContext.Session.GetString("NomUsuario");
-            ProjectProfileContract proyectoContract = new ProjectProfileContract(Id, _connection, id_usuario_aux, nom_usuario_aux);
+            ProjectProfileContract proyectoContract = new(Id, _connection, id_usuario_aux, nom_usuario_aux);
       proyectoContract.Fill();
       return View(proyectoContract.ModelProjectProfile);
 ***REMOVED***
 
     [HttpPost]
-    //[ValidateInput(false)]
     public async Task<FileResult> GeneratePDF_ARC(string id_obj_pdf, int cant_cont, int annio = 0)
     {
       MemoryStream stream = new MemoryStream();
@@ -74,7 +70,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         byte[] byteArray = await _pdfGenerator.GetAsync(html, System.Threading.CancellationToken.None);
         stream = new MemoryStream(byteArray);
         
-      
+       
 
   ***REMOVED***
       return File(stream.ToArray(), "application/pdf", "FichaProyecto_" + id_obj_pdf + "_" + cant_cont.ToString() + ".pdf"); ;
@@ -84,8 +80,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
     private string GeneraHtmlString(ProyectoPdf info)
     {
       string outTxt = "";
-      //int idProyecto = info.ProjectId;
-      string logo = "<div style='width:150px;padding;color:#0D382E;font-weight:600;'>MapaInversiones</div> <div class='separador'><img src='http://investmentmap.eastus.cloudapp.azure.com:8082/img/logoMIV.svg' width='50' height='50'></div>";
+      string logo = "<div style='width:150px;padding;color:#0D382E;font-weight:600;'>MapaInversiones del país</div> <div class='separador'><img src='http://investmentmap.eastus.cloudapp.azure.com:8082/img/logoMIV.svg' width='50' height='50'></div>";
       string titulo_sector = "SECTOR "+ info.Resumen.Sector.ToString().ToUpper();
       string encabezado = "<div id='infoEncabezado' style='padding:10px;'>" +
                   "<div class='row'>" +
@@ -95,7 +90,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     "<div class='separador_5'></div>" +
                     "<h3 class='sub_t1_red text-center'>" + titulo_sector + "</h3>" +
                     "<div class='sub_t2_red text-center'>";
-     
+
       encabezado += "</div>" +
       "</div></div><div class='separador_10'></div>" +
           "<div style='width:60%;'>" +
@@ -277,10 +272,12 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                "</div>" +
               "</div></div>";
               i++;
+
       ***REMOVED***
     ***REMOVED***
   ***REMOVED***
 
+      
 
 
       outTxt += logo;
@@ -289,13 +286,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       outTxt += info_general;
       outTxt += grafica_avance_financiero;
       outTxt += actividadesPorComponentes;
+
       return outTxt;
 
 
 ***REMOVED***
 
 
-
+   
 
   ***REMOVED***
 ***REMOVED***

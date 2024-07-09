@@ -1,30 +1,28 @@
 ﻿@model PlataformaTransparencia.Modelos.ModelProjectProfile
-@inject OrchardCore.IOrchardHelper Orchard
-@{
+    @{
     ViewBag.Title = "Verificar Cuenta";
     ViewBag.SectionId = "section-projects";
     ViewBag.ProjectsSelected = "selected";
 ***REMOVED***
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
-<head>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <html lang="@Orchard.CultureName()">
-    <title>Mapa Inversiones - Verifica Cuenta</title>
+        <title>Mapa Inversiones - Verifica Cuenta</title>
 
 
-</head>
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-bottom" class="section-Admin">
-    <section id="s0" class="section-logIn">
-        <div class="container">
-            <div class="row text-center">
-                @if (@Model.id_usu_participa != null)
-                {
+    </head>
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-bottom" class="section-Admin">
+        <section id="s0" class="section-logIn">
+            <div class="container">
+                <div class="row text-center">
+                    @if (@Model.id_usu_participa != null)
+                    {
                     <text>
                         <h2>@Model.nom_usu_participa, su correo ha sido Verificado</h2>
                         <div class="clear"></div>
@@ -33,16 +31,16 @@
 
                         </div>
                     </text>
-            ***REMOVED***
-                else
-                {
+                ***REMOVED***
+                    else
+                    {
                     <text><h2>Error en verificación de cuenta: @Model.error_msg</h2></text>
-            ***REMOVED***
+                ***REMOVED***
 
+                </div>
             </div>
-        </div>
-    </section>
-</body>
+        </section>
+    </body>
 </html>
 
 
@@ -55,7 +53,7 @@
             if (id_proy != "" && id_proy != null) {
                 url = "/perfilproyecto/" + id_proy + "#s5";
         ***REMOVED***
-
+           
             window.location.href = url;
 
     ***REMOVED***);

@@ -21,13 +21,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         /// 
         private IConsultasComunes ConsultasComunes;
         private readonly IBusquedasProyectosBLL BusquedasProyectosBLL;
-
+        private IConsolidadosNacionalesBLL ConsolidadosNacionales;
 
         // Methods
-        public ServiciosProyectosController(IConsultasComunes consultasComunes, IBusquedasProyectosBLL busquedasProyectosBLL)
+        public ServiciosProyectosController(IConsultasComunes consultasComunes, IBusquedasProyectosBLL busquedasProyectosBLL, IConsolidadosNacionalesBLL consolidadosNacionales)
         {
             ConsultasComunes = consultasComunes;
             BusquedasProyectosBLL = busquedasProyectosBLL;
+            ConsolidadosNacionales = consolidadosNacionales;
     ***REMOVED***
 
 
@@ -101,30 +102,29 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
     ***REMOVED***
 
 
-        [HttpGet("GetProyNacionales")]
-        public async Task<object> GetProyNacionales(int page, int sector)
-        {
-            ModelDataProyecto objReturn = new ModelDataProyecto();
-            List<InfoProyectos> source = new List<InfoProyectos>();
-            source.AddRange(await ConsultasComunes.ObtenerProyectosNacionales(sector));
-            objReturn.totalNumber = source.Count<InfoProyectos>();
-            objReturn.pagesNumber = page;
-            objReturn.totalPages = (objReturn.totalNumber > CommonLabel.MaximumResultsPerPage) ? ((objReturn.totalNumber - (objReturn.totalNumber % CommonLabel.MaximumResultsPerPage)) / CommonLabel.MaximumResultsPerPage) : 1;
-            if ((objReturn.totalNumber >= CommonLabel.MaximumResultsPerPage) && ((objReturn.totalNumber % CommonLabel.MaximumResultsPerPage) > 0))
-            {
-                objReturn.totalPages++;
-        ***REMOVED***
-            if (objReturn.totalNumber > CommonLabel.MaximumResultsPerPage)
-            {
-                objReturn.proyNacionales.AddRange(source.Skip<InfoProyectos>(((page - 1) * CommonLabel.MaximumResultsPerPage)).Take<InfoProyectos>(CommonLabel.MaximumResultsPerPage));
-        ***REMOVED***
-            else
-            {
-                objReturn.proyNacionales.AddRange(source);
-        ***REMOVED***
+       
 
-            objReturn.Status = true;
+        [HttpGet("GetProyectosNacional")]
+        public List<InfoProyectos> GetProyectosNacional()
+        {
+            List<InfoProyectos> objReturn = new List<InfoProyectos>();
+            objReturn = ConsolidadosNacionales.GetProyectosNacionales();
+
             return objReturn;
+
+
+    ***REMOVED***
+
+        [HttpGet("GetProyectosNacionalfiltro")]
+        public List<InfoProyectos> GetProyectosNacionalfiltro(string campo)
+        {
+            List<InfoProyectos> objReturn = new List<InfoProyectos>();
+
+            objReturn = ConsolidadosNacionales.GetProyectosNacionalesfiltro(campo);
+
+            return objReturn;
+
+
     ***REMOVED***
 
 
@@ -209,7 +209,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         [HttpGet("GetAnniosProcesoContratacion")]
         public ModelProcesoContratacionAnios GetAnniosContratos(int? IdProyecto)
         {
-            ModelProcesoContratacionAnios objReturn = new ModelProcesoContratacionAnios();
+                ModelProcesoContratacionAnios objReturn = new ModelProcesoContratacionAnios();
             try
             {
                 var valores = BusquedasProyectosBLL.ObtenerAnniosProcesoContratacion(IdProyecto);
@@ -226,17 +226,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
     ***REMOVED***
 
         [HttpGet("ProcesosContratacion")]
-        public ModelProcesosContratacionData ProcesosContratacion(int Annio, int Semestre, int IdProyecto, int NumeroPagina, int RegistrosPorPagina)
+        public ModelProcesosContratacionData ProcesosContratacion(int Annio, int Semestre, int IdProyecto, int NumeroPagina, int RegistrosPorPagina, string NombreProceso)
         {
 
             ModelProcesosContratacionData objReturn = new ModelProcesosContratacionData();
             ProcesosContratacionFiltros filtros = new ProcesosContratacionFiltros();
             filtros.Annio = Annio;
-            filtros.Semestre = Semestre;
             filtros.IdProyecto = IdProyecto;
             filtros.NumeroPagina = NumeroPagina;
             filtros.RegistrosPorPagina = RegistrosPorPagina;
-
+            filtros.NombreProceso = NombreProceso;  
             try
             {
                 var valores = BusquedasProyectosBLL.ObtenerInformacionProcesosContratacionPorFiltros(filtros);

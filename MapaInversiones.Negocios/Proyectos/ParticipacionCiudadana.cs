@@ -46,14 +46,42 @@ namespace PlataformaTransparencia.Negocios.Project
             return objReturn;
     ***REMOVED***
 
+        public List<itemcomentario> ObtenerComentariosContAsync(string Id)
+        {
+            List<itemcomentario> objReturn = new List<itemcomentario>();
+            var comentarios = new List<object>();
+
+            var infoProyecto = (from Comentario in _connection.Comentarios
+                                join usuarios in _connection.Usuarios
+                                on Comentario.IdUsuario equals usuarios.IdUsuario
+                                where Comentario.Codigocontrato == Id
+                                && (Comentario.IdEstado == 3 || Comentario.IdEstado == 5 || Comentario.IdEstado == 6)
+                                orderby Comentario.ComentarioRelacionado ascending
+                                select new itemcomentario
+                                {
+                                    IdUsuario = usuarios.IdUsuario,
+                                    nom_usuario = usuarios.Nombre,
+                                    fechaCreacion = (DateTime)Comentario.FechaCreacion,
+                                    ComentarioOriginal = Comentario.ComentarioOriginal,
+                                    ComentarioModerado = Comentario.ComentarioModerado,
+                                    IdTipoRespuesta = Comentario.IdTipoRespuesta,
+                                    ComentarioRelacionado = Comentario.ComentarioRelacionado,
+                                    IdComentario = Comentario.IdComentario,
+                                    Anonimo = Comentario.Anonimo
+
+                            ***REMOVED***).OrderBy(p => p.fechaCreacion).ToList();
+
+            objReturn = infoProyecto;
+
+            return objReturn;
+    ***REMOVED***
+
 
         public itemUsuarios ValidaLogin(string correo, string clave, string validarol)
         {
 
             itemUsuarios lstUsuarios = new itemUsuarios();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
+
                 if (validarol == "S") {
                     var infoUsuario = (from query in _connection.Usuarios
                                        join entidad in _connection.UsuarioPermisoes
@@ -81,7 +109,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                    ***REMOVED***).FirstOrDefault();
                     lstUsuarios = infoUsuario;
             ***REMOVED***
-            //***REMOVED***
+           
             return lstUsuarios;
     ***REMOVED***
 
@@ -89,9 +117,6 @@ namespace PlataformaTransparencia.Negocios.Project
         {
 
             itemUsuarios lstUsuarios = new itemUsuarios();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
 
                 var infoUsuario = (from query in _connection.Usuarios
                                    where query.Email == correo
@@ -104,7 +129,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                ***REMOVED***).FirstOrDefault();
                 lstUsuarios = infoUsuario;
 
-            //***REMOVED***
+           
             return lstUsuarios;
     ***REMOVED***
 
@@ -112,10 +137,7 @@ namespace PlataformaTransparencia.Negocios.Project
         public List<RolParticipa> ObtenerRolesProyAsync()
         {
             List<RolParticipa> objReturn = new List<RolParticipa>();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
-
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
+ 
                 objReturn = (from roles in _connection.RolUsuarios
                                    orderby roles.NombreRol
                                    select new RolParticipa {
@@ -124,7 +146,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                ***REMOVED***).ToList();
 
 
-            //***REMOVED***
+           
 
             return objReturn;
     ***REMOVED***
@@ -132,27 +154,21 @@ namespace PlataformaTransparencia.Negocios.Project
         public List<RolParticipa> ObtenerRolesProy()
         {
             List<RolParticipa> objReturn = new List<RolParticipa>();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 objReturn = (from roles in _connection.RolUsuarios
                              orderby roles.NombreRol
                              select new RolParticipa {
                                  id = roles.IdRolUsuario,
                                  name = roles.NombreRol
                          ***REMOVED***).ToList();
-            //***REMOVED***
+           
             return objReturn;
     ***REMOVED***
 
         public List<GenerosParticipacion> ObtenerGenerosProyAsync()
         {
             List<GenerosParticipacion> objReturn = new List<GenerosParticipacion>();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 objReturn = (from generos in _connection.GeneroUsuarios
                                    orderby generos.NombreGenero
                                    select new GenerosParticipacion {
@@ -161,7 +177,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                ***REMOVED***).ToList();
 
 
-            //***REMOVED***
+           
 
             return objReturn;
     ***REMOVED***
@@ -169,33 +185,28 @@ namespace PlataformaTransparencia.Negocios.Project
         public List<GenerosParticipacion> ObtenerGenerosProy()
         {
             List<GenerosParticipacion> objReturn = new List<GenerosParticipacion>();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
+
                 objReturn = (from generos in _connection.GeneroUsuarios
                              orderby generos.NombreGenero
                              select new GenerosParticipacion {
                                  id = generos.IdGeneroUsuario,
                                  name = generos.NombreGenero
                          ***REMOVED***).ToList();
-            //***REMOVED***
+            
             return objReturn;
     ***REMOVED***
 
         public List<MediosParticipacion> ObtenerMotivosProyAsync()
         {
             List<MediosParticipacion> objReturn = new List<MediosParticipacion>();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
-
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
+ 
                 objReturn = (from medios in _connection.MedioMapaIUsuarios
                                    orderby medios.IdMedioMapaIUsuario
                                    select new MediosParticipacion {
                                        id = medios.IdMedioMapaIUsuario,
                                        name = medios.NombreMedio
                                ***REMOVED***).ToList();
-            //***REMOVED***
+            
 
             return objReturn;
     ***REMOVED***
@@ -203,67 +214,57 @@ namespace PlataformaTransparencia.Negocios.Project
         public List<MediosParticipacion> ObtenerMotivosProy()
         {
             List<MediosParticipacion> objReturn = new List<MediosParticipacion>();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
+
                 objReturn = (from medios in _connection.MedioMapaIUsuarios
                              orderby medios.IdMedioMapaIUsuario
                              select new MediosParticipacion {
                                  id = medios.IdMedioMapaIUsuario,
                                  name = medios.NombreMedio
                          ***REMOVED***).ToList();
-            //***REMOVED***
+           
             return objReturn;
     ***REMOVED***
 
-        public List<TiposComentario> ObtenerTipoComentarioAsync()
+        public List<TiposComentario> ObtenerTipoComentarioAsync(int Asociacion)
         {
             List<TiposComentario> objReturn = new List<TiposComentario>();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 objReturn =  (from TipoComentario in _connection.TipoComentarios
                                    where TipoComentario.Estado == true
-                                   orderby TipoComentario.Id
+                                   && TipoComentario.IdAsociacion == Asociacion
+                                    orderby TipoComentario.Id
                                    select new TiposComentario {
                                        idTC = TipoComentario.Id,
                                        nameTC = TipoComentario.TipoComentarioColumn
                                ***REMOVED***).ToList();
-            //***REMOVED***
+            
             return objReturn;
     ***REMOVED***
 
         public List<TiposComentario> ObtenerTipoComentario()
         {
             List<TiposComentario> objReturn = new List<TiposComentario>();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
+
                 objReturn = (from TipoComentario in _connection.TipoComentarios
                              orderby TipoComentario.Id
                              select new TiposComentario {
                                  idTC = TipoComentario.Id,
                                  nameTC = TipoComentario.TipoComentarioColumn
                          ***REMOVED***).ToList();
-            //***REMOVED***
             return objReturn;
     ***REMOVED***
-        public string GuardarComentario(int idUsuario, int? idProyecto, int idAsociacion, int idTipoComentario, string comentarioOriginal, bool? anonimo, int IdEstado, int? ComentarioRelacionado, string id_departamento, string id_municipio)
+        public string GuardarComentario(int idUsuario, int? idProyecto, int idAsociacion, int idTipoComentario, string comentarioOriginal, bool? anonimo, int IdEstado, int? ComentarioRelacionado, string id_departamento, string id_municipio, string CodigoContrato, int? TipoSubsidio)
         {
             int idProy = Convert.ToInt32(idProyecto);
             string outTxt = "";
             try {
-                //using (PISGREntities pisgrEntities = new PISGREntities()) {
-
-                //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-                //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
 
                 int idRegNew = _connection.GetTable<Comentario>()
                     .InsertWithInt32Identity(() => new Comentario {
 
                         IdUsuario = idUsuario,
                         IdProyecto = idProy,
+                        Codigocontrato = CodigoContrato,
                         IdDepartamento = id_departamento,
                         IdMunicipio = id_municipio,
                         FechaCreacion = DateTime.Now,
@@ -295,9 +296,7 @@ namespace PlataformaTransparencia.Negocios.Project
         {
 
             itemUsuarios lstUsuarios = new itemUsuarios();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
+
                 if (validarol == "S") {
                     var infoUsuario = (from query in _connection.Usuarios
                                        join entidad in _connection.UsuarioPermisoes
@@ -325,7 +324,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                    ***REMOVED***).FirstOrDefault();
                     lstUsuarios = infoUsuario;
             ***REMOVED***
-            //***REMOVED***
+            
             return lstUsuarios;
     ***REMOVED***
 
@@ -333,10 +332,7 @@ namespace PlataformaTransparencia.Negocios.Project
         public String ObtenerCorreosAprobadores()
         {
             List<itemUsuarios> lstUsuarios = new List<itemUsuarios>();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 var infoUsuario = (from usuario in _connection.Usuarios
                                    join UsuarioXEntidad in _connection.UsuarioPermisoes
                                    on usuario.IdUsuario equals UsuarioXEntidad.IdUsuario
@@ -347,7 +343,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                        email = usuario.Email
                                ***REMOVED***).ToList();
                 lstUsuarios = infoUsuario;
-            //***REMOVED***
+           
             String destinatarios = "";
             foreach (itemUsuarios item in lstUsuarios) {
                 destinatarios += item.email + ";";
@@ -361,9 +357,7 @@ namespace PlataformaTransparencia.Negocios.Project
         public itemEstadisticas ObtenerEstadisticasProyAsync(int Id)
         {
             itemEstadisticas objReturn = new itemEstadisticas();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
+
                 var infoProyecto =  (from aprobadosInv in _connection.VwProyectosAprobadosInvs
                                           where aprobadosInv.IdProyecto == Id
                                           select new itemEstadisticas {
@@ -374,7 +368,7 @@ namespace PlataformaTransparencia.Negocios.Project
 
                 objReturn = infoProyecto;
 
-            //***REMOVED***
+            
 
             return objReturn;
     ***REMOVED***
@@ -386,23 +380,21 @@ namespace PlataformaTransparencia.Negocios.Project
            
             string outTxt = "";
             try {
-                //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
-                //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-                //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 int id = _connection.GetTable<Usuario>()
                     .InsertWithInt32Identity(() => new Usuario {
                         Nombre = nombre,
                         Email = correo,
                         Estado = "CREADO",
                         HashClave = hash_clave,
+                        FechaCreacion = DateTime.Now,
                         Edad = edad,
                         IdGeneroUsuario = genero,
                         IdRolUsuario = rol,
                         IdMedioMapaIUsuario = medio,
                 ***REMOVED***);
 
-                //***REMOVED***
+                
                 if (id > 0) {
                     outTxt = "0<||>" + id.ToString();
             ***REMOVED***
@@ -427,7 +419,6 @@ namespace PlataformaTransparencia.Negocios.Project
             string outTxt = "";
             int cantReg = 0;
             try {
-                //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
                 cantReg = _connection
                     .GetTable<Usuario>()
@@ -435,7 +426,7 @@ namespace PlataformaTransparencia.Negocios.Project
                     .Update(t => new Usuario {
                         CodVerifica = hash_codigo,
                 ***REMOVED***);
-                //***REMOVED***
+                
                 if (cantReg > 0) {
                     outTxt = "0<||>";
             ***REMOVED***
@@ -454,9 +445,7 @@ namespace PlataformaTransparencia.Negocios.Project
             
             string outTxt = "";
             try {
-                //using (PISGREntities pisgrEntities = new PISGREntities()) {
-                //pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-                //pisgrEntities.Configuration.LazyLoadingEnabled = false;
+
                 int idRegNew = _connection.GetTable<MeGusta>()
                     .InsertWithInt32Identity(() => new MeGusta {
                         IdUsuario = idUsuario,
@@ -467,7 +456,7 @@ namespace PlataformaTransparencia.Negocios.Project
                         IdProyecto = idProyecto,
                         Fecha = DateTime.Now,
                 ***REMOVED***);
-                //***REMOVED***
+                
                 if (idRegNew > 0) {
                     outTxt = "0<||>";
             ***REMOVED***
@@ -486,10 +475,7 @@ namespace PlataformaTransparencia.Negocios.Project
         public itemUsuarios validaEmail(string correo)
         {
             itemUsuarios lstUsuarios = new itemUsuarios();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 var infoUsuario = (from query in _connection.Usuarios
                                    where query.Email == correo
                                    && query.Estado == "ACTIVO"
@@ -498,7 +484,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                        cod_verifica = query.CodVerifica
                                ***REMOVED***).FirstOrDefault();
                 lstUsuarios = infoUsuario;
-            //***REMOVED***
+           
 
             return lstUsuarios;
 
@@ -510,7 +496,7 @@ namespace PlataformaTransparencia.Negocios.Project
             string outTxt = "";
             int cantReg = 0;
             try {
-                //using (PISGREntities pisgrEntities = new PISGREntities()) {
+
 
                     Usuario actualUsuario = (from c in _connection.Usuarios
                                              where c.IdUsuario == id_usuario
@@ -532,7 +518,7 @@ namespace PlataformaTransparencia.Negocios.Project
                     ***REMOVED***
                 ***REMOVED***
 
-                //***REMOVED***
+              
 
         ***REMOVED***
             catch (Exception exe) {
@@ -547,9 +533,7 @@ namespace PlataformaTransparencia.Negocios.Project
         {
             string outTxt = "";
             try {
-                //using (PISGREntities pisgrEntities = new PISGREntities()) {
-                //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-                //pisgrEntities.Configuration.LazyLoadingEnabled = false;
+
 
                 int idRegNew = _connection.GetTable<FotoUsuario>()
                     .InsertWithInt32Identity(() => new FotoUsuario {
@@ -566,7 +550,7 @@ namespace PlataformaTransparencia.Negocios.Project
                             IdProyecto = proyectoId,
                             IdUsuario = idUsuario,
                 ***REMOVED***);
-            //***REMOVED***
+          
             if (idRegNew > 0) {
                     outTxt = "0<||>";
             ***REMOVED***
@@ -587,19 +571,16 @@ namespace PlataformaTransparencia.Negocios.Project
         public itemUsuarios validaUsuarioByHash(string hash_verifica)
         {
             itemUsuarios lstUsuarios = new itemUsuarios();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
+
                 var infoUsuario = (from query in _connection.Usuarios
                                    where query.CodVerifica == hash_verifica
- //AND                                  && query.Estado == "CREADO"
                                    select new itemUsuarios {
                                        IdUsuario = query.IdUsuario,
                                        email = query.Email,
                                        Nombre = query.Nombre
                                ***REMOVED***).FirstOrDefault();
                 lstUsuarios = infoUsuario;
-            //***REMOVED***
+           
             return lstUsuarios;
     ***REMOVED***
 
@@ -609,14 +590,14 @@ namespace PlataformaTransparencia.Negocios.Project
             string outTxt = "";
             int cantReg = 0;
             try {
-                //using (PISGREntities pisgrEntities = new PISGREntities()) {
+    
                 cantReg = _connection
                            .GetTable<Usuario>()
                            .Where(t => t.IdUsuario == id_usuario)
                            .Update(t => new Usuario {
                                Estado = estado,
                        ***REMOVED***);
-                //***REMOVED***
+
                 if (cantReg > 0) {
                     outTxt = "0<||>";
             ***REMOVED***
@@ -631,16 +612,14 @@ namespace PlataformaTransparencia.Negocios.Project
         public List<filtrosParticipacion> ObtenerEstadosComentarioAsync()
         {
             List<filtrosParticipacion> objReturn = new List<filtrosParticipacion>();
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
-            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
+   
                 objReturn = (from TipoComentario in _connection.EstadoComentarios
                                    orderby TipoComentario.Id
                                    select new filtrosParticipacion {
                                        id = TipoComentario.Id,
                                        name = TipoComentario.EstadoComentarioColumn
                                ***REMOVED***).ToList();
-            //***REMOVED***
+            
             return objReturn;
     ***REMOVED***
 
@@ -673,10 +652,7 @@ namespace PlataformaTransparencia.Negocios.Project
             List<itemcomentario> info = new List<itemcomentario>();
             List<itemcomentario> info_2 = new List<itemcomentario>();
 
-            //using (PISGREntities pisgrEntities = new PISGREntities()) {
-                //ObjectParameter total_registros = new ObjectParameter("TOTALREGISTROS", typeof(Int32));
-                //pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-                //pisgrEntities.Configuration.LazyLoadingEnabled = false;
+
                 info = (from Comentario in _connection.ObtenerComentariosPorEstados(1, 1, 0, 1, 999, ref total_registros)
                         select new itemcomentario {
                             IdComentario = Comentario.IdComentario,
@@ -685,7 +661,7 @@ namespace PlataformaTransparencia.Negocios.Project
 
                 total_pendientes += total_registros.Value;
 
-            //***REMOVED***
+    
             return total_pendientes;
     ***REMOVED***
 
@@ -697,13 +673,9 @@ namespace PlataformaTransparencia.Negocios.Project
 
             List<itemcomentario> listInfo = new List<itemcomentario>();
             int total_reg = 0;
-  //AND          //int reg_per_page = CommonLabel.MaximumResultPerFicha;
+
             int reg_per_page = 10;
-            //using (PISGREntities entities = new PISGREntities()) {
-            //    entities.Configuration.AutoDetectChangesEnabled = false;
-            //    entities.Configuration.LazyLoadingEnabled = false;
-            //    entities.Configuration.ValidateOnSaveEnabled = false;
-            //ObjectParameter total_registros = new ObjectParameter("TOTALREGISTROS", typeof(Int32));
+
             int? total_registros = 0;
 
             listInfo = (from x in _connection.ObtenerComentariosPorEstados(estado,1,0, page, reg_per_page, ref total_registros)
@@ -732,7 +704,7 @@ namespace PlataformaTransparencia.Negocios.Project
                         ***REMOVED***).OrderBy(p => p.fechaCreacion).ToList();
 
                 total_reg = (int)total_registros.Value;
-            //***REMOVED***
+           
             objReturn.totalNumber = total_reg;
             objReturn.totalPages = (objReturn.totalNumber > reg_per_page) ? ((objReturn.totalNumber - (objReturn.totalNumber % reg_per_page)) / reg_per_page) : 1;
             if ((objReturn.totalNumber >= reg_per_page) && ((objReturn.totalNumber % reg_per_page) > 0)) {

@@ -2,7 +2,7 @@
 <header id="header" class="header">
     <!-- TOP HEADER -->
     <nav class="header-top">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row justify-content-end">
                 <div class="col-auto">
                     <div class="header-top-links">
@@ -10,11 +10,10 @@
                         <ul class="nav">
 
                             <li class="nav-item">
-                                <a href="/Acercade" title="Acerca de Inversiones">
-                                    Acerca de País Inversiones
+                                <a href="/Acercade" title="Acerca de MapaInversiones">
+                                    Acerca de MapaInversiones
                                 </a>
                             </li>
-
                             <li class="nav-item">
                                 <a href="/CentroAyuda?id=2" title="Centro de Ayuda">
                                     Centro de Ayuda
@@ -30,6 +29,7 @@
                                     Contáctenos
                                 </a>
                             </li>
+                          
                         </ul>
                     </div>
                 </div>
@@ -40,9 +40,11 @@
     </nav>
     <!-- End header top -->
     <!-- Begin header fixed -->
+
     <nav class="header-fixed">
-        <div class="container">
-            <div class="row flex-nowrap align-items-center justify-content-between">
+        <div class="wrap-head">
+            <div class="container">
+               <div class="row flex-nowrap align-items-center justify-content-between">
                 <div class="col-auto d-block d-lg-none header-fixed-col">
                     <div class="main-mnu-btn">
                         <span class="bar bar-1"></span>
@@ -51,24 +53,27 @@
                         <span class="bar bar-4"></span>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="main-header col-md-8 header-fixed-col">
-                        <!-- Begin logo -->
-                        <div class="logoHinv">
-                            <a href="https://www.google.com" target="_blank" title="República de Algún País"  rel="noopener" >
-                                <img src="../img/logoPais.svg" alt="República del País">
-                            </a>
-                        </div>
-                        <div class="logoIntro">
-                            <a href="/" class="logo-ico-widht-text" title="Inversiones">
-                                <img src="../img/logoMIV.svg" alt="Logo ">
-                            </a>
-                        </div>
-
+                <div class="main-header col-md-12 header-fixed-col">
+                    <!-- Begin logo -->
+                    <div class="logoHinv">
+                            <a href="/" target="_blank" rel="noopener" title="Nombre Gobierno">
+                                <img class="img-fluid" src="~/img/logoGobierno.svg" alt="Nombre Gobierno">
+                        </a>
                     </div>
-                    
-                    <div class="col-lg col-auto col-static header-fixed-col">
-                        <div class="row flex-nowrap align-items-center justify-content-center">
+                    <div class="logoIntro">
+                        <a href="/" class="logo-ico-widht-text" title="MapaInversiones">
+                            <img class="img-fluid" src="~/img/logoMIV.svg" alt="Logo MapaInversiones">
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg col-auto col-static header-fixed-col main-navigation-bar">
+                        <div class="row flex-nowrap align-items-center justify-content-end">
                             <div class="col-auto header-fixed-col d-none d-lg-block col-static">
                                 <!-- Begin main menu -->
                                 <nav class="main-mnu">
@@ -137,7 +142,8 @@
                                         ***REMOVED***
                                         </ul>
                                 ***REMOVED***
-                                </nav><!-- End main menu -->
+                                </nav>
+                                <!-- End main menu -->
                             </div>
                             <div class="col-auto header-fixed-col col-static">
                                 <!-- Begin header actions -->
@@ -225,7 +231,9 @@
     </nav>
     <!-- End header fixed -->
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q4H714KM4Z"></script>
+
+
+    <script src="https://www.googletagmanager.com/gtag/js?id=G-Q4H714KM4Z" integrity="sha384-VNIXgAfnXrBQKU+BNlPdO82beO9YSwERuCf5149ppVS/q3VOxeG6Qm4ylAz2Mnnr" crossorigin="anonymous"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); ***REMOVED***

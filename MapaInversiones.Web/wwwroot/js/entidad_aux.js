@@ -1,64 +1,84 @@
 ﻿var cant_contratos = 5;
-getAnnios();
+
 inicializaDatos();
 var pestaniaSeleccionada = 1;
 var scrol = 0;
-var globales = [];
+var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
+var cantXPaginaInv = 6;
+var cantXPagina = 10;
+var globales_gasto = [];
+var globales_lineas = [];
+var globales_otras_lineas = [];
+var proyectos = [];
+var findata = 0;
+var inidata = 0;
+var paginaActual = 1;
 function seleccionoAnio(sel) {
-    var anioEntidad = sel.options[sel.selectedIndex].text;
-    GetDatosPorAnnio(anioEntidad);
-    getProgramasByEntidad(anioEntidad);
-    $("#lblValorAsignacionPrograma").html("");
-    $("#loadingAsignacion").hide();
-    $("#lblEncabezadoListadoGrupos").hide();
     scrol = 0;
-    //--------------------------------
-    GetRecursosPorGrupo(anioEntidad);
-    //----------------------------------
-    getContratos($("#annioEntidad option:selected").val(), 1, cant_contratos, $("#top_contratos_estados option:selected").val(), $("#entidad").val(), $('#procesoo').val(), $("#top_origen_informacion option:selected").val());
+    inicializaDatos();
+    GetDatosPorAnnio(sel);
 ***REMOVED***
 
-
 function inicializaDatos() {
-    $("#divSectionONCAE").hide();
+    
 
     var selectAnio = document.getElementById("annioEntidad");
     var anioEntidad = selectAnio.options[selectAnio.selectedIndex].text;
-    $("#lblValorAsignacionPrograma").html("");
-    $("#loadingAsignacion").hide();
-    $("#lblEncabezadoListadoGrupos").hide();
-
-    GetDatosPorAnnio(anioEntidad);
-    getProgramasByEntidad(anioEntidad);
-    //--------------------------------
-    GetRecursosPorGrupo(anioEntidad);
+    configuraSelectTabContratos("analisis");
+    //---------------------------------- Analisis
+    GetRecursosPorFinalidad(anioEntidad);
+    getDataByFuncion(anioEntidad);
+    getProcesosByFuncion(anioEntidad);
     //----------------------------------
-    configuraSelectTabContratos();
-    scrol = 0;
-    getContratos($("#annioEntidad option:selected").val(), 1, cant_contratos, $("#top_contratos_estados option:selected").val(), $("#entidad").val(), $('#procesoo').val(), $("#top_origen_informacion option:selected").val());
+    
+    getProgramasByEntidad(anioEntidad);
+    getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val());
+
+    GetRecursosPorNivelYAnio(anioEntidad);
+
 ***REMOVED***
 
-function configuraSelectTabContratos() {
-    $('.enlace_tipo_contrato').on('click', function () {
-        var tipo = this.id;
-        if (tipo == "liSEFIN") {
-            $("#divSectionONCAE").hide();
-            $("#divSectionSefin").show();
-    ***REMOVED*** else {
-            $("#divSectionONCAE").show();
-            $("#divSectionSefin").hide();
+function configuraSelectTabContratos(tipo) {
+
+    $(".enlace_tipo_contrato").removeClass("active");
+    $("#analisis").addClass("active");
+        if (tipo == "analisis") {
+            $("#divListadoContratos").hide();
+            $("#divProcesosSection").hide();
+            $("#divInversionSection").hide();
+            $("#divAnalisis").show();
     ***REMOVED***
-***REMOVED***);
-
-
+        if (tipo == "inversion") {
+            $("#divListadoContratos").hide();
+            $("#divProcesosSection").hide();
+            $("#divAnalisis").hide();
+            $("#divInversionSection").show();
+    ***REMOVED***
+        if (tipo == "procesos") {
+            $("#divListadoContratos").hide();
+            $("#divAnalisis").hide();
+            $("#divInversionSection").hide();
+            $("#divProcesosSection").show();
+    ***REMOVED***
+        if (tipo == "contratos") {
+            $("#divAnalisis").hide();
+            $("#divProcesosSection").hide();
+            $("#divInversionSection").hide();
+            $("#divListadoContratos").show();
+    ***REMOVED***
+   
 ***REMOVED***
+
+$('.enlace_tipo_contrato').on('click', function () {
+    var tipo = this.id;
+    configuraSelectTabContratos(tipo);
+***REMOVED***);
 
 function GetDatosPorAnnio(anio) {
     var codigoEntidad = $("#codigoEntidadId").val();
     var anioEntidad = anio;
-    var moneda = 'L ';
   $.ajax({
-      url: "api/serviciosentidad/GetDatosEntidadPorAnnio/",
+      url: "api/serviciosentidad/GetPresupuestoByAnnio/",
     type: "GET",
     data: {
       anio: anioEntidad,
@@ -67,790 +87,110 @@ function GetDatosPorAnnio(anio) {
 
   ***REMOVED***).done(function (data) {
 
-      var existeOncae = 0;
-      var existeSefin = 0;
-      for (var i = 0; i < data.dataContratos.length; i++) {
+      var html = "";
+      if (data.presupuestoVigenteAnnioDisplay) { 
+          html += '<div class="col-lg-4 mb-3">                                                                                                                              '
+          + '    <div class="card h-100 shadow border-0 card-entidad b1">                                                                                                 '
+          + '        <div class="card-body">                                                                                                                           '
+          + '            <div class="wrap-desc-entidad">                                                                                                               '
+          + '                <div class="h5">Presupuesto Vigente</div>                                                                                                 '
+          + '                <div class="h1" id="PresupuestoVigente">$ ' + ((data.presupuestoVigenteAnnioDisplay *1)/1000000).formatMoney(2, ',', '.').toString().trim() +' millones </div>   '
+          + '            </div>                                                                                                                                        '
+          + '        </div>                                                                                                                                            '
+          + '    </div>                                                                                                                                                '
+          + '</div>                                                                                                                                                   ';
+  ***REMOVED***
+      if (data.presupuestoEjecutadoAnnioDisplay) { 
+          html +='<div class="col-lg-4 mb-3 ">                                                                                                                               '
+          + '    <div class="card h-100 shadow border-0 card-entidad b2">                                                                                                 '
+          + '        <div class="card-body">                                                                                                                           '
+          + '            <div class="wrap-desc-entidad">                                                                                                               '
+          + '                <div class="h5">Presupuesto Ejecutado</div>                                                                                               '
+          + '                <div class="h1" id="PresupuestoEjecutado">$ ' + ((data.presupuestoEjecutadoAnnioDisplay * 1) / 1000000).formatMoney(2, ',', '.').toString().trim() +' millones</div>'
+          + '            </div>                                                                                                                                        '
+          + '        </div>                                                                                                                                            '
+          + '    </div>                                                                                                                                                '
+              + '</div>                                                                                                                                                    ';
+  ***REMOVED***
+      if (data.porcEjecutadoAnnioDisplay) {
+          html += '<div class="col-lg-4 mb-3">                                                                                                                               '
+              + '    <div class="card h-100 shadow border-0 card-entidad b3">                                                                                                 '
+              + '        <div class="card-body">                                                                                                                           '
+              + '            <div class="wrap-desc-entidad">                                                                                                               '
+              + '                <div class="h5">% Ejecutado</div>                                                                                                         '
+              + '                <div class="h1" id="PorcEjecutado">$ ' + ((data.porcEjecutadoAnnioDisplay * 1)).formatMoney(2, ',', '.').toString().trim() +' %</div>                              '
+              + '            </div>                                                                                                                                        '
+              + '        </div>                                                                                                                                            '
+              + '    </div>                                                                                                                                                '
+          '</div>                                                                                                                                                     ';
+  ***REMOVED***
 
-          if (data.dataContratos[i].origenInformacion.toUpperCase().includes('ONCAE')) {
-              if (existeOncae == 0) { $('#dataONCAE').empty(); existeOncae +=1;***REMOVED***
-              var html = '<div class="col-md-4">'
-                  + '<div class="h6">' + data.dataContratos[i].origenInformacion.replace("Oncae - ", "").replace("ONCAE - ", "").replace("Catalogo Electrónico", "Catálogo Electrónico") + '</div>'
-                  + '    <div class="h4">' + (data.dataContratos[i].numContratos).formatMoney(0, '.', ',').toString()  + '</div>'
-                  + '    <div class="h6">Valor</div>'
-                  + '    <div class="h4">' + data.dataContratos[i].monedaContrato + ' ' + (data.dataContratos[i].valorTotalContratos * 1 / 1000000).formatMoney(1, '.', ',').toString() + ' Millones' + '</div>'
-                  + '</div>';
-              $('#dataONCAE').append(html);
-      ***REMOVED***
-
-          if (data.dataContratos[i].origenInformacion.toUpperCase().includes('SEFIN')) {
-              if (existeSefin == 0) { $('#dataSEFIN').empty(); existeSefin += 1; ***REMOVED***
-              var html = ''
-                  + '<div class="h6">' + data.dataContratos[i].origenInformacion.toUpperCase() + ' - Órdenes de Pago</div>'
-                  + '    <div class="h4">' + (data.dataContratos[i].numContratos).formatMoney(0, '.', ',').toString() + '</div>'
-                  + '    <div class="h6">Valor</div>'
-                  + '    <div class="h4">' + data.dataContratos[i].monedaContrato + ' ' + (data.dataContratos[i].valorTotalContratos * 1 / 1000000).formatMoney(1, '.', ',').toString() + ' Millones' + '</div>'
-                  + ''
-              $('#dataSEFIN').append(html);
-      ***REMOVED***
-  ***REMOVED***
-    
-      var PresupuestoInicial = document.getElementById("PresupuestoInicial");
-      if (data.presupuestoInicial == null) { PresupuestoInicial.innerHTML = '- -';***REMOVED***
-      else {
-        PresupuestoInicial.innerHTML = moneda + (data.presupuestoInicial/1000000).formatMoney(1, '.', ',').toString() + ' Millones';
-  ***REMOVED***
-      var PresupuestoVigente = document.getElementById("PresupuestoVigente");
-      if (data.presupuestoVigente == null) { PresupuestoVigente.innerHTML = '- -'; ***REMOVED***
-      else {
-          PresupuestoVigente.innerHTML = moneda + (data.presupuestoVigente /1000000).formatMoney(1, '.', ',').toString() + ' Millones';
-  ***REMOVED***
-      var PresupuestoEjecutado = document.getElementById("PresupuestoEjecutado");
-      if (data.presupuestoEjecutado == null) { PresupuestoEjecutado.innerHTML = '- -'; ***REMOVED***
-      else {
-          PresupuestoEjecutado.innerHTML = moneda + (data.presupuestoEjecutado /1000000).formatMoney(1, '.', ',').toString() + ' Millones';
+      if (html != "") {
+          $("#divResumen").html(html);
+  ***REMOVED*** else {
+          html += '<div class="col-lg-3 mb-3">                                                                                                                               '
+              + '    <div class="card h-100 shadow border-0 card-entidad">                                                                                                 '
+              + '        <div class="card-body">                                                                                                                           '
+              + '            <div class="wrap-desc-entidad">                                                                                                               '
+              + '                <div class="h5">NO se han encontrado datos para el año seleccionado</div>                                                                                                         '
+              + '                <div class="h1" id="">$ 000</div>                              '
+              + '            </div>                                                                                                                                        '
+              + '        </div>                                                                                                                                            '
+              + '    </div>                                                                                                                                                '
+              + '</div>';
   ***REMOVED***
 
   ***REMOVED***).fail(function (handleError) {
     // Some function
-
+      alert("Error al traer los datos de la Entidad");
   ***REMOVED***);
 
 ***REMOVED***
 
-function getAnnios() {
-    var actual = new Date().getFullYear();  
-    var limite = actual - 3;
-    var select = "";
-    for (var i = actual; i >= limite; i--) {
-        if (i == actual) {
-            select += '<option value="' + i.toString() + '" selected>' + i.toString() + '</option>';
-    ***REMOVED*** else {
-            select += '<option value="' + i.toString() + '">' + i.toString() + '</option>';
-    ***REMOVED***
-       
-***REMOVED***
 
-    $("#annioEntidad").html(select);
-***REMOVED***
-
-var disableClick = false;
-function deshabilita(des) {
-    disableClick = des;
-    if (des) {
-        $("#btn-buscar").prop("disabled", des);
-        $('#btnLimpiar').attr("disabled", "disabled")
-***REMOVED*** else {
-        $("#btn-buscar").prop("disabled", des);
-        $('#btnLimpiar').removeAttr("disabled")
-***REMOVED***
-***REMOVED***
-
-
-function GetRecursosPorGrupo(anyo) {
-    var codigoEntidad = $("#codigoEntidadId").val();
-    $.ajax({
-        contentType: "application/json; charset=utf-8",
-        url: "api/serviciosentidad/GetRecursosPerGrupos",
-        type: "GET",
-        data: {
-            anyo: anyo,
-            codEntidad: codigoEntidad
-    ***REMOVED***
-***REMOVED***).done(function (data) {
-        if (data.infoRecursos != null) {
-            globales = data.infoRecursos;
-            $("#divGraphRecursosObj").empty();
-            $("#totalPresupuestoValue").html("L " + ((data.totalPresupuesto) / 1000000).formatMoney(1, '.', ',').toString() + " Millones");
-            loadRecursosPorObjetoNivel(data.infoRecursos, 0);
-    ***REMOVED***
-***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
-        alert("Error " + xhr.status + "_" + thrownError);
-***REMOVED***);
-
-***REMOVED***
-
-function loadRecursosPorObjetoNivel(objData, nivel) {
-    if (objData != undefined && objData != null) {
-
-        var distintos = objData.map(item => item.labelGroup)
-            .filter((value, index, self) => self.indexOf(value) === index);
-        var grafica = new d3plus.Treemap()
-            .select("#divGraphRecursosObj")
-
-            .shapeConfig({
-                labelConfig: {
-                    fontFamily: "'Montserrat', sans-serif",
-                    align: "center",
-                    size: 6,
-                    transform: "capitalize"
-            ***REMOVED***
-                , fill: function (d, index) {
-
-                    var index = distintos.indexOf(d.labelGroup);
-                    return assignColor(index);
-
-            ***REMOVED***
-        ***REMOVED***)
-            .on("click", function (d) {
-                var current = grafica.depth();
-                $(".d3plus-viz-back").click(function () {
-                    var depth_aux = grafica.depth();
-                    console.log("btn_atras|| nivel " + nivel + " || depth" + depth_aux);
-                    $("#divGraphRecursosObj").attr("nivel", depth_aux.toString());
-                    if (depth_aux == nivel) {
-                        $("#divGraphRecursosObj").empty();
-                        loadRecursosPorObjetoNivel(globales, 0);
-                ***REMOVED***
-            ***REMOVED***);
-        ***REMOVED***)
-            .translate(function (d) {
-                var traduc_aux = d;
-                if (d === "Back" || d === "back") {
-                    traduc_aux = "Atrás";
-            ***REMOVED*** else if (d === "Click to Expand") {
-                    traduc_aux = "Clic para Expandir";
-            ***REMOVED*** else if (d === "No Data Available") {
-                    traduc_aux = "Información No Disponible";
-            ***REMOVED*** else {
-                    traduc_aux = d;
-            ***REMOVED***
-                return traduc_aux;
-        ***REMOVED***)
-            .config({
-                data: objData,
-                groupBy: ["labelGroup", "label"],
-                tooltipConfig: {
-                    title: function (d) {
-                        var depth_aux = grafica.depth();
-                        var longitud = 80;
-                        var cad = d.labelGroup;
-                        switch (depth_aux) {
-                            case 1:
-                                cad = "Objeto de Gasto: " + d.label;
-                                break;
-                            default:
-                                cad = d.labelGroup;
-                    ***REMOVED***
-
-                        return cad;
-                  ***REMOVED***
-                    tbody: [
-                        [function (d) {
-                            var valor = d["rawValueDouble"] / 1000000;
-                            var cad = "";
-                            cad += "<span>Recursos asignados " + "L " + valor.formatMoney(1, '.', ',').toString() + " Millones" + "</span></br>";
-                            return cad;
-                    ***REMOVED***]
-                    ]
-              ***REMOVED***
-                yConfig: {
-                    title: "",
-            ***REMOVED***
-        ***REMOVED***)
-            .sum("rawValueDouble")
-            .depth(nivel)
-            .legend(false)
-            .render();
-***REMOVED***
-
-***REMOVED***
-
-//graficoTreemapRecursosxNiveles
-function assignColor(indice) {
-    var colores_default = ['#89CFE0', '#276D7E', '#FDD36A', '#FBC99A', '#F7B6A7', '#57BEC3','#ED6A60', '#F6B5C4', '#42B073', '#89CFE0', '#276D7E', '#FDD36A'];
-    return colores_default[indice];
-***REMOVED***
-
-function getProgramasByEntidad(annio) {
-    var codigoEntidad = $("#codigoEntidadId").val();
-        $.ajax({
-            contentType: 'application/json; charset=utf-8',
-            url: "api/serviciosentidad/GetProgramasByEntidad",
-            type: "GET",
-            data: {
-                annio: annio,
-                codEntidad: codigoEntidad
-        ***REMOVED***
-
-    ***REMOVED***).done(function (data) {
-            var result = data.infoProgramas;
-            pintaProgramas(result);
-            
-    ***REMOVED***).fail(function (handleError) {
-            // Some function
-            console.log(handleError);
-    ***REMOVED***);
-
-
-***REMOVED***
-
-function pintaProgramas(data) {
-    if (data.length > 0) {
-        var str_cad = "";
-        str_cad += '<div class="row">';
-        str_cad += '<div class="col-md-12">';
-        str_cad += '<div class="ProgramCards">';
-        str_cad += '<div class="card h-100">';
-        str_cad += '<p>Seleccione un Programa</p>';
-        str_cad += '<div class="content-select">';
-        str_cad += '<select id="selectProgramas">';
-        for (var i = 0; i < data.length; i++) {
-            str_cad += '<option value="' + data[i].id + '">' + data[i].nombre + '</option>';
-    ***REMOVED***
-        str_cad += '</select>';
-        str_cad += '<i></i>';
-        str_cad += '</div>';
-        str_cad += '</div>';
-        str_cad += '</div>';
-        str_cad += '</div>';
-        str_cad += '</div>';
-        $("#divProgramas").html(str_cad);
-
-        configuraSelectProgramas();
-
-        if ($("#selectProgramas").length > 0) {
-            $('#selectProgramas').removeAttr('selected').find('option:first').prop('selected', true).trigger('change');
-            
-    ***REMOVED***
-        
-
-***REMOVED***
-***REMOVED***
-
-function configuraSelectProgramas() {
-    $('#selectProgramas').on('change', function () {
-        var prog_actual = this.value;
-        consultaInfograficoPerPrograma(prog_actual,true);
-***REMOVED***);
-
-***REMOVED***
-
-function consultaInfograficoPerPrograma(prog_actual,bandera) {
-    $("#loadingAsignacion").hide();
-    $("#lblEncabezadoListadoGrupos").hide();
-
-    var codigoEntidad = $("#codigoEntidadId").val();
-    var selectAnio = document.getElementById("annioEntidad");
-    var selectEstado = document.getElementById("top_contratos_estados");
-
-
-    var anioEntidad = $("#annioEntidad option:selected").val();
-    var estadoSel = $("#top_contratos_estados option:selected").val();
-
-    var descProceso = $("#proceso").val();
-    var programaSel = prog_actual;
-    
-
-    $.ajax({
-        contentType: 'application/json; charset=utf-8',
-        url: "api/serviciosentidad/GetGastoByPrograma",
-        type: "GET",
-        data: {
-            annio: anioEntidad,
-            codEntidad: codigoEntidad,
-            codPrograma: programaSel,
-            estado: estadoSel,
-            proceso: descProceso
-    ***REMOVED***
-
-***REMOVED***).done(function (data) {
-        var result = data.infograficoEntidad;
-        if (result.infoGasto != null && result.infoGasto != undefined) {
-
-            getEstructuraInfografico(result.infoGasto,bandera);
-            closeListado();
-            
-    ***REMOVED***
-        
-        deshabilita(false);
-
-***REMOVED***).fail(function (handleError) {
-        // Some function
-        deshabilita(false);
-        console.log(handleError);
-***REMOVED***);
-
-
-***REMOVED***
-
-$("#btnLimpiar").click(function () {
-    if (!disableClick) {
-        $('#top_contratos_estados').removeAttr('selected').find('option:first').prop('selected', true).trigger('change');
-        $("#proceso").val("");
-        deshabilita(true);
-        var prog_actual = $("#selectProgramas option:selected").val();
-        consultaInfograficoPerPrograma(prog_actual,true);
-***REMOVED***
-***REMOVED***);
-
-   $("#btn-buscar").click(function () {
-        if (!disableClick) {
-            deshabilita(true);
-            var prog_actual = $("#selectProgramas option:selected").val();
-            consultaInfograficoPerPrograma(prog_actual,false);
-    ***REMOVED***
-
-***REMOVED***);
 
 
 function monedaSimbolo(codigo) {
     var moneda = [];
     moneda["USD"] = "USD$";
-    moneda["HND"] = "L";
+    moneda["RD"] = "$";
 
     return moneda[codigo];
 ***REMOVED***
 
+//////////////CONTRATOS//////////////////////////
 
-function configuraEnlaceContratista() {
-    $(".enlace_contratista").click(function () {
-        var ruc = $(this).attr('data-parameter');
-        var dataValue = $(this).attr('data-parameter'),
-            dataType = $(this).attr('data-type').toLowerCase();
-        document.cookie = "ruc=" + ruc + ";path=/;";
-        var url = "/contratista?" + dataType + "=" + dataValue;
-        window.location.href = url;
+function getContratos(pagina, registros, entidad, proceso, proyecto) {
 
-***REMOVED***);
-
-
-***REMOVED***
-
-function getEstructuraInfografico(datos,bandera) {
-    var i_aux = 0;
-    var j_aux = 0;
-    var k_aux = 0;
-    //var l = 0;
-    var total_avance = 0;
-    var total_presupuesto = 0;
-    var periodo_aux = 0;
-    var valor_asignacion_programa = 0;
-    var valor_ejecutado_programa = 0;
-
-    var html_str = '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
-    for (var i = 0; i < datos.length; i++) {
-        valor_asignacion_programa += datos[i].presupuesto;
-        valor_ejecutado_programa += datos[i].ejecutado;
-        var valor_asignacion = datos[i].presupuesto/1;
-        var valor_ejecutado = datos[i].ejecutado/1;
-        var porcentaje_gasto = ((valor_ejecutado / valor_asignacion) * 100).formatMoney(1, '.', ',').toString() + " %";
-
-        var nomCollapse = "collapseOne_" + i_aux.toString() + "_" + j_aux.toString();
-        var nomHeading = "headingOne_" + i_aux.toString() + "_" + j_aux.toString();
-        total_avance += datos[i].avance;
-        total_presupuesto += datos[i].presupuesto;
-        var actividad_nom = datos[i].nombre;
-        var vlr_asignado_gasto = monedaSimbolo("HND") + ' ' + (valor_asignacion / 1000000).formatMoney(1, '.', ',').toString() + ' Millones';
-        var vlr_ejecutado_gasto = monedaSimbolo("HND") + ' ' + (valor_ejecutado / 1000000).formatMoney(1, '.', ',').toString() + ' Millones';
-
-        if (actividad_nom.split("|").length > 0) {
-            actividad_nom = actividad_nom.split("|")[1];
-    ***REMOVED***
-        if (datos[i].detalles != null) {
-            if (datos[i].detalles.length > 0) {
-                html_str += '<div class="panel panel-default">';
-        ***REMOVED*** else {
-                html_str += '<div class="panel panel-default ">';
-        ***REMOVED***
-            
-    ***REMOVED*** else {
-            html_str += '<div class="panel panel-default ">';
-    ***REMOVED***
-        
-            html_str += '<div class="panel-heading" role="tab" id="' + nomHeading + '">';
-                html_str += '<div class="panel-title">';
-                    html_str += '<a role="button" data-toggle="collapse" data-parent="#accordion" href="#' + nomCollapse + '" aria-expanded="true" aria-controls="' + nomCollapse + '">';
-                    html_str += '<div class="head">';
-                    //--------------------------------------------------------
-                    html_str += '<div class="cotractName">';
-                    html_str += '<div class="row">';
-                    html_str += '<div class="col-xs-2 col-md-2">';
-                    html_str += '<span class="small"></span>';
-                    html_str += '<div class="clearfix"></div>';
-                    html_str += '<span class="h4">' + actividad_nom  +'</span>';
-                    html_str += '</div>';
-                    //-----------------------------
-                    html_str += '<div class="col-xs-3 col-md-3">';
-                    html_str += '<span class="small">Presupuesto Vigente</span>';
-                    html_str += '<div class="clearfix"></div>';
-                    html_str += '<span class="h4">' + vlr_asignado_gasto + '</span>';
-                    html_str += '</div>';
-                    //------------------------------
-                    html_str += '<div class="col-xs-3 col-md-3">';
-                    html_str += '<span class="small">Presupuesto Ejecutado</span>';
-                    html_str += '<div class="clearfix"></div>';
-                    html_str += '<span class="h4">' + vlr_ejecutado_gasto + '</span>';
-                    html_str += '</div>';
-                    //-----------------------------
-                    html_str += '<div class="col-xs-2 col-md-2">';
-                    html_str += '<span class="small">% Ejecución</span>';
-                    html_str += '<div class="clearfix"></div>';
-                    html_str += '<span class="h4">' + porcentaje_gasto + '</span>';
-                    html_str += '</div>';
-
-                    ///----------------------------------
-
-                   html_str += '<div class="col-xs-2 col-md-2">';
-                    if (datos[i].detalles.length > 0) {
-                        //------------------
-                        html_str += '<h6 class="btnPerfil badge bg-light text-dark"><i class="material-icons md-18">info_outline</i> Ver Detalle</h6>';
-                        //------------------
-                ***REMOVED***
-                    html_str += '</div>';
-
-                    //-----------------------------
-                    html_str += '</div>';
-       
-                    html_str += '</div>';
-                    //--------------------------------------------------
-
-        
-
-                    html_str += '</div >';
-                    html_str += '</a>';  
-                html_str += '</div>';
-            html_str += '</div>';
-
-        html_str += '<div id = "' + nomCollapse + '" class="panel-collapse collapse nivel1" role = "tabpanel" aria - labelTitledby="' + nomHeading + '" actividad = "' + datos[i].nombre.toUpperCase() + '" >';
-        html_str += '<div class="panel-body">';
-
-        //NIVEL 2
-        var vec_proceso = datos[i].detalles;
-        for (var j = 0; j < vec_proceso.length; j++) {
-            var nomNivel2 = "accordion_l2_" + i_aux.toString() + "_" + j_aux.toString();
-            var headNivel2 = "headLevel2_" + i_aux.toString() + "_" + j_aux.toString();
-            var panelHijo2 = "c2_" + j_aux.toString() + "_" + k_aux.toString();
-            var nomHeadLevel3 = "headLevel3_" + j_aux.toString() + "_" + k_aux.toString();
-            var proceso_nom = vec_proceso[j].nombre;
-            var UrlProceso = vec_proceso[j].urlProceso;
-
-            var estado_contratos_proceso = $("#top_contratos_estados option:selected").val();
-
-            var proceso_id = vec_proceso[j].id;
-            if (proceso_nom.split("|").length > 0) {
-                proceso_nom = proceso_nom.split("|")[1];
-        ***REMOVED***
-            var proceso_estado = vec_proceso[j].estado;
-            var proceso_valor = "-";
-            proceso_valor = monedaSimbolo("HND") + ' ' + (vec_proceso[j].presupuesto).formatMoney(1, '.', ',').toString();
-
-            //if (vec_proceso[j].presupuesto/1000000 < 1) {
-            //    proceso_valor = monedaSimbolo("HND") + ' ' + (vec_proceso[j].presupuesto).formatMoney(0, '.', ',').toString();
-            //***REMOVED*** else {
-            //    proceso_valor = monedaSimbolo("HND") + ' ' + (vec_proceso[j].presupuesto / 1000000).formatMoney(2, '.', ',').toString() + ' Millones';
-            //***REMOVED***
-
-
-            html_str += '<div class="panel-group nivel22" id="' + nomNivel2 + '" role="tablist" aria-multiselectable="true">';
-            html_str += '<div class="panel panel-default">';
-            //heading
-            html_str += '<div class="panel-heading" role="tab" id="' + headNivel2 + '">';
-            html_str += '<div class="panel-title">';
-            html_str += '<a role = "button" data-toggle="collapse" data-parent="#' + nomNivel2 + '" href = "#' + panelHijo2 + '" aria-expanded="true" aria-controls="' + nomCollapse + '">';
-            html_str += '<div class="head">';
-            html_str += '<div class="">';
-            html_str += '<span class="labelTit">Proceso: ' + proceso_id + '</span>';
-            html_str += '<span class="">' + proceso_nom + '</span>';
-            html_str += '</div>';
-
-            html_str += '</div>';
-            html_str += '</a>';
-            html_str += '</div>';
-            html_str += '</div>';
-            //body
-            html_str += '<div id="' + panelHijo2 + '" class="panel-collapse collapse level3 nivel2" role="tabpanel" aria-labelledby="' + nomHeadLevel3 + '" proceso="' + vec_proceso[j].nombre.toUpperCase() + '">';
-            html_str += '<div class="panel-body">';
-            //< !--NIVEL 3-- >
-            var vec_contratos = vec_proceso[j].detalles;
-            for (var k = 0; k < vec_contratos.length; k++) {
-
-                var contrato_nom = vec_contratos[k].nombre;
-                var contrato_id = vec_contratos[k].id;
-                var monedaContrato = vec_contratos[k].moneda;
-                
-                var valorPlaneado = (vec_contratos[k].valor_planeado / 1);
-                var valorAdjudicado = (vec_contratos[k].valor_adjudicado/1);
-                var valorContratado = (vec_contratos[k].valor_contratado/1);
-                var contratista = (vec_contratos[k].contratista);
-                var codProveedor = (vec_contratos[k].proveedor);
-
-                var valor_adjudicado_aux = monedaSimbolo("HND") + ' ' + (valorAdjudicado).formatMoney(1, '.', ',').toString();
-
-                if (contrato_nom.split("|").length > 0) {
-                    contrato_nom = contrato_nom.split("|")[1];
-            ***REMOVED***
-
-                var nomNivel3 = "accordion_l3_" + j_aux.toString() + "_" + k_aux.toString();
-                var nomCnivel3 = "c3_" + j_aux.toString() + "_" + k_aux.toString();
-
-                html_str += '<div class="panel-group nivel33" id="' + nomNivel3 + '" role="tablist" aria-multiselectable="true">';
-                html_str += '<div class="panel panel-default">';
-                html_str += '<div class="panel-body">';
-                html_str += '<div class="wrap-head-process">';
-                html_str += '<div class="contractData">';
-                html_str += '<div class="row border-b">';
-                html_str += '<div class="col-xs-12 col-md-4">';
-                html_str += '<span class="txt_small">';
-                html_str += 'ESTADO';
-                html_str += '</span>';
-                html_str += '<span class="amount_adj">' + proceso_estado;
-                html_str += '</span>';
-                html_str += '</div>';
-                html_str += '<div class="col-xs-12 col-md-4">';
-                html_str += '<span class="txt_small"> VALOR ADJUDICADO';
-                html_str += '</span>';
-                html_str += '<span class="amount_adj">' + valor_adjudicado_aux;
-                html_str += '</span>';
-                html_str += '</div>';
-                html_str += '</div>';
-                html_str += '<div class="row border-b">';
-                html_str += '</div>';
-                html_str += '</div>';
-                html_str += '</div>';
-                html_str += '<div class="clearfix">';
-                html_str += '</div>';
-                //if (estado_contratos_proceso != "" && estado_contratos_proceso != undefined) {
-                //    html_str += '<span class="h6">Contratos asociados a este proceso' + '(' + estado_contratos_proceso + ')</span>';
-                //***REMOVED*** else {
-                //    html_str += '<span class="h6">Contratos asociados a este proceso</span>';
-                //***REMOVED***
-                var filaconfirma = "";
-                var referencia = "";
-
-                filaconfirma += '<div class="related-contracts">';
-                filaconfirma += '<span class="h4">Órdenes de pago y Contratos asociados a este proceso:</span>';
-                filaconfirma += '<div class="panel-group" id="accordionContratos_"' + i + '_' + j + '_' + k + '" role="tablist" aria-multiselectable="true">';
-                filaconfirma += '<div class="panel panel-default">';
-                filaconfirma += '<div class="panel-heading" role="tab" id="headingOne' + i + '_' + j + '_' + k + '">';
-                filaconfirma += '<h4 class="panel-title">';
-                filaconfirma += '<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordionContratos_"' + i + '_' + j + '_' + k + '" href="#collapseContrato_' + i + '_' + j + '_' + k + '" aria-expanded="false" aria-controls="collapseContrato_' + i + '_' + j + '_' + k + '">';
-                if (contrato_nom)
-                    {
-                        filaconfirma += 'Código de contratación: ' + contrato_nom + '';
-                ***REMOVED*** else {
-                        filaconfirma += 'Pendiente emisión código contratación';
-                ***REMOVED***
-
-                filaconfirma += '</a>';
-                filaconfirma += '</h4>';
-                filaconfirma += '</div>';
-                filaconfirma += '<div id="collapseContrato_' + i + '_' + j + '_' + k + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_' + i + '_' + j + '_' + k + '" aria-expanded="false" style="height: 0px;">';
-                filaconfirma += '<div class="panel-body">';
-                if (contrato_nom) {
-                    //filaconfirma += '<div class="row border-b">';
-                    //filaconfirma += '<div class="col-md-12"><span class="small"> CONTRATO</span><span class="amount_adj">' + contrato_nom + '</span></div>';
-                    //filaconfirma += '</div>';
-            ***REMOVED***
-                var moneda = 'L';
-                if (monedaContrato != "" && monedaContrato != undefined) {
-                    if (monedaContrato.toUpperCase() == 'USD') {
-                        moneda = '$';
-                ***REMOVED***
-            ***REMOVED***
-                filaconfirma += '<div class="row border-b">';
-                filaconfirma += '<div class="col-md-6">';
-                filaconfirma += '<span class="small"> Código Proveedor </span>';
-                filaconfirma += '<a role="button" class="enlace_contratista" data-type="CONTRATISTA" data-parameter="' + codProveedor + '">';
-                filaconfirma += '<span class="amount_adj">';
-                filaconfirma += '<span class="glyphicon glyphicon-share-alt" ></span > ' + codProveedor + '</span >';
-                filaconfirma += '</a>';
-                filaconfirma += '</div>';
-                filaconfirma += '<div class="col-md-6"><span class="small"> Contratista</span><span class="amount_adj"> ' + contratista + '</span></div>';
-                filaconfirma += '</div>';
-                filaconfirma += '<div class="row border-b">';
-                filaconfirma += '<div class="col-xs-6 col-md-6"><span class="small"> VALOR PLANEADO</span><span class="amount_adj">'+  (valorPlaneado * 1).formatMoney(1, '.', ',').toString() + '</span></div>';
-                filaconfirma += '<div class="col-xs-6 col-md-6"><span class="small"> VALOR ADJUDICADO</span><span class="amount_adj">' +  (valorAdjudicado * 1).formatMoney(1, '.', ',').toString() + '</span></div>';
-                filaconfirma += '</div>';
-                filaconfirma += '<div class="row border-b">';
-                filaconfirma += '<div class="col-xs-6 col-md-6">';
-                filaconfirma += '<span class="small" > VALOR CONTRATADO</span >';
-                filaconfirma += '<span class="amount_adj" > ' + (valorContratado * 1).formatMoney(1, '.', ', ').toString() + '</span >';
-                filaconfirma += '</div>';
-                filaconfirma += '<div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span><span class="amount_adj">' + monedaContrato + '</span>';
-                filaconfirma += '</div>';
-                filaconfirma += '</div>';
-                filaconfirma += '<div class="row border-b">';
-                filaconfirma += '</div>';
-                filaconfirma += '</div>';
-                filaconfirma += '<div class="panel-footer" style="align:center">';
-                filaconfirma += '</div>';
-                filaconfirma += '</div>';
-                filaconfirma += '</div>';
-                filaconfirma += '</div>';
-
-
-                filaconfirma += '<div class="row text-center">';
-                filaconfirma += '<div class="col-xs-12 col-md-12">';
-                filaconfirma += '<a href = "' + UrlProceso + '" target = "_blank" class="btn btn-primary" >';
-                filaconfirma += '<span class="glyphicon glyphicon-plus" ></span > <span class="txt_small">Conozca más de este proceso</span>';
-                filaconfirma += '</a>';
-                filaconfirma += '</div>';
-                filaconfirma += '</div>';
-                filaconfirma += '</div>';
-                html_str = html_str + filaconfirma;
-
-                html_str += '</div>';
-
-                html_str += '</div>';
-                html_str += '</div>';
-                k_aux = k_aux + 1;
-
-        ***REMOVED***
-
-            html_str += '</div>';
-            html_str += '</div>';
-
-            html_str += '</div>';
-
-            html_str += '</div>';
-            j_aux = j_aux + 1;
-
-    ***REMOVED***
-
-        html_str += '</div>';
-        html_str += '</div>';
-
-        html_str += '</div>';
-
-        i_aux = i_aux + 1;
-
-***REMOVED***
-    html_str += "</div>";
-    $("#divListado").html(html_str);
-   
-
-    if (bandera) {
-        var texto_asignacion = '<span class="">' + monedaSimbolo("HND") + ' ' + (valor_asignacion_programa / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-        var texto_ejecutado = '<span class="">' + monedaSimbolo("HND") + ' ' + (valor_ejecutado_programa / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-        var porcentaje_programa = ((valor_ejecutado_programa / valor_asignacion_programa) * 100).formatMoney(1, '.', ',').toString() + "%";
-        var str_programa = '<div class="row">';
-        str_programa += '<div class="presini col-md-4">';
-        str_programa += '<span class="h5">Presupuesto Vigente</span>';
-        str_programa += '<div class="clearfix"></div>';
-        str_programa += '<span class="h2">' + texto_asignacion + '</span>';
-        str_programa += '</div>';
-        str_programa += '<div class="presvig col-md-4">';
-        str_programa += '<span class="h5">Presupuesto Ejecutado</span>';
-        str_programa += '<div class="clearfix"></div>';
-        str_programa += '<span class="h2">' + texto_ejecutado + '</span>';
-        str_programa += '</div>';
-        str_programa += '<div class="presexc col-md-4">';
-        str_programa += '<span class="h5">Porcentaje de Ejecución</span>';
-        str_programa += '<div class="clearfix"></div>';
-        str_programa += '<span class="h2">' + porcentaje_programa + '</span>';
-        str_programa += '</div>';
-        str_programa += '</div>';
-        $("#lblValorAsignacionPrograma").html(str_programa);
-***REMOVED***
-        
-    
-    
-    $("#loadingAsignacion").show();
-    $("#lblEncabezadoListadoGrupos").show();
-    configuraEnlaceContratista();
-***REMOVED***
-
-
-
-function closeListado() {
-    $('#accordion .collapse').removeClass("in");
-***REMOVED***
-
-function seteaListado() {
-    $('#accordion .collapse').removeClass("in");
-    $("#divListadoRecursosObje").show();
-    //seleccionar tab abierto
-    var lstNiveles = $("#migapanlistado").val();
-    var arrayNiv = lstNiveles.split(",");
-    var nom_nivel = "";
-    var longitud = arrayNiv.length;
-
-    if (longitud > 0) {
-
-        for (var i = 0; i < longitud; i++) {
-            nom_nivel = arrayNiv[i].toUpperCase();
-            switch (i) {
-                case 0:
-                    var id = $(".nivel1[actividad='" + nom_nivel + "']").attr("id");
-                    var obj = $("#" + id);
-                    if (obj.length > 0) {
-                        obj.addClass("in");
-                ***REMOVED***
-                    break;
-                case 1:
-                    var id = $(".nivel2[proceso='" + nom_nivel + "']").attr("id");
-                    var obj = $("#" + id);
-                    if (obj.length > 0) {
-                        obj.addClass("in");
-                ***REMOVED***
-
-                    break;
-                case 2:
-                    var id = $(".nivel3[contrato='" + nom_nivel + "']").attr("id");
-                    var obj = $("#" + id);
-                    if (obj.length > 0) {
-                        obj.addClass("in");
-                ***REMOVED***
-                    break;
-                default:
-                    $('#accordion .collapse').removeClass("in");
-                // code block
-                //$('#accordion .collapse').removeClass("in");
-        ***REMOVED***
-
-    ***REMOVED***
-
-
-
-***REMOVED*** else {
-        $('#accordion .collapse').removeClass("in");
-***REMOVED***
-
-
-***REMOVED***
-
-Number.prototype.formatMoney = function (c, d, t) {
-    n = this;
-    c = isNaN(c = Math.abs(c)) ? 2 : c;
-    d = d == undefined ? "." : d;
-    t = t == undefined ? "," : t;
-    let s = n < 0 ? "-" : "";
-    let i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "";
-    var j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-***REMOVED***;
-
-function getContratos(annio, pagina, registros, estado, entidad, proceso, origen) {
-    var ori = "ONCAE";
-    if (origen.toUpperCase().includes('ONCAE')) {
-        ori = origen;
-***REMOVED***
     var filtros = {
-        Annio: annio,
+        Annio: $("#annioEntidad option:selected").val(),
         NumeroPagina: pagina,
         RegistrosPorPagina: registros,
-        NombreEntidad: null,
+        NombreEntidad: entidad,
         NombreProceso: proceso,
-        Estado: estado,
+        IdProyecto: proyecto,
+        Estado: null,
         Moneda: null,
         NombreContratista: null,
-        OrigenInformacion: ori,
-        CodigoComprador: entidad
+        CodigoComprador: $("#codigoEntidadId").val()
 ***REMOVED***;
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        url: "api/ServiciosContratos/Contrato/",
+        url: "api/serviciosentidad/ContratoXEntidad/",
         cache: false,
         data: filtros,
         success: function (result) {
+            if (scrol >= 1) {
+                $('html, body').animate({ scrollTop: $('#trazabilidad').offset().top ***REMOVED***, 2000);
+        ***REMOVED*** else { scrol = scrol + 1; ***REMOVED***
             if (result.status == true) {
                 if (result.cantidadTotalRegistros > 0) {
                     var info = result.data;
                     var proceso = "";
                     var entidad = "";
-                    var filasinfirma = "";
+                    var filaproceso = "";
                     var referencia = "";
                     var data = "";
                     var fila = "";
@@ -859,62 +199,48 @@ function getContratos(annio, pagina, registros, estado, entidad, proceso, origen
                     var finLuis = '</div>';
                     var inicio = "";
                     var fin = "";
-                    var stilo = "";
                     $("#srcContratos").html("");
                     for (var i = 0; i < info.length; i++) {
-                        if (i > 0 && entidad == info[i].comprador.toString() && proceso != info[i].codigoProceso.toString()) {
+                        if (i > 0 && proceso != info[i].codigoProceso.toString()) { 
                             fila += filaconfirma + '</div>' + referencia + '</div>';
                             filaconfirma = "";
 
                     ***REMOVED***
-                        if (entidad != info[i].comprador.toString()) {
+                        if (entidad != info[i].documentoproveedor.toString()) {
                             if (i > 0) //Cambio de entidad
                             {
-                                data += inicioLuis + inicio + fila + filaconfirma + '</div></div>' + referencia + finLuis;
+                                data += inicioLuis + inicio + fila + filaconfirma + '</div></div>' + finLuis;
                                 fila = "";
                                 filaconfirma = "";
                                 filasinfirma = "";
                                 inicio = "";
                                 fin = "";
                         ***REMOVED***
-                            if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" ***REMOVED*** else { stilo = "contractSEFIN" ***REMOVED***
-                            inicio = '<div class="cotractName ' + stilo +'" ><div class="row"><div class="col-xs-12 col-md-12"><span class="small">Comprador</span><div class="clearfix"></div>'
-                                + '                 <span class="h4">' + info[i].comprador.toString() + '</span>'
+                            inicio = '<div class="cotractName contract"><div class="row"><div class="col-xs-12 col-md-12"><span class="small">Proveedor</span><div class="clearfix"></div>'
+                                + '                 <span class="h4">' + info[i].proveedor.toString() + '</span>'
                                 + ' </div></div></div>';
-                            entidad = info[i].comprador.toString();
+                            entidad = info[i].documentoproveedor.toString();
                     ***REMOVED***
 
                         if (proceso != info[i].codigoProceso.toString()) {
+
                             fila += '<div class="processName">'
                                 + '		<div class="row">'
                                 + '			<div class="col-xs-12 col-md-6">'
-                                + '				<span class="small">Origen de los fondos</span><div class="clearfix"></div>'
-                                + '				<span class="h4">' + info[i].origenFondos.toString() + '</span>  </div>'
+                                + '				<span class="small">Tipo Documento</span><div class="clearfix"></div>'
+                                + '				<span class="h4">' + info[i].tipodocproveedor.toString() + '</span>  </div>'
                                 + '			<div class="col-xs-12 col-md-6">'
-                                + '				<span class="small">Fuente de Datos</span><div class="clearfix"></div>'
-                                + '				<span class="h4">' + info[i].origenInformacion.toString().toUpperCase() + '</span>  </div> '
+                                + '				<span class="small">Documento</span><div class="clearfix"></div>'
+                                + '				<span class="h4">' + info[i].documentoproveedor.toString().toUpperCase() + '</span>  </div> '
                                 + '      </div> '
                                 + '	</div>'
-                                + '<div class="contractNumberRP"><span class="">Código proceso: </span>'
-                                + '	<span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div>'
+                                + '<div class="contractNumberRP"><span class="">Más Información del Proveedor: </span>'
+                                + '	<span class="text-bold"><a role="button" class="enlace_contratista" data-type="CONTRATISTA" data-parameter="' + info[i].documentoproveedor.toString() + '"><span class="amount_adj"><span class="glyphicon glyphicon-share-alt"></span> ' + info[i].proveedor.toString() + '</span></a></span></div>' //info[i].codigoProceso.toString()
                                 + '<div class="contractNumberRP"><span class="">Proceso: </span>'
-                                + '	<span class="text-bold">' + info[i].descripcionProceso.toString() + '</span></div>'
+                                + '	<span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div>' //info[i].descripcionProceso.toString()
                                 + '<div class="wrap-head-process">';
                             fila += '<div class="contractData">';
 
-                            fila += ''
-                                + '		<div class="row border-b">'
-                                + '			<div class="col-xs-12 col-md-4">'
-                                + '				<span class="txt_small">Estado del proceso</span>'
-                                + '				<span class="amount_adj">';
-                            if (info[i].estadoProceso) { fila += info[i].estadoProceso.toString(); ***REMOVED***
-                            fila += '</span></div>'
-                                + '			<div class="col-xs-6 col-md-4"><span class="txt_small"></div>'/*   Monto Estimado<span class="amount_adj"> NA </span>*/
-                                + '			    <div class="col-xs-6 col-md-2">'
-                                + '				   <span class="txt_small">Moneda</span>'
-                                + '				   <span class="amount_adj"> ' + info[i].monedaContrato.toString() + ' </span>'
-                                + '			    </div>'
-                                + '			</div>';
 
 
                             fila += ''
@@ -947,13 +273,13 @@ function getContratos(annio, pagina, registros, estado, entidad, proceso, origen
                             fila += '</div>'
                                 + '<div class="clearfix"></div>';
                             filaconfirma += ' <div class="related-contracts">'
-                                + '     <span class="h4">Órdenes de pago y Contratos asociados a este proceso:</span>'
+                                + '     <span class="h4">Órdenes de pago y Contratos asociados según proceso:</span>'
                                 + '     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
-                            proceso = info[i].codigoProceso.toString();
+                            proceso = info[i].urlproceso.toString();
 
 
                             referencia = '<div class="row text-center">'
-                                + '<div class="col-xs-12 col-md-12"><a href="' + info[i].docURL.toString() + '" target="_blank" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span class="txt_small">Conozca mas de este proceso</span></a></div>'
+                                + '<div class="col-xs-12 col-md-12"><a href="' + info[i].urlproceso.toString() + '" target="_blank" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span class="txt_small">Conozca mas de este proceso</span></a></div>'
                                 + '</div>';
 
                     ***REMOVED***
@@ -964,7 +290,7 @@ function getContratos(annio, pagina, registros, estado, entidad, proceso, origen
                             + '                <h4 class="panel-title">'
                             + '                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapse' + i + '">';
 
-                        if (info[i].codigoContrato) { filaconfirma += '                        Código de contratación:  ' + info[i].codigoContrato.toString() + ''; ***REMOVED*** else { filaconfirma += '                      Pendiente emisión código contratación  ' ***REMOVED***
+                        if (info[i].referenciacontrato) { filaconfirma += '                        Código de contratación:  ' + info[i].referenciacontrato.toString() + ''; ***REMOVED*** else { filaconfirma += '                      Pendiente emisión código contratación  ' ***REMOVED***
 
                         filaconfirma += '     </a>'
                             + '                </h4>'
@@ -976,26 +302,24 @@ function getContratos(annio, pagina, registros, estado, entidad, proceso, origen
                                 + '                        <div class="col-md-12"><span class="small"> CONTRATO</span><span class="amount_adj">' + info[i].descripcionContrato.toString() + '</span></div>'
                                 + '                    </div>';
                     ***REMOVED***
-                        var moneda = ''; //'L';
-                        if (info[i].monedaContrato.toString()) {
+                        var moneda = '';
+                        if (info[i].monedaContrato) {
                             if (info[i].monedaContrato.toString() == 'USD') {
-                                moneda = '';// '$';
+                                moneda = '$';
                         ***REMOVED***
-                    ***REMOVED***
+                    ***REMOVED*** else { moneda = '$'; ***REMOVED***
                         filaconfirma += '        <div class="row border-b">'
-                            + '                        <div class="col-md-6">'
-                            + '                            <span class="small"> Código Proveedor </span>'
-                            + '                            <span class="amount_adj">' + info[i].codigoProveedor.toString() + '</span>'
+                            + '                        <div class="col-md-12">'
+                            + '                            <span class="small"> Objeto del Contrato </span>'
+                            + '                            <span class="amount_adj"><span class="glyphicon glyphicon-share-alt"></span>' + info[i].objetodelcontrato.toString() + '</span>'
                             + '                        </div>'
-                            + '                        <div class="col-md-6"><span class="small"> Contratista</span><a role="button" class="enlace_contratista" data-type="CONTRATISTA" data-parameter="' + info[i].codigoProveedor.toString() + '"><span class="amount_adj"><span class="glyphicon glyphicon-share-alt"></span> ' + info[i].contratista.toString() + '</span></a></div>'
                             + '                    </div>'
                             + '                    <div class="row border-b">'
-                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> PRESUPUESTO</span><span class="amount_adj"> ' + moneda + ' ' + (info[i].valorPlaneado * 1).formatMoney(1, '.', ',').toString() + ' </span></div>'
-                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> VALOR ADJUDICADO</span><span class="amount_adj"> ' + moneda + ' ' + (info[i].valorAdjudicado * 1).formatMoney(1, '.', ',').toString() + ' </span></div>'
+                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> Estado </span><span class="amount_adj"> ' + info[i].estadocontrato.toString() + ' </span></div>' // ' + (info[i].valorPlaneado * 1).formatMoney(1, '.', ',').toString() + '
                             + '                    </div>'
                             + '                    <div class="row border-b">'
-                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> MONTO</span><span class="amount_adj"> ' + moneda + ' ' + (info[i].valorContratado * 1).formatMoney(1, '.', ',').toString() + ' </span></div>'
-                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span><span class="amount_adj">' + info[i].monedaContrato.toString() + '</span></div>' //DOP 
+                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> Valor Contrato</span><span class="amount_adj"> ' + moneda + ' ' + (info[i].valorcontrato * 1).formatMoney(1, '.', ',').toString() + ' </span></div>'
+                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span><span class="amount_adj">RD</span></div>' //DOP //' + info[i].monedaContrato.toString() + '
                             + '                    </div>';
 
                         filaconfirma += '                    <div class="row border-b">';
@@ -1056,12 +380,11 @@ function getContratos(annio, pagina, registros, estado, entidad, proceso, origen
                             + '               <div class="panel-footer" style="align:center">';
 
                         if (info[i].codigoContrato) {
-                            //  filaconfirma += '                    <a href="../../contratista/contratoprofile/?CodigoContrato=' + info[i].codigoContrato.toString() + '" class="btn btn-primary btn-primary btn-participe"><span class="glyphicon glyphicon-comment"></span> Hacer comentario al contrato</a>';
                     ***REMOVED***
                         filaconfirma += '                 </div>'
                             + '            </div>'
                             + '        </div>';
-                        //+ '  </div>';
+
                 ***REMOVED***
 
 
@@ -1069,12 +392,12 @@ function getContratos(annio, pagina, registros, estado, entidad, proceso, origen
 
 
                     $("#srcContratos").html(data);
-                    if (scrol >= 1) {
-                        $('html, body').animate({ scrollTop: $('#divSectionONCAE').offset().top ***REMOVED***, 2000);
-                ***REMOVED*** else { scrol = scrol + 1; ***REMOVED***
+                   
 
-                    dibujaPaginacionContrato(pagina, result.cantidadTotalRegistros, Math.ceil(result.cantidadTotalRegistros / registros), registros);
                     configuraEnlaceContratista();
+                    if (Math.ceil(result.cantidadTotalRegistros / registros) > 1) {
+                        dibujarPagNumeradasPerContratos(pagina, Math.ceil(result.cantidadTotalRegistros / registros));
+                ***REMOVED***
             ***REMOVED***
                 else {
                     $("#divPagContratos").empty();
@@ -1087,57 +410,608 @@ function getContratos(annio, pagina, registros, estado, entidad, proceso, origen
         ***REMOVED*** else {
                 alert("Message: " + result.message);
         ***REMOVED***
-            deshabilitaO(false);
+            deshabilita(false);
       ***REMOVED***
         error: function (response) {
-            deshabilitaO(false);
+            deshabilita(false);
             alert(response.responseText);
       ***REMOVED***
         failure: function (response) {
-            deshabilitaO(false);
+            deshabilita(false);
             alert(response.responseText);
     ***REMOVED***
 ***REMOVED***);
 
 ***REMOVED***
-var disableClickO = false;
-function deshabilitaO(des) {
-    disableClickO = des;
-    if (des) {
-        $("#btnBuscarO").prop("disabled", des);
-        $('#btnLimpiarO').attr("disabled", "disabled")
+
+
+
+function dibujarPagNumeradasPerContratos(actual, totalPag) {
+    var pag_actual = parseInt(actual);
+    var cant_por_linea = 10;
+    $("#divPagContratos").html("");
+    var pag_enlace = "";
+    
+    var cociente = Math.floor(pag_actual / cant_por_linea);
+    var residuo = pag_actual % cant_por_linea;
+    var inicio = 1;
+    if (residuo == 0) {
+        inicio = (pag_actual - cant_por_linea) + 1;
 ***REMOVED*** else {
-        $("#btnBuscarO").prop("disabled", des);
-        $('#btnLimpiarO').removeAttr("disabled")
+        inicio = (cociente * cant_por_linea) + 1;
+***REMOVED***
+
+    var fin = inicio + (cant_por_linea - 1);
+    if (totalPag < cant_por_linea) {
+        fin = totalPag;
+***REMOVED***
+    if (fin > totalPag) {
+        fin = totalPag;
+***REMOVED***
+    if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
+        pag_enlace += '<a id="page_left_c" role="button" class="material-icons md-24" data-page_C="' + (inicio - cant_por_linea) + '"><span class="">chevron_left</span></a>';
+***REMOVED***
+
+
+    for (var i = inicio; i <= fin; i++) {
+
+        if (i == pag_actual) {
+            pag_enlace += '<span class="pag_actual" data-page_c="' + i + '"><text>' + i + '</text></span>';
+    ***REMOVED*** else {
+            pag_enlace += '<a class="page_left_c" role="button" data-page_c="' + i + '">';
+            pag_enlace += '<span class="glyphicon"><text class="paginacion">' + i + '</text></span>';
+            pag_enlace += '</a>';
+    ***REMOVED***
+
+***REMOVED***
+
+    if (pag_actual < totalPag) {
+        if (fin < totalPag) {
+            pag_enlace += '<a id="page_right_c" role="button" class="material-icons md-24" data-page_c="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
+    ***REMOVED***
+***REMOVED***
+
+    $("#divPagContratos").html(pag_enlace);
+
+    $('#page_right_c,#page_left_c,.page_left_c,.page_right_c').bind('click', function () {
+        pagina_actual = $(this).attr("data-page_c");
+        getContratos(pagina_actual, cant_contratos, $("#entidad").val(), $('#proceso').val());
+***REMOVED***);
+
+***REMOVED***
+
+var disableClick = false;
+function deshabilita(des) {
+    disableClick = des;
+    if (des) {
+        $("#btn-buscar").prop("disabled", des);
+        $('#btnLimpiar').attr("disabled", "disabled")
+***REMOVED*** else {
+        $("#btn-buscar").prop("disabled", des);
+        $('#btnLimpiar').removeAttr("disabled")
 ***REMOVED***
 ***REMOVED***
-$("#btnLimpiarO").click(function () {
+
+function clickbotoncontratosasoc(id) {
+    $("#divOtrasLineas").empty();
+
+    var nombreenlace = ".enlacecontratosasoc" + id;
+    idproyecto = $(nombreenlace).attr("data-parameter");
+    $("#spanfiltrado").html("Filtrado por BPIN " + idproyecto);
+    $("#spanfiltrado").removeAttr("hidden");
+    $(".enlace_tipo_contrato").removeClass("active");
+    $("#contratos").addClass("active");
+
+    $("#divInversionSection").hide();
+    $("#divListadoContratos").show().delay(800);
+
+
+    getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val(), idproyecto);
+
+***REMOVED***
+
+$("#btnLimpiar").click(function () {
     if (!disableClick) {
-        $("#top_contratos_estados_o").val("");
-        $("#procesoo").val("");
-        deshabilitaO(true);
-        getContratos($("#annioEntidad option:selected").val(), 1, cant_contratos, $("#top_contratos_estados option:selected").val(), $("#entidad").val(), "", $("#top_origen_informacion option:selected").val());
+        $("#spanfiltrado").attr("hidden", "hidden");
+        $("#top_contratos_periodos").val(0);
+        $("#top_origen_informacion").val("");
+        $("#entidad").val("");
+        $("#proceso").val("");
+        deshabilita(true);
+        getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val());
 ***REMOVED***
 ***REMOVED***);
 
-$("#btnBuscarO").click(function () {
+$("#btn-buscar").click(function () {
     if (!disableClick) {
-        deshabilitaO(true);
-        getContratos($("#annioEntidad option:selected").val(), 1, cant_contratos, $("#top_contratos_estados option:selected").val(), $("#entidad").val(), $('#procesoo').val(), $("#top_origen_informacion option:selected").val());
+        deshabilita(true);
+        getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val());
 ***REMOVED***
 
 ***REMOVED***);
 
-function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
+//autocompletar en contratos
+$("#entidad").on("keyup", function (event) {
+    if (event.keyCode == 9 || event.keyCode == 13) {
+        event.preventDefault();
+***REMOVED*** else {
+        if (event.keyCode == 8) {
+            if ($(this).val().length <= 1) {
+                $(this).val("");
+
+        ***REMOVED***
+    ***REMOVED***
+***REMOVED***
+***REMOVED***).autocomplete({
+    source: function (request, response) {
+        var filtros = {
+            proveedor: request.term,
+            institucion: $("#codigoEntidadId").val()
+    ***REMOVED***;
+        $.ajax({
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            url: "/api/ServiciosEntidad/GetProveedorByNombre/",
+            cache: false,
+            data: filtros,
+            success: function (data) {
+                var datos = data;
+
+                if (datos == null || datos.data.length <= 0) {
+                    $("#divNoEncontrado").show();
+                    $("#ui-id-1").hide();
+            ***REMOVED*** else {
+                    $("#divNoEncontrado").hide();
+                    response($.map(datos.data, function (item) {
+
+                        return {
+                            label: item.proveedor,
+                            value: item.documentoproveedor
+                    ***REMOVED***;
+
+                ***REMOVED***
+                    ));
+
+            ***REMOVED***
+          ***REMOVED***
+            error: function (response) {
+                alert(response.responseText);
+          ***REMOVED***
+            failure: function (response) {
+                alert(response.responseText);
+        ***REMOVED***
+    ***REMOVED***);
+  ***REMOVED***
+    delay: 300,
+    minLength: 1,
+    select: function (event, ui) {
+
+***REMOVED***
+***REMOVED***).bind('blur onblur', function () {
+    if ($(this).val() == "") {
+        $(this).val("");
+        $("#divNoEncontrado").hide();
+***REMOVED***
+
+***REMOVED***);
+
+
+/////////////////////INVERSION////////////////////
+
+function getProgramasByEntidad(annio) {
+    var codigoEntidad = $("#codigoEntidadId").val();
+    $.ajax({
+        contentType: 'application/json; charset=utf-8',
+        url: "api/serviciosentidad/GetProgramasByEntidad",
+        type: "GET",
+        data: {
+            annio: annio,
+            codEntidad: codigoEntidad
+    ***REMOVED***
+***REMOVED***).done(function (data) {
+        var result = data.infoProgramas;
+        global_programas = result;
+        pintaProgramas(result);
+
+***REMOVED***).fail(function (handleError) {
+        // Some function
+        console.log(handleError);
+***REMOVED***);
+
+***REMOVED***
+
+function iniProgramaXDefecto() {
+    if ($('#selectProgramas').children('option').length > 0) {
+        $('#selectProgramas').val($('#selectProgramas option:first').val());
+        $('#selectProgramas').trigger('change');
+***REMOVED***
+
+***REMOVED***
+
+function pintaProgramas(data) {
+    $("#divProgramas").empty();
+    $("#divInversion").empty();
+    if (data != null) {
+        if (data.length > 0) {
+            var str_cad = "";
+            str_cad += '<div class="row">';
+            str_cad += '<div class="col-md-12">';
+            str_cad += '<div class="ProgramCards">';
+            str_cad += '<div class="card h-100">';
+            str_cad += '<p>Seleccione un Programa</p>';
+            str_cad += '<div class="content-select">';
+            str_cad += '<select id="selectProgramas">';
+            for (var i = 0; i < data.length; i++) {
+                str_cad += '<option value="' + data[i].id + '">' + data[i].nombre + '</option>';
+        ***REMOVED***
+            str_cad += '</select>';
+            str_cad += '<i></i>';
+            str_cad += '</div>';
+            str_cad += '</div>';
+            str_cad += '</div>';
+            str_cad += '</div>';
+            str_cad += '</div>';
+            $("#divProgramas").html(str_cad);
+            if ($('#selectProgramas').children('option').length > 0) {
+                configuraSelectProgramas();
+                iniProgramaXDefecto();
+        ***REMOVED***
+
+    ***REMOVED***
+***REMOVED***
+
+***REMOVED***
+function configuraSelectProgramas() {
+    $('#selectProgramas').on('change', function () {
+        var prog_actual = this.value;
+        var filter_prog = $.grep(global_programas, function (elemento) {
+            return elemento.id*1 === prog_actual*1;
+    ***REMOVED***);
+        if (filter_prog != null) {
+            setValoresXPrograma(filter_prog);
+    ***REMOVED***
+
+        consultaInfograficoPerPrograma(prog_actual);
+***REMOVED***);
+
+***REMOVED***
+function setValoresXPrograma(data) {
+    var valor_vigente = data[0].presupuesto;
+    var valor_ejecutado = data[0].ejecutado;
+    var valor_aprobado = data[0].aprobado;
+    //--------------------------------------------------------------------
+
+    var texto_aprobado = '<span class="">' + monedaSimbolo("RD") + ' ' + (valor_aprobado / 1000000).formatMoney(1, ',', '.').toString() + ' Millones</span>';
+    var texto_vigente = '<span class="">' + monedaSimbolo("RD") + ' ' + (valor_vigente / 1000000).formatMoney(1, ',', '.').toString() + ' Millones</span>';
+    var texto_ejecutado = '<span class="">' + monedaSimbolo("RD") + ' ' + (valor_ejecutado / 1000000).formatMoney(1, ',', '.').toString() + ' Millones</span>';
+
+    var porcentaje_programa = 0;
+    if (valor_vigente > 0) {
+        porcentaje_programa = ((valor_ejecutado / valor_vigente) * 100).formatMoney(1, ',', '.').toString() + "%";
+***REMOVED***
+
+    //-----------------------------------------------------------
+    var str_programa = '<div class="row justify-content-center">';  //inicio row
+
+
+
+    str_programa += '<div class="col-md-10">';
+    str_programa += '<div class="row">';
+
+    str_programa += '<div class="presini col-md-4">';
+    str_programa += '<span class="h5">Presupuesto Vigente</span>';
+    str_programa += '<div class="clearfix"></div>';
+    str_programa += '<span class="h2">' + texto_vigente + '</span>';
+    str_programa += '</div>';
+    //----------------------------------------------------
+    str_programa += '<div class="presini col-md-4">';
+    str_programa += '<span class="h5">Presupuesto Ejecutado</span>';
+    str_programa += '<div class="clearfix"></div>';
+    str_programa += '<span class="h2">' + texto_ejecutado + '</span>';
+    str_programa += '</div>';
+
+    //----------------------------------------------------
+    str_programa += '<div class="presexc col-md-3">';
+    str_programa += '<span class="h5">Porcentaje de Ejecución</span>';
+    str_programa += '<div class="clearfix"></div>';
+    str_programa += '<span class="h2">' + porcentaje_programa + '</span>';
+    str_programa += '</div>';
+    //----------------------------------------------------- 
+    str_programa += '</div>';
+    str_programa += '</div>';
+
+    str_programa += '</div>';  //fin row
+    $("#lblValorAsignacionPrograma").html(str_programa);
+
+***REMOVED***
+function consultaInfograficoPerPrograma(prog_actual) {
+
+
+    var codigoEntidad = $("#codigoEntidadId").val();
+    var selectAnio = document.getElementById("annioEntidad");
+
+    var anioEntidad = $("#annioEntidad option:selected").val();
+
+
+    var descProceso = $("#proceso").val();
+    var programaSel = prog_actual;
+
+
+    GetDatosByTipo($("#annioEntidad option:selected").val(), "inversion", prog_actual)
+
+***REMOVED***
+
+
+
+
+function GetDatosByTipo(anyo, tipo, programa)
+{
+    var tipo_aux = "";
+    if (tipo != null && tipo != undefined) {
+        tipo_aux = tipo.toString().toUpperCase();
+***REMOVED***
+    $("#divPagFichas").html("");
+    $("#divInversion").empty();
+    $("#divInversion").html(loader_proy);
+    var codigoEntidad = $("#codigoEntidadId").val();
+    var moneda = '$ ';
+    $.ajax({
+        url: "api/ServiciosEntidad/GetGastoByTipo",
+        type: "GET",
+        data: {
+            anyo: anyo,
+            codEntidad: codigoEntidad,
+            tipo: tipo,
+            programa : programa
+      ***REMOVED***
+
+***REMOVED***).done(function (data) {
+        var resultado = data.detalleTipo;
+        proyectos = resultado.proyInv;
+        var otras_lineas = resultado.otrasLineas;
+        var gen_tipo = resultado.genericoTipo;
+        var pagina_actual = 1;
+        if (resultado != null) {
+            if (tipo_aux != "INVERSION" && tipo_aux != "INVERSIÓN") {
+                globales_gasto = gen_tipo;
+                if (gen_tipo != null) {
+                    var ini_data = ((pagina_actual - 1) * cantXPagina);
+                    var fin_data = (pagina_actual * cantXPagina) - 1;
+                    var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
+                        return (i >= ini_data && i <= fin_data);
+                ***REMOVED***);
+                    getEstructuraInfograficoPerTipo(data_pagina, 1);
+
+            ***REMOVED*** else {
+                    $("#divInversion").html("<span class='lblErrorNoData'>Información No Disponible</span>");
+            ***REMOVED***
+
+
+
+        ***REMOVED*** else {
+                if (proyectos == null && otras_lineas == null) {
+                    $("#divInversion").html("<span class='lblErrorNoData'>Información No Disponible</span>");
+
+            ***REMOVED*** else {
+                    if (proyectos != null) {
+                        globales_gasto = proyectos;
+
+                        var ini_data = ((pagina_actual - 1) * cantXPaginaInv);
+                        var fin_data = (pagina_actual * cantXPaginaInv) - 1;
+                        var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
+                            return (i >= ini_data && i <= fin_data);
+                    ***REMOVED***);
+                        getEstructuraInfograficoNew(data_pagina, 1);
+
+                ***REMOVED***
+                    if (otras_lineas != null) {
+                        globales_lineas = otras_lineas;
+                        var ini_data_lineas = ((pagina_actual - 1) * cantXPaginaInv);
+                        var fin_data_lineas = (pagina_actual * cantXPaginaInv) - 1;
+                        var data_pagina_lineas = arr = jQuery.grep(globales_lineas, function (n, i) {
+                            return (i >= ini_data && i <= fin_data);
+                    ***REMOVED***);
+                        getEstructuraInfograficoPerLineas(data_pagina_lineas, 1);
+                ***REMOVED***
+
+            ***REMOVED***
+
+
+
+        ***REMOVED***
+    ***REMOVED*** else {
+            $("#divInversion").html("<span class='lblErrorNoData'>Información No Disponible</span>");
+    ***REMOVED***
+
+
+
+
+
+
+***REMOVED***).fail(function (handleError) {
+        // Some function
+
+***REMOVED***);
+
+***REMOVED***
+
+
+function getEstructuraInfograficoNew(datos, pagina) {
+    var i_aux = 0;
+    var j_aux = 0;
+    var k_aux = 0;
+    //var l = 0;
+    var html_str = '<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
+    for (var i = 0; i < datos.length; i++) {
+        var nomCollapse = "collapseOne_" + i_aux.toString() + "_" + j_aux.toString();
+        var nomHeading = "headingOne_" + i_aux.toString() + "_" + j_aux.toString();
+
+        var nombre = datos[i]['nombre'];
+        var codigo = datos[i]['id'];
+        var avance_fisico = datos[i]['avance_fisico'];
+        var avance_financiero = datos[i]['avance_financiero'];
+        var url_proy = datos[i].url;
+        var lineas_vec = datos[i].detalleLineas;
+        var valor_proyecto = datos[i].comprometido;
+
+        html_str += '<div class="panel panel-default ">';
+        html_str += '<div class="panel-heading" role="tab" id="' + nomHeading + '">';
+        html_str += '<div class="panel-title d-flex">';
+        html_str += '<a class="w-90" role="button" data-toggle="collapse" data-parent="#accordion" href="#' + nomCollapse + '" aria-expanded="true" aria-controls="' + nomCollapse + '">';
+        html_str += '<div class="head">';
+        html_str += '<div class="data0 mainData">';
+        html_str += '<div class="badge badge-outlined"><span class="labelTit">CÓDIGO BPIN: ' + '<strong>' + codigo + '</strong></span></div></br>';
+        html_str += '<span class="td1">' + nombre + '</span>';
+        html_str += '</div>';
+        html_str += '<div class="data1">';
+        html_str += '<span class="labelTit">Valor Proyecto</span>';
+        html_str += '<span class="td1">$ ' + (valor_proyecto*1/1000000).formatMoney(2, ',', '.').toString() + ' Millones</span>';
+        html_str += '</div>';
+
+        html_str += '<div class="data1">';
+        html_str += '<span class="labelTit">Avance Financiero</span>';
+        html_str += '<span class="td1">' + avance_financiero.formatMoney(2, ',', '.').toString() + '%</span>';
+        html_str += '</div>';
+
+
+
+        html_str += '<div class="actions-links">';
+        html_str += '<span class="badge badge-pill badge-primary">Ver líneas presupuestales</span>';
+        html_str += '</div>';
+
+
+
+        html_str += '</div>';
+
+        html_str += '</a>';
+
+        html_str += '<div class="actions-links">';
+        html_str += '<a target="_blank" href="' + url_proy + '" class="text - small">';
+        html_str += '<span class="badge badge-pill badge-primary"> Ver Perfil del Proyecto</span>';
+        html_str += '</a>';
+        html_str += '</div>';
+
+        html_str += '</div>';
+
+
+        html_str += '</div>';
+
+        html_str += '<div id = "' + nomCollapse + '" class="panel-collapse collapse nivel1" role = "tabpanel" aria - labelTitledby="' + nomHeading + '" item = "' + datos[i].nombre.toUpperCase() + '" >';
+        html_str += '<div class="panel-body">';
+
+        //NIVEL 2
+
+        for (var j = 0; j < lineas_vec.length; j++) {
+            var nomNivel2 = "accordion_l2_" + i_aux.toString() + "_" + j_aux.toString();
+            var headNivel2 = "headLevel2_" + i_aux.toString() + "_" + j_aux.toString();
+            var panelHijo2 = "c2_" + j_aux.toString() + "_" + k_aux.toString();
+            var nomHeadLevel3 = "headLevel3_" + j_aux.toString() + "_" + k_aux.toString();
+            var nombre = lineas_vec[j].nombre;
+            var presup_aprobado = lineas_vec[j]['aprobado'] / 1;
+            var presup_vigente = lineas_vec[j]['vigente'] / 1;
+            var presup_ejecutado = lineas_vec[j]['ejecutado'] / 1;
+            var porc_ejecutado = lineas_vec[j]['porcentaje'] * 100;
+
+
+            html_str += '<div class="panel-group nivel22" id="' + nomNivel2 + '" role="tablist" aria-multiselectable="true">';
+            html_str += '<div class="panel panel-default">';
+            //heading
+            html_str += '<div class="panel-heading" role="tab" id="' + headNivel2 + '">';
+            html_str += '<div class="panel-title w-88">';
+            html_str += '<a role = "button" data-toggle="collapse" data-parent="#' + nomNivel2 + '" href = "#' + panelHijo2 + '" aria-expanded="true" aria-controls="' + nomCollapse + '">';
+
+            html_str += '<div class="head">';
+            html_str += '<div class="data1 mainData">';
+            html_str += '<span class="labelTit">Objeto de gasto</span>';
+            html_str += '<span class="td1p">' + nombre + '</span>';
+            html_str += '</div>';
+
+            html_str += '<div class="data1">';
+            html_str += '<span class="labelTit">Presupuesto Aprobado</span>';
+            html_str += '<span class="td1p">' + '$' + ' ' + presup_aprobado.formatMoney(1, ',', '.').toString() + ' Millones</span>';
+            html_str += '</div>';
+
+            html_str += '<div class="data1">';
+            html_str += '<span class="labelTit">Presupuesto Vigente</span>';
+            html_str += '<span class="td1p">' + '$' + ' ' + presup_vigente.formatMoney(0, ',', '.').toString() + ' Millones</span>';
+            html_str += '</div>';
+
+            html_str += '<div class="data1">';
+            html_str += '<span class="labelTit">Ejecución Acumulada</span>';
+            html_str += '<span class="td1p">' + '$' + ' ' + presup_ejecutado.formatMoney(0, ',', '.').toString() + ' Millones</span>';
+            html_str += '</div>';
+
+
+            html_str += '<div class="data1a">';
+            html_str += '<span class="labelTit">% Ejecución</span>';
+            html_str += '<span class="">' + porc_ejecutado.formatMoney(1, ',', '.').toString() + '%</span>';
+            html_str += '</div>';
+
+            html_str += '</div>';//head
+            html_str += '</a>';
+
+            html_str += '</div>';
+            html_str += '</div>';
+            //body
+            html_str += '</div>';
+
+            html_str += '</div>';
+            j_aux = j_aux + 1;
+
+    ***REMOVED***
+
+        ///----------------------------------BOTONES
+        html_str += '<div class="row align-items-center">';
+        html_str += '</div>';
+        html_str += '</div>';
+
+        html_str += '<div class="col-md-12 text-center">';
+        html_str += '<div class="actions-links">';
+        html_str += '<a class="enlacecontratosasoc' + i + '" onclick="clickbotoncontratosasoc(' + i + ')" data-parameter="' + codigo + '" class="text - small">';
+        html_str += '<span class="badge badge-pill badge-primary"> Ver Contratos Asociados</span >';
+        html_str += '</a>';
+        html_str += '</div>';
+        html_str += '</div>';
+        html_str += '</div>';  ///fin row
+        ///---------------------------------------FIN BOTONES
+
+
+        html_str += '</div>';
+        html_str += '</div>';
+
+        html_str += '</div>';
+
+        i_aux = i_aux + 1;
+
+***REMOVED***
+    html_str += "</div>";
+
+
+    ///----------------
+    html_str += '<div id="divPagFichas"></div>';
+
+    $("#divInversion").html(html_str);
+    var totalNumber = globales_gasto.length;
+    var totalPages = (totalNumber > cantXPaginaInv) ? ((totalNumber - (totalNumber % cantXPaginaInv)) / cantXPaginaInv) : 1;
+    if ((totalNumber >= cantXPaginaInv) && ((totalNumber % cantXPaginaInv) > 0)) {
+        totalPages = totalPages + 1;
+***REMOVED***
+    if (totalPages > 1) {
+        dibujarPagNumeradasPerTipoInv(pagina, totalNumber, totalPages);
+***REMOVED***
+
+
+***REMOVED***
+
+function dibujarPagNumeradasPerTipoInv(actual, total, totalPag) {
     var pag_actual = parseInt(actual);
     var pagina_actual = pag_actual;
     var pagesHTML = '';
     var cant_por_linea = 10;
-
-    deshabilita(false);
-    $("#divPagContratos").empty();
-
-    var divPag = d3.select("#divPagContratos");
+    $("#divPagFichas").html("");
+    var divPag = $("#divPagFichas")
+    var pag_enlace = "";
 
     var cociente = Math.floor(pag_actual / cant_por_linea);
     var residuo = pag_actual % cant_por_linea;
@@ -1155,67 +1029,730 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     if (fin > totalPag) {
         fin = totalPag;
 ***REMOVED***
-
-
     if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
-        var pag_enlace = divPag.append("a")
-            .attr("id", "page_left")
-            .attr("role", "button")
-            .attr("class", "material-icons md-24")
-            .attr("data-page", inicio - cant_por_linea)
-        pag_enlace.append("span")
-            .attr("class", "")
-            .text("chevron_left ")
+        pag_enlace += '<a id="page_left" role="button" class="material-icons md-24" data-page="' + (inicio - cant_por_linea) + '"><span class="">chevron_left</span></a>';
 ***REMOVED***
-
 
 
     for (var i = inicio; i <= fin; i++) {
 
         if (i == pag_actual) {
-            var pag_enlace = divPag.append("span")
-                .attr("class", "pag_actual")
-                .attr("data-page", i)
-            pag_enlace.append("text")
-                .text(i)
+            pag_enlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
     ***REMOVED*** else {
-            var pag_enlace = divPag.append("a")
-                //.attr("id", "page_left")
-                .attr("class", "page_left")
-                .attr("role", "button")
-                .attr("data-page", i)
-            pag_enlace.append("span")
-                .attr("class", "glyphicon")
-            pag_enlace.append("text")
-                .attr("class", "paginacion")
-                .text(i)
-
+            pag_enlace += '<a class="page_left" role="button" data-page="' + i + '">';
+            pag_enlace += '<span class="glyphicon"><text class="paginacion">' + i + '</text></span>';
+            pag_enlace += '</a>';
     ***REMOVED***
-
 
 ***REMOVED***
 
     if (pag_actual < totalPag) {
-        //(totalPag - pag_actual) > cant_por_linea
         if (fin < totalPag) {
-            var pag_enlace_der = divPag.append("a")
-                .attr("id", "page_right")
-                .attr("role", "button")
-                .attr("class", "material-icons md-24")
-                .attr("data-page", fin + 1)
-            pag_enlace_der.append("span")
-                .attr("class", "")
-                .text("chevron_right")
+            pag_enlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
     ***REMOVED***
 ***REMOVED***
 
-    $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
+    $("#divPagFichas").html(pag_enlace);
 
-        deshabilita(true);
-        //$('#divPagContratos').attr('disabled', 'disabled');
-        d3.select("#divProyectos").empty();
-        var pagina_actual = $(this).attr("data-page");
-        getContratos($("#annioEntidad option:selected").val(), pagina_actual, cant_contratos, $("#top_contratos_estados option:selected").val(), $("#entidad").val(), $('#procesoo').val(), $("#top_origen_informacion option:selected").val());
+    $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
+        pagina_actual = $(this).attr("data-page");
+        var ini_data = ((pagina_actual - 1) * cantXPaginaInv);
+        var fin_data = (pagina_actual * cantXPaginaInv) - 1;
+        var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
+            return (i >= ini_data && i <= fin_data);
+    ***REMOVED***);
+        $("#divInversion").empty();
+        getEstructuraInfograficoNew(data_pagina, pagina_actual);
 ***REMOVED***);
 
 ***REMOVED***
+
+
+function getEstructuraInfograficoPerLineas(datos_lineas, pagina) {
+    if (datos_lineas.length > 0) {
+        var str_lineas = '<div class="card-entidades-group">';
+        str_lineas += '<div class="wrap-lineas">';
+        str_lineas += '<div class="col-lg-12 text-center py-2">';
+        str_lineas += '<div class="h6 lineasbk">Otras líneas presupuestales';
+        str_lineas += '</div>';
+        str_lineas += '</div>';
+        ///------------------------
+        str_lineas += '<div class="row">';
+        ///----------lineas
+        ///----------lineas
+        for (var j = 0; j < datos_lineas.length; j++) {
+            var nombre = datos_lineas[j]['nombre'];
+            var presup_aprobado = datos_lineas[j]['aprobado'] / 1;
+            var presup_vigente = datos_lineas[j]['vigente'] / 1;
+            var presup_ejecutado = datos_lineas[j]['ejecutado'] / 1;
+            var porc_ejecutado = datos_lineas[j]['porcentaje'] * 100;
+
+
+            str_lineas += '<div class="line0">';
+            str_lineas += '<div class="card-entidades-obj">';
+            str_lineas += '<div class="card d-flex">';
+            str_lineas += '<div class="headEnt">';
+            str_lineas += '<div class="data1 mainDataEntidad">';
+            str_lineas += '<span class="labelTit">Objeto de Gasto</span>';
+            str_lineas += '<span class="td1obj">' + nombre + '</span>';
+            str_lineas += '</div>';
+            str_lineas += '<div class="data1">';
+            str_lineas += '<span class="labelTit">Presupuesto Aprobado</span>';
+            str_lineas += '<span class="td1">$ ' + presup_aprobado.formatMoney(2, '.', ', ').toString() + ' Millones</span>';
+            str_lineas += '</div>';
+            str_lineas += '<div class="data1">';
+            str_lineas += '<span class="labelTit">Presupuesto Vigente</span>';
+            str_lineas += '<span class="td1">$ ' + presup_vigente.formatMoney(2, '.', ', ').toString() + ' Millones</span>';
+            str_lineas += '</div>';
+            str_lineas += '<div class="data1">';
+            str_lineas += '<span class="labelTit">Ejecución Acumulada</span>';
+            str_lineas += '<span class="td1">$ ' + presup_ejecutado.formatMoney(2, '.', ', ').toString() + ' Millones</span>';
+            str_lineas += '</div>';
+            str_lineas += '<div class="data1">';
+            str_lineas += '<span class="labelTit">Porcentaje de ejecución</span>';
+            str_lineas += '<span class="td1">' + porc_ejecutado.toFixed(2).toString() + '%</span>';
+            str_lineas += '</div>';
+            str_lineas += '</div>';
+            str_lineas += '</div>';
+            str_lineas += '</div>';
+            str_lineas += '</div>';
+
+
+    ***REMOVED***
+        str_lineas += '</div>';  ///FIN ROW
+        str_lineas += '</div>';  ///FIN wrap-lineas
+        str_lineas += '</div>';   ///fin card-entidades-group
+
+        str_lineas += '<div id="divPagFichasLineas"></div>';
+        $("#divOtrasLineas").html(str_lineas);
+        //paginacion otras lineas
+        var totalNumber = globales_lineas.length;
+        var totalPages = (totalNumber > cantXPaginaInv) ? ((totalNumber - (totalNumber % cantXPaginaInv)) / cantXPaginaInv) : 1;
+        if ((totalNumber >= cantXPaginaInv) && ((totalNumber % cantXPaginaInv) > 0)) {
+            totalPages = totalPages + 1;
+    ***REMOVED***
+        if (totalPages > 1) {
+            dibujarPagNumeradasPerLineas(pagina, totalNumber, totalPages);
+    ***REMOVED***
+
+***REMOVED***
+
+***REMOVED***
+
+function dibujarPagNumeradasPerLineas(actual, total, totalPag) {
+    var pag_actual = parseInt(actual);
+    var pagina_actual = pag_actual;
+    var pagesHTML = '';
+    var cant_por_linea = 10;
+    $("#divPagFichasLineas").html("");
+    var divPag = $("#divPagFichasLineas")
+    var pag_enlace = "";
+
+    var cociente = Math.floor(pag_actual / cant_por_linea);
+    var residuo = pag_actual % cant_por_linea;
+    var inicio = 1;
+    if (residuo == 0) {
+        inicio = (pag_actual - cant_por_linea) + 1;
+***REMOVED*** else {
+        inicio = (cociente * cant_por_linea) + 1;
+***REMOVED***
+
+    var fin = inicio + (cant_por_linea - 1);
+    if (totalPag < cant_por_linea) {
+        fin = totalPag;
+***REMOVED***
+    if (fin > totalPag) {
+        fin = totalPag;
+***REMOVED***
+    if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
+        pag_enlace += '<a id="page_left_lineas" role="button" class="material-icons md-24" data-page="' + (inicio - cant_por_linea) + '"><span class="">chevron_left</span></a>';
+***REMOVED***
+
+
+    for (var i = inicio; i <= fin; i++) {
+
+        if (i == pag_actual) {
+            pag_enlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
+    ***REMOVED*** else {
+            pag_enlace += '<a class="page_left_lineas" role="button" data-page="' + i + '">';
+            pag_enlace += '<span class="glyphicon"><text class="paginacion">' + i + '</text></span>';
+            pag_enlace += '</a>';
+    ***REMOVED***
+
+***REMOVED***
+
+    if (pag_actual < totalPag) {
+        if (fin < totalPag) {
+            pag_enlace += '<a id="page_right_lineas" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
+    ***REMOVED***
+***REMOVED***
+
+    $("#divPagFichasLineas").html(pag_enlace);
+
+    $('#page_right_lineas,#page_left_lineas,.page_left_lineas,.page_right_lineas').bind('click', function () {
+        pagina_actual = $(this).attr("data-page");
+        var ini_data = ((pagina_actual - 1) * cantXPaginaInv);
+        var fin_data = (pagina_actual * cantXPaginaInv) - 1;
+        var data_pagina = arr = jQuery.grep(globales_lineas, function (n, i) {
+            return (i >= ini_data && i <= fin_data);
+    ***REMOVED***);
+        $("#divOtrasLineas").empty();
+        getEstructuraInfograficoPerLineas(data_pagina, pagina_actual);
+***REMOVED***);
+
+***REMOVED***
+
+
+
+//////////////////////// ANALISIS /////////////////////////////////////
+
+
+
+function GetRecursosPorFinalidad(anyo) {
+    $("#divGraphPerFuncion").empty();
+    $.ajax({
+        contentType: "application/json; charset=utf-8",
+        url: "api/serviciosentidad/GetRecursosPorFinalidad",
+        type: "GET",
+        data: {
+            anyo: anyo,
+            codEntidad: $("#codigoEntidadId").val()
+    ***REMOVED***
+***REMOVED***).done(function (data) {
+        if (data.infoRecursos != null) {
+            globales = data.infoRecursos;
+            loadRecursosPerFinalidad(globales);
+    ***REMOVED***
+***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+        alert("Error " + xhr.status + "_" + thrownError);
+***REMOVED***);
+
+
+
+
+***REMOVED***
+
+function assignColorPaleta(indice) {
+    var color_aux = "#CCCCCC";
+    var col_sel = color_aux;
+    var colores_default = ["#639CBF", "#78B8BF", "#A65D5D", "#4C5959", "#56B4D6", "#56D6B2", "#4FBCE3", "#9BDDCA", "#41A387", "#5A6A70", "#3185A3",
+        "#387CA6", "#96D2D9", "#F2E8C9", "#728EA6", "#BACDD9", "#F2E4DC", "#B0C1D9", "#88A5BF", "#D9BFA9", "#F29863", "#F2C1AE", "#BF9C99"];
+    if (indice < colores_default.length) {
+        col_sel = colores_default[indice];
+***REMOVED***
+    return col_sel;
+***REMOVED***
+function loadRecursosPerFinalidad(objData) {
+    $("#divGraphPerFuncion").empty();
+    var titulo = "Otros";
+    var textoExpandir = "Clic para expandir";
+    var limitePorc = 0.03;
+    var data_filter = [];
+    if (objData != undefined && objData != null) {
+        data_filter = objData;
+
+        var sumaTotal = data_filter.reduce(function (acumulador, elemento) {
+            return acumulador + elemento.rawValueDouble;
+      ***REMOVED*** 0);
+        for (var i = 0; i < data_filter.length; i++) {
+            data_filter[i].labelGroup = data_filter[i].labelGroup.replace(",", " ");
+            data_filter[i].label = data_filter[i].label.replace(",", " ");
+
+            data_filter[i].rawValueDouble = parseFloat(data_filter[i].rawValueDouble);
+            data_filter[i].porcentaje = (((data_filter[i].rawValueDouble / sumaTotal) * 100)).toFixed(2);
+    ***REMOVED***
+
+     
+        var distintos = objData.map(item => item.labelGroup)
+            .filter((value, index, self) => self.indexOf(value) === index);
+
+        grafica = new d3plus.Treemap()
+            .select("#divGraphPerFuncion")
+
+            .shapeConfig({
+                labelConfig: {
+                    fontFamily: "'Montserrat', sans-serif",
+                    align: "center",
+                    size: 6,
+                    transform: "capitalize"
+              ***REMOVED***
+                 fill: function (d, index) {
+                    return assignColorPaleta(index);
+
+            ***REMOVED***
+        ***REMOVED***)
+            .translate(function (d) {
+                var traduc_aux = d;
+                if (d === "Back" || d === "back") {
+                    traduc_aux = "Atrás";
+            ***REMOVED*** else if (d === "Click to Expand") {
+                    traduc_aux = "Clic para expandir";
+            ***REMOVED*** else if (d === "No Data Available") {
+                    traduc_aux = "Información No Disponible";
+            ***REMOVED*** else {
+                    traduc_aux = d;
+            ***REMOVED***
+                return traduc_aux;
+        ***REMOVED***)
+            .config({
+                //threshold: limitePorc,
+                data: data_filter,
+                groupBy: ["labelGroup", "label"],
+                height: 500,
+                tooltipConfig: {
+                    title: function (d) {
+                        var depth_aux = grafica.depth();
+                        var longitud_tooltip = 80;
+                        var cad = '';
+                        switch (depth_aux) {
+                            case 0:
+                                cad = d.labelGroup;
+                                break;
+                            case 1:
+                                cad = d.label;
+                                break;
+                            default:
+                                cad = d.labelGroup;
+                    ***REMOVED***
+                        if (cad.length > longitud_tooltip) {
+                            cad = cad.substr(0, longitud_tooltip) + "...";
+                    ***REMOVED***
+                        return cad;
+                  ***REMOVED***
+                    tbody: [
+                        [function (d) {
+                            var valor = d["rawValueDouble"] / 1000000;
+                            var cad = "";
+                            cad += "<span>Presupuesto Vigente " + "$ " + valor.formatMoney( 0, '.', ',').toString() + " Millones" + "</span></br>";
+                            return cad;
+                    ***REMOVED***]
+                    ]
+              ***REMOVED***
+                yConfig: {
+                    title: "",
+            ***REMOVED***
+        ***REMOVED***)
+            .sum("rawValueDouble")
+            .depth(0)
+            .legend(false)
+            .render();
+***REMOVED***
+
+***REMOVED***
+
+
+function assignColorPaletaD(indice) {
+    var color_aux = "#CCCCCC";
+    var col_sel = color_aux;
+    var colores_default = ["#639CBF", "#78B8BF", "#A65D5D", "#4C5959", "#56B4D6", "#56D6B2", "#4FBCE3", "#9BDDCA", "#41A387", "#5A6A70", "#3185A3",
+        "#387CA6", "#96D2D9", "#F2E8C9", "#728EA6", "#BACDD9", "#F2E4DC", "#B0C1D9", "#88A5BF", "#D9BFA9", "#F29863", "#FAC1AE", "#BF9C09",
+        "#56BFD6", "#5ED6B2", "#4FBC03", "#9B0DCA"];
+    if (indice < colores_default.length) {
+        col_sel = colores_default[indice];
+***REMOVED***
+    return col_sel;
+***REMOVED***
+
+function loadDonaGraph(myData,divContenedor) {
+
+    $("#" + divContenedor).html("");
+    new d3plus.Donut()
+        .select("#" + divContenedor)
+
+        .config({
+            data: myData,
+            groupBy: "labelGroup",
+            label: d => (d["porcentaje"]*1).formatMoney(2, ',', '.')+ "%",
+
+            height: 665,
+            //innerRadius: 50,
+            padAngle: 0.01,
+            legend: false,
+            legendPosition: function () {
+                return this._width > this._height ? "right" : "bottom";
+          ***REMOVED***
+            value: "rawValue",
+            color: function (d, index) {
+                return assignColorPaletaD(index);
+          ***REMOVED***
+            tooltipConfig: {
+                title: function (d) {
+                    return d["labelGroup"];
+              ***REMOVED***
+                tbody: [
+                    [function (d) {
+
+                        var cad_aux = "$ " + d["rawValue"].formatMoney(1, ',', '.').toString() + " ";
+                        if (d["porcentaje"] != undefined && d["porcentaje"] != null) {
+                            cad_aux = "$ " + d["rawValue"].formatMoney(1, ',', '.').toString() + " " + " <strong>(" + d["porcentaje"].formatMoney(1, '.', ',').toString() + " %)</strong>";
+                    ***REMOVED***
+                        return cad_aux;
+
+                ***REMOVED***]
+                ]
+        ***REMOVED***
+            , legendConfig: {
+                label(d, i) {
+                    return d["labelGroup"];
+              ***REMOVED***
+
+        ***REMOVED***
+    ***REMOVED***)
+        .legendTooltip({ footer: "" ***REMOVED***)
+        .on({ "click.legend": () => { ***REMOVED*** ***REMOVED***)
+        .render();
+
+***REMOVED***
+
+function loadConsolidaGastoEntidad(data, div) {
+    var txt_aux = "";
+
+    for (var i = 0; i < data.length; i++) {
+        txt_aux += "<div class='box' style='background:linear-gradient(to right, " + assignColorPaletaD(i) +" 20px, #f2f2f2 0) !important;'>"
+            + "<div class='h3'>$ " + (data[i].rawValue*1).formatMoney(1, ',', '.').toString() + "</div>"
+            + "<div class='desc-item-expenditure'>" + data[i].labelGroup + "</div>"
+            + "<div class='wrap-expenditure-link'></div>"
+            + "</div>";
+***REMOVED***
+
+    $("#" + div).html(txt_aux);
+
+
+
+***REMOVED***
+function getDataByFuncion(annio) {
+    $.ajax({
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        url: "api/ServiciosEntidad/GetDistribucionGastoEntidad",
+        cache: false,
+        data: {
+            annio: annio,
+        codEntidad: $("#codigoEntidadId").val()
+      ***REMOVED***
+        success: function (result) {
+            if (result.status == true) {
+                var data = result.listInfoConsolidado;
+                if (data != null) {
+                    loadDonaGraph(data, "divGraphPerGrupoGasto");
+                    loadConsolidaGastoEntidad(data, "divTxtGrupoGasto");
+            ***REMOVED***
+        ***REMOVED*** else {
+                alert("Error: " + result.message, function () {
+
+            ***REMOVED***);
+        ***REMOVED***
+
+      ***REMOVED***
+        error: function (response) {
+            alert(response.responseText);
+      ***REMOVED***
+        failure: function (response) {
+            alert(response.responseText);
+    ***REMOVED***
+***REMOVED***);
+
+
+***REMOVED***
+
+
+
+
+function getProcesosByFuncion(annio) {
+    $.ajax({
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        url: "api/ServiciosEntidad/GetProcesosPorTipo",
+        cache: false,
+        data: {
+            anyo: annio,
+            codEntidad: $("#codigoEntidadId").val()
+      ***REMOVED***
+        success: function (result) {
+            if (result.status == true) {
+                var data = result.infoRecursos;
+                if (data != null) {
+                    horizontalBar(data, "divGraphProcesos");
+            ***REMOVED***
+        ***REMOVED*** else {
+                alert("Error: " + result.message, function () {
+
+            ***REMOVED***);
+        ***REMOVED***
+
+      ***REMOVED***
+        error: function (response) {
+            alert(response.responseText);
+      ***REMOVED***
+        failure: function (response) {
+            alert(response.responseText);
+    ***REMOVED***
+***REMOVED***);
+
+
+***REMOVED***
+function horizontalBar(data, div) {
+    $("#" + div).html("");
+    //sort bars based on value
+    data = data.sort(function (a, b) {
+        return d3.ascending(a.rawValueDouble, b.rawValueDouble);
+***REMOVED***)
+
+    //set up svg using margin conventions - we'll need plenty of room on the left for labels
+    var margin = {
+        top: 5,
+        right: 40,
+        bottom: 15,
+        left: 80
+***REMOVED***;
+    ancho = $(document).width() - ($(document).width()/3);
+    var width = ancho - margin.left - margin.right,
+        height = (ancho /2) - margin.top - margin.bottom;
+
+    var svg = d3.select("#" + div).append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scale.linear()
+        .range([0, width])
+        .domain([0, d3.max(data, function (d) {
+            return d.rawValueDouble;
+    ***REMOVED***)]);
+
+    var y = d3.scale.ordinal()
+        .rangeRoundBands([height, 0], .1)
+        .domain(data.map(function (d) {
+            return d.labelGroup.trim();
+    ***REMOVED***));
+
+    //make y axis to show bar names
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        //no tick marks
+        .tickSize(0)
+        .orient("left");
+
+    var gy = svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+        .selectAll(".tick text")
+        .call(wrap, 75)
+        .attr("transform", "translate(-2,-30)")
+
+    var bars = svg.selectAll(".bar")
+        .data(data)
+        .enter()
+        .append("g")
+
+    //append rects
+    bars.append("rect")
+        .attr("class", "bar")
+        .attr("y", function (d) {
+            return y(d.labelGroup);
+    ***REMOVED***)
+        .attr("height", y.rangeBand()-20)
+        .attr("x", 0)
+        .attr("width", function (d) {
+            return x(d.rawValueDouble);
+    ***REMOVED***);
+
+    //add a value label to the right of each bar
+    bars.append("text")
+        .attr("class", "label")
+        //y position of the label is halfway down the bar
+        .attr("y", function (d) {
+            return y(d.labelGroup) + y.rangeBand() / 2 -10;
+    ***REMOVED***)
+        //x position is 3 pixels to the right of the bar
+        .attr("x", function (d) {
+            return x(d.rawValueDouble) + 3;
+    ***REMOVED***)
+        .text(function (d) {
+            return d.rawValueDouble;
+    ***REMOVED***);
+
+***REMOVED***
+
+function wrap(text, width) {
+    text.each(function () {
+        var text = d3.select(this),
+            words = text.text().split(/\s+/).reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.1, // ems
+            y = text.attr("y"),
+            dy = parseFloat(text.attr("dy")),
+            tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em")
+        while (word = words.pop()) {
+            line.push(word)
+            tspan.text(line.join(" "))
+            if (tspan.node().getComputedTextLength() > width) {
+                line.pop()
+                tspan.text(line.join(" "))
+                line = [word]
+                tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", `${++lineNumber * lineHeight + dy***REMOVED***em`).text(word)
+        ***REMOVED***
+    ***REMOVED***
+***REMOVED***)
+***REMOVED***
+
+
+////////////////////////////////////////// Procesos ////////////////////////////////////////////////////
+function GetRecursosPorNivelYAnio(anio) {
+    procesos = [];
+    $.ajax({
+        contentType: "application/json; charset=utf-8",
+        url: "api/ServiciosEntidad/GetProcesosPorAnio",
+        type: "GET",
+        data: {
+            anio: anio,
+            codEntidad: $("#codigoEntidadId").val()
+    ***REMOVED***
+***REMOVED***).done(function (data) {
+
+        procesos = data.data;
+        inidata = ((paginaActual - 1) * cantXPagina);
+        findata = (paginaActual * cantXPagina) - 1;
+
+        var institucionesPorPagina = jQuery.grep(procesos, function (n, i) {
+            return (i >= inidata && i <= findata);
+    ***REMOVED***);
+        GetListadoInstituciones(institucionesPorPagina);
+        dibujarPagNumeradas(paginaActual);
+***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+        alert("Error " + xhr.status + "_" + thrownError);
+***REMOVED***);
+
+***REMOVED***
+
+
+function GetListadoInstituciones(institucionesPorPagina) {
+
+    $("#divProcesos").html("");
+    var html_list = '<div class="card-entidades-group">';
+    for (var i = 0; i < institucionesPorPagina.length; i++) {
+
+        html_list += '<div id="proceso_' + i.toString() + '" class="card d-flex">';
+        html_list += '<div class="headEnt">';
+        html_list += '<div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>' + institucionesPorPagina[i]['codigoproceso'] + '</strong></span>';
+        html_list += '<span class="td1">' + institucionesPorPagina[i]['descripcion'] + ' </span>';
+        html_list += '</div>';
+        html_list += '<div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">' + institucionesPorPagina[i]['estadoProceso'].toString() + ' </span ></div > ';
+        html_list += '<div class="data1"><span class="labelTit">Modalidad</span><span class="td1">' + institucionesPorPagina[i]['modalidad'].toString() + ' </span></div>';
+        html_list += '<div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">$ ' + institucionesPorPagina[i]['montoEstimado'].formatMoney(2, '.', ',').toString() + ' </span></div>';
+        html_list += '</div>';
+        html_list += '<div class="btn-action">';
+        html_list += '<div class="btnPerfil">';
+        html_list += '<a target="_blank" href="' + institucionesPorPagina[i]['url'] + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br /> <span>VER PROCESO</span></a>';
+        html_list += '</div>';
+        html_list += '</div>';
+        html_list += '</div>';
+
+***REMOVED***
+    html_list += '</div>';
+    $("#divProcesos").html(html_list);
+
+    dibujarPagNumeradas(1);
+***REMOVED***
+
+//paginador
+
+function dibujarPagNumeradas(paginaActual) {
+    var totalNumber = proyectos.length;
+    var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
+
+    if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
+        totalPages = totalPages + 1;
+***REMOVED***
+    var pagActual = parseInt(paginaActual);
+
+    var totalNumerosPaginador = 10;
+    $("#divPagFichasPro").html("");
+
+    var pagEnlace = "";
+
+    var cociente = Math.floor(pagActual / totalNumerosPaginador);
+    var residuo = pagActual % totalNumerosPaginador;
+    var inicio = 1;
+    if (residuo == 0) {
+        inicio = (pagActual - totalNumerosPaginador) + 1;
+***REMOVED*** else {
+        inicio = (cociente * totalNumerosPaginador) + 1;
+***REMOVED***
+
+    var fin = inicio + (totalNumerosPaginador - 1);
+    if (totalPages < totalNumerosPaginador) {
+        fin = totalPages;
+***REMOVED***
+    if (fin > totalPages) {
+        fin = totalPages;
+***REMOVED***
+    if (pagActual > totalNumerosPaginador && totalPages >= totalNumerosPaginador) {
+        pagEnlace += '<a id="page_left" role="button" class="material-icons md-24" data-page="' + (inicio - totalNumerosPaginador) + '"><span class="">chevron_left</span></a>';
+***REMOVED***
+
+    for (var i = inicio; i <= fin; i++) {
+        if (i == pagActual) {
+            pagEnlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
+    ***REMOVED*** else {
+            pagEnlace += '<a class="page_left" role="button" data-page="' + i + '">';
+            pagEnlace += '<span class="glyphicon"></span>';
+            pagEnlace += '<text class="paginacion">' + i + '</text>';
+            pagEnlace += '</a>';
+    ***REMOVED***
+
+***REMOVED***
+
+    if (pagActual < totalPages) {
+        if (fin < totalPages) {
+            pagEnlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
+    ***REMOVED***
+***REMOVED***
+
+    $("#divPagFichasPro").html(pagEnlace);
+
+    $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
+        paginaActual = $(this).attr("data-page");
+
+        $("#divProcesos").empty();
+        inidata = ((paginaActual - 1) * cantXPagina);
+        findata = (paginaActual * cantXPagina) - 1;
+
+        var institucionesPorPagina = jQuery.grep(proyectos, function (n, i) {
+            return (i >= inidata && i <= findata);
+    ***REMOVED***);
+
+        GetListadoInstituciones(institucionesPorPagina);
+        dibujarPagNumeradas(paginaActual);
+***REMOVED***);
+
+***REMOVED***
+
+        function configuraEnlaceContratista() {
+            $(".enlace_contratista").click(function () {
+                var ruc = $(this).attr('data-parameter');
+                var dataValue = $(this).attr('data-parameter'),
+                    dataType = $(this).attr('data-type').toLowerCase();
+                document.cookie = "ruc=" + ruc + ";path=/;";
+                var url = "/contratista?" + dataType + "=" + dataValue;
+                window.open(url, '_blank');
+
+        ***REMOVED***);
+
+
+    ***REMOVED***
+Number.prototype.formatMoney = function (c, d, t) {
+    var n = this,
+        c = isNaN(c = Math.abs(c)) ? 2 : c,
+        d = d == undefined ? "." : d,
+        t = t == undefined ? "," : t,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+***REMOVED***;

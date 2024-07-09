@@ -65,10 +65,8 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
         ***REMOVED***
     ***REMOVED***
 
-
-
         [HttpGet("Contrato")]
-        public ModelContratosData Contrato(int Annio, int NumeroPagina, int RegistrosPorPagina, string NombreEntidad, string NombreProceso, string Estado, string Moneda, string NombreContratista, string CodigoProveedor, string OrigenInformacion, string CodigoComprador)
+        public ModelContratosData Contrato(int Annio, int NumeroPagina, int RegistrosPorPagina, string NombreEntidad, string NombreProceso, string Estado, string Moneda, string NombreContratista, string CodigoProveedor, string OrigenInformacion, string CodigoComprador, string CodigoContrato)
         {
 
             ModelContratosData objReturn = new ModelContratosData();
@@ -83,6 +81,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
             filtros.CodigoProveedor = CodigoProveedor;
             filtros.OrigenInformacion = OrigenInformacion;
             filtros.CodigoComprador = CodigoComprador;
+            filtros.CodigoContrato = CodigoContrato;
 
 
             try
@@ -100,7 +99,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                 return objReturn;
         ***REMOVED***
     ***REMOVED***
-
 
         [HttpGet("Contratista")]
         public ModelContratosData Contratista(int Annio, int NumeroPagina, int RegistrosPorPagina, string NombreEntidad, string NombreProceso, string Estado, string Moneda, string NombreContratista, string CodigoProveedor, string OrigenInformacion)
@@ -135,8 +133,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
         ***REMOVED***
     ***REMOVED***
 
-
-
         [HttpGet("DataContratosAnios")]
         public ModelContratosData DataContratosAnios(string Contratista)
         {
@@ -158,8 +154,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                 return objReturn;
         ***REMOVED***
     ***REMOVED***
-
-
 
         [HttpGet("DataValorContratosAnios")]
         public ModelContratosData DataValorContratosAnios(string Contratista)
@@ -235,6 +229,27 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
         ***REMOVED***
 
 
+    ***REMOVED***
+
+
+        [HttpGet("GetArticulosContrato")]
+        public ModelArticulosContrato GetArticulosContrato(string CodigoContrato)
+        {
+            ModelArticulosContrato objReturn = new ModelArticulosContrato();
+            try
+            {
+                var aux = new ContratosBLL(_connection);
+                var valores = aux.ObtenerArticulosContrato(CodigoContrato);
+                objReturn = valores;
+                objReturn.Status = true;
+                return objReturn;
+        ***REMOVED***
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.InnerException;
+                return objReturn;
+        ***REMOVED***
     ***REMOVED***
 
 ***REMOVED***

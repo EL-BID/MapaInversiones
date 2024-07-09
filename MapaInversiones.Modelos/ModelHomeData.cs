@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using PlataformaTransparencia.Modelos.Comunes;
 using PlataformaTransparencia.Modelos.Contratos;
-using PlataformaTransparencia.Modelos.Plan;
+using PlataformaTransparencia.Modelos.Home;
+using PlataformaTransparencia.Modelos.OrganismoFinanciador;
 using PlataformaTransparencia.Modelos.Proyectos;
 
 namespace PlataformaTransparencia.Modelos
@@ -166,7 +166,7 @@ namespace PlataformaTransparencia.Modelos
         public List<InfoProyectos> priorityProjects { get; set; ***REMOVED***
         public List<InfoEntidadesConsolida> Entidades { get; set; ***REMOVED***
 
-        public List<InfoRecAsignadosPlan> RecursosPerObjeto { get; set; ***REMOVED***
+        public List<InfoRecAsignadosPresupuesto> RecursosPerObjeto { get; set; ***REMOVED***
 
         public List<InfoRecAsignadosPlan> RecursosAsignados { get; set; ***REMOVED***
 
@@ -178,5 +178,31 @@ namespace PlataformaTransparencia.Modelos
 
         public string MaxAnnioEntidades { get; set; ***REMOVED***
 
+        public int maxAnnioPresupuesto { get; set; ***REMOVED***
+
+        /// <summary>
+        /// Arreglo con objetos representando el grafico de proyectos por sector - obras
+        /// </summary>
+        public List<InfoProjectPerSector> ProjectsPerSectorGroup
+        {
+            get { return projectsPerSectorGroup; ***REMOVED***
+            set { projectsPerSectorGroup = value; ***REMOVED***
+    ***REMOVED***
+        private List<InfoProjectPerSector> projectsPerSectorGroup = new List<InfoProjectPerSector>();
+
+
+        public itemConteoProjects countOngoingProjects { get;set; ***REMOVED***
+
+        public InfoPresupuestoEncabezado valPresupuestoEncabezado { get; set; ***REMOVED***
+
+        public List<string> aniospresupuesto = new List<string>();
+
+        public List<InfoFuentesporAnnio> fuentesporAnnios = new List<InfoFuentesporAnnio>();
+
+        public InfoPresupuestoEncabezado contprocesoscontratos { get; set; ***REMOVED***
+
+        public List<InfoOrganismosFinan> OrganismosFinanciadores = new List<InfoOrganismosFinan>();
+
+        public ModelDataConsolidadoFinanciador ConsolidadoOrganismoFinanciador { get; set; ***REMOVED*** = new();
 ***REMOVED***
 ***REMOVED***

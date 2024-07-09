@@ -26,6 +26,7 @@ namespace PlataformaTransparencia.Negocios.Contracts
         private List<int> sectors;
         private List<int> status;
         private List<int> orgFinanciador;
+        private List<int> entidadEjecutora;
         private List<decimal> topleft;
         private int zoom;
         private List<int> programa;
@@ -50,6 +51,7 @@ namespace PlataformaTransparencia.Negocios.Contracts
             this.sectors = new List<int>();
             this.status = new List<int>();
             this.orgFinanciador = new List<int>();
+            this.entidadEjecutora = new List<int>();
             this.zoom = -1;
             this.topleft = new List<decimal>();
             this.bottomrigth = new List<decimal>();
@@ -93,12 +95,7 @@ namespace PlataformaTransparencia.Negocios.Contracts
                     this.DataProjectsSearchList.Status = true;
             ***REMOVED***
 
-                //CMC: Agregar el Ejecutor a los proyectos
-                //foreach ( objectProjectsSearchMapProject proyecto in this.DataProjectsSearchList.objects)
-                //{
-                    
-                //    proyecto.Ejecutor = string.Concat(new BllProjectProfile().NameActorByProject(CommonConstants.CodigoEjecutor, Convert.ToInt32(proyecto.location)).Select(p => p.Nombre));
-                //***REMOVED***
+
         ***REMOVED***
             catch (Exception exception)
             {
@@ -139,6 +136,10 @@ namespace PlataformaTransparencia.Negocios.Contracts
                 if (parameters.Keys.Contains<string>("orgfinanciador"))
                 {
                     this.orgFinanciador = (from n in parameters["orgfinanciador"].Split(new char[] { ',' ***REMOVED***) select int.Parse(n)).ToList<int>();
+            ***REMOVED***
+                if (parameters.Keys.Contains<string>("entidadejecutora"))
+                {
+                    this.orgFinanciador = (from n in parameters["entidadejecutora"].Split(new char[] { ',' ***REMOVED***) select int.Parse(n)).ToList<int>();
             ***REMOVED***
                 if (parameters.Keys.Contains<string>("query"))
                 {
@@ -193,7 +194,7 @@ namespace PlataformaTransparencia.Negocios.Contracts
 
         private FiltroBusquedaProyecto ObtenerFiltroPorParametros()
         {
-            return new FiltroBusquedaProyecto(this.zoom, this.regions, this.departments, this.municipalities, this.sectors, this.status, this.orgFinanciador, this.periods, this.filtroNombreProyecto, this.topleft, this.bottomrigth, this.programa);
+            return new FiltroBusquedaProyecto(this.zoom, this.regions, this.departments, this.municipalities, this.sectors, this.status, this.orgFinanciador, this.entidadEjecutora, this.periods, this.filtroNombreProyecto, this.topleft, this.bottomrigth, this.programa);
     ***REMOVED***
 
         // Properties

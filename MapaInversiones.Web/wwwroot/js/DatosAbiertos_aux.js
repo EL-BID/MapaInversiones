@@ -1,13 +1,57 @@
-﻿var datoscontrato = JSON.parse($("#boxcontrato").attr('data-contratos'));
-var datospresupuesto = JSON.parse($("#boxpresupuesto").attr('data-presupuesto'));
-
-inicializaDatos();
+﻿inicializaDatos();
 
 function inicializaDatos() {
-    var datos = $("#datoscontratos option:selected").val()
-    cargaannos(datoscontrato, datos, 'annocontratos', 'idDicContratos', 'idUltimaActContratos', 'FuenteContratos');
-    var datos2 = $("#datospresupuesto option:selected").val()
-    cargaannos(datospresupuesto, datos2, 'annopresupuesto', 'idDicPresupuesto', 'idUltimaActPresupuesto', 'FuentePresupuesto');
+
+    cargarfuentesdatos();
+***REMOVED***
+
+function cargarfuentesdatos() {
+    $.ajax({
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        url: "/api/ServiciosDatosAbiertos/ObtenerFuentesDatos",
+        cache: false,
+        data: false,
+        success: function (result) {
+            if (result.status == true) {
+                var info = result.fuentesRecursos;
+                var numproyectos = 0;
+                var aportado = 0;
+                var htmldivfuente = '';
+                var numeroorganismosmostrar = 3;
+                if (info != null) {
+                    for (var i = 0; i < info.length; i++) {
+                        var classdivfuente = "fuente" + info[i].idFuente;
+                        numproyectos += info[i].numeroProyectos;
+                        aportado += info[i].valorVigente;
+                        var htmldivfuente = '';
+                            htmldivfuente += '<div class="fuentes-data">';
+                            htmldivfuente += '<div class="source-fuente" ><span class="">Fuente de datos:</span><span class="text-bold">' + info[i].nombreFuente + '</span></div>';
+                        htmldivfuente += '<div class="source-fuente"><span class="">Última actualización:</span><span class="text-bold">' + info[i].fechaActualizacionFuente.toString().substr(0, 10) + '</span></div>';
+                        htmldivfuente += '</div>';
+
+                        $("." + classdivfuente).html(htmldivfuente);
+
+
+                ***REMOVED***
+                    
+            ***REMOVED***
+
+        ***REMOVED*** else {
+                bootbox.alert("Error: " + result.Message, function () {
+
+            ***REMOVED***);
+        ***REMOVED***
+
+      ***REMOVED***
+        error: function (response) {
+            bootbox.alert(response.responseText);
+      ***REMOVED***
+        failure: function (response) {
+            bootbox.alert(response.responseText);
+    ***REMOVED***
+***REMOVED***);
 ***REMOVED***
 
 function cargaannos(setdatos,datos,elemsel,elemdic,elemultimaact,elemfuente) {

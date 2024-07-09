@@ -1,0 +1,18 @@
+﻿html {
+  font-size: 14px;
+***REMOVED***
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  ***REMOVED***
+***REMOVED***
+
+html {
+  position: relative;
+  min-height: 100%;
+***REMOVED***
+
+body {
+  margin-bottom: 60px;
+***REMOVED***

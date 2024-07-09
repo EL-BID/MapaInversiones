@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using PlataformaTransparencia.Modelos.Comunes;
 using PlataformaTransparencia.Modelos.Contratos;
 
 namespace PlataformaTransparencia.Modelos
 {
-    public class ModelContratistaData : RespuestaContratoBase
+  public class ModelContratistaData : RespuestaContratoBase
     {
         /// Datos encabezado
         /// </summary>
@@ -17,7 +16,7 @@ namespace PlataformaTransparencia.Modelos
         /// id identificador 
         /// </summary>
         public string ruc { get; set; ***REMOVED***
-        public string CodigoContrato { get; set; ***REMOVED***
+        public string codigoContrato { get; set; ***REMOVED***
 
         /// <summary>
         /// Arreglo con objetos representando el grafico de contratos por año
@@ -53,5 +52,24 @@ namespace PlataformaTransparencia.Modelos
 
         public List<EncabezadoContratosCancelados> listEncabezadoContratosCancelados;
 
+        public List<UnidadCompras> listUnidadCompra;
+
+        public List<Contratista> listContratista;
+        public List<TotalContrato> listTotalContratos;
+
+
+        public List<TotalProceso> listTotalProcesos;
+        public Nullable<int> numProcesos { get; set; ***REMOVED***
+        public Nullable<decimal> valorProcesos { get; set; ***REMOVED***
+        public Nullable<decimal> valorEjecutado { get; set; ***REMOVED***
+
+        public Nullable<int> numProcesosCancelados { get; set; ***REMOVED***
+        public Nullable<decimal> valProcesosCancelados { get; set; ***REMOVED***
+
+        public List<ContratosEstado> listEstadosContratos;
+        public Nullable<int> tipoEmergencia { get; set; ***REMOVED***
+        public string nombreUnidadCompra { get; set; ***REMOVED***
+
+        public string nombreEntidad { get; set; ***REMOVED***
 ***REMOVED***
 ***REMOVED***

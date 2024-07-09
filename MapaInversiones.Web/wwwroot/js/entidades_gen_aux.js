@@ -5,6 +5,7 @@ var globales_tab = [];
 var cantXPagina = 6;
 inicializaDatos();
 
+
 GetRecursosPorNivel(anyo_actual);
 
 function inicializaDatos() {
@@ -60,10 +61,9 @@ function getDataTab(nom_tab) {
         var pagina_actual = 1;
         var ini_data = ((pagina_actual - 1) * cantXPagina);
         var fin_data = (pagina_actual * cantXPagina) - 1;
-        var data_pagina = jQuery.grep(globales_tab, function (n, i) {
+        var data_pagina = arr = jQuery.grep(globales_tab, function (n, i) {
             return (i >= ini_data && i <= fin_data);
     ***REMOVED***);
-        var arr = data_pagina;
         getEstructuraInfograficoPerEntidad(data_pagina, pagina_actual);
 
 ***REMOVED***
@@ -91,8 +91,6 @@ function GetRecursosPorNivel(anyo) {
             $("#PresupuestoVigente").html(textoVigente);
             
 
-            //var distintos = globales.map(item => item.labelGroup)
-            //    .filter((value, index, self) => self.indexOf(value) === index);
             var distintos = data.consolidadoNiveles;
             var totalEntidades = data.totalCantidades;
 
@@ -161,8 +159,7 @@ function getEstructuraInfograficoPerEntidad(datos, pagina) {
     for (var i = 0; i < datos.length; i++) {
         var nomCollapse = "collapseOne_" + i_aux.toString() + "_" + j_aux.toString();
         var nomHeading = "headingOne_" + i_aux.toString() + "_" + j_aux.toString();
-        //total_avance += datos[i].ejecutado;
-        //total_presupuesto += datos[i].vigente;
+
         var entidad_nom = datos[i].label;
         var porc_ejecutado = 0;
         if (datos[i].vigente > 0) {
@@ -210,9 +207,7 @@ function getEstructuraInfograficoPerEntidad(datos, pagina) {
         html_str += '<span class="labelTit">% Ejecución</span>';
         html_str += '<span class="td1">' + porc_ejecutado.formatMoney(1, '.', ',').toString() + '</span>';
         html_str += '</div>';
-        //------------------
-        //html_str += '<h6 class="btnPerfil badge bg-light text-dark"><i class="material-icons md-18">info_outline</i> Ver Detalle</h6>';
-        //------------------
+
         html_str += '</div >';
         html_str += '</a>';
         html_str += '</div>';
@@ -340,13 +335,12 @@ function dibujarPagNumeradas(actual, total, totalPag) {
     $("#divPagFichas").html(pag_enlace);
 
     $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
-        var pagina_actual = $(this).attr("data-page");
+        pagina_actual = $(this).attr("data-page");
         var ini_data = ((pagina_actual - 1) * cantXPagina);
         var fin_data = (pagina_actual * cantXPagina) - 1;
-        var data_pagina = jQuery.grep(globales_tab, function (n, i) {
+        var data_pagina = arr = jQuery.grep(globales_tab, function (n, i) {
             return (i >= ini_data && i <= fin_data);
     ***REMOVED***);
-        var arr = data_pagina;
         $("#divListado").empty();
         getEstructuraInfograficoPerEntidad(data_pagina, pagina_actual);
 ***REMOVED***);
@@ -357,18 +351,18 @@ function dibujarPagNumeradas(actual, total, totalPag) {
 function monedaSimbolo(codigo) {
     var moneda = [];
     moneda["USD"] = "USD$";
-    moneda["HND"] = "L";
+    moneda["HND"] = "B/.";
 
     return moneda[codigo];
 ***REMOVED***
 
 Number.prototype.formatMoney = function (c, d, t) {
-    n = this;
-    c = isNaN(c = Math.abs(c)) ? 2 : c;
-    d = d == undefined ? "." : d;
-    t = t == undefined ? "," : t;
-    let s = n < 0 ? "-" : "";
-    let i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "";
-    var j = (j = i.length) > 3 ? j % 3 : 0;
+    var n = this,
+        c = isNaN(c = Math.abs(c)) ? 2 : c,
+        d = d == undefined ? "." : d,
+        t = t == undefined ? "," : t,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 ***REMOVED***;

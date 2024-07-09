@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlataformaTransparencia.Modelos.Entidad;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

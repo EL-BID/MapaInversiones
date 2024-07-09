@@ -45,7 +45,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
             var filtroEstado = new List<filtrosParticipacion>();
             filtroEstado = part.ObtenerEstadosComentarioAsync();
-            var tipoComentario = part.ObtenerTipoComentarioAsync();
+            var tipoComentario = part.ObtenerTipoComentarioAsync(1);
             var infoAsociacion = part.ObtenerAsociacionComentarioAsync();
 
             var modeloRespuesta = new ModelDataParticipacion()

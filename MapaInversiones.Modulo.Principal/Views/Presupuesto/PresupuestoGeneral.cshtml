@@ -17,7 +17,8 @@
     var TituloVersionesPresupuesto = "";
     var LabelFuncionesGobPresupuesto = "";
     var TituloFuncionesGobPresupuesto = "";
-
+    var LabelDistSankeySectores = "";
+    var TituloDistSankeySectores = "";
 
 ***REMOVED***
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
@@ -52,8 +53,82 @@
         LabelFuncionesGobPresupuesto = @etiqueta.HtmlBodyPart.Html;
         TituloFuncionesGobPresupuesto = @etiqueta.TitlePart.Title;
 ***REMOVED***
+    else if (@etiqueta.AliasPart.Alias == "DistSankeySectores")
+    {
+        LabelDistSankeySectores = @etiqueta.HtmlBodyPart.Html;
+        TituloDistSankeySectores = @etiqueta.TitlePart.Title;
 ***REMOVED***
+***REMOVED***
+<head>
+    <style>
+        .node rect {
+            cursor: pointer;
+            fill-opacity: .8;
+            shape-rendering: crispEdges;
+    ***REMOVED***
 
+            .node rect:hover {
+                fill: #CF2E2E
+        ***REMOVED***
+        .node text {
+            pointer-events: none;
+S
+    ***REMOVED***
+
+        .link {
+            fill: none;
+            stroke: #000;
+            stroke-opacity: .1;
+    ***REMOVED***
+
+            .link:hover {
+                stroke-opacity: .2;
+        ***REMOVED***
+
+        .arc text {
+            font: 12px sans-serif;
+            text-anchor: middle;
+            font-weight: bold;
+    ***REMOVED***
+
+        .arc path {
+            stroke: #fff;
+    ***REMOVED***
+
+        .toolTip {
+            position: absolute;
+            display: none;
+            width: auto;
+            height: auto;
+            background: none repeat scroll 0 0 white;
+            border: 0 none;
+            border-radius: 8px 8px 8px 8px;
+            box-shadow: -3px 3px 15px #888888;
+            color: red;
+            font: 12px sans-serif;
+            padding: 5px;
+            text-align: center;
+    ***REMOVED***
+
+        .seccion-breadcrumb {
+            display: none;
+    ***REMOVED***
+
+    </style>
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var miDiv = document.getElementById("miDiv");
+
+        // Mostrar el div
+        miDiv.style.display = "block";
+
+        // Ocultar el div después de 3000 milisegundos (3 segundos)
+        setTimeout(function () {
+            miDiv.style.display = "none";
+      ***REMOVED*** 8000);
+***REMOVED***);
+</script>
 <section class="banner-main">
 
     <div class="container">
@@ -67,43 +142,39 @@
                                 <a href="\">Inicio</a>
                                 <i class="material-icons md-18">chevron_right</i>
                             </li>
-                            <li><a href="#!">Presupuestos</a><i class="material-icons md-18">chevron_right</i></li>
-                            <li>Presupuestos de la República</li>
+                            <li>Trazabilidad al presupuesto nacional</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </nav><!-- End bread crumbs -->
 
-
         <div class="row justify-content-center">
 
             <div class="col-lg-8">
                 <div class="banner-main-info">
-                    <div class="banner-main-title">
-                        <h1>Presupuestos de la República</h1>
+                    <div class="banner-mai-title">
+                        <h1>Trazabilidad al presupuesto nacional</h1>
                     </div>
                     <div class="banner-main-desc">
-                        <p>
-                            El Presupuesto General de la República es el conjunto de ingresos y gastos proyectados por el Gobierno en un año determinado. El ambito de cobertura de la informacion presupuestaria publicada incluye el sector de Gobierno Central y las Instituciones Descentralizadas Empresariales ( Incisos 1, 2 y 3, Art. 2 LOP)
-                        </p>
-
+                        <p>Realice el seguimiento detallado del flujo de fondos desde su origen hasta su aplicación en diversos sectores e instituciones.</p>
                     </div>
-
                 </div>
             </div>
 
         </div>
+
+        <!--SELECT AÑO-->
         <div class="row justify-content-center">
             <div class="col-lg-4">
                 <!--YEAR FILTER-->
-                <div class="form-group subtitle">
+                <div class="form-group">
                     <label for="input-select">Selecciona un año</label>
                     <select class="form-select" aria-label="Selecciona un año:" id="annioPresupuesto">
                         @foreach (var item in Model.periodos)
                         {
                             <text>
-                                <option value="@item">@item</option>
+                            <option value="@item.id">@item.id</option>
                             </text>
 
                     ***REMOVED***
@@ -111,330 +182,370 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!--NAVIGATION ON PAGE-->
-    <div class="row navs-shortcuts">
 
-        <div class="" id="navs-header">
-            <a class="btn-section" href="#ConsolidadoPeriodos">
-                <span class="ic-shortcut"><i class="material-icons md-24">leaderboard</i></span>
-                <span class="text-btn">Comparativo</span>
-            </a>
-            <a class="btn-section" href="#Etapas">
-                <span class="ic-shortcut"><i class="material-icons md-24">leaderboard</i></span>
-                <span class="text-btn">Comparativo Etapas</span>
-            </a>
-            <a class="btn-section" href="#Funciones">
-                <span class="ic-shortcut"><i class="material-icons md-24">leaderboard</i></span>
-                <span class="text-btn">Comparativo Funciones</span>
-            </a>
-            <a class="btn-section" href="#GrupoGasto">
-                <span class="ic-shortcut"><i class="material-icons md-24">payments</i></span>
-                <span class="text-btn">Grupo de Gasto</span>
-            </a>
-            <a class="btn-section" href="#Distribucion">
-                <span class="ic-shortcut"><i class="material-icons md-24">calendar_view_month</i></span>
-                <span class="text-btn">Distribución</span>
-            </a>
-            <a class="btn-section" href="#Ejecucion">
-                <span class="ic-shortcut"><i class="material-icons md-24">donut_small</i></span>
-                <span class="text-btn">Ejecución</span>
-            </a>
-
-        </div>
     </div>
+
 </section>
-<section class="section" id="ConsolidadoPeriodos">
-    <div class="container">
-        <div class="section-heading text-center">
-            <h2>Comparación de presupuesto aprobado por años</h2>
-        </div>
-        <div class="row" id="divDatosConsolidado">
-        </div>
-    </div>
-</section>
-
-<section class="section-gray" id="Etapas">
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="section-heading">
-                    <h2>@TituloVersionesPresupuesto</h2>
-                </div>
-                <div class="section-body">
-                    <p>@Html.Raw(LabelVersionesPresupuesto)</p>
-                </div>
-                <div class="form-group">
-                    <label for="versionBase">Versión Base</label>
-                    <select class="form-select selVersiones" aria-label="Selecciona una versión:" id="versionBase">
-                        @foreach (var item in Model.versiones)
-                        {
-                            <text>
-                                <option value="@item.CodigoVersion">@item.NombreVersion</option>
-                            </text>
-
-                    ***REMOVED***
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="versionBase">Versión Comparacion</label>
-                    <select class="form-select selVersiones" aria-label="Selecciona una versión:" id="versionComparacion">
-                        @foreach (var item in Model.versiones)
-                        {
-                            <text>
-                                <option value="@item.CodigoVersion">@item.NombreVersion</option>
-                            </text>
-
-                    ***REMOVED***
-                    </select>
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <!--<div class="col-lg-8 col-md-6 col-sm-12">
-                    <div class="pBotonera">
-                        <span class="btn badge rounded-pill bg-active" id="topGruposVersiones" cons="0">Top Grupos </span>
-                    </div>
-                </div>-->
-                <div class="pChart">
-                    <div width="100%" height="500px" id="divGraphVersiones">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="section" id="Funciones">
+<section class="section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-                <div class="section-heading">
-                    <h2>@TituloFuncionesGobPresupuesto</h2>
-                    <h3 class="qGasto">¿Para qué se gasta?</h3>
+            <div class="col-md-6 col-sm-6">
+                <div class="section-heading heading-left">
+                    <h2>
+                        El presupuesto de<br />
+                        inversión pública año <span id="annioPresupuestoText"></span>
+                    </h2>
                 </div>
                 <div class="section-body">
-                    <p>@Html.Raw(LabelFuncionesGobPresupuesto)</p>
+                    <p>
+                        El Presupuesto General de la Nación, un instrumento financiero esencial, proporciona un desglose detallado de los ingresos y gastos proyectados del gobierno para un año fiscal determinado.
+                    </p>
+                    <p>
+                        Este presupuesto, que regula el uso de los recursos públicos a nivel nacional, es presentado por el Gobierno Nacional para su aprobación al Congreso de la República.
+                    </p>
                 </div>
-                <div class="form-group">
-                    <div class="form-group subtitle">
-                        <label style="color:black;float:left;">Selecionar Año </label><br />
-                    </div>
-                </div>
-                <div class="d-flex">
-                    @foreach (var item in Model.periodos)
-                    {
-                        var nombre = "func_" + @item;
-                        <text>
-                            <div class="p-2">
-                                <input class="chk_gasto_func" type="checkbox" id="chk_@nombre" name="chk_gasto_periodo_funciones" value="@item">
-                                <label for=@nombre>@item</label>
+            </div>
+            <div class="col-md-6 col-sm-12">
+
+                <!--Inicia Info Presupuesto-->
+                <div class="card h-100 shadow border-0 card-presupuesto">
+                    <div class="card-body">
+                        <div class="Section-infograph">
+                            <div class="row">
+                                <div class="col-md-4 main-icon-value">
+                                    <img src="../img/svg-icons/ICO-Org-009.svg" alt="Icono decorativo Presupuesto" />
+                                </div>
+                                <div class="col-md-8 cont-pres-infograph">
+                                    <span class="h4">Presupuesto de inversión aprobado </span>
+                                    <h2 class="mb-0"><span class="big-number" id="lblValorAprobado"></span></h2>
+                                    <span class="executeV" id="lblEtiquetaMoneda"></span>
+                                </div>
                             </div>
+                        </div>
+                        <div class="cont-infograph-valores py-2">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 py-2">
+                                    <div class="main-icon-value">
+                                        <div class="ic-wrap">
+                                            <img src="../img/svg-icons/ICO-Org-010.svg" alt="Icono decorativo Presupuesto" />
+                                        </div>
+                                        <div class="desc-data">
+                                            <div class="executeV">Presupuesto Vigente</div>
+                                            <div class="presupuestoN" id="lblValorVigente"></div>
 
-                        </text>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 py-2">
+                                    <div class="main-icon-value">
+                                        <div class="ic-wrap">
+                                            <img src="../img/svg-icons/ICO-Org-010.svg" alt="Icono decorativo Presupuesto" />
+                                        </div>
+                                        <div class="desc-data">
+                                            <div class="executeV">Presupuesto Ejecutado</div>
+                                            <div class="presupuestoN" id="lblValorEjecutado"></div>
 
-                ***REMOVED***<br />
-                </div>
-                <!--funcionesCombo-->
-                <div class="form-group">
-                    <div class="form-group subtitle">
-                        <label for="funcionesId" style="color:black;float:left;">Seleccionar Funciones de Gobierno</label>
-                        <select class="form-select selectFuncion" aria-label="Selecciona una función:" id="funcionesId">
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-group subtitle">
-                        <select class="form-select selectFuncion" aria-label="Selecciona una función:" id="funcionesId_2">
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-group subtitle">
-                        <select class="form-select selectFuncion" aria-label="Selecciona una función:" id="funcionesId_3">
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-group subtitle">
-                        <select class="form-select selectFuncion" aria-label="Selecciona una función:" id="funcionesId_4">
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-group subtitle">
-                        <select class="form-select selectFuncion" aria-label="Selecciona una función:" id="funcionesId_5">
-                        </select>
-                    </div>
-                </div>
-                @*<input type="button" class="btn btn-primary" value="Comparar" id="btnCompararFunc" disabled="disabled">*@
-            </div>
-
-
-            <div class="col-lg-8">
-                <!--<div class="col-lg-8 col-md-6 col-sm-12">
-                    <div class="pBotonera">
-                        <span class="btn badge rounded-pill bg-active" id="topGruposFuncionesGob" cons="0">Top Funciones </span>
-                    </div>
-                </div>-->
-                <div class="pChart">
-                    <div width="100%" height="100%" id="divGraphFuncionesGob"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="section-gray" id="GrupoGasto">
-    <div class="container">
-
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="section-heading">
-                    <h2>@TituloGrupoGasto</h2>
-                    <h3 class="qGasto">¿En qué se gasta?</h3>
-                </div>
-                <div class="section-body">
-                    <p>@Html.Raw(LabelGrupoGasto)</p>
-                </div>
-                <div class="d-flex">
-                    @foreach (var item in Model.periodos)
-                    {
-                        var nombre = "gasto_" + @item;
-                        <text>
-                            <div class="p-2">
-                                <input class="chk_gasto" type="checkbox" id="chk_@nombre" name="chk_gasto_periodo" value="@item">
-                                <label for=@nombre>@item</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                        </text>
-
-                ***REMOVED***<br />
+                        </div>
+                    </div>
                 </div>
-                <div id="divGastoCombos">
-
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <div class="col-lg-8 col-md-6 col-sm-12">
-                    <!--<div class="pBotonera">
-                        <span class="btn badge rounded-pill bg-active" id="topGruposG" cons="0">Top Grupos </span>
-                        @*<span class="btn badge rounded-pill bg-noactive" id="todosGruposG" cons="1">Todos los Grupos </span>*@
-                    </div>-->
-                </div>
-                <div class="pChart">
-                    <div width="100%" height="500px" id="divGraphGrupoGasto"></div>
-                </div>
+                <!--Fin Info Presupuesto-->
             </div>
         </div>
     </div>
 </section>
-<section class="section" id="Distribucion">
+<section class="section section-gray" id="RecPerFuncionBySector">
     <div class="container">
+        <div class="row py-4">
+            <div class="col-12">
+                <div class="section-heading heading-left mb-0">
+                    <h2>¿Para qué se gasta?</h2>
+                    <div class="section-subheading">
+                        <p>El presupuesto general de inversiones se gasta en una variedad de áreas con el objetivo de satisfacer las necesidades de la población. <span class="text-bold">Haciendo clic en los cuadros del siguiente gráfico podrá ver, por ejemplo, el monto del presupuesto vigente para servicios sociales, protección del medio ambiente y más.</span></p>
+                    </div>
+                </div>                
+            </div>
+        </div>
+       
         <div class="row">
-            <div class="col-lg-4">
-                <div class="section-heading">
-                    <h2>@TituloDistPresupuesto</h2>
-                    <h3 class="qGasto">¿Quién gasta?</h3>
-                </div>
-                <div class="section-body">
-                   <p>@Html.Raw(@LabelDistPresupuesto)</p>
-                    <div class="wrap-bigData">
-                        <h5>Presupuesto Vigente</h5>
-                        <h3 id="totalPresupuestoValue"></h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8" id="divContenedorGrafica1" style="padding-right: 10px; padding-left: 5px; padding-top: 5px;">
-                <div class="col-lg-8 col-md-6 col-sm-12">
-                    <div class="pBotonera">
-                        <span class="btn badge rounded-pill bg-active" id="todosNivel" cons="0">Por Nivel</span>
-                        <!--<span class="btn badge rounded-pill bg-noactive" id="todosOrganismo" cons="1">Por Organismo</span>-->
-
-                    </div>
-                </div>
+            <div class="col-lg-12">
                 <div class="pChart">
-                    <div id="divGraphRecursosObj"></div>
+                    <div id="divGraphPerFuncion"></div>
                 </div>
             </div>
         </div>
+
     </div>
 </section>
-<section class="section-gray" id="Ejecucion">
+<section class="section" id="RecPerSector">
     <div class="container">
-        <div class="section-heading text-center">
-            <h2>@TituloDistObjetosGasto</h2>
+         <div class="row py-4">
+            <div class="col-12">
+                <div class="section-heading heading-left mb-0">
+                    <h2>Trazabilidad del presupuesto</h2>
+                    <div class="section-subheading">
+                        <p>Visualiza el flujo del presupuesto desde su origen (Fuentes de financiación) hasta su ejecución (proyectos de inversión).</p>
+                    </div>
+                </div>                
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <div class="section-body">
-                    <p>@Html.Raw(LabelDistObjetosGasto)</p>
-                </div>
-            </div>
-            <!-- VIEW OPTIONS-->
-            <div class="col-md-10 col-md-offset-1">
-                <div class="Options">
-                    <div class="switchTable" id="filtro_iconos" opc="">
-                        <p class="vis-none">Tipo de visualización</p>
-                        <a id="enlacelistado_gasto" codigo="gasto" role="button" class="tipo_grafica btn activo">
-                            <i class="material-icons md-24">dashboard</i> <span class="txt-bold">Por Grupo de Gasto</span>
-                        </a>
-                        <a id="enlacelistado_entidad" codigo="entidad" role="button" class="tipo_grafica btn ">
-                            <i class="material-icons md-24">location_city</i> <span class="txt-bold">Por Institución</span>
-                        </a>
+                <div class="tabs goals">
+                    <ul id="tabTipoContratos" class="tabs-nav">
+                        <li id="tab_perSector" class="enlace_tab active">
+                            <div class="goal-number"></div>
+                            <div class="goal-name"><div class="h4">Por sector</div></div>
+                        </li>
+                        <li id="tab_perOrganismo" class="enlace_tab">
+                            <div class="goal-number"></div>
+                            <div class="goal-name"><div class="h4">Por organismo financiador</div></div>
+                        </li>
+                    </ul>
 
+                    <div class="row justify-content-center" id="divPerSectorTab">
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card shadow border-0 card-entidad">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label for="filter_sector_sankey">Seleccione un sector</label>
+                                                <select class="form-select selectSecSankey" aria-label="Selecciona un sector:" id="filter_sector_sankey">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <span class="h4">Presupuesto Vigente</span><br />
+                                            <span class="presvalor2" id="totalSankeyPerSector"></span>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <span class="h4">Ejecutado</span><br />
+                                            <span class="presvalor2" id="PorcEjecPerSector"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--TEXTO COMPLEMENTARIO-->
+                            <!--Inicia Graficos-->
+                            <div class="row">
+                                <div class="col-lg-12 col-sm-12">
+                                    <p>@Html.Raw(LabelDistSankeySectores)</p>
+                                </div>
+                            </div>
+                            <div class="hint-help">
+                                    <div class="row justify-content-center">
+                                            <div class="col-lg-4">
+                                                <div class="wrap-hint-section">
+                                                    <div class="wrap-icon-hint">
+                                                        <img src="../img/ic-sankey1.svg" alt="icono decorativo relacionado a la acción" />
+                                                    </div>
+                                                    <div class="text-hint">
+                                                        <span class="text-bold">Haz clic en cada columna</span> para identificar rápidamente la distribución de recursos en las diferentes etapas (Subfunción, Institución, objetos de gasto y proyectos de inversión).
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="wrap-hint-section">
+                                                        <div class="wrap-icon-hint">
+                                                            <img src="../img/ic-sankey2.svg" alt="icono decorativo relacionado a desplazar el cursor" />
+                                                        </div>
+                                                        <div class="text-hint">
+                                                            <span class="text-bold">Desplaza el cursor sobre las lineas que conectan las columnas</span> para conocer el monto de los recursos que fluyen entre si.
+                                                        </div>
+                                                 </div>
+                                             </div>
+                                           
+                                    </div>
+                            </div>
+
+                        </div>
                     </div>
 
-                </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center" id="divPerOrganismoTab" style="display:none;">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="card shadow border-0 card-entidad">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label for="input-select">Seleccione un organismo</label>
+                                                <select class="form-select selectSecSankey" aria-label="Selecciona un organismo:" id="filter_organismo_sankey">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                    <span class="h4">Monto Financiado</span><br />
+                                            <span class="presvalor2" id="totalSankeyPerOrganismo"></span>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <span class="h4">Ejecutado</span><br />
+                                            <span class="presvalor2" id="PorcEjecPerOrganismo"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="hint-help">
+                                <div class="row justify-content-center">
+                                        <div class="col-lg-4">
+                                            <div class="wrap-hint-section">
+                                                <div class="wrap-icon-hint">
+                                                    <img src="../img/ic-sankey1.svg" alt="icono decorativo relacionado a la acción" />
+                                                </div>
+                                                <div class="text-hint">
+                                                    <span class="text-bold">Haz clic en cada columna</span> para identificar rápidamente la distribución de recursos en las diferentes etapas (Sector, Institución y proyectos de inversión).
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="wrap-hint-section">
+                                                <div class="wrap-icon-hint"><img src="../img/ic-sankey2.svg" alt="icono decorativo relacionado a desplazar el cursor" /></div>
+                                                <div class="text-hint">
+                                                    <span class="text-bold">Desplaza el cursor sobre las lineas que conectan las columnas</span> para conocer el monto de los recursos que fluyen entre si.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<div class="col-lg-3">
+                                            <div class="wrap-hint-section">
+                                                <div class="wrap-icon-hint"><img src="../img/ic-sankey3.svg" alt="icono decorativo relacionado a desplazar el cursor" /></div>
+                                                <div class="text-hint">
+                                                    <span class="text-bold">Escoge la densidad de los datos (vista compacta, vista extendida)</span>  que más se adapte a tus necesidades.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <a class="btn btn-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                X
+                                            </a>
+                            </div>-->
+                                </div>
 
+                            </div>
+                           <!--VISTA EXTENDIDA O COMPACTA-->
+                           <div class="control-switch" style="display:none;">
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="tipoVistaSankey" id="vistaExtendida" value="extendida" >
+                                  <label class="form-check-label" for="vistaExtendida">Vista extendida</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="tipoVistaSankey" id="vistaCompacta" value="compacta" checked>
+                                      <label class="form-check-label" for="vistaCompacta">Vista compacta</label>
+                                </div>
+                           </div>
+
+                        </div>
+
+                    </div>
+                    <!--Fin graficos-->
+
+                </div>
+            
+        <div class="row">
+            <div class="col-lg-12 mt-4 mb-4">
+
+                <div class="wrap_sankey">
+                    <div class="quick-hint">
+                        <div id="miDiv"><span class="text-bold">Haz clic en cada columna para identificar la distribución de recursos.</span>
+                            <div class="arrow-clip"><img src="../img/black-arrow-down.svg" alt="haga clic en las columnas" /></div>
+                        </div>
+                    </div>
+                    <button id="btnAtras">Atrás</button>
+                    <div id="sankey_basic" style="width: 100%; height: auto;"></div>
+                </div>
             </div>
-            <div id="divListadoRecursosObje">
-                <!--TABLA COMPARATIVA-->
-                <input type="hidden" id="migapanlistado" value="" />
-                <div class="comparativeTable" id="divListado">
-
+            <div class="row py-4" id="divInstitucionesPerSector" style="display:none;">
+                <h4 class="prestitle text-center" id="lblTituloListadoSec">Instituciones del Sector</h4>
+                <div id="divListadoRecursosObje">
+                    <!--TABLA COMPARATIVA-->
+                    <input type="hidden" id="migapanlistado" value="" />
+                    <div class="comparativeTable" id="divListado">
+                    </div>
                 </div>
-
+                
+            </div>
+            <div class="row py-4" id="divProyectosPerOrganismo" style="display:none;">
+            <h4 class="prestitle text-center" id="lblTituloListadoProy">Proyectos del Organismo</h4>
+               <div id="divListadoRecursosObje_proy">
+                    <!--TABLA COMPARATIVA-->
+                <input type="hidden" id="migapanlistado_proy" value="" />
+                <div class="comparativeTable" id="divListado_proy">
+                </div>
             </div>
         </div>
+
+        </div>
+         
     </div>
 </section>
-<!--RELATED INFO-->
-<section class="relatedInfo">
+
+<section class="section section-gray" id="EjecutadoVsAprobado">
     <div class="container">
-        <!--LINKS OTRAS SECCIONES-->
-        <div class="row py-5">
-            <!--LEFT COLUMN-->
-            <div class="col-lg-8">
-                <!--LINKS seccion infografia planificacion-->
-                <h2>Conoce</h2>
-                <div class="wrap-cta">
-
-                    <a href="/ProcesoPresupuesto" target="_blank" class="py-5 mb-5 px-0">
-                        <div class="h4">Presupuestos Ciudadanos<i class="material-icons md-18">arrow_forward</i> </div>
-                    </a>
-                </div><br />
-                <h2>Explora</h2>
-                <div class="wrap-cta">
-                    <a href="../Entidades" class="py-5 mb-5 px-0">
-                        <div class="h4">Ir a Instituciones <i class="material-icons md-18">arrow_forward</i> </div>
-                    </a>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading heading-left">
+                    <h2 class="mb-0">
+                        Presupuesto Vigente vs presupuesto Ejecutado
+                    </h2>
+                    <div class="section-subheading">
+                        <p><span class="text-bold">El presupuesto vigente</span> es el monto total que ha sido asignado y aprobado para un período determinado, pero que aún no ha sido gastado o comprometido en su totalidad. <span class="text-bold">El presupuesto ejecutado</span>  se refiere a la cantidad de recursos que efectivamente se ha gastado o utilizado durante un período específico. </p>
+                        <p class="text-bold">Seleccione las instituciones (máximo 5) en las que desea realizar el comparativo. </p>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="wrap-cta">
-                    <p class="card-title mb-4">Información suministrada por:</p>
-                    <a href="https://www.dominioentidad.com/" target="_blank" rel="noopener" rel="noopener">
-                        <img class="img-fluid" src="../img/logoHaciendaP.png" alt="ir a" />
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4 col-sm-4">
+                <div id="divContenedorEntidades">
                 </div>
+            </div>
+            <div class="col-md-8 col-sm-8 text-center">
+                <span class="h5" id="topEntidadesG" cons="0">Top instituciones</span>
+                <div class="mt-4" id="divGraphBarChartGastoEntidades"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section" id="HistoricoPagado">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading heading-left">
+                    <h2 class="mb-0">
+                        Histórico de ejecución presupuestaria
+                    </h2>
+                    <div class="section-subheading">
+                        <p>Este gráfico proporciona una visión histórica de cómo se han ejecutado los recursos financieros a nivel institucional.</p>
+                        <p class="text-bold">Seleccione las instituciones (máximo 5) en las que desea realizar el comparativo. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-4">
+                <div id="divContenedorEntidadesPag">
+                </div>
+            </div>
+            <div class="col-lg-8 text-center">
+                <span class="h5" id="topEntidadesPag" cons="0">Top instituciones </span>
+                <div class="mt-4" id="grafico_lineas"></div>
 
             </div>
         </div>
-
     </div>
 </section>
+
 
 <!--HELP CENTER SHORTCUT-->
-<div id="helpCenter"></div>
+
+<input id="Sector" name="Sector" type="hidden" value="@Model.Sector">
 
 
 
@@ -454,9 +565,9 @@
     ***REMOVED***
 ***REMOVED***
 </script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" integrity="sha384-KUSBBRKMO05pX3xNidXAX5N1p4iNwntmhHY4iugl7mINOyOXFL4KZWceJtMj7M0A" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
-<script src="js/presupuesto_aux.js"></script>
-@*<script src="js/filtro_aux.js"></script>*@
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+<script src="/content/dist/js/sankey.js"></script>
+<script src="js/presupuesto_aux.js"></script>

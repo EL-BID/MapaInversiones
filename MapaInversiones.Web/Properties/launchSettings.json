@@ -1,24 +1,25 @@
 {
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:8080",
-      "sslPort": 44300
+      "applicationUrl": "http://localhost:16286",
+      "sslPort": 44332
 ***REMOVED***
 ***REMOVED***
   "profiles": {
+    "PlataformaTransparencia.Web": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7133;http://localhost:5090",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+    ***REMOVED***
+      "dotnetRunMessages": true
+  ***REMOVED***
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-  ***REMOVED***
-  ***REMOVED***
-    "OrchardCore.Templates.Cms.Web": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
   ***REMOVED***

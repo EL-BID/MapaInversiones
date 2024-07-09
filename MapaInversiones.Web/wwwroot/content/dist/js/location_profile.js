@@ -52,7 +52,7 @@
            .data(ProjectsPerSectorGroup)
            .type({
                "value": "tree_map",
-               "mode": "sqarify"
+               "mode": "squarify"
        ***REMOVED***)
             .id({
                 "value": ["labelGroup","label"],
@@ -118,7 +118,7 @@
 
         ***REMOVED***
 
-            var txtDescriptivo = "Asunción es la capital y la ciudad más poblada de la República del Paraguay. El área metropolitana, llamada Gran Asunción, incluye las ciudades de San Lorenzo, Fernando de la Mora, Lambaré, Luque, Mariano Roque Alonso, Ñemby, San Antonio, Limpio, Capiatá y Villa Elisa, que forman parte del Departamento Central. El área metropolitana de Asunción tiene más de 2 millones de habitantes.";
+            var txtDescriptivo = "Texto descriptivo.";
             var div_txtPadre = d3.select("#divTxtTodosProy")
             div_txtPadre.append("h2")
             .text("Todos los proyectos")

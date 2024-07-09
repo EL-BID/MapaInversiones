@@ -1,18 +1,18 @@
 ﻿$( function() {
  
- 
-
     $('.hover-link').click(function () {
         var val_sel = $(this).attr("data-title");
         $("#tipoRefine").html('"' + val_sel+'"');
         $("#ulPaginacion").attr("refine", val_sel);
-        getListResult(0, true);
-        
+
+
 ***REMOVED***);
 
     $("#ulPaginacion").on("click", "li", function (e) {
         var $target = $(e.target);
         var index = $target.attr("pagina");
+
+      
 
         if (!isNaN(index)) {
             $target.siblings().removeClass("active");
@@ -112,7 +112,6 @@ function getListResult(pagina, repaginar=false ) {
     var val_sort = $("#selectOrden option:selected").val()*1;
     
     var totalResultados = 0;
-    
 
         $.ajax({
             type: 'GET',
@@ -120,6 +119,7 @@ function getListResult(pagina, repaginar=false ) {
             dataType: "json",
             url: "/BusquedaAsync/?SearchString=" + val_input + "&type=" + val_sel + "&start=" + val_start + "&sort=" + val_sort,
             cache: false,
+
             success: function (data) {
                 var Resultados = document.getElementById("SearchResults");
                 Resultados.innerHTML = "";

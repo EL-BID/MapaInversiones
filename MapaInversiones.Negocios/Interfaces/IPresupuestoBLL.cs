@@ -1,34 +1,34 @@
 ﻿using PlataformaTransparencia.Modelos;
-using PlataformaTransparencia.Modelos.Plan;
+using PlataformaTransparencia.Modelos.Comunes;
+using PlataformaTransparencia.Modelos.Entidad;
 using PlataformaTransparencia.Modelos.Presupuesto;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PlataformaTransparencia.Negocios.Interfaces
 {
-    public interface IPresupuestoBLL
-    {
-        public List<InfoConsolidadoPresupuesto> ObtenerRecursosPerNivel(int annio);
-        public List<InfoConsolidadoPresupuesto> ObtenerRecursosPerOrganismo(int annio);
+  public interface IPresupuestoBLL
+  {
+    public InfoConsolidadoPresupuesto GetConsolidadoPeriodos(int anyo);
 
-        public List<InfoConsolidadoPresupuesto> GetConsolidadoPeriodos(int anyo);
+    public List<InfoConsolidadoPresupuesto> GetRecursosPerfinalidad(int annio);
 
-        public List<InfoConsolidadoPresupuesto> ObtenerInfoPerGrupoDeGasto(List<int> filtro, int anyo, List<String> filtro_gasto);
+    public List<InfoPerSector> ObtenerSectoresPerNombre(int anyo);
 
-        public List<InfoEntidad> ObtenerEntidadesPlanNacional();
+    public List<InfograficoFuentes_Nivel_1> ObtDistribucionBySectorFuentes(int annio, string opcion, string tipo);
 
-    public List<InfoEntidad> ObtenerEntidadesPlanNacionalNoAlcaldias();
-    public List<infograficoGasto> GetInfograficoPerGasto(int annio);
+    public List<itemGenerico> ObtenerOrganismosPerNombre(int anyo);
 
-        public List<infograficoGasto> GetInfograficoPerEntidad(int annio);
+    public List<infograficoEntidadPerPresup> GetInfograficoPerEntidad(int annio, string id, string tipo);
 
-        public List<InfoPresupuesto> GetComparativePerVersiones(List<int> filtro, int anyo);
+    public List<InfoConsolidadoPresupuesto> ObtenerGastoEntidades(int anyo, List<string> filtro_sec);
 
-        public List<InfoConsolidadoPresupuesto> ObtenerInfoPerFuncionesGob(List<int> filtro, int anyo, List<string> filtro_func);
+    public List<InformationGraphics> ObtenerEntidadesPerNombre(int anyo);
 
-        public List<InformationGraphics> ObtenerFuncionesPerNombre(string texto, int anyo);
+    public List<InfoConsolidadoPresupuesto> ObtenerGastoPerTiempoEntidades(int anyo, List<string> filtro_sec);
 
-        public List<InformationGraphics> ObtenerGrupoGastoPerNombre(int anyo);
-***REMOVED***
+    public List<itemGenPresupuesto> GetInfograficoPerProyecto(int annio, string id);
+
+
+
+  ***REMOVED***
 ***REMOVED***

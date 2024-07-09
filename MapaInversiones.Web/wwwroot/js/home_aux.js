@@ -1,1010 +1,512 @@
-﻿$("#divGraphRecursosObj").empty();
-$("#btnAtrasGrafica").hide();
-var globales = [];
-GetRecursosPorObjeto();
-configuraAtras();
-GraficaSankey();
-pruebaTreemap();
+﻿var fuentesporAnnios = JSON.parse(document.body.getAttribute('data-fuentesporAnnios'));
+var sector_ideas_globales = [];
+var anyo_actual = $("#anioPresupuesto option:selected").val();
+$("#lblAnyoBannerSec").text(anyo_actual);
+///-------------------------------------------------------
+loadFuentesporAnnios();
 
-function pruebaTreemap() {
-    var data = [
-        { parent: "Group 1", id: "alpha", value: 29 ***REMOVED***,
-        { parent: "Group 1", id: "beta", value: 10 ***REMOVED***,
-        { parent: "Group 1", id: "gamma", value: 2 ***REMOVED***,
-        { parent: "Group 2", id: "delta", value: 29 ***REMOVED***,
-        { parent: "Group 2", id: "eta", value: 25 ***REMOVED***
-    ];
+ObtenerGraphBySectorPerGroup(anyo_actual);
 
-
-    $.ajax({
-        contentType: "application/json; charset=utf-8",
-        url: "api/servicioshome/GetRecursosPerPlan",
-        type: "GET"
-
-***REMOVED***).done(function (data) {
-        if (data.recursosPerObjeto != null) {
-            new d3plus.Treemap()
-                .data(data)
-                .select("#treemapEjemplo")
-                .groupBy(["labelGroup", "label","label_inf"])
-                .sum("rawValueDouble")
-                .render();
-            
-    ***REMOVED***
-
-
-***REMOVED***).fail(function (handleError) {
-        // Some function
-
-***REMOVED***);
-
-
-    
-
-***REMOVED***
-
-$("#btnDescargarPng").click(function () {
-    toImage();
-    
-***REMOVED***);
-
-function toImage() {
-    var dom = document.getElementById("divGraphRecursosObj");
-    d3plus.saveElement(dom, { filename: "my-chart", type: "png" ***REMOVED***)
-***REMOVED***
-
-
-//function pruebaAjaxGet() {
-//    $.ajax({
-//        url: "api/servicioshome/obtPais/america",
-//        type: "GET"
-
-//***REMOVED***).done(function (data) {
-        
-
-//***REMOVED***).fail(function (handleError) {
-//        // Some function
-        
-//***REMOVED***);
-//***REMOVED***
-
-//------------------------------------------------------------------------
-function GraficaSankey() {
-    //var codigoEntidad = document.getElementById("codigoEntidadId").innerHTML;
-    var codigoEntidad = "12-1";
-    var param = "codEntidad=" + codigoEntidad;
-    $.ajax({
-        url: "api/servicioshome/GetGraficaSankey",
-        type: "GET",
-        data: {
-            codEntidad: codigoEntidad
-    ***REMOVED***
-***REMOVED***).done(function (result) {
-        if (result.status == true) {
-            var data = result.distribucionObjetivos;
-            if (data.length > 0) {
-                var datos = obtMatrizData(data);
-                $("#sankey_basic").html("");
-                graphSankeyPloty(datos);
-                $("#sankey_basic_old").html("");
-                graphSankey("sankey_basic_old", datos);
-
+function loadProyectosPrioritarios(resultados) {
+    var limite = 60;
+    $("#divNoEncontradoEjec").hide();
+    $("#divNoExistenEjec").hide();
+    if (resultados.length > 0) {
+        for (var i = 0; i < resultados.length; i++) {
+            var valor_aux = parseFloat(resultados[i].approvedTotalMoney);
+            var nombre_aux = resultados[i].NombreProyecto.toString();
+            if (nombre_aux.length > limite) {
+                nombre_aux = nombre_aux.substr(0, limite) + "...";
         ***REMOVED***
 
-    ***REMOVED*** else {
-            bootbox.alert("Error: " + result.message, function () {
-
-        ***REMOVED***);
-    ***REMOVED***
-        
-
-***REMOVED***).fail(function (handleError) {
-        //alert("error");
-***REMOVED***);
-***REMOVED***
-
-
-
-function graphSankey(contenedor, datos) {
-
-    var height_aux = 0;
-    var width_aux = 1100;
-    var units = "millones";
-    var cant_elementos = 5;
-    if (datos != undefined && datos != null) {
-        if (datos.cant_nodos_fin.cant > 10) {
-            cant_elementos = datos.cant_nodos_fin.cant;
-    ***REMOVED***
-        
-***REMOVED***
-
-    let isMobile = window.matchMedia("only screen and (max-width: 765px)").matches;
-
-
-    if ($(window).innerWidth() <= width_aux || isMobile) {
-        width_aux = 1100;
-***REMOVED*** else {
-        width_aux = $(".container").innerWidth();
-***REMOVED***
-
-
-    var margin = { top: 10, right: 10, bottom: 10, left: 10 ***REMOVED***,
-        width = width_aux - 20 - margin.left - margin.right,
-        height = ((cant_elementos) * 25) - margin.top - margin.bottom;
-
-
-    var format = function (d) {
-        return "";
-        //return "₡ " + (d).formatMoney(0, '.', '.') + " " + units;
-  ***REMOVED***
-        color = d3.scale.category20();
-
-    // append the svg canvas to the page
-    var svg = d3.select("#" + contenedor).append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-
-    // Set the sankey diagram properties
-    var sankey = d3.sankey()
-        .nodeWidth(25)
-        .nodePadding(20)
-        .size([width, height]);
-
-    var path = sankey.link();
-
-
-
-    loadData(function (graph) {
-
-        // contents of the function passed to d3.json                   
-        var nodeMap = {***REMOVED***;
-        graph.nodes.forEach(function (x) { nodeMap[x.name] = x; ***REMOVED***);
-        graph.links = graph.links.map(function (x) {
-            return {
-                source: nodeMap[x.source],
-                target: nodeMap[x.target],
-                value: x.value
-        ***REMOVED***;
-    ***REMOVED***);
-
-        sankey
-            .nodes(graph.nodes)
-            .links(graph.links)
-            .layout(632);
-
-        // add in the links
-        var link = svg.append("g").selectAll(".link")
-            .data(graph.links)
-            .enter().append("path")
-            .attr("class", "link")
-            .attr("d", path)
-            .style("stroke-width", function (d) {
-                return Math.max(1, d.dy);
-                //return 20;
-        ***REMOVED***)
-            .sort(function (a, b) { return b.dy - a.dy; ***REMOVED***);
-
-        // add the link titles
-        link.append("title")
-            .text(function (d) {
-                var destino_aux = d.target.name;
-                var origen_aux = d.source.name;
-                var vec_destino = d.target.name.split("|");
-                var vec_origen = d.source.name.split("|");
-                if (vec_destino.length > 0) {
-                    destino_aux = vec_destino[1];
-            ***REMOVED***
-                if (vec_origen.length > 0) {
-                    origen_aux = vec_origen[1];
-            ***REMOVED***
-
-                return origen_aux + " → " +
-                    destino_aux + "\n" + format(d.value);
-        ***REMOVED***);
-
-        // add in the nodes
-        var node = svg.append("g").selectAll(".node")
-            .data(graph.nodes)
-            .enter().append("g")
-            .attr("class", "node")
-            .attr("transform", function (d) {
-                return "translate(" + d.x + "," + d.y + ")";
-        ***REMOVED***)
-            .call(d3.behavior.drag()
-                .origin(function (d) { return d; ***REMOVED***)
-                .on("dragstart", function () {
-                    this.parentNode.appendChild(this);
-            ***REMOVED***)
-                .on("drag", dragmove));
-
-        // add the rectangles for the nodes
-        node.append("rect")
-            .attr("height", function (d) { return d.dy; ***REMOVED***)
-            .attr("width", sankey.nodeWidth())
-            .style("fill", function (d) {
-                return d.color = color(d.name.replace(/ .*/, ""));
-        ***REMOVED***)
-            .style("stroke", function (d) {
-                return d3.rgb(d.color).darker(2);
-
-        ***REMOVED***)
-            .append("title")
-            .text(function (d) {
-                var nombre = d.name;
-                var vec_aux = nombre.split("|");
-                if (vec_aux.length > 0) {
-                    nombre = vec_aux[1];
-            ***REMOVED***
-                return nombre + "\n" + format(d.value);
-        ***REMOVED***);
-
-        // add in the title for the nodes
-        node.append("text")
-            .attr("x", -6)
-            .attr("y", function (d) { return d.dy / 2; ***REMOVED***)
-            .attr("dy", ".2em")
-            .style("font-size", "10px")
-            .attr("text-anchor", "end")
-            .attr("transform", null)
-            .html(function (d) {
-                var nombre = d.name;
-                var vec_aux = nombre.split("|");
-                if (vec_aux.length > 0) {
-                    nombre = vec_aux[1];
-            ***REMOVED***
-
-                var long = nombre.length;
-                var bandera = false;
-                var long_aux = "";
-                if (long > 50) {
-                    long_aux = 50;
-                    bandera = true;
-            ***REMOVED*** else {
-                    long_aux = long;
-            ***REMOVED***
-
-
-                var nombre_aux = nombre.substring(0, long_aux);
-                if (bandera == true) {
-                    nombre_aux = nombre_aux + "...";
-            ***REMOVED***
-
-                return nombre_aux;
-
-        ***REMOVED***)
-            .filter(function (d) { return d.x < width / 2; ***REMOVED***)
-            .attr("x", 6 + sankey.nodeWidth())
-            .attr("text-anchor", "start");
-
-        // the function for moving the nodes
-        function dragmove(d) {
-            d3.select(this).attr("transform",
-                "translate(" + (
-                    d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
-                ) + "," + (
-                    d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
-                ) + ")");
-            sankey.relayout();
-            link.attr("d", path);
-    ***REMOVED***
-  ***REMOVED*** datos);
-
-***REMOVED***
-
-
-
-
-
-function loadData(cb, datos) {
-    cb(datos)
-***REMOVED***
-
-function graphSankeyPloty(datos) {
-    var height_aux = 0;
-    var width_aux = 1100;
-    var cant_elementos = 5;
-    if (datos != undefined && datos != null) {
-        if (datos.cant_nodos_fin.cant > 10) {
-            cant_elementos = datos.cant_nodos_fin.cant;
-    ***REMOVED***
-***REMOVED***
-
-    let isMobile = window.matchMedia("only screen and (max-width: 765px)").matches;
-
-
-    if ($(window).innerWidth() <= width_aux || isMobile) {
-        width_aux = 1100;
-***REMOVED*** else {
-        width_aux = $(".container").innerWidth();
-***REMOVED***
-
-    var margin = { top: 10, right: 10, bottom: 10, left: 10 ***REMOVED***,
-        width = width_aux - 20 - margin.left - margin.right,
-        height = ((cant_elementos) * 35) - margin.top - margin.bottom;
-
-
-    var vec_labels = [];
-    var vec_source = [];
-    var vec_target = [];
-    var vec_valores = [];
-
-    var nodos = datos.nodes;
-
-    $.each(datos.nodes, function (index, value) {
-        var nombre = value.name;
-        var vec_aux = nombre.split("|");
-        if (vec_aux.length > 0) {
-            nombre = vec_aux[1];
-    ***REMOVED***
-
-        var long = nombre.length;
-        var bandera = false;
-        var long_aux = "";
-        if (long > 50) {
-            long_aux = 50;
-            bandera = true;
-    ***REMOVED*** else {
-            long_aux = long;
-    ***REMOVED***
-
-
-        var nombre_aux = nombre.substring(0, long_aux);
-        if (bandera == true) {
-            nombre_aux = nombre_aux + "...";
-    ***REMOVED***
-
-        vec_labels.push(nombre_aux);
-***REMOVED***);
-
-    $.each(datos.links, function (index, value) {
-        const filtered_source = nodos.filter(x =>
-            x.name == value.source
-        );
-        if (filtered_source.length > 0) {
-            vec_source.push(filtered_source[0].posicion);
-    ***REMOVED***
-
-        const filtered_target = nodos.filter(x =>
-            x.name == value.target
-        );
-
-        if (filtered_target.length > 0) {
-            vec_target.push(filtered_target[0].posicion);
-    ***REMOVED***
-        vec_valores.push(value.value.toFixed(0));
-
-***REMOVED***);
-
-    var data = {
-        type: "sankey",
-        domain: {
-            x: [0, 1],
-            y: [0, 1]
-      ***REMOVED***
-        orientation: "h",
-        node: {
-            pad: 15,
-            thickness: 15,
-            line: {
-                color: "black",
-                width: 0.5
-          ***REMOVED***
-            label: vec_labels,
-            hoverinfo: "all",
-            hovertemplate: "%{label***REMOVED***",
-      ***REMOVED***
-
-        link: {
-            source: vec_source,
-            target: vec_target,
-            value: vec_valores,
-            hovertemplate: "%{source.label***REMOVED***-->%{target.label***REMOVED***",
-            hoverlabel: {
-                bgcolor: "#ffffff"
-          ***REMOVED***
-            color: "#d9d9d9",
-
-    ***REMOVED***
-***REMOVED***
-
-    var data = [data]
-
-    var layout = {
-        width: width,
-        height: height,
-        hoverlabel: {
-            bgcolor: "#ffffff"
-      ***REMOVED***
-        font: {
-            size: 10
-    ***REMOVED***
-***REMOVED***
-
-    const config = {
-        displayModeBar: false, // this is the line that hides the bar.
-***REMOVED***;
-
-    Plotly.react('sankey_basic', data, layout, config);
-
-***REMOVED***
-
-function obtMatrizData(data) {
-    var cant_nodos_1 = 0;
-    var cant_nodos_2 = 0;
-    var cant_nodos_3 = 0;
-    var cant_nodos_fin = 0;
-    var obj_nodos = [];
-    var obj_links = [];
-    var indexLink = -1;
-    $.each(data, function (key, value) {
-        //Eje
-        indexLink+=1;
-        cant_nodos_1 += 1;
-        var test = false;
-        var obj_aux = { posicion: indexLink, name: value.nombre ***REMOVED***;
-        var nomEje = value.nombre;
-        obj_nodos.push(obj_aux);
-        $.each(value.detalles, function (key, value) {
-            //Estrategicos
-            cant_nodos_2 += 1;
-            
-            var nomEstrategico= value.nombre;
-            var valor_estrategico = (value.presupuesto / 1000000);
-
-            test = obj_nodos.some(item => item.name === nomEstrategico);
-            if (test == false) {
-                indexLink += 1;
-                obj_aux = { posicion: indexLink, name: nomEstrategico ***REMOVED***;
-                obj_nodos.push(obj_aux);
-        ***REMOVED***
-
-            var objIndex = obj_links.findIndex((obj => obj.target == nomEstrategico && obj.source == nomEje));
-            if (objIndex > -1) {
-                obj_links[objIndex].value = obj_links[objIndex].value + valor_estrategico;
+            var div_proy = d3.select("#divContenedorFichas")
+            var div_ficha = div_proy.append("div")
+            div_ficha.attr("class", "project-col project-col-carusel")
+            var div_card = div_ficha.append("div").attr("class", "project-card")
+            var div_borde = div_card.append("div").attr("class", "card h-100 shadow border-0")
+            div_borde.append("div").attr("class", "img-card").attr("style", "background: url('/img/TTpic_01_MD.jpg')")
+            div_borde.append("div").attr("class", "labelCategory").text(resultados[i].NombreSector)
+            var div_caption = div_borde.append("div").attr("class", "caption")
+            var div_enlace = div_caption.append("a").attr("href", "../../perfilProyecto/" + resultados[i].IdProyecto)
+            div_enlace.append("h3").text(nombre_aux)
+            if (resultados[i].approvedTotalMoney > 1000000) {
+                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + formatMoney(valor_aux / 1000000, 2, ".", ",").toString() + ' Millones');
         ***REMOVED*** else {
-                var obj_links_aux = { source: nomEje, target: nomEstrategico, value: valor_estrategico ***REMOVED***
-                obj_links.push(obj_links_aux);
+                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + formatMoney(valor_aux / 1, 2, ".", ",").toString());
+
         ***REMOVED***
 
+            div_card.append("div").attr("class", "clearfix")
+            var div_porcentaje = div_card.append("div").attr("class", "percentage")
+            div_porcentaje.append("div").attr("class", "completed").attr("style", "width:" + resultados[i].porcentajeGastado + "%")
+            var div_indicador = div_porcentaje.append("div").attr("class", "indicatorValues")
+            div_indicador.append("span").attr("class", "startPoint").html(resultados[i].MesInicioProyecto + "<br/>" + resultados[i].AnioInicioProyecto)
+            div_indicador.append("span").attr("class", "endPoint").html(resultados[i].MesFinProyecto + "<br/>" + resultados[i].AnioFinProyecto)
+            div_indicador.append("span").attr("class", "middlePoint text-center").html(resultados[i].porcentajeGastado + " %" + "<br/>" + "Gastado")
+            div_card.append("div").attr("class", "clearfix")
 
-            $.each(value.detalles, function (key, value) {
-                cant_nodos_3 += 1;
-                //ObjEspecificos
-                cant_nodos_fin += 1;
-                var nomEspecifico = value.nombre;
-                var valor_especifico = (value.presupuesto / 1000000);
-                test = obj_nodos.some(item => item.name === nomEspecifico);
-                if (test == false) {
-                    indexLink += 1;
-                    obj_aux = { posicion: indexLink, name: nomEspecifico ***REMOVED***;
-                    obj_nodos.push(obj_aux);
-            ***REMOVED***
+            var div_detalles = div_card.append("div").attr("class", "row detailedLinks")
 
-                var objIndex = obj_links.findIndex((obj => obj.target == nomEspecifico && obj.source == nomEstrategico));
-                if (objIndex > -1) {
-                    obj_links[objIndex].value = obj_links[objIndex].value + valor_especifico;
-            ***REMOVED*** else {
-                    obj_links_aux = { source: nomEstrategico, target: nomEspecifico, value: valor_especifico ***REMOVED***
-                    obj_links.push(obj_links_aux);
-            ***REMOVED***
+            var div_photo = div_detalles.append("div").attr("class", "col-6")
+            var enlace_photo = div_photo.append("a").attr("href", "../projectprofile/" + resultados[i].IdProyecto)
+            enlace_photo.append("span").attr("class", "material-icons").text("photo_library")
+            enlace_photo.append("span").attr("class", "text-ic").text("(" + resultados[i].cantidadFotos + ")")
 
+            var div_question = div_detalles.append("div").attr("class", "col-6")
+            var enlace_question = div_question.append("a").attr("href", "../projectprofile/" + resultados[i].IdProyecto)
+            enlace_question.append("span").attr("class", "material-icons").text("question_answer")
+            enlace_question.append("span").attr("class", "text-ic").text("(" + resultados[i].Comentarios + ")")
 
-        ***REMOVED***);
-
-
-    ***REMOVED***);
-***REMOVED***);
-
-    cant_nodos_fin = cant_nodos_1;
-    if (cant_nodos_2 > cant_nodos_1) {
-        cant_nodos_fin = cant_nodos_2;
-***REMOVED***
-    if (cant_nodos_3 > cant_nodos_2) {
-        cant_nodos_fin = cant_nodos_3;
-***REMOVED***
-
-
-    var datos_final =
-    {
-        "links": obj_links,
-        "nodes": obj_nodos,
-        "cant_nodos_fin": {
-            cant: cant_nodos_fin
     ***REMOVED***
-***REMOVED***;
-
-    return datos_final;
+***REMOVED***
+    else {
+        //no existen proyectos en ejecucion
+        $("#divNoExistenEjec").show();
 
 ***REMOVED***
 
 
+***REMOVED***
 
-//----------------------------------------------------------------
-function GetRecursosPorObjeto() {
-    $(".d3plus-viz-back").hide();
-    $("#divGraphRecursosObj").children().remove();
+function ObtenerGraphBySectorPerGroup(anyo_actual) {
+    $("#divGraphRecursosObj").empty();
+    $("#divContadores").empty();
     $.ajax({
+        type: 'GET',
         contentType: "application/json; charset=utf-8",
-        url: "api/servicioshome/GetRecursosPerPlan",
-        type: "GET"
+        dataType: "json",
+        url: "/api/ServiciosHome/ObtenerProyectosPorSectorGroupHome",
+        cache: false,
+        data: {anyo:anyo_actual***REMOVED***,
+        success: function (result) {
+            if (result.status == true) {
+                var data = result.projectsPerSectorGroup;
+                if (data != null) {
+                    
+                    const sum_sectores = groupAndSum(data, ['ordenGroup', 'idSector', 'labelGroup', 'url_imagen'], ['rawValue']);
+                    const sum_ordenado = sum_sectores.sort(function (a, b) {
+                        if (a.ordenGroup !== b.ordenGroup) {
+                            return a.ordenGroup - b.ordenGroup;
+                    ***REMOVED***
+                        return b.rawValue - a.rawValue;
+                ***REMOVED***);
+                    sector_ideas_globales = data;
 
-***REMOVED***).done(function (data) {
-        if (data.recursosPerObjeto != null) {
-            globales = data.recursosPerObjeto;
-            var agrupador = ["rawValue_asoc","labelGroup", "label", "label_inf"];
-            loadRecursosPorObjeto(data.recursosPerObjeto, "divGraphRecursosObj", agrupador,0);
+                    getGraphPorSectorByObrasTab(sum_ordenado, "divContentSectores");
+                    ///-------------------------------------------------------------------
+                    ///TOP SECTORES BANNER
+                    const sum_all = groupAndSum(data, ['label', 'url_imagen','orden'], ['rawValue']);
+                    var filter_sec = $(sum_all).filter(function () {
+                        return this.orden ===1;
+                ***REMOVED***);
+                    var prioritarios_sec = filter_sec.sort((a, b) => b.rawValue - a.rawValue);
+                    if (prioritarios_sec.length >= 3) {
+                        var topSectores = prioritarios_sec.slice(0, 3);
+                        loadSectoresBanner(topSectores);
+                ***REMOVED***
+                    ///-----------------------------------------------------------------------
+                    
+            ***REMOVED***
+
+        ***REMOVED*** else {
+                bootbox.alert("Error: " + result.Message, function () {
+
+            ***REMOVED***);
+        ***REMOVED***
+
+      ***REMOVED***
+        error: function (response) {
+            bootbox.alert(response.responseText);
+      ***REMOVED***
+        failure: function (response) {
+            bootbox.alert(response.responseText);
     ***REMOVED***
-       
-
-***REMOVED***).fail(function (handleError) {
-        // Some function
-        
 ***REMOVED***);
+
+
+***REMOVED***
+
+function groupAndSum(arr, groupKeys, sumKeys) {
+    return Object.values(
+        arr.reduce((acc, curr) => {
+            const group = groupKeys.map(k => curr[k]).join('-');
+            acc[group] = acc[group] || Object.fromEntries(
+                groupKeys.map(k => [k, curr[k]]).concat(sumKeys.map(k => [k, 0])));
+            sumKeys.forEach(k => acc[group][k] += curr[k]);
+            return acc;
+
+      ***REMOVED*** {***REMOVED***)
+    );
 ***REMOVED***
 
 
-function filtrarLabel(data, nivel_ant) {
-    var filtrados = data;
-    var labelGroup = $("#divGraphRecursosObj").attr("labelGroup");
-    var label = $("#divGraphRecursosObj").attr("label");
-    var label_inf = $("#divGraphRecursosObj").attr("label_inf");
-
-    if (nivel_ant == 1) {
-        if (labelGroup != null) {
-            filtrados = jQuery.grep(data, function (n, i) {
-                return (n.labelGroup == labelGroup.toString());
-        ***REMOVED***);
-    ***REMOVED***
-
-***REMOVED*** else if (nivel_ant == 0) {
-        return data;
-***REMOVED***
-   
+function filtrarSector(data, sector) {
+    var filtrados = jQuery.grep(data, function (n, i) {
+        return (n.labelGroup == sector.toString().toUpperCase());
+***REMOVED***);
     return filtrados;
 ***REMOVED***
 
+function getGraphPorSectorByObrasTab(objSectores, divContenedor) {
+    var str_aux = '';
+    var cont = 0;
+    var max_fila = 4;
+    var total_tab = 0;
+    str_aux += '<div class="row">';
 
-function loadRecursosPorObjeto(objData, divContenedor, agrupador,profundidad) {
-    $("#divGraphRecursosObj").empty();
 
-    if (profundidad >= 1) {
-        $("#btnAtrasGrafica").show();
-***REMOVED*** else {
-        $("#btnAtrasGrafica").hide();
+
+    for (var i = 0; i < objSectores.length; i++) {
+        var idSector = objSectores[i].idSector;
+        var valor = objSectores[i].rawValue/1000000;
+        
+        total_tab += objSectores[i].rawValue;
+
+        var fondo = "/img/otros-mas.svg";
+        if (objSectores[i].url_imagen != null) {
+            fondo = objSectores[i].url_imagen;
+    ***REMOVED***
+
+        if (idSector == 0 || cont < 7) {
+            str_aux += '<div id="div_' + + i.toString() + '" class="col-lg-3 mb-3" location_id="' + objSectores[i].labelGroup + '" location_cant="' + objSectores[i].rawValue + '">';
+            str_aux += '<div class="card h-100 shadow border-0 card-entidad">';
+            str_aux += '<div class="card-body CTASectores">';
+            str_aux += '<div class="icon-sectores">';
+            str_aux += '<img src = "' + fondo + '" alt = "icono' + objSectores[i].labelGroup + '">';
+            str_aux += '</div>';
+            str_aux += '<div class="card-content-container">';
+            str_aux += '<span class="crdtitle-entidad">' + objSectores[i].labelGroup + '</span>';
+            str_aux += '<div class="card-subtitle-container">';
+            str_aux += '<span class="SbtPresupuesto">Presupuesto vigente</span><br/>';
+            str_aux += '<span class="SbtBigNumber">$ ' + formatMoney(valor, 2, ".", ",") + ' Millones' + '</span>';
+            str_aux += '</div>';
+            str_aux += '<a href="/PerfilSector?id=' + idSector + '">';
+            str_aux += '<div class="btn btn-outlined">';
+            str_aux += '<span>Ver sector &nbsp;<i class="material-icons md-28">navigate_next</i> ';
+            str_aux += '</span>';
+            str_aux += '</div>';
+            str_aux += '</a>';
+            str_aux += '</div>';
+            str_aux += '</div>';
+            str_aux += '</div>';
+            str_aux += '</div>';
+
+    ***REMOVED***
+
+
+        cont += 1;
+
+***REMOVED***
+    str_aux += '</div>';
+
+    $("#" + divContenedor).html(str_aux);
+    $("#" + divContenedor).attr("total", total_tab);
+    $(".category_sector").bind('mouseover onmouseover', function (e) {
+        var porcentaje = 0;
+        var total_sector = 0;
+        var total_all = 0;
+        $(".sector_tooltip").remove();
+
+        if ($(this).parent().length > 0) {
+            total_all = $(this).parent().attr("total");
+    ***REMOVED***
+
+        var sel_sector = $(this).attr("location_id");
+        var tipo_tab = $(this).attr("tipo");
+
+
+        var id = $(this).attr("id");
+        var str_estados = "";
+        var estados_aux = "";
+        var total_tab = 0;
+
+        var data_filter = [];
+        data_filter = $.grep(sector_ideas_globales, function (element, index) {
+            return element.labelGroup == sel_sector;
+    ***REMOVED***);
+
+
+
+
+        if (data_filter != null) {
+            //agrupar y sumar
+            const suma = groupAndSum(data_filter, ['orden', 'label', 'alias'], ['rawValue']).sort((a, b) => Number(a.orden) - Number(b.orden));
+
+            $(suma).each(function (element, index) {
+                total_sector += this.rawValue;
+                var cad_estado = this.alias;
+
+                estados_aux += '<span class="label_tooltipSec">' + cad_estado + '</span>';
+                estados_aux += '<span class="label_tooltipSecNumber">' + this.rawValue.toString() + '</span>';
+                if (element < suma.length - 1) {
+                    estados_aux += '<hr class="linea_tooltipSec"></hr>';
+            ***REMOVED***
+
+        ***REMOVED***);
+
+            porcentaje = ((total_sector / total_all) * 100).toFixed(2);
+
+    ***REMOVED***
+
+        var elm = $(this);
+        var id = elm.attr("id");
+        var xPos = (e.pageX - elm.offset().left) + 10;
+        var yPos = (e.pageY - elm.offset().top) + 10;
+
+        xPos = 50;
+        yPos = 50;
+
+        var estilo = "position:absolute;z-index:1;opacity:1;width: 200px;height:auto;min-height:100px;top:" + yPos + "px;left:" + xPos + "px;";
+        var htmlpop = '<span class="sector_tooltip_grupo">' + sel_sector + '</span><span class="sector_tooltip_percent">' + porcentaje.toString() + '% </span>';
+
+        htmlpop += '<div class="estados_tooltip_body">' + estados_aux + '</div> ';
+
+
+
+
+        // create a tooltip
+        if ($("#" + id).length > 0) {
+            var tooltip = d3.select("#" + id)
+                .append("div")
+                .attr("class", "sector_tooltip")
+                .attr("style", "position:absolute;opacity:1;width: 0px;height:0px;top:0px;left:0px;")
+                .append("div")
+                .attr("class", "sector_tooltip_body")
+                .attr("style", estilo)
+                .html(htmlpop)
+    ***REMOVED***
+
+
+
+
+***REMOVED***);
+
+    $("#divContentSectores").bind('mouseout', function (e) {
+        setTimeout(
+            function () {
+                //do something special
+                $(".sector_tooltip").remove();
+          ***REMOVED*** 2000);
+***REMOVED***);
+***REMOVED***
+
+function loadSectoresBanner(result) {
+ var str_cad = "";
+    if (result != null) {
+        for (var i = 0; i < result.length; i++) {
+            var valor = result[i].rawValue / 1000000;
+            str_cad += '<div class="col-lg-3">';
+            str_cad += '<div class="card shadow card-sector h-100">';
+            str_cad += '<div class="CTASectores">';
+            str_cad += '<div class="icon-sectores"><img src="' + result[i].url_imagen + '" alt="icono relacionado" /></div>';
+            str_cad += '<div class="card-content-container">';
+            str_cad += '<span class="crdtitle-entidad">' + result[i].label + '</span>';
+            str_cad += '<div class="card-subtitle-container "><span class="SbtPresupuesto">Presupuesto vigente</span><br><span class="SbtBigNumber">$ ' + formatMoney(valor,0,".",",") + ' Millones</span></div>';
+            str_cad += '<a href="/PresupuestoGeneral?sector=undefined#RecPerSector">';
+            str_cad += '<div class="btn btn-link"><span>Ver sector &nbsp;<i class="material-icons md-28">navigate_next</i> </span></div>';
+            str_cad += '</a>';
+            str_cad += '</div>';
+            str_cad += '</div>';
+            str_cad += '</div>';
+            str_cad += '</div>';
+    ***REMOVED***
+        $("#bannerSectoresGasto").html(str_cad)
+***REMOVED***
+    
+
+***REMOVED***
+
+
+function formatMoney(number, c, d, t) {
+    var n = number,
+        c = isNaN(c = Math.abs(c)) ? 2 : c,
+        d = d == undefined ? "." : d,
+        t = t == undefined ? "," : t,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+***REMOVED***
+
+$("#anioPresupuesto").on("change", function (event) {
+    anyo_actual = this.value;
+    loadFuentesporAnnios();
+
+    
+***REMOVED***);
+
+function loadFuentesporAnnios() {
+        if (fuentesporAnnios.length > 0) {
+        var annio_aux = $("#anioPresupuesto").val();
+        var tabfuentes = '';
+        var valor_aux = 0;
+        var flagprimero = 0;
+        tabfuentes += ' <ul class="tabs-nav">';
+
+        for (var i = 0; i < fuentesporAnnios.length; i++) {
+            if (fuentesporAnnios[i].Anio.toString() == annio_aux) {
+                valor_aux += parseFloat(fuentesporAnnios[i].ValorVigente);
+                if (flagprimero == 0) {
+                    tabfuentes += ' <li id="' + annio_aux + '-' + fuentesporAnnios[i].CodigoFuente + '" class="enlace_nivel_administracion active">';
+            ***REMOVED***
+                else { 
+                    tabfuentes += ' <li id="' + annio_aux + '-' + fuentesporAnnios[i].CodigoFuente + '" class="enlace_nivel_administracion">';
+            ***REMOVED***
+                tabfuentes += '<div class="goal-number"></div>';
+                tabfuentes += '<div class="goal-name"><div class="h4">' + fuentesporAnnios[i].Fuente + '</div></div>';
+                tabfuentes += '</li >';
+                flagprimero++;
+        ***REMOVED***
+    ***REMOVED***
+        tabfuentes += ' </ul>';
+        $("#tabsfuentes").html(tabfuentes);
+        cargardatosorganismos(fuentesporAnnios[0].CodigoFuente);
+        $("#valorvigente").html('$ ' + formatMoney(valor_aux / 1000000, 0, ".", ",").toString() + ' Millones');
+
+        ///graficoDonaPerFuentes
+         getGraphDonaFuentesPerAnyo(annio_aux);
+        ///---------------------------------------------
+
+        $('.enlace_nivel_administracion').on('click', function () {
+            $('.enlace_nivel_administracion').each(function (i, obj) {
+                $(obj).removeClass("active");
+        ***REMOVED***);
+            $(this).addClass("active");
+            var id = this.id;
+            var cod = id.split("-");
+            cargardatosorganismos(cod[1]);
+    ***REMOVED***);
 ***REMOVED***
    
-    if (objData != undefined && objData != null) {
-        var grupos = globales.map(item => item.rawValue_asoc)
-            .filter((value, index, self) => self.indexOf(value) === index);
-
-        var grafica = new d3plus.Treemap()
-            .select("#" + divContenedor)
-            .data(objData)
-            .groupBy(agrupador)
-            .shapeConfig({
-                labelConfig: {
-                    fontFamily: "sans-serif",
-                    align: "center",
-                    size: 10,
-                    transform: "capitalize"
-            ***REMOVED***
-                ,fill: function (d,index) {
-                    var pos = grupos.indexOf(d.rawValue_asoc);
-                    return assignColor(d.rawValue_asoc,pos);
-           ***REMOVED***
-                   
-        ***REMOVED***)
-            .on("click", function (d) {
-                //niveles visibles 0,1,2
-                $(".d3plus-viz-back").hide();
-                
-                if (d.labelGroup != "") {
-                    $("#divGraphRecursosObj").attr("labelGroup", d.labelGroup);
-                    if (Array.isArray(d.label) == true) {
-                        //hizoclic nivel 0 para ir al nivel 1
-                        $("#divGraphRecursosObj").attr("nivel", 1);
-                        $("#divGraphRecursosObj").attr("nivel_ant", 0);
-                ***REMOVED*** else {
-                        //hizo clic estando en nivel 1
-                        $("#divGraphRecursosObj").attr("label", d.label);
-                        if (Array.isArray(d.label_inf)) {
-                            //para ir a nivel 2
-                            $("#divGraphRecursosObj").attr("nivel", 2);
-                            $("#divGraphRecursosObj").attr("nivel_ant", 1);
-                    ***REMOVED*** else {
-                            //se encuentra en nivel 2 no va a ningun otro nivel 
-                            $("#divGraphRecursosObj").attr("label_inf", d.label_inf);
-                            $("#divGraphRecursosObj").attr("nivel", 2);
-                            $("#divGraphRecursosObj").attr("nivel_ant", 1);
-
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
-                var nivel_actual = $("#divGraphRecursosObj").attr("nivel");
-                if (nivel_actual >= 1) {
-                    $("#btnAtrasGrafica").show();
-            ***REMOVED*** else {
-                    $("#btnAtrasGrafica").hide();
-            ***REMOVED***
-
-        ***REMOVED***)
-            .layoutPadding(2)
-            .config({
-                tooltipConfig: {
-                    title: function (d) {
-                        var longitud = 80;
-                        var cad = recortarNombre(d.labelGroup,longitud);
-                        if (Array.isArray(d.label)) {
-                            cad = recortarNombre(d.labelGroup, longitud);
-                    ***REMOVED*** else {
-                            cad = d.label;
-                            if (Array.isArray(d.label_inf)) {
-                                cad = recortarNombre(d.label, longitud);
-                        ***REMOVED*** else {
-                                cad = d.label_inf;
-                                if (Array.isArray(d.label_nivel4)) {
-                                    cad = recortarNombre(d.label_inf, longitud);
-                            ***REMOVED***
-                        ***REMOVED***
-                    ***REMOVED***
-                        
-                       
-                        return cad;
-                        //return "";
-                  ***REMOVED***
-                    tbody: [
-                        [function (d) {
-                            var valor = d["rawValueDouble"] / 1000000;
-                            var cad = "";
-                            if (Array.isArray(d.label)) {
-                                cad += "<span>Obj Estratégicos (" + d.label.length + ")</span></br>";
-                        ***REMOVED***
-                            if (Array.isArray(d.label_inf)) {
-                                cad += "<span>Obj Específicos (" + d.label_inf.length + ")</span></br>";
-                        ***REMOVED***
-                            if (Array.isArray(d.label_nivel4)) {
-                                cad += "<span>Instituciones que aportan (" + d.label_nivel4.length + ")</span></br>";
-                        ***REMOVED***
-                            cad += "<span>Recursos asig. " + "L " + valor.formatMoney(0, ',', '.').toString() + " Millones" + "</span></br>";
-                            return cad;
-                    ***REMOVED***]
-                    ]
-              ***REMOVED***
-                yConfig: {
-                    title: "",
-            ***REMOVED***
-        ***REMOVED***)
-            .sum("rawValueDouble")
-            .depth(1)
-            .legend(false)
-            .color("labelGroup")
-            .render();
-
-            
-
-
-***REMOVED***
-    
 ***REMOVED***
 
-function configuraAtras() {
-    $("#btnAtrasGrafica").bind('click', function () {
-        var nivel_ant = $("#divGraphRecursosObj").attr("nivel_ant");
-        var profundidad = parseInt(nivel_ant);
-        var agrupador = ["labelGroup", "label", "label_inf"];
-
-
-        if (profundidad == 0) {
-            //regresa a nivel 0 labelGroup
-            agrupador = ["labelGroup", "label", "label_inf"];
-            $("#divGraphRecursosObj").attr("label", "");
-            $("#divGraphRecursosObj").attr("labelGroup", "");
-            $("#divGraphRecursosObj").attr("label_inf", "");
-
-            $("#divGraphRecursosObj").attr("nivel", 0);
-            $("#divGraphRecursosObj").attr("nivel_ant", 0);
-
-    ***REMOVED*** else if (profundidad == 1) {
-            //regresa a nivel 1 Label
-            agrupador = ["label"];
-            $("#divGraphRecursosObj").attr("label_inf", "");
-            $("#divGraphRecursosObj").attr("label", "");
-
-            $("#divGraphRecursosObj").attr("nivel_ant", 0);
-            $("#divGraphRecursosObj").attr("nivel", 1);
-
-    ***REMOVED*** else {
-            $("#divGraphRecursosObj").attr("label_inf", "");
-            agrupador = ["labelGroup", "label", "label_inf"];
-
-            $("#divGraphRecursosObj").attr("nivel_ant", 1);
-            $("#divGraphRecursosObj").attr("nivel", 2);
-    ***REMOVED***
-        
-
-        var datos_aux = filtrarLabel(globales, profundidad);
-
-        $("#divGraphRecursosObj").attr("nivel_ant", profundidad - 1);
-        loadRecursosPorObjeto(datos_aux, "divGraphRecursosObj", agrupador, profundidad);
-
-***REMOVED***);
-***REMOVED***
-
-function recortarNombre(nombre,longitud) {
-    var aux = nombre;
-    if (nombre != undefined && nombre != null) {
-        if (nombre.length > longitud) {
-            aux = nombre.substr(0, longitud) + "...";
-        ***REMOVED***
-***REMOVED***
-    
-    return aux;
-***REMOVED***
-
-function assignColor(idEje,pos) {
-    var colores_default = ["#b1861b", "#24539f", "#c8703c", "#429670"];
-    var colores = [{ id: 1, color: "#b1861b" ***REMOVED***, { id: 2, color: "#24539f" ***REMOVED***, { id: 3, color: "#c8703c" ***REMOVED***, { id: 4, color: "#429670" ***REMOVED***];
-    var filtered = colores.filter(id => id == idEje);
-    if (filtered.length > 0) {
-        return filtered[0].color;
-***REMOVED*** else {
-        return colores_default[pos];
-***REMOVED***
-    
-***REMOVED***
-//----------------------------------------------------------
-function GetRecursosAsignados() {
-    $.ajax({
-        contentType: "application/json; charset=utf-8",
-        url: "api/servicioshome/GetRegAsignados",
-        type: "GET"
-
-***REMOVED***).done(function (data) {
-        var aux = data;
-        if (data.recursosAsignados != null) {
-            graphRecursosAsigLinePlot(data.recursosAsignados,"divRecursosAsignados");
-    ***REMOVED***
-
-***REMOVED***).fail(function (handleError) {
-        // Some function
-
-***REMOVED***);
-***REMOVED***
-
-
-
-function graphRecursosAsigLinePlot(datacontenido, divContenedor) {
-    var myData = [
-        { labelGroup: "Desarrollo sostenible", label: "meta", periodo: 2019, rawValue: 1000, porcentaje: -1 ***REMOVED***,
-        { labelGroup: "Desarrollo sostenible", label: "meta", periodo: 2020, rawValue: 5000 , porcentaje: -1***REMOVED***,
-        { labelGroup: "Desarrollo sostenible", label: "meta", periodo: 2021, rawValue: 3800 ,  porcentaje:-1 ***REMOVED***,
-        { labelGroup: "Desarrollo sostenible", label: "avance", periodo: 2019, rawValue: 800, porcentaje: 30 ***REMOVED***,
-        { labelGroup: "Desarrollo sostenible", label: "avance", periodo: 2020, rawValue: 3200 , porcentaje: 30 ***REMOVED***,
-        { labelGroup: "Desarrollo sostenible", label: "avance", periodo: 2021, rawValue: 3000 , porcentaje: 40 ***REMOVED***
-        
-    ];
-
-
-    new d3plus.LinePlot()
-        .select("#" + divContenedor)
-        .config({
-            data: datacontenido,
-            groupBy: "label",
-            lineMarkers: true,
-            lineMarkerConfig: {
-                r: 6
-          ***REMOVED***
-            x: "periodo",
-            y: "rawValue",
-            yConfig: {
-                title: "% PGN",
-                titleConfig: {
-                    fontColor: "green"
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***)
-        .tooltipConfig({
-            body: function (d) {
-                var table = "<table class='tooltip-table'>";
-                var cad_aux = "Valor";
-                var valor = d.rawValue + "M";
-                if (d.label == "META") {
-                    cad_aux = "Meta";
-            ***REMOVED*** else {
-                    cad_aux = "Avance";
-            ***REMOVED***
-                if (d.porcentaje > 0) {
-                    valor += " (" + d.porcentaje + "%)";
-            ***REMOVED***
-                table += "<tr><td class='title'>" + cad_aux + ":</td > <td class='data'>" + valor + "</td></tr > ";
-               
-                table += "</table>";
-                return table;
-          ***REMOVED***
-            footer: function (d) {
-                return "";
-          ***REMOVED***
-            title: function (d) {
-                var txt = d.labelGroup;
-                return txt;
-        ***REMOVED***
-    ***REMOVED***)
-        .render();
-***REMOVED***
-
-
-function getGraficoBarrasSectores() {
-    $.ajax({
-        contentType: "application/json; charset=utf-8",
-        url: "api/servicioshome/GetRegAsignadosPerSector",
-        type: "GET"
-
-***REMOVED***).done(function (data) {
-        var aux = data;
-        if (data.recursosBySector != null) {
-            graficoBarrasSector(data.recursosBySector, "divRecursosAsignadosPerSector");
-    ***REMOVED***
-
-***REMOVED***).fail(function (handleError) {
-        // Some function
-
+function getGraphDonaFuentesPerAnyo(anyo) {
+    $("#divGraphDonaPerFuentes").empty();
+    var filter_obj = $(fuentesporAnnios).filter(function () {
+        return this.Anio === parseInt(anyo);
 ***REMOVED***);
 
+    if (filter_obj != null) {
+        const width = 600;
+        const height = 400;
+        const radius = Math.min(width, height) / 2;
 
-***REMOVED***
+        d3.select("#divGraphDonaPerFuentes")
+            .append("g")
+            .attr("transform", "translate(100,100)");
+
+        const colores = ["#4040b0", "#06a7d6", "#f8fb54", "#ff8975", "#ff0024"];
+
+        const colorScale = d3.scaleOrdinal()
+            .domain(d3.range(colores.length)) // Dominio basado en la longitud del array de colores
+            .range(colores); // Rango de colores
+
+        const angulo = d3.scaleLinear()
+            .domain([0, 180]) // Limita el ángulo de 0 a 180 grados
+            .range([0, Math.PI * 2]); // Convierte el rango a radianes
+
+        var angleGen = d3.pie()
+            .startAngle(angulo(-45))
+            .endAngle(angulo(45))
+            .padAngle(.05)
+            .value((d) => d.ValorVigente)
+            .sortValues((a, b) => a < b ? 1 : -1);
+
+        var data = angleGen(filter_obj);
+
+        var arcGen = d3.arc()
+            .innerRadius(50)
+            .outerRadius(90);
+
+        d3.select("#divGraphDonaPerFuentes g")
+            .selectAll("path")
+            .data(data)
+            .enter()
+            .append("path")
+            .attr("d", arcGen)
+            .attr("fill", (d, i) => colorScale(i))
+            .attr("stroke", "gray")
+            .attr("stroke-width", 1);
 
 
-function graficoBarrasSector(dataContenido,divContenedor) {
-    var data = [
-        { id: "alpha", x: 4, y: 7 ***REMOVED***,
-        { id: "alpha", x: 5, y: 25 ***REMOVED***,
-        { id: "alpha", x: 6, y: 13 ***REMOVED***,
-        { id: "alpha", x: 7, y: 9 ***REMOVED***,
-        { id: "beta", x: 4, y: 17 ***REMOVED***,
-        { id: "beta", x: 5, y: 8 ***REMOVED***,
-        { id: "beta", x: 6, y: 13 ***REMOVED***,
-        { id: "beta", x: 7, y: 10 ***REMOVED***,
-        { id: "gamma", x: 4, y: 5 ***REMOVED***,
-        { id: "gamma", x: 5, y: 0 ***REMOVED***,
-        { id: "gamma", x: 6, y: 10 ***REMOVED***,
-        { id: "gamma", x: 7, y: 9 ***REMOVED***
-    ];
-
-    new d3plus.BarChart()
-        .data(data)
-        .barPadding(0)
-        .groupPadding(40)
-        .render();
-
-    new d3plus.BarChart()
-        .select("#" + divContenedor)
-        .config({
-            data: dataContenido,
-            groupBy: "labelGroup",
-            x: "label",
-            y: "rawValue",
-            legend: false
-    ***REMOVED***)
-        .barPadding(0)
-        .groupPadding(40)
-        .render();
-***REMOVED***
-
-
-
-function loadRecursosPorObjetoOld(objData, divContenedor, tipo_desglose) {
-    if (objData != undefined && objData != null) {
-        for (var i = 0; i < objData.length; i++) {
-            objData[i].value = parseFloat(objData[i].value);
-            objData[i].rawValue = parseFloat(objData[i].rawValue);
-
-    ***REMOVED***
-        var visualization = d3plus.viz()
-            .container("#" + divContenedor)
-            .data({
-                "value": objData,
-                "stroke": { "width": 5 ***REMOVED***,
-                "opacity": 0.9
-        ***REMOVED***)
-
-            .type({ "value": "tree_map", "mode": "sqarify" ***REMOVED***)
-            .id({ "value": ["labelGroup", "label", "label_inf", "label_nivel4"], "grouping": true ***REMOVED***)
-            .depth(0)
-            .size("rawValue")
-            .font({ "family": "inherit", "align": "center", "size": 14, "transform": "capitalize" ***REMOVED***)
-            .legend(false)
-            .title({
-                "value": "",
-                "padding": 5,
-                "total": {
-                    "font": {
-                        "size": 16
-                  ***REMOVED***
-                    "value": true
-              ***REMOVED***
-                "sub": {
-                    "padding": 5,
-                    "font": {
-                        "size": 14
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***)
-            .format({
-                "locale": "es_ES",
-                "number": function (number, params) {
-                    var formatted = d3plus.number.format(number, params);
-                    if (params.key === "rawValue") {
-                        return "L " + numberWithCommas(parseFloat(number / 1000000).toFixed(0)) + " Millones";
-                ***REMOVED***
-                    if (params.key === "share") {
-                        return d3.round(number, 2) + " %";
-                ***REMOVED***
-                    else {
-                        return formatted;
-                ***REMOVED***
-              ***REMOVED***
-                "text": function (text, params) {
-                    if (text == "rawValue") {
-                        if (tipo_desglose == "presupuesto") {
-                            return "Presupuesto";
-                    ***REMOVED*** else {
-                            return "Avance";
-                    ***REMOVED***
-
-                ***REMOVED*** else if (text == "labelGroup") {
-                        return "Item";
-                ***REMOVED***
-                    else if (text == "label") {
-                        return "Entidad";
-                ***REMOVED*** else if (text == "label_inf") {
-                        return "Actividad";
-                ***REMOVED***
-                    else if (text == "label_nivel4") {
-                        return "Objeto Gasto";
-                ***REMOVED***
-                    else if (text == "share") {
-                        return "Participación";
-                ***REMOVED***
-                    else if (text == "including") {
-                        return "Incluye";
-                ***REMOVED***
-                    else {
-                        return d3plus.string.title(text, params);
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***)
-            .background("#fafafa")
-            .labels({
-                "align": "center", "valign": "top", "padding": 15, "font":
-                {
-                    "family": "inherit", "size": 10, "weight": "bold", "transform": "capitalize"
-              ***REMOVED*** "resize": true
-        ***REMOVED***)
-            .tooltip(["labelGroup"])
-            .color("labelGroup")
-            .color({
-                "scale": ["#2D506A", "#236B81", "#265C87", "#468ABF"],
-        ***REMOVED***)
-            .height({ "max": 419, "small": 200, "secondary": 100, "value": 419 ***REMOVED***)
-
-            .resize(true)
-            .draw()
-***REMOVED***
 
 
 ***REMOVED***
 
+***REMOVED***
 
-Number.prototype.formatMoney = function (c, d, t) {
-    n = this;
-    c = isNaN(c = Math.abs(c)) ? 2 : c;
-    d = d == undefined ? "." : d;
-    t = t == undefined ? "," : t;
-    let s = n < 0 ? "-" : "";
-    let i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "";
-    var j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+function cargardatosorganismos(idfuente) {
+    var annio_aux = $("#anioPresupuesto").val();
+    var filtros = {
+        Annio: annio_aux,
+        idfuente: idfuente
 ***REMOVED***;
+    $.ajax({
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        url: "/api/ServiciosHome/ObtenerOrganismosPorFuente",
+        cache: false,
+        data: filtros,
+        success: function (result) {
+            if (result.status == true) {
+                var info = result.organismosFinanciadores;
+                if (result.consolidadoOrganismoFinanciador != null && result.consolidadoOrganismoFinanciador != undefined) {
+                    $("#numorganismos").html(result.consolidadoOrganismoFinanciador.totalFinanciadores);
+                    $("#numproyectos").html(result.consolidadoOrganismoFinanciador.totalProyectosFinanciados);
+                    $("#numaportado").html('$ ' + formatMoney(result.consolidadoOrganismoFinanciador.totalAportado, 0, ".", ",").toString() + ' Millones');
+            ***REMOVED***
+
+                var htmldivorganismos = '';
+                var numeroorganismosmostrar = 3;
+                if (info != null) {
+                    for (var i = 0; i < info.length; i++) {
+
+                        if (i < numeroorganismosmostrar) { 
+                            htmldivorganismos += '<div class="col-lg-4 mb-4">';
+                            htmldivorganismos += '    <div class="card h-100 shadow border-0 card-entidad">';
+                            htmldivorganismos += '        <div class="card-body CTASectores">';
+                            htmldivorganismos += '            <div class="card-title-container">';
+                            htmldivorganismos += '                <span class="h4">';
+                            htmldivorganismos += info[i].organismoFinanciador;
+                            htmldivorganismos += '                </span>';
+                            htmldivorganismos += '            </div>';
+                            htmldivorganismos += '            <div class="wrap-content-fuente">';
+                            htmldivorganismos += '                <div class="icon-sectores">';
+                            htmldivorganismos += '                    <img class="img-fluid" src="img/ic-entidad.svg" alt="icono decorativo relacionado al organismo financiador" />';
+                            htmldivorganismos += '                </div>';
+                            htmldivorganismos += '                <div class="card-subtitle-container">';
+                            htmldivorganismos += '                    <span class="SbtBigNumber">' + info[i].numeroProyectos +'</span>';
+                            htmldivorganismos += '                    <span class="SbtPresupuesto">Proyectos Financiados</span>';
+                            htmldivorganismos += '                    <span class="SbtBigNumber"> $ ' + formatMoney(info[i].valorVigente / 1000000, 0, ".", ",").toString() +'Millones </span>';
+                            htmldivorganismos += '                    <span class="SbtPresupuesto">Monto total financiado</span>';
+                            htmldivorganismos += '                    <a href="/FinancialOrganizationDetail?id=' + info[i].codigoOrganismoFinanciador + '&anio=' + annio_aux +'">';
+                            htmldivorganismos += '                        <div class="btn btn-link"><span>Ver organismo financiador &nbsp;<i class="material-icons md-28">navigate_next</i> </span></div>';
+                            htmldivorganismos += '                    </a>';
+                            htmldivorganismos += '                </div>';
+                            htmldivorganismos += '            </div>';
+                            htmldivorganismos += '        </div>';
+                            htmldivorganismos += '        </div>';
+                            htmldivorganismos += '    </div>';
+                    ***REMOVED***
+                ***REMOVED***
+                    console.log("result.ConsolidadoOrganismoFinanciador", result);
+
+                    $("#divorganismos").html(htmldivorganismos);
+            ***REMOVED***
+
+        ***REMOVED*** else {
+                bootbox.alert("Error: " + result.Message, function () {
+
+            ***REMOVED***);
+        ***REMOVED***
+
+      ***REMOVED***
+        error: function (response) {
+            bootbox.alert(response.responseText);
+      ***REMOVED***
+        failure: function (response) {
+            bootbox.alert(response.responseText);
+    ***REMOVED***
+***REMOVED***);
+***REMOVED***

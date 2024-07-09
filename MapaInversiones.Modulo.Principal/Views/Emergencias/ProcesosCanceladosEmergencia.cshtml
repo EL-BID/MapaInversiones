@@ -1,0 +1,157 @@
+﻿@model PlataformaTransparencia.Modelos.ModelContratistaData
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+***REMOVED***
+ @{
+    var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
+    var LabelProcesosCancelados = "";
+    var TituloProcesosCancelados = "";
+    System.IFormatProvider culture =
+        new System.Globalization.CultureInfo("es-RD");
+***REMOVED***
+@foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
+{
+    if (@etiqueta.AliasPart.Alias == "ProcesosCanceladosEmergencia" + @Model.tipoEmergencia)
+    {
+        LabelProcesosCancelados = @etiqueta.HtmlBodyPart.Html;
+        TituloProcesosCancelados = @etiqueta.TitlePart.Title;
+***REMOVED***
+***REMOVED***
+
+<section id="s0" class="banner-main">
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>Emergencias <i class="material-icons md-18">chevron_right</i></li>
+                            <li>Procesos cancelados</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+        <div class="row justify-content-center">
+
+            <!-- intro map-->
+
+            <div class="col-md-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h1 class="" id="nomLocation">
+                           
+                            @TituloProcesosCancelados
+                  
+                            @if (@Model.nombreUnidadCompra != "" && @Model.nombreUnidadCompra is not null)
+                            {
+                            <br />
+                                <text>
+                                    Entidad:
+                                @Model.nombreUnidadCompra</text>
+                        ***REMOVED***
+                        </h1>
+                    </div>
+
+                    <div class="banner-main-desc">
+                        <p>Explore los elementos de los procesos cancelados asociados a la emergencia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="secInfoContratos" class="sec-contratos whiteBg">
+
+    <div class="container">
+        <div class="row">
+           <div class="col-md-3">
+        
+
+            <form class="contractList bgSoftGray p15">
+
+                <div class="form-group" id="grpentidad">
+                    <label class="year" for="entidadProcesoG">Entidad</label>
+
+                    <input type="search" data-results="search-home" data-search="home" id="entidadProcesoG" class="search-input form-control input-lg" autocomplete="on" placeholder="Entidad">
+
+                    <div id="search-home" class="search-body">
+                        <div id="divNoEncontradoProcesoG" class="no-search-results" style="display: none;">No se han encontrado entidades</div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="year" for="proceso">Palabra Clave</label>
+
+                    <input type="search" data-results="search-home" data-search="home" id="proceso" class="search-input form-control input-lg" autocomplete="on" placeholder="Mascarillas, guantes, alimentos, bebidas, desechables, pruebas, etc.">
+
+                </div>
+                <div class="triggerForm">
+                    <input type="button" class="btn btn-primary" value="Buscar" id="btn-buscar" disabled=""><div class="clearfix"></div>
+                    <a class="btn btn-link" id="btnLimpiar" disabled="disabled">LIMPIAR FILTROS</a>
+                </div>
+
+
+
+            </form>
+                <div class="link_external disNone">
+                <span> Información suministrada por:</span>
+                    <a href="https://www.dgcp.gob.do/" target="_blank" rel="noopener"><img class="img-responsive text-center" title="ir a la Dirección General de Contrataciones Públicas (DGCP)" src="../img/logo_dgcp.png"></a>
+                <br />
+                <div class="sepH"></div>
+                <br />
+                <p>Para mayor información consulte:</p>
+                    <a href="https://comunidad.comprasdominicana.gob.do/Public/Tendering/ContractNoticeManagement/Index?currentLanguage=es-DO&amp;Country=DO&amp;Theme=DGCP&amp;Page=Login" target="_blank" rel="noopener"><img class="img-responsive" title="ir al portal transaccional" src="../img/logo_trasaccional.jpg"></a>
+                <br>
+                <div class="sepH"></div>
+                <br />
+                <p class="text-center">Powered by:</p>
+                    <a href="https://www.open-contracting.org/es/data-standard/" target="_blank" rel="noopener"><img class="img-responsive" title="conocer mas de Estándar de Datos para las Contrataciones Abiertas (OCDS)" src="https://ocp.imgix.net/wp-content/uploads/2020/01/OCDS-logo-grey.png"></a>
+            </div>
+            </div>
+
+  
+            <div class="col-md-9">
+    
+
+            <!--ESTRUCTURA HTML PARA TOMAR COMO REFERENCIA-->
+            <!--CIERRE DE ESTRUCTURA-->
+            <div class="wrap-proceso whiteBg" id="srcContratos"> </div>
+            <div id="divPagContratos" class="paginacionContratos"> </div>
+
+            </div>
+        </div>
+     <!--END CONTAINER-->
+    </div>
+</section>
+
+
+
+<input type="hidden" id="tipoemergencia" value="@Model.tipoEmergencia" />
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha384-EZJUCwX9EfOmrML5/1WejmhFx/azi54nnVfOndPu+VTQKOHabXXC9eS7VFdkLz0V" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+<script src="js/procesoscanceladosemergencia_aux.js"></script>
+<script src="https://d3js.org/d3.v4.min.js" integrity="sha384-1EOYqz4UgZkewWm70NbT1JBUXSQpOIS2AaJy6/evZH+lXOrt9ITSJbFctNeyBoIJ" crossorigin="anonymous"></script>
+
+
+@section DataBody {
+        data-locationID=''
+        data-locationType=''
+        data-locationLoaded='false'
+        data-unidadcompra='[{"unidadcompra":"@Model.nombreUnidadCompra"***REMOVED***]',
+        data-tipoEmergencia='[{"tipoEmergencia":"@Model.tipoEmergencia"***REMOVED***]'
+
+***REMOVED***

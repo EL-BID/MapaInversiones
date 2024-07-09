@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AngleSharp.Dom.Events;
+using DataModels;
+//using AngleSharp.Dom.Events;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
+using PlataformaTransparencia.Modelos.Proyectos;
 using PlataformaTransparencia.Negocios;
 using PlataformaTransparencia.Negocios.BLL.Contracts;
 using PlataformaTransparencia.Negocios.Entidad;
 using PlataformaTransparencia.Negocios.Home;
+using PlataformaTransparencia.Negocios.Interfaces;
 using SolrNet;
 using SolrNet.Commands.Parameters;
 
@@ -21,37 +24,62 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
   public class ServiciosHomeController : Controller
   {
-    private readonly ILogger<ServiciosHomeController> _logger;
-    private readonly TransparenciaDB _connection;
-    private ISolrOperations<PlataformaTransparencia.Modelos.Proyectos.Proyecto> _solr;
-    private IConsolidadosNacionalesBLL consolidadosNacionales;
-    private IEntidadBLL consolidadosEntidades;
+    
+        private readonly ILogger<ServiciosHomeController> _logger;
+        private readonly TransparenciaDB _connection;
+        private ISolrOperations<PlataformaTransparencia.Modelos.Proyectos.Proyecto> _solr;
+        private IHomeBLL consolidadosHome;
+        private IFinanciadorBLL _financiadorBLL;
 
-    public ServiciosHomeController(ILogger<ServiciosHomeController> logger, TransparenciaDB connection, ISolrOperations<PlataformaTransparencia.Modelos.Proyectos.Proyecto> solr, IConsolidadosNacionalesBLL consolidadosNacionalesBLL, IEntidadBLL entidadesbll)
-    {
-      _logger = logger;
-      _connection = connection;
-      _solr = solr;
-      consolidadosNacionales = consolidadosNacionalesBLL;
-      consolidadosEntidades = entidadesbll;
+        public ServiciosHomeController(ILogger<ServiciosHomeController> logger, TransparenciaDB connection, ISolrOperations<PlataformaTransparencia.Modelos.Proyectos.Proyecto> solr, IHomeBLL consolidadosHomeBLL, IFinanciadorBLL financiadorBLL)
+        {
+            _logger = logger;
+            _connection = connection;
+            _solr = solr;
+            consolidadosHome = consolidadosHomeBLL;
+            _financiadorBLL = financiadorBLL;
+
+    ***REMOVED***
+
+        [HttpGet("ObtenerProyectosPorSectorGroupHome")]
+        public ModelHomeData ObtenerIdeasProyectosPorSectorGroupHome(int anyo)
+        {
+            ModelHomeData objReturn = new ModelHomeData();
+            try
+            {
+                objReturn.ProjectsPerSectorGroup = consolidadosHome.ObtenerProyectoPorSectorGroupHome(anyo);
+                objReturn.Status = true;
+
+        ***REMOVED***
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.Message;
+
+        ***REMOVED***
+
+            return objReturn;
+    ***REMOVED***
+
+        [HttpGet("ObtenerOrganismosPorFuente")]
+        public ModelHomeData ObtenerOrganismosPorFuente(string Annio, int idfuente)
+        {
+            ModelHomeData objReturn = new();
+            try
+            {
+                objReturn.OrganismosFinanciadores = consolidadosHome.ObtenerOrganismosPorFuenteHome(Annio, idfuente);
+                if (int.TryParse(Annio, out int anio)) objReturn.ConsolidadoOrganismoFinanciador = _financiadorBLL.ObtenerConsolidadoOrganismosFinanciadoresPorAnioAndCodigoFuente(anio, idfuente);
+                objReturn.Status = true;
+        ***REMOVED***
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.Message;
+        ***REMOVED***
+            return objReturn;
+    ***REMOVED***
 
 ***REMOVED***
-
-
-
-    ///ejemplo llamado get varios parametros
-    //[HttpGet("obtCiudades/{city***REMOVED***/{country***REMOVED***")]
-    //public string obtCiudades(string city, string country)
-    //{
-    //    return "obtCiudades";
-    //***REMOVED***
-
-    //[HttpGet("obtPais/{continente***REMOVED***")]
-    //public string obtPais(string continente)
-    //{
-    //    return "obtPais";
-    //***REMOVED***
-  ***REMOVED***
 
 ***REMOVED***
 
