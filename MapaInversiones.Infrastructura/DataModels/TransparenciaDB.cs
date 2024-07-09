@@ -76,7 +76,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public ITable<SearchResultParam> SearchResultParams { get { return this.GetTable<SearchResultParam>(); } }
     public ITable<Sector> Sectors { get { return this.GetTable<Sector>(); } }
     public ITable<SeguimientoEsquemaFinanciacionProyecto> SeguimientoEsquemaFinanciacionProyectos { get { return this.GetTable<SeguimientoEsquemaFinanciacionProyecto>(); } }
-    public ITable<VwSubsidiosCovidConsolidado> VwSubsidiosCovidConsolidadoes { get { return this.GetTable<VwSubsidiosCovidConsolidado>(); } }
+    public ITable<VwSubsidiosEmergenciaConsolidado> VwSubsidiosEmergenciaConsolidadoes { get { return this.GetTable<VwSubsidiosEmergenciaConsolidado>(); } }
     public ITable<SeguimientoMetaIndicadorProducto> SeguimientoMetaIndicadorProductos { get { return this.GetTable<SeguimientoMetaIndicadorProducto>(); } }
     public ITable<TipoComentario> TipoComentarios { get { return this.GetTable<TipoComentario>(); } }
     public ITable<UnidadMedida> UnidadMedidas { get { return this.GetTable<UnidadMedida>(); } }
@@ -2770,8 +2770,8 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     [Column("param"), Nullable] public string Param { get; set; } // varchar(250)
   }
 
-    [Table(Schema = "dbo", Name = "VwSubsidiosCovidConsolidado", IsView = true)]
-    public partial class VwSubsidiosCovidConsolidado
+    [Table(Schema = "dbo", Name = "VwSubsidiosEmergenciaConsolidado", IsView = true)]
+    public partial class VwSubsidiosEmergenciaConsolidado
     {
         [Column(), NotNull] public int Id { get; set; } // int
         [Column("origen"), NotNull] public string Origen { get; set; } // varchar(15)

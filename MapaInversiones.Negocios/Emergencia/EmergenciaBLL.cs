@@ -1254,7 +1254,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
             objContrato.total_beneficiarios = NumContratosActivos;
             objContrato.total_valor = ValorTotalContratosActivos;
 
-            var RecursosPerObjetoQuery = (from cifras in _connection.VwSubsidiosCovidConsolidadoes
+            var RecursosPerObjetoQuery = (from cifras in _connection.VwSubsidiosEmergenciaConsolidadoes
                                           where cifras.NumeroBeneficarios.HasValue && cifras.Valor.HasValue
                                           select new InfoConsolidadoRecursos
                                           {
