@@ -17,17 +17,17 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
   {
     public class consulta
     {
-      public string id { get; set; ***REMOVED***
-      public string texto { get; set; ***REMOVED***
-      public int pagina { get; set; ***REMOVED***
-***REMOVED***
+      public string id { get; set; }
+      public string texto { get; set; }
+      public int pagina { get; set; }
+    }
 
     private readonly TransparenciaDB _connection;
 
     public ServiciosCovidController(TransparenciaDB connection)
     {
       _connection = connection;
-***REMOVED***
+    }
 
     [HttpGet("ObtDistribucionPresupuestalEjecutadoPorTipoEmergencia")]
     public ModelCovidFuentesData ObtDistribucionPresupuestalEjecutadoPorTipoEmergencia()
@@ -40,14 +40,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         objReturn.distribucionItem = emergenciaBll.ObtDistribucionPresupuestalEjecutadoPorTipoEmergencia(tipoEmergencia);
         objReturn.Status = true;
         return objReturn;
-  ***REMOVED***
+      }
       catch (Exception exception)
       {
         objReturn.Status = false;
         objReturn.Message = "Error: " + exception.Message;
         return objReturn;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
   
 
@@ -62,16 +62,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         objReturn.distribucionItem = valores;
         objReturn.Status = true;
         return objReturn;
-  ***REMOVED***
+      }
       catch (Exception exception)
       {
         objReturn.Status = false;
         objReturn.Message = "Error: " + exception.Message;
         return objReturn;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
 
 
-  ***REMOVED***
-***REMOVED***
+  }
+}

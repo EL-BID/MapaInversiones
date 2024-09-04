@@ -31,7 +31,7 @@
 
 				foreach (var c in q)
 					Console.WriteLine(c.ContactName); 
-			***REMOVED***
+			}
 
 		5. See more at https://linq2db.github.io/articles/T4.html
 

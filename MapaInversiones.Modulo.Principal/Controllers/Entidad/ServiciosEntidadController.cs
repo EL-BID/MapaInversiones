@@ -28,7 +28,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
             _solr = solr;
             consolidadosEntidades = entidadesbll;
 
-    ***REMOVED***
+        }
 
 
         [HttpGet("GetDatosEntidadPorAnnio")]
@@ -38,13 +38,13 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
             try
             {
                  //return consolidadosEntidades.GetDatosEntidadPorAnnio(anio, codEntidad);
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
 
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
         [HttpGet("GetProgramasByEntidad")]
         public ModelEntidadData GetProgramasByEntidad(int annio, string codEntidad)
@@ -55,15 +55,15 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
                 objReturn.infoProgramas = consolidadosEntidades.GetProgramasByEntidad(annio, codEntidad);
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
+            }
 
-    ***REMOVED***
+        }
 
         [HttpGet("GetActividadesByPrograma")]
         public ModelEntidadData GetActividadesByPrograma(int annio, string codEntidad, int codPrograma)
@@ -74,15 +74,15 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
                 objReturn.infograficoActividad = consolidadosEntidades.GetActividadByPrograma(annio, codEntidad, codPrograma);
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
+            }
 
-    ***REMOVED***
+        }
 
 
         [HttpGet("GetRecursosPerGrupos")]
@@ -99,21 +99,21 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
                     foreach (InfoConsolidadoPresupuesto element in info)
                     {
                         total += element.rawValueDouble;
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
 
                 objReturn.TotalPresupuesto = (decimal)total;
                 objReturn.InfoRecursos = info;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
 
@@ -143,32 +143,32 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
                 objReturn = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.InnerException;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
         [HttpGet("GetGastoByTipo")]
         public ModelEntidadData GetGastoByTipo(int anyo, string codEntidad, string tipo, string programa)
         {
-            ModelEntidadData objReturn = new() { Status=true ***REMOVED***;
+            ModelEntidadData objReturn = new() { Status=true };
             try
             {
                 objReturn.detalleTipo = consolidadosEntidades.ObtenerRecursosPerTipo(anyo, codEntidad, tipo, programa);
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
         [HttpGet("GetRecursosPorfinalidad")]
@@ -183,14 +183,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
                 objReturn.InfoRecursos = info;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
         [HttpGet("GetProcesosPorTipo")]
@@ -203,14 +203,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
                 objReturn.InfoRecursos = consolidadosEntidades.GetProcesosPorTipo(anyo, codEntidad);
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("GetProcesosPorAnio")]
         public ModelProcesosXEntidadData GetProcesosPorAnio(int anio, string codEntidad)
@@ -223,14 +223,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
                 objReturn.Status = true;
                 objReturn.CantidadTotalRegistros = objReturn.Data.Count;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
         [HttpGet("GetDistribucionGastoEntidad")]
@@ -243,14 +243,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
                 objReturn.ListInfoConsolidado = info;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
 
@@ -267,16 +267,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
                 objReturn.Data = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.InnerException;
                 return objReturn;
-        ***REMOVED***
+            }
 
 
-    ***REMOVED***
+        }
 
         [HttpGet("GetPresupuestoByAnnio")]
         public ModelEntidadData GetPresupuestoByAnnio(string anio, string codEntidad)
@@ -290,17 +290,17 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
                     objReturn.PresupuestoVigenteAnnioDisplay = (decimal)datospresupuesto.PresupuestoVigente;
                     objReturn.PorcEjecutadoAnnioDisplay = (decimal)(datospresupuesto.PresupuestoEjecutado / datospresupuesto.PresupuestoVigente) * 100;
                 
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.InnerException;
                
-        ***REMOVED***
+            }
 
             return objReturn;
-    ***REMOVED***
+        }
 
 
-***REMOVED***
-***REMOVED***
+}
+}

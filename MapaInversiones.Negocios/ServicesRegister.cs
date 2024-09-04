@@ -12,11 +12,11 @@ namespace PlataformaTransparencia.Negocios
         public ServicesRegister(IServiceCollection services)
         {
             _services = services;
-    ***REMOVED***
+        }
 
         public void RegisterDBContext()
         {
             _services.AddTransient(typeof(LinqToDB.IDataContext),typeof(Infrastructura.DataModels.TransparenciaDB));
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

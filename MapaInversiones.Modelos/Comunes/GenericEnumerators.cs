@@ -9,7 +9,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
             Department = 1,
             Municipality = 2,
             Default = 3
-    ***REMOVED***
+        }
 
         public enum FilterKindEnumeration
         {
@@ -19,13 +19,13 @@ namespace PlataformaTransparencia.Modelos.Comunes
             ProyectPeriod =3,
             ProyectOrgFinanciador = 4,
             ProyectoEntidadEjecutora = 5
-    ***REMOVED***
+        }
 
         public enum SearchType
         {
             Map = 0,
             List = 1
-    ***REMOVED***
+        }
 
         public enum SeccionFuncionalAplicativo
         {
@@ -35,7 +35,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
             Produccion = 3,
             Fiscalizacion = 4,
             FiscalizacionANM = 5
-    ***REMOVED***
+        }
         
-***REMOVED***
-***REMOVED***
+    }
+}

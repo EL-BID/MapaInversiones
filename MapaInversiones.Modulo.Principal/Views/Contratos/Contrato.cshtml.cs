@@ -11,6 +11,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Views.Presupuesto
     {
         public void OnGet()
         {
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

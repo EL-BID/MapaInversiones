@@ -5,8 +5,8 @@ namespace PlataformaTransparencia.Modelos.Comunes
 {
     public class EncabezadoContratosCancelados
     {
-        public string Estado { get; set; ***REMOVED***
-        public Nullable<long> valor { get; set; ***REMOVED***
-        public Nullable<int> NroContratos { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string Estado { get; set; }
+        public Nullable<long> valor { get; set; }
+        public Nullable<int> NroContratos { get; set; }
+    }
+}

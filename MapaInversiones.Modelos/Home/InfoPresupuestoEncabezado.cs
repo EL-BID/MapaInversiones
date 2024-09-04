@@ -8,15 +8,15 @@ namespace PlataformaTransparencia.Modelos.Home
 {
     public class InfoPresupuestoEncabezado
     {
-        public int AnioActual { get; set; ***REMOVED***
-        public int AnioAnterior { get; set; ***REMOVED***
-        public double PresupuestoActual { get; set; ***REMOVED***
-        public double PresupuestoAnterior { get; set; ***REMOVED***
-        public double Porcentaje { get; set; ***REMOVED***
-        public int CantProcesosAdjudicados { get; set; ***REMOVED***
-        public int CantContratosActivos { get; set; ***REMOVED***
-        public int CantContratosCerrados { get; set; ***REMOVED***
+        public int AnioActual { get; set; }
+        public int AnioAnterior { get; set; }
+        public double PresupuestoActual { get; set; }
+        public double PresupuestoAnterior { get; set; }
+        public double Porcentaje { get; set; }
+        public int CantProcesosAdjudicados { get; set; }
+        public int CantContratosActivos { get; set; }
+        public int CantContratosCerrados { get; set; }
 
 
-***REMOVED***
-***REMOVED***
+    }
+}

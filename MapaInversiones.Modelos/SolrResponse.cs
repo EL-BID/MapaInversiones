@@ -8,24 +8,24 @@ namespace PlataformaTransparencia.Modelos
     public class SolrResponse
     {
         [SolrUniqueKey("id")]
-        public string Id { get; set; ***REMOVED***
+        public string Id { get; set; }
         [SolrField("principal")]
-        public string Principal { get; set; ***REMOVED***
+        public string Principal { get; set; }
         [SolrField("metadata")]
-        public string Metadata { get; set; ***REMOVED***
+        public string Metadata { get; set; }
         [SolrField("descripcion")]
-        public string Descripcion { get; set; ***REMOVED***
+        public string Descripcion { get; set; }
         [SolrField("IdSector")]
-        public int IdSector { get; set; ***REMOVED***
+        public int IdSector { get; set; }
         [SolrField("hierarchy")]
-        public string Hierarchy { get; set; ***REMOVED***
+        public string Hierarchy { get; set; }
         [SolrField("type")]
-        public string Type { get; set; ***REMOVED***
+        public string Type { get; set; }
         [SolrField("url")]
-        public string Url { get; set; ***REMOVED***
+        public string Url { get; set; }
         [SolrField("numFound")]
-        public int numFound { get; set; ***REMOVED***
+        public int numFound { get; set; }
 
 
-***REMOVED***
-***REMOVED***
+    }
+}

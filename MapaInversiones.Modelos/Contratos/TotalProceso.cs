@@ -8,11 +8,11 @@ namespace PlataformaTransparencia.Modelos.Contratos
 {
     public class TotalProceso
     {
-        public string EstadoProceso { get; set; ***REMOVED***
-        public string MonedaProceso { get; set; ***REMOVED***
-        public Nullable<double> ValorProceso { get; set; ***REMOVED***
-        public Nullable<int> NroProcesos { get; set; ***REMOVED***
-        public Nullable<double> ValorProcesoCancelados { get; set; ***REMOVED***
-        public Nullable<int> NroProcesosCancelados { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string EstadoProceso { get; set; }
+        public string MonedaProceso { get; set; }
+        public Nullable<double> ValorProceso { get; set; }
+        public Nullable<int> NroProcesos { get; set; }
+        public Nullable<double> ValorProcesoCancelados { get; set; }
+        public Nullable<int> NroProcesosCancelados { get; set; }
+    }
+}

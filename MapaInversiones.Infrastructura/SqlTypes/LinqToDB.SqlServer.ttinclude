@@ -10,17 +10,17 @@
 		{
 			afterGenerateLinqToDBModel();
 			DoGenerateSqlServerFreeText();
-		***REMOVED***;
+		};
 
 		var buildColumnComparison = BuildColumnComparison;
 		BuildColumnComparison = (c, padding1, padding2, last) =>
 		{
 			if (c.BuildType() == "SqlHierarchyId")
-				return string.Format("\t(bool)(t.{0***REMOVED***{1***REMOVED*** == {0***REMOVED***{3***REMOVED***){2***REMOVED***", c.MemberName, padding1, last ? ");" : " &&", last ? "" : padding2);
+				return string.Format("\t(bool)(t.{0}{1} == {0}{3}){2}", c.MemberName, padding1, last ? ");" : " &&", last ? "" : padding2);
 			else
 				return buildColumnComparison(c, padding1, padding2, last);
-		***REMOVED***;
-	***REMOVED***
+		};
+	}
 #>
 <#+
 bool GenerateSqlServerFreeText = false; // Defines whether to generate extensions for Free Text search, or not
@@ -44,19 +44,19 @@ void DoGenerateSqlServerFreeText()
 			Members =
 			{
 				new Method(() => "IQueryable<SqlServerExtensions.FreeTextKey<TKey>>", "FreeTextTable",
-					new Func<string>[] { () => "ITable<TTable> table", () => string.Format("Expression<Func<TTable,{0***REMOVED***>> columns", ModelType.Create<object>(true).ToTypeName()), () => "string search" ***REMOVED***,
+					new Func<string>[] { () => "ITable<TTable> table", () => string.Format("Expression<Func<TTable,{0}>> columns", ModelType.Create<object>(true).ToTypeName()), () => "string search" },
 					() => new[]
 					{
 						"return Sql.Ext.SqlServer().FreeTextTable<TTable, TKey>(table, columns, search);"
-					***REMOVED***)
+					})
 				{
-					GenericArguments = { "TTable", "TKey" ***REMOVED***,
-					AfterSignature   = !EnableNullableReferenceTypes ? new List<string>() : new List<string>() { "where TTable : notnull" ***REMOVED***
-				***REMOVED***,
-			***REMOVED***
-		***REMOVED***
+					GenericArguments = { "TTable", "TKey" },
+					AfterSignature   = !EnableNullableReferenceTypes ? new List<string>() : new List<string>() { "where TTable : notnull" }
+				},
+			}
+		}
 	);
-***REMOVED***
+}
 
 LinqToDB.Data.DataConnection GetSqlServerConnection(
 	string connectionString,
@@ -64,7 +64,7 @@ LinqToDB.Data.DataConnection GetSqlServerConnection(
 	SqlServerProvider provider = SqlServerProvider.SystemDataSqlClient)
 {
 	return LinqToDB.DataProvider.SqlServer.SqlServerTools.CreateDataConnection(connectionString, version, provider);
-***REMOVED***
+}
 
 LinqToDB.Data.DataConnection GetSqlServerConnection(
 	string server,
@@ -72,15 +72,15 @@ LinqToDB.Data.DataConnection GetSqlServerConnection(
 	SqlServerVersion  version  = SqlServerVersion.v2008,
 	SqlServerProvider provider = SqlServerProvider.SystemDataSqlClient)
 {
-	return GetSqlServerConnection(string.Format("Data Source={0***REMOVED***;Database={1***REMOVED***;Integrated Security=SSPI", server, database), version, provider);
-***REMOVED***
+	return GetSqlServerConnection(string.Format("Data Source={0};Database={1};Integrated Security=SSPI", server, database), version, provider);
+}
 
 LinqToDB.Data.DataConnection GetSqlServerConnection(string server, string database, string user, string password,
 	SqlServerVersion  version  = SqlServerVersion.v2008,
 	SqlServerProvider provider = SqlServerProvider.SystemDataSqlClient)
 {
-	return GetSqlServerConnection(string.Format("Server={0***REMOVED***;Database={1***REMOVED***;User Id={2***REMOVED***;Password={3***REMOVED***;", server, database, user, password), version, provider);
-***REMOVED***
+	return GetSqlServerConnection(string.Format("Server={0};Database={1};User Id={2};Password={3};", server, database, user, password), version, provider);
+}
 
 public void LoadSqlServerMetadata(string connectionString,
 	SqlServerVersion  version  = SqlServerVersion.v2008,
@@ -88,7 +88,7 @@ public void LoadSqlServerMetadata(string connectionString,
 {
 	using (var dataConnection = GetSqlServerConnection(connectionString, version, provider))
 		LoadMetadata(dataConnection);
-***REMOVED***
+}
 
 public void LoadSqlServerMetadata(string server, string database,
 	SqlServerVersion  version  = SqlServerVersion.v2008,
@@ -96,7 +96,7 @@ public void LoadSqlServerMetadata(string server, string database,
 {
 	using (var dataConnection = GetSqlServerConnection(server, database, version, provider))
 		LoadMetadata(dataConnection);
-***REMOVED***
+}
 
 public void LoadSqlServerMetadata(string server, string database, string user, string password,
 	SqlServerVersion  version  = SqlServerVersion.v2008,
@@ -104,5 +104,5 @@ public void LoadSqlServerMetadata(string server, string database, string user, s
 {
 	using (var dataConnection = GetSqlServerConnection(server, database, user, password, version, provider))
 		LoadMetadata(dataConnection);
-***REMOVED***
+}
 #>

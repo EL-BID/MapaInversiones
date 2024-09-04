@@ -1,1 +1,1 @@
-***REMOVED*** "type": "Point", "coordinates": [0.0, 0.0] ***REMOVED***
+﻿{ "type": "Point", "coordinates": [0.0, 0.0] }

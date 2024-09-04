@@ -15,12 +15,12 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         public CorreoController( IConfiguration configuration)
         {
             Configuration = configuration;
-    ***REMOVED***
+        }
         
         public IActionResult Index()
         {
             return View();
-    ***REMOVED***
+        }
         
         public ModeloRespuestaCorreo EnviarCorreoHtml(string destinatario, string cuerpo_mensaje, string asunto)
         {
@@ -28,6 +28,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             objReturn = CorreoUtilidad.envCorreoNet(cuerpo_mensaje, destinatario, null, null, asunto, Configuration);
             return objReturn;
 
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

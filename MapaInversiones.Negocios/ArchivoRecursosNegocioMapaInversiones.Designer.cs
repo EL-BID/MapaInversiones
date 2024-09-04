@@ -30,7 +30,7 @@ namespace PlataformaTransparencia.Negocios {
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal ArchivoRecursosNegocioMapaInversiones() {
-    ***REMOVED***
+        }
         
         /// <summary>
         ///   Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
@@ -41,10 +41,10 @@ namespace PlataformaTransparencia.Negocios {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PlataformaTransparencia.Negocios.ArchivoRecursosNegocioMapaInversiones", typeof(ArchivoRecursosNegocioMapaInversiones).Assembly);
                     resourceMan = temp;
-            ***REMOVED***
+                }
                 return resourceMan;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Reemplaza la propiedad CurrentUICulture del subproceso actual para todas las
@@ -54,11 +54,11 @@ namespace PlataformaTransparencia.Negocios {
         internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
-        ***REMOVED***
+            }
             set {
                 resourceCulture = value;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a EJECUCI.
@@ -66,8 +66,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string CriterioEstadosEjecucion {
             get {
                 return ResourceManager.GetString("CriterioEstadosEjecucion", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a EJECUTADO.
@@ -75,8 +75,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string CriterioEstadosEjecutado {
             get {
                 return ResourceManager.GetString("CriterioEstadosEjecutado", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a APROBADO.
@@ -84,8 +84,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string CriterioEstadosPendientesSegunHistorico {
             get {
                 return ResourceManager.GetString("CriterioEstadosPendientesSegunHistorico", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Lo sentimos, ha ocurrido un error..
@@ -93,8 +93,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string MensajeError {
             get {
                 return ResourceManager.GetString("MensajeError", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a El Ente Territorial no es valido..
@@ -102,8 +102,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string MensajeErrorEnteTerritorial {
             get {
                 return ResourceManager.GetString("MensajeErrorEnteTerritorial", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a No se ha enviado el filtro requerido o esta en un formato invalido.
@@ -111,8 +111,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string MensajeErrorFiltros {
             get {
                 return ResourceManager.GetString("MensajeErrorFiltros", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a El periodo no es valido..
@@ -120,8 +120,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string MensajeErrorPeriodos {
             get {
                 return ResourceManager.GetString("MensajeErrorPeriodos", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Cero Registros Encontrados.
@@ -129,8 +129,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string MensajeNoHayProduccion {
             get {
                 return ResourceManager.GetString("MensajeNoHayProduccion", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre.
@@ -138,8 +138,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string Meses {
             get {
                 return ResourceManager.GetString("Meses", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Todas las Fuentes.
@@ -147,8 +147,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string NombreFiltroRecursosTodasLasFuentes {
             get {
                 return ResourceManager.GetString("NombreFiltroRecursosTodasLasFuentes", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Departamento.
@@ -156,8 +156,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string nombreTipoEnteRepresentaDpto {
             get {
                 return ResourceManager.GetString("nombreTipoEnteRepresentaDpto", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Municipio.
@@ -165,8 +165,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string nombreTipoEnteRepresentaMunicipio {
             get {
                 return ResourceManager.GetString("nombreTipoEnteRepresentaMunicipio", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Region.
@@ -174,8 +174,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string nombreTipoEnteRepresentaRegion {
             get {
                 return ResourceManager.GetString("nombreTipoEnteRepresentaRegion", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a 4.
@@ -183,8 +183,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string NumeroDeOtrosProyectosAMostrar {
             get {
                 return ResourceManager.GetString("NumeroDeOtrosProyectosAMostrar", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a 1.
@@ -192,8 +192,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string PorcentajeProyectosPorSectorMostrtar {
             get {
                 return ResourceManager.GetString("PorcentajeProyectosPorSectorMostrtar", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a el, las,la,los,de,con,en,para,por,e,y.
@@ -201,8 +201,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string Preposiciones {
             get {
                 return ResourceManager.GetString("Preposiciones", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a 4,68592950660633.
@@ -210,8 +210,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string ProyectoLatitudPorDefecto {
             get {
                 return ResourceManager.GetString("ProyectoLatitudPorDefecto", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a -74,080810546875.
@@ -219,8 +219,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string ProyectoLongitudPorDefecto {
             get {
                 return ResourceManager.GetString("ProyectoLongitudPorDefecto", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Fuentes.
@@ -228,8 +228,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string TextoFiltroFuenteRecursos {
             get {
                 return ResourceManager.GetString("TextoFiltroFuenteRecursos", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Periodos.
@@ -237,8 +237,8 @@ namespace PlataformaTransparencia.Negocios {
         internal static string TextoFiltroPeriodosFiscalizacion {
             get {
                 return ResourceManager.GetString("TextoFiltroPeriodosFiscalizacion", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
         ///   Busca una cadena traducida similar a Periodos.
@@ -246,43 +246,43 @@ namespace PlataformaTransparencia.Negocios {
         internal static string TextoFiltroPeriodosRecursos {
             get {
                 return ResourceManager.GetString("TextoFiltroPeriodosRecursos", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a /projectprofile/{0***REMOVED***.
+        ///   Busca una cadena traducida similar a /projectprofile/{0}.
         /// </summary>
         internal static string URLFichaProyectos {
             get {
                 return ResourceManager.GetString("URLFichaProyectos", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a /Recursos/FichaRecursos?periodosRecursos={0***REMOVED***&amp;{1***REMOVED***={2***REMOVED***.
+        ///   Busca una cadena traducida similar a /Recursos/FichaRecursos?periodosRecursos={0}&amp;{1}={2}.
         /// </summary>
         internal static string URLFichaRecursos {
             get {
                 return ResourceManager.GetString("URLFichaRecursos", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a /api/Proyectos/GetOtrosProyectosAprobados?periodosRecursos={0***REMOVED***&amp;fuentes={1***REMOVED***&amp;{2***REMOVED***={3***REMOVED***&amp;query={4***REMOVED***.
+        ///   Busca una cadena traducida similar a /api/Proyectos/GetOtrosProyectosAprobados?periodosRecursos={0}&amp;fuentes={1}&amp;{2}={3}&amp;query={4}.
         /// </summary>
         internal static string URLProyectos {
             get {
                 return ResourceManager.GetString("URLProyectos", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a /api/Proyectos/GetOtrosProyectosAprobados?{0***REMOVED***={1***REMOVED***&amp;{2***REMOVED***={3***REMOVED***&amp;query={4***REMOVED***.
+        ///   Busca una cadena traducida similar a /api/Proyectos/GetOtrosProyectosAprobados?{0}={1}&amp;{2}={3}&amp;query={4}.
         /// </summary>
         internal static string URLProyectosVerTodos {
             get {
                 return ResourceManager.GetString("URLProyectosVerTodos", resourceCulture);
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+            }
+        }
+    }
+}

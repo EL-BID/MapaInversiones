@@ -17,7 +17,7 @@ function seleccionoAnio(sel) {
     scrol = 0;
     inicializaDatos();
     GetDatosPorAnnio(sel);
-***REMOVED***
+}
 
 function inicializaDatos() {
     
@@ -36,7 +36,7 @@ function inicializaDatos() {
 
     GetRecursosPorNivelYAnio(anioEntidad);
 
-***REMOVED***
+}
 
 function configuraSelectTabContratos(tipo) {
 
@@ -47,32 +47,32 @@ function configuraSelectTabContratos(tipo) {
             $("#divProcesosSection").hide();
             $("#divInversionSection").hide();
             $("#divAnalisis").show();
-    ***REMOVED***
+        }
         if (tipo == "inversion") {
             $("#divListadoContratos").hide();
             $("#divProcesosSection").hide();
             $("#divAnalisis").hide();
             $("#divInversionSection").show();
-    ***REMOVED***
+        }
         if (tipo == "procesos") {
             $("#divListadoContratos").hide();
             $("#divAnalisis").hide();
             $("#divInversionSection").hide();
             $("#divProcesosSection").show();
-    ***REMOVED***
+        }
         if (tipo == "contratos") {
             $("#divAnalisis").hide();
             $("#divProcesosSection").hide();
             $("#divInversionSection").hide();
             $("#divListadoContratos").show();
-    ***REMOVED***
+        }
    
-***REMOVED***
+}
 
 $('.enlace_tipo_contrato').on('click', function () {
     var tipo = this.id;
     configuraSelectTabContratos(tipo);
-***REMOVED***);
+});
 
 function GetDatosPorAnnio(anio) {
     var codigoEntidad = $("#codigoEntidadId").val();
@@ -83,9 +83,9 @@ function GetDatosPorAnnio(anio) {
     data: {
       anio: anioEntidad,
       codEntidad: codigoEntidad
-  ***REMOVED***
+    },
 
-  ***REMOVED***).done(function (data) {
+  }).done(function (data) {
 
       var html = "";
       if (data.presupuestoVigenteAnnioDisplay) { 
@@ -99,7 +99,7 @@ function GetDatosPorAnnio(anio) {
           + '        </div>                                                                                                                                            '
           + '    </div>                                                                                                                                                '
           + '</div>                                                                                                                                                   ';
-  ***REMOVED***
+      }
       if (data.presupuestoEjecutadoAnnioDisplay) { 
           html +='<div class="col-lg-4 mb-3 ">                                                                                                                               '
           + '    <div class="card h-100 shadow border-0 card-entidad b2">                                                                                                 '
@@ -111,7 +111,7 @@ function GetDatosPorAnnio(anio) {
           + '        </div>                                                                                                                                            '
           + '    </div>                                                                                                                                                '
               + '</div>                                                                                                                                                    ';
-  ***REMOVED***
+      }
       if (data.porcEjecutadoAnnioDisplay) {
           html += '<div class="col-lg-4 mb-3">                                                                                                                               '
               + '    <div class="card h-100 shadow border-0 card-entidad b3">                                                                                                 '
@@ -123,11 +123,11 @@ function GetDatosPorAnnio(anio) {
               + '        </div>                                                                                                                                            '
               + '    </div>                                                                                                                                                '
           '</div>                                                                                                                                                     ';
-  ***REMOVED***
+      }
 
       if (html != "") {
           $("#divResumen").html(html);
-  ***REMOVED*** else {
+      } else {
           html += '<div class="col-lg-3 mb-3">                                                                                                                               '
               + '    <div class="card h-100 shadow border-0 card-entidad">                                                                                                 '
               + '        <div class="card-body">                                                                                                                           '
@@ -138,14 +138,14 @@ function GetDatosPorAnnio(anio) {
               + '        </div>                                                                                                                                            '
               + '    </div>                                                                                                                                                '
               + '</div>';
-  ***REMOVED***
+      }
 
-  ***REMOVED***).fail(function (handleError) {
+  }).fail(function (handleError) {
     // Some function
       alert("Error al traer los datos de la Entidad");
-  ***REMOVED***);
+  });
 
-***REMOVED***
+}
 
 
 
@@ -156,7 +156,7 @@ function monedaSimbolo(codigo) {
     moneda["RD"] = "$";
 
     return moneda[codigo];
-***REMOVED***
+}
 
 //////////////CONTRATOS//////////////////////////
 
@@ -173,7 +173,7 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
         Moneda: null,
         NombreContratista: null,
         CodigoComprador: $("#codigoEntidadId").val()
-***REMOVED***;
+    };
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -183,8 +183,8 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
         data: filtros,
         success: function (result) {
             if (scrol >= 1) {
-                $('html, body').animate({ scrollTop: $('#trazabilidad').offset().top ***REMOVED***, 2000);
-        ***REMOVED*** else { scrol = scrol + 1; ***REMOVED***
+                $('html, body').animate({ scrollTop: $('#trazabilidad').offset().top }, 2000);
+            } else { scrol = scrol + 1; }
             if (result.status == true) {
                 if (result.cantidadTotalRegistros > 0) {
                     var info = result.data;
@@ -205,7 +205,7 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                             fila += filaconfirma + '</div>' + referencia + '</div>';
                             filaconfirma = "";
 
-                    ***REMOVED***
+                        }
                         if (entidad != info[i].documentoproveedor.toString()) {
                             if (i > 0) //Cambio de entidad
                             {
@@ -215,12 +215,12 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                                 filasinfirma = "";
                                 inicio = "";
                                 fin = "";
-                        ***REMOVED***
+                            }
                             inicio = '<div class="cotractName contract"><div class="row"><div class="col-xs-12 col-md-12"><span class="small">Proveedor</span><div class="clearfix"></div>'
                                 + '                 <span class="h4">' + info[i].proveedor.toString() + '</span>'
                                 + ' </div></div></div>';
                             entidad = info[i].documentoproveedor.toString();
-                    ***REMOVED***
+                        }
 
                         if (proceso != info[i].codigoProceso.toString()) {
 
@@ -251,21 +251,21 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                                     + '		    <span class="txt_small">Fecha de Inicio</span>'
                                     + '         <span class="amount_adj">' + info[i].FCH_INICIO_PUBLICACION.toString().substr(0, 10) + '</span>'
                                     + '			    </div>';
-                        ***REMOVED***
+                            }
                             if (info[i].FCH_INICIO_RECEP_OFERTAS) {
                                 fila += ''
                                     + '			<div class="col-xs-12 col-md-4">'
                                     + '		    <span class="txt_small">Fecha de Recepción</span>'
                                     + '         <span class="amount_adj">' + info[i].FCH_INICIO_RECEP_OFERTAS.toString().substr(0, 10) + '</span>'
                                     + '			    </div>';
-                        ***REMOVED***
+                            }
                             if (info[i].FCH_ESTIMADA_ADJUDICACION) {
                                 fila += ''
                                     + '			<div class="col-xs-12 col-md-4">'
                                     + '		    <span class="txt_small">Fecha estimada de adjudicación</span>'
                                     + '         <span class="amount_adj">' + info[i].FCH_ESTIMADA_ADJUDICACION.toString().substr(0, 10) + '</span>'
                                     + '			    </div>';
-                        ***REMOVED***
+                            }
 
                             fila += '	</div>'
                                 + '	</div>';
@@ -282,7 +282,7 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                                 + '<div class="col-xs-12 col-md-12"><a href="' + info[i].urlproceso.toString() + '" target="_blank" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span class="txt_small">Conozca mas de este proceso</span></a></div>'
                                 + '</div>';
 
-                    ***REMOVED***
+                        }
 
 
                         filaconfirma += '<div class="panel panel-default">'
@@ -290,7 +290,7 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                             + '                <h4 class="panel-title">'
                             + '                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapse' + i + '">';
 
-                        if (info[i].referenciacontrato) { filaconfirma += '                        Código de contratación:  ' + info[i].referenciacontrato.toString() + ''; ***REMOVED*** else { filaconfirma += '                      Pendiente emisión código contratación  ' ***REMOVED***
+                        if (info[i].referenciacontrato) { filaconfirma += '                        Código de contratación:  ' + info[i].referenciacontrato.toString() + ''; } else { filaconfirma += '                      Pendiente emisión código contratación  ' }
 
                         filaconfirma += '     </a>'
                             + '                </h4>'
@@ -301,13 +301,13 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                             filaconfirma += '          <div class="row border-b">'
                                 + '                        <div class="col-md-12"><span class="small"> CONTRATO</span><span class="amount_adj">' + info[i].descripcionContrato.toString() + '</span></div>'
                                 + '                    </div>';
-                    ***REMOVED***
+                        }
                         var moneda = '';
                         if (info[i].monedaContrato) {
                             if (info[i].monedaContrato.toString() == 'USD') {
                                 moneda = '$';
-                        ***REMOVED***
-                    ***REMOVED*** else { moneda = '$'; ***REMOVED***
+                            }
+                        } else { moneda = '$'; }
                         filaconfirma += '        <div class="row border-b">'
                             + '                        <div class="col-md-12">'
                             + '                            <span class="small"> Objeto del Contrato </span>'
@@ -329,14 +329,14 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                                 + '                                                                     <span class="amount_adj">'
                                 + info[i].fechaInicioContrato.toString().substr(0, 10)
                                 + '                                                                      </span></div>';
-                    ***REMOVED***
+                        }
                         if (info[i].fechaFinContrato && info[i].fechaFinContrato.toString().substr(0, 10) !== "1900-01-01") {
                             filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">'
                                 + 'Fecha de FIN CONTRATO'
                                 + '</span><span class="amount_adj">'
                                 + info[i].fechaFinContrato.toString().substr(0, 10)
                                 + '        </span></div>';
-                    ***REMOVED***
+                        }
 
                         if (info[i].fecha_inicio_ejecucion_contrato && info[i].fecha_inicio_ejecucion_contrato.toString().substr(0, 10) !== "1900-01-01") {
                             filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">'
@@ -344,14 +344,14 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                                 + '</span><span class="amount_adj">'
                                 + info[i].fecha_inicio_ejecucion_contrato.toString().substr(0, 10)
                                 + '        </span></div>';
-                    ***REMOVED***
+                        }
                         if (info[i].fecha_fin_ejecucion_contrato && info[i].fecha_fin_ejecucion_contrato.toString().substr(0, 10) !== "1900-01-01") {
                             filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">'
                                 + 'Fecha de FIN EJECUCIÓN'
                                 + '</span><span class="amount_adj">'
                                 + info[i].fecha_fin_ejecucion_contrato.toString().substr(0, 10)
                                 + '        </span></div>';
-                    ***REMOVED***
+                        }
 
                         filaconfirma += '                    </div>';
 
@@ -359,7 +359,7 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                             filaconfirma += '                    <div class="row border-b">'
                                 + '                        <div class="col-xs-6 col-md-3"><span class="small"> Duración </span><span class="amount_adj">';
 
-                            if (info[i].ofertaPeriodoDuracion) { filaconfirma += info[i].ofertaPeriodoDuracion.toString(); ***REMOVED***
+                            if (info[i].ofertaPeriodoDuracion) { filaconfirma += info[i].ofertaPeriodoDuracion.toString(); }
 
                             filaconfirma += '                   Días</span></div>';
 
@@ -367,25 +367,25 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
 
                             if (info[i].fechaPublicacion !== null && info[i].fechaPublicacion.toString().substr(0, 10) !== "1900-01-01") {
                                 filaconfirma += info[i].fechaPublicacion.toString().substr(0, 10) + '</span></div>';
-                        ***REMOVED***
+                            }
                             else {
                                 filaconfirma += '</span></div>';
-                        ***REMOVED***
+                            }
 
                             filaconfirma += '                    </div>';
 
-                    ***REMOVED***
+                        }
 
                         filaconfirma += '                </div>'
                             + '               <div class="panel-footer" style="align:center">';
 
                         if (info[i].codigoContrato) {
-                    ***REMOVED***
+                        }
                         filaconfirma += '                 </div>'
                             + '            </div>'
                             + '        </div>';
 
-                ***REMOVED***
+                    }
 
 
                     data += inicioLuis + inicio + fila + filaconfirma + '</div></div>' + referencia + finLuis;
@@ -397,8 +397,8 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                     configuraEnlaceContratista();
                     if (Math.ceil(result.cantidadTotalRegistros / registros) > 1) {
                         dibujarPagNumeradasPerContratos(pagina, Math.ceil(result.cantidadTotalRegistros / registros));
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
                 else {
                     $("#divPagContratos").empty();
                     $("#srcContratos").html("");
@@ -406,23 +406,23 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                         + '<div class="contractNumberRP"><span class="text-bold NoResultC">No se encuentran resultados con los filtros solicitados</span></div>'
                         + '</div>';
                     $("#srcContratos").html(fila);
-            ***REMOVED***
-        ***REMOVED*** else {
+                }
+            } else {
                 alert("Message: " + result.message);
-        ***REMOVED***
+            }
             deshabilita(false);
-      ***REMOVED***
+        },
         error: function (response) {
             deshabilita(false);
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             deshabilita(false);
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
-***REMOVED***
+}
 
 
 
@@ -437,48 +437,48 @@ function dibujarPagNumeradasPerContratos(actual, totalPag) {
     var inicio = 1;
     if (residuo == 0) {
         inicio = (pag_actual - cant_por_linea) + 1;
-***REMOVED*** else {
+    } else {
         inicio = (cociente * cant_por_linea) + 1;
-***REMOVED***
+    }
 
     var fin = inicio + (cant_por_linea - 1);
     if (totalPag < cant_por_linea) {
         fin = totalPag;
-***REMOVED***
+    }
     if (fin > totalPag) {
         fin = totalPag;
-***REMOVED***
+    }
     if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
         pag_enlace += '<a id="page_left_c" role="button" class="material-icons md-24" data-page_C="' + (inicio - cant_por_linea) + '"><span class="">chevron_left</span></a>';
-***REMOVED***
+    }
 
 
     for (var i = inicio; i <= fin; i++) {
 
         if (i == pag_actual) {
             pag_enlace += '<span class="pag_actual" data-page_c="' + i + '"><text>' + i + '</text></span>';
-    ***REMOVED*** else {
+        } else {
             pag_enlace += '<a class="page_left_c" role="button" data-page_c="' + i + '">';
             pag_enlace += '<span class="glyphicon"><text class="paginacion">' + i + '</text></span>';
             pag_enlace += '</a>';
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
 
     if (pag_actual < totalPag) {
         if (fin < totalPag) {
             pag_enlace += '<a id="page_right_c" role="button" class="material-icons md-24" data-page_c="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     $("#divPagContratos").html(pag_enlace);
 
     $('#page_right_c,#page_left_c,.page_left_c,.page_right_c').bind('click', function () {
         pagina_actual = $(this).attr("data-page_c");
         getContratos(pagina_actual, cant_contratos, $("#entidad").val(), $('#proceso').val());
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 var disableClick = false;
 function deshabilita(des) {
@@ -486,11 +486,11 @@ function deshabilita(des) {
     if (des) {
         $("#btn-buscar").prop("disabled", des);
         $('#btnLimpiar').attr("disabled", "disabled")
-***REMOVED*** else {
+    } else {
         $("#btn-buscar").prop("disabled", des);
         $('#btnLimpiar').removeAttr("disabled")
-***REMOVED***
-***REMOVED***
+    }
+}
 
 function clickbotoncontratosasoc(id) {
     $("#divOtrasLineas").empty();
@@ -508,7 +508,7 @@ function clickbotoncontratosasoc(id) {
 
     getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val(), idproyecto);
 
-***REMOVED***
+}
 
 $("#btnLimpiar").click(function () {
     if (!disableClick) {
@@ -519,35 +519,35 @@ $("#btnLimpiar").click(function () {
         $("#proceso").val("");
         deshabilita(true);
         getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val());
-***REMOVED***
-***REMOVED***);
+    }
+});
 
 $("#btn-buscar").click(function () {
     if (!disableClick) {
         deshabilita(true);
         getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val());
-***REMOVED***
+    }
 
-***REMOVED***);
+});
 
 //autocompletar en contratos
 $("#entidad").on("keyup", function (event) {
     if (event.keyCode == 9 || event.keyCode == 13) {
         event.preventDefault();
-***REMOVED*** else {
+    } else {
         if (event.keyCode == 8) {
             if ($(this).val().length <= 1) {
                 $(this).val("");
 
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
-***REMOVED***).autocomplete({
+            }
+        }
+    }
+}).autocomplete({
     source: function (request, response) {
         var filtros = {
             proveedor: request.term,
             institucion: $("#codigoEntidadId").val()
-    ***REMOVED***;
+        };
         $.ajax({
             type: 'GET',
             contentType: "application/json; charset=utf-8",
@@ -561,40 +561,40 @@ $("#entidad").on("keyup", function (event) {
                 if (datos == null || datos.data.length <= 0) {
                     $("#divNoEncontrado").show();
                     $("#ui-id-1").hide();
-            ***REMOVED*** else {
+                } else {
                     $("#divNoEncontrado").hide();
                     response($.map(datos.data, function (item) {
 
                         return {
                             label: item.proveedor,
                             value: item.documentoproveedor
-                    ***REMOVED***;
+                        };
 
-                ***REMOVED***
+                    }
                     ));
 
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
             error: function (response) {
                 alert(response.responseText);
-          ***REMOVED***
+            },
             failure: function (response) {
                 alert(response.responseText);
-        ***REMOVED***
-    ***REMOVED***);
-  ***REMOVED***
+            }
+        });
+    },
     delay: 300,
     minLength: 1,
     select: function (event, ui) {
 
-***REMOVED***
-***REMOVED***).bind('blur onblur', function () {
+    }
+}).bind('blur onblur', function () {
     if ($(this).val() == "") {
         $(this).val("");
         $("#divNoEncontrado").hide();
-***REMOVED***
+    }
 
-***REMOVED***);
+});
 
 
 /////////////////////INVERSION////////////////////
@@ -608,26 +608,26 @@ function getProgramasByEntidad(annio) {
         data: {
             annio: annio,
             codEntidad: codigoEntidad
-    ***REMOVED***
-***REMOVED***).done(function (data) {
+        }
+    }).done(function (data) {
         var result = data.infoProgramas;
         global_programas = result;
         pintaProgramas(result);
 
-***REMOVED***).fail(function (handleError) {
+    }).fail(function (handleError) {
         // Some function
         console.log(handleError);
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 function iniProgramaXDefecto() {
     if ($('#selectProgramas').children('option').length > 0) {
         $('#selectProgramas').val($('#selectProgramas option:first').val());
         $('#selectProgramas').trigger('change');
-***REMOVED***
+    }
 
-***REMOVED***
+}
 
 function pintaProgramas(data) {
     $("#divProgramas").empty();
@@ -644,7 +644,7 @@ function pintaProgramas(data) {
             str_cad += '<select id="selectProgramas">';
             for (var i = 0; i < data.length; i++) {
                 str_cad += '<option value="' + data[i].id + '">' + data[i].nombre + '</option>';
-        ***REMOVED***
+            }
             str_cad += '</select>';
             str_cad += '<i></i>';
             str_cad += '</div>';
@@ -656,26 +656,26 @@ function pintaProgramas(data) {
             if ($('#selectProgramas').children('option').length > 0) {
                 configuraSelectProgramas();
                 iniProgramaXDefecto();
-        ***REMOVED***
+            }
 
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
-***REMOVED***
+}
 function configuraSelectProgramas() {
     $('#selectProgramas').on('change', function () {
         var prog_actual = this.value;
         var filter_prog = $.grep(global_programas, function (elemento) {
             return elemento.id*1 === prog_actual*1;
-    ***REMOVED***);
+        });
         if (filter_prog != null) {
             setValoresXPrograma(filter_prog);
-    ***REMOVED***
+        }
 
         consultaInfograficoPerPrograma(prog_actual);
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 function setValoresXPrograma(data) {
     var valor_vigente = data[0].presupuesto;
     var valor_ejecutado = data[0].ejecutado;
@@ -689,7 +689,7 @@ function setValoresXPrograma(data) {
     var porcentaje_programa = 0;
     if (valor_vigente > 0) {
         porcentaje_programa = ((valor_ejecutado / valor_vigente) * 100).formatMoney(1, ',', '.').toString() + "%";
-***REMOVED***
+    }
 
     //-----------------------------------------------------------
     var str_programa = '<div class="row justify-content-center">';  //inicio row
@@ -724,7 +724,7 @@ function setValoresXPrograma(data) {
     str_programa += '</div>';  //fin row
     $("#lblValorAsignacionPrograma").html(str_programa);
 
-***REMOVED***
+}
 function consultaInfograficoPerPrograma(prog_actual) {
 
 
@@ -740,7 +740,7 @@ function consultaInfograficoPerPrograma(prog_actual) {
 
     GetDatosByTipo($("#annioEntidad option:selected").val(), "inversion", prog_actual)
 
-***REMOVED***
+}
 
 
 
@@ -750,7 +750,7 @@ function GetDatosByTipo(anyo, tipo, programa)
     var tipo_aux = "";
     if (tipo != null && tipo != undefined) {
         tipo_aux = tipo.toString().toUpperCase();
-***REMOVED***
+    }
     $("#divPagFichas").html("");
     $("#divInversion").empty();
     $("#divInversion").html(loader_proy);
@@ -764,9 +764,9 @@ function GetDatosByTipo(anyo, tipo, programa)
             codEntidad: codigoEntidad,
             tipo: tipo,
             programa : programa
-      ***REMOVED***
+        },
 
-***REMOVED***).done(function (data) {
+    }).done(function (data) {
         var resultado = data.detalleTipo;
         proyectos = resultado.proyInv;
         var otras_lineas = resultado.otrasLineas;
@@ -780,20 +780,20 @@ function GetDatosByTipo(anyo, tipo, programa)
                     var fin_data = (pagina_actual * cantXPagina) - 1;
                     var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
                         return (i >= ini_data && i <= fin_data);
-                ***REMOVED***);
+                    });
                     getEstructuraInfograficoPerTipo(data_pagina, 1);
 
-            ***REMOVED*** else {
+                } else {
                     $("#divInversion").html("<span class='lblErrorNoData'>Información No Disponible</span>");
-            ***REMOVED***
+                }
 
 
 
-        ***REMOVED*** else {
+            } else {
                 if (proyectos == null && otras_lineas == null) {
                     $("#divInversion").html("<span class='lblErrorNoData'>Información No Disponible</span>");
 
-            ***REMOVED*** else {
+                } else {
                     if (proyectos != null) {
                         globales_gasto = proyectos;
 
@@ -801,40 +801,40 @@ function GetDatosByTipo(anyo, tipo, programa)
                         var fin_data = (pagina_actual * cantXPaginaInv) - 1;
                         var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
                             return (i >= ini_data && i <= fin_data);
-                    ***REMOVED***);
+                        });
                         getEstructuraInfograficoNew(data_pagina, 1);
 
-                ***REMOVED***
+                    }
                     if (otras_lineas != null) {
                         globales_lineas = otras_lineas;
                         var ini_data_lineas = ((pagina_actual - 1) * cantXPaginaInv);
                         var fin_data_lineas = (pagina_actual * cantXPaginaInv) - 1;
                         var data_pagina_lineas = arr = jQuery.grep(globales_lineas, function (n, i) {
                             return (i >= ini_data && i <= fin_data);
-                    ***REMOVED***);
+                        });
                         getEstructuraInfograficoPerLineas(data_pagina_lineas, 1);
-                ***REMOVED***
+                    }
 
-            ***REMOVED***
+                }
 
 
 
-        ***REMOVED***
-    ***REMOVED*** else {
+            }
+        } else {
             $("#divInversion").html("<span class='lblErrorNoData'>Información No Disponible</span>");
-    ***REMOVED***
+        }
 
 
 
 
 
 
-***REMOVED***).fail(function (handleError) {
+    }).fail(function (handleError) {
         // Some function
 
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 
 function getEstructuraInfograficoNew(datos, pagina) {
@@ -959,7 +959,7 @@ function getEstructuraInfograficoNew(datos, pagina) {
             html_str += '</div>';
             j_aux = j_aux + 1;
 
-    ***REMOVED***
+        }
 
         ///----------------------------------BOTONES
         html_str += '<div class="row align-items-center">';
@@ -984,7 +984,7 @@ function getEstructuraInfograficoNew(datos, pagina) {
 
         i_aux = i_aux + 1;
 
-***REMOVED***
+    }
     html_str += "</div>";
 
 
@@ -996,13 +996,13 @@ function getEstructuraInfograficoNew(datos, pagina) {
     var totalPages = (totalNumber > cantXPaginaInv) ? ((totalNumber - (totalNumber % cantXPaginaInv)) / cantXPaginaInv) : 1;
     if ((totalNumber >= cantXPaginaInv) && ((totalNumber % cantXPaginaInv) > 0)) {
         totalPages = totalPages + 1;
-***REMOVED***
+    }
     if (totalPages > 1) {
         dibujarPagNumeradasPerTipoInv(pagina, totalNumber, totalPages);
-***REMOVED***
+    }
 
 
-***REMOVED***
+}
 
 function dibujarPagNumeradasPerTipoInv(actual, total, totalPag) {
     var pag_actual = parseInt(actual);
@@ -1018,39 +1018,39 @@ function dibujarPagNumeradasPerTipoInv(actual, total, totalPag) {
     var inicio = 1;
     if (residuo == 0) {
         inicio = (pag_actual - cant_por_linea) + 1;
-***REMOVED*** else {
+    } else {
         inicio = (cociente * cant_por_linea) + 1;
-***REMOVED***
+    }
 
     var fin = inicio + (cant_por_linea - 1);
     if (totalPag < cant_por_linea) {
         fin = totalPag;
-***REMOVED***
+    }
     if (fin > totalPag) {
         fin = totalPag;
-***REMOVED***
+    }
     if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
         pag_enlace += '<a id="page_left" role="button" class="material-icons md-24" data-page="' + (inicio - cant_por_linea) + '"><span class="">chevron_left</span></a>';
-***REMOVED***
+    }
 
 
     for (var i = inicio; i <= fin; i++) {
 
         if (i == pag_actual) {
             pag_enlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
-    ***REMOVED*** else {
+        } else {
             pag_enlace += '<a class="page_left" role="button" data-page="' + i + '">';
             pag_enlace += '<span class="glyphicon"><text class="paginacion">' + i + '</text></span>';
             pag_enlace += '</a>';
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
 
     if (pag_actual < totalPag) {
         if (fin < totalPag) {
             pag_enlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     $("#divPagFichas").html(pag_enlace);
 
@@ -1060,12 +1060,12 @@ function dibujarPagNumeradasPerTipoInv(actual, total, totalPag) {
         var fin_data = (pagina_actual * cantXPaginaInv) - 1;
         var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
             return (i >= ini_data && i <= fin_data);
-    ***REMOVED***);
+        });
         $("#divInversion").empty();
         getEstructuraInfograficoNew(data_pagina, pagina_actual);
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 
 function getEstructuraInfograficoPerLineas(datos_lineas, pagina) {
@@ -1118,7 +1118,7 @@ function getEstructuraInfograficoPerLineas(datos_lineas, pagina) {
             str_lineas += '</div>';
 
 
-    ***REMOVED***
+        }
         str_lineas += '</div>';  ///FIN ROW
         str_lineas += '</div>';  ///FIN wrap-lineas
         str_lineas += '</div>';   ///fin card-entidades-group
@@ -1130,14 +1130,14 @@ function getEstructuraInfograficoPerLineas(datos_lineas, pagina) {
         var totalPages = (totalNumber > cantXPaginaInv) ? ((totalNumber - (totalNumber % cantXPaginaInv)) / cantXPaginaInv) : 1;
         if ((totalNumber >= cantXPaginaInv) && ((totalNumber % cantXPaginaInv) > 0)) {
             totalPages = totalPages + 1;
-    ***REMOVED***
+        }
         if (totalPages > 1) {
             dibujarPagNumeradasPerLineas(pagina, totalNumber, totalPages);
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
 
-***REMOVED***
+}
 
 function dibujarPagNumeradasPerLineas(actual, total, totalPag) {
     var pag_actual = parseInt(actual);
@@ -1153,39 +1153,39 @@ function dibujarPagNumeradasPerLineas(actual, total, totalPag) {
     var inicio = 1;
     if (residuo == 0) {
         inicio = (pag_actual - cant_por_linea) + 1;
-***REMOVED*** else {
+    } else {
         inicio = (cociente * cant_por_linea) + 1;
-***REMOVED***
+    }
 
     var fin = inicio + (cant_por_linea - 1);
     if (totalPag < cant_por_linea) {
         fin = totalPag;
-***REMOVED***
+    }
     if (fin > totalPag) {
         fin = totalPag;
-***REMOVED***
+    }
     if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
         pag_enlace += '<a id="page_left_lineas" role="button" class="material-icons md-24" data-page="' + (inicio - cant_por_linea) + '"><span class="">chevron_left</span></a>';
-***REMOVED***
+    }
 
 
     for (var i = inicio; i <= fin; i++) {
 
         if (i == pag_actual) {
             pag_enlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
-    ***REMOVED*** else {
+        } else {
             pag_enlace += '<a class="page_left_lineas" role="button" data-page="' + i + '">';
             pag_enlace += '<span class="glyphicon"><text class="paginacion">' + i + '</text></span>';
             pag_enlace += '</a>';
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
 
     if (pag_actual < totalPag) {
         if (fin < totalPag) {
             pag_enlace += '<a id="page_right_lineas" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     $("#divPagFichasLineas").html(pag_enlace);
 
@@ -1195,12 +1195,12 @@ function dibujarPagNumeradasPerLineas(actual, total, totalPag) {
         var fin_data = (pagina_actual * cantXPaginaInv) - 1;
         var data_pagina = arr = jQuery.grep(globales_lineas, function (n, i) {
             return (i >= ini_data && i <= fin_data);
-    ***REMOVED***);
+        });
         $("#divOtrasLineas").empty();
         getEstructuraInfograficoPerLineas(data_pagina, pagina_actual);
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 
 
@@ -1217,20 +1217,20 @@ function GetRecursosPorFinalidad(anyo) {
         data: {
             anyo: anyo,
             codEntidad: $("#codigoEntidadId").val()
-    ***REMOVED***
-***REMOVED***).done(function (data) {
+        }
+    }).done(function (data) {
         if (data.infoRecursos != null) {
             globales = data.infoRecursos;
             loadRecursosPerFinalidad(globales);
-    ***REMOVED***
-***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+        }
+    }).fail(function (xhr, ajaxOptions, thrownError) {
         alert("Error " + xhr.status + "_" + thrownError);
-***REMOVED***);
+    });
 
 
 
 
-***REMOVED***
+}
 
 function assignColorPaleta(indice) {
     var color_aux = "#CCCCCC";
@@ -1239,9 +1239,9 @@ function assignColorPaleta(indice) {
         "#387CA6", "#96D2D9", "#F2E8C9", "#728EA6", "#BACDD9", "#F2E4DC", "#B0C1D9", "#88A5BF", "#D9BFA9", "#F29863", "#F2C1AE", "#BF9C99"];
     if (indice < colores_default.length) {
         col_sel = colores_default[indice];
-***REMOVED***
+    }
     return col_sel;
-***REMOVED***
+}
 function loadRecursosPerFinalidad(objData) {
     $("#divGraphPerFuncion").empty();
     var titulo = "Otros";
@@ -1253,14 +1253,14 @@ function loadRecursosPerFinalidad(objData) {
 
         var sumaTotal = data_filter.reduce(function (acumulador, elemento) {
             return acumulador + elemento.rawValueDouble;
-      ***REMOVED*** 0);
+        }, 0);
         for (var i = 0; i < data_filter.length; i++) {
             data_filter[i].labelGroup = data_filter[i].labelGroup.replace(",", " ");
             data_filter[i].label = data_filter[i].label.replace(",", " ");
 
             data_filter[i].rawValueDouble = parseFloat(data_filter[i].rawValueDouble);
             data_filter[i].porcentaje = (((data_filter[i].rawValueDouble / sumaTotal) * 100)).toFixed(2);
-    ***REMOVED***
+        }
 
      
         var distintos = objData.map(item => item.labelGroup)
@@ -1275,25 +1275,25 @@ function loadRecursosPerFinalidad(objData) {
                     align: "center",
                     size: 6,
                     transform: "capitalize"
-              ***REMOVED***
+                },
                  fill: function (d, index) {
                     return assignColorPaleta(index);
 
-            ***REMOVED***
-        ***REMOVED***)
+                }
+            })
             .translate(function (d) {
                 var traduc_aux = d;
                 if (d === "Back" || d === "back") {
                     traduc_aux = "Atrás";
-            ***REMOVED*** else if (d === "Click to Expand") {
+                } else if (d === "Click to Expand") {
                     traduc_aux = "Clic para expandir";
-            ***REMOVED*** else if (d === "No Data Available") {
+                } else if (d === "No Data Available") {
                     traduc_aux = "Información No Disponible";
-            ***REMOVED*** else {
+                } else {
                     traduc_aux = d;
-            ***REMOVED***
+                }
                 return traduc_aux;
-        ***REMOVED***)
+            })
             .config({
                 //threshold: limitePorc,
                 data: data_filter,
@@ -1313,32 +1313,32 @@ function loadRecursosPerFinalidad(objData) {
                                 break;
                             default:
                                 cad = d.labelGroup;
-                    ***REMOVED***
+                        }
                         if (cad.length > longitud_tooltip) {
                             cad = cad.substr(0, longitud_tooltip) + "...";
-                    ***REMOVED***
+                        }
                         return cad;
-                  ***REMOVED***
+                    },
                     tbody: [
                         [function (d) {
                             var valor = d["rawValueDouble"] / 1000000;
                             var cad = "";
                             cad += "<span>Presupuesto Vigente " + "$ " + valor.formatMoney( 0, '.', ',').toString() + " Millones" + "</span></br>";
                             return cad;
-                    ***REMOVED***]
+                        }]
                     ]
-              ***REMOVED***
+                },
                 yConfig: {
                     title: "",
-            ***REMOVED***
-        ***REMOVED***)
+                }
+            })
             .sum("rawValueDouble")
             .depth(0)
             .legend(false)
             .render();
-***REMOVED***
+    }
 
-***REMOVED***
+}
 
 
 function assignColorPaletaD(indice) {
@@ -1349,9 +1349,9 @@ function assignColorPaletaD(indice) {
         "#56BFD6", "#5ED6B2", "#4FBC03", "#9B0DCA"];
     if (indice < colores_default.length) {
         col_sel = colores_default[indice];
-***REMOVED***
+    }
     return col_sel;
-***REMOVED***
+}
 
 function loadDonaGraph(myData,divContenedor) {
 
@@ -1370,39 +1370,39 @@ function loadDonaGraph(myData,divContenedor) {
             legend: false,
             legendPosition: function () {
                 return this._width > this._height ? "right" : "bottom";
-          ***REMOVED***
+            },
             value: "rawValue",
             color: function (d, index) {
                 return assignColorPaletaD(index);
-          ***REMOVED***
+            },
             tooltipConfig: {
                 title: function (d) {
                     return d["labelGroup"];
-              ***REMOVED***
+                },
                 tbody: [
                     [function (d) {
 
                         var cad_aux = "$ " + d["rawValue"].formatMoney(1, ',', '.').toString() + " ";
                         if (d["porcentaje"] != undefined && d["porcentaje"] != null) {
                             cad_aux = "$ " + d["rawValue"].formatMoney(1, ',', '.').toString() + " " + " <strong>(" + d["porcentaje"].formatMoney(1, '.', ',').toString() + " %)</strong>";
-                    ***REMOVED***
+                        }
                         return cad_aux;
 
-                ***REMOVED***]
+                    }]
                 ]
-        ***REMOVED***
+            }
             , legendConfig: {
                 label(d, i) {
                     return d["labelGroup"];
-              ***REMOVED***
+                },
 
-        ***REMOVED***
-    ***REMOVED***)
-        .legendTooltip({ footer: "" ***REMOVED***)
-        .on({ "click.legend": () => { ***REMOVED*** ***REMOVED***)
+            }
+        })
+        .legendTooltip({ footer: "" })
+        .on({ "click.legend": () => { } })
         .render();
 
-***REMOVED***
+}
 
 function loadConsolidaGastoEntidad(data, div) {
     var txt_aux = "";
@@ -1413,13 +1413,13 @@ function loadConsolidaGastoEntidad(data, div) {
             + "<div class='desc-item-expenditure'>" + data[i].labelGroup + "</div>"
             + "<div class='wrap-expenditure-link'></div>"
             + "</div>";
-***REMOVED***
+    }
 
     $("#" + div).html(txt_aux);
 
 
 
-***REMOVED***
+}
 function getDataByFuncion(annio) {
     $.ajax({
         type: 'GET',
@@ -1430,31 +1430,31 @@ function getDataByFuncion(annio) {
         data: {
             annio: annio,
         codEntidad: $("#codigoEntidadId").val()
-      ***REMOVED***
+        },
         success: function (result) {
             if (result.status == true) {
                 var data = result.listInfoConsolidado;
                 if (data != null) {
                     loadDonaGraph(data, "divGraphPerGrupoGasto");
                     loadConsolidaGastoEntidad(data, "divTxtGrupoGasto");
-            ***REMOVED***
-        ***REMOVED*** else {
+                }
+            } else {
                 alert("Error: " + result.message, function () {
 
-            ***REMOVED***);
-        ***REMOVED***
+                });
+            }
 
-      ***REMOVED***
+        },
         error: function (response) {
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
 
-***REMOVED***
+}
 
 
 
@@ -1469,36 +1469,36 @@ function getProcesosByFuncion(annio) {
         data: {
             anyo: annio,
             codEntidad: $("#codigoEntidadId").val()
-      ***REMOVED***
+        },
         success: function (result) {
             if (result.status == true) {
                 var data = result.infoRecursos;
                 if (data != null) {
                     horizontalBar(data, "divGraphProcesos");
-            ***REMOVED***
-        ***REMOVED*** else {
+                }
+            } else {
                 alert("Error: " + result.message, function () {
 
-            ***REMOVED***);
-        ***REMOVED***
+                });
+            }
 
-      ***REMOVED***
+        },
         error: function (response) {
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
 
-***REMOVED***
+}
 function horizontalBar(data, div) {
     $("#" + div).html("");
     //sort bars based on value
     data = data.sort(function (a, b) {
         return d3.ascending(a.rawValueDouble, b.rawValueDouble);
-***REMOVED***)
+    })
 
     //set up svg using margin conventions - we'll need plenty of room on the left for labels
     var margin = {
@@ -1506,7 +1506,7 @@ function horizontalBar(data, div) {
         right: 40,
         bottom: 15,
         left: 80
-***REMOVED***;
+    };
     ancho = $(document).width() - ($(document).width()/3);
     var width = ancho - margin.left - margin.right,
         height = (ancho /2) - margin.top - margin.bottom;
@@ -1521,13 +1521,13 @@ function horizontalBar(data, div) {
         .range([0, width])
         .domain([0, d3.max(data, function (d) {
             return d.rawValueDouble;
-    ***REMOVED***)]);
+        })]);
 
     var y = d3.scale.ordinal()
         .rangeRoundBands([height, 0], .1)
         .domain(data.map(function (d) {
             return d.labelGroup.trim();
-    ***REMOVED***));
+        }));
 
     //make y axis to show bar names
     var yAxis = d3.svg.axis()
@@ -1553,12 +1553,12 @@ function horizontalBar(data, div) {
         .attr("class", "bar")
         .attr("y", function (d) {
             return y(d.labelGroup);
-    ***REMOVED***)
+        })
         .attr("height", y.rangeBand()-20)
         .attr("x", 0)
         .attr("width", function (d) {
             return x(d.rawValueDouble);
-    ***REMOVED***);
+        });
 
     //add a value label to the right of each bar
     bars.append("text")
@@ -1566,16 +1566,16 @@ function horizontalBar(data, div) {
         //y position of the label is halfway down the bar
         .attr("y", function (d) {
             return y(d.labelGroup) + y.rangeBand() / 2 -10;
-    ***REMOVED***)
+        })
         //x position is 3 pixels to the right of the bar
         .attr("x", function (d) {
             return x(d.rawValueDouble) + 3;
-    ***REMOVED***)
+        })
         .text(function (d) {
             return d.rawValueDouble;
-    ***REMOVED***);
+        });
 
-***REMOVED***
+}
 
 function wrap(text, width) {
     text.each(function () {
@@ -1595,11 +1595,11 @@ function wrap(text, width) {
                 line.pop()
                 tspan.text(line.join(" "))
                 line = [word]
-                tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", `${++lineNumber * lineHeight + dy***REMOVED***em`).text(word)
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***)
-***REMOVED***
+                tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", `${++lineNumber * lineHeight + dy}em`).text(word)
+            }
+        }
+    })
+}
 
 
 ////////////////////////////////////////// Procesos ////////////////////////////////////////////////////
@@ -1612,8 +1612,8 @@ function GetRecursosPorNivelYAnio(anio) {
         data: {
             anio: anio,
             codEntidad: $("#codigoEntidadId").val()
-    ***REMOVED***
-***REMOVED***).done(function (data) {
+        }
+    }).done(function (data) {
 
         procesos = data.data;
         inidata = ((paginaActual - 1) * cantXPagina);
@@ -1621,14 +1621,14 @@ function GetRecursosPorNivelYAnio(anio) {
 
         var institucionesPorPagina = jQuery.grep(procesos, function (n, i) {
             return (i >= inidata && i <= findata);
-    ***REMOVED***);
+        });
         GetListadoInstituciones(institucionesPorPagina);
         dibujarPagNumeradas(paginaActual);
-***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+    }).fail(function (xhr, ajaxOptions, thrownError) {
         alert("Error " + xhr.status + "_" + thrownError);
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 
 function GetListadoInstituciones(institucionesPorPagina) {
@@ -1653,12 +1653,12 @@ function GetListadoInstituciones(institucionesPorPagina) {
         html_list += '</div>';
         html_list += '</div>';
 
-***REMOVED***
+    }
     html_list += '</div>';
     $("#divProcesos").html(html_list);
 
     dibujarPagNumeradas(1);
-***REMOVED***
+}
 
 //paginador
 
@@ -1668,7 +1668,7 @@ function dibujarPagNumeradas(paginaActual) {
 
     if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
         totalPages = totalPages + 1;
-***REMOVED***
+    }
     var pagActual = parseInt(paginaActual);
 
     var totalNumerosPaginador = 10;
@@ -1681,38 +1681,38 @@ function dibujarPagNumeradas(paginaActual) {
     var inicio = 1;
     if (residuo == 0) {
         inicio = (pagActual - totalNumerosPaginador) + 1;
-***REMOVED*** else {
+    } else {
         inicio = (cociente * totalNumerosPaginador) + 1;
-***REMOVED***
+    }
 
     var fin = inicio + (totalNumerosPaginador - 1);
     if (totalPages < totalNumerosPaginador) {
         fin = totalPages;
-***REMOVED***
+    }
     if (fin > totalPages) {
         fin = totalPages;
-***REMOVED***
+    }
     if (pagActual > totalNumerosPaginador && totalPages >= totalNumerosPaginador) {
         pagEnlace += '<a id="page_left" role="button" class="material-icons md-24" data-page="' + (inicio - totalNumerosPaginador) + '"><span class="">chevron_left</span></a>';
-***REMOVED***
+    }
 
     for (var i = inicio; i <= fin; i++) {
         if (i == pagActual) {
             pagEnlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
-    ***REMOVED*** else {
+        } else {
             pagEnlace += '<a class="page_left" role="button" data-page="' + i + '">';
             pagEnlace += '<span class="glyphicon"></span>';
             pagEnlace += '<text class="paginacion">' + i + '</text>';
             pagEnlace += '</a>';
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
 
     if (pagActual < totalPages) {
         if (fin < totalPages) {
             pagEnlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     $("#divPagFichasPro").html(pagEnlace);
 
@@ -1725,13 +1725,13 @@ function dibujarPagNumeradas(paginaActual) {
 
         var institucionesPorPagina = jQuery.grep(proyectos, function (n, i) {
             return (i >= inidata && i <= findata);
-    ***REMOVED***);
+        });
 
         GetListadoInstituciones(institucionesPorPagina);
         dibujarPagNumeradas(paginaActual);
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
         function configuraEnlaceContratista() {
             $(".enlace_contratista").click(function () {
@@ -1742,10 +1742,10 @@ function dibujarPagNumeradas(paginaActual) {
                 var url = "/contratista?" + dataType + "=" + dataValue;
                 window.open(url, '_blank');
 
-        ***REMOVED***);
+            });
 
 
-    ***REMOVED***
+        }
 Number.prototype.formatMoney = function (c, d, t) {
     var n = this,
         c = isNaN(c = Math.abs(c)) ? 2 : c,
@@ -1754,5 +1754,5 @@ Number.prototype.formatMoney = function (c, d, t) {
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-***REMOVED***;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};

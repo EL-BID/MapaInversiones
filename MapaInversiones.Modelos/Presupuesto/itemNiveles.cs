@@ -6,8 +6,8 @@ namespace PlataformaTransparencia.Modelos.Presupuesto
 {
     public class itemNiveles
     {
-        public string labelGroup { get; set; ***REMOVED*** 
-        public int cantidad { get; set; ***REMOVED*** // int
+        public string labelGroup { get; set; } 
+        public int cantidad { get; set; } // int
 
-***REMOVED***
-***REMOVED***
+    }
+}

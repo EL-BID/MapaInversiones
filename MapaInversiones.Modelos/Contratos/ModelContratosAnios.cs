@@ -6,6 +6,6 @@ namespace PlataformaTransparencia.Modelos.Contratos
 {
     public class ModelContratosAnios : RespuestaContratoBase
     {
-        public List<AnioContrato> Detalles { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public List<AnioContrato> Detalles { get; set; }
+    }
+}

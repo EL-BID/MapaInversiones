@@ -6,14 +6,14 @@ namespace PlataformaTransparencia.Modelos.Comunes
 {
     public class ActorFicha
     {
-        public string Nombre { get; set; ***REMOVED***
+        public string Nombre { get; set; }
 
-        public string Tipo { get; set; ***REMOVED***
+        public string Tipo { get; set; }
 
-        public string IdDepartamento { get; set; ***REMOVED***
+        public string IdDepartamento { get; set; }
 
-        public string IdMunicipio { get; set; ***REMOVED***
+        public string IdMunicipio { get; set; }
 
 
-***REMOVED***
-***REMOVED***
+    }
+}

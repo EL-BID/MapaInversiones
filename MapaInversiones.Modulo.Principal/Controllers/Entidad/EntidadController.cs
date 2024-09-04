@@ -24,23 +24,23 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
             _logger = logger;
             _connection = connection;
             _cargaentidad = cargaentidad;
-    ***REMOVED***
+        }
 
         public IActionResult Index()
         {
             return View();
-    ***REMOVED***
+        }
         public IActionResult perfilEntidad(string codEntidad)
         {
             ModelEntidadData entidadData = _cargaentidad.GetEntidadData(codEntidad);
             return View(entidadData);
-    ***REMOVED***
+        }
 
         public IActionResult EntidadesGeneral()
         {
 
             return View();
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -6,10 +6,10 @@ namespace PlataformaTransparencia.Modelos.Contratos
 {
     public class ModelContratistaData : RespuestaContratoBase
     {
-        public List<ContratistaData> Data { get; set; ***REMOVED***
-        public string  Contratista { get; set; ***REMOVED***
-        public List<string> OrigenInformacion { get; set; ***REMOVED***
-        public List<ContratosConsolidado> Consolidados { get; set; ***REMOVED***
+        public List<ContratistaData> Data { get; set; }
+        public string  Contratista { get; set; }
+        public List<string> OrigenInformacion { get; set; }
+        public List<ContratosConsolidado> Consolidados { get; set; }
 
-***REMOVED***
-***REMOVED***
+    }
+}

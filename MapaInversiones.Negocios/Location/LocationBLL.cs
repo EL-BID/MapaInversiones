@@ -19,14 +19,14 @@ namespace PlataformaTransparencia.Negocios.Location
         public LocationBLL(IConfiguration configuration)
         {
             _configuration = configuration;
-    ***REMOVED***
+        }
 
         public ModelHeaderLocalitacionProfileData GetHeaderLocationProfile(string locationId, string type)
         {
             locationId ??= string.Empty;
             type ??= string.Empty;
             locationId = locationId != string.Empty ? locationId.Trim() : locationId;
-            ModelHeaderLocalitacionProfileData objReturn = new() { LocationId = locationId, Type = type, Name = GetNameLocationByIdType(locationId, type) ***REMOVED***;
+            ModelHeaderLocalitacionProfileData objReturn = new() { LocationId = locationId, Type = type, Name = GetNameLocationByIdType(locationId, type) };
             List<InfoProyectos> projectsByLocation = GetInvestingProjectsByLocationIdAndTypeLocation(locationId, type);
             objReturn.IsProvince = type.ToUpper().Trim() == Department.Name || type.ToUpper().Trim() == Province.Name;
             if (projectsByLocation.Count > 0)
@@ -34,11 +34,11 @@ namespace PlataformaTransparencia.Negocios.Location
                 objReturn.NumberProjects = projectsByLocation.Count;
                 objReturn.AverageDurationProjects = projectsByLocation.Select(x => x.AnioFinProyecto - x.AnioInicioProyecto).Average();
                 objReturn.AverageCostProjects = projectsByLocation.Select(x => x.VlrTotalProyectoFuenteRegalias).Average() / 1000000;
-        ***REMOVED***
-            objReturn.UrlImage = $"../GaleriaEnteTerritorial/XL/{objReturn.LocationId***REMOVED***_XL.jpg"; //url('../GaleriaEnteTerritorial/XL/DistritoNacional_XL.jpg')
+            }
+            objReturn.UrlImage = $"../GaleriaEnteTerritorial/XL/{objReturn.LocationId}_XL.jpg"; //url('../GaleriaEnteTerritorial/XL/DistritoNacional_XL.jpg')
             objReturn.Locations = GetChildsLocations(locationId, type);
             return objReturn;
-    ***REMOVED***
+        }
         private static List<itemFilters> GetChildsLocations(string locationId, string type)
         {
             if (string.IsNullOrEmpty(locationId)) return new();
@@ -55,12 +55,12 @@ namespace PlataformaTransparencia.Negocios.Location
                            {
                                value = info.IdMunicipio,
                                name = ente.NombreMunicipio
-                       ***REMOVED***).Distinct().OrderBy(x => x.name).ToList();
+                           }).Distinct().OrderBy(x => x.name).ToList();
                     break;
-        ***REMOVED***
-            rta.Insert(0, new itemFilters { name = "TODOS", value = "0", subTipo = string.Empty ***REMOVED***);
+            }
+            rta.Insert(0, new itemFilters { name = "TODOS", value = "0", subTipo = string.Empty });
             return rta;
-    ***REMOVED***
+        }
         private static string GetNameLocationByIdType(string locationId, string type)
         {
             locationId ??= string.Empty;
@@ -82,8 +82,8 @@ namespace PlataformaTransparencia.Negocios.Location
                     return locationLevelTwo == null ? string.Empty : locationLevelTwo.NombreMunicipio;
                 default:
                     return string.Empty;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -132,7 +132,7 @@ namespace PlataformaTransparencia.Negocios.Location
                                                                   porcentajeGastado = (decimal)info.AvanceFinanciero,
                                                                   EntidadEjecutora = info.EntidadEjecutora,
                                                                   IdEntidadEjecutora = info.IdEntidadEjecutora.ToString()
-                                                          ***REMOVED***).ToList();
+                                                              }).ToList();
                     if (projectsByDistrict != null && projectsByDistrict.Count > 0) projectsByDistrict = projectsByDistrict.DistinctBy(x => x.IdProyecto).ToList();
                     return projectsByDistrict;
                 case Province.Name:
@@ -170,13 +170,13 @@ namespace PlataformaTransparencia.Negocios.Location
                                                                   porcentajeGastado = (decimal)info.AvanceFinanciero,
                                                                   EntidadEjecutora = info.EntidadEjecutora,
                                                                   IdEntidadEjecutora = info.IdEntidadEjecutora.ToString()
-                                                          ***REMOVED***).ToList();
+                                                              }).ToList();
                     if (projectsByProvince != null && projectsByProvince.Count > 0) projectsByProvince = projectsByProvince.DistinctBy(x => x.IdProyecto).ToList();
                     return projectsByProvince;
                 default:
                     return new List<InfoProyectos>();
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         /// <summary>
         /// obt listado sectores filtro proy ejecucion
@@ -193,10 +193,10 @@ namespace PlataformaTransparencia.Negocios.Location
                                {
                                    nombre = maestro.NombreSector,
                                    valor = maestro.IdSector.ToString()
-                           ***REMOVED***).OrderBy(p => p.nombre).ToList();
-        ***REMOVED***
+                               }).OrderBy(p => p.nombre).ToList();
+            }
             return lstSectores;
-    ***REMOVED***
+        }
 
         public LocationProfileDetailData GetDetailLocationProfileByLocationIdAndTypeLocation(string locationId, string typeLocation, string jurisdictionId)
         {
@@ -212,7 +212,7 @@ namespace PlataformaTransparencia.Negocios.Location
             List<LocationProfileChild> locationsRelated = GetLocationRelatedByParentLocationAndTypeLocation(parentLocation, locationId, typeLocation);
             LocationProfileDetailData objReturn = new()
             {
-                GeneralInformacion = new LocationProfileGeneralInformation { UrlImage = $"../img/d-{locationId***REMOVED***.svg", IsChildLocationEnable = childrenLocations != null && childrenLocations.Count > 0, ParentLocationName = parentLocation == null ? string.Empty : parentLocation.Nombre, ChildLocationName = GetChildLocationNameByTypeLocation(typeLocation) ***REMOVED***,
+                GeneralInformacion = new LocationProfileGeneralInformation { UrlImage = $"../img/d-{locationId}.svg", IsChildLocationEnable = childrenLocations != null && childrenLocations.Count > 0, ParentLocationName = parentLocation == null ? string.Empty : parentLocation.Nombre, ChildLocationName = GetChildLocationNameByTypeLocation(typeLocation) },
                 TotalProjectsByState = GetTotalProjectsByState(projects),
                 ProjectsByLocation = projects,
                 LocationChilds = childrenLocations,
@@ -221,9 +221,9 @@ namespace PlataformaTransparencia.Negocios.Location
                 ProjectsByFunctionalGroup = new(),
                 LocationsRelated = locationsRelated,
                 Status = true
-        ***REMOVED***;
+            };
             return objReturn;
-    ***REMOVED***
+        }
 
         private static string GetChildLocationNameByTypeLocation(string typeLocation)
         {
@@ -231,11 +231,11 @@ namespace PlataformaTransparencia.Negocios.Location
             {
                 case Province.Name:
                 case Department.Name:
-                    return $"{Municipality.Name***REMOVED***S";
+                    return $"{Municipality.Name}S";
                 default:
                     return string.Empty;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         private static List<LocationProfileChild> GetLocationRelatedByParentLocationAndTypeLocation(Item parentLocation, string locationId, string typeLocation)
         {
@@ -254,17 +254,17 @@ namespace PlataformaTransparencia.Negocios.Location
                                                           {
                                                               Id = info.IdMunicipio,
                                                               Name = info.NombreMunicipio
-                                                      ***REMOVED***).Distinct().ToList();
+                                                          }).Distinct().ToList();
                         for (int i = 0; i < rta.Count; i++)
                         {
                             var projectsByLocation = GetInvestingProjectsByLocationIdAndTypeLocation(rta[i].Id, typeLocation);
                             rta[i].TotalProjects = projectsByLocation.Count;
-                    ***REMOVED***
+                        }
                         return rta;
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             return new();
-    ***REMOVED***
+        }
 
         /// <summary>
         /// 
@@ -286,26 +286,26 @@ namespace PlataformaTransparencia.Negocios.Location
                                 {
                                     Id = info.IdDepartamento,
                                     Nombre = info.NombreDepartamento
-                            ***REMOVED***).FirstOrDefault();
-            ***REMOVED***
-        ***REMOVED***
+                                }).FirstOrDefault();
+                }
+            }
             return null;
-    ***REMOVED***
+        }
 
         private List<InfoProjectPerSector> GetInvestingProjectsSectorsByInvestingProjectsInLocation(List<InfoProyectos> projects)
         {
             if (projects == null || (projects != null && projects.Count == 0)) return new();
             List<InfoProjectPerSector> rta = (from project in projects
-                                              group project by new { project.State, project.NombreSector ***REMOVED*** into g
+                                              group project by new { project.State, project.NombreSector } into g
                                               select new InfoProjectPerSector
                                               {
                                                   label = g.Key.NombreSector,
                                                   labelGroup = g.Key.State,
                                                   rawValue = g.Count(),
                                                   value = g.Count().ToString()
-                                          ***REMOVED***).OrderByDescending(x => x.rawValue).ToList();
+                                              }).OrderByDescending(x => x.rawValue).ToList();
             return rta;
-    ***REMOVED***
+        }
 
         private static List<LocationProfileChild> GetInvestingProjectsChildrenLocationsByLocationIdAndType(string typeLocation, List<InfoProyectos> projects, List<Item> locations)
         {
@@ -318,13 +318,13 @@ namespace PlataformaTransparencia.Negocios.Location
                 case Province.Name:
                 case Department.Name:
                     List<LocationProfileChild> childrenLocations = (from project in projects
-                                                                    group project by new { project.IdMunicipio, project.NombreMunicipio ***REMOVED*** into g
+                                                                    group project by new { project.IdMunicipio, project.NombreMunicipio } into g
                                                                     select new LocationProfileChild
                                                                     {
                                                                         Id = g.Key.IdMunicipio,
                                                                         Name = g.Key.NombreMunicipio,
                                                                         TotalProjects = g.Count()
-                                                                ***REMOVED***).ToList();
+                                                                    }).ToList();
                     if (childrenLocations.Count > 0)
                     {
                         if (locations.Count > 0)
@@ -337,16 +337,16 @@ namespace PlataformaTransparencia.Negocios.Location
                                        Id = location.Id,
                                        Name = location.Nombre,
                                        TotalProjects = loc?.TotalProjects ?? 0
-                               ***REMOVED***).ToList();
-                    ***REMOVED***
+                                   }).ToList();
+                        }
                         //objReturn.GeneralInformacion.IsChildLocationEnable = true;
                         //objReturn.GeneralInformacion.ChildLocationName = typeLocation.ToUpper().Trim() == Province.Name ? Province.ChildLocation.Name : Department.ChildLocation.Name;
                         //objReturn.LocationChilds = new List<LocationProfileChild>(locationChildren.OrderBy(x => x.Name));
-                ***REMOVED***
+                    }
                     break;
-        ***REMOVED***
+            }
             return rta;
-    ***REMOVED***
+        }
 
         private static List<Item> GetInvestingProjectsLocationsByLocationIdAndType(string locationId, string type)
         {
@@ -365,25 +365,25 @@ namespace PlataformaTransparencia.Negocios.Location
                                {
                                    Id = info.IdMunicipio,
                                    Nombre = info.NombreMunicipio
-                           ***REMOVED***).Distinct().ToList();
+                               }).Distinct().ToList();
                         break;
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             return rta;
-    ***REMOVED***
+        }
 
         private static List<TotalProjectByState> GetTotalProjectsByState(List<InfoProyectos> projects)
         {
             if (projects == null || projects.Count == 0) return new();
             List<TotalProjectByState> rta = (from project in projects
-                                             group project by new { project.State ***REMOVED*** into g
+                                             group project by new { project.State } into g
                                              select new TotalProjectByState
                                              {
                                                  StateName = g.Key.State,
                                                  TotalProjects = g.Count(),
-                                         ***REMOVED***).ToList();
+                                             }).ToList();
             if (rta != null && rta.Count > 0) rta = rta.OrderBy(x => x.StateName).ToList();
             return rta;
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

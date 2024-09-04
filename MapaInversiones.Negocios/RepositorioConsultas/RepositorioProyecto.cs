@@ -33,9 +33,9 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                                     Utilitarios.Utilidades.ListaToCsv(filtro.fechasEjecucion),
                                                                     filtro.CodigosEstado.FirstOrDefault()).ToList();
 
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
         [ExcludeFromCodeCoverage]
         internal static List<ObtenerProyectosPorDepartamentoPorFiltrosResult> ObtenerProyectosPorDepartamentoPorFiltros(FiltroBusquedaProyecto filtro)
@@ -53,10 +53,10 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                                     filtro.ContieneNombreProyecto,
                                                                     Utilitarios.Utilidades.ListaToCsv(filtro.fechasEjecucion),
                                                                     filtro.CodigosEstado.FirstOrDefault()).ToList();
-        ***REMOVED***
+            }
 
             return objReturn;
-    ***REMOVED***
+        }
 
         [ExcludeFromCodeCoverage]
         internal static List<ObtenerProyectosPorMunicipioPorFiltrosResult> ObtenerProyectosPorMunicipioPorFiltros(FiltroBusquedaProyecto filtro)
@@ -73,10 +73,10 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                                         filtro.ContieneNombreProyecto,
                                                                         Utilitarios.Utilidades.ListaToCsv(filtro.fechasEjecucion),
                                                                         filtro.CodigosEstado.FirstOrDefault()).ToList();
-        ***REMOVED***
+            }
 
             return objReturn;
-    ***REMOVED***
+        }
 
         [ExcludeFromCodeCoverage]
         internal static List<ObtenerResumenesProyectosPorFiltrosResult> ObtenerResumenesProyectosPorFiltros(FiltroBusquedaProyecto filtro)
@@ -94,10 +94,10 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                                         filtro.ContieneNombreProyecto,
                                                                         Utilitarios.Utilidades.ListaToCsv(filtro.fechasEjecucion),
                                                                         filtro.CodigosEstado.FirstOrDefault()).ToList();
-        ***REMOVED***
+            }
 
             return objReturn;
-    ***REMOVED***
+        }
 
         [ExcludeFromCodeCoverage]
         internal static List<ObtenerProyectosConsistentesMapListModeResult> ObtenerProyectosConsistentesMapListMode(FiltroBusquedaProyecto filtro)
@@ -116,10 +116,10 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                                     filtro.ContieneNombreProyecto,
                                                                     Utilitarios.Utilidades.ListaToCsv(filtro.fechasEjecucion),
                                                                     filtro.CodigosEstado.FirstOrDefault()).ToList();
-        ***REMOVED***
+            }
 
             return objReturn;
-    ***REMOVED***
+        }
 
         [ExcludeFromCodeCoverage]
         internal static List<ActorFicha> ObtenerNombresActoresPorRolYProyecto(Int32 idProyecto, Int32 idRol)
@@ -130,13 +130,13 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                 var lst = db.ObtenerNombresActoresPorRolYProyecto(Convert.ToInt32(idRol), Convert.ToInt32(idProyecto)).Select(p => new ActorFicha() {
                     Nombre = p.NombreActor,
                     Tipo = p.Rol
-            ***REMOVED***).ToList();
+                }).ToList();
 
             objReturn = lst;
-        ***REMOVED***
+            }
 
             return objReturn;
-    ***REMOVED***
+        }
 
         [ExcludeFromCodeCoverage]
         internal static List<ActorFicha> ObtenerNombresGeografiasBeneficiadasProyecto(Int32 idProyecto)
@@ -149,11 +149,11 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                     IdDepartamento = p.IdDepartamento,
                     IdMunicipio = p.IdMunicipio,
                     Tipo = p.Tipo
-            ***REMOVED***).OrderBy(p => p.Nombre).ToList();
+                }).OrderBy(p => p.Nombre).ToList();
                 objReturn = lst;
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
         internal static string ObtenerURLAuditoriaVisiblePorProyecto(int idProyecto)
         {
@@ -161,9 +161,9 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             using (var db = new TransparenciaDB()) {
 
                 objReturn = db.ObtenerURLAuditoriaVisiblePorProyecto(Convert.ToInt32(idProyecto)).FirstOrDefault().ToString();
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
         internal static async System.Threading.Tasks.Task<string> ObtenerUrlReporteEmpalmeEjecutorAsync(int idProyecto)
         {
@@ -177,9 +177,9 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                   select ejecutorGesProy.CodigoEntidad).FirstOrDefaultAsync();
                 if (codigoEntidadGesproy != 0) {
                     objReturn = codigoEntidadGesproy.ToString();
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             return objReturn;
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

@@ -19,7 +19,7 @@ define(['app/utils/allColors'], function( allColors ){
 				startFromFixedAngle: 90,
 				labels: labels,
 				minPercent: 0.00001
-			***REMOVED***
+			}
 
 		if(!data)
 			return
@@ -27,30 +27,30 @@ define(['app/utils/allColors'], function( allColors ){
 		if( colors ){
 			opts.colors = colors,
 			opts.stroke = colors
-		***REMOVED***else{
+		}else{
 			if(data.length > regionsColors.length){
 				opts.colors = sectorColors
 				opts.stroke = sectorColors
-			***REMOVED***else{
+			}else{
 				opts.colors = regionsColors
 				opts.stroke = regionsColors
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		for(i=0; i<data.length; i++){
 			dataNumber[i] = data[i].rawValue
 			if( typeof data[i].value == 'Number'||
 				data[i].value.indexOf('%') == -1 ){
 				data[i].value +='%'
-			***REMOVED***
+			}
 			dataLabel[i] = data[i].value
-		***REMOVED***
+		}
 
 		pie = r.semiPiechart(radius*1.1, radius*1.1, radius, dataNumber, opts, dataLabel)
 
 		pie.hover(function () {
 			this.sector.stop();
-			this.sector.animate({ transform: 's1.1 1.1 ' + this.cx + ' ' + this.cy ***REMOVED***, 100/*, 'bounce'*/);
+			this.sector.animate({ transform: 's1.1 1.1 ' + this.cx + ' ' + this.cy }, 100/*, 'bounce'*/);
 			// if(!this.pop)
 			this.pop = createPopup(
 				this.sector, data[this.sector.value.order].label + ' - ' +
@@ -58,13 +58,13 @@ define(['app/utils/allColors'], function( allColors ){
 					(noCurrency ? data[this.sector.value.order].rawValue : data[this.sector.value.order].rawValue.toCurrency()),
 				labels ? 19 : 44)
 			this.pop.show()
-		***REMOVED***, function () {
-			this.sector.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy ***REMOVED***, 200/*, 'bounce'*/);
+		}, function () {
+			this.sector.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy }, 200/*, 'bounce'*/);
 			this.pop.remove()
-		***REMOVED***);
+		});
 
 		return pie
-	***REMOVED***
+	}
 
 	function drawBars(elem, data, labels, opts){
 		var barGraph,
@@ -72,7 +72,7 @@ define(['app/utils/allColors'], function( allColors ){
 			height,
 			r = Raphael(elem, width, height)
 		
-		opts = opts || {***REMOVED***
+		opts = opts || {}
 
 		height = opts.height || width * 0.577
 
@@ -88,22 +88,22 @@ define(['app/utils/allColors'], function( allColors ){
 		barGraph.hover(function () {
 			var raw = data[this.bar.value.order].rawValue
 			this.bar.stop();
-			this.bar.animate({ transform: 's1.1 1 ' + this.cx + ' ' + this.cy ***REMOVED***, 100/*, 'bounce'*/);
+			this.bar.animate({ transform: 's1.1 1 ' + this.cx + ' ' + this.cy }, 100/*, 'bounce'*/);
 			// if(!this.pop)
 			if(!opts.invertedData){
 				this.pop = createPopup(this.bar, data[this.bar.value.order].label +
 					' - ' + data[this.bar.value.order].value +
 					'<br>' + raw.toCurrency().replace(/\$\s*/,''), 0, -20)
-			***REMOVED***else{
+			}else{
 				this.pop = createPopup(this.bar, data[this.bar.value.order].label.replace(/(HIDROCARBURO|MINERAL)_FISCALIZADOS$/i,'$1').replace(/_/g,' ') +
 					'<br>' + raw +
 					'%<br>(' + data[this.bar.value.order].value.toCurrency().replace(/\$\s*/,'') + ')', 0, -20)
-			***REMOVED***
+			}
 			this.pop.show()
-		***REMOVED***, function () {
-			this.bar.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy ***REMOVED***, 200/*, 'bounce'*/);
+		}, function () {
+			this.bar.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy }, 200/*, 'bounce'*/);
 			this.pop.remove()
-		***REMOVED***)
+		})
 
 		if( labels ){
 			//Labels
@@ -111,17 +111,17 @@ define(['app/utils/allColors'], function( allColors ){
 				'text-anchor': 'middle',
 				'fill': '#777',
 				'font-size': '11px'
-			***REMOVED***)
+			})
 			r.text(8, height/2, labels[1]).attr({
 				'text-anchor': 'middle',
 				'fill': '#777',
 				'font-size': '11px'
-			***REMOVED***).rotate(-90)
-		***REMOVED***
-	***REMOVED***
+			}).rotate(-90)
+		}
+	}
 
 	function createPopup(node, htmlContent, hMargin, vMargin){
-		var popUp = $('<div>',{'class': 'graph-tooltip'***REMOVED***).html(htmlContent)
+		var popUp = $('<div>',{'class': 'graph-tooltip'}).html(htmlContent)
 
 		vMargin = vMargin || 0
 		hMargin = hMargin || 0
@@ -132,13 +132,13 @@ define(['app/utils/allColors'], function( allColors ){
 			top: $(node.paper.canvas).offset().top + node.getBBox().y - popUp[0].offsetHeight + vMargin,
 			left: $(node.paper.canvas).offset().left + node.getBBox().x + node.getBBox().width/2 + hMargin,
 			display: 'none'
-		***REMOVED***)
+		})
 
 		return popUp
-	***REMOVED***
+	}
 
 	return {
 		drawSemiPie: drawSemiPie,
 		drawBars: drawBars
-	***REMOVED***
-***REMOVED***)
+	}
+})

@@ -8,6 +8,6 @@ namespace PlataformaTransparencia.Modelos.Contratos
 {
     public class ModelNombreEntidad : RespuestaContratoBase
     {
-        public List<string> Nombre { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public List<string> Nombre { get; set; }
+    }
+}

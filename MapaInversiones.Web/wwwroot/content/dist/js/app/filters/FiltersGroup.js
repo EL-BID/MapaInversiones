@@ -34,7 +34,7 @@ define(['lib/mvc/Observable',
 			this.visible = ko.observable( false )
 			this.period = null
 			this.visible.subscribe(this.togglePeriods.bind(this))
-		***REMOVED***,
+		},
 
 		/**
 		 * Adds a Filter to the not observable array of filters
@@ -46,9 +46,9 @@ define(['lib/mvc/Observable',
 			
 			// if( properties.usaServicioAjax ){
 			// 	filter = new FilterSelect2( properties )
-			// ***REMOVED***else{
+			// }else{
 				filter = new Filter( properties )
-			// ***REMOVED***
+			// }
 
 
 			// Events bindings
@@ -57,7 +57,7 @@ define(['lib/mvc/Observable',
 			if(filter.parameter.match(/(region)|(departamento)|(municipio)|(fiscalizacion)/)){
 				filter.on('activated-by-user',
 					self.fireEvent.bind(self, 'territory-activated'))
-			***REMOVED***
+			}
 
 			filter.on('unselect-all-filters', self.unselectAllFilters.bind(self))
 			filter.on('option-activated', self.fireEvent.bind(self,'option-activated'))
@@ -71,16 +71,16 @@ define(['lib/mvc/Observable',
 					self.fireEvent.bind(self, 'period-selected'))
 				self.period = filter
 				self.togglePeriods()
-			***REMOVED***
+			}
 			if( filter.parameter.indexOf('campoProyecto') === 0 ){
 				filter.on('activated-by-user', function(){
 					self.fireEvent('zoom-out')
-				***REMOVED***)
-			***REMOVED***
+				})
+			}
 			self.arrayFilters.push(filter)
 
 			return filter
-		***REMOVED***,
+		},
 
 		/**
 		 * Turns the array of filters
@@ -91,14 +91,14 @@ define(['lib/mvc/Observable',
 			// Empty memory
 			this.arrayFilters = null
 			this.loading( false )
-		***REMOVED***,
+		},
 
 		/**
 		 * Actiavte the options related,
 		 * it's assumed that the related filter
 		 * is in this group of filters
 		 *
-		 * @param  {Array<Option>***REMOVED*** opts
+		 * @param  {Array<Option>} opts
 		 */
 		activateOptionsRelated: function( opts ){
 			var filter, option,
@@ -111,10 +111,10 @@ define(['lib/mvc/Observable',
 					if( filter.parameter == opts[i].type ){
 						filter.activateOptionByValue( opts[i].id )
 						break;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***,
+					}
+				}
+			}
+		},
 
 		/**
 		 * Wether the user activate or deactivate a
@@ -123,7 +123,7 @@ define(['lib/mvc/Observable',
 		 */
 		activatedByUser: function(){
 			this.fireEvent.apply(this, 'territory-activated', [].slice.call( arguments ))
-		***REMOVED***,
+		},
 
 		hideOtherFilters: function( filterActivated, cancelNotify ){
 			var filters = this.filters(),
@@ -136,13 +136,13 @@ define(['lib/mvc/Observable',
 				filter = filters[i]
 				if( filter.active() ){
 					activated.push( filter )
-				***REMOVED***
+				}
 				// Hide other filters in this group
 				if( filter.visible() &&
 					filter.parameter != filterActivated.parameter ){
 					filter.hide()
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			filterActivated.sortOptionsBy( activated )
 
@@ -150,7 +150,7 @@ define(['lib/mvc/Observable',
 
 			this.fireEvent('filters-gonna-show', filterActivated)
 			// This assummes that the related filters are in this group
-		***REMOVED***,
+		},
 
 		hideAllFilters: function(){
 			var filters = this.filters(),
@@ -160,16 +160,16 @@ define(['lib/mvc/Observable',
 				filter = filters[i]
 				if( filter.visible() ){
 					filter.hide()
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***,
+				}
+			}
+		},
 
 		togglePeriods: function(){
 			if( this.period ){
 				this.period.hidden(!this.visible())
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		getQuery: function(){
 			var filters = this.filters(),
@@ -180,10 +180,10 @@ define(['lib/mvc/Observable',
 				filter = filters[i]
 				if( filter.active() ){
 					filtersString += filter.getQuery() + '&'
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 			return filtersString
-		***REMOVED***,
+		},
 
 		selectFilterWith: function( type, id ){
 			var filters = this.filters(),
@@ -195,14 +195,14 @@ define(['lib/mvc/Observable',
 					if( id instanceof Array ){
 						for(j=id.length; j--;){
 							filter.selectOption( id[j] )
-						***REMOVED***
-					***REMOVED***else{
+						}
+					}else{
 						filter.selectOption( id )
-					***REMOVED***
+					}
 					return true
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***,
+				}
+			}
+		},
 
 		hasFiltersActive: function(){
 			var filters = this.filters(),
@@ -212,11 +212,11 @@ define(['lib/mvc/Observable',
 				filter = filters[i]
 				if( filter.active() ) {
 					return true
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			return false
-		***REMOVED***,
+		},
 
 		unselectAllFilters: function( except, noNotify, filtersToExclude ){
 			var filters = this.filters(),
@@ -232,15 +232,15 @@ define(['lib/mvc/Observable',
 						( filtersToExclude.indexOf( filter.parameter ) !== -1 ) ) ||
 						!filtersToExclude ) {
 						filter.disActive()
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 			if(!noNotify)
 				this.fireEvent('unselect-all-filters', this.type, except, filtersToExclude)
 
 			return false
-		***REMOVED***,
+		},
 
 		unselectExclusives: function( except, a, b ){
 			// console.log('disactivating in FG '+except, a, b)
@@ -252,12 +252,12 @@ define(['lib/mvc/Observable',
 				if( filter.active() && filter.parameter !== except &&
 					filter.isExclusive && filter.excludes.indexOf(except) != -1 ) {
 					filter.disActive()
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 
-	***REMOVED*** )
+	} )
 
 	return FiltersGroup
-***REMOVED***)
+})

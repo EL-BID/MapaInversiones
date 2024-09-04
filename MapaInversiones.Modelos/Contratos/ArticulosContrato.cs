@@ -8,12 +8,12 @@ namespace PlataformaTransparencia.Modelos.Contratos
 {
     public class ArticulosContrato
     {
-        public string DescripcionSubclase { get; set; ***REMOVED***
-        public string DescripcionArticulo { get; set; ***REMOVED***
-        public Nullable<int> Cantidad { get; set; ***REMOVED***
-        public decimal PrecioUnitario { get; set; ***REMOVED***
-        public decimal MontoTotal { get; set; ***REMOVED***
-        public Nullable<decimal> ImpuestoTotal { get; set; ***REMOVED***
-        public Nullable<decimal> Descuento { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string DescripcionSubclase { get; set; }
+        public string DescripcionArticulo { get; set; }
+        public Nullable<int> Cantidad { get; set; }
+        public decimal PrecioUnitario { get; set; }
+        public decimal MontoTotal { get; set; }
+        public Nullable<decimal> ImpuestoTotal { get; set; }
+        public Nullable<decimal> Descuento { get; set; }
+    }
+}

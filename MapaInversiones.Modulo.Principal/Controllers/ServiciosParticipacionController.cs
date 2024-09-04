@@ -41,7 +41,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             _hostingEnvironment = hostingEnvironment;
             Configuration = configuration;
 
-    ***REMOVED***
+        }
 
 
         [HttpPost("AddUsuarios")]
@@ -56,7 +56,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             string contrato = params_usu.CodigoContrato;
             string hash_new = SHA256Encripta(params_usu.hash_clave);
             string outTxt = part.RegistroNuevoUsuario(params_usu.Nombre, params_usu.email, hash_new, params_usu.Edad, params_usu.IdGenero, params_usu.IdRol, params_usu.IdMedio);
-            string[] separador = new string[] { "<||>" ***REMOVED***;
+            string[] separador = new string[] { "<||>" };
             var result = outTxt.Split(separador, StringSplitOptions.None);
 
             if (result[0].Equals("0"))
@@ -74,20 +74,20 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     ModeloRespuestaCorreo rptaCorreo = instanciaControladorCorreo.EnviarCorreoHtml(params_usu.email, mensajeCorreo, "Verificar Correo MapaInversiones");
                     objReturn.Status = rptaCorreo.Status;
                     objReturn.Message = rptaCorreo.Message;
-            ***REMOVED***
+                }
                 else
                 {
                     objReturn.Status = false;
                     objReturn.Message = result[1];
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             else
             {
                 objReturn.Status = false;
                 objReturn.Message = result[1];
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
 
         [HttpGet("GetComentarios")]
@@ -106,9 +106,9 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     var itemcomentario = part.ObtenerComentariosProyAsync(Int32.Parse(parameters["IdProyecto"]));
                     objReturn.itemcomentario = itemcomentario;
                     objReturn.Status = true;
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             else if (parameters.Keys.Contains<string>("CodigoContrato"))
             {
                 if (!string.IsNullOrEmpty(parameters["CodigoContrato"]))
@@ -116,18 +116,18 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     var itemcomentario = part.ObtenerComentariosContAsync(parameters["CodigoContrato"]);
                     objReturn.itemcomentario = itemcomentario;
                     objReturn.Status = true;
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             else
             {
 
                 objReturn.Status = false;
                 objReturn.Message = "Error: Identificación de proyecto nula";
-        ***REMOVED***
+            }
 
             return objReturn;
-    ***REMOVED***
+        }
 
 
         [HttpGet("GetTipologiaComentario")]
@@ -139,7 +139,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             objReturn.Status = true;
 
             return objReturn;
-    ***REMOVED***
+        }
 
         [HttpGet("GetCometAprobarCant")]
         public object GetCometAprobarCant()
@@ -152,7 +152,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             objReturn.Status = true;
             objReturn.totalNumber = cantComentarios;
             return objReturn;
-    ***REMOVED***
+        }
 
 
         [HttpGet("GetCometAprobar")]
@@ -164,7 +164,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             objReturn.Status = true;
 
             return objReturn;
-    ***REMOVED***
+        }
 
 
         [HttpPost("ValidaLogin")]
@@ -176,7 +176,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             ParticipacionCiudadana part = new ParticipacionCiudadana(_connection);
             objReturn.usuarios = part.ValidaLogin(params_usu.email, hash_new, params_usu.valida_rol);
             int validacredencial = 0;
-            string[] separador = new string[] { "<||>" ***REMOVED***;
+            string[] separador = new string[] { "<||>" };
             if (objReturn.usuarios != null)
             {
                 if (objReturn.usuarios.IdUsuario > 0)
@@ -184,16 +184,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     objReturn.Status = true;
                     HttpContext.Session.SetString("IdUsuario", objReturn.usuarios.IdUsuario.ToString());
                     HttpContext.Session.SetString("NomUsuario", objReturn.usuarios.Nombre);
-            ***REMOVED***
+                }
                 else
                 {
                     validacredencial = 1;
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             else
             {
                 validacredencial = 1;
-        ***REMOVED***
+            }
             if (validacredencial == 1)
             {
                 objReturn.usuarios = part.validaCreado(params_usu.email, hash_new);
@@ -211,24 +211,24 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                         objReturn.Status = false;
                         objReturn.Message = "El usuario no ha sido validado, por favor verifique el correo enviado";
 
-                ***REMOVED***
+                    }
                     else
                     {
 
                         objReturn.Status = false;
                         objReturn.Message = "Credenciales inválidas";
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
                 else
                 {
                     objReturn.Status = false;
                     objReturn.Message = "Credenciales inválidas";
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             return objReturn;
 
-    ***REMOVED***
+        }
 
         [HttpPost("ValidaSessionUsu")]
         [IgnoreAntiforgeryTokenAttribute]
@@ -242,27 +242,27 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 if (objReturn.usuarios.IdUsuario > 0)
                 {
                     objReturn.Status = true;
-            ***REMOVED***
+                }
                 else
                 {
                     objReturn.Status = false;
                     objReturn.Message = "Invalid Credentials";
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             else
             {
                 objReturn.Status = false;
                 objReturn.Message = "Invalid Credentials";
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
         public string obtUrlLocal()
         {
             string urlRedir = "";
             urlRedir = "https://" + _context.HttpContext.Request.Host.Value;
             return urlRedir;
-    ***REMOVED***
+        }
         private string ObtHtmlVerificacionCuenta(string id_usuario, int id_proyecto, int id_programa, string CodigoContrato)
         {
             string url_local = obtUrlLocal();
@@ -275,8 +275,8 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             mensaje += "<html>";
             mensaje += "<head>";
             mensaje += "<title>MapaInversiones - Notificaciones</title>";
-            mensaje += "<style>a{color:#0D3B59; text-decoration:underline***REMOVED***";
-            mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;***REMOVED***";
+            mensaje += "<style>a{color:#0D3B59; text-decoration:underline}";
+            mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;}";
             mensaje += "</style>";
             mensaje += "</head>";
             mensaje += "<body style=\"background-color:#fff; font-family:'Arial', Helvetica, sans-serif; margin:0; padding:0\">";
@@ -313,7 +313,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
             return mensaje;
 
-    ***REMOVED***
+        }
 
 
         [HttpPost("insComentario")]
@@ -323,7 +323,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             ModelDataParticipacion objReturn = new ModelDataParticipacion();
             ParticipacionCiudadana part = new ParticipacionCiudadana(_connection);
             string outTxt = part.GuardarComentario(params_com.IdUsuario, params_com.IdProyecto, params_com.IdAsociacion, params_com.IdTipoComentario, params_com.ComentarioOriginal, params_com.Anonimo, params_com.IdEstado, params_com.ComentarioRelacionado, params_com.id_departamento, params_com.id_municipio, params_com.CodigoContrato, params_com.TipoSubsidio);
-            string[] separador = new string[] { "<||>" ***REMOVED***;
+            string[] separador = new string[] { "<||>" };
             var idUsuario = HttpContext.Session.GetString("IdUsuario");
             var result = outTxt.Split(separador, StringSplitOptions.None);
             if (result[0].Equals("0"))
@@ -336,7 +336,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     //Actualiza el estado del padre
                     Admin admin = new Admin(_connection);
                     outTxt = admin.ActualizaComent(Convert.ToInt32(params_com.ComentarioRelacionado), Convert.ToInt32(params_com.IdEstadoRelacionado), "");
-                    separador = new string[] { "<||>" ***REMOVED***;
+                    separador = new string[] { "<||>" };
                     result = outTxt.Split(separador, StringSplitOptions.None);
 
                     if (result[0].Equals("0"))
@@ -350,14 +350,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                             ModeloRespuestaCorreo rptaCorreo = instanciaControladorCorreo.EnviarCorreoHtml(infoUsuario.email, mensajeCorreo, "Participación Ciudadana");
                             objReturn.Status = rptaCorreo.Status;
                             objReturn.Message = rptaCorreo.Message;
-                    ***REMOVED***
-                ***REMOVED***
+                        }
+                    }
                     else
                     {
                         objReturn.Status = false;
                         objReturn.Message = result[1];
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
                 else
                 {
                     //Notificar administradores sobre nuevo comentario
@@ -371,16 +371,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                         ModeloRespuestaCorreo rptaCorreo = instanciaControladorCorreo.EnviarCorreoHtml(destinatarios, mensajeCorreo, "Participación Ciudadana");
                         objReturn.Status = rptaCorreo.Status;
                         objReturn.Message = rptaCorreo.Message;
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
+                    }
+                }
+            }
             else
             {
                 objReturn.Status = false;
                 objReturn.Message = result[1];
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
         private string ObtHtmlCorreoComent(string titulo, string saludo, string txtmensaje, int? idproyecto, int? IdAsociacion, int? IdPrograma, string CodigoContrato, string mensajeanonimo, string urladmin)
         {
@@ -389,12 +389,12 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             if (IdAsociacion == 3)
             {
                 urlproyecto = url_local + "/contrato?codcontrato=" + CodigoContrato;
-        ***REMOVED***
+            }
             
             else if (IdAsociacion == 1)
             {
                 urlproyecto = url_local + "/PerfilProyecto/" + idproyecto;
-        ***REMOVED***
+            }
             string urlaprobar = url_local + "/aprobar/";
             string mensaje = "";
             mensaje += "<html>";
@@ -402,8 +402,8 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             mensaje += "<title>MapaInversiones - ";
             mensaje += titulo;
             mensaje += "</title>";
-            mensaje += "<style>a{color:#0D3B59; text-decoration:underline***REMOVED***";
-            mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;***REMOVED***";
+            mensaje += "<style>a{color:#0D3B59; text-decoration:underline}";
+            mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;}";
             mensaje += "</style>";
             mensaje += "</head>";
             mensaje += "<body style=\"background-color:#fff; font-family:'Arial', Helvetica, sans-serif; margin:0; padding:0\">";
@@ -425,19 +425,19 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             if (urladmin == "S")
             {
                 mensaje += "<p> <a href =\"" + urlaprobar + "\" style=\"color:#241588!important\">Ir a aprobar</a></p>";
-        ***REMOVED***
+            }
             if (idproyecto != 0 && idproyecto != null)
             {
                 mensaje += "<p> <a href =\"" + urlproyecto + "\" style=\"color:#241588!important\">Ver proyecto</a></p>";
-        ***REMOVED***
+            }
             if (IdPrograma != 0 && IdPrograma != null)
             {
                 mensaje += "<p> <a href =\"" + urlproyecto + "\" style=\"color:#241588!important\">Ver programa</a></p>";
-        ***REMOVED***
+            }
             if (CodigoContrato != "" && CodigoContrato != null)
             {
                 mensaje += "<p> <a href =\"" + urlproyecto + "\" style=\"color:#241588!important\">Ver Contrato</a></p>";
-        ***REMOVED***
+            }
             if (mensajeanonimo == "S")
             {
                 mensaje += "<table style=\"width:100%; margin:15px auto; text-align:center; border:1px solid #ccc; padding:5px; font-style:italic; font-size:12px\">";
@@ -445,7 +445,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 mensaje += "<td><p style=\"text-align:left\"> Se informa que los comentarios de su participación antes de ser publicados son validados por MapaInversiones. Si desea, su opinión puede ser anónima. </p></td>";
                 mensaje += "</tr>";
                 mensaje += "</table>";
-        ***REMOVED***
+            }
             mensaje += "</td>";
             mensaje += "</tr>";
             mensaje += "</table>";
@@ -459,7 +459,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             mensaje += "</html>";
 
             return mensaje;
-    ***REMOVED***
+        }
 
         [HttpPost("CerrarSession")]
         [IgnoreAntiforgeryTokenAttribute]
@@ -473,7 +473,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
             objReturn.Message = "Sesión cerrada";
             return objReturn;
-    ***REMOVED***
+        }
 
 
         [HttpPost("GuardaMeGusta")]
@@ -484,20 +484,20 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             ParticipacionCiudadana part = new ParticipacionCiudadana(_connection);
 
             string outTxt = part.GuardaMeGusta(params_mg.IdUsuario, params_mg.IdFoto, params_mg.IdFotoUsuario, params_mg.MeGusta, params_mg.NoMeGusta, params_mg.IdProyecto);
-            string[] separador = new string[] { "<||>" ***REMOVED***;
+            string[] separador = new string[] { "<||>" };
             var idUsuario = HttpContext.Session.GetString("IdUsuario");
             var result = outTxt.Split(separador, StringSplitOptions.None);
             if (result[0].Equals("0"))
             {
                 objReturn.Status = true;
-        ***REMOVED***
+            }
             else
             {
                 objReturn.Status = false;
                 objReturn.Message = result[1];
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
         [HttpPost("ValidaEmail")]
         [IgnoreAntiforgeryTokenAttribute]
@@ -522,7 +522,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 string cod_aux = SHA256Encripta(cont.ToString());
 
                 string outCod = part.updCodigoVerifica(infoUsuario.IdUsuario, cod_aux);
-                string[] separador = new string[] { "<||>" ***REMOVED***;
+                string[] separador = new string[] { "<||>" };
                 var result = outCod.Split(separador, StringSplitOptions.None);
                 if (result[0].Equals("0"))
                 {
@@ -534,34 +534,34 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                         //envio correo con codigo verificacion
                         objReturn = notificaCodigoOlvido(hash_codigo, params_usu.email);
 
-                ***REMOVED***
+                    }
                     else
                     {
                         objReturn.Status = false;
                         objReturn.Message = "Error en consulta: código de verificacion no generado";
 
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
                 else
                 {
                     objReturn.Status = false;
                     objReturn.Message = "Error en consulta: código de verificacion no generado";
 
-            ***REMOVED***
+                }
 
                 objReturn.id_usuario = id_usuario;
 
-        ***REMOVED***
+            }
             else
             {
                 objReturn.Status = false;
                 objReturn.Message = "No existe un usuario activo para el correo digitado";
 
-        ***REMOVED***
+            }
 
             return objReturn;
 
-    ***REMOVED***
+        }
 
         private ModeloRespuestaCorreo notificaCodigoOlvido(string codigo_verifica, string email)
         {
@@ -575,8 +575,8 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 mensaje += "<head>";
                 mensaje += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />";
                 mensaje += "<title>MapaInversiones - Notificaciones</title>";
-                mensaje += "<style>a{color:#0D3B59; text-decoration:underline***REMOVED***";
-                mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;***REMOVED***";
+                mensaje += "<style>a{color:#0D3B59; text-decoration:underline}";
+                mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;}";
                 mensaje += "</style>";
                 mensaje += "</head>";
                 mensaje += "<body style=\"background-color:#fff; font-family:'Arial', Helvetica, sans-serif; border-top:2px; margin:0; padding:0\">";
@@ -607,16 +607,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 mensaje += "</html>";
                 CorreoController instanciaControladorCorreo = new CorreoController(Configuration);
                 objReturn = instanciaControladorCorreo.EnviarCorreoHtml(email, mensaje, "Código de verificación");
-        ***REMOVED***
+            }
             else
             {
                 objReturn.Message = "Email destino inválido";
                 objReturn.Status = false;
-        ***REMOVED***
+            }
 
             return objReturn;
 
-    ***REMOVED***
+        }
 
         [HttpPost("ValidaCodigo")]
         [IgnoreAntiforgeryTokenAttribute]
@@ -642,20 +642,20 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     objReturn.Status = true;
                     objReturn.Message = "";
                     objReturn.id_usuario = id_usuario;
-            ***REMOVED***
+                }
 
 
-        ***REMOVED***
+            }
             else
             {
                 objReturn.Status = false;
                 objReturn.Message = "No existe un usuario activo para el correo digitado";
 
-        ***REMOVED***
+            }
 
             return objReturn;
 
-    ***REMOVED***
+        }
 
 
         public string SHA256Encripta(string input)
@@ -671,7 +671,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 output.Append(hashedBytes[i].ToString("x2").ToLower());
 
             return output.ToString();
-    ***REMOVED***
+        }
 
         [HttpPost("updClaveUsuario")]
         [IgnoreAntiforgeryTokenAttribute]
@@ -682,24 +682,24 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
             string hash_new = SHA256Encripta(params_usu.hash_clave);
             string outTxt = part.updClaveUsuario(params_usu.IdUsuario, hash_new);
-            string[] separador = new string[] { "<||>" ***REMOVED***;
+            string[] separador = new string[] { "<||>" };
             var result = outTxt.Split(separador, StringSplitOptions.None);
 
             if (result[0].Equals("0"))
             {
                 objReturn.Status = true;
                 objReturn.Message = "Clave modificada exitosamente";
-        ***REMOVED***
+            }
             else
             {
                 objReturn.Status = false;
                 objReturn.Message = result[1];
-        ***REMOVED***
+            }
 
             return objReturn;
 
 
-    ***REMOVED***
+        }
 
 
         public object NotificaNuevaFoto(int idproyecto)
@@ -715,14 +715,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 ModeloRespuestaCorreo rptaCorreo = instanciaControladorCorreo.EnviarCorreoHtml(destinatarios, mensajeCorreo, "Participación Ciudadana");
                 objReturn.Status = rptaCorreo.Status;
                 objReturn.Message = rptaCorreo.Message;
-        ***REMOVED***
+            }
             else
             {
                 objReturn.Status = false;
                 objReturn.Message = "No hay administradores para reportar";
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
         [HttpGet("GuardarAprobado")]
         public object GuardarAprobado(int IdFotoUsuario, string Aprobadopor, bool Aprobado, bool Eliminado, int IdUsuario, int IdProyecto, string textoJustifica )
@@ -731,7 +731,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             ParticipacionCiudadana part = new ParticipacionCiudadana(_connection);
             Admin admin = new Admin(_connection);
             string outTxt = admin.ActualizaFoto(IdFotoUsuario, Aprobadopor, Aprobado, Eliminado, textoJustifica);
-            string[] separador = new string[] { "<||>" ***REMOVED***;
+            string[] separador = new string[] { "<||>" };
             var result = outTxt.Split(separador, StringSplitOptions.None);
             if (result[0].Equals("0"))
             {
@@ -744,7 +744,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     if (Aprobado == true)
                     {
                         mensajeCorreo = ObtHtmlCorreoComent("Notificaciones", "Gracias por Participar", "Tu foto ha sido publicada.", IdProyecto, 1, null, null, "N", "N");
-                ***REMOVED***
+                    }
                     if (Aprobado == false)
                     {
                         string nopublicado = "";
@@ -753,27 +753,27 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                         nopublicado += "<p>Mensaje del administrador:</p>";
                         nopublicado += "<p>" + textoJustifica;
                         mensajeCorreo = ObtHtmlCorreoComent("Notificaciones", "Gracias por Participar", nopublicado, IdProyecto, 1, null, null, "N", "N");
-                ***REMOVED***
+                    }
                     CorreoController instanciaControladorCorreo = new CorreoController(Configuration);
                     ModeloRespuestaCorreo rptaCorreo = instanciaControladorCorreo.EnviarCorreoHtml(infoUsuario.email, mensajeCorreo, "Participación Ciudadana");
                     objReturn.Status = rptaCorreo.Status;
                     objReturn.Message = rptaCorreo.Message;
-            ***REMOVED***
+                }
                 else
                 {
                     objReturn.Status = false;
                     objReturn.Message = "Error al guardar comentarios";
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             else
             {
                 objReturn.Status = false;
                 objReturn.Message = result[1];
-        ***REMOVED***
+            }
 
             return objReturn;
 
-    ***REMOVED***
+        }
 
         [HttpPost("GetEstadosComentario")]
         [IgnoreAntiforgeryTokenAttribute]
@@ -786,7 +786,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             objReturn.filtrosEstado = estados;
             objReturn.Status = true;
             return objReturn;
-    ***REMOVED***
+        }
 
         [HttpPost("GetAsociacionComentario")]
         [IgnoreAntiforgeryTokenAttribute]
@@ -800,7 +800,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             objReturn.filtrosAsociacion = info;
             objReturn.Status = true;
             return objReturn;
-    ***REMOVED***
+        }
 
         [HttpPost("ActualizarTipologiaComent")]
         [IgnoreAntiforgeryTokenAttribute]
@@ -815,7 +815,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             //consulta si existen tipologias
 
             string outTxt = part.deleteTipologiaComent(cad_tipologia.idComentario);
-            string[] separador = new string[] { "<||>" ***REMOVED***;
+            string[] separador = new string[] { "<||>" };
             var result = outTxt.Split(separador, StringSplitOptions.None);
             if (result[0].Equals("0"))
             {
@@ -827,25 +827,25 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     if (result[0].Equals("0"))
                     {
                         objReturn.Status = true;
-                ***REMOVED***
+                    }
                     else
                     {
                         objReturn.Status = false;
                         objReturn.Message = result[1];
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
                 else
                 {
                     objReturn.Status = true;
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             else
             {
                 objReturn.Status = false;
                 objReturn.Message = result[1];
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
 
         [HttpPost("SubirArchivo")]
@@ -861,7 +861,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 if (HttpContext.Session.GetString("IdUsuario") != null)
                 {
                     id_usuario_aux = HttpContext.Session.GetString("IdUsuario");
-            ***REMOVED***
+                }
                 if (params_img != null && params_img.UploadedImage != null && params_img.UploadedImage.Length > 0 && int.TryParse(id_usuario_aux, out int idUsuario))
                 {
                     var stream = new MemoryStream(params_img.UploadedImage);
@@ -876,56 +876,56 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                         {
                             fileName += ".png";
                             frmt = ImageFormat.Png;
-                    ***REMOVED***
+                        }
                         else if (ImageFormat.Bmp.Equals(img.RawFormat))
                         {
                             fileName += ".bmp";
                             frmt = ImageFormat.Bmp;
-                    ***REMOVED***
+                        }
                         else if (ImageFormat.Emf.Equals(img.RawFormat))
                         {
                             fileName += ".emf";
                             frmt = ImageFormat.Emf;
-                    ***REMOVED***
+                        }
                         else if (ImageFormat.Exif.Equals(img.RawFormat))
                         {
                             fileName += ".exif";
                             frmt = ImageFormat.Exif;
-                    ***REMOVED***
+                        }
                         else if (ImageFormat.Gif.Equals(img.RawFormat))
                         {
                             fileName += ".gif";
                             frmt = ImageFormat.Gif;
-                    ***REMOVED***
+                        }
                         else if (ImageFormat.Icon.Equals(img.RawFormat))
                         {
                             fileName += ".icon";
                             frmt = ImageFormat.Icon;
-                    ***REMOVED***
+                        }
                         else if (ImageFormat.Jpeg.Equals(img.RawFormat))
                         {
                             fileName += ".jpeg";
                             frmt = ImageFormat.Jpeg;
-                    ***REMOVED***
+                        }
                         else if (ImageFormat.MemoryBmp.Equals(img.RawFormat))
                         {
                             fileName += ".memoryBmp";
                             frmt = ImageFormat.MemoryBmp;
-                    ***REMOVED***
+                        }
                         else if (ImageFormat.Tiff.Equals(img.RawFormat))
                         {
                             fileName += ".tiff";
                             frmt = ImageFormat.Tiff;
-                    ***REMOVED***
+                        }
                         else if (ImageFormat.Wmf.Equals(img.RawFormat))
                         {
                             fileName += ".wmf";
                             frmt = ImageFormat.Wmf;
-                    ***REMOVED***
+                        }
                         else
                         {
                             frmt = null;
-                    ***REMOVED***
+                        }
                         #endregion  Defino el formato de la imagen
                         if (frmt != null)
                         {
@@ -935,7 +935,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                             if (!Directory.Exists(path))
                             {
                                 Directory.CreateDirectory(path);
-                        ***REMOVED***
+                            }
                             path += fileName;
                             img.Save(path, frmt);
                             if (int.TryParse(params_img.ProjectImage, out int idProyecto))
@@ -953,41 +953,41 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                                             {
                                                 CambiarTamanoImagen(Convert.ToInt16(ancho_new), stream, path);
                                                 mensaje = "0<||>El archivo se guardó exitosamente, su foto será visualizada una vez el administrador valide los datos";
-                                        ***REMOVED***
+                                            }
                                             else
                                             {
                                                 mensaje = "-1<||>El archivo NO se guardó exitosamente,falta configuracion de tamaño máximo ";
-                                        ***REMOVED***
+                                            }
 
-                                    ***REMOVED***
+                                        }
                                         catch (Exception ex)
                                         {
                                             mensaje = "-1<||>El archivo NO se guardó exitosamente, se presentó un problema con la imagen puede ser el tipo de imagen o el tamaño de esta.\nDetalles del error\n" + ex.Message;
-                                    ***REMOVED***
-                                ***REMOVED***
+                                        }
+                                    }
                                     else mensaje = "-1<||>No fue posible almacenar el registro de la foto en la base de datos";
-                            ***REMOVED***
+                                }
                                 else mensaje = "-1<||>No fue posible capturar la ubicación donde se va a reportar la foto";
-                        ***REMOVED***
-                            //***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
+                            }
+                            //}
+                        }
+                    }
+                }
                 else
                 {
                     mensaje = "-1<||>No hay archivos para guardar";
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             catch (Exception ex)
             {
 
                 return BadRequest(ex.Message);
-        ***REMOVED***
+            }
             objReturn.Status = true;
             objReturn.Message = mensaje;
             return objReturn;
-    ***REMOVED***
+        }
 
 
         /// <summary>
@@ -1006,12 +1006,12 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             {
                 newWidth = thumbnailSize;
                 newHeight = image.Height * thumbnailSize / image.Width;
-        ***REMOVED***
+            }
             else
             {
                 newWidth = image.Width * thumbnailSize / image.Height;
                 newHeight = thumbnailSize;
-        ***REMOVED***
+            }
             var thumbnailBitmap = new Bitmap(newWidth, newHeight);
             var thumbnailGraph = Graphics.FromImage(thumbnailBitmap);
             thumbnailGraph.CompositingQuality = CompositingQuality.HighQuality;
@@ -1023,8 +1023,8 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             thumbnailGraph.Dispose();
             thumbnailBitmap.Dispose();
             image.Dispose();
-    ***REMOVED***
+        }
 
 
-***REMOVED***
-***REMOVED***
+    }
+}

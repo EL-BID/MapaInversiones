@@ -13,45 +13,45 @@ namespace PlataformaTransparencia.Modelos
         /// <summary>
         /// El valor del dinero recaudado en la historia.
         /// </summary>
-        public decimal CollectedMoney { get; set; ***REMOVED***
+        public decimal CollectedMoney { get; set; }
         /// <summary>
         /// El valor del dinero aprobado en la historia
         /// </summary>
-        public decimal ApprovedMoney { get; set; ***REMOVED***
+        public decimal ApprovedMoney { get; set; }
         /// <summary>
         /// El número de proyectos aprobados en la historia
         /// </summary>
-        public int ApprovedProjects { get; set; ***REMOVED***
+        public int ApprovedProjects { get; set; }
         /// <summary>
         /// El valor del dinero aprobado incluyendo otras fuentes no regalías
         /// </summary>
-        public decimal ApprovedMoneyTotal { get; set; ***REMOVED***
+        public decimal ApprovedMoneyTotal { get; set; }
         /// <summary>
         /// Arreglo con los periodos TO DO revisar como se cargan.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("periods")]
         public List<Period> Periods {
-            get { return periods; ***REMOVED***
-            set { periods = value; ***REMOVED***
-    ***REMOVED***
+            get { return periods; }
+            set { periods = value; }
+        }
         private List<Period> periods = new List<Period>();
 
         public class Data
         {
-            public string texto { get; set; ***REMOVED***
-    ***REMOVED***
+            public string texto { get; set; }
+        }
 
 
-        public string cadenaBuscador { get; set; ***REMOVED***
+        public string cadenaBuscador { get; set; }
 
         /// <summary>
         /// Arreglo con objetos representando el grafico de proyectos por sector en toda la historia. 
         /// Dentro de los objetos rawValue representa el alto de las barras, siendo 100 el valor más alto disponible y 0 el 0%.
         /// </summary>
         public List<InfoProjectPerSector> ProjectsPerSector {
-            get { return projectsPerSector; ***REMOVED***
-            set { projectsPerSector = value; ***REMOVED***
-    ***REMOVED***
+            get { return projectsPerSector; }
+            set { projectsPerSector = value; }
+        }
         private List<InfoProjectPerSector> projectsPerSector = new List<InfoProjectPerSector>();
 
 
@@ -59,15 +59,15 @@ namespace PlataformaTransparencia.Modelos
         /// Listado de proyectos a cargar en el inicio
         /// </summary>
         public List<InfoProyectos> ProyectosAprobados {
-            get { return proyectosAprobados; ***REMOVED***
-            set { proyectosAprobados = value; ***REMOVED***
-    ***REMOVED***
+            get { return proyectosAprobados; }
+            set { proyectosAprobados = value; }
+        }
         private List<InfoProyectos> proyectosAprobados = new List<InfoProyectos>();
 
         public List<InfoProyectos> ProyectosNacionales {
-            get { return proyectosNacionales; ***REMOVED***
-            set { proyectosNacionales = value; ***REMOVED***
-    ***REMOVED***
+            get { return proyectosNacionales; }
+            set { proyectosNacionales = value; }
+        }
         private List<InfoProyectos> proyectosNacionales = new List<InfoProyectos>();
 
 
@@ -76,18 +76,18 @@ namespace PlataformaTransparencia.Modelos
         /// Dentro de los objetos rawValue representa el alto de las barras, siendo 100 el valor más alto disponible y 0 el 0%.
         /// </summary>
         public List<InfoResourcesPerSector> ResourcesPerSector {
-            get { return resourcesPerSector; ***REMOVED***
-            set { resourcesPerSector = value; ***REMOVED***
-    ***REMOVED***
+            get { return resourcesPerSector; }
+            set { resourcesPerSector = value; }
+        }
         private List<InfoResourcesPerSector> resourcesPerSector = new List<InfoResourcesPerSector>();
 
         /// <summary>
         /// Arreglo con objetos conteniendo los tips a mostrar en datos consolidados de toda la historia
         /// </summary>
         public List<Fact> Facts {
-            get { return facts; ***REMOVED***
-            set { facts = value; ***REMOVED***
-    ***REMOVED***
+            get { return facts; }
+            set { facts = value; }
+        }
         private List<Fact> facts = new List<Fact>();
 
         /// <summary>
@@ -95,9 +95,9 @@ namespace PlataformaTransparencia.Modelos
         /// Dentro de los objetos rawValue representa el alto de las barras, siendo 100 el valor más alto disponible y 0 el 0%
         /// </summary>
         public List<InfoResourcesPerRegion> ResourcesPerRegion {
-            get { return resourcesPerRegion; ***REMOVED***
-            set { resourcesPerRegion = value; ***REMOVED***
-    ***REMOVED***
+            get { return resourcesPerRegion; }
+            set { resourcesPerRegion = value; }
+        }
         private List<InfoResourcesPerRegion> resourcesPerRegion = new List<InfoResourcesPerRegion>();
 
         /// <summary>
@@ -105,9 +105,9 @@ namespace PlataformaTransparencia.Modelos
         /// Dentro de los objetos rawValue representa el alto de las barras, siendo 100 el valor más alto disponible y 0 el 0%.
         /// </summary>
         public List<InfoResourcesPerDepartment> ResourcesPerDepartment {
-            get { return resourcesPerDepartment; ***REMOVED***
-            set { resourcesPerDepartment = value; ***REMOVED***
-    ***REMOVED***
+            get { return resourcesPerDepartment; }
+            set { resourcesPerDepartment = value; }
+        }
         private List<InfoResourcesPerDepartment> resourcesPerDepartment = new List<InfoResourcesPerDepartment>();
 
 
@@ -115,31 +115,31 @@ namespace PlataformaTransparencia.Modelos
         /// Arreglo con hasta 3 de las más próximas sesiones de OCADs TODO REVISAR.
         /// </summary>
         public List<Object> Agenda {
-            get { return agenda; ***REMOVED***
-            set { agenda = value; ***REMOVED***
-    ***REMOVED***
+            get { return agenda; }
+            set { agenda = value; }
+        }
         private List<Object> agenda = new List<object>();
 
         /// <summary>
         /// Es un arreglo de objetos para armar el mapa. 
         /// </summary>
         public List<ConsolidatedDepartmentProjects> DepartmentProjectData {
-            get { return departmentProjectData; ***REMOVED***
-            set { departmentProjectData = value; ***REMOVED***
-    ***REMOVED***
+            get { return departmentProjectData; }
+            set { departmentProjectData = value; }
+        }
         private List<ConsolidatedDepartmentProjects> departmentProjectData = new List<ConsolidatedDepartmentProjects>();
 
 
         public List<ProyectoConsolidadoPorMunicipio> MunicipioProjectData {
-            get { return municipioProjectData; ***REMOVED***
-            set { municipioProjectData = value; ***REMOVED***
-    ***REMOVED***
+            get { return municipioProjectData; }
+            set { municipioProjectData = value; }
+        }
         private List<ProyectoConsolidadoPorMunicipio> municipioProjectData = new List<ProyectoConsolidadoPorMunicipio>();
 
         public List<InfoProyectos> ProyectoProjectData {
-            get { return proyectoProjectData; ***REMOVED***
-            set { proyectoProjectData = value; ***REMOVED***
-    ***REMOVED***
+            get { return proyectoProjectData; }
+            set { proyectoProjectData = value; }
+        }
         private List<InfoProyectos> proyectoProjectData = new List<InfoProyectos>();
 
 
@@ -147,9 +147,9 @@ namespace PlataformaTransparencia.Modelos
         /// Es un arreglo de objetos para armar el mapa. 
         /// </summary>
         public List<ConsolidateRegionsProjects> RegionProjectData {
-            get { return regionProjectData; ***REMOVED***
-            set { regionProjectData = value; ***REMOVED***
-    ***REMOVED***
+            get { return regionProjectData; }
+            set { regionProjectData = value; }
+        }
         private List<ConsolidateRegionsProjects> regionProjectData = new List<ConsolidateRegionsProjects>();
 
         /// <summary>
@@ -157,52 +157,52 @@ namespace PlataformaTransparencia.Modelos
         /// para la pagina.
         /// </summary>
         public DataCommonSections DataCommonSections {
-            get { return dataCommonSections; ***REMOVED***
-            set { dataCommonSections = value; ***REMOVED***
-    ***REMOVED***
+            get { return dataCommonSections; }
+            set { dataCommonSections = value; }
+        }
         private DataCommonSections dataCommonSections = new DataCommonSections();
 
 
-        public List<InfoProyectos> priorityProjects { get; set; ***REMOVED***
-        public List<InfoEntidadesConsolida> Entidades { get; set; ***REMOVED***
+        public List<InfoProyectos> priorityProjects { get; set; }
+        public List<InfoEntidadesConsolida> Entidades { get; set; }
 
-        public List<InfoRecAsignadosPresupuesto> RecursosPerObjeto { get; set; ***REMOVED***
+        public List<InfoRecAsignadosPresupuesto> RecursosPerObjeto { get; set; }
 
-        public List<InfoRecAsignadosPlan> RecursosAsignados { get; set; ***REMOVED***
+        public List<InfoRecAsignadosPlan> RecursosAsignados { get; set; }
 
-        public List<InformationGraphics> RecursosBySector { get; set; ***REMOVED***
+        public List<InformationGraphics> RecursosBySector { get; set; }
 
-        public List<ContratosConsolidado> Consolidados { get; set; ***REMOVED***
+        public List<ContratosConsolidado> Consolidados { get; set; }
 
-        public string MaxAnnioContratos { get; set; ***REMOVED***
+        public string MaxAnnioContratos { get; set; }
 
-        public string MaxAnnioEntidades { get; set; ***REMOVED***
+        public string MaxAnnioEntidades { get; set; }
 
-        public int maxAnnioPresupuesto { get; set; ***REMOVED***
+        public int maxAnnioPresupuesto { get; set; }
 
         /// <summary>
         /// Arreglo con objetos representando el grafico de proyectos por sector - obras
         /// </summary>
         public List<InfoProjectPerSector> ProjectsPerSectorGroup
         {
-            get { return projectsPerSectorGroup; ***REMOVED***
-            set { projectsPerSectorGroup = value; ***REMOVED***
-    ***REMOVED***
+            get { return projectsPerSectorGroup; }
+            set { projectsPerSectorGroup = value; }
+        }
         private List<InfoProjectPerSector> projectsPerSectorGroup = new List<InfoProjectPerSector>();
 
 
-        public itemConteoProjects countOngoingProjects { get;set; ***REMOVED***
+        public itemConteoProjects countOngoingProjects { get;set; }
 
-        public InfoPresupuestoEncabezado valPresupuestoEncabezado { get; set; ***REMOVED***
+        public InfoPresupuestoEncabezado valPresupuestoEncabezado { get; set; }
 
         public List<string> aniospresupuesto = new List<string>();
 
         public List<InfoFuentesporAnnio> fuentesporAnnios = new List<InfoFuentesporAnnio>();
 
-        public InfoPresupuestoEncabezado contprocesoscontratos { get; set; ***REMOVED***
+        public InfoPresupuestoEncabezado contprocesoscontratos { get; set; }
 
         public List<InfoOrganismosFinan> OrganismosFinanciadores = new List<InfoOrganismosFinan>();
 
-        public ModelDataConsolidadoFinanciador ConsolidadoOrganismoFinanciador { get; set; ***REMOVED*** = new();
-***REMOVED***
-***REMOVED***
+        public ModelDataConsolidadoFinanciador ConsolidadoOrganismoFinanciador { get; set; } = new();
+    }
+}

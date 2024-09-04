@@ -10,7 +10,7 @@ namespace PlataformaTransparencia.Modulo.Noticias
     {
         public override void ConfigureServices(IServiceCollection services)
         {
-    ***REMOVED***
+        }
 
         public override void Configure(IApplicationBuilder builder, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
         {
@@ -18,8 +18,8 @@ namespace PlataformaTransparencia.Modulo.Noticias
                 name: "Noticias",
                 areaName: "PlataformaTransparencia.Modulo.Noticias",
                 pattern: "Noticias",
-                defaults: new { controller = "Noticias", action = "Index" ***REMOVED***
+                defaults: new { controller = "Noticias", action = "Index" }
             );
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

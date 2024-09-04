@@ -26,12 +26,12 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         public ParticipacionController(TransparenciaDB connection)
         {
             _connection = connection;
-    ***REMOVED***
+        }
         public ActionResult ParticipacionCiudadana()
         {
             ViewData["ruta"] = "ParticipacionCiudadana";
             return View();
-    ***REMOVED***
+        }
 
 
         public IActionResult Aprobar()
@@ -55,9 +55,9 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 filtrosEstado = filtroEstado,
                 filtrosAsociacion = infoAsociacion,
                 tipo_comentario = tipoComentario
-        ***REMOVED***;
+            };
             return View(modeloRespuesta);
-    ***REMOVED***
+        }
 
 
         public IActionResult VerificaCuenta(string id)
@@ -65,7 +65,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             ParticipacionCiudadana part = new ParticipacionCiudadana(_connection);
 
             //activacion de usuario
-            string[] separador = new string[] { "_" ***REMOVED***;
+            string[] separador = new string[] { "_" };
             var result = id.Split(separador, StringSplitOptions.None);
             string hash_cod = result[0];
             string id_proyecto = result[2];
@@ -77,7 +77,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             {
                 //usuario existe y se encuentra creado, 
                 string outTxt = part.updEstadoUsuario(infoUsuario.IdUsuario, "ACTIVO");
-                string[] separador_aux = new string[] { "<||>" ***REMOVED***;
+                string[] separador_aux = new string[] { "<||>" };
                 var result_aux = outTxt.Split(separador_aux, StringSplitOptions.None);
                 if (result_aux[0].Equals("0"))
                 {
@@ -85,18 +85,18 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     modeloRespuesta.nom_usu_participa = infoUsuario.Nombre;
                     modeloRespuesta.error_msg = "OK";
                     modeloRespuesta.idproject = Convert.ToInt32(id_proyecto);
-            ***REMOVED***
+                }
                 else
                 {
                     modeloRespuesta.error_msg = result_aux[1];
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             else
             {
                 modeloRespuesta.error_msg = "Error: Usuario no encontrado";
-        ***REMOVED***
+            }
             return View(modeloRespuesta);
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

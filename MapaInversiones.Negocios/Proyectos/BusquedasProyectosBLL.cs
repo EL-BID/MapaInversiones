@@ -27,27 +27,27 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 {
   public class ItemFilter
   {
-    public string value { get; set; ***REMOVED*** = string.Empty;
-    public string name { get; set; ***REMOVED*** = string.Empty;
-  ***REMOVED***
+    public string value { get; set; } = string.Empty;
+    public string name { get; set; } = string.Empty;
+  }
   public class BusquedasProyectosBLL : IBusquedasProyectosBLL
   {
     private static IConfiguration Configuration;
     private static IConsultasComunes _consultasComunes;
 
-    public static IConsultasComunes ConsultasComunes { get => _consultasComunes; set => _consultasComunes = value; ***REMOVED***
+    public static IConsultasComunes ConsultasComunes { get => _consultasComunes; set => _consultasComunes = value; }
 
     public BusquedasProyectosBLL(IConfiguration configuration, TransparenciaDB connection, IConsultasComunes consultasComunes)
     {
       Configuration = configuration;
       ConsultasComunes = consultasComunes;
-***REMOVED***
+    }
 
     public async Task<ProyectoPdf> ObtenerDataProyectoPdfAsync(int idProyecto)
     {
       ProyectoPdf proyecto = await ConsultasComunes.ObtenerDataProyectoPdfAsync(idProyecto);
       return proyecto;
-***REMOVED***
+    }
 
 
     public List<objectProjectsSearchMap> ObtenerPinesDeProyectosPorFiltro(FiltroBusquedaProyecto filtro, out decimal totalDineroAprobado,
@@ -76,7 +76,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
       return resultadosProyectos;
 
-***REMOVED***
+    }
 
     public List<objectProjectsSearchMap> ObtenerListadoDeProyectos(FiltroBusquedaProyecto filtro, out decimal valorTotalTodasFuentes, ref int page)
     {
@@ -102,7 +102,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                   EntidadEjecutora = proy.EntidadEjecutora,
                                   value = Math.Round(proy.VlrTotalProyectoFuenteRegalias),
                                   totalValue = Math.Round(proy.VlrTotalProyectoTodasLasFuentes),
-                            ***REMOVED***).ToList().Distinct().OrderBy(p => p.name);
+                                }).ToList().Distinct().OrderBy(p => p.name);
 
           foreach (var item in proyectosQuery)
           {
@@ -119,13 +119,13 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                     url = GenerateProjectUrl(item.id),
                     ejecutor = item.EntidadEjecutora
                     //image = BusquedasProyectosBLL.GenerarUrlImagenProyecto(item.id)
-              ***REMOVED***);
-        ***REMOVED***
-      ***REMOVED***
+                  });
+            }
+          }
           valorTotalTodasFuentes = 0;//objReturn.Sum(p => p.totalValue);
 
 
-    ***REMOVED***
+        }
         else
         {
           var lst = (from proyecto in ConsultasComunes.ObtenerProyectosConsistentesMapListMode(filtro, ref page).OrderBy(p => p.NombreProyecto)
@@ -139,17 +139,17 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                        ejecutor = proyecto.EntidadEjecutora,
                        type = CommonConstants.ProjectsEnSingular,
                        url = GenerateProjectUrl(proyecto.IdProyecto)
-                 ***REMOVED***).ToList();
+                     }).ToList();
 
           valorTotalTodasFuentes = 0;//objReturn.Sum(p => p.totalValue);
           objReturn.AddRange(lst);
 
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
 
       System.Diagnostics.Trace.WriteLine("Cargada la informacion de los graficos consolidados por cambio de filtro.");
       return objReturn;
-***REMOVED***
+    }
 
     [ExcludeFromCodeCoverage]
     private static bool FiltroBusquedaContieneMismaGeoreferenciacion(FiltroBusquedaProyecto filtro)
@@ -157,7 +157,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       if (filtro.TopLeft.Count > 1 && filtro.BottomRight.Count > 1 && filtro.TopLeft[0] == filtro.BottomRight[0] && filtro.TopLeft[1] == filtro.BottomRight[1])
         return true;
       return false;
-***REMOVED***
+    }
 
     [ExcludeFromCodeCoverage]
     public List<objectProjectsSearchMap> ObtenerInfograficosOld(FiltroBusquedaProyecto filtro, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
@@ -201,12 +201,12 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         //Regiones
         objReturn.AddRange(FormarInfograficoPorRegion(filtro, out cantidadProyectos, out valorRegalias, out valorTotalRegalias));
         objReturn.AddRange(FormarInfograficoPorDepartamento(filtro, out cantidadProyectos, out valorRegalias, out valorTotalRegalias));
-  ***REMOVED***
+      }
       //Municipios
       if ((RomperGeografiaPorZoom(ZoomMunicipFlag, filtro.Zoom, ZoomMaxValue) || FiltroContieneUnDeptoMuyGrande(filtro)) && RomperGeografiaPorZoom(ZoomMunicipFlag, filtro.Zoom, ZoomMaxValue))
       {
         objReturn.AddRange(FormarInfograficoPorMunicipio(filtro, out cantidadProyectos, out valorRegalias, out valorTotalRegalias));
-  ***REMOVED***
+      }
 
       //Pintar pushpins
       if (RomperGeografiaPorZoom(ZoomPushpinsFlag, filtro.Zoom, ZoomMaxValue))
@@ -215,13 +215,13 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         if (filtro.Zoom == 6 && existenFiltros)
         {
           objReturn.AddRange(ObtenerPinesDeProyectosPorFiltro(filtro, out valorRegaliasGeo, out cantidadProyectosGeo, out valorTotalRegaliasGeo));
-    ***REMOVED***
+        }
         else if (filtro.Zoom != 6)
         {
           objReturn.AddRange(ObtenerPinesDeProyectosPorFiltro(filtro, out valorRegaliasGeo, out cantidadProyectosGeo, out valorTotalRegaliasGeo));
-    ***REMOVED***
+        }
 
-  ***REMOVED***
+      }
       #region Old Code (Switch)
       //switch (filtro.Zoom)
       //{
@@ -234,19 +234,19 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       //            if (ZoomPushpinsFlag.Contains(filtro.Zoom) || filtro.Zoom >= ZoomPushpinsFlag.Max())
       //            {
       //                objReturn.AddRange(ObtenerProyectosPorFiltros(filtro, out valorRegaliasGeo, out cantidadProyectosGeo, out valorTotalRegaliasGeo));
-      //        ***REMOVED***
+      //            }
 
       //            break;
-      //    ***REMOVED***
+      //        }
       //    case 8:
       //        {
       //            objReturn.AddRange(FormarInfograficoPorDepartamento(filtro, out cantidadProyectos, out valorRegalias, out valorTotalRegalias));
       //            if (ZoomPushpinsFlag.Contains(filtro.Zoom) || ZoomPushpinsFlag.Max() >= 16)
       //            {
       //                objReturn.AddRange(ObtenerProyectosPorFiltros(filtro, out valorRegaliasGeo, out cantidadProyectosGeo, out valorTotalRegaliasGeo));
-      //        ***REMOVED***
+      //            }
       //            break;// Ya se traen las regiones desde el comienzo
-      //    ***REMOVED***
+      //        }
 
       //    case 9:
       //        {
@@ -254,9 +254,9 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       //            if (ZoomPushpinsFlag.Contains(filtro.Zoom) || ZoomPushpinsFlag.Max() >= 16)
       //            {
       //                objReturn.AddRange(ObtenerProyectosPorFiltros(filtro, out valorRegaliasGeo, out cantidadProyectosGeo, out valorTotalRegaliasGeo));
-      //        ***REMOVED***
+      //            }
       //            break;// Ya se traen las regiones desde el comienzo
-      //    ***REMOVED***
+      //        }
       //    // del 10 en adelante municipios
       //    default:
       //        {
@@ -264,19 +264,19 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       //            if (ZoomPushpinsFlag.Contains(filtro.Zoom) || ZoomPushpinsFlag.Max() >= 16)
       //            {
       //                objReturn.AddRange(ObtenerProyectosPorFiltros(filtro, out valorRegaliasGeo, out cantidadProyectosGeo, out valorTotalRegaliasGeo));
-      //        ***REMOVED***
+      //            }
       //            break;
-      //    ***REMOVED***
-      //***REMOVED***
+      //        }
+      //}
       #endregion
-      //***REMOVED***
+      //}
       //catch (Exception ex)
       //{
       //    Shared.LogHelper.GenerateLog(ex);
-      //***REMOVED***
+      //}
       System.Diagnostics.Trace.WriteLine("Cargada la informacion de los graficos consolidados por cambio de filtro.");
       return objReturn;
-***REMOVED***
+    }
 
     [ExcludeFromCodeCoverage]
     public List<objectProjectsSearchMap> ObtenerInfograficos(FiltroBusquedaProyecto filtro, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
@@ -321,12 +321,12 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         //Regiones
         objReturn.AddRange(FormarInfograficoPorRegion2(filtro, out cantidadProyectos, out valorRegalias, out valorTotalRegalias));
         objReturn.AddRange(FormarInfograficoPorDepartamento2(filtro, out cantidadProyectos, out valorRegalias, out valorTotalRegalias));
-  ***REMOVED***
+      }
       //Municipios
       if ((RomperGeografiaPorZoom(ZoomMunicipFlag, filtro.Zoom, ZoomMaxValue) || FiltroContieneUnDeptoMuyGrande(filtro)) && RomperGeografiaPorZoom(ZoomMunicipFlag, filtro.Zoom, ZoomMaxValue))
       {
         objReturn.AddRange(FormarInfograficoPorMunicipio2(filtro, out cantidadProyectos, out valorRegalias, out valorTotalRegalias));
-  ***REMOVED***
+      }
 
       //Pintar pushpins
       if (RomperGeografiaPorZoom(ZoomPushpinsFlag, filtro.Zoom, ZoomMaxValue))
@@ -335,11 +335,11 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         if (filtro.Zoom == 6 && existenFiltros)
         {
           objReturn.AddRange(ObtenerPinesDeProyectosPorFiltro(filtro, out valorRegaliasGeo, out cantidadProyectosGeo, out valorTotalRegaliasGeo));
-    ***REMOVED***
+        }
         else if (filtro.Zoom != 6)
         {
           objReturn.AddRange(ObtenerPinesDeProyectosPorFiltro(filtro, out valorRegaliasGeo, out cantidadProyectosGeo, out valorTotalRegaliasGeo));
-    ***REMOVED***
+        }
         if (cantidadProyectos == 0)
           cantidadProyectos = cantidadProyectosGeo;
         if (valorRegalias == 0)
@@ -347,7 +347,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         if (valorTotalRegalias == 0)
           valorTotalRegalias = valorTotalRegaliasGeo;
 
-  ***REMOVED***
+      }
       #region Old Code (Switch)
       //switch (filtro.Zoom)
       //{
@@ -360,19 +360,19 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       //            if (ZoomPushpinsFlag.Contains(filtro.Zoom) || filtro.Zoom >= ZoomPushpinsFlag.Max())
       //            {
       //                objReturn.AddRange(ObtenerProyectosPorFiltros(filtro, out valorRegaliasGeo, out cantidadProyectosGeo, out valorTotalRegaliasGeo));
-      //        ***REMOVED***
+      //            }
 
       //            break;
-      //    ***REMOVED***
+      //        }
       //    case 8:
       //        {
       //            objReturn.AddRange(FormarInfograficoPorDepartamento(filtro, out cantidadProyectos, out valorRegalias, out valorTotalRegalias));
       //            if (ZoomPushpinsFlag.Contains(filtro.Zoom) || ZoomPushpinsFlag.Max() >= 16)
       //            {
       //                objReturn.AddRange(ObtenerProyectosPorFiltros(filtro, out valorRegaliasGeo, out cantidadProyectosGeo, out valorTotalRegaliasGeo));
-      //        ***REMOVED***
+      //            }
       //            break;// Ya se traen las regiones desde el comienzo
-      //    ***REMOVED***
+      //        }
 
       //    case 9:
       //        {
@@ -380,9 +380,9 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       //            if (ZoomPushpinsFlag.Contains(filtro.Zoom) || ZoomPushpinsFlag.Max() >= 16)
       //            {
       //                objReturn.AddRange(ObtenerProyectosPorFiltros(filtro, out valorRegaliasGeo, out cantidadProyectosGeo, out valorTotalRegaliasGeo));
-      //        ***REMOVED***
+      //            }
       //            break;// Ya se traen las regiones desde el comienzo
-      //    ***REMOVED***
+      //        }
       //    // del 10 en adelante municipios
       //    default:
       //        {
@@ -390,19 +390,19 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       //            if (ZoomPushpinsFlag.Contains(filtro.Zoom) || ZoomPushpinsFlag.Max() >= 16)
       //            {
       //                objReturn.AddRange(ObtenerProyectosPorFiltros(filtro, out valorRegaliasGeo, out cantidadProyectosGeo, out valorTotalRegaliasGeo));
-      //        ***REMOVED***
+      //            }
       //            break;
-      //    ***REMOVED***
-      //***REMOVED***
+      //        }
+      //}
       #endregion
-      //***REMOVED***
+      //}
       //catch (Exception ex)
       //{
       //    Shared.LogHelper.GenerateLog(ex);
-      //***REMOVED***
+      //}
       System.Diagnostics.Trace.WriteLine("Cargada la informacion de los graficos consolidados por cambio de filtro.");
       return objReturn;
-***REMOVED***
+    }
 
 
 
@@ -420,7 +420,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         return true;
       else
         return false;
-***REMOVED***
+    }
 
     [ExcludeFromCodeCoverage]
     private static List<ObjectProjectsSearchMapGeography> FormarInfograficoPorRegion(FiltroBusquedaProyecto filtro, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
@@ -445,16 +445,16 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                            value = Math.Round(var.approvedMoney), //valor total de los proyectos en el departamento
                            approvedTotalMoney = Math.Round(var.approvedTotalMoney), //valor total de los proyectos en el departamento
                            type = "region"
-                     ***REMOVED***
+                         }
                          ).ToList();
         objReturn = lstReturn;
         ShortCacheHelper.Add(objReturn, key);
-  ***REMOVED***
+      }
       else
         System.Diagnostics.Debug.WriteLine("Obtenida los infograficos region del cache corto");
 
       return objReturn;
-***REMOVED***
+    }
 
     [ExcludeFromCodeCoverage]
     private static List<ObjectProjectsSearchMapGeography> FormarInfograficoPorRegion2(FiltroBusquedaProyecto filtro, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
@@ -477,17 +477,17 @@ namespace PlataformaTransparencia.Negocios.Proyectos
           value = Math.Round(Convert.ToDecimal(var.VlrRegalias)), //valor total de los proyectos en el departamento
           approvedTotalMoney = Math.Round(Convert.ToDecimal(var.VlrTotal)), //valor total de los proyectos en el departamento
           type = "region"
-    ***REMOVED***)).ToList();
+        })).ToList();
 
 
         objReturn = lstReturn;
         ShortCacheHelper.Add(objReturn, key);
-  ***REMOVED***
+      }
       else
         System.Diagnostics.Debug.WriteLine("Obtenida los infograficos region del cache corto");
 
       return objReturn;
-***REMOVED***
+    }
 
 
     [ExcludeFromCodeCoverage]
@@ -513,22 +513,22 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                            value = Math.Round(var.approvedMoney), //valor total de los proyectos en el departamento
                            approvedTotalMoney = Math.Round(var.approvedTotalMoney), //valor total de los proyectos en el departamento
                            type = "departamento"
-                     ***REMOVED***
+                         }
                          ).ToList();
         if (lstReturn.Count == 0)
         {
           lstReturn.AddRange(RepositorioConsultas.ConsultasComunes.AdicionarEnteTerritorialEnCeros(GenericEnumerators.GeographicKindEnumeration.Department));
-    ***REMOVED***
+        }
         objReturn = lstReturn;
         ShortCacheHelper.Add(objReturn, key);
-  ***REMOVED***
+      }
       else
         System.Diagnostics.Debug.WriteLine("Obtenida los infograficos depto del cache corto");
 
       //CollectedMoney = 0;//Recursos presupuestados para inversión SGR -- No se tienen valores del dinero presupuestado pues no hay cargue de los origenes de las agencias
 
       return objReturn;
-***REMOVED***
+    }
 
     [ExcludeFromCodeCoverage]
     private static List<ObjectProjectsSearchMapGeography> FormarInfograficoPorDepartamento2(FiltroBusquedaProyecto filtros, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
@@ -552,22 +552,22 @@ namespace PlataformaTransparencia.Negocios.Proyectos
           value = Math.Round(Convert.ToDecimal(var.VlrRegalias)), //valor total de los proyectos en el departamento
           approvedTotalMoney = Math.Round(Convert.ToDecimal(var.VlrTotal)), //valor total de los proyectos en el departamento
           type = "departamento"
-    ***REMOVED***)).ToList();
+        })).ToList();
 
 
         if (lstReturn.Count == 0)
         {
           lstReturn.AddRange(RepositorioConsultas.ConsultasComunes.AdicionarEnteTerritorialEnCeros(GenericEnumerators.GeographicKindEnumeration.Department));
-    ***REMOVED***
+        }
         objReturn = lstReturn;
         ShortCacheHelper.Add(objReturn, key);
-  ***REMOVED***
+      }
       else
         System.Diagnostics.Debug.WriteLine("Obtenida los infograficos depto del cache corto");
 
 
       return objReturn;
-***REMOVED***
+    }
 
 
     [ExcludeFromCodeCoverage]
@@ -594,20 +594,20 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                            value = Math.Round(var.approvedMoney), //valor total de los proyectos en el departamento
                            approvedTotalMoney = Math.Round(var.approvedTotalMoney), //valor total de los proyectos en el departamento
                            type = "municipio"
-                     ***REMOVED***
+                         }
                          ).ToList();
         if (lstReturn.Count == 0)
         {
           lstReturn.AddRange(RepositorioConsultas.ConsultasComunes.AdicionarEnteTerritorialEnCeros(GenericEnumerators.GeographicKindEnumeration.Municipality));
-    ***REMOVED***
+        }
         objReturn = lstReturn;
         ShortCacheHelper.Add(objReturn, key);
-  ***REMOVED***
+      }
       else
         System.Diagnostics.Debug.WriteLine("Obtenida los infograficos Municipio del cache corto");
 
       return objReturn;
-***REMOVED***
+    }
 
     [ExcludeFromCodeCoverage]
     private static List<ObjectProjectsSearchMapGeography> FormarInfograficoPorMunicipio2(FiltroBusquedaProyecto filtro, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
@@ -630,20 +630,20 @@ namespace PlataformaTransparencia.Negocios.Proyectos
           value = Math.Round(Convert.ToDecimal(var.VlrRegalias)), //valor total de los proyectos en el departamento
           approvedTotalMoney = Math.Round(Convert.ToDecimal(var.VlrTotal)), //valor total de los proyectos en el departamento
           type = "municipio"
-    ***REMOVED***)).ToList();
+        })).ToList();
 
         if (lstReturn.Count == 0)
         {
           lstReturn.AddRange(RepositorioConsultas.ConsultasComunes.AdicionarEnteTerritorialEnCeros(GenericEnumerators.GeographicKindEnumeration.Municipality));
-    ***REMOVED***
+        }
         objReturn = lstReturn;
         ShortCacheHelper.Add(objReturn, key);
-  ***REMOVED***
+      }
       else
         System.Diagnostics.Debug.WriteLine("Obtenida los infograficos Municipio del cache corto");
 
       return objReturn;
-***REMOVED***
+    }
 
 
 
@@ -675,7 +675,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
           break;
           //default:
           //    break;
-  ***REMOVED***
+      }
 
 
       List<int> result = new List<int>();
@@ -684,10 +684,10 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       foreach (var item in auxStringList)
       {
         result.Add(int.Parse(item));
-  ***REMOVED***
+      }
 
       return result;
-***REMOVED***
+    }
 
     /// <summary>
     /// Genera la url del proyecto a buscar
@@ -697,7 +697,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
     public static string GenerateProjectUrl(int ProjectId)
     {
       return string.Format(CommonConstants.ServicesLink, ProjectId.ToString());
-***REMOVED***
+    }
 
     /// <summary>
     /// Genera la ruta de la imágen del proyecto
@@ -715,7 +715,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
     public static bool RomperGeografiaPorZoom(List<int> lstFlagsGeograficos, int zoom, int maxZoomValue)
     {
       return lstFlagsGeograficos.Contains(zoom) || zoom >= maxZoomValue;
-***REMOVED***
+    }
 
     public static string GenerateStatusName(int ProjectId)
     {
@@ -731,9 +731,9 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                       select est).FirstOrDefault();
         retorno = estado.NombreEstado;
 
-  ***REMOVED***
+      }
       return retorno;
-***REMOVED***
+    }
 
     public static string GenerarUrlImagenProyecto(int idProyecto)
     {
@@ -749,14 +749,14 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         if (imageList != null)
         {
           imageUrl = imageList;
-    ***REMOVED***
+        }
         else
         {
           imageUrl = CommonConstants.DefaultImagePath;
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
       return imageUrl;
-***REMOVED***
+    }
 
     public async Task<List<object>> ObtenerFiltrosEspecificosParaProyectosAsync()
     {
@@ -772,7 +772,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                   name = maestro.NombreEstado,
                                   value = maestro.IdEstado.ToString(),
                                   //subTipo = default(string)
-                            ***REMOVED***).ToListAsync();
+                                }).ToListAsync();
 
         var lstSectores = await (from maestro in db.GetTable<Sector>()
                                  select new
@@ -780,7 +780,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                    name = maestro.NombreSector,
                                    value = maestro.IdSector.ToString(),
                                    //subTipo = default(string)
-                             ***REMOVED***).OrderBy(p => p.name).ToListAsync();
+                                 }).OrderBy(p => p.name).ToListAsync();
 
         List<ItemFilter> lstOrgFinanciador = new List<ItemFilter>();
         var instituciones = await (from maestro in db.GetTable<Fuente>()
@@ -788,7 +788,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                    {
                                      name = maestro.NombreTipoEntidad,
                                      value = maestro.IdTipoEntidad.ToString()
-                               ***REMOVED***).OrderBy(p => p.name).ToListAsync();
+                                   }).OrderBy(p => p.name).ToListAsync();
         var institucionesValue = instituciones.Select(x => x.value).Distinct().ToList();
         if (instituciones.Count > 0 && institucionesValue.Count > 0)
         {
@@ -798,17 +798,17 @@ namespace PlataformaTransparencia.Negocios.Proyectos
           {
             ItemFilter organismo = instituciones.Where(x => x.value == institucionesValue[w]).FirstOrDefault();
             if (organismo != null) lstOrgFinanciador.Add(organismo);
-      ***REMOVED***
-    ***REMOVED***
+          }
+        }
 
         var lstEntidadEjecutora = await (from maestro in db.GetTable<VwEntidadEjecutora>()
                                          select new ItemFilter
                                          {
                                            name = maestro.NombreEntidad,
                                            value = maestro.IdEntidad.ToString()
-                                     ***REMOVED***).OrderBy(p => p.name).ToListAsync();
+                                         }).OrderBy(p => p.name).ToListAsync();
 
-        var lstEntidadEjecutoraFinal = lstEntidadEjecutora.Select(a => new { a.name, a.value ***REMOVED***).Distinct().ToList();
+        var lstEntidadEjecutoraFinal = lstEntidadEjecutora.Select(a => new { a.name, a.value }).Distinct().ToList();
 
         filtros.Add(new
         {
@@ -819,7 +819,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
           urlServicioAjax = default(string),
           seccionAplicativo = GenericEnumerators.SeccionFuncionalAplicativo.Proyectos.ToString(),
           items = lstEstados
-    ***REMOVED***);
+        });
 
         filtros.Add(new
         {
@@ -830,7 +830,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
           urlServicioAjax = default(string),
           seccionAplicativo = GenericEnumerators.SeccionFuncionalAplicativo.Proyectos.ToString(),
           items = lstSectores
-    ***REMOVED***);
+        });
 
         filtros.Add(new
         {
@@ -841,7 +841,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
           urlServicioAjax = default(string),
           seccionAplicativo = GenericEnumerators.SeccionFuncionalAplicativo.Proyectos.ToString(),
           items = lstOrgFinanciador
-    ***REMOVED***);
+        });
 
         //filtros.Add(new
         //{
@@ -852,14 +852,14 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         //    urlServicioAjax = default(string),
         //    seccionAplicativo = GenericEnumerators.SeccionFuncionalAplicativo.Proyectos.ToString(),
         //    items = lstEntidadEjecutoraFinal
-        //***REMOVED***);
+        //});
 
         filtros.Add(FiltrosTotalesBLL.ObtenerFiltrosPeriodosAplicativo(GenericEnumerators.SeccionFuncionalAplicativo.Proyectos, "periods"));
-  ***REMOVED***
+      }
 
       return filtros;
 
-***REMOVED***
+    }
 
 
     public static List<Images> ObtenerImagenesParaProyecto(int Id)
@@ -877,10 +877,10 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                        thumbnail = images.RutaFotoPequeno,
                        idFoto = images.IdFoto,
                        fechaFoto = images.Fecha
-                 ***REMOVED***).ToList();
-  ***REMOVED***
+                     }).ToList();
+      }
       return objReturn;
-***REMOVED***
+    }
 
     public static List<itemEntregable> ObtenerEntregablesProyecto(int Id)
     {
@@ -900,10 +900,10 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                        Cantidad = entregable.Cantidad,
                        IdUnidadMedida = entregable.IdUnidadMedida,
                        NombreUnidadMedida = unidad.NombreUnidadMedida
-                 ***REMOVED***).ToList();
-  ***REMOVED***
+                     }).ToList();
+      }
       return objReturn;
-***REMOVED***
+    }
     public static async Task<List<Images>> ObtenerImagenesParaProyectoAsync(int Id)
     {
       var objReturn = new List<Images>();
@@ -919,10 +919,10 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                              thumbnail = images.RutaFotoPequeno,
                              idFoto = images.IdFoto,
                              fechaFoto = images.Fecha
-                       ***REMOVED***).ToListAsync();
-  ***REMOVED***
+                           }).ToListAsync();
+      }
       return objReturn;
-***REMOVED***
+    }
 
     public ModelDataProyecto ObtenerFotosUsuariosPerEstados(int estado, int page)
     {
@@ -954,20 +954,20 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                       idUsuario = images.IdUsuario,
                       nombreUsuario = images.Nombre
 
-                ***REMOVED***).OrderBy(p => p.fechaFoto).ToList();
+                    }).OrderBy(p => p.fechaFoto).ToList();
 
         objReturn.totalNumber = (int)total_reg.Value;
         objReturn.totalPages = (objReturn.totalNumber > reg_per_page) ? ((objReturn.totalNumber - (objReturn.totalNumber % reg_per_page)) / reg_per_page) : 1;
         if ((objReturn.totalNumber >= reg_per_page) && ((objReturn.totalNumber % reg_per_page) > 0))
         {
           objReturn.totalPages++;
-    ***REMOVED***
+        }
 
         objReturn.FotosU = listInfo;
 
-  ***REMOVED***
+      }
       return objReturn;
-***REMOVED***
+    }
 
     public static async Task<List<ImagesUsuario>> ObtenerFotosUsuariosParaProyectoAsync(int Id)
     {
@@ -981,13 +981,13 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                             {
                               IdDepartamento = images.IdDepartamento,
                               IdMunicipio = images.IdMunicipio
-                        ***REMOVED***
+                            }
                             equals
                             new
                             {
                               IdDepartamento = Entidades.IdDepartamento,
                               IdMunicipio = Entidades.IdMunicipio
-                        ***REMOVED***
+                            }
                            where (images.IdProyecto == Id && images.Aprobado == true && images.Eliminado == false)
                            orderby (images.Fecha)
                            select new ImagesUsuario
@@ -1001,10 +1001,10 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                              idMunicipio = images.IdMunicipio,
                              nombreDepartamento = Entidades.NombreDepartamento,
                              nombreMunicipio = Entidades.NombreMunicipio
-                       ***REMOVED***).ToListAsync();
-  ***REMOVED***
+                           }).ToListAsync();
+      }
       return objReturn;
-***REMOVED***
+    }
 
     public int ObtenerFotosUsuariosParaAprobarCant()
     {
@@ -1018,11 +1018,11 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                     select new ImagesUsuario
                     {
                       idFoto = images.IdFotoUsuario,
-                ***REMOVED***).ToList();
+                    }).ToList();
         total_reg = (int)total_reg.Value;
-  ***REMOVED***
+      }
       return (int)total_reg;
-***REMOVED***
+    }
 
     public async Task<List<ImagesUsuario>> ObtenerFotosUsuariosParaAprobarAsync()
     {
@@ -1040,13 +1040,13 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                             {
                               IdDepartamento = images.IdDepartamento,
                               IdMunicipio = images.IdMunicipio
-                        ***REMOVED***
+                            }
                             equals
                             new
                             {
                               IdDepartamento = Entidades.IdDepartamento,
                               IdMunicipio = Entidades.IdMunicipio
-                        ***REMOVED***
+                            }
                            where (images.Aprobado == false && images.Eliminado == false)
                            orderby (images.Fecha)
                            select new ImagesUsuario
@@ -1064,10 +1064,10 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                              nombreProyecto = Proyectos.NombreProyecto,
                              idUsuario = Usuarios.IdUsuario,
                              nombreUsuario = Usuarios.Nombre
-                       ***REMOVED***).ToListAsync();
-  ***REMOVED***
+                           }).ToListAsync();
+      }
       return objReturn;
-***REMOVED***
+    }
 
     public static async Task<List<MetricperYear>> ObtenerMetricasParaProyectoAsync(int Id)
     {
@@ -1092,7 +1092,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                         IdIndicador = indicators.IdIndicador,
                                         FechaInicio = indicators.FechaInicioMeta,
                                         FechaFin = indicators.FechaFinMeta
-                                  ***REMOVED***
+                                      }
                                       equals
                                           new
                                           {
@@ -1100,7 +1100,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                             IdIndicador = tracing.IdIndicador,
                                             FechaInicio = tracing.FechaInicioReporte,
                                             FechaFin = tracing.FechaFinReporte
-                                      ***REMOVED***
+                                          }
                                      into MetricasConSeguimiento
                                      where specifObjetive.IdProyecto == Id && indicators.FechaInicioMeta.Year == year
                                      from seguimiento in MetricasConSeguimiento.DefaultIfEmpty()
@@ -1112,20 +1112,20 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                        product = product.NombreProducto,
                                        goalDescription = specifObjetive.NombreObjetivoEspecifico,
                                        UnidadDeMedida = product.UnidadProducto
-                                 ***REMOVED***).Distinct().ToListAsync();
+                                     }).Distinct().ToListAsync();
 
           foreach (var registro in metricaDelAño)
           {
             if (registro.goal > 0)
               registro.PorcentajeEjecutado = Convert.ToDecimal(ManejoPorcentajes.ValorPorcentajeString(Convert.ToDecimal(registro.goal), Convert.ToDecimal(registro.current)).Replace("%", string.Empty).Trim()); //Convert.ToInt32((registro.goal - registro.current) / registro.goal);    
-      ***REMOVED***
+          }
 
 
-          objReturn.Add(new MetricperYear { year = year, metrics = metricaDelAño ***REMOVED***);
-    ***REMOVED***
-  ***REMOVED***
+          objReturn.Add(new MetricperYear { year = year, metrics = metricaDelAño });
+        }
+      }
       return objReturn;
-***REMOVED***
+    }
 
     public static async Task<List<Modelos.Project>> ObtenerOtrosProyectosOcadProyectoAsync(int Id)
     {
@@ -1155,7 +1155,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                              name = projects.NombreProyecto,
                              TotalValue = projects.VlrTotalProyectoFuenteRegalias,
                              Status = status.NombreEstado
-                       ***REMOVED***).Take(4).ToListAsync();
+                           }).Take(4).ToListAsync();
         foreach (var proyecto in objReturn)
         {
           var instancia = new BllProjectProfile();
@@ -1163,19 +1163,19 @@ namespace PlataformaTransparencia.Negocios.Proyectos
           proyecto.contractor = instancia.NameActorByProject(CommonConstants.CodigoContratista, Id);
           proyecto.controller = instancia.NameActorByProject(CommonConstants.CodigoInterventor, Id);
           proyecto.location = instancia.LocalizationByProject(Id);
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
       return objReturn;
-***REMOVED***
+    }
 
     private static string UppercaseFirst(string s)
     {
       if (string.IsNullOrEmpty(s))
       {
         return string.Empty;
-  ***REMOVED***
+      }
       return char.ToUpper(s[0]) + s.Substring(1).ToLowerInvariant();
-***REMOVED***
+    }
 
     public static async Task<Modelos.Project> ObtenerDetalleProyectoAsync(int Id)
     {
@@ -1220,7 +1220,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                     contComentarios = aprobadosInv.Comentarios,
                                     duracion = aprobadosInv.DuracionProyecto,
                                     tipo_proyecto = aprobadosInv.TipoProyecto.Trim()
-                              ***REMOVED***).FirstOrDefaultAsync();
+                                  }).FirstOrDefaultAsync();
 
 
         var instancia = new BllProjectProfile();
@@ -1240,9 +1240,9 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                  IdDepartamento = municipio.IdDepartamento,
                                  IdMunicipio = municipio.IdMunicipio,
                                  Tipo = municipio.Tipo
-                           ***REMOVED***).OrderBy(p => p.Nombre);
+                               }).OrderBy(p => p.Nombre);
             beneficiarios_munic = munic_query.ToList();
-      ***REMOVED***
+          }
           else
           {
             beneficiarios_aux = instancia.ObtenerNombresGeografiasBeneficiadas(Id);
@@ -1252,20 +1252,20 @@ namespace PlataformaTransparencia.Negocios.Proyectos
               //beneficiarios encabezado
               beneficiarios_munic = beneficiarios_aux.Where(p => p.Tipo.Equals("MUNICIPIO")).ToList();
               beneficiarios_encabezado = beneficiarios_aux.Where(p => p.Tipo.Equals("DEPARTAMENTO")).ToList();
-        ***REMOVED***
+            }
             else
             {
               beneficiarios_munic = beneficiarios_aux;
               beneficiarios_encabezado = beneficiarios_aux;
-        ***REMOVED***
-      ***REMOVED***
+            }
+          }
 
           string cod_bpin = infoProyecto.BPIN;
           string key_estado_proy = Configuration["EstadoProyEstudio"].ToString();
           if (infoProyecto.IdStatus == Convert.ToInt16(key_estado_proy))
           {
             cod_bpin = "";
-      ***REMOVED***
+          }
 
           objReturn = new Modelos.Project()
           {
@@ -1297,11 +1297,11 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             //tipo_proyecto = infoProyecto.tipo_proyecto,
             //EntesBeneficEncabezado = beneficiarios_encabezado
             //rendiciones = await new RendicionCuentasBLL().ObtenerRendicionesPorProyectoAsync(Id)
-      ***REMOVED***;
-    ***REMOVED***
-  ***REMOVED***
+          };
+        }
+      }
       return objReturn;
-***REMOVED***
+    }
 
     public static async Task<List<Sources>> ObtenerFuentesParaProyectoAsync(int Id)
     {
@@ -1323,13 +1323,13 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                       IdTipoRecurso = financiacion.IdTipoRecurso,
                                       IdTipoEntidad = financiacion.IdTipoEntidad,
                                       IdEntidad = financiacion.IdEntidad
-                                ***REMOVED***
+                                    }
                                     equals new
                                     {
                                       IdTipoRecurso = fuente.IdTipoRecurso,
                                       IdTipoEntidad = fuente.IdTipoEntidad,
                                       IdEntidad = fuente.IdEntidad
-                                ***REMOVED***
+                                    }
                                     //join seguimientoEsquemaFinanciacionProyecto in DataModel.SeguimientoEsquemaFinanciacionProyecto
                                     join seguimientoEsquemaFinanciacionProyecto in DataModel.SeguimientoEsquemaFinanciacionProyectos
                                     on new
@@ -1340,7 +1340,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                       IdEntidad = financiacion.IdEntidad,
                                       FechaInicioVigencia = financiacion.FechaInicioVigencia,
                                       FechaFinalVigencia = financiacion.FechaFinalVigencia
-                                ***REMOVED***
+                                    }
                                     equals new
                                     {
                                       IdProyecto = seguimientoEsquemaFinanciacionProyecto.IdProyecto,
@@ -1349,7 +1349,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                       IdEntidad = seguimientoEsquemaFinanciacionProyecto.IdEntidad,
                                       FechaInicioVigencia = seguimientoEsquemaFinanciacionProyecto.FechaInicioReporte,
                                       FechaFinalVigencia = seguimientoEsquemaFinanciacionProyecto.FechaFinalReporte
-                                ***REMOVED***
+                                    }
                                     into proyectoEsquemafinannciacionSeguimiento
                                     from seguimientoEsquemaFinanciacionProyecto in proyectoEsquemafinannciacionSeguimiento.DefaultIfEmpty()
                                     where financiacion.IdProyecto == Id && financiacion.FechaInicioVigencia.Year == year
@@ -1359,22 +1359,22 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                       total = financiacion.ValorAprobado,
                                       current = seguimientoEsquemaFinanciacionProyecto != null ? (decimal)seguimientoEsquemaFinanciacionProyecto.ValorReportado : 0
 
-                                ***REMOVED***).ToListAsync();
+                                    }).ToListAsync();
 
           foreach (var registro in sourcebyYear)
           {
             if (registro.total > 0)
             {
               registro.PorcentajeEjecutado = Convert.ToDecimal(ManejoPorcentajes.ValorPorcentajeString(Convert.ToDecimal(registro.total), Convert.ToDecimal(registro.current)).Replace("%", string.Empty).Trim()); //Convert.ToInt32((registro.goal - registro.current) / registro.goal);    
-        ***REMOVED***
-      ***REMOVED***
-          objReturn.Add(new Sources { year = year, sourcesperyear = sourcebyYear ***REMOVED***);
-    ***REMOVED***
-  ***REMOVED***
+            }
+          }
+          objReturn.Add(new Sources { year = year, sourcesperyear = sourcebyYear });
+        }
+      }
       return objReturn;
 
 
-***REMOVED***
+    }
 
 
     public static List<ComponentesProy> ObtenerComponentesProy(int Id)
@@ -1389,16 +1389,16 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                      {
                        componentes.IdComponente,
                        componentes.Componente
-                 ***REMOVED*** into g
+                     } into g
                      select new ComponentesProy
                      {
                        Id = g.Key.IdComponente,
                        Nombre = g.Key.Componente
-                 ***REMOVED***).OrderBy(p => p.Codigo).ToList();
-  ***REMOVED***
+                     }).OrderBy(p => p.Codigo).ToList();
+      }
       return objReturn;
 
-***REMOVED***
+    }
 
     public static List<Period> ObtenerPeriodosFuentes(int Id)
     {
@@ -1411,15 +1411,15 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                      group fuentes by new
                      {
                        fuentes.Vigencia
-                 ***REMOVED*** into g
+                     } into g
                      select new Period
                      {
                        id = g.Key.Vigencia,
                        name = g.Key.Vigencia.ToString()
-                 ***REMOVED***).OrderBy(p => p.id).ToList();
-  ***REMOVED***
+                     }).OrderBy(p => p.id).ToList();
+      }
       return objReturn;
-***REMOVED***
+    }
 
 
     public List<ComponentesProy> GetActividadesByComponente(int id_proy, string cod_componente)
@@ -1436,19 +1436,19 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                      {
                        componentes.CodigoActividad,
                        componentes.Actividades
-                 ***REMOVED*** into g
+                     } into g
                      select new ComponentesProy
                      {
                        Codigo = g.Key.CodigoActividad,
                        Nombre = g.Key.Actividades,
                        CodigoNum = g.Key.CodigoActividad.Substring(1, g.Key.CodigoActividad.Length)
-                 ***REMOVED***).ToList();
+                     }).ToList();
 
         objReturn_aux = objReturn.OrderBy(o => Convert.ToInt16(o.CodigoNum)).ToList();
-  ***REMOVED***
+      }
       return objReturn_aux;
 
-***REMOVED***
+    }
 
     public List<itemFuentes> GetFuentesByPeriodo(int id_proy, int idPeriodo)
     {
@@ -1464,11 +1464,11 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                        Porcentaje = fuentes.ValorVigente.HasValue && fuentes.ValorEjecutado.HasValue && fuentes.ValorVigente.Value > 0 ? Math.Round(((fuentes.ValorEjecutado.Value / fuentes.ValorVigente.Value) * 100), 2) : 0,
                        ValorEjecutado = fuentes.ValorEjecutado??0,
                        ValorPresupuesto = fuentes.ValorVigente??0
-                 ***REMOVED***).OrderBy(p => p.Id).ToList();
-  ***REMOVED***
+                     }).OrderBy(p => p.Id).ToList();
+      }
       return objReturn;
 
-***REMOVED***
+    }
 
     public static List<itemActores> ObtenerActoresByCategoriaProy(int id_proy)
     {
@@ -1481,7 +1481,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         //where a.IDProyecto = 22102
         objReturn = (from info in DataModel.ActorXProyectos
                      join actores in DataModel.Actors on info.IDActor equals actores.IdActor
-                     join grupos in DataModel.Rols on new { x1 = info.IDRol, x2 = actores.IDRol ***REMOVED*** equals new { x1 = grupos.IdRol, x2 = grupos.IdRol ***REMOVED***
+                     join grupos in DataModel.Rols on new { x1 = info.IDRol, x2 = actores.IDRol } equals new { x1 = grupos.IdRol, x2 = grupos.IdRol }
                      where info.IDProyecto == id_proy
                      select new itemActores
                      {
@@ -1490,10 +1490,10 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                        idActor = actores.IdActor,
                        nomActor = actores.NombreActor
 
-                 ***REMOVED***).OrderBy(x => x.Categoria).ThenBy(y => y.nomActor).ToList();
-  ***REMOVED***
+                     }).OrderBy(x => x.Categoria).ThenBy(y => y.nomActor).ToList();
+      }
       return objReturn;
-***REMOVED***
+    }
     public static List<Period> ObtenerAniosFuentesFinanciacionPorProyecto(int id)
     {
       List<Period> rta = new();
@@ -1507,11 +1507,11 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                {
                  id = fuente.Periodo.Value,
                  name = fuente.Periodo.Value.ToString()
-           ***REMOVED***).Distinct().ToList();
-  ***REMOVED***
+               }).Distinct().ToList();
+      }
       if (rta.Count > 1) rta = new List<Period>(rta.OrderBy(x => x.id));
       return rta;
-***REMOVED***
+    }
     public static List<ModeloAvanceFinancieroPorComponenteProducto> ObtenerAvanceFisicoPorComponenteProductoFaseProyecto(int id)
     {
       List<ModeloAvanceFinancieroPorComponenteProducto> objReturn = new();
@@ -1531,32 +1531,32 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                              Meta = transferencias.MetaProgramada,
                              Ejecutado = transferencias.MetaEjecutada,
                              AvanceFisico = transferencias.PorcentajeAvanceFisico
-                       ***REMOVED***
-                          ).OrderBy(m => new { m.IdentificadorFase, m.CodComponente, m.idProducto ***REMOVED***).ToList();
+                           }
+                          ).OrderBy(m => new { m.IdentificadorFase, m.CodComponente, m.idProducto }).ToList();
 
         foreach (var obj in objReturn)
           obj.Componente = obj.Componente.Replace("\"", string.Empty);
-  ***REMOVED***
+      }
       return objReturn;
-***REMOVED***
+    }
     public ModelProcesoContratacionAnios ObtenerAnniosProcesoContratacion(int? IdProyecto)
     {
       ModelProcesoContratacionAnios _objreturn = new ModelProcesoContratacionAnios();
       int? IdProyect = null;
-      if (IdProyecto != null && IdProyecto != 0) { IdProyect = IdProyecto; ***REMOVED***
+      if (IdProyecto != null && IdProyecto != 0) { IdProyect = IdProyecto; }
       using (var DataModel = new TransparenciaDB())
       {
         _objreturn.Detalles = (from cont in DataModel.VwContratosXProyectoInvDetalles
                                where (cont.IdProyecto == IdProyect || IdProyect == null)
-                               group cont by new { cont.AnioUltimaActualizacion***REMOVED*** into g
+                               group cont by new { cont.AnioUltimaActualizacion} into g
                                orderby g.Key.AnioUltimaActualizacion descending
                                select new AnioProcesoContratacion
                                {
                                  anio = (int)g.Key.AnioUltimaActualizacion
-                           ***REMOVED***).Distinct().OrderBy(x => x.anio).ThenBy(y => y.semestre).ToList();
-  ***REMOVED***
+                               }).Distinct().OrderBy(x => x.anio).ThenBy(y => y.semestre).ToList();
+      }
       return _objreturn;
-***REMOVED***
+    }
 
     public ModelProcesosContratacionData ObtenerInformacionProcesosContratacionPorFiltros(ProcesosContratacionFiltros filtros)
     {
@@ -1567,9 +1567,9 @@ namespace PlataformaTransparencia.Negocios.Proyectos
        
 
 
-      if (filtros.Annio > 0) { Annio = filtros.Annio; ***REMOVED***
-      if (filtros.IdProyecto > 0) { IdProyecto = filtros.IdProyecto; ***REMOVED***
-      if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; ***REMOVED***
+      if (filtros.Annio > 0) { Annio = filtros.Annio; }
+      if (filtros.IdProyecto > 0) { IdProyecto = filtros.IdProyecto; }
+      if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; }
       using (var DataModel = new TransparenciaDB())
       {
                 try
@@ -1585,11 +1585,11 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                                          orderby NUMBER descending
                                                          select NUMBER
                                    ).First();
-            ***REMOVED***
+                }
                 catch
                 {
                     _objreturn.CantidadTotalRegistros = 0;
-            ***REMOVED***
+                }
 
                 _objreturn.Data = (from cont in DataModel.VwContratosXProyectoInvDetalles
                                    where
@@ -1631,14 +1631,14 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                        FechaInicioRecepcionOfertas = cont.FechaInicioRecepcionOfertas,
                                        DescripcionContrato = cont.DescripcionContrato
 
-                               ***REMOVED***
+                                   }
                                  ).ToList();
 
 
-        ***REMOVED***
+            }
       return _objreturn;
-***REMOVED***
+    }
 
-  ***REMOVED***
+  }
 
-***REMOVED***
+}

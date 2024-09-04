@@ -25,81 +25,81 @@ namespace PlataformaTransparencia.Modelos
             componentes_proy = new List<ComponentesProy>();
             actores_proy = new List<itemActores>();
             entregables = new List<itemEntregable>();
-    ***REMOVED***
+        }
         /// <summary>
         /// Es el id del proyecto. 
         /// </summary>
-        public int idproject { get; set; ***REMOVED***
+        public int idproject { get; set; }
 
-        public string urlAuditoriaVisible { get; set; ***REMOVED***
+        public string urlAuditoriaVisible { get; set; }
 
-        public string urlReporteEmpalme { get; set; ***REMOVED***
+        public string urlReporteEmpalme { get; set; }
 
         private Project projectInformation;
         /// <summary>
         /// Es la informacion del proyecto.
         /// </summary>
         public Project ProjectInformation {
-            get { return projectInformation; ***REMOVED***
-            set { projectInformation = value; ***REMOVED***
-    ***REMOVED***
+            get { return projectInformation; }
+            set { projectInformation = value; }
+        }
 
         /// <summary>
         /// El avance del proyecto de 0 a 100
         /// </summary>
-        public decimal Progress { get; set; ***REMOVED***
+        public decimal Progress { get; set; }
         /// <summary>
         /// Las metricas del proyecto.
         /// </summary>
-        public decimal Financial_progress { get; set; ***REMOVED***
-        public List<MetricperYear> Metrics { get; set; ***REMOVED***
+        public decimal Financial_progress { get; set; }
+        public List<MetricperYear> Metrics { get; set; }
         /// <summary>
         /// Las fuentes de financiacion
         /// </summary>
-        public List<Sources> Sources { get; set; ***REMOVED***
+        public List<Sources> Sources { get; set; }
         /// <summary>
         /// La galería de imagenes
         /// </summary>
-        public List<Images> Images { get; set; ***REMOVED***
+        public List<Images> Images { get; set; }
         /// <summary>
         /// Hasta cuatro proyectos del mismo OCAD, del mismo sector idealmente si no cualquier sector.
         ///<remarks>Llamar un metodo de negocio y cargar solo el nombre y la localizacion por ocads</remarks>
         /// </summary>
-        public List<Modelos.Project> OtherProjects { get; set; ***REMOVED***
+        public List<Modelos.Project> OtherProjects { get; set; }
         /// <summary>
         /// Propiedad de dodne se saca la fuete de la informacion 
         /// para la pagina.
         /// </summary>
         public DataCommonSections DataCommonSections {
-            get { return dataCommonSections; ***REMOVED***
-            set { dataCommonSections = value; ***REMOVED***
-    ***REMOVED***
+            get { return dataCommonSections; }
+            set { dataCommonSections = value; }
+        }
 
-        public string ControlCiudadano { get; set; ***REMOVED***
+        public string ControlCiudadano { get; set; }
 
         //Galeria de fotos de usuarios
-        public List<ImagesUsuario> FotosU { get; set; ***REMOVED***
+        public List<ImagesUsuario> FotosU { get; set; }
 
         private DataCommonSections dataCommonSections = new DataCommonSections();
 
-        public string id_usu_participa { get; set; ***REMOVED***
-        public string nom_usu_participa { get; set; ***REMOVED***
-        public List<RolParticipa> rol_participacion { get; set; ***REMOVED***
-        public List<GenerosParticipacion> genero_participacion { get; set; ***REMOVED***
-        public List<MediosParticipacion> medios_participacion { get; set; ***REMOVED***
+        public string id_usu_participa { get; set; }
+        public string nom_usu_participa { get; set; }
+        public List<RolParticipa> rol_participacion { get; set; }
+        public List<GenerosParticipacion> genero_participacion { get; set; }
+        public List<MediosParticipacion> medios_participacion { get; set; }
 
-        public List<TiposComentario> tipo_comentario { get; set; ***REMOVED***
+        public List<TiposComentario> tipo_comentario { get; set; }
 
-        public string error_msg { get; set; ***REMOVED***
+        public string error_msg { get; set; }
 
-        public List<ModeloAvanceFinancieroPorComponenteProducto> avanceFisicoFasePreInversion { get; set; ***REMOVED***
-        public List<ModeloAvanceFinancieroPorComponenteProducto> avanceFisicoFaseInversion { get; set; ***REMOVED***
+        public List<ModeloAvanceFinancieroPorComponenteProducto> avanceFisicoFasePreInversion { get; set; }
+        public List<ModeloAvanceFinancieroPorComponenteProducto> avanceFisicoFaseInversion { get; set; }
 
-        public List<Period> periodos_fuentes { get; set; ***REMOVED***
+        public List<Period> periodos_fuentes { get; set; }
 
-        public List<ComponentesProy> componentes_proy { get; set; ***REMOVED***
+        public List<ComponentesProy> componentes_proy { get; set; }
 
-        public List<itemActores> actores_proy { get; set; ***REMOVED***
-        public List<itemEntregable> entregables { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public List<itemActores> actores_proy { get; set; }
+        public List<itemEntregable> entregables { get; set; }
+    }
+}

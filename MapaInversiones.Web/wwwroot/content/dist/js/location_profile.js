@@ -39,53 +39,53 @@
 	    
 	    function inicializaDatos() {
 	        $("#divNoExistenEjec").hide();
-	***REMOVED***
+	    }
 
 	        
 	    function loadProyectosPorSector() {
 	        for (var i = 0; i < ProjectsPerSectorGroup.length; i++) {
 	            ProjectsPerSectorGroup[i].value = parseFloat(ProjectsPerSectorGroup[i].value);
 	            ProjectsPerSectorGroup[i].rawValue = parseFloat(ProjectsPerSectorGroup[i].rawValue);
-	    ***REMOVED***
+	        }
 	        var visualization = d3plus.viz()
            .container("#divGraphProySector")
            .data(ProjectsPerSectorGroup)
            .type({
                "value": "tree_map",
                "mode": "squarify"
-       ***REMOVED***)
+           })
             .id({
                 "value": ["labelGroup","label"],
                 "grouping": true            // grouping set to false ungroups parent nesting
-        ***REMOVED***)
+            })
            .depth(1)
            .size("rawValue")
            .format({
                "text": function (text, params) {
                    if (text === "rawValue") {
                        return "No. Proyectos";
-               ***REMOVED*** else if (text == "label") {
+                   } else if (text == "label") {
                        return "Estado";
-               ***REMOVED*** else if (text == "labelGroup") {
+                   } else if (text == "labelGroup") {
                        return "Sector";
-               ***REMOVED***
+                   }
                    else {
                        return d3plus.string.title(text, params);
-               ***REMOVED***
+                   }
 
-           ***REMOVED***
-       ***REMOVED***)
+               }
+           })
             .background("#E3E3E3")
-            .labels({ "align": "left", "valign": "top" ***REMOVED***)
+            .labels({ "align": "left", "valign": "top" })
             .tooltip(["labelGroup", "label"])   // list the keys to show in tooltip
             .color("labelGroup")  
             .color({
                 "scale": ["#2F4556","#FF3637", "#31655E", "#00C9B1", "#DD1A8B", "#DD4E29", "#D3A034", "#FFB886", "#FFF190", "#80AFE6", "#73323D", "##5B73DD"],
-        ***REMOVED***)
+            })
             .legend(true)
             .draw()
 
-	***REMOVED***
+	    }
 
 	    function loadConsolidaEstados() {
 	        var txtConsolidado = "";
@@ -95,28 +95,28 @@
             for (var i = 0; i < projectsPerEstado.length; i++) {
                 if (i == 0) {
                     txt_aux = "Hay " + projectsPerEstado[i].rawValue.toString() + " proyectos ";
-            ***REMOVED*** else {
+                } else {
                     if (i == projectsPerEstado.length - 1) {
                         txt_aux = " y " + projectsPerEstado[i].rawValue.toString();
-                ***REMOVED*** else {
+                    } else {
                         txt_aux= " " + projectsPerEstado[i].rawValue.toString();
-                ***REMOVED***
+                    }
                    
-            ***REMOVED***
+                }
                 projectsPerEstado[i].value = parseFloat(projectsPerEstado[i].value);
                 projectsPerEstado[i].rawValue = parseFloat(projectsPerEstado[i].rawValue);
                 if (projectsPerEstado[i].label.toUpperCase() == "EN ESTUDIO") {
                     txtConsolidado += txt_aux + " que se encuentran en estudio,"
-            ***REMOVED*** else if (projectsPerEstado[i].label.toUpperCase() == "RECHAZADO") {
+                } else if (projectsPerEstado[i].label.toUpperCase() == "RECHAZADO") {
                     txtConsolidado += txt_aux + " " + " fueron rechazados"
-            ***REMOVED*** else if (projectsPerEstado[i].label.toUpperCase() == "EN EJECUCIÓN" || projectsPerEstado[i].label.toUpperCase() == "EN EJECUCION") {
+                } else if (projectsPerEstado[i].label.toUpperCase() == "EN EJECUCIÓN" || projectsPerEstado[i].label.toUpperCase() == "EN EJECUCION") {
                     txtConsolidado += txt_aux + " " + " en ejecución,"
-            ***REMOVED*** else {
+                } else {
                     //finalizado
                     txtConsolidado += txt_aux + " han sido ejecutados,"
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
 
             var txtDescriptivo = "Texto descriptivo.";
             var div_txtPadre = d3.select("#divTxtTodosProy")
@@ -130,12 +130,12 @@
             
 
 
-	***REMOVED***
+	    }
 	    function make_viz() {
 	        var sample_data = [
-            { "rawValue": 12, "label": "En ejecución", "color": 1 ***REMOVED***,
-            { "rawValue": 23, "label": "Ejecutados", "color": 1***REMOVED***,
-            { "rawValue": 45, "label": "Viables", "color": 1 ***REMOVED***
+            { "rawValue": 12, "label": "En ejecución", "color": 1 },
+            { "rawValue": 23, "label": "Ejecutados", "color": 1},
+            { "rawValue": 45, "label": "Viables", "color": 1 }
 
 	        ]
 	    // instantiate d3plus
@@ -146,7 +146,7 @@
                 "value": "tree_map",
                 "mode": "slice"
                 //"mode" : "sqarify"
-        ***REMOVED***)
+            })
         .id("label")
         .size("rawValue")
         .text("label")
@@ -154,28 +154,28 @@
 	        "text": function (text, params) {
 	            if (text === "rawValue") {
 	                return "No. Proyectos";
-	        ***REMOVED*** 
+	            } 
 	            else {
 	                return d3plus.string.title(text, params);
-	        ***REMOVED***
+	            }
 
-	    ***REMOVED***
-	***REMOVED***)
+	        }
+	    })
          //.id(["group","label"]) agrupar por dos items
          .background("#E3E3E3")
-         .labels({ "align": "left", "valign": "top" ***REMOVED***)
+         .labels({ "align": "left", "valign": "top" })
          .tooltip({
                 "share": false,
-                "font": { size: "auto" ***REMOVED***,
-        ***REMOVED***)
-         .width({ "small": 400 ***REMOVED***)
+                "font": { size: "auto" },
+            })
+         .width({ "small": 400 })
          //.color("label")  
          .color({
                  "scale": ["#A31D36", "#E51C3C", "#B1DAAE", "#255955"],
-     ***REMOVED***)
+         })
          .legend(false)
          .draw()             
-	***REMOVED***
+	    }
 
 	    function loadProyectosEjecucion(resultados) {
 	        if (resultados.length > 0) {
@@ -199,9 +199,9 @@
 	                for (var i = 0; i < resultados.length; i++) {
 	                    if (i == 0) {
 	                        clase_active = "item active";
-	                ***REMOVED*** else {
+	                    } else {
 	                        clase_active = "item";
-	                ***REMOVED***
+	                    }
 	                    var modulo = (i % 4);
 	                    if (modulo == 0) {
 	                        nom_fila = "divFilaProy_" + cont_aux.toString()
@@ -217,7 +217,7 @@
                             .attr("class", "col-md-3")
 	                        comunes.load_ficha_unica(resultados[i], nom_col, nom_fila, prueba);
 	                        cont_aux += 1;
-	                ***REMOVED*** else {
+	                    } else {
 	                        var nom_col = "ficha_" + i.toString();
 	                        if ($("#" + nom_fila).length > 0) {
 	                            d3.select("#" + nom_fila)
@@ -225,11 +225,11 @@
                                 .attr("class", "col-md-3")
                                 .attr("id", nom_col)
 	                            comunes.load_ficha_unica(resultados[i], nom_col, nom_fila, prueba);
-	                    ***REMOVED***
-	                ***REMOVED***
+	                        }
+	                    }
 
-	            ***REMOVED***
-	        ***REMOVED***
+	                }
+	            }
 
 	            //add data-slide
 	            var divSlide = d3.select("#Carousel")
@@ -245,15 +245,15 @@
                 .attr("class", "right carousel-control")
                 .append("span")
                 .attr("class", "glyphicon glyphicon-chevron-right")
-	    ***REMOVED*** else {
+	        } else {
 	            //no existen proyectos en ejecucion
 	            $("#divNoExistenEjec").show();
 
-	    ***REMOVED***
+	        }
 
 	        //configuraFiltroSector();
 	        configuraFiltrosEje();
-	***REMOVED***
+	    }
 
 	    function configuraFiltrosEje() {
 	        if ($("#filterByEjecucion").length > 0) {
@@ -268,36 +268,36 @@
 	                            var div_proyectos = d3.select("#divContenidoFichas");
 	                            div_proyectos.html("");
 	                            loadProyectosEjecucion(sorted);
-	                    ***REMOVED***
-	                ***REMOVED***
+	                        }
+	                    }
 	                    else if (val_Sel == "PROGRESO") {
 	                        sorted = $(objJson).sort(ordenaProgresoDesc);
 	                        var div_proyectos = d3.select("#divContenidoFichas");
 	                        div_proyectos.html("");
 	                        loadProyectosEjecucion(sorted);
 
-	                ***REMOVED*** else {
+	                    } else {
 	                        //fecha
 	                        sorted = $(objJson).sort(ordenaFechaIniDesc);
 	                        var div_proyectos = d3.select("#divContenidoFichas");
 	                        div_proyectos.html("");
 	                        loadProyectosEjecucion(sorted);
-	                ***REMOVED***
+	                    }
 
-	            ***REMOVED*** else {
+	                } else {
 	                    //opcion vacia
 	                    loadProyectosEjecucion(sorted);
-	            ***REMOVED***
+	                }
 
-	        ***REMOVED***);
-	    ***REMOVED***
-	***REMOVED***
+	            });
+	        }
+	    }
 
 	    
 
 	    function prueba() {
 
-	***REMOVED***
+	    }
 
         ///si se quiere realizar carga directa desde el controlador, sin web api
 	    function AgregarFiltros_proy() {
@@ -306,28 +306,28 @@
 	                if (items_result[i].parameter == "estado") {
 	                    addFiltro("filters_groups_etapa", "filterByEtapa", items_result[i].item_name, items_result[i].item_value);
 
-	            ***REMOVED*** else if (items_result[i].parameter == "sector") {
+	                } else if (items_result[i].parameter == "sector") {
 	                        addFiltro("filters_groups_sector", "filterBySector", items_result[i].item_name, items_result[i].item_value);
 	                        addFiltro("divFiltrosFichaSector", "filterEjecSector", items_result[i].item_name, items_result[i].item_value);
-                ***REMOVED***
+                    }
                     else if (items_result[i].parameter == "departamento") {
                         for (var j = 0; j < items_result[i].items.length; j++) {
                             addFiltro("filters_groups_departamento", "filterByDepartamento", items_result[i].items[j].name, items_result[i].items[j].value);
                             addFiltro("divFiltrosFichaDepartamento", "filterEjecDepartamento", items_result[i].items[j].name, items_result[i].items[j].value);
                             addFiltro("divFiltrosFichaDepartamentoSector", "filterEjecDepartamentoSector", items_result[i].items[j].name, items_result[i].items[j].value);
-                    ***REMOVED***
-                ***REMOVED***
-	        ***REMOVED***
+                        }
+                    }
+	            }
                 $('#filterByEtapa li,#filterBySector li,#filterByDepartamento li').bind('click onclick', function (e) {
 	                var val_Sel = $(this).attr("id");
 	                if (val_Sel != "" && val_Sel != "0") {
 	                    var target = $(e.target);
 	                    target.addClass("selected").siblings().removeClass("selected");
 	                    cargarProyectos(pagina_actual);
-	            ***REMOVED***
-	        ***REMOVED***);
+	                }
+	            });
 	        
-***REMOVED***
+    }
 
 
 	    function AgregarFiltros() {
@@ -338,23 +338,23 @@
 	                    if (items_result[i].parameter == "estado") {
 	                        for (var j = 0; j < items_result[i].items.length; j++) {
 	                            addFiltro("filters_groups_etapa", "filterByEtapa", items_result[i].items[j].name, items_result[i].items[j].value);
-	                    ***REMOVED***
-                    ***REMOVED***
+	                        }
+                        }
                         else if (items_result[i].parameter == "sector")
                         {
 	                        for (var j = 0; j < items_result[i].items.length; j++) {
 	                            addFiltro("filters_groups_sector", "filterBySector", items_result[i].items[j].name, items_result[i].items[j].value);
                                 addFiltro("divFiltrosFichaSector", "filterEjecSector", items_result[i].items[j].name, items_result[i].items[j].value);
-	                    ***REMOVED***
-                    ***REMOVED***
+	                        }
+                        }
                         else if (items_result[i].parameter == "departamento") {
                             for (var j = 0; j < items_result[i].items.length; j++) {
                                 addFiltro("filters_groups_departamento", "filterByDepartamento", items_result[i].items[j].name, items_result[i].items[j].value);
                                 addFiltro("divFiltrosFichaDepartamento", "filterEjecDepartamento", items_result[i].items[j].name, items_result[i].items[j].value);
                                 addFiltro("divFiltrosFichaDepartamentoSector", "filterEjecDepartamentoSector", items_result[i].items[j].name, items_result[i].items[j].value);
-                        ***REMOVED***
-                    ***REMOVED***
-	            ***REMOVED***
+                            }
+                        }
+	                }
 
 
                     $('#filterByEtapa li,#filterBySector li,#filterByDepartamento li').bind('click onclick', function (e) {
@@ -363,8 +363,8 @@
 	                        var target = $(e.target);
 	                        target.addClass("selected").siblings().removeClass("selected");
 	                        cargarProyectos(pagina_actual);
-	                ***REMOVED***
-	            ***REMOVED***);
+	                    }
+	                });
 
 	                $('#filterEjecSector li').bind('click onclick', function () {
 	                    $("#divNoEncontradoEjec").hide();
@@ -373,17 +373,17 @@
 	                            var objJson = proyectos_eje;
 	                            var objFiltered = $.grep(objJson, function (h) {
 	                                return h.IdSector == val_Sel
-	                        ***REMOVED***);
+	                            });
 	                            var div_proyectos = d3.select("#divContenidoFichas");
 	                            div_proyectos.html("");
 	                            if (objFiltered.length > 0) {
 	                                loadProyectosEjecucion(objFiltered);
-	                        ***REMOVED***
+	                            }
 	                            else {
 	                                $("#divNoEncontradoEjec").show();
-	                        ***REMOVED***
-	                    ***REMOVED***
-                ***REMOVED***);
+	                            }
+	                        }
+                    });
 
                     $('#filterEjecDepartamento li').bind('click onclick', function () {
                         $("#divNoEncontradoEjec").hide();
@@ -392,17 +392,17 @@
                             var objJson = proyectos_eje;
                             var objFiltered = $.grep(objJson, function (h) {
                                 return h.IdSector == val_Sel
-                        ***REMOVED***);
+                            });
                             var div_proyectos = d3.select("#divContenidoFichas");
                             div_proyectos.html("");
                             if (objFiltered.length > 0) {
                                 loadProyectosEjecucion(objFiltered);
-                        ***REMOVED***
+                            }
                             else {
                                 $("#divNoEncontradoEjec").show();
-                        ***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***);
+                            }
+                        }
+                    });
 
                     $('#filterEjecDepartamentoSector li').bind('click onclick', function () {
                         $("#divNoEncontradoEjec").hide();
@@ -411,21 +411,21 @@
                             var objJson = proyectos_eje;
                             var objFiltered = $.grep(objJson, function (h) {
                                 return h.IdSector == val_Sel
-                        ***REMOVED***);
+                            });
                             var div_proyectos = d3.select("#divContenidoFichas");
                             div_proyectos.html("");
                             if (objFiltered.length > 0) {
                                 loadProyectosEjecucionSectores(objFiltered);
-                        ***REMOVED***
+                            }
                             else {
                                 $("#divNoEncontradoEjec").show();
-                        ***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***);
+                            }
+                        }
+                    });
 
-	        ***REMOVED***);
+	            });
 
-	***REMOVED***
+	    }
         
 
 	        function cargarProyectos(pagina) {
@@ -438,21 +438,21 @@
 	            var param = "page=" + pagina;
 	            if (sector_id != "" && sector_id != undefined) {
 	                param += "&sector=" + sector_id;
-	        ***REMOVED***
+	            }
 	            if (estado_id != "" && estado_id != undefined) {
 	                param += "&estado=" + estado_id;
-            ***REMOVED***
+                }
                 if (departamento_id != "" && departamento_id != undefined) {
                     param += "&departamento=" + departamento_id;
-            ***REMOVED***
+                }
 	            if (objJson.length > 0) {
                     if (objJson[0].location_type == "MUNICIPIO") {
 	                        param += "&municipio=" + objJson[0].location_id;
-	                ***REMOVED***
+	                    }
 	                    if(objJson[0].location_type == "DEPARTAMENTO") {
 	                        param += "&departamento=" + objJson[0].location_id;
-	                ***REMOVED***
-	        ***REMOVED***
+	                    }
+	            }
 	            Services.projectsList(url + "?"+ param)
                 .done(function (data) {
                     var div_proy = d3.select("#divListadoProyectos")
@@ -464,23 +464,23 @@
                            .attr("class", "list-group-item")
                            .attr("href", "../projectprofile/" + data.objects[k].location)
                            .text(data.objects[k].name)
-                    ***REMOVED***
+                        }
                         //loading(false);
                         //construir paginacion
                         dibujaPaginacion(pagina, data.totalProjectsNumber, data.totalPages);
 
-                ***REMOVED*** else {
+                    } else {
                         //No hay datos
                         //falta ocultar paginacion
                         d3.select("#divPaginacion").html("");
                         $("#divMensaje").show();
-                ***REMOVED***
+                    }
                     
    
-            ***REMOVED***);
+                });
 
 	           
-	    ***REMOVED***
+	        }
 
 	        function addFiltro(obj_div, obj_etiqueta, opc, valor) {
 	            if ($("#" + obj_etiqueta).length == 0) {
@@ -504,7 +504,7 @@
 	                    ul_select.append("li").text(opc)
                         .attr("id", valor)
 
-	            ***REMOVED*** else if (obj_etiqueta == "filterBySector") {
+	                } else if (obj_etiqueta == "filterBySector") {
 	                    var div_col = d3.select("#" + obj_div)
 	                    div_col.append("label")
                         .text("Sector")
@@ -522,7 +522,7 @@
                         .attr("id", obj_etiqueta)
 	                    ul_select.append("li").text(opc)
                         .attr("id", valor)
-                ***REMOVED*** else if (obj_etiqueta == "filterByDepartamento") {
+                    } else if (obj_etiqueta == "filterByDepartamento") {
                         var div_col = d3.select("#" + obj_div)
                         div_col.append("label")
                             .text("Departamento")
@@ -540,7 +540,7 @@
                             .attr("id", obj_etiqueta)
                         ul_select.append("li").text(opc)
                             .attr("id", valor)
-                ***REMOVED***else if (obj_etiqueta == "filterEjecSector") {
+                    }else if (obj_etiqueta == "filterEjecSector") {
 	                    var div_col = d3.select("#" + obj_div)
 	                    div_col.append("label")
                         .text("Sector")
@@ -558,7 +558,7 @@
                         .attr("id", obj_etiqueta)
 		                    ul_select.append("li").text(opc)
                         .attr("id", valor)
-                ***REMOVED***
+                    }
                     else if (obj_etiqueta == "filterEjecDepartamento") {
                         var div_col = d3.select("#" + obj_div)
                         div_col.append("label")
@@ -577,7 +577,7 @@
                             .attr("id", obj_etiqueta)
                         ul_select.append("li").text(opc)
                             .attr("id", valor)
-                ***REMOVED***
+                    }
                     else if (obj_etiqueta == "filterEjecDepartamentoSector") {
                         var div_col = d3.select("#" + obj_div)
                         div_col.append("label")
@@ -596,15 +596,15 @@
                             .attr("id", obj_etiqueta)
                         ul_select.append("li").text(opc)
                             .attr("id", valor)
-                ***REMOVED***
+                    }
 
-	        ***REMOVED*** else {
+	            } else {
 	                var ul_select = d3.select("#" + obj_etiqueta)
 	                ul_select.append("li").text(opc)
                     .attr("id", valor)
-	        ***REMOVED***
+	            }
 
-	    ***REMOVED***
+	        }
 
 	        function dibujaPaginacion(actual, total, totalPag) {
 	            var pag_actual = parseInt(actual);
@@ -622,7 +622,7 @@
                     .attr("class", "glyphicon glyphicon-arrow-left")
                     pag_enlace.append("text")
                     .text(" Anterior")
-	        ***REMOVED***
+	            }
 	            divPag.append("span")
                .attr("class", "totalpages")
                .text("Página " + actual + " de " + totalPag)
@@ -637,64 +637,64 @@
 	                    pag_enlace_der.append("span")
                         .attr("class", "glyphicon glyphicon-arrow-right")
                         
-	            ***REMOVED***
-	        ***REMOVED***
+	                }
+	            }
 
 	            $('#page_right,#page_left').bind('click', function () {
 	                //$("#divListadoProyectos").html("");
 	                d3.select("#divListadoProyectos").selectAll("a").remove()
 	                pagina_actual = $(this).attr("data-page");
 	                cargarProyectos(pagina_actual);
-	        ***REMOVED***);
+	            });
 
 
-	    ***REMOVED***
+	        }
 
 	        function dibujarFichasProyecto() {
 	            comunes.loadFicha(projects, "proyContenedor", "divFiltrosFichaOrdena")
-	    ***REMOVED***
+	        }
 
 
 	        jQuery.fn.sort = function () {
 	            return this.pushStack([].sort.apply(this, arguments), []);
-	    ***REMOVED***;
+	        };
 
 	        function ordenaMonto(a, b) {
 	            if (parseFloat(a.valor_presupuesto) == parseFloat(b.valor_presupuesto)) {
 	                return 0;
-	        ***REMOVED***
+	            }
 	            return parseFloat(a.valor_presupuesto) > parseFloat(b.valor_presupuesto) ? 1 : -1;
-	    ***REMOVED***;
+	        };
 	        function ordenaMontoDesc(a, b) {
 	            return ordenaMonto(a, b) * -1;
-	    ***REMOVED***;
+	        };
 
 	        function ordenaProgreso(a, b) {
 	            if (parseFloat(a.porcentaje_gastado) == parseFloat(b.porcentaje_gastado)) {
 	                return 0;
-	        ***REMOVED***
+	            }
 	            return parseFloat(a.porcentaje_gastado) > parseFloat(b.porcentaje_gastado) ? 1 : -1;
-	    ***REMOVED***;
+	        };
 
 	        function ordenaProgresoDesc(a, b) {
 	            return ordenaProgreso(a, b) * -1;
 
-	    ***REMOVED***;
+	        };
 
 	        function ordenaFechaIni(a, b) {
 	            return a.FechaInicioProyecto > b.FechaInicioProyecto ? 1 : -1;
-	    ***REMOVED***
+	        }
 
 	        function ordenaFechaIniDesc(a, b) {
 	            return ordenaFechaIni(a, b) * -1;
-	    ***REMOVED***
+	        }
 
-        //para aplicar binding agregar function location(){***REMOVED*** al inicio
+        //para aplicar binding agregar function location(){} al inicio
 	    //ko.applyBindings(new location(), $('#projects-list-view')[0]);
 
 	        return {
 	            load_filtro_sector: AgregarFiltros
 
-	        ***REMOVED***;
+	            };
 
-***REMOVED***)
+})

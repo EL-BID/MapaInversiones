@@ -30,5 +30,5 @@ namespace PlataformaTransparencia.Negocios.Interfaces
 
 
 
-  ***REMOVED***
-***REMOVED***
+  }
+}

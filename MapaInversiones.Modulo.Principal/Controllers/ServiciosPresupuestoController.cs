@@ -29,7 +29,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       _connection = connection;
       _solr = solr;
       consolidadoPresupuesto = presupuestoNewBLL;
-***REMOVED***
+    }
 
     [HttpGet("GetConsolidadoPeriodos")]
     public ModelPresupuestoData GetConsolidadoPeriodos(int anyo)
@@ -42,14 +42,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         objReturn.TotalPresupuesto = total;
         objReturn.Status = true;
         return objReturn;
-  ***REMOVED***
+      }
       catch (Exception exception)
       {
         objReturn.Status = false;
         objReturn.Message = "Error: " + exception.Message;
         return objReturn;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
         [HttpGet("GetRecursosPerfinalidad")]
         public ModelPresupuestoData GetRecursosPerfinalidad(int anyo)
@@ -63,14 +63,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 objReturn.InfoRecursos = info;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("ObtenerSectoresPerNombre")]
         public ModelPresupuestoData ObtenerSectoresPerNombre(int anyo)
@@ -81,15 +81,15 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 Presupuesto.sectores = consolidadoPresupuesto.ObtenerSectoresPerNombre(anyo);
                 Presupuesto.Status = true;
                 return Presupuesto;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 Presupuesto.Status = false;
                 Presupuesto.Message = "Error: " + exception.Message;
                 Presupuesto = null;
                 return Presupuesto;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
         [HttpGet("ObtDistribucionBySectorFuentes")]
@@ -108,14 +108,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 objReturn.TotalEjecutado = totalEjecutado;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("ObtenerOrganismosPerNombre")]
         public ModelPresupuestoData ObtenerOrganismosPerNombre(int anyo)
@@ -126,15 +126,15 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 Presupuesto.organismos = consolidadoPresupuesto.ObtenerOrganismosPerNombre(anyo);
                 Presupuesto.Status = true;
                 return Presupuesto;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 Presupuesto.Status = false;
                 Presupuesto.Message = "Error: " + exception.Message;
                 Presupuesto = null;
                 return Presupuesto;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
         [HttpGet("GetInfograficoPerEntidad")]
@@ -146,14 +146,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 objReturn.InfograficoPerEntidad = consolidadoPresupuesto.GetInfograficoPerEntidad(annio, id,tipo);
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("BarChartEntidades")]
         public ModelPresupuestoData BarChartEntidades(int anyo, string filtro)
@@ -165,23 +165,23 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 if (filtro != null && filtro != "")
                 {
                     var cadList = filtro.Split('|')
-                    .Select(m => { return m; ***REMOVED***)
+                    .Select(m => { return m; })
                     .Where(m => m != "")
                     .Distinct().ToList();
                     filtro_aux_sec = cadList;
-            ***REMOVED***
+                }
                 Presupuesto.InfoRecursos = consolidadoPresupuesto.ObtenerGastoEntidades(anyo, filtro_aux_sec);
                 Presupuesto.Status = true;
                 return Presupuesto;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 Presupuesto.Status = false;
                 Presupuesto.Message = "Error: " + exception.Message;
                 Presupuesto = null;
                 return Presupuesto;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("ObtenerEntidadesPerNombre")]
         public ModelPresupuestoData ObtenerEntidadesPerNombre(int anyo)
@@ -192,15 +192,15 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 Presupuesto.entidades = consolidadoPresupuesto.ObtenerEntidadesPerNombre(anyo);
                 Presupuesto.Status = true;
                 return Presupuesto;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 Presupuesto.Status = false;
                 Presupuesto.Message = "Error: " + exception.Message;
                 Presupuesto = null;
                 return Presupuesto;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("BarChartTiempoEntidades")]
         public ModelPresupuestoData BarChartTiempoEntidades(int anyo, string filtro)
@@ -212,23 +212,23 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 if (filtro != null && filtro != "")
                 {
                     var cadList = filtro.Split('|')
-                    .Select(m => { return m; ***REMOVED***)
+                    .Select(m => { return m; })
                     .Where(m => m != "")
                     .Distinct().ToList();
                     filtro_aux_sec = cadList;
-            ***REMOVED***
+                }
                 Presupuesto.InfoRecursos = consolidadoPresupuesto.ObtenerGastoPerTiempoEntidades(anyo, filtro_aux_sec);
                 Presupuesto.Status = true;
                 return Presupuesto;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 Presupuesto.Status = false;
                 Presupuesto.Message = "Error: " + exception.Message;
                 Presupuesto = null;
                 return Presupuesto;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("GetInfograficoPerProyecto")]
         public ModelPresupuestoData GetInfograficoPerProyecto(int annio, string id)
@@ -239,13 +239,13 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 objReturn.proyectosInv = consolidadoPresupuesto.GetInfograficoPerProyecto(annio, id);
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+            }
+        }
+    }
+}

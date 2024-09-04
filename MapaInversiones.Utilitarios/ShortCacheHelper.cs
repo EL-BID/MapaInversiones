@@ -14,7 +14,7 @@ namespace PlataformaTransparencia.Utilitarios
         public static void Init(IMemoryCache memoryCache)
         {
             _cache = memoryCache;
-    ***REMOVED***
+        }
         /// <summary>
         /// Insert value into the cache using
         /// appropriate name/value pairs
@@ -26,7 +26,7 @@ namespace PlataformaTransparencia.Utilitarios
         public static void Add<T>(T o, string key)
         {
             Add(o, key, DuracionCache.Corto);
-    ***REMOVED***
+        }
 
         [ExcludeFromCodeCoverage]
         public static void Add<T>(T o, string key, DuracionCache duracion)
@@ -35,29 +35,29 @@ namespace PlataformaTransparencia.Utilitarios
 
             if (_cache == null) {
                 return;
-        ***REMOVED***
+            }
 
             switch (duracion) {
                 case DuracionCache.Medio: {
                         duracionMinutos = 30;
                         break;
-                ***REMOVED***
+                    }
                 case DuracionCache.Largo: {
                         duracionMinutos = 60;
                         break;
-                ***REMOVED***
+                    }
                 default: {
                         duracionMinutos = 15;
                         break;
-                ***REMOVED***
-        ***REMOVED***
+                    }
+            }
             _cache.Set(key,
                        o,
                        new TimeSpan(0, 0, duracionMinutos, 0, 5));
 
             if (duracionMinutos > 0)
-                System.Diagnostics.Debug.WriteLine(string.Format("Ingresado {0***REMOVED*** al cache {1***REMOVED***.", key, duracion.ToString()));
-    ***REMOVED***
+                System.Diagnostics.Debug.WriteLine(string.Format("Ingresado {0} al cache {1}.", key, duracion.ToString()));
+        }
 
         /// <summary>
         /// Check for item in cache
@@ -68,7 +68,7 @@ namespace PlataformaTransparencia.Utilitarios
         internal static bool Exists(string key)
         {
             return _cache == null ? false : _cache.Get(key) != null;
-    ***REMOVED***
+        }
 
         /// <summary>
         /// Retrieve cached item
@@ -85,34 +85,34 @@ namespace PlataformaTransparencia.Utilitarios
                 if (!Exists(key)) {
                     value = default(T);
                     return false;
-            ***REMOVED***
+                }
                 if (_cache != null) {
                     value = (T)_cache.Get(key);
                     if (key != "dicTitulos") {
-                        System.Diagnostics.Debug.WriteLine(string.Format("Leido {0***REMOVED*** del cache.", key));
-                ***REMOVED***
-            ***REMOVED***
+                        System.Diagnostics.Debug.WriteLine(string.Format("Leido {0} del cache.", key));
+                    }
+                }
                 else {
                     value = value = default(T);
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             catch {
                 value = default(T);
                 return false;
-        ***REMOVED***
+            }
 
             return true;
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
 
     public enum DuracionCache
     {
         Corto = 10,
         Medio = 60,
         Largo = 60 * 3
-***REMOVED***
+    }
 
 
 
-***REMOVED***
+}

@@ -31,155 +31,155 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
   public partial class TransparenciaDB : LinqToDB.Data.DataConnection
   {
         //Inicio: Nuevas tablas perfil de entidad
-    public ITable<consulta_VinculacionIndicadoresPNDXEntidadesStp> VinculacionIndicadoresPNDXEntidadesStps0 { get { return this.GetTable<consulta_VinculacionIndicadoresPNDXEntidadesStp>(); ***REMOVED*** ***REMOVED***
-    public ITable<consulta_CatalogoEntidade> CatalogoEntidades { get { return this.GetTable<consulta_CatalogoEntidade>(); ***REMOVED*** ***REMOVED***
-    public ITable<Actor> Actors { get { return this.GetTable<Actor>(); ***REMOVED*** ***REMOVED***
-    public ITable<ActorXProyecto> ActorXProyectos { get { return this.GetTable<ActorXProyecto>(); ***REMOVED*** ***REMOVED***
-    public ITable<Asociacioncomentario> Asociacioncomentarios { get { return this.GetTable<Asociacioncomentario>(); ***REMOVED*** ***REMOVED***
-    public ITable<CatalogoOrganismoFinanciador> CatalogoOrganismoFinanciadors { get { return this.GetTable<CatalogoOrganismoFinanciador>(); ***REMOVED*** ***REMOVED***
-    public ITable<consulta_CatalogoTiempo> CatalogoTiempoes { get { return this.GetTable<consulta_CatalogoTiempo>(); ***REMOVED*** ***REMOVED***
-    public ITable<Comentario> Comentarios { get { return this.GetTable<Comentario>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwConsolidadoContratacionEmergencia> VwConsolidadoContratacionEmergencias { get { return this.GetTable<VwConsolidadoContratacionEmergencia>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwConsolidadoProcesosContratacionEmergencia> VwConsolidadoProcesosContratacionEmergencias { get { return this.GetTable<VwConsolidadoProcesosContratacionEmergencia>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwDetalleContratacionArticulosEmergencia> VwDetalleContratacionArticulosEmergencias { get { return this.GetTable<VwDetalleContratacionArticulosEmergencia>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwDetalleProcesosArticulosEmergencia> VwDetalleProcesosArticulosEmergencias { get { return this.GetTable<VwDetalleProcesosArticulosEmergencia>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwDetalleContratacionEmergencia> VwDetalleContratacionEmergencias { get { return this.GetTable<VwDetalleContratacionEmergencia>(); ***REMOVED*** ***REMOVED***
-    public ITable<DatosAdicionalesAprobacion> DatosAdicionalesAprobacions { get { return this.GetTable<DatosAdicionalesAprobacion>(); ***REMOVED*** ***REMOVED***
-    public ITable<DatosAdicionalesEjecutore> DatosAdicionalesEjecutores { get { return this.GetTable<DatosAdicionalesEjecutore>(); ***REMOVED*** ***REMOVED***
-    public ITable<EnteTerritorial> EnteTerritorials { get { return this.GetTable<EnteTerritorial>(); ***REMOVED*** ***REMOVED***
-    public ITable<Entregable> Entregables { get { return this.GetTable<Entregable>(); ***REMOVED*** ***REMOVED***
-    public ITable<EntidadesEjecutorasGesProy> EntidadesEjecutorasGesProys { get { return this.GetTable<EntidadesEjecutorasGesProy>(); ***REMOVED*** ***REMOVED***
-    public ITable<EsquemaFinanciacionProyecto> EsquemaFinanciacionProyectos { get { return this.GetTable<EsquemaFinanciacionProyecto>(); ***REMOVED*** ***REMOVED***
-    public ITable<Estado> Estados { get { return this.GetTable<Estado>(); ***REMOVED*** ***REMOVED***
-    public ITable<EstadoComentario> EstadoComentarios { get { return this.GetTable<EstadoComentario>(); ***REMOVED*** ***REMOVED***
-    public ITable<Etapa> Etapas { get { return this.GetTable<Etapa>(); ***REMOVED*** ***REMOVED***
-    public ITable<Fase> Fases { get { return this.GetTable<Fase>(); ***REMOVED*** ***REMOVED***
-    public ITable<Foto> Fotos { get { return this.GetTable<Foto>(); ***REMOVED*** ***REMOVED***
-    public ITable<FotoUsuario> FotoUsuarios { get { return this.GetTable<FotoUsuario>(); ***REMOVED*** ***REMOVED***
-    public ITable<Fuente> Fuentes { get { return this.GetTable<Fuente>(); ***REMOVED*** ***REMOVED***
-    public ITable<FuenteDeLosRecurso> FuenteDeLosRecursos { get { return this.GetTable<FuenteDeLosRecurso>(); ***REMOVED*** ***REMOVED***
-    public ITable<GastoXProgramasEmergencia> GastoXProgramasEmergencias { get { return this.GetTable<GastoXProgramasEmergencia>(); ***REMOVED*** ***REMOVED***
-    public ITable<GeneroUsuario> GeneroUsuarios { get { return this.GetTable<GeneroUsuario>(); ***REMOVED*** ***REMOVED***
-    public ITable<Georreferenciacion> Georreferenciacions { get { return this.GetTable<Georreferenciacion>(); ***REMOVED*** ***REMOVED***
-    public ITable<HistoriaEstado> HistoriaEstados { get { return this.GetTable<HistoriaEstado>(); ***REMOVED*** ***REMOVED***
-    public ITable<MedioMapaIUsuario> MedioMapaIUsuarios { get { return this.GetTable<MedioMapaIUsuario>(); ***REMOVED*** ***REMOVED***
-    public ITable<MetaIndicadorProducto> MetaIndicadorProductos { get { return this.GetTable<MetaIndicadorProducto>(); ***REMOVED*** ***REMOVED***
-    public ITable<ObjetivoEspecifico> ObjetivoEspecificos { get { return this.GetTable<ObjetivoEspecifico>(); ***REMOVED*** ***REMOVED***
-    public ITable<OrigenDato> OrigenDatos { get { return this.GetTable<OrigenDato>(); ***REMOVED*** ***REMOVED***
-    public ITable<ParametrizacionTitulo> ParametrizacionTitulos { get { return this.GetTable<ParametrizacionTitulo>(); ***REMOVED*** ***REMOVED***
-    public ITable<Producto> Productos { get { return this.GetTable<Producto>(); ***REMOVED*** ***REMOVED***
-    public ITable<Proyecto> Proyectos { get { return this.GetTable<Proyecto>(); ***REMOVED*** ***REMOVED***
-    public ITable<ProyectoOrganismoFinanciador> ProyectoOrganismoFinanciadors { get { return this.GetTable<ProyectoOrganismoFinanciador>(); ***REMOVED*** ***REMOVED***
-    public ITable<ProyectoXEntidadTerritorial> ProyectoXEntidadTerritorials { get { return this.GetTable<ProyectoXEntidadTerritorial>(); ***REMOVED*** ***REMOVED***
-    public ITable<Rol> Rols { get { return this.GetTable<Rol>(); ***REMOVED*** ***REMOVED***
-    public ITable<RolUsuario> RolUsuarios { get { return this.GetTable<RolUsuario>(); ***REMOVED*** ***REMOVED***
-    public ITable<SearchResultParam> SearchResultParams { get { return this.GetTable<SearchResultParam>(); ***REMOVED*** ***REMOVED***
-    public ITable<Sector> Sectors { get { return this.GetTable<Sector>(); ***REMOVED*** ***REMOVED***
-    public ITable<SeguimientoEsquemaFinanciacionProyecto> SeguimientoEsquemaFinanciacionProyectos { get { return this.GetTable<SeguimientoEsquemaFinanciacionProyecto>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwSubsidiosEmergenciaConsolidado> VwSubsidiosEmergenciaConsolidadoes { get { return this.GetTable<VwSubsidiosEmergenciaConsolidado>(); ***REMOVED*** ***REMOVED***
-    public ITable<SeguimientoMetaIndicadorProducto> SeguimientoMetaIndicadorProductos { get { return this.GetTable<SeguimientoMetaIndicadorProducto>(); ***REMOVED*** ***REMOVED***
-    public ITable<TipoComentario> TipoComentarios { get { return this.GetTable<TipoComentario>(); ***REMOVED*** ***REMOVED***
-    public ITable<UnidadMedida> UnidadMedidas { get { return this.GetTable<UnidadMedida>(); ***REMOVED*** ***REMOVED***
-    public ITable<Usuario> Usuarios { get { return this.GetTable<Usuario>(); ***REMOVED*** ***REMOVED***
-    public ITable<UsuarioPermiso> UsuarioPermisoes { get { return this.GetTable<UsuarioPermiso>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwComponentesActividade> VwComponentesActividades { get { return this.GetTable<VwComponentesActividade>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwContratosConsolidado> VwContratosConsolidados { get { return this.GetTable<VwContratosConsolidado>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwContratosDetalle> VwContratosDetalles { get { return this.GetTable<VwContratosDetalle>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwContratosXProyectoInvDetalle> VwContratosXProyectoInvDetalles { get { return this.GetTable<VwContratosXProyectoInvDetalle>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwContratosPerfilContratista> VwContratosPerfilContratistas { get { return this.GetTable<VwContratosPerfilContratista>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwContratosPerfilContratistaSinPrograma> VwContratosPerfilContratistaSinProgramas { get { return this.GetTable<VwContratosPerfilContratistaSinPrograma>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwContratosPerfilContratistaXAnio> VwContratosPerfilContratistaXAnios { get { return this.GetTable<VwContratosPerfilContratistaXAnio>(); ***REMOVED*** ***REMOVED***
-    public ITable<VWContratosXPresupuesto> VWContratosXPresupuestoes { get { return this.GetTable<VWContratosXPresupuesto>(); ***REMOVED*** ***REMOVED***
-    public ITable<consulta_VwContratosXEntidad> VwContratosXEntidads { get { return this.GetTable<consulta_VwContratosXEntidad>(); ***REMOVED*** ***REMOVED***
-    public ITable<consulta_VwContratosXProyectosInstitucionesAnio> VwContratosXProyectosInstitucionesAnios { get { return this.GetTable<consulta_VwContratosXProyectosInstitucionesAnio>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwEntidadEjecutora> VwEntidadEjecutoras { get { return this.GetTable<VwEntidadEjecutora>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwEstadoImagene> VwEstadoImagenes { get { return this.GetTable<VwEstadoImagene>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwEstadoProyectosDeptoInv> VwEstadoProyectosDeptoInvs { get { return this.GetTable<VwEstadoProyectosDeptoInv>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwEstadoProyectosInv> VwEstadoProyectosInvs { get { return this.GetTable<VwEstadoProyectosInv>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwFuenteFinanciacion> VwFuenteFinanciacions { get { return this.GetTable<VwFuenteFinanciacion>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwFuentesFinanciacion> VwFuentesFinanciacions2024 { get { return this.GetTable<VwFuentesFinanciacion>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwGaleriaEntidadesTerritorialesDepartamento> VwGaleriaEntidadesTerritorialesDepartamentos { get { return this.GetTable<VwGaleriaEntidadesTerritorialesDepartamento>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwGaleriaEntidadesTerritorialesMunicipio> VwGaleriaEntidadesTerritorialesMunicipios { get { return this.GetTable<VwGaleriaEntidadesTerritorialesMunicipio>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwInformacionGeneralPerfilLocalizacion> VwInformacionGeneralPerfilLocalizacions { get { return this.GetTable<VwInformacionGeneralPerfilLocalizacion>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwInformacionGeneralPerfilLocalizacionDepto> VwInformacionGeneralPerfilLocalizacionDeptos { get { return this.GetTable<VwInformacionGeneralPerfilLocalizacionDepto>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwInformacionGeneralPerfilSector> VwInformacionGeneralPerfilSectors { get { return this.GetTable<VwInformacionGeneralPerfilSector>(); ***REMOVED*** ***REMOVED***
-    public ITable<consulta_VwProcesosXProyectosInstitucionesAnio> VwProcesosXProyectosInstitucionesAnios { get { return this.GetTable<consulta_VwProcesosXProyectosInstitucionesAnio>(); ***REMOVED*** ***REMOVED***
-    public ITable<consulta_VwPresupuesto> VwPresupuestoes { get { return this.GetTable<consulta_VwPresupuesto>(); ***REMOVED*** ***REMOVED***
-    public ITable<consulta_VwPresupuestoHistorico> VwPresupuestoHistoricoes { get { return this.GetTable<consulta_VwPresupuestoHistorico>(); ***REMOVED*** ***REMOVED***
-    public ITable<consulta_VwPresupuestoXProyInv> VwPresupuestoXProyInvs { get { return this.GetTable<consulta_VwPresupuestoXProyInv>(); ***REMOVED*** ***REMOVED***
-    public ITable<consulta_VwPresupuesto> VwPresupuesto { get { return this.GetTable<consulta_VwPresupuesto>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwProcesosCanceladosEmergencia> VwProcesosCanceladosEmergencias { get { return this.GetTable<VwProcesosCanceladosEmergencia>(); ***REMOVED*** ***REMOVED***
-    public ITable<consulta_VwProcesosXInstitucionModalidad> VwProcesosXInstitucionModalidads { get { return this.GetTable<consulta_VwProcesosXInstitucionModalidad>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwProyectosAprobado> VwProyectosAprobados { get { return this.GetTable<VwProyectosAprobado>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwProyectosAprobadosInv> VwProyectosAprobadosInvs { get { return this.GetTable<VwProyectosAprobadosInv>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwSectorListadoPorDeptoInv> VwSectorListadoPorDeptoInvs { get { return this.GetTable<VwSectorListadoPorDeptoInv>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwSectorPerfilDeptoInv> VwSectorPerfilDeptoInvs { get { return this.GetTable<VwSectorPerfilDeptoInv>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwSectorProyectosDeptoInv> VwSectorProyectosDeptoInvs { get { return this.GetTable<VwSectorProyectosDeptoInv>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwSectorProyectosInv> VwSectorProyectosInvs { get { return this.GetTable<VwSectorProyectosInv>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwSeguimientoAvanceFisico> VwSeguimientoAvanceFisicoes { get { return this.GetTable<VwSeguimientoAvanceFisico>(); ***REMOVED*** ***REMOVED***
-    public ITable<VwTotalProcesosSinContratoEmergencia> VwTotalProcesosSinContratoEmergencias { get { return this.GetTable<VwTotalProcesosSinContratoEmergencia>(); ***REMOVED*** ***REMOVED***
-    public ITable<consulta_VinculacionPNDPresupuestoXEntidadStp> ConsultaVinculacionPNDPresupuestoXEntidadStp { get { return this.GetTable<consulta_VinculacionPNDPresupuestoXEntidadStp>(); ***REMOVED*** ***REMOVED***
+    public ITable<consulta_VinculacionIndicadoresPNDXEntidadesStp> VinculacionIndicadoresPNDXEntidadesStps0 { get { return this.GetTable<consulta_VinculacionIndicadoresPNDXEntidadesStp>(); } }
+    public ITable<consulta_CatalogoEntidade> CatalogoEntidades { get { return this.GetTable<consulta_CatalogoEntidade>(); } }
+    public ITable<Actor> Actors { get { return this.GetTable<Actor>(); } }
+    public ITable<ActorXProyecto> ActorXProyectos { get { return this.GetTable<ActorXProyecto>(); } }
+    public ITable<Asociacioncomentario> Asociacioncomentarios { get { return this.GetTable<Asociacioncomentario>(); } }
+    public ITable<CatalogoOrganismoFinanciador> CatalogoOrganismoFinanciadors { get { return this.GetTable<CatalogoOrganismoFinanciador>(); } }
+    public ITable<consulta_CatalogoTiempo> CatalogoTiempoes { get { return this.GetTable<consulta_CatalogoTiempo>(); } }
+    public ITable<Comentario> Comentarios { get { return this.GetTable<Comentario>(); } }
+    public ITable<VwConsolidadoContratacionEmergencia> VwConsolidadoContratacionEmergencias { get { return this.GetTable<VwConsolidadoContratacionEmergencia>(); } }
+    public ITable<VwConsolidadoProcesosContratacionEmergencia> VwConsolidadoProcesosContratacionEmergencias { get { return this.GetTable<VwConsolidadoProcesosContratacionEmergencia>(); } }
+    public ITable<VwDetalleContratacionArticulosEmergencia> VwDetalleContratacionArticulosEmergencias { get { return this.GetTable<VwDetalleContratacionArticulosEmergencia>(); } }
+    public ITable<VwDetalleProcesosArticulosEmergencia> VwDetalleProcesosArticulosEmergencias { get { return this.GetTable<VwDetalleProcesosArticulosEmergencia>(); } }
+    public ITable<VwDetalleContratacionEmergencia> VwDetalleContratacionEmergencias { get { return this.GetTable<VwDetalleContratacionEmergencia>(); } }
+    public ITable<DatosAdicionalesAprobacion> DatosAdicionalesAprobacions { get { return this.GetTable<DatosAdicionalesAprobacion>(); } }
+    public ITable<DatosAdicionalesEjecutore> DatosAdicionalesEjecutores { get { return this.GetTable<DatosAdicionalesEjecutore>(); } }
+    public ITable<EnteTerritorial> EnteTerritorials { get { return this.GetTable<EnteTerritorial>(); } }
+    public ITable<Entregable> Entregables { get { return this.GetTable<Entregable>(); } }
+    public ITable<EntidadesEjecutorasGesProy> EntidadesEjecutorasGesProys { get { return this.GetTable<EntidadesEjecutorasGesProy>(); } }
+    public ITable<EsquemaFinanciacionProyecto> EsquemaFinanciacionProyectos { get { return this.GetTable<EsquemaFinanciacionProyecto>(); } }
+    public ITable<Estado> Estados { get { return this.GetTable<Estado>(); } }
+    public ITable<EstadoComentario> EstadoComentarios { get { return this.GetTable<EstadoComentario>(); } }
+    public ITable<Etapa> Etapas { get { return this.GetTable<Etapa>(); } }
+    public ITable<Fase> Fases { get { return this.GetTable<Fase>(); } }
+    public ITable<Foto> Fotos { get { return this.GetTable<Foto>(); } }
+    public ITable<FotoUsuario> FotoUsuarios { get { return this.GetTable<FotoUsuario>(); } }
+    public ITable<Fuente> Fuentes { get { return this.GetTable<Fuente>(); } }
+    public ITable<FuenteDeLosRecurso> FuenteDeLosRecursos { get { return this.GetTable<FuenteDeLosRecurso>(); } }
+    public ITable<GastoXProgramasEmergencia> GastoXProgramasEmergencias { get { return this.GetTable<GastoXProgramasEmergencia>(); } }
+    public ITable<GeneroUsuario> GeneroUsuarios { get { return this.GetTable<GeneroUsuario>(); } }
+    public ITable<Georreferenciacion> Georreferenciacions { get { return this.GetTable<Georreferenciacion>(); } }
+    public ITable<HistoriaEstado> HistoriaEstados { get { return this.GetTable<HistoriaEstado>(); } }
+    public ITable<MedioMapaIUsuario> MedioMapaIUsuarios { get { return this.GetTable<MedioMapaIUsuario>(); } }
+    public ITable<MetaIndicadorProducto> MetaIndicadorProductos { get { return this.GetTable<MetaIndicadorProducto>(); } }
+    public ITable<ObjetivoEspecifico> ObjetivoEspecificos { get { return this.GetTable<ObjetivoEspecifico>(); } }
+    public ITable<OrigenDato> OrigenDatos { get { return this.GetTable<OrigenDato>(); } }
+    public ITable<ParametrizacionTitulo> ParametrizacionTitulos { get { return this.GetTable<ParametrizacionTitulo>(); } }
+    public ITable<Producto> Productos { get { return this.GetTable<Producto>(); } }
+    public ITable<Proyecto> Proyectos { get { return this.GetTable<Proyecto>(); } }
+    public ITable<ProyectoOrganismoFinanciador> ProyectoOrganismoFinanciadors { get { return this.GetTable<ProyectoOrganismoFinanciador>(); } }
+    public ITable<ProyectoXEntidadTerritorial> ProyectoXEntidadTerritorials { get { return this.GetTable<ProyectoXEntidadTerritorial>(); } }
+    public ITable<Rol> Rols { get { return this.GetTable<Rol>(); } }
+    public ITable<RolUsuario> RolUsuarios { get { return this.GetTable<RolUsuario>(); } }
+    public ITable<SearchResultParam> SearchResultParams { get { return this.GetTable<SearchResultParam>(); } }
+    public ITable<Sector> Sectors { get { return this.GetTable<Sector>(); } }
+    public ITable<SeguimientoEsquemaFinanciacionProyecto> SeguimientoEsquemaFinanciacionProyectos { get { return this.GetTable<SeguimientoEsquemaFinanciacionProyecto>(); } }
+    public ITable<VwSubsidiosEmergenciaConsolidado> VwSubsidiosEmergenciaConsolidadoes { get { return this.GetTable<VwSubsidiosEmergenciaConsolidado>(); } }
+    public ITable<SeguimientoMetaIndicadorProducto> SeguimientoMetaIndicadorProductos { get { return this.GetTable<SeguimientoMetaIndicadorProducto>(); } }
+    public ITable<TipoComentario> TipoComentarios { get { return this.GetTable<TipoComentario>(); } }
+    public ITable<UnidadMedida> UnidadMedidas { get { return this.GetTable<UnidadMedida>(); } }
+    public ITable<Usuario> Usuarios { get { return this.GetTable<Usuario>(); } }
+    public ITable<UsuarioPermiso> UsuarioPermisoes { get { return this.GetTable<UsuarioPermiso>(); } }
+    public ITable<VwComponentesActividade> VwComponentesActividades { get { return this.GetTable<VwComponentesActividade>(); } }
+    public ITable<VwContratosConsolidado> VwContratosConsolidados { get { return this.GetTable<VwContratosConsolidado>(); } }
+    public ITable<VwContratosDetalle> VwContratosDetalles { get { return this.GetTable<VwContratosDetalle>(); } }
+    public ITable<VwContratosXProyectoInvDetalle> VwContratosXProyectoInvDetalles { get { return this.GetTable<VwContratosXProyectoInvDetalle>(); } }
+    public ITable<VwContratosPerfilContratista> VwContratosPerfilContratistas { get { return this.GetTable<VwContratosPerfilContratista>(); } }
+    public ITable<VwContratosPerfilContratistaSinPrograma> VwContratosPerfilContratistaSinProgramas { get { return this.GetTable<VwContratosPerfilContratistaSinPrograma>(); } }
+    public ITable<VwContratosPerfilContratistaXAnio> VwContratosPerfilContratistaXAnios { get { return this.GetTable<VwContratosPerfilContratistaXAnio>(); } }
+    public ITable<VWContratosXPresupuesto> VWContratosXPresupuestoes { get { return this.GetTable<VWContratosXPresupuesto>(); } }
+    public ITable<consulta_VwContratosXEntidad> VwContratosXEntidads { get { return this.GetTable<consulta_VwContratosXEntidad>(); } }
+    public ITable<consulta_VwContratosXProyectosInstitucionesAnio> VwContratosXProyectosInstitucionesAnios { get { return this.GetTable<consulta_VwContratosXProyectosInstitucionesAnio>(); } }
+    public ITable<VwEntidadEjecutora> VwEntidadEjecutoras { get { return this.GetTable<VwEntidadEjecutora>(); } }
+    public ITable<VwEstadoImagene> VwEstadoImagenes { get { return this.GetTable<VwEstadoImagene>(); } }
+    public ITable<VwEstadoProyectosDeptoInv> VwEstadoProyectosDeptoInvs { get { return this.GetTable<VwEstadoProyectosDeptoInv>(); } }
+    public ITable<VwEstadoProyectosInv> VwEstadoProyectosInvs { get { return this.GetTable<VwEstadoProyectosInv>(); } }
+    public ITable<VwFuenteFinanciacion> VwFuenteFinanciacions { get { return this.GetTable<VwFuenteFinanciacion>(); } }
+    public ITable<VwFuentesFinanciacion> VwFuentesFinanciacions2024 { get { return this.GetTable<VwFuentesFinanciacion>(); } }
+    public ITable<VwGaleriaEntidadesTerritorialesDepartamento> VwGaleriaEntidadesTerritorialesDepartamentos { get { return this.GetTable<VwGaleriaEntidadesTerritorialesDepartamento>(); } }
+    public ITable<VwGaleriaEntidadesTerritorialesMunicipio> VwGaleriaEntidadesTerritorialesMunicipios { get { return this.GetTable<VwGaleriaEntidadesTerritorialesMunicipio>(); } }
+    public ITable<VwInformacionGeneralPerfilLocalizacion> VwInformacionGeneralPerfilLocalizacions { get { return this.GetTable<VwInformacionGeneralPerfilLocalizacion>(); } }
+    public ITable<VwInformacionGeneralPerfilLocalizacionDepto> VwInformacionGeneralPerfilLocalizacionDeptos { get { return this.GetTable<VwInformacionGeneralPerfilLocalizacionDepto>(); } }
+    public ITable<VwInformacionGeneralPerfilSector> VwInformacionGeneralPerfilSectors { get { return this.GetTable<VwInformacionGeneralPerfilSector>(); } }
+    public ITable<consulta_VwProcesosXProyectosInstitucionesAnio> VwProcesosXProyectosInstitucionesAnios { get { return this.GetTable<consulta_VwProcesosXProyectosInstitucionesAnio>(); } }
+    public ITable<consulta_VwPresupuesto> VwPresupuestoes { get { return this.GetTable<consulta_VwPresupuesto>(); } }
+    public ITable<consulta_VwPresupuestoHistorico> VwPresupuestoHistoricoes { get { return this.GetTable<consulta_VwPresupuestoHistorico>(); } }
+    public ITable<consulta_VwPresupuestoXProyInv> VwPresupuestoXProyInvs { get { return this.GetTable<consulta_VwPresupuestoXProyInv>(); } }
+    public ITable<consulta_VwPresupuesto> VwPresupuesto { get { return this.GetTable<consulta_VwPresupuesto>(); } }
+    public ITable<VwProcesosCanceladosEmergencia> VwProcesosCanceladosEmergencias { get { return this.GetTable<VwProcesosCanceladosEmergencia>(); } }
+    public ITable<consulta_VwProcesosXInstitucionModalidad> VwProcesosXInstitucionModalidads { get { return this.GetTable<consulta_VwProcesosXInstitucionModalidad>(); } }
+    public ITable<VwProyectosAprobado> VwProyectosAprobados { get { return this.GetTable<VwProyectosAprobado>(); } }
+    public ITable<VwProyectosAprobadosInv> VwProyectosAprobadosInvs { get { return this.GetTable<VwProyectosAprobadosInv>(); } }
+    public ITable<VwSectorListadoPorDeptoInv> VwSectorListadoPorDeptoInvs { get { return this.GetTable<VwSectorListadoPorDeptoInv>(); } }
+    public ITable<VwSectorPerfilDeptoInv> VwSectorPerfilDeptoInvs { get { return this.GetTable<VwSectorPerfilDeptoInv>(); } }
+    public ITable<VwSectorProyectosDeptoInv> VwSectorProyectosDeptoInvs { get { return this.GetTable<VwSectorProyectosDeptoInv>(); } }
+    public ITable<VwSectorProyectosInv> VwSectorProyectosInvs { get { return this.GetTable<VwSectorProyectosInv>(); } }
+    public ITable<VwSeguimientoAvanceFisico> VwSeguimientoAvanceFisicoes { get { return this.GetTable<VwSeguimientoAvanceFisico>(); } }
+    public ITable<VwTotalProcesosSinContratoEmergencia> VwTotalProcesosSinContratoEmergencias { get { return this.GetTable<VwTotalProcesosSinContratoEmergencia>(); } }
+    public ITable<consulta_VinculacionPNDPresupuestoXEntidadStp> ConsultaVinculacionPNDPresupuestoXEntidadStp { get { return this.GetTable<consulta_VinculacionPNDPresupuestoXEntidadStp>(); } }
 
     public TransparenciaDB()
     {
       InitDataContext();
       InitMappingSchema();
-***REMOVED***
+    }
 
     public TransparenciaDB(string configuration)
         : base(configuration)
     {
       InitDataContext();
       InitMappingSchema();
-***REMOVED***
+    }
 
     public TransparenciaDB(LinqToDbConnectionOptions options)
         : base(options)
     {
       InitDataContext();
       InitMappingSchema();
-***REMOVED***
+    }
 
     partial void InitDataContext();
     partial void InitMappingSchema();
-  ***REMOVED***
+  }
 
 
     [Table(Schema = "consulta", Name = "Vinculacion_IndicadoresPND_x_Entidades_STP")]
     public partial class consulta_VinculacionIndicadoresPNDXEntidadesStp
     {
-        [Column("codEjeEstrategico"), Nullable] public int? CodEjeEstrategico { get; set; ***REMOVED*** // int
-        [Column("nombreEjeEstrategico"), Nullable] public string NombreEjeEstrategico { get; set; ***REMOVED*** // varchar(255)
-        [Column("descripcionEjeEstrategico"), Nullable] public string DescripcionEjeEstrategico { get; set; ***REMOVED*** // varchar(255)
-        [Column("codObjetivoEstrategico"), Nullable] public int? CodObjetivoEstrategico { get; set; ***REMOVED*** // int
-        [Column("nombreObjetivoEstrategico"), Nullable] public string NombreObjetivoEstrategico { get; set; ***REMOVED*** // varchar(255)
-        [Column("descripcionObjetivoEstrategico"), Nullable] public string DescripcionObjetivoEstrategico { get; set; ***REMOVED*** // varchar(255)
-        [Column("codObjetivoEspecifico"), Nullable] public int? CodObjetivoEspecifico { get; set; ***REMOVED*** // int
-        [Column("nombreObjetivoEspecifico"), Nullable] public string NombreObjetivoEspecifico { get; set; ***REMOVED*** // varchar(255)
-        [Column("idIndicador"), NotNull] public long IdIndicador { get; set; ***REMOVED*** // bigint
-        [Column("indicador"), Nullable] public string Indicador { get; set; ***REMOVED*** // varchar(255)
-        [Column("Unidad/Escala"), Nullable] public string UnidadEscala { get; set; ***REMOVED*** // varchar(255)
-        [Column("añoBaseIndicador"), Nullable] public double? AñoBaseIndicador { get; set; ***REMOVED*** // float
-        [Column("valorInidicador"), Nullable] public double? ValorInidicador { get; set; ***REMOVED*** // float
-        [Column("Meta 2023"), Nullable] public double? Meta2023 { get; set; ***REMOVED*** // float
-        [Column("Meta 2030"), Nullable] public double? Meta2030 { get; set; ***REMOVED*** // float
-        [Column("avance"), Nullable] public double? Avance { get; set; ***REMOVED*** // float
-        [Column("codNivelEntidad"), Nullable] public string CodNivelEntidad { get; set; ***REMOVED*** // varchar(255)
-        [Column("nombreEntidad"), Nullable] public string NombreEntidad { get; set; ***REMOVED*** // varchar(255)
-        [Column("fuente"), Nullable] public string Fuente { get; set; ***REMOVED*** // varchar(255)
-***REMOVED***
+        [Column("codEjeEstrategico"), Nullable] public int? CodEjeEstrategico { get; set; } // int
+        [Column("nombreEjeEstrategico"), Nullable] public string NombreEjeEstrategico { get; set; } // varchar(255)
+        [Column("descripcionEjeEstrategico"), Nullable] public string DescripcionEjeEstrategico { get; set; } // varchar(255)
+        [Column("codObjetivoEstrategico"), Nullable] public int? CodObjetivoEstrategico { get; set; } // int
+        [Column("nombreObjetivoEstrategico"), Nullable] public string NombreObjetivoEstrategico { get; set; } // varchar(255)
+        [Column("descripcionObjetivoEstrategico"), Nullable] public string DescripcionObjetivoEstrategico { get; set; } // varchar(255)
+        [Column("codObjetivoEspecifico"), Nullable] public int? CodObjetivoEspecifico { get; set; } // int
+        [Column("nombreObjetivoEspecifico"), Nullable] public string NombreObjetivoEspecifico { get; set; } // varchar(255)
+        [Column("idIndicador"), NotNull] public long IdIndicador { get; set; } // bigint
+        [Column("indicador"), Nullable] public string Indicador { get; set; } // varchar(255)
+        [Column("Unidad/Escala"), Nullable] public string UnidadEscala { get; set; } // varchar(255)
+        [Column("añoBaseIndicador"), Nullable] public double? AñoBaseIndicador { get; set; } // float
+        [Column("valorInidicador"), Nullable] public double? ValorInidicador { get; set; } // float
+        [Column("Meta 2023"), Nullable] public double? Meta2023 { get; set; } // float
+        [Column("Meta 2030"), Nullable] public double? Meta2030 { get; set; } // float
+        [Column("avance"), Nullable] public double? Avance { get; set; } // float
+        [Column("codNivelEntidad"), Nullable] public string CodNivelEntidad { get; set; } // varchar(255)
+        [Column("nombreEntidad"), Nullable] public string NombreEntidad { get; set; } // varchar(255)
+        [Column("fuente"), Nullable] public string Fuente { get; set; } // varchar(255)
+    }
 
  
   [Table(Schema = "dbo", Name = "Actividad")]
   public partial class Actividad
   {
-    [PrimaryKey, NotNull] public int IdActividad { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdProducto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string DescripcionActividad { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
-    [Column, Nullable] public string CodigoActividad { get; set; ***REMOVED*** // varchar(10)
+    [PrimaryKey, NotNull] public int IdActividad { get; set; } // int
+    [Column, NotNull] public int IdProducto { get; set; } // int
+    [Column, NotNull] public string DescripcionActividad { get; set; } // varchar(max)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)
+    [Column, Nullable] public string CodigoActividad { get; set; } // varchar(10)
 
     #region Associations
 
@@ -187,20 +187,20 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_ActividadXProducto
     /// </summary>
     [Association(ThisKey = "IdProducto", OtherKey = "IdProducto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_ActividadXProducto", BackReferenceName = "FkActividadXProductoes")]
-    public Producto FkActividadXProducto { get; set; ***REMOVED***
+    public Producto FkActividadXProducto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Actor")]
   public partial class Actor
   {
-    [PrimaryKey(1), NotNull] public string IdActor { get; set; ***REMOVED*** // varchar(100)
-    [Column, NotNull] public string NombreActor { get; set; ***REMOVED*** // varchar(200)
-    [PrimaryKey(2), NotNull] public int IDRol { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string ModificadoPor { get; set; ***REMOVED*** // varchar(30)
+    [PrimaryKey(1), NotNull] public string IdActor { get; set; } // varchar(100)
+    [Column, NotNull] public string NombreActor { get; set; } // varchar(200)
+    [PrimaryKey(2), NotNull] public int IDRol { get; set; } // int
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string ModificadoPor { get; set; } // varchar(30)
 
     #region Associations
 
@@ -208,26 +208,26 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_ActorXProyecto_Actor_BackReference
     /// </summary>
     [Association(ThisKey = "IdActor, IDRol", OtherKey = "IDActor, IDRol", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<ActorXProyecto> ActorXProyectos { get; set; ***REMOVED***
+    public IEnumerable<ActorXProyecto> ActorXProyectos { get; set; }
 
     /// <summary>
     /// FK_ActorXRol
     /// </summary>
     [Association(ThisKey = "IDRol", OtherKey = "IdRol", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_ActorXRol", BackReferenceName = "ActorXRols")]
-    public Rol ActorXRol { get; set; ***REMOVED***
+    public Rol ActorXRol { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "ActorXProyecto")]
   public partial class ActorXProyecto
   {
-    [PrimaryKey(1), NotNull] public string IDActor { get; set; ***REMOVED*** // varchar(100)
-    [PrimaryKey(2), NotNull] public int IDProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string ModificadoPor { get; set; ***REMOVED*** // varchar(30)
-    [PrimaryKey(3), NotNull] public int IDRol { get; set; ***REMOVED*** // int
+    [PrimaryKey(1), NotNull] public string IDActor { get; set; } // varchar(100)
+    [PrimaryKey(2), NotNull] public int IDProyecto { get; set; } // int
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string ModificadoPor { get; set; } // varchar(30)
+    [PrimaryKey(3), NotNull] public int IDRol { get; set; } // int
 
     #region Associations
 
@@ -235,40 +235,40 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_ActorXProyecto_Actor
     /// </summary>
     [Association(ThisKey = "IDActor, IDRol", OtherKey = "IdActor, IDRol", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_ActorXProyecto_Actor", BackReferenceName = "ActorXProyectoes")]
-    public Actor Actor { get; set; ***REMOVED***
+    public Actor Actor { get; set; }
 
     /// <summary>
     /// FK_ActorXProyecto_Proyecto
     /// </summary>
     [Association(ThisKey = "IDProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_ActorXProyecto_Proyecto", BackReferenceName = "ActorXProyectoes")]
-    public Proyecto Proyecto { get; set; ***REMOVED***
+    public Proyecto Proyecto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Alertas")]
   public partial class Alerta
   {
-    [PrimaryKey, NotNull] public string NombreAlerta { get; set; ***REMOVED*** // varchar(75)
-    [Column, NotNull] public bool Habilitada { get; set; ***REMOVED*** // bit
-  ***REMOVED***
+    [PrimaryKey, NotNull] public string NombreAlerta { get; set; } // varchar(75)
+    [Column, NotNull] public bool Habilitada { get; set; } // bit
+  }
 
   [Table(Schema = "dbo", Name = "Asociacioncomentario")]
   public partial class Asociacioncomentario
   {
-    [PrimaryKey, Identity] public int IdAsociacion { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string TipoAsociacion { get; set; ***REMOVED*** // varchar(100)
-  ***REMOVED***
+    [PrimaryKey, Identity] public int IdAsociacion { get; set; } // int
+    [Column, NotNull] public string TipoAsociacion { get; set; } // varchar(100)
+  }
 
   [Table(Schema = "dbo", Name = "CabeceraMunicipio")]
   public partial class CabeceraMunicipio
   {
-    [Column, Nullable] public string DEPARTAMENTO { get; set; ***REMOVED*** // nvarchar(4000)
-    [Column, NotNull] public string MUNICIPIO { get; set; ***REMOVED*** // nvarchar(4000)
-    [Column, NotNull] public decimal Latitud { get; set; ***REMOVED*** // decimal(18, 10)
-    [Column, NotNull] public decimal LONGITUD { get; set; ***REMOVED*** // decimal(18, 10)
-    [PrimaryKey, NotNull] public string CodigoDane { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public SqlGeography PuntoUbicacion { get; set; ***REMOVED*** // geography
+    [Column, Nullable] public string DEPARTAMENTO { get; set; } // nvarchar(4000)
+    [Column, NotNull] public string MUNICIPIO { get; set; } // nvarchar(4000)
+    [Column, NotNull] public decimal Latitud { get; set; } // decimal(18, 10)
+    [Column, NotNull] public decimal LONGITUD { get; set; } // decimal(18, 10)
+    [PrimaryKey, NotNull] public string CodigoDane { get; set; } // varchar(10)
+    [Column, Nullable] public SqlGeography PuntoUbicacion { get; set; } // geography
 
     #region Associations
 
@@ -276,22 +276,22 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_CabeceraMunicipio_EnteTerritorial
     /// </summary>
     [Association(ThisKey = "CodigoDane", OtherKey = "IdMunicipio", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.OneToOne, KeyName = "FK_CabeceraMunicipio_EnteTerritorial", BackReferenceName = "CabeceraMunicipio")]
-    public EnteTerritorial EnteTerritorial { get; set; ***REMOVED***
+    public EnteTerritorial EnteTerritorial { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "CampoOProyecto")]
   public partial class CampoOProyecto
   {
-    [PrimaryKey(1), NotNull] public string IdCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
+    [PrimaryKey(1), NotNull] public string IdCampoOProyecto { get; set; } // nvarchar(50)
     /// <summary>
     /// Titulo Minero o Pozo Petrolifero
     /// </summary>
-    [PrimaryKey(2), NotNull] public string IdTipoCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
-    [Column, NotNull] public string NombreCampoOProyecto { get; set; ***REMOVED*** // varchar(250)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey(2), NotNull] public string IdTipoCampoOProyecto { get; set; } // nvarchar(50)
+    [Column, NotNull] public string NombreCampoOProyecto { get; set; } // varchar(250)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -299,34 +299,34 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Liquidacion_CampoOProyecto_BackReference
     /// </summary>
     [Association(ThisKey = "IdCampoOProyecto, IdTipoCampoOProyecto", OtherKey = "IdCampoOProyecto, IdTipoCampoOProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Liquidacion> Liquidacions { get; set; ***REMOVED***
+    public IEnumerable<Liquidacion> Liquidacions { get; set; }
 
     /// <summary>
     /// FK_Produccion_CampoOProyecto_BackReference
     /// </summary>
     [Association(ThisKey = "IdCampoOProyecto, IdTipoCampoOProyecto", OtherKey = "IdCampoOProyecto, IdTipoCampoOProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Produccion> Produccions { get; set; ***REMOVED***
+    public IEnumerable<Produccion> Produccions { get; set; }
 
     /// <summary>
     /// FK_CampoOProyecto_TipoCampoOProyecto
     /// </summary>
     [Association(ThisKey = "IdTipoCampoOProyecto", OtherKey = "IdTipoCampoOProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_CampoOProyecto_TipoCampoOProyecto", BackReferenceName = "CampoOProyectoes")]
-    public TipoCampoOProyecto TipoCampoOProyecto { get; set; ***REMOVED***
+    public TipoCampoOProyecto TipoCampoOProyecto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "CampoOProyectoFiscalizacion")]
   public partial class CampoOProyectoFiscalizacion
   {
-    [PrimaryKey(1), NotNull] public string IdCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
+    [PrimaryKey(1), NotNull] public string IdCampoOProyecto { get; set; } // nvarchar(50)
     /// <summary>
     /// Titulo Minero o Pozo Petrolifero
     /// </summary>
-    [PrimaryKey(2), NotNull] public string IdTipoCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
-    [Column, NotNull] public string NombreCampoOProyecto { get; set; ***REMOVED*** // varchar(250)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey(2), NotNull] public string IdTipoCampoOProyecto { get; set; } // nvarchar(50)
+    [Column, NotNull] public string NombreCampoOProyecto { get; set; } // varchar(250)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -334,43 +334,43 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_EstadoJuridicoCampoOProyecto_CampoOProyectoFiscalizacion_BackReference
     /// </summary>
     [Association(ThisKey = "IdCampoOProyecto, IdTipoCampoOProyecto", OtherKey = "IdCampoOProyecto, IdTipoCampoOProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<EstadoJuridicoCampoOProyecto> EstadoJuridicoCampoOProyectos { get; set; ***REMOVED***
+    public IEnumerable<EstadoJuridicoCampoOProyecto> EstadoJuridicoCampoOProyectos { get; set; }
 
     /// <summary>
     /// FK_EtapaCampoOProyecto_CampoOProyectoFiscalizacion_BackReference
     /// </summary>
     [Association(ThisKey = "IdCampoOProyecto, IdTipoCampoOProyecto", OtherKey = "IdCampoOProyecto, IdTipoCampoOProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<EtapaCampoOProyecto> EtapaCampoOProyectos { get; set; ***REMOVED***
+    public IEnumerable<EtapaCampoOProyecto> EtapaCampoOProyectos { get; set; }
 
     /// <summary>
     /// FK_Fiscalizacion_CampoOProyectoFiscalizacion_BackReference
     /// </summary>
     [Association(ThisKey = "IdCampoOProyecto, IdTipoCampoOProyecto", OtherKey = "IdCampoOProyecto, IdTipoCampoOProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Fiscalizacion> Fiscalizacions { get; set; ***REMOVED***
+    public IEnumerable<Fiscalizacion> Fiscalizacions { get; set; }
 
     /// <summary>
     /// FK_CampoOProyectoFiscalizacion_TipoCampoOProyecto
     /// </summary>
     [Association(ThisKey = "IdTipoCampoOProyecto", OtherKey = "IdTipoCampoOProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_CampoOProyectoFiscalizacion_TipoCampoOProyecto", BackReferenceName = "CampoOProyectoFiscalizacions")]
-    public TipoCampoOProyecto TipoCampoOProyecto { get; set; ***REMOVED***
+    public TipoCampoOProyecto TipoCampoOProyecto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "CatalogoOrganismoFinanciador", IsView = true)]
   public partial class CatalogoOrganismoFinanciador
   {
-    [Column, NotNull] public string IdOrganismoFinanciador { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public string OrganismoFinanciador { get; set; ***REMOVED*** // varchar(200)
-  ***REMOVED***
+    [Column, NotNull] public string IdOrganismoFinanciador { get; set; } // varchar(30)
+    [Column, NotNull] public string OrganismoFinanciador { get; set; } // varchar(200)
+  }
 
     [Table(Schema = "consulta", Name = "CatalogoOrganismoFinanciador")]
     public partial class consulta_CatalogoOrganismoFinanciador
     {
-        [PrimaryKey, NotNull] public int CodigoOrganismoFinanciador { get; set; ***REMOVED*** // int
-        [Column, Nullable] public string OrganismoFinanciador { get; set; ***REMOVED*** // varchar(500)
-        [Column, Nullable] public string UsuarioCargue { get; set; ***REMOVED*** // varchar(100)
-        [Column, Nullable] public DateTime? FechaModificacion { get; set; ***REMOVED*** // datetime
+        [PrimaryKey, NotNull] public int CodigoOrganismoFinanciador { get; set; } // int
+        [Column, Nullable] public string OrganismoFinanciador { get; set; } // varchar(500)
+        [Column, Nullable] public string UsuarioCargue { get; set; } // varchar(100)
+        [Column, Nullable] public DateTime? FechaModificacion { get; set; } // datetime
 
         #region Associations
 
@@ -378,22 +378,22 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         /// FK_OrganismoFinanciador_CatLineaPresupuestal_BackReference
         /// </summary>
         [Association(ThisKey = "CodigoOrganismoFinanciador", OtherKey = "CodigoOrganismoFinanciador", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-        public IEnumerable<consulta_CatalogoLineaPresupuestal> OrganismoFinanciadorCatLineaPresupuestals { get; set; ***REMOVED***
+        public IEnumerable<consulta_CatalogoLineaPresupuestal> OrganismoFinanciadorCatLineaPresupuestals { get; set; }
 
         #endregion
-***REMOVED***
+    }
 
     [Table(Schema = "consulta", Name = "CatalogoEntidades")]
     public partial class consulta_CatalogoEntidade
     {
-        [PrimaryKey, NotNull] public string CodigoInstitucion { get; set; ***REMOVED*** // varchar(30)
-        [Column, Nullable] public string Institucion { get; set; ***REMOVED*** // varchar(500)
-        [Column, NotNull] public string CodigoCapitulo { get; set; ***REMOVED*** // varchar(30)
-        [Column, Nullable] public string Capitulo { get; set; ***REMOVED*** // varchar(500)
-        [Column, NotNull] public string CodigoSubCapitulo { get; set; ***REMOVED*** // varchar(30)
-        [Column, Nullable] public string SubCapitulo { get; set; ***REMOVED*** // varchar(500)
-        [Column, Nullable] public string UsuarioCargue { get; set; ***REMOVED*** // varchar(100)
-        [Column, Nullable] public DateTime? FechaModificacion { get; set; ***REMOVED*** // datetime
+        [PrimaryKey, NotNull] public string CodigoInstitucion { get; set; } // varchar(30)
+        [Column, Nullable] public string Institucion { get; set; } // varchar(500)
+        [Column, NotNull] public string CodigoCapitulo { get; set; } // varchar(30)
+        [Column, Nullable] public string Capitulo { get; set; } // varchar(500)
+        [Column, NotNull] public string CodigoSubCapitulo { get; set; } // varchar(30)
+        [Column, Nullable] public string SubCapitulo { get; set; } // varchar(500)
+        [Column, Nullable] public string UsuarioCargue { get; set; } // varchar(100)
+        [Column, Nullable] public DateTime? FechaModificacion { get; set; } // datetime
 
         #region Associations
 
@@ -401,18 +401,18 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         /// FK_CatEntidades_CatLineaPresupuestal_BackReference
         /// </summary>
         [Association(ThisKey = "CodigoInstitucion", OtherKey = "CodigoInstitucion", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-        public IEnumerable<consulta_CatalogoLineaPresupuestal> CatEntidadesCatLineaPresupuestals { get; set; ***REMOVED***
+        public IEnumerable<consulta_CatalogoLineaPresupuestal> CatEntidadesCatLineaPresupuestals { get; set; }
 
         #endregion
-***REMOVED***
+    }
 
     [Table(Schema = "consulta", Name = "CatalogoFuenteFinanciamiento")]
     public partial class consulta_CatalogoFuenteFinanciamiento
     {
-        [PrimaryKey, NotNull] public int CodigoFuenteFinanciamiento { get; set; ***REMOVED*** // int
-        [Column, Nullable] public string FuenteFinanciamiento { get; set; ***REMOVED*** // varchar(500)
-        [Column, Nullable] public string UsuarioCargue { get; set; ***REMOVED*** // varchar(100)
-        [Column, Nullable] public DateTime? FechaModificacion { get; set; ***REMOVED*** // datetime
+        [PrimaryKey, NotNull] public int CodigoFuenteFinanciamiento { get; set; } // int
+        [Column, Nullable] public string FuenteFinanciamiento { get; set; } // varchar(500)
+        [Column, Nullable] public string UsuarioCargue { get; set; } // varchar(100)
+        [Column, Nullable] public DateTime? FechaModificacion { get; set; } // datetime
 
         #region Associations
 
@@ -420,47 +420,47 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         /// FK_FuenteFinanciamiento_CatLineaPresupuestal_BackReference
         /// </summary>
         [Association(ThisKey = "CodigoFuenteFinanciamiento", OtherKey = "CodigoFuenteFinanciamiento", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-        public IEnumerable<consulta_CatalogoLineaPresupuestal> FuenteFinanciamientoCatLineaPresupuestals { get; set; ***REMOVED***
+        public IEnumerable<consulta_CatalogoLineaPresupuestal> FuenteFinanciamientoCatLineaPresupuestals { get; set; }
 
         #endregion
-***REMOVED***
+    }
 
     [Table(Schema = "consulta", Name = "CatalogoLineaPresupuestal")]
     public partial class consulta_CatalogoLineaPresupuestal
     {
-        [PrimaryKey, Identity] public int Id { get; set; ***REMOVED*** // int
-        [Column, NotNull] public string CodigoNegocio { get; set; ***REMOVED*** // varchar(max)
-        [Column, NotNull] public string CodigoNegocioTransaccional { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string CodigoSeccion { get; set; ***REMOVED*** // varchar(max)
-        [Column, Nullable] public string Seccion { get; set; ***REMOVED*** // varchar(max)
-        [Column, NotNull] public string CodigoInstitucion { get; set; ***REMOVED*** // varchar(30)
-        [Column, NotNull] public string CodigoPrograma { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string Programa { get; set; ***REMOVED*** // varchar(max)
-        [Column, NotNull] public string CodigoProducto { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string Producto { get; set; ***REMOVED*** // varchar(max)
-        [Column, NotNull] public string CodigoProyecto { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string Proyecto { get; set; ***REMOVED*** // varchar(max)
-        [Column, NotNull] public string CodigoActividadObra { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string NombreActividadObra { get; set; ***REMOVED*** // varchar(max)
-        [Column, Nullable] public string DescripcionActividadObra { get; set; ***REMOVED*** // varchar(max)
-        [Column, NotNull] public int CodigoOrganismoFinanciador { get; set; ***REMOVED*** // int
-        [Column, NotNull] public int CodigoFuenteFinanciamiento { get; set; ***REMOVED*** // int
-        [Column, NotNull] public string CodigoFuenteEspecifica { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string FuenteEspecifica { get; set; ***REMOVED*** // varchar(max)
-        [Column, NotNull] public string CodigoFinalidad { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string Finalidad { get; set; ***REMOVED*** // varchar(max)
-        [Column, NotNull] public string CodigoFuncion { get; set; ***REMOVED*** // varchar(30)
-        [Column, NotNull] public string CodigoSubFuncion { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string SubFuncion { get; set; ***REMOVED*** // varchar(max)
-        [Column, NotNull] public string CodigoAuxiliar { get; set; ***REMOVED*** // varchar(30)
-        [Column, NotNull] public string CodigoEconTipo { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string EconTipo { get; set; ***REMOVED*** // varchar(max)
-        [Column, NotNull] public string CodigoEconTitulo { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string EconTitulo { get; set; ***REMOVED*** // varchar(max)
-        [Column, NotNull] public string CodigoEconSubTitulo { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string EconSubTitulo { get; set; ***REMOVED*** // varchar(max)
-        [Column, NotNull] public string CodigoEconGrupo { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string EconGrupo { get; set; ***REMOVED*** // varchar(max)
+        [PrimaryKey, Identity] public int Id { get; set; } // int
+        [Column, NotNull] public string CodigoNegocio { get; set; } // varchar(max)
+        [Column, NotNull] public string CodigoNegocioTransaccional { get; set; } // varchar(50)
+        [Column, Nullable] public string CodigoSeccion { get; set; } // varchar(max)
+        [Column, Nullable] public string Seccion { get; set; } // varchar(max)
+        [Column, NotNull] public string CodigoInstitucion { get; set; } // varchar(30)
+        [Column, NotNull] public string CodigoPrograma { get; set; } // varchar(50)
+        [Column, Nullable] public string Programa { get; set; } // varchar(max)
+        [Column, NotNull] public string CodigoProducto { get; set; } // varchar(50)
+        [Column, Nullable] public string Producto { get; set; } // varchar(max)
+        [Column, NotNull] public string CodigoProyecto { get; set; } // varchar(50)
+        [Column, Nullable] public string Proyecto { get; set; } // varchar(max)
+        [Column, NotNull] public string CodigoActividadObra { get; set; } // varchar(50)
+        [Column, Nullable] public string NombreActividadObra { get; set; } // varchar(max)
+        [Column, Nullable] public string DescripcionActividadObra { get; set; } // varchar(max)
+        [Column, NotNull] public int CodigoOrganismoFinanciador { get; set; } // int
+        [Column, NotNull] public int CodigoFuenteFinanciamiento { get; set; } // int
+        [Column, NotNull] public string CodigoFuenteEspecifica { get; set; } // varchar(50)
+        [Column, Nullable] public string FuenteEspecifica { get; set; } // varchar(max)
+        [Column, NotNull] public string CodigoFinalidad { get; set; } // varchar(50)
+        [Column, Nullable] public string Finalidad { get; set; } // varchar(max)
+        [Column, NotNull] public string CodigoFuncion { get; set; } // varchar(30)
+        [Column, NotNull] public string CodigoSubFuncion { get; set; } // varchar(50)
+        [Column, Nullable] public string SubFuncion { get; set; } // varchar(max)
+        [Column, NotNull] public string CodigoAuxiliar { get; set; } // varchar(30)
+        [Column, NotNull] public string CodigoEconTipo { get; set; } // varchar(50)
+        [Column, Nullable] public string EconTipo { get; set; } // varchar(max)
+        [Column, NotNull] public string CodigoEconTitulo { get; set; } // varchar(50)
+        [Column, Nullable] public string EconTitulo { get; set; } // varchar(max)
+        [Column, NotNull] public string CodigoEconSubTitulo { get; set; } // varchar(50)
+        [Column, Nullable] public string EconSubTitulo { get; set; } // varchar(max)
+        [Column, NotNull] public string CodigoEconGrupo { get; set; } // varchar(50)
+        [Column, Nullable] public string EconGrupo { get; set; } // varchar(max)
 
         #region Associations
 
@@ -468,50 +468,50 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         /// FK_CatEntidades_CatLineaPresupuestal
         /// </summary>
         [Association(ThisKey = "CodigoInstitucion", OtherKey = "CodigoInstitucion", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_CatEntidades_CatLineaPresupuestal", BackReferenceName = "CatEntidadesCatLineaPresupuestals")]
-        public consulta_CatalogoEntidade CatEntidadesCatLineaPresupuestal { get; set; ***REMOVED***
+        public consulta_CatalogoEntidade CatEntidadesCatLineaPresupuestal { get; set; }
 
         /// <summary>
         /// FK_FuenteFinanciamiento_CatLineaPresupuestal
         /// </summary>
         [Association(ThisKey = "CodigoFuenteFinanciamiento", OtherKey = "CodigoFuenteFinanciamiento", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_FuenteFinanciamiento_CatLineaPresupuestal", BackReferenceName = "FuenteFinanciamientoCatLineaPresupuestals")]
-        public consulta_CatalogoFuenteFinanciamiento FuenteFinanciamientoCatLineaPresupuestal { get; set; ***REMOVED***
+        public consulta_CatalogoFuenteFinanciamiento FuenteFinanciamientoCatLineaPresupuestal { get; set; }
 
         /// <summary>
         /// FK_ObjetoDeGasto_CatLineaPresupuestal
         /// </summary>
         [Association(ThisKey = "CodigoAuxiliar", OtherKey = "CodigoObjetoDeGasto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_ObjetoDeGasto_CatLineaPresupuestal", BackReferenceName = "ObjetoDeGastoCatLineaPresupuestals")]
-        public consulta_CatalogoObjetoDeGasto ObjetoDeGastoCatLineaPresupuestal { get; set; ***REMOVED***
+        public consulta_CatalogoObjetoDeGasto ObjetoDeGastoCatLineaPresupuestal { get; set; }
 
         /// <summary>
         /// FK_OrganismoFinanciador_CatLineaPresupuestal
         /// </summary>
         [Association(ThisKey = "CodigoOrganismoFinanciador", OtherKey = "CodigoOrganismoFinanciador", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_OrganismoFinanciador_CatLineaPresupuestal", BackReferenceName = "OrganismoFinanciadorCatLineaPresupuestals")]
-        public consulta_CatalogoOrganismoFinanciador OrganismoFinanciadorCatLineaPresupuestal { get; set; ***REMOVED***
+        public consulta_CatalogoOrganismoFinanciador OrganismoFinanciadorCatLineaPresupuestal { get; set; }
 
         /// <summary>
         /// FK_Sector_CatLineaPresupuestal
         /// </summary>
         [Association(ThisKey = "CodigoFuncion", OtherKey = "CodigoSector", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Sector_CatLineaPresupuestal", BackReferenceName = "SectorCatLineaPresupuestals")]
-        public consulta_CatalogoSector SectorCatLineaPresupuestal { get; set; ***REMOVED***
+        public consulta_CatalogoSector SectorCatLineaPresupuestal { get; set; }
 
         #endregion
-***REMOVED***
+    }
 
     [Table(Schema = "consulta", Name = "CatalogoObjetoDeGasto")]
     public partial class consulta_CatalogoObjetoDeGasto
     {
-        [PrimaryKey, NotNull] public string CodigoObjetoDeGasto { get; set; ***REMOVED*** // varchar(30)
-        [Column, Nullable] public string ObjetoDeGasto { get; set; ***REMOVED*** // varchar(500)
-        [Column, NotNull] public string CodigoTipo { get; set; ***REMOVED*** // varchar(30)
-        [Column, Nullable] public string Tipo { get; set; ***REMOVED*** // varchar(500)
-        [Column, NotNull] public string CodigoConcepto { get; set; ***REMOVED*** // varchar(30)
-        [Column, Nullable] public string Concepto { get; set; ***REMOVED*** // varchar(500)
-        [Column, NotNull] public string CodigoCuenta { get; set; ***REMOVED*** // varchar(30)
-        [Column, Nullable] public string Cuenta { get; set; ***REMOVED*** // varchar(500)
-        [Column, NotNull] public string CodigoSubCuenta { get; set; ***REMOVED*** // varchar(30)
-        [Column, Nullable] public string SubCuenta { get; set; ***REMOVED*** // varchar(500)
-        [Column, Nullable] public string UsuarioCargue { get; set; ***REMOVED*** // varchar(100)
-        [Column, Nullable] public DateTime? FechaModificacion { get; set; ***REMOVED*** // datetime
+        [PrimaryKey, NotNull] public string CodigoObjetoDeGasto { get; set; } // varchar(30)
+        [Column, Nullable] public string ObjetoDeGasto { get; set; } // varchar(500)
+        [Column, NotNull] public string CodigoTipo { get; set; } // varchar(30)
+        [Column, Nullable] public string Tipo { get; set; } // varchar(500)
+        [Column, NotNull] public string CodigoConcepto { get; set; } // varchar(30)
+        [Column, Nullable] public string Concepto { get; set; } // varchar(500)
+        [Column, NotNull] public string CodigoCuenta { get; set; } // varchar(30)
+        [Column, Nullable] public string Cuenta { get; set; } // varchar(500)
+        [Column, NotNull] public string CodigoSubCuenta { get; set; } // varchar(30)
+        [Column, Nullable] public string SubCuenta { get; set; } // varchar(500)
+        [Column, Nullable] public string UsuarioCargue { get; set; } // varchar(100)
+        [Column, Nullable] public DateTime? FechaModificacion { get; set; } // datetime
 
         #region Associations
 
@@ -519,26 +519,26 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         /// FK_ObjetoDeGasto_CatLineaPresupuestal_BackReference
         /// </summary>
         [Association(ThisKey = "CodigoObjetoDeGasto", OtherKey = "CodigoAuxiliar", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-        public IEnumerable<consulta_CatalogoLineaPresupuestal> ObjetoDeGastoCatLineaPresupuestals { get; set; ***REMOVED***
+        public IEnumerable<consulta_CatalogoLineaPresupuestal> ObjetoDeGastoCatLineaPresupuestals { get; set; }
 
         #endregion
-***REMOVED***
+    }
 
     [Table(Schema = "consulta", Name = "CatalogoPresupuestoXProyInv")]
     public partial class consulta_CatalogoPresupuestoXProyInv
     {
-        [Column(), PrimaryKey(1), NotNull] public int IdCatalogoLineaPresupuestal { get; set; ***REMOVED*** // int
-        [Column("bpin"), PrimaryKey(2), NotNull] public string Bpin { get; set; ***REMOVED*** // varchar(20)
-        [Column(), PrimaryKey(3), NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-***REMOVED***
+        [Column(), PrimaryKey(1), NotNull] public int IdCatalogoLineaPresupuestal { get; set; } // int
+        [Column("bpin"), PrimaryKey(2), NotNull] public string Bpin { get; set; } // varchar(20)
+        [Column(), PrimaryKey(3), NotNull] public int IdProyecto { get; set; } // int
+    }
 
     [Table(Schema = "consulta", Name = "CatalogoSector")]
     public partial class consulta_CatalogoSector
     {
-        [PrimaryKey, NotNull] public string CodigoSector { get; set; ***REMOVED*** // varchar(30)
-        [Column, Nullable] public string Sector { get; set; ***REMOVED*** // varchar(500)
-        [Column, Nullable] public string UsuarioCargue { get; set; ***REMOVED*** // varchar(100)
-        [Column, Nullable] public DateTime? FechaModificacion { get; set; ***REMOVED*** // datetime
+        [PrimaryKey, NotNull] public string CodigoSector { get; set; } // varchar(30)
+        [Column, Nullable] public string Sector { get; set; } // varchar(500)
+        [Column, Nullable] public string UsuarioCargue { get; set; } // varchar(100)
+        [Column, Nullable] public DateTime? FechaModificacion { get; set; } // datetime
 
         #region Associations
 
@@ -546,41 +546,41 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         /// FK_Sector_CatLineaPresupuestal_BackReference
         /// </summary>
         [Association(ThisKey = "CodigoSector", OtherKey = "CodigoFuncion", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-        public IEnumerable<consulta_CatalogoLineaPresupuestal> SectorCatLineaPresupuestals { get; set; ***REMOVED***
+        public IEnumerable<consulta_CatalogoLineaPresupuestal> SectorCatLineaPresupuestals { get; set; }
 
         #endregion
-***REMOVED***
+    }
 
     [Table(Schema = "consulta", Name = "CatalogoTiempo")]
     public partial class consulta_CatalogoTiempo
     {
-        [Column("año"), NotNull] public int Año { get; set; ***REMOVED*** // int
-        [Column("mes"), Nullable] public int? Mes { get; set; ***REMOVED*** // int
-        [Column("periodo"), PrimaryKey, NotNull] public string Periodo { get; set; ***REMOVED*** // varchar(6)
-***REMOVED***
+        [Column("año"), NotNull] public int Año { get; set; } // int
+        [Column("mes"), Nullable] public int? Mes { get; set; } // int
+        [Column("periodo"), PrimaryKey, NotNull] public string Periodo { get; set; } // varchar(6)
+    }
     
     [Table(Schema = "dbo", Name = "Comentario")]
   public partial class Comentario
   {
-    [Column(), PrimaryKey, Identity] public int IdComentario { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? IdAsociacion { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int IdTipoComentario { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? IdPrograma { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? IdProyecto { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? CodEnteTerritorialBeneficiario { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column(), Nullable] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column(), NotNull] public int IdUsuario { get; set; ***REMOVED*** // int
-    [Column("fechaCreacion"), NotNull] public DateTime FechaCreacion { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public int IdEstado { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public string ComentarioOriginal { get; set; ***REMOVED*** // varchar(max)
-    [Column(), Nullable] public string ComentarioModerado { get; set; ***REMOVED*** // varchar(max)
-    [Column("fechaPublicacion"), Nullable] public DateTime? FechaPublicacion { get; set; ***REMOVED*** // datetime
-    [Column(), Nullable] public int? IdTipoRespuesta { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? ComentarioRelacionado { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public bool? Anonimo { get; set; ***REMOVED*** // bit
-    [Column(), Nullable] public string JustificacionParaNoPublicar { get; set; ***REMOVED*** // varchar(max)
-    [Column("codigocontrato"), Nullable] public string Codigocontrato { get; set; ***REMOVED*** // varchar(30)
+    [Column(), PrimaryKey, Identity] public int IdComentario { get; set; } // int
+    [Column(), Nullable] public int? IdAsociacion { get; set; } // int
+    [Column(), NotNull] public int IdTipoComentario { get; set; } // int
+    [Column(), Nullable] public int? IdPrograma { get; set; } // int
+    [Column(), Nullable] public int? IdProyecto { get; set; } // int
+    [Column(), Nullable] public int? CodEnteTerritorialBeneficiario { get; set; } // int
+    [Column(), Nullable] public string IdDepartamento { get; set; } // varchar(10)
+    [Column(), Nullable] public string IdMunicipio { get; set; } // varchar(10)
+    [Column(), NotNull] public int IdUsuario { get; set; } // int
+    [Column("fechaCreacion"), NotNull] public DateTime FechaCreacion { get; set; } // datetime
+    [Column(), NotNull] public int IdEstado { get; set; } // int
+    [Column(), Nullable] public string ComentarioOriginal { get; set; } // varchar(max)
+    [Column(), Nullable] public string ComentarioModerado { get; set; } // varchar(max)
+    [Column("fechaPublicacion"), Nullable] public DateTime? FechaPublicacion { get; set; } // datetime
+    [Column(), Nullable] public int? IdTipoRespuesta { get; set; } // int
+    [Column(), Nullable] public int? ComentarioRelacionado { get; set; } // int
+    [Column(), Nullable] public bool? Anonimo { get; set; } // bit
+    [Column(), Nullable] public string JustificacionParaNoPublicar { get; set; } // varchar(max)
+    [Column("codigocontrato"), Nullable] public string Codigocontrato { get; set; } // varchar(30)
 
     #region Associations
 
@@ -588,215 +588,215 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Comentario_TipoComentario
     /// </summary>
     [Association(ThisKey = "IdTipoComentario", OtherKey = "Id", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Comentario_TipoComentario", BackReferenceName = "Comentarios")]
-    public TipoComentario TipoComentario { get; set; ***REMOVED***
+    public TipoComentario TipoComentario { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
     [Table(Schema = "dbo", Name = "VwConsolidadoContratacionEmergencias", IsView = true)]
     public partial class VwConsolidadoContratacionEmergencia
     {
-        [Column(), NotNull] public int RowId { get; set; ***REMOVED*** // int
-        [Column("anio"), Nullable] public int? Anio { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string CodigoEntidad { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string Entidad { get; set; ***REMOVED*** // nvarchar(150)
-        [Column(), Nullable] public string EstadoContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string MonedaContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public decimal? ValorContratado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public int? NroContratos { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public byte? Origen { get; set; ***REMOVED*** // tinyint
-***REMOVED***
+        [Column(), NotNull] public int RowId { get; set; } // int
+        [Column("anio"), Nullable] public int? Anio { get; set; } // int
+        [Column(), Nullable] public string CodigoEntidad { get; set; } // varchar(100)
+        [Column(), Nullable] public string Entidad { get; set; } // nvarchar(150)
+        [Column(), Nullable] public string EstadoContrato { get; set; } // varchar(100)
+        [Column(), Nullable] public string MonedaContrato { get; set; } // varchar(100)
+        [Column(), Nullable] public decimal? ValorContratado { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public int? NroContratos { get; set; } // int
+        [Column(), Nullable] public byte? Origen { get; set; } // tinyint
+    }
 
     [Table(Schema = "dbo", Name = "VwConsolidadoProcesosContratacionEmergencias", IsView = true)]
     public partial class VwConsolidadoProcesosContratacionEmergencia
     {
-        [Column("anio"), Nullable] public int? Anio { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string Entidad { get; set; ***REMOVED*** // varchar(200)
-        [Column(), NotNull] public string EstadoProceso { get; set; ***REMOVED*** // varchar(100)
-        [Column(), NotNull] public int EstadoProcesoOrden { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string MonedaProceso { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public decimal? ValorProceso { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public int? NroProcesos { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public int? Origen { get; set; ***REMOVED*** // int
-***REMOVED***
+        [Column("anio"), Nullable] public int? Anio { get; set; } // int
+        [Column(), NotNull] public string Entidad { get; set; } // varchar(200)
+        [Column(), NotNull] public string EstadoProceso { get; set; } // varchar(100)
+        [Column(), NotNull] public int EstadoProcesoOrden { get; set; } // int
+        [Column(), Nullable] public string MonedaProceso { get; set; } // varchar(50)
+        [Column(), Nullable] public decimal? ValorProceso { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public int? NroProcesos { get; set; } // int
+        [Column(), Nullable] public int? Origen { get; set; } // int
+    }
 
     [Table(Schema = "dbo", Name = "VwDetalleContratacionArticulosEmergencias", IsView = true)]
     public partial class VwDetalleContratacionArticulosEmergencia
     {
-        [Column(), NotNull] public int IdContratacionArticulos { get; set; ***REMOVED*** // int
-        [Column("anio"), Nullable] public int? Anio { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string CodigoProceso { get; set; ***REMOVED*** // varchar(200)
-        [Column(), Nullable] public string DescripcionProceso { get; set; ***REMOVED*** // varchar(500)
-        [Column(), Nullable] public string CaratulaProceso { get; set; ***REMOVED*** // varchar(250)
-        [Column(), Nullable] public string CodigoContrato { get; set; ***REMOVED*** // varchar(200)
-        [Column(), Nullable] public string DescripcionContrato { get; set; ***REMOVED*** // nvarchar(500)
-        [Column(), Nullable] public string Modalidad { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string CodigoUnidadCompra { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string UnidadCompra { get; set; ***REMOVED*** // nvarchar(150)
-        [Column(), Nullable] public string EstadoProceso { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string EstadoContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string Objeto { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string Rpe { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string RazonSocial { get; set; ***REMOVED*** // varchar(200)
-        [Column(), Nullable] public string TipoDocumento { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string NumeroDocumento { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string IdArticulo { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string SubclaseUnspsc { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string DescripcionSubclase { get; set; ***REMOVED*** // varchar(300)
-        [Column(), Nullable] public string DescripcionArticulo { get; set; ***REMOVED*** // varchar(1000)
-        [Column(), Nullable] public string CuentaPresupuestaria { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public int? Cantidad { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string AbrUnidadMedida { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string DescripcionUnidadMedida { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public decimal? PrecioUnitarioEstimado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), NotNull] public decimal PrecioUnitario { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public decimal? ImpuestoTotal { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public decimal? Descuento { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), NotNull] public decimal MontoTotal { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), NotNull] public int Origen { get; set; ***REMOVED*** // int
-***REMOVED***
+        [Column(), NotNull] public int IdContratacionArticulos { get; set; } // int
+        [Column("anio"), Nullable] public int? Anio { get; set; } // int
+        [Column(), Nullable] public string CodigoProceso { get; set; } // varchar(200)
+        [Column(), Nullable] public string DescripcionProceso { get; set; } // varchar(500)
+        [Column(), Nullable] public string CaratulaProceso { get; set; } // varchar(250)
+        [Column(), Nullable] public string CodigoContrato { get; set; } // varchar(200)
+        [Column(), Nullable] public string DescripcionContrato { get; set; } // nvarchar(500)
+        [Column(), Nullable] public string Modalidad { get; set; } // varchar(100)
+        [Column(), Nullable] public string CodigoUnidadCompra { get; set; } // varchar(100)
+        [Column(), Nullable] public string UnidadCompra { get; set; } // nvarchar(150)
+        [Column(), Nullable] public string EstadoProceso { get; set; } // varchar(100)
+        [Column(), Nullable] public string EstadoContrato { get; set; } // varchar(100)
+        [Column(), Nullable] public string Objeto { get; set; } // varchar(50)
+        [Column(), Nullable] public string Rpe { get; set; } // varchar(50)
+        [Column(), Nullable] public string RazonSocial { get; set; } // varchar(200)
+        [Column(), Nullable] public string TipoDocumento { get; set; } // varchar(50)
+        [Column(), Nullable] public string NumeroDocumento { get; set; } // varchar(100)
+        [Column(), Nullable] public string IdArticulo { get; set; } // varchar(50)
+        [Column(), Nullable] public string SubclaseUnspsc { get; set; } // varchar(50)
+        [Column(), Nullable] public string DescripcionSubclase { get; set; } // varchar(300)
+        [Column(), Nullable] public string DescripcionArticulo { get; set; } // varchar(1000)
+        [Column(), Nullable] public string CuentaPresupuestaria { get; set; } // varchar(50)
+        [Column(), Nullable] public int? Cantidad { get; set; } // int
+        [Column(), Nullable] public string AbrUnidadMedida { get; set; } // varchar(50)
+        [Column(), Nullable] public string DescripcionUnidadMedida { get; set; } // varchar(50)
+        [Column(), Nullable] public decimal? PrecioUnitarioEstimado { get; set; } // numeric(38, 6)
+        [Column(), NotNull] public decimal PrecioUnitario { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public decimal? ImpuestoTotal { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public decimal? Descuento { get; set; } // numeric(38, 6)
+        [Column(), NotNull] public decimal MontoTotal { get; set; } // numeric(38, 6)
+        [Column(), NotNull] public int Origen { get; set; } // int
+    }
 
     [Table(Schema = "dbo", Name = "VwDetalleProcesosArticulosEmergencias", IsView = true)]
     public partial class VwDetalleProcesosArticulosEmergencia
     {
-        [Column(), Nullable] public long? ID { get; set; ***REMOVED*** // bigint
-        [Column("anio"), Nullable] public int? Anio { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string EstadoProceso { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string CodigoProceso { get; set; ***REMOVED*** // varchar(200)
-        [Column(), Nullable] public string ObjetoProceso { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string CodigoUnidadCompra { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string UnidadCompra { get; set; ***REMOVED*** // varchar(200)
-        [Column(), Nullable] public string IdArticulo { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string SubclaseUnspsc { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string DescripcionSubclase { get; set; ***REMOVED*** // varchar(300)
-        [Column(), Nullable] public string DescripcionArticulo { get; set; ***REMOVED*** // varchar(1000)
-        [Column(), Nullable] public string CuentaPresupuestaria { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string CodigoUnidadMedida { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string DescripcionUnidad { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public int? Cantidad { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public decimal? PrecioUnitarioEstimado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public decimal? PrecioTotalEstimado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public int? Origen { get; set; ***REMOVED*** // int
-***REMOVED***
+        [Column(), Nullable] public long? ID { get; set; } // bigint
+        [Column("anio"), Nullable] public int? Anio { get; set; } // int
+        [Column(), NotNull] public string EstadoProceso { get; set; } // varchar(100)
+        [Column(), Nullable] public string CodigoProceso { get; set; } // varchar(200)
+        [Column(), Nullable] public string ObjetoProceso { get; set; } // varchar(50)
+        [Column(), Nullable] public string CodigoUnidadCompra { get; set; } // varchar(50)
+        [Column(), Nullable] public string UnidadCompra { get; set; } // varchar(200)
+        [Column(), Nullable] public string IdArticulo { get; set; } // varchar(50)
+        [Column(), Nullable] public string SubclaseUnspsc { get; set; } // varchar(50)
+        [Column(), Nullable] public string DescripcionSubclase { get; set; } // varchar(300)
+        [Column(), Nullable] public string DescripcionArticulo { get; set; } // varchar(1000)
+        [Column(), Nullable] public string CuentaPresupuestaria { get; set; } // varchar(50)
+        [Column(), Nullable] public string CodigoUnidadMedida { get; set; } // varchar(50)
+        [Column(), Nullable] public string DescripcionUnidad { get; set; } // varchar(50)
+        [Column(), Nullable] public int? Cantidad { get; set; } // int
+        [Column(), Nullable] public decimal? PrecioUnitarioEstimado { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public decimal? PrecioTotalEstimado { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public int? Origen { get; set; } // int
+    }
 
     [Table(Schema = "dbo", Name = "VwDetalleContratacionEmergencias", IsView = true)]
     public partial class VwDetalleContratacionEmergencia
     {
-        [Column("anio"), Nullable] public int? Anio { get; set; ***REMOVED*** // int
-        [Column("codigoproceso"), Nullable] public string Codigoproceso { get; set; ***REMOVED*** // nvarchar(200)
-        [Column(), Nullable] public string DescripcionProceso { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("codigocontrato"), Nullable] public string Codigocontrato { get; set; ***REMOVED*** // nvarchar(200)
-        [Column(), Nullable] public string DescripcionContrato { get; set; ***REMOVED*** // nvarchar(500)
-        [Column(), Nullable] public string MonedaContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string MonedaProceso { get; set; ***REMOVED*** // varchar(100)
-        [Column("valorcontratado"), Nullable] public decimal? Valorcontratado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public string RPE { get; set; ***REMOVED*** // varchar(100)
-        [Column("razonsocial"), Nullable] public string Razonsocial { get; set; ***REMOVED*** // nvarchar(150)
-        [Column("tipodocumento"), Nullable] public string Tipodocumento { get; set; ***REMOVED*** // varchar(32)
-        [Column("numerodocumento"), Nullable] public string Numerodocumento { get; set; ***REMOVED*** // varchar(100)
-        [Column("esmipyme"), Nullable] public bool? Esmipyme { get; set; ***REMOVED*** // bit
-        [Column("genero"), Nullable] public char? Genero { get; set; ***REMOVED*** // varchar(1)
-        [Column(), Nullable] public string EstadoContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column("fechaInicioContrato"), Nullable] public DateTime? FechaInicioContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column("fechaFinContrato"), Nullable] public DateTime? FechaFinContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column("Fecha_inicio_ejecucion_contrato"), Nullable] public DateTime? FechaInicioEjecucionContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column("Fecha_fin_ejecucion_contrato"), Nullable] public DateTime? FechaFinEjecucionContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column("Certificate_code"), Nullable] public string CertificateCode { get; set; ***REMOVED*** // varchar(150)
-        [Column(), Nullable] public string UnidadCompra { get; set; ***REMOVED*** // nvarchar(200)
-        [Column(), Nullable] public string CodigoSNIP { get; set; ***REMOVED*** // varchar(100)
-        [Column("FCH_INICIO_PUBLICACION"), Nullable] public DateTime? FchInicioPublicacion { get; set; ***REMOVED*** // datetime2(7)
-        [Column("FCH_INICIO_RECEP_OFERTAS"), Nullable] public DateTime? FchInicioRecepOfertas { get; set; ***REMOVED*** // datetime2(7)
-        [Column("FCH_ESTIMADA_ADJUDICACION"), Nullable] public DateTime? FchEstimadaAdjudicacion { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public decimal? MontoEstimado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public string EstadoProceso { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string URL { get; set; ***REMOVED*** // varchar(350)
-        [Column(), Nullable] public string CodigoUnidadCompra { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public DateTime? FechaUltimaModificacion { get; set; ***REMOVED*** // datetime2(7)
-        [Column("ocid"), Nullable] public string Ocid { get; set; ***REMOVED*** // nvarchar(200)
-        [Column("id_release"), Nullable] public string IdRelease { get; set; ***REMOVED*** // nvarchar(200)
-        [Column(), Nullable] public int? CodigoOrigenInformacion { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string MetodoContratacion { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string URLProceso { get; set; ***REMOVED*** // varchar(250)
-***REMOVED***
+        [Column("anio"), Nullable] public int? Anio { get; set; } // int
+        [Column("codigoproceso"), Nullable] public string Codigoproceso { get; set; } // nvarchar(200)
+        [Column(), Nullable] public string DescripcionProceso { get; set; } // nvarchar(500)
+        [Column("codigocontrato"), Nullable] public string Codigocontrato { get; set; } // nvarchar(200)
+        [Column(), Nullable] public string DescripcionContrato { get; set; } // nvarchar(500)
+        [Column(), Nullable] public string MonedaContrato { get; set; } // varchar(100)
+        [Column(), Nullable] public string MonedaProceso { get; set; } // varchar(100)
+        [Column("valorcontratado"), Nullable] public decimal? Valorcontratado { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public string RPE { get; set; } // varchar(100)
+        [Column("razonsocial"), Nullable] public string Razonsocial { get; set; } // nvarchar(150)
+        [Column("tipodocumento"), Nullable] public string Tipodocumento { get; set; } // varchar(32)
+        [Column("numerodocumento"), Nullable] public string Numerodocumento { get; set; } // varchar(100)
+        [Column("esmipyme"), Nullable] public bool? Esmipyme { get; set; } // bit
+        [Column("genero"), Nullable] public char? Genero { get; set; } // varchar(1)
+        [Column(), Nullable] public string EstadoContrato { get; set; } // varchar(100)
+        [Column("fechaInicioContrato"), Nullable] public DateTime? FechaInicioContrato { get; set; } // datetime2(7)
+        [Column("fechaFinContrato"), Nullable] public DateTime? FechaFinContrato { get; set; } // datetime2(7)
+        [Column("Fecha_inicio_ejecucion_contrato"), Nullable] public DateTime? FechaInicioEjecucionContrato { get; set; } // datetime2(7)
+        [Column("Fecha_fin_ejecucion_contrato"), Nullable] public DateTime? FechaFinEjecucionContrato { get; set; } // datetime2(7)
+        [Column("Certificate_code"), Nullable] public string CertificateCode { get; set; } // varchar(150)
+        [Column(), Nullable] public string UnidadCompra { get; set; } // nvarchar(200)
+        [Column(), Nullable] public string CodigoSNIP { get; set; } // varchar(100)
+        [Column("FCH_INICIO_PUBLICACION"), Nullable] public DateTime? FchInicioPublicacion { get; set; } // datetime2(7)
+        [Column("FCH_INICIO_RECEP_OFERTAS"), Nullable] public DateTime? FchInicioRecepOfertas { get; set; } // datetime2(7)
+        [Column("FCH_ESTIMADA_ADJUDICACION"), Nullable] public DateTime? FchEstimadaAdjudicacion { get; set; } // datetime2(7)
+        [Column(), Nullable] public decimal? MontoEstimado { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public string EstadoProceso { get; set; } // varchar(100)
+        [Column(), Nullable] public string URL { get; set; } // varchar(350)
+        [Column(), Nullable] public string CodigoUnidadCompra { get; set; } // varchar(100)
+        [Column(), Nullable] public DateTime? FechaUltimaModificacion { get; set; } // datetime2(7)
+        [Column("ocid"), Nullable] public string Ocid { get; set; } // nvarchar(200)
+        [Column("id_release"), Nullable] public string IdRelease { get; set; } // nvarchar(200)
+        [Column(), Nullable] public int? CodigoOrigenInformacion { get; set; } // int
+        [Column(), Nullable] public string MetodoContratacion { get; set; } // varchar(100)
+        [Column(), Nullable] public string URLProceso { get; set; } // varchar(250)
+    }
 
   [Table(Schema = "dbo", Name = "Contratos")]
   public partial class Contrato
   {
-        [Column("codigoproceso"), Nullable] public string Codigoproceso { get; set; ***REMOVED*** // nvarchar(200)
-        [Column(), Nullable] public string DescripcionProceso { get; set; ***REMOVED*** // nvarchar(250)
-        [Column("codigocontrato"), Nullable] public string Codigocontrato { get; set; ***REMOVED*** // nvarchar(200)
-        [Column(), Nullable] public string DescripcionContrato { get; set; ***REMOVED*** // nvarchar(500)
-        [Column(), Nullable] public string MonedaContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string MonedaProceso { get; set; ***REMOVED*** // varchar(100)
-        [Column("valorcontratado"), Nullable] public decimal? Valorcontratado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public string RPE { get; set; ***REMOVED*** // varchar(100)
-        [Column("razonsocial"), NotNull] public string Razonsocial { get; set; ***REMOVED*** // nvarchar(150)
-        [Column("tipodocumento"), NotNull] public string Tipodocumento { get; set; ***REMOVED*** // varchar(32)
-        [Column("numerodocumento"), Nullable] public string Numerodocumento { get; set; ***REMOVED*** // varchar(100)
-        [Column("esmipyme"), Nullable] public bool? Esmipyme { get; set; ***REMOVED*** // bit
-        [Column("genero"), Nullable] public char? Genero { get; set; ***REMOVED*** // varchar(1)
-        [Column(), Nullable] public string EstadoContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column("fechaInicioContrato"), Nullable] public DateTime? FechaInicioContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column("fechaFinContrato"), Nullable] public DateTime? FechaFinContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column("Fecha_inicio_ejecucion_contrato"), Nullable] public DateTime? FechaInicioEjecucionContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column("Fecha_fin_ejecucion_contrato"), Nullable] public DateTime? FechaFinEjecucionContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column("Certificate_code"), Nullable] public string CertificateCode { get; set; ***REMOVED*** // varchar(150)
-        [Column(), Nullable] public string UnidadCompra { get; set; ***REMOVED*** // nvarchar(150)
-        [Column(), Nullable] public string CodigoSNIP { get; set; ***REMOVED*** // varchar(100)
-        [Column("FCH_INICIO_PUBLICACION"), Nullable] public DateTime? FchInicioPublicacion { get; set; ***REMOVED*** // datetime2(7)
-        [Column("FCH_INICIO_RECEP_OFERTAS"), Nullable] public DateTime? FchInicioRecepOfertas { get; set; ***REMOVED*** // datetime2(7)
-        [Column("FCH_ESTIMADA_ADJUDICACION"), Nullable] public DateTime? FchEstimadaAdjudicacion { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public decimal? MontoEstimado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public string EstadoProceso { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string URL { get; set; ***REMOVED*** // varchar(350)
-        [Column(), Nullable] public string CodigoUnidadCompra { get; set; ***REMOVED*** // varchar(100)
-        [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-        [Column("ocid"), Nullable] public string Ocid { get; set; ***REMOVED*** // nvarchar(200)
-        [Column("id_release"), Nullable] public string IdRelease { get; set; ***REMOVED*** // nvarchar(200)
-        [Column(), Nullable] public byte? EsCovid { get; set; ***REMOVED*** // tinyint
-***REMOVED***
+        [Column("codigoproceso"), Nullable] public string Codigoproceso { get; set; } // nvarchar(200)
+        [Column(), Nullable] public string DescripcionProceso { get; set; } // nvarchar(250)
+        [Column("codigocontrato"), Nullable] public string Codigocontrato { get; set; } // nvarchar(200)
+        [Column(), Nullable] public string DescripcionContrato { get; set; } // nvarchar(500)
+        [Column(), Nullable] public string MonedaContrato { get; set; } // varchar(100)
+        [Column(), Nullable] public string MonedaProceso { get; set; } // varchar(100)
+        [Column("valorcontratado"), Nullable] public decimal? Valorcontratado { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public string RPE { get; set; } // varchar(100)
+        [Column("razonsocial"), NotNull] public string Razonsocial { get; set; } // nvarchar(150)
+        [Column("tipodocumento"), NotNull] public string Tipodocumento { get; set; } // varchar(32)
+        [Column("numerodocumento"), Nullable] public string Numerodocumento { get; set; } // varchar(100)
+        [Column("esmipyme"), Nullable] public bool? Esmipyme { get; set; } // bit
+        [Column("genero"), Nullable] public char? Genero { get; set; } // varchar(1)
+        [Column(), Nullable] public string EstadoContrato { get; set; } // varchar(100)
+        [Column("fechaInicioContrato"), Nullable] public DateTime? FechaInicioContrato { get; set; } // datetime2(7)
+        [Column("fechaFinContrato"), Nullable] public DateTime? FechaFinContrato { get; set; } // datetime2(7)
+        [Column("Fecha_inicio_ejecucion_contrato"), Nullable] public DateTime? FechaInicioEjecucionContrato { get; set; } // datetime2(7)
+        [Column("Fecha_fin_ejecucion_contrato"), Nullable] public DateTime? FechaFinEjecucionContrato { get; set; } // datetime2(7)
+        [Column("Certificate_code"), Nullable] public string CertificateCode { get; set; } // varchar(150)
+        [Column(), Nullable] public string UnidadCompra { get; set; } // nvarchar(150)
+        [Column(), Nullable] public string CodigoSNIP { get; set; } // varchar(100)
+        [Column("FCH_INICIO_PUBLICACION"), Nullable] public DateTime? FchInicioPublicacion { get; set; } // datetime2(7)
+        [Column("FCH_INICIO_RECEP_OFERTAS"), Nullable] public DateTime? FchInicioRecepOfertas { get; set; } // datetime2(7)
+        [Column("FCH_ESTIMADA_ADJUDICACION"), Nullable] public DateTime? FchEstimadaAdjudicacion { get; set; } // datetime2(7)
+        [Column(), Nullable] public decimal? MontoEstimado { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public string EstadoProceso { get; set; } // varchar(100)
+        [Column(), Nullable] public string URL { get; set; } // varchar(350)
+        [Column(), Nullable] public string CodigoUnidadCompra { get; set; } // varchar(100)
+        [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+        [Column("ocid"), Nullable] public string Ocid { get; set; } // nvarchar(200)
+        [Column("id_release"), Nullable] public string IdRelease { get; set; } // nvarchar(200)
+        [Column(), Nullable] public byte? EsCovid { get; set; } // tinyint
+    }
 
   [Table(Schema = "dbo", Name = "ContratosEjecucionFinanciera")]
   public partial class ContratosEjecucionFinanciera
   {
-    [PrimaryKey(1), NotNull] public string CodigoContrato { get; set; ***REMOVED*** // varchar(30)
-    [PrimaryKey(12), NotNull] public int TipoPrograma { get; set; ***REMOVED*** // int
-    [PrimaryKey(5), NotNull] public int ObjetoGasto { get; set; ***REMOVED*** // int
-    [PrimaryKey(3), NotNull] public int SubPrograma { get; set; ***REMOVED*** // int
-    [PrimaryKey(7), NotNull] public int FuenteFinanciamiento { get; set; ***REMOVED*** // int
-    [PrimaryKey(8), NotNull] public int CodigoEntidad { get; set; ***REMOVED*** // int
-    [PrimaryKey(2), NotNull] public int CodigoPrograma { get; set; ***REMOVED*** // int
-    [PrimaryKey(4), NotNull] public int CodigoProyecto { get; set; ***REMOVED*** // int
-    [PrimaryKey(9), NotNull] public string CodigoDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public int? CodigoNivel { get; set; ***REMOVED*** // int
-    [PrimaryKey(10), NotNull] public int AnioContrato { get; set; ***REMOVED*** // int
-    [PrimaryKey(6), NotNull] public int CodigoFinanciador { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string IdProceso { get; set; ***REMOVED*** // varchar(150)
-    [Column, Nullable] public DateTime? FechaFinalizacionContrato { get; set; ***REMOVED*** // datetime2(7)
-    [Column, Nullable] public DateTime? FechaInicioContrato { get; set; ***REMOVED*** // datetime2(7)
-    [Column, Nullable] public long? MontoAUtilizar { get; set; ***REMOVED*** // bigint
-    [PrimaryKey(11), NotNull] public string CodigoFinanciero { get; set; ***REMOVED*** // varchar(30)
-    [Column, Nullable] public DateTime? FechaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public bool? RegistroActivo { get; set; ***REMOVED*** // bit
-  ***REMOVED***
+    [PrimaryKey(1), NotNull] public string CodigoContrato { get; set; } // varchar(30)
+    [PrimaryKey(12), NotNull] public int TipoPrograma { get; set; } // int
+    [PrimaryKey(5), NotNull] public int ObjetoGasto { get; set; } // int
+    [PrimaryKey(3), NotNull] public int SubPrograma { get; set; } // int
+    [PrimaryKey(7), NotNull] public int FuenteFinanciamiento { get; set; } // int
+    [PrimaryKey(8), NotNull] public int CodigoEntidad { get; set; } // int
+    [PrimaryKey(2), NotNull] public int CodigoPrograma { get; set; } // int
+    [PrimaryKey(4), NotNull] public int CodigoProyecto { get; set; } // int
+    [PrimaryKey(9), NotNull] public string CodigoDepartamento { get; set; } // varchar(10)
+    [Column, Nullable] public int? CodigoNivel { get; set; } // int
+    [PrimaryKey(10), NotNull] public int AnioContrato { get; set; } // int
+    [PrimaryKey(6), NotNull] public int CodigoFinanciador { get; set; } // int
+    [Column, Nullable] public string IdProceso { get; set; } // varchar(150)
+    [Column, Nullable] public DateTime? FechaFinalizacionContrato { get; set; } // datetime2(7)
+    [Column, Nullable] public DateTime? FechaInicioContrato { get; set; } // datetime2(7)
+    [Column, Nullable] public long? MontoAUtilizar { get; set; } // bigint
+    [PrimaryKey(11), NotNull] public string CodigoFinanciero { get; set; } // varchar(30)
+    [Column, Nullable] public DateTime? FechaModificacion { get; set; } // datetime
+    [Column, Nullable] public bool? RegistroActivo { get; set; } // bit
+  }
 
   [Table(Schema = "dbo", Name = "DatosAdicionalesAprobacion")]
   public partial class DatosAdicionalesAprobacion
   {
-    [PrimaryKey, Identity] public int IdDatoAdicional { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string CodigoBPIN { get; set; ***REMOVED*** // varchar(500)
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdOcad { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string CodigoOcad { get; set; ***REMOVED*** // varchar(500)
-    [Column, NotNull] public string NombreOcad { get; set; ***REMOVED*** // varchar(500)
-    [Column, Nullable] public string NumeroAcuerdo { get; set; ***REMOVED*** // varchar(500)
-    [Column, Nullable] public DateTime? FechaAprobacionInicial { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public DateTime? FechaUltimaAprobacion { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public int? IdOcadAprueba { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string CodigoOcadAprueba { get; set; ***REMOVED*** // varchar(500)
-    [Column, Nullable] public string NombreOcadAprueba { get; set; ***REMOVED*** // varchar(500)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey, Identity] public int IdDatoAdicional { get; set; } // int
+    [Column, NotNull] public string CodigoBPIN { get; set; } // varchar(500)
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public int IdOcad { get; set; } // int
+    [Column, NotNull] public string CodigoOcad { get; set; } // varchar(500)
+    [Column, NotNull] public string NombreOcad { get; set; } // varchar(500)
+    [Column, Nullable] public string NumeroAcuerdo { get; set; } // varchar(500)
+    [Column, Nullable] public DateTime? FechaAprobacionInicial { get; set; } // datetime
+    [Column, Nullable] public DateTime? FechaUltimaAprobacion { get; set; } // datetime
+    [Column, Nullable] public int? IdOcadAprueba { get; set; } // int
+    [Column, Nullable] public string CodigoOcadAprueba { get; set; } // varchar(500)
+    [Column, Nullable] public string NombreOcadAprueba { get; set; } // varchar(500)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -804,40 +804,40 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_DatosAdicionalesAprobacion_Proyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_DatosAdicionalesAprobacion_Proyecto", BackReferenceName = "DatosAdicionalesAprobacions")]
-    public Proyecto Proyecto { get; set; ***REMOVED***
+    public Proyecto Proyecto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "DatosAdicionalesEjecutores")]
   public partial class DatosAdicionalesEjecutore
   {
-    [PrimaryKey(1), NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string CodigoBPIN { get; set; ***REMOVED*** // varchar(500)
-    [PrimaryKey(2), NotNull] public string NitEjecutor { get; set; ***REMOVED*** // nvarchar(15)
-    [Column, Nullable] public string NombreEjecutor { get; set; ***REMOVED*** // nvarchar(300)
-    [Column, Nullable] public string NitInterventor { get; set; ***REMOVED*** // nvarchar(15)
-    [Column, Nullable] public string NombreInterventor { get; set; ***REMOVED*** // nvarchar(300)
-    [Column, Nullable] public DateTime? FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public int? ConsecutivoCarga { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [PrimaryKey(1), NotNull] public int IdProyecto { get; set; } // int
+    [Column, Nullable] public string CodigoBPIN { get; set; } // varchar(500)
+    [PrimaryKey(2), NotNull] public string NitEjecutor { get; set; } // nvarchar(15)
+    [Column, Nullable] public string NombreEjecutor { get; set; } // nvarchar(300)
+    [Column, Nullable] public string NitInterventor { get; set; } // nvarchar(15)
+    [Column, Nullable] public string NombreInterventor { get; set; } // nvarchar(300)
+    [Column, Nullable] public DateTime? FechaUltimaModificacion { get; set; } // datetime
+    [Column, Nullable] public int? ConsecutivoCarga { get; set; } // int
+  }
 
   [Table(Schema = "dbo", Name = "Distribucion")]
   public partial class Distribucion
   {
-    [PrimaryKey(1), NotNull] public int IdTipoRecurso { get; set; ***REMOVED*** // int
-    [PrimaryKey(2), NotNull] public int IdTipoEntidad { get; set; ***REMOVED*** // int
-    [PrimaryKey(3), NotNull] public string IdEntidad { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public decimal Monto { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column, NotNull] public DateTime FechaInicioDistribucion { get; set; ***REMOVED*** // smalldatetime
-    [Column, NotNull] public DateTime FechaFinDistribucion { get; set; ***REMOVED*** // smalldatetime
-    [PrimaryKey(4), NotNull] public int MesDistribucion { get; set; ***REMOVED*** // int
-    [PrimaryKey(5), NotNull] public int AñoDistribucion { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public int IdTipoDeFinanciacion { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey(1), NotNull] public int IdTipoRecurso { get; set; } // int
+    [PrimaryKey(2), NotNull] public int IdTipoEntidad { get; set; } // int
+    [PrimaryKey(3), NotNull] public string IdEntidad { get; set; } // varchar(30)
+    [Column, NotNull] public decimal Monto { get; set; } // decimal(18, 2)
+    [Column, NotNull] public DateTime FechaInicioDistribucion { get; set; } // smalldatetime
+    [Column, NotNull] public DateTime FechaFinDistribucion { get; set; } // smalldatetime
+    [PrimaryKey(4), NotNull] public int MesDistribucion { get; set; } // int
+    [PrimaryKey(5), NotNull] public int AñoDistribucion { get; set; } // int
+    [Column, Nullable] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, Nullable] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, NotNull] public int IdTipoDeFinanciacion { get; set; } // int
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -845,51 +845,51 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Disribucion_EnteTerritorial
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Disribucion_EnteTerritorial", BackReferenceName = "Disribucions")]
-    public EnteTerritorial DisribucionEnteTerritorial { get; set; ***REMOVED***
+    public EnteTerritorial DisribucionEnteTerritorial { get; set; }
 
     /// <summary>
     /// FK_Disribucion_Fuente
     /// </summary>
     [Association(ThisKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", OtherKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Disribucion_Fuente", BackReferenceName = "Disribucions")]
-    public Fuente DisribucionFuente { get; set; ***REMOVED***
+    public Fuente DisribucionFuente { get; set; }
 
     /// <summary>
     /// FK_Distribucion_TipoDeFinanciacion
     /// </summary>
     [Association(ThisKey = "IdTipoDeFinanciacion", OtherKey = "IdTipoFinanciacion", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Distribucion_TipoDeFinanciacion", BackReferenceName = "Distribucions")]
-    public TipoDeFinanciacion TipoDeFinanciacion { get; set; ***REMOVED***
+    public TipoDeFinanciacion TipoDeFinanciacion { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "DonacionProveedor")]
   public partial class DonacionProveedor
   {
-    [Column("id"), PrimaryKey, Identity] public int Id { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string Proveedor { get; set; ***REMOVED*** // varchar(500)
-    [Column(), NotNull] public DateTime FechaModificacion { get; set; ***REMOVED*** // datetime
-  ***REMOVED***
+    [Column("id"), PrimaryKey, Identity] public int Id { get; set; } // int
+    [Column(), NotNull] public string Proveedor { get; set; } // varchar(500)
+    [Column(), NotNull] public DateTime FechaModificacion { get; set; } // datetime
+  }
 
   [Table(Schema = "dbo", Name = "EnteTerritorial")]
   public partial class EnteTerritorial
   {
-    [Column, Nullable] public string IdRegion { get; set; ***REMOVED*** // varchar(10)
-    [PrimaryKey(1), NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [PrimaryKey(2), NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public string NombreRegion { get; set; ***REMOVED*** // varchar(50)
-    [Column, NotNull] public string NombreDepartamento { get; set; ***REMOVED*** // varchar(50)
-    [Column, NotNull] public string NombreMunicipio { get; set; ***REMOVED*** // varchar(50)
-    //[Column, Nullable] public SqlGeography GeoPoligonoEntidadTerritorial { get; set; ***REMOVED*** // geography
-    [Column, Nullable] public string CodigoDANE { get; set; ***REMOVED*** // varchar(15)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    //[Column, Nullable] public SqlGeography TopLeft { get; set; ***REMOVED*** // geography
-    //[Column, Nullable] public SqlGeography BottomRight { get; set; ***REMOVED*** // geography
-    [Column, Nullable] public string Tipo { get; set; ***REMOVED*** // varchar(50)
-    [Column, Nullable] public int? Version { get; set; ***REMOVED*** // int
-    //[Column, Nullable] public SqlGeography Centroide { get; set; ***REMOVED*** // geography
-    [Column, Nullable] public string Geojson { get; set; ***REMOVED*** // varchar(max)
+    [Column, Nullable] public string IdRegion { get; set; } // varchar(10)
+    [PrimaryKey(1), NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [PrimaryKey(2), NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, Nullable] public string NombreRegion { get; set; } // varchar(50)
+    [Column, NotNull] public string NombreDepartamento { get; set; } // varchar(50)
+    [Column, NotNull] public string NombreMunicipio { get; set; } // varchar(50)
+    //[Column, Nullable] public SqlGeography GeoPoligonoEntidadTerritorial { get; set; } // geography
+    [Column, Nullable] public string CodigoDANE { get; set; } // varchar(15)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    //[Column, Nullable] public SqlGeography TopLeft { get; set; } // geography
+    //[Column, Nullable] public SqlGeography BottomRight { get; set; } // geography
+    [Column, Nullable] public string Tipo { get; set; } // varchar(50)
+    [Column, Nullable] public int? Version { get; set; } // int
+    //[Column, Nullable] public SqlGeography Centroide { get; set; } // geography
+    [Column, Nullable] public string Geojson { get; set; } // varchar(max)
 
     #region Associations
 
@@ -897,43 +897,43 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_CabeceraMunicipio_EnteTerritorial_BackReference
     /// </summary>
     [Association(ThisKey = "IdMunicipio", OtherKey = "CodigoDane", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToOne, IsBackReference = true)]
-    public CabeceraMunicipio CabeceraMunicipio { get; set; ***REMOVED***
+    public CabeceraMunicipio CabeceraMunicipio { get; set; }
 
     /// <summary>
     /// Fk_FotoUsuarioXEnteTerritorial_BackReference
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<FotoUsuario> FkFotoUsuarioXEnteTerritorials { get; set; ***REMOVED***
+    public IEnumerable<FotoUsuario> FkFotoUsuarioXEnteTerritorials { get; set; }
 
     /// <summary>
     /// Fk_ProyectoXEnteTerritorial_BackReference
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<ProyectoXEntidadTerritorial> FkProyectoXEnteTerritorials { get; set; ***REMOVED***
+    public IEnumerable<ProyectoXEntidadTerritorial> FkProyectoXEnteTerritorials { get; set; }
 
     /// <summary>
     /// Fk_RespuestaCuestionarioXEnteTerritorial_BackReference
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<RespuestaCuestionario> FkRespuestaCuestionarioXEnteTerritorials { get; set; ***REMOVED***
+    public IEnumerable<RespuestaCuestionario> FkRespuestaCuestionarioXEnteTerritorials { get; set; }
 
     /// <summary>
     /// FK_Fuente_EnteTerritorialMunicipio_BackReference
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Fuente> FuenteEnteTerritorialMunicipios { get; set; ***REMOVED***
+    public IEnumerable<Fuente> FuenteEnteTerritorialMunicipios { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Entregable")]
   public partial class Entregable
   {
-    [Column(), PrimaryKey, NotNull] public int IdEntregable { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column("Entregable"), Nullable] public string EntregableColumn { get; set; ***REMOVED*** // varchar(600)
-    [Column(), Nullable] public double? Cantidad { get; set; ***REMOVED*** // float
-    [Column(), NotNull] public string IdUnidadMedida { get; set; ***REMOVED*** // nvarchar(20)
+    [Column(), PrimaryKey, NotNull] public int IdEntregable { get; set; } // int
+    [Column(), NotNull] public int IdProyecto { get; set; } // int
+    [Column("Entregable"), Nullable] public string EntregableColumn { get; set; } // varchar(600)
+    [Column(), Nullable] public double? Cantidad { get; set; } // float
+    [Column(), NotNull] public string IdUnidadMedida { get; set; } // nvarchar(20)
 
     #region Associations
 
@@ -941,22 +941,22 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Entregable_Proyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Entregable_Proyecto", BackReferenceName = "Entregables")]
-    public Proyecto Proyecto { get; set; ***REMOVED***
+    public Proyecto Proyecto { get; set; }
 
     /// <summary>
     /// FK_Entregable_UnidadMedida
     /// </summary>
     [Association(ThisKey = "IdUnidadMedida", OtherKey = "IdUnidadMedida", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Entregable_UnidadMedida", BackReferenceName = "Entregables")]
-    public UnidadMedida UnidadMedida { get; set; ***REMOVED***
+    public UnidadMedida UnidadMedida { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "EntidadContrato")]
   public partial class EntidadContrato
   {
-    [PrimaryKey, NotNull] public string Codigo { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public string Nombre { get; set; ***REMOVED*** // varchar(150)
+    [PrimaryKey, NotNull] public string Codigo { get; set; } // varchar(30)
+    [Column, NotNull] public string Nombre { get; set; } // varchar(150)
 
     #region Associations
 
@@ -964,52 +964,52 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Proceso_EntidadContrato2_BackReference
     /// </summary>
     [Association(ThisKey = "Codigo", OtherKey = "CodigoProveedor", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Proceso> FkProcesoEntidadContrato2BackReferences { get; set; ***REMOVED***
+    public IEnumerable<Proceso> FkProcesoEntidadContrato2BackReferences { get; set; }
 
     /// <summary>
     /// FK_Proceso_EntidadContrato1_BackReference
     /// </summary>
     [Association(ThisKey = "Codigo", OtherKey = "CodigoComprador", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Proceso> ProcesoEntidadContratos { get; set; ***REMOVED***
+    public IEnumerable<Proceso> ProcesoEntidadContratos { get; set; }
 
     /// <summary>
     /// FK_Proceso_EntidadContrato_BackReference
     /// </summary>
     [Association(ThisKey = "Codigo", OtherKey = "CodigoEntidadConvocante", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Proceso> Procesos { get; set; ***REMOVED***
+    public IEnumerable<Proceso> Procesos { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "EntidadesEjecutorasGesProy")]
   public partial class EntidadesEjecutorasGesProy
   {
-    [PrimaryKey(1), NotNull] public string NIT { get; set; ***REMOVED*** // varchar(11)
-    [PrimaryKey(2), NotNull] public char DigitoVerificacion { get; set; ***REMOVED*** // varchar(1)
-    [Column, NotNull] public string NombreEntidad { get; set; ***REMOVED*** // varchar(500)
-    [Column, NotNull] public string TipoEntidad { get; set; ***REMOVED*** // varchar(500)
-    [Column, NotNull] public decimal CodigoEntidad { get; set; ***REMOVED*** // decimal(18, 0)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [PrimaryKey(1), NotNull] public string NIT { get; set; } // varchar(11)
+    [PrimaryKey(2), NotNull] public char DigitoVerificacion { get; set; } // varchar(1)
+    [Column, NotNull] public string NombreEntidad { get; set; } // varchar(500)
+    [Column, NotNull] public string TipoEntidad { get; set; } // varchar(500)
+    [Column, NotNull] public decimal CodigoEntidad { get; set; } // decimal(18, 0)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+  }
 
   [Table(Schema = "dbo", Name = "EsquemaFinanciacionProyecto")]
   public partial class EsquemaFinanciacionProyecto
   {
-    [PrimaryKey, Identity] public int IdEsquemaFinanciacion { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public decimal ValorAprobado { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column, NotNull] public int IdTipoRecurso { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdTipoEntidad { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string IdEntidad { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public DateTime FechaInicioVigencia { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public DateTime FechaFinalVigencia { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
-    [Column, Nullable] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public int IdEtapa { get; set; ***REMOVED*** // int
+    [PrimaryKey, Identity] public int IdEsquemaFinanciacion { get; set; } // int
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public decimal ValorAprobado { get; set; } // decimal(18, 2)
+    [Column, NotNull] public int IdTipoRecurso { get; set; } // int
+    [Column, NotNull] public int IdTipoEntidad { get; set; } // int
+    [Column, NotNull] public string IdEntidad { get; set; } // varchar(30)
+    [Column, NotNull] public DateTime FechaInicioVigencia { get; set; } // datetime
+    [Column, NotNull] public DateTime FechaFinalVigencia { get; set; } // datetime
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)
+    [Column, Nullable] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, Nullable] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, NotNull] public int IdEtapa { get; set; } // int
 
     #region Associations
 
@@ -1017,49 +1017,49 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_EsquemaFinanciacionProyecto_Etapa
     /// </summary>
     [Association(ThisKey = "IdEtapa", OtherKey = "IdEtapa", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_EsquemaFinanciacionProyecto_Etapa", BackReferenceName = "EsquemaFinanciacionProyectoes")]
-    public Etapa Etapa { get; set; ***REMOVED***
+    public Etapa Etapa { get; set; }
 
     /// <summary>
     /// Fk_EsquemaFinanciacionProyectoXProyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_EsquemaFinanciacionProyectoXProyecto", BackReferenceName = "FkEsquemaFinanciacionProyectoXProyectoes")]
-    public Proyecto FkEsquemaFinanciacionProyectoXProyecto { get; set; ***REMOVED***
+    public Proyecto FkEsquemaFinanciacionProyectoXProyecto { get; set; }
 
     /// <summary>
     /// FK_EsquemaFinanciacionProyecto_Fuente
     /// </summary>
     [Association(ThisKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", OtherKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_EsquemaFinanciacionProyecto_Fuente", BackReferenceName = "EsquemaFinanciacionProyectoes")]
-    public Fuente Fuente { get; set; ***REMOVED***
+    public Fuente Fuente { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Estado")]
   public partial class Estado
   {
-    [PrimaryKey, NotNull] public int IdEstado { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreEstado { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
-  ***REMOVED***
+    [PrimaryKey, NotNull] public int IdEstado { get; set; } // int
+    [Column, NotNull] public string NombreEstado { get; set; } // varchar(30)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)
+  }
 
   [Table(Schema = "dbo", Name = "EstadoComentario")]
   public partial class EstadoComentario
   {
-    [Column(), PrimaryKey, Identity] public int Id { get; set; ***REMOVED*** // int
-    [Column("EstadoComentario"), NotNull] public string EstadoComentarioColumn { get; set; ***REMOVED*** // varchar(100)
-  ***REMOVED***
+    [Column(), PrimaryKey, Identity] public int Id { get; set; } // int
+    [Column("EstadoComentario"), NotNull] public string EstadoComentarioColumn { get; set; } // varchar(100)
+  }
 
   [Table(Schema = "dbo", Name = "EstadoGesproyProyectos")]
   public partial class EstadoGesproyProyecto
   {
-    [Column(), NotNull] public string BPIN { get; set; ***REMOVED*** // varchar(500)
-    [Column("ID_ESTADO"), NotNull] public int IdEstado { get; set; ***REMOVED*** // int
-    [Column("NOMBRE_ESTADO"), NotNull] public string NombreEstado { get; set; ***REMOVED*** // varchar(500)
-    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column(), PrimaryKey, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
+    [Column(), NotNull] public string BPIN { get; set; } // varchar(500)
+    [Column("ID_ESTADO"), NotNull] public int IdEstado { get; set; } // int
+    [Column("NOMBRE_ESTADO"), NotNull] public string NombreEstado { get; set; } // varchar(500)
+    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column(), NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column(), PrimaryKey, NotNull] public int IdProyecto { get; set; } // int
 
     #region Associations
 
@@ -1067,17 +1067,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_EstadoGesproyProyectos_Proyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.OneToOne, KeyName = "FK_EstadoGesproyProyectos_Proyecto", BackReferenceName = "EstadoGesproyProyecto")]
-    public Proyecto Proyecto { get; set; ***REMOVED***
+    public Proyecto Proyecto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "EstadoHomologado")]
   public partial class EstadoHomologado
   {
-    [PrimaryKey, Identity] public int IdEstado { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreEstado { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public int IdEstadoProyecto { get; set; ***REMOVED*** // int
+    [PrimaryKey, Identity] public int IdEstado { get; set; } // int
+    [Column, NotNull] public string NombreEstado { get; set; } // varchar(30)
+    [Column, NotNull] public int IdEstadoProyecto { get; set; } // int
 
     #region Associations
 
@@ -1085,18 +1085,18 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_PreguntaCuestionarioxEstadoHomologado_BackReference
     /// </summary>
     [Association(ThisKey = "IdEstado", OtherKey = "IdEstado", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<PreguntaCuestionario> FkPreguntaCuestionarioxEstadoHomologados { get; set; ***REMOVED***
+    public IEnumerable<PreguntaCuestionario> FkPreguntaCuestionarioxEstadoHomologados { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "EstadoJuridicoCampoOProyecto")]
   public partial class EstadoJuridicoCampoOProyecto
   {
-    [PrimaryKey(1), NotNull] public string IdCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
-    [PrimaryKey(2), NotNull] public string IdTipoCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
-    [PrimaryKey(3), NotNull] public string IdEstadoJuridicoCampoOProyecto { get; set; ***REMOVED*** // varchar(5)
-    [Column, NotNull] public string NombreEstadoJuridicoCampoOProyecto { get; set; ***REMOVED*** // varchar(100)
+    [PrimaryKey(1), NotNull] public string IdCampoOProyecto { get; set; } // nvarchar(50)
+    [PrimaryKey(2), NotNull] public string IdTipoCampoOProyecto { get; set; } // nvarchar(50)
+    [PrimaryKey(3), NotNull] public string IdEstadoJuridicoCampoOProyecto { get; set; } // varchar(5)
+    [Column, NotNull] public string NombreEstadoJuridicoCampoOProyecto { get; set; } // varchar(100)
 
     #region Associations
 
@@ -1104,19 +1104,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_EstadoJuridicoCampoOProyecto_CampoOProyectoFiscalizacion
     /// </summary>
     [Association(ThisKey = "IdCampoOProyecto, IdTipoCampoOProyecto", OtherKey = "IdCampoOProyecto, IdTipoCampoOProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_EstadoJuridicoCampoOProyecto_CampoOProyectoFiscalizacion", BackReferenceName = "EstadoJuridicoCampoOProyectoes")]
-    public CampoOProyectoFiscalizacion CampoOProyectoFiscalizacion { get; set; ***REMOVED***
+    public CampoOProyectoFiscalizacion CampoOProyectoFiscalizacion { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Etapa")]
   public partial class Etapa
   {
-    [PrimaryKey, NotNull] public int IdEtapa { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreEtapa { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string ModificadoPor { get; set; ***REMOVED*** // varchar(50)
+    [PrimaryKey, NotNull] public int IdEtapa { get; set; } // int
+    [Column, NotNull] public string NombreEtapa { get; set; } // varchar(30)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string ModificadoPor { get; set; } // varchar(50)
 
     #region Associations
 
@@ -1124,18 +1124,18 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_EsquemaFinanciacionProyecto_Etapa_BackReference
     /// </summary>
     [Association(ThisKey = "IdEtapa", OtherKey = "IdEtapa", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<EsquemaFinanciacionProyecto> EsquemaFinanciacionProyectos { get; set; ***REMOVED***
+    public IEnumerable<EsquemaFinanciacionProyecto> EsquemaFinanciacionProyectos { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "EtapaCampoOProyecto")]
   public partial class EtapaCampoOProyecto
   {
-    [PrimaryKey(1), NotNull] public string IdCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
-    [PrimaryKey(2), NotNull] public string IdTipoCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
-    [PrimaryKey(3), NotNull] public int IdEtapaCampoOProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreEtapaCampoOProyecto { get; set; ***REMOVED*** // varchar(100)
+    [PrimaryKey(1), NotNull] public string IdCampoOProyecto { get; set; } // nvarchar(50)
+    [PrimaryKey(2), NotNull] public string IdTipoCampoOProyecto { get; set; } // nvarchar(50)
+    [PrimaryKey(3), NotNull] public int IdEtapaCampoOProyecto { get; set; } // int
+    [Column, NotNull] public string NombreEtapaCampoOProyecto { get; set; } // varchar(100)
 
     #region Associations
 
@@ -1143,19 +1143,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_EtapaCampoOProyecto_CampoOProyectoFiscalizacion
     /// </summary>
     [Association(ThisKey = "IdCampoOProyecto, IdTipoCampoOProyecto", OtherKey = "IdCampoOProyecto, IdTipoCampoOProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_EtapaCampoOProyecto_CampoOProyectoFiscalizacion", BackReferenceName = "EtapaCampoOProyectoes")]
-    public CampoOProyectoFiscalizacion CampoOProyectoFiscalizacion { get; set; ***REMOVED***
+    public CampoOProyectoFiscalizacion CampoOProyectoFiscalizacion { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Fase")]
   public partial class Fase
   {
-    [PrimaryKey, NotNull] public int IdFase { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreFase { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string ModificadoPor { get; set; ***REMOVED*** // varchar(50)
+    [PrimaryKey, NotNull] public int IdFase { get; set; } // int
+    [Column, NotNull] public string NombreFase { get; set; } // varchar(30)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string ModificadoPor { get; set; } // varchar(50)
 
     #region Associations
 
@@ -1163,37 +1163,37 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_HistoriaEstado_Fase_BackReference
     /// </summary>
     [Association(ThisKey = "IdFase", OtherKey = "IdFase", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<HistoriaEstado> HistoriaEstados { get; set; ***REMOVED***
+    public IEnumerable<HistoriaEstado> HistoriaEstados { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Fiscalizacion")]
   public partial class Fiscalizacion
   {
-    [PrimaryKey, Identity] public int Id { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string IdCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
+    [PrimaryKey, Identity] public int Id { get; set; } // int
+    [Column, NotNull] public string IdCampoOProyecto { get; set; } // nvarchar(50)
     /// <summary>
     /// Titulo Minero o Pozo Petrolifero
     /// </summary>
-    [Column, NotNull] public string IdTipoCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
-    [Column, NotNull] public string IdPeriodicidad { get; set; ***REMOVED*** // nvarchar(5)
-    [Column, NotNull] public int AñoLiquidado { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int PeriodoLiquidado { get; set; ***REMOVED*** // int
-    [Column, NotNull] public char IdTipoRecursoNatural { get; set; ***REMOVED*** // varchar(1)
-    [Column, NotNull] public DateTime FechaInicioPeriodo { get; set; ***REMOVED*** // smalldatetime
-    [Column, NotNull] public DateTime FechaFinPeriodo { get; set; ***REMOVED*** // smalldatetime
-    [Column, NotNull] public string IdRecursoNatural { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public string IdFiscalizacionNegocio { get; set; ***REMOVED*** // nvarchar(50)
-    [Column, Nullable] public string IdTipoActividad { get; set; ***REMOVED*** // nvarchar(50)
-    [Column, Nullable] public DateTime? FechaActividad { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public string Observaciones { get; set; ***REMOVED*** // varchar(1500)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string IdFiscalizacionSurrogada { get; set; ***REMOVED*** // nvarchar(max)
-    [Column, Nullable] public int? IdEtapa { get; set; ***REMOVED*** // int
+    [Column, NotNull] public string IdTipoCampoOProyecto { get; set; } // nvarchar(50)
+    [Column, NotNull] public string IdPeriodicidad { get; set; } // nvarchar(5)
+    [Column, NotNull] public int AñoLiquidado { get; set; } // int
+    [Column, NotNull] public int PeriodoLiquidado { get; set; } // int
+    [Column, NotNull] public char IdTipoRecursoNatural { get; set; } // varchar(1)
+    [Column, NotNull] public DateTime FechaInicioPeriodo { get; set; } // smalldatetime
+    [Column, NotNull] public DateTime FechaFinPeriodo { get; set; } // smalldatetime
+    [Column, NotNull] public string IdRecursoNatural { get; set; } // varchar(10)
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, Nullable] public string IdFiscalizacionNegocio { get; set; } // nvarchar(50)
+    [Column, Nullable] public string IdTipoActividad { get; set; } // nvarchar(50)
+    [Column, Nullable] public DateTime? FechaActividad { get; set; } // datetime
+    [Column, Nullable] public string Observaciones { get; set; } // varchar(1500)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, Nullable] public string IdFiscalizacionSurrogada { get; set; } // nvarchar(max)
+    [Column, Nullable] public int? IdEtapa { get; set; } // int
 
     #region Associations
 
@@ -1201,51 +1201,51 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Fiscalizacion_CampoOProyectoFiscalizacion
     /// </summary>
     [Association(ThisKey = "IdCampoOProyecto, IdTipoCampoOProyecto", OtherKey = "IdCampoOProyecto, IdTipoCampoOProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Fiscalizacion_CampoOProyectoFiscalizacion", BackReferenceName = "Fiscalizacions")]
-    public CampoOProyectoFiscalizacion CampoOProyectoFiscalizacion { get; set; ***REMOVED***
+    public CampoOProyectoFiscalizacion CampoOProyectoFiscalizacion { get; set; }
 
     /// <summary>
     /// FK_Fiscalizacion_EnteTerritorial
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Fiscalizacion_EnteTerritorial", BackReferenceName = "Fiscalizacions")]
-    public EnteTerritorial EnteTerritorial { get; set; ***REMOVED***
+    public EnteTerritorial EnteTerritorial { get; set; }
 
     /// <summary>
     /// FK_Fiscalizacion_Periodicidad
     /// </summary>
     [Association(ThisKey = "IdPeriodicidad", OtherKey = "IdPeriodicidad", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Fiscalizacion_Periodicidad", BackReferenceName = "Fiscalizacions")]
-    public Periodicidad Periodicidad { get; set; ***REMOVED***
+    public Periodicidad Periodicidad { get; set; }
 
     /// <summary>
     /// FK_Fiscalizacion_RecursoNaturalFiscalizacion
     /// </summary>
     [Association(ThisKey = "IdRecursoNatural, IdTipoRecursoNatural", OtherKey = "IdRecursoNatural, IdTipoRecursoNatural", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Fiscalizacion_RecursoNaturalFiscalizacion", BackReferenceName = "Fiscalizacions")]
-    public RecursoNaturalFiscalizacion RecursoNaturalFiscalizacion { get; set; ***REMOVED***
+    public RecursoNaturalFiscalizacion RecursoNaturalFiscalizacion { get; set; }
 
     /// <summary>
     /// FK_Fiscalizacion_TipoActividadFiscalizacion
     /// </summary>
     [Association(ThisKey = "IdTipoActividad", OtherKey = "Id", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Fiscalizacion_TipoActividadFiscalizacion", BackReferenceName = "Fiscalizacions")]
-    public TipoActividadFiscalizacion TipoActividadFiscalizacion { get; set; ***REMOVED***
+    public TipoActividadFiscalizacion TipoActividadFiscalizacion { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Foto")]
   public partial class Foto
   {
-    [PrimaryKey, Identity] public int IdFoto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string RutaFotoGrande { get; set; ***REMOVED*** // nvarchar(4000)
-    [Column, Nullable] public string RutaFotoMediano { get; set; ***REMOVED*** // nvarchar(4000)
-    [Column, Nullable] public string RutaFotoPequeno { get; set; ***REMOVED*** // nvarchar(4000)
-    [Column, Nullable] public string Descripcion { get; set; ***REMOVED*** // nvarchar(4000)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public DateTime Fecha { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public string Aprobadopor { get; set; ***REMOVED*** // varchar(300)
-    [Column, NotNull] public bool Aprobado { get; set; ***REMOVED*** // bit
-    [Column, NotNull] public bool Eliminado { get; set; ***REMOVED*** // bit
+    [PrimaryKey, Identity] public int IdFoto { get; set; } // int
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, Nullable] public string RutaFotoGrande { get; set; } // nvarchar(4000)
+    [Column, Nullable] public string RutaFotoMediano { get; set; } // nvarchar(4000)
+    [Column, Nullable] public string RutaFotoPequeno { get; set; } // nvarchar(4000)
+    [Column, Nullable] public string Descripcion { get; set; } // nvarchar(4000)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)
+    [Column, NotNull] public DateTime Fecha { get; set; } // datetime
+    [Column, Nullable] public string Aprobadopor { get; set; } // varchar(300)
+    [Column, NotNull] public bool Aprobado { get; set; } // bit
+    [Column, NotNull] public bool Eliminado { get; set; } // bit
 
     #region Associations
 
@@ -1253,29 +1253,29 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_FotoXProyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_FotoXProyecto", BackReferenceName = "FotoXProyectoes")]
-    public Proyecto FotoXProyecto { get; set; ***REMOVED***
+    public Proyecto FotoXProyecto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "FotoUsuario")]
   public partial class FotoUsuario
   {
-    [PrimaryKey, Identity] public int IdFotoUsuario { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdUsuario { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string RutaFotoGrande { get; set; ***REMOVED*** // nvarchar(4000)
-    [Column, Nullable] public string RutaFotoMediano { get; set; ***REMOVED*** // nvarchar(4000)
-    [Column, Nullable] public string RutaFotoPequeno { get; set; ***REMOVED*** // nvarchar(4000)
-    [Column, Nullable] public string Descripcion { get; set; ***REMOVED*** // nvarchar(4000)
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public DateTime Fecha { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public string Aprobadopor { get; set; ***REMOVED*** // varchar(300)
-    [Column, Nullable] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public bool Aprobado { get; set; ***REMOVED*** // bit
-    [Column, NotNull] public bool Eliminado { get; set; ***REMOVED*** // bit
-    [Column, Nullable] public string JustificacionParaNoPublicar { get; set; ***REMOVED*** // varchar(max)
+    [PrimaryKey, Identity] public int IdFotoUsuario { get; set; } // int
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public int IdUsuario { get; set; } // int
+    [Column, Nullable] public string RutaFotoGrande { get; set; } // nvarchar(4000)
+    [Column, Nullable] public string RutaFotoMediano { get; set; } // nvarchar(4000)
+    [Column, Nullable] public string RutaFotoPequeno { get; set; } // nvarchar(4000)
+    [Column, Nullable] public string Descripcion { get; set; } // nvarchar(4000)
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, NotNull] public DateTime Fecha { get; set; } // datetime
+    [Column, Nullable] public string Aprobadopor { get; set; } // varchar(300)
+    [Column, Nullable] public string Modificadopor { get; set; } // varchar(30)
+    [Column, NotNull] public bool Aprobado { get; set; } // bit
+    [Column, NotNull] public bool Eliminado { get; set; } // bit
+    [Column, Nullable] public string JustificacionParaNoPublicar { get; set; } // varchar(max)
 
     #region Associations
 
@@ -1283,38 +1283,38 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_FotoUsuarioProyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_FotoUsuarioProyecto", BackReferenceName = "FkFotoUsuarioProyectoes")]
-    public Proyecto FkFotoUsuarioProyecto { get; set; ***REMOVED***
+    public Proyecto FkFotoUsuarioProyecto { get; set; }
 
     /// <summary>
     /// Fk_FotoUsuarioXEnteTerritorial
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_FotoUsuarioXEnteTerritorial", BackReferenceName = "FkFotoUsuarioXEnteTerritorials")]
-    public EnteTerritorial FkFotoUsuarioXEnteTerritorial { get; set; ***REMOVED***
+    public EnteTerritorial FkFotoUsuarioXEnteTerritorial { get; set; }
 
     /// <summary>
     /// Fk_FotoUsuarioXUsuario
     /// </summary>
     [Association(ThisKey = "IdUsuario", OtherKey = "IdUsuario", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_FotoUsuarioXUsuario", BackReferenceName = "FkFotoUsuarioXUsuarios")]
-    public Usuario FkFotoUsuarioXUsuario { get; set; ***REMOVED***
+    public Usuario FkFotoUsuarioXUsuario { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Fuente")]
   public partial class Fuente
   {
-    [PrimaryKey(1), NotNull] public int IdTipoRecurso { get; set; ***REMOVED*** // int
-    [PrimaryKey(2), NotNull] public int IdTipoEntidad { get; set; ***REMOVED*** // int
-    [PrimaryKey(3), NotNull] public string IdEntidad { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public string NombreTipoRecurso { get; set; ***REMOVED*** // varchar(200)
-    [Column, NotNull] public string NombreTipoEntidad { get; set; ***REMOVED*** // varchar(200)
-    [Column, NotNull] public string NombreEntidad { get; set; ***REMOVED*** // varchar(200)
-    [Column, NotNull] public bool EsFuenteRegalias { get; set; ***REMOVED*** // bit
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
-    [Column, Nullable] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
+    [PrimaryKey(1), NotNull] public int IdTipoRecurso { get; set; } // int
+    [PrimaryKey(2), NotNull] public int IdTipoEntidad { get; set; } // int
+    [PrimaryKey(3), NotNull] public string IdEntidad { get; set; } // varchar(30)
+    [Column, NotNull] public string NombreTipoRecurso { get; set; } // varchar(200)
+    [Column, NotNull] public string NombreTipoEntidad { get; set; } // varchar(200)
+    [Column, NotNull] public string NombreEntidad { get; set; } // varchar(200)
+    [Column, NotNull] public bool EsFuenteRegalias { get; set; } // bit
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)
+    [Column, Nullable] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, Nullable] public string IdMunicipio { get; set; } // varchar(10)
 
     #region Associations
 
@@ -1322,110 +1322,110 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Disribucion_Fuente_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", OtherKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Distribucion> Disribucions { get; set; ***REMOVED***
+    public IEnumerable<Distribucion> Disribucions { get; set; }
 
     /// <summary>
     /// FK_Fuente_EnteTerritorialMunicipio
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Fuente_EnteTerritorialMunicipio", BackReferenceName = "FuenteEnteTerritorialMunicipios")]
-    public EnteTerritorial EnteTerritorialMunicipio { get; set; ***REMOVED***
+    public EnteTerritorial EnteTerritorialMunicipio { get; set; }
 
     /// <summary>
     /// FK_EsquemaFinanciacionProyecto_Fuente_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", OtherKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<EsquemaFinanciacionProyecto> EsquemaFinanciacionProyectos { get; set; ***REMOVED***
+    public IEnumerable<EsquemaFinanciacionProyecto> EsquemaFinanciacionProyectos { get; set; }
 
     /// <summary>
     /// FK_Giro_Fuente_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", OtherKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Giro> Giros { get; set; ***REMOVED***
+    public IEnumerable<Giro> Giros { get; set; }
 
     /// <summary>
     /// FK_SeguimientoEsquemaFinanciacionProyecto_Fuente_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", OtherKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<SeguimientoEsquemaFinanciacionProyecto> SeguimientoEsquemaFinanciacionProyectos { get; set; ***REMOVED***
+    public IEnumerable<SeguimientoEsquemaFinanciacionProyecto> SeguimientoEsquemaFinanciacionProyectos { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "FuenteDeLosRecursos")]
   public partial class FuenteDeLosRecurso
   {
-    [PrimaryKey, NotNull] public int IdFuente { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string NombreFuente { get; set; ***REMOVED*** // nvarchar(150)
-    [Column, NotNull] public string Descripcion { get; set; ***REMOVED*** // nvarchar(500)
-    [Column, NotNull] public DateTime FechaActualizacionFuente { get; set; ***REMOVED*** // datetime
-  ***REMOVED***
+    [PrimaryKey, NotNull] public int IdFuente { get; set; } // int
+    [Column, Nullable] public string NombreFuente { get; set; } // nvarchar(150)
+    [Column, NotNull] public string Descripcion { get; set; } // nvarchar(500)
+    [Column, NotNull] public DateTime FechaActualizacionFuente { get; set; } // datetime
+  }
 
   [Table(Schema = "dbo", Name = "FuenteFinancieraPrograma")]
   public partial class FuenteFinancieraPrograma
   {
-    [Column("codigoFuenteFinanciamiento"), PrimaryKey, NotNull] public int CodigoFuenteFinanciamiento { get; set; ***REMOVED*** // int
-    [Column("descripcionFuenteFinanciamiento"), NotNull] public string DescripcionFuenteFinanciamiento { get; set; ***REMOVED*** // varchar(50)
-  ***REMOVED***
+    [Column("codigoFuenteFinanciamiento"), PrimaryKey, NotNull] public int CodigoFuenteFinanciamiento { get; set; } // int
+    [Column("descripcionFuenteFinanciamiento"), NotNull] public string DescripcionFuenteFinanciamiento { get; set; } // varchar(50)
+  }
 
   [Table(Schema = "dbo", Name = "FuncionamientoSitio")]
   public partial class FuncionamientoSitio
   {
-    [PrimaryKey, Identity] public int IDFuncionamientoSitio { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Imagen { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public string Titulo { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public string Descripcion { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public string Seccion { get; set; ***REMOVED*** // varchar(max)
-  ***REMOVED***
+    [PrimaryKey, Identity] public int IDFuncionamientoSitio { get; set; } // int
+    [Column, NotNull] public string Imagen { get; set; } // varchar(max)
+    [Column, NotNull] public string Titulo { get; set; } // varchar(max)
+    [Column, NotNull] public string Descripcion { get; set; } // varchar(max)
+    [Column, NotNull] public string Seccion { get; set; } // varchar(max)
+  }
 
     [Table(Schema = "dbo", Name = "GastoXProgramasEmergencia")]
     public partial class GastoXProgramasEmergencia
     {
-        [Column("origen"), NotNull] public string Origen { get; set; ***REMOVED*** // varchar(24)
-        [Column("NOM_CAPITULO"), Nullable] public string NomCapitulo { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("NOM_SUB_CAPITULO"), Nullable] public string NomSubCapitulo { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("NOM_UE"), Nullable] public string NomUe { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_SUB_CAPITULO"), Nullable] public string CodSubCapitulo { get; set; ***REMOVED*** // nvarchar(100)
-        [Column("COD_CCP_SUBCTA"), Nullable] public string CodCcpSubcta { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("DES_CCP_SUBCTA"), Nullable] public string DesCcpSubcta { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_CCP_CONCEPTO"), Nullable] public string CodCcpConcepto { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("DES_CCP_CONCEPTO"), Nullable] public string DesCcpConcepto { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_CAPITULO"), Nullable] public string CodCapitulo { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_CCP_AUX"), Nullable] public string CodCcpAux { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("DES_CCP_AUX"), Nullable] public string DesCcpAux { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_CCP_CUENTA"), Nullable] public string CodCcpCuenta { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("DES_CCP_CUENTA"), Nullable] public string DesCcpCuenta { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_SECCION"), Nullable] public string CodSeccion { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_DEPENDENCIA"), Nullable] public string CodDependencia { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("VLR_GASTO"), Nullable] public decimal? VlrGasto { get; set; ***REMOVED*** // decimal(32, 2)
-        [Column("COD_FUENTE"), Nullable] public string CodFuente { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_UE"), Nullable] public string CodUe { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("PERIODO_IMPUTACION"), Nullable] public string PeriodoImputacion { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("MES_IMPUTACION"), Nullable] public string MesImputacion { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("NOM_PROGRAMA_ASISTENCIA"), Nullable] public string NomProgramaAsistencia { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_FUNCION_FINALIDAD"), Nullable] public string CodFuncionFinalidad { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("DES_FUNCION_FINALIDAD"), Nullable] public string DesFuncionFinalidad { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_ORG_FINANCIADOR"), Nullable] public string CodOrgFinanciador { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("DES_ORG_FINANCIADOR"), Nullable] public string DesOrgFinanciador { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_FUNCION_FUNCION"), Nullable] public string CodFuncionFuncion { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("DES_FUNCION_FUNCION"), Nullable] public string DesFuncionFuncion { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_FUNCION_SUBFUN"), Nullable] public string CodFuncionSubfun { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("DES_FUNCION_SUBFUN"), Nullable] public string DesFuncionSubfun { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("COD_INST_RECEPTORA"), Nullable] public string CodInstReceptora { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("DES_INST_RECEPTORA"), Nullable] public string DesInstReceptora { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("DES_FUENTE"), Nullable] public string DesFuente { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("TIP_GRUPO_FUENTE"), Nullable] public string TipGrupoFuente { get; set; ***REMOVED*** // nvarchar(100)
-        [Column("DES_SECCION"), Nullable] public string DesSeccion { get; set; ***REMOVED*** // nvarchar(500)
-        [Column("VLR_EJECUTADO"), Nullable] public double? VlrEjecutado { get; set; ***REMOVED*** // float
-        [Column(), Nullable] public int? IdOrigen { get; set; ***REMOVED*** // int
-***REMOVED***
+        [Column("origen"), NotNull] public string Origen { get; set; } // varchar(24)
+        [Column("NOM_CAPITULO"), Nullable] public string NomCapitulo { get; set; } // nvarchar(500)
+        [Column("NOM_SUB_CAPITULO"), Nullable] public string NomSubCapitulo { get; set; } // nvarchar(500)
+        [Column("NOM_UE"), Nullable] public string NomUe { get; set; } // nvarchar(500)
+        [Column("COD_SUB_CAPITULO"), Nullable] public string CodSubCapitulo { get; set; } // nvarchar(100)
+        [Column("COD_CCP_SUBCTA"), Nullable] public string CodCcpSubcta { get; set; } // nvarchar(500)
+        [Column("DES_CCP_SUBCTA"), Nullable] public string DesCcpSubcta { get; set; } // nvarchar(500)
+        [Column("COD_CCP_CONCEPTO"), Nullable] public string CodCcpConcepto { get; set; } // nvarchar(500)
+        [Column("DES_CCP_CONCEPTO"), Nullable] public string DesCcpConcepto { get; set; } // nvarchar(500)
+        [Column("COD_CAPITULO"), Nullable] public string CodCapitulo { get; set; } // nvarchar(500)
+        [Column("COD_CCP_AUX"), Nullable] public string CodCcpAux { get; set; } // nvarchar(500)
+        [Column("DES_CCP_AUX"), Nullable] public string DesCcpAux { get; set; } // nvarchar(500)
+        [Column("COD_CCP_CUENTA"), Nullable] public string CodCcpCuenta { get; set; } // nvarchar(500)
+        [Column("DES_CCP_CUENTA"), Nullable] public string DesCcpCuenta { get; set; } // nvarchar(500)
+        [Column("COD_SECCION"), Nullable] public string CodSeccion { get; set; } // nvarchar(500)
+        [Column("COD_DEPENDENCIA"), Nullable] public string CodDependencia { get; set; } // nvarchar(500)
+        [Column("VLR_GASTO"), Nullable] public decimal? VlrGasto { get; set; } // decimal(32, 2)
+        [Column("COD_FUENTE"), Nullable] public string CodFuente { get; set; } // nvarchar(500)
+        [Column("COD_UE"), Nullable] public string CodUe { get; set; } // nvarchar(500)
+        [Column("PERIODO_IMPUTACION"), Nullable] public string PeriodoImputacion { get; set; } // nvarchar(500)
+        [Column("MES_IMPUTACION"), Nullable] public string MesImputacion { get; set; } // nvarchar(500)
+        [Column("NOM_PROGRAMA_ASISTENCIA"), Nullable] public string NomProgramaAsistencia { get; set; } // nvarchar(500)
+        [Column("COD_FUNCION_FINALIDAD"), Nullable] public string CodFuncionFinalidad { get; set; } // nvarchar(500)
+        [Column("DES_FUNCION_FINALIDAD"), Nullable] public string DesFuncionFinalidad { get; set; } // nvarchar(500)
+        [Column("COD_ORG_FINANCIADOR"), Nullable] public string CodOrgFinanciador { get; set; } // nvarchar(500)
+        [Column("DES_ORG_FINANCIADOR"), Nullable] public string DesOrgFinanciador { get; set; } // nvarchar(500)
+        [Column("COD_FUNCION_FUNCION"), Nullable] public string CodFuncionFuncion { get; set; } // nvarchar(500)
+        [Column("DES_FUNCION_FUNCION"), Nullable] public string DesFuncionFuncion { get; set; } // nvarchar(500)
+        [Column("COD_FUNCION_SUBFUN"), Nullable] public string CodFuncionSubfun { get; set; } // nvarchar(500)
+        [Column("DES_FUNCION_SUBFUN"), Nullable] public string DesFuncionSubfun { get; set; } // nvarchar(500)
+        [Column("COD_INST_RECEPTORA"), Nullable] public string CodInstReceptora { get; set; } // nvarchar(500)
+        [Column("DES_INST_RECEPTORA"), Nullable] public string DesInstReceptora { get; set; } // nvarchar(500)
+        [Column("DES_FUENTE"), Nullable] public string DesFuente { get; set; } // nvarchar(500)
+        [Column("TIP_GRUPO_FUENTE"), Nullable] public string TipGrupoFuente { get; set; } // nvarchar(100)
+        [Column("DES_SECCION"), Nullable] public string DesSeccion { get; set; } // nvarchar(500)
+        [Column("VLR_EJECUTADO"), Nullable] public double? VlrEjecutado { get; set; } // float
+        [Column(), Nullable] public int? IdOrigen { get; set; } // int
+    }
 
 
     [Table(Schema = "dbo", Name = "GeneroUsuario")]
   public partial class GeneroUsuario
   {
-    [PrimaryKey, Identity] public int IdGeneroUsuario { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreGenero { get; set; ***REMOVED*** // varchar(50)
-    [Column, Nullable] public DateTime? FechaCreacion { get; set; ***REMOVED*** // datetime
+    [PrimaryKey, Identity] public int IdGeneroUsuario { get; set; } // int
+    [Column, NotNull] public string NombreGenero { get; set; } // varchar(50)
+    [Column, Nullable] public DateTime? FechaCreacion { get; set; } // datetime
 
     #region Associations
 
@@ -1433,21 +1433,21 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_UsuarioXGeneroUsuario_BackReference
     /// </summary>
     [Association(ThisKey = "IdGeneroUsuario", OtherKey = "IdGeneroUsuario", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Usuario> FkUsuarioXGeneroUsuarios { get; set; ***REMOVED***
+    public IEnumerable<Usuario> FkUsuarioXGeneroUsuarios { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Georreferenciacion")]
   public partial class Georreferenciacion
   {
-    [Column(), PrimaryKey, Identity] public int IdGeorreferencia { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string NombreReferencia { get; set; ***REMOVED*** // varchar(50)
-    [Column(), NotNull] public SqlGeography GeoPuntoUbicacion { get; set; ***REMOVED*** // geography
-    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
-    [Column("idProyecto"), NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
+    [Column(), PrimaryKey, Identity] public int IdGeorreferencia { get; set; } // int
+    [Column(), NotNull] public string NombreReferencia { get; set; } // varchar(50)
+    [Column(), NotNull] public SqlGeography GeoPuntoUbicacion { get; set; } // geography
+    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column(), NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column(), NotNull] public string Modificadopor { get; set; } // varchar(30)
+    [Column("idProyecto"), NotNull] public int IdProyecto { get; set; } // int
 
     #region Associations
 
@@ -1455,31 +1455,31 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_GeorreferenciacionXProyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_GeorreferenciacionXProyecto", BackReferenceName = "GeorreferenciacionXProyectoes")]
-    public Proyecto GeorreferenciacionXProyecto { get; set; ***REMOVED***
+    public Proyecto GeorreferenciacionXProyecto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Giro")]
   public partial class Giro
   {
-    [PrimaryKey, Identity] public int IdGiro { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdTipoRecurso { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdTipoEntidad { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string IdEntidad { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public DateTime VigenciaInicio { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public DateTime VigenciaFin { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public decimal Monto { get; set; ***REMOVED*** // decimal(30, 8)
-    [Column, Nullable] public string CodigoBPIN { get; set; ***REMOVED*** // varchar(200)
-    [Column, NotNull] public DateTime FechaDeGiro { get; set; ***REMOVED*** // smalldatetime
-    [Column, NotNull] public int AñoFiscal { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string NITEjecutor { get; set; ***REMOVED*** // nvarchar(11)
-    [Column, Nullable] public string NombreEjecutor { get; set; ***REMOVED*** // varchar(500)
-    [Column, Nullable] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public int IdTipoDeFinanciacion { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey, Identity] public int IdGiro { get; set; } // int
+    [Column, NotNull] public int IdTipoRecurso { get; set; } // int
+    [Column, NotNull] public int IdTipoEntidad { get; set; } // int
+    [Column, NotNull] public string IdEntidad { get; set; } // varchar(30)
+    [Column, NotNull] public DateTime VigenciaInicio { get; set; } // datetime
+    [Column, NotNull] public DateTime VigenciaFin { get; set; } // datetime
+    [Column, NotNull] public decimal Monto { get; set; } // decimal(30, 8)
+    [Column, Nullable] public string CodigoBPIN { get; set; } // varchar(200)
+    [Column, NotNull] public DateTime FechaDeGiro { get; set; } // smalldatetime
+    [Column, NotNull] public int AñoFiscal { get; set; } // int
+    [Column, Nullable] public string NITEjecutor { get; set; } // nvarchar(11)
+    [Column, Nullable] public string NombreEjecutor { get; set; } // varchar(500)
+    [Column, Nullable] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, Nullable] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, NotNull] public int IdTipoDeFinanciacion { get; set; } // int
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -1487,31 +1487,31 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Giro_EnteTerritorial
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Giro_EnteTerritorial", BackReferenceName = "Giroes")]
-    public EnteTerritorial EnteTerritorial { get; set; ***REMOVED***
+    public EnteTerritorial EnteTerritorial { get; set; }
 
     /// <summary>
     /// FK_Giro_Fuente
     /// </summary>
     [Association(ThisKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", OtherKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Giro_Fuente", BackReferenceName = "Giroes")]
-    public Fuente Fuente { get; set; ***REMOVED***
+    public Fuente Fuente { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
 
   [Table(Schema = "dbo", Name = "HistoriaEstado")]
   public partial class HistoriaEstado
   {
-    [Column("idHistoriaEstado"), PrimaryKey, Identity] public int IdHistoriaEstado { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int IdEstado { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public DateTime FechaRegistro { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public bool ActualSiNo { get; set; ***REMOVED*** // bit
-    [Column(), NotNull] public int IdFase { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int IdEtapa { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
+    [Column("idHistoriaEstado"), PrimaryKey, Identity] public int IdHistoriaEstado { get; set; } // int
+    [Column(), NotNull] public int IdProyecto { get; set; } // int
+    [Column(), NotNull] public int IdEstado { get; set; } // int
+    [Column(), NotNull] public DateTime FechaRegistro { get; set; } // datetime
+    [Column(), NotNull] public bool ActualSiNo { get; set; } // bit
+    [Column(), NotNull] public int IdFase { get; set; } // int
+    [Column(), NotNull] public int IdEtapa { get; set; } // int
+    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column(), NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column(), NotNull] public string Modificadopor { get; set; } // varchar(30)
 
     #region Associations
 
@@ -1519,103 +1519,103 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_HistoriaEstado_Fase
     /// </summary>
     [Association(ThisKey = "IdFase", OtherKey = "IdFase", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_HistoriaEstado_Fase", BackReferenceName = "HistoriaEstadoes")]
-    public Fase Fase { get; set; ***REMOVED***
+    public Fase Fase { get; set; }
 
     /// <summary>
     /// Fk_HistoriaEstadoXEstado
     /// </summary>
     [Association(ThisKey = "IdEstado", OtherKey = "IdEstado", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_HistoriaEstadoXEstado", BackReferenceName = "FkHistoriaEstadoXEstadoes")]
-    public Estado FkHistoriaEstadoXEstado { get; set; ***REMOVED***
+    public Estado FkHistoriaEstadoXEstado { get; set; }
 
     /// <summary>
     /// Fk_HistoriaEstadoXProyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_HistoriaEstadoXProyecto", BackReferenceName = "FkHistoriaEstadoXProyectoes")]
-    public Proyecto FkHistoriaEstadoXProyecto { get; set; ***REMOVED***
+    public Proyecto FkHistoriaEstadoXProyecto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Ideas")]
   public partial class Idea
   {
-    [Column(), PrimaryKey, Identity] public int IdIdea { get; set; ***REMOVED*** // int
-    [Column("fechaCreacion"), NotNull] public DateTime FechaCreacion { get; set; ***REMOVED*** // datetime
-    [Column("titulo"), Nullable] public string Titulo { get; set; ***REMOVED*** // varchar(max)
-    [Column("descripcioncorta"), Nullable] public string Descripcioncorta { get; set; ***REMOVED*** // varchar(max)
-    [Column("descripcion"), Nullable] public string Descripcion { get; set; ***REMOVED*** // varchar(max)
-    [Column("urlimagen"), Nullable] public string Urlimagen { get; set; ***REMOVED*** // varchar(max)
-  ***REMOVED***
+    [Column(), PrimaryKey, Identity] public int IdIdea { get; set; } // int
+    [Column("fechaCreacion"), NotNull] public DateTime FechaCreacion { get; set; } // datetime
+    [Column("titulo"), Nullable] public string Titulo { get; set; } // varchar(max)
+    [Column("descripcioncorta"), Nullable] public string Descripcioncorta { get; set; } // varchar(max)
+    [Column("descripcion"), Nullable] public string Descripcion { get; set; } // varchar(max)
+    [Column("urlimagen"), Nullable] public string Urlimagen { get; set; } // varchar(max)
+  }
 
   [Table(Schema = "dbo", Name = "IdeaMejora")]
   public partial class IdeaMejora
   {
-    [PrimaryKey, Identity] public int IdeaMejoraID { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Nombre { get; set; ***REMOVED*** // nvarchar(400)
-    [Column, NotNull] public string Email { get; set; ***REMOVED*** // nvarchar(200)
-    [Column, NotNull] public DateTime Fecha { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public string Categoria { get; set; ***REMOVED*** // nvarchar(50)
-    [Column, NotNull] public string Descripcion { get; set; ***REMOVED*** // ntext
-  ***REMOVED***
+    [PrimaryKey, Identity] public int IdeaMejoraID { get; set; } // int
+    [Column, NotNull] public string Nombre { get; set; } // nvarchar(400)
+    [Column, NotNull] public string Email { get; set; } // nvarchar(200)
+    [Column, NotNull] public DateTime Fecha { get; set; } // datetime
+    [Column, NotNull] public string Categoria { get; set; } // nvarchar(50)
+    [Column, NotNull] public string Descripcion { get; set; } // ntext
+  }
 
   [Table(Schema = "dbo", Name = "ImagenesXEnteTerritorial")]
   public partial class ImagenesXEnteTerritorial
   {
-    [Identity, PrimaryKey(1)] public int IdImageXEnteTerritorial { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string IdRegion { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column(SkipOnInsert = true, SkipOnUpdate = true), PrimaryKey(2), NotNull] public string IdImage { get; set; ***REMOVED*** // varchar(42)
-    [Column, Nullable] public string UrlImagePequenia { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string UrlImageMediana { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string UrlImageGrande { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string DescripcionImage { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string ImageIndicador { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [Identity, PrimaryKey(1)] public int IdImageXEnteTerritorial { get; set; } // int
+    [Column, Nullable] public string IdRegion { get; set; } // varchar(10)
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [Column(SkipOnInsert = true, SkipOnUpdate = true), PrimaryKey(2), NotNull] public string IdImage { get; set; } // varchar(42)
+    [Column, Nullable] public string UrlImagePequenia { get; set; } // varchar(max)
+    [Column, Nullable] public string UrlImageMediana { get; set; } // varchar(max)
+    [Column, Nullable] public string UrlImageGrande { get; set; } // varchar(max)
+    [Column, Nullable] public string DescripcionImage { get; set; } // varchar(max)
+    [Column, Nullable] public string ImageIndicador { get; set; } // varchar(10)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+  }
 
   [Table(Schema = "dbo", Name = "Indicadores")]
   public partial class Indicadore
   {
-    [PrimaryKey(1), NotNull] public int Anio { get; set; ***REMOVED*** // int
-    [PrimaryKey(2), NotNull] public int IdPrograma { get; set; ***REMOVED*** // int
-    [PrimaryKey(3), NotNull] public int CodigoIndicador { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string NombreIndicador { get; set; ***REMOVED*** // varchar(1000)
-    [Column, Nullable] public decimal? AnioBaseIndicador { get; set; ***REMOVED*** // numeric(4, 0)
-    [Column, Nullable] public decimal? MetaIndicador { get; set; ***REMOVED*** // numeric(22, 2)
-    [Column, Nullable] public decimal? AvanceIndicador { get; set; ***REMOVED*** // numeric(22, 2)
-    [Column, Nullable] public decimal? DenominadorIndicador { get; set; ***REMOVED*** // numeric(22, 2)
-    [Column, Nullable] public decimal? PorcentajeMeta { get; set; ***REMOVED*** // numeric(22, 2)
-    [Column, Nullable] public decimal? PorcentajeAvance { get; set; ***REMOVED*** // numeric(22, 2)
-    [Column, Nullable] public string TipoIndicador { get; set; ***REMOVED*** // varchar(50)
-    [Column, Nullable] public string TamanoIndicador { get; set; ***REMOVED*** // varchar(50)
-    [Column, Nullable] public string Tipo2Indicador { get; set; ***REMOVED*** // varchar(50)
-    [Column, Nullable] public string FecuenciaIndicador { get; set; ***REMOVED*** // varchar(50)
-    [Column, Nullable] public string CodigoBPIN { get; set; ***REMOVED*** // varchar(30)
-    [Column, Nullable] public DateTime? FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-  ***REMOVED***
+    [PrimaryKey(1), NotNull] public int Anio { get; set; } // int
+    [PrimaryKey(2), NotNull] public int IdPrograma { get; set; } // int
+    [PrimaryKey(3), NotNull] public int CodigoIndicador { get; set; } // int
+    [Column, Nullable] public string NombreIndicador { get; set; } // varchar(1000)
+    [Column, Nullable] public decimal? AnioBaseIndicador { get; set; } // numeric(4, 0)
+    [Column, Nullable] public decimal? MetaIndicador { get; set; } // numeric(22, 2)
+    [Column, Nullable] public decimal? AvanceIndicador { get; set; } // numeric(22, 2)
+    [Column, Nullable] public decimal? DenominadorIndicador { get; set; } // numeric(22, 2)
+    [Column, Nullable] public decimal? PorcentajeMeta { get; set; } // numeric(22, 2)
+    [Column, Nullable] public decimal? PorcentajeAvance { get; set; } // numeric(22, 2)
+    [Column, Nullable] public string TipoIndicador { get; set; } // varchar(50)
+    [Column, Nullable] public string TamanoIndicador { get; set; } // varchar(50)
+    [Column, Nullable] public string Tipo2Indicador { get; set; } // varchar(50)
+    [Column, Nullable] public string FecuenciaIndicador { get; set; } // varchar(50)
+    [Column, Nullable] public string CodigoBPIN { get; set; } // varchar(30)
+    [Column, Nullable] public DateTime? FechaUltimaModificacion { get; set; } // datetime
+  }
 
   [Table(Schema = "dbo", Name = "IndicadoresTexto")]
   public partial class IndicadoresTexto
   {
-    [PrimaryKey, NotNull] public int CodigoIndicador { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string Texto { get; set; ***REMOVED*** // nvarchar(500)
-    [Column, NotNull] public string Negrilla { get; set; ***REMOVED*** // nvarchar(500)
-  ***REMOVED***
+    [PrimaryKey, NotNull] public int CodigoIndicador { get; set; } // int
+    [Column, Nullable] public string Texto { get; set; } // nvarchar(500)
+    [Column, NotNull] public string Negrilla { get; set; } // nvarchar(500)
+  }
 
   [Table(Schema = "dbo", Name = "InformeAvanceFisicoProyecto")]
   public partial class InformeAvanceFisicoProyecto
   {
-    [PrimaryKey, Identity] public int IdInformeAvanceFisico { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime FechaInicioReporte { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public DateTime FechaFinReporte { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public string Descripcion { get; set; ***REMOVED*** // varchar(4000)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
+    [PrimaryKey, Identity] public int IdInformeAvanceFisico { get; set; } // int
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public DateTime FechaInicioReporte { get; set; } // datetime
+    [Column, NotNull] public DateTime FechaFinReporte { get; set; } // datetime
+    [Column, Nullable] public string Descripcion { get; set; } // varchar(4000)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)
 
     #region Associations
 
@@ -1623,36 +1623,36 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_InformeAvanceFisicoProyectoXProyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_InformeAvanceFisicoProyectoXProyecto", BackReferenceName = "FkInformeAvanceFisicoProyectoXProyectoes")]
-    public Proyecto FkInformeAvanceFisicoProyectoXProyecto { get; set; ***REMOVED***
+    public Proyecto FkInformeAvanceFisicoProyectoXProyecto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Liquidacion")]
   public partial class Liquidacion
   {
-    [PrimaryKey, Identity] public int IdLiquidación { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string IdCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
-    [Column, NotNull] public decimal ValorLiquidado { get; set; ***REMOVED*** // decimal(20, 8)
-    [Column, Nullable] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string IdPeriocidad { get; set; ***REMOVED*** // nvarchar(5)
-    [Column, Nullable] public string IdLiquidacionNegocio { get; set; ***REMOVED*** // nvarchar(8)
-    [Column, NotNull] public string IdRecursoNatural { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public char IdTipoRecursoNatural { get; set; ***REMOVED*** // varchar(1)
-    [Column, NotNull] public int PeriodoLiquidado { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime FechaInicioPeriodo { get; set; ***REMOVED*** // smalldatetime
-    [Column, NotNull] public DateTime FechaFinPeriodo { get; set; ***REMOVED*** // smalldatetime
-    [Column, NotNull] public string IdTipoContraprestacion { get; set; ***REMOVED*** // nvarchar(50)
-    [Column, Nullable] public decimal? TRM { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column, NotNull] public int AñoLiquidado { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdTipoDeFinanciacion { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey, Identity] public int IdLiquidación { get; set; } // int
+    [Column, NotNull] public string IdCampoOProyecto { get; set; } // nvarchar(50)
+    [Column, NotNull] public decimal ValorLiquidado { get; set; } // decimal(20, 8)
+    [Column, Nullable] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, Nullable] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, NotNull] public string IdPeriocidad { get; set; } // nvarchar(5)
+    [Column, Nullable] public string IdLiquidacionNegocio { get; set; } // nvarchar(8)
+    [Column, NotNull] public string IdRecursoNatural { get; set; } // varchar(10)
+    [Column, NotNull] public char IdTipoRecursoNatural { get; set; } // varchar(1)
+    [Column, NotNull] public int PeriodoLiquidado { get; set; } // int
+    [Column, NotNull] public DateTime FechaInicioPeriodo { get; set; } // smalldatetime
+    [Column, NotNull] public DateTime FechaFinPeriodo { get; set; } // smalldatetime
+    [Column, NotNull] public string IdTipoContraprestacion { get; set; } // nvarchar(50)
+    [Column, Nullable] public decimal? TRM { get; set; } // decimal(18, 2)
+    [Column, NotNull] public int AñoLiquidado { get; set; } // int
+    [Column, NotNull] public int IdTipoDeFinanciacion { get; set; } // int
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
     /// <summary>
     /// Titulo Minero o Pozo Petrolifero
     /// </summary>
-    [Column, NotNull] public string IdTipoCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
+    [Column, NotNull] public string IdTipoCampoOProyecto { get; set; } // nvarchar(50)
 
     #region Associations
 
@@ -1660,47 +1660,47 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Liquidacion_CampoOProyecto
     /// </summary>
     [Association(ThisKey = "IdCampoOProyecto, IdTipoCampoOProyecto", OtherKey = "IdCampoOProyecto, IdTipoCampoOProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Liquidacion_CampoOProyecto", BackReferenceName = "Liquidacions")]
-    public CampoOProyecto CampoOProyecto { get; set; ***REMOVED***
+    public CampoOProyecto CampoOProyecto { get; set; }
 
     /// <summary>
     /// FK_LiquidacionProduccionANH_EnteTerritorial
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_LiquidacionProduccionANH_EnteTerritorial", BackReferenceName = "LiquidacionProduccionAnhs")]
-    public EnteTerritorial LiquidacionProduccionANHEnteTerritorial { get; set; ***REMOVED***
+    public EnteTerritorial LiquidacionProduccionANHEnteTerritorial { get; set; }
 
     /// <summary>
     /// FK_Liquidacion_Periodicidad
     /// </summary>
     [Association(ThisKey = "IdPeriocidad", OtherKey = "IdPeriodicidad", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Liquidacion_Periodicidad", BackReferenceName = "Liquidacions")]
-    public Periodicidad Periodicidad { get; set; ***REMOVED***
+    public Periodicidad Periodicidad { get; set; }
 
     /// <summary>
     /// FK_Liquidacion_RecursoNatural1
     /// </summary>
     [Association(ThisKey = "IdRecursoNatural, IdTipoRecursoNatural", OtherKey = "IdRecursoNatural, IdTipoRecursoNatural", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Liquidacion_RecursoNatural1", BackReferenceName = "LiquidacionRecursoNaturals")]
-    public RecursoNatural RecursoNatural { get; set; ***REMOVED***
+    public RecursoNatural RecursoNatural { get; set; }
 
     /// <summary>
     /// FK_Liquidacion_TipoContraprestacion
     /// </summary>
     [Association(ThisKey = "IdTipoContraprestacion", OtherKey = "IdTipoContraprestacion", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Liquidacion_TipoContraprestacion", BackReferenceName = "Liquidacions")]
-    public TipoContraprestacion TipoContraprestacion { get; set; ***REMOVED***
+    public TipoContraprestacion TipoContraprestacion { get; set; }
 
     /// <summary>
     /// FK_Liquidacion_TipoDeFinanciacion
     /// </summary>
     [Association(ThisKey = "IdTipoDeFinanciacion", OtherKey = "IdTipoFinanciacion", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Liquidacion_TipoDeFinanciacion", BackReferenceName = "Liquidacions")]
-    public TipoDeFinanciacion TipoDeFinanciacion { get; set; ***REMOVED***
+    public TipoDeFinanciacion TipoDeFinanciacion { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "MedioMapaIUsuario")]
   public partial class MedioMapaIUsuario
   {
-    [PrimaryKey, Identity] public int IdMedioMapaIUsuario { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreMedio { get; set; ***REMOVED*** // varchar(100)
-    [Column, Nullable] public DateTime? FechaCreacion { get; set; ***REMOVED*** // datetime
+    [PrimaryKey, Identity] public int IdMedioMapaIUsuario { get; set; } // int
+    [Column, NotNull] public string NombreMedio { get; set; } // varchar(100)
+    [Column, Nullable] public DateTime? FechaCreacion { get; set; } // datetime
 
     #region Associations
 
@@ -1708,23 +1708,23 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_UsuarioXMedioMapaIUsuario_BackReference
     /// </summary>
     [Association(ThisKey = "IdMedioMapaIUsuario", OtherKey = "IdMedioMapaIUsuario", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Usuario> FkUsuarioXMedioMapaIUsuarios { get; set; ***REMOVED***
+    public IEnumerable<Usuario> FkUsuarioXMedioMapaIUsuarios { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "MeGusta")]
   public partial class MeGusta
   {
-    [Column(), PrimaryKey, Identity] public int IdMeGusta { get; set; ***REMOVED*** // int
-    [Column(SkipOnInsert = true, SkipOnUpdate = true), NotNull] public string IdMegustaUnico { get; set; ***REMOVED*** // varchar(38)
-    [Column(), NotNull] public int IdUsuario { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? IdFoto { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? IdFotoUsuario { get; set; ***REMOVED*** // int
-    [Column("MeGusta"), NotNull] public bool MeGustaColumn { get; set; ***REMOVED*** // bit
-    [Column(), NotNull] public bool NoMeGusta { get; set; ***REMOVED*** // bit
-    [Column(), NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public DateTime? Fecha { get; set; ***REMOVED*** // datetime
+    [Column(), PrimaryKey, Identity] public int IdMeGusta { get; set; } // int
+    [Column(SkipOnInsert = true, SkipOnUpdate = true), NotNull] public string IdMegustaUnico { get; set; } // varchar(38)
+    [Column(), NotNull] public int IdUsuario { get; set; } // int
+    [Column(), Nullable] public int? IdFoto { get; set; } // int
+    [Column(), Nullable] public int? IdFotoUsuario { get; set; } // int
+    [Column("MeGusta"), NotNull] public bool MeGustaColumn { get; set; } // bit
+    [Column(), NotNull] public bool NoMeGusta { get; set; } // bit
+    [Column(), NotNull] public int IdProyecto { get; set; } // int
+    [Column(), Nullable] public DateTime? Fecha { get; set; } // datetime
 
     #region Associations
 
@@ -1732,30 +1732,30 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_MeGustaXProyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_MeGustaXProyecto", BackReferenceName = "FkMeGustaXProyectoes")]
-    public Proyecto FkMeGustaXProyecto { get; set; ***REMOVED***
+    public Proyecto FkMeGustaXProyecto { get; set; }
 
     /// <summary>
     /// Fk_MeGustaXUsuario
     /// </summary>
     [Association(ThisKey = "IdUsuario", OtherKey = "IdUsuario", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_MeGustaXUsuario", BackReferenceName = "FkMeGustaXUsuarios")]
-    public Usuario FkMeGustaXUsuario { get; set; ***REMOVED***
+    public Usuario FkMeGustaXUsuario { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "MetaIndicadorProducto")]
   public partial class MetaIndicadorProducto
   {
-    [Column("idMetaIndicadorProducto"), PrimaryKey, Identity] public int IdMetaIndicadorProducto { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public double ValorMeta { get; set; ***REMOVED*** // float
-    [Column(), NotNull] public DateTime FechaInicioMeta { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public DateTime FechaFinMeta { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
-    [Column("idProducto"), NotNull] public int IdProducto { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string NombreIndicador { get; set; ***REMOVED*** // varchar(200)
-    [Column(), NotNull] public int IdIndicador { get; set; ***REMOVED*** // int
+    [Column("idMetaIndicadorProducto"), PrimaryKey, Identity] public int IdMetaIndicadorProducto { get; set; } // int
+    [Column(), NotNull] public double ValorMeta { get; set; } // float
+    [Column(), NotNull] public DateTime FechaInicioMeta { get; set; } // datetime
+    [Column(), NotNull] public DateTime FechaFinMeta { get; set; } // datetime
+    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column(), NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column(), NotNull] public string Modificadopor { get; set; } // varchar(30)
+    [Column("idProducto"), NotNull] public int IdProducto { get; set; } // int
+    [Column(), NotNull] public string NombreIndicador { get; set; } // varchar(200)
+    [Column(), NotNull] public int IdIndicador { get; set; } // int
 
     #region Associations
 
@@ -1763,20 +1763,20 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_MetaIndicadorProducto_Producto
     /// </summary>
     [Association(ThisKey = "IdProducto", OtherKey = "IdProducto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_MetaIndicadorProducto_Producto", BackReferenceName = "MetaIndicadorProductoes")]
-    public Producto Producto { get; set; ***REMOVED***
+    public Producto Producto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "ObjetivoEspecifico")]
   public partial class ObjetivoEspecifico
   {
-    [PrimaryKey, NotNull] public int IdObjetivoEspecifico { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreObjetivoEspecifico { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
+    [PrimaryKey, NotNull] public int IdObjetivoEspecifico { get; set; } // int
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public string NombreObjetivoEspecifico { get; set; } // varchar(max)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)
 
     #region Associations
 
@@ -1784,34 +1784,34 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_ObjetivoEspecificoXProyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_ObjetivoEspecificoXProyecto", BackReferenceName = "FkObjetivoEspecificoXProyectoes")]
-    public Proyecto FkObjetivoEspecificoXProyecto { get; set; ***REMOVED***
+    public Proyecto FkObjetivoEspecificoXProyecto { get; set; }
 
     /// <summary>
     /// FK_Producto_ObjetivoEspecifico_BackReference
     /// </summary>
     [Association(ThisKey = "IdObjetivoEspecifico", OtherKey = "IdObjetivoEspecifico", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Producto> Productos { get; set; ***REMOVED***
+    public IEnumerable<Producto> Productos { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Opciones")]
   public partial class Opcione
   {
-    [PrimaryKey, NotNull] public string Variable { get; set; ***REMOVED*** // varchar(150)
-    [Column, NotNull] public string Valor { get; set; ***REMOVED*** // nvarchar(150)
-  ***REMOVED***
+    [PrimaryKey, NotNull] public string Variable { get; set; } // varchar(150)
+    [Column, NotNull] public string Valor { get; set; } // nvarchar(150)
+  }
 
   [Table(Schema = "dbo", Name = "OpcionRespuestas")]
   public partial class OpcionRespuesta
   {
-    [PrimaryKey, Identity] public int IdOpcionRespuestas { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdPregunta { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string EtiquetaOpcion { get; set; ***REMOVED*** // varchar(200)
-    [Column, Nullable] public int? EstadoRespuesta { get; set; ***REMOVED*** // int
-    [Column, Nullable] public int? Orden { get; set; ***REMOVED*** // int
-    [Column, Nullable] public DateTime? FechaInicio { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public DateTime? FechaFin { get; set; ***REMOVED*** // datetime
+    [PrimaryKey, Identity] public int IdOpcionRespuestas { get; set; } // int
+    [Column, NotNull] public int IdPregunta { get; set; } // int
+    [Column, Nullable] public string EtiquetaOpcion { get; set; } // varchar(200)
+    [Column, Nullable] public int? EstadoRespuesta { get; set; } // int
+    [Column, Nullable] public int? Orden { get; set; } // int
+    [Column, Nullable] public DateTime? FechaInicio { get; set; } // datetime
+    [Column, Nullable] public DateTime? FechaFin { get; set; } // datetime
 
     #region Associations
 
@@ -1819,41 +1819,41 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_OpcionRespuestasxPreguntaCuestionario
     /// </summary>
     [Association(ThisKey = "IdPregunta", OtherKey = "IdPregunta", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_OpcionRespuestasxPreguntaCuestionario", BackReferenceName = "FkOpcionRespuestasxPreguntaCuestionarios")]
-    public PreguntaCuestionario FkOpcionRespuestasxPreguntaCuestionario { get; set; ***REMOVED***
+    public PreguntaCuestionario FkOpcionRespuestasxPreguntaCuestionario { get; set; }
 
     /// <summary>
     /// Fk_RespuestaCuestionarioxOpcionRespuesta_BackReference
     /// </summary>
     [Association(ThisKey = "IdOpcionRespuestas", OtherKey = "IdOpcionRespuesta", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<RespuestaCuestionario> FkRespuestaCuestionarioxOpcionRespuestas { get; set; ***REMOVED***
+    public IEnumerable<RespuestaCuestionario> FkRespuestaCuestionarioxOpcionRespuestas { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
     [Table(Schema = "dbo", Name = "OrigenDatos")]
     public partial class OrigenDato
     {
-        [Column, NotNull] public int IdOrigen { get; set; ***REMOVED*** // int
-        [Column, Nullable] public string Codigo { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string Descripcion { get; set; ***REMOVED*** // varchar(100)
-        [Column, Nullable] public string Observaciones { get; set; ***REMOVED*** // varchar(100)
-***REMOVED***
+        [Column, NotNull] public int IdOrigen { get; set; } // int
+        [Column, Nullable] public string Codigo { get; set; } // varchar(50)
+        [Column, Nullable] public string Descripcion { get; set; } // varchar(100)
+        [Column, Nullable] public string Observaciones { get; set; } // varchar(100)
+    }
 
     [Table(Schema = "dbo", Name = "OrdenCompraProyecto")]
   public partial class OrdenCompraProyecto
   {
-    [PrimaryKey, NotNull] public string IdOrdenCompraProyecto { get; set; ***REMOVED*** // varchar(100)
-    [Column, NotNull] public int Annio { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int Semestre { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string Convenio { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string Tipoproceso { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string Obra { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string Fuente { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public double? Monto { get; set; ***REMOVED*** // float
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string ModificadoPor { get; set; ***REMOVED*** // varchar(30)
+    [PrimaryKey, NotNull] public string IdOrdenCompraProyecto { get; set; } // varchar(100)
+    [Column, NotNull] public int Annio { get; set; } // int
+    [Column, NotNull] public int Semestre { get; set; } // int
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, Nullable] public string Convenio { get; set; } // varchar(max)
+    [Column, Nullable] public string Tipoproceso { get; set; } // varchar(max)
+    [Column, Nullable] public string Obra { get; set; } // varchar(max)
+    [Column, Nullable] public string Fuente { get; set; } // varchar(max)
+    [Column, Nullable] public double? Monto { get; set; } // float
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string ModificadoPor { get; set; } // varchar(30)
 
     #region Associations
 
@@ -1861,28 +1861,28 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_OrdenCompraProyecto_Proyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_OrdenCompraProyecto_Proyecto", BackReferenceName = "OrdenCompraProyectoes")]
-    public Proyecto Proyecto { get; set; ***REMOVED***
+    public Proyecto Proyecto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "ParametrizacionTitulos")]
   public partial class ParametrizacionTitulo
   {
-    [Column("idParametrizacion"), PrimaryKey, Identity] public int IdParametrizacion { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string Texto { get; set; ***REMOVED*** // varchar(max)
-    [Column(), NotNull] public string Pagina { get; set; ***REMOVED*** // varchar(200)
-    [Column(), NotNull] public string Seccion { get; set; ***REMOVED*** // varchar(200)
-    [Column(), NotNull] public string Label { get; set; ***REMOVED*** // varchar(200)
-    [Column(), NotNull] public string Llave { get; set; ***REMOVED*** // varchar(200)
-  ***REMOVED***
+    [Column("idParametrizacion"), PrimaryKey, Identity] public int IdParametrizacion { get; set; } // int
+    [Column(), NotNull] public string Texto { get; set; } // varchar(max)
+    [Column(), NotNull] public string Pagina { get; set; } // varchar(200)
+    [Column(), NotNull] public string Seccion { get; set; } // varchar(200)
+    [Column(), NotNull] public string Label { get; set; } // varchar(200)
+    [Column(), NotNull] public string Llave { get; set; } // varchar(200)
+  }
 
   [Table(Schema = "dbo", Name = "Periodicidad")]
   public partial class Periodicidad
   {
-    [PrimaryKey, NotNull] public string IdPeriodicidad { get; set; ***REMOVED*** // nvarchar(5)
-    [Column, NotNull] public string NombrePeriocidad { get; set; ***REMOVED*** // varchar(250)
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey, NotNull] public string IdPeriodicidad { get; set; } // nvarchar(5)
+    [Column, NotNull] public string NombrePeriocidad { get; set; } // varchar(250)
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -1890,35 +1890,35 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Fiscalizacion_Periodicidad_BackReference
     /// </summary>
     [Association(ThisKey = "IdPeriodicidad", OtherKey = "IdPeriodicidad", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Fiscalizacion> Fiscalizacions { get; set; ***REMOVED***
+    public IEnumerable<Fiscalizacion> Fiscalizacions { get; set; }
 
     /// <summary>
     /// FK_Liquidacion_Periodicidad_BackReference
     /// </summary>
     [Association(ThisKey = "IdPeriodicidad", OtherKey = "IdPeriocidad", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Liquidacion> Liquidacions { get; set; ***REMOVED***
+    public IEnumerable<Liquidacion> Liquidacions { get; set; }
 
     /// <summary>
     /// FK_Produccion_Periodicidad_BackReference
     /// </summary>
     [Association(ThisKey = "IdPeriodicidad", OtherKey = "IdPeriodicidad", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Produccion> Produccions { get; set; ***REMOVED***
+    public IEnumerable<Produccion> Produccions { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "PreguntaCuestionario")]
   public partial class PreguntaCuestionario
   {
-    [PrimaryKey, Identity] public int IdPregunta { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdEstado { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string TextoPregunta { get; set; ***REMOVED*** // varchar(200)
-    [Column, NotNull] public string TextoExplicativo { get; set; ***REMOVED*** // varchar(200)
-    [Column, Nullable] public string TextoRespuestas { get; set; ***REMOVED*** // varchar(200)
-    [Column, Nullable] public int? EstadoPregunta { get; set; ***REMOVED*** // int
-    [Column, Nullable] public int? Orden { get; set; ***REMOVED*** // int
-    [Column, Nullable] public DateTime? FechaInicio { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public DateTime? FechaFin { get; set; ***REMOVED*** // datetime
+    [PrimaryKey, Identity] public int IdPregunta { get; set; } // int
+    [Column, NotNull] public int IdEstado { get; set; } // int
+    [Column, NotNull] public string TextoPregunta { get; set; } // varchar(200)
+    [Column, NotNull] public string TextoExplicativo { get; set; } // varchar(200)
+    [Column, Nullable] public string TextoRespuestas { get; set; } // varchar(200)
+    [Column, Nullable] public int? EstadoPregunta { get; set; } // int
+    [Column, Nullable] public int? Orden { get; set; } // int
+    [Column, Nullable] public DateTime? FechaInicio { get; set; } // datetime
+    [Column, Nullable] public DateTime? FechaFin { get; set; } // datetime
 
     #region Associations
 
@@ -1926,174 +1926,174 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_OpcionRespuestasxPreguntaCuestionario_BackReference
     /// </summary>
     [Association(ThisKey = "IdPregunta", OtherKey = "IdPregunta", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<OpcionRespuesta> FkOpcionRespuestasxPreguntaCuestionarios { get; set; ***REMOVED***
+    public IEnumerable<OpcionRespuesta> FkOpcionRespuestasxPreguntaCuestionarios { get; set; }
 
     /// <summary>
     /// Fk_PreguntaCuestionarioxEstadoHomologado
     /// </summary>
     [Association(ThisKey = "IdEstado", OtherKey = "IdEstado", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_PreguntaCuestionarioxEstadoHomologado", BackReferenceName = "FkPreguntaCuestionarioxEstadoHomologadoes")]
-    public EstadoHomologado FkPreguntaCuestionarioxEstadoHomologado { get; set; ***REMOVED***
+    public EstadoHomologado FkPreguntaCuestionarioxEstadoHomologado { get; set; }
 
     /// <summary>
     /// Fk_RespuestaCuestionarioxPreguntaCuestionario_BackReference
     /// </summary>
     [Association(ThisKey = "IdPregunta", OtherKey = "Idpregunta", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<RespuestaCuestionario> FkRespuestaCuestionarioxPreguntaCuestionarios { get; set; ***REMOVED***
+    public IEnumerable<RespuestaCuestionario> FkRespuestaCuestionarioxPreguntaCuestionarios { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Presupuesto")]
   public partial class Presupuesto
   {
-    [PrimaryKey(1), NotNull] public int IdTipoRecurso { get; set; ***REMOVED*** // int
-    [PrimaryKey(2), NotNull] public int IdTipoEntidad { get; set; ***REMOVED*** // int
-    [PrimaryKey(3), NotNull] public string IdEntidad { get; set; ***REMOVED*** // varchar(30)
-    [PrimaryKey(4), NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [PrimaryKey(5), NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [PrimaryKey(6), NotNull] public DateTime InicioVigencia { get; set; ***REMOVED*** // smalldatetime
-    [PrimaryKey(7), NotNull] public DateTime FinVigencia { get; set; ***REMOVED*** // smalldatetime
-    [Column, Nullable] public string NombreEntidad { get; set; ***REMOVED*** // varchar(150)
-    [Column, NotNull] public decimal ValorMonto { get; set; ***REMOVED*** // decimal(30, 8)
-    [Column, NotNull] public int IdTipoDeFinanciacion { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [PrimaryKey(1), NotNull] public int IdTipoRecurso { get; set; } // int
+    [PrimaryKey(2), NotNull] public int IdTipoEntidad { get; set; } // int
+    [PrimaryKey(3), NotNull] public string IdEntidad { get; set; } // varchar(30)
+    [PrimaryKey(4), NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [PrimaryKey(5), NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [PrimaryKey(6), NotNull] public DateTime InicioVigencia { get; set; } // smalldatetime
+    [PrimaryKey(7), NotNull] public DateTime FinVigencia { get; set; } // smalldatetime
+    [Column, Nullable] public string NombreEntidad { get; set; } // varchar(150)
+    [Column, NotNull] public decimal ValorMonto { get; set; } // decimal(30, 8)
+    [Column, NotNull] public int IdTipoDeFinanciacion { get; set; } // int
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+  }
 
     [Table(Schema = "consulta", Name = "VwPresupuesto", IsView = true)]
     public partial class consulta_VwPresupuesto
     {
-        [Column(), NotNull] public int Periodo { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string Mes { get; set; ***REMOVED*** // varchar(2)
-        [Column("nivel_de_administracion"), NotNull] public string NivelDeAdministracion { get; set; ***REMOVED*** // varchar(11)
-        [Column(), NotNull] public string CodigoInstitucion { get; set; ***REMOVED*** // varchar(30)
-        [Column(), Nullable] public string Institucion { get; set; ***REMOVED*** // varchar(500)
-        [Column("codigoue"), NotNull] public string Codigoue { get; set; ***REMOVED*** // varchar(30)
-        [Column("ue"), Nullable] public string Ue { get; set; ***REMOVED*** // varchar(500)
-        [Column("codigoga"), NotNull] public char Codigoga { get; set; ***REMOVED*** // varchar(1)
-        [Column("ga"), NotNull] public string Ga { get; set; ***REMOVED*** // varchar(11)
-        [Column(), NotNull] public string TipoGasto { get; set; ***REMOVED*** // varchar(11)
-        [Column("CodigoFuente_de_Financiamiento"), NotNull] public int CodigoFuenteDeFinanciamiento { get; set; ***REMOVED*** // int
-        [Column("Fuente_de_Financiamiento"), Nullable] public string FuenteDeFinanciamiento { get; set; ***REMOVED*** // varchar(500)
-        [Column(), NotNull] public string CodigoFuenteEspecifica { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string FuenteEspecifica { get; set; ***REMOVED*** // varchar(max)
-        [Column(), NotNull] public int CodigoOrganismoFinanciador { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string OrganismoFinanciador { get; set; ***REMOVED*** // varchar(500)
-        [Column(), NotNull] public string CodigoPrograma { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string Programa { get; set; ***REMOVED*** // varchar(max)
-        [Column("CodigoSub_Programa"), NotNull] public string CodigoSubPrograma { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string SubPrograma { get; set; ***REMOVED*** // varchar(max)
-        [Column(), NotNull] public string CodigoProyecto { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string Proyecto { get; set; ***REMOVED*** // varchar(max)
-        [Column(), NotNull] public string CodigoActividadObra { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string ActividadObra { get; set; ***REMOVED*** // varchar(max)
-        [Column("CodigoGrupo_de_gasto"), NotNull] public string CodigoGrupoDeGasto { get; set; ***REMOVED*** // varchar(30)
-        [Column("Grupo_de_gasto"), Nullable] public string GrupoDeGasto { get; set; ***REMOVED*** // varchar(500)
-        [Column(), NotNull] public string CodigoFinalidad { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string Finalidad { get; set; ***REMOVED*** // varchar(max)
-        [Column("CodigoObjeto_de_gasto"), NotNull] public string CodigoObjetoDeGasto { get; set; ***REMOVED*** // varchar(30)
-        [Column("Objeto_de_gasto"), Nullable] public string ObjetoDeGasto { get; set; ***REMOVED*** // varchar(500)
-        [Column(), Nullable] public double? Aprobado { get; set; ***REMOVED*** // float
-        [Column(), Nullable] public double? Vigente { get; set; ***REMOVED*** // float
-        [Column(), Nullable] public double? EjecucionAcumulada { get; set; ***REMOVED*** // float
-        [Column(), NotNull] public int Obligacion { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public double? Pagos { get; set; ***REMOVED*** // float
-        [Column("%_de_Ejecucion"), Nullable] public double? DeEjecucion { get; set; ***REMOVED*** // float
-        [Column(), NotNull] public int IdSector { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string Sector { get; set; ***REMOVED*** // varchar(200)
-        [Column(), NotNull] public string CodigoSubFuncion { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string SubFuncion { get; set; ***REMOVED*** // varchar(max)
-        [Column(), NotNull] public int IdCatalogoLineaPresupuestal { get; set; ***REMOVED*** // int
-***REMOVED***
+        [Column(), NotNull] public int Periodo { get; set; } // int
+        [Column(), Nullable] public string Mes { get; set; } // varchar(2)
+        [Column("nivel_de_administracion"), NotNull] public string NivelDeAdministracion { get; set; } // varchar(11)
+        [Column(), NotNull] public string CodigoInstitucion { get; set; } // varchar(30)
+        [Column(), Nullable] public string Institucion { get; set; } // varchar(500)
+        [Column("codigoue"), NotNull] public string Codigoue { get; set; } // varchar(30)
+        [Column("ue"), Nullable] public string Ue { get; set; } // varchar(500)
+        [Column("codigoga"), NotNull] public char Codigoga { get; set; } // varchar(1)
+        [Column("ga"), NotNull] public string Ga { get; set; } // varchar(11)
+        [Column(), NotNull] public string TipoGasto { get; set; } // varchar(11)
+        [Column("CodigoFuente_de_Financiamiento"), NotNull] public int CodigoFuenteDeFinanciamiento { get; set; } // int
+        [Column("Fuente_de_Financiamiento"), Nullable] public string FuenteDeFinanciamiento { get; set; } // varchar(500)
+        [Column(), NotNull] public string CodigoFuenteEspecifica { get; set; } // varchar(50)
+        [Column(), Nullable] public string FuenteEspecifica { get; set; } // varchar(max)
+        [Column(), NotNull] public int CodigoOrganismoFinanciador { get; set; } // int
+        [Column(), Nullable] public string OrganismoFinanciador { get; set; } // varchar(500)
+        [Column(), NotNull] public string CodigoPrograma { get; set; } // varchar(50)
+        [Column(), Nullable] public string Programa { get; set; } // varchar(max)
+        [Column("CodigoSub_Programa"), NotNull] public string CodigoSubPrograma { get; set; } // varchar(50)
+        [Column(), Nullable] public string SubPrograma { get; set; } // varchar(max)
+        [Column(), NotNull] public string CodigoProyecto { get; set; } // varchar(50)
+        [Column(), Nullable] public string Proyecto { get; set; } // varchar(max)
+        [Column(), NotNull] public string CodigoActividadObra { get; set; } // varchar(50)
+        [Column(), Nullable] public string ActividadObra { get; set; } // varchar(max)
+        [Column("CodigoGrupo_de_gasto"), NotNull] public string CodigoGrupoDeGasto { get; set; } // varchar(30)
+        [Column("Grupo_de_gasto"), Nullable] public string GrupoDeGasto { get; set; } // varchar(500)
+        [Column(), NotNull] public string CodigoFinalidad { get; set; } // varchar(50)
+        [Column(), Nullable] public string Finalidad { get; set; } // varchar(max)
+        [Column("CodigoObjeto_de_gasto"), NotNull] public string CodigoObjetoDeGasto { get; set; } // varchar(30)
+        [Column("Objeto_de_gasto"), Nullable] public string ObjetoDeGasto { get; set; } // varchar(500)
+        [Column(), Nullable] public double? Aprobado { get; set; } // float
+        [Column(), Nullable] public double? Vigente { get; set; } // float
+        [Column(), Nullable] public double? EjecucionAcumulada { get; set; } // float
+        [Column(), NotNull] public int Obligacion { get; set; } // int
+        [Column(), Nullable] public double? Pagos { get; set; } // float
+        [Column("%_de_Ejecucion"), Nullable] public double? DeEjecucion { get; set; } // float
+        [Column(), NotNull] public int IdSector { get; set; } // int
+        [Column(), NotNull] public string Sector { get; set; } // varchar(200)
+        [Column(), NotNull] public string CodigoSubFuncion { get; set; } // varchar(50)
+        [Column(), Nullable] public string SubFuncion { get; set; } // varchar(max)
+        [Column(), NotNull] public int IdCatalogoLineaPresupuestal { get; set; } // int
+    }
 
 
     [Table(Schema = "consulta", Name = "VwPresupuestoHistorico", IsView = true)]
     public partial class consulta_VwPresupuestoHistorico
     {
-        [Column, NotNull] public int Periodo { get; set; ***REMOVED*** // int
-        [Column, Nullable] public string Mes { get; set; ***REMOVED*** // varchar(2)
-        [Column, NotNull] public string CodigoInstitucion { get; set; ***REMOVED*** // varchar(30)
-        [Column, Nullable] public string Institucion { get; set; ***REMOVED*** // varchar(500)
-        [Column, NotNull] public string TipoGasto { get; set; ***REMOVED*** // varchar(11)
-        [Column, NotNull] public int IdSector { get; set; ***REMOVED*** // int
-        [Column, NotNull] public string NombreSector { get; set; ***REMOVED*** // varchar(200)
-        [Column, Nullable] public double? Aprobado { get; set; ***REMOVED*** // float
-        [Column, NotNull] public int Adicionado { get; set; ***REMOVED*** // int
-        [Column, NotNull] public int Reducido { get; set; ***REMOVED*** // int
-        [Column, Nullable] public double? Vigente { get; set; ***REMOVED*** // float
-        [Column, NotNull] public int Comprometido { get; set; ***REMOVED*** // int
-        [Column, Nullable] public double? Pagos { get; set; ***REMOVED*** // float
-***REMOVED***
+        [Column, NotNull] public int Periodo { get; set; } // int
+        [Column, Nullable] public string Mes { get; set; } // varchar(2)
+        [Column, NotNull] public string CodigoInstitucion { get; set; } // varchar(30)
+        [Column, Nullable] public string Institucion { get; set; } // varchar(500)
+        [Column, NotNull] public string TipoGasto { get; set; } // varchar(11)
+        [Column, NotNull] public int IdSector { get; set; } // int
+        [Column, NotNull] public string NombreSector { get; set; } // varchar(200)
+        [Column, Nullable] public double? Aprobado { get; set; } // float
+        [Column, NotNull] public int Adicionado { get; set; } // int
+        [Column, NotNull] public int Reducido { get; set; } // int
+        [Column, Nullable] public double? Vigente { get; set; } // float
+        [Column, NotNull] public int Comprometido { get; set; } // int
+        [Column, Nullable] public double? Pagos { get; set; } // float
+    }
 
     [Table(Schema = "consulta", Name = "VwPresupuestoXProyInv", IsView = true)]
     public partial class consulta_VwPresupuestoXProyInv
     {
-        [Column(), NotNull] public int Periodo { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public int IdCatalogoLineaPresupuestal { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string CodigoInstitucion { get; set; ***REMOVED*** // varchar(30)
-        [Column(), NotNull] public string TipoGasto { get; set; ***REMOVED*** // varchar(11)
-        [Column("CodigoFuente_de_Financiamiento"), NotNull] public int CodigoFuenteDeFinanciamiento { get; set; ***REMOVED*** // int
-        [Column("Fuente_de_Financiamiento"), Nullable] public string FuenteDeFinanciamiento { get; set; ***REMOVED*** // varchar(500)
-        [Column(), NotNull] public string CodigoFuenteEspecifica { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string FuenteEspecifica { get; set; ***REMOVED*** // varchar(max)
-        [Column(), NotNull] public int CodigoOrganismoFinanciador { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string OrganismoFinanciador { get; set; ***REMOVED*** // varchar(500)
-        [Column("CodigoObjeto_de_gasto"), NotNull] public string CodigoObjetoDeGasto { get; set; ***REMOVED*** // varchar(30)
-        [Column("Objeto_de_gasto"), Nullable] public string ObjetoDeGasto { get; set; ***REMOVED*** // varchar(500)
-        [Column(), NotNull] public string CodigoFinalidad { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string Finalidad { get; set; ***REMOVED*** // varchar(max)
-        [Column(), NotNull] public int IdSector { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string NombreSector { get; set; ***REMOVED*** // varchar(200)
-        [Column(), NotNull] public string CodigoSubFuncion { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string SubFuncion { get; set; ***REMOVED*** // varchar(max)
-        [Column("bpin"), NotNull] public string Bpin { get; set; ***REMOVED*** // varchar(20)
-        [Column("nombreproyecto"), Nullable] public string Nombreproyecto { get; set; ***REMOVED*** // varchar(max)
-        [Column("objetivogeneral"), NotNull] public string Objetivogeneral { get; set; ***REMOVED*** // varchar(max)
-        [Column("avancefinancieroLinea"), Nullable] public decimal? AvancefinancieroLinea { get; set; ***REMOVED*** // decimal(18, 2)
-        [Column("avancefinanciero"), Nullable] public decimal? Avancefinanciero { get; set; ***REMOVED*** // decimal(10, 2)
-        [Column("avancefisico"), NotNull] public int Avancefisico { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public int IdEstado { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string NombreEstado { get; set; ***REMOVED*** // varchar(30)
-        [Column(), Nullable] public int? IdProyecto { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public decimal? ValorProyecto { get; set; ***REMOVED*** // decimal(18, 2)
-        [Column(), Nullable] public decimal? ValorFinanciado { get; set; ***REMOVED*** // decimal(38, 2)
-        [Column(), Nullable] public decimal? ValorEjecutado { get; set; ***REMOVED*** // decimal(18, 2)
-        [Column(), NotNull] public string URLProyecto { get; set; ***REMOVED*** // varchar(75)
-***REMOVED***
+        [Column(), NotNull] public int Periodo { get; set; } // int
+        [Column(), NotNull] public int IdCatalogoLineaPresupuestal { get; set; } // int
+        [Column(), NotNull] public string CodigoInstitucion { get; set; } // varchar(30)
+        [Column(), NotNull] public string TipoGasto { get; set; } // varchar(11)
+        [Column("CodigoFuente_de_Financiamiento"), NotNull] public int CodigoFuenteDeFinanciamiento { get; set; } // int
+        [Column("Fuente_de_Financiamiento"), Nullable] public string FuenteDeFinanciamiento { get; set; } // varchar(500)
+        [Column(), NotNull] public string CodigoFuenteEspecifica { get; set; } // varchar(50)
+        [Column(), Nullable] public string FuenteEspecifica { get; set; } // varchar(max)
+        [Column(), NotNull] public int CodigoOrganismoFinanciador { get; set; } // int
+        [Column(), Nullable] public string OrganismoFinanciador { get; set; } // varchar(500)
+        [Column("CodigoObjeto_de_gasto"), NotNull] public string CodigoObjetoDeGasto { get; set; } // varchar(30)
+        [Column("Objeto_de_gasto"), Nullable] public string ObjetoDeGasto { get; set; } // varchar(500)
+        [Column(), NotNull] public string CodigoFinalidad { get; set; } // varchar(50)
+        [Column(), Nullable] public string Finalidad { get; set; } // varchar(max)
+        [Column(), NotNull] public int IdSector { get; set; } // int
+        [Column(), NotNull] public string NombreSector { get; set; } // varchar(200)
+        [Column(), NotNull] public string CodigoSubFuncion { get; set; } // varchar(50)
+        [Column(), Nullable] public string SubFuncion { get; set; } // varchar(max)
+        [Column("bpin"), NotNull] public string Bpin { get; set; } // varchar(20)
+        [Column("nombreproyecto"), Nullable] public string Nombreproyecto { get; set; } // varchar(max)
+        [Column("objetivogeneral"), NotNull] public string Objetivogeneral { get; set; } // varchar(max)
+        [Column("avancefinancieroLinea"), Nullable] public decimal? AvancefinancieroLinea { get; set; } // decimal(18, 2)
+        [Column("avancefinanciero"), Nullable] public decimal? Avancefinanciero { get; set; } // decimal(10, 2)
+        [Column("avancefisico"), NotNull] public int Avancefisico { get; set; } // int
+        [Column(), NotNull] public int IdEstado { get; set; } // int
+        [Column(), NotNull] public string NombreEstado { get; set; } // varchar(30)
+        [Column(), Nullable] public int? IdProyecto { get; set; } // int
+        [Column(), Nullable] public decimal? ValorProyecto { get; set; } // decimal(18, 2)
+        [Column(), Nullable] public decimal? ValorFinanciado { get; set; } // decimal(38, 2)
+        [Column(), Nullable] public decimal? ValorEjecutado { get; set; } // decimal(18, 2)
+        [Column(), NotNull] public string URLProyecto { get; set; } // varchar(75)
+    }
 
   [Table(Schema = "dbo", Name = "Procesos")]
   public partial class Proceso
   {
-    [Column(), PrimaryKey(2), NotNull] public string IdProceso { get; set; ***REMOVED*** // varchar(150)
-    [Column(), Nullable] public string CodigoContrato { get; set; ***REMOVED*** // varchar(30)
-    [Column("ocid"), PrimaryKey(3), NotNull] public string Ocid { get; set; ***REMOVED*** // varchar(50)
-    [Column(), Nullable] public DateTime? FechaPublicacion { get; set; ***REMOVED*** // datetime2(7)
-    [Column(), Nullable] public string Publicador { get; set; ***REMOVED*** // varchar(250)
-    [Column(), Nullable] public DateTime? FechaFotoProceso { get; set; ***REMOVED*** // datetime2(7)
-    [Column(), Nullable] public DateTime? FechaDeEmisionCodContracto { get; set; ***REMOVED*** // datetime2(7)
-    [Column(), Nullable] public string CodigoEntidadConvocante { get; set; ***REMOVED*** // varchar(30)
-    [Column(), Nullable] public string CategoriaContratacion { get; set; ***REMOVED*** // varchar(200)
-    [Column(), Nullable] public string EstadoProceso { get; set; ***REMOVED*** // varchar(30)
-    [Column(), Nullable] public string IdOferta { get; set; ***REMOVED*** // varchar(30)
-    [Column(), Nullable] public string DescripcionOferta { get; set; ***REMOVED*** // varchar(300)
-    [Column(), Nullable] public string MetodoContratacion { get; set; ***REMOVED*** // varchar(300)
-    [Column(), Nullable] public string CodigoComprador { get; set; ***REMOVED*** // varchar(30)
-    [Column(), Nullable] public string DuracionContrato { get; set; ***REMOVED*** // varchar(3)
-    [Column(), Nullable] public DateTime? FechaFinContrato { get; set; ***REMOVED*** // datetime2(7)
-    [Column(), Nullable] public DateTime? FechaInicioContrato { get; set; ***REMOVED*** // datetime2(7)
-    [Column(), PrimaryKey(5), NotNull] public string CodigoProveedor { get; set; ***REMOVED*** // varchar(30)
-    [Column("uriProceso"), Nullable] public string UriProceso { get; set; ***REMOVED*** // varchar(324)
-    [Column("Es_Covid"), NotNull] public int EsCovid { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public DateTime? FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column("codigo_BPIN"), PrimaryKey(4), NotNull] public string CodigoBpin { get; set; ***REMOVED*** // varchar(50)
-    [Column("urlResumenAdjudicacion"), Nullable] public string UrlResumenAdjudicacion { get; set; ***REMOVED*** // varchar(250)
-    [Column("urlProveedoresAdjudicados"), Nullable] public string UrlProveedoresAdjudicados { get; set; ***REMOVED*** // varchar(250)
-    [Column("urlProveedoresOferentes"), Nullable] public string UrlProveedoresOferentes { get; set; ***REMOVED*** // varchar(250)
-    [Column("urlDocumentosAdjudicacion"), Nullable] public string UrlDocumentosAdjudicacion { get; set; ***REMOVED*** // varchar(250)
-    [Column(), Nullable] public string UrlpreciosReferencia { get; set; ***REMOVED*** // varchar(250)
-    [Column(), Nullable] public string UrlInvitados { get; set; ***REMOVED*** // varchar(250)
-    [Column("idprocesojson"), PrimaryKey(1), NotNull] public string Idprocesojson { get; set; ***REMOVED*** // varchar(250)
-    [Column(), PrimaryKey(6), NotNull] public string AwardId { get; set; ***REMOVED*** // varchar(250)
+    [Column(), PrimaryKey(2), NotNull] public string IdProceso { get; set; } // varchar(150)
+    [Column(), Nullable] public string CodigoContrato { get; set; } // varchar(30)
+    [Column("ocid"), PrimaryKey(3), NotNull] public string Ocid { get; set; } // varchar(50)
+    [Column(), Nullable] public DateTime? FechaPublicacion { get; set; } // datetime2(7)
+    [Column(), Nullable] public string Publicador { get; set; } // varchar(250)
+    [Column(), Nullable] public DateTime? FechaFotoProceso { get; set; } // datetime2(7)
+    [Column(), Nullable] public DateTime? FechaDeEmisionCodContracto { get; set; } // datetime2(7)
+    [Column(), Nullable] public string CodigoEntidadConvocante { get; set; } // varchar(30)
+    [Column(), Nullable] public string CategoriaContratacion { get; set; } // varchar(200)
+    [Column(), Nullable] public string EstadoProceso { get; set; } // varchar(30)
+    [Column(), Nullable] public string IdOferta { get; set; } // varchar(30)
+    [Column(), Nullable] public string DescripcionOferta { get; set; } // varchar(300)
+    [Column(), Nullable] public string MetodoContratacion { get; set; } // varchar(300)
+    [Column(), Nullable] public string CodigoComprador { get; set; } // varchar(30)
+    [Column(), Nullable] public string DuracionContrato { get; set; } // varchar(3)
+    [Column(), Nullable] public DateTime? FechaFinContrato { get; set; } // datetime2(7)
+    [Column(), Nullable] public DateTime? FechaInicioContrato { get; set; } // datetime2(7)
+    [Column(), PrimaryKey(5), NotNull] public string CodigoProveedor { get; set; } // varchar(30)
+    [Column("uriProceso"), Nullable] public string UriProceso { get; set; } // varchar(324)
+    [Column("Es_Covid"), NotNull] public int EsCovid { get; set; } // int
+    [Column(), Nullable] public DateTime? FechaUltimaModificacion { get; set; } // datetime
+    [Column("codigo_BPIN"), PrimaryKey(4), NotNull] public string CodigoBpin { get; set; } // varchar(50)
+    [Column("urlResumenAdjudicacion"), Nullable] public string UrlResumenAdjudicacion { get; set; } // varchar(250)
+    [Column("urlProveedoresAdjudicados"), Nullable] public string UrlProveedoresAdjudicados { get; set; } // varchar(250)
+    [Column("urlProveedoresOferentes"), Nullable] public string UrlProveedoresOferentes { get; set; } // varchar(250)
+    [Column("urlDocumentosAdjudicacion"), Nullable] public string UrlDocumentosAdjudicacion { get; set; } // varchar(250)
+    [Column(), Nullable] public string UrlpreciosReferencia { get; set; } // varchar(250)
+    [Column(), Nullable] public string UrlInvitados { get; set; } // varchar(250)
+    [Column("idprocesojson"), PrimaryKey(1), NotNull] public string Idprocesojson { get; set; } // varchar(250)
+    [Column(), PrimaryKey(6), NotNull] public string AwardId { get; set; } // varchar(250)
 
     #region Associations
 
@@ -2101,48 +2101,48 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Proceso_EntidadContrato1
     /// </summary>
     [Association(ThisKey = "CodigoComprador", OtherKey = "Codigo", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Proceso_EntidadContrato1", BackReferenceName = "ProcesoEntidadContratoes")]
-    public EntidadContrato FkProcesoEntidadContrato1 { get; set; ***REMOVED***
+    public EntidadContrato FkProcesoEntidadContrato1 { get; set; }
 
     /// <summary>
     /// FK_Proceso_EntidadContrato2
     /// </summary>
     [Association(ThisKey = "CodigoProveedor", OtherKey = "Codigo", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Proceso_EntidadContrato2", BackReferenceName = "FkProcesoEntidadContrato2BackReferences")]
-    public EntidadContrato FkProcesoEntidadContrato2 { get; set; ***REMOVED***
+    public EntidadContrato FkProcesoEntidadContrato2 { get; set; }
 
     /// <summary>
     /// FK_Proceso_EntidadContrato
     /// </summary>
     [Association(ThisKey = "CodigoEntidadConvocante", OtherKey = "Codigo", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Proceso_EntidadContrato", BackReferenceName = "Procesoes")]
-    public EntidadContrato ProcesoEntidadContrato { get; set; ***REMOVED***
+    public EntidadContrato ProcesoEntidadContrato { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Produccion")]
   public partial class Produccion
   {
-    [Column(), PrimaryKey, Identity] public int IdProduccion { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string IdPeriodicidad { get; set; ***REMOVED*** // nvarchar(5)
-    [Column(), NotNull] public int PeriodoLiquidado { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string IdRecursoNatural { get; set; ***REMOVED*** // varchar(10)
-    [Column(), NotNull] public char IdTipoRecursoNatural { get; set; ***REMOVED*** // varchar(1)
-    [Column(), NotNull] public string IdUnidadMedida { get; set; ***REMOVED*** // nvarchar(20)
-    [Column("Produccion"), NotNull] public decimal ProduccionColumn { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column(), NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column(), NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column(), NotNull] public string IdCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
-    [Column(), NotNull] public DateTime FechaInicioPeriodo { get; set; ***REMOVED*** // smalldatetime
-    [Column(), NotNull] public DateTime FechaFinPeriodo { get; set; ***REMOVED*** // smalldatetime
-    [Column(), Nullable] public string IdLiquidacionNegocio { get; set; ***REMOVED*** // nvarchar(8)
-    [Column(), NotNull] public int AñoLiquidado { get; set; ***REMOVED*** // int
+    [Column(), PrimaryKey, Identity] public int IdProduccion { get; set; } // int
+    [Column(), NotNull] public string IdPeriodicidad { get; set; } // nvarchar(5)
+    [Column(), NotNull] public int PeriodoLiquidado { get; set; } // int
+    [Column(), NotNull] public string IdRecursoNatural { get; set; } // varchar(10)
+    [Column(), NotNull] public char IdTipoRecursoNatural { get; set; } // varchar(1)
+    [Column(), NotNull] public string IdUnidadMedida { get; set; } // nvarchar(20)
+    [Column("Produccion"), NotNull] public decimal ProduccionColumn { get; set; } // decimal(18, 2)
+    [Column(), NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column(), NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [Column(), NotNull] public string IdCampoOProyecto { get; set; } // nvarchar(50)
+    [Column(), NotNull] public DateTime FechaInicioPeriodo { get; set; } // smalldatetime
+    [Column(), NotNull] public DateTime FechaFinPeriodo { get; set; } // smalldatetime
+    [Column(), Nullable] public string IdLiquidacionNegocio { get; set; } // nvarchar(8)
+    [Column(), NotNull] public int AñoLiquidado { get; set; } // int
     /// <summary>
     /// Titulo Minero o Pozo Petrolifero
     /// </summary>
-    [Column(), NotNull] public string IdTipoCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
-    [Column(), NotNull] public int IdTipoDeFinanciacion { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int IdTipoDeContraprestacion { get; set; ***REMOVED*** // int
+    [Column(), NotNull] public string IdTipoCampoOProyecto { get; set; } // nvarchar(50)
+    [Column(), NotNull] public int IdTipoDeFinanciacion { get; set; } // int
+    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column(), NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column(), NotNull] public int IdTipoDeContraprestacion { get; set; } // int
 
     #region Associations
 
@@ -2150,61 +2150,61 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Produccion_CampoOProyecto
     /// </summary>
     [Association(ThisKey = "IdCampoOProyecto, IdTipoCampoOProyecto", OtherKey = "IdCampoOProyecto, IdTipoCampoOProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Produccion_CampoOProyecto", BackReferenceName = "Produccions")]
-    public CampoOProyecto CampoOProyecto { get; set; ***REMOVED***
+    public CampoOProyecto CampoOProyecto { get; set; }
 
     /// <summary>
     /// FK_Produccion_EnteTerritorial
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Produccion_EnteTerritorial", BackReferenceName = "Produccions")]
-    public EnteTerritorial EnteTerritorial { get; set; ***REMOVED***
+    public EnteTerritorial EnteTerritorial { get; set; }
 
     /// <summary>
     /// FK_Produccion_Periodicidad
     /// </summary>
     [Association(ThisKey = "IdPeriodicidad", OtherKey = "IdPeriodicidad", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Produccion_Periodicidad", BackReferenceName = "Produccions")]
-    public Periodicidad Periodicidad { get; set; ***REMOVED***
+    public Periodicidad Periodicidad { get; set; }
 
     /// <summary>
     /// FK_ProduccionANH_Produccion_BackReference
     /// </summary>
     [Association(ThisKey = "IdProduccion", OtherKey = "IdProduccion", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToOne, IsBackReference = true)]
-    public ProduccionANH ProduccionANH { get; set; ***REMOVED***
+    public ProduccionANH ProduccionANH { get; set; }
 
     /// <summary>
     /// FK_ProduccionANM_Produccion_BackReference
     /// </summary>
     [Association(ThisKey = "IdProduccion", OtherKey = "IdProduccion", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToOne, IsBackReference = true)]
-    public ProduccionANM ProduccionANM { get; set; ***REMOVED***
+    public ProduccionANM ProduccionANM { get; set; }
 
     /// <summary>
     /// FK_Produccion_RecursoNatural
     /// </summary>
     [Association(ThisKey = "IdRecursoNatural, IdTipoRecursoNatural", OtherKey = "IdRecursoNatural, IdTipoRecursoNatural", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Produccion_RecursoNatural", BackReferenceName = "Produccions")]
-    public RecursoNatural RecursoNatural { get; set; ***REMOVED***
+    public RecursoNatural RecursoNatural { get; set; }
 
     /// <summary>
     /// FK_Produccion_TipoDeFinanciacion
     /// </summary>
     [Association(ThisKey = "IdTipoDeFinanciacion", OtherKey = "IdTipoFinanciacion", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Produccion_TipoDeFinanciacion", BackReferenceName = "Produccions")]
-    public TipoDeFinanciacion TipoDeFinanciacion { get; set; ***REMOVED***
+    public TipoDeFinanciacion TipoDeFinanciacion { get; set; }
 
     /// <summary>
     /// FK_Produccion_UnidadMedida
     /// </summary>
     [Association(ThisKey = "IdUnidadMedida", OtherKey = "IdUnidadMedida", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Produccion_UnidadMedida", BackReferenceName = "Produccions")]
-    public UnidadMedida UnidadMedida { get; set; ***REMOVED***
+    public UnidadMedida UnidadMedida { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "ProduccionANH")]
   public partial class ProduccionANH
   {
-    [PrimaryKey, NotNull] public int IdProduccion { get; set; ***REMOVED*** // int
-    [Column, Nullable] public decimal? ProducccionFiscalizada { get; set; ***REMOVED*** // decimal(18, 0)
-    [Column, Nullable] public decimal? VolumenRegalia { get; set; ***REMOVED*** // decimal(20, 8)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey, NotNull] public int IdProduccion { get; set; } // int
+    [Column, Nullable] public decimal? ProducccionFiscalizada { get; set; } // decimal(18, 0)
+    [Column, Nullable] public decimal? VolumenRegalia { get; set; } // decimal(20, 8)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -2212,19 +2212,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_ProduccionANH_Produccion
     /// </summary>
     [Association(ThisKey = "IdProduccion", OtherKey = "IdProduccion", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.OneToOne, KeyName = "FK_ProduccionANH_Produccion", BackReferenceName = "ProduccionANH")]
-    public Produccion Produccion { get; set; ***REMOVED***
+    public Produccion Produccion { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "ProduccionANM")]
   public partial class ProduccionANM
   {
-    [PrimaryKey, NotNull] public int IdProduccion { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdTipoDeContraprestacion { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreDeContraprestacion { get; set; ***REMOVED*** // varchar(250)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey, NotNull] public int IdProduccion { get; set; } // int
+    [Column, NotNull] public int IdTipoDeContraprestacion { get; set; } // int
+    [Column, NotNull] public string NombreDeContraprestacion { get; set; } // varchar(250)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -2232,22 +2232,22 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_ProduccionANM_Produccion
     /// </summary>
     [Association(ThisKey = "IdProduccion", OtherKey = "IdProduccion", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.OneToOne, KeyName = "FK_ProduccionANM_Produccion", BackReferenceName = "ProduccionANM")]
-    public Produccion Produccion { get; set; ***REMOVED***
+    public Produccion Produccion { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Producto")]
   public partial class Producto
   {
-    [PrimaryKey, NotNull] public int IdProducto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreProducto { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public string UnidadProducto { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public decimal CantidadProducto { get; set; ***REMOVED*** // decimal(18, 0)
-    [Column, NotNull] public int IdObjetivoEspecifico { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
+    [PrimaryKey, NotNull] public int IdProducto { get; set; } // int
+    [Column, NotNull] public string NombreProducto { get; set; } // varchar(max)
+    [Column, NotNull] public string UnidadProducto { get; set; } // varchar(max)
+    [Column, NotNull] public decimal CantidadProducto { get; set; } // decimal(18, 0)
+    [Column, NotNull] public int IdObjetivoEspecifico { get; set; } // int
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)
 
     #region Associations
 
@@ -2255,43 +2255,43 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_ActividadXProducto_BackReference
     /// </summary>
     [Association(ThisKey = "IdProducto", OtherKey = "IdProducto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Actividad> FkActividadXProductos { get; set; ***REMOVED***
+    public IEnumerable<Actividad> FkActividadXProductos { get; set; }
 
     /// <summary>
     /// FK_MetaIndicadorProducto_Producto_BackReference
     /// </summary>
     [Association(ThisKey = "IdProducto", OtherKey = "IdProducto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<MetaIndicadorProducto> MetaIndicadorProductos { get; set; ***REMOVED***
+    public IEnumerable<MetaIndicadorProducto> MetaIndicadorProductos { get; set; }
 
     /// <summary>
     /// FK_Producto_ObjetivoEspecifico
     /// </summary>
     [Association(ThisKey = "IdObjetivoEspecifico", OtherKey = "IdObjetivoEspecifico", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_Producto_ObjetivoEspecifico", BackReferenceName = "Productoes")]
-    public ObjetivoEspecifico ObjetivoEspecifico { get; set; ***REMOVED***
+    public ObjetivoEspecifico ObjetivoEspecifico { get; set; }
 
     /// <summary>
     /// FK_SeguimientoMetaIndicadorProducto_Producto_BackReference
     /// </summary>
     [Association(ThisKey = "IdProducto", OtherKey = "IdProducto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<SeguimientoMetaIndicadorProducto> SeguimientoMetaIndicadorProductos { get; set; ***REMOVED***
+    public IEnumerable<SeguimientoMetaIndicadorProducto> SeguimientoMetaIndicadorProductos { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Programa")]
   public partial class Programa
   {
-    [Column(), PrimaryKey, Identity] public int Id { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int Nivel { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int CodigoEntidad { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int ClasePrograma { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int CodigoPrograma { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string NombrePrograma { get; set; ***REMOVED*** // varchar(60)
-    [Column(), NotNull] public int CodigoSubPrograma { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int CodigoProyecto { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int EsProgramaCovid { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public string NombreActividadProyecto { get; set; ***REMOVED*** // varchar(250)
-    [Column("codigoprogramaNegocio", SkipOnInsert = true, SkipOnUpdate = true), Nullable] public int? CodigoprogramaNegocio { get; set; ***REMOVED*** // int
+    [Column(), PrimaryKey, Identity] public int Id { get; set; } // int
+    [Column(), NotNull] public int Nivel { get; set; } // int
+    [Column(), NotNull] public int CodigoEntidad { get; set; } // int
+    [Column(), NotNull] public int ClasePrograma { get; set; } // int
+    [Column(), NotNull] public int CodigoPrograma { get; set; } // int
+    [Column(), NotNull] public string NombrePrograma { get; set; } // varchar(60)
+    [Column(), NotNull] public int CodigoSubPrograma { get; set; } // int
+    [Column(), NotNull] public int CodigoProyecto { get; set; } // int
+    [Column(), NotNull] public int EsProgramaCovid { get; set; } // int
+    [Column(), Nullable] public string NombreActividadProyecto { get; set; } // varchar(250)
+    [Column("codigoprogramaNegocio", SkipOnInsert = true, SkipOnUpdate = true), Nullable] public int? CodigoprogramaNegocio { get; set; } // int
 
     #region Associations
 
@@ -2299,49 +2299,49 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_ProgramaEjecucionContrato_Programa_BackReference
     /// </summary>
     [Association(ThisKey = "Id", OtherKey = "IdPrograma", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<ProgramaEjecucionContrato> ProgramaEjecucionContratos { get; set; ***REMOVED***
+    public IEnumerable<ProgramaEjecucionContrato> ProgramaEjecucionContratos { get; set; }
 
     /// <summary>
     /// FK_ProgramaMetasFinancieras_Programa_BackReference
     /// </summary>
     [Association(ThisKey = "Id", OtherKey = "IdPrograma", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<ProgramaMetasFinanciera> ProgramaMetasFinancieras { get; set; ***REMOVED***
+    public IEnumerable<ProgramaMetasFinanciera> ProgramaMetasFinancieras { get; set; }
 
     /// <summary>
     /// FK_ProgramaMetasFisicas_Programa_BackReference
     /// </summary>
     [Association(ThisKey = "Id", OtherKey = "IdPrograma", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<ProgramaMetasFisica> ProgramaMetasFisicas { get; set; ***REMOVED***
+    public IEnumerable<ProgramaMetasFisica> ProgramaMetasFisicas { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "ProgramaEjecucionContrato")]
   public partial class ProgramaEjecucionContrato
   {
-    [Column(), PrimaryKey, Identity] public long Id { get; set; ***REMOVED*** // bigint
-    [Column(), NotNull] public int NivelEntidad { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int CodEntidad { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string Entidad { get; set; ***REMOVED*** // varchar(max)
-    [Column(), NotNull] public int IdPrograma { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int CodProyActividad { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string NombreProyActividad { get; set; ***REMOVED*** // varchar(max)
-    [Column("PRY_Clasificacion"), NotNull] public string PryClasificacion { get; set; ***REMOVED*** // varchar(10)
-    [Column("Codigo_SNIP"), NotNull] public int CodigoSnip { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int CodObjeto { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string NombreObjeto { get; set; ***REMOVED*** // varchar(max)
-    [Column(), NotNull] public int Fuente { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int Financiador { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int Departamento { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public decimal Unidad { get; set; ***REMOVED*** // numeric(18, 0)
-    [Column(), NotNull] public int Asiento { get; set; ***REMOVED*** // int
-    [Column("DOC_FHCLAB"), NotNull] public DateTime DocFhclab { get; set; ***REMOVED*** // datetime
-    [Column("Ruc_Proveedor"), NotNull] public string RucProveedor { get; set; ***REMOVED*** // varchar(50)
-    [Column(), NotNull] public string NombreProveedor { get; set; ***REMOVED*** // varchar(max)
-    [Column(), NotNull] public string Comprobante { get; set; ***REMOVED*** // varchar(255)
-    [Column(), NotNull] public string DocConcepto { get; set; ***REMOVED*** // varchar(max)
-    [Column(), Nullable] public string CodigoContratacion { get; set; ***REMOVED*** // varchar(max)
-    [Column(), Nullable] public decimal? Monto { get; set; ***REMOVED*** // numeric(18, 0)
+    [Column(), PrimaryKey, Identity] public long Id { get; set; } // bigint
+    [Column(), NotNull] public int NivelEntidad { get; set; } // int
+    [Column(), NotNull] public int CodEntidad { get; set; } // int
+    [Column(), NotNull] public string Entidad { get; set; } // varchar(max)
+    [Column(), NotNull] public int IdPrograma { get; set; } // int
+    [Column(), NotNull] public int CodProyActividad { get; set; } // int
+    [Column(), NotNull] public string NombreProyActividad { get; set; } // varchar(max)
+    [Column("PRY_Clasificacion"), NotNull] public string PryClasificacion { get; set; } // varchar(10)
+    [Column("Codigo_SNIP"), NotNull] public int CodigoSnip { get; set; } // int
+    [Column(), NotNull] public int CodObjeto { get; set; } // int
+    [Column(), NotNull] public string NombreObjeto { get; set; } // varchar(max)
+    [Column(), NotNull] public int Fuente { get; set; } // int
+    [Column(), NotNull] public int Financiador { get; set; } // int
+    [Column(), NotNull] public int Departamento { get; set; } // int
+    [Column(), NotNull] public decimal Unidad { get; set; } // numeric(18, 0)
+    [Column(), NotNull] public int Asiento { get; set; } // int
+    [Column("DOC_FHCLAB"), NotNull] public DateTime DocFhclab { get; set; } // datetime
+    [Column("Ruc_Proveedor"), NotNull] public string RucProveedor { get; set; } // varchar(50)
+    [Column(), NotNull] public string NombreProveedor { get; set; } // varchar(max)
+    [Column(), NotNull] public string Comprobante { get; set; } // varchar(255)
+    [Column(), NotNull] public string DocConcepto { get; set; } // varchar(max)
+    [Column(), Nullable] public string CodigoContratacion { get; set; } // varchar(max)
+    [Column(), Nullable] public decimal? Monto { get; set; } // numeric(18, 0)
 
     #region Associations
 
@@ -2349,27 +2349,27 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_ProgramaEjecucionContrato_Programa
     /// </summary>
     [Association(ThisKey = "IdPrograma", OtherKey = "Id", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_ProgramaEjecucionContrato_Programa", BackReferenceName = "ProgramaEjecucionContratoes")]
-    public Programa Programa { get; set; ***REMOVED***
+    public Programa Programa { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "ProgramaMetasFinancieras")]
   public partial class ProgramaMetasFinanciera
   {
-    [Column(), PrimaryKey(1), NotNull] public DateTime FechaMeta { get; set; ***REMOVED*** // datetime
-    [Column("idPrograma"), PrimaryKey(2), NotNull] public int IdPrograma { get; set; ***REMOVED*** // int
-    [Column(), PrimaryKey(3), NotNull] public int CodigoProducto { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public string NombreProducto { get; set; ***REMOVED*** // varchar(100)
-    [Column(), PrimaryKey(4), NotNull] public int CodigoObjeto { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public string NombreObjeto { get; set; ***REMOVED*** // varchar(80)
-    [Column(), PrimaryKey(5), NotNull] public int Fuente { get; set; ***REMOVED*** // int
-    [Column(), PrimaryKey(6), NotNull] public int Financiador { get; set; ***REMOVED*** // int
-    [Column(), PrimaryKey(7), NotNull] public int CodigoDepartamento { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public decimal? Meta { get; set; ***REMOVED*** // numeric(15, 0)
-    [Column(), Nullable] public decimal? Avance { get; set; ***REMOVED*** // numeric(15, 0)
-    [Column(), Nullable] public DateTime? FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column("codigosnip"), Nullable] public string Codigosnip { get; set; ***REMOVED*** // varchar(60)
+    [Column(), PrimaryKey(1), NotNull] public DateTime FechaMeta { get; set; } // datetime
+    [Column("idPrograma"), PrimaryKey(2), NotNull] public int IdPrograma { get; set; } // int
+    [Column(), PrimaryKey(3), NotNull] public int CodigoProducto { get; set; } // int
+    [Column(), Nullable] public string NombreProducto { get; set; } // varchar(100)
+    [Column(), PrimaryKey(4), NotNull] public int CodigoObjeto { get; set; } // int
+    [Column(), Nullable] public string NombreObjeto { get; set; } // varchar(80)
+    [Column(), PrimaryKey(5), NotNull] public int Fuente { get; set; } // int
+    [Column(), PrimaryKey(6), NotNull] public int Financiador { get; set; } // int
+    [Column(), PrimaryKey(7), NotNull] public int CodigoDepartamento { get; set; } // int
+    [Column(), Nullable] public decimal? Meta { get; set; } // numeric(15, 0)
+    [Column(), Nullable] public decimal? Avance { get; set; } // numeric(15, 0)
+    [Column(), Nullable] public DateTime? FechaUltimaModificacion { get; set; } // datetime
+    [Column("codigosnip"), Nullable] public string Codigosnip { get; set; } // varchar(60)
 
     #region Associations
 
@@ -2377,28 +2377,28 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_ProgramaMetasFinancieras_Programa
     /// </summary>
     [Association(ThisKey = "IdPrograma", OtherKey = "Id", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_ProgramaMetasFinancieras_Programa", BackReferenceName = "ProgramaMetasFinancieras")]
-    public Programa Programa { get; set; ***REMOVED***
+    public Programa Programa { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "ProgramaMetasFisicas")]
   public partial class ProgramaMetasFisica
   {
-    [PrimaryKey(1), NotNull] public int IdPrograma { get; set; ***REMOVED*** // int
-    [PrimaryKey(2), NotNull] public int CodigoProyecto { get; set; ***REMOVED*** // int
-    [PrimaryKey(3), NotNull] public int CodigoProducto { get; set; ***REMOVED*** // int
-    [PrimaryKey(4), NotNull] public DateTime FechaMeta { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public string Objetivo { get; set; ***REMOVED*** // varchar(2000)
-    [Column, Nullable] public string ResultadoIntermedio { get; set; ***REMOVED*** // varchar(1000)
-    [Column, Nullable] public string ResultadoInmediato { get; set; ***REMOVED*** // varchar(2000)
-    [Column, Nullable] public string NombreProyecto { get; set; ***REMOVED*** // varchar(250)
-    [Column, Nullable] public string NombreProducto { get; set; ***REMOVED*** // varchar(100)
-    [Column, Nullable] public string Unidad { get; set; ***REMOVED*** // varchar(60)
-    [Column, Nullable] public decimal? MetaTotal { get; set; ***REMOVED*** // numeric(17, 2)
-    [Column, Nullable] public decimal? Meta { get; set; ***REMOVED*** // numeric(17, 2)
-    [Column, Nullable] public decimal? Avance { get; set; ***REMOVED*** // numeric(17, 2)
-    [Column, NotNull] public DateTime FechaModificacion { get; set; ***REMOVED*** // datetime
+    [PrimaryKey(1), NotNull] public int IdPrograma { get; set; } // int
+    [PrimaryKey(2), NotNull] public int CodigoProyecto { get; set; } // int
+    [PrimaryKey(3), NotNull] public int CodigoProducto { get; set; } // int
+    [PrimaryKey(4), NotNull] public DateTime FechaMeta { get; set; } // datetime
+    [Column, Nullable] public string Objetivo { get; set; } // varchar(2000)
+    [Column, Nullable] public string ResultadoIntermedio { get; set; } // varchar(1000)
+    [Column, Nullable] public string ResultadoInmediato { get; set; } // varchar(2000)
+    [Column, Nullable] public string NombreProyecto { get; set; } // varchar(250)
+    [Column, Nullable] public string NombreProducto { get; set; } // varchar(100)
+    [Column, Nullable] public string Unidad { get; set; } // varchar(60)
+    [Column, Nullable] public decimal? MetaTotal { get; set; } // numeric(17, 2)
+    [Column, Nullable] public decimal? Meta { get; set; } // numeric(17, 2)
+    [Column, Nullable] public decimal? Avance { get; set; } // numeric(17, 2)
+    [Column, NotNull] public DateTime FechaModificacion { get; set; } // datetime
 
     #region Associations
 
@@ -2406,51 +2406,51 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_ProgramaMetasFisicas_Programa
     /// </summary>
     [Association(ThisKey = "IdPrograma", OtherKey = "Id", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_ProgramaMetasFisicas_Programa", BackReferenceName = "ProgramaMetasFisicas")]
-    public Programa Programa { get; set; ***REMOVED***
+    public Programa Programa { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "ProyeccionRecursosITEMS")]
   public partial class ProyeccionRecursosITEM
   {
-    [Column(), PrimaryKey, Identity] public int IdProyeccion { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int IdItem { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public string Item { get; set; ***REMOVED*** // varchar(30)
-    [Column(), NotNull] public int IdArticulo { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public string Articulo { get; set; ***REMOVED*** // varchar(30)
-    [Column(), Nullable] public string DescripcionArticulo { get; set; ***REMOVED*** // varchar(4000)
-    [Column(), NotNull] public int PlanificadoValorUSD { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int TransferidoValorUSD { get; set; ***REMOVED*** // int
-    [Column("codigoprogramaNegocio"), NotNull] public int CodigoprogramaNegocio { get; set; ***REMOVED*** // int
-    [Column("codigoProyectoActividad"), NotNull] public int CodigoProyectoActividad { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? FuenteFinanciacion { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? OrganismoFinanciador { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [Column(), PrimaryKey, Identity] public int IdProyeccion { get; set; } // int
+    [Column(), NotNull] public int IdItem { get; set; } // int
+    [Column(), Nullable] public string Item { get; set; } // varchar(30)
+    [Column(), NotNull] public int IdArticulo { get; set; } // int
+    [Column(), Nullable] public string Articulo { get; set; } // varchar(30)
+    [Column(), Nullable] public string DescripcionArticulo { get; set; } // varchar(4000)
+    [Column(), NotNull] public int PlanificadoValorUSD { get; set; } // int
+    [Column(), NotNull] public int TransferidoValorUSD { get; set; } // int
+    [Column("codigoprogramaNegocio"), NotNull] public int CodigoprogramaNegocio { get; set; } // int
+    [Column("codigoProyectoActividad"), NotNull] public int CodigoProyectoActividad { get; set; } // int
+    [Column(), Nullable] public int? FuenteFinanciacion { get; set; } // int
+    [Column(), Nullable] public int? OrganismoFinanciador { get; set; } // int
+  }
 
   [Table(Schema = "dbo", Name = "Proyecto")]
   public partial class Proyecto
   {
-    [Column(), PrimaryKey, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string CodigoBPIN { get; set; ***REMOVED*** // varchar(max)
-    [Column(), NotNull] public string NombreProyecto { get; set; ***REMOVED*** // varchar(max)
-    [Column(), NotNull] public DateTime FechaInicioProyecto { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public DateTime FechaFinProyecto { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public decimal VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column(), NotNull] public decimal VlrTotalProyectoTodasLasFuentes { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column(), NotNull] public string ObjetivoGeneral { get; set; ***REMOVED*** // varchar(max)
-    [Column(), NotNull] public int IdSector { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string TipoDeProyecto { get; set; ***REMOVED*** // varchar(max)
-    [Column(), NotNull] public long NumeroBeneficiarios { get; set; ***REMOVED*** // bigint
-    [Column(), NotNull] public int IdOCAD { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string NombreOCAD { get; set; ***REMOVED*** // varchar(max)
-    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
-    [Column(), NotNull] public decimal PorcentajeAvanceFisico { get; set; ***REMOVED*** // decimal(10, 2)
-    //[Column(), Nullable] public decimal? PorcentajeAvanceFinanciero { get; set; ***REMOVED*** // decimal(10, 2)
-    //[Column("BIP_ARRASTRE"), Nullable] public string BipArrastre { get; set; ***REMOVED*** // varchar(50)
-    //[Column(), Nullable] public string Descripcion { get; set; ***REMOVED*** // varchar(max)
+    [Column(), PrimaryKey, NotNull] public int IdProyecto { get; set; } // int
+    [Column(), NotNull] public string CodigoBPIN { get; set; } // varchar(max)
+    [Column(), NotNull] public string NombreProyecto { get; set; } // varchar(max)
+    [Column(), NotNull] public DateTime FechaInicioProyecto { get; set; } // datetime
+    [Column(), NotNull] public DateTime FechaFinProyecto { get; set; } // datetime
+    [Column(), NotNull] public decimal VlrTotalProyectoFuenteRegalias { get; set; } // decimal(18, 2)
+    [Column(), NotNull] public decimal VlrTotalProyectoTodasLasFuentes { get; set; } // decimal(18, 2)
+    [Column(), NotNull] public string ObjetivoGeneral { get; set; } // varchar(max)
+    [Column(), NotNull] public int IdSector { get; set; } // int
+    [Column(), NotNull] public string TipoDeProyecto { get; set; } // varchar(max)
+    [Column(), NotNull] public long NumeroBeneficiarios { get; set; } // bigint
+    [Column(), NotNull] public int IdOCAD { get; set; } // int
+    [Column(), NotNull] public string NombreOCAD { get; set; } // varchar(max)
+    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column(), NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column(), NotNull] public string Modificadopor { get; set; } // varchar(30)
+    [Column(), NotNull] public decimal PorcentajeAvanceFisico { get; set; } // decimal(10, 2)
+    //[Column(), Nullable] public decimal? PorcentajeAvanceFinanciero { get; set; } // decimal(10, 2)
+    //[Column("BIP_ARRASTRE"), Nullable] public string BipArrastre { get; set; } // varchar(50)
+    //[Column(), Nullable] public string Descripcion { get; set; } // varchar(max)
 
     #region Associations
 
@@ -2458,76 +2458,76 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_EsquemaFinanciacionProyectoXProyecto_BackReference
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<EsquemaFinanciacionProyecto> FkEsquemaFinanciacionProyectoXProyectoes { get; set; ***REMOVED***
+    public IEnumerable<EsquemaFinanciacionProyecto> FkEsquemaFinanciacionProyectoXProyectoes { get; set; }
 
     /// <summary>
     /// Fk_FotoUsuarioProyecto_BackReference
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<FotoUsuario> FkFotoUsuarioProyectoes { get; set; ***REMOVED***
+    public IEnumerable<FotoUsuario> FkFotoUsuarioProyectoes { get; set; }
 
     /// <summary>
     /// Fk_MeGustaXProyecto_BackReference
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<MeGusta> FkMeGustaXProyectoes { get; set; ***REMOVED***
+    public IEnumerable<MeGusta> FkMeGustaXProyectoes { get; set; }
 
     /// <summary>
     /// Fk_ObjetivoEspecificoXProyecto_BackReference
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<ObjetivoEspecifico> FkObjetivoEspecificoXProyectoes { get; set; ***REMOVED***
+    public IEnumerable<ObjetivoEspecifico> FkObjetivoEspecificoXProyectoes { get; set; }
 
     /// <summary>
     /// Fk_ProyectoXEnteTerritoria_BackReference
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<ProyectoXEntidadTerritorial> FkProyectoXEnteTerritorias { get; set; ***REMOVED***
+    public IEnumerable<ProyectoXEntidadTerritorial> FkProyectoXEnteTerritorias { get; set; }
 
     /// <summary>
     /// Fk_ProyectoXSector
     /// </summary>
     [Association(ThisKey = "IdSector", OtherKey = "IdSector", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_ProyectoXSector", BackReferenceName = "FkProyectoXSectors")]
-    public Sector FkProyectoXSector { get; set; ***REMOVED***
+    public Sector FkProyectoXSector { get; set; }
 
     /// <summary>
     /// Fk_RespuestaCuestionarioXProyecto_BackReference
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<RespuestaCuestionario> FkRespuestaCuestionarioXProyectoes { get; set; ***REMOVED***
+    public IEnumerable<RespuestaCuestionario> FkRespuestaCuestionarioXProyectoes { get; set; }
 
     /// <summary>
     /// FK_FotoXProyecto_BackReference
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Foto> FotoXProyectoes { get; set; ***REMOVED***
+    public IEnumerable<Foto> FotoXProyectoes { get; set; }
 
     /// <summary>
     /// FK_GeorreferenciacionXProyecto_BackReference
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Georreferenciacion> GeorreferenciacionXProyectoes { get; set; ***REMOVED***
+    public IEnumerable<Georreferenciacion> GeorreferenciacionXProyectoes { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "ProyectoOrganismoFinanciador", IsView = true)]
   public partial class ProyectoOrganismoFinanciador
   {
-    [Column, Nullable] public int? IdOrganismoFinanciador { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string OrganismoFinanciador { get; set; ***REMOVED*** // varchar(200)
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [Column, Nullable] public int? IdOrganismoFinanciador { get; set; } // int
+    [Column, Nullable] public string OrganismoFinanciador { get; set; } // varchar(200)
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+  }
 
   [Table(Schema = "dbo", Name = "ProyectoXEntidadTerritorial")]
   public partial class ProyectoXEntidadTerritorial
   {
-    [PrimaryKey(1), NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [PrimaryKey(2), NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [PrimaryKey(3), NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
+    [PrimaryKey(1), NotNull] public int IdProyecto { get; set; } // int
+    [PrimaryKey(2), NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [PrimaryKey(3), NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)
 
     #region Associations
 
@@ -2535,26 +2535,26 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_ProyectoXEnteTerritoria
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_ProyectoXEnteTerritoria", BackReferenceName = "FkProyectoXEnteTerritorias")]
-    public Proyecto FkProyectoXEnteTerritoria { get; set; ***REMOVED***
+    public Proyecto FkProyectoXEnteTerritoria { get; set; }
 
     /// <summary>
     /// Fk_ProyectoXEnteTerritorial
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_ProyectoXEnteTerritorial", BackReferenceName = "FkProyectoXEnteTerritorials")]
-    public EnteTerritorial FkProyectoXEnteTerritorial { get; set; ***REMOVED***
+    public EnteTerritorial FkProyectoXEnteTerritorial { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "PuntajeEvaluacionProyectos")]
   public partial class PuntajeEvaluacionProyecto
   {
-    [PrimaryKey, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string CodigoBPIN { get; set; ***REMOVED*** // nvarchar(50)
-    [Column, Nullable] public decimal? Puntaje { get; set; ***REMOVED*** // numeric(18, 2)
-    [Column, Nullable] public DateTime? FechaPuntaje { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public DateTime? FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, Nullable] public int? ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey, NotNull] public int IdProyecto { get; set; } // int
+    [Column, Nullable] public string CodigoBPIN { get; set; } // nvarchar(50)
+    [Column, Nullable] public decimal? Puntaje { get; set; } // numeric(18, 2)
+    [Column, Nullable] public DateTime? FechaPuntaje { get; set; } // datetime
+    [Column, Nullable] public DateTime? FechaUltimaModificacion { get; set; } // datetime
+    [Column, Nullable] public int? ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -2562,20 +2562,20 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_PuntajeEvaluacionProyectos_Proyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.OneToOne, KeyName = "FK_PuntajeEvaluacionProyectos_Proyecto", BackReferenceName = "PuntajeEvaluacionProyecto")]
-    public Proyecto Proyecto { get; set; ***REMOVED***
+    public Proyecto Proyecto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "RecursoNatural")]
   public partial class RecursoNatural
   {
-    [PrimaryKey(1), NotNull] public string IdRecursoNatural { get; set; ***REMOVED*** // varchar(10)
-    [PrimaryKey(2), NotNull] public char IdTipoRecursoNatural { get; set; ***REMOVED*** // varchar(1)
-    [Column, NotNull] public string NombreRecursoNatural { get; set; ***REMOVED*** // varchar(250)
-    [Column, NotNull] public string NombreTipoRecursoNatural { get; set; ***REMOVED*** // varchar(250)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey(1), NotNull] public string IdRecursoNatural { get; set; } // varchar(10)
+    [PrimaryKey(2), NotNull] public char IdTipoRecursoNatural { get; set; } // varchar(1)
+    [Column, NotNull] public string NombreRecursoNatural { get; set; } // varchar(250)
+    [Column, NotNull] public string NombreTipoRecursoNatural { get; set; } // varchar(250)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -2583,32 +2583,32 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Liquidacion_RecursoNatural1_BackReference
     /// </summary>
     [Association(ThisKey = "IdRecursoNatural, IdTipoRecursoNatural", OtherKey = "IdRecursoNatural, IdTipoRecursoNatural", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Liquidacion> LiquidacionRecursoNaturals { get; set; ***REMOVED***
+    public IEnumerable<Liquidacion> LiquidacionRecursoNaturals { get; set; }
 
     /// <summary>
     /// FK_Produccion_RecursoNatural_BackReference
     /// </summary>
     [Association(ThisKey = "IdRecursoNatural, IdTipoRecursoNatural", OtherKey = "IdRecursoNatural, IdTipoRecursoNatural", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Produccion> Produccions { get; set; ***REMOVED***
+    public IEnumerable<Produccion> Produccions { get; set; }
 
     /// <summary>
     /// FK_RecursoNatural_TipoDeRecursoNatural
     /// </summary>
     [Association(ThisKey = "IdTipoRecursoNatural", OtherKey = "IdTipoRecursoNatural", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_RecursoNatural_TipoDeRecursoNatural", BackReferenceName = "RecursoNaturals")]
-    public TipoDeRecursoNatural TipoDeRecursoNatural { get; set; ***REMOVED***
+    public TipoDeRecursoNatural TipoDeRecursoNatural { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "RecursoNaturalFiscalizacion")]
   public partial class RecursoNaturalFiscalizacion
   {
-    [PrimaryKey(1), NotNull] public string IdRecursoNatural { get; set; ***REMOVED*** // varchar(10)
-    [PrimaryKey(2), NotNull] public char IdTipoRecursoNatural { get; set; ***REMOVED*** // varchar(1)
-    [Column, NotNull] public string NombreRecursoNatural { get; set; ***REMOVED*** // varchar(250)
-    [Column, NotNull] public string NombreTipoRecursoNatural { get; set; ***REMOVED*** // varchar(250)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey(1), NotNull] public string IdRecursoNatural { get; set; } // varchar(10)
+    [PrimaryKey(2), NotNull] public char IdTipoRecursoNatural { get; set; } // varchar(1)
+    [Column, NotNull] public string NombreRecursoNatural { get; set; } // varchar(250)
+    [Column, NotNull] public string NombreTipoRecursoNatural { get; set; } // varchar(250)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -2616,28 +2616,28 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Fiscalizacion_RecursoNaturalFiscalizacion_BackReference
     /// </summary>
     [Association(ThisKey = "IdRecursoNatural, IdTipoRecursoNatural", OtherKey = "IdRecursoNatural, IdTipoRecursoNatural", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Fiscalizacion> Fiscalizacions { get; set; ***REMOVED***
+    public IEnumerable<Fiscalizacion> Fiscalizacions { get; set; }
 
     /// <summary>
     /// FK_RecursoNaturalFiscalizacion_TipoDeRecursoNatural
     /// </summary>
     [Association(ThisKey = "IdTipoRecursoNatural", OtherKey = "IdTipoRecursoNatural", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_RecursoNaturalFiscalizacion_TipoDeRecursoNatural", BackReferenceName = "RecursoNaturalFiscalizacions")]
-    public TipoDeRecursoNatural TipoDeRecursoNatural { get; set; ***REMOVED***
+    public TipoDeRecursoNatural TipoDeRecursoNatural { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "RendimientosFinancieros")]
   public partial class RendimientosFinanciero
   {
-    [PrimaryKey(1), NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [PrimaryKey(2), NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [PrimaryKey(3), NotNull] public int AñoVigencia { get; set; ***REMOVED*** // int
-    [PrimaryKey(4), NotNull] public int MesInicioVigencia { get; set; ***REMOVED*** // int
-    [PrimaryKey(5), NotNull] public int MesFinVigencia { get; set; ***REMOVED*** // int
-    [Column, NotNull] public double Valor { get; set; ***REMOVED*** // float
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey(1), NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [PrimaryKey(2), NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [PrimaryKey(3), NotNull] public int AñoVigencia { get; set; } // int
+    [PrimaryKey(4), NotNull] public int MesInicioVigencia { get; set; } // int
+    [PrimaryKey(5), NotNull] public int MesFinVigencia { get; set; } // int
+    [Column, NotNull] public double Valor { get; set; } // float
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -2645,23 +2645,23 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_RendimientosFinancieros_EnteTerritorial
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_RendimientosFinancieros_EnteTerritorial", BackReferenceName = "RendimientosFinancieros")]
-    public EnteTerritorial EnteTerritorial { get; set; ***REMOVED***
+    public EnteTerritorial EnteTerritorial { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "RespuestaCuestionario")]
   public partial class RespuestaCuestionario
   {
-    [PrimaryKey, Identity] public int IdRespuesta { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdUsuario { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int Idpregunta { get; set; ***REMOVED*** // int
-    [Column, Nullable] public int? IdOpcionRespuesta { get; set; ***REMOVED*** // int
-    [Column, Nullable] public DateTime? Fecha { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public string ComentarioRespuesta { get; set; ***REMOVED*** // varchar(4000)
+    [PrimaryKey, Identity] public int IdRespuesta { get; set; } // int
+    [Column, NotNull] public int IdUsuario { get; set; } // int
+    [Column, NotNull] public int Idpregunta { get; set; } // int
+    [Column, Nullable] public int? IdOpcionRespuesta { get; set; } // int
+    [Column, Nullable] public DateTime? Fecha { get; set; } // datetime
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, Nullable] public string ComentarioRespuesta { get; set; } // varchar(4000)
 
     #region Associations
 
@@ -2669,67 +2669,67 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_RespuestaCuestionarioXEnteTerritorial
     /// </summary>
     [Association(ThisKey = "IdDepartamento, IdMunicipio", OtherKey = "IdDepartamento, IdMunicipio", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_RespuestaCuestionarioXEnteTerritorial", BackReferenceName = "FkRespuestaCuestionarioXEnteTerritorials")]
-    public EnteTerritorial FkRespuestaCuestionarioXEnteTerritorial { get; set; ***REMOVED***
+    public EnteTerritorial FkRespuestaCuestionarioXEnteTerritorial { get; set; }
 
     /// <summary>
     /// Fk_RespuestaCuestionarioxOpcionRespuesta
     /// </summary>
     [Association(ThisKey = "IdOpcionRespuesta", OtherKey = "IdOpcionRespuestas", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_RespuestaCuestionarioxOpcionRespuesta", BackReferenceName = "FkRespuestaCuestionarioxOpcionRespuestas")]
-    public OpcionRespuesta FkRespuestaCuestionarioxOpcionRespuesta { get; set; ***REMOVED***
+    public OpcionRespuesta FkRespuestaCuestionarioxOpcionRespuesta { get; set; }
 
     /// <summary>
     /// Fk_RespuestaCuestionarioxPreguntaCuestionario
     /// </summary>
     [Association(ThisKey = "Idpregunta", OtherKey = "IdPregunta", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_RespuestaCuestionarioxPreguntaCuestionario", BackReferenceName = "FkRespuestaCuestionarioxPreguntaCuestionarios")]
-    public PreguntaCuestionario FkRespuestaCuestionarioxPreguntaCuestionario { get; set; ***REMOVED***
+    public PreguntaCuestionario FkRespuestaCuestionarioxPreguntaCuestionario { get; set; }
 
     /// <summary>
     /// Fk_RespuestaCuestionarioXProyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_RespuestaCuestionarioXProyecto", BackReferenceName = "FkRespuestaCuestionarioXProyectoes")]
-    public Proyecto FkRespuestaCuestionarioXProyecto { get; set; ***REMOVED***
+    public Proyecto FkRespuestaCuestionarioXProyecto { get; set; }
 
     /// <summary>
     /// Fk_RespuestaCuestionarioXUsuario
     /// </summary>
     [Association(ThisKey = "IdUsuario", OtherKey = "IdUsuario", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_RespuestaCuestionarioXUsuario", BackReferenceName = "FkRespuestaCuestionarioXUsuarios")]
-    public Usuario FkRespuestaCuestionarioXUsuario { get; set; ***REMOVED***
+    public Usuario FkRespuestaCuestionarioXUsuario { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "RespuestaCuestionarioTemp")]
   public partial class RespuestaCuestionarioTemp
   {
-    [PrimaryKey, NotNull] public int IdRespuesta { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdUsuario { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int Idpregunta { get; set; ***REMOVED*** // int
-    [Column, Nullable] public int? IdOpcionRespuesta { get; set; ***REMOVED*** // int
-    [Column, Nullable] public DateTime? Fecha { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public string ComentarioRespuesta { get; set; ***REMOVED*** // varchar(4000)
-  ***REMOVED***
+    [PrimaryKey, NotNull] public int IdRespuesta { get; set; } // int
+    [Column, NotNull] public int IdUsuario { get; set; } // int
+    [Column, NotNull] public int Idpregunta { get; set; } // int
+    [Column, Nullable] public int? IdOpcionRespuesta { get; set; } // int
+    [Column, Nullable] public DateTime? Fecha { get; set; } // datetime
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, Nullable] public string ComentarioRespuesta { get; set; } // varchar(4000)
+  }
 
   [Table(Schema = "dbo", Name = "ResumenEstadisticasNacional")]
   public partial class ResumenEstadisticasNacional
   {
-    [Column("id"), PrimaryKey, Identity] public int Id { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string RutaIcono { get; set; ***REMOVED*** // varchar(max)
-    [Column(), NotNull] public string ConsultaSQL { get; set; ***REMOVED*** // varchar(max)
-    [Column(), NotNull] public string Descripcion { get; set; ***REMOVED*** // varchar(1000)
-    [Column(), NotNull] public string SeccionAplicativo { get; set; ***REMOVED*** // varchar(250)
-  ***REMOVED***
+    [Column("id"), PrimaryKey, Identity] public int Id { get; set; } // int
+    [Column(), NotNull] public string RutaIcono { get; set; } // varchar(max)
+    [Column(), NotNull] public string ConsultaSQL { get; set; } // varchar(max)
+    [Column(), NotNull] public string Descripcion { get; set; } // varchar(1000)
+    [Column(), NotNull] public string SeccionAplicativo { get; set; } // varchar(250)
+  }
 
   [Table(Schema = "dbo", Name = "Rol")]
   public partial class Rol
   {
-    [PrimaryKey, NotNull] public int IdRol { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreRol { get; set; ***REMOVED*** // varchar(50)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string ModificadoPor { get; set; ***REMOVED*** // varchar(30)
+    [PrimaryKey, NotNull] public int IdRol { get; set; } // int
+    [Column, NotNull] public string NombreRol { get; set; } // varchar(50)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string ModificadoPor { get; set; } // varchar(30)
 
     #region Associations
 
@@ -2737,17 +2737,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_ActorXRol_BackReference
     /// </summary>
     [Association(ThisKey = "IdRol", OtherKey = "IDRol", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Actor> ActorXRols { get; set; ***REMOVED***
+    public IEnumerable<Actor> ActorXRols { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "RolUsuario")]
   public partial class RolUsuario
   {
-    [PrimaryKey, Identity] public int IdRolUsuario { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreRol { get; set; ***REMOVED*** // varchar(50)
-    [Column, Nullable] public DateTime? FechaCreacion { get; set; ***REMOVED*** // datetime
+    [PrimaryKey, Identity] public int IdRolUsuario { get; set; } // int
+    [Column, NotNull] public string NombreRol { get; set; } // varchar(50)
+    [Column, Nullable] public DateTime? FechaCreacion { get; set; } // datetime
 
     #region Associations
 
@@ -2755,38 +2755,38 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_UsuarioXRolUsuario_BackReference
     /// </summary>
     [Association(ThisKey = "IdRolUsuario", OtherKey = "IdRolUsuario", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Usuario> FkUsuarioXRolUsuarios { get; set; ***REMOVED***
+    public IEnumerable<Usuario> FkUsuarioXRolUsuarios { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "SearchResultParam")]
   public partial class SearchResultParam
   {
-    [Column(), PrimaryKey, Identity] public int Id { get; set; ***REMOVED*** // int
-    [Column("hierarchy"), NotNull] public string Hierarchy { get; set; ***REMOVED*** // varchar(100)
-    [Column("type"), NotNull] public string Type { get; set; ***REMOVED*** // varchar(50)
-    [Column("url"), NotNull] public string Url { get; set; ***REMOVED*** // varchar(250)
-    [Column("param"), Nullable] public string Param { get; set; ***REMOVED*** // varchar(250)
-  ***REMOVED***
+    [Column(), PrimaryKey, Identity] public int Id { get; set; } // int
+    [Column("hierarchy"), NotNull] public string Hierarchy { get; set; } // varchar(100)
+    [Column("type"), NotNull] public string Type { get; set; } // varchar(50)
+    [Column("url"), NotNull] public string Url { get; set; } // varchar(250)
+    [Column("param"), Nullable] public string Param { get; set; } // varchar(250)
+  }
 
     [Table(Schema = "dbo", Name = "VwSubsidiosEmergenciaConsolidado", IsView = true)]
     public partial class VwSubsidiosEmergenciaConsolidado
     {
-        [Column(), NotNull] public int Id { get; set; ***REMOVED*** // int
-        [Column("origen"), NotNull] public string Origen { get; set; ***REMOVED*** // varchar(15)
-        [Column(), Nullable] public long? NumeroBeneficarios { get; set; ***REMOVED*** // bigint
-        [Column(), Nullable] public decimal? Valor { get; set; ***REMOVED*** // decimal(38, 2)
-***REMOVED***
+        [Column(), NotNull] public int Id { get; set; } // int
+        [Column("origen"), NotNull] public string Origen { get; set; } // varchar(15)
+        [Column(), Nullable] public long? NumeroBeneficarios { get; set; } // bigint
+        [Column(), Nullable] public decimal? Valor { get; set; } // decimal(38, 2)
+    }
 
     [Table(Schema = "dbo", Name = "Sector")]
   public partial class Sector
   {
-    [PrimaryKey, NotNull] public int IdSector { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreSector { get; set; ***REMOVED*** // varchar(200)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Modificadopor { get; set; ***REMOVED*** // varchar(30)
+    [PrimaryKey, NotNull] public int IdSector { get; set; } // int
+    [Column, NotNull] public string NombreSector { get; set; } // varchar(200)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)
 
     #region Associations
 
@@ -2794,29 +2794,29 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_ProyectoXSector_BackReference
     /// </summary>
     [Association(ThisKey = "IdSector", OtherKey = "IdSector", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Proyecto> FkProyectoXSectors { get; set; ***REMOVED***
+    public IEnumerable<Proyecto> FkProyectoXSectors { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "SeguimientoEsquemaFinanciacionProyecto")]
   public partial class SeguimientoEsquemaFinanciacionProyecto
   {
-    [Column("idSeguimientoEsquemaFinanciacion"), PrimaryKey, Identity] public int IdSeguimientoEsquemaFinanciacion { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public decimal? ValorReportado { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column(), NotNull] public decimal PresupuestoVigente { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column(), NotNull] public decimal PresupuestoObligado { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column(), NotNull] public decimal PresupuestoPagado { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column(), NotNull] public int Anio { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public DateTime FechaInicioReporte { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public DateTime FechaFinalReporte { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public int IdTipoRecurso { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int IdTipoEntidad { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string IdEntidad { get; set; ***REMOVED*** // varchar(30)
-    [Column("idProyecto"), NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string ModificadoPor { get; set; ***REMOVED*** // varchar(50)
+    [Column("idSeguimientoEsquemaFinanciacion"), PrimaryKey, Identity] public int IdSeguimientoEsquemaFinanciacion { get; set; } // int
+    [Column(), Nullable] public decimal? ValorReportado { get; set; } // decimal(18, 2)
+    [Column(), NotNull] public decimal PresupuestoVigente { get; set; } // decimal(18, 2)
+    [Column(), NotNull] public decimal PresupuestoObligado { get; set; } // decimal(18, 2)
+    [Column(), NotNull] public decimal PresupuestoPagado { get; set; } // decimal(18, 2)
+    [Column(), NotNull] public int Anio { get; set; } // int
+    [Column(), NotNull] public DateTime FechaInicioReporte { get; set; } // datetime
+    [Column(), NotNull] public DateTime FechaFinalReporte { get; set; } // datetime
+    [Column(), NotNull] public int IdTipoRecurso { get; set; } // int
+    [Column(), NotNull] public int IdTipoEntidad { get; set; } // int
+    [Column(), NotNull] public string IdEntidad { get; set; } // varchar(30)
+    [Column("idProyecto"), NotNull] public int IdProyecto { get; set; } // int
+    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column(), NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column(), NotNull] public string ModificadoPor { get; set; } // varchar(50)
 
     #region Associations
 
@@ -2824,29 +2824,29 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_SeguimientoEsquemaFinanciacionProyecto_Fuente
     /// </summary>
     [Association(ThisKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", OtherKey = "IdTipoRecurso, IdTipoEntidad, IdEntidad", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_SeguimientoEsquemaFinanciacionProyecto_Fuente", BackReferenceName = "SeguimientoEsquemaFinanciacionProyectoes")]
-    public Fuente Fuente { get; set; ***REMOVED***
+    public Fuente Fuente { get; set; }
 
     /// <summary>
     /// FK_SeguimientoEsquemaFinanciacionProyecto_Proyecto
     /// </summary>
     [Association(ThisKey = "IdProyecto", OtherKey = "IdProyecto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_SeguimientoEsquemaFinanciacionProyecto_Proyecto", BackReferenceName = "SeguimientoEsquemaFinanciacionProyectoes")]
-    public Proyecto Proyecto { get; set; ***REMOVED***
+    public Proyecto Proyecto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "SeguimientoMetaIndicadorProducto")]
   public partial class SeguimientoMetaIndicadorProducto
   {
-    [Column("idSeguimientoMetaIndicadorProducto"), PrimaryKey, Identity] public int IdSeguimientoMetaIndicadorProducto { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public double ValorReportado { get; set; ***REMOVED*** // float
-    [Column(), NotNull] public DateTime FechaInicioReporte { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public DateTime FechaFinReporte { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column(), NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string ModificadoPor { get; set; ***REMOVED*** // varchar(50)
-    [Column(), NotNull] public int IdProducto { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public int IdIndicador { get; set; ***REMOVED*** // int
+    [Column("idSeguimientoMetaIndicadorProducto"), PrimaryKey, Identity] public int IdSeguimientoMetaIndicadorProducto { get; set; } // int
+    [Column(), NotNull] public double ValorReportado { get; set; } // float
+    [Column(), NotNull] public DateTime FechaInicioReporte { get; set; } // datetime
+    [Column(), NotNull] public DateTime FechaFinReporte { get; set; } // datetime
+    [Column(), NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column(), NotNull] public int ConsecutivoCarga { get; set; } // int
+    [Column(), NotNull] public string ModificadoPor { get; set; } // varchar(50)
+    [Column(), NotNull] public int IdProducto { get; set; } // int
+    [Column(), NotNull] public int IdIndicador { get; set; } // int
 
     #region Associations
 
@@ -2854,32 +2854,32 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_SeguimientoMetaIndicadorProducto_Producto
     /// </summary>
     [Association(ThisKey = "IdProducto", OtherKey = "IdProducto", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_SeguimientoMetaIndicadorProducto_Producto", BackReferenceName = "SeguimientoMetaIndicadorProductoes")]
-    public Producto Producto { get; set; ***REMOVED***
+    public Producto Producto { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Tiempo")]
   public partial class Tiempo
   {
-    [PrimaryKey, NotNull] public int IdFecha { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime Fecha { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int Anio { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int MesNro { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int Dia { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int AnioMesNro { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string AnioMes { get; set; ***REMOVED*** // nvarchar(7)
-    [Column, NotNull] public string Semestre { get; set; ***REMOVED*** // nvarchar(10)
-    [Column, NotNull] public string MesNombre { get; set; ***REMOVED*** // nvarchar(10)
-    [Column, NotNull] public string MesNombreCorto { get; set; ***REMOVED*** // nvarchar(3)
-    [Column, NotNull] public int Trimestre { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [PrimaryKey, NotNull] public int IdFecha { get; set; } // int
+    [Column, NotNull] public DateTime Fecha { get; set; } // datetime
+    [Column, NotNull] public int Anio { get; set; } // int
+    [Column, NotNull] public int MesNro { get; set; } // int
+    [Column, NotNull] public int Dia { get; set; } // int
+    [Column, NotNull] public int AnioMesNro { get; set; } // int
+    [Column, NotNull] public string AnioMes { get; set; } // nvarchar(7)
+    [Column, NotNull] public string Semestre { get; set; } // nvarchar(10)
+    [Column, NotNull] public string MesNombre { get; set; } // nvarchar(10)
+    [Column, NotNull] public string MesNombreCorto { get; set; } // nvarchar(3)
+    [Column, NotNull] public int Trimestre { get; set; } // int
+  }
 
   [Table(Schema = "dbo", Name = "TipoActividadFiscalizacion")]
   public partial class TipoActividadFiscalizacion
   {
-    [PrimaryKey, NotNull] public string Id { get; set; ***REMOVED*** // nvarchar(50)
-    [Column, NotNull] public string Nombre { get; set; ***REMOVED*** // varchar(250)
+    [PrimaryKey, NotNull] public string Id { get; set; } // nvarchar(50)
+    [Column, NotNull] public string Nombre { get; set; } // varchar(250)
 
     #region Associations
 
@@ -2887,18 +2887,18 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Fiscalizacion_TipoActividadFiscalizacion_BackReference
     /// </summary>
     [Association(ThisKey = "Id", OtherKey = "IdTipoActividad", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Fiscalizacion> Fiscalizacions { get; set; ***REMOVED***
+    public IEnumerable<Fiscalizacion> Fiscalizacions { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "TipoCampoOProyecto")]
   public partial class TipoCampoOProyecto
   {
-    [PrimaryKey, NotNull] public string IdTipoCampoOProyecto { get; set; ***REMOVED*** // nvarchar(50)
-    [Column, NotNull] public string NombreTipoCampoOProyecto { get; set; ***REMOVED*** // varchar(250)
-    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey, NotNull] public string IdTipoCampoOProyecto { get; set; } // nvarchar(50)
+    [Column, NotNull] public string NombreTipoCampoOProyecto { get; set; } // varchar(250)
+    [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -2906,24 +2906,24 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_CampoOProyecto_TipoCampoOProyecto_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoCampoOProyecto", OtherKey = "IdTipoCampoOProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<CampoOProyecto> CampoOProyectos { get; set; ***REMOVED***
+    public IEnumerable<CampoOProyecto> CampoOProyectos { get; set; }
 
     /// <summary>
     /// FK_CampoOProyectoFiscalizacion_TipoCampoOProyecto_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoCampoOProyecto", OtherKey = "IdTipoCampoOProyecto", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<CampoOProyectoFiscalizacion> CampoOProyectoFiscalizacions { get; set; ***REMOVED***
+    public IEnumerable<CampoOProyectoFiscalizacion> CampoOProyectoFiscalizacions { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "TipoComentario")]
   public partial class TipoComentario
   {
-    [Column(), PrimaryKey, Identity] public int Id { get; set; ***REMOVED*** // int
-    [Column("TipoComentario"), NotNull] public string TipoComentarioColumn { get; set; ***REMOVED*** // varchar(100)
-    [Column(), Nullable] public bool? Estado { get; set; ***REMOVED*** // bit
-    [Column(), Nullable] public int? IdAsociacion { get; set; ***REMOVED*** // int
+    [Column(), PrimaryKey, Identity] public int Id { get; set; } // int
+    [Column("TipoComentario"), NotNull] public string TipoComentarioColumn { get; set; } // varchar(100)
+    [Column(), Nullable] public bool? Estado { get; set; } // bit
+    [Column(), Nullable] public int? IdAsociacion { get; set; } // int
 
         #region Associations
 
@@ -2931,17 +2931,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         /// FK_Comentario_TipoComentario_BackReference
         /// </summary>
         [Association(ThisKey = "Id", OtherKey = "IdTipoComentario", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Comentario> Comentarios { get; set; ***REMOVED***
+    public IEnumerable<Comentario> Comentarios { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "TipoContraprestacion")]
   public partial class TipoContraprestacion
   {
-    [PrimaryKey, NotNull] public string IdTipoContraprestacion { get; set; ***REMOVED*** // nvarchar(50)
-    [Column, Nullable] public string NombreTipoContraprestacion { get; set; ***REMOVED*** // varchar(300)
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey, NotNull] public string IdTipoContraprestacion { get; set; } // nvarchar(50)
+    [Column, Nullable] public string NombreTipoContraprestacion { get; set; } // varchar(300)
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -2949,16 +2949,16 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Liquidacion_TipoContraprestacion_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoContraprestacion", OtherKey = "IdTipoContraprestacion", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Liquidacion> Liquidacions { get; set; ***REMOVED***
+    public IEnumerable<Liquidacion> Liquidacions { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "TipoDeFinanciacion")]
   public partial class TipoDeFinanciacion
   {
-    [PrimaryKey, NotNull] public int IdTipoFinanciacion { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string TipoFinanciacion { get; set; ***REMOVED*** // varchar(500)
+    [PrimaryKey, NotNull] public int IdTipoFinanciacion { get; set; } // int
+    [Column, NotNull] public string TipoFinanciacion { get; set; } // varchar(500)
 
     #region Associations
 
@@ -2966,29 +2966,29 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Distribucion_TipoDeFinanciacion_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoFinanciacion", OtherKey = "IdTipoDeFinanciacion", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Distribucion> Distribucions { get; set; ***REMOVED***
+    public IEnumerable<Distribucion> Distribucions { get; set; }
 
     /// <summary>
     /// FK_Liquidacion_TipoDeFinanciacion_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoFinanciacion", OtherKey = "IdTipoDeFinanciacion", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Liquidacion> Liquidacions { get; set; ***REMOVED***
+    public IEnumerable<Liquidacion> Liquidacions { get; set; }
 
     /// <summary>
     /// FK_Produccion_TipoDeFinanciacion_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoFinanciacion", OtherKey = "IdTipoDeFinanciacion", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Produccion> Produccions { get; set; ***REMOVED***
+    public IEnumerable<Produccion> Produccions { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "TipoDeRecursoNatural")]
   public partial class TipoDeRecursoNatural
   {
-    [PrimaryKey, NotNull] public char IdTipoRecursoNatural { get; set; ***REMOVED*** // varchar(1)
-    [Column, Nullable] public string NombreTipoDeRecurso { get; set; ***REMOVED*** // varchar(50)
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey, NotNull] public char IdTipoRecursoNatural { get; set; } // varchar(1)
+    [Column, Nullable] public string NombreTipoDeRecurso { get; set; } // varchar(50)
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -2996,22 +2996,22 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_RecursoNaturalFiscalizacion_TipoDeRecursoNatural_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoRecursoNatural", OtherKey = "IdTipoRecursoNatural", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<RecursoNaturalFiscalizacion> RecursoNaturalFiscalizacions { get; set; ***REMOVED***
+    public IEnumerable<RecursoNaturalFiscalizacion> RecursoNaturalFiscalizacions { get; set; }
 
     /// <summary>
     /// FK_RecursoNatural_TipoDeRecursoNatural_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoRecursoNatural", OtherKey = "IdTipoRecursoNatural", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<RecursoNatural> RecursoNaturals { get; set; ***REMOVED***
+    public IEnumerable<RecursoNatural> RecursoNaturals { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Tipologias")]
   public partial class Tipologia
   {
-    [Column(), PrimaryKey, Identity] public int IdTipologia { get; set; ***REMOVED*** // int
-    [Column("Tipologia"), NotNull] public string TipologiaColumn { get; set; ***REMOVED*** // varchar(100)
+    [Column(), PrimaryKey, Identity] public int IdTipologia { get; set; } // int
+    [Column("Tipologia"), NotNull] public string TipologiaColumn { get; set; } // varchar(100)
 
     #region Associations
 
@@ -3019,17 +3019,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_TipologiasComentario_Tipologias_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipologia", OtherKey = "IdTipologia", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<TipologiasComentario> TipologiasComentarios { get; set; ***REMOVED***
+    public IEnumerable<TipologiasComentario> TipologiasComentarios { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "TipologiasComentario")]
   public partial class TipologiasComentario
   {
-    [PrimaryKey, Identity] public int IdTipologiaComenario { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdTipologia { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdComentario { get; set; ***REMOVED*** // int
+    [PrimaryKey, Identity] public int IdTipologiaComenario { get; set; } // int
+    [Column, NotNull] public int IdTipologia { get; set; } // int
+    [Column, NotNull] public int IdComentario { get; set; } // int
 
     #region Associations
 
@@ -3037,16 +3037,16 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_TipologiasComentario_Tipologias
     /// </summary>
     [Association(ThisKey = "IdTipologia", OtherKey = "IdTipologia", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "FK_TipologiasComentario_Tipologias", BackReferenceName = "TipologiasComentarios")]
-    public Tipologia Tipologia { get; set; ***REMOVED***
+    public Tipologia Tipologia { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "TipoPermiso")]
   public partial class TipoPermiso
   {
-    [PrimaryKey, Identity] public int IdTipoPermiso { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombrePermiso { get; set; ***REMOVED*** // varchar(100)
+    [PrimaryKey, Identity] public int IdTipoPermiso { get; set; } // int
+    [Column, NotNull] public string NombrePermiso { get; set; } // varchar(100)
 
     #region Associations
 
@@ -3054,24 +3054,24 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_UsuarioPermisoxTipoPermiso_BackReference
     /// </summary>
     [Association(ThisKey = "IdTipoPermiso", OtherKey = "IdTipoPermiso", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<UsuarioPermiso> FkUsuarioPermisoxTipoPermisoes { get; set; ***REMOVED***
+    public IEnumerable<UsuarioPermiso> FkUsuarioPermisoxTipoPermisoes { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "TipoRespuesta")]
   public partial class TipoRespuesta
   {
-    [Column(), PrimaryKey, Identity] public int Id { get; set; ***REMOVED*** // int
-    [Column("TipoRespuesta"), Nullable] public string TipoRespuestaColumn { get; set; ***REMOVED*** // varchar(50)
-  ***REMOVED***
+    [Column(), PrimaryKey, Identity] public int Id { get; set; } // int
+    [Column("TipoRespuesta"), Nullable] public string TipoRespuestaColumn { get; set; } // varchar(50)
+  }
 
   [Table(Schema = "dbo", Name = "UnidadMedida")]
   public partial class UnidadMedida
   {
-    [PrimaryKey, NotNull] public string IdUnidadMedida { get; set; ***REMOVED*** // nvarchar(20)
-    [Column, NotNull] public string NombreUnidadMedida { get; set; ***REMOVED*** // varchar(250)
-    [Column, NotNull] public int ConsecutivoCarga { get; set; ***REMOVED*** // int
+    [PrimaryKey, NotNull] public string IdUnidadMedida { get; set; } // nvarchar(20)
+    [Column, NotNull] public string NombreUnidadMedida { get; set; } // varchar(250)
+    [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
 
     #region Associations
 
@@ -3079,27 +3079,27 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// FK_Produccion_UnidadMedida_BackReference
     /// </summary>
     [Association(ThisKey = "IdUnidadMedida", OtherKey = "IdUnidadMedida", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<Produccion> Produccions { get; set; ***REMOVED***
+    public IEnumerable<Produccion> Produccions { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "Usuario")]
   public partial class Usuario
   {
-    [Column(), PrimaryKey, Identity] public int IdUsuario { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string Nombre { get; set; ***REMOVED*** // varchar(400)
-    [Column("email"), NotNull] public string Email { get; set; ***REMOVED*** // varchar(200)
-    [Column("hash_clave"), NotNull] public string HashClave { get; set; ***REMOVED*** // varchar(200)
-    [Column(), Nullable] public string FacebookID { get; set; ***REMOVED*** // varchar(200)
-    [Column(), Nullable] public string Estado { get; set; ***REMOVED*** // varchar(50)
-    [Column(), Nullable] public DateTime? FCambioPwd { get; set; ***REMOVED*** // datetime
-    [Column("cod_verifica"), Nullable] public string CodVerifica { get; set; ***REMOVED*** // varchar(64)
-    [Column(), Nullable] public DateTime? FechaCreacion { get; set; ***REMOVED*** // datetime
-    [Column(), Nullable] public int? Edad { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? IdRolUsuario { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? IdGeneroUsuario { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? IdMedioMapaIUsuario { get; set; ***REMOVED*** // int
+    [Column(), PrimaryKey, Identity] public int IdUsuario { get; set; } // int
+    [Column(), NotNull] public string Nombre { get; set; } // varchar(400)
+    [Column("email"), NotNull] public string Email { get; set; } // varchar(200)
+    [Column("hash_clave"), NotNull] public string HashClave { get; set; } // varchar(200)
+    [Column(), Nullable] public string FacebookID { get; set; } // varchar(200)
+    [Column(), Nullable] public string Estado { get; set; } // varchar(50)
+    [Column(), Nullable] public DateTime? FCambioPwd { get; set; } // datetime
+    [Column("cod_verifica"), Nullable] public string CodVerifica { get; set; } // varchar(64)
+    [Column(), Nullable] public DateTime? FechaCreacion { get; set; } // datetime
+    [Column(), Nullable] public int? Edad { get; set; } // int
+    [Column(), Nullable] public int? IdRolUsuario { get; set; } // int
+    [Column(), Nullable] public int? IdGeneroUsuario { get; set; } // int
+    [Column(), Nullable] public int? IdMedioMapaIUsuario { get; set; } // int
 
     #region Associations
 
@@ -3107,54 +3107,54 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_FotoUsuarioXUsuario_BackReference
     /// </summary>
     [Association(ThisKey = "IdUsuario", OtherKey = "IdUsuario", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<FotoUsuario> FkFotoUsuarioXUsuarios { get; set; ***REMOVED***
+    public IEnumerable<FotoUsuario> FkFotoUsuarioXUsuarios { get; set; }
 
     /// <summary>
     /// Fk_MeGustaXUsuario_BackReference
     /// </summary>
     [Association(ThisKey = "IdUsuario", OtherKey = "IdUsuario", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<MeGusta> FkMeGustaXUsuarios { get; set; ***REMOVED***
+    public IEnumerable<MeGusta> FkMeGustaXUsuarios { get; set; }
 
     /// <summary>
     /// Fk_RespuestaCuestionarioXUsuario_BackReference
     /// </summary>
     [Association(ThisKey = "IdUsuario", OtherKey = "IdUsuario", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<RespuestaCuestionario> FkRespuestaCuestionarioXUsuarios { get; set; ***REMOVED***
+    public IEnumerable<RespuestaCuestionario> FkRespuestaCuestionarioXUsuarios { get; set; }
 
     /// <summary>
     /// Fk_UsuarioPermisoxUsuario_BackReference
     /// </summary>
     [Association(ThisKey = "IdUsuario", OtherKey = "IdUsuario", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.OneToMany, IsBackReference = true)]
-    public IEnumerable<UsuarioPermiso> FkUsuarioPermisoxUsuarios { get; set; ***REMOVED***
+    public IEnumerable<UsuarioPermiso> FkUsuarioPermisoxUsuarios { get; set; }
 
     /// <summary>
     /// Fk_UsuarioXGeneroUsuario
     /// </summary>
     [Association(ThisKey = "IdGeneroUsuario", OtherKey = "IdGeneroUsuario", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_UsuarioXGeneroUsuario", BackReferenceName = "FkUsuarioXGeneroUsuarios")]
-    public GeneroUsuario FkUsuarioXGeneroUsuario { get; set; ***REMOVED***
+    public GeneroUsuario FkUsuarioXGeneroUsuario { get; set; }
 
     /// <summary>
     /// Fk_UsuarioXMedioMapaIUsuario
     /// </summary>
     [Association(ThisKey = "IdMedioMapaIUsuario", OtherKey = "IdMedioMapaIUsuario", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_UsuarioXMedioMapaIUsuario", BackReferenceName = "FkUsuarioXMedioMapaIUsuarios")]
-    public MedioMapaIUsuario FkUsuarioXMedioMapaIUsuario { get; set; ***REMOVED***
+    public MedioMapaIUsuario FkUsuarioXMedioMapaIUsuario { get; set; }
 
     /// <summary>
     /// Fk_UsuarioXRolUsuario
     /// </summary>
     [Association(ThisKey = "IdRolUsuario", OtherKey = "IdRolUsuario", CanBeNull = true, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_UsuarioXRolUsuario", BackReferenceName = "FkUsuarioXRolUsuarios")]
-    public RolUsuario FkUsuarioXRolUsuario { get; set; ***REMOVED***
+    public RolUsuario FkUsuarioXRolUsuario { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "UsuarioPermiso")]
   public partial class UsuarioPermiso
   {
-    [PrimaryKey, Identity] public int Id { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdUsuario { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdTipoPermiso { get; set; ***REMOVED*** // int
-    [Column, Nullable] public int? Activo { get; set; ***REMOVED*** // int
+    [PrimaryKey, Identity] public int Id { get; set; } // int
+    [Column, NotNull] public int IdUsuario { get; set; } // int
+    [Column, NotNull] public int IdTipoPermiso { get; set; } // int
+    [Column, Nullable] public int? Activo { get; set; } // int
 
     #region Associations
 
@@ -3162,549 +3162,549 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     /// Fk_UsuarioPermisoxTipoPermiso
     /// </summary>
     [Association(ThisKey = "IdTipoPermiso", OtherKey = "IdTipoPermiso", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_UsuarioPermisoxTipoPermiso", BackReferenceName = "FkUsuarioPermisoxTipoPermisoes")]
-    public TipoPermiso FkUsuarioPermisoxTipoPermiso { get; set; ***REMOVED***
+    public TipoPermiso FkUsuarioPermisoxTipoPermiso { get; set; }
 
     /// <summary>
     /// Fk_UsuarioPermisoxUsuario
     /// </summary>
     [Association(ThisKey = "IdUsuario", OtherKey = "IdUsuario", CanBeNull = false, Relationship = LinqToDB.Mapping.Relationship.ManyToOne, KeyName = "Fk_UsuarioPermisoxUsuario", BackReferenceName = "FkUsuarioPermisoxUsuarios")]
-    public Usuario FkUsuarioPermisoxUsuario { get; set; ***REMOVED***
+    public Usuario FkUsuarioPermisoxUsuario { get; set; }
 
     #endregion
-  ***REMOVED***
+  }
 
   [Table(Schema = "dbo", Name = "VwComponentesActividades", IsView = true)]
   public partial class VwComponentesActividade
   {
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdComponente { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string CodigoComponente { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public string Componente { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public int IdActividad { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string CodigoActividad { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string Actividades { get; set; ***REMOVED*** // varchar(max)
-  ***REMOVED***
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public int IdComponente { get; set; } // int
+    [Column, NotNull] public string CodigoComponente { get; set; } // varchar(max)
+    [Column, NotNull] public string Componente { get; set; } // varchar(max)
+    [Column, NotNull] public int IdActividad { get; set; } // int
+    [Column, Nullable] public string CodigoActividad { get; set; } // varchar(10)
+    [Column, NotNull] public string Actividades { get; set; } // varchar(max)
+  }
 
   [Table(Schema = "dbo", Name = "VwContratosCancelados", IsView = true)]
   public partial class VwContratosCancelado
   {
-    [Column(), Nullable] public string IdProceso { get; set; ***REMOVED*** // varchar(250)
-    [Column(), Nullable] public string Estado { get; set; ***REMOVED*** // varchar(30)
-    [Column(), Nullable] public long? Valor { get; set; ***REMOVED*** // bigint
-    [Column(), Nullable] public string MonedaValor { get; set; ***REMOVED*** // varchar(5)
-    [Column(), Nullable] public string Proveedor { get; set; ***REMOVED*** // varchar(250)
-    [Column(), NotNull] public string CodigoProveedor { get; set; ***REMOVED*** // varchar(40)
-    [Column(), Nullable] public DateTime? FechaModificacion { get; set; ***REMOVED*** // datetime
-    [Column("esCovid"), Nullable] public int? EsCovid { get; set; ***REMOVED*** // int
-    [Column("urlContrato"), NotNull] public string UrlContrato { get; set; ***REMOVED*** // varchar(324)
-  ***REMOVED***
+    [Column(), Nullable] public string IdProceso { get; set; } // varchar(250)
+    [Column(), Nullable] public string Estado { get; set; } // varchar(30)
+    [Column(), Nullable] public long? Valor { get; set; } // bigint
+    [Column(), Nullable] public string MonedaValor { get; set; } // varchar(5)
+    [Column(), Nullable] public string Proveedor { get; set; } // varchar(250)
+    [Column(), NotNull] public string CodigoProveedor { get; set; } // varchar(40)
+    [Column(), Nullable] public DateTime? FechaModificacion { get; set; } // datetime
+    [Column("esCovid"), Nullable] public int? EsCovid { get; set; } // int
+    [Column("urlContrato"), NotNull] public string UrlContrato { get; set; } // varchar(324)
+  }
 
   [Table(Schema = "dbo", Name = "VwContratosConsolidados", IsView = true)]
   public partial class VwContratosConsolidado
   {
-        [Column("anio"), Nullable] public int? Anio { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string EstadoContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column(), NotNull] public string MonedaContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column(), NotNull] public double? ValorContratado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public int? NroContratos { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string OrigenInformacion { get; set; ***REMOVED*** // varchar(9)
-        [Column(), Nullable] public int? CodigoOrigenInformacion { get; set; ***REMOVED*** // int
-***REMOVED***
+        [Column("anio"), Nullable] public int? Anio { get; set; } // int
+        [Column(), Nullable] public string EstadoContrato { get; set; } // varchar(100)
+        [Column(), NotNull] public string MonedaContrato { get; set; } // varchar(100)
+        [Column(), NotNull] public double? ValorContratado { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public int? NroContratos { get; set; } // int
+        [Column(), NotNull] public string OrigenInformacion { get; set; } // varchar(9)
+        [Column(), Nullable] public int? CodigoOrigenInformacion { get; set; } // int
+    }
 
     [Table(Schema = "dbo", Name = "VwContratosDetalle", IsView = true)]
     public partial class VwContratosDetalle
     {
-        [Column(), Nullable] public int? AnioUltimaActualizacion { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string DescripcionProceso { get; set; ***REMOVED*** // nvarchar(4000)
-        [Column(), Nullable] public string DescripcionContrato { get; set; ***REMOVED*** // nvarchar(4000)
-        [Column(), Nullable] public string EstadoProceso { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string CodigoContrato { get; set; ***REMOVED*** // nvarchar(200)
-        [Column(), Nullable] public string CodigoProceso { get; set; ***REMOVED*** // nvarchar(200)
-        [Column(), Nullable] public string CodigoProveedor { get; set; ***REMOVED*** // varchar(100)
-        [Column(), NotNull] public string TipoCodigoProveedor { get; set; ***REMOVED*** // varchar(32)
-        [Column(), NotNull] public string Contratista { get; set; ***REMOVED*** // nvarchar(150)
-        [Column(), NotNull] public double ValorPlaneado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), NotNull] public int ValorAdjudicado { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public double? ValorContratado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), NotNull] public string MonedaContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column("urlContrato"), Nullable] public string UrlContrato { get; set; ***REMOVED*** // varchar(350)
-        [Column("codigoComprador"), Nullable] public string CodigoComprador { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string Comprador { get; set; ***REMOVED*** // nvarchar(150)
-        [Column(), NotNull] public string EntidadOrigenFondos { get; set; ***REMOVED*** // varchar(1)
-        [Column(), NotNull] public string OrigenFondos { get; set; ***REMOVED*** // varchar(1)
-        [Column("docURL"), NotNull] public string DocURL { get; set; ***REMOVED*** // varchar(1)
-        [Column(), Nullable] public int CodigoOrigenInformacion { get; set; ***REMOVED*** // tinyint
-        [Column(), NotNull] public string OrigenInformacion { get; set; ***REMOVED*** // varchar(1)
-        [Column(), Nullable] public DateTime? FechaIncioPublicacionProceso { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public DateTime? FechaEstimadaAdjudicacion { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public DateTime? FechaInicioRecepcionOfertas { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public DateTime? FechaInicioContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public DateTime? FechaFinContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public DateTime? FechaInicioEjecucionContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public DateTime? FechaFinEjecucionContrato { get; set; ***REMOVED*** // datetime2(7)
-***REMOVED***
+        [Column(), Nullable] public int? AnioUltimaActualizacion { get; set; } // int
+        [Column(), Nullable] public string DescripcionProceso { get; set; } // nvarchar(4000)
+        [Column(), Nullable] public string DescripcionContrato { get; set; } // nvarchar(4000)
+        [Column(), Nullable] public string EstadoProceso { get; set; } // varchar(100)
+        [Column(), Nullable] public string CodigoContrato { get; set; } // nvarchar(200)
+        [Column(), Nullable] public string CodigoProceso { get; set; } // nvarchar(200)
+        [Column(), Nullable] public string CodigoProveedor { get; set; } // varchar(100)
+        [Column(), NotNull] public string TipoCodigoProveedor { get; set; } // varchar(32)
+        [Column(), NotNull] public string Contratista { get; set; } // nvarchar(150)
+        [Column(), NotNull] public double ValorPlaneado { get; set; } // numeric(38, 6)
+        [Column(), NotNull] public int ValorAdjudicado { get; set; } // int
+        [Column(), NotNull] public double? ValorContratado { get; set; } // numeric(38, 6)
+        [Column(), NotNull] public string MonedaContrato { get; set; } // varchar(100)
+        [Column("urlContrato"), Nullable] public string UrlContrato { get; set; } // varchar(350)
+        [Column("codigoComprador"), Nullable] public string CodigoComprador { get; set; } // varchar(100)
+        [Column(), Nullable] public string Comprador { get; set; } // nvarchar(150)
+        [Column(), NotNull] public string EntidadOrigenFondos { get; set; } // varchar(1)
+        [Column(), NotNull] public string OrigenFondos { get; set; } // varchar(1)
+        [Column("docURL"), NotNull] public string DocURL { get; set; } // varchar(1)
+        [Column(), Nullable] public int CodigoOrigenInformacion { get; set; } // tinyint
+        [Column(), NotNull] public string OrigenInformacion { get; set; } // varchar(1)
+        [Column(), Nullable] public DateTime? FechaIncioPublicacionProceso { get; set; } // datetime2(7)
+        [Column(), Nullable] public DateTime? FechaEstimadaAdjudicacion { get; set; } // datetime2(7)
+        [Column(), Nullable] public DateTime? FechaInicioRecepcionOfertas { get; set; } // datetime2(7)
+        [Column(), Nullable] public DateTime? FechaInicioContrato { get; set; } // datetime2(7)
+        [Column(), Nullable] public DateTime? FechaFinContrato { get; set; } // datetime2(7)
+        [Column(), Nullable] public DateTime? FechaInicioEjecucionContrato { get; set; } // datetime2(7)
+        [Column(), Nullable] public DateTime? FechaFinEjecucionContrato { get; set; } // datetime2(7)
+    }
 
     [Table(Schema = "dbo", Name = "vwContratosPerfilContratista", IsView = true)]
     public partial class VwContratosPerfilContratista
     {
-        [Column(), Nullable] public string Contratista { get; set; ***REMOVED*** // nvarchar(150)
-        [Column("tipodocumento"), NotNull] public string Tipodocumento { get; set; ***REMOVED*** // varchar(32)
-        [Column("numerodocumento"), Nullable] public string Numerodocumento { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public decimal? ValorTotalContratos { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public int? NumContratos { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public int? NumProcesos { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string OrigenInformacion { get; set; ***REMOVED*** // varchar(9)
-        [Column(), NotNull] public int CodigoOrigenInformacion { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string MonedaContrato { get; set; ***REMOVED*** // varchar(3)
-***REMOVED***
+        [Column(), Nullable] public string Contratista { get; set; } // nvarchar(150)
+        [Column("tipodocumento"), NotNull] public string Tipodocumento { get; set; } // varchar(32)
+        [Column("numerodocumento"), Nullable] public string Numerodocumento { get; set; } // varchar(100)
+        [Column(), Nullable] public decimal? ValorTotalContratos { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public int? NumContratos { get; set; } // int
+        [Column(), Nullable] public int? NumProcesos { get; set; } // int
+        [Column(), NotNull] public string OrigenInformacion { get; set; } // varchar(9)
+        [Column(), NotNull] public int CodigoOrigenInformacion { get; set; } // int
+        [Column(), NotNull] public string MonedaContrato { get; set; } // varchar(3)
+    }
 
   [Table(Schema = "dbo", Name = "VwContratosPerfilContratistaSinPrograma", IsView = true)]
   public partial class VwContratosPerfilContratistaSinPrograma
   {
-    [Column(), NotNull] public int COVID19 { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public string Contratista { get; set; ***REMOVED*** // varchar(150)
-    [Column("tipodocumento"), NotNull] public string Tipodocumento { get; set; ***REMOVED*** // varchar(6)
-    [Column("numerodocumento"), Nullable] public string Numerodocumento { get; set; ***REMOVED*** // varchar(30)
-    [Column(), Nullable] public long? ValorTotalContratos { get; set; ***REMOVED*** // bigint
-    [Column(), Nullable] public int? NumContratos { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? NumProcesos { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [Column(), NotNull] public int COVID19 { get; set; } // int
+    [Column(), Nullable] public string Contratista { get; set; } // varchar(150)
+    [Column("tipodocumento"), NotNull] public string Tipodocumento { get; set; } // varchar(6)
+    [Column("numerodocumento"), Nullable] public string Numerodocumento { get; set; } // varchar(30)
+    [Column(), Nullable] public long? ValorTotalContratos { get; set; } // bigint
+    [Column(), Nullable] public int? NumContratos { get; set; } // int
+    [Column(), Nullable] public int? NumProcesos { get; set; } // int
+  }
 
     [Table(Schema = "dbo", Name = "vwContratosPerfilContratistaXAnio", IsView = true)]
     public partial class VwContratosPerfilContratistaXAnio
     {
-        [Column("anio"), Nullable] public int? Anio { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string Proveedor { get; set; ***REMOVED*** // nvarchar(150)
-        [Column("tipodocumento"), NotNull] public string Tipodocumento { get; set; ***REMOVED*** // varchar(32)
-        [Column("numerodocumento"), Nullable] public string Numerodocumento { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string MonedaContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public decimal? ValorContratado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public int? NroContratos { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string OrigenInformacion { get; set; ***REMOVED*** // varchar(9)
-        [Column(), Nullable] public int? CodigoOrigenInformacion { get; set; ***REMOVED*** // int
-***REMOVED***
+        [Column("anio"), Nullable] public int? Anio { get; set; } // int
+        [Column(), Nullable] public string Proveedor { get; set; } // nvarchar(150)
+        [Column("tipodocumento"), NotNull] public string Tipodocumento { get; set; } // varchar(32)
+        [Column("numerodocumento"), Nullable] public string Numerodocumento { get; set; } // varchar(100)
+        [Column(), Nullable] public string MonedaContrato { get; set; } // varchar(100)
+        [Column(), Nullable] public decimal? ValorContratado { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public int? NroContratos { get; set; } // int
+        [Column(), NotNull] public string OrigenInformacion { get; set; } // varchar(9)
+        [Column(), Nullable] public int? CodigoOrigenInformacion { get; set; } // int
+    }
 
   [Table(Schema = "dbo", Name = "VwContratosPerfilContratosCancelados", IsView = true)]
   public partial class VwContratosPerfilContratosCancelado
   {
-    [Column(), Nullable] public string Estado { get; set; ***REMOVED*** // varchar(30)
-    [Column("valor"), Nullable] public long? Valor { get; set; ***REMOVED*** // bigint
-    [Column(), Nullable] public int? NroContratos { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [Column(), Nullable] public string Estado { get; set; } // varchar(30)
+    [Column("valor"), Nullable] public long? Valor { get; set; } // bigint
+    [Column(), Nullable] public int? NroContratos { get; set; } // int
+  }
 
   [Table(Schema = "dbo", Name = "VWContratosXPresupuesto", IsView = true)]
   public partial class VWContratosXPresupuesto
   {
-    [Column(), Nullable] public int? Periodo { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? CodigoInstitucion { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? CodigoPrograma { get; set; ***REMOVED*** // int
-    [Column("CodigoSub_Programa"), Nullable] public int? CodigoSubPrograma { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? CodigoProyecto { get; set; ***REMOVED*** // int
-    [Column(), Nullable] public int? CodigoActividadObra { get; set; ***REMOVED*** // int
-    [Column("CodigoBeneficiario_de_Transferencia"), Nullable] public int? CodigoBeneficiarioDeTransferencia { get; set; ***REMOVED*** // int
-    [Column("CodigoFuente_de_Financiamiento"), Nullable] public int? CodigoFuenteDeFinanciamiento { get; set; ***REMOVED*** // int
-    [Column("CodigoObjeto_de_gasto"), Nullable] public int? CodigoObjetoDeGasto { get; set; ***REMOVED*** // int
-    [Column("ocid"), Nullable] public string Ocid { get; set; ***REMOVED*** // varchar(250)
-    [Column("idBudget"), Nullable] public string IdBudget { get; set; ***REMOVED*** // varchar(250)
-  ***REMOVED***
+    [Column(), Nullable] public int? Periodo { get; set; } // int
+    [Column(), Nullable] public int? CodigoInstitucion { get; set; } // int
+    [Column(), Nullable] public int? CodigoPrograma { get; set; } // int
+    [Column("CodigoSub_Programa"), Nullable] public int? CodigoSubPrograma { get; set; } // int
+    [Column(), Nullable] public int? CodigoProyecto { get; set; } // int
+    [Column(), Nullable] public int? CodigoActividadObra { get; set; } // int
+    [Column("CodigoBeneficiario_de_Transferencia"), Nullable] public int? CodigoBeneficiarioDeTransferencia { get; set; } // int
+    [Column("CodigoFuente_de_Financiamiento"), Nullable] public int? CodigoFuenteDeFinanciamiento { get; set; } // int
+    [Column("CodigoObjeto_de_gasto"), Nullable] public int? CodigoObjetoDeGasto { get; set; } // int
+    [Column("ocid"), Nullable] public string Ocid { get; set; } // varchar(250)
+    [Column("idBudget"), Nullable] public string IdBudget { get; set; } // varchar(250)
+  }
 
     [Table(Schema = "consulta", Name = "VwContratosXEntidad", IsView = true)]
     public partial class consulta_VwContratosXEntidad
     {
-        [Column(), NotNull] public string CodigoInstitucion { get; set; ***REMOVED*** // varchar(30)
-        [Column("bpin"), Nullable] public string Bpin { get; set; ***REMOVED*** // varchar(40)
-        [Column("tipodocproveedor"), Nullable] public string Tipodocproveedor { get; set; ***REMOVED*** // varchar(50)
-        [Column("documentoproveedor"), Nullable] public string Documentoproveedor { get; set; ***REMOVED*** // varchar(50)
-        [Column("proveedor"), Nullable] public string Proveedor { get; set; ***REMOVED*** // varchar(250)
-        [Column("estadocontrato"), Nullable] public string Estadocontrato { get; set; ***REMOVED*** // varchar(50)
-        [Column("referenciacontrato"), Nullable] public string Referenciacontrato { get; set; ***REMOVED*** // varchar(50)
-        [Column("codigoproceso"), Nullable] public string Codigoproceso { get; set; ***REMOVED*** // varchar(50)
-        [Column("valorcontrato"), Nullable] public decimal? Valorcontrato { get; set; ***REMOVED*** // numeric(20, 2)
-        [Column("urlproceso"), Nullable] public string Urlproceso { get; set; ***REMOVED*** // varchar(250)
-        [Column("vigenciacontrato"), Nullable] public string Vigenciacontrato { get; set; ***REMOVED*** // varchar(50)
-        [Column("objetodelcontrato"), Nullable] public string Objetodelcontrato { get; set; ***REMOVED*** // varchar(4000)
-***REMOVED***
+        [Column(), NotNull] public string CodigoInstitucion { get; set; } // varchar(30)
+        [Column("bpin"), Nullable] public string Bpin { get; set; } // varchar(40)
+        [Column("tipodocproveedor"), Nullable] public string Tipodocproveedor { get; set; } // varchar(50)
+        [Column("documentoproveedor"), Nullable] public string Documentoproveedor { get; set; } // varchar(50)
+        [Column("proveedor"), Nullable] public string Proveedor { get; set; } // varchar(250)
+        [Column("estadocontrato"), Nullable] public string Estadocontrato { get; set; } // varchar(50)
+        [Column("referenciacontrato"), Nullable] public string Referenciacontrato { get; set; } // varchar(50)
+        [Column("codigoproceso"), Nullable] public string Codigoproceso { get; set; } // varchar(50)
+        [Column("valorcontrato"), Nullable] public decimal? Valorcontrato { get; set; } // numeric(20, 2)
+        [Column("urlproceso"), Nullable] public string Urlproceso { get; set; } // varchar(250)
+        [Column("vigenciacontrato"), Nullable] public string Vigenciacontrato { get; set; } // varchar(50)
+        [Column("objetodelcontrato"), Nullable] public string Objetodelcontrato { get; set; } // varchar(4000)
+    }
 
     [Table(Schema = "dbo", Name = "VwContratosXProyectoInvDetalle", IsView = true)]
     public partial class VwContratosXProyectoInvDetalle
     {
-        [Column(), Nullable] public int? IdProyecto { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public int? AnioUltimaActualizacion { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string DescripcionProceso { get; set; ***REMOVED*** // nvarchar(4000)
-        [Column(), Nullable] public string EstadoProceso { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string CodigoContrato { get; set; ***REMOVED*** // nvarchar(200)
-        [Column(), NotNull] public string DescripcionContrato { get; set; ***REMOVED*** // nvarchar(4000)
-        [Column(), Nullable] public string CodigoProceso { get; set; ***REMOVED*** // nvarchar(200)
-        [Column(), Nullable] public string CodigoProveedor { get; set; ***REMOVED*** // varchar(100)
-        [Column(), NotNull] public string TipoCodigoProveedor { get; set; ***REMOVED*** // varchar(32)
-        [Column(), NotNull] public string Contratista { get; set; ***REMOVED*** // nvarchar(150)
-        [Column(), NotNull] public decimal ValorPlaneado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), NotNull] public int ValorAdjudicado { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public decimal ValorContratado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), NotNull] public string MonedaContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column("urlContrato"), NotNull] public string UrlContrato { get; set; ***REMOVED*** // varchar(1)
-        [Column(), Nullable] public string CodigoComprador { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string Comprador { get; set; ***REMOVED*** // nvarchar(150)
-        [Column(), NotNull] public string EntidadOrigenFondos { get; set; ***REMOVED*** // varchar(1)
-        [Column(), NotNull] public string OrigenFondos { get; set; ***REMOVED*** // varchar(1)
-        [Column("docURL"), Nullable] public string DocURL { get; set; ***REMOVED*** // varchar(350)
-        [Column(), Nullable] public DateTime? FechaIncioPublicacionProceso { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public DateTime? FechaEstimadaAdjudicacion { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public DateTime? FechaInicioRecepcionOfertas { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), NotNull] public byte CodigoOrigenInformacion { get; set; ***REMOVED*** // tinyint
-        [Column(), NotNull] public string OrigenInformacion { get; set; ***REMOVED*** // varchar(9)
-        [Column(), Nullable] public DateTime? FechaInicioContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public DateTime? FechaFinContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public DateTime? FechaInicioEjecucionContrato { get; set; ***REMOVED*** // datetime2(7)
-        [Column(), Nullable] public DateTime? FechaFinEjecucionContrato { get; set; ***REMOVED*** // datetime2(7)
-***REMOVED***
+        [Column(), Nullable] public int? IdProyecto { get; set; } // int
+        [Column(), Nullable] public int? AnioUltimaActualizacion { get; set; } // int
+        [Column(), Nullable] public string DescripcionProceso { get; set; } // nvarchar(4000)
+        [Column(), Nullable] public string EstadoProceso { get; set; } // varchar(100)
+        [Column(), Nullable] public string CodigoContrato { get; set; } // nvarchar(200)
+        [Column(), NotNull] public string DescripcionContrato { get; set; } // nvarchar(4000)
+        [Column(), Nullable] public string CodigoProceso { get; set; } // nvarchar(200)
+        [Column(), Nullable] public string CodigoProveedor { get; set; } // varchar(100)
+        [Column(), NotNull] public string TipoCodigoProveedor { get; set; } // varchar(32)
+        [Column(), NotNull] public string Contratista { get; set; } // nvarchar(150)
+        [Column(), NotNull] public decimal ValorPlaneado { get; set; } // numeric(38, 6)
+        [Column(), NotNull] public int ValorAdjudicado { get; set; } // int
+        [Column(), NotNull] public decimal ValorContratado { get; set; } // numeric(38, 6)
+        [Column(), NotNull] public string MonedaContrato { get; set; } // varchar(100)
+        [Column("urlContrato"), NotNull] public string UrlContrato { get; set; } // varchar(1)
+        [Column(), Nullable] public string CodigoComprador { get; set; } // varchar(100)
+        [Column(), Nullable] public string Comprador { get; set; } // nvarchar(150)
+        [Column(), NotNull] public string EntidadOrigenFondos { get; set; } // varchar(1)
+        [Column(), NotNull] public string OrigenFondos { get; set; } // varchar(1)
+        [Column("docURL"), Nullable] public string DocURL { get; set; } // varchar(350)
+        [Column(), Nullable] public DateTime? FechaIncioPublicacionProceso { get; set; } // datetime2(7)
+        [Column(), Nullable] public DateTime? FechaEstimadaAdjudicacion { get; set; } // datetime2(7)
+        [Column(), Nullable] public DateTime? FechaInicioRecepcionOfertas { get; set; } // datetime2(7)
+        [Column(), NotNull] public byte CodigoOrigenInformacion { get; set; } // tinyint
+        [Column(), NotNull] public string OrigenInformacion { get; set; } // varchar(9)
+        [Column(), Nullable] public DateTime? FechaInicioContrato { get; set; } // datetime2(7)
+        [Column(), Nullable] public DateTime? FechaFinContrato { get; set; } // datetime2(7)
+        [Column(), Nullable] public DateTime? FechaInicioEjecucionContrato { get; set; } // datetime2(7)
+        [Column(), Nullable] public DateTime? FechaFinEjecucionContrato { get; set; } // datetime2(7)
+    }
 
     [Table(Schema = "consulta", Name = "VwContratosXProyectosInstitucionesAnio", IsView = true)]
     public partial class consulta_VwContratosXProyectosInstitucionesAnio
     {
-        [Column(), NotNull] public int AnioPresupuesto { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string CodigoInstitucion { get; set; ***REMOVED*** // varchar(30)
-        [Column("bpin"), Nullable] public string Bpin { get; set; ***REMOVED*** // varchar(40)
-        [Column(), Nullable] public string NombreProyecto { get; set; ***REMOVED*** // varchar(max)
-        [Column(), Nullable] public string CodigoContrato { get; set; ***REMOVED*** // varchar(50)
-        [Column(), Nullable] public string Descripcion { get; set; ***REMOVED*** // nvarchar(500)
-        [Column(), Nullable] public string EstadoContrato { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public decimal? ValorContrato { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public string Url { get; set; ***REMOVED*** // varchar(350)
-***REMOVED***
+        [Column(), NotNull] public int AnioPresupuesto { get; set; } // int
+        [Column(), NotNull] public string CodigoInstitucion { get; set; } // varchar(30)
+        [Column("bpin"), Nullable] public string Bpin { get; set; } // varchar(40)
+        [Column(), Nullable] public string NombreProyecto { get; set; } // varchar(max)
+        [Column(), Nullable] public string CodigoContrato { get; set; } // varchar(50)
+        [Column(), Nullable] public string Descripcion { get; set; } // nvarchar(500)
+        [Column(), Nullable] public string EstadoContrato { get; set; } // varchar(100)
+        [Column(), Nullable] public decimal? ValorContrato { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public string Url { get; set; } // varchar(350)
+    }
 
   [Table(Schema = "dbo", Name = "VwEntidadEjecutora", IsView = true)]
   public partial class VwEntidadEjecutora
   {
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string IdEntidad { get; set; ***REMOVED*** // varchar(30)
-    [Column, NotNull] public string NombreEntidad { get; set; ***REMOVED*** // varchar(200)
-    [Column, Nullable] public long? COUNT { get; set; ***REMOVED*** // bigint
-  ***REMOVED***
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public string IdEntidad { get; set; } // varchar(30)
+    [Column, NotNull] public string NombreEntidad { get; set; } // varchar(200)
+    [Column, Nullable] public long? COUNT { get; set; } // bigint
+  }
 
     [Table(Schema = "dbo", Name = "VwEstadoImagenes", IsView = true)]
     public partial class VwEstadoImagene
     {
-        [Column(), NotNull] public int IdSector { get; set; ***REMOVED*** // int
-        [Column(), Nullable] public string NombreSector { get; set; ***REMOVED*** // varchar(200)
-        [Column("imgSector"), NotNull] public string ImgSector { get; set; ***REMOVED*** // varchar(15)
-        [Column(), NotNull] public int MostrarSector { get; set; ***REMOVED*** // int
-***REMOVED***
+        [Column(), NotNull] public int IdSector { get; set; } // int
+        [Column(), Nullable] public string NombreSector { get; set; } // varchar(200)
+        [Column("imgSector"), NotNull] public string ImgSector { get; set; } // varchar(15)
+        [Column(), NotNull] public int MostrarSector { get; set; } // int
+    }
 
     [Table(Schema = "dbo", Name = "VwEstadoProyectosDeptoInv", IsView = true)]
   public partial class VwEstadoProyectosDeptoInv
   {
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public int IdEstado { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreEstado { get; set; ***REMOVED*** // varchar(30)
-    [Column, Nullable] public long? NumeroProyectos { get; set; ***REMOVED*** // bigint
-    [Column, Nullable] public decimal? ValorProyectos { get; set; ***REMOVED*** // decimal(38, 2)
-  ***REMOVED***
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public int IdEstado { get; set; } // int
+    [Column, NotNull] public string NombreEstado { get; set; } // varchar(30)
+    [Column, Nullable] public long? NumeroProyectos { get; set; } // bigint
+    [Column, Nullable] public decimal? ValorProyectos { get; set; } // decimal(38, 2)
+  }
 
   [Table(Schema = "dbo", Name = "VwEstadoProyectosInv", IsView = true)]
   public partial class VwEstadoProyectosInv
   {
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public int IdEstado { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreEstado { get; set; ***REMOVED*** // varchar(30)
-    [Column, Nullable] public int? NumeroProyectos { get; set; ***REMOVED*** // int
-    [Column, Nullable] public decimal? ValorProyectos { get; set; ***REMOVED*** // decimal(38, 2)
-  ***REMOVED***
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, NotNull] public int IdEstado { get; set; } // int
+    [Column, NotNull] public string NombreEstado { get; set; } // varchar(30)
+    [Column, Nullable] public int? NumeroProyectos { get; set; } // int
+    [Column, Nullable] public decimal? ValorProyectos { get; set; } // decimal(38, 2)
+  }
 
   [Table(Schema = "dbo", Name = "VwFuenteFinanciacion", IsView = true)]
   public partial class VwFuenteFinanciacion
   {
-    [Column("id"), Nullable] public long? Id { get; set; ***REMOVED*** // bigint
-    [Column(), NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string IdOrganismoFinanciador { get; set; ***REMOVED*** // varchar(30)
-    [Column(), NotNull] public string OrganismoFinanciador { get; set; ***REMOVED*** // varchar(200)
-    [Column(), NotNull] public int IdFuenteFinanciacion { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public string FuenteFinanciacion { get; set; ***REMOVED*** // varchar(200)
-    [Column(), NotNull] public int Vigencia { get; set; ***REMOVED*** // int
-    [Column(), NotNull] public decimal PresupuestoVigente { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column(), NotNull] public decimal PresupuestoObligado { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column(), NotNull] public decimal PresupuestoPagado { get; set; ***REMOVED*** // decimal(18, 2)
-  ***REMOVED***
+    [Column("id"), Nullable] public long? Id { get; set; } // bigint
+    [Column(), NotNull] public int IdProyecto { get; set; } // int
+    [Column(), NotNull] public string IdOrganismoFinanciador { get; set; } // varchar(30)
+    [Column(), NotNull] public string OrganismoFinanciador { get; set; } // varchar(200)
+    [Column(), NotNull] public int IdFuenteFinanciacion { get; set; } // int
+    [Column(), NotNull] public string FuenteFinanciacion { get; set; } // varchar(200)
+    [Column(), NotNull] public int Vigencia { get; set; } // int
+    [Column(), NotNull] public decimal PresupuestoVigente { get; set; } // decimal(18, 2)
+    [Column(), NotNull] public decimal PresupuestoObligado { get; set; } // decimal(18, 2)
+    [Column(), NotNull] public decimal PresupuestoPagado { get; set; } // decimal(18, 2)
+  }
 
   [Table(Schema = "dbo", Name = "VwFuentesFinanciacion", IsView = true)]
   public partial class VwFuentesFinanciacion
   {
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdOrganismoFinanciador { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string OrganismoFinanciador { get; set; ***REMOVED*** // varchar(200)
-    [Column, NotNull] public int IdFuenteFinanciacion { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string FuenteFinanciacion { get; set; ***REMOVED*** // varchar(200)
-    [Column, Nullable] public decimal? ValorVigente { get; set; ***REMOVED*** // decimal(38, 2)
-    [Column, Nullable] public decimal? ValorEjecutado { get; set; ***REMOVED*** // decimal(38, 2)
-    [Column, Nullable] public int? Periodo { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public int IdOrganismoFinanciador { get; set; } // int
+    [Column, NotNull] public string OrganismoFinanciador { get; set; } // varchar(200)
+    [Column, NotNull] public int IdFuenteFinanciacion { get; set; } // int
+    [Column, NotNull] public string FuenteFinanciacion { get; set; } // varchar(200)
+    [Column, Nullable] public decimal? ValorVigente { get; set; } // decimal(38, 2)
+    [Column, Nullable] public decimal? ValorEjecutado { get; set; } // decimal(38, 2)
+    [Column, Nullable] public int? Periodo { get; set; } // int
+  }
 
   [Table(Schema = "dbo", Name = "VwGaleriaEntidadesTerritorialesDepartamentos", IsView = true)]
   public partial class VwGaleriaEntidadesTerritorialesDepartamento
   {
-    [Column, Nullable] public int? IdImageXEnteTerritorial { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string NombreDepartamento { get; set; ***REMOVED*** // varchar(50)
-    [Column, Nullable] public string IdRegion { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public string IdImage { get; set; ***REMOVED*** // varchar(42)
-    [Column, Nullable] public string UrlImagePequenia { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string UrlImageMediana { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string UrlImageGrande { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string DescripcionImage { get; set; ***REMOVED*** // varchar(max)
-  ***REMOVED***
+    [Column, Nullable] public int? IdImageXEnteTerritorial { get; set; } // int
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public string NombreDepartamento { get; set; } // varchar(50)
+    [Column, Nullable] public string IdRegion { get; set; } // varchar(10)
+    [Column, Nullable] public string IdImage { get; set; } // varchar(42)
+    [Column, Nullable] public string UrlImagePequenia { get; set; } // varchar(max)
+    [Column, Nullable] public string UrlImageMediana { get; set; } // varchar(max)
+    [Column, Nullable] public string UrlImageGrande { get; set; } // varchar(max)
+    [Column, Nullable] public string DescripcionImage { get; set; } // varchar(max)
+  }
 
   [Table(Schema = "dbo", Name = "VwGaleriaEntidadesTerritorialesMunicipios", IsView = true)]
   public partial class VwGaleriaEntidadesTerritorialesMunicipio
   {
-    [Column, Nullable] public int? IdImageXEnteTerritorial { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string IdRegion { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string NombreDepartamento { get; set; ***REMOVED*** // varchar(50)
-    [Column, NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string NombreMunicipio { get; set; ***REMOVED*** // varchar(50)
-    [Column, Nullable] public string IdImage { get; set; ***REMOVED*** // varchar(42)
-    [Column, Nullable] public string UrlImagePequenia { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string UrlImageMediana { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string UrlImageGrande { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public string DescripcionImage { get; set; ***REMOVED*** // varchar(max)
-  ***REMOVED***
+    [Column, Nullable] public int? IdImageXEnteTerritorial { get; set; } // int
+    [Column, Nullable] public string IdRegion { get; set; } // varchar(10)
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public string NombreDepartamento { get; set; } // varchar(50)
+    [Column, NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, NotNull] public string NombreMunicipio { get; set; } // varchar(50)
+    [Column, Nullable] public string IdImage { get; set; } // varchar(42)
+    [Column, Nullable] public string UrlImagePequenia { get; set; } // varchar(max)
+    [Column, Nullable] public string UrlImageMediana { get; set; } // varchar(max)
+    [Column, Nullable] public string UrlImageGrande { get; set; } // varchar(max)
+    [Column, Nullable] public string DescripcionImage { get; set; } // varchar(max)
+  }
 
   [Table(Schema = "dbo", Name = "VwInformacionGeneralPerfilLocalizacion", IsView = true)]
   public partial class VwInformacionGeneralPerfilLocalizacion
   {
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public decimal? ValorPromedioProyecto { get; set; ***REMOVED*** // decimal(38, 6)
-    [Column, Nullable] public int? NumeroProyectos { get; set; ***REMOVED*** // int
-    [Column, Nullable] public decimal? DuracionPromedioProyectos { get; set; ***REMOVED*** // decimal(38, 6)
-  ***REMOVED***
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, Nullable] public decimal? ValorPromedioProyecto { get; set; } // decimal(38, 6)
+    [Column, Nullable] public int? NumeroProyectos { get; set; } // int
+    [Column, Nullable] public decimal? DuracionPromedioProyectos { get; set; } // decimal(38, 6)
+  }
 
   [Table(Schema = "dbo", Name = "VwInformacionGeneralPerfilLocalizacionDepto", IsView = true)]
   public partial class VwInformacionGeneralPerfilLocalizacionDepto
   {
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, Nullable] public decimal? ValorPromedioProyecto { get; set; ***REMOVED*** // decimal(38, 6)
-    [Column, Nullable] public int? NumeroProyectos { get; set; ***REMOVED*** // int
-    [Column, Nullable] public decimal? DuracionPromedioProyectos { get; set; ***REMOVED*** // decimal(38, 6)
-  ***REMOVED***
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, Nullable] public decimal? ValorPromedioProyecto { get; set; } // decimal(38, 6)
+    [Column, Nullable] public int? NumeroProyectos { get; set; } // int
+    [Column, Nullable] public decimal? DuracionPromedioProyectos { get; set; } // decimal(38, 6)
+  }
 
     [Table(Schema = "dbo", Name = "VwInformacionGeneralPerfilSector", IsView = true)]
     public partial class VwInformacionGeneralPerfilSector
     {
-        [Column, NotNull] public int IdSector { get; set; ***REMOVED*** // int
-        [Column, NotNull] public string NombreSector { get; set; ***REMOVED*** // varchar(200)
-        [Column, Nullable] public decimal? ValorPromedioProyecto { get; set; ***REMOVED*** // decimal(38, 6)
-        [Column, Nullable] public int? NumeroProyectos { get; set; ***REMOVED*** // int
-        [Column, Nullable] public decimal? DuracionPromedioProyectos { get; set; ***REMOVED*** // decimal(38, 6)
-        [Column, Nullable] public decimal? ValorProyectosTotal { get; set; ***REMOVED*** // decimal(38, 2)
-***REMOVED***
+        [Column, NotNull] public int IdSector { get; set; } // int
+        [Column, NotNull] public string NombreSector { get; set; } // varchar(200)
+        [Column, Nullable] public decimal? ValorPromedioProyecto { get; set; } // decimal(38, 6)
+        [Column, Nullable] public int? NumeroProyectos { get; set; } // int
+        [Column, Nullable] public decimal? DuracionPromedioProyectos { get; set; } // decimal(38, 6)
+        [Column, Nullable] public decimal? ValorProyectosTotal { get; set; } // decimal(38, 2)
+    }
 
     [Table(Schema = "consulta", Name = "VwProcesosXProyectosInstitucionesAnio", IsView = true)]
     public partial class consulta_VwProcesosXProyectosInstitucionesAnio
     {
-        [Column(), NotNull] public int AnioPresupuesto { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string CodigoInstitucion { get; set; ***REMOVED*** // varchar(30)
-        [Column("bpin"), Nullable] public string Bpin { get; set; ***REMOVED*** // varchar(40)
-        [Column(), Nullable] public string NombreProyecto { get; set; ***REMOVED*** // varchar(max)
-        [Column("codigoproceso"), Nullable] public string Codigoproceso { get; set; ***REMOVED*** // varchar(40)
-        [Column(), Nullable] public string Descripcion { get; set; ***REMOVED*** // varchar(500)
-        [Column(), Nullable] public string Caratula { get; set; ***REMOVED*** // varchar(250)
-        [Column(), NotNull] public string EstadoProceso { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public decimal? MontoEstimado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column(), Nullable] public string Modalidad { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public string Url { get; set; ***REMOVED*** // varchar(250)
-***REMOVED***
+        [Column(), NotNull] public int AnioPresupuesto { get; set; } // int
+        [Column(), NotNull] public string CodigoInstitucion { get; set; } // varchar(30)
+        [Column("bpin"), Nullable] public string Bpin { get; set; } // varchar(40)
+        [Column(), Nullable] public string NombreProyecto { get; set; } // varchar(max)
+        [Column("codigoproceso"), Nullable] public string Codigoproceso { get; set; } // varchar(40)
+        [Column(), Nullable] public string Descripcion { get; set; } // varchar(500)
+        [Column(), Nullable] public string Caratula { get; set; } // varchar(250)
+        [Column(), NotNull] public string EstadoProceso { get; set; } // varchar(100)
+        [Column(), Nullable] public decimal? MontoEstimado { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public string Modalidad { get; set; } // varchar(100)
+        [Column(), Nullable] public string Url { get; set; } // varchar(250)
+    }
 
     [Table(Schema = "dbo", Name = "VwProcesosCanceladosEmergencias", IsView = true)]
     public partial class VwProcesosCanceladosEmergencia
     {
-        [Column, NotNull] public string CodigoUnidadCompra { get; set; ***REMOVED*** // varchar(50)
-        [Column, NotNull] public string UnidadCompra { get; set; ***REMOVED*** // varchar(200)
-        [Column, NotNull] public string CodigoProceso { get; set; ***REMOVED*** // varchar(200)
-        [Column, Nullable] public string CodigoModalidad { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string Modalidad { get; set; ***REMOVED*** // varchar(100)
-        [Column, Nullable] public string TipoExcepcion { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string Caratula { get; set; ***REMOVED*** // varchar(250)
-        [Column, Nullable] public string Descripcion { get; set; ***REMOVED*** // varchar(500)
-        [Column, NotNull] public string EstadoProceso { get; set; ***REMOVED*** // varchar(100)
-        [Column, Nullable] public string FaseProceso { get; set; ***REMOVED*** // varchar(100)
-        [Column, Nullable] public string Moneda { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public decimal? MontoEstimado { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column, Nullable] public DateTime? FechaPublicacion { get; set; ***REMOVED*** // datetime2(7)
-        [Column, Nullable] public DateTime? FechaEnmienda { get; set; ***REMOVED*** // datetime2(7)
-        [Column, Nullable] public DateTime? FechaFinRecepcionOfertas { get; set; ***REMOVED*** // datetime2(7)
-        [Column, Nullable] public DateTime? FechaAperturaOfertas { get; set; ***REMOVED*** // datetime2(7)
-        [Column, Nullable] public DateTime? FechaEstimadaAdjudicacion { get; set; ***REMOVED*** // datetime2(7)
-        [Column, Nullable] public DateTime? FechaSuscripcion { get; set; ***REMOVED*** // datetime2(7)
-        [Column, Nullable] public string DirigidoMipymes { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string DirigidoMipymesMujeres { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string ProcesoLotificado { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string AdquisicionPlaneada { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string ObjetoProceso { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string SubobjetoProceso { get; set; ***REMOVED*** // varchar(50)
-        [Column, Nullable] public string Url { get; set; ***REMOVED*** // varchar(250)
-        [Column, Nullable] public string MotivoCancelacion { get; set; ***REMOVED*** // varchar(2000)
-        [Column, Nullable] public int? Origen { get; set; ***REMOVED*** // int
-***REMOVED***
+        [Column, NotNull] public string CodigoUnidadCompra { get; set; } // varchar(50)
+        [Column, NotNull] public string UnidadCompra { get; set; } // varchar(200)
+        [Column, NotNull] public string CodigoProceso { get; set; } // varchar(200)
+        [Column, Nullable] public string CodigoModalidad { get; set; } // varchar(50)
+        [Column, Nullable] public string Modalidad { get; set; } // varchar(100)
+        [Column, Nullable] public string TipoExcepcion { get; set; } // varchar(50)
+        [Column, Nullable] public string Caratula { get; set; } // varchar(250)
+        [Column, Nullable] public string Descripcion { get; set; } // varchar(500)
+        [Column, NotNull] public string EstadoProceso { get; set; } // varchar(100)
+        [Column, Nullable] public string FaseProceso { get; set; } // varchar(100)
+        [Column, Nullable] public string Moneda { get; set; } // varchar(50)
+        [Column, Nullable] public decimal? MontoEstimado { get; set; } // numeric(38, 6)
+        [Column, Nullable] public DateTime? FechaPublicacion { get; set; } // datetime2(7)
+        [Column, Nullable] public DateTime? FechaEnmienda { get; set; } // datetime2(7)
+        [Column, Nullable] public DateTime? FechaFinRecepcionOfertas { get; set; } // datetime2(7)
+        [Column, Nullable] public DateTime? FechaAperturaOfertas { get; set; } // datetime2(7)
+        [Column, Nullable] public DateTime? FechaEstimadaAdjudicacion { get; set; } // datetime2(7)
+        [Column, Nullable] public DateTime? FechaSuscripcion { get; set; } // datetime2(7)
+        [Column, Nullable] public string DirigidoMipymes { get; set; } // varchar(50)
+        [Column, Nullable] public string DirigidoMipymesMujeres { get; set; } // varchar(50)
+        [Column, Nullable] public string ProcesoLotificado { get; set; } // varchar(50)
+        [Column, Nullable] public string AdquisicionPlaneada { get; set; } // varchar(50)
+        [Column, Nullable] public string ObjetoProceso { get; set; } // varchar(50)
+        [Column, Nullable] public string SubobjetoProceso { get; set; } // varchar(50)
+        [Column, Nullable] public string Url { get; set; } // varchar(250)
+        [Column, Nullable] public string MotivoCancelacion { get; set; } // varchar(2000)
+        [Column, Nullable] public int? Origen { get; set; } // int
+    }
 
     [Table(Schema = "consulta", Name = "VwProcesosXInstitucionModalidad", IsView = true)]
     public partial class consulta_VwProcesosXInstitucionModalidad
     {
-        [Column("año"), NotNull] public int Año { get; set; ***REMOVED*** // int
-        [Column(), NotNull] public string CodigoInstitucion { get; set; ***REMOVED*** // varchar(30)
-        [Column(), Nullable] public string Modalidad { get; set; ***REMOVED*** // varchar(100)
-        [Column(), Nullable] public int? Cantidad { get; set; ***REMOVED*** // int
-***REMOVED***
+        [Column("año"), NotNull] public int Año { get; set; } // int
+        [Column(), NotNull] public string CodigoInstitucion { get; set; } // varchar(30)
+        [Column(), Nullable] public string Modalidad { get; set; } // varchar(100)
+        [Column(), Nullable] public int? Cantidad { get; set; } // int
+    }
 
   [Table(Schema = "dbo", Name = "VwProyectosAprobados", IsView = true)]
   public partial class VwProyectosAprobado
   {
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime FechaInicioProyecto { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public DateTime FechaFinProyecto { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public string NombreProyecto { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public decimal VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column, NotNull] public decimal VlrTotalProyectoTodasLasFuentes { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column, NotNull] public int IdSector { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public DateTime FechaInicioProyecto { get; set; } // datetime
+    [Column, NotNull] public DateTime FechaFinProyecto { get; set; } // datetime
+    [Column, NotNull] public string NombreProyecto { get; set; } // varchar(max)
+    [Column, NotNull] public decimal VlrTotalProyectoFuenteRegalias { get; set; } // decimal(18, 2)
+    [Column, NotNull] public decimal VlrTotalProyectoTodasLasFuentes { get; set; } // decimal(18, 2)
+    [Column, NotNull] public int IdSector { get; set; } // int
+  }
 
   [Table(Schema = "dbo", Name = "VwProyectosAprobadosInv", IsView = true)]
   public partial class VwProyectosAprobadosInv
   {
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime FechaInicioProyecto { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public string MesInicioProyecto { get; set; ***REMOVED*** // nvarchar(3)
-    [Column, NotNull] public int AnioInicioProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public DateTime FechaFinProyecto { get; set; ***REMOVED*** // datetime
-    [Column, NotNull] public string MesFinProyecto { get; set; ***REMOVED*** // nvarchar(3)
-    [Column, NotNull] public int AnioFinProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreProyecto { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public decimal VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column, NotNull] public decimal VlrTotalProyectoTodasLasFuentes { get; set; ***REMOVED*** // decimal(18, 2)
-    [Column, NotNull] public int IdSector { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreSector { get; set; ***REMOVED*** // varchar(200)
-    [Column, NotNull] public string URLImagen { get; set; ***REMOVED*** // nvarchar(4000)
-    [Column, NotNull] public int NumeroImagenes { get; set; ***REMOVED*** // int
-    [Column, Nullable] public decimal? AvanceFinanciero { get; set; ***REMOVED*** // decimal(10, 2)
-    [Column, NotNull] public decimal AvanceFisico { get; set; ***REMOVED*** // decimal(10, 2)
-    [Column, NotNull] public int IdEntidadEjecutora { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string EntidadEjecutora { get; set; ***REMOVED*** // varchar(27)
-    [Column, Nullable] public decimal? DuracionProyecto { get; set; ***REMOVED*** // decimal(18, 0)
-    [Column, NotNull] public int MeGusta { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int Comentarios { get; set; ***REMOVED*** // int
-    [Column, Nullable] public string TipoProyecto { get; set; ***REMOVED*** // varchar(13)
-    [Column, NotNull] public string IdPrograma { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string Programa { get; set; ***REMOVED*** // varchar(255)
-    [Column, NotNull] public string CodigoSNIP { get; set; ***REMOVED*** // varchar(max)
-    //[Column, Nullable] public decimal? NumeroBeneficiariosHombres { get; set; ***REMOVED*** // numeric(11, 0)
-    //[Column, Nullable] public decimal? NumeroBeneficiariosMujeres { get; set; ***REMOVED*** // numeric(11, 0)
-    //[Column, Nullable] public string IDMoneda { get; set; ***REMOVED*** // varchar(9)
-    //[Column, Nullable] public string Moneda { get; set; ***REMOVED*** // varchar(60)
-    //[Column, Nullable] public decimal? TasaCambio { get; set; ***REMOVED*** // numeric(22, 4)
-  ***REMOVED***
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public DateTime FechaInicioProyecto { get; set; } // datetime
+    [Column, NotNull] public string MesInicioProyecto { get; set; } // nvarchar(3)
+    [Column, NotNull] public int AnioInicioProyecto { get; set; } // int
+    [Column, NotNull] public DateTime FechaFinProyecto { get; set; } // datetime
+    [Column, NotNull] public string MesFinProyecto { get; set; } // nvarchar(3)
+    [Column, NotNull] public int AnioFinProyecto { get; set; } // int
+    [Column, NotNull] public string NombreProyecto { get; set; } // varchar(max)
+    [Column, NotNull] public decimal VlrTotalProyectoFuenteRegalias { get; set; } // decimal(18, 2)
+    [Column, NotNull] public decimal VlrTotalProyectoTodasLasFuentes { get; set; } // decimal(18, 2)
+    [Column, NotNull] public int IdSector { get; set; } // int
+    [Column, NotNull] public string NombreSector { get; set; } // varchar(200)
+    [Column, NotNull] public string URLImagen { get; set; } // nvarchar(4000)
+    [Column, NotNull] public int NumeroImagenes { get; set; } // int
+    [Column, Nullable] public decimal? AvanceFinanciero { get; set; } // decimal(10, 2)
+    [Column, NotNull] public decimal AvanceFisico { get; set; } // decimal(10, 2)
+    [Column, NotNull] public int IdEntidadEjecutora { get; set; } // int
+    [Column, NotNull] public string EntidadEjecutora { get; set; } // varchar(27)
+    [Column, Nullable] public decimal? DuracionProyecto { get; set; } // decimal(18, 0)
+    [Column, NotNull] public int MeGusta { get; set; } // int
+    [Column, NotNull] public int Comentarios { get; set; } // int
+    [Column, Nullable] public string TipoProyecto { get; set; } // varchar(13)
+    [Column, NotNull] public string IdPrograma { get; set; } // varchar(10)
+    [Column, NotNull] public string Programa { get; set; } // varchar(255)
+    [Column, NotNull] public string CodigoSNIP { get; set; } // varchar(max)
+    //[Column, Nullable] public decimal? NumeroBeneficiariosHombres { get; set; } // numeric(11, 0)
+    //[Column, Nullable] public decimal? NumeroBeneficiariosMujeres { get; set; } // numeric(11, 0)
+    //[Column, Nullable] public string IDMoneda { get; set; } // varchar(9)
+    //[Column, Nullable] public string Moneda { get; set; } // varchar(60)
+    //[Column, Nullable] public decimal? TasaCambio { get; set; } // numeric(22, 4)
+  }
 
   [Table(Schema = "dbo", Name = "VwSectorListadoPorDeptoInv", IsView = true)]
   public partial class VwSectorListadoPorDeptoInv
   {
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public int IdEstado { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdSector { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreSector { get; set; ***REMOVED*** // varchar(200)
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public int IdEstado { get; set; } // int
+    [Column, NotNull] public int IdSector { get; set; } // int
+    [Column, NotNull] public string NombreSector { get; set; } // varchar(200)
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+  }
 
   [Table(Schema = "dbo", Name = "VwSectorPerfilDeptoInv", IsView = true)]
   public partial class VwSectorPerfilDeptoInv
   {
-    [Column, NotNull] public int IdSector { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreSector { get; set; ***REMOVED*** // varchar(200)
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string NombreDepartamento { get; set; ***REMOVED*** // varchar(50)
-    [Column, Nullable] public long? NumeroProyectosSect { get; set; ***REMOVED*** // bigint
-    [Column, NotNull] public int IdEstado { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreEstado { get; set; ***REMOVED*** // varchar(30)
-    [Column, Nullable] public long? NumeroProyectosxEstado { get; set; ***REMOVED*** // bigint
-  ***REMOVED***
+    [Column, NotNull] public int IdSector { get; set; } // int
+    [Column, NotNull] public string NombreSector { get; set; } // varchar(200)
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public string NombreDepartamento { get; set; } // varchar(50)
+    [Column, Nullable] public long? NumeroProyectosSect { get; set; } // bigint
+    [Column, NotNull] public int IdEstado { get; set; } // int
+    [Column, NotNull] public string NombreEstado { get; set; } // varchar(30)
+    [Column, Nullable] public long? NumeroProyectosxEstado { get; set; } // bigint
+  }
 
     [Table(Schema = "dbo", Name = "VwSectorProyectosDeptoInv", IsView = true)]
       public partial class VwSectorProyectosDeptoInv
       {
-        [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-        [Column, NotNull] public int IdSector { get; set; ***REMOVED*** // int
-        [Column, NotNull] public string NombreSector { get; set; ***REMOVED*** // varchar(200)
-        [Column, Nullable] public long? NumeroProyectosSect { get; set; ***REMOVED*** // bigint
-        [Column, NotNull] public int IdEstado { get; set; ***REMOVED*** // int
-        [Column, NotNull] public string NombreEstado { get; set; ***REMOVED*** // varchar(30)
-        [Column, Nullable] public long? NumeroProyectosxEstado { get; set; ***REMOVED*** // bigint
-  ***REMOVED***
+        [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+        [Column, NotNull] public int IdSector { get; set; } // int
+        [Column, NotNull] public string NombreSector { get; set; } // varchar(200)
+        [Column, Nullable] public long? NumeroProyectosSect { get; set; } // bigint
+        [Column, NotNull] public int IdEstado { get; set; } // int
+        [Column, NotNull] public string NombreEstado { get; set; } // varchar(30)
+        [Column, Nullable] public long? NumeroProyectosxEstado { get; set; } // bigint
+      }
 
   [Table(Schema = "dbo", Name = "VwSectorProyectosInv", IsView = true)]
   public partial class VwSectorProyectosInv
   {
-    [Column, NotNull] public string IdDepartamento { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public string IdMunicipio { get; set; ***REMOVED*** // varchar(10)
-    [Column, NotNull] public int IdSector { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreSector { get; set; ***REMOVED*** // varchar(200)
-    [Column, Nullable] public int? NumeroProyectosSect { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdEstado { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string NombreEstado { get; set; ***REMOVED*** // varchar(30)
-    [Column, Nullable] public int? NumeroProyectosxEstado { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
+    [Column, NotNull] public string IdMunicipio { get; set; } // varchar(10)
+    [Column, NotNull] public int IdSector { get; set; } // int
+    [Column, NotNull] public string NombreSector { get; set; } // varchar(200)
+    [Column, Nullable] public int? NumeroProyectosSect { get; set; } // int
+    [Column, NotNull] public int IdEstado { get; set; } // int
+    [Column, NotNull] public string NombreEstado { get; set; } // varchar(30)
+    [Column, Nullable] public int? NumeroProyectosxEstado { get; set; } // int
+  }
 
   [Table(Schema = "dbo", Name = "VwSeguimientoAvanceFisico", IsView = true)]
   public partial class VwSeguimientoAvanceFisico
   {
-    [Column, NotNull] public int IdProyecto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdentificadorFase { get; set; ***REMOVED*** // int
-    [Column, NotNull] public int IdFase { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Fase { get; set; ***REMOVED*** // varchar(max)
-    [Column, Nullable] public int? IdComponente { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Componente { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public int IdProducto { get; set; ***REMOVED*** // int
-    [Column, NotNull] public string Producto { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public string UnidadProducto { get; set; ***REMOVED*** // varchar(max)
-    [Column, NotNull] public double MetaProgramada { get; set; ***REMOVED*** // float
-    [Column, NotNull] public double MetaEjecutada { get; set; ***REMOVED*** // float
-    [Column, NotNull] public double PorcentajeAvanceFisico { get; set; ***REMOVED*** // float
-  ***REMOVED***
+    [Column, NotNull] public int IdProyecto { get; set; } // int
+    [Column, NotNull] public int IdentificadorFase { get; set; } // int
+    [Column, NotNull] public int IdFase { get; set; } // int
+    [Column, NotNull] public string Fase { get; set; } // varchar(max)
+    [Column, Nullable] public int? IdComponente { get; set; } // int
+    [Column, NotNull] public string Componente { get; set; } // varchar(max)
+    [Column, NotNull] public int IdProducto { get; set; } // int
+    [Column, NotNull] public string Producto { get; set; } // varchar(max)
+    [Column, NotNull] public string UnidadProducto { get; set; } // varchar(max)
+    [Column, NotNull] public double MetaProgramada { get; set; } // float
+    [Column, NotNull] public double MetaEjecutada { get; set; } // float
+    [Column, NotNull] public double PorcentajeAvanceFisico { get; set; } // float
+  }
 
     [Table(Schema = "dbo", Name = "VwTotalProcesosSinContratoEmergencia", IsView = true)]
     public partial class VwTotalProcesosSinContratoEmergencia
     {
-        [Column, NotNull] public string CodigoEntidad { get; set; ***REMOVED*** // varchar(50)
-        [Column, NotNull] public string Entidad { get; set; ***REMOVED*** // varchar(200)
-        [Column, Nullable] public int? NroProcesos { get; set; ***REMOVED*** // int
-        [Column, Nullable] public decimal? ValorProcesos { get; set; ***REMOVED*** // numeric(38, 6)
-        [Column, Nullable] public int? Origen { get; set; ***REMOVED*** // int
-***REMOVED***
+        [Column, NotNull] public string CodigoEntidad { get; set; } // varchar(50)
+        [Column, NotNull] public string Entidad { get; set; } // varchar(200)
+        [Column, Nullable] public int? NroProcesos { get; set; } // int
+        [Column, Nullable] public decimal? ValorProcesos { get; set; } // numeric(38, 6)
+        [Column, Nullable] public int? Origen { get; set; } // int
+    }
     [Table(Schema = "stp", Name = "VinculacionPND_Presupuesto_x_Entidad_STP")]
 
   [Table(Schema = "consulta", Name = "VinculacionPND_Presupuesto_x_Entidad_STP")]
   public partial class consulta_VinculacionPNDPresupuestoXEntidadStp
   {
-    [Column("codEjeEstrategico"), Nullable] public int? CodEjeEstrategico { get; set; ***REMOVED*** // int
-    [Column("nombreEjeEstrategico"), NotNull] public string NombreEjeEstrategico { get; set; ***REMOVED*** // varchar(256)
-    [Column("codObjetivoEstrategico"), Nullable] public int? CodObjetivoEstrategico { get; set; ***REMOVED*** // int
-    [Column("nombreObjetivoEstrategico"), NotNull] public string NombreObjetivoEstrategico { get; set; ***REMOVED*** // varchar(256)
-    [Column("codObjetivoEspecifico"), Nullable] public int? CodObjetivoEspecifico { get; set; ***REMOVED*** // int
-    [Column("nombreObjetivoEspecifico"), NotNull] public string NombreObjetivoEspecifico { get; set; ***REMOVED*** // varchar(256)
-    [Column("codODS"), Nullable] public int? CodODS { get; set; ***REMOVED*** // int
-    [Column("nombreODS"), Nullable] public string NombreODS { get; set; ***REMOVED*** // varchar(255)
-    [Column("descripcionODS"), Nullable] public string DescripcionODS { get; set; ***REMOVED*** // varchar(255)
-    [Column("codNivelEntidad"), NotNull] public string CodNivelEntidad { get; set; ***REMOVED*** // varchar(47)
-    [Column("entidad"), Nullable] public string Entidad { get; set; ***REMOVED*** // varchar(255)
-    [Column("siglaEntidad"), Nullable] public string SiglaEntidad { get; set; ***REMOVED*** // varchar(255)
-    [Column("numSector"), Nullable] public int? NumSector { get; set; ***REMOVED*** // int
-    [Column("nombreSector"), Nullable] public string NombreSector { get; set; ***REMOVED*** // varchar(100)
-    [Column("clasificacionSector"), Nullable] public string ClasificacionSector { get; set; ***REMOVED*** // varchar(100)
-    [Column(), Nullable] public string IdNegocioProyecto { get; set; ***REMOVED*** // varchar(255)
-    [Column("nombreProyecto"), Nullable] public string NombreProyecto { get; set; ***REMOVED*** // varchar(255)
-    [Column("aportePorcentualAlObjetivo"), Nullable] public double? AportePorcentualAlObjetivo { get; set; ***REMOVED*** // float
-    [Column("aportePresupuestalAlObjetivo"), Nullable] public double? AportePresupuestalAlObjetivo { get; set; ***REMOVED*** // float
-    [Column(), NotNull] public int AnioPresupuesto { get; set; ***REMOVED*** // int
-    [Column("version"), NotNull] public int Version { get; set; ***REMOVED*** // int
-  ***REMOVED***
+    [Column("codEjeEstrategico"), Nullable] public int? CodEjeEstrategico { get; set; } // int
+    [Column("nombreEjeEstrategico"), NotNull] public string NombreEjeEstrategico { get; set; } // varchar(256)
+    [Column("codObjetivoEstrategico"), Nullable] public int? CodObjetivoEstrategico { get; set; } // int
+    [Column("nombreObjetivoEstrategico"), NotNull] public string NombreObjetivoEstrategico { get; set; } // varchar(256)
+    [Column("codObjetivoEspecifico"), Nullable] public int? CodObjetivoEspecifico { get; set; } // int
+    [Column("nombreObjetivoEspecifico"), NotNull] public string NombreObjetivoEspecifico { get; set; } // varchar(256)
+    [Column("codODS"), Nullable] public int? CodODS { get; set; } // int
+    [Column("nombreODS"), Nullable] public string NombreODS { get; set; } // varchar(255)
+    [Column("descripcionODS"), Nullable] public string DescripcionODS { get; set; } // varchar(255)
+    [Column("codNivelEntidad"), NotNull] public string CodNivelEntidad { get; set; } // varchar(47)
+    [Column("entidad"), Nullable] public string Entidad { get; set; } // varchar(255)
+    [Column("siglaEntidad"), Nullable] public string SiglaEntidad { get; set; } // varchar(255)
+    [Column("numSector"), Nullable] public int? NumSector { get; set; } // int
+    [Column("nombreSector"), Nullable] public string NombreSector { get; set; } // varchar(100)
+    [Column("clasificacionSector"), Nullable] public string ClasificacionSector { get; set; } // varchar(100)
+    [Column(), Nullable] public string IdNegocioProyecto { get; set; } // varchar(255)
+    [Column("nombreProyecto"), Nullable] public string NombreProyecto { get; set; } // varchar(255)
+    [Column("aportePorcentualAlObjetivo"), Nullable] public double? AportePorcentualAlObjetivo { get; set; } // float
+    [Column("aportePresupuestalAlObjetivo"), Nullable] public double? AportePresupuestalAlObjetivo { get; set; } // float
+    [Column(), NotNull] public int AnioPresupuesto { get; set; } // int
+    [Column("version"), NotNull] public int Version { get; set; } // int
+  }
 
 
 
@@ -3715,7 +3715,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<VwContratosPerfilContratosCancelado> EncabezadoContratosCancelados(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<VwContratosPerfilContratosCancelado>("[dbo].[EncabezadoContratosCancelados]");
-***REMOVED***
+    }
 
     #endregion
 
@@ -3724,14 +3724,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static int EncabezadoContratosRP(this TransparenciaDB dataConnection, ref int? @TOTALREGISTROS, ref long? @VALORCONTRATOS)
     {
       var ret = dataConnection.ExecuteProc("[dbo].[EncabezadoContratosRP]",
-          new DataParameter("@TOTALREGISTROS", @TOTALREGISTROS, LinqToDB.DataType.Int32) { Direction = ParameterDirection.InputOutput ***REMOVED***,
-          new DataParameter("@VALORCONTRATOS", @VALORCONTRATOS, LinqToDB.DataType.Int64) { Direction = ParameterDirection.InputOutput ***REMOVED***);
+          new DataParameter("@TOTALREGISTROS", @TOTALREGISTROS, LinqToDB.DataType.Int32) { Direction = ParameterDirection.InputOutput },
+          new DataParameter("@VALORCONTRATOS", @VALORCONTRATOS, LinqToDB.DataType.Int64) { Direction = ParameterDirection.InputOutput });
 
       @TOTALREGISTROS = Converter.ChangeTypeTo<int?>(((IDbDataParameter)dataConnection.Command.Parameters["@TOTALREGISTROS"]).Value);
       @VALORCONTRATOS = Converter.ChangeTypeTo<long?>(((IDbDataParameter)dataConnection.Command.Parameters["@VALORCONTRATOS"]).Value);
 
       return ret;
-***REMOVED***
+    }
 
     #endregion
 
@@ -3741,13 +3741,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<GetDataGraficaLiquidadoPorDepartamentoResult>("[dbo].[GetDataGraficaLiquidadoPorDepartamento]",
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class GetDataGraficaLiquidadoPorDepartamentoResult
     {
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public decimal? Liquidado { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreDepartamento { get; set; }
+      public decimal? Liquidado { get; set; }
+    }
 
     #endregion
 
@@ -3757,13 +3757,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<GetDataGraficaLiquidadoPorRecursoResult>("[dbo].[GetDataGraficaLiquidadoPorRecurso]",
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class GetDataGraficaLiquidadoPorRecursoResult
     {
-      public string NombreRecursoNatural { get; set; ***REMOVED***
-      public decimal? Liquidado { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreRecursoNatural { get; set; }
+      public decimal? Liquidado { get; set; }
+    }
 
     #endregion
 
@@ -3773,13 +3773,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<GetDataGraficaLiquidadoPorTipoRecursoResult>("[dbo].[GetDataGraficaLiquidadoPorTipoRecurso]",
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class GetDataGraficaLiquidadoPorTipoRecursoResult
     {
-      public string NombreTipoRecursoNatural { get; set; ***REMOVED***
-      public decimal? Liquidado { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreTipoRecursoNatural { get; set; }
+      public decimal? Liquidado { get; set; }
+    }
 
     #endregion
 
@@ -3789,14 +3789,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<GetDataGraficaProduccionPorRecursoResult>("[dbo].[GetDataGraficaProduccionPorRecurso]",
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class GetDataGraficaProduccionPorRecursoResult
     {
-      public string NombreRecursoNatural { get; set; ***REMOVED***
-      public decimal? Cantidad { get; set; ***REMOVED***
-      public string NombreUnidadMedida { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreRecursoNatural { get; set; }
+      public decimal? Cantidad { get; set; }
+      public string NombreUnidadMedida { get; set; }
+    }
 
     #endregion
 
@@ -3811,7 +3811,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@Longitud", @Longitud, LinqToDB.DataType.Decimal),
           new DataParameter("@CodigoDane", @CodigoDane, LinqToDB.DataType.VarChar),
           new DataParameter("@PuntoUbicacion", @PuntoUbicacion, LinqToDB.DataType.Udt));
-***REMOVED***
+    }
 
     #endregion
 
@@ -3835,7 +3835,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@Version", @Version, LinqToDB.DataType.Int32),
           new DataParameter("@Centroide", @Centroide, LinqToDB.DataType.Udt),
           new DataParameter("@Geojson", @Geojson, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     #endregion
 
@@ -3844,7 +3844,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static int LLenarBusqueda(this TransparenciaDB dataConnection)
     {
       return dataConnection.ExecuteProc("[dbo].[LLenarBusqueda]");
-***REMOVED***
+    }
 
     #endregion
 
@@ -3853,7 +3853,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static int LLenarBusquedaCovid(this TransparenciaDB dataConnection)
     {
       return dataConnection.ExecuteProc("[dbo].[LLenarBusquedaCovid]");
-***REMOVED***
+    }
 
     #endregion
 
@@ -3862,12 +3862,12 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerAnniosContratosResult> ObtenerAnniosContratos(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerAnniosContratosResult>("[dbo].[ObtenerAnniosContratos]");
-***REMOVED***
+    }
 
     public partial class ObtenerAnniosContratosResult
     {
-      public int? ANIOINICIOCONTRATO { get; set; ***REMOVED***
-***REMOVED***
+      public int? ANIOINICIOCONTRATO { get; set; }
+    }
 
     #endregion
 
@@ -3877,12 +3877,12 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<ObtenerAnniosContratosPorProgramaResult>("[dbo].[ObtenerAnniosContratosPorPrograma]",
           new DataParameter("@IDPROGRAMA", @IDPROGRAMA, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerAnniosContratosPorProgramaResult
     {
-      public int? ANIOINICIOCONTRATO { get; set; ***REMOVED***
-***REMOVED***
+      public int? ANIOINICIOCONTRATO { get; set; }
+    }
 
     #endregion
 
@@ -3892,12 +3892,12 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<ObtenerAnniosContratosPorProyectoResult>("[dbo].[ObtenerAnniosContratosPorProyecto]",
           new DataParameter("@IDPROYECTO", @IDPROYECTO, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerAnniosContratosPorProyectoResult
     {
-      public int? ANIOINICIOCONTRATO { get; set; ***REMOVED***
-***REMOVED***
+      public int? ANIOINICIOCONTRATO { get; set; }
+    }
 
     #endregion
 
@@ -3907,12 +3907,12 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<ObtenerAnniosContratosPorRuCResult>("[dbo].[ObtenerAnniosContratosPorRuC]",
           new DataParameter("@RUC", @RUC, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerAnniosContratosPorRuCResult
     {
-      public int? ANIOINICIOCONTRATO { get; set; ***REMOVED***
-***REMOVED***
+      public int? ANIOINICIOCONTRATO { get; set; }
+    }
 
     #endregion
 
@@ -3921,12 +3921,12 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerAnniosContratosRPResult> ObtenerAnniosContratosRP(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerAnniosContratosRPResult>("[dbo].[ObtenerAnniosContratosRP]");
-***REMOVED***
+    }
 
     public partial class ObtenerAnniosContratosRPResult
     {
-      public int? ANIOINICIOCONTRATO { get; set; ***REMOVED***
-***REMOVED***
+      public int? ANIOINICIOCONTRATO { get; set; }
+    }
 
     #endregion
 
@@ -3940,44 +3940,44 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@TIPOCOMENTARIO", @TIPOCOMENTARIO, LinqToDB.DataType.Int32),
           new DataParameter("@NUMEROPAGINA", @NUMEROPAGINA, LinqToDB.DataType.Int32),
           new DataParameter("@REGPORPAGINA", @REGPORPAGINA, LinqToDB.DataType.Int32),
-          new DataParameter("@TOTALREGISTROS", @TOTALREGISTROS, LinqToDB.DataType.Int32) { Direction = ParameterDirection.InputOutput ***REMOVED***).ToList();
+          new DataParameter("@TOTALREGISTROS", @TOTALREGISTROS, LinqToDB.DataType.Int32) { Direction = ParameterDirection.InputOutput }).ToList();
 
       @TOTALREGISTROS = Converter.ChangeTypeTo<int?>(((IDbDataParameter)dataConnection.Command.Parameters["@TOTALREGISTROS"]).Value);
 
       return ret;
-***REMOVED***
+    }
 
     public partial class ObtenerComentariosPorEstadosResult
     {
-      public long? NUMBER { get; set; ***REMOVED***
-      public int IdUsuario { get; set; ***REMOVED***
-      public string Nombre { get; set; ***REMOVED***
-      public string NombreRol { get; set; ***REMOVED***
-      public string NombreGenero { get; set; ***REMOVED***
-      public string email { get; set; ***REMOVED***
-      public DateTime fechaCreacion { get; set; ***REMOVED***
-      public string ComentarioOriginal { get; set; ***REMOVED***
-      public string ComentarioModerado { get; set; ***REMOVED***
-      public int? IdTipoRespuesta { get; set; ***REMOVED***
-      public int? ComentarioRelacionado { get; set; ***REMOVED***
-      public int IdEstado { get; set; ***REMOVED***
-      public int IdComentario { get; set; ***REMOVED***
-      public string EstadoComentario { get; set; ***REMOVED***
-      public int? IdAsociacion { get; set; ***REMOVED***
-      public int? IdPrograma { get; set; ***REMOVED***
-      public string NombrePrograma { get; set; ***REMOVED***
-      public string CodigoContrato { get; set; ***REMOVED***
-      public int? IdProyecto { get; set; ***REMOVED***
-      public string NombreProyecto { get; set; ***REMOVED***
-      public bool? Anonimo { get; set; ***REMOVED***
-      public int IdTipoComentario { get; set; ***REMOVED***
-      public string TipoComentario { get; set; ***REMOVED***
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string IdMunicipio { get; set; ***REMOVED***
-      public int? CodEnteTerritorialBeneficiario { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-***REMOVED***
+      public long? NUMBER { get; set; }
+      public int IdUsuario { get; set; }
+      public string Nombre { get; set; }
+      public string NombreRol { get; set; }
+      public string NombreGenero { get; set; }
+      public string email { get; set; }
+      public DateTime fechaCreacion { get; set; }
+      public string ComentarioOriginal { get; set; }
+      public string ComentarioModerado { get; set; }
+      public int? IdTipoRespuesta { get; set; }
+      public int? ComentarioRelacionado { get; set; }
+      public int IdEstado { get; set; }
+      public int IdComentario { get; set; }
+      public string EstadoComentario { get; set; }
+      public int? IdAsociacion { get; set; }
+      public int? IdPrograma { get; set; }
+      public string NombrePrograma { get; set; }
+      public string CodigoContrato { get; set; }
+      public int? IdProyecto { get; set; }
+      public string NombreProyecto { get; set; }
+      public bool? Anonimo { get; set; }
+      public int IdTipoComentario { get; set; }
+      public string TipoComentario { get; set; }
+      public string IdDepartamento { get; set; }
+      public string IdMunicipio { get; set; }
+      public int? CodEnteTerritorialBeneficiario { get; set; }
+      public string NombreMunicipio { get; set; }
+      public string NombreDepartamento { get; set; }
+    }
 
     #endregion
 
@@ -3991,44 +3991,44 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@TIPOCOMENTARIO", @TIPOCOMENTARIO, LinqToDB.DataType.Int32),
           new DataParameter("@NUMEROPAGINA", @NUMEROPAGINA, LinqToDB.DataType.Int32),
           new DataParameter("@REGPORPAGINA", @REGPORPAGINA, LinqToDB.DataType.Int32),
-          new DataParameter("@TOTALREGISTROS", @TOTALREGISTROS, LinqToDB.DataType.Int32) { Direction = ParameterDirection.InputOutput ***REMOVED***).ToList();
+          new DataParameter("@TOTALREGISTROS", @TOTALREGISTROS, LinqToDB.DataType.Int32) { Direction = ParameterDirection.InputOutput }).ToList();
 
       @TOTALREGISTROS = Converter.ChangeTypeTo<int?>(((IDbDataParameter)dataConnection.Command.Parameters["@TOTALREGISTROS"]).Value);
 
       return ret;
-***REMOVED***
+    }
 
     public partial class ObtenerComentariosPublicarResult
     {
-      public long? NUMBER { get; set; ***REMOVED***
-      public int IdUsuario { get; set; ***REMOVED***
-      public string Nombre { get; set; ***REMOVED***
-      public string NombreRol { get; set; ***REMOVED***
-      public string NombreGenero { get; set; ***REMOVED***
-      public string email { get; set; ***REMOVED***
-      public DateTime fechaCreacion { get; set; ***REMOVED***
-      public string ComentarioOriginal { get; set; ***REMOVED***
-      public string ComentarioModerado { get; set; ***REMOVED***
-      public int? IdTipoRespuesta { get; set; ***REMOVED***
-      public int? ComentarioRelacionado { get; set; ***REMOVED***
-      public int IdEstado { get; set; ***REMOVED***
-      public int IdComentario { get; set; ***REMOVED***
-      public string EstadoComentario { get; set; ***REMOVED***
-      public int? IdAsociacion { get; set; ***REMOVED***
-      public int? IdPrograma { get; set; ***REMOVED***
-      public string NombrePrograma { get; set; ***REMOVED***
-      public string CodigoContrato { get; set; ***REMOVED***
-      public int? IdProyecto { get; set; ***REMOVED***
-      public string NombreProyecto { get; set; ***REMOVED***
-      public bool? Anonimo { get; set; ***REMOVED***
-      public int IdTipoComentario { get; set; ***REMOVED***
-      public string TipoComentario { get; set; ***REMOVED***
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string IdMunicipio { get; set; ***REMOVED***
-      public int? CodEnteTerritorialBeneficiario { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-***REMOVED***
+      public long? NUMBER { get; set; }
+      public int IdUsuario { get; set; }
+      public string Nombre { get; set; }
+      public string NombreRol { get; set; }
+      public string NombreGenero { get; set; }
+      public string email { get; set; }
+      public DateTime fechaCreacion { get; set; }
+      public string ComentarioOriginal { get; set; }
+      public string ComentarioModerado { get; set; }
+      public int? IdTipoRespuesta { get; set; }
+      public int? ComentarioRelacionado { get; set; }
+      public int IdEstado { get; set; }
+      public int IdComentario { get; set; }
+      public string EstadoComentario { get; set; }
+      public int? IdAsociacion { get; set; }
+      public int? IdPrograma { get; set; }
+      public string NombrePrograma { get; set; }
+      public string CodigoContrato { get; set; }
+      public int? IdProyecto { get; set; }
+      public string NombreProyecto { get; set; }
+      public bool? Anonimo { get; set; }
+      public int IdTipoComentario { get; set; }
+      public string TipoComentario { get; set; }
+      public string IdDepartamento { get; set; }
+      public string IdMunicipio { get; set; }
+      public int? CodEnteTerritorialBeneficiario { get; set; }
+      public string NombreMunicipio { get; set; }
+      public string NombreDepartamento { get; set; }
+    }
 
     #endregion
 
@@ -4037,7 +4037,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<Alerta> ObtenerConfiguracionAlertas(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<Alerta>("[dbo].[ObtenerConfiguracionAlertas]");
-***REMOVED***
+    }
 
     #endregion
 
@@ -4047,12 +4047,12 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<ObtenerEntidadRPPorNombreResult>("[dbo].[ObtenerEntidadRPPorNombre]",
           new DataParameter("@NOMBREENTIDAD", @NOMBREENTIDAD, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerEntidadRPPorNombreResult
     {
-      public string ENTIDAD { get; set; ***REMOVED***
-***REMOVED***
+      public string ENTIDAD { get; set; }
+    }
 
         #endregion
 
@@ -4062,20 +4062,20 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         //{
         //    return dataConnection.QueryProc<ObtenerEntidadesContratosEmergenciaResult>("[dbo].[ObtenerEntidadesContratosEmergencia]",
         //        new DataParameter("@NOMBRECONTRATISTA", @NOMBREENTIDAD, LinqToDB.DataType.VarChar)
-        //***REMOVED***
+        //}
 
         //public partial class ObtenerEntidadesContratosEmergenciaResult
         //{
-        //    [Column(), Nullable] public string Entidad { get; set; ***REMOVED*** // nvarchar(200)
-        //    [Column(), Nullable] public string MonedaContrato { get; set; ***REMOVED*** // varchar(100)
-        //    [Column(), NotNull] public double? ValorContratado { get; set; ***REMOVED*** // numeric(38, 6)
-        //    [Column(), Nullable] public int? NroContratos { get; set; ***REMOVED*** // int
-        //    [Column(), Nullable] public string MonedaProceso { get; set; ***REMOVED*** // varchar(100)
-        //    [Column(), NotNull] public double? ValorProceso { get; set; ***REMOVED*** // numeric(38, 6)
-        //    [Column(), Nullable] public int? NroProcesos { get; set; ***REMOVED*** // int
+        //    [Column(), Nullable] public string Entidad { get; set; } // nvarchar(200)
+        //    [Column(), Nullable] public string MonedaContrato { get; set; } // varchar(100)
+        //    [Column(), NotNull] public double? ValorContratado { get; set; } // numeric(38, 6)
+        //    [Column(), Nullable] public int? NroContratos { get; set; } // int
+        //    [Column(), Nullable] public string MonedaProceso { get; set; } // varchar(100)
+        //    [Column(), NotNull] public double? ValorProceso { get; set; } // numeric(38, 6)
+        //    [Column(), Nullable] public int? NroProcesos { get; set; } // int
 
 
-        //***REMOVED***
+        //}
 
         //#endregion
 
@@ -4088,19 +4088,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdDpto", @IdDpto, LinqToDB.DataType.VarChar),
           new DataParameter("@IdMunicipio", @IdMunicipio, LinqToDB.DataType.VarChar),
           new DataParameter("@Periodo", @Periodo, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerFichaProduccionParaEnteResult
     {
-      public string NombreTipoDeRecurso { get; set; ***REMOVED***
-      public string IdRecurso { get; set; ***REMOVED***
-      public string NombreRecursoNatural { get; set; ***REMOVED***
-      public string IdCampo { get; set; ***REMOVED***
-      public string NombreCampoOProyecto { get; set; ***REMOVED***
-      public decimal? Cantidad { get; set; ***REMOVED***
-      public string NombreUnidadMedida { get; set; ***REMOVED***
-      public decimal? ValorRegalia { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreTipoDeRecurso { get; set; }
+      public string IdRecurso { get; set; }
+      public string NombreRecursoNatural { get; set; }
+      public string IdCampo { get; set; }
+      public string NombreCampoOProyecto { get; set; }
+      public decimal? Cantidad { get; set; }
+      public string NombreUnidadMedida { get; set; }
+      public decimal? ValorRegalia { get; set; }
+    }
 
     #endregion
 
@@ -4112,13 +4112,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdRegion", @IdRegion, LinqToDB.DataType.VarChar),
           new DataParameter("@IdDpto", @IdDpto, LinqToDB.DataType.VarChar),
           new DataParameter("@IdMunicipio", @IdMunicipio, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerFiltroCampoMinaPorGeografiaResult
     {
-      public string value { get; set; ***REMOVED***
-      public string name { get; set; ***REMOVED***
-***REMOVED***
+      public string value { get; set; }
+      public string name { get; set; }
+    }
 
     #endregion
 
@@ -4136,18 +4136,18 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@TextoBusqueda", @TextoBusqueda, LinqToDB.DataType.NVarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEtapaCampoMina", @IdEtapaCampoMina, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerFiscalizacionesFichaPorFiltrosResult
     {
-      public string NombreCampoMina { get; set; ***REMOVED***
-      public string IdFiscalizacion { get; set; ***REMOVED***
-      public DateTime? FechaActividad { get; set; ***REMOVED***
-      public string recurso { get; set; ***REMOVED***
-      public char? CodigoTipoRecurso { get; set; ***REMOVED***
-      public string Actividad { get; set; ***REMOVED***
-      public string Observacion { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreCampoMina { get; set; }
+      public string IdFiscalizacion { get; set; }
+      public DateTime? FechaActividad { get; set; }
+      public string recurso { get; set; }
+      public char? CodigoTipoRecurso { get; set; }
+      public string Actividad { get; set; }
+      public string Observacion { get; set; }
+    }
 
     #endregion
 
@@ -4158,21 +4158,21 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<ObtenerFiscalizacionPorBusquedaTextoCompuestaResult>("[dbo].[ObtenerFiscalizacionPorBusquedaTextoCompuesta]",
           new DataParameter("@TextoBusqueda", @TextoBusqueda, LinqToDB.DataType.VarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerFiscalizacionPorBusquedaTextoCompuestaResult
     {
-      public string IdRegion { get; set; ***REMOVED***
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string IdMunicipio { get; set; ***REMOVED***
-      public string NombreRegion { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public string TextoCompuesto { get; set; ***REMOVED***
-      public string NombreRecurso { get; set; ***REMOVED***
-      public int AñoFiscalizacion { get; set; ***REMOVED***
-      public int? Fiscalizaciones { get; set; ***REMOVED***
-***REMOVED***
+      public string IdRegion { get; set; }
+      public string IdDepartamento { get; set; }
+      public string IdMunicipio { get; set; }
+      public string NombreRegion { get; set; }
+      public string NombreDepartamento { get; set; }
+      public string NombreMunicipio { get; set; }
+      public string TextoCompuesto { get; set; }
+      public string NombreRecurso { get; set; }
+      public int AñoFiscalizacion { get; set; }
+      public int? Fiscalizaciones { get; set; }
+    }
 
     #endregion
 
@@ -4189,16 +4189,16 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt),
           new DataParameter("@IdTipoFiscalizacion", @IdTipoFiscalizacion, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerFiscalizacionPorDepartamentoPorFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public int AñoFiscalizacion { get; set; ***REMOVED***
-      public int? Fiscalizaciones { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public string Url { get; set; }
+      public int AñoFiscalizacion { get; set; }
+      public int? Fiscalizaciones { get; set; }
+    }
 
     #endregion
 
@@ -4217,17 +4217,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdTipoFiscalizacion", @IdTipoFiscalizacion, LinqToDB.DataType.Int32),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEtapaCampoMina", @IdEtapaCampoMina, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerFiscalizacionPorDepartamentoPorFiltrosV2Result
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public int? TotalCamposMinas { get; set; ***REMOVED***
-      public int? TotalFiscalizaciones { get; set; ***REMOVED***
-      public decimal? Porcentaje { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public string Url { get; set; }
+      public int? TotalCamposMinas { get; set; }
+      public int? TotalFiscalizaciones { get; set; }
+      public decimal? Porcentaje { get; set; }
+    }
 
     #endregion
 
@@ -4244,16 +4244,16 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt),
           new DataParameter("@IdTipoFiscalizacion", @IdTipoFiscalizacion, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerFiscalizacionPorMunicipioPorFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public int AñoFiscalizacion { get; set; ***REMOVED***
-      public int? Fiscalizaciones { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public string Url { get; set; }
+      public int AñoFiscalizacion { get; set; }
+      public int? Fiscalizaciones { get; set; }
+    }
 
     #endregion
 
@@ -4272,17 +4272,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdTipoFiscalizacion", @IdTipoFiscalizacion, LinqToDB.DataType.Int32),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEtapaCampoMina", @IdEtapaCampoMina, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerFiscalizacionPorMunicipioPorFiltrosV2Result
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public int? TotalCamposMinas { get; set; ***REMOVED***
-      public int? TotalFiscalizaciones { get; set; ***REMOVED***
-      public decimal? Porcentaje { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public string Url { get; set; }
+      public int? TotalCamposMinas { get; set; }
+      public int? TotalFiscalizaciones { get; set; }
+      public decimal? Porcentaje { get; set; }
+    }
 
     #endregion
 
@@ -4299,16 +4299,16 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt),
           new DataParameter("@IdTipoFiscalizacion", @IdTipoFiscalizacion, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerFiscalizacionPorRegionPorFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public int? AñoFiscalizacion { get; set; ***REMOVED***
-      public int? Fiscalizaciones { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public string Url { get; set; }
+      public int? AñoFiscalizacion { get; set; }
+      public int? Fiscalizaciones { get; set; }
+    }
 
     #endregion
 
@@ -4327,17 +4327,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdTipoFiscalizacion", @IdTipoFiscalizacion, LinqToDB.DataType.Int32),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEtapaCampoMina", @IdEtapaCampoMina, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerFiscalizacionPorRegionPorFiltrosV2Result
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public int? TotalCamposMinas { get; set; ***REMOVED***
-      public int? TotalFiscalizaciones { get; set; ***REMOVED***
-      public decimal? Porcentaje { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public string Url { get; set; }
+      public int? TotalCamposMinas { get; set; }
+      public int? TotalFiscalizaciones { get; set; }
+      public decimal? Porcentaje { get; set; }
+    }
 
     #endregion
 
@@ -4348,15 +4348,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<ObtenerFiscalizacionPorTipoActividadResult>("[dbo].[ObtenerFiscalizacionPorTipoActividad]",
           new DataParameter("@Periodo", @Periodo, LinqToDB.DataType.Int32),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerFiscalizacionPorTipoActividadResult
     {
-      public string TipoActividad { get; set; ***REMOVED***
-      public int? Campos { get; set; ***REMOVED***
-      public int? Total { get; set; ***REMOVED***
-      public string Id { get; set; ***REMOVED***
-***REMOVED***
+      public string TipoActividad { get; set; }
+      public int? Campos { get; set; }
+      public int? Total { get; set; }
+      public string Id { get; set; }
+    }
 
     #endregion
 
@@ -4367,13 +4367,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<ObtenerFiscalizacionPorTipoRecursoResult>("[dbo].[ObtenerFiscalizacionPorTipoRecurso]",
           new DataParameter("@Periodo", @Periodo, LinqToDB.DataType.Int32),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerFiscalizacionPorTipoRecursoResult
     {
-      public string Tipo { get; set; ***REMOVED***
-      public int? Campos { get; set; ***REMOVED***
-***REMOVED***
+      public string Tipo { get; set; }
+      public int? Campos { get; set; }
+    }
 
     #endregion
 
@@ -4385,30 +4385,30 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IDESTADO", @IDESTADO, LinqToDB.DataType.Int32),
           new DataParameter("@NUMEROPAGINA", @NUMEROPAGINA, LinqToDB.DataType.Int32),
           new DataParameter("@REGPORPAGINA", @REGPORPAGINA, LinqToDB.DataType.Int32),
-          new DataParameter("@TOTALREGISTROS", @TOTALREGISTROS, LinqToDB.DataType.Int32) { Direction = ParameterDirection.InputOutput ***REMOVED***).ToList();
+          new DataParameter("@TOTALREGISTROS", @TOTALREGISTROS, LinqToDB.DataType.Int32) { Direction = ParameterDirection.InputOutput }).ToList();
 
       @TOTALREGISTROS = Converter.ChangeTypeTo<int?>(((IDbDataParameter)dataConnection.Command.Parameters["@TOTALREGISTROS"]).Value);
 
       return ret;
-***REMOVED***
+    }
 
     public partial class ObtenerFotosPorEstadosResult
     {
-      public long? NUMBER { get; set; ***REMOVED***
-      public string Descripcion { get; set; ***REMOVED***
-      public string RutaFotoGrande { get; set; ***REMOVED***
-      public string RutaFotoPequeno { get; set; ***REMOVED***
-      public int IdFotoUsuario { get; set; ***REMOVED***
-      public DateTime Fecha { get; set; ***REMOVED***
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string IdMunicipio { get; set; ***REMOVED***
-      public int IdProyecto { get; set; ***REMOVED***
-      public string NombreProyecto { get; set; ***REMOVED***
-      public int IdUsuario { get; set; ***REMOVED***
-      public string Nombre { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-***REMOVED***
+      public long? NUMBER { get; set; }
+      public string Descripcion { get; set; }
+      public string RutaFotoGrande { get; set; }
+      public string RutaFotoPequeno { get; set; }
+      public int IdFotoUsuario { get; set; }
+      public DateTime Fecha { get; set; }
+      public string IdDepartamento { get; set; }
+      public string IdMunicipio { get; set; }
+      public int IdProyecto { get; set; }
+      public string NombreProyecto { get; set; }
+      public int IdUsuario { get; set; }
+      public string Nombre { get; set; }
+      public string NombreMunicipio { get; set; }
+      public string NombreDepartamento { get; set; }
+    }
 
     #endregion
 
@@ -4418,12 +4418,12 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<ObtenerIdProyectoPorBpinResult>("[dbo].[ObtenerIdProyectoPorBpin]",
           new DataParameter("@BPIN", @BPIN, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerIdProyectoPorBpinResult
     {
-      public int? ReturnValue { get; set; ***REMOVED***
-***REMOVED***
+      public int? ReturnValue { get; set; }
+    }
 
     #endregion
 
@@ -4433,37 +4433,37 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<ObtenerInformacionContratoResult>("[dbo].[ObtenerInformacionContrato]",
           new DataParameter("@CODIGOCONTRATO", @CODIGOCONTRATO, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerInformacionContratoResult
     {
-      public long? NUMBER { get; set; ***REMOVED***
-      public int? Anio { get; set; ***REMOVED***
-      public string UnidadCompra { get; set; ***REMOVED***
-      public string EstadoProceso { get; set; ***REMOVED***
-      public string CodigoContrato { get; set; ***REMOVED***
-      public string CodigoProceso { get; set; ***REMOVED***
-      public string tipodocumento { get; set; ***REMOVED***
-      public string numerodocumento { get; set; ***REMOVED***
-      public string Contratista { get; set; ***REMOVED***
-      public string DocURL { get; set; ***REMOVED***
-      public string UrlResumenAdjudicacion { get; set; ***REMOVED***
-      public string UrlInvitados { get; set; ***REMOVED***
-      public DateTime? FechaIncioPublicacionProceso { get; set; ***REMOVED***
-      public int? OfertaPeriodoDuracion { get; set; ***REMOVED***
-      public DateTime? FechaPublicacion { get; set; ***REMOVED***
-      public DateTime? FechaInicioContrato { get; set; ***REMOVED***
-      public DateTime? FechaFinContrato { get; set; ***REMOVED***
-      public long? ValorContrato { get; set; ***REMOVED***
-      public string MetodoContratacion { get; set; ***REMOVED***
-      public string CategoriaContratacion { get; set; ***REMOVED***
-      public DateTime? FCH_INICIO_PUBLICACION { get; set; ***REMOVED***
-      public DateTime? FCH_FIN_PUBLICACION { get; set; ***REMOVED***
-      public DateTime? FCH_ESTIMADA_ADJUDICACION { get; set; ***REMOVED***
-      public string DescripcionContrato { get; set; ***REMOVED***
-      public string DescripcionProceso { get; set; ***REMOVED***
-      public int COVID19 { get; set; ***REMOVED***
-***REMOVED***
+      public long? NUMBER { get; set; }
+      public int? Anio { get; set; }
+      public string UnidadCompra { get; set; }
+      public string EstadoProceso { get; set; }
+      public string CodigoContrato { get; set; }
+      public string CodigoProceso { get; set; }
+      public string tipodocumento { get; set; }
+      public string numerodocumento { get; set; }
+      public string Contratista { get; set; }
+      public string DocURL { get; set; }
+      public string UrlResumenAdjudicacion { get; set; }
+      public string UrlInvitados { get; set; }
+      public DateTime? FechaIncioPublicacionProceso { get; set; }
+      public int? OfertaPeriodoDuracion { get; set; }
+      public DateTime? FechaPublicacion { get; set; }
+      public DateTime? FechaInicioContrato { get; set; }
+      public DateTime? FechaFinContrato { get; set; }
+      public long? ValorContrato { get; set; }
+      public string MetodoContratacion { get; set; }
+      public string CategoriaContratacion { get; set; }
+      public DateTime? FCH_INICIO_PUBLICACION { get; set; }
+      public DateTime? FCH_FIN_PUBLICACION { get; set; }
+      public DateTime? FCH_ESTIMADA_ADJUDICACION { get; set; }
+      public string DescripcionContrato { get; set; }
+      public string DescripcionProceso { get; set; }
+      public int COVID19 { get; set; }
+    }
 
     #endregion
 
@@ -4472,7 +4472,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<VwContratosCancelado> ObtenerInformacionContratosCancelados(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<VwContratosCancelado>("[dbo].[ObtenerInformacionContratosCancelados]");
-***REMOVED***
+    }
 
     #endregion
 
@@ -4491,42 +4491,42 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@COVID19", @COVID19, LinqToDB.DataType.Int32),
           new DataParameter("@NOMBREPROCESO", @NOMBREPROCESO, LinqToDB.DataType.VarChar),
           new DataParameter("@NOMBREENTIDAD", @NOMBREENTIDAD, LinqToDB.DataType.VarChar),
-          new DataParameter("@TOTALREGISTROS", @TOTALREGISTROS, LinqToDB.DataType.Int32) { Direction = ParameterDirection.InputOutput ***REMOVED***).ToList();
+          new DataParameter("@TOTALREGISTROS", @TOTALREGISTROS, LinqToDB.DataType.Int32) { Direction = ParameterDirection.InputOutput }).ToList();
 
       @TOTALREGISTROS = Converter.ChangeTypeTo<int?>(((IDbDataParameter)dataConnection.Command.Parameters["@TOTALREGISTROS"]).Value);
 
       return ret;
-***REMOVED***
+    }
 
     public partial class ObtenerInformacionContratosPorFiltrosResult
     {
-      public long? NUMBER { get; set; ***REMOVED***
-      public int? Anio { get; set; ***REMOVED***
-      public string UnidadCompra { get; set; ***REMOVED***
-      public string EstadoProceso { get; set; ***REMOVED***
-      public string CodigoContrato { get; set; ***REMOVED***
-      public string CodigoProceso { get; set; ***REMOVED***
-      public string tipodocumento { get; set; ***REMOVED***
-      public string numerodocumento { get; set; ***REMOVED***
-      public string Contratista { get; set; ***REMOVED***
-      public string DocURL { get; set; ***REMOVED***
-      public string UrlResumenAdjudicacion { get; set; ***REMOVED***
-      public string UrlInvitados { get; set; ***REMOVED***
-      public DateTime? FechaFirmaContrato { get; set; ***REMOVED***
-      public int? OfertaPeriodoDuracion { get; set; ***REMOVED***
-      public DateTime? FechaPublicacion { get; set; ***REMOVED***
-      public DateTime? FechaInicioContrato { get; set; ***REMOVED***
-      public DateTime? FechaFinContrato { get; set; ***REMOVED***
-      public long? ValorContrato { get; set; ***REMOVED***
-      public string MetodoContratacion { get; set; ***REMOVED***
-      public string CategoriaContratacion { get; set; ***REMOVED***
-      public DateTime? FCH_INICIO_PUBLICACION { get; set; ***REMOVED***
-      public DateTime? FCH_FIN_PUBLICACION { get; set; ***REMOVED***
-      public DateTime? FCH_ESTIMADA_ADJUDICACION { get; set; ***REMOVED***
-      public string DescripcionContrato { get; set; ***REMOVED***
-      public string DescripcionProceso { get; set; ***REMOVED***
-      public int COVID19 { get; set; ***REMOVED***
-***REMOVED***
+      public long? NUMBER { get; set; }
+      public int? Anio { get; set; }
+      public string UnidadCompra { get; set; }
+      public string EstadoProceso { get; set; }
+      public string CodigoContrato { get; set; }
+      public string CodigoProceso { get; set; }
+      public string tipodocumento { get; set; }
+      public string numerodocumento { get; set; }
+      public string Contratista { get; set; }
+      public string DocURL { get; set; }
+      public string UrlResumenAdjudicacion { get; set; }
+      public string UrlInvitados { get; set; }
+      public DateTime? FechaFirmaContrato { get; set; }
+      public int? OfertaPeriodoDuracion { get; set; }
+      public DateTime? FechaPublicacion { get; set; }
+      public DateTime? FechaInicioContrato { get; set; }
+      public DateTime? FechaFinContrato { get; set; }
+      public long? ValorContrato { get; set; }
+      public string MetodoContratacion { get; set; }
+      public string CategoriaContratacion { get; set; }
+      public DateTime? FCH_INICIO_PUBLICACION { get; set; }
+      public DateTime? FCH_FIN_PUBLICACION { get; set; }
+      public DateTime? FCH_ESTIMADA_ADJUDICACION { get; set; }
+      public string DescripcionContrato { get; set; }
+      public string DescripcionProceso { get; set; }
+      public int COVID19 { get; set; }
+    }
 
     #endregion
 
@@ -4541,43 +4541,43 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@REGPORPAGINA", @REGPORPAGINA, LinqToDB.DataType.Int32),
           new DataParameter("@NOMBREPROCESO", @NOMBREPROCESO, LinqToDB.DataType.VarChar),
           new DataParameter("@NOMBREENTIDAD", @NOMBREENTIDAD, LinqToDB.DataType.VarChar),
-          new DataParameter("@TOTALREGISTROS", @TOTALREGISTROS, LinqToDB.DataType.Int32) { Direction = ParameterDirection.InputOutput ***REMOVED***).ToList();
+          new DataParameter("@TOTALREGISTROS", @TOTALREGISTROS, LinqToDB.DataType.Int32) { Direction = ParameterDirection.InputOutput }).ToList();
 
       @TOTALREGISTROS = Converter.ChangeTypeTo<int?>(((IDbDataParameter)dataConnection.Command.Parameters["@TOTALREGISTROS"]).Value);
 
       return ret;
-***REMOVED***
+    }
 
     public partial class ObtenerInformacionContratosRPPorFiltrosResult
     {
-      public long? NUMBER { get; set; ***REMOVED***
-      public int? Anio { get; set; ***REMOVED***
-      public string UnidadCompra { get; set; ***REMOVED***
-      public string EstadoProceso { get; set; ***REMOVED***
-      public string CodigoContrato { get; set; ***REMOVED***
-      public string CodigoProceso { get; set; ***REMOVED***
-      public string tipodocumento { get; set; ***REMOVED***
-      public string numerodocumento { get; set; ***REMOVED***
-      public string Contratista { get; set; ***REMOVED***
-      public string DocURL { get; set; ***REMOVED***
-      public string UrlResumenAdjudicacion { get; set; ***REMOVED***
-      public string UrlInvitados { get; set; ***REMOVED***
-      public DateTime? FechaFirmaContrato { get; set; ***REMOVED***
-      public int? OfertaPeriodoDuracion { get; set; ***REMOVED***
-      public DateTime? FechaPublicacion { get; set; ***REMOVED***
-      public DateTime? FechaInicioContrato { get; set; ***REMOVED***
-      public DateTime? FechaFinContrato { get; set; ***REMOVED***
-      public long? ValorContrato { get; set; ***REMOVED***
-      public string MetodoContratacion { get; set; ***REMOVED***
-      public string CategoriaContratacion { get; set; ***REMOVED***
-      public DateTime? FCH_INICIO_PUBLICACION { get; set; ***REMOVED***
-      public DateTime? FCH_FIN_PUBLICACION { get; set; ***REMOVED***
-      public DateTime? FCH_ESTIMADA_ADJUDICACION { get; set; ***REMOVED***
-      public string DescripcionContrato { get; set; ***REMOVED***
-      public string DescripcionProceso { get; set; ***REMOVED***
-      public int COVID19 { get; set; ***REMOVED***
-      public short ORDEN { get; set; ***REMOVED***
-***REMOVED***
+      public long? NUMBER { get; set; }
+      public int? Anio { get; set; }
+      public string UnidadCompra { get; set; }
+      public string EstadoProceso { get; set; }
+      public string CodigoContrato { get; set; }
+      public string CodigoProceso { get; set; }
+      public string tipodocumento { get; set; }
+      public string numerodocumento { get; set; }
+      public string Contratista { get; set; }
+      public string DocURL { get; set; }
+      public string UrlResumenAdjudicacion { get; set; }
+      public string UrlInvitados { get; set; }
+      public DateTime? FechaFirmaContrato { get; set; }
+      public int? OfertaPeriodoDuracion { get; set; }
+      public DateTime? FechaPublicacion { get; set; }
+      public DateTime? FechaInicioContrato { get; set; }
+      public DateTime? FechaFinContrato { get; set; }
+      public long? ValorContrato { get; set; }
+      public string MetodoContratacion { get; set; }
+      public string CategoriaContratacion { get; set; }
+      public DateTime? FCH_INICIO_PUBLICACION { get; set; }
+      public DateTime? FCH_FIN_PUBLICACION { get; set; }
+      public DateTime? FCH_ESTIMADA_ADJUDICACION { get; set; }
+      public string DescripcionContrato { get; set; }
+      public string DescripcionProceso { get; set; }
+      public int COVID19 { get; set; }
+      public short ORDEN { get; set; }
+    }
 
     #endregion
 
@@ -4586,17 +4586,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerListaDepartamentosHomeResult> ObtenerListaDepartamentosHome(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerListaDepartamentosHomeResult>("[dbo].[ObtenerListaDepartamentosHome]");
-***REMOVED***
+    }
 
     public partial class ObtenerListaDepartamentosHomeResult
     {
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public decimal? VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED***
-      public decimal? VlrTotalProyectoTodasLasFuentes { get; set; ***REMOVED***
-      public int? projectNumber { get; set; ***REMOVED***
-      public string UrlImagePequenia { get; set; ***REMOVED***
-***REMOVED***
+      public string IdDepartamento { get; set; }
+      public string NombreDepartamento { get; set; }
+      public decimal? VlrTotalProyectoFuenteRegalias { get; set; }
+      public decimal? VlrTotalProyectoTodasLasFuentes { get; set; }
+      public int? projectNumber { get; set; }
+      public string UrlImagePequenia { get; set; }
+    }
 
     #endregion
 
@@ -4605,13 +4605,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerListadoDeCamposOProyectosResult> ObtenerListadoDeCamposOProyectos(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerListadoDeCamposOProyectosResult>("[dbo].[ObtenerListadoDeCamposOProyectos]");
-***REMOVED***
+    }
 
     public partial class ObtenerListadoDeCamposOProyectosResult
     {
-      public string value { get; set; ***REMOVED***
-      public string name { get; set; ***REMOVED***
-***REMOVED***
+      public string value { get; set; }
+      public string name { get; set; }
+    }
 
     #endregion
 
@@ -4620,14 +4620,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerListadoDeCamposOProyectosFiscalizacionResult> ObtenerListadoDeCamposOProyectosFiscalizacion(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerListadoDeCamposOProyectosFiscalizacionResult>("[dbo].[ObtenerListadoDeCamposOProyectosFiscalizacion]");
-***REMOVED***
+    }
 
     public partial class ObtenerListadoDeCamposOProyectosFiscalizacionResult
     {
-      public string value { get; set; ***REMOVED***
-      public string name { get; set; ***REMOVED***
-      public char TipoRecurso { get; set; ***REMOVED***
-***REMOVED***
+      public string value { get; set; }
+      public string name { get; set; }
+      public char TipoRecurso { get; set; }
+    }
 
     #endregion
 
@@ -4638,14 +4638,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<ObtenerListadoDeCamposOProyectosFiscalizacionPorFiltroResult>("[dbo].[ObtenerListadoDeCamposOProyectosFiscalizacionPorFiltro]",
           new DataParameter("@NombreCampoOProyecto", @NombreCampoOProyecto, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerListadoDeCamposOProyectosFiscalizacionPorFiltroResult
     {
-      public string IdCampoOProyecto { get; set; ***REMOVED***
-      public string NombreCampoOProyecto { get; set; ***REMOVED***
-      public char TipoRecurso { get; set; ***REMOVED***
-***REMOVED***
+      public string IdCampoOProyecto { get; set; }
+      public string NombreCampoOProyecto { get; set; }
+      public char TipoRecurso { get; set; }
+    }
 
     #endregion
 
@@ -4654,14 +4654,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerListadoDeEstadoJuridicoCamposOProyectosResult> ObtenerListadoDeEstadoJuridicoCamposOProyectos(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerListadoDeEstadoJuridicoCamposOProyectosResult>("[dbo].[ObtenerListadoDeEstadoJuridicoCamposOProyectos]");
-***REMOVED***
+    }
 
     public partial class ObtenerListadoDeEstadoJuridicoCamposOProyectosResult
     {
-      public string IdEstadoJuridicoCampoOProyecto { get; set; ***REMOVED***
-      public string NombreEstadoJuridicoCampoOProyecto { get; set; ***REMOVED***
-      public string IdTipoCampoOProyecto { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEstadoJuridicoCampoOProyecto { get; set; }
+      public string NombreEstadoJuridicoCampoOProyecto { get; set; }
+      public string IdTipoCampoOProyecto { get; set; }
+    }
 
     #endregion
 
@@ -4670,14 +4670,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerListadoDeEtapaCamposOProyectosResult> ObtenerListadoDeEtapaCamposOProyectos(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerListadoDeEtapaCamposOProyectosResult>("[dbo].[ObtenerListadoDeEtapaCamposOProyectos]");
-***REMOVED***
+    }
 
     public partial class ObtenerListadoDeEtapaCamposOProyectosResult
     {
-      public int IdEtapaCampoOProyecto { get; set; ***REMOVED***
-      public string NombreEtapaCampoOProyecto { get; set; ***REMOVED***
-      public string IdTipoCampoOProyecto { get; set; ***REMOVED***
-***REMOVED***
+      public int IdEtapaCampoOProyecto { get; set; }
+      public string NombreEtapaCampoOProyecto { get; set; }
+      public string IdTipoCampoOProyecto { get; set; }
+    }
 
     #endregion
 
@@ -4686,13 +4686,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerListadoDeRecursosNaturalesResult> ObtenerListadoDeRecursosNaturales(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerListadoDeRecursosNaturalesResult>("[dbo].[ObtenerListadoDeRecursosNaturales]");
-***REMOVED***
+    }
 
     public partial class ObtenerListadoDeRecursosNaturalesResult
     {
-      public string value { get; set; ***REMOVED***
-      public string name { get; set; ***REMOVED***
-***REMOVED***
+      public string value { get; set; }
+      public string name { get; set; }
+    }
 
     #endregion
 
@@ -4701,14 +4701,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerListadoDeRecursosNaturalesFiscalizacionResult> ObtenerListadoDeRecursosNaturalesFiscalizacion(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerListadoDeRecursosNaturalesFiscalizacionResult>("[dbo].[ObtenerListadoDeRecursosNaturalesFiscalizacion]");
-***REMOVED***
+    }
 
     public partial class ObtenerListadoDeRecursosNaturalesFiscalizacionResult
     {
-      public string value { get; set; ***REMOVED***
-      public string name { get; set; ***REMOVED***
-      public char IdTipoRecursoNatural { get; set; ***REMOVED***
-***REMOVED***
+      public string value { get; set; }
+      public string name { get; set; }
+      public char IdTipoRecursoNatural { get; set; }
+    }
 
     #endregion
 
@@ -4717,13 +4717,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerListadoDeTiposDeFiscalizacionResult> ObtenerListadoDeTiposDeFiscalizacion(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerListadoDeTiposDeFiscalizacionResult>("[dbo].[ObtenerListadoDeTiposDeFiscalizacion]");
-***REMOVED***
+    }
 
     public partial class ObtenerListadoDeTiposDeFiscalizacionResult
     {
-      public char value { get; set; ***REMOVED***
-      public string name { get; set; ***REMOVED***
-***REMOVED***
+      public char value { get; set; }
+      public string name { get; set; }
+    }
 
     #endregion
 
@@ -4732,13 +4732,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerListadoDeTiposRecursosNaturalesResult> ObtenerListadoDeTiposRecursosNaturales(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerListadoDeTiposRecursosNaturalesResult>("[dbo].[ObtenerListadoDeTiposRecursosNaturales]");
-***REMOVED***
+    }
 
     public partial class ObtenerListadoDeTiposRecursosNaturalesResult
     {
-      public char value { get; set; ***REMOVED***
-      public string name { get; set; ***REMOVED***
-***REMOVED***
+      public char value { get; set; }
+      public string name { get; set; }
+    }
 
     #endregion
 
@@ -4747,13 +4747,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerListadoPeriodosParaRecursosResult> ObtenerListadoPeriodosParaRecursos(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerListadoPeriodosParaRecursosResult>("[dbo].[ObtenerListadoPeriodosParaRecursos]");
-***REMOVED***
+    }
 
     public partial class ObtenerListadoPeriodosParaRecursosResult
     {
-      public int? value { get; set; ***REMOVED***
-      public int? name { get; set; ***REMOVED***
-***REMOVED***
+      public int? value { get; set; }
+      public int? name { get; set; }
+    }
 
     #endregion
 
@@ -4762,13 +4762,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerListadoTiposDeRecursosFuenteResult> ObtenerListadoTiposDeRecursosFuente(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerListadoTiposDeRecursosFuenteResult>("[dbo].[ObtenerListadoTiposDeRecursosFuente]");
-***REMOVED***
+    }
 
     public partial class ObtenerListadoTiposDeRecursosFuenteResult
     {
-      public int value { get; set; ***REMOVED***
-      public string name { get; set; ***REMOVED***
-***REMOVED***
+      public int value { get; set; }
+      public string name { get; set; }
+    }
 
     #endregion
 
@@ -4777,17 +4777,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerListaMunicipiosHomeResult> ObtenerListaMunicipiosHome(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerListaMunicipiosHomeResult>("[dbo].[ObtenerListaMunicipiosHome]");
-***REMOVED***
+    }
 
     public partial class ObtenerListaMunicipiosHomeResult
     {
-      public string IdMunicipio { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public decimal? VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED***
-      public decimal? VlrTotalProyectoTodasLasFuentes { get; set; ***REMOVED***
-      public int? projectNumber { get; set; ***REMOVED***
-      public string UrlImagePequenia { get; set; ***REMOVED***
-***REMOVED***
+      public string IdMunicipio { get; set; }
+      public string NombreMunicipio { get; set; }
+      public decimal? VlrTotalProyectoFuenteRegalias { get; set; }
+      public decimal? VlrTotalProyectoTodasLasFuentes { get; set; }
+      public int? projectNumber { get; set; }
+      public string UrlImagePequenia { get; set; }
+    }
 
     #endregion
 
@@ -4800,13 +4800,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdDpto", @IdDpto, LinqToDB.DataType.VarChar),
           new DataParameter("@IdMunicipio", @IdMunicipio, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt));
-***REMOVED***
+    }
 
     public partial class ObtenerMunicipiosPorFiltrosGeograficosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+    }
 
     #endregion
 
@@ -4817,13 +4817,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<ObtenerNombresActoresPorRolYProyectoResult>("[dbo].[ObtenerNombresActoresPorRolYProyecto]",
           new DataParameter("@IdRol", @IdRol, LinqToDB.DataType.Int32),
           new DataParameter("@IdProyecto", @IdProyecto, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerNombresActoresPorRolYProyectoResult
     {
-      public string NombreActor { get; set; ***REMOVED***
-      public string Rol { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreActor { get; set; }
+      public string Rol { get; set; }
+    }
 
     #endregion
 
@@ -4833,15 +4833,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<ObtenerNombresGeografiasBeneficiadasProyectoResult>("[dbo].[ObtenerNombresGeografiasBeneficiadasProyecto]",
           new DataParameter("@IdProyecto", @IdProyecto, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerNombresGeografiasBeneficiadasProyectoResult
     {
-      public string NombreEntidad { get; set; ***REMOVED***
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string IdMunicipio { get; set; ***REMOVED***
-      public string Tipo { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreEntidad { get; set; }
+      public string IdDepartamento { get; set; }
+      public string IdMunicipio { get; set; }
+      public string Tipo { get; set; }
+    }
 
     #endregion
 
@@ -4852,23 +4852,23 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<ObtenerPinesFiscalizacionPorBusquedaDeTextoResult>("[dbo].[ObtenerPinesFiscalizacionPorBusquedaDeTexto]",
           new DataParameter("@TextoBusqueda", @TextoBusqueda, LinqToDB.DataType.VarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerPinesFiscalizacionPorBusquedaDeTextoResult
     {
-      public string IdRegion { get; set; ***REMOVED***
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string IdMunicipio { get; set; ***REMOVED***
-      public decimal Latitud { get; set; ***REMOVED***
-      public decimal Longitud { get; set; ***REMOVED***
-      public string NombreRegion { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public string TextoCompuesto { get; set; ***REMOVED***
-      public string NombreRecurso { get; set; ***REMOVED***
-      public int AñoFiscalizacion { get; set; ***REMOVED***
-      public int? Fiscalizaciones { get; set; ***REMOVED***
-***REMOVED***
+      public string IdRegion { get; set; }
+      public string IdDepartamento { get; set; }
+      public string IdMunicipio { get; set; }
+      public decimal Latitud { get; set; }
+      public decimal Longitud { get; set; }
+      public string NombreRegion { get; set; }
+      public string NombreDepartamento { get; set; }
+      public string NombreMunicipio { get; set; }
+      public string TextoCompuesto { get; set; }
+      public string NombreRecurso { get; set; }
+      public int AñoFiscalizacion { get; set; }
+      public int? Fiscalizaciones { get; set; }
+    }
 
     #endregion
 
@@ -4879,22 +4879,22 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<ObtenerPinesFiscalizacionPorBusquedaDeTextoV2Result>("[dbo].[ObtenerPinesFiscalizacionPorBusquedaDeTextoV2]",
           new DataParameter("@TextoBusqueda", @TextoBusqueda, LinqToDB.DataType.VarChar),
           new DataParameter("@AñoLiquidado", @AñoLiquidado, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerPinesFiscalizacionPorBusquedaDeTextoV2Result
     {
-      public string IdRegion { get; set; ***REMOVED***
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string IdMunicipio { get; set; ***REMOVED***
-      public decimal? Latitud { get; set; ***REMOVED***
-      public decimal? Longitud { get; set; ***REMOVED***
-      public string NombreRegion { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public string TextoCompuesto { get; set; ***REMOVED***
-      public int? TotalCamposMinas { get; set; ***REMOVED***
-      public int? TotalFiscalizaciones { get; set; ***REMOVED***
-***REMOVED***
+      public string IdRegion { get; set; }
+      public string IdDepartamento { get; set; }
+      public string IdMunicipio { get; set; }
+      public decimal? Latitud { get; set; }
+      public decimal? Longitud { get; set; }
+      public string NombreRegion { get; set; }
+      public string NombreDepartamento { get; set; }
+      public string NombreMunicipio { get; set; }
+      public string TextoCompuesto { get; set; }
+      public int? TotalCamposMinas { get; set; }
+      public int? TotalFiscalizaciones { get; set; }
+    }
 
     #endregion
 
@@ -4911,18 +4911,18 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt),
           new DataParameter("@IdTipoFiscalizacion", @IdTipoFiscalizacion, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerPinesFiscalizacionPorDepartamentoFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public decimal? Latitud { get; set; ***REMOVED***
-      public decimal? Longitud { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public int AñoFiscalizacion { get; set; ***REMOVED***
-      public int? Fiscalizaciones { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public decimal? Latitud { get; set; }
+      public decimal? Longitud { get; set; }
+      public string Url { get; set; }
+      public int AñoFiscalizacion { get; set; }
+      public int? Fiscalizaciones { get; set; }
+    }
 
     #endregion
 
@@ -4941,19 +4941,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdTipoFiscalizacion", @IdTipoFiscalizacion, LinqToDB.DataType.Int32),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEtapaCampoMina", @IdEtapaCampoMina, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerPinesFiscalizacionPorDepartamentoFiltrosV2Result
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public decimal? Latitud { get; set; ***REMOVED***
-      public decimal? Longitud { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public int? TotalCamposMinas { get; set; ***REMOVED***
-      public int? TotalFiscalizaciones { get; set; ***REMOVED***
-      public decimal? Porcentaje { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public decimal? Latitud { get; set; }
+      public decimal? Longitud { get; set; }
+      public string Url { get; set; }
+      public int? TotalCamposMinas { get; set; }
+      public int? TotalFiscalizaciones { get; set; }
+      public decimal? Porcentaje { get; set; }
+    }
 
     #endregion
 
@@ -4970,18 +4970,18 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt),
           new DataParameter("@IdTipoFiscalizacion", @IdTipoFiscalizacion, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerPinesFiscalizacionPorMunicipioPorFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public decimal Latitud { get; set; ***REMOVED***
-      public decimal Longitud { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public int AñoFiscalizacion { get; set; ***REMOVED***
-      public int? Fiscalizaciones { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public decimal Latitud { get; set; }
+      public decimal Longitud { get; set; }
+      public string Url { get; set; }
+      public int AñoFiscalizacion { get; set; }
+      public int? Fiscalizaciones { get; set; }
+    }
 
     #endregion
 
@@ -5000,19 +5000,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdTipoFiscalizacion", @IdTipoFiscalizacion, LinqToDB.DataType.Int32),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEtapaCampoMina", @IdEtapaCampoMina, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerPinesFiscalizacionPorMunicipioPorFiltrosV2Result
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public decimal? Latitud { get; set; ***REMOVED***
-      public decimal? Longitud { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public int? TotalCamposMinas { get; set; ***REMOVED***
-      public int? TotalFiscalizaciones { get; set; ***REMOVED***
-      public decimal? Porcentaje { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public decimal? Latitud { get; set; }
+      public decimal? Longitud { get; set; }
+      public string Url { get; set; }
+      public int? TotalCamposMinas { get; set; }
+      public int? TotalFiscalizaciones { get; set; }
+      public decimal? Porcentaje { get; set; }
+    }
 
     #endregion
 
@@ -5029,18 +5029,18 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt),
           new DataParameter("@IdTipoFiscalizacion", @IdTipoFiscalizacion, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerPinesFiscalizacionPorRegionFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public decimal? Latitud { get; set; ***REMOVED***
-      public decimal? Longitud { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public int AñoFiscalizacion { get; set; ***REMOVED***
-      public int? Fiscalizaciones { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public decimal? Latitud { get; set; }
+      public decimal? Longitud { get; set; }
+      public string Url { get; set; }
+      public int AñoFiscalizacion { get; set; }
+      public int? Fiscalizaciones { get; set; }
+    }
 
     #endregion
 
@@ -5059,19 +5059,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdTipoFiscalizacion", @IdTipoFiscalizacion, LinqToDB.DataType.Int32),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEtapaCampoMina", @IdEtapaCampoMina, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerPinesFiscalizacionPorRegionFiltrosV2Result
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public decimal? Latitud { get; set; ***REMOVED***
-      public decimal? Longitud { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public int? TotalCamposMinas { get; set; ***REMOVED***
-      public int? TotalFiscalizaciones { get; set; ***REMOVED***
-      public decimal? Porcentaje { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public decimal? Latitud { get; set; }
+      public decimal? Longitud { get; set; }
+      public string Url { get; set; }
+      public int? TotalCamposMinas { get; set; }
+      public int? TotalFiscalizaciones { get; set; }
+      public decimal? Porcentaje { get; set; }
+    }
 
     #endregion
 
@@ -5082,23 +5082,23 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<ObtenerPinesProduccionPorBusquedaDeTextoResult>("[dbo].[ObtenerPinesProduccionPorBusquedaDeTexto]",
           new DataParameter("@TextoBusqueda", @TextoBusqueda, LinqToDB.DataType.VarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerPinesProduccionPorBusquedaDeTextoResult
     {
-      public string IdRegion { get; set; ***REMOVED***
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string IdMunicipio { get; set; ***REMOVED***
-      public decimal Latitud { get; set; ***REMOVED***
-      public decimal Longitud { get; set; ***REMOVED***
-      public string NombreRegion { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public string TextoCompuesto { get; set; ***REMOVED***
-      public string NombreRecurso { get; set; ***REMOVED***
-      public decimal? Cantidad { get; set; ***REMOVED***
-      public string UnidadDeMedida { get; set; ***REMOVED***
-***REMOVED***
+      public string IdRegion { get; set; }
+      public string IdDepartamento { get; set; }
+      public string IdMunicipio { get; set; }
+      public decimal Latitud { get; set; }
+      public decimal Longitud { get; set; }
+      public string NombreRegion { get; set; }
+      public string NombreDepartamento { get; set; }
+      public string NombreMunicipio { get; set; }
+      public string TextoCompuesto { get; set; }
+      public string NombreRecurso { get; set; }
+      public decimal? Cantidad { get; set; }
+      public string UnidadDeMedida { get; set; }
+    }
 
     #endregion
 
@@ -5114,19 +5114,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt));
-***REMOVED***
+    }
 
     public partial class ObtenerPinesProduccionPorDepartamentoFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public decimal? Latitud { get; set; ***REMOVED***
-      public decimal? Longitud { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public string NombreRecurso { get; set; ***REMOVED***
-      public decimal? Cantidad { get; set; ***REMOVED***
-      public string UnidadDeMedida { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public decimal? Latitud { get; set; }
+      public decimal? Longitud { get; set; }
+      public string Url { get; set; }
+      public string NombreRecurso { get; set; }
+      public decimal? Cantidad { get; set; }
+      public string UnidadDeMedida { get; set; }
+    }
 
     #endregion
 
@@ -5142,19 +5142,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt));
-***REMOVED***
+    }
 
     public partial class ObtenerPinesProduccionPorMunicipioPorFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public decimal Latitud { get; set; ***REMOVED***
-      public decimal Longitud { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public string NombreRecurso { get; set; ***REMOVED***
-      public decimal? Cantidad { get; set; ***REMOVED***
-      public string UnidadDeMedida { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public decimal Latitud { get; set; }
+      public decimal Longitud { get; set; }
+      public string Url { get; set; }
+      public string NombreRecurso { get; set; }
+      public decimal? Cantidad { get; set; }
+      public string UnidadDeMedida { get; set; }
+    }
 
     #endregion
 
@@ -5170,19 +5170,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt));
-***REMOVED***
+    }
 
     public partial class ObtenerPinesProduccionPorRegionFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public decimal? Latitud { get; set; ***REMOVED***
-      public decimal? Longitud { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public string NombreRecurso { get; set; ***REMOVED***
-      public decimal? Cantidad { get; set; ***REMOVED***
-      public string UnidadDeMedida { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public decimal? Latitud { get; set; }
+      public decimal? Longitud { get; set; }
+      public string Url { get; set; }
+      public string NombreRecurso { get; set; }
+      public decimal? Cantidad { get; set; }
+      public string UnidadDeMedida { get; set; }
+    }
 
     #endregion
 
@@ -5196,15 +5196,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdMunicipio", @IdMunicipio, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.Int32),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerPresupuestoPorDepartamentoPorFiltrosResult
     {
-      public int? PeriodoPresupuestado { get; set; ***REMOVED***
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public decimal? ValorPresupuesto { get; set; ***REMOVED***
-***REMOVED***
+      public int? PeriodoPresupuestado { get; set; }
+      public string IdDepartamento { get; set; }
+      public string NombreDepartamento { get; set; }
+      public decimal? ValorPresupuesto { get; set; }
+    }
 
     #endregion
 
@@ -5218,15 +5218,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdMunicipio", @IdMunicipio, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.Int32),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerPresupuestoPorMunicipioPorFiltrosResult
     {
-      public int? PeriodoPresupuestado { get; set; ***REMOVED***
-      public string IdMunicipio { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public decimal? ValorPresupuesto { get; set; ***REMOVED***
-***REMOVED***
+      public int? PeriodoPresupuestado { get; set; }
+      public string IdMunicipio { get; set; }
+      public string NombreMunicipio { get; set; }
+      public decimal? ValorPresupuesto { get; set; }
+    }
 
     #endregion
 
@@ -5240,15 +5240,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdMunicipio", @IdMunicipio, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.Int32),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerPresupuestoPorRegionPorFiltrosResult
     {
-      public int? PeriodoPresupuestado { get; set; ***REMOVED***
-      public string IdRegion { get; set; ***REMOVED***
-      public string NombreRegion { get; set; ***REMOVED***
-      public decimal? ValorPresupuesto { get; set; ***REMOVED***
-***REMOVED***
+      public int? PeriodoPresupuestado { get; set; }
+      public string IdRegion { get; set; }
+      public string NombreRegion { get; set; }
+      public decimal? ValorPresupuesto { get; set; }
+    }
 
     #endregion
 
@@ -5259,21 +5259,21 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<ObtenerProduccionPorBusquedaDeTextoResult>("[dbo].[ObtenerProduccionPorBusquedaDeTexto]",
           new DataParameter("@TextoBusqueda", @TextoBusqueda, LinqToDB.DataType.VarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerProduccionPorBusquedaDeTextoResult
     {
-      public string IdRegion { get; set; ***REMOVED***
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string IdMunicipio { get; set; ***REMOVED***
-      public string NombreRegion { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public string TextoCompuesto { get; set; ***REMOVED***
-      public string NombreRecurso { get; set; ***REMOVED***
-      public decimal? Cantidad { get; set; ***REMOVED***
-      public string UnidadDeMedida { get; set; ***REMOVED***
-***REMOVED***
+      public string IdRegion { get; set; }
+      public string IdDepartamento { get; set; }
+      public string IdMunicipio { get; set; }
+      public string NombreRegion { get; set; }
+      public string NombreDepartamento { get; set; }
+      public string NombreMunicipio { get; set; }
+      public string TextoCompuesto { get; set; }
+      public string NombreRecurso { get; set; }
+      public decimal? Cantidad { get; set; }
+      public string UnidadDeMedida { get; set; }
+    }
 
     #endregion
 
@@ -5289,17 +5289,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt));
-***REMOVED***
+    }
 
     public partial class ObtenerProduccionPorDepartamentoPorFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public string NombreRecurso { get; set; ***REMOVED***
-      public decimal? Cantidad { get; set; ***REMOVED***
-      public string UnidadDeMedida { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public string Url { get; set; }
+      public string NombreRecurso { get; set; }
+      public decimal? Cantidad { get; set; }
+      public string UnidadDeMedida { get; set; }
+    }
 
     #endregion
 
@@ -5315,17 +5315,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt));
-***REMOVED***
+    }
 
     public partial class ObtenerProduccionPorMunicipioPorFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public string NombreRecurso { get; set; ***REMOVED***
-      public decimal? Cantidad { get; set; ***REMOVED***
-      public string UnidadDeMedida { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public string Url { get; set; }
+      public string NombreRecurso { get; set; }
+      public decimal? Cantidad { get; set; }
+      public string UnidadDeMedida { get; set; }
+    }
 
     #endregion
 
@@ -5341,17 +5341,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@CuadradoVisualIntersectar", @CuadradoVisualIntersectar, LinqToDB.DataType.Udt));
-***REMOVED***
+    }
 
     public partial class ObtenerProduccionPorRegionPorFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public string NombreEntidad { get; set; ***REMOVED***
-      public string Url { get; set; ***REMOVED***
-      public string NombreRecurso { get; set; ***REMOVED***
-      public decimal? Cantidad { get; set; ***REMOVED***
-      public string UnidadDeMedida { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public string NombreEntidad { get; set; }
+      public string Url { get; set; }
+      public string NombreRecurso { get; set; }
+      public decimal? Cantidad { get; set; }
+      public string UnidadDeMedida { get; set; }
+    }
 
     #endregion
 
@@ -5365,16 +5365,16 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdMunicipio", @IdMunicipio, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerRecursosFiscalizacionPorGeografiaResult
     {
-      public int AñoLiquidado { get; set; ***REMOVED***
-      public string IdRecursoNatural { get; set; ***REMOVED***
-      public string NombreRecursoNatural { get; set; ***REMOVED***
-      public char IdTipoRecursoNatural { get; set; ***REMOVED***
-      public string NombreTipoDeRecurso { get; set; ***REMOVED***
-***REMOVED***
+      public int AñoLiquidado { get; set; }
+      public string IdRecursoNatural { get; set; }
+      public string NombreRecursoNatural { get; set; }
+      public char IdTipoRecursoNatural { get; set; }
+      public string NombreTipoDeRecurso { get; set; }
+    }
 
     #endregion
 
@@ -5385,14 +5385,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<ObtenerRendimientosDirectasPorDepartamentoResult>("[dbo].[ObtenerRendimientosDirectasPorDepartamento]",
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@IdDepartamento", @IdDepartamento, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerRendimientosDirectasPorDepartamentoResult
     {
-      public int Periodo { get; set; ***REMOVED***
-      public string NombreTipoRecurso { get; set; ***REMOVED***
-      public decimal? ValorMonto { get; set; ***REMOVED***
-***REMOVED***
+      public int Periodo { get; set; }
+      public string NombreTipoRecurso { get; set; }
+      public decimal? ValorMonto { get; set; }
+    }
 
     #endregion
 
@@ -5403,14 +5403,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<ObtenerRendimientosDirectasPorMunicipioResult>("[dbo].[ObtenerRendimientosDirectasPorMunicipio]",
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@IdMunicipio", @IdMunicipio, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerRendimientosDirectasPorMunicipioResult
     {
-      public int Periodo { get; set; ***REMOVED***
-      public string NombreTipoRecurso { get; set; ***REMOVED***
-      public decimal? ValorMonto { get; set; ***REMOVED***
-***REMOVED***
+      public int Periodo { get; set; }
+      public string NombreTipoRecurso { get; set; }
+      public decimal? ValorMonto { get; set; }
+    }
 
     #endregion
 
@@ -5421,14 +5421,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<ObtenerRendimientosDirectasPorRegionResult>("[dbo].[ObtenerRendimientosDirectasPorRegion]",
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@IdRegion", @IdRegion, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerRendimientosDirectasPorRegionResult
     {
-      public int Periodo { get; set; ***REMOVED***
-      public string NombreTipoRecurso { get; set; ***REMOVED***
-      public decimal? ValorMonto { get; set; ***REMOVED***
-***REMOVED***
+      public int Periodo { get; set; }
+      public string NombreTipoRecurso { get; set; }
+      public decimal? ValorMonto { get; set; }
+    }
 
     #endregion
 
@@ -5446,13 +5446,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@TextoBusqueda", @TextoBusqueda, LinqToDB.DataType.NVarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEtapaCampoMina", @IdEtapaCampoMina, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerResumenConsultaFiscalizacionesFichaPorFiltrosResult
     {
-      public int? TotalCamposMinas { get; set; ***REMOVED***
-      public int? TotalFiscalizaciones { get; set; ***REMOVED***
-***REMOVED***
+      public int? TotalCamposMinas { get; set; }
+      public int? TotalFiscalizaciones { get; set; }
+    }
 
     #endregion
 
@@ -5470,15 +5470,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@NombreProyecto", @NombreProyecto, LinqToDB.DataType.VarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEstado", @IdEstado, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerProyectosPorDepartamentoPorFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public int CantidadProyectos { get; set; ***REMOVED***
-      public decimal VlrRegalias { get; set; ***REMOVED***
-      public decimal? VlrTotal { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public int CantidadProyectos { get; set; }
+      public decimal VlrRegalias { get; set; }
+      public decimal? VlrTotal { get; set; }
+    }
 
     #endregion
 
@@ -5496,15 +5496,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@NombreProyecto", @NombreProyecto, LinqToDB.DataType.VarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEstado", @IdEstado, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerProyectosPorMunicipioPorFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public int CantidadProyectos { get; set; ***REMOVED***
-      public decimal VlrRegalias { get; set; ***REMOVED***
-      public decimal? VlrTotal { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public int CantidadProyectos { get; set; }
+      public decimal VlrRegalias { get; set; }
+      public decimal? VlrTotal { get; set; }
+    }
 
     #endregion
 
@@ -5522,15 +5522,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@NombreProyecto", @NombreProyecto, LinqToDB.DataType.VarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEstado", @IdEstado, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerProyectosPorRegionPorFiltrosResult
     {
-      public string IdEntidad { get; set; ***REMOVED***
-      public int CantidadProyectos { get; set; ***REMOVED***
-      public decimal VlrRegalias { get; set; ***REMOVED***
-      public decimal? VlrTotal { get; set; ***REMOVED***
-***REMOVED***
+      public string IdEntidad { get; set; }
+      public int CantidadProyectos { get; set; }
+      public decimal VlrRegalias { get; set; }
+      public decimal? VlrTotal { get; set; }
+    }
 
     #endregion
 
@@ -5548,14 +5548,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@NombreProyecto", @NombreProyecto, LinqToDB.DataType.VarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEstado", @IdEstado, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerResumenesProyectosPorFiltrosResult
     {
-      public int CantidadProyectos { get; set; ***REMOVED***
-      public decimal VlrRegalias { get; set; ***REMOVED***
-      public decimal? VlrTotal { get; set; ***REMOVED***
-***REMOVED***
+      public int CantidadProyectos { get; set; }
+      public decimal VlrRegalias { get; set; }
+      public decimal? VlrTotal { get; set; }
+    }
 
     #endregion
 
@@ -5573,17 +5573,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@NombreProyecto", @NombreProyecto, LinqToDB.DataType.VarChar),
           new DataParameter("@periodosList", @periodosList, LinqToDB.DataType.VarChar),
           new DataParameter("@IdEstado", @IdEstado, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerProyectosConsistentesMapListModeResult
     {
-      public int IdProyecto { get; set; ***REMOVED***
-      public string NombreProyecto { get; set; ***REMOVED***
-      public string nombreEstado { get; set; ***REMOVED***
-      public string NombreActor { get; set; ***REMOVED***
-      public decimal VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED***
-      public decimal VlrTotalProyectoTodasLasFuentes { get; set; ***REMOVED***
-***REMOVED***
+      public int IdProyecto { get; set; }
+      public string NombreProyecto { get; set; }
+      public string nombreEstado { get; set; }
+      public string NombreActor { get; set; }
+      public decimal VlrTotalProyectoFuenteRegalias { get; set; }
+      public decimal VlrTotalProyectoTodasLasFuentes { get; set; }
+    }
 
     #endregion
 
@@ -5592,25 +5592,25 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerSubsidiosxLocalizacionResult> ObtenerSubsidiosxLocalizacion(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerSubsidiosxLocalizacionResult>("[dbo].[ObtenerSubsidiosxLocalizacion]");
-***REMOVED***
+    }
 
     public partial class ObtenerSubsidiosxLocalizacionResult
     {
-      public string IdSubsidio { get; set; ***REMOVED***
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public char IdMunicipio { get; set; ***REMOVED***
-      public char NombreMunicipio { get; set; ***REMOVED***
-      public char CaracteristicaSubsidio { get; set; ***REMOVED***
-      public char ClaseSubsidio { get; set; ***REMOVED***
-      public decimal? ValorSubsidio { get; set; ***REMOVED***
-      public int? CantidadSubsidio { get; set; ***REMOVED***
-      public char GeoJson { get; set; ***REMOVED***
-      public char GeojsonDepto { get; set; ***REMOVED***
-      public decimal Latitud { get; set; ***REMOVED***
-      public decimal LONGITUD { get; set; ***REMOVED***
-      public char PuntoUbicacion { get; set; ***REMOVED***
-***REMOVED***
+      public string IdSubsidio { get; set; }
+      public string IdDepartamento { get; set; }
+      public string NombreDepartamento { get; set; }
+      public char IdMunicipio { get; set; }
+      public char NombreMunicipio { get; set; }
+      public char CaracteristicaSubsidio { get; set; }
+      public char ClaseSubsidio { get; set; }
+      public decimal? ValorSubsidio { get; set; }
+      public int? CantidadSubsidio { get; set; }
+      public char GeoJson { get; set; }
+      public char GeojsonDepto { get; set; }
+      public decimal Latitud { get; set; }
+      public decimal LONGITUD { get; set; }
+      public char PuntoUbicacion { get; set; }
+    }
 
     #endregion
 
@@ -5620,14 +5620,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<ObtenerTipologiasPorComentarioResult>("[dbo].[ObtenerTipologiasPorComentario]",
           new DataParameter("@IDCOMENTARIO", @IDCOMENTARIO, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerTipologiasPorComentarioResult
     {
-      public int IdTipologia { get; set; ***REMOVED***
-      public string Tipologia { get; set; ***REMOVED***
-      public int Relacion { get; set; ***REMOVED***
-***REMOVED***
+      public int IdTipologia { get; set; }
+      public string Tipologia { get; set; }
+      public int Relacion { get; set; }
+    }
 
     #endregion
 
@@ -5637,12 +5637,12 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<ObtenerURLAuditoriaVisiblePorProyectoResult>("[dbo].[ObtenerURLAuditoriaVisiblePorProyecto]",
           new DataParameter("@IdProyecto", @IdProyecto, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerURLAuditoriaVisiblePorProyectoResult
     {
-      public string URLAuditoria { get; set; ***REMOVED***
-***REMOVED***
+      public string URLAuditoria { get; set; }
+    }
 
     #endregion
 
@@ -5651,15 +5651,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerValoresConsolidadosContratosResult> ObtenerValoresConsolidadosContratos(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerValoresConsolidadosContratosResult>("[dbo].[ObtenerValoresConsolidadosContratos]");
-***REMOVED***
+    }
 
     public partial class ObtenerValoresConsolidadosContratosResult
     {
-      public int? CantidadProgramas { get; set; ***REMOVED***
-      public long? ValorContrato { get; set; ***REMOVED***
-      public long ValorEjecutado { get; set; ***REMOVED***
-      public int CantidadBeneficiario { get; set; ***REMOVED***
-***REMOVED***
+      public int? CantidadProgramas { get; set; }
+      public long? ValorContrato { get; set; }
+      public long ValorEjecutado { get; set; }
+      public int CantidadBeneficiario { get; set; }
+    }
 
     #endregion
 
@@ -5669,16 +5669,16 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<ObtenerValoresConsolidadosContratosPorProgramaResult>("[dbo].[ObtenerValoresConsolidadosContratosPorPrograma]",
           new DataParameter("@IDPROGRAMA", @IDPROGRAMA, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerValoresConsolidadosContratosPorProgramaResult
     {
-      public int? CodigoPrograma { get; set; ***REMOVED***
-      public int? CantidadProgramas { get; set; ***REMOVED***
-      public long? ValorContrato { get; set; ***REMOVED***
-      public long ValorEjecutado { get; set; ***REMOVED***
-      public int CantidadBeneficiario { get; set; ***REMOVED***
-***REMOVED***
+      public int? CodigoPrograma { get; set; }
+      public int? CantidadProgramas { get; set; }
+      public long? ValorContrato { get; set; }
+      public long ValorEjecutado { get; set; }
+      public int CantidadBeneficiario { get; set; }
+    }
 
     #endregion
 
@@ -5687,14 +5687,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<ObtenerValoresIndicadoresContratosResult> ObtenerValoresIndicadoresContratos(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<ObtenerValoresIndicadoresContratosResult>("[dbo].[ObtenerValoresIndicadoresContratos]");
-***REMOVED***
+    }
 
     public partial class ObtenerValoresIndicadoresContratosResult
     {
-      public decimal? ValorIndicador { get; set; ***REMOVED***
-      public decimal? AvanceIndicador { get; set; ***REMOVED***
-      public decimal? ProcentajeAvance { get; set; ***REMOVED***
-***REMOVED***
+      public decimal? ValorIndicador { get; set; }
+      public decimal? AvanceIndicador { get; set; }
+      public decimal? ProcentajeAvance { get; set; }
+    }
 
     #endregion
 
@@ -5704,14 +5704,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<ObtenerValoresIndicadoresContratosPorProgramaResult>("[dbo].[ObtenerValoresIndicadoresContratosPorPrograma]",
           new DataParameter("@IDPROGRAMA", @IDPROGRAMA, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class ObtenerValoresIndicadoresContratosPorProgramaResult
     {
-      public decimal? ValorIndicador { get; set; ***REMOVED***
-      public decimal? AvanceIndicador { get; set; ***REMOVED***
-      public decimal? ProcentajeAvance { get; set; ***REMOVED***
-***REMOVED***
+      public decimal? ValorIndicador { get; set; }
+      public decimal? AvanceIndicador { get; set; }
+      public decimal? ProcentajeAvance { get; set; }
+    }
 
     #endregion
 
@@ -5721,14 +5721,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<ObtenerValorSubsidioPorDepartamentoResult>("[dbo].[ObtenerValorSubsidioPorDepartamento]",
           new DataParameter("@IdSubsidio", @IdSubsidio, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class ObtenerValorSubsidioPorDepartamentoResult
     {
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public decimal? ValorSubsidio { get; set; ***REMOVED***
-      public int? CantidadSubsidio { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreDepartamento { get; set; }
+      public decimal? ValorSubsidio { get; set; }
+      public int? CantidadSubsidio { get; set; }
+    }
 
     #endregion
 
@@ -5741,7 +5741,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@owner_id", @owner_id, LinqToDB.DataType.Int32),
           new DataParameter("@version", @version, LinqToDB.DataType.Int32),
           new DataParameter("@definition", @definition, LinqToDB.DataType.VarBinary));
-***REMOVED***
+    }
 
     #endregion
 
@@ -5754,7 +5754,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@owner_id", @owner_id, LinqToDB.DataType.Int32),
           new DataParameter("@version", @version, LinqToDB.DataType.Int32),
           new DataParameter("@definition", @definition, LinqToDB.DataType.VarBinary));
-***REMOVED***
+    }
 
     #endregion
 
@@ -5765,7 +5765,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.ExecuteProc("[dbo].[sp_dropdiagram]",
           new DataParameter("@diagramname", @diagramname, LinqToDB.DataType.NVarChar),
           new DataParameter("@owner_id", @owner_id, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     #endregion
 
@@ -5776,13 +5776,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<SpHelpdiagramdefinitionResult>("[dbo].[sp_helpdiagramdefinition]",
           new DataParameter("@diagramname", @diagramname, LinqToDB.DataType.NVarChar),
           new DataParameter("@owner_id", @owner_id, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SpHelpdiagramdefinitionResult
     {
-      public int? version { get; set; ***REMOVED***
-      public byte[] definition { get; set; ***REMOVED***
-***REMOVED***
+      public int? version { get; set; }
+      public byte[] definition { get; set; }
+    }
 
     #endregion
 
@@ -5793,16 +5793,16 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<SpHelpdiagramsResult>("[dbo].[sp_helpdiagrams]",
           new DataParameter("@diagramname", @diagramname, LinqToDB.DataType.NVarChar),
           new DataParameter("@owner_id", @owner_id, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SpHelpdiagramsResult
     {
-      public string Database { get; set; ***REMOVED***
-      public string Name { get; set; ***REMOVED***
-      public int ID { get; set; ***REMOVED***
-      public string Owner { get; set; ***REMOVED***
-      public int OwnerID { get; set; ***REMOVED***
-***REMOVED***
+      public string Database { get; set; }
+      public string Name { get; set; }
+      public int ID { get; set; }
+      public string Owner { get; set; }
+      public int OwnerID { get; set; }
+    }
 
     #endregion
 
@@ -5812,14 +5812,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<SpObtenerCodigosProyectosPorEnteTerritorialSPResult>("[dbo].[sp_ObtenerCodigosProyectosPorEnteTerritorialSP]",
           new DataParameter("@filtro", @filtro, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class SpObtenerCodigosProyectosPorEnteTerritorialSPResult
     {
-      public int IdProyecto { get; set; ***REMOVED***
-      public string CodigoBPIN { get; set; ***REMOVED***
-      public string NombreProyecto { get; set; ***REMOVED***
-***REMOVED***
+      public int IdProyecto { get; set; }
+      public string CodigoBPIN { get; set; }
+      public string NombreProyecto { get; set; }
+    }
 
     #endregion
 
@@ -5829,14 +5829,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<SpObtenerCodigosProyectosPorNombreProyectoSPResult>("[dbo].[sp_ObtenerCodigosProyectosPorNombreProyectoSP]",
           new DataParameter("@filtro", @filtro, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class SpObtenerCodigosProyectosPorNombreProyectoSPResult
     {
-      public int IdProyecto { get; set; ***REMOVED***
-      public string CodigoBPIN { get; set; ***REMOVED***
-      public string NombreProyecto { get; set; ***REMOVED***
-***REMOVED***
+      public int IdProyecto { get; set; }
+      public string CodigoBPIN { get; set; }
+      public string NombreProyecto { get; set; }
+    }
 
     #endregion
 
@@ -5847,15 +5847,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<SpObtenerFiscalizacionPorTipoRecursoPorDepartamentoV2Result>("[dbo].[sp_ObtenerFiscalizacionPorTipoRecursoPorDepartamentoV2]",
           new DataParameter("@AñoLiquidado", @AñoLiquidado, LinqToDB.DataType.Int32),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class SpObtenerFiscalizacionPorTipoRecursoPorDepartamentoV2Result
     {
-      public string NombreEntidad { get; set; ***REMOVED***
-      public int? TotalCamposMinas { get; set; ***REMOVED***
-      public int? TotalFiscalizaciones { get; set; ***REMOVED***
-      public decimal? Porcentaje { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreEntidad { get; set; }
+      public int? TotalCamposMinas { get; set; }
+      public int? TotalFiscalizaciones { get; set; }
+      public decimal? Porcentaje { get; set; }
+    }
 
     #endregion
 
@@ -5867,15 +5867,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdDepartamento", @IdDepartamento, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar));
-***REMOVED***
+    }
 
     public partial class SpObtenerRecursosFiscalizacionPorDepartamentoResult
     {
-      public string IdRecursoNatural { get; set; ***REMOVED***
-      public string NombreRecursoNatural { get; set; ***REMOVED***
-      public char IdTipoRecursoNatural { get; set; ***REMOVED***
-      public string NombreTipoDeRecurso { get; set; ***REMOVED***
-***REMOVED***
+      public string IdRecursoNatural { get; set; }
+      public string NombreRecursoNatural { get; set; }
+      public char IdTipoRecursoNatural { get; set; }
+      public string NombreTipoDeRecurso { get; set; }
+    }
 
     #endregion
 
@@ -5887,15 +5887,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdMunicipio", @IdMunicipio, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar));
-***REMOVED***
+    }
 
     public partial class SpObtenerRecursosFiscalizacionPorMunicipioResult
     {
-      public string IdRecursoNatural { get; set; ***REMOVED***
-      public string NombreRecursoNatural { get; set; ***REMOVED***
-      public char IdTipoRecursoNatural { get; set; ***REMOVED***
-      public string NombreTipoDeRecurso { get; set; ***REMOVED***
-***REMOVED***
+      public string IdRecursoNatural { get; set; }
+      public string NombreRecursoNatural { get; set; }
+      public char IdTipoRecursoNatural { get; set; }
+      public string NombreTipoDeRecurso { get; set; }
+    }
 
     #endregion
 
@@ -5907,15 +5907,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdRegion", @IdRegion, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar));
-***REMOVED***
+    }
 
     public partial class SpObtenerRecursosFiscalizacionPorRegionResult
     {
-      public string IdRecursoNatural { get; set; ***REMOVED***
-      public string NombreRecursoNatural { get; set; ***REMOVED***
-      public char IdTipoRecursoNatural { get; set; ***REMOVED***
-      public string NombreTipoDeRecurso { get; set; ***REMOVED***
-***REMOVED***
+      public string IdRecursoNatural { get; set; }
+      public string NombreRecursoNatural { get; set; }
+      public char IdTipoRecursoNatural { get; set; }
+      public string NombreTipoDeRecurso { get; set; }
+    }
 
     #endregion
 
@@ -5927,14 +5927,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdDepartamento", @IdDepartamento, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar));
-***REMOVED***
+    }
 
     public partial class SpObtenerResumenFiscalizacionPorDepartamentoResult
     {
-      public int Periodo { get; set; ***REMOVED***
-      public string Tipo { get; set; ***REMOVED***
-      public int? Total { get; set; ***REMOVED***
-***REMOVED***
+      public int Periodo { get; set; }
+      public string Tipo { get; set; }
+      public int? Total { get; set; }
+    }
 
     #endregion
 
@@ -5946,14 +5946,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdMunicipio", @IdMunicipio, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar));
-***REMOVED***
+    }
 
     public partial class SpObtenerResumenFiscalizacionPorMunicipioResult
     {
-      public int Periodo { get; set; ***REMOVED***
-      public string Tipo { get; set; ***REMOVED***
-      public int? Total { get; set; ***REMOVED***
-***REMOVED***
+      public int Periodo { get; set; }
+      public string Tipo { get; set; }
+      public int? Total { get; set; }
+    }
 
     #endregion
 
@@ -5965,14 +5965,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdRegion", @IdRegion, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.VarChar),
           new DataParameter("@IdCampoOMina", @IdCampoOMina, LinqToDB.DataType.NVarChar));
-***REMOVED***
+    }
 
     public partial class SpObtenerResumenFiscalizacionPorRegionResult
     {
-      public int Periodo { get; set; ***REMOVED***
-      public string Tipo { get; set; ***REMOVED***
-      public int? Total { get; set; ***REMOVED***
-***REMOVED***
+      public int Periodo { get; set; }
+      public string Tipo { get; set; }
+      public int? Total { get; set; }
+    }
 
     #endregion
 
@@ -5984,20 +5984,20 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@Periodos", @Periodos, LinqToDB.DataType.VarChar),
           new DataParameter("@IdDepartamento", @IdDepartamento, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SpProyectosAprobadosPorFuenteFinanciacionPorDepartamentoResult
     {
-      public int? Periodo { get; set; ***REMOVED***
-      public int IdProyecto { get; set; ***REMOVED***
-      public string Proyecto { get; set; ***REMOVED***
-      public string NombreRegion { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public string Estado { get; set; ***REMOVED***
-      public decimal? Valor { get; set; ***REMOVED***
-      public string Ejecutor { get; set; ***REMOVED***
-***REMOVED***
+      public int? Periodo { get; set; }
+      public int IdProyecto { get; set; }
+      public string Proyecto { get; set; }
+      public string NombreRegion { get; set; }
+      public string NombreDepartamento { get; set; }
+      public string NombreMunicipio { get; set; }
+      public string Estado { get; set; }
+      public decimal? Valor { get; set; }
+      public string Ejecutor { get; set; }
+    }
 
     #endregion
 
@@ -6009,20 +6009,20 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@Periodos", @Periodos, LinqToDB.DataType.VarChar),
           new DataParameter("@IdMunicipio", @IdMunicipio, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SpProyectosAprobadosPorFuenteFinanciacionPorMunicipioResult
     {
-      public int? Periodo { get; set; ***REMOVED***
-      public int IdProyecto { get; set; ***REMOVED***
-      public string Proyecto { get; set; ***REMOVED***
-      public string NombreRegion { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public string Estado { get; set; ***REMOVED***
-      public decimal? Valor { get; set; ***REMOVED***
-      public string Ejecutor { get; set; ***REMOVED***
-***REMOVED***
+      public int? Periodo { get; set; }
+      public int IdProyecto { get; set; }
+      public string Proyecto { get; set; }
+      public string NombreRegion { get; set; }
+      public string NombreDepartamento { get; set; }
+      public string NombreMunicipio { get; set; }
+      public string Estado { get; set; }
+      public decimal? Valor { get; set; }
+      public string Ejecutor { get; set; }
+    }
 
     #endregion
 
@@ -6034,20 +6034,20 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@Periodos", @Periodos, LinqToDB.DataType.VarChar),
           new DataParameter("@IdRegion", @IdRegion, LinqToDB.DataType.VarChar),
           new DataParameter("@IdTipoRecurso", @IdTipoRecurso, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SpProyectosAprobadosPorFuenteFinanciacionPorRegionResult
     {
-      public int? Periodo { get; set; ***REMOVED***
-      public int IdProyecto { get; set; ***REMOVED***
-      public string Proyecto { get; set; ***REMOVED***
-      public string NombreRegion { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public string Estado { get; set; ***REMOVED***
-      public decimal? Valor { get; set; ***REMOVED***
-      public string Ejecutor { get; set; ***REMOVED***
-***REMOVED***
+      public int? Periodo { get; set; }
+      public int IdProyecto { get; set; }
+      public string Proyecto { get; set; }
+      public string NombreRegion { get; set; }
+      public string NombreDepartamento { get; set; }
+      public string NombreMunicipio { get; set; }
+      public string Estado { get; set; }
+      public decimal? Valor { get; set; }
+      public string Ejecutor { get; set; }
+    }
 
     #endregion
 
@@ -6059,7 +6059,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@diagramname", @diagramname, LinqToDB.DataType.NVarChar),
           new DataParameter("@owner_id", @owner_id, LinqToDB.DataType.Int32),
           new DataParameter("@new_diagramname", @new_diagramname, LinqToDB.DataType.NVarChar));
-***REMOVED***
+    }
 
     #endregion
 
@@ -6071,15 +6071,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@IdMunicipio", @IdMunicipio, LinqToDB.DataType.VarChar),
           new DataParameter("@IdDepartamento", @IdDepartamento, LinqToDB.DataType.VarChar),
           new DataParameter("@IdRegion", @IdRegion, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class SpUbicacionGeograficaPorEnteTerritorialResult
     {
-      public string NombreEntidad { get; set; ***REMOVED***
-      public decimal Latitud { get; set; ***REMOVED***
-      public decimal Longitud { get; set; ***REMOVED***
-      public object PuntoUbicacion { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreEntidad { get; set; }
+      public decimal Latitud { get; set; }
+      public decimal Longitud { get; set; }
+      public object PuntoUbicacion { get; set; }
+    }
 
     #endregion
 
@@ -6092,17 +6092,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@filtroNombre", @filtroNombre, LinqToDB.DataType.VarChar),
           new DataParameter("@BPINE", @BPINE, LinqToDB.DataType.VarChar),
           new DataParameter("@EntidadTerritorial", @EntidadTerritorial, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class SpointObtenerProyectosPorFiltrosResult
     {
-      public int IdProyecto { get; set; ***REMOVED***
-      public string CodigoBPIN { get; set; ***REMOVED***
-      public string NombreProyecto { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-      public string NombreRegion { get; set; ***REMOVED***
-***REMOVED***
+      public int IdProyecto { get; set; }
+      public string CodigoBPIN { get; set; }
+      public string NombreProyecto { get; set; }
+      public string NombreMunicipio { get; set; }
+      public string NombreDepartamento { get; set; }
+      public string NombreRegion { get; set; }
+    }
 
     #endregion
 
@@ -6112,14 +6112,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<SptDataConsolidatedContractCargarDatosContratoProjectsPerSectorResult>("[dbo].[spt_DataConsolidatedContractCargarDatosContratoProjectsPerSector]",
           new DataParameter("@AnnioActual", @AnnioActual, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SptDataConsolidatedContractCargarDatosContratoProjectsPerSectorResult
     {
-      public string NombreSector { get; set; ***REMOVED***
-      public int? numero_proyectos { get; set; ***REMOVED***
-      public decimal? porcentaje { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreSector { get; set; }
+      public int? numero_proyectos { get; set; }
+      public decimal? porcentaje { get; set; }
+    }
 
     #endregion
 
@@ -6129,14 +6129,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<SptDataConsolidatedContractCargarDatosContratoResourcesPerDepartmentResult>("[dbo].[spt_DataConsolidatedContractCargarDatosContratoResourcesPerDepartment]",
           new DataParameter("@Annio", @Annio, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SptDataConsolidatedContractCargarDatosContratoResourcesPerDepartmentResult
     {
-      public string nombre_departamento { get; set; ***REMOVED***
-      public decimal? total_departamento { get; set; ***REMOVED***
-      public decimal? porcentaje { get; set; ***REMOVED***
-***REMOVED***
+      public string nombre_departamento { get; set; }
+      public decimal? total_departamento { get; set; }
+      public decimal? porcentaje { get; set; }
+    }
 
     #endregion
 
@@ -6151,16 +6151,16 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           {
             NombreRegion = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
             Column2 = Converter.ChangeTypeTo<decimal?>(dataReader.GetValue(1), ms),
-        ***REMOVED***
+          },
           "[dbo].[spt_DataConsolidatedContractCargarDatosContratoResourcesPerRegion]",
           new DataParameter("@Annio", @Annio, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SptDataConsolidatedContractCargarDatosContratoResourcesPerRegionResult
     {
-      public string NombreRegion { get; set; ***REMOVED***
-      [Column("")] public decimal? Column2 { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreRegion { get; set; }
+      [Column("")] public decimal? Column2 { get; set; }
+    }
 
     #endregion
 
@@ -6170,14 +6170,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<SptDataConsolidatedContractCargarDatosContratoResourcesPerSectorResult>("[dbo].[spt_DataConsolidatedContractCargarDatosContratoResourcesPerSector]",
           new DataParameter("@Annio", @Annio, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SptDataConsolidatedContractCargarDatosContratoResourcesPerSectorResult
     {
-      public string NombreSector { get; set; ***REMOVED***
-      public decimal? dinero_aprobado { get; set; ***REMOVED***
-      public decimal? porcentaje { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreSector { get; set; }
+      public decimal? dinero_aprobado { get; set; }
+      public decimal? porcentaje { get; set; }
+    }
 
     #endregion
 
@@ -6186,13 +6186,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<SptFiltersContractUnitTestExisteFiltroDepartamentoResult> SptFiltersContractUnitTestExisteFiltroDepartamento(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<SptFiltersContractUnitTestExisteFiltroDepartamentoResult>("[dbo].[spt_FiltersContractUnitTestExisteFiltroDepartamento]");
-***REMOVED***
+    }
 
     public partial class SptFiltersContractUnitTestExisteFiltroDepartamentoResult
     {
-      public string IdDepartamento { get; set; ***REMOVED***
-      public string NombreDepartamento { get; set; ***REMOVED***
-***REMOVED***
+      public string IdDepartamento { get; set; }
+      public string NombreDepartamento { get; set; }
+    }
 
     #endregion
 
@@ -6201,13 +6201,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<SptFiltersContractUnitTestExisteFiltroEstadoResult> SptFiltersContractUnitTestExisteFiltroEstado(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<SptFiltersContractUnitTestExisteFiltroEstadoResult>("[dbo].[spt_FiltersContractUnitTestExisteFiltroEstado]");
-***REMOVED***
+    }
 
     public partial class SptFiltersContractUnitTestExisteFiltroEstadoResult
     {
-      public int IdEstado { get; set; ***REMOVED***
-      public string NombreEstado { get; set; ***REMOVED***
-***REMOVED***
+      public int IdEstado { get; set; }
+      public string NombreEstado { get; set; }
+    }
 
     #endregion
 
@@ -6216,13 +6216,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<SptFiltersContractUnitTestExisteFiltroMunicipioResult> SptFiltersContractUnitTestExisteFiltroMunicipio(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<SptFiltersContractUnitTestExisteFiltroMunicipioResult>("[dbo].[spt_FiltersContractUnitTestExisteFiltroMunicipio]");
-***REMOVED***
+    }
 
     public partial class SptFiltersContractUnitTestExisteFiltroMunicipioResult
     {
-      public string IdMunicipio { get; set; ***REMOVED***
-      public string NombreMunicipio { get; set; ***REMOVED***
-***REMOVED***
+      public string IdMunicipio { get; set; }
+      public string NombreMunicipio { get; set; }
+    }
 
     #endregion
 
@@ -6231,13 +6231,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<SptFiltersContractUnitTestExisteFiltroRegionResult> SptFiltersContractUnitTestExisteFiltroRegion(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<SptFiltersContractUnitTestExisteFiltroRegionResult>("[dbo].[spt_FiltersContractUnitTestExisteFiltroRegion]");
-***REMOVED***
+    }
 
     public partial class SptFiltersContractUnitTestExisteFiltroRegionResult
     {
-      public string IdRegion { get; set; ***REMOVED***
-      public string NombreRegion { get; set; ***REMOVED***
-***REMOVED***
+      public string IdRegion { get; set; }
+      public string NombreRegion { get; set; }
+    }
 
     #endregion
 
@@ -6246,13 +6246,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<SptFiltersContractUnitTestExisteFiltroSectorResult> SptFiltersContractUnitTestExisteFiltroSector(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<SptFiltersContractUnitTestExisteFiltroSectorResult>("[dbo].[spt_FiltersContractUnitTestExisteFiltroSector]");
-***REMOVED***
+    }
 
     public partial class SptFiltersContractUnitTestExisteFiltroSectorResult
     {
-      public int IdSector { get; set; ***REMOVED***
-      public string NombreSector { get; set; ***REMOVED***
-***REMOVED***
+      public int IdSector { get; set; }
+      public string NombreSector { get; set; }
+    }
 
     #endregion
 
@@ -6261,7 +6261,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static IEnumerable<FuncionamientoSitio> SptHowToContractUnitTestCargarDatosHowToContract(this TransparenciaDB dataConnection)
     {
       return dataConnection.QueryProc<FuncionamientoSitio>("[dbo].[spt_HowToContractUnitTest_CargarDatosHowToContract]");
-***REMOVED***
+    }
 
     #endregion
 
@@ -6279,19 +6279,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
             RutaFotoGrande = Converter.ChangeTypeTo<string>(dataReader.GetValue(2), ms),
             RutaFotoMediano = Converter.ChangeTypeTo<string>(dataReader.GetValue(3), ms),
             RutaFotoPequeno = Converter.ChangeTypeTo<string>(dataReader.GetValue(4), ms),
-        ***REMOVED***
+          },
           "[dbo].[spt_ProjectProfileContractUnitTestCargarDatosGetListImagesbyId]",
           new DataParameter("@IdProyecto", @IdProyecto, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SptProjectProfileContractUnitTestCargarDatosGetListImagesbyIdResult
     {
-      public int IdProyecto { get; set; ***REMOVED***
-      [Column("IdProyecto")] public int Column2 { get; set; ***REMOVED***
-      public string RutaFotoGrande { get; set; ***REMOVED***
-      public string RutaFotoMediano { get; set; ***REMOVED***
-      public string RutaFotoPequeno { get; set; ***REMOVED***
-***REMOVED***
+      public int IdProyecto { get; set; }
+      [Column("IdProyecto")] public int Column2 { get; set; }
+      public string RutaFotoGrande { get; set; }
+      public string RutaFotoMediano { get; set; }
+      public string RutaFotoPequeno { get; set; }
+    }
 
     #endregion
 
@@ -6301,17 +6301,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<SptProjectProfileContractUnitTestCargarDatosGetListMetricbyIdResult>("[dbo].[spt_ProjectProfileContractUnitTestCargarDatosGetListMetricbyId]",
           new DataParameter("@IdProyecto", @IdProyecto, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SptProjectProfileContractUnitTestCargarDatosGetListMetricbyIdResult
     {
-      public int idProducto { get; set; ***REMOVED***
-      public string NombreProducto { get; set; ***REMOVED***
-      public int? año { get; set; ***REMOVED***
-      public double? valor_meta { get; set; ***REMOVED***
-      public double? valor_reportado { get; set; ***REMOVED***
-      public decimal? porcentaje { get; set; ***REMOVED***
-***REMOVED***
+      public int idProducto { get; set; }
+      public string NombreProducto { get; set; }
+      public int? año { get; set; }
+      public double? valor_meta { get; set; }
+      public double? valor_reportado { get; set; }
+      public decimal? porcentaje { get; set; }
+    }
 
     #endregion
 
@@ -6357,47 +6357,47 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
             Column31 = Converter.ChangeTypeTo<DateTime>(dataReader.GetValue(30), ms),
             Column32 = Converter.ChangeTypeTo<int>(dataReader.GetValue(31), ms),
             Column33 = Converter.ChangeTypeTo<string>(dataReader.GetValue(32), ms),
-        ***REMOVED***
+          },
           "[dbo].[spt_ProjectProfileContractUnitTestCargarDatosGetOtherProjectsbyId]",
           new DataParameter("@IdProyecto", @IdProyecto, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SptProjectProfileContractUnitTestCargarDatosGetOtherProjectsbyIdResult
     {
-      public int IdProyecto { get; set; ***REMOVED***
-      public string CodigoBPIN { get; set; ***REMOVED***
-      public string NombreProyecto { get; set; ***REMOVED***
-      public DateTime FechaInicioProyecto { get; set; ***REMOVED***
-      public DateTime FechaFinProyecto { get; set; ***REMOVED***
-      public decimal VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED***
-      public decimal VlrTotalProyectoTodasLasFuentes { get; set; ***REMOVED***
-      public string ObjetivoGeneral { get; set; ***REMOVED***
-      public int IdSector { get; set; ***REMOVED***
-      public string TipoDeProyecto { get; set; ***REMOVED***
-      public long NumeroBeneficiarios { get; set; ***REMOVED***
-      public int IdOCAD { get; set; ***REMOVED***
-      public string NombreOCAD { get; set; ***REMOVED***
-      public DateTime FechaUltimaModificacion { get; set; ***REMOVED***
-      public int ConsecutivoCarga { get; set; ***REMOVED***
-      public string Modificadopor { get; set; ***REMOVED***
-      public decimal PorcentajeAvanceFisico { get; set; ***REMOVED***
-      public decimal? PorcentajeAvanceFinanciero { get; set; ***REMOVED***
-      public int idHistoriaEstado { get; set; ***REMOVED***
-      [Column("IdProyecto")] public int Column20 { get; set; ***REMOVED***
-      public int IdEstado { get; set; ***REMOVED***
-      public DateTime FechaRegistro { get; set; ***REMOVED***
-      public bool ActualSiNo { get; set; ***REMOVED***
-      public int IdFase { get; set; ***REMOVED***
-      public int IdEtapa { get; set; ***REMOVED***
-      [Column("FechaUltimaModificacion")] public DateTime Column26 { get; set; ***REMOVED***
-      [Column("ConsecutivoCarga")] public int Column27 { get; set; ***REMOVED***
-      [Column("Modificadopor")] public string Column28 { get; set; ***REMOVED***
-      [Column("IdEstado")] public int Column29 { get; set; ***REMOVED***
-      public string NombreEstado { get; set; ***REMOVED***
-      [Column("FechaUltimaModificacion")] public DateTime Column31 { get; set; ***REMOVED***
-      [Column("ConsecutivoCarga")] public int Column32 { get; set; ***REMOVED***
-      [Column("Modificadopor")] public string Column33 { get; set; ***REMOVED***
-***REMOVED***
+      public int IdProyecto { get; set; }
+      public string CodigoBPIN { get; set; }
+      public string NombreProyecto { get; set; }
+      public DateTime FechaInicioProyecto { get; set; }
+      public DateTime FechaFinProyecto { get; set; }
+      public decimal VlrTotalProyectoFuenteRegalias { get; set; }
+      public decimal VlrTotalProyectoTodasLasFuentes { get; set; }
+      public string ObjetivoGeneral { get; set; }
+      public int IdSector { get; set; }
+      public string TipoDeProyecto { get; set; }
+      public long NumeroBeneficiarios { get; set; }
+      public int IdOCAD { get; set; }
+      public string NombreOCAD { get; set; }
+      public DateTime FechaUltimaModificacion { get; set; }
+      public int ConsecutivoCarga { get; set; }
+      public string Modificadopor { get; set; }
+      public decimal PorcentajeAvanceFisico { get; set; }
+      public decimal? PorcentajeAvanceFinanciero { get; set; }
+      public int idHistoriaEstado { get; set; }
+      [Column("IdProyecto")] public int Column20 { get; set; }
+      public int IdEstado { get; set; }
+      public DateTime FechaRegistro { get; set; }
+      public bool ActualSiNo { get; set; }
+      public int IdFase { get; set; }
+      public int IdEtapa { get; set; }
+      [Column("FechaUltimaModificacion")] public DateTime Column26 { get; set; }
+      [Column("ConsecutivoCarga")] public int Column27 { get; set; }
+      [Column("Modificadopor")] public string Column28 { get; set; }
+      [Column("IdEstado")] public int Column29 { get; set; }
+      public string NombreEstado { get; set; }
+      [Column("FechaUltimaModificacion")] public DateTime Column31 { get; set; }
+      [Column("ConsecutivoCarga")] public int Column32 { get; set; }
+      [Column("Modificadopor")] public string Column33 { get; set; }
+    }
 
     #endregion
 
@@ -6407,7 +6407,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<Proyecto>("[dbo].[spt_ProjectProfileContractUnitTestCargarDatosGetProgressProject]",
           new DataParameter("@IdProyecto", @IdProyecto, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     #endregion
 
@@ -6417,19 +6417,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<SptProjectProfileContractUnitTestCargarDatosGetProjectInformationResult>("[dbo].[spt_ProjectProfileContractUnitTestCargarDatosGetProjectInformation]",
           new DataParameter("@IdProyecto", @IdProyecto, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SptProjectProfileContractUnitTestCargarDatosGetProjectInformationResult
     {
-      public int IdProyecto { get; set; ***REMOVED***
-      public string NombreSector { get; set; ***REMOVED***
-      public DateTime FechaInicioProyecto { get; set; ***REMOVED***
-      public DateTime FechaFinProyecto { get; set; ***REMOVED***
-      public string CodigoBPIN { get; set; ***REMOVED***
-      public decimal VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED***
-      public string NombreProyecto { get; set; ***REMOVED***
-      public string NombreEstado { get; set; ***REMOVED***
-***REMOVED***
+      public int IdProyecto { get; set; }
+      public string NombreSector { get; set; }
+      public DateTime FechaInicioProyecto { get; set; }
+      public DateTime FechaFinProyecto { get; set; }
+      public string CodigoBPIN { get; set; }
+      public decimal VlrTotalProyectoFuenteRegalias { get; set; }
+      public string NombreProyecto { get; set; }
+      public string NombreEstado { get; set; }
+    }
 
     #endregion
 
@@ -6439,7 +6439,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<Proyecto>("[dbo].[spt_ProjectProfileContractUnitTestCargarDatosGetSourcesByProject]",
           new DataParameter("@IdProyecto", @IdProyecto, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     #endregion
 
@@ -6451,14 +6451,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new DataParameter("@p_IdEstado", @p_IdEstado, LinqToDB.DataType.Int32),
           new DataParameter("@p_annio", @p_annio, LinqToDB.DataType.Int32),
           new DataParameter("@p_sector", @p_sector, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class SptProjectsSearchListContractUnitTestCargarListadoPorProyectosResult
     {
-      public string NombreProyecto { get; set; ***REMOVED***
-      public decimal VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED***
-      public string NombreEstado { get; set; ***REMOVED***
-***REMOVED***
+      public string NombreProyecto { get; set; }
+      public decimal VlrTotalProyectoFuenteRegalias { get; set; }
+      public string NombreEstado { get; set; }
+    }
 
     #endregion
 
@@ -6468,17 +6468,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<SptProjectsSearchMapContractUnitTestCargarProyectosEnElMapaDepartamentoResult>("[dbo].[spt_ProjectsSearchMapContractUnitTestCargarProyectosEnElMapaDepartamento]",
           new DataParameter("@departamentos", @departamentos, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class SptProjectsSearchMapContractUnitTestCargarProyectosEnElMapaDepartamentoResult
     {
-      public int IdProyecto { get; set; ***REMOVED***
-      public string NombreProyecto { get; set; ***REMOVED***
-      public DateTime FechaInicioProyecto { get; set; ***REMOVED***
-      public decimal VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED***
-      public decimal VlrTotalProyectoTodasLasFuentes { get; set; ***REMOVED***
-      public string NombreEstado { get; set; ***REMOVED***
-***REMOVED***
+      public int IdProyecto { get; set; }
+      public string NombreProyecto { get; set; }
+      public DateTime FechaInicioProyecto { get; set; }
+      public decimal VlrTotalProyectoFuenteRegalias { get; set; }
+      public decimal VlrTotalProyectoTodasLasFuentes { get; set; }
+      public string NombreEstado { get; set; }
+    }
 
     #endregion
 
@@ -6488,17 +6488,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<SptProjectsSearchMapContractUnitTestCargarProyectosEnElMapaMunicipioResult>("[dbo].[spt_ProjectsSearchMapContractUnitTestCargarProyectosEnElMapaMunicipio]",
           new DataParameter("@departamentos", @departamentos, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class SptProjectsSearchMapContractUnitTestCargarProyectosEnElMapaMunicipioResult
     {
-      public int IdProyecto { get; set; ***REMOVED***
-      public string NombreProyecto { get; set; ***REMOVED***
-      public DateTime FechaInicioProyecto { get; set; ***REMOVED***
-      public decimal VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED***
-      public decimal VlrTotalProyectoTodasLasFuentes { get; set; ***REMOVED***
-      public string NombreEstado { get; set; ***REMOVED***
-***REMOVED***
+      public int IdProyecto { get; set; }
+      public string NombreProyecto { get; set; }
+      public DateTime FechaInicioProyecto { get; set; }
+      public decimal VlrTotalProyectoFuenteRegalias { get; set; }
+      public decimal VlrTotalProyectoTodasLasFuentes { get; set; }
+      public string NombreEstado { get; set; }
+    }
 
     #endregion
 
@@ -6508,17 +6508,17 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<SptProjectsSearchMapContractUnitTestCargarProyectosEnElMapaRegionResult>("[dbo].[spt_ProjectsSearchMapContractUnitTestCargarProyectosEnElMapaRegion]",
           new DataParameter("@departamentos", @departamentos, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class SptProjectsSearchMapContractUnitTestCargarProyectosEnElMapaRegionResult
     {
-      public int IdProyecto { get; set; ***REMOVED***
-      public string NombreProyecto { get; set; ***REMOVED***
-      public DateTime FechaInicioProyecto { get; set; ***REMOVED***
-      public decimal VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED***
-      public decimal VlrTotalProyectoTodasLasFuentes { get; set; ***REMOVED***
-      public string NombreEstado { get; set; ***REMOVED***
-***REMOVED***
+      public int IdProyecto { get; set; }
+      public string NombreProyecto { get; set; }
+      public DateTime FechaInicioProyecto { get; set; }
+      public decimal VlrTotalProyectoFuenteRegalias { get; set; }
+      public decimal VlrTotalProyectoTodasLasFuentes { get; set; }
+      public string NombreEstado { get; set; }
+    }
 
     #endregion
 
@@ -6527,7 +6527,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static int StpUpdateNombreIndicador(this TransparenciaDB dataConnection)
     {
       return dataConnection.ExecuteProc("[dbo].[stp_updateNombreIndicador]");
-***REMOVED***
+    }
 
     #endregion
 
@@ -6537,13 +6537,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<TestObtenerEsquemaFinanciacionPorDeptoResult>("[dbo].[TestObtenerEsquemaFinanciacionPorDepto]",
           new DataParameter("@CodDepto", @CodDepto, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class TestObtenerEsquemaFinanciacionPorDeptoResult
     {
-      public int IdProyecto { get; set; ***REMOVED***
-      public int IdTipoRecurso { get; set; ***REMOVED***
-***REMOVED***
+      public int IdProyecto { get; set; }
+      public int IdTipoRecurso { get; set; }
+    }
 
     #endregion
 
@@ -6554,14 +6554,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
       return dataConnection.QueryProc<TestObtenerResumenConsolidadoNacionalResult>("[dbo].[TestObtenerResumenConsolidadoNacional]",
           new DataParameter("@AñoInicial", @AñoInicial, LinqToDB.DataType.Int32),
           new DataParameter("@AñoFinal", @AñoFinal, LinqToDB.DataType.Int32));
-***REMOVED***
+    }
 
     public partial class TestObtenerResumenConsolidadoNacionalResult
     {
-      public decimal? Aprobado { get; set; ***REMOVED***
-      public decimal? aprobadoTotal { get; set; ***REMOVED***
-      public int? NumProyectos { get; set; ***REMOVED***
-***REMOVED***
+      public decimal? Aprobado { get; set; }
+      public decimal? aprobadoTotal { get; set; }
+      public int? NumProyectos { get; set; }
+    }
 
     #endregion
 
@@ -6575,19 +6575,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new TOJSONDEPARTAMENTOResult
           {
             Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
-        ***REMOVED***
+          },
           "[dbo].[TOJSONDEPARTAMENTO]",
-          new DataParameter("@JsonOutput", @JsonOutput, LinqToDB.DataType.VarChar) { Direction = ParameterDirection.InputOutput, Size = -1 ***REMOVED***).ToList();
+          new DataParameter("@JsonOutput", @JsonOutput, LinqToDB.DataType.VarChar) { Direction = ParameterDirection.InputOutput, Size = -1 }).ToList();
 
       @JsonOutput = Converter.ChangeTypeTo<string>(((IDbDataParameter)dataConnection.Command.Parameters["@JsonOutput"]).Value);
 
       return ret;
-***REMOVED***
+    }
 
     public partial class TOJSONDEPARTAMENTOResult
     {
-      [Column("")] public string Column1 { get; set; ***REMOVED***
-***REMOVED***
+      [Column("")] public string Column1 { get; set; }
+    }
 
     #endregion
 
@@ -6601,19 +6601,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new TOJSONMUNICIPIOResult
           {
             Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
-        ***REMOVED***
+          },
           "[dbo].[TOJSONMUNICIPIO]",
-          new DataParameter("@JsonOutput", @JsonOutput, LinqToDB.DataType.VarChar) { Direction = ParameterDirection.InputOutput, Size = -1 ***REMOVED***).ToList();
+          new DataParameter("@JsonOutput", @JsonOutput, LinqToDB.DataType.VarChar) { Direction = ParameterDirection.InputOutput, Size = -1 }).ToList();
 
       @JsonOutput = Converter.ChangeTypeTo<string>(((IDbDataParameter)dataConnection.Command.Parameters["@JsonOutput"]).Value);
 
       return ret;
-***REMOVED***
+    }
 
     public partial class TOJSONMUNICIPIOResult
     {
-      [Column("")] public string Column1 { get; set; ***REMOVED***
-***REMOVED***
+      [Column("")] public string Column1 { get; set; }
+    }
 
     #endregion
 
@@ -6627,19 +6627,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           new TOJSONPROYECTOResult
           {
             Column1 = Converter.ChangeTypeTo<string>(dataReader.GetValue(0), ms),
-        ***REMOVED***
+          },
           "[dbo].[TOJSONPROYECTO]",
-          new DataParameter("@JsonOutput", @JsonOutput, LinqToDB.DataType.VarChar) { Direction = ParameterDirection.InputOutput, Size = -1 ***REMOVED***).ToList();
+          new DataParameter("@JsonOutput", @JsonOutput, LinqToDB.DataType.VarChar) { Direction = ParameterDirection.InputOutput, Size = -1 }).ToList();
 
       @JsonOutput = Converter.ChangeTypeTo<string>(((IDbDataParameter)dataConnection.Command.Parameters["@JsonOutput"]).Value);
 
       return ret;
-***REMOVED***
+    }
 
     public partial class TOJSONPROYECTOResult
     {
-      [Column("")] public string Column1 { get; set; ***REMOVED***
-***REMOVED***
+      [Column("")] public string Column1 { get; set; }
+    }
 
     #endregion
 
@@ -6649,15 +6649,15 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return dataConnection.QueryProc<VerificarCodigoBPINResult>("[dbo].[VerificarCodigoBPIN]",
           new DataParameter("@BPIN", @BPIN, LinqToDB.DataType.VarChar));
-***REMOVED***
+    }
 
     public partial class VerificarCodigoBPINResult
     {
-      public int ReturnValue { get; set; ***REMOVED***
-***REMOVED***
+      public int ReturnValue { get; set; }
+    }
 
     #endregion
-  ***REMOVED***
+  }
 
   public static partial class SqlFunctions
   {
@@ -6667,7 +6667,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static decimal? Duration(DateTime? @start, DateTime? @end)
     {
       throw new InvalidOperationException();
-***REMOVED***
+    }
 
     #endregion
 
@@ -6677,10 +6677,10 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public static int? FnDiagramobjects()
     {
       throw new InvalidOperationException();
-***REMOVED***
+    }
 
     #endregion
-  ***REMOVED***
+  }
 
   public static partial class TableExtensions
   {
@@ -6688,14 +6688,14 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
       return table.FirstOrDefault(t =>
           t.IdActividad == IdActividad);
-***REMOVED***
+    }
 
     public static Actor Find(this ITable<Actor> table, string IdActor, int IDRol)
     {
       return table.FirstOrDefault(t =>
           t.IdActor == IdActor &&
           t.IDRol == IDRol);
-***REMOVED***
+    }
 
     public static ActorXProyecto Find(this ITable<ActorXProyecto> table, string IDActor, int IDProyecto, int IDRol)
     {
@@ -6703,63 +6703,63 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.IDActor == IDActor &&
           t.IDProyecto == IDProyecto &&
           t.IDRol == IDRol);
-***REMOVED***
+    }
 
     public static Alerta Find(this ITable<Alerta> table, string NombreAlerta)
     {
       return table.FirstOrDefault(t =>
           t.NombreAlerta == NombreAlerta);
-***REMOVED***
+    }
 
     public static Asociacioncomentario Find(this ITable<Asociacioncomentario> table, int IdAsociacion)
     {
       return table.FirstOrDefault(t =>
           t.IdAsociacion == IdAsociacion);
-***REMOVED***
+    }
 
     public static CabeceraMunicipio Find(this ITable<CabeceraMunicipio> table, string CodigoDane)
     {
       return table.FirstOrDefault(t =>
           t.CodigoDane == CodigoDane);
-***REMOVED***
+    }
 
     public static CampoOProyecto Find(this ITable<CampoOProyecto> table, string IdCampoOProyecto, string IdTipoCampoOProyecto)
     {
       return table.FirstOrDefault(t =>
           t.IdCampoOProyecto == IdCampoOProyecto &&
           t.IdTipoCampoOProyecto == IdTipoCampoOProyecto);
-***REMOVED***
+    }
 
     public static CampoOProyectoFiscalizacion Find(this ITable<CampoOProyectoFiscalizacion> table, string IdCampoOProyecto, string IdTipoCampoOProyecto)
     {
       return table.FirstOrDefault(t =>
           t.IdCampoOProyecto == IdCampoOProyecto &&
           t.IdTipoCampoOProyecto == IdTipoCampoOProyecto);
-***REMOVED***
+    }
 
     public static consulta_CatalogoEntidade Find(this ITable<consulta_CatalogoEntidade> table, string CodigoInstitucion)
     {
         return table.FirstOrDefault(t =>
             t.CodigoInstitucion == CodigoInstitucion);
-***REMOVED***
+    }
 
     public static consulta_CatalogoFuenteFinanciamiento Find(this ITable<consulta_CatalogoFuenteFinanciamiento> table, int CodigoFuenteFinanciamiento)
     {
         return table.FirstOrDefault(t =>
             t.CodigoFuenteFinanciamiento == CodigoFuenteFinanciamiento);
-***REMOVED***
+    }
 
     public static consulta_CatalogoLineaPresupuestal Find(this ITable<consulta_CatalogoLineaPresupuestal> table, int Id)
     {
         return table.FirstOrDefault(t =>
             t.Id == Id);
-***REMOVED***
+    }
 
     public static consulta_CatalogoObjetoDeGasto Find(this ITable<consulta_CatalogoObjetoDeGasto> table, string CodigoObjetoDeGasto)
     {
         return table.FirstOrDefault(t =>
             t.CodigoObjetoDeGasto == CodigoObjetoDeGasto);
-***REMOVED***
+    }
 
     public static consulta_CatalogoPresupuestoXProyInv Find(this ITable<consulta_CatalogoPresupuestoXProyInv> table, int IdCatalogoLineaPresupuestal, string Bpin, int IdProyecto)
     {
@@ -6767,30 +6767,30 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
             t.IdCatalogoLineaPresupuestal == IdCatalogoLineaPresupuestal &&
             t.Bpin == Bpin &&
             t.IdProyecto == IdProyecto);
-***REMOVED***
+    }
 
     public static consulta_CatalogoSector Find(this ITable<consulta_CatalogoSector> table, string CodigoSector)
     {
         return table.FirstOrDefault(t =>
             t.CodigoSector == CodigoSector);
-***REMOVED***
+    }
 
     public static consulta_CatalogoTiempo Find(this ITable<consulta_CatalogoTiempo> table, string Periodo)
     {
         return table.FirstOrDefault(t =>
              t.Periodo == Periodo);
-***REMOVED***
+    }
         public static Comentario Find(this ITable<Comentario> table, int IdComentario)
     {
       return table.FirstOrDefault(t =>
           t.IdComentario == IdComentario);
-***REMOVED***
+    }
 
     public static Contrato Find(this ITable<Contrato> table, string CodigoContrato)
     {
       return table.FirstOrDefault(t =>
           t.Codigocontrato == CodigoContrato);
-***REMOVED***
+    }
 
     public static ContratosEjecucionFinanciera Find(this ITable<ContratosEjecucionFinanciera> table, string CodigoContrato, int TipoPrograma, int ObjetoGasto, int SubPrograma, int FuenteFinanciamiento, int CodigoEntidad, int CodigoPrograma, int CodigoProyecto, string CodigoDepartamento, int AnioContrato, int CodigoFinanciador, string CodigoFinanciero)
     {
@@ -6807,20 +6807,20 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.AnioContrato == AnioContrato &&
           t.CodigoFinanciador == CodigoFinanciador &&
           t.CodigoFinanciero == CodigoFinanciero);
-***REMOVED***
+    }
 
     public static DatosAdicionalesAprobacion Find(this ITable<DatosAdicionalesAprobacion> table, int IdDatoAdicional)
     {
       return table.FirstOrDefault(t =>
           t.IdDatoAdicional == IdDatoAdicional);
-***REMOVED***
+    }
 
     public static DatosAdicionalesEjecutore Find(this ITable<DatosAdicionalesEjecutore> table, int IdProyecto, string NitEjecutor)
     {
       return table.FirstOrDefault(t =>
           t.IdProyecto == IdProyecto &&
           t.NitEjecutor == NitEjecutor);
-***REMOVED***
+    }
 
     public static Distribucion Find(this ITable<Distribucion> table, int IdTipoRecurso, int IdTipoEntidad, string IdEntidad, int MesDistribucion, int AñoDistribucion)
     {
@@ -6830,63 +6830,63 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.IdEntidad == IdEntidad &&
           t.MesDistribucion == MesDistribucion &&
           t.AñoDistribucion == AñoDistribucion);
-***REMOVED***
+    }
 
     public static DonacionProveedor Find(this ITable<DonacionProveedor> table, int Id)
     {
       return table.FirstOrDefault(t =>
           t.Id == Id);
-***REMOVED***
+    }
 
     public static EnteTerritorial Find(this ITable<EnteTerritorial> table, string IdDepartamento, string IdMunicipio)
     {
       return table.FirstOrDefault(t =>
           t.IdDepartamento == IdDepartamento &&
           t.IdMunicipio == IdMunicipio);
-***REMOVED***
+    }
 
     public static EntidadContrato Find(this ITable<EntidadContrato> table, string Codigo)
     {
       return table.FirstOrDefault(t =>
           t.Codigo == Codigo);
-***REMOVED***
+    }
 
     public static EntidadesEjecutorasGesProy Find(this ITable<EntidadesEjecutorasGesProy> table, string NIT, char DigitoVerificacion)
     {
       return table.FirstOrDefault(t =>
           t.NIT == NIT &&
           t.DigitoVerificacion == DigitoVerificacion);
-***REMOVED***
+    }
 
     public static EsquemaFinanciacionProyecto Find(this ITable<EsquemaFinanciacionProyecto> table, int IdEsquemaFinanciacion)
     {
       return table.FirstOrDefault(t =>
           t.IdEsquemaFinanciacion == IdEsquemaFinanciacion);
-***REMOVED***
+    }
 
     public static Estado Find(this ITable<Estado> table, int IdEstado)
     {
       return table.FirstOrDefault(t =>
           t.IdEstado == IdEstado);
-***REMOVED***
+    }
 
     public static EstadoComentario Find(this ITable<EstadoComentario> table, int Id)
     {
       return table.FirstOrDefault(t =>
           t.Id == Id);
-***REMOVED***
+    }
 
     public static EstadoGesproyProyecto Find(this ITable<EstadoGesproyProyecto> table, int IdProyecto)
     {
       return table.FirstOrDefault(t =>
           t.IdProyecto == IdProyecto);
-***REMOVED***
+    }
 
     public static EstadoHomologado Find(this ITable<EstadoHomologado> table, int IdEstado)
     {
       return table.FirstOrDefault(t =>
           t.IdEstado == IdEstado);
-***REMOVED***
+    }
 
     public static EstadoJuridicoCampoOProyecto Find(this ITable<EstadoJuridicoCampoOProyecto> table, string IdCampoOProyecto, string IdTipoCampoOProyecto, string IdEstadoJuridicoCampoOProyecto)
     {
@@ -6894,13 +6894,13 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.IdCampoOProyecto == IdCampoOProyecto &&
           t.IdTipoCampoOProyecto == IdTipoCampoOProyecto &&
           t.IdEstadoJuridicoCampoOProyecto == IdEstadoJuridicoCampoOProyecto);
-***REMOVED***
+    }
 
     public static Etapa Find(this ITable<Etapa> table, int IdEtapa)
     {
       return table.FirstOrDefault(t =>
           t.IdEtapa == IdEtapa);
-***REMOVED***
+    }
 
     public static EtapaCampoOProyecto Find(this ITable<EtapaCampoOProyecto> table, string IdCampoOProyecto, string IdTipoCampoOProyecto, int IdEtapaCampoOProyecto)
     {
@@ -6908,31 +6908,31 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.IdCampoOProyecto == IdCampoOProyecto &&
           t.IdTipoCampoOProyecto == IdTipoCampoOProyecto &&
           t.IdEtapaCampoOProyecto == IdEtapaCampoOProyecto);
-***REMOVED***
+    }
 
     public static Fase Find(this ITable<Fase> table, int IdFase)
     {
       return table.FirstOrDefault(t =>
           t.IdFase == IdFase);
-***REMOVED***
+    }
 
     public static Fiscalizacion Find(this ITable<Fiscalizacion> table, int Id)
     {
       return table.FirstOrDefault(t =>
           t.Id == Id);
-***REMOVED***
+    }
 
     public static Foto Find(this ITable<Foto> table, int IdFoto)
     {
       return table.FirstOrDefault(t =>
           t.IdFoto == IdFoto);
-***REMOVED***
+    }
 
     public static FotoUsuario Find(this ITable<FotoUsuario> table, int IdFotoUsuario)
     {
       return table.FirstOrDefault(t =>
           t.IdFotoUsuario == IdFotoUsuario);
-***REMOVED***
+    }
 
     public static Fuente Find(this ITable<Fuente> table, int IdTipoRecurso, int IdTipoEntidad, string IdEntidad)
     {
@@ -6940,67 +6940,67 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.IdTipoRecurso == IdTipoRecurso &&
           t.IdTipoEntidad == IdTipoEntidad &&
           t.IdEntidad == IdEntidad);
-***REMOVED***
+    }
 
     public static FuenteDeLosRecurso Find(this ITable<FuenteDeLosRecurso> table, int IdFuente)
     {
       return table.FirstOrDefault(t =>
           t.IdFuente == IdFuente);
-***REMOVED***
+    }
 
     public static FuenteFinancieraPrograma Find(this ITable<FuenteFinancieraPrograma> table, int CodigoFuenteFinanciamiento)
     {
       return table.FirstOrDefault(t =>
           t.CodigoFuenteFinanciamiento == CodigoFuenteFinanciamiento);
-***REMOVED***
+    }
 
     public static FuncionamientoSitio Find(this ITable<FuncionamientoSitio> table, int IDFuncionamientoSitio)
     {
       return table.FirstOrDefault(t =>
           t.IDFuncionamientoSitio == IDFuncionamientoSitio);
-***REMOVED***
+    }
 
     public static GeneroUsuario Find(this ITable<GeneroUsuario> table, int IdGeneroUsuario)
     {
       return table.FirstOrDefault(t =>
           t.IdGeneroUsuario == IdGeneroUsuario);
-***REMOVED***
+    }
 
     public static Georreferenciacion Find(this ITable<Georreferenciacion> table, int IdGeorreferencia)
     {
       return table.FirstOrDefault(t =>
           t.IdGeorreferencia == IdGeorreferencia);
-***REMOVED***
+    }
 
     public static Giro Find(this ITable<Giro> table, int IdGiro)
     {
       return table.FirstOrDefault(t =>
           t.IdGiro == IdGiro);
-***REMOVED***
+    }
 
     public static HistoriaEstado Find(this ITable<HistoriaEstado> table, int IdHistoriaEstado)
     {
       return table.FirstOrDefault(t =>
           t.IdHistoriaEstado == IdHistoriaEstado);
-***REMOVED***
+    }
     public static Idea Find(this ITable<Idea> table, int IdIdea)
     {
       return table.FirstOrDefault(t =>
           t.IdIdea == IdIdea);
-***REMOVED***
+    }
 
     public static IdeaMejora Find(this ITable<IdeaMejora> table, int IdeaMejoraID)
     {
       return table.FirstOrDefault(t =>
           t.IdeaMejoraID == IdeaMejoraID);
-***REMOVED***
+    }
 
     public static ImagenesXEnteTerritorial Find(this ITable<ImagenesXEnteTerritorial> table, int IdImageXEnteTerritorial, string IdImage)
     {
       return table.FirstOrDefault(t =>
           t.IdImageXEnteTerritorial == IdImageXEnteTerritorial &&
           t.IdImage == IdImage);
-***REMOVED***
+    }
 
     public static Indicadore Find(this ITable<Indicadore> table, int Anio, int IdPrograma, int CodigoIndicador)
     {
@@ -7008,84 +7008,84 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.Anio == Anio &&
           t.IdPrograma == IdPrograma &&
           t.CodigoIndicador == CodigoIndicador);
-***REMOVED***
+    }
 
     public static IndicadoresTexto Find(this ITable<IndicadoresTexto> table, int CodigoIndicador)
     {
       return table.FirstOrDefault(t =>
           t.CodigoIndicador == CodigoIndicador);
-***REMOVED***
+    }
 
     public static InformeAvanceFisicoProyecto Find(this ITable<InformeAvanceFisicoProyecto> table, int IdInformeAvanceFisico)
     {
       return table.FirstOrDefault(t =>
           t.IdInformeAvanceFisico == IdInformeAvanceFisico);
-***REMOVED***
+    }
 
     public static Liquidacion Find(this ITable<Liquidacion> table, int IdLiquidación)
     {
       return table.FirstOrDefault(t =>
           t.IdLiquidación == IdLiquidación);
-***REMOVED***
+    }
 
     public static MedioMapaIUsuario Find(this ITable<MedioMapaIUsuario> table, int IdMedioMapaIUsuario)
     {
       return table.FirstOrDefault(t =>
           t.IdMedioMapaIUsuario == IdMedioMapaIUsuario);
-***REMOVED***
+    }
 
     public static MeGusta Find(this ITable<MeGusta> table, int IdMeGusta)
     {
       return table.FirstOrDefault(t =>
           t.IdMeGusta == IdMeGusta);
-***REMOVED***
+    }
 
     public static MetaIndicadorProducto Find(this ITable<MetaIndicadorProducto> table, int IdMetaIndicadorProducto)
     {
       return table.FirstOrDefault(t =>
           t.IdMetaIndicadorProducto == IdMetaIndicadorProducto);
-***REMOVED***
+    }
 
     public static ObjetivoEspecifico Find(this ITable<ObjetivoEspecifico> table, int IdObjetivoEspecifico)
     {
       return table.FirstOrDefault(t =>
           t.IdObjetivoEspecifico == IdObjetivoEspecifico);
-***REMOVED***
+    }
 
     public static Opcione Find(this ITable<Opcione> table, string Variable)
     {
       return table.FirstOrDefault(t =>
           t.Variable == Variable);
-***REMOVED***
+    }
 
     public static OpcionRespuesta Find(this ITable<OpcionRespuesta> table, int IdOpcionRespuestas)
     {
       return table.FirstOrDefault(t =>
           t.IdOpcionRespuestas == IdOpcionRespuestas);
-***REMOVED***
+    }
 
     public static OrdenCompraProyecto Find(this ITable<OrdenCompraProyecto> table, string IdOrdenCompraProyecto)
     {
       return table.FirstOrDefault(t =>
           t.IdOrdenCompraProyecto == IdOrdenCompraProyecto);
-***REMOVED***
+    }
     public static ParametrizacionTitulo Find(this ITable<ParametrizacionTitulo> table, int IdParametrizacion)
     {
       return table.FirstOrDefault(t =>
           t.IdParametrizacion == IdParametrizacion);
-***REMOVED***
+    }
 
     public static Periodicidad Find(this ITable<Periodicidad> table, string IdPeriodicidad)
     {
       return table.FirstOrDefault(t =>
           t.IdPeriodicidad == IdPeriodicidad);
-***REMOVED***
+    }
 
     public static PreguntaCuestionario Find(this ITable<PreguntaCuestionario> table, int IdPregunta)
     {
       return table.FirstOrDefault(t =>
           t.IdPregunta == IdPregunta);
-***REMOVED***
+    }
 
     public static Presupuesto Find(this ITable<Presupuesto> table, int IdTipoRecurso, int IdTipoEntidad, string IdEntidad, string IdDepartamento, string IdMunicipio, DateTime InicioVigencia, DateTime FinVigencia)
     {
@@ -7097,7 +7097,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.IdMunicipio == IdMunicipio &&
           t.InicioVigencia == InicioVigencia &&
           t.FinVigencia == FinVigencia);
-***REMOVED***
+    }
 
     public static Proceso Find(this ITable<Proceso> table, string IdProceso, string Ocid, string CodigoProveedor, string CodigoBpin, string Idprocesojson, string AwardId)
     {
@@ -7108,43 +7108,43 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.CodigoBpin == CodigoBpin &&
           t.Idprocesojson == Idprocesojson &&
           t.AwardId == AwardId);
-***REMOVED***
+    }
 
     public static Produccion Find(this ITable<Produccion> table, int IdProduccion)
     {
       return table.FirstOrDefault(t =>
           t.IdProduccion == IdProduccion);
-***REMOVED***
+    }
 
     public static ProduccionANH Find(this ITable<ProduccionANH> table, int IdProduccion)
     {
       return table.FirstOrDefault(t =>
           t.IdProduccion == IdProduccion);
-***REMOVED***
+    }
 
     public static ProduccionANM Find(this ITable<ProduccionANM> table, int IdProduccion)
     {
       return table.FirstOrDefault(t =>
           t.IdProduccion == IdProduccion);
-***REMOVED***
+    }
 
     public static Producto Find(this ITable<Producto> table, int IdProducto)
     {
       return table.FirstOrDefault(t =>
           t.IdProducto == IdProducto);
-***REMOVED***
+    }
 
     public static Programa Find(this ITable<Programa> table, int Id)
     {
       return table.FirstOrDefault(t =>
           t.Id == Id);
-***REMOVED***
+    }
 
     public static ProgramaEjecucionContrato Find(this ITable<ProgramaEjecucionContrato> table, long Id)
     {
       return table.FirstOrDefault(t =>
           t.Id == Id);
-***REMOVED***
+    }
 
     public static ProgramaMetasFinanciera Find(this ITable<ProgramaMetasFinanciera> table, DateTime FechaMeta, int IdPrograma, int CodigoProducto, int CodigoObjeto, int Fuente, int Financiador, int CodigoDepartamento)
     {
@@ -7156,7 +7156,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.Fuente == Fuente &&
           t.Financiador == Financiador &&
           t.CodigoDepartamento == CodigoDepartamento);
-***REMOVED***
+    }
 
     public static ProgramaMetasFisica Find(this ITable<ProgramaMetasFisica> table, int IdPrograma, int CodigoProyecto, int CodigoProducto, DateTime FechaMeta)
     {
@@ -7165,19 +7165,19 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.CodigoProyecto == CodigoProyecto &&
           t.CodigoProducto == CodigoProducto &&
           t.FechaMeta == FechaMeta);
-***REMOVED***
+    }
 
     public static ProyeccionRecursosITEM Find(this ITable<ProyeccionRecursosITEM> table, int IdProyeccion)
     {
       return table.FirstOrDefault(t =>
           t.IdProyeccion == IdProyeccion);
-***REMOVED***
+    }
 
     public static Proyecto Find(this ITable<Proyecto> table, int IdProyecto)
     {
       return table.FirstOrDefault(t =>
           t.IdProyecto == IdProyecto);
-***REMOVED***
+    }
 
     public static ProyectoXEntidadTerritorial Find(this ITable<ProyectoXEntidadTerritorial> table, int IdProyecto, string IdDepartamento, string IdMunicipio)
     {
@@ -7185,27 +7185,27 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.IdProyecto == IdProyecto &&
           t.IdDepartamento == IdDepartamento &&
           t.IdMunicipio == IdMunicipio);
-***REMOVED***
+    }
 
     public static PuntajeEvaluacionProyecto Find(this ITable<PuntajeEvaluacionProyecto> table, int IdProyecto)
     {
       return table.FirstOrDefault(t =>
           t.IdProyecto == IdProyecto);
-***REMOVED***
+    }
 
     public static RecursoNatural Find(this ITable<RecursoNatural> table, string IdRecursoNatural, char IdTipoRecursoNatural)
     {
       return table.FirstOrDefault(t =>
           t.IdRecursoNatural == IdRecursoNatural &&
           t.IdTipoRecursoNatural == IdTipoRecursoNatural);
-***REMOVED***
+    }
 
     public static RecursoNaturalFiscalizacion Find(this ITable<RecursoNaturalFiscalizacion> table, string IdRecursoNatural, char IdTipoRecursoNatural)
     {
       return table.FirstOrDefault(t =>
           t.IdRecursoNatural == IdRecursoNatural &&
           t.IdTipoRecursoNatural == IdTipoRecursoNatural);
-***REMOVED***
+    }
 
     public static RendimientosFinanciero Find(this ITable<RendimientosFinanciero> table, string IdDepartamento, string IdMunicipio, int AñoVigencia, int MesInicioVigencia, int MesFinVigencia)
     {
@@ -7215,144 +7215,144 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
           t.AñoVigencia == AñoVigencia &&
           t.MesInicioVigencia == MesInicioVigencia &&
           t.MesFinVigencia == MesFinVigencia);
-***REMOVED***
+    }
 
     public static RespuestaCuestionario Find(this ITable<RespuestaCuestionario> table, int IdRespuesta)
     {
       return table.FirstOrDefault(t =>
           t.IdRespuesta == IdRespuesta);
-***REMOVED***
+    }
 
     public static RespuestaCuestionarioTemp Find(this ITable<RespuestaCuestionarioTemp> table, int IdRespuesta)
     {
       return table.FirstOrDefault(t =>
           t.IdRespuesta == IdRespuesta);
-***REMOVED***
+    }
 
     public static ResumenEstadisticasNacional Find(this ITable<ResumenEstadisticasNacional> table, int Id)
     {
       return table.FirstOrDefault(t =>
           t.Id == Id);
-***REMOVED***
+    }
 
     public static Rol Find(this ITable<Rol> table, int IdRol)
     {
       return table.FirstOrDefault(t =>
           t.IdRol == IdRol);
-***REMOVED***
+    }
 
     public static RolUsuario Find(this ITable<RolUsuario> table, int IdRolUsuario)
     {
       return table.FirstOrDefault(t =>
           t.IdRolUsuario == IdRolUsuario);
-***REMOVED***
+    }
     public static SearchResultParam Find(this ITable<SearchResultParam> table, int Id)
     {
       return table.FirstOrDefault(t =>
           t.Id == Id);
-***REMOVED***
+    }
     public static Sector Find(this ITable<Sector> table, int IdSector)
     {
       return table.FirstOrDefault(t =>
           t.IdSector == IdSector);
-***REMOVED***
+    }
 
     public static SeguimientoEsquemaFinanciacionProyecto Find(this ITable<SeguimientoEsquemaFinanciacionProyecto> table, int IdSeguimientoEsquemaFinanciacion)
     {
       return table.FirstOrDefault(t =>
           t.IdSeguimientoEsquemaFinanciacion == IdSeguimientoEsquemaFinanciacion);
-***REMOVED***
+    }
 
     public static SeguimientoMetaIndicadorProducto Find(this ITable<SeguimientoMetaIndicadorProducto> table, int IdSeguimientoMetaIndicadorProducto)
     {
       return table.FirstOrDefault(t =>
           t.IdSeguimientoMetaIndicadorProducto == IdSeguimientoMetaIndicadorProducto);
-***REMOVED***
+    }
 
     public static Tiempo Find(this ITable<Tiempo> table, int IdFecha)
     {
       return table.FirstOrDefault(t =>
           t.IdFecha == IdFecha);
-***REMOVED***
+    }
 
     public static TipoActividadFiscalizacion Find(this ITable<TipoActividadFiscalizacion> table, string Id)
     {
       return table.FirstOrDefault(t =>
           t.Id == Id);
-***REMOVED***
+    }
 
     public static TipoCampoOProyecto Find(this ITable<TipoCampoOProyecto> table, string IdTipoCampoOProyecto)
     {
       return table.FirstOrDefault(t =>
           t.IdTipoCampoOProyecto == IdTipoCampoOProyecto);
-***REMOVED***
+    }
 
     public static TipoComentario Find(this ITable<TipoComentario> table, int Id)
     {
       return table.FirstOrDefault(t =>
           t.Id == Id);
-***REMOVED***
+    }
 
     public static TipoContraprestacion Find(this ITable<TipoContraprestacion> table, string IdTipoContraprestacion)
     {
       return table.FirstOrDefault(t =>
           t.IdTipoContraprestacion == IdTipoContraprestacion);
-***REMOVED***
+    }
 
     public static TipoDeFinanciacion Find(this ITable<TipoDeFinanciacion> table, int IdTipoFinanciacion)
     {
       return table.FirstOrDefault(t =>
           t.IdTipoFinanciacion == IdTipoFinanciacion);
-***REMOVED***
+    }
 
     public static TipoDeRecursoNatural Find(this ITable<TipoDeRecursoNatural> table, char IdTipoRecursoNatural)
     {
       return table.FirstOrDefault(t =>
           t.IdTipoRecursoNatural == IdTipoRecursoNatural);
-***REMOVED***
+    }
 
     public static Tipologia Find(this ITable<Tipologia> table, int IdTipologia)
     {
       return table.FirstOrDefault(t =>
           t.IdTipologia == IdTipologia);
-***REMOVED***
+    }
 
     public static TipologiasComentario Find(this ITable<TipologiasComentario> table, int IdTipologiaComenario)
     {
       return table.FirstOrDefault(t =>
           t.IdTipologiaComenario == IdTipologiaComenario);
-***REMOVED***
+    }
 
     public static TipoPermiso Find(this ITable<TipoPermiso> table, int IdTipoPermiso)
     {
       return table.FirstOrDefault(t =>
           t.IdTipoPermiso == IdTipoPermiso);
-***REMOVED***
+    }
 
     public static TipoRespuesta Find(this ITable<TipoRespuesta> table, int Id)
     {
       return table.FirstOrDefault(t =>
           t.Id == Id);
-***REMOVED***
+    }
 
     public static UnidadMedida Find(this ITable<UnidadMedida> table, string IdUnidadMedida)
     {
       return table.FirstOrDefault(t =>
           t.IdUnidadMedida == IdUnidadMedida);
-***REMOVED***
+    }
 
     public static Usuario Find(this ITable<Usuario> table, int IdUsuario)
     {
       return table.FirstOrDefault(t =>
           t.IdUsuario == IdUsuario);
-***REMOVED***
+    }
     public static UsuarioPermiso Find(this ITable<UsuarioPermiso> table, int Id)
     {
       return table.FirstOrDefault(t =>
           t.Id == Id);
-***REMOVED***
-  ***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
 #pragma warning restore 1591
 

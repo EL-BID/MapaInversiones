@@ -7,7 +7,7 @@ namespace PlataformaTransparencia.Modelos.Proyectos
 {
     public class ModelProcesosContratacionData : RespuestaContratoBase
     {
-        public long CantidadTotalRegistros { get; set; ***REMOVED***
-        public List<ContratosData> Data { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public long CantidadTotalRegistros { get; set; }
+        public List<ContratosData> Data { get; set; }
+    }
+}

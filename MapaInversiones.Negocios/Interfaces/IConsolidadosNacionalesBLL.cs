@@ -26,5 +26,5 @@ namespace PlataformaTransparencia.Negocios.Interfaces
         List<InfoResourcesPerDepartment> ObtenerRecursosPorDepartamento(List<DataModels.Proyecto> listProyectos);
         List<InfoResourcesPerRegion> ObtenerRecursosPorRegion(List<DataModels.Proyecto> listProyectos);
         List<InfoResourcesPerSector> ObtenerRecursosPorSector(List<DataModels.Proyecto> listProyectos);
-***REMOVED***
-***REMOVED***
+    }
+}

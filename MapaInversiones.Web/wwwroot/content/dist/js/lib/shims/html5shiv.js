@@ -7,7 +7,7 @@
   var version = '3.6.2';
 
   /** Preset options */
-  var options = window.html5 || {***REMOVED***;
+  var options = window.html5 || {};
 
   /** Used to skip problem elements */
   var reSkip = /^<|^(?:button|map|select|textarea|object|iframe|option|optgroup)$/i;
@@ -25,7 +25,7 @@
   var expanID = 0;
 
   /** Cached data for each document */
-  var expandoData = {***REMOVED***;
+  var expandoData = {};
 
   /** Detect whether the browser supports unknown elements */
   var supportsUnknownElements;
@@ -46,23 +46,23 @@
             typeof frag.createDocumentFragment == 'undefined' ||
             typeof frag.createElement == 'undefined'
           );
-    ***REMOVED***());
-***REMOVED*** catch(e) {
+        }());
+    } catch(e) {
       // assign a false positive if detection fails => unable to shiv
       supportsHtml5Styles = true;
       supportsUnknownElements = true;
-***REMOVED***
+    }
 
-  ***REMOVED***());
+  }());
 
   /*--------------------------------------------------------------------------*/
 
   /**
    * Creates a style sheet with the given CSS text and adds it to the document.
    * @private
-   * @param {Document***REMOVED*** ownerDocument The document.
-   * @param {String***REMOVED*** cssText The CSS text.
-   * @returns {StyleSheet***REMOVED*** The style element.
+   * @param {Document} ownerDocument The document.
+   * @param {String} cssText The CSS text.
+   * @returns {StyleSheet} The style element.
    */
   function addStyleSheet(ownerDocument, cssText) {
     var p = ownerDocument.createElement('p'),
@@ -70,61 +70,61 @@
 
     p.innerHTML = 'x<style>' + cssText + '</style>';
     return parent.insertBefore(p.lastChild, parent.firstChild);
-  ***REMOVED***
+  }
 
   /**
    * Returns the value of `html5.elements` as an array.
    * @private
-   * @returns {Array***REMOVED*** An array of shived element node names.
+   * @returns {Array} An array of shived element node names.
    */
   function getElements() {
     var elements = html5.elements;
     return typeof elements == 'string' ? elements.split(' ') : elements;
-  ***REMOVED***
+  }
 
     /**
    * Returns the data associated to the given document
    * @private
-   * @param {Document***REMOVED*** ownerDocument The document.
-   * @returns {Object***REMOVED*** An object of data.
+   * @param {Document} ownerDocument The document.
+   * @returns {Object} An object of data.
    */
   function getExpandoData(ownerDocument) {
     var data = expandoData[ownerDocument[expando]];
     if (!data) {
-        data = {***REMOVED***;
+        data = {};
         expanID++;
         ownerDocument[expando] = expanID;
         expandoData[expanID] = data;
-***REMOVED***
+    }
     return data;
-  ***REMOVED***
+  }
 
   /**
    * returns a shived element for the given nodeName and document
    * @memberOf html5
-   * @param {String***REMOVED*** nodeName name of the element
-   * @param {Document***REMOVED*** ownerDocument The context document.
-   * @returns {Object***REMOVED*** The shived element.
+   * @param {String} nodeName name of the element
+   * @param {Document} ownerDocument The context document.
+   * @returns {Object} The shived element.
    */
   function createElement(nodeName, ownerDocument, data){
     if (!ownerDocument) {
         ownerDocument = document;
-***REMOVED***
+    }
     if(supportsUnknownElements){
         return ownerDocument.createElement(nodeName);
-***REMOVED***
+    }
     if (!data) {
         data = getExpandoData(ownerDocument);
-***REMOVED***
+    }
     var node;
 
     if (data.cache[nodeName]) {
         node = data.cache[nodeName].cloneNode();
-***REMOVED*** else if (saveClones.test(nodeName)) {
+    } else if (saveClones.test(nodeName)) {
         node = (data.cache[nodeName] = data.createElem(nodeName)).cloneNode();
-***REMOVED*** else {
+    } else {
         node = data.createElem(nodeName);
-***REMOVED***
+    }
 
     // Avoid adding some elements to fragments in IE < 9 because
     // * Attributes like `name` or `type` cannot be set/changed once an element
@@ -134,21 +134,21 @@
     // * Script elements appended to fragments will execute when their `src`
     //   or `text` property is set
     return node.canHaveChildren && !reSkip.test(nodeName) ? data.frag.appendChild(node) : node;
-  ***REMOVED***
+  }
 
   /**
    * returns a shived DocumentFragment for the given document
    * @memberOf html5
-   * @param {Document***REMOVED*** ownerDocument The context document.
-   * @returns {Object***REMOVED*** The shived DocumentFragment.
+   * @param {Document} ownerDocument The context document.
+   * @returns {Object} The shived DocumentFragment.
    */
   function createDocumentFragment(ownerDocument, data){
     if (!ownerDocument) {
         ownerDocument = document;
-***REMOVED***
+    }
     if(supportsUnknownElements){
         return ownerDocument.createDocumentFragment();
-***REMOVED***
+    }
     data = data || getExpandoData(ownerDocument);
     var clone = data.frag.cloneNode(),
         i = 0,
@@ -156,32 +156,32 @@
         l = elems.length;
     for(;i<l;i++){
         clone.createElement(elems[i]);
-***REMOVED***
+    }
     return clone;
-  ***REMOVED***
+  }
 
   /**
    * Shivs the `createElement` and `createDocumentFragment` methods of the document.
    * @private
-   * @param {Document|DocumentFragment***REMOVED*** ownerDocument The document.
-   * @param {Object***REMOVED*** data of the document.
+   * @param {Document|DocumentFragment} ownerDocument The document.
+   * @param {Object} data of the document.
    */
   function shivMethods(ownerDocument, data) {
     if (!data.cache) {
-        data.cache = {***REMOVED***;
+        data.cache = {};
         data.createElem = ownerDocument.createElement;
         data.createFrag = ownerDocument.createDocumentFragment;
         data.frag = data.createFrag();
-***REMOVED***
+    }
 
 
     ownerDocument.createElement = function(nodeName) {
       //abort shiv
       if (!html5.shivMethods) {
           return data.createElem(nodeName);
-  ***REMOVED***
+      }
       return createElement(nodeName, ownerDocument, data);
-***REMOVED***;
+    };
 
     ownerDocument.createDocumentFragment = Function('h,f', 'return function(){' +
       'var n=f.cloneNode(),c=n.createElement;' +
@@ -191,40 +191,40 @@
           data.createElem(nodeName);
           data.frag.createElement(nodeName);
           return 'c("' + nodeName + '")';
-    ***REMOVED***) +
-      ');return n***REMOVED***'
+        }) +
+      ');return n}'
     )(html5, data.frag);
-  ***REMOVED***
+  }
 
   /*--------------------------------------------------------------------------*/
 
   /**
    * Shivs the given document.
    * @memberOf html5
-   * @param {Document***REMOVED*** ownerDocument The document to shiv.
-   * @returns {Document***REMOVED*** The shived document.
+   * @param {Document} ownerDocument The document to shiv.
+   * @returns {Document} The shived document.
    */
   function shivDocument(ownerDocument) {
     if (!ownerDocument) {
         ownerDocument = document;
-***REMOVED***
+    }
     var data = getExpandoData(ownerDocument);
 
     if (html5.shivCSS && !supportsHtml5Styles && !data.hasCSS) {
       data.hasCSS = !!addStyleSheet(ownerDocument,
         // corrects block display not defined in IE6/7/8/9
-        'article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:block***REMOVED***' +
+        'article,aside,figcaption,figure,footer,header,hgroup,main,nav,section{display:block}' +
         // adds styling not present in IE6/7/8/9
-        'mark{background:#FF0;color:#000***REMOVED***' +
+        'mark{background:#FF0;color:#000}' +
         // hides non-rendered elements
-        'template{display:none***REMOVED***'
+        'template{display:none}'
       );
-***REMOVED***
+    }
     if (!supportsUnknownElements) {
       shivMethods(ownerDocument, data);
-***REMOVED***
+    }
     return ownerDocument;
-  ***REMOVED***
+  }
 
   /*--------------------------------------------------------------------------*/
 
@@ -235,7 +235,7 @@
    * @example
    *
    * // options can be changed before the script is included
-   * html5 = { 'elements': 'mark section', 'shivCSS': false, 'shivMethods': false ***REMOVED***;
+   * html5 = { 'elements': 'mark section', 'shivCSS': false, 'shivMethods': false };
    */
   var html5 = {
 
@@ -288,7 +288,7 @@
 
     //creates a shived documentFragment
     createDocumentFragment: createDocumentFragment
-  ***REMOVED***;
+  };
 
   /*--------------------------------------------------------------------------*/
 
@@ -298,4 +298,4 @@
   // shiv the document
   shivDocument(document);
 
-***REMOVED***(this, document));
+}(this, document));

@@ -12,17 +12,17 @@ define(['app/controller/AppState'], function( AppState ){
 		this.pages = ko.observableArray([])
 		this.actual = 0
 		this.loading = ko.observable(true)
-	***REMOVED***
+	}
 
 
 	ListView.prototype.onLoading = function(){
 		this.loading(true)
 		this.projects( [] )
 		this.root.find('.pagination').html('')
-		$('html, body').animate({ scrollTop: 0 ***REMOVED***, 200)
-	***REMOVED***
+		$('html, body').animate({ scrollTop: 0 }, 200)
+	}
 
-	ListView.prototype.pageNumberTempl = doT.compile('<a href="#" class="{{? it.active***REMOVED******REMOVED***active{{?***REMOVED******REMOVED***" data-page="{{=it.page***REMOVED******REMOVED***">{{=it.page***REMOVED******REMOVED***</a>')
+	ListView.prototype.pageNumberTempl = doT.compile('<a href="#" class="{{? it.active}}active{{?}}" data-page="{{=it.page}}">{{=it.page}}</a>')
 
 	ListView.prototype.projectsListLoaded = function( data ){
 		data.objects = data.objects || []
@@ -31,7 +31,7 @@ define(['app/controller/AppState'], function( AppState ){
 			var items = ["Regional", "Departamental", "Municipal"],
 				item = items[Math.floor(Math.random()*items.length)];
 			k.finalization = item;
-		***REMOVED***)
+		})
 
 		
 		this.projects( data.objects )
@@ -41,20 +41,20 @@ define(['app/controller/AppState'], function( AppState ){
 		this.drawPages(+ data['pageNumber'], + data['totalPages'])
 		$('html, body').animate({
 			scrollTop: $('#controls').offset().top
-		***REMOVED***, 300);
+		}, 300);
 		this.loading(false)
-	***REMOVED***
+	}
 
 	ListView.prototype.loadPage = function(e){
 		this.loading(true)
 		AppState.setPage( e.target.getAttribute('data-page') )
 		return false
-	***REMOVED***
+	}
 
 	ListView.prototype.toMapMode = function(){
 		AppState.setListMode( false )
 		return false
-	***REMOVED***
+	}
 
 	ListView.prototype.drawPages = function( actual, total ){
 		var pagesHTML = '',
@@ -67,48 +67,48 @@ define(['app/controller/AppState'], function( AppState ){
 		if( actual > 1 ){
 			pagesHTML += '<a class="prev" href="#" data-page="' +
 				(actual-1) + '">&lt;</a>'
-		***REMOVED***
+		}
 		if( total < SOMA1 ){
 			for( i = 1; i<=total; i++ ){
-				pagesHTML += this.pageNumberTempl({page: i, active: i==actual***REMOVED***)
-			***REMOVED***
-		***REMOVED***else{
+				pagesHTML += this.pageNumberTempl({page: i, active: i==actual})
+			}
+		}else{
 			for( i = 1; i < SOMA2; i++ ){
-				pagesHTML += this.pageNumberTempl({page: i, active: i==actual***REMOVED***)
-			***REMOVED***
+				pagesHTML += this.pageNumberTempl({page: i, active: i==actual})
+			}
 			if( actual > SOMA2 + 1 && actual < total - SOMA2 ){
 				pagesHTML += '...'
-				pagesHTML += this.pageNumberTempl({page: actual - 1, active: i==actual***REMOVED***)
-				pagesHTML += this.pageNumberTempl({page: actual, active: true***REMOVED***)
-				pagesHTML += this.pageNumberTempl({page: actual + 1, active: i==actual***REMOVED***)
+				pagesHTML += this.pageNumberTempl({page: actual - 1, active: i==actual})
+				pagesHTML += this.pageNumberTempl({page: actual, active: true})
+				pagesHTML += this.pageNumberTempl({page: actual + 1, active: i==actual})
 				pagesHTML += '...'
-			***REMOVED***else{
+			}else{
 				if( actual < total - SOMA2 ){
 					for( i = SOMA2; i<=SOMA2 + 2; i++ ){
-						pagesHTML += this.pageNumberTempl({page: i, active: i==actual***REMOVED***)
-					***REMOVED***
+						pagesHTML += this.pageNumberTempl({page: i, active: i==actual})
+					}
 					pagesHTML += '...'
-				***REMOVED***else{
+				}else{
 					pagesHTML += '...'
 					for( i = total-7; i<=total-SOMA2+1; i++ ){
-						pagesHTML += this.pageNumberTempl({page: i, active: i==actual***REMOVED***)
-					***REMOVED***
+						pagesHTML += this.pageNumberTempl({page: i, active: i==actual})
+					}
 
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 			for( i = total - SOMA2 + 2; i<=total; i++ ){
-				pagesHTML += this.pageNumberTempl({page: i, active: i==actual***REMOVED***)
-			***REMOVED***
-		***REMOVED***
+				pagesHTML += this.pageNumberTempl({page: i, active: i==actual})
+			}
+		}
 
 		if( actual < total ){
 			pagesHTML += '<a class="next" href="#" data-page="' +
 				(actual+1) + '">&gt;</a>'
-		***REMOVED***
+		}
 
 		this.root.find('.pagination').html(pagesHTML)
-	***REMOVED***
+	}
 
 	var lv = new ListView()
 	ko.applyBindings(lv, lv.root[0])
-***REMOVED***)
+})

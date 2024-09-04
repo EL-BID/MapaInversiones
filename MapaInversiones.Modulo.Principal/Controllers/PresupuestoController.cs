@@ -29,29 +29,29 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       _connection = connection;
       Configuration = configuration;
 
-***REMOVED***
+    }
 
     public IActionResult Index()
     {
       return View();
-***REMOVED***
+    }
 
     public ActionResult ProcesoPresupuesto()
     {
       ViewData["ruta"] = "Presupuesto";
       return View();
-***REMOVED***
+    }
 
 
     public ActionResult PresupuestoInversionPublica()
     {
       return View();
-***REMOVED***
+    }
 
     public ActionResult prueba()
     {
         return View();
-***REMOVED***
+    }
 
         public IActionResult PresupuestoGeneral()
     {
@@ -68,10 +68,10 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                              {
                                 id=g.Key,
                                 name=g.Key.ToString()
-                         ***REMOVED***).Distinct().OrderByDescending(x => x.id).ToList();
+                             }).Distinct().OrderByDescending(x => x.id).ToList();
                 modelo.periodos = grupos;
 
-        ***REMOVED***
+            }
             modelo.Sector = _sector;
 
             ViewData["ruta"] = "Presupuesto";
@@ -79,12 +79,12 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
 
            
-***REMOVED***
+    }
 
   
     public ActionResult ElaboraPresupuesto()
     {
       return View();
-***REMOVED***
-  ***REMOVED***
-***REMOVED***
+    }
+  }
+}

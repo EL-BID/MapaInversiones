@@ -6,24 +6,24 @@ namespace PlataformaTransparencia.Modelos.Entidad
 {
     public class infograficoContratos
     {
-        public string Id { get; set; ***REMOVED***
+        public string Id { get; set; }
 
-        public string Nombre { get; set; ***REMOVED***
+        public string Nombre { get; set; }
 
-        public double presupuesto { get; set; ***REMOVED***
+        public double presupuesto { get; set; }
 
-        public string moneda { get; set; ***REMOVED***
+        public string moneda { get; set; }
 
-        public string proveedor { get; set; ***REMOVED***
+        public string proveedor { get; set; }
 
-        public string contratista { get; set; ***REMOVED***
+        public string contratista { get; set; }
 
-        public double valor_planeado { get; set; ***REMOVED***
+        public double valor_planeado { get; set; }
 
-        public double valor_adjudicado { get; set; ***REMOVED***
+        public double valor_adjudicado { get; set; }
 
         
-        public double valor_contratado { get; set; ***REMOVED***
+        public double valor_contratado { get; set; }
 
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -49,22 +49,22 @@
             </div>
             @{
                 var noticias = await Orchard.GetRecentContentItemsByContentTypeAsync("BlogPost", 10);
-        ***REMOVED***
+            }
             <div class="card border-0 shadow rounded-3 overflow-hidden">
                 <div class="card-body p-0">
                     <div class="row gx-0">
                         <div class="col-lg-6 col-xl-5 py-lg-5">
                             <div class="p-4 p-md-5">
                                 @{
-                                    var compara = string.Format("{0***REMOVED***", @noticias.First().Content.BlogPost.Tags);
-                                    if (compara != "{***REMOVED***")
+                                    var compara = string.Format("{0}", @noticias.First().Content.BlogPost.Tags);
+                                    if (compara != "{}")
                                     {
                                         @foreach (var tag in @noticias.First().Content.BlogPost.Tags.TagNames)
                                         {
                                             <div class="badge bg-primary bg-gradient rounded-pill mb-2">@tag</div>
-                                    ***REMOVED***
-                                ***REMOVED***
-                            ***REMOVED***
+                                        }
+                                    }
+                                }
                                 <div class="h2 fw-bolder">@noticias.First().DisplayText</div>
                                 <p>@noticias.First().Content.BlogPost.Subtitle.Text</p>
                                 <a class="stretched-link text-decoration-none" href="Noticia/@noticias.First().ContentItemId">
@@ -80,12 +80,12 @@
                                 {
                                     firstpath = @noticias.First().Content.BlogPost.Image.Paths[0];
                                     <div class="bg-featured-blog" style="background-image: url('@Orchard.AssetUrl((string)firstpath)')"></div>
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     <div class="bg-featured-blog" style="background-image: url('@firstpath')"></div>
-                            ***REMOVED***
-                        ***REMOVED***
+                                }
+                            }
 
                         </div>
                     </div>
@@ -94,7 +94,7 @@
         </div>
         @{
             var menu = await Orchard.GetContentItemByHandleAsync("alias:main-menu");
-    ***REMOVED***
+        }
     </section>
     <section class="other-news">
         <div class="container">
@@ -115,26 +115,26 @@
                                             {
                                                 imgpath = noticia.Content.BlogPost.Image.Paths[0];
                                                 <img class="img-fluid" src=@Orchard.AssetUrl((string)imgpath) alt="...">
-                                        ***REMOVED***
+                                            }
                                             else
                                             {
                                                 <img class="img-fluid" src=@imgpath alt="...">
-                                        ***REMOVED***
-                                    ***REMOVED***
+                                            }
+                                        }
 
                                     </div>
                                     <div class="col-md-8 col-lg-9">
                                         <div class="card-body">
                                             @{
-                                                var x = string.Format("{0***REMOVED***", noticia.Content.BlogPost.Tags);
-                                                if (x != "{***REMOVED***")
+                                                var x = string.Format("{0}", noticia.Content.BlogPost.Tags);
+                                                if (x != "{}")
                                                 {
                                                     foreach (var tag in noticia.Content.BlogPost.Tags.TagNames)
                                                     {
                                                         <div class="badge bg-primary bg-gradient rounded-pill mb-2">@tag</div>
-                                                ***REMOVED***
-                                            ***REMOVED***
-                                        ***REMOVED***
+                                                    }
+                                                }
+                                            }
                                             <a href="/Noticia/@noticia.ContentItemId"><h5 class="card-title">@noticia</h5></a>
                                             <p class="card-text">@noticia.Content.BlogPost.Subtitle.Text</p>
                                             <p class="card-text"><small class="text-muted">Creado: @noticia.CreatedUtc</small></p>
@@ -142,7 +142,7 @@
                                     </div>
                                 </div>
                             </div>
-                    ***REMOVED***
+                        }
                     </div>
                 </div>
                 <div class="col-lg-4">

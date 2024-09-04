@@ -21,7 +21,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       _connection = connection;
       _gestorTitulos = gestorTitulos;
       _configuration = configuration;
-***REMOVED***
+    }
 
     public IActionResult Location()
     {
@@ -36,12 +36,12 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         {
           type = path[2];
           id = path[4];
-    ***REMOVED***
-  ***REMOVED***
-      LocationContract locationContract = new(_configuration) { HeaderLocationModel= new() { Locations=new() ***REMOVED*** ***REMOVED***;
+        }
+      }
+      LocationContract locationContract = new(_configuration) { HeaderLocationModel= new() { Locations=new() } };
       locationContract.Fill(id.ToString(), type);
       return View(locationContract.HeaderLocationModel);
       
-***REMOVED***
-  ***REMOVED***
-***REMOVED***
+    }
+  }
+}

@@ -23,7 +23,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         private ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> _solr;
         private IHomeBLL consolidadosHome;
 
-        public List<ContratosConsolidado> Consolidados { get; set; ***REMOVED***
+        public List<ContratosConsolidado> Consolidados { get; set; }
 
 
         public HomeController(ILogger<HomeController> logger, TransparenciaDB connection, ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> solr, IHomeBLL consolidadosHomeBLL)
@@ -32,27 +32,27 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             _connection = connection;
             _solr = solr;
             consolidadosHome = consolidadosHomeBLL;
-    ***REMOVED***
+        }
         public ActionResult Index()
         {
             HomeContract homeContract = new HomeContract(_connection);
             homeContract.Fill();
             return View(homeContract.HomeModel);
   
-    ***REMOVED***
+        }
 
-        [HttpGet("Search/{SearchString***REMOVED***")]
+        [HttpGet("Search/{SearchString}")]
         public async Task<List<PlataformaTransparencia.Modelos.SolrResponse>> SearchAsync(string SearchString = "", string Type = "", string Id = "", int start = 0, int sort=0, int rows = 10)
         {
             return (List<PlataformaTransparencia.Modelos.SolrResponse>)await new MySolrRepository(_solr).Search(SearchString, Type, Id, start, sort, rows);
-    ***REMOVED***
+        }
 
 
-        [HttpGet("AutocompleteSearch/{keywords***REMOVED***")]
+        [HttpGet("AutocompleteSearch/{keywords}")]
         public async Task<List<PlataformaTransparencia.Modelos.SolrResponse>> GetSuggestionsAsync(string keywords)
         {
             return (List<PlataformaTransparencia.Modelos.SolrResponse>)await new MySolrRepository(_solr).Autocomplete(keywords);
-    ***REMOVED***
+        }
 
         [HttpGet]
         public ViewResult BusquedaResultados(string SearchString = "", string Type="", string Id = "", int start = 0, int sort=0, int rows = 10)
@@ -61,7 +61,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             var busquedaViewModel = new PlataformaTransparencia.Modelos.ResultadoBusquedaViewModel {
                 CadenaBusqueda = SearchString,
                 Type = Type
-        ***REMOVED***;
+            };
 
             foreach (var item in ListResultadosBusqueda) {
                 var busquedaItem = new PlataformaTransparencia.Modelos.ResultadoBusquedaItem() {
@@ -71,20 +71,20 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     Url = item.Url,
                     Type = item.Type,
                     numFound = item.numFound
-            ***REMOVED***;
+                };
                 busquedaViewModel.ListaResultados.Add(busquedaItem);
-        ***REMOVED***
+            }
             busquedaViewModel.TotalResultados = (ListResultadosBusqueda.Count>0 ? ListResultadosBusqueda[0].numFound : busquedaViewModel.ListaResultados.Count);
             busquedaViewModel.Type= (Type!="" ? Type : "");
             busquedaViewModel.ListaJerarquia = consolidadosHome.GetSearchHierarchyModel();
             return View(busquedaViewModel);
-    ***REMOVED***
+        }
 
         [HttpGet("OnGetFilter")]
         public IActionResult OnGetFilter(string FilterBy)
         {
             return new JsonResult(new PlataformaTransparencia.Modelos.ResultadoBusquedaViewModel());
-    ***REMOVED***
+        }
 
         [HttpGet("BusquedaAsync")]
         public async Task<List<PlataformaTransparencia.Modelos.ResultadoBusquedaItem>> BusquedaAsync(string SearchString = "", string Type = "", string Id = "", int start = 0, int sort = 0, int rows = 10)
@@ -93,7 +93,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             var busquedaViewModel = new PlataformaTransparencia.Modelos.ResultadoBusquedaViewModel {
                 CadenaBusqueda = SearchString,
                 Type = Type
-        ***REMOVED***;
+            };
 
 
             foreach (var item in ListResultadosBusqueda) {
@@ -104,42 +104,42 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     Url = item.Url,
                     Type = item.Type,
                     numFound=item.numFound
-            ***REMOVED***;
+                };
                 busquedaViewModel.ListaResultados.Add(busquedaItem);
-        ***REMOVED***
+            }
             busquedaViewModel.TotalResultados =  (ListResultadosBusqueda.Count>0 ? ListResultadosBusqueda[0].numFound : busquedaViewModel.ListaResultados.Count);
             busquedaViewModel.ListaJerarquia = consolidadosHome.GetSearchHierarchyModel();
             return busquedaViewModel.ListaResultados;
-    ***REMOVED***
+        }
 
         public ActionResult perfilEntidad()
         {
             return View();
-    ***REMOVED***
+        }
 
         public ActionResult PerfilMenu()
         {
             return View();
-    ***REMOVED***
+        }
 
         public ActionResult InversionesPrioritarias()
         {
             return View();
-    ***REMOVED***
+        }
 
         public ActionResult ArticulacionPlan()
         {
             return View();
-    ***REMOVED***
+        }
         public ActionResult PlanificacionResultados()
         {
             return View();
-    ***REMOVED***
+        }
 
         public ActionResult ProcesoCiclo()
         {
             return View();
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

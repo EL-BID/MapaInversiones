@@ -16,17 +16,17 @@ define(['./urlsMap',
 		Modal
 	){
 	var DEBUG_MODE = !!$(document.body).attr('data-debug'),
-		_factoryCacheObj = {***REMOVED***,
+		_factoryCacheObj = {},
 		ready = !DEBUG_MODE,
 		queuedDebugQueries = [],
-		appVersion = {***REMOVED***,
+		appVersion = {},
 		// global ajax promise for projects
 		projectsSearching,
 		isIE = /*@cc_on!@*/false || testCSS('msTransform'),
 		root = DEBUG_MODE ? '' : window.location.protocol+'//'+window.location.host
 		// root = 'http://172.16.78.69:29579'
 	
-	window.appVersion = {Name: 'Mapa Regalias', Version: '0.3.2'***REMOVED***;
+	window.appVersion = {Name: 'Mapa Regalias', Version: '0.3.2'};
 
 	//console.info(window.appVersion)
 
@@ -41,24 +41,24 @@ define(['./urlsMap',
 					var promise = _get(queuedDebugQueries[i].url, queuedDebugQueries[i].data, queuedDebugQueries[i].callback, queuedDebugQueries[i].errorCb)
 					if(queuedDebugQueries[i].cb)
 						promise.done(queuedDebugQueries[i].cb)
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***)
-	***REMOVED***
+				}
+			}
+		})
+	}
 
 
 	function testCSS(prop) {
 		return prop in document.documentElement.style;
-	***REMOVED***
+	}
 
 
 	/**
 	 * Proxy function for easy comms
-	 * @param  {String***REMOVED***		url
-	 * @param  {Object***REMOVED***		data
-	 * @param  {Function***REMOVED***	callback
-	 * @param  {Function***REMOVED***	errorCb
-	 * @return {jQuery.ajax***REMOVED***
+	 * @param  {String}		url
+	 * @param  {Object}		data
+	 * @param  {Function}	callback
+	 * @param  {Function}	errorCb
+	 * @return {jQuery.ajax}
 	 */
 	function _get(url, data, callback, errorCb){
 		errorCb = errorCb || defaultErrorCb
@@ -78,8 +78,8 @@ define(['./urlsMap',
 								url,
 								data
 							)
-					***REMOVED***
-				***REMOVED***)
+					}
+				})
 
 			//jQuery deffer success and error filters
 			request.pipe(
@@ -91,31 +91,31 @@ define(['./urlsMap',
 							modal.show()
 							if('console' in window){
 								//window.console.log(response.message)
-							***REMOVED***
-						***REMOVED***else if(status != 'abort' && ('console' in window)){
+							}
+						}else if(status != 'abort' && ('console' in window)){
 							//window.console.log('Harmless Warning: Request Aborted')
-						***REMOVED***
+						}
 						if(response.status && response.message){
 								modal = Modal.info(response.message)
 								modal.show()
-						***REMOVED***
+						}
 						return response.status
-					***REMOVED***,
+					},
 					function(response, status){
 						var modal
 						if(!response.status && status != 'abort'){
 							if('console' in window){
 								//window.console.log(response.message)
-							***REMOVED***
-						***REMOVED***else if(status != 'abort' && ('console' in window)){
+							}
+						}else if(status != 'abort' && ('console' in window)){
 							//window.console.log('Harmless Warning: Request Aborted')
-						***REMOVED***
+						}
 						if(response.message && status != 'abort'){
 							var modal = Modal.error(response.message)
 							modal.show()
-						***REMOVED***
+						}
 						return !response.status
-					***REMOVED***
+					}
 				)
 
 			request.fail(errorCb)
@@ -124,7 +124,7 @@ define(['./urlsMap',
 			if(callback) request.done(callback)
 
 			return request
-		***REMOVED***else{
+		}else{
 			queuedDebugQueries.push({
 				url: url,
 				data: data,
@@ -133,13 +133,13 @@ define(['./urlsMap',
 				done: function(callback){
 					this.cb = this.cb || []
 					this.cb.push(callback)
-				***REMOVED***
-			***REMOVED***)
+				}
+			})
 			return queuedDebugQueries[queuedDebugQueries.length-1]
-		***REMOVED***
+		}
 
 		
-	***REMOVED***
+	}
 
 	function _factoryCache(url, data){
 		//Warning: IE7- has no JSON Object defined
@@ -147,15 +147,15 @@ define(['./urlsMap',
 		
 		if(_factoryCacheObj[key]){
 			return true
-		***REMOVED***
+		}
 			
 		_factoryCacheObj[key] = true
 		return false
-	***REMOVED***
+	}
 
 	function defaultErrorCb(){
 		//TODO error handling
-	***REMOVED***
+	}
 
 	$(document).on('click', '.submenu a', function(e){
 		e.preventDefault()
@@ -170,7 +170,7 @@ define(['./urlsMap',
 
 		$('.buttons-filter-fiscalization a[data-value="'+dataValue+'"]').trigger('click')
 
-	***REMOVED***)
+	})
 
 	$(document).on('click', '.buttons-filter-fiscalization a', function(e){
 		e.preventDefault()
@@ -191,12 +191,12 @@ define(['./urlsMap',
 		if($searchCampo.val() != ""){
 			//$searchCampo.val('')
 			$optionSelected.trigger('click')
-		***REMOVED***
+		}
 
 		$('.filter-group[data-parameter=tipoRecursoNaturalFiscalizacion] .option[data-value="'+dataValue+'"]').trigger('click')
 
 		
-	***REMOVED***)
+	})
 
 	/*$(document).on('click', '.submenu li a', function(e){
 		e.preventDefault()
@@ -206,7 +206,7 @@ define(['./urlsMap',
 		$('.filter-group[data-parameter="tipoRecursoNaturalFiscalizacion"] .option[data-value="-1"]').trigger('click')
 		$('#header .menu-item-fiscalizacion').trigger('click')
 
-	***REMOVED***)*/
+	})*/
 
 
 
@@ -227,13 +227,13 @@ define(['./urlsMap',
 
 	/**
 	 * Makes the request and handle the
-	 * @param  {String***REMOVED***   type        whether is departments,regions,municipalities
-	 * @param  {Function***REMOVED*** callback
-	 * @param  {Number***REMOVED***   lastUpdated the last date of modification
+	 * @param  {String}   type        whether is departments,regions,municipalities
+	 * @param  {Function} callback
+	 * @param  {Number}   lastUpdated the last date of modification
 	 */
 	function polygonsRequester(type, callback, polygonsData){
 		var data = polygonsData && polygonsData.lastUpdated ?
-			{lastUpdated: polygonsData.lastUpdated***REMOVED*** : {***REMOVED***
+			{lastUpdated: polygonsData.lastUpdated} : {}
 
 		//console.log(urls[type])
 		_get(urls[type], data, function(responseJSON){
@@ -244,198 +244,198 @@ define(['./urlsMap',
 					if(!isIE){
 						Storage.storeDataList(responseJSON)
 						callback(Storage.getDataList(type))
-					***REMOVED***else{
+					}else{
 						callback(responseJSON.geojson)
-					***REMOVED***
-				***REMOVED***catch(e){
+					}
+				}catch(e){
 					if('console' in window){
 						//window.console.log('Harmless Warning: Quota Exceded!')
 						//window.console.log('Harmless Warning: Quota exceded storing: ' + responseJSON )
-					***REMOVED***
+					}
 					if('localStorage' in window)
 						window.localStorage.clear()
 					callback(responseJSON.geojson)
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				callback(polygonsData)
-			***REMOVED***
-		***REMOVED***)
+			}
+		})
 				// callback(polygonsData)
-	***REMOVED***
+	}
 
 	/**
 	 * Interface for common actions to handling the data request
 	 *
-	 * @param  {String***REMOVED***   type     flag for data type
-	 * @param  {Function***REMOVED*** callback
+	 * @param  {String}   type     flag for data type
+	 * @param  {Function} callback
 	 */
 	function loadInterface(type, callback){
 		var polygonsData = Storage.getDataList(type)
 		if(!polygonsData.features.length){
 			polygonsRequester(type, callback)
-		***REMOVED***else{
+		}else{
 			polygonsRequester(type, callback, polygonsData)
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	/**
 	 * Loads the departments polygons data
 	 *
-	 * @param  {Function***REMOVED*** callback [description]
+	 * @param  {Function} callback [description]
 	 */
 	function loadDepartments(callback){
 		loadInterface('departments', callback)
-	***REMOVED***
+	}
 
 	/**
 	 * Loads the regions polygons data
 	 *
-	 * @param  {Function***REMOVED*** callback [description]
+	 * @param  {Function} callback [description]
 	 */
 	function loadRegions(callback){
 		loadInterface('regions', callback)
-	***REMOVED***
+	}
 
 	/**
 	 * Loads the municipalities polygons data
 	 *
-	 * @param  {Function***REMOVED*** callback [description]
+	 * @param  {Function} callback [description]
 	 */
 	function loadMunicipalities(callback){
 		loadInterface('municipalities', callback)
-	***REMOVED***
+	}
 
 	function loadProjectFilters(){
 		return _get(urls.filtersProjects)
-	***REMOVED***
+	}
 
 	function search( type, query, options ){
 		var json
-		options = options || {***REMOVED***
+		options = options || {}
 		//console.warn(type, query, options)
 		if( type === 'Proyectos' ){
 			if( options.isList ){
 				return _get(urls['searchProjectsList'], query );
-			***REMOVED***
+			}
 			else{
 				return _get(urls['searchProjects'], query );
-			***REMOVED***
-		***REMOVED***else if( type === 'Recursos' ){
+			}
+		}else if( type === 'Recursos' ){
 			if( options.pushpins ){
 				return _get(urls['infoboxesResources'], query );
-			***REMOVED***
+			}
 			else{
 				return _get(urls['searchResources'], query );
-			***REMOVED***
-		***REMOVED***else if( type === 'Produccion' ){
+			}
+		}else if( type === 'Produccion' ){
 			if( options.pushpins ){
 				return _get(urls['infoboxesProduction'], query );
-			***REMOVED***
+			}
 			else{
 				return _get(urls['searchProduction'], query );
-			***REMOVED***
-		***REMOVED***else if( type === 'Fiscalizacion' ){
+			}
+		}else if( type === 'Fiscalizacion' ){
 			if( options.pushpins ){
 				return _get(urls['infoboxesFiscalizacion'], query );
-			***REMOVED***
+			}
 			else{
 				return _get(urls['searchFiscalizacion'], query );
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 	function searchText( key ){
-		return _get(urls.texts, {id: key***REMOVED***)
-	***REMOVED***
+		return _get(urls.texts, {id: key})
+	}
 
 	function getConsolidated(paramsString){
 		return _get(urls.consolidated, paramsString)
-	***REMOVED***
+	}
 
 	function getBudgetList(params){
 		return _get(urls.getBudget, params)
-	***REMOVED***
+	}
 	function getDistributionList(params){
 		return _get(urls.getDistribution, params)
-	***REMOVED***
+	}
 	function getOutlayList(params){
 		return _get(urls.getOutlay, params)
-	***REMOVED***
+	}
 	function getAprovedList(params){
 		return _get(urls.getAprovedProyects, params)
-	***REMOVED***
+	}
 	function getExecutedList(params){
 		return _get(urls.getExecuted, params)
-	***REMOVED***
+	}
 	function getRegaliasList(params){
 		return _get(urls.getRegalias, params)
-	***REMOVED***
+	}
 	function getValueAproved(params){
 		return _get(urls.getValueAproved, params)
-	***REMOVED***
+	}
 	function getPerformance(params){
 		return _get(urls.getPerformance, params)
-	***REMOVED***
+	}
 
 	function getConsolidatedResources(paramsString){
 		return _get(urls.consolidatedResources, paramsString)
-	***REMOVED***
+	}
 
 	function getConsolidatedProduction(paramsString){
 		return _get(urls.consolidatedProduction, paramsString)
-	***REMOVED***
+	}
 
 	function getConsolidatedFiscalizacion(paramsString){
 		return _get(urls.consolidatedFiscalizacion, paramsString)
-	***REMOVED***
+	}
 
 	function getProductionInfo(paramsString){
 		return _get(urls.getProductionInfo, paramsString)
-	***REMOVED***
+	}
 	function getFieldInfo(url, paramsString){
 		return _get(url, paramsString)
-	***REMOVED***
+	}
 
 	function getProjectList(url){
 		var split = url.split('?')
 		return _get(split[0], split[1])
-	***REMOVED***
+	}
 
 	function sendByEmail( params ){
 		return _get(urls.sendByEmail, params)
-	***REMOVED***
+	}
 
 	function getContratos(params) {
 	    return _get(urls.getContratosContratista, params);
-	***REMOVED***
+	}
 
 	function getAnnioContratos(params) {
 	    return _get(urls.getValorAnnioContratos, params)
-	***REMOVED***
+	}
 	function getGraficaContratos(params) {
 	    return _get(urls.getContratosPerAnyo, params)
-	***REMOVED***
+	}
 	function getGraficaValorContratos(params) {
 	    return _get(urls.getValorContratosPerAnyo, params)
-	***REMOVED***
+	}
 	function getGraficaContratosTipo(params) {
 	    return _get(urls.getContratosPerTipo, params)
-	***REMOVED***
+	}
 
 	function getAnnioContratosProyecto(params) {
 	    return _get(urls.getAnnioContratosProyecto, params)
-	***REMOVED***
+	}
 
 	return {
 		polygons: {
 			getDepartments: loadDepartments,
 			getRegions: loadRegions,
 			getMunicipalities: loadMunicipalities
-		***REMOVED***,
+		},
 		
 		filters: {
 			forProjects: loadProjectFilters
-		***REMOVED***,
+		},
 
 		search: search,
 
@@ -448,20 +448,20 @@ define(['./urlsMap',
 			regalias: getRegaliasList,
 			valorAprobado: getValueAproved,
 			rendimiento: getPerformance
-		***REMOVED***,
+		},
 
 		production: {
 			productionInfo: getProductionInfo,
 			fieldInfo: getFieldInfo,
 			aproved: getAprovedList
-		***REMOVED***,
+		},
 
 		infograph: {
 			consolidated: getConsolidated,
 			resources: getConsolidatedResources,
 			production: getConsolidatedProduction,
 			fiscalizacion: getConsolidatedFiscalizacion
-		***REMOVED***,
+		},
 
 		contratista: {
 		    getGraficaContratos: getGraficaContratos,
@@ -470,12 +470,12 @@ define(['./urlsMap',
 		    getAnnioContratos: getAnnioContratos,
 		    getContratos: getContratos,
 		    getAnnioContratosProyecto: getAnnioContratosProyecto
-		***REMOVED***,
+		},
 
 		projectsList: getProjectList,
 
 		sendByEmail: sendByEmail,
 
 		texts: searchText
-	***REMOVED***
-***REMOVED***)
+	}
+})

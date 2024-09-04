@@ -26,7 +26,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
           _connection = connection;
           _solr = solr;
 
-    ***REMOVED***
+        }
 
 
     [HttpGet("GetEjesEstrategicos")]
@@ -41,17 +41,17 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                                         Nombre = "Eje " + ejes.CodEjeEstrategico.Value + ": " + ejes.NombreEjeEstrategico,
                                         Descripcion = ejes.DescripcionEjeEstrategico,
                                         Id = ejes.CodEjeEstrategico.Value
-                                  ***REMOVED***).Distinct().OrderBy(x=>x.Nombre).ToList();
+                                      }).Distinct().OrderBy(x=>x.Nombre).ToList();
         objReturn.Status = true;
         return objReturn;
-  ***REMOVED***
+      }
       catch (Exception exception) 
       {
         objReturn.Status = false;
         objReturn.Message = "Error: " + exception.Message;
         return objReturn;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
 
     [HttpGet("GetObjetivosGeneralesXEjeEstrategico")]
@@ -64,13 +64,13 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         objReturn.ObjetivosPorEjeEstrategico = aux.ObtenerObjetivosPorEjeEstrategico(idEjeEstrategico);
         objReturn.Status = true;
         return objReturn;
-  ***REMOVED***
+      }
       catch (Exception exception) {
         objReturn.Status = false;
         objReturn.Message = "Error: " + exception.Message;
         return objReturn;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
 
     [HttpGet("GetEntidadesPlanNacional")]
@@ -81,11 +81,11 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         var aux = new PlanNacionalBLL(_connection);
         objReturn = aux.ObtenerEntidadesPlanNacional();
         return objReturn;
-  ***REMOVED***
+      }
       catch (Exception) {
         return objReturn;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     [HttpGet("GetIndicadoresXIdObjetivoEspecifico")]
     public List<IndicadorObjetivoEspecifico> GetIndicadoresXIdObjetivoEspecifico(string idEje, string idObjetivoEstrategico, string idObjetivoEspecifico)
@@ -95,15 +95,15 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         var aux = new PlanNacionalBLL(_connection);
         if (int.TryParse(idEje, out int idEjeEstrategico) && int.TryParse(idObjetivoEstrategico, out int idObjEstrategico) && int.TryParse(idObjetivoEspecifico, out int idObjEspecifico)) {
           objReturn = aux.ObtenerIndicadoresXIdObjetivoEspecifico(idEjeEstrategico, idObjEstrategico, idObjEspecifico);
-    ***REMOVED***
+        }
         return objReturn;
-  ***REMOVED***
+      }
       catch (Exception) {
         return objReturn;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
 
 
-***REMOVED***
-***REMOVED***
+    }
+}

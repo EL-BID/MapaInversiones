@@ -2,22 +2,22 @@
 @inject OrchardCore.IOrchardHelper Orchard
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+}
  @{
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
     var LabelContratos = "";
     var TituloContratos = "";
     System.IFormatProvider culture =
         new System.Globalization.CultureInfo("es-RD");
-***REMOVED***
+}
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
     if (@etiqueta.AliasPart.Alias == "PresupuestoGeneralEmergencias")
     {
         LabelContratos = @etiqueta.HtmlBodyPart.Html;
         TituloContratos = @etiqueta.TitlePart.Title;
-***REMOVED***
-***REMOVED***
+    }
+}
 
 
 
@@ -88,7 +88,7 @@
                                 @foreach (var item in Model.Anios)
                                 {
                                     <option value=@item> @item</option>
-                            ***REMOVED***
+                                }
                             </select>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                 <div class="row section">
                     <div class="col-lg-12">
                         <div class="card-carusel-wrap">
-                            <div id="divResumenProcesos" class="project-carusel carouselData" data-flickity='{"initialIndex": 0, "pageDots": false, "groupCells": true, "contain": true, "prevNextButtons": true , "freeScroll":true,"wrapAround":false, "setGallerySize": false ***REMOVED***'></div>
+                            <div id="divResumenProcesos" class="project-carusel carouselData" data-flickity='{"initialIndex": 0, "pageDots": false, "groupCells": true, "contain": true, "prevNextButtons": true , "freeScroll":true,"wrapAround":false, "setGallerySize": false }'></div>
                         </div>
                     </div>
                 </div>
@@ -206,22 +206,22 @@
         data-presupuestoGeneralPerAnio='[@foreach (var item in @Model.PresupuestoGeneralPorAnios)
     {
         <text>
-            {"anio":"@item.Anio","presupuestoAsignado":"@item.PresupuestoAsignado", "presupuestoEjecutado": "@item.PresupuestoEjecutado", "porcentajeAvance": "@item.PorcentajeAvance"***REMOVED***@if (item != @Model.PresupuestoGeneralPorAnios.Last())
+            {"anio":"@item.Anio","presupuestoAsignado":"@item.PresupuestoAsignado", "presupuestoEjecutado": "@item.PresupuestoEjecutado", "porcentajeAvance": "@item.PorcentajeAvance"}@if (item != @Model.PresupuestoGeneralPorAnios.Last())
             {
                 <text>,</text>
-        ***REMOVED***
+            }
         </text>
-***REMOVED***]'
+    }]'
 
         data-presupuestoEjecutadoPorEmergencias='[@foreach (var item in @Model.PresupuestoEjecutadoPorEmergencias)
     {
         <text>
-            {"anio":"@item.Anio","nombre":"@item.Nombre", "presupuestoEjecutado": "@item.PresupuestoEjecutado", "enlace": "@item.Enlace"***REMOVED***@if (item != @Model.PresupuestoEjecutadoPorEmergencias.Last())
+            {"anio":"@item.Anio","nombre":"@item.Nombre", "presupuestoEjecutado": "@item.PresupuestoEjecutado", "enlace": "@item.Enlace"}@if (item != @Model.PresupuestoEjecutadoPorEmergencias.Last())
             {
                 <text>,</text>
-        ***REMOVED***
+            }
         </text>
-***REMOVED***]'
+    }]'
 
-***REMOVED***
+}
 

@@ -10,7 +10,7 @@ define(['../network/Services'], function( Services ){
 		this.root.find('.projects-list-view-inner').on('click', function( evt ){
 			if( evt.target.tagName !== 'A' )
 				return false
-		***REMOVED***)
+		})
 		this.projects = ko.observableArray([])
 
 		// AppState.on('projects-list-loaded', this.projectsListLoaded.bind(this))
@@ -28,10 +28,10 @@ define(['../network/Services'], function( Services ){
 			self.actual = this.getAttribute('data-page')
 			self.requestProyectsList()
 			return false
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
-	ListView.prototype.pageNumberTempl = doT.compile('<a href="#" class="{{? it.active***REMOVED******REMOVED***active{{?***REMOVED******REMOVED***" data-page="{{=it.page***REMOVED******REMOVED***">{{=it.page***REMOVED******REMOVED***</a>')
+	ListView.prototype.pageNumberTempl = doT.compile('<a href="#" class="{{? it.active}}active{{?}}" data-page="{{=it.page}}">{{=it.page}}</a>')
 
 
 	ListView.prototype.getProjectsList = function( evt ){
@@ -41,14 +41,14 @@ define(['../network/Services'], function( Services ){
 		this.requestProyectsList()
 		this.show()
 		return false
-	***REMOVED***
+	}
 
 	ListView.prototype.requestProyectsList = function( ){
 		this.loading(true)
 		this.projects( [] )
 		Services.projectsList( this.url + '&Pagina=' + this.actual )
 			.done(this.projectsListLoaded.bind(this))
-	***REMOVED***
+	}
 
 	ListView.prototype.projectsListLoaded = function( data ){
 		this.projects( data.Proyectos )
@@ -59,13 +59,13 @@ define(['../network/Services'], function( Services ){
 		this.drawPages(+ data['Pagina'], + data['TotalPagina'])
 		// $('html, body').animate({
 		// 	scrollTop: this.root.offset().top
-		// ***REMOVED***, 300);
-	***REMOVED***
+		// }, 300);
+	}
 
 	ListView.prototype.toMapMode = function(){
 		// AppState.setListMode( false )
 		// return false
-	***REMOVED***
+	}
 
 	ListView.prototype.drawPages = function( actual, total ){
 		var pagesHTML = '',
@@ -78,53 +78,53 @@ define(['../network/Services'], function( Services ){
 		if( actual > 1 ){
 			pagesHTML += '<a class="prev" href="#" data-page="' +
 				(actual-1) + '">&lt;</a>'
-		***REMOVED***
+		}
 		if( total < SOMA1 ){
 			for( i = 1; i<=total; i++ ){
-				pagesHTML += this.pageNumberTempl({page: i, active: i==actual***REMOVED***)
-			***REMOVED***
-		***REMOVED***else{
+				pagesHTML += this.pageNumberTempl({page: i, active: i==actual})
+			}
+		}else{
 			for( i = 1; i < SOMA2; i++ ){
-				pagesHTML += this.pageNumberTempl({page: i, active: i==actual***REMOVED***)
-			***REMOVED***
+				pagesHTML += this.pageNumberTempl({page: i, active: i==actual})
+			}
 			if( actual > SOMA2 + 1 && actual < total - SOMA2 ){
 				pagesHTML += '...'
-				pagesHTML += this.pageNumberTempl({page: actual - 1, active: i==actual***REMOVED***)
-				pagesHTML += this.pageNumberTempl({page: actual, active: true***REMOVED***)
-				pagesHTML += this.pageNumberTempl({page: actual + 1, active: i==actual***REMOVED***)
+				pagesHTML += this.pageNumberTempl({page: actual - 1, active: i==actual})
+				pagesHTML += this.pageNumberTempl({page: actual, active: true})
+				pagesHTML += this.pageNumberTempl({page: actual + 1, active: i==actual})
 				pagesHTML += '...'
-			***REMOVED***else{
+			}else{
 				if( actual < total - SOMA2 ){
 					for( i = SOMA2; i<=SOMA2 + 2; i++ ){
-						pagesHTML += this.pageNumberTempl({page: i, active: i==actual***REMOVED***)
-					***REMOVED***
+						pagesHTML += this.pageNumberTempl({page: i, active: i==actual})
+					}
 					pagesHTML += '...'
-				***REMOVED***else{
+				}else{
 					pagesHTML += '...'
 					for( i = total-7; i<=total-SOMA2+1; i++ ){
-						pagesHTML += this.pageNumberTempl({page: i, active: i==actual***REMOVED***)
-					***REMOVED***
+						pagesHTML += this.pageNumberTempl({page: i, active: i==actual})
+					}
 
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 			for( i = total - SOMA2 + 2; i<=total; i++ ){
-				pagesHTML += this.pageNumberTempl({page: i, active: i==actual***REMOVED***)
-			***REMOVED***
-		***REMOVED***
+				pagesHTML += this.pageNumberTempl({page: i, active: i==actual})
+			}
+		}
 
 		if( actual < total ){
 			pagesHTML += '<a class="next" href="#" data-page="' +
 				(actual+1) + '">&gt;</a>'
-		***REMOVED***
+		}
 
 		this.root.find('.pagination').html(pagesHTML)
-	***REMOVED***
+	}
 	ListView.prototype.show = function(){
 		$('html').css('overflow', 'hidden')
 		// document.body.appendChild(this.modal)
 		// this.root.style.display = 'block'
 		this.root.fadeIn()
-	***REMOVED***
+	}
 	ListView.prototype.hide = function(event){
 		var target = event.target,
 			href = target.getAttribute('href')
@@ -134,11 +134,11 @@ define(['../network/Services'], function( Services ){
 		if( href && 
 			href.length < 10 ) 
 				return false
-	***REMOVED***
+	}
 	ListView.prototype.load = function(){
 
-	***REMOVED***
+	}
 
 	var lv = new ListView()
 	ko.applyBindings(lv, lv.root[0])
-***REMOVED***)
+})

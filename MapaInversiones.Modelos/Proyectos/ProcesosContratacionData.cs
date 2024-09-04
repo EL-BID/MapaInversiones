@@ -6,17 +6,17 @@ namespace PlataformaTransparencia.Modelos.Proyectos
 {
     public class ProcesosContratacionData
     {
-        public string IdOrdenCompraProyecto { get; set; ***REMOVED*** // varchar(100)
-        public int Annio { get; set; ***REMOVED*** // int
-        public int Semestre { get; set; ***REMOVED*** // int
-        public int IdProyecto { get; set; ***REMOVED*** // int
-        public string Convenio { get; set; ***REMOVED*** // varchar(max)
-        public string Tipoproceso { get; set; ***REMOVED*** // varchar(max)
-        public string Obra { get; set; ***REMOVED*** // varchar(max)
-        public string Fuente { get; set; ***REMOVED*** // varchar(max)
-        public double? Monto { get; set; ***REMOVED*** // float
-        public DateTime FechaUltimaModificacion { get; set; ***REMOVED*** // datetime
-        public int ConsecutivoCarga { get; set; ***REMOVED*** // int
-        public string ModificadoPor { get; set; ***REMOVED*** // varchar(30)
-***REMOVED***
-***REMOVED***
+        public string IdOrdenCompraProyecto { get; set; } // varchar(100)
+        public int Annio { get; set; } // int
+        public int Semestre { get; set; } // int
+        public int IdProyecto { get; set; } // int
+        public string Convenio { get; set; } // varchar(max)
+        public string Tipoproceso { get; set; } // varchar(max)
+        public string Obra { get; set; } // varchar(max)
+        public string Fuente { get; set; } // varchar(max)
+        public double? Monto { get; set; } // float
+        public DateTime FechaUltimaModificacion { get; set; } // datetime
+        public int ConsecutivoCarga { get; set; } // int
+        public string ModificadoPor { get; set; } // varchar(30)
+    }
+}

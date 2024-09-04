@@ -10,15 +10,15 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
     public FinancialOrganizationController(IFinanciadorBLL financiadorBLL)
     {
       _financiadorBLL = financiadorBLL;
-***REMOVED***
+    }
     public IActionResult Index()
     {
       ModelDataOrganismoFinanciador data = new()
       {
         Anios = _financiadorBLL.ObtenerAniosVistaPresupuesto()
-  ***REMOVED***;
+      };
       return View(data);
-***REMOVED***
+    }
 
     public IActionResult FinancialOrganizationDetail(int id, int anio)
     {
@@ -28,8 +28,8 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         AnioSelected=anio,
         Nombre= _financiadorBLL.ObtenerNombreOrganismoPorCodigoFinanciador(id),
         Codigo=id
-  ***REMOVED***;
+      };
       return View(data);
-***REMOVED***
-  ***REMOVED***
-***REMOVED***
+    }
+  }
+}

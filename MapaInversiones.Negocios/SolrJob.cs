@@ -18,7 +18,7 @@ namespace PlataformaTransparencia.Negocios
         public SolrJob(IConfiguration config)
         {
             _config = config;
-    ***REMOVED***
+        }
         public async Task Execute(IJobExecutionContext context)
         {
             try
@@ -37,7 +37,7 @@ namespace PlataformaTransparencia.Negocios
 
                     foreach (var topic in topics)
                     {
-                        if (LoopNum > 1) { clean = "false"; ***REMOVED***
+                        if (LoopNum > 1) { clean = "false"; }
                         tempstring = "&clean=" + clean + "&entity=" + topic;
 
                         client.DefaultRequestHeaders.Accept.Add(
@@ -47,20 +47,20 @@ namespace PlataformaTransparencia.Negocios
                         //var content = response.Content.ReadAsStringAsync().Result;
                         System.Threading.Thread.Sleep(Sleeptime);
                         LoopNum += 1;
-                ***REMOVED***
+                    }
 
-            ***REMOVED*** 
+                } 
 
 
 
-        ***REMOVED***
+            }
             catch (Exception ex)
             {
                 LogHelper.GenerateLog(ex);
-        ***REMOVED***
+            }
             return;
             //return Task.FromResult(true);
 
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

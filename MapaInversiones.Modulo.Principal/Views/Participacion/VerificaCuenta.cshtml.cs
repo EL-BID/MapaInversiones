@@ -11,6 +11,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Views.Participacion
     {
         public void OnGet()
         {
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

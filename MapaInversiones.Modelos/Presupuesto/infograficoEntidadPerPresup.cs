@@ -9,18 +9,18 @@ namespace PlataformaTransparencia.Modelos.Presupuesto
 {
     public  class infograficoEntidadPerPresup
     {
-        public string Id { get; set; ***REMOVED***
-        public string Nombre { get; set; ***REMOVED***
+        public string Id { get; set; }
+        public string Nombre { get; set; }
 
-        public double? presupuesto { get; set; ***REMOVED***
+        public double? presupuesto { get; set; }
 
-        public double? avance { get; set; ***REMOVED***
+        public double? avance { get; set; }
 
-        public double? aprobado { get; set; ***REMOVED***
+        public double? aprobado { get; set; }
 
-        public double porcentaje { get; set; ***REMOVED***
+        public double porcentaje { get; set; }
 
-        public List<infograficoActividad> Detalles { get; set; ***REMOVED***
+        public List<infograficoActividad> Detalles { get; set; }
 
         public infograficoEntidadPerPresup()
         {
@@ -32,6 +32,6 @@ namespace PlataformaTransparencia.Modelos.Presupuesto
             porcentaje = 0;
             Detalles = new List<infograficoActividad>();
 
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

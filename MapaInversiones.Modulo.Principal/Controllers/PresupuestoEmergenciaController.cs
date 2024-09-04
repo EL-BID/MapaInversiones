@@ -15,7 +15,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
     public PresupuestoEmergenciaController(TransparenciaDB connection)
     {
       _connection = connection;
-***REMOVED***
+    }
 
     /// <summary>
     /// Devuelve la información del presupuesto dado un tipo de emergencia
@@ -30,10 +30,10 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       if (homeContract.HomePresupuestoEmergenciaModel != null)
       {
         homeContract.HomePresupuestoEmergenciaModel.TipoEmergencia = tipoDeEmergenciaId.ToString();
-  ***REMOVED***
+      }
 
       return View(homeContract.HomePresupuestoEmergenciaModel);
-***REMOVED***
+    }
 
-  ***REMOVED***
-***REMOVED***
+  }
+}

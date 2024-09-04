@@ -17,7 +17,7 @@ function loadProyectosPrioritarios(resultados) {
             var nombre_aux = resultados[i].NombreProyecto.toString();
             if (nombre_aux.length > limite) {
                 nombre_aux = nombre_aux.substr(0, limite) + "...";
-        ***REMOVED***
+            }
 
             var div_proy = d3.select("#divContenedorFichas")
             var div_ficha = div_proy.append("div")
@@ -31,10 +31,10 @@ function loadProyectosPrioritarios(resultados) {
             div_enlace.append("h3").text(nombre_aux)
             if (resultados[i].approvedTotalMoney > 1000000) {
                 div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + formatMoney(valor_aux / 1000000, 2, ".", ",").toString() + ' Millones');
-        ***REMOVED*** else {
+            } else {
                 div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + formatMoney(valor_aux / 1, 2, ".", ",").toString());
 
-        ***REMOVED***
+            }
 
             div_card.append("div").attr("class", "clearfix")
             var div_porcentaje = div_card.append("div").attr("class", "percentage")
@@ -57,16 +57,16 @@ function loadProyectosPrioritarios(resultados) {
             enlace_question.append("span").attr("class", "material-icons").text("question_answer")
             enlace_question.append("span").attr("class", "text-ic").text("(" + resultados[i].Comentarios + ")")
 
-    ***REMOVED***
-***REMOVED***
+        }
+    }
     else {
         //no existen proyectos en ejecucion
         $("#divNoExistenEjec").show();
 
-***REMOVED***
+    }
 
 
-***REMOVED***
+}
 
 function ObtenerGraphBySectorPerGroup(anyo_actual) {
     $("#divGraphRecursosObj").empty();
@@ -77,7 +77,7 @@ function ObtenerGraphBySectorPerGroup(anyo_actual) {
         dataType: "json",
         url: "/api/ServiciosHome/ObtenerProyectosPorSectorGroupHome",
         cache: false,
-        data: {anyo:anyo_actual***REMOVED***,
+        data: {anyo:anyo_actual},
         success: function (result) {
             if (result.status == true) {
                 var data = result.projectsPerSectorGroup;
@@ -87,9 +87,9 @@ function ObtenerGraphBySectorPerGroup(anyo_actual) {
                     const sum_ordenado = sum_sectores.sort(function (a, b) {
                         if (a.ordenGroup !== b.ordenGroup) {
                             return a.ordenGroup - b.ordenGroup;
-                    ***REMOVED***
+                        }
                         return b.rawValue - a.rawValue;
-                ***REMOVED***);
+                    });
                     sector_ideas_globales = data;
 
                     getGraphPorSectorByObrasTab(sum_ordenado, "divContentSectores");
@@ -98,33 +98,33 @@ function ObtenerGraphBySectorPerGroup(anyo_actual) {
                     const sum_all = groupAndSum(data, ['label', 'url_imagen','orden'], ['rawValue']);
                     var filter_sec = $(sum_all).filter(function () {
                         return this.orden ===1;
-                ***REMOVED***);
+                    });
                     var prioritarios_sec = filter_sec.sort((a, b) => b.rawValue - a.rawValue);
                     if (prioritarios_sec.length >= 3) {
                         var topSectores = prioritarios_sec.slice(0, 3);
                         loadSectoresBanner(topSectores);
-                ***REMOVED***
+                    }
                     ///-----------------------------------------------------------------------
                     
-            ***REMOVED***
+                }
 
-        ***REMOVED*** else {
+            } else {
                 bootbox.alert("Error: " + result.Message, function () {
 
-            ***REMOVED***);
-        ***REMOVED***
+                });
+            }
 
-      ***REMOVED***
+        },
         error: function (response) {
             bootbox.alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             bootbox.alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
 
-***REMOVED***
+}
 
 function groupAndSum(arr, groupKeys, sumKeys) {
     return Object.values(
@@ -135,17 +135,17 @@ function groupAndSum(arr, groupKeys, sumKeys) {
             sumKeys.forEach(k => acc[group][k] += curr[k]);
             return acc;
 
-      ***REMOVED*** {***REMOVED***)
+        }, {})
     );
-***REMOVED***
+}
 
 
 function filtrarSector(data, sector) {
     var filtrados = jQuery.grep(data, function (n, i) {
         return (n.labelGroup == sector.toString().toUpperCase());
-***REMOVED***);
+    });
     return filtrados;
-***REMOVED***
+}
 
 function getGraphPorSectorByObrasTab(objSectores, divContenedor) {
     var str_aux = '';
@@ -165,7 +165,7 @@ function getGraphPorSectorByObrasTab(objSectores, divContenedor) {
         var fondo = "/img/otros-mas.svg";
         if (objSectores[i].url_imagen != null) {
             fondo = objSectores[i].url_imagen;
-    ***REMOVED***
+        }
 
         if (idSector == 0 || cont < 7) {
             str_aux += '<div id="div_' + + i.toString() + '" class="col-lg-3 mb-3" location_id="' + objSectores[i].labelGroup + '" location_cant="' + objSectores[i].rawValue + '">';
@@ -191,12 +191,12 @@ function getGraphPorSectorByObrasTab(objSectores, divContenedor) {
             str_aux += '</div>';
             str_aux += '</div>';
 
-    ***REMOVED***
+        }
 
 
         cont += 1;
 
-***REMOVED***
+    }
     str_aux += '</div>';
 
     $("#" + divContenedor).html(str_aux);
@@ -209,7 +209,7 @@ function getGraphPorSectorByObrasTab(objSectores, divContenedor) {
 
         if ($(this).parent().length > 0) {
             total_all = $(this).parent().attr("total");
-    ***REMOVED***
+        }
 
         var sel_sector = $(this).attr("location_id");
         var tipo_tab = $(this).attr("tipo");
@@ -223,7 +223,7 @@ function getGraphPorSectorByObrasTab(objSectores, divContenedor) {
         var data_filter = [];
         data_filter = $.grep(sector_ideas_globales, function (element, index) {
             return element.labelGroup == sel_sector;
-    ***REMOVED***);
+        });
 
 
 
@@ -240,13 +240,13 @@ function getGraphPorSectorByObrasTab(objSectores, divContenedor) {
                 estados_aux += '<span class="label_tooltipSecNumber">' + this.rawValue.toString() + '</span>';
                 if (element < suma.length - 1) {
                     estados_aux += '<hr class="linea_tooltipSec"></hr>';
-            ***REMOVED***
+                }
 
-        ***REMOVED***);
+            });
 
             porcentaje = ((total_sector / total_all) * 100).toFixed(2);
 
-    ***REMOVED***
+        }
 
         var elm = $(this);
         var id = elm.attr("id");
@@ -274,21 +274,21 @@ function getGraphPorSectorByObrasTab(objSectores, divContenedor) {
                 .attr("class", "sector_tooltip_body")
                 .attr("style", estilo)
                 .html(htmlpop)
-    ***REMOVED***
+        }
 
 
 
 
-***REMOVED***);
+    });
 
     $("#divContentSectores").bind('mouseout', function (e) {
         setTimeout(
             function () {
                 //do something special
                 $(".sector_tooltip").remove();
-          ***REMOVED*** 2000);
-***REMOVED***);
-***REMOVED***
+            }, 2000);
+    });
+}
 
 function loadSectoresBanner(result) {
  var str_cad = "";
@@ -309,12 +309,12 @@ function loadSectoresBanner(result) {
             str_cad += '</div>';
             str_cad += '</div>';
             str_cad += '</div>';
-    ***REMOVED***
+        }
         $("#bannerSectoresGasto").html(str_cad)
-***REMOVED***
+    }
     
 
-***REMOVED***
+}
 
 
 function formatMoney(number, c, d, t) {
@@ -325,15 +325,15 @@ function formatMoney(number, c, d, t) {
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-***REMOVED***
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+}
 
 $("#anioPresupuesto").on("change", function (event) {
     anyo_actual = this.value;
     loadFuentesporAnnios();
 
     
-***REMOVED***);
+});
 
 function loadFuentesporAnnios() {
         if (fuentesporAnnios.length > 0) {
@@ -348,16 +348,16 @@ function loadFuentesporAnnios() {
                 valor_aux += parseFloat(fuentesporAnnios[i].ValorVigente);
                 if (flagprimero == 0) {
                     tabfuentes += ' <li id="' + annio_aux + '-' + fuentesporAnnios[i].CodigoFuente + '" class="enlace_nivel_administracion active">';
-            ***REMOVED***
+                }
                 else { 
                     tabfuentes += ' <li id="' + annio_aux + '-' + fuentesporAnnios[i].CodigoFuente + '" class="enlace_nivel_administracion">';
-            ***REMOVED***
+                }
                 tabfuentes += '<div class="goal-number"></div>';
                 tabfuentes += '<div class="goal-name"><div class="h4">' + fuentesporAnnios[i].Fuente + '</div></div>';
                 tabfuentes += '</li >';
                 flagprimero++;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         tabfuentes += ' </ul>';
         $("#tabsfuentes").html(tabfuentes);
         cargardatosorganismos(fuentesporAnnios[0].CodigoFuente);
@@ -370,21 +370,21 @@ function loadFuentesporAnnios() {
         $('.enlace_nivel_administracion').on('click', function () {
             $('.enlace_nivel_administracion').each(function (i, obj) {
                 $(obj).removeClass("active");
-        ***REMOVED***);
+            });
             $(this).addClass("active");
             var id = this.id;
             var cod = id.split("-");
             cargardatosorganismos(cod[1]);
-    ***REMOVED***);
-***REMOVED***
+        });
+    }
    
-***REMOVED***
+}
 
 function getGraphDonaFuentesPerAnyo(anyo) {
     $("#divGraphDonaPerFuentes").empty();
     var filter_obj = $(fuentesporAnnios).filter(function () {
         return this.Anio === parseInt(anyo);
-***REMOVED***);
+    });
 
     if (filter_obj != null) {
         const width = 600;
@@ -431,16 +431,16 @@ function getGraphDonaFuentesPerAnyo(anyo) {
 
 
 
-***REMOVED***
+    }
 
-***REMOVED***
+}
 
 function cargardatosorganismos(idfuente) {
     var annio_aux = $("#anioPresupuesto").val();
     var filtros = {
         Annio: annio_aux,
         idfuente: idfuente
-***REMOVED***;
+    };
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -455,7 +455,7 @@ function cargardatosorganismos(idfuente) {
                     $("#numorganismos").html(result.consolidadoOrganismoFinanciador.totalFinanciadores);
                     $("#numproyectos").html(result.consolidadoOrganismoFinanciador.totalProyectosFinanciados);
                     $("#numaportado").html('$ ' + formatMoney(result.consolidadoOrganismoFinanciador.totalAportado, 0, ".", ",").toString() + ' Millones');
-            ***REMOVED***
+                }
 
                 var htmldivorganismos = '';
                 var numeroorganismosmostrar = 3;
@@ -488,25 +488,25 @@ function cargardatosorganismos(idfuente) {
                             htmldivorganismos += '        </div>';
                             htmldivorganismos += '        </div>';
                             htmldivorganismos += '    </div>';
-                    ***REMOVED***
-                ***REMOVED***
+                        }
+                    }
 
 
                     $("#divorganismos").html(htmldivorganismos);
-            ***REMOVED***
+                }
 
-        ***REMOVED*** else {
+            } else {
                 bootbox.alert("Error: " + result.Message, function () {
 
-            ***REMOVED***);
-        ***REMOVED***
+                });
+            }
 
-      ***REMOVED***
+        },
         error: function (response) {
             bootbox.alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             bootbox.alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
-***REMOVED***
+        }
+    });
+}

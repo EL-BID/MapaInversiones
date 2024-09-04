@@ -39,7 +39,7 @@
 			this.isotopeGalleryMasonry();
 			this.spincrement();
 
-		***REMOVED***,
+		},
  
 		setUpListeners: function() {
 
@@ -106,14 +106,14 @@
 			$(document).on("click", '.btn-top', this.btnTop);
 			$(window).on("scroll", this.btnTopScroll);
 			
-		***REMOVED***,
+		},
 
 		//=== Body visible ===\\
 		mainVisible: function() {
 
 			$(".main").addClass("main-visible");
 
-		***REMOVED***,
+		},
 
 		//=== Cookie ===\\
 		COOKIENAME: 'enresultados-cookie',
@@ -126,48 +126,48 @@
 			if(!this.getCookie(this.COOKIENAME)) {
 				setTimeout(function() {
 					cookieMessage.addClass("open");
-				***REMOVED***, this.COOKIEDURATION);
-			***REMOVED***
+				}, this.COOKIEDURATION);
+			}
 
-		***REMOVED***,
+		},
 		cookieSet: function() {
 
 			app.setCookie(app.COOKIENAME, 'enabled', app.COOKIEEXDAYS);
 			$(this).closest(".cookie-message").removeClass('open');
 
-		***REMOVED***,
+		},
 		setCookie: function(cname, cvalue, exdays) {
 			var d = new Date();
 			d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
 			var expires = "expires=" + d.toUTCString();
 			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-		***REMOVED***,
+		},
 		getCookie: function(name) {
 			var matches = document.cookie.match(new RegExp(
-				"(?:^|; )" + name.replace(/([\.$?*|{***REMOVED***\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+				"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
 			));
 			return matches ? decodeURIComponent(matches[1]) : undefined;
-		***REMOVED***,
+		},
 
 		appendMfBg: function() {
 
 			$("body").append('<div class="mf-bg"></div>');
 
-		***REMOVED***,
+		},
 
 		appendBtnTop: function() {
 
 			$("body").append('<div class="btn-top"><i class="material-icons md-24">arrow_upward</i></div>');
 
-		***REMOVED***,
+		},
 
 		btnTop: function() {
 			
-			$('html, body').animate({scrollTop: 0***REMOVED***,1000, function() {
+			$('html, body').animate({scrollTop: 0},1000, function() {
 				$(this).removeClass("active");
-			***REMOVED***);
+			});
 
-		***REMOVED***,
+		},
 
 		btnTopScroll: function() {
 			
@@ -177,13 +177,13 @@
 
 				btnTop.addClass("active");
 
-			***REMOVED*** else {
+			} else {
 
 				btnTop.removeClass("active");
 				
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		ui: function() {
 
@@ -208,18 +208,18 @@
 						marginTop: $(".header-fixed").outerHeight() + 20,
 						zIndex: 2,
 						limit: $(".footer").offset().top - nav.outerHeight() - 40,
-						preAbsolute: function() { $(this).css({"opacity": 0, "visability": "hidden"***REMOVED***); ***REMOVED***,
-						postUnfixed: function() { $(this).css({"opacity": 1, "visability": "visible"***REMOVED***); ***REMOVED***,
-						postAbsolute: function() { $(this).css({"opacity": 1, "visability": "visible"***REMOVED***); ***REMOVED***,
-					***REMOVED***);
+						preAbsolute: function() { $(this).css({"opacity": 0, "visability": "hidden"}); },
+						postUnfixed: function() { $(this).css({"opacity": 1, "visability": "visible"}); },
+						postAbsolute: function() { $(this).css({"opacity": 1, "visability": "visible"}); },
+					});
 
 				if ($(document).scrollTop() > 0) {
-					$("html, body").animate({ scrollTop: 0 ***REMOVED***, 500);
-				***REMOVED***
+					$("html, body").animate({ scrollTop: 0 }, 500);
+				}
 			
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		//=== Tab ===\\
 		tab: function() {
@@ -239,9 +239,9 @@
 					.siblings()
 					.removeClass("active");
 			
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		//=== Accordion ===\\
 		accordion: function(e) {
@@ -261,40 +261,40 @@
 				item.addClass("active");
 				otherContents.stop(true, true).slideUp(duration);
 				content.stop(true, true).slideDown(duration);
-			***REMOVED*** else {
+			} else {
 				content.stop(true, true).slideUp(duration);
 				item.removeClass("active");
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		//=== Header search ===\\
 		headerSearchOpen: function() {
 
 			$(this).closest(".header-search").addClass("open");
 
-		***REMOVED***,
+		},
 		headerSearchClose: function() {
 
 			$(this).closest(".header-search").removeClass("open");
 
-		***REMOVED***,
+		},
 		headerSearchCloseNotEl: function(e) {
 
 			if($(".header-search").hasClass("open")) {
 				if ($(e.originalEvent.target).closest(".header-search").length) return;
 				$(".header-search").removeClass("open");
 				e.originalEvent.stopPropagation();
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 		
 		//=== Header lang ===\\
 		headerLangOpen: function() {
 
 			$(this).parent().toggleClass("open");
 
-		***REMOVED***,
+		},
 		headerLangSelect: function() {
 
 			var _this = $(this),
@@ -306,16 +306,16 @@
 			current.children().text(lang);
 			current.attr("data-title", lang);
 
-		***REMOVED***,
+		},
 		headerLangCloseNotEl: function(e) {
 			
 			if($(".header-lang").hasClass("open")) {
 				if ($(e.originalEvent.target).closest(".header-lang").length) return;
 				$(".header-lang").removeClass("open");
 				e.originalEvent.stopPropagation();
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		//=== Mobile/tablet main menu ===\\
 		MainMenuToggle: function() {
@@ -333,11 +333,11 @@
 				
 			if(_body.hasClass("mob-main-mnu-open")) {
 				$(".mf-bg").addClass("visible mm");
-			***REMOVED*** else {
+			} else {
 				$(".mf-bg").removeClass("visible mm");
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 		MainMenuSubmenuToggle: function() {
 
 			var _this = $(this),
@@ -347,7 +347,7 @@
 			item.toggleClass("open");
 			content.slideToggle();
 
-		***REMOVED***,
+		},
 		MainMenuCloseNotEl: function(e) {
 
 			if($("body").hasClass("mob-main-mnu-open")) {
@@ -356,23 +356,23 @@
 				$(".main-mnu-btn").removeClass("active");
 				$(".mf-bg").removeClass("visible mm");
 				e.originalEvent.stopPropagation();
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		//=== Header mobile/tablet navbar ===\\
 		headerNavbarToggle: function() {
 
 			$(this).parent().toggleClass("open");
 
-		***REMOVED***,
+		},
 		headerNavbarNotEl: function(e) {
 
 			if ($(e.originalEvent.target).closest(".header-navbar").length) return;
 			$(".header-navbar").removeClass("open");
 			e.originalEvent.stopPropagation();
 
-		***REMOVED***,
+		},
 
 		//=== Side toggle ===\\
 		sideOpen: function(e) {
@@ -386,17 +386,17 @@
 				side.toggleClass("open");
 				if(!e.currentTarget.classList.contains("panel-settings-btn")) {
 					$(".mf-bg").toggleClass("visible side-visible");
-				***REMOVED***
+				}
 
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 		sideClose: function() {
 
 			$(".side, .sidebar-filters").removeClass("open");
 			$(".mf-bg").removeClass("visible side-visible");
 
-		***REMOVED***,
+		},
 
 		//=== Form input ===\\
 		inputEach: function() {
@@ -406,11 +406,11 @@
 
 			if (val === "") {
 				_this.removeClass("focus");
-			***REMOVED*** else {
+			} else {
 				_this.addClass("focus");
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 		inputFocus: function() {
 
 			var _this = $(this),
@@ -418,7 +418,7 @@
 
 			wrappInput.addClass("focus");
 
-		***REMOVED***,
+		},
 		inputKeyup: function() {
 
 			var _this = $(this),
@@ -427,11 +427,11 @@
 
 			if (val === "" && !_this.is(":focus")) {
 				wrappInput.removeClass("focus");
-			***REMOVED*** else {
+			} else {
 				wrappInput.addClass("focus");
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 		inputBlur: function() {
 
 			var _this = $(this),
@@ -440,9 +440,9 @@
 
 			if(val === "") {
 				wrappInput.removeClass("focus"); 
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		//=== Ripple effect for buttons ===\\
 		btnRipple: function(e) {
@@ -457,14 +457,14 @@
 				.css({
 					left: positionX,
 					top: positionY
-				***REMOVED***)
+				})
 				.animate({
 					opacity: 0
-				***REMOVED***, 1500, function() {
+				}, 1500, function() {
 					$(this).remove();
-				***REMOVED***);
+				});
 
-		***REMOVED***,
+		},
 
 		btnHover: function() {
 
@@ -483,13 +483,13 @@
 
 				element.addEventListener("mouseenter", function(e) {	
 					btnHandler(element, index, e);			
-				***REMOVED***);
+				});
 
 				element.addEventListener("mouseleave", function(e) {
 					btnHandler(element, index, e);
-				***REMOVED***);
+				});
 				
-			***REMOVED***);
+			});
 
 			const btnHandler = function(element, index, e) {
 
@@ -500,9 +500,9 @@
 				btn[index].style.left = left + "px";
 				btn[index].style.top = top + "px";
 
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		//=== Forming href for phone ===\\
 		formingHrefTel: function() {
@@ -519,23 +519,23 @@
 					var thisNunb = app.isNumber(arrayString[i]);
 					if (thisNunb === true || (arrayString[i] === "+" && i === 0)) {
 						joinNumbToStringTel += arrayString[i];
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				_this.attr("href", function () {
 					return joinNumbToStringTel;
-				***REMOVED***);
+				});
 				joinNumbToStringTel = 'tel:'
 
-			***REMOVED***);
+			});
 
-		***REMOVED***,
+		},
 
 		isNumber: function(n) {
 
 			return !isNaN(parseFloat(n)) && isFinite(n);
 
-		***REMOVED***,
+		},
 
 		//=== Sidebar category item ===\\
 		sidebarCatItemToggle: function(e) {
@@ -548,7 +548,7 @@
 			item.toggleClass("open");
 			ul.slideToggle();
 
-		***REMOVED***,
+		},
 		
 		//=== Content table responsive ===\\
 		contentTable: function() {
@@ -558,20 +558,20 @@
 				
 				$.each(contentTable.find("table"), function() {
 					$(this).wrap("<div class='table-responsive-outer'></div>").wrap("<div class='table-responsive'></div>");
-				***REMOVED***);
+				});
 				
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		//=== Clock count down ===\\
 		clockCountDown: function() {
 
 			if($("#countdown").length) {
 				this.clock("countdown", $("#countdown").attr("data-dedline"));
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 		getTimeRemaining: function(endtime) {
 
 			var t = Date.parse(endtime) - Date.parse(new Date()),
@@ -586,9 +586,9 @@
 				hours: hours,
 				minutes: minutes,
 				seconds: seconds
-			***REMOVED***;
+			};
 
-		***REMOVED***,
+		},
 		clock: function(id, endtime) {
 
 			var clock = document.getElementById(id),
@@ -605,18 +605,18 @@
 					document.getElementById("deadline-message").classList.add("visible");
 					clearInterval(timeinterval);
 					return true;
-				***REMOVED***
+				}
 
 				daysSpan.innerHTML = t.days;
 				hoursSpan.innerHTML = ("0" + t.hours).slice(-2);
 				minutesSpan.innerHTML = ("0" + t.minutes).slice(-2);
 				secondsSpan.innerHTML = ("0" + t.seconds).slice(-2);
-			***REMOVED***
+			}
 
 			updateClock();
 			var timeinterval = setInterval(updateClock, 1000);
 
-		***REMOVED***,
+		},
 
 		//=== Custom alert ===\\
 		customAlert: function(text, duration, alertInfo) {
@@ -628,22 +628,22 @@
 			
 			if (!alerts.length) {
 				body.append('<div class="alerts"></div>');
-			***REMOVED***
+			}
 			$(".alert").remove();
 
 			if (alertInfo === "success") {
 				alertClass = "alert-success";
 				alertIco = "check";
-			***REMOVED*** else if (alertInfo === "danger") {
+			} else if (alertInfo === "danger") {
 				alertClass = "alert-danger";
 				alertIco = "error";
-			***REMOVED*** else if (alertInfo === "warning") {
+			} else if (alertInfo === "warning") {
 				alertClass = "alert-warning";
 				alertIco = "warning";
-			***REMOVED*** else if (alertInfo == "default") {
+			} else if (alertInfo == "default") {
 				alertClass = "alert-default";
 				alertIco = "info";
-			***REMOVED***
+			}
 
 			if (!$("." + alertClass + "").length) {
 				$(".alerts").append(
@@ -660,16 +660,16 @@
 
 				setTimeout(function() {
 					$("." + alertClass + "").remove();
-				***REMOVED***, duration);
-			***REMOVED***
+				}, duration);
+			}
 
 			$(document).on("click", ".alert-close", function() {
 				$(this)
 				.closest(".alert")
 				.remove();
-			***REMOVED***);
+			});
 
-		***REMOVED***,
+		},
 
 		//=== Plugins ===\\
 
@@ -678,13 +678,13 @@
 			var observer = lozad('.lazy');
 			observer.observe();
 
-		***REMOVED***,
+		},
 
 		autoSizeTextarea: function() {
 
 			autosize(document.querySelectorAll('textarea'));
 
-		***REMOVED***,
+		},
 
 		device: function() {
 
@@ -693,9 +693,9 @@
 				$('main, .main-inner').css('cursor', 'pointer')
 						 .css('-webkit-tap-highlight-color', 'rgba(0, 0, 0, 0)');
 				$('a').css('-webkit-tap-highlight-color', tempCSS);
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		popUp: function() {
 
@@ -703,45 +703,45 @@
 				transition: 'all 0.4s',
 				color: '#000000',
 				opacity: 0.8
-			***REMOVED***);
+			});
 			$('.popup_autoopen').popup({
 				transition: 'all 0.4s',
 				color: '#000000',
 				autoopen: true,
 				opacity: 0.8
-			***REMOVED***);
+			});
 
-		***REMOVED***,
+		},
 
 		lightGallery: function() {
 
 			$(".gallery-container").lightGallery({
 				selector: '.gallery-item'
-			***REMOVED***);
+			});
 
-		***REMOVED***,
+		},
 
 		scrollToFixed: function() {
 
 			if($('.header-fixed').length) {
 
 				$('.header-fixed').scrollToFixed({
-					preFixed: function() { $(this).addClass("fixed"); ***REMOVED***,
-					postFixed: function() { $(this).removeClass("fixed"); ***REMOVED***
-				***REMOVED***);
+					preFixed: function() { $(this).addClass("fixed"); },
+					postFixed: function() { $(this).removeClass("fixed"); }
+				});
 	
 				$('#ui-nav').scrollToFixed({
 					marginTop: $('.header-fixed').outerHeight() + 20,
 					zIndex: 2,
 					limit: $('.footer').offset().top - $('#ui-nav').outerHeight() - 40,
-					preAbsolute: function() { $(this).css({"opacity": 0, "visability": "hidden"***REMOVED***); ***REMOVED***,
-					postUnfixed: function() { $(this).css({"opacity": 1, "visability": "visible"***REMOVED***); ***REMOVED***,
-					postAbsolute: function() { $(this).css({"opacity": 1, "visability": "visible"***REMOVED***); ***REMOVED***,
-				***REMOVED***);
+					preAbsolute: function() { $(this).css({"opacity": 0, "visability": "hidden"}); },
+					postUnfixed: function() { $(this).css({"opacity": 1, "visability": "visible"}); },
+					postAbsolute: function() { $(this).css({"opacity": 1, "visability": "visible"}); },
+				});
 
-			***REMOVED***
+			}
 			
-		***REMOVED***,
+		},
 
 		carusels: function() {
 			
@@ -753,14 +753,14 @@
 				adaptiveHeight: true,
 				fade: true,
 				prevNextButtons: false
-			***REMOVED***);
+			});
 
 			$('.reviews-thumb-item').on('click', function() {
 				var _this = $(this),
 					index = _this.index();
 				reviewsCaruselTh.flickity( 'select', index );
 				_this.addClass("active").siblings().removeClass("active");
-			***REMOVED***);
+			});
 
 
 			$('.project-carusel-main').flickity({
@@ -768,7 +768,7 @@
 				imagesLoaded: true,
 				lazyLoad: 1,
 				prevNextButtons: true
-			***REMOVED***);
+			});
 			$('.project-carusel-thumb').flickity({
 				asNavFor: '.project-carusel-main',
 				imagesLoaded: true,
@@ -776,9 +776,9 @@
 				prevNextButtons: true,
 				contain: true,
 				pageDots: false
-			***REMOVED***);
+			});
 
-		***REMOVED***,
+		},
 
 		forms: function() {
 
@@ -786,7 +786,7 @@
 
 			$.validator.addMethod("customemail", function (value, element) {
 				return /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value);
-			***REMOVED***,
+			},
 				"The email is not a valid email."
 			);
 			
@@ -795,19 +795,19 @@
 					NameCallBack: {
 					required: true,
 					minlength: 2
-					***REMOVED***,
+					},
 					PhoneCallBack: {
 					required: true
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				messages: {
 					NameCallBack: {
 					required: "The name field is required.",
-					***REMOVED***,
+					},
 					PhoneCallBack: {
 					required: "The phone field is required.",
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				submitHandler: function(form) {
 					var th = $(form),
 						popup = th.closest(".popup_style"),
@@ -818,7 +818,7 @@
 						type: "POST",
 						url: ajaxurl,
 						data: th.serialize()
-					***REMOVED***).done(function() {
+					}).done(function() {
 
 						//customAlert(text, duration, alertInfo) info = "success" || "danger" || "warning" || "default"
 						app.customAlert("Successfully sent!", 4000, "success");
@@ -826,11 +826,11 @@
 						setTimeout(function() {
 							th.trigger("reset");
 							$(".form-field").removeClass("focus");
-						***REMOVED***, 1000);
-					***REMOVED***);
+						}, 1000);
+					});
 
-				***REMOVED***
-			***REMOVED***);
+				}
+			});
 			
 
 			$(".contact-form").validate({
@@ -838,29 +838,29 @@
 					ContactName: {
 					required: true,
 					minlength: 2
-					***REMOVED***,
+					},
 					ContactPhone: {
 					required: true
-					***REMOVED***,
+					},
 					ContactEmail: {
 						required: true,
 						email: true,
 						customemail: true
-					***REMOVED***,
-				***REMOVED***,
+					},
+				},
 				messages: {
 					ContactName: {
 					required: "The name field is required.",
-					***REMOVED***,
+					},
 					ContactPhone: {
 					required: "The phone field is required.",
-					***REMOVED***,
+					},
 					ContactEmail: {
 						required: "The email field is required.",
 						email: "The email field is required.",
 						customemail: "The email is not a valid email."
-					***REMOVED***,
-				***REMOVED***,
+					},
+				},
 				submitHandler: function(form) {
 					var th = $(form);
 
@@ -868,7 +868,7 @@
 						type: "POST",
 						url: ajaxurl,
 						data: th.serialize()
-					***REMOVED***).done(function() {
+					}).done(function() {
 
 						//customAlert(text, duration, alertInfo) info = "success" || "danger" || "warning" || "default"
 						app.customAlert("Successfully sent!", 4000, "success");
@@ -876,11 +876,11 @@
 						setTimeout(function() {
 							th.trigger("reset");
 							$(".form-field").removeClass("focus");
-						***REMOVED***, 1000);
-					***REMOVED***);
+						}, 1000);
+					});
 
-				***REMOVED***
-			***REMOVED***);
+				}
+			});
 			
 			$(".footer-subscribe").validate({
 				rules: {
@@ -888,15 +888,15 @@
 						required: true,
 						email: true,
 						customemail: true
-					***REMOVED***,
-				***REMOVED***,
+					},
+				},
 				messages: {
 					ContactEmail: {
 						required: "The email field is required.",
 						email: "The email field is required.",
 						customemail: "The email is not a valid email."
-					***REMOVED***,
-				***REMOVED***,
+					},
+				},
 				submitHandler: function(form) {
 					var th = $(form);
 			
@@ -906,29 +906,29 @@
 					setTimeout(function() {
 						th.trigger("reset");
 						$(".form-field").removeClass("focus");
-					***REMOVED***, 1000);
+					}, 1000);
 		
-				***REMOVED***
-			***REMOVED***);
+				}
+			});
 
 			$(".login-form").validate({
 				rules: {
 					LoginName: {
 						required: true
-					***REMOVED***,
+					},
 					loginPassword: {
 						required: true,
 						minlength : 6
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				messages: {
 					LoginName: {
 						required: "The login field is required.",
-					***REMOVED***,
+					},
 					loginPassword: {
 						required: "The password field is required.",
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				submitHandler: function(form) {
 					var th = $(form);
 			
@@ -938,29 +938,29 @@
 					setTimeout(function() {
 						th.trigger("reset");
 						$(".form-field").removeClass("focus");
-					***REMOVED***, 1000);
+					}, 1000);
 		
-				***REMOVED***
-			***REMOVED***);
+				}
+			});
 
 			$(".order-form").validate({
 				rules: {
 					orderName: {
 					required: true,
 					minlength: 2
-					***REMOVED***,
+					},
 					orderPhone: {
 					required: true
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				messages: {
 					orderName: {
 					required: "The name field is required.",
-					***REMOVED***,
+					},
 					orderPhone: {
 					required: "The phone field is required.",
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				submitHandler: function(form) {
 					var th = $(form);
 
@@ -968,7 +968,7 @@
 						type: "POST",
 						url: ajaxurl,
 						data: th.serialize()
-					***REMOVED***).done(function() {
+					}).done(function() {
 						
 						//customAlert(text, duration, alertInfo) info = "success" || "danger" || "warning" || "default"
 						app.customAlert("Successfully sent!", 4000, "success");
@@ -976,11 +976,11 @@
 						setTimeout(function() {
 							th.trigger("reset");
 							$(".form-field").removeClass("focus");
-						***REMOVED***, 1000);
-					***REMOVED***);
+						}, 1000);
+					});
 
-				***REMOVED***
-			***REMOVED***);
+				}
+			});
 
 			$(".subscribe-bg-form").validate({
 				rules: {
@@ -988,15 +988,15 @@
 						required: true,
 						email: true,
 						customemail: true
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				messages: {
 					subscribeBgEmail: {
 						required: "The email field is required.",
 						email: "The email field is required.",
 						customemail: "The email is not a valid email."
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				submitHandler: function(form) {
 					var th = $(form);
 
@@ -1006,9 +1006,9 @@
 					setTimeout(function() {
 						th.trigger("reset");
 						$(".form-field").removeClass("focus");
-					***REMOVED***, 1000);
-				***REMOVED***
-			***REMOVED***);
+					}, 1000);
+				}
+			});
 
 			$(".mailchimp-form").validate({
 				rules: {
@@ -1016,15 +1016,15 @@
 						required: true,
 						email: true,
 						customemail: true
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				messages: {
 					mailchimpEmail: {
 						required: "The email field is required.",
 						email: "The email field is required.",
 						customemail: "The email is not a valid email."
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				submitHandler: function(form) {
 					var th = $(form);
 
@@ -1034,9 +1034,9 @@
 					setTimeout(function() {
 						th.trigger("reset");
 						$(".form-field").removeClass("focus");
-					***REMOVED***, 1000);
-				***REMOVED***
-			***REMOVED***);
+					}, 1000);
+				}
+			});
 
 			$(".cm-form").validate({
 				rules: {
@@ -1044,15 +1044,15 @@
 						required: true,
 						email: true,
 						customemail: true
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				messages: {
 					cmEmail: {
 						required: "The email field is required.",
 						email: "The email field is required.",
 						customemail: "The email is not a valid email."
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				submitHandler: function(form) {
 					var th = $(form);
 
@@ -1062,9 +1062,9 @@
 					setTimeout(function() {
 						th.trigger("reset");
 						$(".form-field").removeClass("focus");
-					***REMOVED***, 1000);
-				***REMOVED***
-			***REMOVED***);
+					}, 1000);
+				}
+			});
 
 			$(".comming-soon-form").validate({
 				rules: {
@@ -1072,15 +1072,15 @@
 						required: true,
 						email: true,
 						customemail: true
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				messages: {
 					commingSoonEmail: {
 						required: "The email field is required.",
 						email: "The email field is required.",
 						customemail: "The email is not a valid email."
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				submitHandler: function(form) {
 					var th = $(form);
 
@@ -1090,39 +1090,39 @@
 					setTimeout(function() {
 						th.trigger("reset");
 						$(".form-field").removeClass("focus");
-					***REMOVED***, 1000);
-				***REMOVED***
-			***REMOVED***);
+					}, 1000);
+				}
+			});
 
 			$(".comments-form").validate({
 				rules: {
 					CommentsName: {
 						required: true,
 						minlength: 2
-					***REMOVED***,
+					},
 					CommentsEmail: {
 						required: true,
 						email: true,
 						customemail: true
-					***REMOVED***,
+					},
 					CommentsMessage: {
 						required: true,
 						minlength: 15
-					***REMOVED***,
-				***REMOVED***,
+					},
+				},
 				messages: {
 					CommentsName: {
 						required: "The name field is required."
-					***REMOVED***,
+					},
 					CommentsEmail: {
 						required: "The email field is required.",
 						email: "The email field is required.",
 						customemail: "The email is not a valid email."
-					***REMOVED***,
+					},
 					CommentsMessage: {
 						required: "The message field is required."
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				submitHandler: function(form) {
 					var th = $(form);
 
@@ -1132,9 +1132,9 @@
 					setTimeout(function() {
 						th.trigger("reset");
 						$(".form-field").removeClass("focus");
-					***REMOVED***, 1000);
-				***REMOVED***
-			***REMOVED***);
+					}, 1000);
+				}
+			});
 
 			$(".subscribe-news-form").validate({
 				rules: {
@@ -1142,15 +1142,15 @@
 						required: true,
 						email: true,
 						customemail: true
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				messages: {
 					CommentsEmail: {
 						required: "The email field is required.",
 						email: "The email field is required.",
 						customemail: "The email is not a valid email."
-					***REMOVED***
-				***REMOVED***,
+					}
+				},
 				submitHandler: function(form) {
 					var th = $(form);
 
@@ -1160,11 +1160,11 @@
 					setTimeout(function() {
 						th.trigger("reset");
 						$(".form-field").removeClass("focus");
-					***REMOVED***, 1000);
-				***REMOVED***
-			***REMOVED***);
+					}, 1000);
+				}
+			});
 
-		***REMOVED***,
+		},
 
 		isotopeProjects: function() {
 
@@ -1172,7 +1172,7 @@
 
 			container.isotope({
 				itemSelector: '.project-col'
-			***REMOVED***);
+			});
 
 			$('.project-nav-list li').on('click', function() {
 				var _this = $(this),
@@ -1181,10 +1181,10 @@
 				_this.addClass("active").siblings().removeClass("active");
 				container.isotope({
 					filter: selector
-				***REMOVED***);
-			***REMOVED***);
+				});
+			});
 
-		***REMOVED***,
+		},
 
 		isotopeGallery: function() {
 
@@ -1192,7 +1192,7 @@
 
 			container.isotope({
 				itemSelector: '.gallery-col'
-			***REMOVED***);
+			});
 
 			$('.gallery-nav-list li').on('click', function() {
 				var _this = $(this),
@@ -1201,10 +1201,10 @@
 				_this.addClass("active").siblings().removeClass("active");
 				container.isotope({
 					filter: selector,
-				***REMOVED***);
-			***REMOVED***);
+				});
+			});
 
-		***REMOVED***,
+		},
 
 		isotopeGalleryMasonry: function() {
 
@@ -1215,8 +1215,8 @@
 				percentPosition: true,
 				masonry: {
 					columnWidth: '.gallery-col-sizer'
-				***REMOVED***
-			***REMOVED***);
+				}
+			});
 
 			$('.gallery-masonry-nav-list li').on('click', function() {
 				var _this = $(this),
@@ -1225,10 +1225,10 @@
 				_this.addClass("active").siblings().removeClass("active");
 				container.isotope({
 					filter: selector,
-				***REMOVED***);
-			***REMOVED***);
+				});
+			});
 
-		***REMOVED***,
+		},
 
 		spincrement: function() {
 
@@ -1248,13 +1248,13 @@
 						$('.spincrement').spincrement({
 							duration: 1500,
 							leeway: 10
-						***REMOVED***);
+						});
 					show = false;
-					***REMOVED***
-				***REMOVED***);
-			***REMOVED***
+					}
+				});
+			}
 
-		***REMOVED***,
+		},
 
 		//=== detect IE ===\\
 		detectIE: function() {
@@ -1264,9 +1264,9 @@
 					msg = 'Unfortunately, the browser Internet Explorer you use is outdated and cannot display the site normally. <br> Please open the site in another browser';
 				body.classList.add("overflow-hidden");
 				body.innerHTML = '<div class="ie-browser"><div class="ie-browser-tr"><div class="ie-browser-td">'+ msg +'</div></div></div>';
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 		detectIECheck: function() {
 
 			var ua = window.navigator.userAgent;
@@ -1275,25 +1275,25 @@
 			if (msie > 0) {
 				// IE 10 or older => return version number
 				return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
-			***REMOVED***
+			}
 			  
 			var trident = ua.indexOf('Trident/');
 			if (trident > 0) {
 				// IE 11 => return version number
 				var rv = ua.indexOf('rv:');
 				return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
-			***REMOVED***
+			}
 			  
 			// other browser
 			return false;
 
-		***REMOVED***
+		}
 		
-	***REMOVED***
+	}
  
 	app.init();
  
-***REMOVED***());
+}());
 
 function initMap() {
     var geocoder, map,
@@ -1309,16 +1309,16 @@ function initMap() {
             mapTypeControl: true,
             mapTypeControlOptions: {
                 style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
-          ***REMOVED***
-            styles: [ { "featureType": "water", "elementType": "geometry", "stylers": [ { "color": "#e9e9e9" ***REMOVED***, { "lightness": 17 ***REMOVED*** ] ***REMOVED***, { "featureType": "landscape", "elementType": "geometry", "stylers": [ { "color": "#f5f5f5" ***REMOVED***, { "lightness": 20 ***REMOVED*** ] ***REMOVED***, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [ { "color": "#ffffff" ***REMOVED***, { "lightness": 17 ***REMOVED*** ] ***REMOVED***, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [ { "color": "#ffffff" ***REMOVED***, { "lightness": 29 ***REMOVED***, { "weight": 0.2 ***REMOVED*** ] ***REMOVED***, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [ { "color": "#ffffff" ***REMOVED***, { "lightness": 18 ***REMOVED*** ] ***REMOVED***, { "featureType": "road.local", "elementType": "geometry", "stylers": [ { "color": "#ffffff" ***REMOVED***, { "lightness": 16 ***REMOVED*** ] ***REMOVED***, { "featureType": "poi", "elementType": "geometry", "stylers": [ { "color": "#f5f5f5" ***REMOVED***, { "lightness": 21 ***REMOVED*** ] ***REMOVED***, { "featureType": "poi.park", "elementType": "geometry", "stylers": [ { "color": "#dedede" ***REMOVED***, { "lightness": 21 ***REMOVED*** ] ***REMOVED***, { "elementType": "labels.text.stroke", "stylers": [ { "visibility": "on" ***REMOVED***, { "color": "#ffffff" ***REMOVED***, { "lightness": 16 ***REMOVED*** ] ***REMOVED***, { "elementType": "labels.text.fill", "stylers": [ { "saturation": 36 ***REMOVED***, { "color": "#333333" ***REMOVED***, { "lightness": 40 ***REMOVED*** ] ***REMOVED***, { "elementType": "labels.icon", "stylers": [ { "visibility": "off" ***REMOVED*** ] ***REMOVED***, { "featureType": "transit", "elementType": "geometry", "stylers": [ { "color": "#f2f2f2" ***REMOVED***, { "lightness": 19 ***REMOVED*** ] ***REMOVED***, { "featureType": "administrative", "elementType": "geometry.fill", "stylers": [ { "color": "#fefefe" ***REMOVED***, { "lightness": 20 ***REMOVED*** ] ***REMOVED***, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [ { "color": "#fefefe" ***REMOVED***, { "lightness": 17 ***REMOVED***, { "weight": 1.2 ***REMOVED*** ] ***REMOVED*** ],
+            },
+            styles: [ { "featureType": "water", "elementType": "geometry", "stylers": [ { "color": "#e9e9e9" }, { "lightness": 17 } ] }, { "featureType": "landscape", "elementType": "geometry", "stylers": [ { "color": "#f5f5f5" }, { "lightness": 20 } ] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [ { "color": "#ffffff" }, { "lightness": 17 } ] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [ { "color": "#ffffff" }, { "lightness": 29 }, { "weight": 0.2 } ] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [ { "color": "#ffffff" }, { "lightness": 18 } ] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [ { "color": "#ffffff" }, { "lightness": 16 } ] }, { "featureType": "poi", "elementType": "geometry", "stylers": [ { "color": "#f5f5f5" }, { "lightness": 21 } ] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [ { "color": "#dedede" }, { "lightness": 21 } ] }, { "elementType": "labels.text.stroke", "stylers": [ { "visibility": "on" }, { "color": "#ffffff" }, { "lightness": 16 } ] }, { "elementType": "labels.text.fill", "stylers": [ { "saturation": 36 }, { "color": "#333333" }, { "lightness": 40 } ] }, { "elementType": "labels.icon", "stylers": [ { "visibility": "off" } ] }, { "featureType": "transit", "elementType": "geometry", "stylers": [ { "color": "#f2f2f2" }, { "lightness": 19 } ] }, { "featureType": "administrative", "elementType": "geometry.fill", "stylers": [ { "color": "#fefefe" }, { "lightness": 20 } ] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [ { "color": "#fefefe" }, { "lightness": 17 }, { "weight": 1.2 } ] } ],
             navigationControl: true,
             mapTypeId: google.maps.MapTypeId.ROADMAP
-    ***REMOVED***;
+        };
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
         if (geocoder) {
             geocoder.geocode({
                 'address': address
-          ***REMOVED*** function(results, status) {
+            }, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
                         map.setCenter(results[0].geometry.location);
@@ -1326,7 +1326,7 @@ function initMap() {
                         var infowindow = new google.maps.InfoWindow({
                             content: '<b>' + address + '</b>',
                             size: new google.maps.Size(150, 50)
-                    ***REMOVED***);
+                        });
 
                         var marker = new google.maps.Marker({
                             position: results[0].geometry.location,
@@ -1335,21 +1335,21 @@ function initMap() {
                             icon: {
                               url: markerUrl,
                               scaledSize: new google.maps.Size(47, 71)
-                        ***REMOVED***
-                    ***REMOVED***);
+                            }
+                        });
                         google.maps.event.addListener(marker, 'click', function() {
                             infowindow.open(map, marker);
-                    ***REMOVED***);
+                        });
 
-                ***REMOVED*** else {
+                    } else {
                         console.log("+++");
-                ***REMOVED***
-            ***REMOVED*** else {
+                    }
+                } else {
                   console.log("Status: " + status);
                     
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
-***REMOVED***
+                }
+            });
+        }
+    }
     google.maps.event.addDomListener(window, 'load', initialize);
-***REMOVED***
+}

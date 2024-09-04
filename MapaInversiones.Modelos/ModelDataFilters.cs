@@ -15,12 +15,12 @@ namespace PlataformaTransparencia.Modelos
         /// <summary>
         /// Es la lista de los filtros utilizados.
         /// </summary>
-        public List<Filter> filters { get; set; ***REMOVED***
+        public List<Filter> filters { get; set; }
 
         public ModelDataFilters()
         {
             filters = new List<Filter>();
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

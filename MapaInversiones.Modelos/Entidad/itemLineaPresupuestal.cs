@@ -6,11 +6,11 @@ namespace PlataformaTransparencia.Modelos.Entidad
 {
     public class itemLineaPresupuestal
     {
-        public string nombre { get; set; ***REMOVED***
-        public decimal? aprobado { get; set; ***REMOVED***
-        public decimal? vigente { get; set; ***REMOVED***
-        public decimal ejecutado { get; set; ***REMOVED***
+        public string nombre { get; set; }
+        public decimal? aprobado { get; set; }
+        public decimal? vigente { get; set; }
+        public decimal ejecutado { get; set; }
 
-        public decimal porcentaje { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public decimal porcentaje { get; set; }
+    }
+}

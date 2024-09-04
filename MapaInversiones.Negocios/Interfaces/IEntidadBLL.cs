@@ -37,5 +37,5 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
         public List<ProcesosXEntidadData> GetProcesosPorAnio(int annio, string codEntidad);
 
-***REMOVED***
-***REMOVED***
+    }
+}

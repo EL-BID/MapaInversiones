@@ -10,10 +10,10 @@ define(['../utils/beta'], function() {
 		if( $(href).offset() ){
 			$root.animate({
 				scrollTop: $(href).offset().top - 63
-			***REMOVED***, 600, function () {
+			}, 600, function () {
 				window.location.hash = href
-			***REMOVED***)
-		***REMOVED***
+			})
+		}
 		return false
-	***REMOVED***)
-***REMOVED***)
+	})
+})

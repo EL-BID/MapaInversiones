@@ -14,7 +14,7 @@ namespace PlataformaTransparencia.Modelos.Proyectos
         public FiltroBusquedaProyecto()
         {
             this.InicializarValoresDefecto();
-    ***REMOVED***
+        }
 
         public FiltroBusquedaProyecto(int zoom, List<string> lstCodigosRegion, List<string> lstCodigosDptos, List<string> lstCodigosMunicipios, List<int> lstCodigosSector, List<int> lstCodigosEstado, List<int> lstCodigosOrgFinanciador, List<int> lstCodigosEntidadEjecutora, List<int> lstAños, string nombreProyecto, List<decimal> puntosTopLeft, List<decimal> puntosBottomRight, List<int> lstCodigoPrograma)
         {
@@ -33,10 +33,10 @@ namespace PlataformaTransparencia.Modelos.Proyectos
             {
                 this.fechasEjecucion = lstAños;
                 this.FechasPorDefecto = false;
-        ***REMOVED***
+            }
             this.ContieneNombreProyecto = nombreProyecto;
             this.CodigoPrograma = lstCodigoPrograma;
-    ***REMOVED***
+        }
 
         private void InicializarValoresDefecto()
         {
@@ -56,36 +56,36 @@ namespace PlataformaTransparencia.Modelos.Proyectos
             this.fechasEjecucion.AddRange(tiempo.FechasEjecucion);
             this.FechasPorDefecto = true;
             this.CodigoPrograma = new List<int>();
-    ***REMOVED***
+        }
 
         // Properties
-        public List<decimal> BottomRight { get; set; ***REMOVED***
+        public List<decimal> BottomRight { get; set; }
 
-        public List<string> CodigosDepartamentos { get; set; ***REMOVED***
+        public List<string> CodigosDepartamentos { get; set; }
 
-        public List<int> CodigosEstado { get; set; ***REMOVED***
+        public List<int> CodigosEstado { get; set; }
 
-        public List<string> CodigosMunicipios { get; set; ***REMOVED***
+        public List<string> CodigosMunicipios { get; set; }
 
-        public List<string> CodigosRegion { get; set; ***REMOVED***
+        public List<string> CodigosRegion { get; set; }
 
-        public List<int> CodigosSector { get; set; ***REMOVED***
+        public List<int> CodigosSector { get; set; }
 
-        public List<int> CodigosOrgFinanciador { get; set; ***REMOVED***
+        public List<int> CodigosOrgFinanciador { get; set; }
 
-        public List<int> CodigosEntidadEjecutora { get; set; ***REMOVED***
+        public List<int> CodigosEntidadEjecutora { get; set; }
 
-        public string ContieneNombreProyecto { get; set; ***REMOVED***
+        public string ContieneNombreProyecto { get; set; }
 
-        public List<int> fechasEjecucion { get; set; ***REMOVED***
+        public List<int> fechasEjecucion { get; set; }
 
-        public List<decimal> TopLeft { get; set; ***REMOVED***
+        public List<decimal> TopLeft { get; set; }
 
-        public int Zoom { get; set; ***REMOVED***
+        public int Zoom { get; set; }
 
-        public List<int> CodigoPrograma { get; set; ***REMOVED***
+        public List<int> CodigoPrograma { get; set; }
 
-***REMOVED***
+    }
 
 
-***REMOVED***
+}

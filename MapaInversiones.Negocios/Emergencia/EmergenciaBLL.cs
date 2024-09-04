@@ -29,7 +29,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
         {
             _connection = connection;
             _connection.CommandTimeout = 180;
-    ***REMOVED***
+        }
 
         public ModelHomeEmergencias ObtenerDatosModeloInicio(int tipoEmergencia)
         {
@@ -45,7 +45,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
             objReturn.Status = true;
             objReturn.TipoEmergencia = tipoEmergencia;
             return objReturn;
-    ***REMOVED***
+        }
 
         private ModelContratistaData ObtenerDatosContratosPorTipoEmergencia(int tipoEmergencia)
         {
@@ -53,21 +53,21 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
             var contratosByEntidad = (from consolidadoContrato in _connection.VwConsolidadoContratacionEmergencias
                                       where consolidadoContrato.Origen.HasValue && consolidadoContrato.Origen == tipoEmergencia
-                                      group consolidadoContrato by new { consolidadoContrato.Entidad ***REMOVED*** into g
+                                      group consolidadoContrato by new { consolidadoContrato.Entidad } into g
                                       select new
                                       {
                                           g.Key.Entidad,
                                           ValorContratos = g.Sum(x => x.ValorContratado),
                                           NumContratos = g.Sum(x => x.NroContratos)
-                                  ***REMOVED***).ToList();
+                                      }).ToList();
             if (contratosByEntidad.Count > 0)
             {
                 objReturn.numContratos = contratosByEntidad.Sum(x => x.NumContratos);
                 objReturn.valorContratos = contratosByEntidad.Sum(a => a.ValorContratos);
-        ***REMOVED***
+            }
             objReturn.listUnidadCompra = (from info in _connection.VwConsolidadoProcesosContratacionEmergencias
                                           where info.Origen.HasValue && info.Origen == tipoEmergencia && info.ValorProceso.HasValue
-                                          group info by new { info.Entidad, info.MonedaProceso ***REMOVED*** into g
+                                          group info by new { info.Entidad, info.MonedaProceso } into g
                                           select new UnidadCompras
                                           {
                                               Entidad = g.Key.Entidad,
@@ -77,7 +77,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                               NroContratos = 0,
                                               ValorProceso = g.Sum(x => (double?)x.ValorProceso),
                                               NroProcesos = g.Sum(x => x.NroProcesos)
-                                      ***REMOVED***).ToList();
+                                          }).ToList();
             if (objReturn.listUnidadCompra.Count > 0 && contratosByEntidad.Count > 0)
             {
                 for (int i = 0; i < objReturn.listUnidadCompra.Count; i++)
@@ -87,9 +87,9 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                     {
                         objReturn.listUnidadCompra[i].NroContratos = contratoEntidad.NumContratos;
                         objReturn.listUnidadCompra[i].ValorContratado = contratoEntidad.ValorContratos;
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
+                    }
+                }
+            }
             objReturn.listContratista = (from contratista in _connection.VwContratosPerfilContratistas
                                          where contratista.CodigoOrigenInformacion == tipoEmergencia && contratista.ValorTotalContratos.HasValue
                                          select new Modelos.Contratos.Contratista
@@ -101,7 +101,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                              NumContratos = contratista.NumContratos,
                                              NumProcesos = contratista.NumProcesos,
                                              OrigenInformacion = contratista.OrigenInformacion
-                                     ***REMOVED***
+                                         }
                                         ).ToList();
             if (_connection.GastoXProgramasEmergencias.Where(x => x.IdOrigen.HasValue && x.IdOrigen.Value == tipoEmergencia && x.VlrGasto.HasValue).Count() > 0)
                 objReturn.valorEjecutado = Convert.ToDecimal(_connection.GastoXProgramasEmergencias.Where(x => x.IdOrigen.HasValue && x.IdOrigen.Value == tipoEmergencia && x.VlrEjecutado.HasValue).Sum(x => x.VlrEjecutado.Value));
@@ -112,7 +112,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
             if (objReturn.listContratista.Count > 0) objReturn.listContratista = objReturn.listContratista.OrderByDescending(x => x.ValorTotalContratos).ToList();
             return objReturn;
-    ***REMOVED***
+        }
 
         private List<InfoRecursosEmergenciaPerObjeto> ObtenerRecursosPerContratosPorTipoEmergencia(int tipoEmergencia)
         {
@@ -121,20 +121,20 @@ namespace PlataformaTransparencia.Negocios.Emergencia
             var RecursosPerObjetoQuery = (from info in _connection.VwDetalleContratacionArticulosEmergencias
                                           where info.Origen == tipoEmergencia
                                           //where info.EstadoContrato.ToUpper().Equals("ACTIVO") || info.EstadoContrato.ToUpper().Equals("EN EDICIÓN")
-                                          group info by new { info.UnidadCompra, info.Objeto, info.DescripcionSubclase ***REMOVED*** into g
+                                          group info by new { info.UnidadCompra, info.Objeto, info.DescripcionSubclase } into g
                                           select new InfoRecursosEmergenciaPerObjeto
                                           {
                                               labelGroup = g.Key.UnidadCompra,
                                               label = g.Key.Objeto,
                                               label_inf = g.Key.DescripcionSubclase,
                                               rawValue = (decimal)g.Sum(z => z.MontoTotal)
-                                      ***REMOVED***).OrderBy(x => x.labelGroup).ThenBy(n => n.label_inf).ToList();
+                                          }).OrderBy(x => x.labelGroup).ThenBy(n => n.label_inf).ToList();
 
             objReturn = RecursosPerObjetoQuery;
             if (objReturn == null) objReturn = new List<InfoRecursosEmergenciaPerObjeto>();
             return objReturn;
 
-    ***REMOVED***
+        }
 
         private List<InfoRecursosEmergenciaPerObjeto> ObtenerRecursosPerProcesosPorTipoEmergencia(int tipoEmergencia)
         {
@@ -142,30 +142,30 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
             var RecursosPerObjetoQuery = (from info in _connection.VwDetalleProcesosArticulosEmergencias
                                           where info.Origen == tipoEmergencia
-                                          group info by new { info.UnidadCompra, info.ObjetoProceso, info.DescripcionSubclase ***REMOVED*** into g
+                                          group info by new { info.UnidadCompra, info.ObjetoProceso, info.DescripcionSubclase } into g
                                           select new InfoRecursosEmergenciaPerObjeto
                                           {
                                               labelGroup = g.Key.UnidadCompra,
                                               label = g.Key.ObjetoProceso,
                                               label_inf = g.Key.DescripcionSubclase,
                                               rawValue = g.Sum(z => z.PrecioTotalEstimado.Value)
-                                      ***REMOVED***).OrderBy(x => x.labelGroup).ThenBy(n => n.label_inf).ToList();
+                                          }).OrderBy(x => x.labelGroup).ThenBy(n => n.label_inf).ToList();
 
 
             var RecursosPerObjetoQuerysq = (from info in _connection.VwDetalleProcesosArticulosEmergencias
                                           where info.Origen == tipoEmergencia
-                                          group info by new { info.UnidadCompra, info.ObjetoProceso, info.DescripcionSubclase ***REMOVED*** into g
+                                          group info by new { info.UnidadCompra, info.ObjetoProceso, info.DescripcionSubclase } into g
                                           select new InfoRecursosEmergenciaPerObjeto
                                           {
                                               labelGroup = g.Key.UnidadCompra,
                                               label = g.Key.ObjetoProceso,
                                               label_inf = g.Key.DescripcionSubclase,
                                               rawValue = g.Sum(z => z.PrecioTotalEstimado.Value)
-                                      ***REMOVED***).OrderBy(x => x.labelGroup).ThenBy(n => n.label_inf);
+                                          }).OrderBy(x => x.labelGroup).ThenBy(n => n.label_inf);
             objReturn = RecursosPerObjetoQuery;
 
             return objReturn;
-    ***REMOVED***
+        }
 
 
 
@@ -193,7 +193,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
             objReturn.tipoEmergencia = tipoEmergencia;
             objReturn.nombreUnidadCompra = Entidad;
             return objReturn;
-    ***REMOVED***
+        }
 
 
         private List<TotalContrato> ObtenerEncabezadoContratosEmergencias(int? tipoEmergencia, string Entidad = null)
@@ -203,7 +203,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
             objreturn = (from info in _connection.VwConsolidadoContratacionEmergencias
                          where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrEmpty())
-                         group info by new { info.EstadoContrato, info.MonedaContrato ***REMOVED*** into g
+                         group info by new { info.EstadoContrato, info.MonedaContrato } into g
                          orderby g.Sum(x => x.ValorContratado)
                          orderby g.Sum(x => x.NroContratos)
                          select new TotalContrato
@@ -212,11 +212,11 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                              EstadoContrato = g.Key.EstadoContrato,
                              ValorContratado = g.Sum(x => x.ValorContratado),
                              NroContratos = g.Sum(x => x.NroContratos)
-                     ***REMOVED***).OrderBy(x => x.EstadoContrato).ToList();
+                         }).OrderBy(x => x.EstadoContrato).ToList();
 
             var RecursosPerObjetoQuery = (from info in _connection.VwConsolidadoContratacionEmergencias
                                           where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrEmpty())
-                                          group info by new { info.EstadoContrato, info.MonedaContrato ***REMOVED*** into g
+                                          group info by new { info.EstadoContrato, info.MonedaContrato } into g
                                           orderby g.Sum(x => x.ValorContratado)
                                           orderby g.Sum(x => x.NroContratos)
                                           select new TotalContrato
@@ -225,11 +225,11 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                               EstadoContrato = g.Key.EstadoContrato,
                                               ValorContratado = g.Sum(x => x.ValorContratado),
                                               NroContratos = g.Sum(x => x.NroContratos)
-                                      ***REMOVED***).OrderBy(x => x.EstadoContrato);
+                                          }).OrderBy(x => x.EstadoContrato);
 
             return objreturn;
 
-    ***REMOVED***
+        }
 
         private List<TotalProceso> ObtenerEncabezadoProcesosContratosEmergencias(out int? numProcesosCancelados, out decimal? valProcesosCancelados, int? tipoEmergencia, string Entidad = null)
         {
@@ -240,7 +240,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
             objreturn = (from info in _connection.VwConsolidadoProcesosContratacionEmergencias
                          where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrEmpty())
-                         group info by new { info.EstadoProceso, info.MonedaProceso, info.EstadoProcesoOrden ***REMOVED*** into g
+                         group info by new { info.EstadoProceso, info.MonedaProceso, info.EstadoProcesoOrden } into g
                          orderby g.Sum(x => x.ValorProceso)
                          orderby g.Sum(x => x.NroProcesos)
                          select new TotalProceso
@@ -249,7 +249,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                              EstadoProceso = g.Key.EstadoProceso,
                              ValorProceso = (double)g.Sum(x => x.ValorProceso),
                              NroProcesos = g.Sum(x => x.NroProcesos)
-                     ***REMOVED***
+                         }
                                           ).OrderBy(x => x.EstadoProceso).ToList();
 
 
@@ -267,7 +267,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
             return objreturn;
 
-    ***REMOVED***
+        }
 
         private List<ContratosEstado> ObtenerEstadosContratosEmergencias(int? tipoEmergencia)
         {
@@ -275,16 +275,16 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
             objreturn = (from info in _connection.VwConsolidadoContratacionEmergencias
                          where info.Origen == tipoEmergencia
-                         group info by new { info.EstadoContrato ***REMOVED*** into g
+                         group info by new { info.EstadoContrato } into g
                          select new ContratosEstado
                          {
                              Nombre = g.Key.EstadoContrato,
                              EstadoContrato = g.Key.EstadoContrato
-                     ***REMOVED***).ToList();
+                         }).ToList();
 
 
             return objreturn;
-    ***REMOVED***
+        }
 
         public ModelContratosData ObtenerInformacionContratosEmergeciasPorFiltros(ContratosFiltros filtros)
         {
@@ -294,10 +294,10 @@ namespace PlataformaTransparencia.Negocios.Emergencia
             string Estado = null;
             int? TipoEmergencia = null;
 
-            if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; ***REMOVED***
-            if (filtros.NombreEntidad != null && filtros.NombreEntidad.Trim() != "") { NombreEntidad = filtros.NombreEntidad; ***REMOVED***
-            if (filtros.Estado != null && filtros.Estado.Trim() != "") { Estado = filtros.Estado; ***REMOVED***
-            if (filtros.OrigenInformacion != null && filtros.OrigenInformacion.Trim() != "") { TipoEmergencia = int.Parse(filtros.OrigenInformacion); ***REMOVED***
+            if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; }
+            if (filtros.NombreEntidad != null && filtros.NombreEntidad.Trim() != "") { NombreEntidad = filtros.NombreEntidad; }
+            if (filtros.Estado != null && filtros.Estado.Trim() != "") { Estado = filtros.Estado; }
+            if (filtros.OrigenInformacion != null && filtros.OrigenInformacion.Trim() != "") { TipoEmergencia = int.Parse(filtros.OrigenInformacion); }
             try
             {
 
@@ -316,11 +316,11 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                                      orderby NUMBER descending
                                                      select NUMBER
                                ).First();
-        ***REMOVED***
+            }
             catch
             {
                 _objreturn.CantidadTotalRegistros = 0;
-        ***REMOVED***
+            }
 
 
 
@@ -368,11 +368,11 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
 
 
-                           ***REMOVED***
+                               }
                              ).Distinct().ToList();
 
             return _objreturn;
-    ***REMOVED***
+        }
 
         public List<string> ObtenerEntidadGestionContratosPorNombre(ContratosFiltros filtro)
         {
@@ -380,8 +380,8 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
             string NombreEntidad = null;
             int? OrigenInformacion = null;
-            if (filtro.NombreEntidad != null && filtro.NombreEntidad.Trim() != "") { NombreEntidad = filtro.NombreEntidad; ***REMOVED***
-            if (filtro.OrigenInformacion != null && filtro.OrigenInformacion.Trim() != "") { OrigenInformacion = int.Parse(filtro.OrigenInformacion); ***REMOVED***
+            if (filtro.NombreEntidad != null && filtro.NombreEntidad.Trim() != "") { NombreEntidad = filtro.NombreEntidad; }
+            if (filtro.OrigenInformacion != null && filtro.OrigenInformacion.Trim() != "") { OrigenInformacion = int.Parse(filtro.OrigenInformacion); }
             objreturn = (from cont in _connection.VwDetalleContratacionEmergencias
                          where
                           (cont.UnidadCompra.Contains(NombreEntidad) || NombreEntidad == null)
@@ -392,7 +392,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
 
             return objreturn;
-    ***REMOVED***
+        }
 
 
         public List<InfograficoFuentePrograma> ObtDistribucionPresupuestalEjecutadoPorTipoEmergencia(int tipoEmergencia)
@@ -414,7 +414,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                               CodigoCuentaObjeto = info.CodCcpCuenta,
                                               NombreCuentaObjeto = info.DesCcpCuenta,
                                               AvanceProgramaxObjeto = info.VlrEjecutado
-                                      ***REMOVED***).ToList();
+                                          }).ToList();
             InfograficoFuentePrograma objFuente = null;
             InfograficoOrganismo objOrganismo = null;
             InfoGraficoItemPrograma objItem = null;
@@ -459,15 +459,15 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
 
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -477,15 +477,15 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
+                                    }
+                                }
                                 objItem.Detalles.Add(objCapitulo);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objCapitulo.presupuesto += 0;
@@ -501,14 +501,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -518,16 +518,16 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
-                        ***REMOVED***
+                                    }
+                                }
+                            }
                             objOrganismo.Detalles.Add(objItem);
-                    ***REMOVED***
+                        }
                         else
                         {
                             objItem.presupuesto += 0;
@@ -549,14 +549,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -566,15 +566,15 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
+                                    }
+                                }
                                 objItem.Detalles.Add(objCapitulo);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objCapitulo.presupuesto += 0;
@@ -590,14 +590,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -608,17 +608,17 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
-                        ***REMOVED***
-                    ***REMOVED***
+                                    }
+                                }
+                            }
+                        }
                         objFuente.Detalles.Add(objOrganismo);
-                ***REMOVED***
+                    }
                     else
                     {
                         objOrganismo.presupuesto += 0;
@@ -646,14 +646,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -663,15 +663,15 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
+                                    }
+                                }
                                 objItem.Detalles.Add(objCapitulo);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objCapitulo.presupuesto += 0;
@@ -687,14 +687,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -704,16 +704,16 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
-                        ***REMOVED***
+                                    }
+                                }
+                            }
                             objOrganismo.Detalles.Add(objItem);
-                    ***REMOVED***
+                        }
                         else
                         {
                             objItem.presupuesto += 0;
@@ -736,14 +736,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -753,15 +753,15 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
+                                    }
+                                }
                                 objItem.Detalles.Add(objCapitulo);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objCapitulo.presupuesto += 0;
@@ -778,14 +778,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -795,18 +795,18 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
-                        ***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***
+                                    }
+                                }
+                            }
+                        }
+                    }
                     objReturn.Add(objFuente);
-            ***REMOVED***
+                }
                 else
                 {
                     objFuente.presupuesto += 0;
@@ -840,14 +840,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -857,15 +857,15 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
+                                    }
+                                }
                                 objItem.Detalles.Add(objCapitulo);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objCapitulo.presupuesto += 0;
@@ -881,14 +881,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -898,16 +898,16 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
-                        ***REMOVED***
+                                    }
+                                }
+                            }
                             objOrganismo.Detalles.Add(objItem);
-                    ***REMOVED***
+                        }
                         else
                         {
                             objItem.presupuesto += 0;
@@ -929,14 +929,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -946,15 +946,15 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
+                                    }
+                                }
                                 objItem.Detalles.Add(objCapitulo);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objCapitulo.presupuesto += 0;
@@ -970,14 +970,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -987,17 +987,17 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
-                        ***REMOVED***
-                    ***REMOVED***
+                                    }
+                                }
+                            }
+                        }
                         objFuente.Detalles.Add(objOrganismo);
-                ***REMOVED***
+                    }
                     else
                     {
                         objOrganismo.presupuesto += 0;
@@ -1025,14 +1025,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -1042,15 +1042,15 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
+                                    }
+                                }
                                 objItem.Detalles.Add(objCapitulo);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objCapitulo.presupuesto += 0;
@@ -1066,14 +1066,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -1083,16 +1083,16 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
-                        ***REMOVED***
+                                    }
+                                }
+                            }
                             objOrganismo.Detalles.Add(objItem);
-                    ***REMOVED***
+                        }
                         else
                         {
                             objItem.presupuesto += 0;
@@ -1114,14 +1114,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -1131,15 +1131,15 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                     {
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
+                                    }
+                                }
                                 objItem.Detalles.Add(objCapitulo);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objCapitulo.presupuesto += 0;
@@ -1156,14 +1156,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
+                                    }
                                     objCapitulo.Detalles.Add(objConcepto);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objConcepto.presupuesto += 0;
@@ -1174,19 +1174,19 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
                                         objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
                                         objConcepto.Detalles.Add(objGasto);
-                                ***REMOVED***
+                                    }
                                     else
                                     {
                                         objGasto.presupuesto += 0;
                                         objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                ***REMOVED***
-                            ***REMOVED***
-                        ***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
-            //***REMOVED***
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            //}
             ///ordena primer nivel
             var result = objReturn.OrderByDescending(x => x.avance).ToList();
             foreach (var item_entidad in result)
@@ -1200,11 +1200,11 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                     foreach (var item_gasto in item_actividad.Detalles)
                     {
                         item_gasto.Detalles = item_gasto.Detalles.OrderByDescending(x => x.avance).ToList();
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
+                    }
+                }
+            }
             return result;
-    ***REMOVED***
+        }
 
 
         /// <summary>
@@ -1219,14 +1219,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
             var ordenIni = new itemPrograma[]
                 {
-                  new itemPrograma{ orden=5, nombre ="QUÉDATE EN CASA", estado=true,externo=true, label_nombre="Programa de ayuda", label_valor="Total ayudas entregadas",label_beneficiarios="Beneficiarios",label_boton="Consultar estatus"***REMOVED***,
-                  new itemPrograma{ orden=2, nombre ="FASE", estado=true,externo=false, label_nombre="Fondo de Asistencia al Empleado",label_valor="Total ayudas entregadas",label_beneficiarios="Beneficiarios",label_boton="Ver distribución"***REMOVED***,
-                  new itemPrograma{ orden=3, nombre ="FASE TURISMO", estado=true,externo=false, label_nombre="",label_valor="Total ayudas entregadas",label_beneficiarios="Beneficiarios",label_boton="Ver distribución"***REMOVED***,
-                  new itemPrograma{ orden=1, nombre ="PATI", estado=true , externo=true,label_nombre="Programa de Asistencia al Trabajador Independiente",label_valor="Total ayudas entregadas",label_beneficiarios="Beneficiarios",label_boton="Consultar estatus"***REMOVED***,
-                  new itemPrograma{ orden=6, nombre ="INCENTIVOS", estado=false,externo=false, label_nombre="",label_valor="Valor total",label_beneficiarios="Beneficiarios",label_boton="Ver distribución"***REMOVED***,
-                  new itemPrograma{ orden=7, nombre ="OTROS GASTOS", estado=false , externo=false,label_nombre="",label_valor="Valor total",label_beneficiarios="",label_boton="Ver distribución"***REMOVED***,
-                  new itemPrograma{ orden=4, nombre ="QUEDATE EN CASA", estado=true, externo=true,label_nombre="Programa de ayuda", label_valor="Total ayudas entregadas",label_beneficiarios="Beneficiarios",label_boton="Consultar estatus"***REMOVED***,
-            ***REMOVED***;
+                  new itemPrograma{ orden=5, nombre ="QUÉDATE EN CASA", estado=true,externo=true, label_nombre="Programa de ayuda", label_valor="Total ayudas entregadas",label_beneficiarios="Beneficiarios",label_boton="Consultar estatus"},
+                  new itemPrograma{ orden=2, nombre ="FASE", estado=true,externo=false, label_nombre="Fondo de Asistencia al Empleado",label_valor="Total ayudas entregadas",label_beneficiarios="Beneficiarios",label_boton="Ver distribución"},
+                  new itemPrograma{ orden=3, nombre ="FASE TURISMO", estado=true,externo=false, label_nombre="",label_valor="Total ayudas entregadas",label_beneficiarios="Beneficiarios",label_boton="Ver distribución"},
+                  new itemPrograma{ orden=1, nombre ="PATI", estado=true , externo=true,label_nombre="Programa de Asistencia al Trabajador Independiente",label_valor="Total ayudas entregadas",label_beneficiarios="Beneficiarios",label_boton="Consultar estatus"},
+                  new itemPrograma{ orden=6, nombre ="INCENTIVOS", estado=false,externo=false, label_nombre="",label_valor="Valor total",label_beneficiarios="Beneficiarios",label_boton="Ver distribución"},
+                  new itemPrograma{ orden=7, nombre ="OTROS GASTOS", estado=false , externo=false,label_nombre="",label_valor="Valor total",label_beneficiarios="",label_boton="Ver distribución"},
+                  new itemPrograma{ orden=4, nombre ="QUEDATE EN CASA", estado=true, externo=true,label_nombre="Programa de ayuda", label_valor="Total ayudas entregadas",label_beneficiarios="Beneficiarios",label_boton="Consultar estatus"},
+                };
 
             //using (var DataModel = new TransparenciaDB())
             //{
@@ -1262,7 +1262,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                               NomItem = cifras.Origen,
                                               total_beneficiarios = cifras.NumeroBeneficarios.Value,
                                               total_valor = cifras.Valor.Value,
-                                      ***REMOVED***).ToList();
+                                          }).ToList();
 
             foreach (var fila in RecursosPerObjetoQuery)
             {
@@ -1276,14 +1276,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                     fila.label_valor = foundItem.label_valor;
                     fila.orden = foundItem.orden;
                     fila.externo = foundItem.externo;
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             objReturn_aux = RecursosPerObjetoQuery;
             objReturn_aux.Add(objContrato);
             objReturn = objReturn_aux.OrderBy(x => x.orden).ToList();
-            //***REMOVED***
+            //}
             return objReturn;
-    ***REMOVED***
+        }
 
 
         public ModelContratistaData ObtenerDatosProcesosCanceladosEmergencia(int tipoEmergencia, string Entidad = null)
@@ -1292,7 +1292,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
             objReturn.nombreUnidadCompra= Entidad;
             objReturn.tipoEmergencia = tipoEmergencia;
             return objReturn;
-    ***REMOVED***
+        }
 
 
         public ModelInformacionContratos ObtenerInformacionProcesosCanceladosEmergenciaPorFiltros(ContratosFiltros filtros)
@@ -1305,12 +1305,12 @@ namespace PlataformaTransparencia.Negocios.Emergencia
             int? Annio = null;
             int? TipoEmergencia = null;
 
-            if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; ***REMOVED***
-            if (filtros.NombreEntidad != null && filtros.NombreEntidad.Trim() != "") { NombreEntidad = filtros.NombreEntidad; ***REMOVED***
-            if (filtros.NombreContratista != null && filtros.NombreContratista.Trim() != "") { NombreContratista = filtros.NombreContratista; ***REMOVED***
-            if (filtros.CodigoProceso != null && filtros.CodigoProceso.Trim() != "") { CodigoProceso = filtros.CodigoProceso; ***REMOVED***
-            if (filtros.Annio != 0) { Annio = filtros.Annio; ***REMOVED***
-            if (filtros.OrigenInformacion != null && filtros.OrigenInformacion.Trim() != "") { TipoEmergencia = int.Parse(filtros.OrigenInformacion); ***REMOVED***
+            if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; }
+            if (filtros.NombreEntidad != null && filtros.NombreEntidad.Trim() != "") { NombreEntidad = filtros.NombreEntidad; }
+            if (filtros.NombreContratista != null && filtros.NombreContratista.Trim() != "") { NombreContratista = filtros.NombreContratista; }
+            if (filtros.CodigoProceso != null && filtros.CodigoProceso.Trim() != "") { CodigoProceso = filtros.CodigoProceso; }
+            if (filtros.Annio != 0) { Annio = filtros.Annio; }
+            if (filtros.OrigenInformacion != null && filtros.OrigenInformacion.Trim() != "") { TipoEmergencia = int.Parse(filtros.OrigenInformacion); }
 
 
             try
@@ -1326,11 +1326,11 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                                      orderby NUMBER descending
                                                      select NUMBER
                                ).First();
-        ***REMOVED***
+            }
             catch
             {
                 _objreturn.CantidadTotalRegistros = 0;
-        ***REMOVED***
+            }
 
 
 
@@ -1374,14 +1374,14 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                                    Url = cont.Url,
                                    MotivoCancelacion = cont.MotivoCancelacion,
                                    Origen = cont.Origen
-                           ***REMOVED***
+                               }
                              ).Distinct().ToList();
 
 
             return _objreturn;
-    ***REMOVED***
+        }
 
         
 
-***REMOVED***
-***REMOVED***
+    }
+}

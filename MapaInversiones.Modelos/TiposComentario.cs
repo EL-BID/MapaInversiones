@@ -6,7 +6,7 @@ namespace PlataformaTransparencia.Modelos
 {
     public class TiposComentario
     {
-        public string nameTC { get; set; ***REMOVED***
-        public int idTC { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string nameTC { get; set; }
+        public int idTC { get; set; }
+    }
+}

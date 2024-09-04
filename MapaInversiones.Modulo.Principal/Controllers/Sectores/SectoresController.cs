@@ -22,12 +22,12 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Sectores
             _connection = connection;
             _cargasector = cargasector;
 
-    ***REMOVED***
+        }
         public IActionResult PerfilSectores(string id)
         {
             ModelLocationData locationData = new ModelLocationData();
             locationData = _cargasector.ObtenerDatosLocalizacionSector(id);
             return View(locationData);
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

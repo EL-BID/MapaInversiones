@@ -21,7 +21,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         {
             _consultascomunes = Consultascomunes;
             BusquedasProyectosBLL = busquedasProyectosBLL;
-    ***REMOVED***
+        }
 
         [HttpGet("GetFiltros")]
         public async Task<object> GetFiltros()
@@ -29,7 +29,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             var horaInicio = DateTime.UtcNow;
             var geograficos = await _consultascomunes.ObtenerFiltrosGeograficosAsync();
             var proyectos = await BusquedasProyectosBLL.ObtenerFiltrosEspecificosParaProyectosAsync();
-            Debug.Print("API Filtros - Metodo ObtenerFiltrosEspecificosParaProyectos ejecutó en {0***REMOVED*** ms", (horaInicio - DateTime.UtcNow).Milliseconds);
+            Debug.Print("API Filtros - Metodo ObtenerFiltrosEspecificosParaProyectos ejecutó en {0} ms", (horaInicio - DateTime.UtcNow).Milliseconds);
             horaInicio = DateTime.Now;
             horaInicio = DateTime.Now;
 
@@ -42,9 +42,9 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 filters = filtros,
                 status = true,
                 message = default(string)
-        ***REMOVED***;
+            };
             return modeloRespuesta;
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

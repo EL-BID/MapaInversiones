@@ -6,7 +6,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
 {
     public class ModeloRespuestaCorreo : RespuestaContratoBase
     {
-        public string id_usuario { get; set; ***REMOVED***
+        public string id_usuario { get; set; }
 
-***REMOVED***
-***REMOVED***
+    }
+}

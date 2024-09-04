@@ -1,10 +1,10 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.topojson = {***REMOVED***)));
-***REMOVED***(this, function (exports) { 'use strict';
+  (factory((global.topojson = {})));
+}(this, function (exports) { 'use strict';
 
-  function noop() {***REMOVED***
+  function noop() {}
 
   function absolute(transform) {
     if (!transform) return noop;
@@ -18,8 +18,8 @@
       if (!i) x0 = y0 = 0;
       point[0] = (x0 += point[0]) * kx + dx;
       point[1] = (y0 += point[1]) * ky + dy;
-***REMOVED***;
-  ***REMOVED***
+    };
+  }
 
   function relative(transform) {
     if (!transform) return noop;
@@ -37,13 +37,13 @@
       point[1] = y1 - y0;
       x0 = x1;
       y0 = y1;
-***REMOVED***;
-  ***REMOVED***
+    };
+  }
 
   function reverse(array, n) {
     var t, j = array.length, i = j - n;
     while (i < --j) t = array[i], array[i++] = array[j], array[j] = t;
-  ***REMOVED***
+  }
 
   function bisect(a, x) {
     var lo = 0, hi = a.length;
@@ -51,27 +51,27 @@
       var mid = lo + hi >>> 1;
       if (a[mid] < x) lo = mid + 1;
       else hi = mid;
-***REMOVED***
+    }
     return lo;
-  ***REMOVED***
+  }
 
   function feature(topology, o) {
     return o.type === "GeometryCollection" ? {
       type: "FeatureCollection",
-      features: o.geometries.map(function(o) { return feature$1(topology, o); ***REMOVED***)
-***REMOVED*** : feature$1(topology, o);
-  ***REMOVED***
+      features: o.geometries.map(function(o) { return feature$1(topology, o); })
+    } : feature$1(topology, o);
+  }
 
   function feature$1(topology, o) {
     var f = {
       type: "Feature",
       id: o.id,
-      properties: o.properties || {***REMOVED***,
+      properties: o.properties || {},
       geometry: object(topology, o)
-***REMOVED***;
+    };
     if (o.id == null) delete f.id;
     return f;
-  ***REMOVED***
+  }
 
   function object(topology, o) {
     var absolute$$ = absolute(topology.transform),
@@ -82,56 +82,56 @@
       for (var a = arcs[i < 0 ? ~i : i], k = 0, n = a.length, p; k < n; ++k) {
         points.push(p = a[k].slice());
         absolute$$(p, k);
-  ***REMOVED***
+      }
       if (i < 0) reverse(points, n);
-***REMOVED***
+    }
 
     function point(p) {
       p = p.slice();
       absolute$$(p, 0);
       return p;
-***REMOVED***
+    }
 
     function line(arcs) {
       var points = [];
       for (var i = 0, n = arcs.length; i < n; ++i) arc(arcs[i], points);
       if (points.length < 2) points.push(points[0].slice());
       return points;
-***REMOVED***
+    }
 
     function ring(arcs) {
       var points = line(arcs);
       while (points.length < 4) points.push(points[0].slice());
       return points;
-***REMOVED***
+    }
 
     function polygon(arcs) {
       return arcs.map(ring);
-***REMOVED***
+    }
 
     function geometry(o) {
       var t = o.type;
-      return t === "GeometryCollection" ? {type: t, geometries: o.geometries.map(geometry)***REMOVED***
-          : t in geometryType ? {type: t, coordinates: geometryType[t](o)***REMOVED***
+      return t === "GeometryCollection" ? {type: t, geometries: o.geometries.map(geometry)}
+          : t in geometryType ? {type: t, coordinates: geometryType[t](o)}
           : null;
-***REMOVED***
+    }
 
     var geometryType = {
-      Point: function(o) { return point(o.coordinates); ***REMOVED***,
-      MultiPoint: function(o) { return o.coordinates.map(point); ***REMOVED***,
-      LineString: function(o) { return line(o.arcs); ***REMOVED***,
-      MultiLineString: function(o) { return o.arcs.map(line); ***REMOVED***,
-      Polygon: function(o) { return polygon(o.arcs); ***REMOVED***,
-      MultiPolygon: function(o) { return o.arcs.map(polygon); ***REMOVED***
-***REMOVED***;
+      Point: function(o) { return point(o.coordinates); },
+      MultiPoint: function(o) { return o.coordinates.map(point); },
+      LineString: function(o) { return line(o.arcs); },
+      MultiLineString: function(o) { return o.arcs.map(line); },
+      Polygon: function(o) { return polygon(o.arcs); },
+      MultiPolygon: function(o) { return o.arcs.map(polygon); }
+    };
 
     return geometry(o);
-  ***REMOVED***
+  }
 
   function stitchArcs(topology, arcs) {
-    var stitchedArcs = {***REMOVED***,
-        fragmentByStart = {***REMOVED***,
-        fragmentByEnd = {***REMOVED***,
+    var stitchedArcs = {},
+        fragmentByStart = {},
+        fragmentByEnd = {},
         fragments = [],
         emptyIndex = -1;
 
@@ -140,8 +140,8 @@
       var arc = topology.arcs[i < 0 ? ~i : i], t;
       if (arc.length < 3 && !arc[1][0] && !arc[1][1]) {
         t = arcs[++emptyIndex], arcs[emptyIndex] = i, arcs[j] = t;
-  ***REMOVED***
-***REMOVED***);
+      }
+    });
 
     arcs.forEach(function(i) {
       var e = ends(i),
@@ -157,10 +157,10 @@
           delete fragmentByStart[g.start];
           var fg = g === f ? f : f.concat(g);
           fragmentByStart[fg.start = f.start] = fragmentByEnd[fg.end = g.end] = fg;
-    ***REMOVED*** else {
+        } else {
           fragmentByStart[f.start] = fragmentByEnd[f.end] = f;
-    ***REMOVED***
-  ***REMOVED*** else if (f = fragmentByStart[end]) {
+        }
+      } else if (f = fragmentByStart[end]) {
         delete fragmentByStart[f.start];
         f.unshift(i);
         f.start = start;
@@ -168,21 +168,21 @@
           delete fragmentByEnd[g.end];
           var gf = g === f ? f : g.concat(f);
           fragmentByStart[gf.start = g.start] = fragmentByEnd[gf.end = f.end] = gf;
-    ***REMOVED*** else {
+        } else {
           fragmentByStart[f.start] = fragmentByEnd[f.end] = f;
-    ***REMOVED***
-  ***REMOVED*** else {
+        }
+      } else {
         f = [i];
         fragmentByStart[f.start = start] = fragmentByEnd[f.end = end] = f;
-  ***REMOVED***
-***REMOVED***);
+      }
+    });
 
     function ends(i) {
       var arc = topology.arcs[i < 0 ? ~i : i], p0 = arc[0], p1;
-      if (topology.transform) p1 = [0, 0], arc.forEach(function(dp) { p1[0] += dp[0], p1[1] += dp[1]; ***REMOVED***);
+      if (topology.transform) p1 = [0, 0], arc.forEach(function(dp) { p1[0] += dp[0], p1[1] += dp[1]; });
       else p1 = arc[arc.length - 1];
       return i < 0 ? [p1, p0] : [p0, p1];
-***REMOVED***
+    }
 
     function flush(fragmentByEnd, fragmentByStart) {
       for (var k in fragmentByEnd) {
@@ -190,42 +190,42 @@
         delete fragmentByStart[f.start];
         delete f.start;
         delete f.end;
-        f.forEach(function(i) { stitchedArcs[i < 0 ? ~i : i] = 1; ***REMOVED***);
+        f.forEach(function(i) { stitchedArcs[i < 0 ? ~i : i] = 1; });
         fragments.push(f);
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     flush(fragmentByEnd, fragmentByStart);
     flush(fragmentByStart, fragmentByEnd);
-    arcs.forEach(function(i) { if (!stitchedArcs[i < 0 ? ~i : i]) fragments.push([i]); ***REMOVED***);
+    arcs.forEach(function(i) { if (!stitchedArcs[i < 0 ? ~i : i]) fragments.push([i]); });
 
     return fragments;
-  ***REMOVED***
+  }
 
   function mesh(topology) {
     return object(topology, meshArcs.apply(this, arguments));
-  ***REMOVED***
+  }
 
   function meshArcs(topology, o, filter) {
     var arcs = [];
 
     function arc(i) {
       var j = i < 0 ? ~i : i;
-      (geomsByArc[j] || (geomsByArc[j] = [])).push({i: i, g: geom***REMOVED***);
-***REMOVED***
+      (geomsByArc[j] || (geomsByArc[j] = [])).push({i: i, g: geom});
+    }
 
     function line(arcs) {
       arcs.forEach(arc);
-***REMOVED***
+    }
 
     function polygon(arcs) {
       arcs.forEach(line);
-***REMOVED***
+    }
 
     function geometry(o) {
       if (o.type === "GeometryCollection") o.geometries.forEach(geometry);
       else if (o.type in geometryType) geom = o, geometryType[o.type](o.arcs);
-***REMOVED***
+    }
 
     if (arguments.length > 1) {
       var geomsByArc = [],
@@ -235,25 +235,25 @@
         LineString: line,
         MultiLineString: polygon,
         Polygon: polygon,
-        MultiPolygon: function(arcs) { arcs.forEach(polygon); ***REMOVED***
-  ***REMOVED***;
+        MultiPolygon: function(arcs) { arcs.forEach(polygon); }
+      };
 
       geometry(o);
 
       geomsByArc.forEach(arguments.length < 3
-          ? function(geoms) { arcs.push(geoms[0].i); ***REMOVED***
-          : function(geoms) { if (filter(geoms[0].g, geoms[geoms.length - 1].g)) arcs.push(geoms[0].i); ***REMOVED***);
-***REMOVED*** else {
+          ? function(geoms) { arcs.push(geoms[0].i); }
+          : function(geoms) { if (filter(geoms[0].g, geoms[geoms.length - 1].g)) arcs.push(geoms[0].i); });
+    } else {
       for (var i = 0, n = topology.arcs.length; i < n; ++i) arcs.push(i);
-***REMOVED***
+    }
 
-    return {type: "MultiLineString", arcs: stitchArcs(topology, arcs)***REMOVED***;
-  ***REMOVED***
+    return {type: "MultiLineString", arcs: stitchArcs(topology, arcs)};
+  }
 
   function triangle(triangle) {
     var a = triangle[0], b = triangle[1], c = triangle[2];
     return Math.abs((a[0] - c[0]) * (b[1] - a[1]) - (a[0] - b[0]) * (c[1] - a[1]));
-  ***REMOVED***
+  }
 
   function ring(ring) {
     var i = -1,
@@ -266,37 +266,37 @@
       a = b;
       b = ring[i];
       area += a[0] * b[1] - a[1] * b[0];
-***REMOVED***
+    }
 
     return area / 2;
-  ***REMOVED***
+  }
 
   function merge(topology) {
     return object(topology, mergeArcs.apply(this, arguments));
-  ***REMOVED***
+  }
 
   function mergeArcs(topology, objects) {
-    var polygonsByArc = {***REMOVED***,
+    var polygonsByArc = {},
         polygons = [],
         components = [];
 
     objects.forEach(function(o) {
       if (o.type === "Polygon") register(o.arcs);
       else if (o.type === "MultiPolygon") o.arcs.forEach(register);
-***REMOVED***);
+    });
 
     function register(polygon) {
       polygon.forEach(function(ring$$) {
         ring$$.forEach(function(arc) {
           (polygonsByArc[arc = arc < 0 ? ~arc : arc] || (polygonsByArc[arc] = [])).push(polygon);
-    ***REMOVED***);
-  ***REMOVED***);
+        });
+      });
       polygons.push(polygon);
-***REMOVED***
+    }
 
     function exterior(ring$$) {
-      return ring(object(topology, {type: "Polygon", arcs: [ring$$]***REMOVED***).coordinates[0]) > 0; // TODO allow spherical?
-***REMOVED***
+      return ring(object(topology, {type: "Polygon", arcs: [ring$$]}).coordinates[0]) > 0; // TODO allow spherical?
+    }
 
     polygons.forEach(function(polygon) {
       if (!polygon._) {
@@ -312,17 +312,17 @@
                 if (!polygon._) {
                   polygon._ = 1;
                   neighbors.push(polygon);
-            ***REMOVED***
-          ***REMOVED***);
-        ***REMOVED***);
-      ***REMOVED***);
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***);
+                }
+              });
+            });
+          });
+        }
+      }
+    });
 
     polygons.forEach(function(polygon) {
       delete polygon._;
-***REMOVED***);
+    });
 
     return {
       type: "MultiPolygon",
@@ -335,10 +335,10 @@
             ring$$.forEach(function(arc) {
               if (polygonsByArc[arc < 0 ? ~arc : arc].length < 2) {
                 arcs.push(arc);
-          ***REMOVED***
-        ***REMOVED***);
-      ***REMOVED***);
-    ***REMOVED***);
+              }
+            });
+          });
+        });
 
         // Stitch the arcs into one or more rings.
         arcs = stitchArcs(topology, arcs);
@@ -353,18 +353,18 @@
             if (sgn === exterior(arcs[i])) {
               t = arcs[0], arcs[0] = arcs[i], arcs[i] = t;
               break;
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***
+            }
+          }
+        }
 
         return arcs;
-  ***REMOVED***)
-***REMOVED***;
-  ***REMOVED***
+      })
+    };
+  }
 
   function neighbors(objects) {
-    var indexesByArc = {***REMOVED***, // arc index -> array of object indexes
-        neighbors = objects.map(function() { return []; ***REMOVED***);
+    var indexesByArc = {}, // arc index -> array of object indexes
+        neighbors = objects.map(function() { return []; });
 
     function line(arcs, i) {
       arcs.forEach(function(a) {
@@ -372,24 +372,24 @@
         var o = indexesByArc[a];
         if (o) o.push(i);
         else indexesByArc[a] = [i];
-  ***REMOVED***);
-***REMOVED***
+      });
+    }
 
     function polygon(arcs, i) {
-      arcs.forEach(function(arc) { line(arc, i); ***REMOVED***);
-***REMOVED***
+      arcs.forEach(function(arc) { line(arc, i); });
+    }
 
     function geometry(o, i) {
-      if (o.type === "GeometryCollection") o.geometries.forEach(function(o) { geometry(o, i); ***REMOVED***);
+      if (o.type === "GeometryCollection") o.geometries.forEach(function(o) { geometry(o, i); });
       else if (o.type in geometryType) geometryType[o.type](o.arcs, i);
-***REMOVED***
+    }
 
     var geometryType = {
       LineString: line,
       MultiLineString: polygon,
       Polygon: polygon,
-      MultiPolygon: function(arcs, i) { arcs.forEach(function(arc) { polygon(arc, i); ***REMOVED***); ***REMOVED***
-***REMOVED***;
+      MultiPolygon: function(arcs, i) { arcs.forEach(function(arc) { polygon(arc, i); }); }
+    };
 
     objects.forEach(geometry);
 
@@ -399,40 +399,40 @@
           var ij = indexes[j], ik = indexes[k], n;
           if ((n = neighbors[ij])[i = bisect(n, ik)] !== ik) n.splice(i, 0, ik);
           if ((n = neighbors[ik])[i = bisect(n, ij)] !== ij) n.splice(i, 0, ij);
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+        }
+      }
+    }
 
     return neighbors;
-  ***REMOVED***
+  }
 
   function compareArea(a, b) {
     return a[1][2] - b[1][2];
-  ***REMOVED***
+  }
 
   function minAreaHeap() {
-    var heap = {***REMOVED***,
+    var heap = {},
         array = [],
         size = 0;
 
     heap.push = function(object) {
       up(array[object._ = size] = object, size++);
       return size;
-***REMOVED***;
+    };
 
     heap.pop = function() {
       if (size <= 0) return;
       var removed = array[0], object;
       if (--size > 0) object = array[size], down(array[object._ = 0] = object, 0);
       return removed;
-***REMOVED***;
+    };
 
     heap.remove = function(removed) {
       var i = removed._, object;
       if (array[i] !== removed) return; // invalid request
       if (i !== --size) object = array[size], (compareArea(object, removed) < 0 ? up : down)(array[object._ = i] = object, i);
       return i;
-***REMOVED***;
+    };
 
     function up(object, i) {
       while (i > 0) {
@@ -441,8 +441,8 @@
         if (compareArea(object, parent) >= 0) break;
         array[parent._ = i] = parent;
         array[object._ = i = j] = object;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     function down(object, i) {
       while (true) {
@@ -455,11 +455,11 @@
         if (j === i) break;
         array[child._ = i] = child;
         array[object._ = i = j] = object;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     return heap;
-  ***REMOVED***
+  }
 
   function presimplify(topology, triangleArea) {
     var absolute$$ = absolute(topology.transform),
@@ -483,20 +483,20 @@
       for (i = 0, n = arc.length; i < n; ++i) {
         p = arc[i];
         absolute$$(arc[i] = [p[0], p[1], Infinity], i);
-  ***REMOVED***
+      }
 
       for (i = 1, n = arc.length - 1; i < n; ++i) {
         triangle = arc.slice(i - 1, i + 2);
         triangle[1][2] = triangleArea(triangle);
         triangles.push(triangle);
         heap.push(triangle);
-  ***REMOVED***
+      }
 
       for (i = 0, n = triangles.length; i < n; ++i) {
         triangle = triangles[i];
         triangle.previous = triangles[i - 1];
         triangle.next = triangles[i + 1];
-  ***REMOVED***
+      }
 
       while (triangle = heap.pop()) {
         var previous = triangle.previous,
@@ -513,26 +513,26 @@
           previous.next = next;
           previous[2] = triangle[2];
           update(previous);
-    ***REMOVED***
+        }
 
         if (next) {
           next.previous = previous;
           next[0] = triangle[0];
           update(next);
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
 
       arc.forEach(relative$$);
-***REMOVED***);
+    });
 
     function update(triangle) {
       heap.remove(triangle);
       triangle[1][2] = triangleArea(triangle);
       heap.push(triangle);
-***REMOVED***
+    }
 
     return topology;
-  ***REMOVED***
+  }
 
   var version = "1.6.24";
 
@@ -545,4 +545,4 @@
   exports.neighbors = neighbors;
   exports.presimplify = presimplify;
 
-***REMOVED***));
+}));

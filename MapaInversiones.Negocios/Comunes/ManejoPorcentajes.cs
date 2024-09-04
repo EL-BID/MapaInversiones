@@ -15,8 +15,8 @@ namespace PlataformaTransparencia.Negocios.Comunes
         /// <returns>númer que representa el porcentaje en texto</returns>
         public static string ValorPorcentajeString(decimal max, decimal value)
         {
-            return string.Format("{0:P2***REMOVED***", (value / max));
-    ***REMOVED***
+            return string.Format("{0:P2}", (value / max));
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

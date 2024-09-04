@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha384-KcyRSlC9FQog/lJsT+QA8AUIFBgnwKM7bxm7/YaX+NTr4D00npYawrX0h+oXI3a2" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha384-JPbtLYL10d/Z1crlc6GGGGM3PavCzzoUJ1UxH0bXHOfguWHQ6XAWrIzW+MBGGXe5" crossorigin="anonymous"></script>
-***REMOVED***
+}
 
 @{
     ViewBag.Title = "Proyecto " + @Truncate(Model.ProjectInformation.name, 20) + " en " + @Model.ProjectInformation.location + "";
@@ -20,18 +20,18 @@
         if (input == null)
         {
             return "";
-    ***REMOVED***
+        }
         else if (input.Length <= length)
         {
             return @input;
-    ***REMOVED***
+        }
         else
         {
             return @input.Substring(0, length) + "...";
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
-***REMOVED***
+}
 
 <input type="hidden" id="hdNomUsuario" value="" />
 <input type="hidden" id="hdIdUsuario" value="" />
@@ -57,7 +57,7 @@
                                         {
                                             @Model.ProjectInformation.name.Trim()
                                             ;
-                                    ***REMOVED***
+                                        }
                                     </a>
                                 </li>
                             </ul>
@@ -74,7 +74,7 @@
                                 @if (@Model.ProjectInformation.name != null)
                                 {
                                     @Model.ProjectInformation.name.Trim();
-                            ***REMOVED***
+                                }
                             </h2>
                         </div>
                         <div class="banner-main-desc">
@@ -97,37 +97,37 @@
                                             if (@item.Tipo == "MUNICIPIO")
                                             {
                                                 <li>@item.Nombre ,</li>
-                                        ***REMOVED***
+                                            }
                                             else if (@item.Tipo == "DEPARTAMENTO" || @item.Tipo == "REGION")
                                             {
                                                 <li>@item.Nombre ,</li>
-                                        ***REMOVED***
+                                            }
                                             else
                                             {
                                                 <li>@item.Nombre ,</li>
 
-                                        ***REMOVED***
-                                    ***REMOVED***
+                                            }
+                                        }
                                         else
                                         {
                                             if (@item.Tipo == "MUNICIPIO" || @item.Tipo == "COUNTY")
                                             {
                                                 <li>@item.Nombre</li>
-                                        ***REMOVED***
+                                            }
                                             else if (@item.Tipo == "DEPARTAMENTO" || @item.Tipo == "REGION")
                                             {
                                                 <li>@item.Nombre</li>
-                                        ***REMOVED***
+                                            }
                                             else
                                             {
                                                 <li>@item.Nombre</li>
-                                        ***REMOVED***
-                                    ***REMOVED***
+                                            }
+                                        }
 
                                         count++;
-                                ***REMOVED***
+                                    }
 
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     var count = 0;
@@ -139,34 +139,34 @@
                                                 @if (@item.Tipo == "MUNICIPIO" || @item.Tipo == "COUNTY")
                                                 {
                                                     <li>@item.Nombre ,</li>
-                                            ***REMOVED***
+                                                }
                                                 else if (@item.Tipo == "DEPARTAMENTO" || @item.Tipo == "REGION")
                                                 {
                                                     <li>@item.Nombre ,</li>
-                                            ***REMOVED***
+                                                }
                                                 else
                                                 {
                                                     <li>@item.Nombre ,</li>
-                                            ***REMOVED***
+                                                }
                                             </text>
-                                    ***REMOVED***
+                                        }
 
                                         beneficiarios += ""+@item.Nombre+", ";
                                         count++;
-                                ***REMOVED***
-                                    <li> y <a href="#benefi">otros @String.Format("{0***REMOVED***", @count - 3)</a></li>
-                            ***REMOVED***
+                                    }
+                                    <li> y <a href="#benefi">otros @String.Format("{0}", @count - 3)</a></li>
+                                }
 
                             </ul>
                         </div>
                         <ul class="list-inline details">
                             <li>
 
-                                <h3>@String.Format(cultureCountry, "{0:n1***REMOVED***", @Model.ProjectInformation.duracion) Años</h3>
+                                <h3>@String.Format(cultureCountry, "{0:n1}", @Model.ProjectInformation.duracion) Años</h3>
                                 <h6>Duración Del Proyecto</h6>
                             </li>
                             <li>
-                                <h3 id="lblCostoEstimado">$ @String.Format(cultureCountry, "{0:n1***REMOVED***", Model.ProjectInformation.TotalValue)</h3>
+                                <h3 id="lblCostoEstimado">$ @String.Format(cultureCountry, "{0:n1}", Model.ProjectInformation.TotalValue)</h3>
                                 <h6>Costo Estimado</h6>
                             </li>
                           
@@ -252,7 +252,7 @@
 
                                         </li>
                                         </text>
-                                 ***REMOVED***
+                                     }
                                 
                                 </ul>
                             </div>
@@ -293,8 +293,8 @@
                                                             <option value="@item.id" class="export_option">@item.id</option>
                                                     </text>
                                                     i++;
-                                            ***REMOVED***
-                                        ***REMOVED***
+                                                }
+                                            }
                                             </select>
                                         </div>
                                     </div>
@@ -330,9 +330,9 @@
                                                                 </option>
                                                         </text>
                                                         i++;
-                                                ***REMOVED***
+                                                    }
 
-                                            ***REMOVED***
+                                                }
 
 
                                                 </select>
@@ -343,7 +343,7 @@
                                 </div>
                             </div>
 
-                    ***REMOVED***
+                        }
                     </div>                    
                 </div>
                 <div class="row mb-4">
@@ -393,7 +393,7 @@
                                                         <div class="col-lg-3">
                                                         </div>
                                                     </div>
-                                            ***REMOVED***
+                                                }
                                                 <div class="wraptable-fase">
                                                     <div class="row">
                                                         <div class="col-lg-9">
@@ -418,7 +418,7 @@
                                                         </div>
                                                         <div class="col-lg-3">
                                                             <div class="wproduct producto">
-                                                                <div class="tproduct">Avance de producto <span>@String.Format("{0:0.00***REMOVED***", item.AvanceFisico) %</span></div>
+                                                                <div class="tproduct">Avance de producto <span>@String.Format("{0:0.00}", item.AvanceFisico) %</span></div>
                                                                 <div class="tpercent" style="width:@item.AvanceFisico%"></div>
                                                             </div>
                                                         </div>
@@ -428,11 +428,11 @@
                                                 i++;
                                                 j = item.IdentificadorFase;
                                                 k = item.CodComponente;
-                                        ***REMOVED***
+                                            }
                                         </div>
                                     </div>
                                 </text>
-                        ***REMOVED***
+                            }
                         </div>
                     </div>
                 </div>
@@ -440,7 +440,7 @@
             </div>
         </section>
 
-    @****REMOVED****@
+    @*}*@
    
     <!--Fin entregables-->
 
@@ -501,10 +501,10 @@
                 <text>
                     <div class="empty-gallery">No existen imágenes aún para este proyecto</div>
                 </text>
-        ***REMOVED***
+            }
             else
             {
-                <div class="project-carusel w2col" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true ***REMOVED***'>
+                <div class="project-carusel w2col" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true }'>
                     @foreach (var photo in Model.Images)
                     {
                         <!--ITEM 1-->
@@ -530,10 +530,10 @@
                             </div><!-- End project item -->
                         </div>
 
-                ***REMOVED***
+                    }
                 </div>
 
-        ***REMOVED***
+            }
 
             <!--MODAL-->
             <div id="FotoModal" class="modal fade" role="dialog">
@@ -568,13 +568,13 @@
                         <h2 class="mb-3">Fotos cargadas por los ciudadanos </h2>
                     </div>
                     <div class="empty-gallery">No existen imágenes aún para este proyecto</div>
-                </text> ***REMOVED***
+                </text> }
             else
             {
                 <div class="section-heading heading-left">
                     <h2 class="mb-3">Fotos cargadas por los ciudadanos(@Model.FotosU.Count()) </h2>
                 </div>
-                <div class="project-carusel w4col" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true ***REMOVED***'>
+                <div class="project-carusel w4col" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true }'>
                     @foreach (var photo in Model.FotosU)
                     {<!--ITEM 1-->
                         <div class="project-col gallery-col-carusel">
@@ -597,8 +597,8 @@
 
                                 </div>
                             </div><!-- End project item -->
-                        </div>***REMOVED***
-                </div>***REMOVED***
+                        </div>}
+                </div>}
             <!--BOTONERA-->
             <div class="col-md-12">
                 <div class="filtersBox">
@@ -647,8 +647,8 @@
                                         {
                                             <option value="@(item.IdMunicipio)-@(item.IdDepartamento)"> @item.Nombre </option>
 
-                                    ***REMOVED***
-                                ***REMOVED***
+                                        }
+                                    }
                                 </select>
                             </div>
                             <div class="form-group">
@@ -735,11 +735,11 @@
                                                 @foreach (var item in Model.genero_participacion)
                                                 {
                                                     <option id="@item.id" id_gen="@item.id" nom_gen="@item.name">@item.name</option>
-                                            ***REMOVED***
+                                                }
 
                                             </select>
                                         </text>
-                                ***REMOVED***
+                                    }
                                     <div id="error_filtro_Genero" class="alert-danger" hidden="hidden">Género no puede ser vacío</div>
                                 </div>
                                 <div class="form-group">
@@ -758,9 +758,9 @@
                                             @foreach (var item in Model.rol_participacion)
                                             {
                                                 <option id="@item.id" id_rol="@item.id" nom_rol="@item.id">@item.name</option>
-                                        ***REMOVED***
+                                            }
                                         </select>
-                                ***REMOVED***
+                                    }
                                     <div id="error_filtro_Rol" class="alert-danger" hidden="hidden">Rol no puede ser vacío </div>
                                 </div>
                                 <div class="form-group">
@@ -787,9 +787,9 @@
                                             @foreach (var item in Model.medios_participacion)
                                             {
                                                 <option id="@item.id" id_medio="@item.id" nom_medio="@item.id">@item.name</option>
-                                        ***REMOVED***
+                                            }
                                         </select>
-                                ***REMOVED***
+                                    }
                                     <div id="error_filtro_Medios" class="alert-danger" hidden="hidden">"¿Cómo se enteró de Mapa Inversiones?" No puede ser vacío</div>
                                 </div>
                                 <div class="disclaimer well mb-3">
@@ -894,8 +894,8 @@
                                             @foreach (var item in Model.tipo_comentario)
                                             {
                                                 <option id_tipo="@item.idTC">@item.nameTC</option>
-                                        ***REMOVED***
-                                    ***REMOVED***
+                                            }
+                                        }
 
                                     </select>
                                 </div>
@@ -909,8 +909,8 @@
                                                 @foreach (var item in Model.ProjectInformation.EntesBeneficiados)
                                                 {
                                                     <option id_depa="@item.IdDepartamento">@item.Nombre</option>
-                                            ***REMOVED***
-                                        ***REMOVED***
+                                                }
+                                            }
 
                                         </select>
 
@@ -984,7 +984,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div id="divContenedorFichas" class="project-carusel carouselData" data-flickity='{ "initialIndex": 0, "pageDots": false, "groupCells": true, "contain": true, "prevNextButtons": true , "freeScroll":true,"wrapAround":false ***REMOVED***'>
+                    <div id="divContenedorFichas" class="project-carusel carouselData" data-flickity='{ "initialIndex": 0, "pageDots": false, "groupCells": true, "contain": true, "prevNextButtons": true , "freeScroll":true,"wrapAround":false }'>
                     </div>
                     <!--END MAQUETA BASICA PROJECTOS-->
                     <div id="divNoEncontradoEjec" class="no-search-results objHidden">No se encontraron resultados</div>
@@ -1016,7 +1016,7 @@
 
     <script>
 
-        window.onscroll = function () { myFunction() ***REMOVED***;
+        window.onscroll = function () { myFunction() };
 
         var header = document.getElementById("navs-header");
         var sticky = header.offsetTop;
@@ -1025,20 +1025,20 @@
             if (window.pageYOffset > sticky) {
                 header.classList.add("sticky");
                 header.classList.add("bg-white");
-        ***REMOVED*** else {
+            } else {
                 header.classList.remove("sticky");
                 header.classList.remove("bg-white");
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
     </script>
 
-    @using (Html.BeginForm("GeneratePDF_ARC", "Proyecto", FormMethod.Post, new { id = "formPdfProy" ***REMOVED***))
+    @using (Html.BeginForm("GeneratePDF_ARC", "Proyecto", FormMethod.Post, new { id = "formPdfProy" }))
     {
         <input type="hidden" name="id_obj_pdf" id="id_obj_pdf" />
         <input type="hidden" name="cant_cont" id="cant_cont" value="0" />
         <input type="hidden" name="annio" id="annio" value="" />
         <input type="button" id="btnEnviar" value="Download Pdf" style="display:none;" />
-***REMOVED***
+    }
 
     <script type="text/javascript">
     $(function () {
@@ -1051,7 +1051,7 @@
             $("#annio").val(annio);
             $("#formPdfProy").submit();
 
-    ***REMOVED***);
+        });
 
 
         $("#btnEnviarExc").click(function () {
@@ -1059,9 +1059,9 @@
             $("#id_obj_exc").val(id_proy);
             $("#formExComent").submit();
 
-    ***REMOVED***);
+        });
 
-***REMOVED***);
+    });
     </script>
 
 
@@ -1077,41 +1077,41 @@
                     searchBox.addClass('searchbox-open');
                     inputBox.focus();
                     isOpen = true;
-            ***REMOVED*** else {
+                } else {
                     searchBox.removeClass('searchbox-open');
                     inputBox.focusout();
                     isOpen = false;
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
             submitIcon.mouseup(function () {
                 return false;
-        ***REMOVED***);
+            });
             searchBox.mouseup(function () {
                 return false;
-        ***REMOVED***);
+            });
             $(document).mouseup(function () {
                 if (isOpen == true) {
                     $('.searchbox-icon').css('display', 'block');
                     submitIcon.click();
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
 
 
 
 
 
 
-    ***REMOVED***);
+        });
         function buttonUp() {
             var inputVal = $('.searchbox-input').val();
             inputVal = $.trim(inputVal).length;
             if (inputVal !== 0) {
                 $('.searchbox-icon').css('display', 'none');
-        ***REMOVED*** else {
+            } else {
                 $('.searchbox-input').val('');
                 $('.searchbox-icon').css('display', 'block');
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
     </script>
@@ -1122,9 +1122,9 @@
                 if (value != undefined) {
                     $(this).find(".btn-select-input").val(value);
                     $(this).find(".btn-select-value").html(value);
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***);
+                }
+            });
+        });
 
         $(document).on('click', '.btn-select', function (e) {
             e.preventDefault();
@@ -1136,25 +1136,25 @@
                     var value = target.html();
                     $(this).find(".btn-select-input").val(value);
                     $(this).find(".btn-select-value").html(value);
-            ***REMOVED***
+                }
                 ul.hide();
                 $(this).removeClass("active");
-        ***REMOVED***
+            }
             else {
                 $('.btn-select').not(this).each(function () {
                     $(this).removeClass("active").find("ul").hide();
-            ***REMOVED***);
+                });
                 ul.slideDown();
                 $(this).addClass("active");
-        ***REMOVED***
-    ***REMOVED***);
+            }
+        });
 
         $(document).on('click', function (e) {
             var target = $(e.target).closest(".btn-select");
             if (!target.length) {
                 $(".btn-select").removeClass("active").find("ul").hide();
-        ***REMOVED***
-    ***REMOVED***);
+            }
+        });
 
 
     </script>
@@ -1182,13 +1182,13 @@
                         array = new Uint8Array(arrayBuffer);
                       for (const a of array) {
                         fileByteArray.push(a);
-                  ***REMOVED***
+                      }
                       var params_img = {
                         UploadedImage: fileByteArray,
                         DescripcionImage: $('#tbDescripcion').val(),
                         LocationImage: $('#filtro_AreaFotoUsuUpload option:selected').val(),
                         ProjectImage:@Model.idproject
-	                    ***REMOVED***;
+	                        };
                       $.ajax({
                         type: 'POST',
                         contentType: "application/json; charset=utf-8",
@@ -1206,34 +1206,34 @@
                               bootbox.alert(mensaje_error, function () {
                                 $('select,input[type=text],input[type=radio],textarea', $('#divDatosModal')).each(function (i, e) {
                                   $(e).val("");
-                            ***REMOVED***);
+                                });
                                 $("#btnCloseFotos").trigger("click");
-                          ***REMOVED***);
-                        ***REMOVED*** else {
+                              });
+                            } else {
                               bootbox.alert(mensaje_error);
-                        ***REMOVED***
-                      ***REMOVED*** else {
+                            }
+                          } else {
                             bootbox.alert(result);
-                      ***REMOVED***
-                      ***REMOVED***
+                          }
+                        },
                         error: function (response) {
                           bootbox.alert('Error: ' + response.responseText);
-                      ***REMOVED***
+                        },
                         failure: function (response) {
                           bootbox.alert('Fallo: ' + response.responseText);
-                    ***REMOVED***
-                  ***REMOVED***);
+                        }
+                      });
 
-                ***REMOVED***
-              ***REMOVED***
-            ***REMOVED***
+                    }
+                  }
+                }
                 else {
                     var tamanoArchivo = Math.round(files[0].size / maxFileSize);
                     bootbox.alert('Lo sentimos, el archivo tiene un tamaño de ' + tamanoArchivo +' MB y supera el máximo tamaño permitido que es de 1MB.\nPor favor, modifique la imagen disminuyendo el tamaño del archivo antes de subirlo al sistema.');
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             else bootbox.alert('No existe archivo para subir.');
-    ***REMOVED***);
+        });
 
         $('.enlace_img').on('click' , function(e){
             var id = $(this).attr("data-src");
@@ -1241,16 +1241,16 @@
             var des = $(this).attr("descrip");
 
 
-    ***REMOVED***);
-***REMOVED***);
+        });
+    });
     </script>
 
     <div id="fb-root"></div>
     @section DataBody {
-        data-profile='[{"avance_financiero":"@Model.ProjectInformation.avance_financiero","id_project":"@Model.idproject"***REMOVED***]'
+        data-profile='[{"avance_financiero":"@Model.ProjectInformation.avance_financiero","id_project":"@Model.idproject"}]'
         data-actores='[@foreach (var info in @Model.actores_proy)
-        {<text> {"idCategoria":"@info.idCategoria","Categoria": "@info.Categoria","nomActor": "@info.nomActor"***REMOVED***@if (info != @Model.actores_proy.Last())
-        {<text>,</text>***REMOVED***</text>***REMOVED***]'
-***REMOVED***
+        {<text> {"idCategoria":"@info.idCategoria","Categoria": "@info.Categoria","nomActor": "@info.nomActor"}@if (info != @Model.actores_proy.Last())
+        {<text>,</text>}</text>}]'
+    }
 
 </body>

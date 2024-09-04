@@ -21,5 +21,5 @@ namespace PlataformaTransparencia.Negocios.Interfaces
         public Task<RespuestaPoligonoTerritorial> ObtenerPoligonosRegionesAsync();
         public Task<List<InfoProyectos>> ObtenerProyectosNacionales(int id_sector);
         public Task<ProyectoPdf> ObtenerDataProyectoPdfAsync(int idProyecto);
-  ***REMOVED***
-***REMOVED***
+  }
+}

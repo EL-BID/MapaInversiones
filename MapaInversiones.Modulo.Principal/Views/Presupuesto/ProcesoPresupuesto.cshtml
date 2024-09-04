@@ -1,6 +1,6 @@
 ﻿@page
 @inject OrchardCore.IOrchardHelper Orchard
-@{ Layout = "~/Views/Shared/_Layout.cshtml"; ***REMOVED***
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <!--MAIN BANNER-->
 <section class="banner-main">
@@ -309,9 +309,9 @@
     $(document).ready(function () {
         //GetEntidadesPresupuesto();
         GetEntidadesPresupuestoNoAlcaldias();
-***REMOVED***);
+    });
 
-    window.onscroll = function () { myFunction() ***REMOVED***;
+    window.onscroll = function () { myFunction() };
 
     var header = document.getElementById("navs-header");
     var sticky = header.offsetTop;
@@ -320,11 +320,11 @@
         if (window.pageYOffset > sticky) {
             header.classList.add("sticky");
             header.classList.add("bg-white");
-    ***REMOVED*** else {
+        } else {
             header.classList.remove("sticky");
             header.classList.remove("bg-white");
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 </script>
 
 

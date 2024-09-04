@@ -4,6 +4,6 @@ namespace PlataformaTransparencia.Modelos.OrganismoFinanciador
 {
     public class ModelDataOrganismoFinanciador : RespuestaContratoBase
     {
-        public List<int> Anios { get; set; ***REMOVED*** = new();
-***REMOVED***
-***REMOVED***
+        public List<int> Anios { get; set; } = new();
+    }
+}

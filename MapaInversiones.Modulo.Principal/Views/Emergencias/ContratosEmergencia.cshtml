@@ -2,7 +2,7 @@
 @inject OrchardCore.IOrchardHelper Orchard
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+}
 @{
     var enlace = "";
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
@@ -10,15 +10,15 @@
     var TituloContratos = "";
     System.IFormatProvider culture =
         new System.Globalization.CultureInfo("es-RD");
-***REMOVED***
+}
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
     if (@etiqueta.AliasPart.Alias == "TituloContratosEmergencia" + @Model.tipoEmergencia)
     {
         LabelContratos = @etiqueta.HtmlBodyPart.Html;
         TituloContratos = @etiqueta.TitlePart.Title;
-***REMOVED***
-***REMOVED***
+    }
+}
  
 
 <section id="s0" class="banner-main">
@@ -49,11 +49,11 @@
                         {
                             enlace = "entidad=" + @Model.nombreUnidadCompra + "&emergencia=" + @Model.tipoEmergencia;
                             <h1>Entidad : @Model.nombreUnidadCompra</h1>
-                    ***REMOVED***
+                        }
                         else{
 
                             enlace = "emergencia=" + @Model.tipoEmergencia;
-                    ***REMOVED***
+                        }
 
                     </div>
                     <div class="banner-main-desc">
@@ -109,7 +109,7 @@
                         </div>
                         <div class="col-lg-8">
                             <span class="label">Monto total procesos de compra</span>
-                            <span class="bigNumber">RD $ @String.Format("{0:n2***REMOVED***", @Model.valorProcesos)</span>
+                            <span class="bigNumber">RD $ @String.Format("{0:n2}", @Model.valorProcesos)</span>
                         </div>
                     </div>
                     <div class="wrap-estados">
@@ -123,7 +123,7 @@
 
                             </div>
 
-                    ***REMOVED***
+                        }
                     </div>
 
                 </div>
@@ -170,7 +170,7 @@
                         </div>
                         <div class="col-lg-8">
                             <span class="label">Monto total contratos</span>
-                            <span class="bigNumber">RD $ @String.Format("{0:n2***REMOVED***", @Model.valorContratos)</span>
+                            <span class="bigNumber">RD $ @String.Format("{0:n2}", @Model.valorContratos)</span>
                         </div>
                     </div>
                     <div class="wrap-estados">
@@ -183,7 +183,7 @@
 
                             </div>
 
-                    ***REMOVED***
+                        }
                     </div>
 
                 </div>
@@ -211,7 +211,7 @@
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="txt-small">Procesos cancelados y desiertos</div>
-                                    <span class="bigNumber">$ @String.Format("{0:n0***REMOVED***", @Model.valProcesosCancelados / 1000000) Millones</span>
+                                    <span class="bigNumber">$ @String.Format("{0:n0}", @Model.valProcesosCancelados / 1000000) Millones</span>
                                 </div>
 
                                 <div class="col-md-4">
@@ -268,8 +268,8 @@
                                     <text>
                                     <option value="@item.EstadoContrato">@item.Nombre</option>
                                     </text>
-                            ***REMOVED***
-                        ***REMOVED***
+                                }
+                            }
                         </select>
 
                     </div>
@@ -362,9 +362,9 @@
 
 
 @section DataBody {
-            data-unidadcompra='[{"unidadcompra":"@Model.nombreUnidadCompra"***REMOVED***]',
-        data-tipoEmergencia='[{"tipoEmergencia":"@Model.tipoEmergencia"***REMOVED***]'
+            data-unidadcompra='[{"unidadcompra":"@Model.nombreUnidadCompra"}]',
+        data-tipoEmergencia='[{"tipoEmergencia":"@Model.tipoEmergencia"}]'
 
 
-***REMOVED***
+}
 

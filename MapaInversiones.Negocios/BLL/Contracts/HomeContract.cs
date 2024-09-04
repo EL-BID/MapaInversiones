@@ -10,13 +10,13 @@ namespace PlataformaTransparencia.Negocios.BLL.Contracts
     public class HomeContract : RespuestaContratoBase
     {
         private readonly TransparenciaDB _connection;
-        public ModelHomeData HomeModel { get; set; ***REMOVED***
+        public ModelHomeData HomeModel { get; set; }
 
         public HomeContract(TransparenciaDB connection)
         {
             this.HomeModel = new ModelHomeData();
             _connection = connection;
-    ***REMOVED***
+        }
 
         public void Fill(bool esHome = true)
         {
@@ -26,12 +26,12 @@ namespace PlataformaTransparencia.Negocios.BLL.Contracts
                 this.HomeModel = objNegocioConsolidados.ObtenerDatosModeloInicio(esHome);
                 this.Status = true;
 
-        ***REMOVED***
+            }
             catch (Exception ex) {
                 this.Status = false;
                 this.Message = "Lo sentimos, ha ocurrido un error.";
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

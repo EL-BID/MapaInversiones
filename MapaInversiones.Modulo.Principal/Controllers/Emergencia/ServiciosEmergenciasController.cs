@@ -25,7 +25,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
       _cargaemergencia = cargaemergencia;
       _cargapresupuestoemergencia = cargapresupuestoemergencia;
 
-***REMOVED***
+    }
 
     [HttpGet("GetInformacionContratosEmergenciaPorFiltros")]
     public ModelContratosData GetInformacionContratosEmergenciaPorFiltros(int NumeroPagina, int RegistrosPorPagina, string NombreEntidad, string NombreProceso, string Estado, int? TipoEmergencia)
@@ -40,7 +40,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
         NumeroPagina = NumeroPagina,
         RegistrosPorPagina = RegistrosPorPagina,
         OrigenInformacion = TipoEmergencia.ToString()
-  ***REMOVED***;
+      };
 
       try
       {
@@ -48,14 +48,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
         objReturn = valores;
         objReturn.Status = true;
         return objReturn;
-  ***REMOVED***
+      }
       catch (Exception exception)
       {
         objReturn.Status = false;
         objReturn.Message = "Error: " + exception.InnerException;
         return objReturn;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
 
         [HttpGet("GetEntidadContratosEmergenciaPorNombre")]
@@ -66,7 +66,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
                 
                 NombreEntidad = NombreEntidad,
                 OrigenInformacion = TipoEmergencia.ToString()
-        ***REMOVED***;
+            };
 
 
             ModelNombreEntidad objReturn = new ModelNombreEntidad();
@@ -76,15 +76,15 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
                 objReturn.Nombre = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
+            }
 
-    ***REMOVED***
+        }
 
 
         [HttpGet("GetInformacionProcesosCanceladosEmergenciaPorFiltros")]
@@ -99,7 +99,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
                 NumeroPagina = NumeroPagina,
                 RegistrosPorPagina = RegistrosPorPagina,
                 OrigenInformacion = TipoEmergencia.ToString()
-        ***REMOVED***;
+            };
             ModelInformacionContratos objReturn = new ModelInformacionContratos();
             try
             {
@@ -107,14 +107,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
                 objReturn = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.InnerException;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
         [HttpGet("ObtDistribucionPresupuestalGeneralPorTipoEmergencia")]
@@ -126,14 +126,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
                 objReturn.distribucionItem = _cargapresupuestoemergencia.ObtDistribucionPresupuestalPorTipoEmergencia(null);
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
        
@@ -145,12 +145,12 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
             {
                 objReturn = _cargapresupuestoemergencia.ObtenerPresupuestoGeneralAsignadoPorEntidad();//anio
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception)
             {
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

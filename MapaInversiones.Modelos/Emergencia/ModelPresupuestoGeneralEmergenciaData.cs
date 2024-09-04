@@ -6,9 +6,9 @@ namespace PlataformaTransparencia.Modelos.Emergencia
 {
   public class ModelPresupuestoGeneralEmergenciaData : RespuestaContratoBase
   {
-    public List<int> Anios { get; set; ***REMOVED*** = new();
-    public List<InfoGraficoItemPrograma> PresupuestoAsignadoPorEntidad { get; set; ***REMOVED*** = new();
-    public List<InfoPresupuestoEjecutadoPorEmergencia> PresupuestoEjecutadoPorEmergencias { get; set; ***REMOVED*** = new();
-    public List<InfoPresupuestoGeneralPorAnio> PresupuestoGeneralPorAnios { get; set; ***REMOVED*** = new();
-  ***REMOVED***
-***REMOVED***
+    public List<int> Anios { get; set; } = new();
+    public List<InfoGraficoItemPrograma> PresupuestoAsignadoPorEntidad { get; set; } = new();
+    public List<InfoPresupuestoEjecutadoPorEmergencia> PresupuestoEjecutadoPorEmergencias { get; set; } = new();
+    public List<InfoPresupuestoGeneralPorAnio> PresupuestoGeneralPorAnios { get; set; } = new();
+  }
+}

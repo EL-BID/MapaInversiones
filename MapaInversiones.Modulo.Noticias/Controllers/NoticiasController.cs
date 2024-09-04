@@ -12,14 +12,14 @@ namespace PlataformaTransparencia.Modulo.Noticias.Controllers
         public IActionResult Index()
         {
             return View();
-    ***REMOVED***
+        }
 
-        [Route("Noticia/{id***REMOVED***")]
+        [Route("Noticia/{id}")]
         public IActionResult Noticia(string id)
         {
-            var noticia = new Modelos.NoticiaModel() { Id = id ***REMOVED***;
+            var noticia = new Modelos.NoticiaModel() { Id = id };
             return View(noticia);
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
-***REMOVED***
+}

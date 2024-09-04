@@ -8,7 +8,7 @@ namespace PlataformaTransparencia.Modelos.Contratos
 {
     public class ModelInformacionContratos : RespuestaContratoBase
     {
-        public long CantidadTotalRegistros { get; set; ***REMOVED***
+        public long CantidadTotalRegistros { get; set; }
 
         public List<InformacionContratos> listInformacion;
 
@@ -17,7 +17,7 @@ namespace PlataformaTransparencia.Modelos.Contratos
 
             CantidadTotalRegistros = 0;
             listInformacion = new List<InformacionContratos>();
-    ***REMOVED***
+        }
     
-***REMOVED***
-***REMOVED***
+    }
+}

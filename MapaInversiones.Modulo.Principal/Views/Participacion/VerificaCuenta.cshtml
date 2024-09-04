@@ -3,7 +3,7 @@
     ViewBag.Title = "Verificar Cuenta";
     ViewBag.SectionId = "section-projects";
     ViewBag.ProjectsSelected = "selected";
-***REMOVED***
+    }
     <!DOCTYPE html>
     <html>
     <head>
@@ -31,11 +31,11 @@
 
                         </div>
                     </text>
-                ***REMOVED***
+                    }
                     else
                     {
                     <text><h2>Error en verificación de cuenta: @Model.error_msg</h2></text>
-                ***REMOVED***
+                    }
 
                 </div>
             </div>
@@ -52,12 +52,12 @@
             var url = "/";
             if (id_proy != "" && id_proy != null) {
                 url = "/perfilproyecto/" + id_proy + "#s5";
-        ***REMOVED***
+            }
            
             window.location.href = url;
 
-    ***REMOVED***);
-***REMOVED***);
+        });
+    });
 
 
 </script>

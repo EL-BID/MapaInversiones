@@ -3,7 +3,7 @@
     ViewBag.Title = "Aprobar Fotos y Comentarios";
     ViewBag.SectionId = "section-projects";
     ViewBag.ProjectsSelected = "selected";
-***REMOVED***
+}
 
 <input type="hidden" id="hdNomUsuario" value="" />
 <input type="hidden" id="hdIdUsuario" value="" />
@@ -141,7 +141,7 @@
                                 {
                     @foreach (var item in Model.filtrosAsociacion)
                     {
-    <option value="@item.id" name="@item.name">@item.name</option>***REMOVED******REMOVED***
+    <option value="@item.id" name="@item.name">@item.name</option>}}
                             </select>
                         </div>
                     </div>
@@ -153,8 +153,8 @@
                                 {
                                     foreach (var item in Model.filtrosEstado)
                                     {
-                    <option value="@item.id" name="@item.name">@item.name</option>***REMOVED***
-                            ***REMOVED***
+                    <option value="@item.id" name="@item.name">@item.name</option>}
+                                }
                             </select>
                         </div>
                     </div>
@@ -202,35 +202,35 @@
                 searchBox.addClass('searchbox-open');
                 inputBox.focus();
                 isOpen = true;
-        ***REMOVED*** else {
+            } else {
                 searchBox.removeClass('searchbox-open');
                 inputBox.focusout();
                 isOpen = false;
-        ***REMOVED***
-    ***REMOVED***);
+            }
+        });
         submitIcon.mouseup(function () {
             return false;
-    ***REMOVED***);
+        });
         searchBox.mouseup(function () {
             return false;
-    ***REMOVED***);
+        });
         $(document).mouseup(function () {
             if (isOpen == true) {
                 $('.searchbox-icon').css('display', 'block');
                 submitIcon.click();
-        ***REMOVED***
-    ***REMOVED***);
-***REMOVED***);
+            }
+        });
+    });
     function buttonUp() {
         var inputVal = $('.searchbox-input').val();
         inputVal = $.trim(inputVal).length;
         if (inputVal !== 0) {
             $('.searchbox-icon').css('display', 'none');
-    ***REMOVED*** else {
+        } else {
             $('.searchbox-input').val('');
             $('.searchbox-icon').css('display', 'block');
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
 
 </script>
@@ -285,8 +285,8 @@
                                         foreach (var item in Model.tipo_comentario)
                                         {<text>
                                                 <li id_tipo="@item.idTC">@item.nameTC</li>
-                                        </text>***REMOVED***
-                            ***REMOVED***
+                                        </text>}
+                                }
                                 </ul>
                             </a>
 
@@ -337,9 +337,9 @@
             if (value != undefined) {
                 $(this).find(".btn-select-input").val(value);
                 $(this).find(".btn-select-value").html(value);
-        ***REMOVED***
-    ***REMOVED***);
-***REMOVED***);
+            }
+        });
+    });
 
     $(document).on('click', '.btn-select', function (e) {
         e.preventDefault();
@@ -351,30 +351,30 @@
                 var value = target.html();
                 $(this).find(".btn-select-input").val(value);
                 $(this).find(".btn-select-value").html(value);
-        ***REMOVED***
+            }
             ul.hide();
             $(this).removeClass("active");
-    ***REMOVED***
+        }
         else {
             $('.btn-select').not(this).each(function () {
                 $(this).removeClass("active").find("ul").hide();
-        ***REMOVED***);
+            });
             ul.slideDown();
             $(this).addClass("active");
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
     $(document).on('click', function (e) {
         var target = $(e.target).closest(".btn-select");
         if (!target.length) {
             $(".btn-select").removeClass("active").find("ul").hide();
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
 
 </script>
 
 
 @section DataBody {
-    data-profile='[{"idUsuParticipa":"@Model.id_usu_participa" , "nomUsuParticipa" : "@Model.nom_usu_participa"***REMOVED***]'
-***REMOVED***
+    data-profile='[{"idUsuParticipa":"@Model.id_usu_participa" , "nomUsuParticipa" : "@Model.nom_usu_participa"}]'
+}

@@ -11,7 +11,7 @@
 
             getAnnio($("#moneda").val());
 
-    ***REMOVED***
+        }
 
 
         function configuraEnlaceContratista() {
@@ -23,17 +23,17 @@
                 var url = "/contratista?" + dataType + "=" + dataValue;
                 window.open(url, '_blank');
 
-        ***REMOVED***);
+            });
 
 
-    ***REMOVED***
+        }
 
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
             var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
             var results = regex.exec(location.search);
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    ***REMOVED***
+        }
 
 
 
@@ -45,13 +45,13 @@ Number.prototype.formatMoney = function (c, d, t) {
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-***REMOVED***;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
 
 
         function cambiarTipoTexto(cadena) {
             return cadena.charAt(0).toUpperCase() + cadena.slice(1).toLowerCase();
-    ***REMOVED***
+        }
 
 
 function getAnnio(moneda, nombreProceso = null) {
@@ -59,7 +59,7 @@ function getAnnio(moneda, nombreProceso = null) {
             var filtros = {
                 Moneda: moneda,
                 NombreProceso: nombreProceso
-        ***REMOVED***;
+            };
             $.ajax({
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
@@ -78,33 +78,33 @@ function getAnnio(moneda, nombreProceso = null) {
                         if (!annios.includes(items_result[i].valor.toString())) {
                             annios.push(items_result[i].valor.toString());
                             select = select + '<option value="' + items_result[i].valor.toString() + '">' + items_result[i].valor.toString() + '</option>';
-                    ***REMOVED***
+                        }
 
-                ***REMOVED***
+                    }
 
                     $('#top_contratos_periodos').html(select).fadeIn();
                     if (items_result.length > 0) {
                         $("#top_contratos_periodos").val($('#maxyear').val());
                         getContratos($("#top_contratos_periodos option:selected").val(), 1, cant_contratos, $("#top_origen_informacion option:selected").val(), "", $('#proceso').val(), $("#moneda").val());
 
-                ***REMOVED*** else {
+                    } else {
                         $("#srcContratos").html("");
                         var fila = '<div class="contractBox" >'
                           + '<div class="contractNumberRP"><span class="text-bold NoResultC">No se encuentran resultados con los filtros solicitados</span></div>'
                           + '</div>';
 
                         $("#srcContratos").html(fila);
-                ***REMOVED***
-              ***REMOVED***
+                    }
+                },
                 error: function (response) {
                     alert(response.responseText);
-              ***REMOVED***
+                },
                 failure: function (response) {
                     alert(response.responseText);
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
 
-    ***REMOVED***
+        }
 
         var disableClick = false;
         function deshabilita(des) {
@@ -112,11 +112,11 @@ function getAnnio(moneda, nombreProceso = null) {
             if (des) {
                 $("#btn-buscar").prop("disabled", des);
                 $('#btnLimpiar').attr("disabled", "disabled")
-        ***REMOVED*** else {
+            } else {
                 $("#btn-buscar").prop("disabled", des);
                 $('#btnLimpiar').removeAttr("disabled")
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         $("#btnLimpiar").click(function () {
             if (!disableClick) {
@@ -126,17 +126,17 @@ function getAnnio(moneda, nombreProceso = null) {
                 $("#proceso").val("");
                 deshabilita(true);
                 getContratos($("#top_contratos_periodos option:selected").val(), 1, cant_contratos, $("#top_origen_informacion option:selected").val(), "", "",$("#moneda").val());
-        ***REMOVED***
-    ***REMOVED***);
+            }
+        });
 
         $("#btn-buscar").click(function () {
             if (!disableClick) {
                 deshabilita(true);
                 getContratos($("#top_contratos_periodos option:selected").val(), 1, cant_contratos, $("#top_origen_informacion option:selected").val(), $('#entidad').val(), $('#proceso').val(),$("#moneda").val());
                 getGraficasAll();
-        ***REMOVED***
+            }
 
-    ***REMOVED***);
+        });
 
 
    function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
@@ -155,17 +155,17 @@ function getAnnio(moneda, nombreProceso = null) {
             var inicio = 1;
             if (residuo == 0) {
                 inicio = (pag_actual - cant_por_linea) + 1;
-        ***REMOVED*** else {
+            } else {
                 inicio = (cociente * cant_por_linea) + 1;
-        ***REMOVED***
+            }
 
             var fin = inicio + (cant_por_linea - 1);
             if (totalPag < cant_por_linea) {
                 fin = totalPag;
-        ***REMOVED***
+            }
             if (fin > totalPag) {
                 fin = totalPag;
-        ***REMOVED***
+            }
 
 
             if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
@@ -177,7 +177,7 @@ function getAnnio(moneda, nombreProceso = null) {
                 pag_enlace.append("span")
                     .attr("class", "")
                     .text("chevron_left ")
-        ***REMOVED***
+            }
 
 
 
@@ -189,7 +189,7 @@ function getAnnio(moneda, nombreProceso = null) {
                         .attr("data-page", i)
                     pag_enlace.append("text")
                         .text(i)
-            ***REMOVED*** else {
+                } else {
                     var pag_enlace = divPag.append("a")
                         .attr("class", "page_left")
                         .attr("role", "button")
@@ -200,10 +200,10 @@ function getAnnio(moneda, nombreProceso = null) {
                         .attr("class", "paginacion")
                         .text(i)
 
-            ***REMOVED***
+                }
 
 
-        ***REMOVED***
+            }
 
             if (pag_actual < totalPag) {
                 //(totalPag - pag_actual) > cant_por_linea
@@ -217,8 +217,8 @@ function getAnnio(moneda, nombreProceso = null) {
                         .attr("class", "")
                         .text("chevron_right")
 
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
                
@@ -227,9 +227,9 @@ function getAnnio(moneda, nombreProceso = null) {
                 pagina_actual = $(this).attr("data-page");
 
                 getContratos($("#top_contratos_periodos option:selected").val(), pagina_actual, cant_por_pag, $("#top_origen_informacion option:selected").val(), $('#entidad').val(), $('#proceso').val());
-        ***REMOVED***);
+            });
 
-    ***REMOVED***
+        }
 
         function getContratos(annio, pagina, registros, origen, entidad, proceso, moneda) {
 
@@ -244,7 +244,7 @@ function getAnnio(moneda, nombreProceso = null) {
                 NombreContratista: null,
                 OrigenInformacion: 0,
                 CodigoContrato: null
-        ***REMOVED***;
+            };
             $.ajax({
                 type: 'GET',
                 contentType: "application/json; charset=utf-8",
@@ -274,7 +274,7 @@ function getAnnio(moneda, nombreProceso = null) {
                                     fila += filaconfirma + '</div>' + referencia + '</div>';
                                     filaconfirma = "";
 
-                            ***REMOVED***
+                                }
                                 if (entidad != info[i].comprador.toString()) {
                                     if (i > 0) //Cambio de entidad
                                     {
@@ -284,14 +284,14 @@ function getAnnio(moneda, nombreProceso = null) {
                                         filasinfirma = "";
                                         inicio = "";
                                         fin = "";
-                                ***REMOVED***
+                                    }
                                     var stilo = "";
-                                    if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" ***REMOVED*** else { stilo = "contractSEFIN" ***REMOVED***
+                                    if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" } else { stilo = "contractSEFIN" }
                                     inicio = '<div class="cotractName ' + stilo+'"><div class="row"><div class="col-xs-12 col-md-12"><span class="small">Entidad</span><div class="clearfix"></div>'
                                         + '                 <span class="h4">' + info[i].comprador.toString() + '</span>'
                                         + ' </div></div></div>';
                                     entidad = info[i].comprador.toString();
-                            ***REMOVED***
+                                }
 
                                 if (proceso != info[i].codigoProceso.toString()) {
                                     
@@ -308,7 +308,7 @@ function getAnnio(moneda, nombreProceso = null) {
 							            + '			<div class="col-xs-12 col-md-4">'
 							            + '				<span class="txt_small">Estado del proceso</span>'
 							            + '				<span class="amount_adj">';
-                                    if (info[i].estadoProceso) { fila += info[i].estadoProceso.toString(); ***REMOVED***
+                                    if (info[i].estadoProceso) { fila += info[i].estadoProceso.toString(); }
                                     fila += '</span></div>'
                                         + '			<div class="col-xs-6 col-md-4"><span class="txt_small">Monto Estimado</span> <span class="amount_adj"> ' + (info[i].valorPlaneado * 1).formatMoney(2, '.', ',').toString() + ' </span></div>'
                                         + '			    <div class="col-xs-6 col-md-2">'
@@ -326,21 +326,21 @@ function getAnnio(moneda, nombreProceso = null) {
                                         + '		    <span class="txt_small">Fecha de Inicio</span>'
                                             + '         <span class="amount_adj">' + info[i].fechaIncioPublicacionProceso.toString().substr(0, 10) + '</span>'
                                         + '			    </div>';
-                                ***REMOVED***
+                                    }
                                     if (info[i].fechaInicioRecepcionOfertas) {
                                         fila += ''
                                         + '			<div class="col-xs-12 col-md-4">'
                                         + '		    <span class="txt_small">Fecha de Recepción</span>'
                                             + '         <span class="amount_adj">' + info[i].fechaInicioRecepcionOfertas.toString().substr(0, 10) + '</span>'
                                         + '			    </div>';
-                                ***REMOVED***
+                                    }
                                     if (info[i].fechaEstimadaAdjudicacion) {
                                         fila += ''
                                         + '			<div class="col-xs-12 col-md-4">'
                                         + '		    <span class="txt_small">Fecha estimada de adjudicación</span>'
                                             + '         <span class="amount_adj">' + info[i].fechaEstimadaAdjudicacion.toString().substr(0, 10) + '</span>'
                                         + '			    </div>';
-                                ***REMOVED***
+                                    }
 
                                     fila += '	</div>'
                                     + '	</div>';
@@ -357,7 +357,7 @@ function getAnnio(moneda, nombreProceso = null) {
                                         + '<div class="col-xs-12 col-md-12"><a href="' + info[i].docURL.toString() + '" target="_blank" class="btn btn-outlined"><i class="material-icons md-22">launch</i> <span class="txt_small">Conozca mas de este proceso</span></a></div>'
                                     + '</div>';
 
-                            ***REMOVED***
+                                }
 
 
                                 filaconfirma += '<div class="panel panel-default">'
@@ -365,7 +365,7 @@ function getAnnio(moneda, nombreProceso = null) {
                                     + '                <h4 class="panel-title">'
                                     + '                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapse' + i + '">';
 
-                                if (info[i].codigoContrato) { filaconfirma += '                        Código de contratación:  ' + info[i].codigoContrato.toString() + ''; ***REMOVED*** else { filaconfirma += '                      Pendiente emisión código contratación  ' ***REMOVED***
+                                if (info[i].codigoContrato) { filaconfirma += '                        Código de contratación:  ' + info[i].codigoContrato.toString() + ''; } else { filaconfirma += '                      Pendiente emisión código contratación  ' }
 
                                 filaconfirma += '     </a>'
                                     + '                </h4>'
@@ -376,13 +376,13 @@ function getAnnio(moneda, nombreProceso = null) {
                                     filaconfirma += '          <div class="row border-b">'
                                         + '                        <div class="col-md-12"><span class="small"> CONTRATO</span><span class="amount_adj">' + info[i].descripcionContrato.toString() + '</span></div>'
                                         + '                    </div>';
-                            ***REMOVED***
+                                }
                                 var moneda = '$'; //'L';
                                 if (info[i].monedaContrato.toString()) {
                                     if (info[i].monedaContrato.toString() == 'USD') {
                                         moneda = '';// '$';
-                                ***REMOVED***
-                            ***REMOVED***
+                                    }
+                                }
                                 filaconfirma +=  '        <div class="row border-b">'
                                    + '                        <div class="col-md-4">'
                                    + '                            <span class="small"> RAZÓN SOCIAL<span>'
@@ -404,14 +404,14 @@ function getAnnio(moneda, nombreProceso = null) {
                                     + '                                                                     <span class="amount_adj">'
                                     + info[i].fechaInicioContrato.toString().substr(0, 10)
                                     + '                                                                      </span></div>';
-                            ***REMOVED***
+                                }
                                 if (info[i].fechaFinContrato && info[i].fechaFinContrato.toString().substr(0, 10) !== "1900-01-01") {
                                     filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">'
                                     + 'FECHA DE FIN CONTRATO'
                                     + '</span><span class="amount_adj">'
                                         + info[i].fechaFinContrato.toString().substr(0, 10)
                                     + '        </span></div>';
-                            ***REMOVED***
+                                }
 
                                 if (info[i].fechaInicioEjecucionContrato && info[i].fechaInicioEjecucionContrato.toString().substr(0, 10) !== "1900-01-01") {
                                     filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">'
@@ -419,14 +419,14 @@ function getAnnio(moneda, nombreProceso = null) {
                                     + '</span><span class="amount_adj">'
                                         + info[i].fechaInicioEjecucionContrato.toString().substr(0, 10)
                                     + '        </span></div>';
-                            ***REMOVED***
+                                }
                                 if (info[i].fechaFinEjecucionContrato && info[i].fechaFinEjecucionContrato.toString().substr(0, 10) !== "1900-01-01") {
                                     filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">'
                                     + 'Fecha de FIN EJECUCIÓN'
                                     + '</span><span class="amount_adj">'
                                         + info[i].fechaFinEjecucionContrato.toString().substr(0, 10)
                                     + '        </span></div>';
-                            ***REMOVED***
+                                }
 
                                 filaconfirma += '                    </div>';
 
@@ -434,7 +434,7 @@ function getAnnio(moneda, nombreProceso = null) {
                                     filaconfirma += '                    <div class="row border-b">'
                                     + '                        <div class="col-xs-6 col-md-3"><span class="small"> Duración </span><span class="amount_adj">';
 
-                                    if (info[i].ofertaPeriodoDuracion) { filaconfirma += info[i].ofertaPeriodoDuracion.toString(); ***REMOVED***
+                                    if (info[i].ofertaPeriodoDuracion) { filaconfirma += info[i].ofertaPeriodoDuracion.toString(); }
 
                                     filaconfirma += '                   Días</span></div>';
 
@@ -442,26 +442,26 @@ function getAnnio(moneda, nombreProceso = null) {
 
                                     if (info[i].fechaPublicacion !== null && info[i].fechaPublicacion.toString().substr(0, 10) !== "1900-01-01") {
                                         filaconfirma += info[i].fechaPublicacion.toString().substr(0, 10) + '</span></div>';
-                                ***REMOVED***
+                                    }
                                     else {
                                         filaconfirma += '</span></div>';
-                                ***REMOVED***
+                                    }
 
                                     filaconfirma += '                    </div>';
 
-                            ***REMOVED***
+                                }
 
                                 filaconfirma += '                </div>'
                                 + '               <div class="panel-footer" style="align:center">';
 
                                 if (info[i].codigoContrato) {
                                     filaconfirma += '                    <a href="../../contrato?codcontrato=' + info[i].codigoContrato.toString() + '" class="btn btn-primary btn-participe"><i class="material-icons md-22">add_comment</i> Hacer comentario al contrato</a>';
-                            ***REMOVED***
+                                }
                                 filaconfirma += '                 </div>'
                                 + '            </div>'
                                 + '        </div>';
                                 
-                        ***REMOVED***
+                            }
 
 
                             data += inicioLuis + inicio + fila + filaconfirma + '</div></div>' + referencia + finLuis;
@@ -469,12 +469,12 @@ function getAnnio(moneda, nombreProceso = null) {
 
                             $("#srcContratos").html(data);
                             if (scrol >= 1) {
-                                $('html, body').animate({ scrollTop: $('#secInfoContratos').offset().top ***REMOVED***, 2000);
-                        ***REMOVED*** else { scrol = scrol + 1; ***REMOVED***
+                                $('html, body').animate({ scrollTop: $('#secInfoContratos').offset().top }, 2000);
+                            } else { scrol = scrol + 1; }
 
                             dibujaPaginacionContrato(pagina, result.cantidadTotalRegistros, Math.ceil(result.cantidadTotalRegistros / registros), registros);
                             configuraEnlaceContratista();
-                    ***REMOVED***
+                        }
                         else {
                             $("#divPagContratos").empty();
                             $("#srcContratos").html("");
@@ -482,23 +482,23 @@ function getAnnio(moneda, nombreProceso = null) {
                                 + '<div class="contractNumberRP"><span class="text-bold NoResultC">No se encuentran resultados con los filtros solicitados</span></div>'
                                 + '</div>';
                             $("#srcContratos").html(fila);
-                    ***REMOVED***
-                ***REMOVED*** else {
+                        }
+                    } else {
                         alert("Message: " + result.message);
-                ***REMOVED***
+                    }
                     deshabilita(false);
-              ***REMOVED***
+                },
                 error: function (response) {
                     deshabilita(false);
                     alert(response.responseText);
-              ***REMOVED***
+                },
                 failure: function (response) {
                     deshabilita(false);
                     alert(response.responseText);
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
 
-    ***REMOVED***
+        }
 
 
 
@@ -507,19 +507,19 @@ function getAnnio(moneda, nombreProceso = null) {
 $("#entidad").on("keyup", function (event) {
     if (event.keyCode == 9 || event.keyCode == 13) {
         event.preventDefault();
-***REMOVED*** else {
+    } else {
         if (event.keyCode == 8) {
             if ($(this).val().length <= 1) {
                 $(this).val("");
 
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
-***REMOVED***).autocomplete({
+            }
+        }
+    }
+}).autocomplete({
     source: function (request, response) {
         var filtros = {
             Comprador: request.term
-    ***REMOVED***;
+        };
         $.ajax({
             type: 'GET',
             contentType: "application/json; charset=utf-8",
@@ -533,46 +533,46 @@ $("#entidad").on("keyup", function (event) {
                 if (datos == null || datos.contratosPerAnyo.length <= 0) {
                     $("#divNoEncontrado").show();
                     $("#ui-id-1").hide();
-            ***REMOVED*** else {
+                } else {
                     $("#divNoEncontrado").hide();
                     response($.map(datos.contratosPerAnyo, function (item) {
                         return {
                             label: item.label,
                             value: item.label
-                    ***REMOVED***;
+                        };
 
-                ***REMOVED***
+                    }
                     ));
 
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
             error: function (response) {
                 alert(response.responseText);
-          ***REMOVED***
+            },
             failure: function (response) {
                 alert(response.responseText);
-        ***REMOVED***
-    ***REMOVED***);
-  ***REMOVED***
+            }
+        });
+    },
     delay: 300,
     minLength: 1,
     select: function (event, ui) {
 
-***REMOVED***
-***REMOVED***).bind('blur onblur', function () {
+    }
+}).bind('blur onblur', function () {
     if ($(this).val() == "") {
         $(this).val("");
         $("#divNoEncontrado").hide();
-***REMOVED***
+    }
 
-***REMOVED***);
+});
 
 $("#top_contratos_periodos").change(function () {
 
     var filtros = {
         Annio: $("#top_contratos_periodos option:selected").val(),
         Moneda: $("#moneda").val(),
-***REMOVED***;
+    };
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -590,7 +590,7 @@ $("#top_contratos_periodos").change(function () {
                 for (var i = 0; i < result.consolidados.length; i++) {
 
                     if (result.consolidados[i].origenInformacion.toUpperCase().includes('ONCAE')) {
-                            if (existeOncae == 0) { $('#resultONCAE').empty(); existeOncae += 1; ***REMOVED***
+                            if (existeOncae == 0) { $('#resultONCAE').empty(); existeOncae += 1; }
                             var html = '<div class="col-md-4">'
                                 + '<div class="h6">' + result.consolidados[i].origenInformacion.replace("Oncae - ", "").replace("ONCAE - ", "").replace("Catalogo Electrónico","Catálogo Electrónico") + '</div>'
                             + '    <div class="h4">' + (result.consolidados[i].nroContratos * 1).formatMoney(0, '.', ',').toString() + '</div>'
@@ -598,10 +598,10 @@ $("#top_contratos_periodos").change(function () {
                                 + '    <div class="h4">' + result.consolidados[i].monedaContrato + ' ' + (result.consolidados[i].valorContratado * 1 / 1000000).formatMoney(1, '.', ',').toString() + ' Millones' + '</div>'
                                 + '</div>';
                             $('#dataONCAE').append(html);
-                    ***REMOVED***
+                        }
 
                     if (result.consolidados[i].origenInformacion.toUpperCase().includes('SEFIN')) {
-                            if (existeSefin == 0) { $('#resultSEFIN').empty(); existeSefin += 1; ***REMOVED***
+                            if (existeSefin == 0) { $('#resultSEFIN').empty(); existeSefin += 1; }
                             var html = ''
                                 + '<div class="h6">' + result.consolidados[i].origenInformacion.toUpperCase() + '</div>'
                             + '    <div class="h4">' + (result.consolidados[i].nroContratos).formatMoney(0, '.', ',').toString() + '</div>'
@@ -609,21 +609,21 @@ $("#top_contratos_periodos").change(function () {
                                 + '    <div class="h4">' + result.consolidados[i].monedaContrato + ' ' + (result.consolidados[i].valorContratado * 1 / 1000000).formatMoney(1, '.', ',').toString() + ' Millones' + '</div>'
                                 + ''
                             $('#dataSEFIN').append(html);
-                    ***REMOVED***
-            ***REMOVED***
+                        }
+                }
                 scrol = 0;
                 getContratos($("#top_contratos_periodos option:selected").val(), 1, cant_contratos, $("#top_origen_informacion option:selected").val(), $('#entidad').val(), $('#proceso').val());
 
-        ***REMOVED***
+            }
 
-      ***REMOVED***
+        },
         error: function (response) {
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
-***REMOVED***);
+        }
+    });
+});
 
 

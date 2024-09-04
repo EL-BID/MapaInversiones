@@ -8,7 +8,7 @@ namespace PlataformaTransparencia.Modelos.Contratos
 {
     public class ContratosEstado
     {
-        public string EstadoContrato { get; set; ***REMOVED***
-        public string Nombre { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string EstadoContrato { get; set; }
+        public string Nombre { get; set; }
+    }
+}

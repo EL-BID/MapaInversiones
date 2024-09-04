@@ -9,7 +9,7 @@ var ruc_contratista = null;
 
 if (contratistaData != null && contratistaData != undefined && contratistaData.length > 0) {
     ruc_contratista = contratistaData[0].contratista_id;
-***REMOVED***
+}
 
 var done_graficas = 0;
 var cant_graficas = 5;
@@ -25,16 +25,16 @@ function inicializaDatos() {
     getAnnio();
 
 
-***REMOVED***
+}
 
 
 function getGraficasAll() {
     if (ruc_contratista != undefined && ruc_contratista != null && ruc_contratista != "") {
         getInfoGraficaContratosPerAnyo();
         getInfoGraficaValorContratosPerAnyo();
-***REMOVED***
+    }
 
-***REMOVED***
+}
 
 function configuraEnlaceContratista() {
     $(".enlace_contratista").click(function () {
@@ -45,19 +45,19 @@ function configuraEnlaceContratista() {
         var url = "/contratista?" + dataType + "=" + dataValue;
         window.location.href = url;
 
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     var results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-***REMOVED***
+}
 
 function getInfoGraficaContratosPerAnyo() {
-    var params_usu = { "Contratista": ruc_contratista***REMOVED***;
+    var params_usu = { "Contratista": ruc_contratista};
     $("#divGraphContratosCantidad").html("");
     $("#divContenedorContratosCantidad").css("display", "none");
 
@@ -81,23 +81,23 @@ function getInfoGraficaContratosPerAnyo() {
                 $("#divContenedorContratosCantidad").css("display", "");
                 $("#divGraphContratosCantidad").css("display", "");
                 loadBarChartUnidades(contratos_anyo_data,"divGraphContratosCantidad");
-        ***REMOVED*** else {
+            } else {
                 $("#secCantidadContrato").css("display", "none");
                 $("#divContenedorContratosCantidad").css("display", "none");
-        ***REMOVED***
-      ***REMOVED***
+            }
+        },
         error: function (response) {
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
-***REMOVED***
+}
 
 function getInfoGraficaValorContratosPerAnyo() {
-    var params_usu = { "Contratista": ruc_contratista ***REMOVED***;
+    var params_usu = { "Contratista": ruc_contratista };
     $("#divGraphContratosValor").html("");
     $("#divContenedorContratosValor").css("display", "none");
 
@@ -121,20 +121,20 @@ function getInfoGraficaValorContratosPerAnyo() {
                 $("#divContenedorContratosValor").css("display", "");
                 $("#divGraphContratosValor").css("display", "");
                 loadBarChartDinero(contratos_valor_data, "divGraphContratosValor");
-        ***REMOVED*** else {
+            } else {
                 $("#secValorContrato").css("display", "none");
                 $("#divContenedorContratosValor").css("display", "none");
-        ***REMOVED***
-      ***REMOVED***
+            }
+        },
         error: function (response) {
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
-***REMOVED***
+}
 
 
 
@@ -147,22 +147,22 @@ function loadBarChartUnidades(objData, divContenedor) {
                 var traduc_aux = (d.toString());
                 if (d === "Back" || d === "back") {
                     traduc_aux = "Atrás";
-            ***REMOVED*** else if (d === "Click to Expand") {
+                } else if (d === "Click to Expand") {
                     traduc_aux = "Clic para Expandir";
-            ***REMOVED*** else if (d === "No Data Available") {
+                } else if (d === "No Data Available") {
                     traduc_aux = "Información No Disponible";
-            ***REMOVED***
+                }
                 else if (d === "Click to Hide") {
                         traduc_aux = "Clic para Ocultar";
-            ***REMOVED***
+                }
                 else if (d === "Shift+Click to Highlight") {
                     traduc_aux = "Mayús + clic para resaltar";
-            ***REMOVED***
+                }
                 else {
                     traduc_aux = d;
-            ***REMOVED***
+                }
                 return traduc_aux;
-        ***REMOVED***)
+            })
             .config({
                 data: objData,
                 groupBy: "labelGroup",
@@ -171,31 +171,31 @@ function loadBarChartUnidades(objData, divContenedor) {
                 shapeConfig: {
                     label: false,
 
-              ***REMOVED***
+                },
                 tooltipConfig: {
                     title: function (d) {
                         return d["labelGroup"];
-                  ***REMOVED***
+                    },
                     tbody: [
-                        [function (d) { return d["rawValue"].formatMoney(0, '.', ',').toString()+" contratos"***REMOVED***]
+                        [function (d) { return d["rawValue"].formatMoney(0, '.', ',').toString()+" contratos"}]
                     ]
-              ***REMOVED***
+                },
                 yConfig: {
                     title: " ",
                     scale: "pow",
-              ***REMOVED***
+                },
                 xConfig: {
                     fontsize: "2px",
                     size: "2px"
-              ***REMOVED***
-        ***REMOVED***)
+                },
+            })
             .barPadding(0)
             .groupPadding(50)
             .colorScale(["#4DE0E3", "#3899CD"])
             .height(400)
             .render();
-***REMOVED***
-***REMOVED***
+    }
+}
 
 function loadBarChartDinero(objData, divContenedor) {
     $("#" + divContenedor).empty();
@@ -206,22 +206,22 @@ function loadBarChartDinero(objData, divContenedor) {
                 var traduc_aux = (d.toString());
                 if (d === "Back" || d === "back") {
                     traduc_aux = "Atrás";
-            ***REMOVED*** else if (d === "Click to Expand") {
+                } else if (d === "Click to Expand") {
                     traduc_aux = "Clic para Expandir";
-            ***REMOVED*** else if (d === "No Data Available") {
+                } else if (d === "No Data Available") {
                     traduc_aux = "Información No Disponible";
-            ***REMOVED***
+                }
                 else if (d === "Click to Hide") {
                     traduc_aux = "Clic para Ocultar";
-            ***REMOVED***
+                }
                 else if (d === "Shift+Click to Highlight") {
                     traduc_aux = "Mayús + clic para resaltar";
-            ***REMOVED***
+                }
                 else {
                     traduc_aux = d;
-            ***REMOVED***
+                }
                 return traduc_aux;
-        ***REMOVED***)
+            })
             .config({
                 data: objData,
                 groupBy: "labelGroup",
@@ -229,35 +229,35 @@ function loadBarChartDinero(objData, divContenedor) {
                 y: "rawValue",
                 shapeConfig: {
                     label: false,
-              ***REMOVED***
+                },
                 tooltipConfig: {
                     title: function (d) {
                         return d["labelGroup"];
-                  ***REMOVED***
+                    },
                     tbody: [
-                        [function (d) { return "L " + (d["rawValue"]).formatMoney(2, '.', ',').toString() + " " ***REMOVED***]
+                        [function (d) { return "L " + (d["rawValue"]).formatMoney(2, '.', ',').toString() + " " }]
                     ]
-              ***REMOVED***
+                },
                 yConfig: {
                     maxSize: "100px",
                     title: [],
                     scale: "pow",
                     tickFormat: function (d) {
                         return (d.formatMoney(0, '.', ',').toString()) + " ";
-                ***REMOVED***
-              ***REMOVED***
+                    }
+                },
                 xConfig: {
                     fontsize: "2px",
                     size: "2px"
-              ***REMOVED***
-        ***REMOVED***)
+                },
+            })
             .barPadding(0)
             .groupPadding(50)
             .colorScale(["#4DE0E3", "#3899CD"])
             .height(400)
             .render();
-***REMOVED***
-***REMOVED***
+    }
+}
 
 
 
@@ -270,19 +270,19 @@ Number.prototype.formatMoney = function (c, d, t) {
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-***REMOVED***;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
 
 
 
 function cambiarTipoTexto(cadena) {
     return cadena.charAt(0).toUpperCase() + cadena.slice(1).toLowerCase();
-***REMOVED***
+}
 
 
 function getAnnio() {
     //debugger;
-    var params_usu = { "Contratista": ruc_contratista ***REMOVED***;
+    var params_usu = { "Contratista": ruc_contratista };
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -302,32 +302,32 @@ function getAnnio() {
                 if (!annios.includes(items_result[i].valor.toString())) {
                     annios.push(items_result[i].valor.toString());
                     select = select + '<option value="' + items_result[i].valor.toString() + '">' + items_result[i].valor.toString() + '</option>';
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
 
             $('#top_contratos_periodos').html(select).fadeIn();
             if (items_result.length > 0) {
                 getContratos($("#top_contratos_periodos option:selected").val(), ruc_contratista, $("#top_origen_informacion option:selected").val(), 1, cant_contratos);
                 getGraficasAll();
-        ***REMOVED*** else {
+            } else {
                 $("#srcContratos").html("");
                 var fila = '<div class="contractBox" >'
                     + '<div class="contractNumber"><span class="text-bold">No se encuentran resultados con los filtros solicitados</span></div>'
                     + '</div>';
 
                 $("#srcContratos").html(fila);
-        ***REMOVED***
-      ***REMOVED***
+            }
+        },
         error: function (response) {
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
-***REMOVED***
+}
 
 var disableClick = false;
 function deshabilita(des) {
@@ -335,11 +335,11 @@ function deshabilita(des) {
     if (des) {
         $("#btn-buscar").prop("disabled", des);
         $('#btnLimpiar').attr("disabled", "disabled")
-***REMOVED*** else {
+    } else {
         $("#btn-buscar").prop("disabled", des);
         $('#btnLimpiar').removeAttr("disabled")
-***REMOVED***
-***REMOVED***
+    }
+}
 
 $("#btnLimpiar").click(function () {
     if (!disableClick) {
@@ -347,17 +347,17 @@ $("#btnLimpiar").click(function () {
         $("#top_origen_informacion").val("");
         deshabilita(true);
         getContratos($("#top_contratos_periodos option:selected").val(), ruc_contratista, $("#top_origen_informacion option:selected").val(), 1, cant_contratos);
-***REMOVED***
-***REMOVED***);
+    }
+});
 
 $("#btn-buscar").click(function () {
     if (!disableClick) {
         deshabilita(true);
         getContratos($("#top_contratos_periodos option:selected").val(), ruc_contratista, $("#top_origen_informacion option:selected").val(), 1, cant_contratos);
 
-***REMOVED***
+    }
 
-***REMOVED***);
+});
 
 function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     var pag_actual = parseInt(actual);
@@ -375,17 +375,17 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     var inicio = 1;
     if (residuo == 0) {
         inicio = (pag_actual - cant_por_linea) + 1;
-***REMOVED*** else {
+    } else {
         inicio = (cociente * cant_por_linea) + 1;
-***REMOVED***
+    }
 
     var fin = inicio + (cant_por_linea - 1);
     if (totalPag < cant_por_linea) {
         fin = totalPag;
-***REMOVED***
+    }
     if (fin > totalPag) {
         fin = totalPag;
-***REMOVED***
+    }
 
 
     if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
@@ -397,7 +397,7 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
         pag_enlace.append("span")
             .attr("class", "")
             .text("chevron_left ")
-***REMOVED***
+    }
 
 
 
@@ -409,7 +409,7 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
                 .attr("data-page", i)
             pag_enlace.append("text")
                 .text(i)
-    ***REMOVED*** else {
+        } else {
             var pag_enlace = divPag.append("a")
                 .attr("class", "page_left")
                 .attr("role", "button")
@@ -420,10 +420,10 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
                 .attr("class", "paginacion")
                 .text(i)
 
-    ***REMOVED***
+        }
 
 
-***REMOVED***
+    }
 
     if (pag_actual < totalPag) {
         if (fin < totalPag) {
@@ -436,8 +436,8 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
                 .attr("class", "")
                 .text("chevron_right")
 
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
 
@@ -446,9 +446,9 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
         pagina_actual = $(this).attr("data-page");
 
         getContratos($("#top_contratos_periodos option:selected").val(), ruc_contratista, $("#top_origen_informacion option:selected").val(), pagina_actual, cant_por_pag);
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 function getContratos(annio, ruc, origen, pagina, registros) {
 
@@ -465,7 +465,7 @@ function getContratos(annio, ruc, origen, pagina, registros) {
         CodigoProveedor: ruc,
         OrigenInformacion: origen
        
-***REMOVED***;
+    };
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -502,13 +502,13 @@ function getContratos(annio, ruc, origen, pagina, registros) {
                                 fila = "";
                                 inicio = "";
                                 fin = "";
-                        ***REMOVED***
+                            }
                             if (info[i].docURL) {
                                 urlProceso = info[i].docURL;
-                        ***REMOVED***
+                            }
 
                             var stilo = "";
-                            if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" ***REMOVED*** else { stilo = "contractSEFIN" ***REMOVED***
+                            if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" } else { stilo = "contractSEFIN" }
                             inicio = '<div class="contractNumber"><span class="">Código proceso: </span> <span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div>'
                                 + ' <div class="wrap-head-process">'
                                 + '     <div class="cotractName '+stilo+'">'
@@ -529,7 +529,7 @@ function getContratos(annio, ruc, origen, pagina, registros) {
                                 inicio += info[i].unidadCompra.toString();
                                 inicio += '</span></div>'
                                     + '         </div>';
-                        ***REMOVED***
+                            }
 
 
 
@@ -542,7 +542,7 @@ function getContratos(annio, ruc, origen, pagina, registros) {
                                     + '             <div class="col-xs-6 col-md-4"><span class="txt_small">Monto Estimado</span><span class="amount_adj">' + (info[i].valorPlaneado * 1).formatMoney(2, '.', ',').toString() + '</span></div>' // 
                                     + '             <div class="col-xs-6 col-md-4"><span class="txt_small">Moneda</span><span class="amount_adj">' + info[i].monedaContrato + '</span></div>' // L
                                     + '         </div>';
-                        ***REMOVED***
+                            }
 
                             if (info[i].fechaIncioPublicacionProceso) {
                                 inicio += ''
@@ -552,11 +552,11 @@ function getContratos(annio, ruc, origen, pagina, registros) {
                                 inicio += '</span></div>';
                                 if (info[i].fechaInicioRecepcionOfertas) {
                                     inicio += '             <div class="col-xs-6 col-md-4"><span class="txt_small">Fecha de Recepción</span><span class="amount_adj">' + info[i].fechaInicioRecepcionOfertas.toString().substr(0, 10) + '</span></div>' // 
-                            ***REMOVED***
+                                }
                                     
                                 inicio += '             <div class="col-xs-6 col-md-4"><span class="txt_small">Fecha estimada de adjudicación</span><span class="amount_adj">' + info[i].fechaEstimadaAdjudicacion.toString().substr(0, 10) + '</span></div>' // L
                                     + '         </div>';
-                        ***REMOVED***
+                            }
 
                             inicio += '     </div>'
                                 + ' </div>'
@@ -566,18 +566,18 @@ function getContratos(annio, ruc, origen, pagina, registros) {
                             proceso = info[i].codigoProceso.toString();
                             origen = info[i].origenInformacion.toString();
                            
-                    ***REMOVED***
+                        }
                         fila += '<div class="panel panel-default">'
                             + '            <div class="panel-heading" role="tab" id="headingOne' + i + '">'
                             + '                <h4 class="panel-title">'
                             + '                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapse' + i + '">';
-                        if (info[i].codigoContrato) { fila += '                        Código de contratación:  ' + info[i].codigoContrato.toString() + ''; ***REMOVED*** else { fila += '                      Pendiente emisión código contratación  ' ***REMOVED***
+                        if (info[i].codigoContrato) { fila += '                        Código de contratación:  ' + info[i].codigoContrato.toString() + ''; } else { fila += '                      Pendiente emisión código contratación  ' }
                         var moneda = '$';//'L';
                         if (info[i].monedaContrato.toString()) {
                             if (info[i].monedaContrato.toString() == 'USD') {
                                 moneda = '';// '$';
-                        ***REMOVED***
-                    ***REMOVED***
+                            }
+                        }
                         fila += '                    </a>'
                             + '                </h4>'
                             + '            </div>'
@@ -598,27 +598,27 @@ function getContratos(annio, ruc, origen, pagina, registros) {
                             + '                    </div>'
                             + '                    <div class="row border-b">'
                             + '                        <div class="col-xs-3 col-md-3"><span class="small">';
-                            if (info[i].fechaInicioContrato) { fila += ' FECHA DE INICIO CONTRATO'; ***REMOVED***
+                            if (info[i].fechaInicioContrato) { fila += ' FECHA DE INICIO CONTRATO'; }
                             fila += '</span><span class="amount_adj">';
-                            if (info[i].fechaInicioContrato) { fila += info[i].fechaInicioContrato.toString().substr(0, 10); ***REMOVED***
+                            if (info[i].fechaInicioContrato) { fila += info[i].fechaInicioContrato.toString().substr(0, 10); }
 
                             fila += ' </span></div>'
                                 + '                        <div class="col-xs-3 col-md-3"><span class="small">';
-                            if (info[i].fechaFinContrato) { fila += 'FECHA DE FIN CONTRATO'; ***REMOVED***
+                            if (info[i].fechaFinContrato) { fila += 'FECHA DE FIN CONTRATO'; }
                             fila += '</span><span class="amount_adj"> ';
-                            if (info[i].fechaFinContrato) { fila += info[i].fechaFinContrato.toString().substr(0, 10); ***REMOVED***
+                            if (info[i].fechaFinContrato) { fila += info[i].fechaFinContrato.toString().substr(0, 10); }
 
                             fila += ' </span></div>'
                                 + '                        <div class="col-xs-3 col-md-3"><span class="small">';
-                            if (info[i].fechaInicioEjecucionContrato) { fila += 'FECHA DE INICIO EJECUCIÓN'; ***REMOVED***
+                            if (info[i].fechaInicioEjecucionContrato) { fila += 'FECHA DE INICIO EJECUCIÓN'; }
                                 fila += '</span><span class="amount_adj"> ';
-                            if (info[i].fechaInicioEjecucionContrato) { fila += info[i].fechaInicioEjecucionContrato.toString().substr(0, 10); ***REMOVED***
+                            if (info[i].fechaInicioEjecucionContrato) { fila += info[i].fechaInicioEjecucionContrato.toString().substr(0, 10); }
 
                                 fila += ' </span></div>'
                                     + '                        <div class="col-xs-3 col-md-3"><span class="small">';
-                            if (info[i].fechaFinEjecucionContrato) { fila += 'FECHA DE FIN EJECUCIÓN'; ***REMOVED***
+                            if (info[i].fechaFinEjecucionContrato) { fila += 'FECHA DE FIN EJECUCIÓN'; }
                                 fila += '</span><span class="amount_adj"> ';
-                            if (info[i].fechaFinEjecucionContrato) { fila += info[i].fechaFinEjecucionContrato.toString().substr(0, 10); ***REMOVED***
+                            if (info[i].fechaFinEjecucionContrato) { fila += info[i].fechaFinEjecucionContrato.toString().substr(0, 10); }
 
                             fila += ' </span></div>'
 
@@ -629,7 +629,7 @@ function getContratos(annio, ruc, origen, pagina, registros) {
                             fila += '                    <div class="row border-b">'
                                 + '                        <div class="col-xs-6 col-md-3"><span class="small"> Duración </span><span class="amount_adj">';
 
-                            if (info[i].ofertaPeriodoDuracion) { fila += info[i].ofertaPeriodoDuracion.toString(); ***REMOVED***
+                            if (info[i].ofertaPeriodoDuracion) { fila += info[i].ofertaPeriodoDuracion.toString(); }
 
                             fila += '                   Días</span></div>';
 
@@ -637,14 +637,14 @@ function getContratos(annio, ruc, origen, pagina, registros) {
 
                             if (info[i].fechaPublicacion !== null && info[i].fechaPublicacion.toString().substr(0, 10) !== "1900-01-01") {
                                 fila += info[i].fechaPublicacion.toString().substr(0, 10) + '</span></div>';
-                        ***REMOVED***
+                            }
                             else {
                                 fila += '</span></div>';
-                        ***REMOVED***
+                            }
 
                             fila += '                    </div>';
 
-                    ***REMOVED***
+                        }
 
                         fila += '                    '
                             + '                </div>'
@@ -652,11 +652,11 @@ function getContratos(annio, ruc, origen, pagina, registros) {
 
                         if (info[i].codigoContrato) {
                             fila += '                    <a href="../../contrato?codcontrato=' + info[i].codigoContrato.toString() + '" class="btn btn-primary btn-participe"><i class="material-icons md-22">add_comment</i> Hacer comentario al contrato</a>';
-                    ***REMOVED***
+                        }
                         fila += '       </div>'
                             + '            </div>'
                             + '        </div>';
-                ***REMOVED***
+                    }
                     data += inicioLuis + inicio + fila + '</div></div>';
                     data += '<div class="row text-center">'
                         + '<div class="col-xs-12 col-md-12"><a href="' + urlProceso + '" target="_blank" class="btn btn-outlined"><i class="material-icons md-22">launch</i> <span class="txt_small">Conozca mas de este proceso</span></a></div>'
@@ -666,34 +666,34 @@ function getContratos(annio, ruc, origen, pagina, registros) {
 
                     $("#srcContratos").html(data);
                     if (scrol >= 1) {
-                        $('html, body').animate({ scrollTop: $('#secInfoContratos').offset().top ***REMOVED***, 2000);
-                ***REMOVED*** else { scrol = scrol + 1; ***REMOVED***
+                        $('html, body').animate({ scrollTop: $('#secInfoContratos').offset().top }, 2000);
+                    } else { scrol = scrol + 1; }
                     dibujaPaginacionContrato(pagina, result.cantidadTotalRegistros, Math.ceil(result.cantidadTotalRegistros / registros), registros);
                     configuraEnlaceContratista();
-            ***REMOVED***
+                }
                 else {
                     $("#srcContratos").html("");
                     var fila = '<div class="contractBox" >'
                         + '<div class="contractNumber"><span class="text-bold">No se encuentran resultados con los filtros solicitados</span></div>'
                         + '</div>';
                     $("#srcContratos").html(fila);
-            ***REMOVED***
-        ***REMOVED*** else {
+                }
+            } else {
                 alert("Message: " + result.message);
-        ***REMOVED***
+            }
             deshabilita(false);
-      ***REMOVED***
+        },
         error: function (response) {
             deshabilita(false);
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             deshabilita(false);
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
-***REMOVED***
+}
 
 
 

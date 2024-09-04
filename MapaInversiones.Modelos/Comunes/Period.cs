@@ -6,8 +6,8 @@ namespace PlataformaTransparencia.Modelos.Comunes
 {
     public class Period
     {
-        public string name { get; set; ***REMOVED***
-        public int id { get; set; ***REMOVED***
+        public string name { get; set; }
+        public int id { get; set; }
 
-***REMOVED***
-***REMOVED***
+    }
+}

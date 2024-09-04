@@ -10,12 +10,12 @@
 
     function finger(x, y, width, height, dir, ending, isPath, paper) {
         var path,
-            ends = { round: 'round', sharp: 'sharp', soft: 'soft', square: 'square' ***REMOVED***;
+            ends = { round: 'round', sharp: 'sharp', soft: 'soft', square: 'square' };
 
         // dir 0 for horizontal and 1 for vertical
         if ((dir && !height) || (!dir && !width)) {
             return isPath ? "" : paper.path();
-    ***REMOVED***
+        }
 
         ending = ends[ending] || "square";
         height = Math.round(height);
@@ -37,7 +37,7 @@
                             "l", 0, 0,
                             "z"
                         ];
-                ***REMOVED*** else {
+                    } else {
                         path = [
                             "M", x + .5, y + .5 - r,
                             "l", width - r, 0,
@@ -45,8 +45,8 @@
                             "l", r - width, 0,
                             "z"
                         ];
-                ***REMOVED***
-            ***REMOVED*** else {
+                    }
+                } else {
                     r = ~~(width / 2);
 
                     if (height < r) {
@@ -58,7 +58,7 @@
                             "l", 0, 0,
                             "z"
                         ];
-                ***REMOVED*** else {
+                    } else {
                         path = [
                             "M", x - r, y,
                             "l", 0, r - height,
@@ -66,8 +66,8 @@
                             "l", 0, height - r,
                             "z"
                         ];
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
                 break;
             case "sharp":
                 if (!dir) {
@@ -78,14 +78,14 @@
                         "l", 0, -height, mmax(width - half, 0), 0, mmin(half, width), half, -mmin(half, width), half + (half * 2 < height),
                         "z"
                     ];
-            ***REMOVED*** else {
+                } else {
                     half = ~~(width / 2);
                     path = [
                         "M", x + half, y,
                         "l", -width, 0, 0, -mmax(height - half, 0), half, -mmin(half, height), half, mmin(half, height), half,
                         "z"
                     ];
-            ***REMOVED***
+                }
                 break;
             case "square":
                 if (!dir) {
@@ -94,13 +94,13 @@
                         "l", 0, -height, width, 0, 0, height,
                         "z"
                     ];
-            ***REMOVED*** else {
+                } else {
                     path = [
                         "M", x + ~~(width / 2), y,
                         "l", 1 - width, 0, 0, -height, width - 1, 0,
                         "z"
                     ];
-            ***REMOVED***
+                }
                 break;
             case "soft":
                 if (!dir) {
@@ -114,7 +114,7 @@
                         "l", r - width, 0,
                         "z"
                     ];
-            ***REMOVED*** else {
+                } else {
                     r = mmin(Math.round(width / 5), height);
                     path = [
                         "M", x - ~~(width / 2), y,
@@ -125,15 +125,15 @@
                         "l", 0, height - r,
                         "z"
                     ];
-            ***REMOVED***
-    ***REMOVED***
+                }
+        }
 
         if (isPath) {
             return path.join(",");
-    ***REMOVED*** else {
+        } else {
             return paper.path(path);
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
 /*\
  * Paper.vbarchart
@@ -157,15 +157,15 @@
  o stacked (boolean) whether or not to tread values as in a stacked bar chart
  o to
  o stretch (boolean)
- o ***REMOVED***
+ o }
  **
  = (object) path element of the popup
  > Usage
- | r.vbarchart(0, 0, 620, 260, [76, 70, 67, 71, 69], {***REMOVED***)
+ | r.vbarchart(0, 0, 620, 260, [76, 70, 67, 71, 69], {})
  \*/
  
     function VBarchart(paper, x, y, width, height, values, opts) {
-        opts = opts || {***REMOVED***;
+        opts = opts || {};
 
         var chartinst = this,
             type = opts.type || "square",
@@ -187,7 +187,7 @@
         for(ind = values.length; ind--;){
             total = Math.max(total, values[ind].rawValue)
         	if( values[ind].rawValue ) min = Math.min(min, values[ind].rawValue)
-    ***REMOVED***
+        }
 
 
         // if (Raphael.is(values[0], "array")) {
@@ -199,7 +199,7 @@
         //         bars.push(paper.set());
         //         total.push(Math.max.apply(Math, values[i]));
         //         len = Math.max(len, values[i].length);
-        // ***REMOVED***
+        //     }
 
         //     if (opts.stacked) {
         //         for (var i = len; i--;) {
@@ -207,22 +207,22 @@
 
         //             for (var j = values.length; j--;) {
         //                 tot +=+ values[j][i] || 0;
-        //         ***REMOVED***
+        //             }
 
         //             stacktotal.push(tot);
-        //     ***REMOVED***
-        // ***REMOVED***
+        //         }
+        //     }
 
         //     for (var i = values.length; i--;) {
         //         if (values[i].length < len) {
         //             for (var j = len; j--;) {
         //                 values[i].push(0);
-        //         ***REMOVED***
-        //     ***REMOVED***
-        // ***REMOVED***
+        //             }
+        //         }
+        //     }
 
         //     total = Math.max.apply(Math, opts.stacked ? stacktotal : total);
-        // ***REMOVED***
+        // }
         
         total = (opts.to) || total;
 
@@ -237,7 +237,7 @@
         gap = dectotal/linesCount
         while(dectotal-gap > total){
         	dectotal -= gap
-    ***REMOVED***
+        }
         gap = dectotal/linesCount
 		
 
@@ -257,32 +257,32 @@
                 s = min + ((max - min)/
                     numScales * i)
                 s = Math.round( s / Math.pow(10, hidnDigs) )
-                scales.push(s.toString().replace(/(\d)(\d{3***REMOVED***)/,'$1.$2'))
-        ***REMOVED***
+                scales.push(s.toString().replace(/(\d)(\d{3})/,'$1.$2'))
+            }
 
             if(hidnDigs == 3){
                 units = 'Miles'
-        ***REMOVED***else if(hidnDigs == 6){
+            }else if(hidnDigs == 6){
                 units = 'Millones'
-        ***REMOVED***else if(hidnDigs == 9){
+            }else if(hidnDigs == 9){
                 units = 'Miles de Millones'
-        ***REMOVED***else if(hidnDigs == 12){
+            }else if(hidnDigs == 12){
                 units = 'Billones'
-        ***REMOVED***else if(hidnDigs == 15){
+            }else if(hidnDigs == 15){
                 units = 'Miles de Billones'
-        ***REMOVED***else if(hidnDigs == 18){
+            }else if(hidnDigs == 18){
                 units = 'Millones de Billones'
-        ***REMOVED***else if(hidnDigs == 18){
+            }else if(hidnDigs == 18){
                 units = 'Trillones'
-        ***REMOVED***
+            }
             
-            return {units: units, scales: scales***REMOVED***
-    ***REMOVED***
+            return {units: units, scales: scales}
+        }
 
         if (!opts.stretch) {
             barhgutter = Math.round(barhgutter);
             barwidth = Math.floor(barwidth);
-    ***REMOVED***
+        }
 
         !opts.stacked && (barwidth /= multi || 1);
 		
@@ -295,19 +295,19 @@
 	        		stroke: '#ddd',
 	        		opacity: 0.8,
 	        		'stroke-width': '1'
-	        	***REMOVED***)
+	        	})
             paper.text(x - 5, vpos+y, units.scales[linesCount-i] + (opts.to ? '%' : '') )
                 .attr({
                     'text-anchor': 'end',
                     'fill': '#666' 
-            ***REMOVED***)
-    ***REMOVED***
+                })
+        }
         
         // paper.text(x + width, height + 5, '( Cifras en ' + units.units + ' de Pesos Colombianos )' )
         //     .attr({
         //         'text-anchor': 'end',
         //         'fill': '#aaa' 
-        // ***REMOVED***)
+        //     })
         
         for (i = 0; i < len; i++) {
 
@@ -321,14 +321,14 @@
                 
                 var h = Math.round( ( values[i].rawValue > minHeight ? values[i].rawValue : minHeight ) * Y ), 
                     top = y + height - barvgutter - h,
-                    bar = finger(Math.round(X + barwidth / 2), top + h, barwidth, h, true, type, null, paper).attr({ stroke: "none", fill: colors[multi ? j : i] ***REMOVED***);
+                    bar = finger(Math.round(X + barwidth / 2), top + h, barwidth, h, true, type, null, paper).attr({ stroke: "none", fill: colors[multi ? j : i] });
 
 
                 if (multi) {
                     bars[j].push(bar);
-            ***REMOVED*** else {
+                } else {
                     bars.push(bar);
-            ***REMOVED***
+                }
                 bar.y = top;
                 bar.x = Math.round(X + barwidth / 2);
                 bar.w = barwidth;
@@ -339,10 +339,10 @@
 
                 if (!opts.stacked) {
                     X += barwidth;
-            ***REMOVED*** else {
+                } else {
                     stack.push(bar);
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
 
 
@@ -356,7 +356,7 @@
 
                 for (var s = stack.length; s--;) {
                     stack[s].toFront();
-            ***REMOVED***
+                }
 
                 for (var s = 0, ss = stack.length; s < ss; s++) {
                     var bar = stack[s],
@@ -365,7 +365,7 @@
                         path = finger(bar.x, y + height - barvgutter - !!size * .5, barwidth, h, true, type, 1, paper);
 
                     cvr.bars.push(bar);
-                    size && bar.attr({path: path***REMOVED***);
+                    size && bar.attr({path: path});
                     bar.h = h;
                     bar.y = y + height - barvgutter - !!size * .5 - h;
                     covers.push(cover = paper.rect(bar.x - bar.w / 2, bar.y, barwidth, bar.value * Y).attr(chartinst.shim));
@@ -374,13 +374,13 @@
                     size += bar.value;
 
                    
-            ***REMOVED***
+                }
 
                 X += barwidth;
-        ***REMOVED***
+            }
 
             X += barhgutter;
-    ***REMOVED***
+        }
 
         covers2.toFront();
         X = x + barhgutter;
@@ -395,11 +395,11 @@
                     cover.value = cover.bar.value;
                     X += barwidth;
 
-            ***REMOVED***
+                }
 
                 X += barhgutter;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         chart.label = function (labels, isBottom) {
             labels = labels || [];
@@ -423,14 +423,14 @@
 
                             if (bb.x - 7 < l) {
                                 L.remove();
-                        ***REMOVED*** else {
+                            } else {
                                 this.labels.push(L);
                                 l = bb.x + bb.width;
-                        ***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED*** else {
+                            }
+                        }
+                    }
+                }
+            } else {
                 for (var i = 0; i < len; i++) {
                     for (var j = 0; j < (multi || 1); j++) {
                         var label = paper.labelise(multi ? labels[j] && labels[j][i] : labels[i], values[i].rawValue, total);
@@ -441,79 +441,79 @@
 
                         if (bb.x - 7 < l) {
                             L.remove();
-                    ***REMOVED*** else {
+                        } else {
                             this.labels.push(L);
                             l = bb.x + bb.width;
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
+                        }
+                    }
+                }
+            }
             return this;
-    ***REMOVED***;
+        };
 
         chart.hover = function (fin, fout) {
             covers2.hide();
             covers.show();
             covers.mouseover(fin).mouseout(fout);
             return this;
-    ***REMOVED***;
+        };
 
         chart.hoverColumn = function (fin, fout) {
             covers.hide();
             covers2.show();
-            fout = fout || function () {***REMOVED***;
+            fout = fout || function () {};
             covers2.mouseover(fin).mouseout(fout);
             return this;
-    ***REMOVED***;
+        };
 
         chart.click = function (f) {
             covers2.hide();
             covers.show();
             covers.click(f);
             return this;
-    ***REMOVED***;
+        };
 
         chart.each = function (f) {
             if (!Raphael.is(f, "function")) {
                 return this;
-        ***REMOVED***
+            }
             for (var i = covers.length; i--;) {
                 f.call(covers[i]);
-        ***REMOVED***
+            }
             return this;
-    ***REMOVED***;
+        };
 
         chart.eachColumn = function (f) {
             if (!Raphael.is(f, "function")) {
                 return this;
-        ***REMOVED***
+            }
             for (var i = covers2.length; i--;) {
                 f.call(covers2[i]);
-        ***REMOVED***
+            }
             return this;
-    ***REMOVED***;
+        };
 
         chart.clickColumn = function (f) {
             covers.hide();
             covers2.show();
             covers2.click(f);
             return this;
-    ***REMOVED***;
+        };
 
         chart.push(bars, covers, covers2);
         chart.bars = bars;
         chart.covers = covers;
         return chart;
-***REMOVED***;
+    };
     
     //inheritance
-    var F = function() {***REMOVED***;
+    var F = function() {};
     F.prototype = Raphael.g;
     HBarchart.prototype = VBarchart.prototype = new F; //prototype reused by hbarchart
     
     Raphael.fn.barchart = function(x, y, width, height, values, opts) {
         return new VBarchart(this, x, y, width, height, values, opts);
-***REMOVED***;
+    };
     
 /*\
  * Paper.barchart
@@ -537,15 +537,15 @@
  o stacked (boolean) whether or not to tread values as in a stacked bar chart
  o to
  o stretch (boolean)
- o ***REMOVED***
+ o }
  **
  = (object) path element of the popup
  > Usage
- | r.barchart(0, 0, 620, 260, [76, 70, 67, 71, 69], {***REMOVED***)
+ | r.barchart(0, 0, 620, 260, [76, 70, 67, 71, 69], {})
  \*/
  
     function HBarchart(paper, x, y, width, height, values, opts) {
-        opts = opts || {***REMOVED***;
+        opts = opts || {};
 
         var chartinst = this,
             type = opts.type || "square",
@@ -569,28 +569,28 @@
                 bars.push(paper.set());
                 total.push(Math.max.apply(Math, values[i]));
                 len = Math.max(len, values[i].length);
-        ***REMOVED***
+            }
 
             if (opts.stacked) {
                 for (var i = len; i--;) {
                     var tot = 0;
                     for (var j = values.length; j--;) {
                         tot +=+ values[j][i] || 0;
-                ***REMOVED***
+                    }
                     stacktotal.push(tot);
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             for (var i = values.length; i--;) {
                 if (values[i].length < len) {
                     for (var j = len; j--;) {
                         values[i].push(0);
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
+                    }
+                }
+            }
 
             total = Math.max.apply(Math, opts.stacked ? stacktotal : total);
-    ***REMOVED***
+        }
         
         total = (opts.to) || total;
 
@@ -607,13 +607,13 @@
 
             for (var j = 0; j < (multi || 1); j++) {
                 var val = multi ? values[j][i] : values[i],
-                    bar = finger(x, Y + barheight / 2, Math.round(val * X), barheight - 1, false, type, null, paper).attr({stroke: "none", fill: colors[(multi ? j : i)%colors.length]***REMOVED***);
+                    bar = finger(x, Y + barheight / 2, Math.round(val * X), barheight - 1, false, type, null, paper).attr({stroke: "none", fill: colors[(multi ? j : i)%colors.length]});
 
                 if (multi) {
                     bars[j].push(bar);
-            ***REMOVED*** else {
+                } else {
                     bars.push(bar);
-            ***REMOVED***
+                }
 
                 bar.x = x + Math.round(val * X);
                 bar.y = Y + barheight / 2;
@@ -623,10 +623,10 @@
 
                 if (!opts.stacked) {
                     Y += barheight;
-            ***REMOVED*** else {
+                } else {
                     stack.push(bar);
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             if (opts.stacked) {
                 var cvr = paper.rect(x, stack[0].y - stack[0].h / 2, width, barheight).attr(chartinst.shim);
@@ -638,7 +638,7 @@
 
                 for (var s = stack.length; s--;) {
                     stack[s].toFront();
-            ***REMOVED***
+                }
 
                 for (var s = 0, ss = stack.length; s < ss; s++) {
                     var bar = stack[s],
@@ -647,19 +647,19 @@
                         path = finger(x, bar.y, val, barheight - 1, false, type, 1, paper);
 
                     cvr.bars.push(bar);
-                    size && bar.attr({ path: path ***REMOVED***);
+                    size && bar.attr({ path: path });
                     bar.w = val;
                     bar.x = x + val;
                     covers.push(cover = paper.rect(x + size * X, bar.y - bar.h / 2, bar.value * X, barheight).attr(chartinst.shim));
                     cover.bar = bar;
                     size += bar.value;
-            ***REMOVED***
+                }
 
                 Y += barheight;
-        ***REMOVED***
+            }
 
             Y += bargutter;
-    ***REMOVED***
+        }
 
         covers2.toFront();
         Y = y + bargutter;
@@ -673,11 +673,11 @@
                     cover.bar = multi ? bars[j][i] : bars[i];
                     cover.value = cover.bar.value;
                     Y += barheight;
-            ***REMOVED***
+                }
 
                 Y += bargutter;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         chart.label = function (labels, isRight) {
             labels = labels || [];
@@ -690,77 +690,77 @@
                         A = isRight ? "end" : "start",
                         L;
 
-                    this.labels.push(L = paper.text(X, bars[i * (multi || 1) + j].y, label).attr(txtattr).attr({ "text-anchor": A ***REMOVED***).insertBefore(covers[0]));
+                    this.labels.push(L = paper.text(X, bars[i * (multi || 1) + j].y, label).attr(txtattr).attr({ "text-anchor": A }).insertBefore(covers[0]));
 
                     if (L.getBBox().x < x + 5) {
-                        L.attr({x: x + 5, "text-anchor": "start"***REMOVED***);
-                ***REMOVED*** else {
+                        L.attr({x: x + 5, "text-anchor": "start"});
+                    } else {
                         bars[i * (multi || 1) + j].label = L;
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
+                    }
+                }
+            }
 
             return this;
-    ***REMOVED***;
+        };
 
         chart.hover = function (fin, fout) {
             covers2.hide();
             covers.show();
-            fout = fout || function () {***REMOVED***;
+            fout = fout || function () {};
             covers.mouseover(fin).mouseout(fout);
             return this;
-    ***REMOVED***;
+        };
 
         chart.hoverColumn = function (fin, fout) {
             covers.hide();
             covers2.show();
-            fout = fout || function () {***REMOVED***;
+            fout = fout || function () {};
             covers2.mouseover(fin).mouseout(fout);
             return this;
-    ***REMOVED***;
+        };
 
         chart.each = function (f) {
             if (!Raphael.is(f, "function")) {
                 return this;
-        ***REMOVED***
+            }
             for (var i = covers.length; i--;) {
                 f.call(covers[i]);
-        ***REMOVED***
+            }
             return this;
-    ***REMOVED***;
+        };
 
         chart.eachColumn = function (f) {
             if (!Raphael.is(f, "function")) {
                 return this;
-        ***REMOVED***
+            }
             for (var i = covers2.length; i--;) {
                 f.call(covers2[i]);
-        ***REMOVED***
+            }
             return this;
-    ***REMOVED***;
+        };
 
         chart.click = function (f) {
             covers2.hide();
             covers.show();
             covers.click(f);
             return this;
-    ***REMOVED***;
+        };
 
         chart.clickColumn = function (f) {
             covers.hide();
             covers2.show();
             covers2.click(f);
             return this;
-    ***REMOVED***;
+        };
 
         chart.push(bars, covers, covers2);
         chart.bars = bars;
         chart.covers = covers;
         return chart;
-***REMOVED***;
+    };
     
     Raphael.fn.hbarchart = function(x, y, width, height, values, opts) {
         return new HBarchart(this, x, y, width, height, values, opts);
-***REMOVED***;
+    };
     
-***REMOVED***)();
+})();

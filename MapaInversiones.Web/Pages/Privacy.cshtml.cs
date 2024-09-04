@@ -10,11 +10,11 @@ public class PrivacyModel : PageModel
     public PrivacyModel(ILogger<PrivacyModel> logger)
     {
         _logger = logger;
-***REMOVED***
+    }
 
     public void OnGet()
     {
-***REMOVED***
-***REMOVED***
+    }
+}
 
 

@@ -2,27 +2,27 @@
 @inject OrchardCore.IOrchardHelper Orchard
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+}
 @{
     // var TextMoneda = "";
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
     @*       var LabelContratista = "";
             var TituloContratista = "";
 
-    ***REMOVED***
+        }
         @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
         {
             if (@etiqueta.AliasPart.Alias == "Contratista")
             {
                 LabelContratista = @etiqueta.HtmlBodyPart.Html;
                 TituloContratista = @etiqueta.TitlePart.Title;
-        ***REMOVED***
+            }
 
-    ***REMOVED****@
+        }*@
 
 System.IFormatProvider culture =
 new System.Globalization.CultureInfo("es-RD");
-***REMOVED***
+}
 <section class="banner-main">
     <div class="container">
         <!-- Begin bread crumbs -->
@@ -71,12 +71,12 @@ new System.Globalization.CultureInfo("es-RD");
                                         $
                                         @if (Model.Data.Sum(l => l.ValorTotalContratos) >= 1000000)
                                         {
-                                            <text> @String.Format(culture, "{0:n0***REMOVED***",((double)((double)@Model.Data.Sum(l => l.ValorTotalContratos) / (double)1000000)))  Millones</text>
-                                    ***REMOVED***
+                                            <text> @String.Format(culture, "{0:n0}",((double)((double)@Model.Data.Sum(l => l.ValorTotalContratos) / (double)1000000)))  Millones</text>
+                                        }
                                         else
                                         {
-                                            <text> @String.Format(culture, "{0:n0***REMOVED***",(@Model.Data.Sum(l => l.ValorTotalContratos)))</text>
-                                    ***REMOVED***
+                                            <text> @String.Format(culture, "{0:n0}",(@Model.Data.Sum(l => l.ValorTotalContratos)))</text>
+                                        }
                                     </span>
                                     <span class="text-center">Valor total de contratos  </span>
                                 </li>
@@ -100,21 +100,21 @@ new System.Globalization.CultureInfo("es-RD");
                                                 <text>
                                                 <option selected value="">@item.OrigenInformacion (@item.NroContratos)</option>
                                                 </text>
-                                        ***REMOVED***
+                                            }
                                             else
                                             {
                                                 <text>
                                                 <option value="@item.CodigoOrigenInformacion">@item.OrigenInformacion (@item.NroContratos)</option>
                                                 </text>
-                                        ***REMOVED***
-                                    ***REMOVED***
+                                            }
+                                        }
 
                                     </select>
                                 </div>
 
                             </div>
                         </div>
-                ***REMOVED***
+                    }
                     else{
                     <div class="banner-main-desc">
                         <p>
@@ -122,7 +122,7 @@ new System.Globalization.CultureInfo("es-RD");
                         </p>
 
                     </div>
-                ***REMOVED***
+                    }
                 </div>
             </div>
 
@@ -167,7 +167,7 @@ new System.Globalization.CultureInfo("es-RD");
     </div>
 </section>
 <div class="clearfix"></div>
-<section class="section" id="secInfoContratos" data-contratista='[{"contratista_id":"@Model.Contratista"***REMOVED***]'>
+<section class="section" id="secInfoContratos" data-contratista='[{"contratista_id":"@Model.Contratista"}]'>
     <div class="container">
         <div class="section-heading heading-left">
             <h2 class="mb-4">Buscador Contratos</h2>

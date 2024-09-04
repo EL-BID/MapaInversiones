@@ -27,151 +27,151 @@ namespace PlataformaTransparencia.Modelos
       Fase = "";
       NombreActor = "";
 
-***REMOVED***
+    }
     /// <summary>
     /// Este es el id del proyecto.
     /// </summary>
-    public int ProjectId { get; set; ***REMOVED***
+    public int ProjectId { get; set; }
     /// <summary>
     /// Sector.
     /// </summary>
-    public string sector { get; set; ***REMOVED***
+    public string sector { get; set; }
     /// <summary>
     /// Descripción.
     /// </summary>
-    public string descripcion { get; set; ***REMOVED***
+    public string descripcion { get; set; }
     /// <summary>
     /// Fecha inicio proyecto.
     /// Con formato
     /// </summary>
-    public string startdate { get; set; ***REMOVED***
+    public string startdate { get; set; }
     /// <summary>
     /// Fecha fin proyecto.
     /// Con formato
     /// </summary>
-    public string enddate { get; set; ***REMOVED***
+    public string enddate { get; set; }
     /// <summary>
     /// Fecha Inicio del proyecto
     /// como viene de la base de datos
     /// </summary>
-    public DateTime? startdateDateTime { get; set; ***REMOVED***
+    public DateTime? startdateDateTime { get; set; }
 
-    public string fechaAprobacion { get; set; ***REMOVED***
+    public string fechaAprobacion { get; set; }
     /// <summary>
     /// Fecha Fin del proyecto.
     /// como viene de la base de datos.
     /// </summary>
-    public DateTime? enddateDateTime { get; set; ***REMOVED***
+    public DateTime? enddateDateTime { get; set; }
     /// <summary>
     /// Ejecutor.
     /// </summary>
-    public List<ActorFicha> executor { get; set; ***REMOVED***
+    public List<ActorFicha> executor { get; set; }
     /// <summary>
     /// Contratista.
     /// </summary>
-    public List<ActorFicha> contractor { get; set; ***REMOVED***
+    public List<ActorFicha> contractor { get; set; }
     /// <summary>
     /// Interventor.
     /// </summary>
-    public List<ActorFicha> controller { get; set; ***REMOVED***
+    public List<ActorFicha> controller { get; set; }
 
-    public List<ActorFicha> EntesBeneficiados { get; set; ***REMOVED***
+    public List<ActorFicha> EntesBeneficiados { get; set; }
 
 
     /// <summary>
     /// Es el identificador del proyecto.
     /// </summary>
-    public string BPIN { get; set; ***REMOVED***
+    public string BPIN { get; set; }
     /// <summary>
     /// Nombre del proyecto.
     /// </summary>
-    public string name { get; set; ***REMOVED***
+    public string name { get; set; }
     /// <summary>
     /// Es la localizacion del proyecto. Region/Departamento/Municipio.
     /// </summary>
-    public string location { get; set; ***REMOVED***
+    public string location { get; set; }
     /// <summary>
     /// Es el valor total del proyecto.
     /// </summary>
-    public decimal? TotalValue { get; set; ***REMOVED***
+    public decimal? TotalValue { get; set; }
 
     /// <summary>
     /// Es el valor total del proyecto SGR.
     /// </summary>
-    public decimal? TotalValueAll { get; set; ***REMOVED***
+    public decimal? TotalValueAll { get; set; }
     /// <summary>
     /// Es el estado del proyecto.
     /// </summary>
-    public string Status { get; set; ***REMOVED***
+    public string Status { get; set; }
     /// <summary>
     /// Latitud donde se encuentra el proyecto
     /// </summary>
-    public decimal latitude { get; set; ***REMOVED***
+    public decimal latitude { get; set; }
     /// <summary>
     /// Longitud donde se encuentra el proyecto
     /// </summary>
-    public decimal longitude { get; set; ***REMOVED***
+    public decimal longitude { get; set; }
     /// <summary>
     /// id Ocad
     /// </summary>
-    public int idOcad { get; set; ***REMOVED***
+    public int idOcad { get; set; }
     /// <summary>
     /// nombre de la ocad
     /// </summary>
-    public string nameOcad { get; set; ***REMOVED***
+    public string nameOcad { get; set; }
 
-    public decimal avance_fisico { get; set; ***REMOVED***
-    public decimal avance_financiero { get; set; ***REMOVED***
+    public decimal avance_fisico { get; set; }
+    public decimal avance_financiero { get; set; }
 
     /// <summary>
     /// Id estado del proyecto
     /// </summary>
-    public int IdStatus { get; set; ***REMOVED***
+    public int IdStatus { get; set; }
 
-    public int contMegusta { get; set; ***REMOVED***
-    public int contComentarios { get; set; ***REMOVED***
-    public decimal duracion { get; set; ***REMOVED***
+    public int contMegusta { get; set; }
+    public int contComentarios { get; set; }
+    public decimal duracion { get; set; }
 
-    public List<AvanceFisicoEtapas> avance_fisico_etapas { get; set; ***REMOVED***
+    public List<AvanceFisicoEtapas> avance_fisico_etapas { get; set; }
 
-    public string objGeneral { get; set; ***REMOVED***
-    public List<itemfuentes> fuentes_financiacion { get; set; ***REMOVED***
-    public List<itemGenerico> productos_proy { get; set; ***REMOVED***
-    public List<itemGenerico> fases_proy { get; set; ***REMOVED***
+    public string objGeneral { get; set; }
+    public List<itemfuentes> fuentes_financiacion { get; set; }
+    public List<itemGenerico> productos_proy { get; set; }
+    public List<itemGenerico> fases_proy { get; set; }
 
-    public int CantidadContratos { get; set; ***REMOVED***
-    public int AnnioContratos { get; set; ***REMOVED***
-    public List<ModeloAvanceFinancieroPorComponenteProducto> avanceFisicoInversion { get; set; ***REMOVED***
+    public int CantidadContratos { get; set; }
+    public int AnnioContratos { get; set; }
+    public List<ModeloAvanceFinancieroPorComponenteProducto> avanceFisicoInversion { get; set; }
     /// <summary>
     /// Numero beneficiarios hombres
     /// </summary>
-    public decimal? NumBeneficHombres { get; set; ***REMOVED***
+    public decimal? NumBeneficHombres { get; set; }
     /// <summary>
     /// Numero beneficiarios mujeres
     /// </summary>
-    public decimal? NumBeneficMujeres { get; set; ***REMOVED***
+    public decimal? NumBeneficMujeres { get; set; }
     /// <summary>
     /// Subsector
     /// </summary>
     /// 
-    public string Moneda { get; set; ***REMOVED***
+    public string Moneda { get; set; }
     /// <summary>
     /// Etapa
     /// </summary>
-    public string IDMoneda { get; set; ***REMOVED***
-    public decimal? TasaCambio { get; set; ***REMOVED***
-    public string subSector { get; set; ***REMOVED***
+    public string IDMoneda { get; set; }
+    public decimal? TasaCambio { get; set; }
+    public string subSector { get; set; }
     /// <summary>
     /// Etapa
     /// </summary>
-    public string Etapa { get; set; ***REMOVED***
+    public string Etapa { get; set; }
     /// <summary>
     /// Fase
     /// </summary>
-    public string Fase { get; set; ***REMOVED***
-    public string NombreActor { get; set; ***REMOVED***
+    public string Fase { get; set; }
+    public string NombreActor { get; set; }
 
-    public string TipoDeProyecto { get; set; ***REMOVED***
+    public string TipoDeProyecto { get; set; }
 
-  ***REMOVED***
-***REMOVED***
+  }
+}

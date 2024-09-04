@@ -10,55 +10,55 @@
     <script type="text/javascript" src="/js/home_aux.js"></script>
 
 
-***REMOVED***
+}
 @{
    System.Globalization.CultureInfo cultureRD = new System.Globalization.CultureInfo("es-DO");
-***REMOVED***
+}
 @{
      var banners = await Orchard.GetContentItemByHandleAsync("alias:bannerhome");
      var cadena="";
- ***REMOVED***
+ }
 <style>
     .capitalEntidad {
         text-transform: capitalize;
-***REMOVED***
+    }
 
     .autocomplete-suggestions {
         border: 1px solid #999;
         background: #FFF;
         overflow: auto;
-***REMOVED***
+    }
 
     .autocomplete-suggestion {
         padding: 2px 5px;
         white-space: nowrap;
         overflow: hidden;
-***REMOVED***
+    }
 
     .autocomplete-selected {
         background: #F0F0F0;
-***REMOVED***
+    }
 
     .autocomplete-suggestions strong {
         font-weight: normal;
         color: #3399FF;
-***REMOVED***
+    }
 
     .autocomplete-group {
         padding: 2px 5px;
-***REMOVED***
+    }
 
         .autocomplete-group strong {
             display: block;
             border-bottom: 1px solid #000;
-    ***REMOVED***
+        }
 
     path:hover {
         fill: #6ECAE4;
         stroke: #0171bb;
         stroke-width: 3px;
         transition: fill 0.4s;
-***REMOVED***
+    }
 </style>
 
 <main>
@@ -76,7 +76,7 @@
             <div class="wrap-slide-thumb">
                 <!--MAIN SLIDER-->
                 <div class="carousel carousel-nav"
-                     data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false, "prevNextButtons": false ***REMOVED***'>
+                     data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false, "prevNextButtons": false }'>
                     <div class="carousel-cell">
                         <div class="wrap-thumbnail">
                             <span class="h5">Presupuesto Nacional de Inversiones</span>
@@ -103,18 +103,18 @@
                 </div>
 
                 <!-- Flickity HTML init -->
-                <div class="carousel carousel-main" data-flickity='{ "autoPlay": 9000 ***REMOVED***'>
+                <div class="carousel carousel-main" data-flickity='{ "autoPlay": 9000 }'>
                     <div class="carousel-cell">
                         <div class="wrap-cell-container text-center bg-s1">
                             <h2>¿Sabes cuál es el monto total vigente para inversiones públicas durante <span class="number-slide">@Model.valPresupuestoEncabezado.AnioActual</span>?</h2>
-                            <span class="big-number">$  @String.Format(cultureRD, "{0:n0***REMOVED***",  Model.valPresupuestoEncabezado.PresupuestoActual/1000000) Millones</span>
+                            <span class="big-number">$  @String.Format(cultureRD, "{0:n0}",  Model.valPresupuestoEncabezado.PresupuestoActual/1000000) Millones</span>
                             @if (@Model.valPresupuestoEncabezado.Porcentaje < 0)
                             {
-                                <div class="comparativo"><p>Con respecto al año @Model.valPresupuestoEncabezado.AnioAnterior este presupuesto tuvo una disminución del <span class="text-bold">@String.Format(cultureRD, "{0:n0***REMOVED***",(@Model.valPresupuestoEncabezado.Porcentaje*-1))% </span></p></div>
-                        ***REMOVED***else
+                                <div class="comparativo"><p>Con respecto al año @Model.valPresupuestoEncabezado.AnioAnterior este presupuesto tuvo una disminución del <span class="text-bold">@String.Format(cultureRD, "{0:n0}",(@Model.valPresupuestoEncabezado.Porcentaje*-1))% </span></p></div>
+                            }else
                             {
-                                <div class="comparativo"><p>Con respecto al año @Model.valPresupuestoEncabezado.AnioAnterior este presupuesto tuvo un incremento del <span class="text-bold">@String.Format(cultureRD, "{0:n0***REMOVED***",@Model.valPresupuestoEncabezado.Porcentaje)% </span></p></div>
-                        ***REMOVED***
+                                <div class="comparativo"><p>Con respecto al año @Model.valPresupuestoEncabezado.AnioAnterior este presupuesto tuvo un incremento del <span class="text-bold">@String.Format(cultureRD, "{0:n0}",@Model.valPresupuestoEncabezado.Porcentaje)% </span></p></div>
+                            }
                             <div class="desc-slide">Conoce las cifras, monto total por años del presupuesto nacional de inversiones públicas</div>
                              <div class="wrap-cta my-3">
                                 <a href="/PresupuestoGeneral" class="btn btn-primary btn-lg">
@@ -145,15 +145,15 @@
                                         
                                         <div class="col-lg-3">
                                             <div class="wrap-slide-content">
-                                            <span class="big-number">$  @String.Format(cultureRD, "{0:n0***REMOVED***", item.ValorVigente/1000000) Millones</span>
+                                            <span class="big-number">$  @String.Format(cultureRD, "{0:n0}", item.ValorVigente/1000000) Millones</span>
                                                 <span class="label">@item.Fuente</span>
                                             </div>
                                         </div>
                                         contadorCant++;
-                                        if (contadorCant == cantMostrar) { break; ***REMOVED***
-                                ***REMOVED***
+                                        if (contadorCant == cantMostrar) { break; }
+                                    }
                                 </div>
-                            ***REMOVED***
+                                }
 
                             
                             <div class="wrap-cta my-3">
@@ -262,7 +262,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
 
-                        @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" ***REMOVED***))
+                        @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" }))
                         {
                             <div class="form-field whiteSearch mb-4" id="contentSearchDiv">
                                 <label for="SearchString" class="form-field-label">
@@ -277,7 +277,7 @@
                                 <!--id="page-field-search"-->
                             </div>
 
-                    ***REMOVED***
+                        }
 
 
                         <div id="search-home" class="search-body">
@@ -319,8 +319,8 @@
                                     <text>
                                         <option value="@item">@item</option>
                                     </text>
-                            ***REMOVED***
-                        ***REMOVED***
+                                }
+                            }
 
                         </select>
                     </div>
@@ -425,13 +425,13 @@
                     <div class="counters">
                         <div class="desc-data">
                             <div class="executeV">Proyectos en ejecución</div>
-                            <div class="executeN" id="numProyExe">@String.Format(cultureRD, "{0:n0***REMOVED***",  Model.countOngoingProjects.cantidad)</div>
+                            <div class="executeN" id="numProyExe">@String.Format(cultureRD, "{0:n0}",  Model.countOngoingProjects.cantidad)</div>
                         </div>
                     </div>
                     <div class="counters">
                         <div class="desc-data">
                             <div class="executeV">Costo total de proyectos en ejecución</div>
-                            <div class="executeN" id="costoProyExce">$ @String.Format(cultureRD, "{0:n0***REMOVED***",  Model.countOngoingProjects.costo / 1000000) Millones</div>
+                            <div class="executeN" id="costoProyExce">$ @String.Format(cultureRD, "{0:n0}",  Model.countOngoingProjects.costo / 1000000) Millones</div>
                         </div>
                     </div>
                     <div class="wrap-cta my-3">
@@ -592,7 +592,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div id="divContenedorFichas22" class="project-carusel" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "prevNextButtons": true, "autoPlay": 8000 ***REMOVED***'>
+                    <div id="divContenedorFichas22" class="project-carusel" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "prevNextButtons": true, "autoPlay": 8000 }'>
                         @if (Model.Entidades != null)
                         {
                             @foreach (var item in Model.Entidades)
@@ -617,7 +617,7 @@
                                                          style="width:@porcentaje" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
                                                         <div class="wrap-data-advance py-3">
-                                                            <span class="executeN">$ @String.Format(cultureRD, "{0:n0***REMOVED***",  item.avance / 1000000)</span><span class="executeV"> millones</span>
+                                                            <span class="executeN">$ @String.Format(cultureRD, "{0:n0}",  item.avance / 1000000)</span><span class="executeV"> millones</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -625,8 +625,8 @@
                                         </div>
                                     </div>
                                 </text>
-                        ***REMOVED***
-                    ***REMOVED***
+                            }
+                        }
                     </div>
                 </div>
 
@@ -691,12 +691,12 @@
                                                 {
                                                     imgpath = noticia.Content.BlogPost.BannerImage.Paths[0];
                                                     <img class="img-fluid" src=@Orchard.AssetUrl((string)imgpath) alt="...">
-                                            ***REMOVED***
+                                                }
                                                 else
                                                 {
                                                    <img class="img-fluid" src=@imgpath alt="...">
-                                            ***REMOVED***
-                                        ***REMOVED***
+                                                }
+                                            }
 
                                         </div>
                                         <div class="col-md-8 col-lg-9">
@@ -708,7 +708,7 @@
                                         </div>
                                     </div>
                                 </div>
-                        ***REMOVED***
+                            }
                         </div>
                     </div>
                 </div>
@@ -732,12 +732,12 @@
     
     data-fuentesporAnnios='[@foreach (var fuen in @Model.fuentesporAnnios)
     {<text>
-            {"Anio": @fuen.Anio,"CodigoFuente": @fuen.CodigoFuente,"Fuente": "@fuen.Fuente", "ValorVigente": @fuen.ValorVigente***REMOVED***
+            {"Anio": @fuen.Anio,"CodigoFuente": @fuen.CodigoFuente,"Fuente": "@fuen.Fuente", "ValorVigente": @fuen.ValorVigente}
             @if (fuen != @Model.fuentesporAnnios.Last())
             {
                 <text>,</text>
-        ***REMOVED***
-</text>***REMOVED***]'
-***REMOVED***
+            }
+</text>}]'
+}
 
 

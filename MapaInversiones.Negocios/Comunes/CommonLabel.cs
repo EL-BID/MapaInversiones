@@ -16,9 +16,9 @@ namespace PlataformaTransparencia.Negocios.Comunes
 
         public static string RegionLabel
         {
-            get { return CommonLabel.regionLabel; ***REMOVED***
-            set { CommonLabel.regionLabel = value; ***REMOVED***
-    ***REMOVED***
+            get { return CommonLabel.regionLabel; }
+            set { CommonLabel.regionLabel = value; }
+        }
 
 
         /// </summary>
@@ -26,74 +26,74 @@ namespace PlataformaTransparencia.Negocios.Comunes
 
         public static string DepartmentLabel
         {
-            get { return departmentLabel; ***REMOVED***
-            set { departmentLabel = value; ***REMOVED***
-    ***REMOVED***
+            get { return departmentLabel; }
+            set { departmentLabel = value; }
+        }
        
 
-        public static string MunicipalityLabel {get; set;***REMOVED***     
+        public static string MunicipalityLabel {get; set;}     
        
         /// </summary>
         private static string stateLabel ;
 
         public static string StateLabel
         {
-            get { return stateLabel; ***REMOVED***
-            set { stateLabel = value; ***REMOVED***
-    ***REMOVED***
+            get { return stateLabel; }
+            set { stateLabel = value; }
+        }
         /// </summary>
         private static string sectorLabel;
 
         public static string SectorLabel
         {
-            get { return sectorLabel; ***REMOVED***
-            set { sectorLabel = value; ***REMOVED***
-    ***REMOVED***
+            get { return sectorLabel; }
+            set { sectorLabel = value; }
+        }
 
         private static string orgFinanciadorLabel;
 
         public static string OrgFinanciadorLabel
         {
-            get { return orgFinanciadorLabel; ***REMOVED***
-            set { orgFinanciadorLabel = value; ***REMOVED***
-    ***REMOVED***
+            get { return orgFinanciadorLabel; }
+            set { orgFinanciadorLabel = value; }
+        }
 
         private static string entidadEjecutoraLabel;
-        public static string EntidadEjecutoraLabel { get => entidadEjecutoraLabel; set => entidadEjecutoraLabel = value; ***REMOVED***
+        public static string EntidadEjecutoraLabel { get => entidadEjecutoraLabel; set => entidadEjecutoraLabel = value; }
 
 
-        public static string TypeLabel {get; set;***REMOVED***     
+        public static string TypeLabel {get; set;}     
                
-        public static string StatusLabel {get; set;***REMOVED***     
+        public static string StatusLabel {get; set;}     
         
         
-        public static string TypeLabelMessage {get; set;***REMOVED***     
+        public static string TypeLabelMessage {get; set;}     
        
 
-        public static string GeoJsonLabel {get; set;***REMOVED***       
+        public static string GeoJsonLabel {get; set;}       
         
 
-        public static string MessageLabel  {get; set;***REMOVED***     
+        public static string MessageLabel  {get; set;}     
         
         /// </summary>
         private static string periodsLabel;
 
         public static string PeriodsLabel
         {
-            get { return periodsLabel; ***REMOVED***
-            set { periodsLabel = value; ***REMOVED***
-    ***REMOVED***
+            get { return periodsLabel; }
+            set { periodsLabel = value; }
+        }
 
        
-        public static int MaximumResultsPerPage {get; set; ***REMOVED***
+        public static int MaximumResultsPerPage {get; set; }
 
-        public static int MaximumResultsFotos { get; set; ***REMOVED***
+        public static int MaximumResultsFotos { get; set; }
 
-        public static int MaximumResultPerFicha { get; set; ***REMOVED***
+        public static int MaximumResultPerFicha { get; set; }
 
-        public static int MaximumResultsPerDonaciones { get; set; ***REMOVED***
+        public static int MaximumResultsPerDonaciones { get; set; }
 
-        public static int MaximumResultsPerSalarios { get; set; ***REMOVED***
+        public static int MaximumResultsPerSalarios { get; set; }
 
         public static void Init(TransparenciaDB connection, IConfiguration configuration)
         {
@@ -113,7 +113,7 @@ namespace PlataformaTransparencia.Negocios.Comunes
                                             Texto=paraTitulos.Texto,
                                             Label=paraTitulos.Label,
                                             Llave=paraTitulos.Llave,
-                                        ***REMOVED***).ToList();
+                                            }).ToList();
 
 
                 foreach (var item in listTitulos)
@@ -161,11 +161,11 @@ namespace PlataformaTransparencia.Negocios.Comunes
                                     PeriodsLabel = item.Texto;
                                     break;
                       
-                        ***REMOVED***                    
+                            }                    
                    
-            ***REMOVED***
+                }
 
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

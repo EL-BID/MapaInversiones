@@ -8,12 +8,12 @@ namespace PlataformaTransparencia.Modelos
     {
         public List<TiposComentario> tipo_comentario;
 
-        public List<Comentarios> comentarios { get; set; ***REMOVED***
+        public List<Comentarios> comentarios { get; set; }
 
-        public List<itemcomentario> itemcomentario { get; set; ***REMOVED***
-        public List<RolParticipa> rol_participacion { get; set; ***REMOVED***
-        public List<GenerosParticipacion> genero_participacion { get; set; ***REMOVED***
-        public List<MediosParticipacion> medios_participacion { get; set; ***REMOVED***
+        public List<itemcomentario> itemcomentario { get; set; }
+        public List<RolParticipa> rol_participacion { get; set; }
+        public List<GenerosParticipacion> genero_participacion { get; set; }
+        public List<MediosParticipacion> medios_participacion { get; set; }
 
         public ModelDataParticipacion()
         {
@@ -28,25 +28,25 @@ namespace PlataformaTransparencia.Modelos
             totalNumber = 0;
             totalPages = 0;
             pagesNumber = 0;
-    ***REMOVED***
+        }
 
-        public itemUsuarios usuarios { get; set; ***REMOVED***
+        public itemUsuarios usuarios { get; set; }
 
-        public itemEstadisticas estadisticasProy { get; set; ***REMOVED***
+        public itemEstadisticas estadisticasProy { get; set; }
 
-        public string id_usu_participa { get; set; ***REMOVED***
+        public string id_usu_participa { get; set; }
 
-        public string nom_usu_participa { get; set; ***REMOVED***
+        public string nom_usu_participa { get; set; }
 
-        public int totalNumber { get; set; ***REMOVED***
-        public int totalPages { get; set; ***REMOVED***
-        public int pagesNumber { get; set; ***REMOVED***
+        public int totalNumber { get; set; }
+        public int totalPages { get; set; }
+        public int pagesNumber { get; set; }
 
-        public List<filtrosParticipacion> filtrosEstado { get; set; ***REMOVED***
-        public List<filtrosParticipacion> filtrosAsociacion { get; set; ***REMOVED***
-
-
+        public List<filtrosParticipacion> filtrosEstado { get; set; }
+        public List<filtrosParticipacion> filtrosAsociacion { get; set; }
 
 
-***REMOVED***
-***REMOVED***
+
+
+    }
+}

@@ -11,22 +11,22 @@
 	 *		yAxis: {
 	 *			name: 'Name of the Y Axis',
 	 *			breaks: 6
-	 *		***REMOVED***,
+	 *		},
 	 *		xAxis: {
-	 *			labels: function(){ return name ***REMOVED***,
-	 *		***REMOVED***,
-	 *		tooltip: function(){ return innrHTML ***REMOVED***
+	 *			labels: function(){ return name },
+	 *		},
+	 *		tooltip: function(){ return innrHTML }
 	 *		data: {
 	 *				total: {
 	 *					name: 'Total Name',
 	 *					values: []
-	 *				***REMOVED***,
+	 *				},
 	 *				inner: {
 	 *					name: 'Children Name',
 	 *					values: []
-	 *				***REMOVED***
-	 *			***REMOVED***
-	 *   ***REMOVED***
+	 *				}
+	 *			}
+	 *   }
 	 */
 	function StackedBarChart( elemId, width, height, data ){
 		var totalValues = data.data.total.values,
@@ -56,16 +56,16 @@
 				.attr({
 					fill: '#00b5c6',
 					'stroke-width': 0
-				***REMOVED***)
+				})
 			paper.rect( left + barGap, barMaxHeight - iHeight, barWidth, iHeight)
 				.attr({
 					fill: '#009dac',
 					'stroke-width': 0
-				***REMOVED***)
+				})
 			// paper.rect( left, 0, barWidth, barMaxHeight)
 			left += 2*barGap + barWidth
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	window.StackedBarChart = StackedBarChart
-***REMOVED***());
+}());

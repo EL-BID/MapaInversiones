@@ -11,14 +11,14 @@
     {
         displayglosario = "display:none"; displaytabglosario = "btn-section ";
         displaypreguntas = "display:block"; displaytabpreguntas = "btn-section focused-btn";
-***REMOVED***
+    }
     else
     {
         displayglosario = "display:block"; displaytabglosario = "btn-section focused-btn";
         displaypreguntas = "display:none"; displaytabpreguntas = "btn-section";
-***REMOVED***
+    }
 
-        ***REMOVED***
+            }
 
 <!--MAIN BANNER-->
 <section class="banner-main-asc mb-0">
@@ -93,12 +93,12 @@
                         {
                             <div class="indice" id="@c">
                                 @c
-                            </div>***REMOVED***
+                            </div>}
                     </div>
                 </div>
             </div>
             <div class="row">
-                @{ var glosario = await Orchard.GetContentItemByHandleAsync("alias:PalabrasGlosario"); ***REMOVED***
+                @{ var glosario = await Orchard.GetContentItemByHandleAsync("alias:PalabrasGlosario"); }
                 <!--LEFT COLUMN-->
                 <div class="col-lg-2">
                 </div>
@@ -114,7 +114,7 @@
                             </span>
                             <div>@Html.Raw(palabra.HtmlBodyPart.Html)</div>
 
-                        </div>***REMOVED***
+                        </div>}
 
 
                 </div>
@@ -125,7 +125,7 @@
         <div class="sect-tab preguntas" id="preguntas" style="@displaypreguntas">
             <div class="row">
                 @{ var preguntas = await Orchard.GetContentItemByHandleAsync("alias:Preguntas");
-        List<string> categorias = new List<string>(); ***REMOVED***
+        List<string> categorias = new List<string>(); }
                 <!--LEFT COLUMN-->
                 <div class="col-lg-3">
                     @foreach (var pregunta in preguntas.Content.BagPart.ContentItems)
@@ -140,8 +140,8 @@
                 categorias.Add(term);
                                 <div class="categoriapregunta" id="@term">
                                     <span class="h5">@display</span>
-                                </div>***REMOVED***
-                    ***REMOVED******REMOVED***
+                                </div>}
+                        }}
                 </div>
                 <!--RIGHT COLUMN-->
                 <div class="col-lg-8">
@@ -161,7 +161,7 @@
                                     </strong>
                                 </span>
                                 <div>@Html.Raw(pregunta.HtmlBodyPart.Html)</div>
-                            </div>***REMOVED******REMOVED***
+                            </div>}}
 
 
                 </div>
@@ -185,15 +185,15 @@
           Mostrar("palabra", "palabra A")
           var g = document.getElementById('A');
           g.className = "indice focused-glo"
-  ***REMOVED***
+      }
       else {
           Mostrar("sect-tab", "sect-tab contacto");
           
-  ***REMOVED***
+      }
        $('.section-question').hide();
         
 
-***REMOVED***);
+    });
 
     $(document).on('click', '.categoriapregunta', function (e) {
         id = "pregunta " + this.id;
@@ -202,9 +202,9 @@
         var i;
         for (i = 0; i < y.length; i++) {
             y[i].className = "categoriapregunta";
-    ***REMOVED***
+        }
         this.className = "categoriapregunta focused-cat"
-***REMOVED***);
+    });
 
     $(document).on('click', '.btn-section', function (e) {
         id = "sect-tab " + this.id;
@@ -213,9 +213,9 @@
         var i;
         for (i = 0; i < y.length; i++) {
             y[i].className = "btn-section";
-    ***REMOVED***
+        }
         this.className = "btn-section focused-btn"
-***REMOVED***);
+    });
 
 
     $(document).on('click', '.indice', function (e) {
@@ -225,20 +225,20 @@
         var i;
         for (i = 0; i < y.length; i++) {
             y[i].className = "indice";
-    ***REMOVED***
+        }
         this.className = "indice focused-glo"
-***REMOVED***);
+    });
   function Mostrar(ocultar, mostrar) {
 
         var y = document.getElementsByClassName(ocultar);
         var i;
         for (i = 0; i < y.length; i++) {
             y[i].style.display = "none";
-    ***REMOVED***
+        }
         var x = document.getElementsByClassName(mostrar);
         var i;
         for (i = 0; i < x.length; i++) {
             x[i].style.display = "block";
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 </script>

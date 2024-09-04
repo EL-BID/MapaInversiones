@@ -37,7 +37,7 @@ var GeoJSONModule = function () {
             pushpinOptions: null,
             polylineOptions: null,
             polygonOptions: null
-    ***REMOVED***;
+        };
 
     /*****************
     * Private Methods
@@ -49,13 +49,13 @@ var GeoJSONModule = function () {
 
             if (_allCoords != null && _allCoords.length > 0) {
                 bounds = Microsoft.Maps.LocationRect.fromLocations(_allCoords);
-        ***REMOVED*** else {
+            } else {
                 bounds = new Microsoft.Maps.LocationRect(new Microsoft.Maps.Location(0, 0), 360, 180);
-        ***REMOVED***
+            }
 
             _callback(result, bounds);
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     function parseGeoJSONItem(i) {
         var shape = null;
@@ -82,91 +82,91 @@ var GeoJSONModule = function () {
                 shape = new Microsoft.Maps.EntityCollection();
                 $(parseMultiPoint(i)).each(function (i, v) {
                     shape.push(createPushpin(v));
-            ***REMOVED***);
+                });
                 break;
             case "MultiLineString":
                 shape = new Microsoft.Maps.EntityCollection();
                 $(parseMultiLineString(i)).each(function (i, v) {
                     shape.push(v);
-            ***REMOVED***);
+                });
                 break;
             case "MultiPolygon":
                 shape = new Microsoft.Maps.EntityCollection();
                 $(parseMultiPolygon(i)).each(function (i, v) {
                     shape.push(v);
-            ***REMOVED***);
+                });
                 break;
             case "GeometryCollection":
                 shape = parseGeometryCollection(i);
                 break;
             default:
                 // do nothing with it not a supported element
-    ***REMOVED***
+        }
         return shape;
-***REMOVED***
+    }
     /* methods for parsing GeoJSON*/
 
     function parsePoint(p) {
         var loc = new Microsoft.Maps.Location(p.coordinates[1], p.coordinates[0]);
         _allCoords.push(loc);
         return loc;
-***REMOVED***
+    }
 
     function parseLineString(ls) {
         var result = new Microsoft.Maps.Polyline(parseMultiPoint(ls), _options.polylineOptions);
         if (ls.properties) result.Metadata = ls.properties;
         return result;
-***REMOVED***
+    }
 
     function parsePolygon(po) {
         var rings = [];
         $(po.coordinates).each(function (i, v) {
-            rings.push(parseMultiPoint({ coordinates: v ***REMOVED***));
-    ***REMOVED***);
+            rings.push(parseMultiPoint({ coordinates: v }));
+        });
         var result = new Microsoft.Maps.Polygon(rings, _options.polygonOptions);
         if (po.properties) result.Metadata = po.properties;
         return result;
-***REMOVED***
+    }
 
     function parseMultiPoint(mp) {
         var locs = [];
         $(mp.coordinates).each(function (i, v) {
-            locs.push(parsePoint({ coordinates: v ***REMOVED***));
-    ***REMOVED***);
+            locs.push(parsePoint({ coordinates: v }));
+        });
         if (mp.properties) locs.Metadata = mp.properties;
         return locs;
-***REMOVED***
+    }
 
     function parseMultiLineString(mls) {
         var ls = [];
         $(mls.coordinates).each(function (i, v) {
-            ls.push(parseLineString({ coordinates: v ***REMOVED***));
-    ***REMOVED***);
+            ls.push(parseLineString({ coordinates: v }));
+        });
         if (mls.properties) ls.Metadata = mls.properties;
         return ls;
-***REMOVED***
+    }
 
     function parseMultiPolygon(mpo) {
         var pos = [];
         $(mpo.coordinates).each(function (i, v) {
             $(v).each(function (ii, vv) {
-                pos.push(parsePolygon({ coordinates: vv ***REMOVED***));
-        ***REMOVED***);
-    ***REMOVED***);
+                pos.push(parsePolygon({ coordinates: vv }));
+            });
+        });
         if (mpo.properties) pos.Metadata = mpo.properties;
         return pos;
-***REMOVED***
+    }
 
     function parseGeometryCollection(gc) {
         var entityCollection = new Microsoft.Maps.EntityCollection();
         $(gc.geometries).each(function (i, v) {
-            var entity = parseFeature({ geometry: v ***REMOVED***);
+            var entity = parseFeature({ geometry: v });
 
             if (entity) entityCollection.push(entity);
-    ***REMOVED***);
+        });
         if (gc.properties) entityCollection.Metadata = gc.properties;
         return entityCollection;
-***REMOVED***
+    }
 
     function parseFeature(fe) {
         var entity;
@@ -187,41 +187,41 @@ var GeoJSONModule = function () {
                 entity = new Microsoft.Maps.EntityCollection();
                 $(parseMultiPoint(i)).each(function (i, v) {
                     entity.push(createPushpin(v));
-            ***REMOVED***);
+                });
                 break;
             case "MultiLineString":
                 entity = new Microsoft.Maps.EntityCollection();
                 $(parseMultiLineString(i)).each(function (i, v) {
                     entity.push(v);
-            ***REMOVED***);
+                });
                 break;
             case "MultiPolygon":
                 entity = new Microsoft.Maps.EntityCollection();
                 $(parseMultiPolygon(i)).each(function (i, v) {
                     entity.push(v);
-            ***REMOVED***);
+                });
                 break;
             default:
                 // do nothing with it not a supported element
-    ***REMOVED***
+        }
 
         if (fe.properties) entity.Metadata = fe.properties;
 
         return entity;
-***REMOVED***
+    }
 
     function parseFeatureCollection(fc) {
         var entityCollection = new Microsoft.Maps.EntityCollection();
         $(fc.features).each(function (i, v) {
             entityCollection.push(parseFeature(v));
-    ***REMOVED***);
+        });
         return entityCollection;
-***REMOVED***
+    }
 
     /* methods for creating Bing Maps entities including passed in options */
     function createPushpin(point) {
         return new Microsoft.Maps.Pushpin(point, _options.pushpinOptions);
-***REMOVED***
+    }
 
     /****************
     * Public Methods
@@ -236,14 +236,14 @@ var GeoJSONModule = function () {
         if (options != null) {
             for (attrname in options) {
                 _options[attrname] = options[attrname];
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         $.getJSON(link, function (json) {
             parseGeoJSON(json);
-    ***REMOVED***);
-***REMOVED***;
-***REMOVED***;
+        });
+    };
+};
 
 (function () {
     //Load complex polygon module is not already loaded
@@ -252,10 +252,10 @@ var GeoJSONModule = function () {
         Microsoft.Maps.loadModule('Microsoft.Maps.AdvancedShapes', { callback: function () {
             // Call the Module Loaded method
             Microsoft.Maps.moduleLoaded('GeoJSONModule');
-    ***REMOVED***
-    ***REMOVED***);
-***REMOVED*** else {
+        }
+        });
+    } else {
         // Call the Module Loaded method
         Microsoft.Maps.moduleLoaded('GeoJSONModule');
-***REMOVED***
-***REMOVED***)();
+    }
+})();

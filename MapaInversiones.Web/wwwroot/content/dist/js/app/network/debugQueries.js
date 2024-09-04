@@ -24,51 +24,51 @@ define([
 				{
 					'Mes':'Enero',
 					'ValorTotalPorMes':'321.123.456'
-				***REMOVED***,
+				},
 				{
 					'Mes':'Febrero',
 					'ValorTotalPorMes':'321.123.456'
-				***REMOVED***,
+				},
 				{
 					'Mes':'Marzo',
 					'ValorTotalPorMes':'321.123.456'
-				***REMOVED***,
+				},
 				{
 					'Mes':'Abril',
 					'ValorTotalPorMes':'321.123.456'
-				***REMOVED***,
+				},
 				{
 					'Mes':'Mayo',
 					'ValorTotalPorMes':'321.123.456'
-				***REMOVED***,
+				},
 				{
 					'Mes':'Junio',
 					'ValorTotalPorMes':'321.123.456'
-				***REMOVED***,
+				},
 				{
 					'Mes':'Julio',
 					'ValorTotalPorMes':'321.123.456'
-				***REMOVED***,
+				},
 				{
 					'Mes':'Agosto',
 					'ValorTotalPorMes':'321.123.456'
-				***REMOVED***,
+				},
 				{
 					'Mes':'Septiembre',
 					'ValorTotalPorMes':'321.123.456'
-				***REMOVED***,
+				},
 				{
 					'Mes':'Octubre',
 					'ValorTotalPorMes':'321.123.456'
-				***REMOVED***,
+				},
 				{
 					'Mes':'Noviembre',
 					'ValorTotalPorMes':'321.123.456'
-				***REMOVED***,
+				},
 				{
 					'Mes':'Diciembre',
 					'ValorTotalPorMes':'321.123.456'
-				***REMOVED***
+				}
 			]
 
 	$.mockjaxSettings.responseTime = 0
@@ -86,9 +86,9 @@ define([
 				contentType: 'application/json',
 				proxy: '../content/js/data/' + urlMatch[1] + suffix + '.json',
 				responseTime: duration
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			}
+		}
+	})
 
 	$.mockjax({
 		url: urls.filtersProjects,
@@ -97,9 +97,9 @@ define([
 			this.responseText = {
 				'status': true,
 				'filters': debugFilters
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			}
+		}
+	})
 
 	//Búsqueda proyectos mapa
 	$.mockjax({
@@ -122,18 +122,18 @@ define([
 							obj.projectNumber = Math.round(Math.random()*60)
 							obj.approvedMoney = Math.round(Math.random()*909999909)
 							return obj
-						***REMOVED***)
+						})
 						municipalities2 = municipalities2.filter(function(entity, index){
 							return index % 9 == mod
-						***REMOVED***)
+						})
 						objects = objects.concat(municipalities2)
-					***REMOVED***else if(zoom[1] < 8){ // departamentos
+					}else if(zoom[1] < 8){ // departamentos
 						var departments2 = departments.map(function(entity){
 							var obj = $.extend(null, entity)
 							obj.projectNumber = Math.round(Math.random()*60)
 							obj.approvedMoney = Math.round(Math.random()*909999909)
 							return obj
-						***REMOVED***)
+						})
 						objects = objects.concat(departments2)
 
 						var regions2 = regions.map(function(entity){
@@ -141,11 +141,11 @@ define([
 							obj.projectNumber = Math.round(Math.random()*60)
 							obj.approvedMoney = Math.round(Math.random()*909999909)
 							return obj
-						***REMOVED***)
+						})
 						objects = objects.concat(regions2)
 						// console.warn('yeah'+testCount)
 
-					***REMOVED***
+					}
 					if(true || zoom[1] >= 7){
 						var width = + se[0] - nw [0],
 							height = + se[1] - nw [1],
@@ -161,14 +161,14 @@ define([
 								'latitude': + nw[0] + Math.random() * width,
 								'longitude': + nw[1] + Math.random() * height,
 								'location': 'Bogotá D.C.' + Math.round(Math.random() * 20)
-							***REMOVED***
+							}
 							if( obj.count > 5 ){
 								// yeah back misspelling
 								obj.UsanMismaGeorefenciacion = true
 								// obj.IdPrimerProyectoUsanMismaGeoreferenciacion = true
-							***REMOVED***
+							}
 							objects.push( obj )
-						***REMOVED***
+						}
 						for(i=0; i<projects; i++){
 							objects.push({
 								'type': 'project',
@@ -186,11 +186,11 @@ define([
 								'longitude': + nw[1] + height * Math.random(),
 								'image': 'http://www.escapefromamerica.com/wp-\
 									content/uploads/2012/07/7_colombiamining.jpg'
-							***REMOVED***)
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+							})
+						}
+					}
+				}
+			}
 
 			this.responseText = {
 				'status': true,
@@ -200,7 +200,7 @@ define([
 				'approvedProjects': Math.round(Math.random()*1000),
 				'approvedMoneyTotal': Math.round(Math.random()*943072838885024),
 				'totalProjectsNumber': Math.round(300 * Math.random())
-			***REMOVED***
+			}
 
 			if( testCount++ < 3 ) return
 			console.log('NOOOOOO')
@@ -217,7 +217,7 @@ define([
 						"location": null,
 						"type": "region",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "01",
 						"approvedMoney": 1239718640948,
@@ -228,7 +228,7 @@ define([
 						"location": null,
 						"type": "region",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "06",
 						"approvedMoney": 812913763961,
@@ -239,7 +239,7 @@ define([
 						"location": null,
 						"type": "region",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "03",
 						"approvedMoney": 2594576594707,
@@ -250,7 +250,7 @@ define([
 						"location": null,
 						"type": "region",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "04",
 						"approvedMoney": 757125093173,
@@ -261,7 +261,7 @@ define([
 						"location": null,
 						"type": "region",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "05",
 						"approvedMoney": 904481647189,
@@ -272,7 +272,7 @@ define([
 						"location": null,
 						"type": "region",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "18",
 						"approvedMoney": 81968682942,
@@ -283,7 +283,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "85",
 						"approvedMoney": 399310842760,
@@ -294,7 +294,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "52",
 						"approvedMoney": 224211099128,
@@ -305,7 +305,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "08",
 						"approvedMoney": 93311897778,
@@ -316,7 +316,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "15",
 						"approvedMoney": 230090779001,
@@ -327,7 +327,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "54",
 						"approvedMoney": 62413866543,
@@ -338,7 +338,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "76",
 						"approvedMoney": 129461117284,
@@ -349,7 +349,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "73",
 						"approvedMoney": 108965576797,
@@ -360,7 +360,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "50",
 						"approvedMoney": 445278368950,
@@ -371,7 +371,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "25",
 						"approvedMoney": 242195776629,
@@ -382,7 +382,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "68",
 						"approvedMoney": 222818525998,
@@ -393,7 +393,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "20",
 						"approvedMoney": 573612175696,
@@ -404,7 +404,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "23",
 						"approvedMoney": 377845863368,
@@ -415,7 +415,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "70",
 						"approvedMoney": 237602274346,
@@ -426,7 +426,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "44",
 						"approvedMoney": 610901337765,
@@ -437,7 +437,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "05",
 						"approvedMoney": 638148319223,
@@ -448,7 +448,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "19",
 						"approvedMoney": 294335855732,
@@ -459,7 +459,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "99",
 						"approvedMoney": 50279216777,
@@ -470,7 +470,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "86",
 						"approvedMoney": 90781011144,
@@ -481,7 +481,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "81",
 						"approvedMoney": 303653702351,
@@ -492,7 +492,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "41",
 						"approvedMoney": 174420837662,
@@ -503,7 +503,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "27",
 						"approvedMoney": 164905691817,
@@ -514,7 +514,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "13",
 						"approvedMoney": 182944634808,
@@ -525,7 +525,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "88",
 						"approvedMoney": 57779374131,
@@ -536,7 +536,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "17",
 						"approvedMoney": 198530951999,
@@ -547,7 +547,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "63",
 						"approvedMoney": 11606605463,
@@ -558,7 +558,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "66",
 						"approvedMoney": 56195770507,
@@ -569,7 +569,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "47",
 						"approvedMoney": 499944426817,
@@ -580,7 +580,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "97",
 						"approvedMoney": 10054886350,
@@ -591,7 +591,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "95",
 						"approvedMoney": 20406277633,
@@ -602,7 +602,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "91",
 						"approvedMoney": 4001189829,
@@ -613,7 +613,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***,
+					},
 					{
 						"id": "94",
 						"approvedMoney": 10735346126,
@@ -624,7 +624,7 @@ define([
 						"location": null,
 						"type": "departamento",
 						"UsanMismaGeorefenciacion": false
-					***REMOVED***
+					}
 				],
 				"collectedMoney": 0,
 				"approvedMoney": 6629815190289,
@@ -633,9 +633,9 @@ define([
 				"totalProjectsNumber": 2319,
 				"status": true,
 				"message": null
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			}
+		}
+	})
 
 	$.mockjax({
 		url: urls.infoboxesResources,
@@ -671,15 +671,15 @@ define([
 			periodos = periodosRand ? ['2012'] : ['2012','2013-2014']
 			if(fuente == '-1'){
 				fuentes = allFuentes
-			***REMOVED***else if(fuente || fuente === 0){
+			}else if(fuente || fuente === 0){
 				fuentes = [
 					allFuentes[Math.floor(Math.random()*allFuentes.length)]
 				]
-			***REMOVED***
+			}
 			for(k=0; k<res; k++){
 				objsArray = Math.random() > 0.5 ? departments : municipalities
 				entity = objsArray[~~(objsArray.length * Math.random())]
-				obj = {***REMOVED***
+				obj = {}
 				obj.IdEntidad = entity.id
 				obj.TipoEntidad = entity.type
 				obj.TipoInfografico = 'G'
@@ -692,7 +692,7 @@ define([
 						Periodo: periodos[i],
 						PeriodoPresupuestal: '(' + periodos[i] + ')',
 						DetalleInfograficoRecursos: []
-					***REMOVED***
+					}
 					for( j=0; j<fuentes.length; j++){
 						obj.infograficosRecursos[i]
 							.DetalleInfograficoRecursos[j] = {
@@ -701,18 +701,18 @@ define([
 									'TotalPresupuesto':(999999999999 * Math.random()).toFixed(2),
 									'TotalAprobado':(999999999999 * Math.random()).toFixed(2),
 									'CantidadProyectosAprobados': Math.random().toFixed(1)
-								***REMOVED***
-							***REMOVED***
-					***REMOVED***
-				***REMOVED***
+								}
+							}
+					}
+				}
 				objects[k] = obj
-			***REMOVED***
+			}
 			this.responseText = {
 				'status': true,
 				'pushPinsRecursos': objects
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			}
+		}
+	})
 
 
 
@@ -740,7 +740,7 @@ define([
 				mod, zoom, nw, se
 
 			function terrytoryMaping(entity){
-				var obj = {***REMOVED***
+				var obj = {}
 				obj.IdEntidad = entity.id
 				obj.TipoEntidad = entity.type
 				obj.TipoInfografico = 'G'
@@ -752,7 +752,7 @@ define([
 						Periodo: periodos[i],
 						PeriodoPresupuestal: '(' + periodos[i] + ')',
 						DetalleInfograficoRecursos: []
-					***REMOVED***
+					}
 					for( j=0; j<fuentes.length; j++){
 						obj .infograficosRecursos[i]
 							.DetalleInfograficoRecursos[j] = {
@@ -761,12 +761,12 @@ define([
 									'TotalPresupuesto': (999999999999 * Math.random()).toFixed(2),
 									'TotalAprobado': (999999999999 * Math.random()).toFixed(2),
 									'CantidadProyectosAprobados': Math.random().toFixed(1)
-								***REMOVED***
-							***REMOVED***
-					***REMOVED***
-				***REMOVED***
+								}
+							}
+					}
+				}
 				return obj
-			***REMOVED***
+			}
 
 			// if(params.data){
 				zoom = params.data.match(/zoom=(\d+)/)
@@ -775,166 +775,166 @@ define([
 				periodos = periodosRand ? ['2012'] : ['2012','2013-2014']
 				if(fuente == '-1'){
 					fuentes = allFuentes
-				***REMOVED***else if(fuente || fuente === 0){
+				}else if(fuente || fuente === 0){
 					fuentes = [
 						allFuentes[Math.floor(Math.random()*allFuentes.length)]
 					]
-				***REMOVED***else{
+				}else{
 					fuentes = allFuentes
-				***REMOVED***
+				}
 				// if(zoom && zoom[1]){
 					if(zoom && (zoom[1] >= 8) && (zoom[1] < 12)){ // municipalities
 						mod = Math.round(8 * Math.random())
 						municipalities2 = municipalities.map( terrytoryMaping )
 						municipalities2 = municipalities2.filter(function(entity, index){
 							return index % 9 == mod
-						***REMOVED***)
+						})
 						objects = objects.concat(municipalities2)
-					***REMOVED***else if(!zoom || zoom[1] < 8){ // departamentos
+					}else if(!zoom || zoom[1] < 8){ // departamentos
 						departments2 = departments.map( terrytoryMaping )
 						objects = objects.concat(departments2)
 
 						regions2 = regions.map( terrytoryMaping )
 						objects = objects.concat(regions2)
 
-					***REMOVED***
-				// ***REMOVED***
-			// ***REMOVED***
+					}
+				// }
+			// }
 
 			this.responseText = {
 				status: true,
 				detalleRecursos: objects
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			}
+		}
+	})
 
 	$.mockjax({
 		url: urls.consolidated,
 		// responseTime: responseDuration,
 		response: function () {
 			var projectsPerSector = [
-					{'label':'Agropecuario','value':'7%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Minero','value':'2%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Tecnología','value':'0%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Agropecuario','value':'5%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Minero','value':'4%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Tecnología','value':'0%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Agropecuario','value':'7%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Minero','value':'4%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Tecnología','value':'8%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Agropecuario','value':'6%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Minero','value':'6%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Tecnología','value':'3%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Agropecuario','value':'3%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Minero','value':'2%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Tecnología','value':'1%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Agropecuario','value':'5%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Minero','value':'7%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Tecnología','value':'6%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Agropecuario','value':'0%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Minero','value':'0%','rawValue':Math.round(Math.random()*99999)***REMOVED***,
-					{'label':'Tecnología','value':'4%','rawValue':Math.round(Math.random()*99999)***REMOVED***
+					{'label':'Agropecuario','value':'7%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Minero','value':'2%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Tecnología','value':'0%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Agropecuario','value':'5%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Minero','value':'4%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Tecnología','value':'0%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Agropecuario','value':'7%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Minero','value':'4%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Tecnología','value':'8%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Agropecuario','value':'6%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Minero','value':'6%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Tecnología','value':'3%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Agropecuario','value':'3%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Minero','value':'2%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Tecnología','value':'1%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Agropecuario','value':'5%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Minero','value':'7%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Tecnología','value':'6%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Agropecuario','value':'0%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Minero','value':'0%','rawValue':Math.round(Math.random()*99999)},
+					{'label':'Tecnología','value':'4%','rawValue':Math.round(Math.random()*99999)}
 				],
 				total = 0
 
 			for(var i=0; i<projectsPerSector.length; i++){
 				total += projectsPerSector[i].rawValue
-			***REMOVED***
+			}
 			for(i=0; i<projectsPerSector.length; i++){
 				projectsPerSector[i].value  = Math.round(projectsPerSector[i].rawValue/total*100) + '%'
-			***REMOVED***
+			}
 
 			var resourcesPerSector = [
-					{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Agropecuario', 'value': '5%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***,
-					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)***REMOVED***
+					{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Agropecuario', 'value': '5%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*99999999)},
+					{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*99999999)}
 				]
 			
 			total = 0
 
 			for(i=0; i<resourcesPerSector.length; i++){
 				total += resourcesPerSector[i].rawValue
-			***REMOVED***
+			}
 			for(i=0; i<resourcesPerSector.length; i++){
 				resourcesPerSector[i].value  = Math.round(resourcesPerSector[i].rawValue/total*100) + '%'
-			***REMOVED***
+			}
 
 			var resourcesPerRegion = [
-				{'label':'Amazonas', 'value': '10%', 'rawValue': Math.round(Math.random()*999999999)***REMOVED***,
-				{'label':'Pacífico', 'value': '5%', 'rawValue': Math.round(Math.random()*999999999)***REMOVED***,
-				{'label':'Occidental', 'value': '16%', 'rawValue': Math.round(Math.random()*999999999)***REMOVED***,
-				{'label':'Oriental', 'value': '14%', 'rawValue': Math.round(Math.random()*999999999)***REMOVED***,
-				{'label':'Caribe', 'value': '25%', 'rawValue': Math.round(Math.random()*999999999)***REMOVED***,
-				{'label':'Andina', 'value': '35%', 'rawValue': Math.round(Math.random()*999999999)***REMOVED***
+				{'label':'Amazonas', 'value': '10%', 'rawValue': Math.round(Math.random()*999999999)},
+				{'label':'Pacífico', 'value': '5%', 'rawValue': Math.round(Math.random()*999999999)},
+				{'label':'Occidental', 'value': '16%', 'rawValue': Math.round(Math.random()*999999999)},
+				{'label':'Oriental', 'value': '14%', 'rawValue': Math.round(Math.random()*999999999)},
+				{'label':'Caribe', 'value': '25%', 'rawValue': Math.round(Math.random()*999999999)},
+				{'label':'Andina', 'value': '35%', 'rawValue': Math.round(Math.random()*999999999)}
 			]
 
 			total = 0
 
 			for(i=0; i<resourcesPerRegion.length; i++){
 				total += resourcesPerRegion[i].rawValue
-			***REMOVED***
+			}
 			for(i=0; i<resourcesPerRegion.length; i++){
 				resourcesPerRegion[i].value  = Math.round(resourcesPerRegion[i].rawValue/total*100) + '%'
-			***REMOVED***
+			}
 
 			var resourcesPerDepartment = [
-				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'San Andrés y Providencia', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Agropecuario', 'value': '5%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Agropecuario', 'value': '5%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***,
-				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)***REMOVED***
+				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'San Andrés y Providencia', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Agropecuario', 'value': '5%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Agropecuario', 'value': '10%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Agropecuario', 'value': '5%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Minero', 'value': '2%', 'rawValue': Math.round(Math.random()*9999999)},
+				{'label':'Tecnología', 'value': '3%', 'rawValue': Math.round(Math.random()*9999999)}
 			]
 			total = 0
 			for(i=0; i<resourcesPerDepartment.length; i++){
 				total += resourcesPerDepartment[i].rawValue
-			***REMOVED***
+			}
 			for(i=0; i<resourcesPerDepartment.length; i++){
 				resourcesPerDepartment[i].value  = Math.round(resourcesPerDepartment[i].rawValue/total*100) + '%'
-			***REMOVED***
+			}
 
 			this.responseText = {
 				'status': true,
@@ -944,120 +944,120 @@ define([
 				],
 				'resourcesPerRegion': resourcesPerRegion,
 				'resourcesPerDepartment': resourcesPerDepartment
-			***REMOVED***
+			}
 
 			this.responseText = {
 				'projectsPerSector':[
-					{'label':'Agricultura - Adquisición y Adjudicación de Tierras','value':'0,80%','rawValue':5.0***REMOVED***,
-					{'label':'Agricultura - Asistencia Técnica','value':'0,16%','rawValue':1.0***REMOVED***,
-					{'label':'Agricultura - Proyectos de Desarrollo Rural','value':'0,32%','rawValue':2.0***REMOVED***,
-					{'label':'Ciencia y Tecnología - Innovación','value':'0,16%','rawValue':1.0***REMOVED***,
-					{'label':'Ciencia y Tecnología - Investigación y Desarrollo','value':'0,48%','rawValue':3.0***REMOVED***,
-					{'label':'Comercio, Industria y Turismo - Fondos de capital emprendedores','value':'0,16%','rawValue':1.0***REMOVED***,
-					{'label':'Cultura - Formación artística y creación cultural','value':'0,16%','rawValue':1.0***REMOVED***,
-					{'label':'Cultura - Lectura y escritura','value':'0,16%','rawValue':1.0***REMOVED***,
-					{'label':'Deporte  - Fomento a la recreación, actividad fisica y deporte','value':'0,32%','rawValue':2.0***REMOVED***,
-					{'label':'Deporte  - Infraestructura deportiva','value':'0,16%','rawValue':1.0***REMOVED***,
-					{'label':'Desarrollo Social - Familia, primera infancia, niñez, adolescencia','value':'0,32%','rawValue':2.0***REMOVED***,
-					{'label':'Desarrollo Social - Infraestructura social y comunitaria','value':'0,16%','rawValue':1.0***REMOVED***,
-					{'label':'Educación - Formación para el trabajo y el desarrollo humano','value':'0,16%','rawValue':1.0***REMOVED***,
-					{'label':'Educación - Preescolar y Básica y Media','value':'1,28%','rawValue':8.0***REMOVED***,
-					{'label':'Medio Ambiente y Riesgo  - Control de la contaminación y manejo de residuos','value':'0,32%','rawValue':2.0***REMOVED***,
-					{'label':'Medio Ambiente y Riesgo  - Prevención y adaptación al cambio climático','value':'0,16%','rawValue':1.0***REMOVED***,
-					{'label':'Minas y Energía - Minería - Apoyo a pequeña minería','value':'0,16%','rawValue':1.0***REMOVED***,
-					{'label':'Planificación','value':'0,16%','rawValue':1.0***REMOVED***,
-					{'label':'Transporte - Red urbana','value':'0,64%','rawValue':4.0***REMOVED***,
-					{'label':'Transporte - Vial Red Secundaria','value':'0,16%','rawValue':1.0***REMOVED***,
-					{'label':'Transporte - Vial Red Terciaria','value':'0,80%','rawValue':5.0***REMOVED***,
-					{'label':'Vivienda y Desarrollo Urbano - Agua potable y saneamiento básico','value':'0,80%','rawValue':5.0***REMOVED***,
-					{'label':'Vivienda y Desarrollo Urbano - Vivienda rural','value':'0,48%','rawValue':3.0***REMOVED***,
-					{'label':'Vivienda y Desarrollo Urbano - Vivienda urbana','value':'1,44%','rawValue':9.0***REMOVED***
+					{'label':'Agricultura - Adquisición y Adjudicación de Tierras','value':'0,80%','rawValue':5.0},
+					{'label':'Agricultura - Asistencia Técnica','value':'0,16%','rawValue':1.0},
+					{'label':'Agricultura - Proyectos de Desarrollo Rural','value':'0,32%','rawValue':2.0},
+					{'label':'Ciencia y Tecnología - Innovación','value':'0,16%','rawValue':1.0},
+					{'label':'Ciencia y Tecnología - Investigación y Desarrollo','value':'0,48%','rawValue':3.0},
+					{'label':'Comercio, Industria y Turismo - Fondos de capital emprendedores','value':'0,16%','rawValue':1.0},
+					{'label':'Cultura - Formación artística y creación cultural','value':'0,16%','rawValue':1.0},
+					{'label':'Cultura - Lectura y escritura','value':'0,16%','rawValue':1.0},
+					{'label':'Deporte  - Fomento a la recreación, actividad fisica y deporte','value':'0,32%','rawValue':2.0},
+					{'label':'Deporte  - Infraestructura deportiva','value':'0,16%','rawValue':1.0},
+					{'label':'Desarrollo Social - Familia, primera infancia, niñez, adolescencia','value':'0,32%','rawValue':2.0},
+					{'label':'Desarrollo Social - Infraestructura social y comunitaria','value':'0,16%','rawValue':1.0},
+					{'label':'Educación - Formación para el trabajo y el desarrollo humano','value':'0,16%','rawValue':1.0},
+					{'label':'Educación - Preescolar y Básica y Media','value':'1,28%','rawValue':8.0},
+					{'label':'Medio Ambiente y Riesgo  - Control de la contaminación y manejo de residuos','value':'0,32%','rawValue':2.0},
+					{'label':'Medio Ambiente y Riesgo  - Prevención y adaptación al cambio climático','value':'0,16%','rawValue':1.0},
+					{'label':'Minas y Energía - Minería - Apoyo a pequeña minería','value':'0,16%','rawValue':1.0},
+					{'label':'Planificación','value':'0,16%','rawValue':1.0},
+					{'label':'Transporte - Red urbana','value':'0,64%','rawValue':4.0},
+					{'label':'Transporte - Vial Red Secundaria','value':'0,16%','rawValue':1.0},
+					{'label':'Transporte - Vial Red Terciaria','value':'0,80%','rawValue':5.0},
+					{'label':'Vivienda y Desarrollo Urbano - Agua potable y saneamiento básico','value':'0,80%','rawValue':5.0},
+					{'label':'Vivienda y Desarrollo Urbano - Vivienda rural','value':'0,48%','rawValue':3.0},
+					{'label':'Vivienda y Desarrollo Urbano - Vivienda urbana','value':'1,44%','rawValue':9.0}
 				],
 				'resourcesPerSector':
 				[
-					{'label':'Agricultura - Adquisición y Adjudicación de Tierras','value':'0,06%','rawValue':3190682199.0***REMOVED***,
-					{'label':'Agricultura - Asistencia Técnica','value':'0,00%','rawValue':0.0***REMOVED***,
-					{'label':'Agricultura - Proyectos de Desarrollo Rural','value':'0,01%','rawValue':606008580.0***REMOVED***,
-					{'label':'Ciencia y Tecnología - Innovación','value':'0,25%','rawValue':12520765607.0***REMOVED***,
-					{'label':'Ciencia y Tecnología - Investigación y Desarrollo','value':'0,11%','rawValue':5477524544.0***REMOVED***,
-					{'label':'Comercio, Industria y Turismo - Fondo del Turismo','value':'0,00%','rawValue':100000000.0***REMOVED***,
-					{'label':'Comercio, Industria y Turismo - Fondos de capital emprendedores','value':'0,00%','rawValue':4800000.0***REMOVED***,
-					{'label':'Cultura - Formación artística y creación cultural','value':'0,00%','rawValue':17580000.0***REMOVED***,
-					{'label':'Cultura - Lectura y escritura','value':'0,02%','rawValue':920000000.0***REMOVED***,
-					{'label':'Deporte  - Fomento a la recreación, actividad fisica y deporte','value':'0,01%','rawValue':550153319.0***REMOVED***,
-					{'label':'Deporte  - Infraestructura deportiva','value':'0,04%','rawValue':2189914231.0***REMOVED***,
-					{'label':'Desarrollo Social - Familia, primera infancia, niñez, adolescencia','value':'0,41%','rawValue':20547051285.0***REMOVED***,
-					{'label':'Desarrollo Social - Infraestructura social y comunitaria','value':'0,00%','rawValue':129250507.0***REMOVED***,
-					{'label':'Desarrollo Social - población vulnerable y excluída','value':'0,21%','rawValue':10742849797.0***REMOVED***,
-					{'label':'Educación - Formación para el trabajo y el desarrollo humano','value':'0,00%','rawValue':50000000.0***REMOVED***,
-					{'label':'Educación - Preescolar y Básica y Media','value':'1,25%','rawValue':63355089767.0***REMOVED***,
-					{'label':'Medio Ambiente y Riesgo  - Control de la contaminación y manejo de residuos','value':'0,08%','rawValue':4092116449.0***REMOVED***,
-					{'label':'Medio Ambiente y Riesgo  - Prevención y adaptación al cambio climático','value':'0,40%','rawValue':20180076750.0***REMOVED***,
-					{'label':'Minas y Energía - Energía Eléctrica - Distribución (< 220 KV)','value':'0,01%','rawValue':454216047.0***REMOVED***,
-					{'label':'Minas y Energía - Minería - Apoyo a pequeña minería','value':'0,01%','rawValue':479257074.0***REMOVED***,
-					{'label':'Planificación','value':'0,01%','rawValue':325606101.0***REMOVED***,
-					{'label':'Salud -  Prestación de servicios de salud','value':'0,01%','rawValue':300000000.0***REMOVED***,
-					{'label':'Salud - Régimen subsidiado','value':'0,20%','rawValue':10126214871.0***REMOVED***,
-					{'label':'Transporte - Red urbana ','value':'0,18%','rawValue':8990706841.0***REMOVED***,
-					{'label':'Transporte - Vial Red Primaria','value':'0,03%','rawValue':1618285590.0***REMOVED***,
-					{'label':'Transporte - Vial Red Secundaria','value':'0,05%','rawValue':2503993610.0***REMOVED***,
-					{'label':'Transporte - Vial Red Terciaria','value':'0,04%','rawValue':2145223145.0***REMOVED***,
-					{'label':'Vivienda y Desarrollo Urbano - Agua potable y saneamiento básico','value':'0,09%','rawValue':4339425960.0***REMOVED***,
-					{'label':'Vivienda y Desarrollo Urbano - Vivienda rural','value':'0,13%','rawValue':6800594696.0***REMOVED***,
-					{'label':'Vivienda y Desarrollo Urbano - Vivienda urbana','value':'1,24%','rawValue':62435172021.0***REMOVED***
+					{'label':'Agricultura - Adquisición y Adjudicación de Tierras','value':'0,06%','rawValue':3190682199.0},
+					{'label':'Agricultura - Asistencia Técnica','value':'0,00%','rawValue':0.0},
+					{'label':'Agricultura - Proyectos de Desarrollo Rural','value':'0,01%','rawValue':606008580.0},
+					{'label':'Ciencia y Tecnología - Innovación','value':'0,25%','rawValue':12520765607.0},
+					{'label':'Ciencia y Tecnología - Investigación y Desarrollo','value':'0,11%','rawValue':5477524544.0},
+					{'label':'Comercio, Industria y Turismo - Fondo del Turismo','value':'0,00%','rawValue':100000000.0},
+					{'label':'Comercio, Industria y Turismo - Fondos de capital emprendedores','value':'0,00%','rawValue':4800000.0},
+					{'label':'Cultura - Formación artística y creación cultural','value':'0,00%','rawValue':17580000.0},
+					{'label':'Cultura - Lectura y escritura','value':'0,02%','rawValue':920000000.0},
+					{'label':'Deporte  - Fomento a la recreación, actividad fisica y deporte','value':'0,01%','rawValue':550153319.0},
+					{'label':'Deporte  - Infraestructura deportiva','value':'0,04%','rawValue':2189914231.0},
+					{'label':'Desarrollo Social - Familia, primera infancia, niñez, adolescencia','value':'0,41%','rawValue':20547051285.0},
+					{'label':'Desarrollo Social - Infraestructura social y comunitaria','value':'0,00%','rawValue':129250507.0},
+					{'label':'Desarrollo Social - población vulnerable y excluída','value':'0,21%','rawValue':10742849797.0},
+					{'label':'Educación - Formación para el trabajo y el desarrollo humano','value':'0,00%','rawValue':50000000.0},
+					{'label':'Educación - Preescolar y Básica y Media','value':'1,25%','rawValue':63355089767.0},
+					{'label':'Medio Ambiente y Riesgo  - Control de la contaminación y manejo de residuos','value':'0,08%','rawValue':4092116449.0},
+					{'label':'Medio Ambiente y Riesgo  - Prevención y adaptación al cambio climático','value':'0,40%','rawValue':20180076750.0},
+					{'label':'Minas y Energía - Energía Eléctrica - Distribución (< 220 KV)','value':'0,01%','rawValue':454216047.0},
+					{'label':'Minas y Energía - Minería - Apoyo a pequeña minería','value':'0,01%','rawValue':479257074.0},
+					{'label':'Planificación','value':'0,01%','rawValue':325606101.0},
+					{'label':'Salud -  Prestación de servicios de salud','value':'0,01%','rawValue':300000000.0},
+					{'label':'Salud - Régimen subsidiado','value':'0,20%','rawValue':10126214871.0},
+					{'label':'Transporte - Red urbana ','value':'0,18%','rawValue':8990706841.0},
+					{'label':'Transporte - Vial Red Primaria','value':'0,03%','rawValue':1618285590.0},
+					{'label':'Transporte - Vial Red Secundaria','value':'0,05%','rawValue':2503993610.0},
+					{'label':'Transporte - Vial Red Terciaria','value':'0,04%','rawValue':2145223145.0},
+					{'label':'Vivienda y Desarrollo Urbano - Agua potable y saneamiento básico','value':'0,09%','rawValue':4339425960.0},
+					{'label':'Vivienda y Desarrollo Urbano - Vivienda rural','value':'0,13%','rawValue':6800594696.0},
+					{'label':'Vivienda y Desarrollo Urbano - Vivienda urbana','value':'1,24%','rawValue':62435172021.0}
 				],
 				'facts':
 				[
-					{'phrase':'Vivienda y Desarrollo Urbano - Vivienda urbanaVivienda y Desarrollo Urbano - Vivienda urbana','icon':'/content/img/example/fact1.png','title':null***REMOVED***,
-					{'phrase':'Vivienda y Desarrollo Urbano - Vivienda urbanaVivienda y Desarrollo Urbano - Vivienda urbana','icon':'/content/img/example/fact1.png','title':null***REMOVED***,
-					{'phrase':'HoVivienda y Desarrollo Urbano - Vivienda urbanaVivienda y Desarrollo Urbano - Vivienda urbanala','icon':'/content/img/example/fact1.png','title':null***REMOVED***
+					{'phrase':'Vivienda y Desarrollo Urbano - Vivienda urbanaVivienda y Desarrollo Urbano - Vivienda urbana','icon':'/content/img/example/fact1.png','title':null},
+					{'phrase':'Vivienda y Desarrollo Urbano - Vivienda urbanaVivienda y Desarrollo Urbano - Vivienda urbana','icon':'/content/img/example/fact1.png','title':null},
+					{'phrase':'HoVivienda y Desarrollo Urbano - Vivienda urbanaVivienda y Desarrollo Urbano - Vivienda urbanala','icon':'/content/img/example/fact1.png','title':null}
 				],
 				'resourcesPerRegion':
 				[
-					{'label':'Region 1','value':'53,22%','rawValue':3285384699858.0***REMOVED***,
-					{'label':'Region 2','value':'46,78%','rawValue':2887505446147.0***REMOVED***
+					{'label':'Region 1','value':'53,22%','rawValue':3285384699858.0},
+					{'label':'Region 2','value':'46,78%','rawValue':2887505446147.0}
 				],
 				'resourcesPerDepartment':
 				[
-					{'label':'Bogotá, D.C.','value':'1,01%','rawValue':50821498398.0***REMOVED***,
-					{'label':'Cauca','value':'4.817,06%','rawValue':243223802672955.0***REMOVED***,
-					{'label':'Tolima','value':'752,04%','rawValue':37971942565059.0***REMOVED***,
-					{'label':'Valle del Cauca','value':'896,98%','rawValue':45290438140438.0***REMOVED***,
-					{'label':'Risaralda','value':'127,47%','rawValue':6436015911360.0***REMOVED***,
-					{'label':'Meta','value':'1.377,02%','rawValue':69528613605000.0***REMOVED***,
-					{'label':'Santander','value':'3.744,38%','rawValue':189061632545896.0***REMOVED***,
-					{'label':'Antioquia','value':'1.560,11%','rawValue':78773393709000.0***REMOVED***,
-					{'label':'Caquetá','value':'313,17%','rawValue':15812594625984.0***REMOVED***,
-					{'label':'Casanare','value':'1.695,22%','rawValue':85595120236900.0***REMOVED***,
-					{'label':'Nariño','value':'1.610,10%','rawValue':81297622750680.0***REMOVED***,
-					{'label':'Atlántico','value':'140,81%','rawValue':7109674521504.0***REMOVED***,
-					{'label':'Sucre','value':'557,69%','rawValue':28158831594175.0***REMOVED***,
-					{'label':'Cundinamarca','value':'6.519,15%','rawValue':329165894136260.0***REMOVED***,
-					{'label':'Córdoba','value':'290,68%','rawValue':14676994336167.0***REMOVED***,
-					{'label':'Putumayo','value':'123,69%','rawValue':6245301379837.0***REMOVED***,
-					{'label':'Boyacá','value':'4.909,51%','rawValue':247891386110960.0***REMOVED***,
-					{'label':'Caldas','value':'1.054,99%','rawValue':53268719443420.0***REMOVED***,
-					{'label':'Magdalena','value':'301,76%','rawValue':15236316673620.0***REMOVED***,
-					{'label':'Guaviare','value':'26,74%','rawValue':1350077666530.0***REMOVED***,
-					{'label':'La Guajira','value':'384,70%','rawValue':19424516957395.0***REMOVED***,
-					{'label':'Vichada','value':'12,59%','rawValue':635586060860.0***REMOVED***,
-					{'label':'Norte de Santander','value':'1.572,99%','rawValue':79423408913893.0***REMOVED***,
-					{'label':'Amazonas','value':'34,60%','rawValue':1746903211083.0***REMOVED***,
-					{'label':'Arauca','value':'32,14%','rawValue':1622582018880.0***REMOVED***,
-					{'label':'Cesar','value':'203,15%','rawValue':10257247388925.0***REMOVED***,
-					{'label':'Bolívar','value':'129,44%','rawValue':6535742383776.0***REMOVED***,
-					{'label':'Huila','value':'1.919,97%','rawValue':96943368656302.0***REMOVED***,
-					{'label':'Guainía','value':'55,98%','rawValue':2826474595352.0***REMOVED***,
-					{'label':'San Andrés y Providencia','value':'2,20%','rawValue':110862649620.0***REMOVED***,
-					{'label':'Chocó','value':'61,08%','rawValue':3084090682266.0***REMOVED***,
-					{'label':'Vaupés','value':'2,53%','rawValue':127579857237.0***REMOVED***,
-					{'label':'Quindío','value':'9,08%','rawValue':458319057430.0***REMOVED***
+					{'label':'Bogotá, D.C.','value':'1,01%','rawValue':50821498398.0},
+					{'label':'Cauca','value':'4.817,06%','rawValue':243223802672955.0},
+					{'label':'Tolima','value':'752,04%','rawValue':37971942565059.0},
+					{'label':'Valle del Cauca','value':'896,98%','rawValue':45290438140438.0},
+					{'label':'Risaralda','value':'127,47%','rawValue':6436015911360.0},
+					{'label':'Meta','value':'1.377,02%','rawValue':69528613605000.0},
+					{'label':'Santander','value':'3.744,38%','rawValue':189061632545896.0},
+					{'label':'Antioquia','value':'1.560,11%','rawValue':78773393709000.0},
+					{'label':'Caquetá','value':'313,17%','rawValue':15812594625984.0},
+					{'label':'Casanare','value':'1.695,22%','rawValue':85595120236900.0},
+					{'label':'Nariño','value':'1.610,10%','rawValue':81297622750680.0},
+					{'label':'Atlántico','value':'140,81%','rawValue':7109674521504.0},
+					{'label':'Sucre','value':'557,69%','rawValue':28158831594175.0},
+					{'label':'Cundinamarca','value':'6.519,15%','rawValue':329165894136260.0},
+					{'label':'Córdoba','value':'290,68%','rawValue':14676994336167.0},
+					{'label':'Putumayo','value':'123,69%','rawValue':6245301379837.0},
+					{'label':'Boyacá','value':'4.909,51%','rawValue':247891386110960.0},
+					{'label':'Caldas','value':'1.054,99%','rawValue':53268719443420.0},
+					{'label':'Magdalena','value':'301,76%','rawValue':15236316673620.0},
+					{'label':'Guaviare','value':'26,74%','rawValue':1350077666530.0},
+					{'label':'La Guajira','value':'384,70%','rawValue':19424516957395.0},
+					{'label':'Vichada','value':'12,59%','rawValue':635586060860.0},
+					{'label':'Norte de Santander','value':'1.572,99%','rawValue':79423408913893.0},
+					{'label':'Amazonas','value':'34,60%','rawValue':1746903211083.0},
+					{'label':'Arauca','value':'32,14%','rawValue':1622582018880.0},
+					{'label':'Cesar','value':'203,15%','rawValue':10257247388925.0},
+					{'label':'Bolívar','value':'129,44%','rawValue':6535742383776.0},
+					{'label':'Huila','value':'1.919,97%','rawValue':96943368656302.0},
+					{'label':'Guainía','value':'55,98%','rawValue':2826474595352.0},
+					{'label':'San Andrés y Providencia','value':'2,20%','rawValue':110862649620.0},
+					{'label':'Chocó','value':'61,08%','rawValue':3084090682266.0},
+					{'label':'Vaupés','value':'2,53%','rawValue':127579857237.0},
+					{'label':'Quindío','value':'9,08%','rawValue':458319057430.0}
 				],
 				'status':true,
 				'message':null
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			}
+		}
+	})
 
 	$.mockjax({
 		url: urls.consolidatedResources,
@@ -1069,20 +1069,20 @@ define([
 						{
 							"Nombre": "Presupuesto",
 							"ItemsGrafica": []
-						***REMOVED***,
+						},
 						{
 							"Nombre": "RecursosAprobadosXRegion",
 							"ItemsGrafica": []
-						***REMOVED***,
+						},
 						{
 							"Nombre": "RecursosAprobadosXDepartamento",
 							"ItemsGrafica": []
-						***REMOVED***
+						}
 					],
 					"status": true,
 					"message": null
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				this.responseText = {
 					"graficasConsolidadas": [
 						{
@@ -1094,37 +1094,37 @@ define([
 									"LabelExtendido": null,
 									"Porcentaje": 51.895393,
 									"Items": null
-								***REMOVED***,
+								},
 								{
 									"Valor": 1158307177241,
 									"Label": "Fondo  de compensación regional",
 									"LabelExtendido": null,
 									"Porcentaje": 46.852648,
 									"Items": null
-								***REMOVED***,
+								},
 								{
 									"Valor": 16265747761,
 									"Label": "Fondo  de desarrollo regional",
 									"LabelExtendido": null,
 									"Porcentaje": 0.657937,
 									"Items": null
-								***REMOVED***,
+								},
 								{
 									"Valor": 13941606259,
 									"Label": "Fondo de ciencia, tecnología e innovación",
 									"LabelExtendido": null,
 									"Porcentaje": 0.563927,
 									"Items": null
-								***REMOVED***,
+								},
 								{
 									"Valor": 743978756,
 									"Label": "Nación",
 									"LabelExtendido": null,
 									"Porcentaje": 0.030093,
 									"Items": null
-								***REMOVED***
+								}
 							]
-						***REMOVED***,
+						},
 						{
 							"Nombre": "RecursosAprobadosXRegion",
 							"ItemsGrafica": [
@@ -1140,9 +1140,9 @@ define([
 											"LabelExtendido": null,
 											"Porcentaje": null,
 											"Items": null
-										***REMOVED***
+										}
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 83767777310,
 									"Label": "REGION CENTRO ORIENTE",
@@ -1151,7 +1151,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 94593999116,
 									"Label": "REGION CENTRO SUR AMAZONIA",
@@ -1160,7 +1160,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 28013197672,
 									"Label": "REGION DEL LLANO",
@@ -1169,7 +1169,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 408655497649,
 									"Label": "REGION EJE CAFETERO",
@@ -1178,7 +1178,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 63633425775,
 									"Label": "REGION PACIFICO",
@@ -1191,11 +1191,11 @@ define([
 											"LabelExtendido": null,
 											"Porcentaje": null,
 											"Items": null
-										***REMOVED***
+										}
 									]
-								***REMOVED***
+								}
 							]
-						***REMOVED***,
+						},
 						{
 							"Nombre": "RecursosAprobadosXDepartamento",
 							"ItemsGrafica": [
@@ -1207,7 +1207,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 103811224298,
 									"Label": "ANTIOQUIA",
@@ -1216,7 +1216,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "ARAUCA",
@@ -1225,7 +1225,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 9367364660,
 									"Label": "ATLANTICO",
@@ -1234,7 +1234,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "BOGOTA",
@@ -1243,7 +1243,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 8638674998,
 									"Label": "BOLIVAR",
@@ -1256,9 +1256,9 @@ define([
 											"LabelExtendido": null,
 											"Porcentaje": null,
 											"Items": null
-										***REMOVED***
+										}
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "BOYACA",
@@ -1267,7 +1267,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 20994031616,
 									"Label": "CALDAS",
@@ -1276,7 +1276,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 2538140050,
 									"Label": "CAQUETA",
@@ -1285,7 +1285,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "CASANARE",
@@ -1294,7 +1294,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "CAUCA",
@@ -1303,7 +1303,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "CESAR",
@@ -1312,7 +1312,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 1827740000,
 									"Label": "CHOCO",
@@ -1321,7 +1321,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 31160944331,
 									"Label": "CORDOBA",
@@ -1330,7 +1330,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 51240205060,
 									"Label": "CUNDINAMARCA",
@@ -1339,7 +1339,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "GUAINIA",
@@ -1348,7 +1348,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "GUAVIARE",
@@ -1357,7 +1357,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 27294800595,
 									"Label": "HUILA",
@@ -1366,7 +1366,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 14600472578,
 									"Label": "LA GUAJIRA",
@@ -1379,9 +1379,9 @@ define([
 											"LabelExtendido": null,
 											"Porcentaje": null,
 											"Items": null
-										***REMOVED***
+										}
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "MAGDALENA",
@@ -1390,7 +1390,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "META",
@@ -1399,7 +1399,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 777285000,
 									"Label": "NARIÑO",
@@ -1412,9 +1412,9 @@ define([
 											"LabelExtendido": null,
 											"Porcentaje": null,
 											"Items": null
-										***REMOVED***
+										}
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "NORTE DE SANTANDER",
@@ -1423,7 +1423,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "PUTUMAYO",
@@ -1432,7 +1432,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "QUINDIO",
@@ -1441,7 +1441,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 11830894643,
 									"Label": "RISARALDA",
@@ -1450,7 +1450,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "SAN ANDRES",
@@ -1459,7 +1459,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 4999969283,
 									"Label": "SANTANDER",
@@ -1468,7 +1468,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 8638674998,
 									"Label": "SUCRE",
@@ -1477,7 +1477,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 15800894003,
 									"Label": "TOLIMA",
@@ -1486,7 +1486,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "VALLE",
@@ -1495,7 +1495,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 2004844747,
 									"Label": "VAUPES",
@@ -1504,7 +1504,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 1030000000,
 									"Label": "VICHADA",
@@ -1513,16 +1513,16 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***
+								}
 							]
-						***REMOVED***
+						}
 					],
 					"status": true,
 					"message": null
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+				}
+			}
+		}
+	})
 
 	$.mockjax({
 		url: urls.consolidatedProduction,
@@ -1534,20 +1534,20 @@ define([
 						{
 							"Nombre": "Presupuesto",
 							"ItemsGrafica": []
-						***REMOVED***,
+						},
 						{
 							"Nombre": "RecursosAprobadosXRegion",
 							"ItemsGrafica": []
-						***REMOVED***,
+						},
 						{
 							"Nombre": "RecursosAprobadosXDepartamento",
 							"ItemsGrafica": []
-						***REMOVED***
+						}
 					],
 					"status": true,
 					"message": null
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				this.responseText = {
 					"graficasConsolidadas": [
 						{
@@ -1559,37 +1559,37 @@ define([
 									"LabelExtendido": null,
 									"Porcentaje": 51.895393,
 									"Items": null
-								***REMOVED***,
+								},
 								{
 									"Valor": 1158307177241,
 									"Label": "Fondo  de compensación regional",
 									"LabelExtendido": null,
 									"Porcentaje": 46.852648,
 									"Items": null
-								***REMOVED***,
+								},
 								{
 									"Valor": 16265747761,
 									"Label": "Fondo  de desarrollo regional",
 									"LabelExtendido": null,
 									"Porcentaje": 0.657937,
 									"Items": null
-								***REMOVED***,
+								},
 								{
 									"Valor": 13941606259,
 									"Label": "Fondo de ciencia, tecnología e innovación",
 									"LabelExtendido": null,
 									"Porcentaje": 0.563927,
 									"Items": null
-								***REMOVED***,
+								},
 								{
 									"Valor": 743978756,
 									"Label": "Nación",
 									"LabelExtendido": null,
 									"Porcentaje": 0.030093,
 									"Items": null
-								***REMOVED***
+								}
 							]
-						***REMOVED***,
+						},
 						{
 							"Nombre": "RecursosAprobadosXRegion",
 							"ItemsGrafica": [
@@ -1605,9 +1605,9 @@ define([
 											"LabelExtendido": null,
 											"Porcentaje": null,
 											"Items": null
-										***REMOVED***
+										}
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 83767777310,
 									"Label": "REGION CENTRO ORIENTE",
@@ -1616,7 +1616,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 94593999116,
 									"Label": "REGION CENTRO SUR AMAZONIA",
@@ -1625,7 +1625,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 28013197672,
 									"Label": "REGION DEL LLANO",
@@ -1634,7 +1634,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 408655497649,
 									"Label": "REGION EJE CAFETERO",
@@ -1643,7 +1643,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 63633425775,
 									"Label": "REGION PACIFICO",
@@ -1656,11 +1656,11 @@ define([
 											"LabelExtendido": null,
 											"Porcentaje": null,
 											"Items": null
-										***REMOVED***
+										}
 									]
-								***REMOVED***
+								}
 							]
-						***REMOVED***,
+						},
 						{
 							"Nombre": "RecursosAprobadosXDepartamento",
 							"ItemsGrafica": [
@@ -1672,7 +1672,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 103811224298,
 									"Label": "ANTIOQUIA",
@@ -1681,7 +1681,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "ARAUCA",
@@ -1690,7 +1690,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 9367364660,
 									"Label": "ATLANTICO",
@@ -1699,7 +1699,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "BOGOTA",
@@ -1708,7 +1708,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 8638674998,
 									"Label": "BOLIVAR",
@@ -1721,9 +1721,9 @@ define([
 											"LabelExtendido": null,
 											"Porcentaje": null,
 											"Items": null
-										***REMOVED***
+										}
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "BOYACA",
@@ -1732,7 +1732,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 20994031616,
 									"Label": "CALDAS",
@@ -1741,7 +1741,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 2538140050,
 									"Label": "CAQUETA",
@@ -1750,7 +1750,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "CASANARE",
@@ -1759,7 +1759,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "CAUCA",
@@ -1768,7 +1768,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "CESAR",
@@ -1777,7 +1777,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 1827740000,
 									"Label": "CHOCO",
@@ -1786,7 +1786,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 31160944331,
 									"Label": "CORDOBA",
@@ -1795,7 +1795,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 51240205060,
 									"Label": "CUNDINAMARCA",
@@ -1804,7 +1804,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "GUAINIA",
@@ -1813,7 +1813,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "GUAVIARE",
@@ -1822,7 +1822,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 27294800595,
 									"Label": "HUILA",
@@ -1831,7 +1831,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 14600472578,
 									"Label": "LA GUAJIRA",
@@ -1844,9 +1844,9 @@ define([
 											"LabelExtendido": null,
 											"Porcentaje": null,
 											"Items": null
-										***REMOVED***
+										}
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "MAGDALENA",
@@ -1855,7 +1855,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "META",
@@ -1864,7 +1864,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 777285000,
 									"Label": "NARIÑO",
@@ -1877,9 +1877,9 @@ define([
 											"LabelExtendido": null,
 											"Porcentaje": null,
 											"Items": null
-										***REMOVED***
+										}
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "NORTE DE SANTANDER",
@@ -1888,7 +1888,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "PUTUMAYO",
@@ -1897,7 +1897,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "QUINDIO",
@@ -1906,7 +1906,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 11830894643,
 									"Label": "RISARALDA",
@@ -1915,7 +1915,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "SAN ANDRES",
@@ -1924,7 +1924,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 4999969283,
 									"Label": "SANTANDER",
@@ -1933,7 +1933,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 8638674998,
 									"Label": "SUCRE",
@@ -1942,7 +1942,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 15800894003,
 									"Label": "TOLIMA",
@@ -1951,7 +1951,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": null,
 									"Label": "VALLE",
@@ -1960,7 +1960,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 2004844747,
 									"Label": "VAUPES",
@@ -1969,7 +1969,7 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***,
+								},
 								{
 									"Valor": 1030000000,
 									"Label": "VICHADA",
@@ -1978,16 +1978,16 @@ define([
 									"Items": [
 										null
 									]
-								***REMOVED***
+								}
 							]
-						***REMOVED***
+						}
 					],
 					"status": true,
 					"message": null
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+				}
+			}
+		}
+	})
 
 	
 	$.mockjax({
@@ -2012,8 +2012,8 @@ define([
 						'longitude': -74.059508,
 						'location': 'Cajicá, Cundinamarca',
 						'image': 'http://www.escapefromamerica.com/wp-content/uploads/2012/07/7_colombiamining.jpg'
-					***REMOVED***)
-			***REMOVED***
+					})
+			}
 
 			this.responseText = {
 				'status': true,
@@ -2021,9 +2021,9 @@ define([
 				'totalPages': 30,
 				'pageNumber': page,
 				'objects': objects
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			}
+		}
+	})
 
 	
 	$.mockjax({
@@ -2035,13 +2035,13 @@ define([
 				text = ''
 			for(var i = 0; i<times; i++){
 				text += dictionary[ i % dictionary.length ] + ' '
-			***REMOVED***
+			}
 			this.responseText = {
 				TextoParametrico: text,
 				status: true
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			}
+		}
+	})
 
 	$.mockjax({
 		url: urls.getBudget,
@@ -2063,8 +2063,8 @@ define([
 					Fuente: allFuentes[i],
 					DetallePorMes: detalleMes.slice(),
 					ValorTotalPorFuente: Math.round(Math.random() * 999999999)
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			// if( Math.random() > 0.7 ) tempDetalle = []
 			// if( Math.random() > 0.5 ) tempDetalle = null
@@ -2078,10 +2078,10 @@ define([
 					Periodo: '2012',
 					ValorTotalPeriodo: 8987876876542299,
 					DetallePorFuente: tempDetalle
-				***REMOVED***]
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+				}]
+			}
+		}
+	})
 
 	$.mockjax({
 		url: urls.getDistribution,
@@ -2103,8 +2103,8 @@ define([
 					Fuente: allFuentes[i],
 					DetallePorMes: detalleMes.slice(),
 					ValorTotalPorFuente: Math.round(Math.random() * 999999999)
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			// if( Math.random() > 0.7 ) tempDetalle = []
 			// if( Math.random() > 0.5 ) tempDetalle = null
@@ -2118,10 +2118,10 @@ define([
 					periodo: '2012',
 					ValorTotalPeriodo: Math.round(Math.random() * 999999999),
 					DetallePorFuente: tempDetalle
-				***REMOVED***]
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+				}]
+			}
+		}
+	})
 	
 	$.mockjax({
 		url: urls.getOutlay,
@@ -2143,8 +2143,8 @@ define([
 					Fuente: allFuentes[i],
 					DetallePorMes: detalleMes.slice(),
 					ValorTotalPorFuente: Math.round(Math.random() * 999999999)
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			// if( Math.random() > 0.7 ) tempDetalle = []
 			// if( Math.random() > 0.5 ) tempDetalle = null
@@ -2158,10 +2158,10 @@ define([
 					periodo: '2012',
 					ValorTotalPeriodo: Math.round(Math.random() * 999999999),
 					DetallePorFuente: tempDetalle
-				***REMOVED***]
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+				}]
+			}
+		}
+	})
 
 	$.mockjax({
 		url: urls.getAprovedProyects,
@@ -2183,7 +2183,7 @@ define([
 						Municipio: 'Bogotá',
 						Estado: 'Aprovado',
 						Valor: Math.round(Math.random() * 9999999999)
-					***REMOVED***,
+					},
 					{
 						Id: '002',
 						URLFicha: 'http://monoku.com',
@@ -2193,7 +2193,7 @@ define([
 						Municipio: 'Bogotá',
 						Estado: 'Aprovado',
 						Valor: Math.round(Math.random() * 9999999999)
-					***REMOVED***,
+					},
 					{
 						Id: '003',
 						URLFicha: 'http://monoku.com',
@@ -2203,7 +2203,7 @@ define([
 						Municipio: 'Bogotá',
 						Estado: 'Aprovado',
 						Valor: Math.round(Math.random() * 9999999999)
-					***REMOVED***,
+					},
 					{
 						Id: '004',
 						URLFicha: 'http://monoku.com',
@@ -2213,9 +2213,9 @@ define([
 						Municipio: 'Bogotá',
 						Estado: 'Aprovado',
 						Valor: Math.round(Math.random() * 9999999999)
-					***REMOVED***
+					}
 				]
-			***REMOVED***
+			}
 			if( isList ){
 				pagina = pagina ? pagina[1] : 1
 				this.responseText.TotalProyectos = 140
@@ -2223,9 +2223,9 @@ define([
 				this.responseText.NumeroPagina = pagina
 				this.responseText.status = true
 				this.responseText.message = null			
-			***REMOVED***
-		***REMOVED***	
-	***REMOVED***)
+			}
+		}	
+	})
 
 	$.mockjax({
 		url: urls.getValueAproved,
@@ -2246,9 +2246,9 @@ define([
 					Fuente: allFuentes[i],
 					ValorTotalPorFuente: Math.round(Math.random() * 999999999),
 					URLProyectos: '/api/Proyectos/GetOtrosProyectosAprobados?periodosRecursos=2012&fuentes=2874&departamento=05&query=Aprobados'
-				***REMOVED***
+				}
 
-			***REMOVED***
+			}
 			this.responseText = {
 				status: true,
 				message: '',
@@ -2256,10 +2256,10 @@ define([
 					periodo: '2012',
 					ValorTotalPeriodo: 898787687654555,
 					DetallePorFuente: tempDetalle
-				***REMOVED***]
-			***REMOVED***
-		***REMOVED***	
-	***REMOVED***)
+				}]
+			}
+		}	
+	})
 
 	$.mockjax({
 		url: urls.getExecuted,
@@ -2282,8 +2282,8 @@ define([
 					DetallePorMes: detalleMes.slice(),
 					ValorTotalPorFuente: Math.round(Math.random() * 999999999),
 					URLProyectos: '/api/Proyectos/GetOtrosProyectosAprobados?periodosRecursos=2012&fuentes=2874&departamento=05&query=Aprobados'
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			// if( Math.random() > 0.7 ) tempDetalle = []
 			// if( Math.random() > 0.5 ) tempDetalle = null
@@ -2297,10 +2297,10 @@ define([
 					periodo: '2012',
 					ValorTotalPeriodo: Math.round(Math.random() * 999999999),
 					DetallePorFuente: tempDetalle
-				***REMOVED***]
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+				}]
+			}
+		}
+	})
 
 	$.mockjax({
 		url: urls.getRegalias,
@@ -2322,15 +2322,15 @@ define([
 					Fuente: allFuentes[i],
 					DetallePorMes: detalleMes.slice(),
 					ValorTotalPorFuente: Math.round(Math.random() * 999999999)
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			// if( Math.random() > 0.7 ) tempDetalle = []
 			// if( Math.random() > 0.5 ) tempDetalle = null
 				
-			this.responseText = {"ResumenLiquidacion":[{"Periodo":"2012","ValorTotalPeriodo":2522614.00000000,"DetallePorMes":[{"Mes":"Enero","ValorTotalPorMes":0.0***REMOVED***,{"Mes":"Febrero","ValorTotalPorMes":0.0***REMOVED***,{"Mes":"Marzo","ValorTotalPorMes":0.0***REMOVED***,{"Mes":"Abril","ValorTotalPorMes":0.0***REMOVED***,{"Mes":"Mayo","ValorTotalPorMes":0.0***REMOVED***,{"Mes":"Junio","ValorTotalPorMes":0.0***REMOVED***,{"Mes":"Julio","ValorTotalPorMes":0.0***REMOVED***,{"Mes":"Agosto","ValorTotalPorMes":0.0***REMOVED***,{"Mes":"Septiembre","ValorTotalPorMes":0.0***REMOVED***,{"Mes":"Octubre","ValorTotalPorMes":0.0***REMOVED***,{"Mes":"Noviembre","ValorTotalPorMes":0.0***REMOVED***,{"Mes":"Diciembre","ValorTotalPorMes":2522614.00000000***REMOVED***]***REMOVED***],"status":true,"message":null***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			this.responseText = {"ResumenLiquidacion":[{"Periodo":"2012","ValorTotalPeriodo":2522614.00000000,"DetallePorMes":[{"Mes":"Enero","ValorTotalPorMes":0.0},{"Mes":"Febrero","ValorTotalPorMes":0.0},{"Mes":"Marzo","ValorTotalPorMes":0.0},{"Mes":"Abril","ValorTotalPorMes":0.0},{"Mes":"Mayo","ValorTotalPorMes":0.0},{"Mes":"Junio","ValorTotalPorMes":0.0},{"Mes":"Julio","ValorTotalPorMes":0.0},{"Mes":"Agosto","ValorTotalPorMes":0.0},{"Mes":"Septiembre","ValorTotalPorMes":0.0},{"Mes":"Octubre","ValorTotalPorMes":0.0},{"Mes":"Noviembre","ValorTotalPorMes":0.0},{"Mes":"Diciembre","ValorTotalPorMes":2522614.00000000}]}],"status":true,"message":null}
+		}
+	})
 
 	$.mockjax({
 		url: urls.getPerformance,
@@ -2352,8 +2352,8 @@ define([
 					Fuente: allFuentes[i],
 					DetallePorMes: detalleMes.slice(),
 					ValorTotalPorFuente: Math.round(Math.random() * 999999999)
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			// if( Math.random() > 0.7 ) tempDetalle = []
 			// if( Math.random() > 0.5 ) tempDetalle = null
@@ -2367,10 +2367,10 @@ define([
 					Periodo: '2012',
 					ValorTotalPeriodo: 8987876876542299,
 					DetallePorFuente: tempDetalle
-				***REMOVED***]
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+				}]
+			}
+		}
+	})
 
 	//---------------------------------
 	// PRODUCTION QUERIES
@@ -2404,16 +2404,16 @@ define([
 			periodos = periodosRand ? ['2012'] : ['2012','2013-2014']
 			if(!fuente || fuente == '-1'){
 				fuentes = allResources
-			***REMOVED***else{
+			}else{
 				fuentes = [
 					allResources[Math.floor(Math.random()*allResources.length)]
 				]
-			***REMOVED***
+			}
 			if(zoom && zoom[1]){
 				if(zoom[1] >= 8 && zoom[1] < 12){ // municipalities
 					var mod = Math.round(8 * Math.random())
 					var municipalities2 = municipalities.map(function(entity){
-						var obj = {***REMOVED***
+						var obj = {}
 						obj.IdEntidad = entity.id
 						obj.NombreEntidad = 'N/A'
 						obj.TipoEntidad = 'municipio'
@@ -2421,25 +2421,25 @@ define([
 						obj.Url = '/Produccion/FichaProduccion?periodosRecursos=2012,2013,2014,2015&departamento=47'
 						obj['DetalleA\u00f1o'] = []
 						for(var i = 0; i < periodos.length; i++){
-							obj['DetalleA\u00f1o'][i] = { Periodo: periodos[i] ***REMOVED***
+							obj['DetalleA\u00f1o'][i] = { Periodo: periodos[i] }
 							obj['DetalleA\u00f1o'][i].Detalles = []
 							for(var j = 0; j < fuentes.length; j++){
 								obj['DetalleA\u00f1o'][i].Detalles[j] = {
 									"Cantidad": Math.round(Math.random()*90999), 
 									"NombreRecurso": fuentes[j], 
 									"UnidadDeMedida": "Barriles (Barriles Mes)"
-								***REMOVED***
-							***REMOVED***
-						***REMOVED***
+								}
+							}
+						}
 						return obj
-					***REMOVED***)
+					})
 					municipalities2 = municipalities2.filter(function(entity, index){
 						return index % 9 == mod
-					***REMOVED***)
+					})
 					objects = objects.concat(municipalities2)
-				***REMOVED***else if(zoom[1] < 8){ // departamentos
+				}else if(zoom[1] < 8){ // departamentos
 					var departments2 = departments.map(function(entity){
-						var obj = {***REMOVED***
+						var obj = {}
 						obj.IdEntidad = entity.id
 						obj.NombreEntidad = ''
 						obj.TipoEntidad = 'departamento'
@@ -2447,22 +2447,22 @@ define([
 						obj.Url = '/Produccion/FichaProduccion?periodosRecursos=2012,2013,2014,2015&departamento=47'
 						obj['DetalleA\u00f1o'] = []
 						for(var i = 0; i < periodos.length; i++){
-							obj['DetalleA\u00f1o'][i] = { Periodo: periodos[i] ***REMOVED***
+							obj['DetalleA\u00f1o'][i] = { Periodo: periodos[i] }
 							obj['DetalleA\u00f1o'][i].Detalles = []
 							for(var j = 0; j < fuentes.length; j++){
 								obj['DetalleA\u00f1o'][i].Detalles[j] = {
 									"Cantidad": Math.round(Math.random()*90999), 
 									"NombreRecurso": fuentes[j], 
 									"UnidadDeMedida": "Barriles (Barriles Mes)"
-								***REMOVED***
-							***REMOVED***
-						***REMOVED***
+								}
+							}
+						}
 						return obj
-					***REMOVED***)
+					})
 					objects = objects.concat(departments2)
 
 					var regions2 = regions.map(function(entity){
-						var obj = {***REMOVED***
+						var obj = {}
 						obj.IdEntidad = entity.id
 						obj.NombreEntidad = 'N/A'
 						obj.TipoEntidad = 'region'
@@ -2470,29 +2470,29 @@ define([
 						obj.Url = '/Produccion/FichaProduccion?periodosRecursos=2012,2013,2014,2015&departamento=47'
 						obj['DetalleA\u00f1o'] = []
 						for(var i = 0; i < periodos.length; i++){
-							obj['DetalleA\u00f1o'][i] = { Periodo: periodos[i] ***REMOVED***
+							obj['DetalleA\u00f1o'][i] = { Periodo: periodos[i] }
 							obj['DetalleA\u00f1o'][i].Detalles = []
 							for(var j = 0; j < fuentes.length; j++){
 								obj['DetalleA\u00f1o'][i].Detalles[j] = {
 									"Cantidad": Math.round(Math.random()*90999), 
 									"NombreRecurso": fuentes[j], 
 									"UnidadDeMedida": "Barriles (Barriles Mes)"
-								***REMOVED***
-							***REMOVED***
-						***REMOVED***
+								}
+							}
+						}
 						return obj
-					***REMOVED***)
+					})
 					objects = objects.concat(regions2)
 
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 			// console.log(objects)
 			this.responseText = {
 				'status': true,
 				'Detalles': objects
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			}
+		}
+	})
 
 	$.mockjax({
 		url: urls.searchProduction,
@@ -2522,16 +2522,16 @@ define([
 
 			if(! fuente || fuente == '-1'){
 				fuentes = allResources
-			***REMOVED***else{
+			}else{
 				fuentes = [
 					allResources[Math.floor(Math.random()*allResources.length)]
 				]
-			***REMOVED***
+			}
 			for(k=0; k<res; k++){
 				objsArray = Math.random() > 0.5 ? departments : municipalities
 				entity = objsArray[~~(objsArray.length * Math.random())]
-				obj = {***REMOVED***
-				var obj = {***REMOVED***
+				obj = {}
+				var obj = {}
 				obj.IdEntidad = entity.id
 				obj.NombreEntidad = ''
 				obj.TipoEntidad = entity.type
@@ -2542,23 +2542,23 @@ define([
 				obj.Url = '/Produccion/FichaProduccion?periodosRecursos=2012,2013,2014,2015&departamento=47'
 				obj['DetalleA\u00f1o'] = []
 				for(var i = 0; i < periodos.length; i++){
-					obj['DetalleA\u00f1o'][i] = { Periodo: periodos[i] ***REMOVED***
+					obj['DetalleA\u00f1o'][i] = { Periodo: periodos[i] }
 					obj['DetalleA\u00f1o'][i].Detalles = []
 					for(var j = 0; j < fuentes.length; j++){
 						obj['DetalleA\u00f1o'][i].Detalles[j] = {
 							"Cantidad": Math.round(Math.random()*90999), 
 							"NombreRecurso": fuentes[j], 
 							"UnidadDeMedida": "Barriles (Barriles Mes)"
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***
+						}
+					}
+				}
 				objects[k] = obj
-			***REMOVED***
+			}
 			console.log( objects )
 			this.responseText = {
 				'status': true,
 				'Detalles': objects
-			***REMOVED***
+			}
 
 			this.responseText = {
 				"Detalles": [
@@ -2578,25 +2578,25 @@ define([
 										"NombreRecurso": "CRUDO",
 										"Cantidad": 13040,
 										"UnidadDeMedida": "Barriles (Barriles Mes)"
-									***REMOVED***
+									}
 								]
-							***REMOVED***
+							}
 						]
-					***REMOVED***
+					}
 				],
 				"status": true,
 				"message": null//Math.random() > 0.7 ? null : "Yeah Baby!!"
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			}
+		}
+	})
 
 	$.mockjax({
 		url: urls.consolidatedProduction,
 		// responseTime: responseDuration,
 		response: function () {
-			this.responseText = {"graficasConsolidadas":[{"Nombre":"Producción por recurso Natural","ItemsGrafica":[{"Valor":87370399.00,"Label":"CRUDO","LabelExtendido":"Barriles (Barriles Mes)","Porcentaje":null,"Items":null***REMOVED***,{"Valor":96060841.00,"Label":"GAS","LabelExtendido":"Kilo Pies Cúbicos","Porcentaje":null,"Items":null***REMOVED***,{"Valor":1014643.83,"Label":"CARBON","LabelExtendido":"Toneladas","Porcentaje":null,"Items":null***REMOVED***]***REMOVED***,{"Nombre":"LiquidadoPorTipoRecurso","ItemsGrafica":[{"Valor":10030142121.62000000,"Label":"CARBON","LabelExtendido":null,"Porcentaje":0.4738220308762289720206624922,"Items":null***REMOVED***,{"Valor":1950757561723.00000000,"Label":"CRUDO","LabelExtendido":null,"Porcentaje":92.15342100192134751496081181,"Items":null***REMOVED***,{"Valor":156070835441.00000000,"Label":"GAS","LabelExtendido":null,"Porcentaje":7.3727569672024235130185257014,"Items":null***REMOVED***]***REMOVED***,{"Nombre":"LiquidadoPorRecurso","ItemsGrafica":[{"Valor":10030142121.62000000,"Label":"CARBON","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":1950757561723.00000000,"Label":"CRUDO","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":156070835441.00000000,"Label":"GAS","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***]***REMOVED***,{"Nombre":"LiquidadoPorDepartamento","ItemsGrafica":[{"Valor":48944934641.30000000,"Label":"ANTIOQUIA","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":170290843225.00000000,"Label":"ARAUCA","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":60390925678.96000000,"Label":"BOYACA","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":439057307557.00000000,"Label":"CASANARE","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":2158718477.80000000,"Label":"CAUCA","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":14826464219.00000000,"Label":"CESAR","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":977851706.60000000,"Label":"CORDOBA","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":6275623842.08000000,"Label":"CUNDINAMARCA","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":101942953443.00000000,"Label":"HUILA","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":93417298738.00000000,"Label":"LA GUAJIRA","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":9472226.00000000,"Label":"MAGDALENA","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":918985275402.00000000,"Label":"META","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":962517956.00000000,"Label":"NARIÑO","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":11229332678.04000000,"Label":"NORTE DE SANTANDER","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":58163418851.00000000,"Label":"PUTUMAYO","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":130604261083.84000000,"Label":"SANTANDER","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":58421068495.00000000,"Label":"TOLIMA","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":37024336.00000000,"Label":"VALLE","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***,{"Valor":163246729.00000000,"Label":"VICHADA","LabelExtendido":null,"Porcentaje":null,"Items":null***REMOVED***]***REMOVED***],"status":true,"message":null***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			this.responseText = {"graficasConsolidadas":[{"Nombre":"Producción por recurso Natural","ItemsGrafica":[{"Valor":87370399.00,"Label":"CRUDO","LabelExtendido":"Barriles (Barriles Mes)","Porcentaje":null,"Items":null},{"Valor":96060841.00,"Label":"GAS","LabelExtendido":"Kilo Pies Cúbicos","Porcentaje":null,"Items":null},{"Valor":1014643.83,"Label":"CARBON","LabelExtendido":"Toneladas","Porcentaje":null,"Items":null}]},{"Nombre":"LiquidadoPorTipoRecurso","ItemsGrafica":[{"Valor":10030142121.62000000,"Label":"CARBON","LabelExtendido":null,"Porcentaje":0.4738220308762289720206624922,"Items":null},{"Valor":1950757561723.00000000,"Label":"CRUDO","LabelExtendido":null,"Porcentaje":92.15342100192134751496081181,"Items":null},{"Valor":156070835441.00000000,"Label":"GAS","LabelExtendido":null,"Porcentaje":7.3727569672024235130185257014,"Items":null}]},{"Nombre":"LiquidadoPorRecurso","ItemsGrafica":[{"Valor":10030142121.62000000,"Label":"CARBON","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":1950757561723.00000000,"Label":"CRUDO","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":156070835441.00000000,"Label":"GAS","LabelExtendido":null,"Porcentaje":null,"Items":null}]},{"Nombre":"LiquidadoPorDepartamento","ItemsGrafica":[{"Valor":48944934641.30000000,"Label":"ANTIOQUIA","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":170290843225.00000000,"Label":"ARAUCA","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":60390925678.96000000,"Label":"BOYACA","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":439057307557.00000000,"Label":"CASANARE","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":2158718477.80000000,"Label":"CAUCA","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":14826464219.00000000,"Label":"CESAR","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":977851706.60000000,"Label":"CORDOBA","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":6275623842.08000000,"Label":"CUNDINAMARCA","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":101942953443.00000000,"Label":"HUILA","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":93417298738.00000000,"Label":"LA GUAJIRA","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":9472226.00000000,"Label":"MAGDALENA","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":918985275402.00000000,"Label":"META","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":962517956.00000000,"Label":"NARIÑO","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":11229332678.04000000,"Label":"NORTE DE SANTANDER","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":58163418851.00000000,"Label":"PUTUMAYO","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":130604261083.84000000,"Label":"SANTANDER","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":58421068495.00000000,"Label":"TOLIMA","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":37024336.00000000,"Label":"VALLE","LabelExtendido":null,"Porcentaje":null,"Items":null},{"Valor":163246729.00000000,"Label":"VICHADA","LabelExtendido":null,"Porcentaje":null,"Items":null}]}],"status":true,"message":null}
+		}
+	})
 
 	//----------------------------------------
 	// Ficha Producto
@@ -2604,9 +2604,9 @@ define([
 	$.mockjax({
 		url: urls.getProductionInfo,
 		response: function(){
-			this.responseText = {"Detalles":[{"TipoDeRecurso":"HIDROCARBURO","ValorTotal":194207376512,"Detalles":[{"NombreRecurso":"CRUDO","Cantidad":9652028,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":193339844796,"Detalles":[{"Cantidad":556516,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":29582275016,"Detalles":[],"IdCampo":"Y","NombreCampo":"AREA TECA-COCORNA"***REMOVED***,{"Cantidad":7241804,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":137311717696,"Detalles":[],"IdCampo":"Q","NombreCampo":"CASABE"***REMOVED***,{"Cantidad":1346248,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":18221011068,"Detalles":[],"IdCampo":"T","NombreCampo":"CASABE SUR"***REMOVED***,{"Cantidad":92980,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":3091390460,"Detalles":[],"IdCampo":"W","NombreCampo":"NARE"***REMOVED***,{"Cantidad":72924,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":1726643848,"Detalles":[],"IdCampo":"Y","NombreCampo":"PEÑAS BLANCAS"***REMOVED***,{"Cantidad":341556,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":3406806708,"Detalles":[],"IdCampo":"Q","NombreCampo":"UNDERRIVER"***REMOVED***],"IdRecurso":56***REMOVED***,{"NombreRecurso":"GAS","Cantidad":570076,"UnidadDeMedida":"Kilo Pies Cúbicos","ValorLiquidado":867531716,"Detalles":[{"Cantidad":570076,"UnidadDeMedida":"Kilo Pies Cúbicos","ValorLiquidado":867531716,"Detalles":[],"IdCampo":"W","NombreCampo":"CASABE"***REMOVED***],"IdRecurso":38***REMOVED***]***REMOVED***,{"TipoDeRecurso":"MINERAL","ValorTotal":1549791065,"Detalles":[{"NombreRecurso":"CARBON","Cantidad":294077.57,"UnidadDeMedida":"Toneladas","ValorLiquidado":1549791065,"Detalles":[{"Cantidad":294077.57,"UnidadDeMedida":"Toneladas","ValorLiquidado":1549791065,"Detalles":[],"IdCampo":"Y","NombreCampo":"OTROS"***REMOVED***],"IdRecurso":1***REMOVED***]***REMOVED***],"status":true,"message":null***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			this.responseText = {"Detalles":[{"TipoDeRecurso":"HIDROCARBURO","ValorTotal":194207376512,"Detalles":[{"NombreRecurso":"CRUDO","Cantidad":9652028,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":193339844796,"Detalles":[{"Cantidad":556516,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":29582275016,"Detalles":[],"IdCampo":"Y","NombreCampo":"AREA TECA-COCORNA"},{"Cantidad":7241804,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":137311717696,"Detalles":[],"IdCampo":"Q","NombreCampo":"CASABE"},{"Cantidad":1346248,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":18221011068,"Detalles":[],"IdCampo":"T","NombreCampo":"CASABE SUR"},{"Cantidad":92980,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":3091390460,"Detalles":[],"IdCampo":"W","NombreCampo":"NARE"},{"Cantidad":72924,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":1726643848,"Detalles":[],"IdCampo":"Y","NombreCampo":"PEÑAS BLANCAS"},{"Cantidad":341556,"UnidadDeMedida":"Barriles (Barriles Mes)","ValorLiquidado":3406806708,"Detalles":[],"IdCampo":"Q","NombreCampo":"UNDERRIVER"}],"IdRecurso":56},{"NombreRecurso":"GAS","Cantidad":570076,"UnidadDeMedida":"Kilo Pies Cúbicos","ValorLiquidado":867531716,"Detalles":[{"Cantidad":570076,"UnidadDeMedida":"Kilo Pies Cúbicos","ValorLiquidado":867531716,"Detalles":[],"IdCampo":"W","NombreCampo":"CASABE"}],"IdRecurso":38}]},{"TipoDeRecurso":"MINERAL","ValorTotal":1549791065,"Detalles":[{"NombreRecurso":"CARBON","Cantidad":294077.57,"UnidadDeMedida":"Toneladas","ValorLiquidado":1549791065,"Detalles":[{"Cantidad":294077.57,"UnidadDeMedida":"Toneladas","ValorLiquidado":1549791065,"Detalles":[],"IdCampo":"Y","NombreCampo":"OTROS"}],"IdRecurso":1}]}],"status":true,"message":null}
+		}
+	})
 	$.mockjax({
 		url: urls.getFieldInfo,
 		response: function(){
@@ -2618,78 +2618,78 @@ define([
 							"Cantidad": 0,
 							"UnidadDeMedida": null,
 							"ValorLiquidado": 0
-						***REMOVED***,
+						},
 						{
 							"Mes": "Febrero",
 							"Cantidad": 0,
 							"UnidadDeMedida": null,
 							"ValorLiquidado": 0
-						***REMOVED***,
+						},
 						{
 							"Mes": "Marzo",
 							"Cantidad": 0,
 							"UnidadDeMedida": null,
 							"ValorLiquidado": 0
-						***REMOVED***,
+						},
 						{
 							"Mes": "Abril",
 							"Cantidad": 0,
 							"UnidadDeMedida": null,
 							"ValorLiquidado": 0
-						***REMOVED***,
+						},
 						{
 							"Mes": "Mayo",
 							"Cantidad": 0,
 							"UnidadDeMedida": null,
 							"ValorLiquidado": 0
-						***REMOVED***,
+						},
 						{
 							"Mes": "Junio",
 							"Cantidad": 0,
 							"UnidadDeMedida": null,
 							"ValorLiquidado": 0
-						***REMOVED***,
+						},
 						{
 							"Mes": "Julio",
 							"Cantidad": 0,
 							"UnidadDeMedida": null,
 							"ValorLiquidado": 0
-						***REMOVED***,
+						},
 						{
 							"Mes": "Agosto",
 							"Cantidad": 0,
 							"UnidadDeMedida": null,
 							"ValorLiquidado": 0
-						***REMOVED***,
+						},
 						{
 							"Mes": "Septiembre",
 							"Cantidad": 0,
 							"UnidadDeMedida": null,
 							"ValorLiquidado": 0
-						***REMOVED***,
+						},
 						{
 							"Mes": "Octubre",
 							"Cantidad": 0,
 							"UnidadDeMedida": null,
 							"ValorLiquidado": 0
-						***REMOVED***,
+						},
 						{
 							"Mes": "Noviembre",
 							"Cantidad": 0,
 							"UnidadDeMedida": null,
 							"ValorLiquidado": 0
-						***REMOVED***,
+						},
 						{
 							"Mes": "Diciembre",
 							"Cantidad": 0,
 							"UnidadDeMedida": null,
 							"ValorLiquidado": 0
-						***REMOVED***
+						}
 					],
 					"status": true,
 					"message": null
-				***REMOVED***
-			***REMOVED***else{
+				}
+			}else{
 				this.responseText = {
 					"Detalles": [
 						{
@@ -2697,107 +2697,107 @@ define([
 							"Cantidad": Math.round(Math.random()*99999),
 							"UnidadDeMedida": 'Barriles (Barriles Mes)',
 							"ValorLiquidado": Math.round(Math.random()*99999999999999)
-						***REMOVED***,
+						},
 						{
 							"Mes": "Febrero",
 							"Cantidad": Math.round(Math.random()*99999),
 							"UnidadDeMedida": 'Barriles (Barriles Mes)',
 							"ValorLiquidado": Math.round(Math.random()*99999999999999)
-						***REMOVED***,
+						},
 						{
 							"Mes": "Marzo",
 							"Cantidad": Math.round(Math.random()*99999),
 							"UnidadDeMedida": 'Barriles (Barriles Mes)',
 							"ValorLiquidado": Math.round(Math.random()*99999999999999)
-						***REMOVED***,
+						},
 						{
 							"Mes": "Abril",
 							"Cantidad": Math.round(Math.random()*99999),
 							"UnidadDeMedida": 'Barriles (Barriles Mes)',
 							"ValorLiquidado": Math.round(Math.random()*99999999999999)
-						***REMOVED***,
+						},
 						{
 							"Mes": "Mayo",
 							"Cantidad": Math.round(Math.random()*99999),
 							"UnidadDeMedida": 'Barriles (Barriles Mes)',
 							"ValorLiquidado": Math.round(Math.random()*99999999999999)
-						***REMOVED***,
+						},
 						{
 							"Mes": "Junio",
 							"Cantidad": Math.round(Math.random()*99999),
 							"UnidadDeMedida": 'Barriles (Barriles Mes)',
 							"ValorLiquidado": Math.round(Math.random()*99999999999999)
-						***REMOVED***,
+						},
 						{
 							"Mes": "Julio",
 							"Cantidad": Math.round(Math.random()*99999),
 							"UnidadDeMedida": 'Barriles (Barriles Mes)',
 							"ValorLiquidado": Math.round(Math.random()*99999999999999)
-						***REMOVED***,
+						},
 						{
 							"Mes": "Agosto",
 							"Cantidad": Math.round(Math.random()*99999),
 							"UnidadDeMedida": 'Barriles (Barriles Mes)',
 							"ValorLiquidado": Math.round(Math.random()*99999999999999)
-						***REMOVED***,
+						},
 						{
 							"Mes": "Septiembre",
 							"Cantidad": Math.round(Math.random()*99999),
 							"UnidadDeMedida": 'Barriles (Barriles Mes)',
 							"ValorLiquidado": Math.round(Math.random()*99999999999999)
-						***REMOVED***,
+						},
 						{
 							"Mes": "Octubre",
 							"Cantidad": Math.round(Math.random()*99999),
 							"UnidadDeMedida": 'Barriles (Barriles Mes)',
 							"ValorLiquidado": Math.round(Math.random()*99999999999999)
-						***REMOVED***,
+						},
 						{
 							"Mes": "Noviembre",
 							"Cantidad": Math.round(Math.random()*99999),
 							"UnidadDeMedida": 'Barriles (Barriles Mes)',
 							"ValorLiquidado": Math.round(Math.random()*99999999999999)
-						***REMOVED***,
+						},
 						{
 							"Mes": "Diciembre",
 							"Cantidad": Math.round(Math.random()*99999),
 							"UnidadDeMedida": 'Barriles (Barriles Mes)',
 							"ValorLiquidado": Math.round(Math.random()*99999999999999)
-						***REMOVED***
+						}
 					],
 					"status": true,
 					"message": null
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+				}
+			}
+		}
+	})
 
 	$.mockjax({
 		url: urls.infoboxesFiscalizacion,
 		response: function(params){
 			this.responseText = debugFiscalizacion.infoboxes(params)
-		***REMOVED***
-	***REMOVED***)
+		}
+	})
 
 	$.mockjax({
 		url: urls.consolidatedFiscalizacion,
 		response: function(params){
 			this.responseText = debugFiscConsol
-		***REMOVED***
-	***REMOVED***)
+		}
+	})
 
 	$.mockjax({
 		url: urls.searchFiscalizacion,
 		response: function(params){
 			this.responseText = debugFiscalizacion.search(params)
-		***REMOVED***
-	***REMOVED***)
+		}
+	})
 
 	$.mockjax({
 		url: '/api/Fiscalizacion/GetCampoOMinasPorNombre/',
 		response: function(params){
 			this.responseText = debugFiscalizacion.campoMina(params)
-		***REMOVED***
-	***REMOVED***)
+		}
+	})
 
-***REMOVED***)
+})

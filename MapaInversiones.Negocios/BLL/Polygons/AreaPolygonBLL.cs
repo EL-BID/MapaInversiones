@@ -16,7 +16,7 @@ namespace PlataformaTransparencia.Negocios.BLL.Polygons
         public AreaPolygonBLL (TransparenciaDB connection)
         {
             DataModel = connection;
-    ***REMOVED***
+        }
 
         public static JObject GenerarPoligonosDeDepartamentos()
         {
@@ -46,17 +46,17 @@ namespace PlataformaTransparencia.Negocios.BLL.Polygons
                 if (municipioJson.Contains("BOGOTA, D.C.")) {
                     Bogota = municipioJson;
                     jSonString.Remove(jSonString.Length - 1, 1);
-            ***REMOVED***
+                }
                 else
                     jSonString.Append(municipioJson);
-        ***REMOVED***
+            }
             jSonString.Append(",");
             jSonString.Append(Bogota);
-            jSonString.Append("]***REMOVED******REMOVED***");
+            jSonString.Append("]}}");
 
             JObject objReturn = JObject.Parse(jSonString.ToString());
             return objReturn;
-    ***REMOVED***
+        }
 
         public static JObject GenerarPoligonosDeRegiones()
         {
@@ -77,7 +77,7 @@ namespace PlataformaTransparencia.Negocios.BLL.Polygons
                 entes = (from ente in context.EnteTerritorials
                          where ente.Tipo.ToUpper().Equals(nombreTipoEnteRepresentaMunicipio.ToUpper())
                          select ente.Geojson).ToList();
-        ***REMOVED***
+            }
             bool primerRegistro = true;
             foreach (string municipioJson in entes) {
                 if (primerRegistro)
@@ -85,13 +85,13 @@ namespace PlataformaTransparencia.Negocios.BLL.Polygons
                 else
                     jSonString.Append(",");
                 jSonString.Append(municipioJson);
-        ***REMOVED***
+            }
 
-            jSonString.Append("]***REMOVED******REMOVED***");
+            jSonString.Append("]}}");
 
             JObject objReturn = JObject.Parse(jSonString.ToString());
             return objReturn;
-    ***REMOVED***
+        }
 
         public static JObject GenerarPoligonosDeMunicipios()
         {
@@ -112,7 +112,7 @@ namespace PlataformaTransparencia.Negocios.BLL.Polygons
                 entes = (from ente in context.EnteTerritorials
                          where ente.Tipo.ToUpper().Equals(nombreTipoEnteRepresentaMunicipio.ToUpper())
                          select ente.Geojson).ToList();
-        ***REMOVED***
+            }
             bool primerRegistro = true;
             foreach (string municipioJson in entes) {
                 if (primerRegistro)
@@ -120,18 +120,18 @@ namespace PlataformaTransparencia.Negocios.BLL.Polygons
                 else
                     jSonString.Append(",");
                 jSonString.Append(municipioJson);
-        ***REMOVED***
+            }
 
-            jSonString.Append("]***REMOVED******REMOVED***");
+            jSonString.Append("]}}");
 
             JObject objReturn = JObject.Parse(jSonString.ToString());
             return objReturn;
 
 
-    ***REMOVED***
+        }
 
 
 
-***REMOVED***
+    }
 
-***REMOVED***
+}

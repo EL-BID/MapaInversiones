@@ -27,10 +27,10 @@ function InicializaDatos() {
             if ($.trim(val_Sel) != "" && val_Sel != undefined) {
                 var id_proyecto = projectPerfil[0].id_project;
                 GetFuentesByPeriodo(id_proyecto, val_Sel);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         
-***REMOVED***
+    }
     
     if ($("#filtro_Componente") != null) {
         if ($("filtro_Componente").children() != null) {
@@ -38,10 +38,10 @@ function InicializaDatos() {
             if ($.trim(val_Sel) != "" && val_Sel != undefined) {
                 var id_proyecto = projectPerfil[0].id_project;
                 GetActividadesByComponente(id_proyecto, val_Sel);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
-***REMOVED***
+    }
 
     if ($("#selectGrupActores") != null) {
         if ($("selectGrupActores").children() != null) {
@@ -50,10 +50,10 @@ function InicializaDatos() {
             var val_Sel = $('#selectGrupActores option:eq(0)').val();
             if ($.trim(val_Sel) != "" && val_Sel != undefined) {
                 GetActoresByCat(val_Sel);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
-***REMOVED***
+    }
 
     getAnnio(projectPerfil[0].id_project);
 
@@ -61,17 +61,17 @@ function InicializaDatos() {
         $("#divUsuarioLog").slideUp(100, function () {
             $("#divCuentaNueva").slideDown(function () {
                 limpiarCamposUsuario("login");
-        ***REMOVED***);
-    ***REMOVED***);
-***REMOVED***);
+            });
+        });
+    });
 
     $("#btnAddCuentaUsu").click(function () {
         AddNuevaCuentaUsuario();
-***REMOVED***);
+    });
 
     $("#btnIngresarUsuLog").click(function () {
         validaLoginUsu();
-***REMOVED***);
+    });
 
 
 
@@ -79,17 +79,17 @@ function InicializaDatos() {
         $("#divUsuarioLog").slideUp(100, function () {
             $("#divOlvidoClave").slideDown(function () {
                 limpiarCamposUsuario("clave");
-        ***REMOVED***);
-    ***REMOVED***);
+            });
+        });
 
-***REMOVED***);
+    });
 
     $("#btnEnviaCodigoClave").click(function () {
         //valida correo
         var correo_usu = $("#txtEmailReset").val();
         if (validaEmail(correo_usu)) {
 
-            var params_usu = { "email": correo_usu ***REMOVED***;
+            var params_usu = { "email": correo_usu };
             $.ajax({
                 type: 'POST',
                 contentType: "application/json; charset=utf-8",
@@ -104,37 +104,37 @@ function InicializaDatos() {
                         $("#divOlvidoClave").slideUp(100, function () {
                             $("#divConfirmaCodigo").slideDown(function () {
                                 limpiarCamposUsuario("clave");
-                        ***REMOVED***);
-                    ***REMOVED***);
+                            });
+                        });
 
 
-                ***REMOVED*** else {
+                    } else {
                         bootbox.alert("Error: " + result.message, function () {
 
-                    ***REMOVED***);
-                ***REMOVED***
+                        });
+                    }
 
-              ***REMOVED***
+                },
                 error: function (response) {
                     alert(response.responseText);
-              ***REMOVED***
+                },
                 failure: function (response) {
                     alert(response.responseText);
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
 
-    ***REMOVED*** else {
+        } else {
             bootbox.alert("Email inválido");
 
-    ***REMOVED***
+        }
 
 
 
 
-***REMOVED***);
+    });
 
     $("#btnVerificaCodigoClave").click(function () {
-        var params_usu = { "email": $("#txtEmailVerifica").val(), "cod_verifica": $("#txtCodigoVerifica").val() ***REMOVED***;
+        var params_usu = { "email": $("#txtEmailVerifica").val(), "cod_verifica": $("#txtCodigoVerifica").val() };
         $.ajax({
             type: 'POST',
             contentType: "application/json; charset=utf-8",
@@ -149,32 +149,32 @@ function InicializaDatos() {
                     $("#divConfirmaCodigo").slideUp(100, function () {
                         $("#divResetPassword").slideDown(function () {
                             limpiarCamposUsuario("clave");
-                    ***REMOVED***);
-                ***REMOVED***);
-            ***REMOVED*** else {
+                        });
+                    });
+                } else {
                     $("#hdIdUsuario").val("");
                     if (result.message == null || result.message == undefined) {
                         bootbox.alert("Error: " + "Fallo la verificación", function () {
 
-                    ***REMOVED***);
-                ***REMOVED*** else {
+                        });
+                    } else {
                         bootbox.alert("Error: " + result.message, function () {
 
-                    ***REMOVED***);
-                ***REMOVED***
+                        });
+                    }
 
-            ***REMOVED***
+                }
 
-          ***REMOVED***
+            },
             error: function (response) {
                 alert(response.responseText);
-          ***REMOVED***
+            },
             failure: function (response) {
                 alert(response.responseText);
-        ***REMOVED***
-    ***REMOVED***);
+            }
+        });
 
-***REMOVED***);
+    });
 
 
     $("#btnCambiarClaveOlvido").click(function () {
@@ -184,21 +184,21 @@ function InicializaDatos() {
         if (formularioOK == false) {
             if (camposReq != "") {
                 bootbox.alert("Faltan campos obligatorios");
-        ***REMOVED***
-    ***REMOVED*** else {
+            }
+        } else {
             //validarClave
             if ($("#txtPassword_re").val() != $("#txtPassword_re_2").val()) {
                 bootbox.alert("Confirmación nueva clave incorrecta");
-        ***REMOVED*** else {
+            } else {
                 var clave_usu = $("#txtPassword_re").val();
                 if (validaClaveUsu(clave_usu) == false) {
                     bootbox.alert("Formato de clave incorrecto: La clave debe tener al menos 8 carácteres, entre ellos, una letra mayúscula y un número");
-            ***REMOVED*** else {
+                } else {
                     if ($("#hdIdUsuario").val() != "") {
                         var params_usu = {
                             IdUsuario: $("#hdIdUsuario").val(),
                             hash_clave: clave_usu,
-                    ***REMOVED***;
+                        };
                         //add nuevo registro
                         $.ajax({
                             type: 'POST',
@@ -213,31 +213,31 @@ function InicializaDatos() {
                                         $("#divResetPassword").slideUp(100, function () {
                                             $("#divUsuarioLog").slideDown(function () {
                                                 limpiarCamposUsuario("all");
-                                        ***REMOVED***);
-                                    ***REMOVED***);
-                                ***REMOVED***);
+                                            });
+                                        });
+                                    });
 
-                            ***REMOVED*** else {
+                                } else {
                                     bootbox.alert("@Error: " + result.message);
-                            ***REMOVED***
+                                }
 
-                          ***REMOVED***
+                            },
                             error: function (response) {
                                 bootbox.alert(response.responseText);
-                          ***REMOVED***
+                            },
                             failure: function (response) {
                                 bootbox.alert(response.responseText);
-                        ***REMOVED***
-                    ***REMOVED***);
-                ***REMOVED*** else {
+                            }
+                        });
+                    } else {
                         bootbox.alert("Codigo no verificado");
-                ***REMOVED***
+                    }
 
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                }
+            }
+        }
 
-***REMOVED***);
+    });
 
     $("#btnGuardarComent").click(function () {
         //valida campos obligatorios
@@ -247,8 +247,8 @@ function InicializaDatos() {
         if (formularioOK == false) {
             if (camposReq != "") {
                 bootbox.alert("Campos requeridos");
-        ***REMOVED***
-    ***REMOVED*** else {
+            }
+        } else {
             var formularioOK = true;
             var camposReq = "";
             $(".alert-danger").hide();
@@ -262,15 +262,15 @@ function InicializaDatos() {
             if (id_tipo == "" || id_tipo == undefined) {
                 formularioOK = false;
                 bootbox.alert("Seleccione un tipo de comentario");
-        ***REMOVED***
+            }
             else if (id_departamento == "" || id_departamento == undefined) {
                 formularioOK = false;
                 bootbox.alert("Seleccione una entidad territorial");
-        ***REMOVED***
+            }
             else if (text_coment == "") {
                 formularioOK = false;
                 bootbox.alert("Ingresar un comentario");
-        ***REMOVED***
+            }
 
             if (formularioOK == true) {
                 var params_com = {
@@ -286,7 +286,7 @@ function InicializaDatos() {
                     IdTipoRespuesta: 1,
                     ComentarioRelacionado: null,
                     UsuarioComenta: 0
-            ***REMOVED***;
+                };
                 //add nuevo registro
                 $.ajax({
                     type: 'POST',
@@ -305,42 +305,42 @@ function InicializaDatos() {
                                 $("#divConfirmaEnvio").slideDown(function () {
                                     if (projectPerfil[0].id_project != undefined) {
                                         GetComentarios(projectPerfil[0].id_project);
-                                ***REMOVED***
-                            ***REMOVED***);
-                        ***REMOVED***);
+                                    }
+                                });
+                            });
 
-                    ***REMOVED*** else {
+                        } else {
                             bootbox.alert("@Error: " + result.message);
-                    ***REMOVED***
+                        }
 
-                  ***REMOVED***
+                    },
                     error: function (response) {
                         bootbox.alert(response.responseText);
-                  ***REMOVED***
+                    },
                     failure: function (response) {
                         bootbox.alert(response.responseText);
-                ***REMOVED***
-            ***REMOVED***);
-        ***REMOVED***
-    ***REMOVED***
+                    }
+                });
+            }
+        }
         $("#btnGuardarComent").show();
 
-***REMOVED***);
+    });
     $(".btnMegusta").click(function () {
         var tipoFoto = ($(this).attr('tipofoto'));
         var idFoto = ($(this).attr('idfoto'));
         guardarMeGusta('M', tipoFoto, idFoto);
-***REMOVED***);
+    });
 
     $(".btnNoMegusta").click(function () {
         var tipoFoto = ($(this).attr('tipofoto'));
         var idFoto = ($(this).attr('idfoto'));
         guardarMeGusta('N', tipoFoto, idFoto);
-***REMOVED***);
+    });
 
     $("#enlace_cierre").click(function () {
         cerrarSesionUsu();
-***REMOVED***);
+    });
 
 
 
@@ -349,7 +349,7 @@ function InicializaDatos() {
         if ($("#hdIdUsuario").val() != "") {
             $("#btnSubirFoto").trigger("click");
 
-    ***REMOVED*** else {
+        } else {
 
             bootbox.confirm({
                 message: "Acción válida para usuarios registrados",
@@ -357,39 +357,39 @@ function InicializaDatos() {
                     confirm: {
                         label: 'Ingresar',
                         className: 'btn btn-primary active'
-                  ***REMOVED***
+                    },
                     cancel: {
                         label: 'Cancelar',
                         className: 'objHidden'
-                ***REMOVED***
-              ***REMOVED***
+                    }
+                },
                 callback: function (result) {
                     if (result == true) {
                         document.location.href = "#s5";
                         setTimeout(function () {
                             $('#txtEmailLog').focus();
-                      ***REMOVED*** 10);
-                ***REMOVED***
+                        }, 10);
+                    }
 
 
 
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
+                }
+            });
+        }
 
-***REMOVED***);
+    });
 
     if (projectPerfil[0].id_project != undefined) {
         GetComentarios(projectPerfil[0].id_project);
-***REMOVED***
+    }
 
     $("#btnSigVerifica").click(function () {
         var url = "/projectprofile/" + projectPerfil[0].id_project + "#s5";
         window.location.href = url;
 
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 function listarActores() {
     $("#divGruposActores").empty();
@@ -405,19 +405,19 @@ function listarActores() {
                 var id = distintos[i].split("|")[0];
                 str_cad += ' <option value="' + id + '">' + nombre + '</option>';
 
-        ***REMOVED***
+            }
             str_cad += '</select>';
             $("#divGruposActores").html(str_cad);
             configuraSelectActores();
-    ***REMOVED*** else {
+        } else {
             $("#divContainerActores").hide();
-    ***REMOVED***
-***REMOVED*** else {
+        }
+    } else {
         $("#divContainerActores").hide();
-***REMOVED***
+    }
 
     
-***REMOVED***
+}
 
 function configuraSelectActores() {
     if ($("#selectGrupActores").length > 0) {
@@ -427,33 +427,33 @@ function configuraSelectActores() {
             if ($.trim(val_Sel) != "" && val_Sel != undefined) {
                 GetActoresByCat(val_Sel);
 
-        ***REMOVED*** else {
+            } else {
                 //opcion vacia
                 $("#divDetFuentes").children().remove();
-        ***REMOVED***
-    ***REMOVED***);
+            }
+        });
 
 
-***REMOVED***
+    }
 
-***REMOVED***
+}
 
 function GetActoresByCat(idCat) {
     $("#listActPerGrupo").empty();
     var data_filter = $.grep(actoresGlobal, function (element, index) {
         return element.idCategoria == idCat;
-***REMOVED***);
+    });
     var str_cad = '<ul class="listDetail" id="lstDetActores">';
     for (var i = 0; i < data_filter.length; i++) {
         str_cad += '<li class="data-list">';
         str_cad += '<span class="text-desc">' + data_filter[i].nomActor + '</span>';
         str_cad += '</li>';
-***REMOVED***
+    }
     str_cad += '</ul>';
     $("#listActPerGrupo").html(str_cad);
 
 
-***REMOVED***
+}
 
 function graficarAvance(divContenedor,value) {
     new d3plus.BarChart()
@@ -463,15 +463,15 @@ function graficarAvance(divContenedor,value) {
                 "strokeWidth": 1,
                 "stroke": "#e25126",
                 "fill": "transparent",
-          ***REMOVED***
-            font:{ "family": "inherit", "size": 14 ***REMOVED***,
+            },
+            font:{ "family": "inherit", "size": 14 },
             data: [ 
                 
                 {
                     id: 'proy',
                     x: 1,
                     y: value
-            ***REMOVED***
+                }
             ],
             height: 170,
             title: "",
@@ -482,44 +482,44 @@ function graficarAvance(divContenedor,value) {
                 "resize": false,
                 "weight":600,
                 "textAnchor": "middle"
-          ***REMOVED***
+            },
             colorScale: 'id',
             colorScaleConfig: {
                 color: [
                     '#e25126',
                 ]
-          ***REMOVED***
+            },
             discrete: 'y',
             groupBy: 'id',
             stacked: true,
             tooltip: false,
-             label: d => `${(d['y'])***REMOVED***%`,
+             label: d => `${(d['y'])}%`,
 
              x: 'y',
             xConfig: {
                 title: false,
-                tickFormat: d => `${d***REMOVED***%`,
+                tickFormat: d => `${d}%`,
                 ticks: [],
                 labels: [0, 20, 40, 60, 80, 100],
                 color: "#666",
                 grid: false
-           ***REMOVED***
+             },
              xDomain: [
                 0,
                 100
             ],
             y: 'x',
             yConfig: {
-                tickFormat: d => `${d***REMOVED***%`,
+                tickFormat: d => `${d}%`,
 
                 title: false,
                 ticks: []
-          ***REMOVED***
-        ***REMOVED***
+              }
+            }
         )
         .legend(false)
         .render();
-***REMOVED***
+}
 
 function configuraFiltro_Periodos() {
     if ($("#filtro_periodo").length > 0) {
@@ -530,15 +530,15 @@ function configuraFiltro_Periodos() {
                 var id_proyecto = projectPerfil[0].id_project;
                 GetFuentesByPeriodo(id_proyecto, val_Sel);
 
-        ***REMOVED*** else {
+            } else {
                 //opcion vacia
                 $("#divDetFuentes").children().remove();
-        ***REMOVED***
-    ***REMOVED***);
+            }
+        });
 
        
-***REMOVED***
-***REMOVED***
+    }
+}
 
 function configuraFiltro_Componentes() {
     if ($("#filtro_Componente").length > 0) {
@@ -548,15 +548,15 @@ function configuraFiltro_Componentes() {
             if ($.trim(val_Sel) != "" && val_Sel != undefined) {
                 var id_proyecto = projectPerfil[0].id_project;
                 GetActividadesByComponente(id_proyecto, val_Sel);
-        ***REMOVED*** else {
+            } else {
                 //opcion vacia
                 $("#divDetActividades").children().remove();
                 $("#divDetActividades").hide();
-        ***REMOVED***
+            }
 
-    ***REMOVED***);
-***REMOVED***
-***REMOVED***
+        });
+    }
+}
 
 function GetActividadesByComponente(id_proyecto, id_componente) {
 
@@ -568,9 +568,9 @@ function GetActividadesByComponente(id_proyecto, id_componente) {
         data: {
             IdProyecto: id_proyecto,
             codComponente: id_componente
-    ***REMOVED***
+        }
 
-***REMOVED***).done(function (data) {
+    }).done(function (data) {
 
         console.log("data", data);
         var items_result = data.componentes;
@@ -585,20 +585,20 @@ function GetActividadesByComponente(id_proyecto, id_componente) {
                 divLista.append("span")
                     .text(" " + items_result[i].nombre.toString())
                 $("#divDetActividades").show();
-        ***REMOVED***
-    ***REMOVED*** else {
+            }
+        } else {
 
             $("#divDetActividades").empty();
             $("#divDetActividades").hide();
 
-    ***REMOVED***
+        }
 
 
 
-***REMOVED***).fail(function (handleError) {
+    }).fail(function (handleError) {
         // Some function
         console.log(handleError);
-***REMOVED***);
+    });
 
 
 
@@ -606,7 +606,7 @@ function GetActividadesByComponente(id_proyecto, id_componente) {
 
 
     
-***REMOVED***
+}
 
 
 
@@ -621,9 +621,9 @@ function GetFuentesByPeriodo(id_proyecto, id_periodo) {
         data: {
             IdProyecto: id_proyecto,
             IdPeriodo:id_periodo
-    ***REMOVED***
+        }
 
-***REMOVED***).done(function (data) {
+    }).done(function (data) {
         var items_result = data.fuentesFinanciacion;
         if (items_result.length > 0) {
             for (var i = 0; i < items_result.length; i++) {
@@ -635,15 +635,15 @@ function GetFuentesByPeriodo(id_proyecto, id_periodo) {
                 if (val_presupuestado > 999999) {
                     cad_presupuestado = (val_presupuestado / 1000000).formatMoney(1, '.', ',').toString();
                     cad_presupuestado += " Millones";
-            ***REMOVED*** else {
+                } else {
                     cad_presupuestado = (val_presupuestado).formatMoney(1, '.', ',').toString();
-            ***REMOVED***
+                }
                 if (val_ejecutado > 999999) {
                     cad_ejecutado = (val_ejecutado / 1000000).formatMoney(1, '.', ',').toString();
                     cad_ejecutado += " Millones";
-            ***REMOVED*** else {
+                } else {
                     cad_ejecutado = (val_ejecutado).formatMoney(1, '.', ',').toString();
-            ***REMOVED***
+                }
 
                 var residuo_aux = i % colores.length;
                 var color = colores[residuo_aux];
@@ -670,14 +670,14 @@ function GetFuentesByPeriodo(id_proyecto, id_periodo) {
                    if (x!=null) {
                        var porcentaje = (parseFloat(items_result[i].porcentaje) / 1).toFixed(2);
                        graficarAvance(nom_div, porcentaje);
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***).fail(function (handleError) {
+                }
+            }
+        }
+    }).fail(function (handleError) {
         // Some function
         console.log(handleError);
-***REMOVED***);
-***REMOVED***
+    });
+}
 
 
 function make_viz_fuentes(divContenedor, data_contenido, titulo, color, etiqueta) {
@@ -688,8 +688,8 @@ function make_viz_fuentes(divContenedor, data_contenido, titulo, color, etiqueta
                 "strokeWidth": 2,
                 "stroke": color,
                 "fill": "transparent",
-          ***REMOVED***
-            font: { "family": "inherit", "size": 14 ***REMOVED***,
+            },
+            font: { "family": "inherit", "size": 14 },
             data: data_contenido,
             height: 80,
             title: titulo,
@@ -699,43 +699,43 @@ function make_viz_fuentes(divContenedor, data_contenido, titulo, color, etiqueta
                 "resize": false,
                 "weight": 600,
                 "textAnchor": "left"
-          ***REMOVED***
+            },
             colorScale: 'name',
             colorScaleConfig: {
                 color: [
                     color,
                 ]
-          ***REMOVED***
+            },
             discrete: 'y',
             groupBy: 'name',
             stacked: true,
             tooltip: false,
-            label: d => `${(d['value'])***REMOVED***%`,
+            label: d => `${(d['value'])}%`,
 
             x: 'value',
             xConfig: {
                 title: false,
-                tickFormat: d => `${d***REMOVED***%`,
+                tickFormat: d => `${d}%`,
                 ticks: [],
                 labels: [0, 20, 40, 60, 80, 100],
                 color: "#666",
                 grid: false
-          ***REMOVED***
+            },
             xDomain: [
                 0,
                 100
             ],
             y: 'year',
             yConfig: {
-                tickFormat: d => `${d***REMOVED***%`,
+                tickFormat: d => `${d}%`,
                 title: false,
                 ticks: []
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         )
         .legend(false)
         .render();
-***REMOVED***
+}
 
 //comunes
 function separar_miles(num) {
@@ -744,27 +744,27 @@ function separar_miles(num) {
         try {
             num_aux = num.toString().replace(/\./g, '');
             if (!isNaN(num_aux)) {
-                num_aux = num_aux.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3***REMOVED***)/g, '$1.');
+                num_aux = num_aux.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
                 num_aux = num_aux.split('').reverse().join('').replace(/^[\.]/, '');
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         catch (error) {
             console.error("function separar_miles: " + error);
-    ***REMOVED***
-***REMOVED***
+        }
+    }
     return num_aux;
-***REMOVED***
+}
 
 function convertirMillones(num) {
     return num > 999999 ? (num / 1000000).toFixed(0) : num
 
-***REMOVED***
+}
 
 function getAnnio(IdProyecto) {
     //debugger;
     var filtros = {
         IdProyecto: IdProyecto
-***REMOVED***;
+    };
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -788,34 +788,34 @@ function getAnnio(IdProyecto) {
                 if (!annios.includes(items_result[i].anio.toString())) {
                     annios.push(items_result[i].anio.toString());
                     select = select + '<option value="' + items_result[i].anio.toString() + '">' + items_result[i].anio.toString() + '</option>';
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             
             $('#top_origen_informacion').html(select).fadeIn();
             if (items_result.length > 0) {
                 getSemestre(data.detalles);
                 getProcesosContratacion($("#top_origen_informacion option:selected").val(), 1, cant_contratos, IdProyecto, $("#proceso").val());
                 
-        ***REMOVED*** else {
+            } else {
                 $("#srcContratos").html("");
                 var fila = '<div class="contractBox" >'
                     + '<div class="cotractName contractONCAE"><span class="text-bold NoResultC">No se encuentran resultados con los filtros solicitados</span></div>'
                     + '</div>';
 
                 $("#srcContratos").html(fila);
-        ***REMOVED***
+            }
            
-      ***REMOVED***
+        },
         error: function (response) {
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
-***REMOVED***
+}
 
 function getSemestre(detalles) {
 
@@ -827,11 +827,11 @@ function getSemestre(detalles) {
 
         if (items_result[i].anio.toString() === $("#top_origen_informacion option:selected").val()) {
             select = select + '<option value="' + items_result[i].semestre.toString() + '">' + semestre[items_result[i].semestre*1-1] + '</option>';
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
     $('#top_origen_semestre').html(select);
-***REMOVED***
+}
 
 var disableClick = false;
 function deshabilita(des) {
@@ -839,11 +839,11 @@ function deshabilita(des) {
     if (des) {
         $("#btn-buscar").prop("disabled", des);
         $('#btnLimpiar').attr("disabled", "disabled")
-***REMOVED*** else {
+    } else {
         $("#btn-buscar").prop("disabled", des);
         $('#btnLimpiar').removeAttr("disabled")
-***REMOVED***
-***REMOVED***
+    }
+}
 
 $("#btnLimpiar").click(function () {
     if (!disableClick) {
@@ -853,16 +853,16 @@ $("#btnLimpiar").click(function () {
         $("#proceso").val("");
         deshabilita(true);
         getProcesosContratacion($("#top_origen_informacion option:selected").val(), 1, cant_contratos, projectPerfil[0].id_project, $("#proceso").val());
-***REMOVED***
-***REMOVED***);
+    }
+});
 
 $("#btn-buscar").click(function () {
     if (!disableClick) {
         deshabilita(true);
         getProcesosContratacion($("#top_origen_informacion option:selected").val(), 1, cant_contratos, projectPerfil[0].id_project, $("#proceso").val() );
-***REMOVED***
+    }
 
-***REMOVED***);
+});
 
 function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
 
@@ -873,7 +873,7 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
         NumeroPagina: pagina,
         RegistrosPorPagina: registros,
         NombreProceso: proceso,
-***REMOVED***;
+    };
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -903,7 +903,7 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                             fila += filaconfirma + '</div>' + referencia + '</div>';
                             filaconfirma = "";
 
-                    ***REMOVED***
+                        }
                         if (entidad != info[i].comprador.toString()) {
                             if (i > 0) //Cambio de entidad
                             {
@@ -913,14 +913,14 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                                 filasinfirma = "";
                                 inicio = "";
                                 fin = "";
-                        ***REMOVED***
+                            }
                             var stilo = "";
-                            if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" ***REMOVED*** else { stilo = "contractSEFIN" ***REMOVED***
+                            if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" } else { stilo = "contractSEFIN" }
                             inicio = '<div class="cotractName ' + stilo + '"><div class="row"><div class="col-xs-12 col-md-12"><span class="small">Entidad</span><div class="clearfix"></div>'
                                 + '                 <span class="h4">' + info[i].comprador.toString() + '</span>'
                                 + ' </div></div></div>';
                             entidad = info[i].comprador.toString();
-                    ***REMOVED***
+                        }
 
                         if (proceso != info[i].codigoProceso.toString()) {
 
@@ -936,7 +936,7 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                                 + '			<div class="col-xs-12 col-md-4">'
                                 + '				<span class="txt_small">Estado del proceso</span>'
                                 + '				<span class="amount_adj">';
-                            if (info[i].estadoProceso) { fila += info[i].estadoProceso.toString(); ***REMOVED***
+                            if (info[i].estadoProceso) { fila += info[i].estadoProceso.toString(); }
                             fila += '</span></div>'
                                 + '			<div class="col-xs-6 col-md-4"><span class="txt_small">Monto Estimado</span> <span class="amount_adj"> ' + (info[i].valorPlaneado * 1).formatMoney(2, '.', ',').toString() + ' </span></div>'
                                 + '			    <div class="col-xs-6 col-md-2">'
@@ -954,21 +954,21 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                                     + '		    <span class="txt_small">Fecha de Inicio</span>'
                                     + '         <span class="amount_adj">' + info[i].fechaIncioPublicacionProceso.toString().substr(0, 10) + '</span>'
                                     + '			    </div>';
-                        ***REMOVED***
+                            }
                             if (info[i].fechaInicioRecepcionOfertas) {
                                 fila += ''
                                     + '			<div class="col-xs-12 col-md-4">'
                                     + '		    <span class="txt_small">Fecha de Recepción</span>'
                                     + '         <span class="amount_adj">' + info[i].fechaInicioRecepcionOfertas.toString().substr(0, 10) + '</span>'
                                     + '			    </div>';
-                        ***REMOVED***
+                            }
                             if (info[i].fechaEstimadaAdjudicacion) {
                                 fila += ''
                                     + '			<div class="col-xs-12 col-md-4">'
                                     + '		    <span class="txt_small">Fecha estimada de adjudicación</span>'
                                     + '         <span class="amount_adj">' + info[i].fechaEstimadaAdjudicacion.toString().substr(0, 10) + '</span>'
                                     + '			    </div>';
-                        ***REMOVED***
+                            }
 
                             fila += '	</div>'
                                 + '	</div>';
@@ -985,7 +985,7 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                                 + '<div class="col-xs-12 col-md-12"><a href="' + info[i].docURL.toString() + '" target="_blank" class="btn btn-outlined"><i class="material-icons md-22">launch</i> <span class="txt_small">Conozca mas de este proceso</span></a></div>'
                                 + '</div>';
 
-                    ***REMOVED***
+                        }
 
 
                         filaconfirma += '<div class="panel panel-default">'
@@ -993,7 +993,7 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                             + '                <h4 class="panel-title">'
                             + '                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapse' + i + '">';
 
-                        if (info[i].codigoContrato) { filaconfirma += '                        Código de contratación:  ' + info[i].codigoContrato.toString() + ''; ***REMOVED*** else { filaconfirma += '                      Pendiente emisión código contratación  ' ***REMOVED***
+                        if (info[i].codigoContrato) { filaconfirma += '                        Código de contratación:  ' + info[i].codigoContrato.toString() + ''; } else { filaconfirma += '                      Pendiente emisión código contratación  ' }
 
                         filaconfirma += '     </a>'
                             + '                </h4>'
@@ -1004,13 +1004,13 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                             filaconfirma += '          <div class="row border-b">'
                                 + '                        <div class="col-md-12"><span class="small"> CONTRATO</span><span class="amount_adj">' + info[i].descripcionContrato.toString() + '</span></div>'
                                 + '                    </div>';
-                    ***REMOVED***
+                        }
                         var moneda = '$';
                         if (info[i].monedaContrato.toString()) {
                             if (info[i].monedaContrato.toString() == 'USD') {
                                 moneda = '';
-                        ***REMOVED***
-                    ***REMOVED***
+                            }
+                        }
                         filaconfirma += '        <div class="row border-b">'
                             + '                        <div class="col-md-4">'
                             + '                            <span class="small"> RAZÓN SOCIAL<span>'
@@ -1032,14 +1032,14 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                                 + '                                                                     <span class="amount_adj">'
                                 + info[i].fechaInicioContrato.toString().substr(0, 10)
                                 + '                                                                      </span></div>';
-                    ***REMOVED***
+                        }
                         if (info[i].fechaFinContrato && info[i].fechaFinContrato.toString().substr(0, 10) !== "1900-01-01") {
                             filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">'
                                 + 'FECHA DE FIN CONTRATO'
                                 + '</span><span class="amount_adj">'
                                 + info[i].fechaFinContrato.toString().substr(0, 10)
                                 + '        </span></div>';
-                    ***REMOVED***
+                        }
 
                         if (info[i].fechaInicioEjecucionContrato && info[i].fechaInicioEjecucionContrato.toString().substr(0, 10) !== "1900-01-01") {
                             filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">'
@@ -1047,14 +1047,14 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                                 + '</span><span class="amount_adj">'
                                 + info[i].fechaInicioEjecucionContrato.toString().substr(0, 10)
                                 + '        </span></div>';
-                    ***REMOVED***
+                        }
                         if (info[i].fechaFinEjecucionContrato && info[i].fechaFinEjecucionContrato.toString().substr(0, 10) !== "1900-01-01") {
                             filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">'
                                 + 'Fecha de FIN EJECUCIÓN'
                                 + '</span><span class="amount_adj">'
                                 + info[i].fechaFinEjecucionContrato.toString().substr(0, 10)
                                 + '        </span></div>';
-                    ***REMOVED***
+                        }
 
                         filaconfirma += '                    </div>';
 
@@ -1062,7 +1062,7 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                             filaconfirma += '                    <div class="row border-b">'
                                 + '                        <div class="col-xs-6 col-md-3"><span class="small"> Duración </span><span class="amount_adj">';
 
-                            if (info[i].ofertaPeriodoDuracion) { filaconfirma += info[i].ofertaPeriodoDuracion.toString(); ***REMOVED***
+                            if (info[i].ofertaPeriodoDuracion) { filaconfirma += info[i].ofertaPeriodoDuracion.toString(); }
 
                             filaconfirma += '                   Días</span></div>';
 
@@ -1070,26 +1070,26 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
 
                             if (info[i].fechaPublicacion !== null && info[i].fechaPublicacion.toString().substr(0, 10) !== "1900-01-01") {
                                 filaconfirma += info[i].fechaPublicacion.toString().substr(0, 10) + '</span></div>';
-                        ***REMOVED***
+                            }
                             else {
                                 filaconfirma += '</span></div>';
-                        ***REMOVED***
+                            }
 
                             filaconfirma += '                    </div>';
 
-                    ***REMOVED***
+                        }
 
                         filaconfirma += '                </div>'
                             + '               <div class="panel-footer" style="align:center">';
 
                         if (info[i].codigoContrato) {
                             filaconfirma += '                    <a href="../../contrato?codcontrato=' + info[i].codigoContrato.toString() + '" class="btn btn-primary btn-participe"><i class="material-icons md-22">add_comment</i> Hacer comentario al contrato</a>';
-                    ***REMOVED***
+                        }
                         filaconfirma += '                 </div>'
                             + '            </div>'
                             + '        </div>';
                         //+ '  </div>';
-                ***REMOVED***
+                    }
 
 
                     data += inicioLuis + inicio + fila + filaconfirma + '</div></div>' + referencia + finLuis;
@@ -1097,12 +1097,12 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
 
                     $("#srcContratos").html(data);
                     if (scrol >= 1) {
-                        $('html, body').animate({ scrollTop: $('#secInfoContratos').offset().top ***REMOVED***, 2000);
-                ***REMOVED*** else { scrol = scrol + 1; ***REMOVED***
+                        $('html, body').animate({ scrollTop: $('#secInfoContratos').offset().top }, 2000);
+                    } else { scrol = scrol + 1; }
 
                     dibujaPaginacionContrato(pagina, result.cantidadTotalRegistros, Math.ceil(result.cantidadTotalRegistros / registros), registros);
                     configuraEnlaceContratista();
-            ***REMOVED***
+                }
                 else {
                     $("#divPagContratos").empty();
                     $("#srcContratos").html("");
@@ -1110,23 +1110,23 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                         + '<div class="contractNumberRP"><span class="text-bold NoResultC">No se encuentran resultados con los filtros solicitados</span></div>'
                         + '</div>';
                     $("#srcContratos").html(fila);
-            ***REMOVED***
-        ***REMOVED*** else {
+                }
+            } else {
                 alert("Message: " + result.message);
-        ***REMOVED***
+            }
             deshabilita(false);
-      ***REMOVED***
+        },
         error: function (response) {
             deshabilita(false);
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             deshabilita(false);
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
-***REMOVED***
+}
 
 
 
@@ -1134,7 +1134,7 @@ $("#top_origen_informacion").change(function () {
     var datos = $('#top_origen_informacion').data("detalles");
     getSemestre(datos);
 
-***REMOVED***);
+});
 
 
 Number.prototype.formatMoney = function (c, d, t) {
@@ -1145,8 +1145,8 @@ Number.prototype.formatMoney = function (c, d, t) {
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-***REMOVED***;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
 
 
 function iniUsuarioLog() {
@@ -1159,10 +1159,10 @@ function iniUsuarioLog() {
             $("#divCloseSesion").show();
             $("#divPregParticipacion").css("visibility", "visible");
             $("#divPregParticipacion").attr("class", "objVisible");
-    ***REMOVED***);
+        });
 
-***REMOVED*** 
-***REMOVED***
+    } 
+}
 
 
 function configurarEnlaceLocation() {
@@ -1176,10 +1176,10 @@ function configurarEnlaceLocation() {
             var tipo_aux = tipo;
             if (tipo.toUpperCase() == "REGION" || tipo.toUpperCase() == "DEPARTAMENTO") {
                 tipo_aux = "region";
-        ***REMOVED***
+            }
             else if (tipo.toUpperCase() == "COUNTY" || tipo.toUpperCase() == "MUNICIPIO") {
                 tipo_aux = "county";
-        ***REMOVED***
+            }
 
             enlace_url += "?" + "type=" + tipo_aux + "&id=" + location_id
 
@@ -1187,22 +1187,22 @@ function configurarEnlaceLocation() {
             //-----------------------------------
             $(this).attr('href', enlace_url);
 
-    ***REMOVED***);
-***REMOVED***)
-***REMOVED***
+        });
+    })
+}
 
 
 function GetComentarios(id) {
     if ($("#content-2").length > 0) {
         $("#content-2").remove();
-***REMOVED***
+    }
     var param = "IdProyecto=" + id;
     $.ajax({
         url: "/api/ServiciosParticipacion/GetComentarios",
         type: "GET",
         data: param,
 
-***REMOVED***).done(function (result) {
+    }).done(function (result) {
         var items_result = result.itemcomentario;
         if ($("#content-2").length <= 0) {
             d3.select("#divComentarios")
@@ -1210,7 +1210,7 @@ function GetComentarios(id) {
                 .attr("id", "content-2")
                 .attr("class", "content mCustomScrollbar")
                 .attr("data-mcs-theme", "minimal")
-    ***REMOVED***
+        }
 
         var cont_resp = 0;
 
@@ -1229,10 +1229,10 @@ function GetComentarios(id) {
                     var nombre = "";
                     if (items_result[i].anonimo == false) {
                         nombre = items_result[i].nom_usuario.toString();
-                ***REMOVED***
+                    }
                     else {
                         nombre = " Anónimo";
-                ***REMOVED***
+                    }
                     if (id_padre == null) {
                         cont_resp = cont_resp + 1;
                         var div_commenta = d3.select("#content-2")
@@ -1258,7 +1258,7 @@ function GetComentarios(id) {
                             .append("text").text("Fecha de Publicación: " + fecha_aux)
                         var divhijo = div_comment.append("div")
                             .attr("id", dividcomm)
-                ***REMOVED***
+                    }
                     else {
                         var dividcomm = "#divPadre" + id_padre;
                         var div_res = d3.select(dividcomm)
@@ -1276,18 +1276,18 @@ function GetComentarios(id) {
                         var usr_date = usr_poster.append("div")
                             .attr("class", "Post_date")
                             .append("text").text("Fecha de Publicación: " + fecha_aux)
-                ***REMOVED***
+                    }
 
 
-            ***REMOVED***
+                }
 
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         $("#txtNumComentarios").text("(" + cont_resp + ") ");
 
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 
 function limpiarCamposUsuario(opc) {
@@ -1302,15 +1302,15 @@ function limpiarCamposUsuario(opc) {
         $("#hdIdUsuario").val("");
         $('.btn-select-value').each(function (i, e) {
             $(e).html($(e).attr("etiqueta"));
-    ***REMOVED***);
+        });
 
-***REMOVED*** else if (opc == "clave") {
+    } else if (opc == "clave") {
         $("#txtPassword_re").val("");
         $("#txtPassword_re_2").val("");
         $("#txtCodigoVerifica").val("");
         $("#txtEmailReset").val("");
 
-***REMOVED*** else if (opc == "all") {
+    } else if (opc == "all") {
         $("#txtEmailLog").val("");
         $("#txtClaveLog").val("");
         $("#txtNombre").val("");
@@ -1326,9 +1326,9 @@ function limpiarCamposUsuario(opc) {
         $("#txtEmailVerifica").val("");
         $('.btn-select-value').each(function (i, e) {
             $(e).html($(e).attr("etiqueta"));
-    ***REMOVED***);
-***REMOVED***
-***REMOVED***
+        });
+    }
+}
 
 
 function AddNuevaCuentaUsuario() {
@@ -1344,35 +1344,35 @@ function AddNuevaCuentaUsuario() {
                 camposReq += "[" + id_txt + "]";
                 $("#error_" + id_txt).show();
                 formularioOK = false;
-        ***REMOVED*** else {
+            } else {
                 $("#error_" + id_txt).hide();
-        ***REMOVED***
-    ***REMOVED*** else {
+            }
+        } else {
             if ($('#' + id_txt + ' li.selected').attr('id') == "0") {
                 camposReq += "[" + id_txt + "]";
                 $("#error_" + id_txt).show();
                 formularioOK = false;
-        ***REMOVED*** else {
+            } else {
                 $("#error_" + id_txt).hide();
-        ***REMOVED***
+            }
 
-    ***REMOVED***
+        }
 
-***REMOVED***);
+    });
 
     if (formularioOK == false) {
         if (camposReq != "") {
             bootbox.alert("Faltan campos obligatorios");
-    ***REMOVED***
-***REMOVED*** else {
+        }
+    } else {
         //validarCorreo
         if ($("#txtPassword").val() != $("#txtPassword_2").val()) {
             bootbox.alert("Confirmación Password incorrecta");
-    ***REMOVED*** else {
+        } else {
             var clave_usu = $("#txtPassword").val();
             if (validaClaveUsu(clave_usu) == false) {
                 bootbox.alert("Formato de clave incorrecto: La clave debe tener al menos 8 carácteres, entre ellos, una letra mayúscula y un número");
-        ***REMOVED*** else {
+            } else {
                 //validarCorreo
                 if (validaEmail($('#txtEmail').val())) {
                     //validar edad
@@ -1386,7 +1386,7 @@ function AddNuevaCuentaUsuario() {
                             IdRol: $("#filtro_Rol option:selected").attr("id_rol"),
                             IdMedio: $("#filtro_Medios option:selected").attr("id_medio"),
                             IdProyRel: projectPerfil[0].id_project
-                    ***REMOVED***;
+                        };
                         //add nuevo registro
                         $.ajax({
                             type: 'POST',
@@ -1401,65 +1401,65 @@ function AddNuevaCuentaUsuario() {
                                         $("#divCuentaNueva").slideUp(100, function () {
                                             $("#divUsuarioLog").slideDown(function () {
                                                 limpiarCamposUsuario();
-                                        ***REMOVED***);
-                                    ***REMOVED***);
-                                ***REMOVED***);
+                                            });
+                                        });
+                                    });
 
-                            ***REMOVED*** else {
+                                } else {
                                     bootbox.alert("@Error: " + result.message);
-                            ***REMOVED***
+                                }
 
-                          ***REMOVED***
+                            },
                             error: function (response) {
                                 alert(response.responseText);
-                          ***REMOVED***
+                            },
                             failure: function (response) {
                                 alert(response.responseText);
-                        ***REMOVED***
-                    ***REMOVED***);
+                            }
+                        });
 
-                ***REMOVED*** else {
+                    } else {
                         bootbox.alert("Edad inválida");
 
-                ***REMOVED***
-            ***REMOVED*** else {
+                    }
+                } else {
                     bootbox.alert("Email inválido");
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
 
 
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}
 
 
 function validaClaveUsu(cadena) {
     //que tenga mayusculas, numeros,de 8 digitos al menos
-    var clave = new RegExp(/^(?=(?:.*\d){1***REMOVED***)(?=(?:.*[A-Z]){1***REMOVED***)\S{8,***REMOVED***$/);
+    var clave = new RegExp(/^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})\S{8,}$/);
     valida = clave.test(cadena);
     return valida;
-***REMOVED***
+}
 
 
 //Comunes
 
 //validación de correo electrónico
 function validaEmail(cadena) {
-    if (cadena.match(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3***REMOVED***)$/)) {
+    if (cadena.match(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/)) {
         return true;
-***REMOVED*** else {
+    } else {
         return false;
-***REMOVED***
-***REMOVED***
+    }
+}
 
 function validaEnteroMayorCero(cadena) {
     if (cadena.match(/^[1-9]+[0-9]*$/)) {
         return true;
-***REMOVED*** else {
+    } else {
         return false;
-***REMOVED***
-***REMOVED***
+    }
+}
 
 
 function validaLoginUsu() {
@@ -1476,23 +1476,23 @@ function validaLoginUsu() {
             camposReq += "[" + id_txt + "]";
             $("#error_" + id_txt).show();
             formularioOK = false;
-    ***REMOVED*** else {
+        } else {
             $("#error_" + id_txt).hide();
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
     if (formularioOK == false) {
         if (camposReq != "") {
             bootbox.alert("Faltan campos obligatorios");
-    ***REMOVED***
-***REMOVED*** else {
+        }
+    } else {
         //validarCorreo
         if (validaEmail($('#txtEmailLog').val())) {
             var params_usu = {
                 email: $("#txtEmailLog").val(),
                 hash_clave: $("#txtClaveLog").val(),
                 valida_rol: 'n'
-        ***REMOVED***;
+            };
             //add nuevo registro
             $.ajax({
                 type: 'POST',
@@ -1512,29 +1512,29 @@ function validaLoginUsu() {
                             $("#divCloseSesion").show();
                             $("#divPregParticipacion").attr("class", "objVisible");
 
-                    ***REMOVED***);
+                        });
 
 
-                ***REMOVED*** else {
+                    } else {
                         bootbox.alert("Error: " + result.message, function () {
 
-                    ***REMOVED***);
-                ***REMOVED***
+                        });
+                    }
 
-              ***REMOVED***
+                },
                 error: function (response) {
                     alert(response.responseText);
-              ***REMOVED***
+                },
                 failure: function (response) {
                     alert(response.responseText);
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
 
-    ***REMOVED*** else {
+        } else {
             bootbox.alert("Email inválido");
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}
 
 
 function cerrarSesionUsu() {
@@ -1555,19 +1555,19 @@ function cerrarSesionUsu() {
                     $("#divCloseSesion").show();
                     $("#divPregParticipacion").attr("class", "objHidden");
                     location.reload();
-            ***REMOVED***);
-        ***REMOVED*** else {
+                });
+            } else {
                 bootbox.alert("@Error: " + result.message);
-        ***REMOVED***
-      ***REMOVED***
+            }
+        },
         error: function (response) {
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
-***REMOVED***
+        }
+    });
+}
 
 function guardarMeGusta(mg, tipoFoto, id) {
     //valida campos obligatorios
@@ -1575,12 +1575,12 @@ function guardarMeGusta(mg, tipoFoto, id) {
     var nomegusta = false;
     var idFoto = '';
     var idFotoUsuario = '';
-    if (mg == 'M') { megusta = true ***REMOVED***
-    else if (mg == 'N') { nomegusta = true ***REMOVED***
-    else { bootbox.alert("Error"); ***REMOVED***
-    if (tipoFoto == 'P') { idFoto = id; ***REMOVED***
-    else if (tipoFoto == 'U') { idFotoUsuario = id; ***REMOVED***
-    else { bootbox.alert("Error"); ***REMOVED***
+    if (mg == 'M') { megusta = true }
+    else if (mg == 'N') { nomegusta = true }
+    else { bootbox.alert("Error"); }
+    if (tipoFoto == 'P') { idFoto = id; }
+    else if (tipoFoto == 'U') { idFotoUsuario = id; }
+    else { bootbox.alert("Error"); }
 
     var formularioOK = true;
     var camposReq = "";
@@ -1590,8 +1590,8 @@ function guardarMeGusta(mg, tipoFoto, id) {
     if (formularioOK == false) {
         if (camposReq != "") {
             bootbox.alert("Faltan campos obligatorios");
-    ***REMOVED***
-***REMOVED*** else {
+        }
+    } else {
         if ($("#hdIdUsuario").val() != 0) {
             var params_mg = {
                 IdUsuario: $("#hdIdUsuario").val(),
@@ -1601,7 +1601,7 @@ function guardarMeGusta(mg, tipoFoto, id) {
                 NoMegusta: nomegusta,
                 IdProyecto: projectPerfil[0].id_project,
 
-        ***REMOVED***;
+            };
             //add nuevo registro
             $.ajax({
                 type: 'POST',
@@ -1616,22 +1616,22 @@ function guardarMeGusta(mg, tipoFoto, id) {
                         bootbox.alert("Su opinión ha sido guardada", function () {
                             if (projectPerfil[0].id_project != undefined) {
 
-                        ***REMOVED***
-                    ***REMOVED***);
+                            }
+                        });
 
-                ***REMOVED*** else {
+                    } else {
                         bootbox.alert("@Error: " + result.message);
-                ***REMOVED***
-              ***REMOVED***
+                    }
+                },
                 error: function (response) {
                     alert(response.responseText);
-              ***REMOVED***
+                },
                 failure: function (response) {
                     alert(response.responseText);
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
 
-    ***REMOVED*** else {
+        } else {
 
             bootbox.confirm({
                 message: "Acción válida sólo para usuarios registrados",
@@ -1639,25 +1639,25 @@ function guardarMeGusta(mg, tipoFoto, id) {
                     confirm: {
                         label: 'Ingresar',
                         className: 'btn btn-primary active'
-                  ***REMOVED***
+                    },
                     cancel: {
                         label: 'Cancelar',
                         className: 'objHidden'
-                ***REMOVED***
-              ***REMOVED***
+                    }
+                },
                 callback: function (result) {
                     if (result == true) {
                         document.location.href = "#s5";
                         setTimeout(function () {
                             $('#txtEmailLog').focus();
-                      ***REMOVED*** 10);
-                ***REMOVED***
+                        }, 10);
+                    }
 
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+                }
+            });
+        }
+    }
+}
 
 function validaCamposOblig(contenedor) {
     var formularioOK = true;
@@ -1669,12 +1669,12 @@ function validaCamposOblig(contenedor) {
             camposReq += "[" + id_txt + "]";
             $("#error_" + id_txt).show();
             formularioOK = false;
-    ***REMOVED*** else {
+        } else {
             $("#error_" + id_txt).hide();
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
     return formularioOK;
-***REMOVED***
+}
 
 
 Number.prototype.formatMoney = function (c, d, t) {
@@ -1685,8 +1685,8 @@ Number.prototype.formatMoney = function (c, d, t) {
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-***REMOVED***;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
 
 function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     var pag_actual = parseInt(actual);
@@ -1704,17 +1704,17 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     var inicio = 1;
     if (residuo == 0) {
         inicio = (pag_actual - cant_por_linea) + 1;
-***REMOVED*** else {
+    } else {
         inicio = (cociente * cant_por_linea) + 1;
-***REMOVED***
+    }
 
     var fin = inicio + (cant_por_linea - 1);
     if (totalPag < cant_por_linea) {
         fin = totalPag;
-***REMOVED***
+    }
     if (fin > totalPag) {
         fin = totalPag;
-***REMOVED***
+    }
 
 
     if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
@@ -1726,7 +1726,7 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
         pag_enlace.append("span")
             .attr("class", "")
             .text("chevron_left ")
-***REMOVED***
+    }
 
 
 
@@ -1738,7 +1738,7 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
                 .attr("data-page", i)
             pag_enlace.append("text")
                 .text(i)
-    ***REMOVED*** else {
+        } else {
             var pag_enlace = divPag.append("a")
 
                 .attr("class", "page_left")
@@ -1750,10 +1750,10 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
                 .attr("class", "paginacion")
                 .text(i)
 
-    ***REMOVED***
+        }
 
 
-***REMOVED***
+    }
 
     if (pag_actual < totalPag) {
 
@@ -1767,8 +1767,8 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
                 .attr("class", "")
                 .text("chevron_right")
 
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
 
@@ -1778,9 +1778,9 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
         pagina_actual = $(this).attr("data-page");
 
         getProcesosContratacion($("#top_origen_informacion option:selected").val(), pagina_actual, cant_contratos, projectPerfil[0].id_project, $("#proceso").val());
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 function configuraEnlaceContratista() {
     $(".enlace_contratista").click(function () {
@@ -1791,7 +1791,7 @@ function configuraEnlaceContratista() {
         var url = "/contratista?" + dataType + "=" + dataValue;
         window.open(url, '_blank');
 
-***REMOVED***);
+    });
 
 
-***REMOVED***
+}

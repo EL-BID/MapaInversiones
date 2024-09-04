@@ -8,14 +8,14 @@ namespace PlataformaTransparencia.Modelos
     {
         public DataCommonSections()
         {
-    ***REMOVED***
+        }
         /// <summary>
         /// Lista que saca la informacion del datasource.
         /// </summary>
-        public List<InformationSource> dataSource { get; set; ***REMOVED***
+        public List<InformationSource> dataSource { get; set; }
         /// <summary>
         /// Es el numero de visitas.
         /// </summary>
-        public int visitsNumber { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public int visitsNumber { get; set; }
+    }
+}

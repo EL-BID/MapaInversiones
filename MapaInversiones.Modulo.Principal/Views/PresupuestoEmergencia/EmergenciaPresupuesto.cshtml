@@ -1,6 +1,6 @@
 ﻿@model PlataformaTransparencia.Modelos.ModelPresupuestoEmergenciaData
 @inject OrchardCore.IOrchardHelper Orchard
-@{ Layout = "~/Views/Shared/_Layout.cshtml"; ***REMOVED***
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 
 
@@ -105,7 +105,7 @@
                                                             </div>
                                                             <div class="data1">
                                                                 <span class="labelTit">Ejecutado</span>
-                                                                <span class="td1">RD $ @String.Format("{0:n2***REMOVED***", @item.total_avance / 1000000) Millones</span>
+                                                                <span class="td1">RD $ @String.Format("{0:n2}", @item.total_avance / 1000000) Millones</span>
                                                             </div>
                                                         </div>
                                                     </a>
@@ -131,7 +131,7 @@
                                                                                 </div>
                                                                                 <div class="data2">
                                                                                     <span class="labelTit">Ejecutado</span>
-                                                                                    <span class="td1p">RD $ @String.Format("{0:n2***REMOVED***", @ent.avance / 1000000) Millones</span>
+                                                                                    <span class="td1p">RD $ @String.Format("{0:n2}", @ent.avance / 1000000) Millones</span>
                                                                                 </div>
                                                                             </div>
                                                                         </a>
@@ -155,7 +155,7 @@
                                                                                                     </div>
                                                                                                     <div class="data2">
                                                                                                         <span class="labelTit">Ejecutado</span>
-                                                                                                        <span class="td1p">$ @String.Format("{0:n2***REMOVED***", @act.avance / 1000000) Millones</span>
+                                                                                                        <span class="td1p">$ @String.Format("{0:n2}", @act.avance / 1000000) Millones</span>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </a>
@@ -164,18 +164,18 @@
                                                                                 </div>
                                                                             </div>
                                                                             k++;
-                                                                    ***REMOVED***
+                                                                        }
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         j++;
-                                                ***REMOVED***
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
                                         i++;
-                                ***REMOVED***
+                                    }
                                 </div>
                                 <div id="divAdminTotales" class="summUp">
                                     <div class="panel-title">
@@ -186,12 +186,12 @@
                                             </div>
                                             <div class="data2">
                                                 <span class="labelTit">Ejecutado</span>
-                                                <span class="td1">RD $ @String.Format("{0:n0***REMOVED***", @total_avance / 1000000) Millones</span>
+                                                <span class="td1">RD $ @String.Format("{0:n0}", @total_avance / 1000000) Millones</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                        ***REMOVED***
+                            }
                         </div>
                     </div>
                     <div id="divListadoRecursosObjeEnteNoCentral">
@@ -224,7 +224,7 @@
                                                             </div>
                                                             <div class="data2">
                                                                 <span class="labelTit">Ejecutado</span>
-                                                                <span class="td1">RD $ @String.Format("{0:n2***REMOVED***", @item.total_avance / 1000000) Millones</span>
+                                                                <span class="td1">RD $ @String.Format("{0:n2}", @item.total_avance / 1000000) Millones</span>
                                                             </div>
                                                         </div>
                                                     </a>
@@ -251,7 +251,7 @@
                                                                                 </div>
                                                                                 <div class="data2">
                                                                                     <span class="labelTit">Ejecutado</span>
-                                                                                    <span class="td1p">RD $ @String.Format("{0:n2***REMOVED***", @ent.avance / 1000000) Millones</span>
+                                                                                    <span class="td1p">RD $ @String.Format("{0:n2}", @ent.avance / 1000000) Millones</span>
                                                                                 </div>
                                                                             </div>
                                                                         </a>
@@ -275,7 +275,7 @@
                                                                                                     </div>
                                                                                                     <div class="data2 mainDatalvl2">
                                                                                                         <span class="labelTit">Ejecutado</span>
-                                                                                                        <span class="td1p">$ @String.Format("{0:n2***REMOVED***", @act.avance / 1000000) Millones</span>
+                                                                                                        <span class="td1p">$ @String.Format("{0:n2}", @act.avance / 1000000) Millones</span>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </a>
@@ -284,18 +284,18 @@
                                                                                 </div>
                                                                             </div>
                                                                             k++;
-                                                                    ***REMOVED***
+                                                                        }
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         j++;
-                                                ***REMOVED***
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
                                         i++;
-                                ***REMOVED***
+                                    }
                                 </div>
                                 <div id="divTotales" class="summUp">
                                     <div class="panel-title">
@@ -307,14 +307,14 @@
                                             </div>
                                             <div class="data2">
                                                 <span class="labelTit">Ejecutado</span>
-                                                <span class="td1">RD $ @String.Format("{0:n0***REMOVED***", @total_avance / 1000000) Millones</span>
+                                                <span class="td1">RD $ @String.Format("{0:n0}", @total_avance / 1000000) Millones</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="divPagFichas">
                                 </div>
-                        ***REMOVED***
+                            }
                         </div>
 
                     </div>
@@ -408,7 +408,7 @@
                                                                         @if (item.es_programa == true)
                                                                         {
                                                                             <span class="labelTit">Programa</span>
-                                                                    ***REMOVED***
+                                                                        }
                                                                         <span class="td1"> @item.Nombre</span>
                                                                     </div>
 
@@ -416,12 +416,12 @@
                                                                         <span class="labelTit">Gastos devengados</span>
                                                                         @if (val_nivel1 < 1)
                                                                         {
-                                                                            <span class="td1">RD $ @String.Format("{0:n2***REMOVED***", @item.avance / 1000000) Millones</span>
-                                                                    ***REMOVED***
+                                                                            <span class="td1">RD $ @String.Format("{0:n2}", @item.avance / 1000000) Millones</span>
+                                                                        }
                                                                         else
                                                                         {
-                                                                            <span class="td1">RD $ @String.Format("{0:n0***REMOVED***", @item.avance / 1000000) Millones</span>
-                                                                    ***REMOVED***
+                                                                            <span class="td1">RD $ @String.Format("{0:n0}", @item.avance / 1000000) Millones</span>
+                                                                        }
                                                                     </div>
                                                                 </div>
                                                             </a>
@@ -453,12 +453,12 @@
                                                                                             <span class="labelTit">Gastos devengados</span>
                                                                                             @if (val_nivel2 < 1)
                                                                                             {
-                                                                                                <span class="td1p">RD $ @String.Format("{0:n2***REMOVED***", @ent.avance / 1000000) Millones</span>
-                                                                                        ***REMOVED***
+                                                                                                <span class="td1p">RD $ @String.Format("{0:n2}", @ent.avance / 1000000) Millones</span>
+                                                                                            }
                                                                                             else
                                                                                             {
-                                                                                                <span class="td1p">RD $ @String.Format("{0:n0***REMOVED***", @ent.avance / 1000000) Millones</span>
-                                                                                        ***REMOVED***
+                                                                                                <span class="td1p">RD $ @String.Format("{0:n0}", @ent.avance / 1000000) Millones</span>
+                                                                                            }
 
                                                                                         </div>
                                                                                     </div>
@@ -491,12 +491,12 @@
                                                                                                                 <span class="labelTit">Gastos devengados</span>
                                                                                                                 @if (val_nivel3 < 1)
                                                                                                                 {
-                                                                                                                    <span class="td1p">$ @String.Format("{0:n2***REMOVED***", @act.avance / 1000000) Millones</span>
-                                                                                                            ***REMOVED***
+                                                                                                                    <span class="td1p">$ @String.Format("{0:n2}", @act.avance / 1000000) Millones</span>
+                                                                                                                }
                                                                                                                 else
                                                                                                                 {
-                                                                                                                    <span class="td1p">$ @String.Format("{0:n0***REMOVED***", @act.avance / 1000000) Millones</span>
-                                                                                                            ***REMOVED***
+                                                                                                                    <span class="td1p">$ @String.Format("{0:n0}", @act.avance / 1000000) Millones</span>
+                                                                                                                }
 
                                                                                                             </div>
                                                                                                         </div>
@@ -521,18 +521,18 @@
                                                                                                                         <span class="labelTit">Gastos devengados</span>
                                                                                                                         @if (val_nivel4 < 1)
                                                                                                                         {
-                                                                                                                            <span class="td1p">RD $ @String.Format("{0:n2***REMOVED***", @gasto.avance / 1000000) Millones</span>
-                                                                                                                    ***REMOVED***
+                                                                                                                            <span class="td1p">RD $ @String.Format("{0:n2}", @gasto.avance / 1000000) Millones</span>
+                                                                                                                        }
                                                                                                                         else
                                                                                                                         {
-                                                                                                                            <span class="td1p">RD $ @String.Format("{0:n0***REMOVED***", @gasto.avance / 1000000) Millones</span>
-                                                                                                                    ***REMOVED***
+                                                                                                                            <span class="td1p">RD $ @String.Format("{0:n0}", @gasto.avance / 1000000) Millones</span>
+                                                                                                                        }
 
                                                                                                                     </div>
                                                                                                                 </div>
                                                                                                             </li>
                                                                                                             l++;
-                                                                                                    ***REMOVED***
+                                                                                                        }
 
 
                                                                                                     </ul>
@@ -546,7 +546,7 @@
                                                                                     </div>
 
                                                                                     k++;
-                                                                            ***REMOVED***
+                                                                                }
                                                                             </div>
 
                                                                         </div>
@@ -554,7 +554,7 @@
                                                                 </div>
 
                                                                 j++;
-                                                        ***REMOVED***
+                                                            }
                                                         </div>
                                                     </div>
 
@@ -562,7 +562,7 @@
 
                                                 i++;
                                                 <!--CIERRE PANEL NIVEL 1-->
-                                        ***REMOVED***
+                                            }
                                         </div>
                                         <div id="divTotales" class="summUp">
                                             <div class="panel-title">
@@ -575,7 +575,7 @@
 
                                                     <div class="data1">
                                                         <span class="labelTit">Gastos devengados</span>
-                                                        <span class="td1">RD $ @String.Format("{0:n0***REMOVED***", @total_avance / 1000000) Millones</span>
+                                                        <span class="td1">RD $ @String.Format("{0:n0}", @total_avance / 1000000) Millones</span>
                                                     </div>
                                                 </div>
 
@@ -584,7 +584,7 @@
                                         </div>
 
 
-                                ***REMOVED***
+                                    }
 
                                 </div>
 
@@ -697,7 +697,7 @@
 
     @{
         var parame = "emergencia" + @Model.TipoEmergencia;
-***REMOVED***
+    }
     <input type="hidden" id="param" value="@parame" />
      <div class="clearfix"></div>
 
@@ -727,9 +727,9 @@
                                         </div>
                                     </div>
                 </text>
-        ***REMOVED***
+            }
         </text>
-***REMOVED***
+    }
      
 
 
@@ -743,52 +743,52 @@
     <script src="~/content/dist/js/sankey.js"></script>
     <script src="js/emergencia_presupuesto_aux.js"></script>
 
-    @using (Html.BeginForm("DescargarIndicadoresProgramaDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProg" ***REMOVED***))
+    @using (Html.BeginForm("DescargarIndicadoresProgramaDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProg" }))
     {
         <input type="button" id="btnEnviar" value="Generar Csv" style="display:none;" />
-***REMOVED***
-    @using (Html.BeginForm("DescargarProgramaMetasFinancierasDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProgFin" ***REMOVED***))
+    }
+    @using (Html.BeginForm("DescargarProgramaMetasFinancierasDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProgFin" }))
     {
         <input type="button" id="btnEnviar" value="Generar Csv" style="display:none;" />
-***REMOVED***
-    @using (Html.BeginForm("DescargarEjecucionPresupuestariaDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProgEjePre" ***REMOVED***))
+    }
+    @using (Html.BeginForm("DescargarEjecucionPresupuestariaDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProgEjePre" }))
     {
         <input type="button" id="btnEnviarEjePre" value="Generar Csv" style="display:none;" />
-***REMOVED***
-    @using (Html.BeginForm("DescargarEjecucionContableDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProgEjeCon" ***REMOVED***))
+    }
+    @using (Html.BeginForm("DescargarEjecucionContableDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProgEjeCon" }))
     {
         <input type="button" id="btnEnviarEjeCon" value="Generar Csv" style="display:none;" />
-***REMOVED***
-    @using (Html.BeginForm("DescargarSubsidiosDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvSub" ***REMOVED***))
+    }
+    @using (Html.BeginForm("DescargarSubsidiosDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvSub" }))
     {
         <input type="button" id="btnEnviarSub" value="Generar Csv" style="display:none;" />
-***REMOVED***
-    @using (Html.BeginForm("DescargarProgramasMetasFisicasDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProMetFis" ***REMOVED***))
+    }
+    @using (Html.BeginForm("DescargarProgramasMetasFisicasDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProMetFis" }))
     {
         <input type="button" id="btnEnviarProMetFis" value="Generar Csv" style="display:none;" />
-***REMOVED***
-    @using (Html.BeginForm("DescargarCreditoAgricolaDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvCredAgricola" ***REMOVED***))
+    }
+    @using (Html.BeginForm("DescargarCreditoAgricolaDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvCredAgricola" }))
     {
         <input type="button" id="btnEnviarCredAgri" value="Generar Csv" style="display:none;" />
-***REMOVED***
-***REMOVED***
+    }
+}
 @section DataBody {
-    data-periods='[{"name":"2012", "id":1***REMOVED***,{"name":"2011", "id":2***REMOVED***,{"name":"2010", "id":3***REMOVED***]'
+    data-periods='[{"name":"2012", "id":1},{"name":"2011", "id":2},{"name":"2010", "id":3}]'
     data-periods-default-text=""
     data-busqueda=''
     data-tipoEmergencia=@Model.TipoEmergencia
-    data-location='[{***REMOVED***]'
+    data-location='[{}]'
     data-resourcesPerContratos='[@foreach (var item in @Model.InfoRecursosContratos)
     {
         <text>
-            {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "label_nivel4":"@item.label_nivel4", "value": "@item.value", "rawValue": "@item.rawValue"***REMOVED***@if (item != @Model.InfoRecursosContratos.Last())
-    {<text>,</text>***REMOVED***</text>***REMOVED***]'
+            {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "label_nivel4":"@item.label_nivel4", "value": "@item.value", "rawValue": "@item.rawValue"}@if (item != @Model.InfoRecursosContratos.Last())
+    {<text>,</text>}</text>}]'
     data-recursosPerObjetoGroup='[@foreach (var grupo in @Model.RecursosPerObjeto)
-    {<text> {"labelGroup": "@grupo.labelGroup" , "label":"@grupo.label","label_inf":"@grupo.label_inf","label_nivel4":"@grupo.label_nivel4","value": "@grupo.value", "rawValue": @grupo.rawValue***REMOVED***@if (grupo != @Model.RecursosPerObjeto.Last())
-    {<text>,</text>***REMOVED***</text>***REMOVED***]'
+    {<text> {"labelGroup": "@grupo.labelGroup" , "label":"@grupo.label","label_inf":"@grupo.label_inf","label_nivel4":"@grupo.label_nivel4","value": "@grupo.value", "rawValue": @grupo.rawValue}@if (grupo != @Model.RecursosPerObjeto.Last())
+    {<text>,</text>}</text>}]'
     data-recursosPerObjetoAvanceGroup='[@foreach (var grupo in @Model.RecursosPerObjetoAvance)
     {
         <text>
-            {"labelGroup": "@grupo.labelGroup" , "label":"@grupo.label","label_inf":"@grupo.label_inf","label_nivel4":"@grupo.label_nivel4","value": "@grupo.value", "rawValue": "@grupo.rawValue"***REMOVED***@if (grupo != @Model.RecursosPerObjetoAvance.Last())
-    {<text>,</text>***REMOVED***</text>***REMOVED***]'
-***REMOVED***
+            {"labelGroup": "@grupo.labelGroup" , "label":"@grupo.label","label_inf":"@grupo.label_inf","label_nivel4":"@grupo.label_nivel4","value": "@grupo.value", "rawValue": "@grupo.rawValue"}@if (grupo != @Model.RecursosPerObjetoAvance.Last())
+    {<text>,</text>}</text>}]'
+}

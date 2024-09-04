@@ -3,7 +3,7 @@
     {
       "Name": "Select",
       "DisplayName": "Select",
-      "Settings": {***REMOVED***,
+      "Settings": {},
       "ContentTypePartDefinitionRecords": [
         {
           "PartName": "FormInputElementPart",
@@ -11,51 +11,51 @@
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "1"
-        ***REMOVED***
-      ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        },
         {
           "PartName": "FormElementPart",
           "Name": "FormElementPart",
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "2"
-        ***REMOVED***
-      ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        },
         {
           "PartName": "FormElementLabelPart",
           "Name": "FormElementLabelPart",
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "3"
-        ***REMOVED***
-      ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        },
         {
           "PartName": "SelectPart",
           "Name": "SelectPart",
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "4"
-        ***REMOVED***
-      ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        },
         {
           "PartName": "FormElementValidationPart",
           "Name": "FormElementValidationPart",
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "5"
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***
+            }
+          }
+        }
       ]
-  ***REMOVED***
+    },
     {
       "Name": "Input",
       "DisplayName": "Input",
-      "Settings": {***REMOVED***,
+      "Settings": {},
       "ContentTypePartDefinitionRecords": [
         {
           "PartName": "FormInputElementPart",
@@ -63,51 +63,51 @@
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "1"
-        ***REMOVED***
-      ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        },
         {
           "PartName": "FormElementPart",
           "Name": "FormElementPart",
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "2"
-        ***REMOVED***
-      ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        },
         {
           "PartName": "FormElementLabelPart",
           "Name": "FormElementLabelPart",
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "3"
-        ***REMOVED***
-      ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        },
         {
           "PartName": "InputPart",
           "Name": "InputPart",
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "4"
-        ***REMOVED***
-      ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        },
         {
           "PartName": "FormElementValidationPart",
           "Name": "FormElementValidationPart",
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "5"
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***
+            }
+          }
+        }
       ]
-  ***REMOVED***
+    },
     {
       "Name": "TextArea",
       "DisplayName": "Text Area",
-      "Settings": {***REMOVED***,
+      "Settings": {},
       "ContentTypePartDefinitionRecords": [
         {
           "PartName": "FormInputElementPart",
@@ -115,47 +115,47 @@
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "1"
-        ***REMOVED***
-      ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        },
         {
           "PartName": "FormElementPart",
           "Name": "FormElementPart",
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "2"
-        ***REMOVED***
-      ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        },
         {
           "PartName": "FormElementLabelPart",
           "Name": "FormElementLabelPart",
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "3"
-        ***REMOVED***
-      ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        },
         {
           "PartName": "TextAreaPart",
           "Name": "TextAreaPart",
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "4"
-        ***REMOVED***
-      ***REMOVED***
-      ***REMOVED***
+            }
+          }
+        },
         {
           "PartName": "FormElementValidationPart",
           "Name": "FormElementValidationPart",
           "Settings": {
             "ContentTypePartSettings": {
               "Position": "5"
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***
+            }
+          }
+        }
       ]
-***REMOVED***
+    }
   ],
   "ContentPartDefinitionRecords": [
     {
@@ -165,20 +165,20 @@
           "Attachable": true,
           "DisplayName": "Form Element Label Part",
           "Description": "Provides a way to capture element's label."
-    ***REMOVED***
-    ***REMOVED***
+        }
+      },
       "ContentPartFieldDefinitionRecords": []
-  ***REMOVED***
+    },
     {
       "Name": "FormElementValidationPart",
       "Settings": {
         "ContentPartSettings": {
           "Attachable": true,
           "DisplayName": "Form Element Validation Part"
-    ***REMOVED***
-    ***REMOVED***
+        }
+      },
       "ContentPartFieldDefinitionRecords": []
-***REMOVED***
+    }
   ],
   "Identifier": "4vksyhmvt1q2nyx3pjbexemjny"
-***REMOVED***
+}

@@ -61,4 +61,4 @@ define( function(){
 		'#00bff3',
 		'#6dcff6'
 	]
-***REMOVED***)
+})

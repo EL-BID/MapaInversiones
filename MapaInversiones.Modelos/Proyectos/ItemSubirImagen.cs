@@ -6,9 +6,9 @@ namespace PlataformaTransparencia.Modelos.Proyectos
 {
   public class ItemSubirImagen
   {
-    public byte[] UploadedImage { get; set; ***REMOVED***
-    public string DescripcionImage { get; set; ***REMOVED***
-    public string LocationImage { get; set; ***REMOVED***
-    public string ProjectImage { get; set; ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+    public byte[] UploadedImage { get; set; }
+    public string DescripcionImage { get; set; }
+    public string LocationImage { get; set; }
+    public string ProjectImage { get; set; }
+  }
+}

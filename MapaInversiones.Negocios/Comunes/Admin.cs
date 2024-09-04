@@ -14,7 +14,7 @@ namespace PlataformaTransparencia.Negocios.Comunes
         public Admin(TransparenciaDB connection)
         {
             _connection = connection;
-    ***REMOVED***
+        }
         public string ActualizaFoto(int idFotoUsuario, string Aprobadopor, bool Aprobado, bool Eliminado, string textoJustifica)
         {
             int idRegNew = 0;
@@ -30,23 +30,23 @@ namespace PlataformaTransparencia.Negocios.Comunes
                     Aprobado = Aprobado,
                     Eliminado = Eliminado,
                     JustificacionParaNoPublicar = textoJustifica
-            ***REMOVED***);
+                });
                 if (idRegNew > 0)
                 {
                     outTxt = "0<||>";
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             catch (Exception exe)
             {
                 if (exe.InnerException.InnerException.Message.IndexOf("UNIQUE KEY") > -1)
                 {
                     outTxt = "-1<||>" + "Ya se registró la opinión para esta foto";
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             return outTxt;
-    ***REMOVED***
+        }
         public string ActualizaComent(int IdComentario, int IdEstado, string textoJustifica)
         {
             int idRegNew = 0;
@@ -65,25 +65,25 @@ namespace PlataformaTransparencia.Negocios.Comunes
                     IdEstado = IdEstado,
                     fechaPublicacion = DateTime.Now,
                     JustificacionParaNoPublicar = textoJustifica,
-            ***REMOVED***);
+                });
 
-                //***REMOVED***
+                //}
                 if (idRegNew > 0)
                 {
                     outTxt = "0<||>";
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             catch (Exception exe)
             {
                 if (exe.InnerException.InnerException.Message.IndexOf("UNIQUE KEY") > -1)
                 {
                     outTxt = "-1<||>" + "Ya se genero comentario";
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             return outTxt;
-    ***REMOVED***
+        }
 
 
 
@@ -100,23 +100,23 @@ namespace PlataformaTransparencia.Negocios.Comunes
                 .Update(t => new Comentarios
                 {
                     IdTipoComentario = IdTipoComentario,
-            ***REMOVED***);
+                });
   
                 if (idRegNew > 0)
                 {
                     outTxt = "0<||>";
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             catch (Exception exe)
             {
                 if (exe.InnerException.InnerException.Message.IndexOf("UNIQUE KEY") > -1)
                 {
                     outTxt = "-1<||>" + "Update error";
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             return outTxt;
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

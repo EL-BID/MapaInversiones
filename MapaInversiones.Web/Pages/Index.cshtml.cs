@@ -10,11 +10,11 @@ public class IndexModel : PageModel
     public IndexModel(ILogger<IndexModel> logger)
     {
         _logger = logger;
-***REMOVED***
+    }
 
     public IActionResult OnGet()
     {
         return Redirect("/Home");
-***REMOVED***
-***REMOVED***
+    }
+}
 

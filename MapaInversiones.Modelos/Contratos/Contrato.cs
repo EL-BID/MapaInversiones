@@ -6,10 +6,10 @@ namespace PlataformaTransparencia.Modelos.Contratos
 {
     public class Contrato
     {
-        public string? Moneda { get; set; ***REMOVED***
-        public string? CodigoProceso { get; set; ***REMOVED***
-        public string? MaxYear { get; set; ***REMOVED***
-        public string? CodigoContrato { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string? Moneda { get; set; }
+        public string? CodigoProceso { get; set; }
+        public string? MaxYear { get; set; }
+        public string? CodigoContrato { get; set; }
+    }
+}
 

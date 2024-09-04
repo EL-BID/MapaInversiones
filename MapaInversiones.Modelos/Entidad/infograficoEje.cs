@@ -6,12 +6,12 @@ namespace PlataformaTransparencia.Modelos.Entidad
 {
     public class infograficoEje
     {
-        public string Id { get; set; ***REMOVED***
-        public string Nombre { get; set; ***REMOVED***
+        public string Id { get; set; }
+        public string Nombre { get; set; }
 
-        public double presupuesto { get; set; ***REMOVED***
+        public double presupuesto { get; set; }
 
-        public List<infograficoEstrategico> Detalles { get; set; ***REMOVED***
+        public List<infograficoEstrategico> Detalles { get; set; }
 
 
         public infograficoEje()
@@ -20,6 +20,6 @@ namespace PlataformaTransparencia.Modelos.Entidad
             Nombre = "";
             presupuesto = 0;
             Detalles = new List<infograficoEstrategico>();
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

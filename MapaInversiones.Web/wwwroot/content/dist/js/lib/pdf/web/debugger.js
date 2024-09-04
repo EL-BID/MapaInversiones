@@ -27,40 +27,40 @@ var FontInspector = (function FontInspectorClosure() {
     for (var i = 0, ii = divs.length; i < ii; ++i) {
       var div = divs[i];
       div.className = '';
-***REMOVED***
-  ***REMOVED***
+    }
+  }
   function resetSelection() {
     var divs = document.querySelectorAll('div[' + fontAttribute + ']');
     for (var i = 0, ii = divs.length; i < ii; ++i) {
       var div = divs[i];
       div.className = 'debuggerHideText';
-***REMOVED***
-  ***REMOVED***
+    }
+  }
   function selectFont(fontName, show) {
     var divs = document.querySelectorAll('div[' + fontAttribute + '=' +
                                          fontName + ']');
     for (var i = 0, ii = divs.length; i < ii; ++i) {
       var div = divs[i];
       div.className = show ? 'debuggerShowText' : 'debuggerHideText';
-***REMOVED***
-  ***REMOVED***
+    }
+  }
   function textLayerClick(e) {
     if (!e.target.dataset.fontName ||
         e.target.tagName.toUpperCase() !== 'DIV') {
       return;
-***REMOVED***
+    }
     var fontName = e.target.dataset.fontName;
     var selects = document.getElementsByTagName('input');
     for (var i = 0; i < selects.length; ++i) {
       var select = selects[i];
       if (select.dataset.fontName !== fontName) {
         continue;
-  ***REMOVED***
+      }
       select.checked = !select.checked;
       selectFont(fontName, select.checked);
       select.scrollIntoView();
-***REMOVED***
-  ***REMOVED***
+    }
+  }
   return {
     // Properties/functions needed by PDFBug.
     id: 'FontInspector',
@@ -77,24 +77,24 @@ var FontInspector = (function FontInspectorClosure() {
 
       fonts = document.createElement('div');
       panel.appendChild(fonts);
-  ***REMOVED***
+    },
     cleanup: function cleanup() {
       fonts.textContent = '';
-  ***REMOVED***
+    },
     enabled: false,
     get active() {
       return active;
-  ***REMOVED***
+    },
     set active(value) {
       active = value;
       if (active) {
         document.body.addEventListener('click', textLayerClick, true);
         resetSelection();
-  ***REMOVED*** else {
+      } else {
         document.body.removeEventListener('click', textLayerClick, true);
         removeSelection();
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
     // FontInspector specific functions.
     fontAdded: function fontAdded(fontObj, url) {
       function properties(obj, list) {
@@ -108,9 +108,9 @@ var FontInspector = (function FontInspectorClosure() {
           td2.textContent = obj[list[i]].toString();
           tr.appendChild(td2);
           moreInfo.appendChild(tr);
-    ***REMOVED***
+        }
         return moreInfo;
-  ***REMOVED***
+      }
       var moreInfo = properties(fontObj, ['name', 'type']);
       var m = /url\(['"]?([^\)"']+)/.exec(url);
       var fontName = fontObj.loadedName;
@@ -126,15 +126,15 @@ var FontInspector = (function FontInspectorClosure() {
       logIt.addEventListener('click', function(event) {
         event.preventDefault();
         console.log(fontObj);
-  ***REMOVED***);
+      });
       var select = document.createElement('input');
       select.setAttribute('type', 'checkbox');
       select.dataset.fontName = fontName;
       select.addEventListener('click', (function(select, fontName) {
         return (function() {
            selectFont(fontName, select.checked);
-    ***REMOVED***);
-  ***REMOVED***)(select, fontName));
+        });
+      })(select, fontName));
       font.appendChild(select);
       font.appendChild(name);
       font.appendChild(document.createTextNode(' '));
@@ -148,11 +148,11 @@ var FontInspector = (function FontInspectorClosure() {
       setTimeout(function() {
         if (this.active) {
           resetSelection();
-    ***REMOVED***
-  ***REMOVED***.bind(this), 2000);
-***REMOVED***
-  ***REMOVED***;
-***REMOVED***)();
+        }
+      }.bind(this), 2000);
+    }
+  };
+})();
 
 // Manages all the page steppers.
 var StepperManager = (function StepperManagerClosure() {
@@ -160,7 +160,7 @@ var StepperManager = (function StepperManagerClosure() {
   var stepperDiv = null;
   var stepperControls = null;
   var stepperChooser = null;
-  var breakPoints = {***REMOVED***;
+  var breakPoints = {};
   return {
     // Properties/functions needed by PDFBug.
     id: 'Stepper',
@@ -174,20 +174,20 @@ var StepperManager = (function StepperManagerClosure() {
       stepperChooser = document.createElement('select');
       stepperChooser.addEventListener('change', function(event) {
         self.selectStepper(this.value);
-  ***REMOVED***);
+      });
       stepperControls.appendChild(stepperChooser);
       stepperDiv = document.createElement('div');
       this.panel.appendChild(stepperControls);
       this.panel.appendChild(stepperDiv);
       if (sessionStorage.getItem('pdfjsBreakPoints')) {
         breakPoints = JSON.parse(sessionStorage.getItem('pdfjsBreakPoints'));
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
     cleanup: function cleanup() {
       stepperChooser.textContent = '';
       stepperDiv.textContent = '';
       steppers = [];
-  ***REMOVED***
+    },
     enabled: false,
     active: false,
     // Stepper specific functions.
@@ -206,34 +206,34 @@ var StepperManager = (function StepperManagerClosure() {
       steppers.push(stepper);
       if (steppers.length === 1) {
         this.selectStepper(pageIndex, false);
-  ***REMOVED***
+      }
       return stepper;
-  ***REMOVED***
+    },
     selectStepper: function selectStepper(pageIndex, selectPanel) {
       var i;
       if (selectPanel) {
         this.manager.selectPanel(this);
-  ***REMOVED***
+      }
       for (i = 0; i < steppers.length; ++i) {
         var stepper = steppers[i];
         if (stepper.pageIndex === pageIndex) {
           stepper.panel.removeAttribute('hidden');
-    ***REMOVED*** else {
+        } else {
           stepper.panel.setAttribute('hidden', true);
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
       var options = stepperChooser.options;
       for (i = 0; i < options.length; ++i) {
         var option = options[i];
         option.selected = (option.value | 0) === pageIndex;
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
     saveBreakPoints: function saveBreakPoints(pageIndex, bps) {
       breakPoints[pageIndex] = bps;
       sessionStorage.setItem('pdfjsBreakPoints', JSON.stringify(breakPoints));
-***REMOVED***
-  ***REMOVED***;
-***REMOVED***)();
+    }
+  };
+})();
 
 // The stepper for each page's IRQueue.
 var Stepper = (function StepperClosure() {
@@ -242,9 +242,9 @@ var Stepper = (function StepperClosure() {
     var d = document.createElement(tag);
     if (textContent) {
       d.textContent = textContent;
-***REMOVED***
+    }
     return d;
-  ***REMOVED***
+  }
 
   var opMap = null;
 
@@ -253,27 +253,27 @@ var Stepper = (function StepperClosure() {
       var MAX_STRING_LENGTH = 75;
       return args.length <= MAX_STRING_LENGTH ? args :
         args.substr(0, MAX_STRING_LENGTH) + '...';
-***REMOVED***
+    }
     if (typeof args !== 'object' || args === null) {
       return args;
-***REMOVED***
+    }
     if ('length' in args) { // array
       var simpleArgs = [], i, ii;
       var MAX_ITEMS = 10;
       for (i = 0, ii = Math.min(MAX_ITEMS, args.length); i < ii; i++) {
         simpleArgs.push(simplifyArgs(args[i]));
-  ***REMOVED***
+      }
       if (i < args.length) {
         simpleArgs.push('...');
-  ***REMOVED***
+      }
       return simpleArgs;
-***REMOVED***
-    var simpleObj = {***REMOVED***;
+    }
+    var simpleObj = {};
     for (var key in args) {
       simpleObj[key] = simplifyArgs(args[key]);
-***REMOVED***
+    }
     return simpleObj;
-  ***REMOVED***
+  }
 
   function Stepper(panel, pageIndex, initialBreakPoints) {
     this.panel = panel;
@@ -283,7 +283,7 @@ var Stepper = (function StepperClosure() {
     this.breakPoints = initialBreakPoints;
     this.currentIdx = -1;
     this.operatorListIdx = 0;
-  ***REMOVED***
+  }
   Stepper.prototype = {
     init: function init() {
       var panel = this.panel;
@@ -303,9 +303,9 @@ var Stepper = (function StepperClosure() {
         opMap = Object.create(null);
         for (var key in PDFJS.OPS) {
           opMap[PDFJS.OPS[key]] = key;
-    ***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
+        }
+      }
+    },
     updateOperatorList: function updateOperatorList(operatorList) {
       var self = this;
 
@@ -313,16 +313,16 @@ var Stepper = (function StepperClosure() {
         var x = +this.dataset.idx;
         if (this.checked) {
           self.breakPoints.push(x);
-    ***REMOVED*** else {
+        } else {
           self.breakPoints.splice(self.breakPoints.indexOf(x), 1);
-    ***REMOVED***
+        }
         StepperManager.saveBreakPoints(self.pageIndex, self.breakPoints);
-  ***REMOVED***
+      }
 
       var MAX_OPERATORS_COUNT = 15000;
       if (this.operatorListIdx > MAX_OPERATORS_COUNT) {
         return;
-  ***REMOVED***
+      }
 
       var chunk = document.createDocumentFragment();
       var operatorsToDisplay = Math.min(MAX_OPERATORS_COUNT,
@@ -356,40 +356,40 @@ var Stepper = (function StepperClosure() {
             var glyph = glyphs[j];
             if (typeof glyph === 'object' && glyph !== null) {
               str.push(glyph.fontChar);
-        ***REMOVED*** else {
+            } else {
               if (str.length > 0) {
                 newArgs.push(str.join(''));
                 str = [];
-          ***REMOVED***
+              }
               newArgs.push(glyph); // null or number
-        ***REMOVED***
-      ***REMOVED***
+            }
+          }
           if (str.length > 0) {
             newArgs.push(str.join(''));
-      ***REMOVED***
+          }
           decArgs = [newArgs];
-    ***REMOVED***
+        }
         line.appendChild(c('td', fn));
         line.appendChild(c('td', JSON.stringify(simplifyArgs(decArgs))));
-  ***REMOVED***
+      }
       if (operatorsToDisplay < operatorList.fnArray.length) {
         line = c('tr');
         var lastCell = c('td', '...');
         lastCell.colspan = 4;
         chunk.appendChild(lastCell);
-  ***REMOVED***
+      }
       this.operatorListIdx = operatorList.fnArray.length;
       this.table.appendChild(chunk);
-  ***REMOVED***
+    },
     getNextBreakPoint: function getNextBreakPoint() {
-      this.breakPoints.sort(function(a, b) { return a - b; ***REMOVED***);
+      this.breakPoints.sort(function(a, b) { return a - b; });
       for (var i = 0; i < this.breakPoints.length; i++) {
         if (this.breakPoints[i] > this.currentIdx) {
           return this.breakPoints[i];
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
       return null;
-  ***REMOVED***
+    },
     breakIt: function breakIt(idx, callback) {
       StepperManager.selectStepper(this.pageIndex, true);
       var self = this;
@@ -410,11 +410,11 @@ var Stepper = (function StepperClosure() {
             self.goTo(-1);
             callback();
             break;
-    ***REMOVED***
-  ***REMOVED***;
+        }
+      };
       dom.addEventListener('keydown', listener, false);
       self.goTo(idx);
-  ***REMOVED***
+    },
     goTo: function goTo(idx) {
       var allRows = this.panel.getElementsByClassName('line');
       for (var x = 0, xx = allRows.length; x < xx; ++x) {
@@ -422,30 +422,30 @@ var Stepper = (function StepperClosure() {
         if (parseInt(row.dataset.idx, 10) === idx) {
           row.style.backgroundColor = 'rgb(251,250,207)';
           row.scrollIntoView();
-    ***REMOVED*** else {
+        } else {
           row.style.backgroundColor = null;
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***;
+        }
+      }
+    }
+  };
   return Stepper;
-***REMOVED***)();
+})();
 
 var Stats = (function Stats() {
   var stats = [];
   function clear(node) {
     while (node.hasChildNodes()) {
       node.removeChild(node.lastChild);
-***REMOVED***
-  ***REMOVED***
+    }
+  }
   function getStatIndex(pageNumber) {
     for (var i = 0, ii = stats.length; i < ii; ++i) {
       if (stats[i].pageNumber === pageNumber) {
         return i;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
     return false;
-  ***REMOVED***
+  }
   return {
     // Properties/functions needed by PDFBug.
     id: 'Stats',
@@ -455,20 +455,20 @@ var Stats = (function Stats() {
     init: function init() {
       this.panel.setAttribute('style', 'padding: 5px;');
       PDFJS.enableStats = true;
-  ***REMOVED***
+    },
     enabled: false,
     active: false,
     // Stats specific functions.
     add: function(pageNumber, stat) {
       if (!stat) {
         return;
-  ***REMOVED***
+      }
       var statsIndex = getStatIndex(pageNumber);
       if (statsIndex !== false) {
         var b = stats[statsIndex];
         this.panel.removeChild(b.div);
         stats.splice(statsIndex, 1);
-  ***REMOVED***
+      }
       var wrapper = document.createElement('div');
       wrapper.className = 'stats';
       var title = document.createElement('div');
@@ -478,19 +478,19 @@ var Stats = (function Stats() {
       statsDiv.textContent = stat.toString();
       wrapper.appendChild(title);
       wrapper.appendChild(statsDiv);
-      stats.push({ pageNumber: pageNumber, div: wrapper ***REMOVED***);
-      stats.sort(function(a, b) { return a.pageNumber - b.pageNumber; ***REMOVED***);
+      stats.push({ pageNumber: pageNumber, div: wrapper });
+      stats.sort(function(a, b) { return a.pageNumber - b.pageNumber; });
       clear(this.panel);
       for (var i = 0, ii = stats.length; i < ii; ++i) {
         this.panel.appendChild(stats[i].div);
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
     cleanup: function () {
       stats = [];
       clear(this.panel);
-***REMOVED***
-  ***REMOVED***;
-***REMOVED***)();
+    }
+  };
+})();
 
 // Manages all the debugging tools.
 var PDFBug = (function PDFBugClosure() {
@@ -508,13 +508,13 @@ var PDFBug = (function PDFBugClosure() {
       var all = false, tools = this.tools;
       if (ids.length === 1 && ids[0] === 'all') {
         all = true;
-  ***REMOVED***
+      }
       for (var i = 0; i < tools.length; ++i) {
         var tool = tools[i];
         if (all || ids.indexOf(tool.id) !== -1) {
           tool.enabled = true;
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
       if (!all) {
         // Sort the tools by the order they are enabled.
         tools.sort(function(a, b) {
@@ -523,9 +523,9 @@ var PDFBug = (function PDFBugClosure() {
           var indexB = ids.indexOf(b.id);
           indexB = indexB < 0 ? tools.length : indexB;
           return indexA - indexB;
-    ***REMOVED***);
-  ***REMOVED***
-  ***REMOVED***
+        });
+      }
+    },
     init: function init() {
       /*
        * Basic Layout:
@@ -563,37 +563,37 @@ var PDFBug = (function PDFBugClosure() {
           return function(event) {
             event.preventDefault();
             self.selectPanel(selected);
-      ***REMOVED***;
-    ***REMOVED***)(i));
+          };
+        })(i));
         controls.appendChild(panelButton);
         panels.appendChild(panel);
         tool.panel = panel;
         tool.manager = this;
         if (tool.enabled) {
           tool.init();
-    ***REMOVED*** else {
+        } else {
           panel.textContent = tool.name + ' is disabled. To enable add ' +
                               ' "' + tool.id + '" to the pdfBug parameter ' +
                               'and refresh (seperate multiple by commas).';
-    ***REMOVED***
+        }
         buttons.push(panelButton);
-  ***REMOVED***
+      }
       this.selectPanel(0);
-  ***REMOVED***
+    },
     cleanup: function cleanup() {
       for (var i = 0, ii = this.tools.length; i < ii; i++) {
         if (this.tools[i].enabled) {
           this.tools[i].cleanup();
-    ***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
+        }
+      }
+    },
     selectPanel: function selectPanel(index) {
       if (typeof index !== 'number') {
         index = this.tools.indexOf(index);
-  ***REMOVED***
+      }
       if (index === activePanel) {
         return;
-  ***REMOVED***
+      }
       activePanel = index;
       var tools = this.tools;
       for (var j = 0; j < tools.length; ++j) {
@@ -601,12 +601,12 @@ var PDFBug = (function PDFBugClosure() {
           buttons[j].setAttribute('class', 'active');
           tools[j].active = true;
           tools[j].panel.removeAttribute('hidden');
-    ***REMOVED*** else {
+        } else {
           buttons[j].setAttribute('class', '');
           tools[j].active = false;
           tools[j].panel.setAttribute('hidden', 'true');
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***;
-***REMOVED***)();
+        }
+      }
+    }
+  };
+})();

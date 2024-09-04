@@ -5,35 +5,35 @@ namespace PlataformaTransparencia.Modelos.Proyectos
 {
   public class InfoProyectos
   {
-    public int IdProyecto { get; set; ***REMOVED***
-    public string NombreProyecto { get; set; ***REMOVED***
-    public DbGeography Geography { get; set; ***REMOVED***
-    public string State { get; set; ***REMOVED***
-    public string Location { get; set; ***REMOVED***
-    public decimal Value { get; set; ***REMOVED***
-    public decimal approvedTotalMoney { get; set; ***REMOVED***
-    public string NombreMunicipio { get; set; ***REMOVED***
-    public string UrlImagen { get; set; ***REMOVED***
-    public Nullable<int> cantidadFotos { get; set; ***REMOVED***
-    public decimal porcentajeGastado { get; set; ***REMOVED***
-    public string NombreSector { get; set; ***REMOVED***
-    public int IdSector { get; set; ***REMOVED***
-    public decimal VlrTotalProyectoFuenteRegalias { get; set; ***REMOVED***
-    public decimal VlrTotalProyectoTodasLasFuentes { get; set; ***REMOVED***
-    public string MesInicioProyecto { get; set; ***REMOVED***
-    public int AnioInicioProyecto { get; set; ***REMOVED***
-    public string MesFinProyecto { get; set; ***REMOVED***
-    public int AnioFinProyecto { get; set; ***REMOVED***
-    public DateTime FechaInicioProyecto { get; set; ***REMOVED***
-    public int Megusta { get; set; ***REMOVED***
-    public int Comentarios { get; set; ***REMOVED***
-    public string IdDepartamento { get; set; ***REMOVED***
-    public string IdEntidadEjecutora { get; set; ***REMOVED***
-    public string EntidadEjecutora { get; set; ***REMOVED***
-    public string CodigoSnip { get; set; ***REMOVED***
-    public string GrupoFuncional { get; set; ***REMOVED***
-    public string PartidaPresupuestaria { get; set; ***REMOVED***
-    public string IdMunicipio { get; set; ***REMOVED***
-        public string NombreDepartamento { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+    public int IdProyecto { get; set; }
+    public string NombreProyecto { get; set; }
+    public DbGeography Geography { get; set; }
+    public string State { get; set; }
+    public string Location { get; set; }
+    public decimal Value { get; set; }
+    public decimal approvedTotalMoney { get; set; }
+    public string NombreMunicipio { get; set; }
+    public string UrlImagen { get; set; }
+    public Nullable<int> cantidadFotos { get; set; }
+    public decimal porcentajeGastado { get; set; }
+    public string NombreSector { get; set; }
+    public int IdSector { get; set; }
+    public decimal VlrTotalProyectoFuenteRegalias { get; set; }
+    public decimal VlrTotalProyectoTodasLasFuentes { get; set; }
+    public string MesInicioProyecto { get; set; }
+    public int AnioInicioProyecto { get; set; }
+    public string MesFinProyecto { get; set; }
+    public int AnioFinProyecto { get; set; }
+    public DateTime FechaInicioProyecto { get; set; }
+    public int Megusta { get; set; }
+    public int Comentarios { get; set; }
+    public string IdDepartamento { get; set; }
+    public string IdEntidadEjecutora { get; set; }
+    public string EntidadEjecutora { get; set; }
+    public string CodigoSnip { get; set; }
+    public string GrupoFuncional { get; set; }
+    public string PartidaPresupuestaria { get; set; }
+    public string IdMunicipio { get; set; }
+        public string NombreDepartamento { get; set; }
+    }
+}

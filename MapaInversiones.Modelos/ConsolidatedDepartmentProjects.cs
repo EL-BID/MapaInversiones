@@ -6,12 +6,12 @@ namespace PlataformaTransparencia.Modelos
 {
     public class ConsolidatedDepartmentProjects
     {
-        public string departmentId { get; set; ***REMOVED***
-        public int projectNumber { get; set; ***REMOVED***
-        public decimal approvedMoney { get; set; ***REMOVED***
-        public decimal approvedTotalMoney { get; set; ***REMOVED***
-        public string nombre { get; set; ***REMOVED***
-        public string url_img_peq { get; set; ***REMOVED***
+        public string departmentId { get; set; }
+        public int projectNumber { get; set; }
+        public decimal approvedMoney { get; set; }
+        public decimal approvedTotalMoney { get; set; }
+        public string nombre { get; set; }
+        public string url_img_peq { get; set; }
 
-***REMOVED***
-***REMOVED***
+    }
+}

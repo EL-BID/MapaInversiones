@@ -7,15 +7,15 @@ var initData = 0;
 inicializarDatos();
 function inicializarDatos() {
     obtenerOrganismoFinanciador(anio, codigoFuente);
-***REMOVED***
+}
 function organismoFinanciadorSelected(codigoFuenteSeleccionado) {
     codigoFuente = codigoFuenteSeleccionado;
     obtenerOrganismoFinanciador(anio, codigoFuente);
-***REMOVED***
+}
 function anioSeleccionado(sel) {
     anio = sel.options[sel.selectedIndex].text;
     obtenerOrganismoFinanciador(anio, codigoFuente);
-***REMOVED***
+}
 function obtenerOrganismoFinanciador(anio, codigoFuente) {
     $("#divDatosConsolidado").empty();
     $.ajax({
@@ -25,15 +25,15 @@ function obtenerOrganismoFinanciador(anio, codigoFuente) {
         data: {
             anio: anio,
             codigofuente: codigoFuente
-    ***REMOVED***
-***REMOVED***).done(function (data) {
+        }
+    }).done(function (data) {
         //console.log("data", data);
         $("#totalFinanciadores").empty();
         $("#totalFinanciadores").html(data.totalFinanciadores);
         $("#totalProyectosFinanciados").empty();
         $("#totalProyectosFinanciados").html(data.totalProyectosFinanciados);
         $("#totalAportado").empty();
-        $("#totalAportado").html("RD " + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 ***REMOVED***).format(data.totalAportado) + " M");
+        $("#totalAportado").html("RD " + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(data.totalAportado) + " M");
         let dataTable = "";
         $("#divPaginator").empty();
 
@@ -46,7 +46,7 @@ function obtenerOrganismoFinanciador(anio, codigoFuente) {
                         '</div>' +
                         '<div class="data1">' +
                             '<span class="labelTit">Monto financiado</span>' +
-                            '<span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 ***REMOVED***).format(data.financiadores[i].montoFinanciado)+' M</span>' +
+                            '<span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(data.financiadores[i].montoFinanciado)+' M</span>' +
                         '</div>' +
                         '<div class="data1b">' +
                             '<span class="labelTit">Proyectos financiados</span>' +
@@ -72,10 +72,10 @@ function obtenerOrganismoFinanciador(anio, codigoFuente) {
                     '</div>' +
                 '</div>' +
                 '</div >';
-    ***REMOVED***
+        }
         $("#table_financiadores").empty();
         $("#table_financiadores").html(dataTable);
-***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+}).fail(function (xhr, ajaxOptions, thrownError) {
     alert("Error " + xhr.status + "_" + thrownError);
-***REMOVED***);
-***REMOVED***
+});
+}

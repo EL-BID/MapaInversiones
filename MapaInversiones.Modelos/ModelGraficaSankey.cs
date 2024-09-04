@@ -8,5 +8,5 @@ namespace PlataformaTransparencia.Modelos
       public class ModelGraficaSankey : RespuestaContratoBase
       {
             public List<infograficoEje> distribucionObjetivos = new List<infograficoEje>();
-  ***REMOVED***
-***REMOVED***
+      }
+}

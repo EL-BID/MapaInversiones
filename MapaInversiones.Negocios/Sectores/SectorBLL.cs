@@ -25,7 +25,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
             DataModel = connection;
             Configuration = configuration;
             _consultasComunes = consultasComunes;
-    ***REMOVED***
+        }
         public ModelLocationData ObtenerDatosLocalizacionSector(string sector_id)
         {
             ModelLocationData objReturn = new();
@@ -48,12 +48,12 @@ namespace PlataformaTransparencia.Negocios.Sectores
                     CantProyectos = 0,
                     UrlImgXL = "",
                     nomSector = ""
-            ***REMOVED***;
-        ***REMOVED***
+                };
+            }
             else
             {
                 objReturn.EncabezadoSector = enc_aux;
-        ***REMOVED***
+            }
             #endregion
 
             #region TODOSPROYECTOS
@@ -64,9 +64,9 @@ namespace PlataformaTransparencia.Negocios.Sectores
 
             ////consultar si es municipio o departamento
             FiltroBusquedaProyecto filtro_busqueda = new();
-            List<string> codigo_filtro = new() { sector_id.Trim().ToUpper() ***REMOVED***;
+            List<string> codigo_filtro = new() { sector_id.Trim().ToUpper() };
             List< Modelos.Comunes.Departamento > lstDepartamentos = ConsultasComunes.ObtenerDepartamentosPorSectores(codigo_filtro);
-            lstDepartamentos.Add(new Modelos.Comunes.Departamento { IdDepartamento = "0", NombreDepartamento = "Proyectos Nacionales" ***REMOVED***);
+            lstDepartamentos.Add(new Modelos.Comunes.Departamento { IdDepartamento = "0", NombreDepartamento = "Proyectos Nacionales" });
 
             #region PROYXSECTOR
             objReturn.ProjectsPerSectorGroup = ObtenerProyectosPorDepartamentoDadoSector(sector_id, lstDepartamentos);
@@ -78,7 +78,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
             if (!string.IsNullOrEmpty(key_estado_proy))
             {
                 codigo_estado.Add(int.Parse(key_estado_proy));
-        ***REMOVED***
+            }
             filtro_busqueda.CodigosEstado = codigo_estado;
 
             lstProyectosAprobados = _consultasComunes.ObtenerProyectosConsistentesPorSectores(codigo_filtro, filtro_busqueda, 999);
@@ -88,7 +88,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
             objReturn.Datossectores = ObtenerTopSectores();
             objReturn.Status = true;
             return objReturn;
-    ***REMOVED***
+        }
 
         private InfoLocationSectorGen ObtenerInfoLocationSectores(string sector_id)
         {
@@ -103,11 +103,11 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                  Costo = Math.Round((decimal)perfilSector.ValorProyectosTotal, 2),
                                  Duracion = Math.Round((decimal)perfilSector.DuracionPromedioProyectos, 2),
                                  CantProyectos = Math.Round((decimal)perfilSector.NumeroProyectos, 2),
-                         ***REMOVED***).ToList();
+                             }).ToList();
             //objReturn = queryInfo;
 
             return objReturn.FirstOrDefault();
-    ***REMOVED***
+        }
 
         private List<InfoProjectsPerEstado> ObtenerProyectosEstadoPorSector(string sector_id)
         {
@@ -120,7 +120,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                      {
                                          estado.NombreEstado,
                                          proyecto.IdProyecto
-                                 ***REMOVED***).ToList();
+                                     }).ToList();
             if (datosEstadoSector.Any())
             {
                 var ProjectsPerEstadoQuery = (from estado in datosEstadoSector
@@ -131,11 +131,11 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                                   label = g.Key,
                                                   rawValue = g.Count(),
                                                   value = g.Count().ToString()
-                                          ***REMOVED***);
+                                              });
                 objReturn = ProjectsPerEstadoQuery.ToList();
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
         private List<PlataformaTransparencia.Modelos.Comunes.Departamento> ObtenerDepartamentosPorSectores(List<string> codigosSector)
         {
             if (codigosSector == null) codigosSector = new();
@@ -145,9 +145,9 @@ namespace PlataformaTransparencia.Negocios.Sectores
                          {
                              IdDepartamento = ente.IdDepartamento,
                              NombreDepartamento = ente.NombreDepartamento
-                     ***REMOVED***).Distinct().ToList();
+                         }).Distinct().ToList();
             return new List<PlataformaTransparencia.Modelos.Comunes.Departamento>(entes);
-    ***REMOVED***
+        }
 
         public List<InfoProjectPerSector> ObtenerProyectosPorDepartamentoDadoSector(string sectorId, List<PlataformaTransparencia.Modelos.Comunes.Departamento> lstDepartamentos)
         {
@@ -162,7 +162,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                               vistaSectorEnte.IdDepartamento,
                                               estado.NombreEstado,
                                               vistaSectorEnte.IdProyecto
-                                      ***REMOVED***).ToArray();
+                                          }).ToArray();
             var proyectosXEstadoNombreDpto = (from proyEstadoIdDpto in proyectosXEstadoIdDpto
                                               join dpto in lstDepartamentos on proyEstadoIdDpto.IdDepartamento equals dpto.IdDepartamento
                                               select new
@@ -171,9 +171,9 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                                   proyEstadoIdDpto.NombreEstado,
                                                   proyEstadoIdDpto.IdProyecto,
                                                   dpto.IdDepartamento,
-                                          ***REMOVED***).ToArray();
+                                              }).ToArray();
             var numProyectosXEstadoNombreDpto = (from proyEstadoNombreDpto in proyectosXEstadoNombreDpto
-                                                 group proyEstadoNombreDpto by new { proyEstadoNombreDpto.NombreDepartamento, proyEstadoNombreDpto.IdDepartamento, proyEstadoNombreDpto.NombreEstado ***REMOVED*** into g
+                                                 group proyEstadoNombreDpto by new { proyEstadoNombreDpto.NombreDepartamento, proyEstadoNombreDpto.IdDepartamento, proyEstadoNombreDpto.NombreEstado } into g
                                                  select new InfoProjectPerSector
                                                  {
                                                      label = g.Key.NombreEstado,
@@ -181,7 +181,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                                      rawValue = g.Count(),
                                                      value = g.Count().ToString(),
                                                      alias = g.Key.IdDepartamento
-                                             ***REMOVED***).ToArray();
+                                                 }).ToArray();
             #endregion Obtener los proyectos por Departamento (Ente territorial)
             #region Obtener los proyectos que no pertenecen a un ente territorial (Nacionales)
 
@@ -197,14 +197,14 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                         {
                                             proyecto.IdProyecto,
                                             estado.NombreEstado
-                                    ***REMOVED***).Distinct().ToArray();
+                                        }).Distinct().ToArray();
 
             List<InfoProjectPerSector> proyectosSinEnteTerritorial = new List<InfoProjectPerSector>();
             for (int j = 0; j < todosProyectosSector.Length; j++)
             {
                 if (!proyectosSectorConEnteTerritorial.Contains(todosProyectosSector[j].IdProyecto))
-                    proyectosSinEnteTerritorial.Add(new InfoProjectPerSector { label = todosProyectosSector[j].NombreEstado, rawValue = todosProyectosSector[j].IdProyecto ***REMOVED***);
-        ***REMOVED***
+                    proyectosSinEnteTerritorial.Add(new InfoProjectPerSector { label = todosProyectosSector[j].NombreEstado, rawValue = todosProyectosSector[j].IdProyecto });
+            }
             var numProyectosNacionalesXEstado = (from proyNac in proyectosSinEnteTerritorial
                                                  group proyNac by proyNac.label into g
                                                  select new InfoProjectPerSector
@@ -213,7 +213,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                                      label = g.Key,
                                                      rawValue = g.Count(),
                                                      value = g.Count().ToString()
-                                             ***REMOVED***).ToArray();
+                                                 }).ToArray();
 
             #endregion Obtener los proyectos que no pertenecen a un ente territorial (Nacionales)
             #region Agrego los datos de las dos consultas en una variable temporal
@@ -222,32 +222,32 @@ namespace PlataformaTransparencia.Negocios.Sectores
             #endregion Agrego los datos de las dos consultas en una variable temporal
             objReturn = objReturnTemp.OrderByDescending(o => o.rawValue).ToList();
             return objReturn;
-    ***REMOVED***
+        }
 
         public ModelLocationData ObtenerProyectosAnioEstado(string sector_id, string departamento_id, string? anio, string? id_estado)
         {
-            ModelLocationData objReturn = new() { ProyectosAprobados= new() ***REMOVED***;
+            ModelLocationData objReturn = new() { ProyectosAprobados= new() };
             if (string.IsNullOrEmpty(sector_id)) return objReturn;
             objReturn.location_id = sector_id;
-            List<string> codigo_filtro = new() { sector_id.Trim().ToUpper() ***REMOVED***;
+            List<string> codigo_filtro = new() { sector_id.Trim().ToUpper() };
             int year = int.MinValue;
             anio??=string.Empty;
             if (int.TryParse(anio, out year))
             {
                 List<Modelos.Comunes.Departamento> lstDepartamentos = ConsultasComunes.ObtenerDepartamentosPorSectores(codigo_filtro);
-                lstDepartamentos.Add(new Modelos.Comunes.Departamento { IdDepartamento = "0", NombreDepartamento = "Proyectos Nacionales" ***REMOVED***);
+                lstDepartamentos.Add(new Modelos.Comunes.Departamento { IdDepartamento = "0", NombreDepartamento = "Proyectos Nacionales" });
 
 
                 var RecursosPerObjetoQuery = (from info in DataModel.VwPresupuestoXProyInvs
                                               where info.Periodo.ToString().Contains(anio)
-                                              group info by new { info.IdProyecto, info.Nombreproyecto***REMOVED*** into g
+                                              group info by new { info.IdProyecto, info.Nombreproyecto} into g
                                               select new itemGenPresupuesto
                                               {
 
                                                   id = g.Key.IdProyecto.ToString(),
                                                   ejecutado = g.Sum(x => x.ValorEjecutado.Value) 
 
-                                          ***REMOVED***);
+                                              });
  
 
 
@@ -268,7 +268,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                                   ejecutado.ejecutado,
                                                   CodigoSnip = proyecto.CodigoBPIN,
                                                   vistaSectorEnte.IdDepartamento
-                                          ***REMOVED***);
+                                              });
 
                 var proyectosXEstadoIdDpto = (from vistaSectorEnte in DataModel.VwSectorListadoPorDeptoInvs
                                               join estado in DataModel.Estados on vistaSectorEnte.IdEstado equals estado.IdEstado
@@ -286,7 +286,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                                   ejecutado.ejecutado,
                                                   CodigoSnip = proyecto.CodigoBPIN,
                                                   vistaSectorEnte.IdDepartamento
-                                          ***REMOVED***).ToList();
+                                              }).ToList();
                 var proyectosXEstadoNombreDpto = (from proyecto in proyectosXEstadoIdDpto
                                                   join dpto in lstDepartamentos on proyecto.IdDepartamento equals dpto.IdDepartamento
                                                   where proyecto.IdDepartamento== departamento_id || proyecto.IdDepartamento=="0"
@@ -299,13 +299,13 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                                       CodigoSnip = proyecto.CodigoSnip,
                                                       IdDepartamento = dpto.IdDepartamento,
                                                       NombreDepartamento = dpto.NombreDepartamento,
-                                              ***REMOVED***).ToList();
+                                                  }).ToList();
                 if (proyectosXEstadoNombreDpto != null && proyectosXEstadoNombreDpto.Count > 1) proyectosXEstadoNombreDpto = proyectosXEstadoNombreDpto.DistinctBy(x => x.IdProyecto).ToList();
                 if(proyectosXEstadoNombreDpto!=null && proyectosXEstadoNombreDpto.Count>1) proyectosXEstadoNombreDpto= proyectosXEstadoNombreDpto.OrderByDescending(x=>x.VlrTotalProyectoFuenteRegalias).ToList();
                 objReturn.ProyectosAprobados = proyectosXEstadoNombreDpto;
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
         private List<InfoLocationSectorGen> ObtenerTopSectores()
         {
             List<InfoLocationSectorGen> objReturn = (from perfilSector in DataModel.VwInformacionGeneralPerfilSectors
@@ -319,9 +319,9 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                                          Duracion = Math.Round((decimal)perfilSector.DuracionPromedioProyectos, 2),
                                                          CantProyectos = Math.Round((decimal)perfilSector.NumeroProyectos, 2),
                                                          UrlImgXL = img.ImgSector
-                                                 ***REMOVED***).OrderByDescending(p => p.CantProyectos).Take(4).ToList();
+                                                     }).OrderByDescending(p => p.CantProyectos).Take(4).ToList();
             return objReturn;
-    ***REMOVED***
+        }
 
         public ModelLocationData ObtenerProyectosAnios(string sector_id, string departamento_id)
         {
@@ -330,7 +330,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
             objReturn.location_id = sector_id;
 
             string[]? deptoid = null;
-            if (departamento_id is not null) { deptoid = departamento_id.Split(","); ***REMOVED***
+            if (departamento_id is not null) { deptoid = departamento_id.Split(","); }
 
             List<string> anios = (from vistaSectorEnte in DataModel.VwSectorListadoPorDeptoInvs
                                   //join estado in DataModel.Estados on vistaSectorEnte.IdEstado equals estado.IdEstado
@@ -343,7 +343,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
             if (anios != null && anios.Count > 1) anios = anios.OrderBy(x => x).ToList();
             objReturn.Anios = anios;
             return objReturn;
-    ***REMOVED***
+        }
 
         public ModelLocationData ObtenerProyectosAniosPerfilSector(string sector_id, string departamento_id)
         {
@@ -360,7 +360,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
             if (anios != null && anios.Count > 1) anios = anios.OrderBy(x => x).ToList();
             objReturn.Anios = anios;
             return objReturn;
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

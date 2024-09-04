@@ -6,10 +6,10 @@ namespace PlataformaTransparencia.Negocios.Interfaces
 {
     public interface IGeneradorDatosProximidad
     {
-        int TotalCantidadProyectos { get; set; ***REMOVED***
-        decimal TotalValorRegalias { get; set; ***REMOVED***
-        decimal TotalValorTodasLasFuentes { get; set; ***REMOVED***
+        int TotalCantidadProyectos { get; set; }
+        decimal TotalValorRegalias { get; set; }
+        decimal TotalValorTodasLasFuentes { get; set; }
 
         List<objectProjectsSearchMap> ObtenerPinesDeProyectos(int zoom, List<decimal> topLeft, List<decimal> bottomRight, List<InfoProyectos> infoProyectos, FiltroBusquedaProyecto filtro);
-***REMOVED***
-***REMOVED***
+    }
+}

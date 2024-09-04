@@ -8,22 +8,22 @@ namespace PlataformaTransparencia.Modelos.Proyectos
     public class Proyecto
     {
         [SolrUniqueKey("id")]
-        public int Id { get; set; ***REMOVED***
+        public int Id { get; set; }
         [SolrField("CodigoBPIN")]
-        public List<string> CodigoBPIN { get; set; ***REMOVED***
+        public List<string> CodigoBPIN { get; set; }
         [SolrField("NombreProyecto")]
-        public string NombreProyecto { get; set; ***REMOVED***
+        public string NombreProyecto { get; set; }
         [SolrField("FechaInicioProyecto")]
-        public DateTime FechaInicioProyecto { get; set; ***REMOVED***
+        public DateTime FechaInicioProyecto { get; set; }
         [SolrField("FechaFinProyecto")]
-        public DateTime FechaFinProyecto { get; set; ***REMOVED***
+        public DateTime FechaFinProyecto { get; set; }
         [SolrField("ObjetivoGeneral")]
-        public string ObjetivoGeneral { get; set; ***REMOVED***
+        public string ObjetivoGeneral { get; set; }
         [SolrField("IdSector")]
-        public int IdSector { get; set; ***REMOVED***
+        public int IdSector { get; set; }
         [SolrField("Sector")]
-        public string Sector { get; set; ***REMOVED***
+        public string Sector { get; set; }
         [SolrField("TipoDeProyecto")]
-        public string TipoDeProyecto { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string TipoDeProyecto { get; set; }
+    }
+}

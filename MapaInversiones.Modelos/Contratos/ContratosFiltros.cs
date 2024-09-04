@@ -6,25 +6,25 @@ namespace PlataformaTransparencia.Modelos.Contratos
 {
     public class ContratosFiltros
     {
-        public int? Annio { get; set; ***REMOVED***
-        public string? Estado { get; set; ***REMOVED***
-        public string? Moneda { get; set; ***REMOVED***
-        public string? NombreEntidad { get; set; ***REMOVED***
-        public string? NombreProceso { get; set; ***REMOVED***
-        public int? NumeroPagina { get; set; ***REMOVED***
-        public int? RegistrosPorPagina { get; set; ***REMOVED***
+        public int? Annio { get; set; }
+        public string? Estado { get; set; }
+        public string? Moneda { get; set; }
+        public string? NombreEntidad { get; set; }
+        public string? NombreProceso { get; set; }
+        public int? NumeroPagina { get; set; }
+        public int? RegistrosPorPagina { get; set; }
         
-        public string CodigoProveedor { get; set; ***REMOVED***
-        public string CodigoComprador{ get; set; ***REMOVED***
-        public string NombreContratista { get; set; ***REMOVED***
+        public string CodigoProveedor { get; set; }
+        public string CodigoComprador{ get; set; }
+        public string NombreContratista { get; set; }
 
-        public string OrigenInformacion { get; set; ***REMOVED***
+        public string OrigenInformacion { get; set; }
 
-        public string? CodigoContrato { get; set; ***REMOVED***
+        public string? CodigoContrato { get; set; }
 
-        public string? CodigoProceso { get; set; ***REMOVED***
+        public string? CodigoProceso { get; set; }
 
-        public string? IdProyecto { get; set; ***REMOVED***
+        public string? IdProyecto { get; set; }
 
-***REMOVED***
-***REMOVED***
+    }
+}

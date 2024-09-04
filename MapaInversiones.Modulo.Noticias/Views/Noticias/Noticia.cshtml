@@ -4,7 +4,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var blogPost = await Orchard.GetContentItemByIdAsync(Model.Id);
-***REMOVED***
+}
 <!--MAIN BANNER-->
 <section class="banner-main-asc">
 
@@ -53,12 +53,12 @@
                             {
                                 imgpath = @blogPost.Content.BlogPost.BannerImage.Paths[0];
                                 <img class="img-fluid-news" src=@Orchard.AssetUrl((string)imgpath) alt="...">
-                        ***REMOVED***
+                            }
                             else
                             {
                                 <img class="img-fluid-news" src=@imgpath alt="...">
-                        ***REMOVED***
-                    ***REMOVED***
+                            }
+                        }
 
                     </div>
                     <div class="row justify-content-center" style="text-align:justify">

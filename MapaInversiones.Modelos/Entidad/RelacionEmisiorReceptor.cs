@@ -6,7 +6,7 @@ namespace PlataformaTransparencia.Modelos.Entidad
 {
   public class RelacionEmisiorReceptor
   {
-    public string Emisor { get; set; ***REMOVED***
-    public string Receptor { get; set; ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+    public string Emisor { get; set; }
+    public string Receptor { get; set; }
+  }
+}

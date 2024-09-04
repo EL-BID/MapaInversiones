@@ -2,22 +2,22 @@
 @inject OrchardCore.IOrchardHelper Orchard
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+}
 @{
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
     var LabelSector = "";
     var TituloSector = "";
     System.IFormatProvider culture =
         new System.Globalization.CultureInfo("es-RD");
-***REMOVED***
+}
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
     if (@etiqueta.AliasPart.Alias == "Sector")
     {
         LabelSector = @etiqueta.HtmlBodyPart.Html;
         TituloSector = @etiqueta.TitlePart.Title;
-***REMOVED***
-***REMOVED***
+    }
+}
     
     <!-- Landing Section -->
 <section id="s0" class="banner-main">
@@ -59,15 +59,15 @@
 
                 <ul class="list-inline details">
                     <li>
-                        <span class="h3 text-center">$ @String.Format("{0:n0***REMOVED***", @Model.EncabezadoSector.Costo)</span>
+                        <span class="h3 text-center">$ @String.Format("{0:n0}", @Model.EncabezadoSector.Costo)</span>
                         <span class="text-center h6">Valor total proyectos</span>
                     </li>
                     <li>
-                        <span class="h3 text-center">@String.Format("{0:n2***REMOVED***", @Model.EncabezadoSector.Duracion) Años</span>
+                        <span class="h3 text-center">@String.Format("{0:n2}", @Model.EncabezadoSector.Duracion) Años</span>
                         <span class="text-center h6">Duración promedio del proyecto</span>
                     </li>
                     <li>
-                        <span class="h3 text-center">@String.Format("{0:n0***REMOVED***", @Model.EncabezadoSector.CantProyectos)</span>
+                        <span class="h3 text-center">@String.Format("{0:n0}", @Model.EncabezadoSector.CantProyectos)</span>
                         <span class="text-center h6">Número de Proyectos</span>
                     </li>
 
@@ -110,7 +110,7 @@
         box-shadow: 0 5px 5px #e4dcdc;
         padding-top :22px;
         padding-left : 26px;
-***REMOVED***
+    }
 </style>
 <section class="s1E-section whiteBg" id="s1">
     <div class="container">
@@ -182,14 +182,14 @@
 /*PROJECT CAROUSEL*/
 .thumbnail {
     position: relative
-***REMOVED***
+}
 
 .carousel {
     margin-bottom: 0;
     /*padding: 0 40px 30px 40px;*/
     padding: 0px 25px 19px 25px;
     margin-top: 25px;
-***REMOVED***
+}
 /* The controlsy */
 .carousel-control {
     left: -12px;
@@ -201,45 +201,45 @@
     padding: 5px;
     text-align: center;
     display: inline-block;
-***REMOVED***
+}
 
 .carousel-inner {
     min-height: 250px; /*temporary style*/
-***REMOVED***
+}
 
 .carousel-control.left {
     background-image: none;
     background-color: #9D1717
-***REMOVED***
+}
 
 .carousel-control i {
     color: #fff !important;
     font-size: inherit;
     width: auto
-***REMOVED***
+}
 
 .glyphicon-menu-left:before, .glyphicon-menu-right:before {
     font-size: 50px;
-***REMOVED***
+}
 
 .carousel-control.right {
     /*right: -12px;*/ background: #9D1717
-***REMOVED***
+}
 
 .carousel-indicators {
     right: 50%;
     top: auto;
     bottom: -10px;
     margin-right: -19px;
-***REMOVED***
+}
 
     .carousel-indicators li {
-***REMOVED***
+    }
 
     .carousel-indicators .active {
-***REMOVED***
+    }
 
-.tabs{display: flex; justify-content: center***REMOVED***
+.tabs{display: flex; justify-content: center}
 .tab-link {
     font-size: 2rem;
     font-weight: 700;
@@ -250,48 +250,48 @@
     margin-right: 15px;
     border-bottom-color: #D5D5D5;
     border-bottom-width: 1px;
-***REMOVED***
+}
 .tab-link.current {
     margin-bottom: -1px;
     border-bottom-width: 2px;
     border-bottom-color: #FCFCFC !important;
-***REMOVED***
+}
 .pCancelado {
     border: 1px solid #8CC3F4;
     background-color: #F6F8F9;
     border-radius: 9px!important; margin: 15px!important;
-***REMOVED***
+}
 .table-striped {
     background-color: #fff;
     border: 1px solid #2E528D
-***REMOVED***
+}
 .table-striped thead {
     background-color: #2E528D;
     color: #fff;
     font-weight: 700;
     border-top-left-radius: 6px;
     border-bottom: 0px;
-***REMOVED***
+}
 .table-striped thead th {
     font-weight: 700!important;
-***REMOVED***
-.acciones .card{ max-width:33%***REMOVED***
+}
+.acciones .card{ max-width:33%}
 .wrap-contract-cards .card-title { display: flex; align-items:center
-***REMOVED***
+}
 
 .enlace_ficha {
     margin-top: 17px;
     display: block
-***REMOVED***
+}
 .enlace_ficha_inversiones {
     margin-top: 17px;
     display: block
-***REMOVED***
+}
 
 
 .dropdown .glyphicon {
     margin-left: 5px
-***REMOVED***
+}
 
 </style>
 <section id="s3" class="s2-section">
@@ -313,7 +313,7 @@
         </div>
             <div class="row">
                 <div class="col-12">
-                    <div id="divContenedorFichas" class="project-carusel" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true, "autoPlay": 8000 ***REMOVED***'>
+                    <div id="divContenedorFichas" class="project-carusel" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true, "autoPlay": 8000 }'>
                     </div>
                     <!--END MAQUETA BASICA PROJECTOS-->
                     <div id="divNoEncontradoEjec" class="no-search-results objHidden">No se encontraron resultados</div>
@@ -346,7 +346,7 @@
                                     </div><span class="h5"><a href="/PerfilSector?id=@sector.IdSector">@sector.nomSector</span><span class="number-proy">@sector.CantProyectos proyectos</span>
                                 </div>
                             </text>
-                    ***REMOVED***
+                        }
                     
                    
                 </div>
@@ -365,28 +365,28 @@
     data-projectsPerEstado='[@foreach (var estado in @Model.ProjectsPerEstado)
     {
         <text>
-            {"label":"@estado.label", "value": "@estado.value", "rawValue": @estado.rawValue***REMOVED***@if (estado != @Model.ProjectsPerEstado.Last())
+            {"label":"@estado.label", "value": "@estado.value", "rawValue": @estado.rawValue}@if (estado != @Model.ProjectsPerEstado.Last())
             {
                 <text>,</text>
-        ***REMOVED***
+            }
         </text>
-***REMOVED***]'
+    }]'
     data-projectsPerSectorGroup='[@foreach (var grupo_sector in @Model.ProjectsPerSectorGroup)
     {
         <text>
-            {"labelGroup": "@grupo_sector.labelGroup" , "label":"@grupo_sector.label", "value": "@grupo_sector.value", "rawValue": @grupo_sector.rawValue, "alias": "@grupo_sector.alias"***REMOVED***@if (grupo_sector != @Model.ProjectsPerSectorGroup.Last())
+            {"labelGroup": "@grupo_sector.labelGroup" , "label":"@grupo_sector.label", "value": "@grupo_sector.value", "rawValue": @grupo_sector.rawValue, "alias": "@grupo_sector.alias"}@if (grupo_sector != @Model.ProjectsPerSectorGroup.Last())
             {
                 <text>,</text>
-        ***REMOVED***
+            }
         </text>
-***REMOVED***]'
+    }]'
     data-proyectoProjectData='[@foreach (var proy in @Model.ProyectosEjecucion)
     {
         <text>
-            {"IdDepartamento":"@proy.IdDepartamento",  "IdProyecto": "@proy.IdProyecto","NombreProyecto": "@proy.NombreProyecto","cantidadFotos": @proy.cantidadFotos, "approvedTotalMoney": "@proy.approvedTotalMoney.ToString("N0").Replace(",", string.Empty)","NombreMunicipio" : "@proy.NombreMunicipio" , "UrlImagen" : "@proy.UrlImagen" , "MesInicioProyecto" : "@proy.MesInicioProyecto" , "AnioInicioProyecto" : "@proy.AnioInicioProyecto" , "MesFinProyecto" : "@proy.MesFinProyecto" , "AnioFinProyecto" : "@proy.AnioFinProyecto" , "NombreSector": "@proy.NombreSector", "IdSector": "@proy.IdSector","porcentajeGastado":"@proy.porcentajeGastado","Megusta":"@proy.Megusta","Comentarios":"@proy.Comentarios","FechaInicioProyecto":"@proy.FechaInicioProyecto"***REMOVED***@if (proy != @Model.ProyectosEjecucion.Last())
+            {"IdDepartamento":"@proy.IdDepartamento",  "IdProyecto": "@proy.IdProyecto","NombreProyecto": "@proy.NombreProyecto","cantidadFotos": @proy.cantidadFotos, "approvedTotalMoney": "@proy.approvedTotalMoney.ToString("N0").Replace(",", string.Empty)","NombreMunicipio" : "@proy.NombreMunicipio" , "UrlImagen" : "@proy.UrlImagen" , "MesInicioProyecto" : "@proy.MesInicioProyecto" , "AnioInicioProyecto" : "@proy.AnioInicioProyecto" , "MesFinProyecto" : "@proy.MesFinProyecto" , "AnioFinProyecto" : "@proy.AnioFinProyecto" , "NombreSector": "@proy.NombreSector", "IdSector": "@proy.IdSector","porcentajeGastado":"@proy.porcentajeGastado","Megusta":"@proy.Megusta","Comentarios":"@proy.Comentarios","FechaInicioProyecto":"@proy.FechaInicioProyecto"}@if (proy != @Model.ProyectosEjecucion.Last())
             {
                 <text>,</text>
-        ***REMOVED***
+            }
         </text>
-***REMOVED***]'
-***REMOVED***
+    }]'
+}

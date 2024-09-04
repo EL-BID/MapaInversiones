@@ -17,16 +17,16 @@ namespace PlataformaTransparencia.Modelos
         /// </summary>
         /// <remarks>Ej: Departamento con Municipio</remarks>
 
-        public List<DependsOn> dependsOn { get; set; ***REMOVED***
+        public List<DependsOn> dependsOn { get; set; }
         /// <summary>
         /// Arreglo de decimal que contiene los datos latitud y longitud
         /// de la primera coordenada
         /// </summary>
-        public List<decimal> topLeft { get; set; ***REMOVED***
+        public List<decimal> topLeft { get; set; }
         /// <summary>
         /// Arreglo de decimal que contiene los datos latitud y longitud
         /// de la segunda coordenada
         /// </summary>
-        public List<decimal> bottomRight { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public List<decimal> bottomRight { get; set; }
+    }
+}

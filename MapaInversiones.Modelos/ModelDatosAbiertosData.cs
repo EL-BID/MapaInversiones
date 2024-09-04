@@ -8,6 +8,6 @@ namespace PlataformaTransparencia.Modelos
 {
     public class ModelDatosAbiertosData : RespuestaContratoBase
     {
-        public List<infoFuentesRecursos> FuentesRecursos { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public List<infoFuentesRecursos> FuentesRecursos { get; set; }
+    }
+}

@@ -9,5 +9,5 @@ namespace PlataformaTransparencia.Negocios.Interfaces
   {
     List<ObjetivosGeneralPorEjeEstrategico> ObtenerObjetivosPorEjeEstrategico(int idEjeEstrategico);
     List<InfoEntidad> ObtenerEntidadesPlanNacionalNoAlcaldias();
-  ***REMOVED***
-***REMOVED***
+  }
+}

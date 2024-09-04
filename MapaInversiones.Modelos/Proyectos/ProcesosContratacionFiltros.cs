@@ -6,11 +6,11 @@ namespace PlataformaTransparencia.Modelos.Proyectos
 {
     public class ProcesosContratacionFiltros
     {
-        public int Annio { get; set; ***REMOVED*** // int
-        public int Semestre { get; set; ***REMOVED*** // int
-        public int IdProyecto { get; set; ***REMOVED*** // int
-        public int? NumeroPagina { get; set; ***REMOVED***
-        public int? RegistrosPorPagina { get; set; ***REMOVED***
-        public string? NombreProceso { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public int Annio { get; set; } // int
+        public int Semestre { get; set; } // int
+        public int IdProyecto { get; set; } // int
+        public int? NumeroPagina { get; set; }
+        public int? RegistrosPorPagina { get; set; }
+        public string? NombreProceso { get; set; }
+    }
+}

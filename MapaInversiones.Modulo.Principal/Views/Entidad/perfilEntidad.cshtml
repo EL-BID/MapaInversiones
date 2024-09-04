@@ -3,7 +3,7 @@
 @inject OrchardCore.IOrchardHelper Orchard
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+}
 
 @{
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
@@ -13,26 +13,26 @@
     var TituloContratosFirmadosEntidadEntidad = "";
     var LabelDistPresupuesto = "";
     var TituloDistPresupuesto = "";
-***REMOVED***
+}
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
     if (@etiqueta.AliasPart.Alias == "DistribucionPresupuestalEntidad")
     {
         LabelDistribucionPresupuestalEntidad = @etiqueta.HtmlBodyPart.Html;
         TituloDistribucionPresupuestalEntidad = @etiqueta.TitlePart.Title;
-***REMOVED***
+    }
 
     if (@etiqueta.AliasPart.Alias == "LabelContratosFirmadosEntidad")
     {
         LabelContratosFirmadosEntidad = @etiqueta.HtmlBodyPart.Html;
         TituloContratosFirmadosEntidadEntidad = @etiqueta.TitlePart.Title;
-***REMOVED***
+    }
     if (@etiqueta.AliasPart.Alias == "DistribucionPresupuestoEntidadPerGasto")
     {
         LabelDistPresupuesto = @etiqueta.HtmlBodyPart.Html;
         TituloDistPresupuesto = @etiqueta.TitlePart.Title;
-***REMOVED***
-***REMOVED***
+    }
+}
 <head>
     <style>
 
@@ -40,32 +40,32 @@
             cursor: move;
             fill-opacity: .8;
             shape-rendering: crispEdges;
-    ***REMOVED***
+        }
 
         .node text {
             pointer-events: none;
             /*text-shadow: 0 1px 0 #fff;*/
-    ***REMOVED***
+        }
 
         .link {
             fill: none;
             stroke: #000;
             stroke-opacity: .1;
-    ***REMOVED***
+        }
 
             .link:hover {
                 stroke-opacity: .2;
-        ***REMOVED***
+            }
 
         .arc text {
             font: 12px sans-serif;
             text-anchor: middle;
             font-weight: bold;
-    ***REMOVED***
+        }
 
         .arc path {
             stroke: #fff;
-    ***REMOVED***
+        }
 
         .toolTip {
             position: absolute;
@@ -80,7 +80,7 @@
             font: 12px sans-serif;
             padding: 5px;
             text-align: center;
-    ***REMOVED***
+        }
     </style>
 </head>
 <body>
@@ -169,8 +169,8 @@
                                     <text>
                                     <option value="@item">@item</option>
                                     </text>
-                            ***REMOVED***
-                        ***REMOVED***
+                                }
+                            }
                         </select>
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                         <div class="card-body">
                             <div class="wrap-desc-entidad">
                                 <div class="h5">Presupuesto Vigente</div>
-                                <div class="h1" id="PresupuestoVigente">$ @String.Format("{0:n2***REMOVED***", (@Model.PresupuestoVigenteAnnioDisplay / 1000000)) millones </div>
+                                <div class="h1" id="PresupuestoVigente">$ @String.Format("{0:n2}", (@Model.PresupuestoVigenteAnnioDisplay / 1000000)) millones </div>
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
                         <div class="card-body">
                             <div class="wrap-desc-entidad">
                                 <div class="h5">Presupuesto Ejecutado</div>
-                                <div class="h1" id="PresupuestoEjecutado">$ @String.Format("{0:n2***REMOVED***", (@Model.PresupuestoEjecutadoAnnioDisplay / 1000000)) millones</div>
+                                <div class="h1" id="PresupuestoEjecutado">$ @String.Format("{0:n2}", (@Model.PresupuestoEjecutadoAnnioDisplay / 1000000)) millones</div>
                             </div>
                         </div>
                     </div>
@@ -201,7 +201,7 @@
                         <div class="card-body">
                             <div class="wrap-desc-entidad">
                                 <div class="h5">% Ejecutado</div>
-                                <div class="h1" id="PorcEjecutado">@String.Format("{0:n2***REMOVED***", (@Model.PorcEjecutadoAnnioDisplay))  %</div>
+                                <div class="h1" id="PorcEjecutado">@String.Format("{0:n2}", (@Model.PorcEjecutadoAnnioDisplay))  %</div>
                             </div>
                         </div>
                     </div>
@@ -403,7 +403,7 @@
 
     <script>
 
-        window.onscroll = function () { myFunction() ***REMOVED***;
+        window.onscroll = function () { myFunction() };
 
         var header = document.getElementById("navs-header");
         var sticky = header.offsetTop;
@@ -412,34 +412,34 @@
             if (window.pageYOffset > sticky) {
                 header.classList.add("sticky");
                 header.classList.add("bg-white");
-        ***REMOVED*** else {
+            } else {
                 header.classList.remove("sticky");
                 header.classList.remove("bg-white");
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
     </script>
     <style>
         body {
             font-family: "Arial", sans-serif;
-    ***REMOVED***
+        }
 
         .bar {
             fill: #5f89ad;
-    ***REMOVED***
+        }
 
         .axis {
             font-size: 13px;
-    ***REMOVED***
+        }
 
             .axis path,
             .axis line {
                 fill: none;
                 display: none;
-        ***REMOVED***
+            }
 
         .label {
             font-size: 13px;
-    ***REMOVED***
+        }
     </style>
 </body>
 

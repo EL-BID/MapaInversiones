@@ -7,8 +7,8 @@ namespace PlataformaTransparencia.Modelos
 {
   public class ModelPlanData : RespuestaContratoBase
   {
-    public List<PlanNacionalEjeObjetivos> ObjetivosEjesEstrategicos { get; set; ***REMOVED***
-    public List<EjeEstrategico> EjesEstrategicos { get; set; ***REMOVED***
-    public List<ObjetivosGeneralPorEjeEstrategico> ObjetivosPorEjeEstrategico { get; set; ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+    public List<PlanNacionalEjeObjetivos> ObjetivosEjesEstrategicos { get; set; }
+    public List<EjeEstrategico> EjesEstrategicos { get; set; }
+    public List<ObjetivosGeneralPorEjeEstrategico> ObjetivosPorEjeEstrategico { get; set; }
+  }
+}

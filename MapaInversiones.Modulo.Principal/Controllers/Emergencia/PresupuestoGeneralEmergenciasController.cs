@@ -26,22 +26,22 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
             _logger = logger;
             _connection = connection;
             _cargaemergencia = cargaemergencia;
-    ***REMOVED***
+        }
 
         public IActionResult Index()
         {
             return View();
-    ***REMOVED***
+        }
 
         public ActionResult PresupuestoGeneralEmergencia()
         {
             ModelPresupuestoGeneralEmergenciaData Data = new ModelPresupuestoGeneralEmergenciaData();
             Data = _cargaemergencia.ObtenerDatosPresupuestoGeneralEmergencias();
             return View("../Emergencias/PresupuestoGeneralEmergencia", Data);
-    ***REMOVED***
+        }
 
       
 
-***REMOVED***
+    }
 
-***REMOVED***
+}

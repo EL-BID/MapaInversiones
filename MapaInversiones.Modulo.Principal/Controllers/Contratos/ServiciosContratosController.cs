@@ -23,7 +23,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
             _logger = logger;
             _connection = connection;
 
-    ***REMOVED***
+        }
 
         [HttpGet("GetAnniosContratos")]
         public ModelContratosAnios GetAnniosContratos(string Moneda, string? NombreProceso)
@@ -36,14 +36,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                 objReturn = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("GetAnniosContratistas")]
         public ModelContratosAnios GetAnniosContratistas(string Contratista)
@@ -56,14 +56,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                 objReturn = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("Contrato")]
         public ModelContratosData Contrato(int Annio, int NumeroPagina, int RegistrosPorPagina, string NombreEntidad, string NombreProceso, string Estado, string Moneda, string NombreContratista, string CodigoProveedor, string OrigenInformacion, string CodigoComprador, string CodigoContrato)
@@ -91,14 +91,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                 objReturn = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.InnerException;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("Contratista")]
         public ModelContratosData Contratista(int Annio, int NumeroPagina, int RegistrosPorPagina, string NombreEntidad, string NombreProceso, string Estado, string Moneda, string NombreContratista, string CodigoProveedor, string OrigenInformacion)
@@ -124,14 +124,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                 objReturn = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.InnerException;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("DataContratosAnios")]
         public ModelContratosData DataContratosAnios(string Contratista)
@@ -146,14 +146,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                 objReturn.ContratosPerAnyo = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.InnerException;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("DataValorContratosAnios")]
         public ModelContratosData DataValorContratosAnios(string Contratista)
@@ -169,14 +169,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                 objReturn.ContratosPerAnyo = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.InnerException;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
 
@@ -194,16 +194,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                 objReturn.ContratosPerAnyo = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.InnerException;
                 return objReturn;
-        ***REMOVED***
+            }
 
 
-    ***REMOVED***
+        }
 
 
 
@@ -220,16 +220,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                 objReturn.Consolidados = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.InnerException;
                 return objReturn;
-        ***REMOVED***
+            }
 
 
-    ***REMOVED***
+        }
 
 
         [HttpGet("GetArticulosContrato")]
@@ -243,16 +243,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                 objReturn = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.InnerException;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}
  
 

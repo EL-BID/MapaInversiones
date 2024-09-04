@@ -30,9 +30,9 @@ namespace PlataformaTransparencia.Modelos.Comunes
                     if ((!string.IsNullOrEmpty(vecCorreos[i].ToString().Trim()))) {
                         if ((valMail(vecCorreos[i].ToString().Trim()))) {
                             mMailMessage.To.Add(new MailAddress(vecCorreos[i].ToString().Trim()));
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
+                        }
+                    }
+                }
 
 
                 mMailMessage.Subject = asunto;
@@ -43,11 +43,11 @@ namespace PlataformaTransparencia.Modelos.Comunes
                 if ((!string.IsNullOrEmpty(adj1))) {
                     Attachment oAttch = new Attachment(adj1, "application/pdf");
                     mMailMessage.Attachments.Add(oAttch);
-            ***REMOVED***
+                }
                 if ((!string.IsNullOrEmpty(adj2))) {
                     Attachment oAttch2 = new Attachment(adj2, "application/pdf");
                     mMailMessage.Attachments.Add(oAttch2);
-            ***REMOVED***
+                }
 
 
                 
@@ -66,53 +66,53 @@ namespace PlataformaTransparencia.Modelos.Comunes
 
                 mSmtpClient.EnableSsl = true;
                 mSmtpClient.Credentials = new System.Net.NetworkCredential(username, password);
-                ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; ***REMOVED***;
+                ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
                 mSmtpClient.Send(mMailMessage);
 
                 msgerrr = "";
-        ***REMOVED***
+            }
             catch (Exception ex) {
                 msgerrr = "No se envío los adjuntos a los correos " + corrEnv + " <br/>" + ex.Message;
                 //insertar log de errores
-        ***REMOVED***
+            }
             finally {
                 mMailMessage.Dispose();
-        ***REMOVED***
+            }
 
             try {
                 if ((!string.IsNullOrEmpty(adj1) & ConfirmDelete)) {
                     FileInfo fileA = new FileInfo(adj1);
                     fileA.Delete();
-            ***REMOVED***
+                }
                 if ((!string.IsNullOrEmpty(adj2) & ConfirmDelete)) {
                     FileInfo fileB = new FileInfo(adj2);
                     fileB.Delete();
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             catch (Exception ex) {
                 //Log de errores
                 msgerrr = ex.InnerException.ToString();
-        ***REMOVED***
+            }
             finally {
                 objReturn.Message = msgerrr;
                 if (!string.IsNullOrEmpty(msgerrr)) {
                     objReturn.Status = false;
-            ***REMOVED***
+                }
                 else {
                     objReturn.Status = true;
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             return objReturn;
 
 
-    ***REMOVED***
+        }
 
         public static bool valMail(string sMail)
         {
             // retorna true o false   
             return Regex.IsMatch(sMail, "^([\\w-]+\\.)*?[\\w-]+@[\\w-]+\\.([\\w-]+\\.)*?[\\w]+$");
 
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

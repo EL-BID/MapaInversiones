@@ -6,20 +6,20 @@ define(function (require) {
         var ultimoEspacio = -1;
         if (texto.length < numMaxCaract) {
             textoCortado = texto;
-    ***REMOVED*** else {
+        } else {
             textoCortado = texto.substr(0, numMaxCaract);
             ultimoEspacio = texto.lastIndexOf(" ");
 
             if (ultimoEspacio > -1) {
                 textoCortado = textoCortado.substr(0, ultimoEspacio);
                 textoCortado += '...';
-        ***REMOVED*** else {
+            } else {
                 textoCortado += '...';
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         return textoCortado;
-***REMOVED***
+    }
     function loadFichaUnica(resultados, div_contenedor, div_padre, func_fin) {
         if ($("#" + div_padre).length > 0) {
             var aux_div_col = d3.select("#" + div_contenedor)
@@ -37,7 +37,7 @@ define(function (require) {
             var aux_div_proy_celda_int = aux_div_proy_celda.append("div")
                 .attr("class", "amount")
             aux_div_proy_celda_int.append("span")
-                //.attr("class", "bigNumber").text("TT" + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits:0 ***REMOVED***).format(resultados.approvedTotalMoney))
+                //.attr("class", "bigNumber").text("TT" + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits:0 }).format(resultados.approvedTotalMoney))
                 .attr("class", "bigNumber").text("TT$ " + convertirMillones(resultados.approvedTotalMoney) + " Million")
             aux_div_proy_celda.append("a")
                 //.attr("href", "")
@@ -86,11 +86,11 @@ define(function (require) {
             var aux_a5 = aux_a4.append("img").attr("src", "../content/img/icons/IconPictureC.svg").html('&nbsp;')
             aux_a4.append("text").text("Photos")
             aux_a4.append("span").attr("class", "badge pull-right").text(resultados.cantidadFotos)
-    ***REMOVED***
+        }
         if (jQuery.isFunction(func_fin)) {
             func_fin();
-    ***REMOVED***
-***REMOVED***
+        }
+    }
     function loadFichaUnicaSector(resultados, div_contenedor, div_padre, func_fin) {
         if ($("#" + div_padre).length > 0) {
             var aux_div_col = d3.select("#" + div_contenedor)
@@ -108,7 +108,7 @@ define(function (require) {
             var aux_div_proy_celda_int = aux_div_proy_celda.append("div")
                 .attr("class", "amount")
             aux_div_proy_celda_int.append("span")
-                //.attr("class", "bigNumber").text("TT" + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 ***REMOVED***).format(resultados.approvedTotalMoney)) //separar_miles(convertirMillones(resultados.approvedTotalMoney))
+                //.attr("class", "bigNumber").text("TT" + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(resultados.approvedTotalMoney)) //separar_miles(convertirMillones(resultados.approvedTotalMoney))
                 .attr("class", "bigNumber").text("TT$ " + convertirMillones(resultados.approvedTotalMoney) + " Million")
             aux_div_proy_celda.append("a")
                 //.attr("href", "")
@@ -158,11 +158,11 @@ define(function (require) {
             var aux_a5 = aux_a4.append("img").attr("src", "../content/img/icons/IconPictureC.svg").html('&nbsp;')
             aux_a4.append("text").text("Photos")
             aux_a4.append("span").attr("class", "badge pull-right").text(resultados.cantidadFotos)
-    ***REMOVED***
+        }
         if (jQuery.isFunction(func_fin)) {
             func_fin();
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
 
     function loadFicha(resultados, div_contenedor, div_padre, func_fin) {
@@ -171,24 +171,24 @@ define(function (require) {
         if ($("#" + div_padre).length > 0) {
             if ($("#" + div_contenedor).length > 0) {
                 var div_aux_fila = d3.select("#" + div_contenedor)
-        ***REMOVED*** else {
+            } else {
                 var div_aux_fila = d3.select("#" + div_padre).append("div")
                     .attr("class", "flexContainer")
                     .attr("id", div_contenedor.toString())
-        ***REMOVED***
+            }
             for (var i = 0; i < contador; i++) {
                 var nom_ficha = "ficha_" + i.toString();
                 div_aux_fila.append("div")
                     .attr("class", "flex-item")
                     .attr("id", nom_ficha)
                 loadFichaUnica(resultados[i], nom_ficha, div_padre, func_fin);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         if (jQuery.isFunction(func_fin)) {
             func_fin();
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
 
     function fichaOrdenamiento(obj_div, nom_obj, etiqueta, label_filtros) {
         var div_col = d3.select("#" + obj_div.toString())
@@ -196,7 +196,7 @@ define(function (require) {
             div_col.append("label")
                 .text("Sort by")
                 .attr("class", "objHidden")
-    ***REMOVED***
+        }
 
         var afilter = div_col.append("a")
             .attr("class", "btn btn-select btn-select-light mivCustom")
@@ -218,35 +218,35 @@ define(function (require) {
                 .attr("id", nom_obj + "_fecha")
             ul_select.append("li").text("Progress")
                 .attr("id", nom_obj + "_progreso")
-    ***REMOVED*** else {
+        } else {
 
             $.each(label_filtros, function (index, value) {
                 ul_select.append("li").text(value)
                     .attr("id", nom_obj + "_" + value);
-        ***REMOVED***);
-    ***REMOVED***
+            });
+        }
 
-***REMOVED***
+    }
 
 
     function convertirMillones(num) {
         return num > 999999 ? (num / 1000000).toFixed(0) : num
 
-***REMOVED***
+    }
 
     function quitardecimal(num) {
         if (num != undefined) {
             if (isNaN(num)) {
                 var num = num.toString().split(',');
                 return num[0]
-        ***REMOVED***
+            }
             else {
                 //var num = num.toFixed(0);
                 return num;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
-***REMOVED***
+    }
 
     function separar_miles(num) {
         var num_aux = num;
@@ -254,44 +254,44 @@ define(function (require) {
             try {
                 num_aux = num.toString().replace(/\./g, '');
                 if (!isNaN(num_aux)) {
-                    num_aux = num_aux.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3***REMOVED***)/g, '$1.');
+                    num_aux = num_aux.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
                     num_aux = num_aux.split('').reverse().join('').replace(/^[\.]/, '');
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             catch (error) {
                 console.error("function separar_miles: " + error);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         return num_aux;
-***REMOVED***
+    }
 
 
 
 
     function log(message) {
         logs.push(message);
-***REMOVED***
+    }
 
     function encodeRFC5987ValueChars(str) {
         return encodeURIComponent(str).replace(/['()]/g, escape).replace(/\*/g, '%2A').replace(/%(?:7C|60|5E)/g, unescape);
-***REMOVED***
+    }
 
     //validación de correo electrónico
     function validaEmail(cadena) {
-        if (cadena.match(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3***REMOVED***)$/)) {
+        if (cadena.match(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/)) {
             return true;
-    ***REMOVED*** else {
+        } else {
             return false;
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     function validaEnteroMayorCero(cadena) {
         if (cadena.match(/^[1-9]+[0-9]*$/)) {
             return true;
-    ***REMOVED*** else {
+        } else {
             return false;
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     return {
         load_filtro_orden: fichaOrdenamiento,
@@ -305,10 +305,10 @@ define(function (require) {
         validaEnteroMayorCero: validaEnteroMayorCero,
         separar_miles: separar_miles,
         convertirMillones: convertirMillones
-***REMOVED***;
+    };
 
 
-***REMOVED***);
+});
 
 Number.prototype.formatMoney = function (c, d, t) {
     var n = this,
@@ -318,5 +318,5 @@ Number.prototype.formatMoney = function (c, d, t) {
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-***REMOVED***;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};

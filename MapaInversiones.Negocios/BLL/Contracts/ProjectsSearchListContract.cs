@@ -41,7 +41,7 @@ namespace PlataformaTransparencia.Negocios.Contracts
             this.GetAtributtes(parameters);
             _consultasComunes = consultasComunes;
             BusquedasProyectosBLL = busquedasProyectosBLL;
-    ***REMOVED***
+        }
 
         private void Inicializar()
         {
@@ -60,7 +60,7 @@ namespace PlataformaTransparencia.Negocios.Contracts
             this.filtroNombreProyecto = string.Empty;
             this.DataProjectsSearchList = new ModelDataProjectsSearchList();
             this.programa = new List<int>();
-    ***REMOVED***
+        }
 
 
 
@@ -81,29 +81,29 @@ namespace PlataformaTransparencia.Negocios.Contracts
                 {
                     ModelDataProjectsSearchList dataProjectsSearchList = this.DataProjectsSearchList;
                     dataProjectsSearchList.totalPages++;
-            ***REMOVED***
+                }
                 if (this.DataProjectsSearchList.totalNumber > CommonLabel.MaximumResultsPerPage)
                 {
                     this.DataProjectsSearchList.objects.AddRange(source.Skip<objectProjectsSearchMap>(((this.page - 1) * CommonLabel.MaximumResultsPerPage)).Take<objectProjectsSearchMap>(CommonLabel.MaximumResultsPerPage));
-            ***REMOVED***
+                }
                 else
                 {
                     this.DataProjectsSearchList.objects.AddRange(source);
-            ***REMOVED***
+                }
                 if (this.DataProjectsSearchList.objects.Count<objectProjectsSearchMap>() > 0)
                 {
                     this.DataProjectsSearchList.Status = true;
-            ***REMOVED***
+                }
 
 
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 base.Status = this.DataProjectsSearchList.Status = false;
                 LogHelper.GenerateLog(exception);
                 base.Message = this.DataProjectsSearchList.Message = "Lo sentimos, ha ocurrido un error.";
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         private void GetAtributtes(Dictionary<string, string> parameters)
         {
@@ -111,95 +111,95 @@ namespace PlataformaTransparencia.Negocios.Contracts
             {
                 if (parameters.Keys.Contains<string>("region"))
                 {
-                    this.regions = (from n in parameters["region"].Split(new char[] { ',' ***REMOVED***) select n).ToList<string>();
-            ***REMOVED***
+                    this.regions = (from n in parameters["region"].Split(new char[] { ',' }) select n).ToList<string>();
+                }
                 if (parameters.Keys.Contains<string>("department"))
                 {
-                    this.departments = (from n in parameters["department"].Split(new char[] { ',' ***REMOVED***) select n).ToList<string>();
-            ***REMOVED***
+                    this.departments = (from n in parameters["department"].Split(new char[] { ',' }) select n).ToList<string>();
+                }
                 if (parameters.Keys.Contains<string>("departamento"))
                 {
-                    this.departments = (from n in parameters["departamento"].Split(new char[] { ',' ***REMOVED***) select n).ToList<string>();
-            ***REMOVED***
+                    this.departments = (from n in parameters["departamento"].Split(new char[] { ',' }) select n).ToList<string>();
+                }
                 if (parameters.Keys.Contains<string>("municipio"))
                 {
-                    this.municipalities = (from n in parameters["municipio"].Split(new char[] { ',' ***REMOVED***) select n).ToList<string>();
-            ***REMOVED***
+                    this.municipalities = (from n in parameters["municipio"].Split(new char[] { ',' }) select n).ToList<string>();
+                }
                 if (parameters.Keys.Contains<string>("sector"))
                 {
-                    this.sectors = (from n in parameters["sector"].Split(new char[] { ',' ***REMOVED***) select int.Parse(n)).ToList<int>();
-            ***REMOVED***
+                    this.sectors = (from n in parameters["sector"].Split(new char[] { ',' }) select int.Parse(n)).ToList<int>();
+                }
                 if (parameters.Keys.Contains<string>("estado"))
                 {
-                    this.status = (from n in parameters["estado"].Split(new char[] { ',' ***REMOVED***) select int.Parse(n)).ToList<int>();
-            ***REMOVED***
+                    this.status = (from n in parameters["estado"].Split(new char[] { ',' }) select int.Parse(n)).ToList<int>();
+                }
                 if (parameters.Keys.Contains<string>("orgfinanciador"))
                 {
-                    this.orgFinanciador = (from n in parameters["orgfinanciador"].Split(new char[] { ',' ***REMOVED***) select int.Parse(n)).ToList<int>();
-            ***REMOVED***
+                    this.orgFinanciador = (from n in parameters["orgfinanciador"].Split(new char[] { ',' }) select int.Parse(n)).ToList<int>();
+                }
                 if (parameters.Keys.Contains<string>("entidadejecutora"))
                 {
-                    this.orgFinanciador = (from n in parameters["entidadejecutora"].Split(new char[] { ',' ***REMOVED***) select int.Parse(n)).ToList<int>();
-            ***REMOVED***
+                    this.orgFinanciador = (from n in parameters["entidadejecutora"].Split(new char[] { ',' }) select int.Parse(n)).ToList<int>();
+                }
                 if (parameters.Keys.Contains<string>("query"))
                 {
                     this.filtroNombreProyecto = parameters["query"];
-            ***REMOVED***
+                }
                 if (parameters.Keys.Contains<string>("zoom"))
                 {
                     this.zoom = Convert.ToInt32(parameters["zoom"]);
-            ***REMOVED***
+                }
                 else
                 {
                     this.zoom = 5;
-            ***REMOVED***
+                }
                 if (parameters.Keys.Contains<string>("topLeft"))
                 {
-                    this.topleft = (from n in parameters["topLeft"].Split(new char[] { ',' ***REMOVED***) select decimal.Parse(n, CultureInfo.InvariantCulture)).ToList<decimal>();
-            ***REMOVED***
+                    this.topleft = (from n in parameters["topLeft"].Split(new char[] { ',' }) select decimal.Parse(n, CultureInfo.InvariantCulture)).ToList<decimal>();
+                }
                 else
                 {
                     this.topleft.Add(4.5M);
                     this.topleft.Add(-79.5M);
-            ***REMOVED***
+                }
                 if (parameters.Keys.Contains<string>("bottomRight"))
                 {
-                    this.bottomrigth = (from n in parameters["bottomRight"].Split(new char[] { ',' ***REMOVED***) select decimal.Parse(n, CultureInfo.InvariantCulture)).ToList<decimal>();
-            ***REMOVED***
+                    this.bottomrigth = (from n in parameters["bottomRight"].Split(new char[] { ',' }) select decimal.Parse(n, CultureInfo.InvariantCulture)).ToList<decimal>();
+                }
                 else
                 {
                     this.bottomrigth.Add(decimal.Parse("12.5", CultureInfo.InvariantCulture));
                     this.bottomrigth.Add(decimal.Parse("-66.5", CultureInfo.InvariantCulture));
-            ***REMOVED***
+                }
                 if (parameters.Keys.Contains<string>("periods"))
                 {
-                    this.periods = (from n in parameters["periods"].Split(new char[] { ',' ***REMOVED***) select int.Parse(n, CultureInfo.InvariantCulture)).ToList<int>();
-            ***REMOVED***
+                    this.periods = (from n in parameters["periods"].Split(new char[] { ',' }) select int.Parse(n, CultureInfo.InvariantCulture)).ToList<int>();
+                }
                 if (parameters.Keys.Contains<string>("page"))
                 {
                     this.page = Convert.ToInt32(parameters["page"]);
-            ***REMOVED***
+                }
                 if (parameters.Keys.Contains<string>("programa"))
                 {
-                    this.programa = (from n in parameters["programa"].Split(new char[] { ',' ***REMOVED***) select int.Parse(n)).ToList<int>();
-            ***REMOVED***
-        ***REMOVED***
+                    this.programa = (from n in parameters["programa"].Split(new char[] { ',' }) select int.Parse(n)).ToList<int>();
+                }
+            }
             catch (Exception exception)
             {
                 base.Status = false;
                 LogHelper.GenerateLog(exception);
                 base.Message = "Lo sentimos, ha ocurrido un error.";
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         private FiltroBusquedaProyecto ObtenerFiltroPorParametros()
         {
             return new FiltroBusquedaProyecto(this.zoom, this.regions, this.departments, this.municipalities, this.sectors, this.status, this.orgFinanciador, this.entidadEjecutora, this.periods, this.filtroNombreProyecto, this.topleft, this.bottomrigth, this.programa);
-    ***REMOVED***
+        }
 
         // Properties
-        public ModelDataProjectsSearchList DataProjectsSearchList { get; set; ***REMOVED***
-***REMOVED***
+        public ModelDataProjectsSearchList DataProjectsSearchList { get; set; }
+    }
 
 
-***REMOVED***
+}

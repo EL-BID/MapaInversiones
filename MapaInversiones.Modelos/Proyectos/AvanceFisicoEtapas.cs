@@ -6,10 +6,10 @@ namespace PlataformaTransparencia.Modelos.Proyectos
 {
     public class AvanceFisicoEtapas
     {
-        public string Etapa { get; set; ***REMOVED***
-        public decimal Porcentaje { get; set; ***REMOVED***
-        public DateTime fechaInicio { get; set; ***REMOVED***
-        public DateTime fechaFin { get; set; ***REMOVED***
+        public string Etapa { get; set; }
+        public decimal Porcentaje { get; set; }
+        public DateTime fechaInicio { get; set; }
+        public DateTime fechaFin { get; set; }
 
-***REMOVED***
-***REMOVED***
+    }
+}

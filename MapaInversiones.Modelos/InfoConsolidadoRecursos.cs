@@ -4,19 +4,19 @@ namespace PlataformaTransparencia.Modelos
 {
   public class InfoConsolidadoRecursos
     {
-        public int orden { get; set; ***REMOVED***
-        public int IdItem { get; set; ***REMOVED***
-        public string NomItem { get; set; ***REMOVED***
-        public decimal total_valor { get; set; ***REMOVED***
-        public long total_beneficiarios { get; set; ***REMOVED***
-        public Boolean es_programa { get; set; ***REMOVED***
-        public Boolean externo { get; set; ***REMOVED***
-        public string label_nombre { get; set; ***REMOVED***
-        public string label_valor { get; set; ***REMOVED***
-        public string label_beneficiarios { get; set; ***REMOVED***
-        public string label_boton { get; set; ***REMOVED***
-        public string enlace_boton { get; set; ***REMOVED***
-        public string tipoenlace { get; set; ***REMOVED***
+        public int orden { get; set; }
+        public int IdItem { get; set; }
+        public string NomItem { get; set; }
+        public decimal total_valor { get; set; }
+        public long total_beneficiarios { get; set; }
+        public Boolean es_programa { get; set; }
+        public Boolean externo { get; set; }
+        public string label_nombre { get; set; }
+        public string label_valor { get; set; }
+        public string label_beneficiarios { get; set; }
+        public string label_boton { get; set; }
+        public string enlace_boton { get; set; }
+        public string tipoenlace { get; set; }
 
 
         public InfoConsolidadoRecursos()
@@ -32,7 +32,7 @@ namespace PlataformaTransparencia.Modelos
             label_boton = "";
             enlace_boton = "";
             tipoenlace = "";
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

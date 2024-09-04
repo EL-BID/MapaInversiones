@@ -12,14 +12,14 @@ namespace PlataformaTransparencia.Modelos
         /// La fecha POSIX de última actualización
         /// POSIX: Es la fecha en formato Unix.
         /// </summary>
-        public int lastUpdated { get; set; ***REMOVED***
+        public int lastUpdated { get; set; }
         /// <summary>
         /// Se define el tipo de los poligonos a retornar, region,departamento,municipio.
         /// </summary>
-        public string type { get; set; ***REMOVED***
+        public string type { get; set; }
         /// <summary>
         /// Se define el poligono del tipo.
         /// </summary>
-        public DbGeography Polygon { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public DbGeography Polygon { get; set; }
+    }
+}

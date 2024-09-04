@@ -29,7 +29,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             ConsultasComunes = consultasComunes;
             BusquedasProyectosBLL = busquedasProyectosBLL;
             ConsolidadosNacionales = consolidadosNacionales;
-    ***REMOVED***
+        }
 
 
         [HttpGet("busqueda")]
@@ -41,7 +41,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             projectsSearchMapContract.Fill();
             return projectsSearchMapContract.DataProjectSearchMap;
 
-    ***REMOVED***
+        }
 
 
         [HttpGet("listado")]
@@ -53,7 +53,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             projectsSearchListContract.Fill();
             return projectsSearchListContract.DataProjectsSearchList;
 
-    ***REMOVED***
+        }
 
 
         [HttpGet("GetFotosAprobar")]
@@ -68,18 +68,18 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             if ((objReturn.totalNumber >= CommonLabel.MaximumResultsFotos) && ((objReturn.totalNumber % CommonLabel.MaximumResultsFotos) > 0))
             {
                 objReturn.totalPages++;
-        ***REMOVED***
+            }
             if (objReturn.totalNumber > CommonLabel.MaximumResultsFotos)
             {
                 objReturn.FotosU.AddRange(source.Skip<ImagesUsuario>(((page - 1) * CommonLabel.MaximumResultsFotos)).Take<ImagesUsuario>(CommonLabel.MaximumResultsFotos));
-        ***REMOVED***
+            }
             else
             {
                 objReturn.FotosU.AddRange(source);
-        ***REMOVED***
+            }
             objReturn.Status = true;
             return objReturn;
-    ***REMOVED***
+        }
 
         [HttpGet("GetFotosEstados")]
         public object GetFotosEstados(int page, int estado)
@@ -88,7 +88,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             objReturn = BusquedasProyectosBLL.ObtenerFotosUsuariosPerEstados(estado, page);
             objReturn.Status = true;
             return objReturn;
-    ***REMOVED***
+        }
 
         [HttpGet("GetFotosAprobarCant")]
         public object GetFotosAprobarCant()
@@ -99,7 +99,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             objReturn.FotosU = null;
             objReturn.Status = true;
             return objReturn;
-    ***REMOVED***
+        }
 
 
        
@@ -113,7 +113,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             return objReturn;
 
 
-    ***REMOVED***
+        }
 
         [HttpGet("GetProyectosNacionalfiltro")]
         public List<InfoProyectos> GetProyectosNacionalfiltro(string campo)
@@ -125,7 +125,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             return objReturn;
 
 
-    ***REMOVED***
+        }
 
 
         [HttpGet("GetActividadesComponentes")]
@@ -147,24 +147,24 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                             var valores_actividad = BusquedasProyectosBLL.GetActividadesByComponente(Convert.ToInt16(id_proyecto), cod_componente);
                             objReturn.componentes = valores_actividad;
                             objReturn.Status = true;
-                    ***REMOVED***
+                        }
 
-                ***REMOVED***
+                    }
                     else
                     {
                         objReturn.Status = false;
                         objReturn.Message = "Error: Componente de proyecto nulo";
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
+                    }
+                }
+            }
             else
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: Identificación de proyecto nula";
-        ***REMOVED***
+            }
 
             return objReturn;
-    ***REMOVED***
+        }
 
         [HttpGet("GetFuentesPeriodo")]
         public ModelDataProyecto GetFuentesPeriodo()
@@ -186,24 +186,24 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                             objReturn.Status = true;
 
                             objReturn.Status = true;
-                    ***REMOVED***
-                ***REMOVED***
+                        }
+                    }
                     else
                     {
                         objReturn.Status = false;
                         objReturn.Message = "Error: Periodo nulo";
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
+                    }
+                }
+            }
             else
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: Identificación de proyecto nula";
-        ***REMOVED***
+            }
 
 
             return objReturn;
-    ***REMOVED***
+        }
 
 
         [HttpGet("GetAnniosProcesoContratacion")]
@@ -216,14 +216,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 objReturn = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("ProcesosContratacion")]
         public ModelProcesosContratacionData ProcesosContratacion(int Annio, int Semestre, int IdProyecto, int NumeroPagina, int RegistrosPorPagina, string NombreProceso)
@@ -242,17 +242,17 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 objReturn = valores;
                 objReturn.Status = true;
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.InnerException;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
 
 
-***REMOVED***
+    }
 
-***REMOVED***
+}

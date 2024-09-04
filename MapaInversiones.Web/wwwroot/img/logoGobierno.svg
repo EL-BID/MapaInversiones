@@ -4,43 +4,43 @@
     <style>
       .cls-1 {
         fill: #524596;
-  ***REMOVED***
+      }
 
       .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
         stroke-width: 0px;
-  ***REMOVED***
+      }
 
       .cls-2 {
         fill: url(#linear-gradient);
-  ***REMOVED***
+      }
 
       .cls-3 {
         fill: url(#linear-gradient-6);
-  ***REMOVED***
+      }
 
       .cls-4 {
         fill: url(#linear-gradient-5);
-  ***REMOVED***
+      }
 
       .cls-5 {
         fill: url(#linear-gradient-2);
-  ***REMOVED***
+      }
 
       .cls-6 {
         fill: url(#linear-gradient-7);
-  ***REMOVED***
+      }
 
       .cls-7 {
         fill: url(#linear-gradient-3);
-  ***REMOVED***
+      }
 
       .cls-8 {
         fill: url(#linear-gradient-8);
-  ***REMOVED***
+      }
 
       .cls-9 {
         fill: url(#linear-gradient-4);
-  ***REMOVED***
+      }
     </style>
     <linearGradient id="linear-gradient" x1="29" y1="26.2" x2="74.8" y2="26.2" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#7600ff"/>

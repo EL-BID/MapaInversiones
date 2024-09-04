@@ -6,28 +6,28 @@ namespace PlataformaTransparencia.Modelos.Entidad
 {
     public class itemGenPresupuesto
     {
-        public string id { get; set; ***REMOVED***
-        public string nombre { get; set; ***REMOVED***
-        public decimal? aprobado { get; set; ***REMOVED***
-        public decimal? vigente { get; set; ***REMOVED***
-        public decimal ejecutado { get; set; ***REMOVED***
+        public string id { get; set; }
+        public string nombre { get; set; }
+        public decimal? aprobado { get; set; }
+        public decimal? vigente { get; set; }
+        public decimal ejecutado { get; set; }
 
-        public decimal comprometido { get; set; ***REMOVED***
+        public decimal comprometido { get; set; }
 
-        public decimal porcentaje { get; set; ***REMOVED***
+        public decimal porcentaje { get; set; }
 
-        public string url { get; set; ***REMOVED***
+        public string url { get; set; }
 
-        public string recurso { get; set; ***REMOVED***
+        public string recurso { get; set; }
 
-        public double? avance_fisico { get; set; ***REMOVED***
+        public double? avance_fisico { get; set; }
 
-        public double? avance_financiero { get; set; ***REMOVED***
-        public double? AvanceFinancieroOrganismo { get; set; ***REMOVED***
+        public double? avance_financiero { get; set; }
+        public double? AvanceFinancieroOrganismo { get; set; }
 
-        public List<itemLineaPresupuestal> detalleLineas { get; set; ***REMOVED***
+        public List<itemLineaPresupuestal> detalleLineas { get; set; }
 
-        public string estado { get; set; ***REMOVED*** = string.Empty;
+        public string estado { get; set; } = string.Empty;
 
         public itemGenPresupuesto()
         {
@@ -43,6 +43,6 @@ namespace PlataformaTransparencia.Modelos.Entidad
             url = "";
             detalleLineas = new List<itemLineaPresupuestal>();
             estado=string.Empty;
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

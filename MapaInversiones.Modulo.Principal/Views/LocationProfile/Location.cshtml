@@ -4,15 +4,15 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha384-KcyRSlC9FQog/lJsT+QA8AUIFBgnwKM7bxm7/YaX+NTr4D00npYawrX0h+oXI3a2" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha384-JPbtLYL10d/Z1crlc6GGGGM3PavCzzoUJ1UxH0bXHOfguWHQ6XAWrIzW+MBGGXe5" crossorigin="anonymous"></script>
-***REMOVED***
+}
 @inject OrchardCore.IOrchardHelper Orchard
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+}
 
 @{
     System.IFormatProvider cultureMoneda = new System.Globalization.CultureInfo("es-PA");
-***REMOVED***
+}
 
 <body>
     <section class="banner-main-section s0-section" style="background-image: url(@Model.UrlImage)">
@@ -51,18 +51,18 @@
                         @if (@Model != null)
                         {
                             <li>
-                                <span class="h2">@String.Format(cultureMoneda, "{0:n0***REMOVED***", @Model.NumberProjects)</span>
+                                <span class="h2">@String.Format(cultureMoneda, "{0:n0}", @Model.NumberProjects)</span>
                                 <span>Número de proyectos</span>
                             </li>
                             <!--<li>
-                                <span class="h2"> $/. @String.Format(cultureMoneda, "{0:n2***REMOVED***", @Model.AverageCostProjects) Millones</span>
+                                <span class="h2"> $/. @String.Format(cultureMoneda, "{0:n2}", @Model.AverageCostProjects) Millones</span>
                                 <span>Costo promedio por proyecto</span>
                             </li>-->
                             <li>
-                                <span class="h2">@String.Format(cultureMoneda, "{0:n2***REMOVED***", @Model.AverageDurationProjects) Años</span>
+                                <span class="h2">@String.Format(cultureMoneda, "{0:n2}", @Model.AverageDurationProjects) Años</span>
                                 <span>Duración promedio del proyecto</span>
                             </li>
-                    ***REMOVED***
+                        }
                     </ul>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                             <span class="ic-shortcut"><i class="material-icons md-24">share_location</i></span>
                             <span class="text-btn">Sigue explorando</span>
                         </a>
-                ***REMOVED***
+                    }
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
     @if (Model != null && Model.IsProvince)
     {
         <section class="section" id="s0"></section>
-***REMOVED***
+    }
     <!--PROYECTOS-->
     <section class="section" id="s1">
         <div class="container">
@@ -113,14 +113,14 @@
                                 @foreach (var item in Model.Locations)
                                 {
                                     <option value=@item.value> @item.name</option>
-                            ***REMOVED***
+                                }
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="head-corregimiento text-center" id="jurisdictionName">
                 </div>
-        ***REMOVED****@
+            }*@
             <!--Tabs-->
             <div class="tabs goals">
                 <ul id="tabTipoProyectos" class="tabs-nav">
@@ -190,7 +190,7 @@
                 </div>
             </div>
         </section>
-***REMOVED***
+    }
 
 
     @if (Model != null && !Model.IsProvince)
@@ -505,7 +505,7 @@
                 </div>
             </div>
         </section>
-***REMOVED***
+    }
     <!--SECCION DISTRITOS-->
     <section class="section section-bg3" id="s2"></section>
     <style>
@@ -514,7 +514,7 @@
             stroke: #0171bb;
             stroke-width: 3px;
             transition: fill 0.4s;
-    ***REMOVED***
+        }
     </style>
     <script src="~/Content/dist/js/lib/D3/d3.min.js" charset="utf-8"></script>
     <script src="~/content/dist/js/lib/D3/d3plus.js"></script>
@@ -535,8 +535,8 @@
                 s = n < 0 ? "-" : "",
                 i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
                 j = (j = i.length) > 3 ? j % 3 : 0;
-            return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-    ***REMOVED***;
+            return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+        };
         getInformationByTypeLocationAndLocationIdAndYearAndJurisdiction();
         tabProjectSelected();
         function tabProjectSelected() {
@@ -548,22 +548,22 @@
                     $("#projectsByFuntionalGroup").addClass('link_project_by_type');
                     $("#projectsBySector").removeClass('link_project_by_type');
                     $("#projectsBySector").addClass('link_project_by_type active');
-            ***REMOVED***
+                }
                 else {
                     getDivGraphFunctionalGroup(dataLocation.projectsByFunctionalGroup, dataLocation.projectsByFunctional);
                     $("#projectsBySector").removeClass('link_project_by_type active');
                     $("#projectsBySector").addClass('link_project_by_type');
                     $("#projectsByFuntionalGroup").removeClass('link_project_by_type');
                     $("#projectsByFuntionalGroup").addClass('link_project_by_type active');
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
+                }
+            });
+        }
         function clearDivLocationProfile() {
             $("#divListadoProyectos").empty();
             $("#typeProjectTitle").empty();
             $("#divGraphProy").empty();
             $("#linkDistrict").show();
-    ***REMOVED***
+        }
         function getInformationByTypeLocationAndLocationIdAndYearAndJurisdiction() {
             var jurisdictionId = $("#jurisdiction").val() == undefined ? "0" : $("#jurisdiction").val();
             $.ajax({
@@ -574,8 +574,8 @@
                     locationId: $("#locationId").val(),
                     typeLocation: $("#typeLocation").text(),
                     jurisdictionId: jurisdictionId
-            ***REMOVED***
-        ***REMOVED***).done(function (data) {
+                }
+            }).done(function (data) {
                 dataLocation = data;
 
                 $("#s0").empty();
@@ -583,8 +583,8 @@
                 if (data != undefined && data.totalProjectsByState != null) {
                     data.totalProjectsByState.forEach(x=>{
                         geneInfoProjByState = geneInfoProjByState + getDivGeneralInformacionCard("card h-100 shadow card-entidad b1", x.stateName, x.totalProjects);
-                ***REMOVED***);
-        ***REMOVED***
+                    });
+            }
             $("#s0").append(geneInfoProjByState);
 
         $("#s2").empty();
@@ -597,9 +597,9 @@
                 locationChilds = locationChilds + getDivChildLocations(data.locationChilds);
                 locationChilds = locationChilds + '</div></div>';
                 $("#s2").append(locationChilds);
-        ***REMOVED***
+            }
             $("#provinceByDistrict").append(data.generalInformacion.parentLocationName);
-    ***REMOVED***
+        }
         $("#s3").empty();
         if (data.locationsRelated) {
             $("#linkMoreDistrict").show();
@@ -608,19 +608,19 @@
             locationRelated = locationRelated + getDivChildLocationsRelated(data.locationsRelated);
             locationRelated = locationRelated + '</div></div>';
             $("#s3").append(locationRelated);
-    ***REMOVED***
+        }
         getDivGraphProySector(data.projectsBySector, data.projectsByLocation);
-                ***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+                    }).fail(function (xhr, ajaxOptions, thrownError) {
             alert("Error w " + xhr.status + "_" + thrownError);
-    ***REMOVED***);
-    ***REMOVED***
+        });
+        }
         function getDivGeneralInformacionCard(styleCard, titleCard, totalRegister) {
             let divGeneInfoProjState = '<div class="col-lg-3 mb-3">';
             divGeneInfoProjState = divGeneInfoProjState + '<div class="' + styleCard + '"> <div class="card-body"> <div class="wrap-desc-entidad"><div class="h5">';
             divGeneInfoProjState = divGeneInfoProjState + titleCard + '</div> <div class="h1">';
             divGeneInfoProjState = divGeneInfoProjState + totalRegister + '</div></div></div></div></div>';
             return divGeneInfoProjState;
-    ***REMOVED***
+        }
         function getDivTableProjectsByFunctionalGroup(functional, projectsByFunctional) {
             $("#divListadoProyectos").empty();
             $("#typeProjectTitle").empty();
@@ -634,27 +634,27 @@
                     finishData = (actualPage * totalByPage) - 1;
                     var projectsByPage = jQuery.grep(projectsByFiltersEntity, function (n, i) {
                         return (i >= initData && i <= finishData);
-                ***REMOVED***);
+                    });
                     if (projectsByPage.length > 0) {
                         existProject = true;
                         $("#divPaginator").show();
                         getDivTableProjectsByFilters(projectsByPage);
                         drawPaginator(actualPage, projectsByFiltersEntity.length);
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
                 if (!existProject) {
                     $("#divPaginator").hide();
                     var divProjectList = "No hay proyectos para el grupo funcional <b>" + functional + " </b>estado <i>" + status.toLowerCase() + " </i>";//año de ejecución <b>" + year + "</b>";
                     $("#divListadoProyectos").html(divProjectList);
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                }
+            }
+        }
         function getDivTableProjectsByFilters(projectsByPage) {
             var divProjectList = '<div class="card-entidades-group">';
-            projectsByPage.forEach(x => { divProjectList = divProjectList + getDivProject(x); ***REMOVED***);
+            projectsByPage.forEach(x => { divProjectList = divProjectList + getDivProject(x); });
             divProjectList = divProjectList + '</div>';
             $("#divListadoProyectos").html(divProjectList);
-    ***REMOVED***
+        }
         function drawPaginator(actualPage, totalRegister) {
             var totalPages = (totalRegister > totalByPage) ? ((totalRegister - (totalRegister % totalByPage)) / totalByPage) : 1;
             if ((totalRegister >= totalByPage) && ((totalRegister % totalByPage) > 0)) totalPages = totalPages + 1;
@@ -666,34 +666,34 @@
             var init = 1;
             if (residue == 0) {
                 init = (actualPag - totalByPage) + 1;
-        ***REMOVED*** else {
+            } else {
                 init = (quotient * totalByPage) + 1;
-        ***REMOVED***
+            }
             var finish = init + (totalPages - 1);
             if (totalPages < totalByPage) {
                 finish = totalPages;
-        ***REMOVED***
+            }
             if (finish > totalPages) {
                 finish = totalPages;
-        ***REMOVED***
+            }
             if (actualPag > totalByPage && totalPages >= totalByPage) {
                 pagEnlace += '<a id="page_left" role="button" class="material-icons md-24" data-page="' + (init - totalByPage) + '"><span class="">chevron_left</span></a>';
-        ***REMOVED***
+            }
             for (var i = init; i <= finish; i++) {
                 if (i == actualPag) {
                     pagEnlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
-            ***REMOVED*** else {
+                } else {
                     pagEnlace += '<a class="page_left" role="button" data-page="' + i + '">';
                     pagEnlace += '<span class="glyphicon"></span>';
                     pagEnlace += '<text class="paginacion">' + i + '</text>';
                     pagEnlace += '</a>';
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             if (actualPag < totalPages) {
                 if (finish < totalPages) {
                     pagEnlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (finish + 1) + '"><span class="">chevron_right</span></a>';
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             $("#divPaginator").html(pagEnlace);
             $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
                 actualPage = $(this).attr("data-page");
@@ -702,13 +702,13 @@
                 finishData = (actualPage * totalByPage) - 1;
                 var projectsByPage = jQuery.grep(projectsByFiltersEntity, function (n, i) {
                     return (i >= initData && i <= finishData);
-            ***REMOVED***);
+                });
                 if (projectsByPage.length > 0) {
                     getDivTableProjectsByFilters(projectsByPage);
                     drawPaginator(actualPage, projectsByFiltersEntity.length);
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
+                }
+            });
+        }
         function getDivTableProjectsBySector(sector, projectsByLocation) {
             $("#divListadoProyectos").empty();
             $("#typeProjectTitle").empty();
@@ -722,21 +722,21 @@
                     finishData = (actualPage * totalByPage) - 1;
                     var projectsByPage = jQuery.grep(projectsByFiltersEntity, function (n, i) {
                         return (i >= initData && i <= finishData);
-                ***REMOVED***);
+                    });
                     if (projectsByPage.length > 0) {
                         existProject = true;
                         $("#divPaginator").show();
                         getDivTableProjectsByFilters(projectsByPage);
                         drawPaginator(actualPage, projectsByFiltersEntity.length);
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
                 if (!existProject) {
                     $("#divPaginator").hide();
                     divProjectList = "No hay proyectos para el sector <b>" + sector + " </b>estado <i>" + status.toLowerCase() + " </i>";//año de ejecución <b>" + year + "</b>";
                     $("#divListadoProyectos").html(divProjectList);
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                }
+            }
+        }
         function getDivProject(project) {
             let divProject = '<div id="proj_' + project.idProyecto + '" class="card d-flex">';
             divProject = divProject + '<div class="headEnt"><div class="data1 mainDataProyecto"><span class="small">Código SNIP: </span><span class="small text-bold">' + project.codigoSnip + '</span><br/>';
@@ -749,7 +749,7 @@
             divProject = divProject + '<div class="btnPerfil"><a target="_blank" rel="noopener" href="/projectprofile/' + project.idProyecto + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>Ver proyecto</span></a></div>';
             divProject = divProject + '</div></div>';
             return divProject;
-    ***REMOVED***
+        }
         function getDivGraphProySector(projectsBySector, projectsByLocation) {
             $("#divGraphProy").empty();
             $("#divListadoProyectos").empty();
@@ -766,43 +766,43 @@
                 for (var i = 0; i < projectsBySector.length; i++) {
                     projectsBySector[i].value = parseFloat(projectsBySector[i].value);
                     projectsBySector[i].rawValue = parseFloat(projectsBySector[i].rawValue);
-            ***REMOVED***
+                }
                 if (projectsBySector.length > 0) {
                     var visualization = d3plus.viz()
                         .container("#divGraphProy")
                         .data(projectsBySector)
-                        .type({ "value": "tree_map", "mode": "squarify" ***REMOVED***)
-                        .id({ "value": ["label"], "grouping": true ***REMOVED***)
+                        .type({ "value": "tree_map", "mode": "squarify" })
+                        .id({ "value": ["label"], "grouping": true })
                         .depth(1)
                         .size("rawValue")
-                        .font({ "family": "inherit" ***REMOVED***)
+                        .font({ "family": "inherit" })
                         .format({
                             "text": function (text, params) {
                                 if (text == "rawValue") {
                                     return "Proyectos";
-                            ***REMOVED*** else if (text == "label") {
+                                } else if (text == "label") {
                                     return "Sector";
-                            ***REMOVED*** else if (text == "labelGroup") {
+                                } else if (text == "labelGroup") {
                                     return "Estado";
-                            ***REMOVED*** else if (text == "share") {
+                                } else if (text == "share") {
                                     return "Participación";
-                            ***REMOVED***
+                                }
                                 else if (text == "including") {
                                     return "Incluye";
-                            ***REMOVED***
+                                }
                                 else {
                                     return d3plus.string.title(text, params);
-                            ***REMOVED***
-                        ***REMOVED***
-                    ***REMOVED***)
+                                }
+                            }
+                        })
                         .background("rgba(255,255,255,0)")
-                        .labels({ "align": "left", "valign": "top", "font": { "family": "inherit", "size": 14, "weight": "bold" ***REMOVED***, "resize": true ***REMOVED***)
+                        .labels({ "align": "left", "valign": "top", "font": { "family": "inherit", "size": 14, "weight": "bold" }, "resize": true })
                         .tooltip(["labelGroup", "label"])   // list the keys to show in tooltip "labelGroup",
                         .color("label")
                         .color({
                             "scale": ["#2F4556", "#FF3637", "#31655E", "#00C9B1", "#DD1A8B", "#DD4E29", "#D3A034", "#FFB886", "#FFF190", "#80AFE6", "#73323D", "##5B73DD"],
-                    ***REMOVED***)
-                        .height({ "max": 419, "small": 200, "secondary": 100, "value": 419 ***REMOVED***)
+                        })
+                        .height({ "max": 419, "small": 200, "secondary": 100, "value": 419 })
                         .legend({
                             "align": "middle",
                             "size": [50, 80],
@@ -813,24 +813,24 @@
                             , "order": {
                                 "sort": "desc",
                                 "value": "size"
-                        ***REMOVED***
-                    ***REMOVED***)
+                            }
+                        })
                         .resize(true)
                         .mouse({
                             "move": true,
                             "click": function (node, viz) {
                                 $("#sectorSelected").val(node.label);
                                 getYearsAndStatusProjectsBySector(node.label, projectsByLocation);
-                        ***REMOVED***
-                    ***REMOVED***).draw();
+                            }
+                        }).draw();
 
                     var sectorGreaterParticipation = getSectorGreaterParticipation(projectsBySector);
                     if (sectorGreaterParticipation != '') {
                         $("#sectorSelected").val(sectorGreaterParticipation);
                         $("#functionalGroupSelected").val('');
                         getYearsAndStatusProjectsBySector(sectorGreaterParticipation, projectsByLocation);
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
                 else {
                     $("#showMessageGraph").show();
                     $("#yearLabel").hide();
@@ -838,8 +838,8 @@
                     $("#stateLabel").hide();
                     $("#statusProject").hide();
                     $("#entitiesProject").hide();
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             else {
                 $("#showMessageGraph").show();
                 $("#yearLabel").hide();
@@ -847,8 +847,8 @@
                 $("#stateLabel").hide();
                 $("#statusProject").hide();
                 $("#entitiesProject").hide();
-        ***REMOVED***;
-    ***REMOVED***
+            };
+        }
         function getYearsAndStatusProjectsBySector(sector, projectsByLocation) {
             if (projectsByLocation != null && projectsByLocation.length > 0) {
                 $("#entitiesProject").empty();
@@ -856,19 +856,19 @@
                 for (var i = 0; i < projectsByLocation.length; i++) {
                     if (projectsByLocation[i].nombreSector == sector) {
                         entities.push(projectsByLocation[i].entidadEjecutora);
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
                 if (entities.length > 0) {
                     entities = entities.map(x => x).filter((value, index, self) => self.indexOf(value) === index);
                     entities.sort();
                     entities.forEach(x => $("#entitiesProject").append('<option value="' + x + '">' + x + '</option>'));
-            ***REMOVED***
+                }
                 if (entities.length > 0) {
                     $("#typeProjectTitle").html('Proyectos sector <span>' + sector + '</span>');
                     getDivTableProjectsBySector(sector, projectsByLocation);
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                }
+            }
+        }
         function getSectorGreaterParticipation(projectsBySector) {
             if (projectsBySector == undefined || projectsBySector.length == 0) return '';
             var sectors = projectsBySector.map(item => item.label).filter((value, index, self) => self.indexOf(value) === index);
@@ -877,14 +877,14 @@
             for (var i = 0; i < sectors.length; i++) {
                 var projectsInSector = projectsBySector.filter(x => x.label == sectors[i]);
                 let totalProjectsInSector = 0;
-                projectsInSector.forEach(x => { totalProjectsInSector = totalProjectsInSector + x.rawValue ***REMOVED***)
+                projectsInSector.forEach(x => { totalProjectsInSector = totalProjectsInSector + x.rawValue })
                 if (totalProjectsInSector > maxSector) {
                     rta = sectors[i];
                     maxSector = totalProjectsInSector;
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             return rta;
-    ***REMOVED***
+        }
         function getFuntionalGreaterParticipation(projectsByFuntional) {
             if (projectsByFuntional == undefined || projectsByFuntional.length == 0) return '';
             var functionals = projectsByFuntional.map(item => item.label).filter((value, index, self) => self.indexOf(value) === index);
@@ -895,10 +895,10 @@
                 if (totalProjectsInFuntional > maxFuntional) {
                     rta = functionals[i];
                     maxFuntional = totalProjectsInFuntional;
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             return rta;
-    ***REMOVED***
+        }
         function getDivGraphFunctionalGroup(projectsByFuntional, projectsByFuntionalGroup) {
             $("#divGraphProy").empty();
             $("#divListadoProyectos").empty();
@@ -911,39 +911,39 @@
                 for (var i = 0; i < projectsByFuntional.length; i++) {
                     projectsByFuntional[i].value = parseFloat(projectsByFuntional[i].value);
                     projectsByFuntional[i].rawValue = parseFloat(projectsByFuntional[i].rawValue);
-            ***REMOVED***
+                }
                 if (projectsByFuntional.length > 0) {
                     var visualization = d3plus.viz()
                         .container("#divGraphProy")
                         .data(projectsByFuntional)
-                        .type({ "value": "tree_map", "mode": "squarify" ***REMOVED***)
-                        .id({ "value": ["labelGroup", "label"], "grouping": true ***REMOVED***)
+                        .type({ "value": "tree_map", "mode": "squarify" })
+                        .id({ "value": ["labelGroup", "label"], "grouping": true })
                         .depth(1)
                         .size("rawValue")
-                        .font({ "family": "inherit" ***REMOVED***)
+                        .font({ "family": "inherit" })
                         .format({
                             "text": function (text, params) {
                                 if (text == "rawValue") {
                                     return "Proyectos";
-                            ***REMOVED*** else if (text == "label") {
+                                } else if (text == "label") {
                                     return "Funcionalidad";
-                            ***REMOVED*** else if (text == "labelgroup") {
+                                } else if (text == "labelgroup") {
                                     return "Funcionalidad";
-                            ***REMOVED*** else if (text == "share") {
+                                } else if (text == "share") {
                                     return "Participación";
-                            ***REMOVED*** else {
+                                } else {
                                     return d3plus.string.title(text, params);
-                            ***REMOVED***
-                        ***REMOVED***
-                    ***REMOVED***)
+                                }
+                            }
+                        })
                         .background("rgba(255,255,255,0)")
-                        .labels({ "align": "left", "valign": "top", "font": { "family": "inherit", "size": 14, "weight": "bold" ***REMOVED***, "resize": true ***REMOVED***)
+                        .labels({ "align": "left", "valign": "top", "font": { "family": "inherit", "size": 14, "weight": "bold" }, "resize": true })
                         .tooltip(["label"])   // list the keys to show in tooltip "labelGroup",
                         .color("label")
                         .color({
                             "scale": ["#2F4556", "#FF3637", "#31655E", "#00C9B1", "#DD1A8B", "#DD4E29", "#D3A034", "#FFB886", "#FFF190", "#80AFE6", "#73323D", "##5B73DD"],
-                    ***REMOVED***)
-                        .height({ "max": 419, "small": 200, "secondary": 100, "value": 419 ***REMOVED***)
+                        })
+                        .height({ "max": 419, "small": 200, "secondary": 100, "value": 419 })
                         .legend({
                             "align": "middle",
                             "size": [50, 80],
@@ -954,31 +954,31 @@
                             , "order": {
                                 "sort": "desc",
                                 "value": "size"
-                        ***REMOVED***
-                    ***REMOVED***)
+                            }
+                        })
                         .resize(true)
                         .mouse({
                             "move": true,
                             "click": function (node, viz) {
                                 getYearsAndStatusProjectsByFuntionalGroup(node.label, projectsByFuntionalGroup);
-                        ***REMOVED***
-                    ***REMOVED***).draw();
+                            }
+                        }).draw();
                     var funtionalGreaterParticipation = getFuntionalGreaterParticipation(projectsByFuntional);
                     if (funtionalGreaterParticipation != '') {
                         $("#sectorSelected").val('');
                         $("#functionalGroupSelected").val(funtionalGreaterParticipation);
                         getYearsAndStatusProjectsByFuntionalGroup(funtionalGreaterParticipation, projectsByFuntionalGroup);
-                ***REMOVED***
+                    }
 
-            ***REMOVED***
+                }
                 else {
                     $("#showMessageGraph").show();
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             else {
                 $("#showMessageGraph").show();
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         function getYearsAndStatusProjectsByFuntionalGroup(functional, projectsByFuntionalGroup) {
             if (projectsByFuntionalGroup != null && projectsByFuntionalGroup.length > 0) {
                 $("#entitiesProject").empty();
@@ -987,23 +987,23 @@
                     if (projectsByFuntionalGroup[i].grupoFuncional == functional) {
 
                         entities.push(projectsByFuntionalGroup[i].entidadEjecutora);
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
               
                 if (entities.length > 0) {
                     entities = entities.map(x => x).filter((value, index, self) => self.indexOf(value) === index);
                     entities.sort();
                     entities.forEach(x => $("#entitiesProject").append('<option value="' + x + '">' + x + '</option>'));
-            ***REMOVED***
+                }
 
                 $("#functionalGroupSelected").val(functional);
                 if (entities.length > 0) {
                     $("#typeProjectTitle").html('Proyectos grupo funcional <span>' + functional + '</span>');
                     getDivTableProjectsByFunctionalGroup(functional, projectsByFuntionalGroup);
-            ***REMOVED***
+                }
 
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         function getDivChildLocations(locationChilds) {
             let divChildLocations = '<div class="col-lg-6"> <div class="links-container">';
             for (var i = 0; i < locationChilds.length; i++) {
@@ -1011,42 +1011,42 @@
                 divChildLocations = divChildLocations + '<a href="/Location/&type=municipio&id=' + locationChilds[i].id + '"><span class="location-name">' + locationChilds[i].name + '</span>';
                 divChildLocations = divChildLocations + '<span class="location-num-proy">(' + locationChilds[i].totalProjects + ')</span>';
                 divChildLocations = divChildLocations + '<i class="material-icons md-24">arrow_forward_ios</i></a></div>';
-        ***REMOVED***
+            }
             divChildLocations = divChildLocations + "</div>";
             return divChildLocations;
-    ***REMOVED***
+        }
         function getDivChildLocationsRelated(locationsRelated) {
             let divChildLocationsRelated = '<div class="col-lg-12"> <div class="links-container">';
             for (var i = 0; i < locationsRelated.length; i++) {
                 divChildLocationsRelated = divChildLocationsRelated + '<div class="card blue-card link-location">';
                 divChildLocationsRelated = divChildLocationsRelated + '<a href="/Location/&type=municipio&id=' + locationsRelated[i].id + '"><span class="location-name">' + locationsRelated[i].name + '(' + locationsRelated[i].totalProjects + ')' + '</span>';
                 divChildLocationsRelated = divChildLocationsRelated + '<i class="material-icons md-24">arrow_forward_ios</i></a></div>';
-        ***REMOVED***
+            }
             divChildLocationsRelated = divChildLocationsRelated + "</div>";
             return divChildLocationsRelated;
-    ***REMOVED***
+        }
         function getDivImageLocationChild(urlImageLocation, typeLocation) {
             return '<div class="col-lg-6"><img class="img-fluid py-3" src="' + urlImageLocation + '" alt="' + typeLocation + '"/></div>';
-    ***REMOVED***
+        }
         function getDivNameLocationChild(locationChildName) {
             return '<div class="section-heading heading-left"><h2>' + locationChildName + '</h2></div>';
-    ***REMOVED***
+        }
         function getDivNameLocationRelated(locationChildNameRelated) {
             return '<div class="section-heading heading-left"><h2>Sigue explorando</h2><p class="section-subheading">Otros municipios en ' + locationChildNameRelated + '</p2></div>';
-    ***REMOVED***
+        }
         function jurisdictionChanged() {
             if ($.trim($("#jurisdiction option:selected").text()) == "TODOS") $("#jurisdictionName").hide();
             else {
                 $("#jurisdictionName").show();
                 $("#jurisdictionName").empty();
-        ***REMOVED***
+            }
             getInformationByTypeLocationAndLocationIdAndYearAndJurisdiction();
-    ***REMOVED***
+        }
 
         function entitiesProjectChanged() {
             if ($("#functionalGroupSelected").val() != '') getDivTableProjectsByFunctionalGroup($("#functionalGroupSelected").val(), dataLocation.projectsByFunctional);
             else if ($("#sectorSelected").val() != '') getDivTableProjectsBySector($("#sectorSelected").val(), dataLocation.projectsByLocation);
-    ***REMOVED***
+        }
     </script>
 </body>
 

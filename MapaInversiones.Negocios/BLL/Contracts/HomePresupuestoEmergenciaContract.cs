@@ -12,7 +12,7 @@ namespace PlataformaTransparencia.Negocios.BLL.Contracts
     /// <summary>
     /// 
     /// </summary>
-    public ModelPresupuestoEmergenciaData HomePresupuestoEmergenciaModel { get; set; ***REMOVED***
+    public ModelPresupuestoEmergenciaData HomePresupuestoEmergenciaModel { get; set; }
 
     /// <summary>
     /// 
@@ -21,7 +21,7 @@ namespace PlataformaTransparencia.Negocios.BLL.Contracts
     {
       _connection = connection;
       HomePresupuestoEmergenciaModel = new ModelPresupuestoEmergenciaData();
-***REMOVED***
+    }
 
     public void Fill(int idTipoEmergencia)
     {
@@ -30,13 +30,13 @@ namespace PlataformaTransparencia.Negocios.BLL.Contracts
         PresupuestoEmergenciaBLL objNegocioConsolidados = new(_connection);
         HomePresupuestoEmergenciaModel = objNegocioConsolidados.ObtenerDatosModeloInicioPorTipoEmergencia(idTipoEmergencia);
         Status = true;
-  ***REMOVED***
+      }
       catch (Exception ex)
       {
         Status = false;
         LogHelper.GenerateLog(ex);
         Message = "Lo sentimos, ha ocurrido un error.";
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***
-***REMOVED***
+      }
+    }
+  }
+}

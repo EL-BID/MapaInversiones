@@ -17,12 +17,12 @@ namespace PlataformaTransparencia.Utilitarios
             foreach(int item in list)
             {
                 if(item == list.First())
-                    strb1.Append(string.Format("{0***REMOVED***", item.ToString()));
+                    strb1.Append(string.Format("{0}", item.ToString()));
                 else
-                    strb1.Append(string.Format(",{0***REMOVED***", item.ToString()));
-        ***REMOVED***
+                    strb1.Append(string.Format(",{0}", item.ToString()));
+            }
             return strb1.ToString();
-    ***REMOVED***
+        }
 
         public static string ObtenerMes(int idMes)
         {
@@ -35,16 +35,16 @@ namespace PlataformaTransparencia.Utilitarios
                 {
                     mes = meses[i];
                     break;
-            ***REMOVED***          
-        ***REMOVED***
+                }          
+            }
             return mes;
 
-    ***REMOVED***
+        }
 
         public static string[] ObtenerMeses()
         {
             return RecursosUtilidadesNegocio.Meses.Split(',');
-    ***REMOVED***
+        }
 
         public static string ConcatenarPeriodos(List<int> periodos)
         {
@@ -55,15 +55,15 @@ namespace PlataformaTransparencia.Utilitarios
                 if (i == largoArreglo - 1)
                 {
                     respuesta = respuesta + periodos[i];
-            ***REMOVED***
+                }
                 else
                 {
                     respuesta = respuesta + periodos[i] + ",";
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             return respuesta;
-    ***REMOVED***
+        }
 
         public static string[]  RemoverPreposiciones(string[] texto)
         {
@@ -72,8 +72,8 @@ namespace PlataformaTransparencia.Utilitarios
 
             return result.ToArray();           
 
-    ***REMOVED***
+        }
 
 
-***REMOVED***
-***REMOVED***
+    }
+}

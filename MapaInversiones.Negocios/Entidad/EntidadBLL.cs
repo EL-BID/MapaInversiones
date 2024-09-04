@@ -27,7 +27,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
         public EntidadBLL(TransparenciaDB connection)
         {
             _connection = connection;
-    ***REMOVED***
+        }
 
         private string ConvertirTextoMayusculaMinuscula(string texto)
         {
@@ -37,13 +37,13 @@ namespace PlataformaTransparencia.Negocios.Entidad
             texto = texto.Remove(0, 1);
             texto = primeraLetra.ToUpper() + texto;
             return texto;
-    ***REMOVED***
+        }
 
         public List<infograficoPrograma> GetProgramasByEntidad(int annio, string codEntidad) {
             List<infograficoPrograma> objReturn = new List<infograficoPrograma>();
             var RecursosPerObjetoQuery = (from a in _connection.VwPresupuesto
                                           where a.Periodo.ToString().StartsWith(annio.ToString()) && a.CodigoInstitucion == codEntidad
-                                          group a by new { a.CodigoPrograma, a.Programa ***REMOVED*** into g
+                                          group a by new { a.CodigoPrograma, a.Programa } into g
                                           select new infograficoPrograma
                                           {
                                               Id = g.Key.CodigoPrograma,
@@ -51,14 +51,14 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                               presupuesto = g.Sum(x => x.Vigente.Value),
                                               aprobado = g.Sum(x => x.Aprobado.Value),
                                               ejecutado = g.Sum(x => x.EjecucionAcumulada.Value)
-                                      ***REMOVED***).ToList();
+                                          }).ToList();
 
             objReturn = RecursosPerObjetoQuery;
 
             return objReturn;
 
 
-    ***REMOVED***
+        }
 
         public List<infograficoActividad> GetActividadByPrograma(int annio, string codEntidad, int codPrograma)
         {
@@ -66,7 +66,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
             var query1 = (from pre in _connection.VwPresupuesto
                           where (pre.Periodo == annio && Convert.ToInt32(pre.CodigoInstitucion) == Convert.ToInt32(codEntidad) && pre.CodigoPrograma == Convert.ToInt32(codPrograma).ToString())
-                          group pre by new { pre.Periodo, pre.CodigoInstitucion, pre.CodigoPrograma, pre.CodigoSubPrograma, pre.CodigoActividadObra, pre.ActividadObra, pre.CodigoObjetoDeGasto ***REMOVED*** into g
+                          group pre by new { pre.Periodo, pre.CodigoInstitucion, pre.CodigoPrograma, pre.CodigoSubPrograma, pre.CodigoActividadObra, pre.ActividadObra, pre.CodigoObjetoDeGasto } into g
                           select new
                           {
                               periodo = g.Key.Periodo,
@@ -77,12 +77,12 @@ namespace PlataformaTransparencia.Negocios.Entidad
                               nomActividad = g.Key.ActividadObra,
                               codObjeto = g.Key.CodigoObjetoDeGasto,
                               asignado = (decimal)g.Sum(t => t.Vigente) / 1000000,
-                      ***REMOVED***);
+                          });
 
 
             var query2 = (from x in _connection.VWContratosXPresupuestoes
                           where (x.Periodo == annio && Convert.ToInt32(x.CodigoInstitucion) == Convert.ToInt32(codEntidad) && x.CodigoPrograma == codPrograma)
-                          group x by new { x.Periodo, x.CodigoInstitucion, x.CodigoPrograma, x.CodigoSubPrograma, x.CodigoActividadObra, x.CodigoObjetoDeGasto, x.Ocid, x.IdBudget ***REMOVED*** into g
+                          group x by new { x.Periodo, x.CodigoInstitucion, x.CodigoPrograma, x.CodigoSubPrograma, x.CodigoActividadObra, x.CodigoObjetoDeGasto, x.Ocid, x.IdBudget } into g
                           select new
                           {
                               periodo = g.Key.Periodo,
@@ -94,7 +94,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                               ocid = g.Key.Ocid,
                               contrato = g.Key.IdBudget
 
-                      ***REMOVED***);
+                          });
 
 
             var query3 = (from presupuesto in query1
@@ -115,7 +115,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                               codContrato = "contr|" + detalle.CodigoContrato,
                               AportePresupuesto = detalle.ValorAdjudicado
 
-                      ***REMOVED***
+                          }
                           ).Distinct().OrderBy(x => x.nomActividad).
                                     ThenBy(x => x.codProceso).
                                     ThenBy(x => x.codContrato).ToList();
@@ -157,16 +157,16 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
                             objProcesos.Detalles.Add(objContratos);
 
-                    ***REMOVED***
+                        }
                         else
                         {
                             objContratos.presupuesto += fila.AportePresupuesto;
                
 
-                    ***REMOVED***
+                        }
 
                         objActividad.Detalles.Add(objProcesos);
-                ***REMOVED***
+                    }
                     else
                     {
                         objProcesos.presupuesto += fila.AportePresupuesto;
@@ -183,17 +183,17 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
                             objProcesos.Detalles.Add(objContratos);
 
-                    ***REMOVED***
+                        }
                         else
                         {
                             objContratos.presupuesto += fila.AportePresupuesto;
                             
-                    ***REMOVED***
+                        }
 
-                ***REMOVED***
+                    }
 
                     objReturn.Add(objActividad);
-            ***REMOVED***
+                }
                 else
                 {
                     objActividad.presupuesto += fila.AportePresupuesto;
@@ -218,16 +218,16 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
                             objProcesos.Detalles.Add(objContratos);
 
-                    ***REMOVED***
+                        }
                         else
                         {
                             objContratos.presupuesto += fila.AportePresupuesto;
                             
 
-                    ***REMOVED***
+                        }
 
                         objActividad.Detalles.Add(objProcesos);
-                ***REMOVED***
+                    }
                     else
                     {
                         objProcesos.presupuesto += fila.AportePresupuesto;
@@ -242,18 +242,18 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
                             objProcesos.Detalles.Add(objContratos);
 
-                    ***REMOVED***
+                        }
                         else
                         {
                             objContratos.presupuesto += fila.AportePresupuesto;
                          
-                    ***REMOVED***
+                        }
 
-                ***REMOVED***
+                    }
 
 
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             ///ordena primer nivel actividad
             var result = objReturn.OrderByDescending(x => x.presupuesto).ToList();
@@ -265,28 +265,28 @@ namespace PlataformaTransparencia.Negocios.Entidad
                 {
                     //ordena nivel cont
                     item_actividad.Detalles = item_actividad.Detalles.OrderByDescending(x => x.presupuesto).ToList();
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             return result;
 
 
 
-    ***REMOVED***
+        }
 
 
         public infograficoEntidad GetGastoByPrograma(int annio, int codEntidad, int codPrograma, string estado, string proceso)
         {
             String estado_aux = null;
             String proceso_aux = null;
-            if (proceso != null && proceso.Trim() != "") { proceso_aux = proceso; ***REMOVED***
-            if (estado != null && estado.Trim() != "") { estado_aux = estado; ***REMOVED***
+            if (proceso != null && proceso.Trim() != "") { proceso_aux = proceso; }
+            if (estado != null && estado.Trim() != "") { estado_aux = estado; }
 
 
             infograficoEntidad objReturn = new infograficoEntidad();
 
             var query1 = (from pre in _connection.VwPresupuesto
                           where (pre.Periodo == annio && int.Parse(pre.CodigoInstitucion) == codEntidad && pre.CodigoPrograma == codPrograma.ToString())
-                          group pre by new { pre.Periodo, pre.CodigoInstitucion, pre.CodigoPrograma, pre.CodigoSubPrograma, pre.CodigoActividadObra, pre.CodigoGrupoDeGasto, pre.GrupoDeGasto, pre.CodigoObjetoDeGasto ***REMOVED*** into g
+                          group pre by new { pre.Periodo, pre.CodigoInstitucion, pre.CodigoPrograma, pre.CodigoSubPrograma, pre.CodigoActividadObra, pre.CodigoGrupoDeGasto, pre.GrupoDeGasto, pre.CodigoObjetoDeGasto } into g
                           select new
                           {
                               periodo = g.Key.Periodo,
@@ -299,13 +299,13 @@ namespace PlataformaTransparencia.Negocios.Entidad
                               codObjeto = g.Key.CodigoObjetoDeGasto,
                               vigente = (decimal)g.Sum(t => t.Vigente),
                               
-                      ***REMOVED***);
+                          });
 
 
 
             var query2 = (from x in _connection.VWContratosXPresupuestoes
                           where (x.Periodo == annio && x.CodigoInstitucion == codEntidad && x.CodigoPrograma == codPrograma)
-                          group x by new { x.Periodo, x.CodigoInstitucion, x.CodigoPrograma, x.CodigoSubPrograma, x.CodigoActividadObra, x.CodigoObjetoDeGasto, x.Ocid, x.IdBudget ***REMOVED*** into g
+                          group x by new { x.Periodo, x.CodigoInstitucion, x.CodigoPrograma, x.CodigoSubPrograma, x.CodigoActividadObra, x.CodigoObjetoDeGasto, x.Ocid, x.IdBudget } into g
                           select new
                           {
                               periodo = g.Key.Periodo,
@@ -317,7 +317,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                               ocid = g.Key.Ocid,
                               contrato = g.Key.IdBudget
 
-                      ***REMOVED***);
+                          });
 
             var query3 = (from presupuesto in query1
                           from contratos in query2.Where(j => j.periodo == presupuesto.periodo)
@@ -347,21 +347,21 @@ namespace PlataformaTransparencia.Negocios.Entidad
                               ValorContratado = detalle.ValorContratado,
                               Contratista = detalle.Contratista,
                               CodigoProveedor = detalle.CodigoProveedor
-                      ***REMOVED***
+                          }
                           ).Distinct().OrderBy(x => x.nomGrupoGasto).
                                     ThenBy(x => x.codProceso).
                                     ThenBy(x => x.codContrato).ToList();
 
 
             var queryInfo = (from info in query1
-                             group info by new { info.codGrupoGasto, info.nomGrupoGasto ***REMOVED*** into g
+                             group info by new { info.codGrupoGasto, info.nomGrupoGasto } into g
                              select new
                              {
                                  codGrupoGasto = g.Key.codGrupoGasto,
                                  nomGrupoGasto = "grp|" + g.Key.nomGrupoGasto,
                                  vigente = (decimal)g.Sum(t => t.vigente),
                                 
-                         ***REMOVED***
+                             }
                           ).Distinct().OrderBy(x => x.nomGrupoGasto).ToList();
 
 
@@ -382,13 +382,13 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
 
                     objReturn.infoGasto.Add(objGrupo);
-            ***REMOVED***
+                }
                 else {
                     objGrupo.presupuesto += (double)fila.vigente;
                     
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
 
             foreach (var fila in query3)
             {
@@ -431,7 +431,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
                             objProcesos.Detalles.Add(objContratos);
 
-                    ***REMOVED***
+                        }
                         else
                         {
                             objContratos.presupuesto += fila.AportePresupuesto;
@@ -440,10 +440,10 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.valor_contratado += fila.ValorContratado.Value;
                             
 
-                    ***REMOVED***
+                        }
 
                         objGrupo.Detalles.Add(objProcesos);
-                ***REMOVED***
+                    }
                     else
                     {
                         objProcesos.presupuesto += fila.AportePresupuesto;
@@ -466,7 +466,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
                             objProcesos.Detalles.Add(objContratos);
 
-                    ***REMOVED***
+                        }
                         else
                         {
                             objContratos.presupuesto += fila.AportePresupuesto;
@@ -474,12 +474,12 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.valor_adjudicado += fila.ValorAdjudicado;
                             objContratos.valor_contratado += fila.ValorContratado.Value;
                          
-                    ***REMOVED***
+                        }
 
-                ***REMOVED***
+                    }
 
                     objReturn.infoGasto.Add(objGrupo);
-            ***REMOVED***
+                }
                 else
                 {
                    
@@ -508,7 +508,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
                             objProcesos.Detalles.Add(objContratos);
 
-                    ***REMOVED***
+                        }
                         else
                         {
                             objContratos.presupuesto += fila.AportePresupuesto;
@@ -516,10 +516,10 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.valor_adjudicado += fila.ValorAdjudicado;
                             objContratos.valor_contratado += fila.ValorContratado.Value;
 
-                    ***REMOVED***
+                        }
 
                         objGrupo.Detalles.Add(objProcesos);
-                ***REMOVED***
+                    }
                     else
                     {
                         objProcesos.presupuesto += fila.AportePresupuesto;
@@ -539,20 +539,20 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
                             objProcesos.Detalles.Add(objContratos);
 
-                    ***REMOVED***
+                        }
                         else
                         {
                             objContratos.presupuesto += fila.AportePresupuesto;
                             objContratos.valor_planeado += fila.ValorPlaneado;
                             objContratos.valor_adjudicado += fila.ValorAdjudicado;
                             objContratos.valor_contratado += fila.ValorContratado.Value;
-                    ***REMOVED***
+                        }
 
-                ***REMOVED***
+                    }
 
 
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             ///ordena primer nivel actividad
             var result = objReturn.infoGasto.OrderByDescending(x => x.presupuesto).ToList();
@@ -564,8 +564,8 @@ namespace PlataformaTransparencia.Negocios.Entidad
                 {
                     //ordena nivel cont
                     item_actividad.Detalles = item_actividad.Detalles.OrderByDescending(x => x.presupuesto).ToList();
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             objReturn.infoGasto = result;
             objReturn.programa.estados = estados;
@@ -574,7 +574,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
             return objReturn;
 
-    ***REMOVED***
+        }
 
         public List<InfoConsolidadoPresupuesto> ObtenerRecursosPerGrupos(int annio, int codEntidad)
         {
@@ -582,21 +582,21 @@ namespace PlataformaTransparencia.Negocios.Entidad
             List<InfoConsolidadoPresupuesto> objReturn = new List<InfoConsolidadoPresupuesto>();
             var RecursosPerObjetoQuery = (from info in _connection.VwPresupuesto
                                           where info.Periodo == annio && int.Parse(info.CodigoInstitucion) == codEntidad
-                                          group info by new { info.GrupoDeGasto, info.ObjetoDeGasto ***REMOVED*** into g
+                                          group info by new { info.GrupoDeGasto, info.ObjetoDeGasto } into g
 
                                           select new InfoConsolidadoPresupuesto
                                           {
                                               labelGroup = g.Key.GrupoDeGasto,
                                               label = g.Key.ObjetoDeGasto,
                                               rawValueDouble = (double)g.Sum(g => g.Vigente),
-                                      ***REMOVED***).ToList();
+                                          }).ToList();
 
             objReturn = RecursosPerObjetoQuery;
 
 
             return objReturn;
 
-    ***REMOVED***
+        }
 
 
 
@@ -605,13 +605,13 @@ namespace PlataformaTransparencia.Negocios.Entidad
             List<string> objReturn = new List<string>();
             objReturn = (from info in _connection.VwPresupuesto
                          where info.CodigoInstitucion == codEntidad
-                         group info by new { annio = info.Periodo.ToString().Substring(0, 4) ***REMOVED*** into g
+                         group info by new { annio = info.Periodo.ToString().Substring(0, 4) } into g
                          orderby g.Key.annio descending
                          select g.Key.annio
                                           ).ToList();
 
             return objReturn;
-    ***REMOVED***
+        }
 
         public ModelEntidadData GetEntidadData(string codEntidad) {
             ModelEntidadData objReturn = new()
@@ -620,17 +620,17 @@ namespace PlataformaTransparencia.Negocios.Entidad
                 CodigoEntidad = codEntidad,
                 NombreEntidad = (from info in _connection.VwPresupuesto
                                  where info.CodigoInstitucion == codEntidad
-                                 group info by new { info.Institucion ***REMOVED*** into g
+                                 group info by new { info.Institucion } into g
                                  select g.Key.Institucion).First()
-        ***REMOVED***;
+            };
             if (objReturn.Annios.Count > 0) {
                 var datospresupuesto = GetDatosEntidadPorAnnio(objReturn.Annios[0],codEntidad);
                 objReturn.PresupuestoEjecutadoAnnioDisplay = (decimal)datospresupuesto.PresupuestoEjecutado;
                 objReturn.PresupuestoVigenteAnnioDisplay = (decimal)datospresupuesto.PresupuestoVigente;
                 objReturn.PorcEjecutadoAnnioDisplay = (decimal)(datospresupuesto.PresupuestoEjecutado / datospresupuesto.PresupuestoVigente) * 100;
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
 
         public DatosEntidadAnio GetDatosEntidadPorAnnio(string anioEntidad, string codEntidad)
@@ -646,17 +646,17 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                                {
                                                    ct.Año,
                                                    info.CodigoInstitucion
-                                           ***REMOVED*** into g
+                                               } into g
                                                select new DatosEntidadAnio
                                                {
                                                    PresupuestoInicial = ((decimal)g.Sum(x => x.Aprobado.Value)),
                                                    PresupuestoVigente = ((decimal)g.Sum(x => x.Vigente.Value)),
                                                    PresupuestoEjecutado = ((decimal)g.Sum(x => x.EjecucionAcumulada.Value)),
 
-                                           ***REMOVED***).ToList();
+                                               }).ToList();
             objReturn = consulta[0];
             return objReturn;
-    ***REMOVED***
+        }
 
 
 
@@ -673,15 +673,15 @@ namespace PlataformaTransparencia.Negocios.Entidad
             String CodigoComprador = null;
             int? Annio = null;
 
-            if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; ***REMOVED***
-            if (filtros.NombreEntidad != null && filtros.NombreEntidad.Trim() != "") { NombreEntidad = filtros.NombreEntidad; ***REMOVED***
-            if (filtros.CodigoProveedor != null && filtros.CodigoProveedor.Trim() != "") { CodigoProveedor = filtros.CodigoProveedor; ***REMOVED***
-            if (filtros.IdProyecto != null && filtros.IdProyecto.Trim() != "") { IdProyecto = filtros.IdProyecto; ***REMOVED***
-            if (filtros.CodigoComprador != null && filtros.CodigoComprador.Trim() != "") { CodigoComprador = filtros.CodigoComprador; ***REMOVED***
-            if (filtros.Estado != null && filtros.Estado.Trim() != "") { Estado = filtros.Estado; ***REMOVED***
-            if (filtros.Moneda != null && filtros.Moneda.Trim() != "") { Moneda = filtros.Moneda; ***REMOVED***
-            if (filtros.OrigenInformacion != null && filtros.OrigenInformacion.Trim() != "") { OrigenInformacion = filtros.OrigenInformacion; ***REMOVED***
-            if (filtros.Annio > 0) { Annio = filtros.Annio; ***REMOVED***
+            if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; }
+            if (filtros.NombreEntidad != null && filtros.NombreEntidad.Trim() != "") { NombreEntidad = filtros.NombreEntidad; }
+            if (filtros.CodigoProveedor != null && filtros.CodigoProveedor.Trim() != "") { CodigoProveedor = filtros.CodigoProveedor; }
+            if (filtros.IdProyecto != null && filtros.IdProyecto.Trim() != "") { IdProyecto = filtros.IdProyecto; }
+            if (filtros.CodigoComprador != null && filtros.CodigoComprador.Trim() != "") { CodigoComprador = filtros.CodigoComprador; }
+            if (filtros.Estado != null && filtros.Estado.Trim() != "") { Estado = filtros.Estado; }
+            if (filtros.Moneda != null && filtros.Moneda.Trim() != "") { Moneda = filtros.Moneda; }
+            if (filtros.OrigenInformacion != null && filtros.OrigenInformacion.Trim() != "") { OrigenInformacion = filtros.OrigenInformacion; }
+            if (filtros.Annio > 0) { Annio = filtros.Annio; }
 
             try
             {
@@ -698,11 +698,11 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                                      orderby NUMBER descending
                                                      select NUMBER
                                ).FirstOrDefault();
-        ***REMOVED***
+            }
             catch
             {
                 _objreturn.CantidadTotalRegistros = 0;
-        ***REMOVED***
+            }
 
 
             _objreturn.Data = (from cont in _connection.VwContratosXEntidads
@@ -732,11 +732,11 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                    Objetodelcontrato = cont.Objetodelcontrato,
                                    CodigoProceso = cont.Codigoproceso
                                  
-                           ***REMOVED***
+                               }
                              ).Distinct().ToList();
 
             return _objreturn;
-    ***REMOVED***
+        }
 
 
         public itemGenInversion ObtenerRecursosPerTipo(int annio, string codEntidad, string tipo, string programa)
@@ -749,17 +749,17 @@ namespace PlataformaTransparencia.Negocios.Entidad
                 if (tipo.ToUpper().Equals("INVERSION"))
                 {
                     var queryInfo = (from info in _connection.VwPresupuestoXProyInvs
-                                     join pre in _connection.VwPresupuesto on new { info.IdCatalogoLineaPresupuestal, info.CodigoObjetoDeGasto, info.CodigoInstitucion, info.Periodo ***REMOVED*** equals new { pre.IdCatalogoLineaPresupuestal, pre.CodigoObjetoDeGasto, pre.CodigoInstitucion, pre.Periodo ***REMOVED***
+                                     join pre in _connection.VwPresupuesto on new { info.IdCatalogoLineaPresupuestal, info.CodigoObjetoDeGasto, info.CodigoInstitucion, info.Periodo } equals new { pre.IdCatalogoLineaPresupuestal, pre.CodigoObjetoDeGasto, pre.CodigoInstitucion, pre.Periodo }
                                      join t in _connection.CatalogoTiempoes on pre.Periodo.ToString().Substring(0, 11) equals t.Periodo.ToString().Substring(0, 11)
                                      where info.Periodo.ToString().Substring(0, 11).Contains(annio.ToString()) &&
                                            info.CodigoInstitucion == codEntidad &&
                                            pre.CodigoPrograma == programa
-                                     group new { info, pre ***REMOVED*** by new
+                                     group new { info, pre } by new
                                      {
                                          info.Bpin,
                                          info.Nombreproyecto,
                                          pre.ObjetoDeGasto
-                                 ***REMOVED*** into g
+                                     } into g
                                      orderby g.Key.Bpin, g.Key.ObjetoDeGasto
                                      select new
                                      {
@@ -773,7 +773,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                          Aprobado = g.Sum(x => x.pre.Aprobado) / 1000000,
                                          Ejecutado = g.Sum(x => x.pre.EjecucionAcumulada) / 1000000,
                                          valor_proyecto = g.Max(x => x.info.ValorProyecto)
-                                 ***REMOVED***).Distinct().ToList();
+                                     }).Distinct().ToList();
                     itemGenPresupuesto objProy = null;
                     itemLineaPresupuestal objLineas = null;
                     itemLineaPresupuestal objRecursos = null;
@@ -791,15 +791,15 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                 objLineas.ejecutado = (decimal)fila.Ejecutado.Value;
                                 objLineas.porcentaje = (decimal)((objLineas.vigente.HasValue && objLineas.vigente.Value > 0) ? ((objLineas.ejecutado / objLineas.vigente.Value)) : 0);
                                 objReturn.otrasLineas.Add(objLineas);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objLineas.vigente += (decimal)fila.Vigente.Value;
                                 objLineas.aprobado += (decimal)fila.Aprobado.Value;
                                 objLineas.ejecutado += (decimal)fila.Ejecutado.Value;
                                 objLineas.porcentaje = (decimal)((objLineas.vigente.HasValue && objLineas.vigente.Value > 0) ? ((objLineas.ejecutado / objLineas.vigente.Value)) : 0);
-                        ***REMOVED***
-                    ***REMOVED***
+                            }
+                        }
                         else
                         {
                             objProy = objReturn.proyInv.Find(p => p.id == fila.bpin);
@@ -822,9 +822,9 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                     objRecursos.ejecutado = (decimal)fila.Ejecutado.Value;
                                     objRecursos.porcentaje = (decimal)((objRecursos.vigente.HasValue && objRecursos.vigente.Value > 0) ? ((objRecursos.ejecutado / objRecursos.vigente.Value)) : 0);
                                     objProy.detalleLineas.Add(objRecursos);
-                            ***REMOVED***
+                                }
                                 objReturn.proyInv.Add(objProy);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objRecursos = objProy.detalleLineas.Find(p => p.nombre == fila.objeto);
@@ -837,24 +837,24 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                     objRecursos.ejecutado = (decimal)fila.Ejecutado.Value;
                                     objRecursos.porcentaje = (decimal)((objRecursos.vigente.HasValue && objRecursos.vigente.Value > 0) ? ((objRecursos.ejecutado / objRecursos.vigente.Value) ) : 0);
                                     objProy.detalleLineas.Add(objRecursos);
-                            ***REMOVED***
+                                }
                                 else
                                 {
                                     objRecursos.vigente += (decimal)fila.Vigente.Value;
                                     objRecursos.aprobado += (decimal)fila.Aprobado.Value;
                                     objRecursos.ejecutado += (decimal)fila.Ejecutado.Value;
                                     objRecursos.porcentaje = (decimal)((objRecursos.vigente.HasValue && objRecursos.vigente.Value > 0) ? ((objRecursos.ejecutado / objRecursos.vigente.Value) ) : 0);
-                            ***REMOVED***
-                        ***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
+                                }
+                            }
+                        }
+                    }
+                }
                 else
                 {
                     var RecursosPerObjetoQuery = (from info in _connection.VwPresupuesto
                                                   where info.Periodo == annio && info.CodigoInstitucion == codEntidad && info.CodigoPrograma == programa
                                                   && info.TipoGasto == tipo
-                                                  group info by new { info.ObjetoDeGasto ***REMOVED*** into g
+                                                  group info by new { info.ObjetoDeGasto } into g
 
                                                   select new itemGenPresupuesto
                                                   {
@@ -862,27 +862,27 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                                       vigente = (decimal)g.Sum(g => g.Vigente.Value),
                                                       aprobado = (decimal)g.Sum(g => g.Aprobado.Value),
                                                       ejecutado = (decimal)g.Sum(g => g.EjecucionAcumulada.Value)
-                                              ***REMOVED***).ToList();
+                                                  }).ToList();
                     objReturn.genericoTipo = RecursosPerObjetoQuery;
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
            return objReturn;
-    ***REMOVED***
+        }
 
         public List<InfoConsolidadoPresupuesto> GetRecursosPorfinalidad(int annio, string codEntidad)
         {
             List<InfoConsolidadoPresupuesto> objReturn = (from info in _connection.VwPresupuesto
                                                           join ct in _connection.CatalogoTiempoes on info.Periodo.ToString() equals ct.Periodo
                                                           where ct.Año == annio && info.CodigoInstitucion == codEntidad
-                                                          group info by new { info.Finalidad, info.Sector ***REMOVED*** into g
+                                                          group info by new { info.Finalidad, info.Sector } into g
                                                           select new InfoConsolidadoPresupuesto
                                                           {
                                                               labelGroup = g.Key.Finalidad,
                                                               label = g.Key.Sector,
                                                               rawValueDouble = g.Sum(g => g.Vigente.Value)
-                                                      ***REMOVED***).OrderBy(x => x.labelGroup).ThenBy(n => n.label).ToList();
+                                                          }).OrderBy(x => x.labelGroup).ThenBy(n => n.label).ToList();
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<InfoConsolidadoPresupuesto> GetDistribucionGastoEntidad(int annio, string codEntidad)
         {
@@ -890,12 +890,12 @@ namespace PlataformaTransparencia.Negocios.Entidad
             var RecursosPerObjetoQuery = (from info in _connection.VwPresupuesto
                                           join ct in _connection.CatalogoTiempoes on info.Periodo.ToString() equals ct.Periodo
                                           where ct.Año == annio && info.CodigoInstitucion == codEntidad
-                                          group info by new { info.GrupoDeGasto ***REMOVED*** into g
+                                          group info by new { info.GrupoDeGasto } into g
                                           select new InfoConsolidadoPresupuesto
                                           {
                                               labelGroup = g.Key.GrupoDeGasto,
                                               rawValue = (decimal)g.Sum(g => g.Vigente.Value)
-                                      ***REMOVED***).OrderByDescending(x => x.rawValue).ToList();
+                                          }).OrderByDescending(x => x.rawValue).ToList();
          
             var objTotalPeriodo = RecursosPerObjetoQuery.Sum(x => x.rawValue);
             foreach (var item in RecursosPerObjetoQuery)
@@ -903,8 +903,8 @@ namespace PlataformaTransparencia.Negocios.Entidad
                 if (objTotalPeriodo > 0)
                 {
                     item.porcentaje = (decimal)Math.Round((item.rawValue / objTotalPeriodo) * 100, 4);
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             int i = 0;
             decimal otros = 0;
             decimal porcentaje = 0;
@@ -915,12 +915,12 @@ namespace PlataformaTransparencia.Negocios.Entidad
                     otros = item.rawValue + otros;
                     porcentaje = item.porcentaje + porcentaje;
                     
-            ***REMOVED***
+                }
                 else {
                     objReturn.Add(item);
-            ***REMOVED***
+                }
                 i = i + 1;
-        ***REMOVED***
+            }
             if (i >= 5)
             {
                 InfoConsolidadoPresupuesto objotros = new InfoConsolidadoPresupuesto();
@@ -928,22 +928,22 @@ namespace PlataformaTransparencia.Negocios.Entidad
             objotros.porcentaje=porcentaje;
             objotros.labelGroup = "OTROS";
             objReturn.Add(objotros);
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<ContratosXEntidadData> ObtenerProveedor(string Proveedor, string CodigoInstitucion)
         {
             List<ContratosXEntidadData> objreturn = (from cont in _connection.VwContratosXEntidads
                                                       where (cont.Proveedor.Contains(Proveedor) && cont.CodigoInstitucion.Equals(CodigoInstitucion))
-                                                      group cont by new { cont.Proveedor, cont.Documentoproveedor ***REMOVED*** into g
+                                                      group cont by new { cont.Proveedor, cont.Documentoproveedor } into g
                                                       select new ContratosXEntidadData
                                                       {
                                                           Proveedor = g.Key.Proveedor,
                                                           Documentoproveedor = g.Key.Proveedor
-                                                  ***REMOVED***).Distinct().ToList();
+                                                      }).Distinct().ToList();
             return objreturn;
-    ***REMOVED***
+        }
 
         public List<InfoConsolidadoPresupuesto> GetProcesosPorTipo(int annio, string codEntidad)
         {
@@ -957,14 +957,14 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                               labelGroup = info.Modalidad,
                                               label = info.Año.ToString(),
                                               rawValueDouble = (double)info.Cantidad
-                                      ***REMOVED***).ToList();
+                                          }).ToList();
 
             objReturn = RecursosPerObjetoQuery;
 
 
             return objReturn;
 
-    ***REMOVED***
+        }
 
         public List<ProcesosXEntidadData> GetProcesosPorAnio(int annio, string codEntidad)
         {
@@ -985,14 +985,14 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                               Modalidad = info.Modalidad,
                                               Url = info.Url
 
-                                      ***REMOVED***).Distinct().ToList();
+                                          }).Distinct().ToList();
 
             objReturn = RecursosPerObjetoQuery;
 
 
             return objReturn;
 
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

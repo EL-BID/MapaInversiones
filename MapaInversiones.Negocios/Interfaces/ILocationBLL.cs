@@ -10,5 +10,5 @@ namespace PlataformaTransparencia.Negocios.Location
     {
         public List<TableSectores> GetListSectores();
         public LocationProfileDetailData GetDetailLocationProfileByLocationIdAndTypeLocation(string locationId, string typeLocation, string jurisdictionId);
-***REMOVED***
-***REMOVED***
+    }
+}

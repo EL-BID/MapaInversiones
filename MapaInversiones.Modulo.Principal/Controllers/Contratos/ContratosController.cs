@@ -27,12 +27,12 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
       _logger = logger;
       _connection = connection;
 
-***REMOVED***
+    }
 
     public IActionResult Index()
     {
       return View();
-***REMOVED***
+    }
     public IActionResult Contratos()
     {
        ModelContratosConsolidados modelo = new ModelContratosConsolidados();
@@ -40,8 +40,8 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
             var monedaQ = Request.Query["moneda"];
             var procesoQ = Request.Query["codproceso"];
             object moneda = "";
-            if (monedaQ.Count > 0) { moneda = monedaQ[0]; ***REMOVED*** else { moneda = DBNull.Value; ***REMOVED***
-            if (procesoQ.Count > 0) { modelo.CodigoProceso = procesoQ[0]; ***REMOVED*** else { modelo.CodigoProceso = null; ***REMOVED***
+            if (monedaQ.Count > 0) { moneda = monedaQ[0]; } else { moneda = DBNull.Value; }
+            if (procesoQ.Count > 0) { modelo.CodigoProceso = procesoQ[0]; } else { modelo.CodigoProceso = null; }
 
             int? maxyear = null;
 
@@ -53,7 +53,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                            orderby contr.Anio descending
                            select contr.Anio).First();
 
-        ***REMOVED***
+            }
             else {
 
                 maxyear = (from contr in _connection.VwContratosDetalles
@@ -65,14 +65,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                            select contr.AnioUltimaActualizacion).First();
 
 
-        ***REMOVED***
+            }
 
             modelo.Consolidados = (from contr in _connection.VwContratosConsolidados
                                    where (contr.MonedaContrato == moneda.ToString() || moneda == DBNull.Value)
                                    && contr.ValorContratado != null
                                    && contr.Anio== maxyear
                                    orderby contr.Anio descending
-                                   group contr by new { contr.MonedaContrato, contr.CodigoOrigenInformacion, contr.OrigenInformacion ***REMOVED*** into datos
+                                   group contr by new { contr.MonedaContrato, contr.CodigoOrigenInformacion, contr.OrigenInformacion } into datos
                                    select new ContratosConsolidado
                                    {
                                        OrigenInformacion = datos.Key.OrigenInformacion,
@@ -80,26 +80,26 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                                        MonedaContrato = datos.Key.MonedaContrato,
                                        ValorContratado = datos.Sum(x => x.ValorContratado),
                                        NroContratos = datos.Sum(x => x.NroContratos),
-                               ***REMOVED***).Distinct().ToList();
+                                   }).Distinct().ToList();
 
 
             modelo.selectCon = (from contr in _connection.VwContratosDetalles
                       where (contr.MonedaContrato == moneda.ToString() || moneda == DBNull.Value)
                     && contr.ValorContratado != null
-                      group contr by new { contr.CodigoOrigenInformacion, contr.OrigenInformacion ***REMOVED*** into datos
+                      group contr by new { contr.CodigoOrigenInformacion, contr.OrigenInformacion } into datos
                       select new ContratosConsolidado
                       {
                           OrigenInformacion = datos.Key.OrigenInformacion,
                           CodigoOrigenInformacion = datos.Key.CodigoOrigenInformacion
 
-                  ***REMOVED***).Distinct().ToList();
+                      }).Distinct().ToList();
 
 
 
             modelo.Moneda = (moneda == DBNull.Value ? null: moneda.ToString());
             modelo.MaxYear = maxyear.ToString();
             return View(modelo);
-***REMOVED***
+    }
 
         public IActionResult Contratista()
         {
@@ -121,22 +121,22 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                                OrigenInformacion= contr.OrigenInformacion,
                                CodigoOrigenInformacion=contr.CodigoOrigenInformacion
 
-                       ***REMOVED***).Distinct().ToList();
+                           }).Distinct().ToList();
 
             modelo.Consolidados = new List<ContratosConsolidado>();
-            modelo.Consolidados.Add(new ContratosConsolidado { NroContratos = modelo.Data.Sum(l => l.NumContratos) , OrigenInformacion = "Todos", CodigoOrigenInformacion = -1 ***REMOVED***);
+            modelo.Consolidados.Add(new ContratosConsolidado { NroContratos = modelo.Data.Sum(l => l.NumContratos) , OrigenInformacion = "Todos", CodigoOrigenInformacion = -1 });
             foreach (var contratis in modelo.Data)
             {
-                modelo.Consolidados.Add(new ContratosConsolidado { NroContratos = contratis.NumContratos, OrigenInformacion = contratis.OrigenInformacion, CodigoOrigenInformacion = contratis.CodigoOrigenInformacion ***REMOVED***);
+                modelo.Consolidados.Add(new ContratosConsolidado { NroContratos = contratis.NumContratos, OrigenInformacion = contratis.OrigenInformacion, CodigoOrigenInformacion = contratis.CodigoOrigenInformacion });
 
-        ***REMOVED***
+            }
 
          
             modelo.Contratista = _contratista;
 
            
             return View(modelo);
-    ***REMOVED***
+        }
 
         public IActionResult Contrato()
         {
@@ -158,15 +158,15 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
             modelo.tipo_comentario = part.ObtenerTipoComentarioAsync(3);
             Modelos.Contratos.Contrato query = new Modelos.Contratos.Contrato(); 
 
-            if (monedaQ.Count > 0) { query.Moneda = monedaQ[0]; ***REMOVED*** else { query.Moneda = null; ***REMOVED***
-            if (procesoQ.Count > 0) { query.CodigoProceso = procesoQ[0]; ***REMOVED*** else { query.CodigoProceso = null; ***REMOVED***
-            if (contratoQ.Count > 0) { query.CodigoContrato = contratoQ[0]; ***REMOVED*** else { query.CodigoContrato = null; ***REMOVED***
+            if (monedaQ.Count > 0) { query.Moneda = monedaQ[0]; } else { query.Moneda = null; }
+            if (procesoQ.Count > 0) { query.CodigoProceso = procesoQ[0]; } else { query.CodigoProceso = null; }
+            if (contratoQ.Count > 0) { query.CodigoContrato = contratoQ[0]; } else { query.CodigoContrato = null; }
 
             modelo.Query = new List<Modelos.Contratos.Contrato>();
             modelo.Query.Add(query);
 
             return View(modelo);
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

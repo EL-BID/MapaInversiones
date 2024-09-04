@@ -30,7 +30,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             _solr = solr;
             datosAbiertos = DatosAbiertosNewBLL;
 
-    ***REMOVED***
+        }
 
         [HttpGet("ObtenerFuentesDatos")]
         public ModelDatosAbiertosData ObtenerFuentesDatos()
@@ -41,15 +41,15 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 objReturn.FuentesRecursos = datosAbiertos.ObtenerFuentesDatosAbiertos();
                 objReturn.Status = true;
 
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
 
-        ***REMOVED***
+            }
 
             return objReturn;
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

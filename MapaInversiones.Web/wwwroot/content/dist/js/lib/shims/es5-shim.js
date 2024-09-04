@@ -7,13 +7,13 @@
 	if (typeof define == "function") {
 		define(definition);
 	// YUI3
-	***REMOVED*** else if (typeof YUI == "function") {
+	} else if (typeof YUI == "function") {
 		YUI.add("es5", definition);
 	// CommonJS and <script>
-	***REMOVED*** else {
+	} else {
 		definition();
-	***REMOVED***
-***REMOVED***)(function () {
+	}
+})(function () {
 
 /**
  * Brings an environment as close to ECMAScript 5 compliance
@@ -32,7 +32,7 @@
 // ES-5 15.3.4.5
 // http://es5.github.com/#x15.3.4.5
 
-function Empty() {***REMOVED***
+function Empty() {}
 
 if (!Function.prototype.bind) {
 	Function.prototype.bind = function bind(that) { // .length is 1
@@ -41,7 +41,7 @@ if (!Function.prototype.bind) {
 		// 2. If IsCallable(Target) is false, throw a TypeError exception.
 		if (typeof target != "function") {
 			throw new TypeError("Function.prototype.bind called on incompatible " + target);
-		***REMOVED***
+		}
 		// 3. Let A be a new (possibly empty) internal list of all of the
 		//   argument values provided after thisArg (arg1, arg2 etc), in order.
 		// XXX slicedArgs will stand in for "A" if used
@@ -80,10 +80,10 @@ if (!Function.prototype.bind) {
 				);
 				if (Object(result) === result) {
 					return result;
-				***REMOVED***
+				}
 				return this;
 
-			***REMOVED*** else {
+			} else {
 				// 15.3.4.5.1 [[Call]]
 				// When the [[Call]] internal method of a function object, F,
 				// which was created using the bind function is called with a
@@ -108,15 +108,15 @@ if (!Function.prototype.bind) {
 					args.concat(slice.call(arguments))
 				);
 
-			***REMOVED***
+			}
 
-		***REMOVED***;
+		};
 		if(target.prototype) {
 			Empty.prototype = target.prototype;
 			bound.prototype = new Empty();
 			// Clean up dangling references.
 			Empty.prototype = null;
-		***REMOVED***
+		}
 		// XXX bound.length is never writable, so don't even try
 		//
 		// 15. If the [[Class]] internal property of Target is "Function", then
@@ -134,11 +134,11 @@ if (!Function.prototype.bind) {
 		// 19. Let thrower be the [[ThrowTypeError]] function Object (13.2.3).
 		// 20. Call the [[DefineOwnProperty]] internal method of F with
 		//   arguments "caller", PropertyDescriptor {[[Get]]: thrower, [[Set]]:
-		//   thrower, [[Enumerable]]: false, [[Configurable]]: false***REMOVED***, and
+		//   thrower, [[Enumerable]]: false, [[Configurable]]: false}, and
 		//   false.
 		// 21. Call the [[DefineOwnProperty]] internal method of F with
 		//   arguments "arguments", PropertyDescriptor {[[Get]]: thrower,
-		//   [[Set]]: thrower, [[Enumerable]]: false, [[Configurable]]: false***REMOVED***,
+		//   [[Set]]: thrower, [[Enumerable]]: false, [[Configurable]]: false},
 		//   and false.
 
 		// TODO
@@ -149,8 +149,8 @@ if (!Function.prototype.bind) {
 
 		// 22. Return F.
 		return bound;
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 // Shortcut to an often accessed properties, in order to avoid multiple
 // dereference that costs universally.
@@ -175,7 +175,7 @@ if ((supportsAccessors = owns(prototypeOfObject, "__defineGetter__"))) {
 	defineSetter = call.bind(prototypeOfObject.__defineSetter__);
 	lookupGetter = call.bind(prototypeOfObject.__lookupGetter__);
 	lookupSetter = call.bind(prototypeOfObject.__lookupSetter__);
-***REMOVED***
+}
 
 //
 // Array
@@ -192,14 +192,14 @@ if ([1,2].splice(0).length != 2) {
 	Array.prototype.splice = function(start, deleteCount) {
 		if (!arguments.length) {
 			return [];
-		***REMOVED*** else {
+		} else {
 			return array_splice.apply(this, [
 				start === void 0 ? 0 : start,
 				deleteCount === void 0 ? (this.length - start) : deleteCount
 			].concat(slice.call(arguments, 2)))
-		***REMOVED***
-	***REMOVED***;
-***REMOVED***
+		}
+	};
+}
 
 // ES5 15.4.4.12
 // http://es5.github.com/#x15.4.4.13
@@ -211,8 +211,8 @@ if ([].unshift(0) != 1) {
 	Array.prototype.unshift = function() {
 		array_unshift.apply(this, arguments);
 		return this.length;
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 // ES5 15.4.3.2
 // http://es5.github.com/#x15.4.3.2
@@ -220,8 +220,8 @@ if ([].unshift(0) != 1) {
 if (!Array.isArray) {
 	Array.isArray = function isArray(obj) {
 		return _toString(obj) == "[object Array]";
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 // The IsCallable() check in the Array functions
 // has been replaced with a strict check on the
@@ -257,7 +257,7 @@ if (!Array.prototype.forEach) {
 		// If no callback function or if callback is not a callable function
 		if (_toString(fun) != "[object Function]") {
 			throw new TypeError(); // TODO message
-		***REMOVED***
+		}
 
 		while (++i < length) {
 			if (i in self) {
@@ -265,10 +265,10 @@ if (!Array.prototype.forEach) {
 				// context, property value, property key, thisArg object
 				// context
 				fun.call(thisp, self[i], i, object);
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***;
-***REMOVED***
+			}
+		}
+	};
+}
 
 // ES5 15.4.4.19
 // http://es5.github.com/#x15.4.4.19
@@ -286,15 +286,15 @@ if (!Array.prototype.map) {
 		// If no callback function or if callback is not a callable function
 		if (_toString(fun) != "[object Function]") {
 			throw new TypeError(fun + " is not a function");
-		***REMOVED***
+		}
 
 		for (var i = 0; i < length; i++) {
 			if (i in self)
 				result[i] = fun.call(thisp, self[i], i, object);
-		***REMOVED***
+		}
 		return result;
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 // ES5 15.4.4.20
 // http://es5.github.com/#x15.4.4.20
@@ -313,19 +313,19 @@ if (!Array.prototype.filter) {
 		// If no callback function or if callback is not a callable function
 		if (_toString(fun) != "[object Function]") {
 			throw new TypeError(fun + " is not a function");
-		***REMOVED***
+		}
 
 		for (var i = 0; i < length; i++) {
 			if (i in self) {
 				value = self[i];
 				if (fun.call(thisp, value, i, object)) {
 					result.push(value);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 		return result;
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 // ES5 15.4.4.16
 // http://es5.github.com/#x15.4.4.16
@@ -342,16 +342,16 @@ if (!Array.prototype.every) {
 		// If no callback function or if callback is not a callable function
 		if (_toString(fun) != "[object Function]") {
 			throw new TypeError(fun + " is not a function");
-		***REMOVED***
+		}
 
 		for (var i = 0; i < length; i++) {
 			if (i in self && !fun.call(thisp, self[i], i, object)) {
 				return false;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 		return true;
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 // ES5 15.4.4.17
 // http://es5.github.com/#x15.4.4.17
@@ -368,16 +368,16 @@ if (!Array.prototype.some) {
 		// If no callback function or if callback is not a callable function
 		if (_toString(fun) != "[object Function]") {
 			throw new TypeError(fun + " is not a function");
-		***REMOVED***
+		}
 
 		for (var i = 0; i < length; i++) {
 			if (i in self && fun.call(thisp, self[i], i, object)) {
 				return true;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 		return false;
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 // ES5 15.4.4.21
 // http://es5.github.com/#x15.4.4.21
@@ -393,40 +393,40 @@ if (!Array.prototype.reduce) {
 		// If no callback function or if callback is not a callable function
 		if (_toString(fun) != "[object Function]") {
 			throw new TypeError(fun + " is not a function");
-		***REMOVED***
+		}
 
 		// no value to return if no initial value and an empty array
 		if (!length && arguments.length == 1) {
 			throw new TypeError("reduce of empty array with no initial value");
-		***REMOVED***
+		}
 
 		var i = 0;
 		var result;
 		if (arguments.length >= 2) {
 			result = arguments[1];
-		***REMOVED*** else {
+		} else {
 			do {
 				if (i in self) {
 					result = self[i++];
 					break;
-				***REMOVED***
+				}
 
 				// if array contains no values, no initial value to return
 				if (++i >= length) {
 					throw new TypeError("reduce of empty array with no initial value");
-				***REMOVED***
-			***REMOVED*** while (true);
-		***REMOVED***
+				}
+			} while (true);
+		}
 
 		for (; i < length; i++) {
 			if (i in self) {
 				result = fun.call(void 0, result, self[i], i, object);
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		return result;
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 // ES5 15.4.4.22
 // http://es5.github.com/#x15.4.4.22
@@ -442,39 +442,39 @@ if (!Array.prototype.reduceRight) {
 		// If no callback function or if callback is not a callable function
 		if (_toString(fun) != "[object Function]") {
 			throw new TypeError(fun + " is not a function");
-		***REMOVED***
+		}
 
 		// no value to return if no initial value, empty array
 		if (!length && arguments.length == 1) {
 			throw new TypeError("reduceRight of empty array with no initial value");
-		***REMOVED***
+		}
 
 		var result, i = length - 1;
 		if (arguments.length >= 2) {
 			result = arguments[1];
-		***REMOVED*** else {
+		} else {
 			do {
 				if (i in self) {
 					result = self[i--];
 					break;
-				***REMOVED***
+				}
 
 				// if array contains no values, no initial value to return
 				if (--i < 0) {
 					throw new TypeError("reduceRight of empty array with no initial value");
-				***REMOVED***
-			***REMOVED*** while (true);
-		***REMOVED***
+				}
+			} while (true);
+		}
 
 		do {
 			if (i in this) {
 				result = fun.call(void 0, result, self[i], i, object);
-			***REMOVED***
-		***REMOVED*** while (i--);
+			}
+		} while (i--);
 
 		return result;
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 // ES5 15.4.4.14
 // http://es5.github.com/#x15.4.4.14
@@ -488,23 +488,23 @@ if (!Array.prototype.indexOf || ([0, 1].indexOf(1, 2) != -1)) {
 
 		if (!length) {
 			return -1;
-		***REMOVED***
+		}
 
 		var i = 0;
 		if (arguments.length > 1) {
 			i = toInteger(arguments[1]);
-		***REMOVED***
+		}
 
 		// handle negative indices
 		i = i >= 0 ? i : Math.max(0, length + i);
 		for (; i < length; i++) {
 			if (i in self && self[i] === sought) {
 				return i;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 		return -1;
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 // ES5 15.4.4.15
 // http://es5.github.com/#x15.4.4.15
@@ -518,21 +518,21 @@ if (!Array.prototype.lastIndexOf || ([0, 1].lastIndexOf(0, -3) != -1)) {
 
 		if (!length) {
 			return -1;
-		***REMOVED***
+		}
 		var i = length - 1;
 		if (arguments.length > 1) {
 			i = Math.min(i, toInteger(arguments[1]));
-		***REMOVED***
+		}
 		// handle negative indices
 		i = i >= 0 ? i : length - Math.abs(i);
 		for (; i >= 0; i--) {
 			if (i in self && sought === self[i]) {
 				return i;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 		return -1;
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 //
 // Object
@@ -555,9 +555,9 @@ if (!Object.keys) {
 		],
 		dontEnumsLength = dontEnums.length;
 
-	for (var key in {"toString": null***REMOVED***) {
+	for (var key in {"toString": null}) {
 		hasDontEnumBug = false;
-	***REMOVED***
+	}
 
 	Object.keys = function keys(object) {
 
@@ -566,27 +566,27 @@ if (!Object.keys) {
 			object === null
 		) {
 			throw new TypeError("Object.keys called on a non-object");
-		***REMOVED***
+		}
 
 		var keys = [];
 		for (var name in object) {
 			if (owns(object, name)) {
 				keys.push(name);
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		if (hasDontEnumBug) {
 			for (var i = 0, ii = dontEnumsLength; i < ii; i++) {
 				var dontEnum = dontEnums[i];
 				if (owns(object, dontEnum)) {
 					keys.push(dontEnum);
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 		return keys;
-	***REMOVED***;
+	};
 
-***REMOVED***
+}
 
 //
 // Date
@@ -610,7 +610,7 @@ if (
 		var result, length, value, year, month;
 		if (!isFinite(this)) {
 			throw new RangeError("Date.prototype.toISOString called on non-finite value.");
-		***REMOVED***
+		}
 
 		year = this.getUTCFullYear();
 
@@ -635,16 +635,16 @@ if (
 			// digits.
 			if (value < 10) {
 				result[length] = "0" + value;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 		// pad milliseconds to have three digits.
 		return (
 			year + "-" + result.slice(0, 2).join("-") +
 			"T" + result.slice(2).join(":") + "." +
 			("000" + this.getUTCMilliseconds()).slice(-3) + "Z"
 		);
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 
 // ES5 15.9.5.44
@@ -660,11 +660,11 @@ try {
 		Date.prototype.toJSON.call({ // generic
 			toISOString: function () {
 				return true;
-			***REMOVED***
-		***REMOVED***)
+			}
+		})
 	);
-***REMOVED*** catch (e) {
-***REMOVED***
+} catch (e) {
+}
 if (!dateToJSONIsSupported) {
 	Date.prototype.toJSON = function toJSON(key) {
 		// When the toJSON method is called with argument key, the following
@@ -679,14 +679,14 @@ if (!dateToJSONIsSupported) {
 		// 3. If tv is a Number and is not finite, return null.
 		if (typeof tv === "number" && !isFinite(tv)) {
 			return null;
-		***REMOVED***
+		}
 		// 4. Let toISO be the result of calling the [[Get]] internal method of
 		// O with argument "toISOString".
 		toISO = o.toISOString;
 		// 5. If IsCallable(toISO) is false, throw a TypeError exception.
 		if (typeof toISO != "function") {
 			throw new TypeError("toISOString property is not callable");
-		***REMOVED***
+		}
 		// 6. Return the result of calling the [[Call]] internal method of
 		//  toISO with O as the this value and an empty argument list.
 		return toISO.call(o);
@@ -699,8 +699,8 @@ if (!dateToJSONIsSupported) {
 		// it does require that any such object have a toISOString method. An
 		// object is free to use the argument key to filter its
 		// stringification.
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 // ES5 15.9.4.2
 // http://es5.github.com/#x15.9.4.2
@@ -731,29 +731,29 @@ if (!Date.parse || "Date.parse is buggy") {
 				// Prevent mixups with unfixed Date object
 				date.constructor = Date;
 				return date;
-			***REMOVED***
+			}
 			return NativeDate.apply(this, arguments);
-		***REMOVED***;
+		};
 
 		// 15.9.1.15 Date Time String Format.
 		var isoDateExpression = new RegExp("^" +
-			"(\\d{4***REMOVED***|[\+\-]\\d{6***REMOVED***)" + // four-digit year capture or sign +
+			"(\\d{4}|[\+\-]\\d{6})" + // four-digit year capture or sign +
 									  // 6-digit extended year
-			"(?:-(\\d{2***REMOVED***)" + // optional month capture
-			"(?:-(\\d{2***REMOVED***)" + // optional day capture
+			"(?:-(\\d{2})" + // optional month capture
+			"(?:-(\\d{2})" + // optional day capture
 			"(?:" + // capture hours:minutes:seconds.milliseconds
-				"T(\\d{2***REMOVED***)" + // hours capture
-				":(\\d{2***REMOVED***)" + // minutes capture
+				"T(\\d{2})" + // hours capture
+				":(\\d{2})" + // minutes capture
 				"(?:" + // optional :seconds.milliseconds
-					":(\\d{2***REMOVED***)" + // seconds capture
-					"(?:\\.(\\d{3***REMOVED***))?" + // milliseconds capture
+					":(\\d{2})" + // seconds capture
+					"(?:\\.(\\d{3}))?" + // milliseconds capture
 				")?" +
 			"(" + // capture UTC offset component
 				"Z|" + // UTC capture
 				"(?:" + // offset specifier +/-hours:minutes
 					"([-+])" + // sign capture
-					"(\\d{2***REMOVED***)" + // hours offset capture
-					":(\\d{2***REMOVED***)" + // minutes offset capture
+					"(\\d{2})" + // hours offset capture
+					":(\\d{2})" + // minutes offset capture
 				")" +
 			")?)?)?)?" +
 		"$");
@@ -771,12 +771,12 @@ if (!Date.parse || "Date.parse is buggy") {
 				Math.floor((year - 1601 + t) / 400) +
 				365 * (year - 1970)
 			);
-		***REMOVED***
+		}
 
 		// Copy any custom methods a 3rd party library may have added
 		for (var key in NativeDate) {
 			Date[key] = NativeDate[key];
-		***REMOVED***
+		}
 
 		// Copy "native" methods explicitly; they may be non-enumerable
 		Date.now = NativeDate.now;
@@ -832,24 +832,24 @@ if (!Date.parse || "Date.parse is buggy") {
 					) * 1000 + millisecond + offset;
 					if (-8.64e15 <= result && result <= 8.64e15) {
 						return result;
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 				return NaN;
-			***REMOVED***
+			}
 			return NativeDate.parse.apply(this, arguments);
-		***REMOVED***;
+		};
 
 		return Date;
-	***REMOVED***)(Date);
-***REMOVED***
+	})(Date);
+}
 
 // ES5 15.9.4.4
 // http://es5.github.com/#x15.9.4.4
 if (!Date.now) {
 	Date.now = function now() {
 		return new Date().getTime();
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 
 //
@@ -871,8 +871,8 @@ if("0".split(void 0, 0).length) {
 	String.prototype.split = function(separator, limit) {
 		if(separator === void 0 && limit === 0)return [];
 		return string_split.apply(this, arguments);
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 // ECMA-262, 3rd B.2.3
 // Note an ECMAScript standart, although ECMAScript 3rd Edition has a
@@ -883,9 +883,9 @@ if("".substr && "0b".substr(-1) !== "b") {
 	var string_substr = String.prototype.substr;
 	/**
 	 *  Get the substring of a string
-	 *  @param  {integer***REMOVED***  start   where to start the substring
-	 *  @param  {integer***REMOVED***  length  how many characters to return
-	 *  @return {string***REMOVED***
+	 *  @param  {integer}  start   where to start the substring
+	 *  @param  {integer}  length  how many characters to return
+	 *  @return {string}
 	 */
 	String.prototype.substr = function(start, length) {
 		return string_substr.call(
@@ -893,8 +893,8 @@ if("".substr && "0b".substr(-1) !== "b") {
 			start < 0 ? ((start = this.length + start) < 0 ? 0 : start) : start,
 			length
 		);
-	***REMOVED***
-***REMOVED***
+	}
+}
 
 // ES5 15.5.4.20
 // http://es5.github.com/#x15.5.4.20
@@ -910,12 +910,12 @@ if (!String.prototype.trim || ws.trim()) {
 	String.prototype.trim = function trim() {
 		if (this === undefined || this === null) {
 			throw new TypeError("can't convert "+this+" to object");
-		***REMOVED***
+		}
 		return String(this)
 			.replace(trimBeginRegexp, "")
 			.replace(trimEndRegexp, "");
-	***REMOVED***;
-***REMOVED***
+	};
+}
 
 //
 // Util
@@ -930,11 +930,11 @@ function toInteger(n) {
 	n = +n;
 	if (n !== n) { // isNaN
 		n = 0;
-	***REMOVED*** else if (n !== 0 && n !== (1/0) && n !== -(1/0)) {
+	} else if (n !== 0 && n !== (1/0) && n !== -(1/0)) {
 		n = (n > 0 || -1) * Math.floor(Math.abs(n));
-	***REMOVED***
+	}
 	return n;
-***REMOVED***
+}
 
 function isPrimitive(input) {
 	var type = typeof input;
@@ -945,51 +945,51 @@ function isPrimitive(input) {
 		type === "number" ||
 		type === "string"
 	);
-***REMOVED***
+}
 
 function toPrimitive(input) {
 	var val, valueOf, toString;
 	if (isPrimitive(input)) {
 		return input;
-	***REMOVED***
+	}
 	valueOf = input.valueOf;
 	if (typeof valueOf === "function") {
 		val = valueOf.call(input);
 		if (isPrimitive(val)) {
 			return val;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 	toString = input.toString;
 	if (typeof toString === "function") {
 		val = toString.call(input);
 		if (isPrimitive(val)) {
 			return val;
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 	throw new TypeError();
-***REMOVED***
+}
 
 // ES5 9.9
 // http://es5.github.com/#x9.9
 var toObject = function (o) {
 	if (o == null) { // this matches both null and undefined
 		throw new TypeError("can't convert "+o+" to object");
-	***REMOVED***
+	}
 	return Object(o);
-***REMOVED***;
+};
 
-***REMOVED***);
+});
 
 /**
 * Create an slug for the String
 * @return Slugified string
 */
 String.prototype.slugify = (function(){
-		var MEMO = {***REMOVED***
+		var MEMO = {}
 		return function(){
 				if(MEMO[this]){
 						return MEMO[this]
-				***REMOVED***
+				}
 
 				MEMO[this] = this.toLowerCase()
 				.replace(/[à-æ]/g,'a')
@@ -1002,8 +1002,8 @@ String.prototype.slugify = (function(){
 				.replace(/[^a-zA-Z]+/g,'-')
 				.replace(/(?:^-+)|(?:-+$)/g,'')
 				return MEMO[this]
-		***REMOVED***
-***REMOVED***)();
+		}
+})();
 
 /*!
 * string_score.js: String Scoring Algorithm 0.1.10 
@@ -1024,9 +1024,9 @@ String.prototype.slugify = (function(){
 */
 String.prototype.score = function(abbreviation, fuzziness) {
 	// If the string is equal to the abbreviation, perfect match.
-	if (this == abbreviation) {return 1;***REMOVED***
+	if (this == abbreviation) {return 1;}
 	//if it's not a perfect match and is empty return 0
-	if(abbreviation === "") {return 0;***REMOVED***
+	if(abbreviation === "") {return 0;}
 
 	var total_character_score = 0,
 			abbreviation_length = abbreviation.length,
@@ -1060,19 +1060,19 @@ String.prototype.score = function(abbreviation, fuzziness) {
 			if (fuzziness) {
 				fuzzies += 1-fuzziness;
 				continue;
-			***REMOVED*** else {
+			} else {
 				return 0;
-			***REMOVED***
-		***REMOVED*** else {
+			}
+		} else {
 			character_score = 0.1;
-		***REMOVED***
+		}
 
 		// Set base score for matching 'c'.
 
 		// Same case bonus.
 		if (string[index_in_string] === c) { 
 			character_score += 0.1; 
-		***REMOVED***
+		}
 
 		// Consecutive letter & start-of-string Bonus
 		if (index_in_string === 0) {
@@ -1083,23 +1083,23 @@ String.prototype.score = function(abbreviation, fuzziness) {
 				// & the first character of abbreviation, add a
 				// start-of-string match bonus.
 				start_of_string_bonus = 1 //true;
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 		else {
 	// Acronym Bonus
 	// Weighing Logic: Typing the first character of an acronym is as if you
 	// preceded it with two perfect character matches.
 	if (string.charAt(index_in_string - 1) === ' ') {
 		character_score += 0.8; // * Math.min(index_in_string, 5); // Cap bonus at 0.4 * 5
-	***REMOVED***
-		***REMOVED***
+	}
+		}
 
 		// Left trim the already matched part of the string
 		// (forces sequential matching).
 		string = string.substring(index_in_string + 1, string_length);
 
 		total_character_score += character_score;
-	***REMOVED*** // end of for loop
+	} // end of for loop
 
 	// Uncomment to weigh smaller words higher.
 	// return total_character_score / string_length;
@@ -1116,10 +1116,10 @@ String.prototype.score = function(abbreviation, fuzziness) {
 
 	if (start_of_string_bonus && (final_score + 0.15 < 1)) {
 		final_score += 0.15;
-	***REMOVED***
+	}
 
 	return final_score;
-***REMOVED***;
+};
 
 ;(function(){
 	function toCurrency(nStr){
@@ -1128,16 +1128,16 @@ String.prototype.score = function(abbreviation, fuzziness) {
 		var x = nStr.split('.'),
 			x1 = x[0],
 			x2 = x.length > 1 ? '.' + x[1] : '',
-			rgx = /(\d+)(\d{3***REMOVED***)/,
+			rgx = /(\d+)(\d{3})/,
 			index = 1,
 			separator;
 		while (rgx.test(x1)) {
 			separator = index % 2 === 0 ? '\'' : '.'
 			x1 = x1.replace(rgx, '$1' + separator + '$2')
 			index ++
-		***REMOVED***
+		}
 		return 'B/.' + x1 + x2;
-	***REMOVED***
+	}
 	// Assigning this to Number prototype for letting use it inside templates
 	Number.prototype.toCurrency = toCurrency
-***REMOVED***)();
+})();

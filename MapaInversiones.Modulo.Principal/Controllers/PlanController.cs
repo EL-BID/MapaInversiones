@@ -22,32 +22,32 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         _logger = logger;
         _connection = connection;
 
-***REMOVED***
+    }
 
     
     public IActionResult Index()
     {
       return View();
-***REMOVED***
+    }
     public IActionResult PlanNacional()
     {
       ViewData["ruta"] = "Planificación";
       return View();
-***REMOVED***
+    }
     public IActionResult PerfilPrograma()
     {
       return View();
-***REMOVED***
+    }
 
     public IActionResult ProcesoPlanNacional()
     {
       ViewData["ruta"] = "Planificación";
       return View();
-***REMOVED***
+    }
 
         public IActionResult pruebaGrafica()
         {
             return View();
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

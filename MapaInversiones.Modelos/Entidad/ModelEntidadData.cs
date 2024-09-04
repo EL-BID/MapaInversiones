@@ -8,119 +8,119 @@ namespace PlataformaTransparencia.Modelos.Entidad
 {
     public class ModelEntidadData : RespuestaContratoBase
     {
-        public string Mision { get; set; ***REMOVED***
-        public string Vision { get; set; ***REMOVED***
-        public string NombreEntidad { get; set; ***REMOVED***
-        public string CodigoEntidad { get; set; ***REMOVED***
+        public string Mision { get; set; }
+        public string Vision { get; set; }
+        public string NombreEntidad { get; set; }
+        public string CodigoEntidad { get; set; }
 
         public List<string> Annios = new List<string>();
-        public string UrlParticipacionCiudadana { get; set; ***REMOVED***
+        public string UrlParticipacionCiudadana { get; set; }
 
-        public List<RelacionEmisiorReceptor> RelacionEntidadObjetivos { get; set; ***REMOVED***
+        public List<RelacionEmisiorReceptor> RelacionEntidadObjetivos { get; set; }
 
-        public List<InfoEntidad> Entidades { get; set; ***REMOVED***
-        public List<ProyectosPerfilEntidad> ProyectosHaciendaCentral { get; set; ***REMOVED***
-        public List<ProyectosPerfilEntidad> ProyectosHaciendaNoAsignable { get; set; ***REMOVED***
-        public List<ProyectosProgramas> ProyectosHaciendaSustantivo { get; set; ***REMOVED***
+        public List<InfoEntidad> Entidades { get; set; }
+        public List<ProyectosPerfilEntidad> ProyectosHaciendaCentral { get; set; }
+        public List<ProyectosPerfilEntidad> ProyectosHaciendaNoAsignable { get; set; }
+        public List<ProyectosProgramas> ProyectosHaciendaSustantivo { get; set; }
 
-        public List<infograficoPrograma> infoProgramas { get; set; ***REMOVED***
+        public List<infograficoPrograma> infoProgramas { get; set; }
 
-        public List<infograficoActividad> infograficoActividad { get; set; ***REMOVED***
+        public List<infograficoActividad> infograficoActividad { get; set; }
 
-        public List<infograficoGrupoGasto> infograficoGasto { get; set; ***REMOVED***
+        public List<infograficoGrupoGasto> infograficoGasto { get; set; }
 
-        public infograficoEntidad infograficoEntidad { get; set; ***REMOVED***
+        public infograficoEntidad infograficoEntidad { get; set; }
 
-        public decimal PresupuestoVigenteAnnioDisplay { get; set; ***REMOVED***
-        public decimal PresupuestoEjecutadoAnnioDisplay { get; set; ***REMOVED***
-        public decimal PorcEjecutadoAnnioDisplay { get; set; ***REMOVED***
+        public decimal PresupuestoVigenteAnnioDisplay { get; set; }
+        public decimal PresupuestoEjecutadoAnnioDisplay { get; set; }
+        public decimal PorcEjecutadoAnnioDisplay { get; set; }
 
-        public itemGenInversion detalleTipo { get; set; ***REMOVED***
-***REMOVED***
+        public itemGenInversion detalleTipo { get; set; }
+    }
 
     public class ProyectosPerfilEntidad
     {
-        public string NombreProyectoActividad { get; set; ***REMOVED***
-        public string Descripcion { get; set; ***REMOVED***
-        public string Clasificacion { get; set; ***REMOVED***
-        public decimal PresupuestoVigente { get; set; ***REMOVED***
-        public decimal PresupuestoAvance { get; set; ***REMOVED***
+        public string NombreProyectoActividad { get; set; }
+        public string Descripcion { get; set; }
+        public string Clasificacion { get; set; }
+        public decimal PresupuestoVigente { get; set; }
+        public decimal PresupuestoAvance { get; set; }
 
-        public List<IndicadorProyecto> Indicadores { get; set; ***REMOVED***
-***REMOVED***
+        public List<IndicadorProyecto> Indicadores { get; set; }
+    }
 
     public class IndicadorProyecto
     {
-        public int Codigo { get; set; ***REMOVED***
-        public string Nombre { get; set; ***REMOVED***
-        public string Descripcion { get; set; ***REMOVED***
-        public string UnidadMedidaAnioBase { get; set; ***REMOVED***
-        public string UnidadMedidaTotal { get; set; ***REMOVED***
-        public string UnidadIndicador { get; set; ***REMOVED***
-        public decimal Avance { get; set; ***REMOVED***
-        public string Frecuencia { get; set; ***REMOVED***
-        public string Fuente { get; set; ***REMOVED***
-        public string Formula { get; set; ***REMOVED***
+        public int Codigo { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public string UnidadMedidaAnioBase { get; set; }
+        public string UnidadMedidaTotal { get; set; }
+        public string UnidadIndicador { get; set; }
+        public decimal Avance { get; set; }
+        public string Frecuencia { get; set; }
+        public string Fuente { get; set; }
+        public string Formula { get; set; }
 
-        public string ind_frecuen { get; set; ***REMOVED***
+        public string ind_frecuen { get; set; }
 
-        public string tipoIndicador { get; set; ***REMOVED***
+        public string tipoIndicador { get; set; }
 
-        public string nivel { get; set; ***REMOVED***
+        public string nivel { get; set; }
 
-        public string DescripcionPoblTotal { get; set; ***REMOVED***
+        public string DescripcionPoblTotal { get; set; }
 
-        public decimal? indAnioBase { get; set; ***REMOVED***
+        public decimal? indAnioBase { get; set; }
 
-***REMOVED***
+    }
 
     public class TableIndicadorGraphics
     {
-        public int anio { get; set; ***REMOVED***
+        public int anio { get; set; }
 
-        public string meta_numerador { get; set; ***REMOVED***
+        public string meta_numerador { get; set; }
 
-        public decimal? denominador { get; set; ***REMOVED***
+        public decimal? denominador { get; set; }
 
-        public decimal? avance_numerador { get; set; ***REMOVED***
+        public decimal? avance_numerador { get; set; }
 
-        public double? porc_meta { get; set; ***REMOVED***
+        public double? porc_meta { get; set; }
 
-        public double? porc_avance { get; set; ***REMOVED***
+        public double? porc_avance { get; set; }
 
 
-***REMOVED***
+    }
 
     public class ProyectosProgramas
     {
-        public string NombrePrograma { get; set; ***REMOVED***
-        public string ResultadoInmediato { get; set; ***REMOVED***
-        public string ResultadoIntermedio { get; set; ***REMOVED***
-        public string Problematica { get; set; ***REMOVED***
-        public decimal PresupuestoAsignado { get; set; ***REMOVED***
-        public List<ProyectosPerfilEntidad> Proyectos { get; set; ***REMOVED***
-***REMOVED***
+        public string NombrePrograma { get; set; }
+        public string ResultadoInmediato { get; set; }
+        public string ResultadoIntermedio { get; set; }
+        public string Problematica { get; set; }
+        public decimal PresupuestoAsignado { get; set; }
+        public List<ProyectosPerfilEntidad> Proyectos { get; set; }
+    }
 
     public class ConsolidadoProgramasEntidad
     {
-        public int TotalActividadesProgramaCentral { get; set; ***REMOVED***
-        public int TotalProgramasSustantivos { get; set; ***REMOVED***
-        public int TotalActividadesProgramasNoAsignables { get; set; ***REMOVED***
+        public int TotalActividadesProgramaCentral { get; set; }
+        public int TotalProgramasSustantivos { get; set; }
+        public int TotalActividadesProgramasNoAsignables { get; set; }
 
 
-***REMOVED***
+    }
 
     public class DatosEntidadAnio
     {
-        public decimal? PresupuestoInicial { get; set; ***REMOVED***
-        public decimal? PresupuestoVigente { get; set; ***REMOVED***
-        public decimal? PresupuestoEjecutado { get; set; ***REMOVED***
-        public int FirmadosOncae { get; set; ***REMOVED***
-        public decimal? ValorOncae { get; set; ***REMOVED***
-        public int FirmadosSefin { get; set; ***REMOVED***
-        public decimal? ValorSefin { get; set; ***REMOVED***
-        public List<ContratistaData> DataContratos { get; set; ***REMOVED***
-***REMOVED***
+        public decimal? PresupuestoInicial { get; set; }
+        public decimal? PresupuestoVigente { get; set; }
+        public decimal? PresupuestoEjecutado { get; set; }
+        public int FirmadosOncae { get; set; }
+        public decimal? ValorOncae { get; set; }
+        public int FirmadosSefin { get; set; }
+        public decimal? ValorSefin { get; set; }
+        public List<ContratistaData> DataContratos { get; set; }
+    }
 
 
-***REMOVED***
+}

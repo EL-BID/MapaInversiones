@@ -13,15 +13,15 @@ define([
 	function toggleDescription(){
 		desc.slideToggle()
 		header.toggleClass('open')
-	***REMOVED***
+	}
 
 	$(document)
 		.on('mouseenter', '.tooltip', function(){
 			$('.info-tool', this).fadeIn('fast')
-		***REMOVED***)
+		})
 		.on('mouseleave', '.tooltip', function(){
 			$('.info-tool', this).fadeOut('fast')
-		***REMOVED***)
+		})
 
 	var modal = new Modal('<iframe src="//player.vimeo.com/video/98644859?portrait=0&amp;badge=0" width="700" height="410" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>');
 	//style = modal.getElement().style
@@ -32,7 +32,7 @@ define([
 	$('.get-video-regalias').on('click', function(){
 		modal.show()	
 		$('.modal .wrapper').css('width', 700)
-	***REMOVED***)
+	})
 
 
 	var $tabbed = $('.main-content__consolidated-tabbed'),
@@ -47,14 +47,14 @@ define([
 	if(href == "#/fiscalizacion"){
 		$tabbed.fadeIn()//.addClass('show-tabbed')
 
-	***REMOVED***else{
+	}else{
 		$tabbed.fadeOut()//.addClass('show-tabbed')
 
-	***REMOVED***
+	}
 			
 		return false;
 		
-	***REMOVED***);
+	});
 
 
-***REMOVED***)
+})

@@ -22,7 +22,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
         public PresupuestoBLL(TransparenciaDB connection)
     {
       _connection = connection;
-***REMOVED***
+    }
 
     public InfoConsolidadoPresupuesto GetConsolidadoPeriodos(int anyo)
     {
@@ -35,24 +35,24 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                                       join anyos in _connection.CatalogoTiempoes
                                       on info.Periodo.ToString() equals anyos.Periodo
                                       where anyos.Año == anyo
-                                      group new { info, anyos ***REMOVED*** by new { anyos.Año ***REMOVED*** into g
+                                      group new { info, anyos } by new { anyos.Año } into g
                                       select new InfoConsolidadoPresupuesto
                                       {
                                         Id = g.Key.Año,
                                         vigente = g.Sum(g => g.info.Vigente.Value),
                                         aprobado = g.Sum(g => g.info.Aprobado.Value),
                                         ejecutado = g.Sum(g => g.info.EjecucionAcumulada.Value)
-                                  ***REMOVED***).FirstOrDefault();
+                                      }).FirstOrDefault();
 
         objReturn = RecursosPerObjetoQuery;
-  ***REMOVED***
+      }
       catch (Exception exception)
       {
         return null;
-  ***REMOVED***
+      }
       return objReturn;
 
-***REMOVED***
+    }
 
     public List<InfoConsolidadoPresupuesto> GetRecursosPerfinalidad(int annio)
     {
@@ -61,21 +61,21 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
       var RecursosPerObjetoQuery = (from info in _connection.VwPresupuesto
                                     join ct in _connection.CatalogoTiempoes on info.Periodo.ToString() equals ct.Periodo
                                     where ct.Año == annio
-                                    group info by new { info.Finalidad, info.Sector ***REMOVED*** into g
+                                    group info by new { info.Finalidad, info.Sector } into g
 
                                     select new InfoConsolidadoPresupuesto
                                     {
                                       labelGroup = g.Key.Finalidad,
                                       label = g.Key.Sector,
                                       rawValueDouble = g.Sum(g => g.Vigente.Value)
-                                ***REMOVED***).OrderBy(x => x.labelGroup).ThenBy(n => n.label).ToList();
+                                    }).OrderBy(x => x.labelGroup).ThenBy(n => n.label).ToList();
 
       objReturn = RecursosPerObjetoQuery;
 
 
       return objReturn;
 
-***REMOVED***
+    }
 
 
     public List<InfoPerSector> ObtenerSectoresPerNombre(int anyo)
@@ -84,19 +84,19 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
 
       objReturn = (from pre in _connection.VwPresupuesto
                    where (pre.Periodo.ToString().Contains(anyo.ToString()))
-                   group pre by new { pre.IdSector, pre.Sector ***REMOVED*** into g
+                   group pre by new { pre.IdSector, pre.Sector } into g
                    select new InfoPerSector
                    {
                      idSector = g.Key.IdSector,
                      label = g.Key.Sector
-               ***REMOVED***).Distinct().OrderBy(x => x.label).ToList();
+                   }).Distinct().OrderBy(x => x.label).ToList();
 
 
 
 
       return objReturn;
 
-***REMOVED***
+    }
 
     public List<itemGenerico> ObtenerOrganismosPerNombre(int anyo)
     {
@@ -106,19 +106,19 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                    join ct in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals ct.Periodo
                    where ct.Año == anyo 
                    && pre.Vigente>0
-                   group pre by new { pre.CodigoOrganismoFinanciador, pre.OrganismoFinanciador ***REMOVED*** into g
+                   group pre by new { pre.CodigoOrganismoFinanciador, pre.OrganismoFinanciador } into g
                    select new itemGenerico
                    {
                      id = g.Key.CodigoOrganismoFinanciador,
                      name = g.Key.OrganismoFinanciador
-               ***REMOVED***).Distinct().OrderBy(x => x.name).ToList();
+                   }).Distinct().OrderBy(x => x.name).ToList();
 
 
 
 
       return objReturn;
 
-***REMOVED***
+    }
 
 
     /// <summary>
@@ -137,22 +137,22 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
         if (int.TryParse(opcion, out int id_aux))
         {
           idAux = id_aux;
-    ***REMOVED***
+        }
 
-  ***REMOVED***
+      }
       List<InfograficoFuentes_Nivel_1> objReturn = new List<InfograficoFuentes_Nivel_1>();
             if (tipo.Equals("sector"))
             {
                 //SECTOR
                 RecursosPerObjetoQuery = (from info in _connection.VwPresupuestoXProyInvs
-                                          join pre in _connection.VwPresupuesto on new { info.IdCatalogoLineaPresupuestal, info.CodigoObjetoDeGasto, info.CodigoInstitucion, info.Periodo ***REMOVED*** equals new { pre.IdCatalogoLineaPresupuestal, pre.CodigoObjetoDeGasto, pre.CodigoInstitucion, pre.Periodo ***REMOVED***
+                                          join pre in _connection.VwPresupuesto on new { info.IdCatalogoLineaPresupuestal, info.CodigoObjetoDeGasto, info.CodigoInstitucion, info.Periodo } equals new { pre.IdCatalogoLineaPresupuestal, pre.CodigoObjetoDeGasto, pre.CodigoInstitucion, pre.Periodo }
                                           join t in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals t.Periodo
                                           where t.Año == annio
                                               && (!string.IsNullOrEmpty(pre.Sector))
                                               && (pre.Sector != "NULL")
                                               && pre.IdSector == idAux
                                               && pre.Vigente > 0
-                                          group new { info, pre ***REMOVED*** by new { pre.CodigoSubFuncion, pre.SubFuncion, pre.Sector, pre.CodigoInstitucion, pre.Institucion, pre.CodigoObjetoDeGasto, pre.ObjetoDeGasto, info.IdProyecto, info.Nombreproyecto ***REMOVED*** into g
+                                          group new { info, pre } by new { pre.CodigoSubFuncion, pre.SubFuncion, pre.Sector, pre.CodigoInstitucion, pre.Institucion, pre.CodigoObjetoDeGasto, pre.ObjetoDeGasto, info.IdProyecto, info.Nombreproyecto } into g
                                           select new itemSankey
                                           {
                                               idNivel_1 = g.Key.CodigoSubFuncion,
@@ -165,21 +165,21 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                                               nomNivel_4 = "n4|" + g.Key.Nombreproyecto,
                                               Avance = (decimal)g.Sum(x => x.pre.EjecucionAcumulada)/1000000,
                                               Presupuesto = (decimal)g.Sum(x => x.pre.Vigente)/1000000
-                                      ***REMOVED***).ToList();
+                                          }).ToList();
 
-        ***REMOVED***
+            }
             else
             {
                 //TAB ORGANISMOS
                 RecursosPerObjetoQuery = (from info in _connection.VwPresupuestoXProyInvs
-                                          join pre in _connection.VwPresupuesto on new { info.IdCatalogoLineaPresupuestal, info.CodigoObjetoDeGasto, info.CodigoInstitucion, info.Periodo ***REMOVED*** equals new { pre.IdCatalogoLineaPresupuestal, pre.CodigoObjetoDeGasto, pre.CodigoInstitucion, pre.Periodo ***REMOVED***
+                                          join pre in _connection.VwPresupuesto on new { info.IdCatalogoLineaPresupuestal, info.CodigoObjetoDeGasto, info.CodigoInstitucion, info.Periodo } equals new { pre.IdCatalogoLineaPresupuestal, pre.CodigoObjetoDeGasto, pre.CodigoInstitucion, pre.Periodo }
                                           join t in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals t.Periodo
                                           where t.Año == annio
                                           && pre.CodigoOrganismoFinanciador == idAux
                                           && pre.Vigente > 0
 
 
-                                  group new { info, pre ***REMOVED*** by new { pre.IdSector, pre.Sector, pre.CodigoInstitucion, pre.Institucion,info.IdProyecto, info.Nombreproyecto ***REMOVED*** into g
+                                  group new { info, pre } by new { pre.IdSector, pre.Sector, pre.CodigoInstitucion, pre.Institucion,info.IdProyecto, info.Nombreproyecto } into g
                                   select new itemSankey
                                   {
                                     idNivel_1 = g.Key.IdSector.ToString(),
@@ -192,9 +192,9 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                                     //nomNivel_4 = "n4|",
                                     Avance = (decimal)g.Sum(x => x.pre.EjecucionAcumulada)/1000000,
                                     Presupuesto = (decimal)g.Sum(x => x.pre.Vigente)/ 1000000
-                              ***REMOVED***).ToList();
+                                  }).ToList();
 
-  ***REMOVED***
+      }
 
 
       InfograficoFuentes_Nivel_1 objNivel_1 = null;  //fuente de financiacion/recurso
@@ -210,7 +210,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
         if (vec_fuente.Length > 0)
         {
           nomNivel1_aux = vec_fuente[0];
-    ***REMOVED***
+        }
 
         objNivel_1 = objReturn.Find(p => p.Nombre == nomNivel1_aux);
         if (objNivel_1 == null) //Primer detalle del infografico
@@ -240,17 +240,17 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                 objNivel_4.avance += (decimal)fila.Avance;
 
                 objNivel_3.Detalles.Add(objNivel_4);
-          ***REMOVED***
+              }
               else
               {
                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                 objNivel_4.avance += (decimal)fila.Avance;
 
-          ***REMOVED***
+              }
 
               objNivel_2.Detalles.Add(objNivel_3);
 
-        ***REMOVED***
+            }
             else
             {
               objNivel_3.presupuesto += (decimal)fila.Presupuesto;
@@ -263,15 +263,15 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                 objNivel_4.avance += (decimal)fila.Avance;
 
                 objNivel_3.Detalles.Add(objNivel_4);
-          ***REMOVED***
+              }
               else
               {
                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                 objNivel_4.avance += (decimal)fila.Avance;
-          ***REMOVED***
-        ***REMOVED***
+              }
+            }
             objNivel_1.Detalles.Add(objNivel_2);
-      ***REMOVED***
+          }
           else
           {
             objNivel_2.presupuesto += (decimal)fila.Presupuesto;
@@ -290,25 +290,25 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                 objNivel_4.avance += (decimal)fila.Avance;
 
                 objNivel_3.Detalles.Add(objNivel_4);
-          ***REMOVED***
+              }
               else
               {
                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                 objNivel_4.avance += (decimal)fila.Avance;
-          ***REMOVED***
+              }
 
 
               objNivel_2.Detalles.Add(objNivel_3);
-        ***REMOVED***
+            }
             else
             {
               objNivel_3.presupuesto += (decimal)fila.Presupuesto;
               objNivel_3.avance += (decimal)fila.Avance;
 
-        ***REMOVED***
-      ***REMOVED***
+            }
+          }
           objReturn.Add(objNivel_1);
-    ***REMOVED***
+        }
         else
         {
           objNivel_1.presupuesto += (decimal)fila.Presupuesto;
@@ -334,15 +334,15 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                 objNivel_4.avance += (decimal)fila.Avance;
 
                 objNivel_3.Detalles.Add(objNivel_4);
-          ***REMOVED***
+              }
               else
               {
                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                 objNivel_4.avance += (decimal)fila.Avance;
-          ***REMOVED***
+              }
 
               objNivel_2.Detalles.Add(objNivel_3);
-        ***REMOVED***
+            }
             else
             {
               objNivel_3.presupuesto += (decimal)fila.Presupuesto;
@@ -356,16 +356,16 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                 objNivel_4.avance += (decimal)fila.Avance;
 
                 objNivel_3.Detalles.Add(objNivel_4);
-          ***REMOVED***
+              }
               else
               {
                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                 objNivel_4.avance += (decimal)fila.Avance;
-          ***REMOVED***
+              }
 
-        ***REMOVED***
+            }
             objNivel_1.Detalles.Add(objNivel_2);
-      ***REMOVED***
+          }
           else
           {
             objNivel_2.presupuesto += (decimal)fila.Presupuesto;
@@ -385,15 +385,15 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                 objNivel_4.avance += (decimal)fila.Avance;
 
                 objNivel_3.Detalles.Add(objNivel_4);
-          ***REMOVED***
+              }
               else
               {
                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                 objNivel_4.avance += (decimal)fila.Avance;
-          ***REMOVED***
+              }
 
               objNivel_2.Detalles.Add(objNivel_3);
-        ***REMOVED***
+            }
             else
             {
               objNivel_3.presupuesto += (decimal)fila.Presupuesto;
@@ -407,17 +407,17 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                 objNivel_4.avance += (decimal)fila.Avance;
 
                 objNivel_3.Detalles.Add(objNivel_4);
-          ***REMOVED***
+              }
               else
               {
                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                 objNivel_4.avance += (decimal)fila.Avance;
-          ***REMOVED***
+              }
 
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
+            }
+          }
+        }
+      }
 
       ///ordena primer nivel
       var result = objReturn.OrderByDescending(x => x.presupuesto).ToList();
@@ -433,13 +433,13 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
           {
             //ordena nivel 4
             item_nivel3.Detalles = item_nivel3.Detalles.OrderByDescending(x => x.presupuesto).Take(5).ToList();
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
+          }
+        }
+      }
 
       return result;
 
-***REMOVED***
+    }
 
 
     public List<infograficoEntidadPerPresup> GetInfograficoPerEntidad(int annio, string id, string tipo)
@@ -457,7 +457,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                            {
                              info.CodigoInstitucion,
                              info.Institucion,
-                       ***REMOVED*** into g
+                           } into g
                            select new infograficoEntidadPerPresup
                            {
                              Id = g.Key.CodigoInstitucion,
@@ -465,10 +465,10 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                              presupuesto = (g.Sum(g => g.Vigente.Value)),
                              aprobado = (g.Sum(g => g.Aprobado.Value)),
                              avance = (g.Sum(g => g.EjecucionAcumulada.Value))
-                       ***REMOVED***
+                           }
                           ).Distinct().OrderByDescending(x => x.presupuesto);
           objReturn = infoQuery.ToList();
-    ***REMOVED***
+        }
         else
         {
           var infoQuery = (from info in _connection.VwPresupuesto
@@ -478,7 +478,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                            {
                              info.CodigoInstitucion,
                              info.Institucion,
-                       ***REMOVED*** into g
+                           } into g
                            select new infograficoEntidadPerPresup
                            {
                              Id = g.Key.CodigoInstitucion,
@@ -486,18 +486,18 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                              presupuesto = (g.Sum(g => g.Vigente.Value)),
                              aprobado = (g.Sum(g => g.Aprobado.Value)),
                              avance = (g.Sum(g => g.EjecucionAcumulada.Value))
-                       ***REMOVED***
+                           }
                           ).Distinct().OrderByDescending(x => x.presupuesto);
           objReturn = infoQuery.ToList();
-    ***REMOVED***
+        }
 
 
 
-  ***REMOVED***
+      }
 
       return objReturn;
 
-***REMOVED***
+    }
 
     public List<InfoConsolidadoPresupuesto> ObtenerGastoEntidades(int anyo, List<string> filtro_sec)
     {
@@ -508,24 +508,24 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             var queryTotalVigente = (from pre in _connection.VwPresupuesto
                                      join ct in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals ct.Periodo
                                      where ct.Año == anyo
-                                     group new { pre, ct ***REMOVED*** by new { ct.Año ***REMOVED*** into g
+                                     group new { pre, ct } by new { ct.Año } into g
                                      select new InfoConsolidadoPresupuesto
                                      {
                                          label = "Vigente",
                                          rawValue = (decimal)g.Sum(g => g.pre.Vigente) / 1000000,
                                          periodo = (int)g.Key.Año
-                                 ***REMOVED***).ToList();
+                                     }).ToList();
 
             var queryTotalAvance = (from pre in _connection.VwPresupuesto
                                     join ct in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals ct.Periodo
                                     where ct.Año == anyo
-                                    group new { pre, ct ***REMOVED*** by new { ct.Año ***REMOVED*** into g
+                                    group new { pre, ct } by new { ct.Año } into g
                                     select new InfoConsolidadoPresupuesto
                                     {
                                         label = "Ejecutado",
                                         rawValue = (decimal)g.Sum(g => g.pre.EjecucionAcumulada) / 1000000,
                                         periodo = (int)g.Key.Año
-                                ***REMOVED***).ToList();
+                                    }).ToList();
 
             if (filtro_sec.Count > 0)
             {
@@ -534,7 +534,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                           join ct in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals ct.Periodo
                           where ct.Año == anyo
                           && filtro_sec.Contains(pre.Institucion)
-                          group new { ct, pre ***REMOVED*** by new { ct.Año, pre.Institucion***REMOVED*** into g
+                          group new { ct, pre } by new { ct.Año, pre.Institucion} into g
                           
                           select new InfoConsolidadoPresupuesto
                           {
@@ -542,24 +542,24 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                               label = g.Key.Institucion,
                               rawValue = (decimal)g.Sum(g => g.pre.Vigente) / 1000000,
                               periodo = (int)g.Key.Año
-                      ***REMOVED***).ToList();
+                          }).ToList();
 
 
                 query2 = (from pre in _connection.VwPresupuesto
                           join ct in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals ct.Periodo
                           where ct.Año == anyo
                           && filtro_sec.Contains(pre.Institucion)
-                          group new { ct, pre ***REMOVED*** by new { ct.Año, pre.Institucion ***REMOVED*** into g
+                          group new { ct, pre } by new { ct.Año, pre.Institucion } into g
                           select new InfoConsolidadoPresupuesto
                           {
                               labelGroup = "Ejecutado",
                               label = g.Key.Institucion,
                               rawValue = (decimal)g.Sum(g => g.pre.EjecucionAcumulada) / 1000000,
                               periodo = (int)g.Key.Año
-                      ***REMOVED***).ToList();
+                          }).ToList();
 
                 query1.AddRange(query2);
-        ***REMOVED***
+            }
             else
             {
                 //top 4
@@ -567,17 +567,17 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                            join ct in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals ct.Periodo
                            where ct.Año == anyo
                            ///top del presupuesto del año seleccionado
-                           group pre by new { pre.Institucion ***REMOVED*** into h
+                           group pre by new { pre.Institucion } into h
                            select new InfoConsolidadoPresupuesto
                            {
                                rawValue = (decimal)h.Sum(h => h.Vigente) / 1000000,
                                labelGroup = h.Key.Institucion
-                       ***REMOVED***).OrderByDescending(h => h.rawValue).Take(4));
+                           }).OrderByDescending(h => h.rawValue).Take(4));
 
                 query1 = (from pre in _connection.VwPresupuesto
                           join ct in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals ct.Periodo
                           where ct.Año == anyo
-                          group new { ct, pre ***REMOVED*** by new { ct.Año, pre.Institucion ***REMOVED*** into g
+                          group new { ct, pre } by new { ct.Año, pre.Institucion } into g
                           from top in q0
                           .Where(j => j.labelGroup == g.Key.Institucion) //inner join
                           select new InfoConsolidadoPresupuesto
@@ -586,12 +586,12 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                               labelGroup = "Vigente",
                               periodo = (int)g.Key.Año,
                               label = g.Key.Institucion
-                      ***REMOVED***).ToList();
+                          }).ToList();
 
                 query2 = (from pre in _connection.VwPresupuesto
                           join ct in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals ct.Periodo
                           where ct.Año == anyo
-                           group new { ct, pre ***REMOVED*** by new { ct.Año, pre.Institucion ***REMOVED*** into g
+                           group new { ct, pre } by new { ct.Año, pre.Institucion } into g
                           from top in q0
                           .Where(j => j.labelGroup == g.Key.Institucion) //inner join
                           select new InfoConsolidadoPresupuesto
@@ -600,10 +600,10 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                               labelGroup = "Ejecutado",
                               periodo = (int)g.Key.Año,
                               label = g.Key.Institucion
-                      ***REMOVED***).ToList();
+                          }).ToList();
 
                 query1.AddRange(query2);
-        ***REMOVED***
+            }
 
 
             objReturn = query1.OrderByDescending(x => x.rawValue).ToList();
@@ -618,9 +618,9 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                     {
                         if (objTotalPeriodo.rawValue > 0) {
                             item.porcentaje = Math.Round((item.rawValue / objTotalPeriodo.rawValue) * 100, 2);
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
+                        }
+                    }
+                }
                 else
                 {
                     var objTotalPeriodo = queryTotalAvance.Find(p => p.periodo == item.periodo);
@@ -628,14 +628,14 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                     {
                         if (objTotalPeriodo.rawValue > 0) {
                             item.porcentaje = Math.Round((item.rawValue / objTotalPeriodo.rawValue) * 100, 2);
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
+                        }
+                    }
+                }
+            }
 
             return objReturn;
 
-***REMOVED***
+    }
 
 
     public List<InformationGraphics> ObtenerEntidadesPerNombre(int anyo)
@@ -650,14 +650,14 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                          select new InformationGraphics
                          {
                              label = g.Key
-                     ***REMOVED***).Distinct().OrderBy(x => x.label).ToList();
+                         }).Distinct().OrderBy(x => x.label).ToList();
 
 
 
 
             return objReturn;
 
-***REMOVED***
+    }
 
   public List<InfoConsolidadoPresupuesto> ObtenerGastoPerTiempoEntidades(int anyo, List<string> filtro_sec)
         {
@@ -671,34 +671,34 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                           join ct in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals ct.Periodo
                           where ct.Año == anyo
                           && filtro_sec.Contains(pre.Institucion)
-                          group pre by new { pre.Institucion, pre.Periodo, pre.Mes ***REMOVED*** into g
+                          group pre by new { pre.Institucion, pre.Periodo, pre.Mes } into g
                           select new InfoConsolidadoPresupuesto
                           {
                               labelGroup = g.Key.Institucion,
                               label = g.Key.Mes,
                               rawValue = (decimal)g.Sum(g => g.Pagos) / 1000000
-                      ***REMOVED***).OrderByDescending(x => x.rawValue).ToList();
+                          }).OrderByDescending(x => x.rawValue).ToList();
 
 
-        ***REMOVED***
+            }
             else
             {
                 //top 4
                 var q0 = ((from pre in _connection.VwPresupuestoHistoricoes
                            join ct in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals ct.Periodo
                            where ct.Año == anyo
-                           group pre by new { pre.Institucion ***REMOVED*** into h
+                           group pre by new { pre.Institucion } into h
                            select new InfoConsolidadoPresupuesto
                            {
                                rawValue = (decimal)h.Sum(h => h.Pagos) / 1000000,
                                labelGroup = h.Key.Institucion
-                       ***REMOVED***).OrderByDescending(h => h.rawValue).Take(4));
+                           }).OrderByDescending(h => h.rawValue).Take(4));
 
 
                 query1 = (from pre in _connection.VwPresupuestoHistoricoes
                           join ct in _connection.CatalogoTiempoes on pre.Periodo.ToString() equals ct.Periodo
                           where ct.Año == anyo
-                          group pre by new { pre.Institucion, pre.Periodo, pre.Mes ***REMOVED*** into g
+                          group pre by new { pre.Institucion, pre.Periodo, pre.Mes } into g
                           from top in q0
                           .Where(j => j.labelGroup == g.Key.Institucion) //inner join
                           select new InfoConsolidadoPresupuesto
@@ -707,16 +707,16 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                               label = g.Key.Mes,
                               rawValue = (decimal)g.Sum(g => g.Pagos) / 1000000,
 
-                      ***REMOVED***).ToList();
+                          }).ToList();
 
 
-        ***REMOVED***
+            }
 
 
             objReturn = query1;
             return objReturn;
 
-    ***REMOVED***
+        }
 
         public List<itemGenPresupuesto> GetInfograficoPerProyecto(int annio, string id)
         {
@@ -725,14 +725,14 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             if (int.TryParse(id, out int id_aux))
             {
                 idAux = id_aux;
-        ***REMOVED***
+            }
 
                var RecursosPerObjetoQuery = (from info in _connection.VwPresupuestoXProyInvs
                                           join t in _connection.CatalogoTiempoes on info.Periodo.ToString() equals t.Periodo
                                           where t.Año == annio
                                           && info.CodigoOrganismoFinanciador == idAux
                                           && info.ValorFinanciado > 0
-                                          group  info by new { info.IdProyecto, info.Nombreproyecto,info.NombreEstado ***REMOVED*** into g
+                                          group  info by new { info.IdProyecto, info.Nombreproyecto,info.NombreEstado } into g
                                           select new itemGenPresupuesto
                                           {
 
@@ -745,13 +745,13 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                                               AvanceFinancieroOrganismo = g.Average(x => x.ValorFinanciado) == 0 ? 0 : Convert.ToDouble(Math.Round(g.Average(x => x.ValorEjecutado.Value) / g.Average(x => x.ValorFinanciado.Value), 3)),
                                               estado = g.Key.NombreEstado
 
-                                      ***REMOVED***).OrderBy(h => h.nombre).ToList();
+                                          }).OrderBy(h => h.nombre).ToList();
 
             objReturn = RecursosPerObjetoQuery;
 
             return objReturn;
 
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -196,17 +196,17 @@
     <comment>Texto label filtro periodos en pagina Recursos</comment>
   </data>
   <data name="URLFichaProyectos" xml:space="preserve">
-    <value>/projectprofile/{0***REMOVED***</value>
+    <value>/projectprofile/{0}</value>
     <comment>URL ficha de proyecto</comment>
   </data>
   <data name="URLFichaRecursos" xml:space="preserve">
-    <value>/Recursos/FichaRecursos?periodosRecursos={0***REMOVED***&amp;{1***REMOVED***={2***REMOVED***</value>
+    <value>/Recursos/FichaRecursos?periodosRecursos={0}&amp;{1}={2}</value>
     <comment>URL ficha recursos</comment>
   </data>
   <data name="URLProyectos" xml:space="preserve">
-    <value>/api/Proyectos/GetOtrosProyectosAprobados?periodosRecursos={0***REMOVED***&amp;fuentes={1***REMOVED***&amp;{2***REMOVED***={3***REMOVED***&amp;query={4***REMOVED***</value>
+    <value>/api/Proyectos/GetOtrosProyectosAprobados?periodosRecursos={0}&amp;fuentes={1}&amp;{2}={3}&amp;query={4}</value>
   </data>
   <data name="URLProyectosVerTodos" xml:space="preserve">
-    <value>/api/Proyectos/GetOtrosProyectosAprobados?{0***REMOVED***={1***REMOVED***&amp;{2***REMOVED***={3***REMOVED***&amp;query={4***REMOVED***</value>
+    <value>/api/Proyectos/GetOtrosProyectosAprobados?{0}={1}&amp;{2}={3}&amp;query={4}</value>
   </data>
 </root>

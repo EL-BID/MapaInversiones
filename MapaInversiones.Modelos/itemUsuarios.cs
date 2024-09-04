@@ -6,24 +6,24 @@ namespace PlataformaTransparencia.Modelos
 {
     public class itemUsuarios
     {
-        public string valida_rol { get; set; ***REMOVED***
-        public int IdUsuario { get; set; ***REMOVED***
-        public string Nombre { get; set; ***REMOVED***
-        public string email { get; set; ***REMOVED***
-        public string hash_clave { get; set; ***REMOVED***
-        public string FacebookID { get; set; ***REMOVED***
-        public string Estado { get; set; ***REMOVED***
-        public Nullable<System.DateTime> FCambioPwd { get; set; ***REMOVED***
-        public string cod_verifica { get; set; ***REMOVED***
-        public Nullable<System.DateTime> FechaCreacion { get; set; ***REMOVED***
-        public Nullable<int> Edad { get; set; ***REMOVED***
-        public Nullable<int> IdRol { get; set; ***REMOVED***
-        public Nullable<int> IdGenero { get; set; ***REMOVED***
-        public Nullable<int> IdMedio { get; set; ***REMOVED***
-        public int IdProyRel { get; set; ***REMOVED***
-        public int IdProgRel { get; set; ***REMOVED***
-        public string CodigoContrato { get; set; ***REMOVED***
+        public string valida_rol { get; set; }
+        public int IdUsuario { get; set; }
+        public string Nombre { get; set; }
+        public string email { get; set; }
+        public string hash_clave { get; set; }
+        public string FacebookID { get; set; }
+        public string Estado { get; set; }
+        public Nullable<System.DateTime> FCambioPwd { get; set; }
+        public string cod_verifica { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public Nullable<int> Edad { get; set; }
+        public Nullable<int> IdRol { get; set; }
+        public Nullable<int> IdGenero { get; set; }
+        public Nullable<int> IdMedio { get; set; }
+        public int IdProyRel { get; set; }
+        public int IdProgRel { get; set; }
+        public string CodigoContrato { get; set; }
 
-***REMOVED***
+    }
 
-***REMOVED***
+}

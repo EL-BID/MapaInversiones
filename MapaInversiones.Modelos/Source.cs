@@ -8,16 +8,16 @@ namespace PlataformaTransparencia.Modelos
     {
         public SourcesPerYear()
         {
-    ***REMOVED***
-        public string name { get; set; ***REMOVED***
-        public decimal total { get; set; ***REMOVED***
-        public decimal current { get; set; ***REMOVED***
-        public decimal PorcentajeEjecutado { get; set; ***REMOVED***
-***REMOVED***
+        }
+        public string name { get; set; }
+        public decimal total { get; set; }
+        public decimal current { get; set; }
+        public decimal PorcentajeEjecutado { get; set; }
+    }
     public class Source
     {
-        public string name { get; set; ***REMOVED***
-        public int total { get; set; ***REMOVED***
-        public int current { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string name { get; set; }
+        public int total { get; set; }
+        public int current { get; set; }
+    }
+}

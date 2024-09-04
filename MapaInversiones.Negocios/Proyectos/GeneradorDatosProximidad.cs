@@ -16,18 +16,18 @@ namespace PlataformaTransparencia.Negocios.Proyectos
     public class GeneradorDatosProximidad : IGeneradorDatosProximidad
     {
 
-        public int TotalCantidadProyectos { get; set; ***REMOVED***
-        public decimal TotalValorRegalias { get; set; ***REMOVED***
-        public decimal TotalValorTodasLasFuentes { get; set; ***REMOVED***
+        public int TotalCantidadProyectos { get; set; }
+        public decimal TotalValorRegalias { get; set; }
+        public decimal TotalValorTodasLasFuentes { get; set; }
         private static IConfiguration Configuration;
         public GeneradorDatosProximidad(IConfiguration configuration)
         {
             Configuration = configuration;
-    ***REMOVED***
+        }
 
         public GeneradorDatosProximidad()
         {
-    ***REMOVED***
+        }
         public List<objectProjectsSearchMap> ObtenerPinesDeProyectos(int zoom, List<decimal> topLeft, List<decimal> bottomRight, List<InfoProyectos> infoProyectos, FiltroBusquedaProyecto filtro)
         {
             List<objectProjectsSearchMap> retornoProyectos = new List<objectProjectsSearchMap>();
@@ -89,44 +89,44 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                     int cantidadProyectos = lstParcialProyectos.Count;
                     if (cantidadProyectos > 1) {
                         retornoProyectos.Add(GenerarDataProyectoGrupal(lstParcialProyectos, cantidadProyectos));
-                ***REMOVED***
+                    }
                     else if (cantidadProyectos == 1) {
                         retornoProyectos.Add(GenerarDataProyectoIndividual(lstParcialProyectos.First()));
-                ***REMOVED***
+                    }
                     longitudActual = longitudActual + incrementoLongitud;
                     contador++;
-                    //System.Diagnostics.Trace.WriteLine(string.Format("Restan {0***REMOVED*** proyectos por evaluar en proximidad.", lstTotalProyectos.Count.ToString()));
+                    //System.Diagnostics.Trace.WriteLine(string.Format("Restan {0} proyectos por evaluar en proximidad.", lstTotalProyectos.Count.ToString()));
                     if (lstTotalProyectos.Count == 0) {
-                        System.Diagnostics.Trace.WriteLine(string.Format("Salida del algoritmo de proximidad (Proyectos evacuados) luego de {0***REMOVED*** ciclos.", contador.ToString()));
+                        System.Diagnostics.Trace.WriteLine(string.Format("Salida del algoritmo de proximidad (Proyectos evacuados) luego de {0} ciclos.", contador.ToString()));
                         analizadosTodosLosProyectos = true;
                         break;
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
                 if (analizadosTodosLosProyectos)
                     break;
                 latitudActual = latitudActual - incrementoLatitud;
-        ***REMOVED***
-            System.Diagnostics.Trace.WriteLine(string.Format("Terminado algoritmo de proximidad luego de {0***REMOVED*** ciclos.", contador.ToString()));
+            }
+            System.Diagnostics.Trace.WriteLine(string.Format("Terminado algoritmo de proximidad luego de {0} ciclos.", contador.ToString()));
 
             return retornoProyectos;
-    ***REMOVED***
+        }
 
         private bool LongitudActualDentroCuadradoInicial(decimal longitudDerechaActual, decimal longitudInferiorLimite)
         {
             return longitudDerechaActual < longitudInferiorLimite;
-    ***REMOVED***
+        }
 
         private bool LatitudActualDentroCuadradoInicial(decimal latitudInferiorActual, decimal latitudInferiorLimite)
         {
             if (latitudInferiorActual >= 0)//Coordenadas Positivas
             {
                 return latitudInferiorActual > latitudInferiorLimite;
-        ***REMOVED***
+            }
             else //Abajo ecuador coordenadas negativas
             {
                 return Math.Abs(latitudInferiorActual) < Math.Abs(latitudInferiorLimite);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
       
         private objectProjectsSearchMapProject GenerarDataProyectoIndividual(InfoProyectos infoProyectos)
@@ -149,7 +149,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             TotalValorTodasLasFuentes += retonroProyecto.approvedTotalMoney;
 
             return retonroProyecto;
-    ***REMOVED***
+        }
 
         private objectProjectsSearchMapGroup GenerarDataProyectoGrupal(List<InfoProyectos> infoProyectos, int cantidadProyectos)
         {
@@ -172,21 +172,21 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                        select new {
                                            proyecto.Geography.Latitude,
                                            proyecto.Geography.Longitude
-                                   ***REMOVED***).Distinct().Count();
+                                       }).Distinct().Count();
 
             if (infoProyectos.Count > 1
                 && cantidadUbicaciones == 1) {
                 retonroProyecto.UsanMismaGeorefenciacion = true;
-        ***REMOVED***
+            }
             #endregion
 
             return retonroProyecto;
-    ***REMOVED***
+        }
 
 
 
-***REMOVED***
+    }
 
 
 
-***REMOVED***
+}

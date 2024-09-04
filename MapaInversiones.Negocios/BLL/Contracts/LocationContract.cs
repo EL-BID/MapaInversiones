@@ -7,13 +7,13 @@ namespace PlataformaTransparencia.Negocios.BLL.Contracts
 {
   public class LocationContract : RespuestaContratoBase
   {
-    public ModelHeaderLocalitacionProfileData HeaderLocationModel { get; set; ***REMOVED***
+    public ModelHeaderLocalitacionProfileData HeaderLocationModel { get; set; }
     private IConfiguration _configuration;
     public LocationContract(IConfiguration configuration)
     {
       _configuration = configuration;
       HeaderLocationModel = new();
-***REMOVED***
+    }
 
     public void Fill(string locationId, string type)
     {
@@ -21,12 +21,12 @@ namespace PlataformaTransparencia.Negocios.BLL.Contracts
       {
         HeaderLocationModel = new LocationBLL(_configuration).GetHeaderLocationProfile(locationId, type);
         Status = true;
-  ***REMOVED***
+      }
       catch (Exception)
       {
         Status = false;
         Message = "Lo sentimos, ha ocurrido un error.";
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***
-***REMOVED***
+      }
+    }
+  }
+}

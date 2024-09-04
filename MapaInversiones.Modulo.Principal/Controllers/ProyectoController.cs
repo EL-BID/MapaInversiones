@@ -42,7 +42,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       _pdfGenerator = pdfGenerator;
       _configuration = configuration;
       _consultasComunes = consultasComunes;
-***REMOVED***
+    }
 
     public IActionResult PerfilProyecto(int Id)
     {
@@ -53,7 +53,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             ProjectProfileContract proyectoContract = new(Id, _connection, id_usuario_aux, nom_usuario_aux);
       proyectoContract.Fill();
       return View(proyectoContract.ModelProjectProfile);
-***REMOVED***
+    }
 
     [HttpPost]
     public async Task<FileResult> GeneratePDF_ARC(string id_obj_pdf, int cant_cont, int annio = 0)
@@ -72,10 +72,10 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         
        
 
-  ***REMOVED***
+      }
       return File(stream.ToArray(), "application/pdf", "FichaProyecto_" + id_obj_pdf + "_" + cant_cont.ToString() + ".pdf"); ;
 
-***REMOVED***
+    }
 
     private string GeneraHtmlString(ProyectoPdf info)
     {
@@ -102,17 +102,17 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                                   "<span>Duración estimada del proyecto</span>" +
                                   "</td> " +
                                   "<td style='padding:5px;'>" +
-                                  "<span class='h2'>L$ " + string.Format("{0:n0***REMOVED***", info.Resumen.CostoEstimado)+ " </span>" +
+                                  "<span class='h2'>L$ " + string.Format("{0:n0}", info.Resumen.CostoEstimado)+ " </span>" +
                                   "<br/>" +
                                   "<span>Costo estimado del proyecto</span>" +
                                   "</td>" +
                                   "<td style='padding:5px;'>" +
-                                  "<span class='h2'>" + $"{info.Resumen.MonedaCostoProyecto***REMOVED*** " + string.Format("{0:n0***REMOVED***", info.Resumen.CostoOtraMoneda) + "</span>" +
+                                  "<span class='h2'>" + $"{info.Resumen.MonedaCostoProyecto} " + string.Format("{0:n0}", info.Resumen.CostoOtraMoneda) + "</span>" +
                                   "<br/>" +
                                  "<span>Costo en otra moneda</span>" +
                                   "</td>" +
                                    "<td style='padding:5px;'>" +
-                                  "<span class='h2'>" + $"{info.Resumen.MonedaCostoProyecto***REMOVED*** {info.Resumen.TasaCambio.ToString().Replace(',', '.')***REMOVED***" + "</span>" +
+                                  "<span class='h2'>" + $"{info.Resumen.MonedaCostoProyecto} {info.Resumen.TasaCambio.ToString().Replace(',', '.')}" + "</span>" +
                                   "<br/>" +
                                   "<span>Tasa de cambio</span>" +
                               "</td>" +
@@ -175,21 +175,21 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       info_general += "</p>" + "</div>";
 
       string avance_financiero = info.InformacionFinanciera.AvanceFinanciero.ToString().Replace(',', '.');
-      string num_financiero = $"{info.InformacionFinanciera.AvanceFinanciero.ToString().Replace(',', '.')***REMOVED*** %";
+      string num_financiero = $"{info.InformacionFinanciera.AvanceFinanciero.ToString().Replace(',', '.')} %";
       string celda_aux_2 = "<td style='padding-bottom:5px;padding-right:5px;padding-top:5px;padding-left:5px;color:#ffffff;'>&nbsp;</td>";
       if (info.InformacionFinanciera.AvanceFinanciero <= 0)
       {
         num_financiero = "";
         avance_financiero = "0";
-  ***REMOVED***
+      }
       else
       {
         if (info.InformacionFinanciera.AvanceFinanciero > 100)
         {
           avance_financiero = "100";
           celda_aux_2 = "";
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
       string grafica_avance_financiero = "<div class='separador_20'></div><div style='background-color:#fff;text-align:center;'><h2 class='text-center'>AVANCE FINANCIERO</h2></div>" +
   "<div id='prueba_info' style='background-color:#FFFFFF;'>" +
       "<table style='width:700px;height:30px;border:1px solid #e25126;'>" +
@@ -203,12 +203,12 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         if (info.InformacionFinanciera.AvanceFinanciero < 100)
         {
           grafica_avance_financiero += celda_aux_2;
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
       else
       {
         grafica_avance_financiero += "<td style='background-color:#e25126;color:#c5d7d5;width:" + avance_financiero + "%;padding-bottom:10px;padding-right:0px;padding-top:10px;padding-left:0px;text-align:center;font-size:16px;'>" + "</td><td style='color:#e25126;padding-bottom:10px;padding-right:0px;padding-top:10px;padding-left:0px;text-align:left;font-size:16px;'>" + num_financiero + "</td>";
-  ***REMOVED***
+      }
       grafica_avance_financiero += "</tr>" +
 "</table>" +
 "</td>" +
@@ -260,7 +260,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             "<span class='badge'>" + item.CodigoComponente.ToString() + "</span>" +
             "<span>" + item.CodigoComponente + "</span>" +
             "</div>";
-      ***REMOVED***
+          }
           foreach (var actividad in item.ActividadesComponente)
           {
             actividadesPorComponentes += "<div class='wraptable-fase'><div class='wraptable-product'>" +
@@ -273,9 +273,9 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
               "</div></div>";
               i++;
 
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
+          }
+        }
+      }
 
       
 
@@ -290,10 +290,10 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       return outTxt;
 
 
-***REMOVED***
+    }
 
 
    
 
-  ***REMOVED***
-***REMOVED***
+  }
+}

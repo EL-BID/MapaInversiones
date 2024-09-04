@@ -12,14 +12,14 @@ namespace PlataformaTransparencia.Modelos
         public Sources()
         {
 
-    ***REMOVED***
+        }
         /// <summary>
         /// Año a cargar.
         /// </summary>
-        public int year { get; set; ***REMOVED***
+        public int year { get; set; }
         /// <summary>
         /// Lista con los años a cargar.
         /// </summary>
-        public List<SourcesPerYear> sourcesperyear { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public List<SourcesPerYear> sourcesperyear { get; set; }
+    }
+}

@@ -18,7 +18,7 @@ namespace PlataformaTransparencia.Negocios.Contratos
         {
             _connection = connection;
             _connection.CommandTimeout = 180;
-    ***REMOVED***
+        }
 
 
         public ModelContratosAnios ObtenerAnniosContratos(string Moneda,string NombreProcesoo)
@@ -26,8 +26,8 @@ namespace PlataformaTransparencia.Negocios.Contratos
             ModelContratosAnios _objreturn = new ModelContratosAnios();
             String Monedac = null;
             String NombreProceso = null;
-            if (NombreProcesoo != null && NombreProcesoo.Trim() != "") { NombreProceso = NombreProcesoo; ***REMOVED***
-            if (Moneda != null && Moneda.Trim() != "") { Monedac = Moneda; ***REMOVED***
+            if (NombreProcesoo != null && NombreProcesoo.Trim() != "") { NombreProceso = NombreProcesoo; }
+            if (Moneda != null && Moneda.Trim() != "") { Monedac = Moneda; }
             _objreturn.Detalles = (from cont in _connection.VwContratosDetalles
                                     where (cont.MonedaContrato.Contains(Moneda) || Moneda == null)
                                      && (cont.CodigoProceso.TrimStart().Contains(NombreProceso) || cont.DescripcionProceso.Contains(NombreProceso) || NombreProceso == null)
@@ -37,10 +37,10 @@ namespace PlataformaTransparencia.Negocios.Contratos
                                     select new AnioContrato
                                     {
                                     valor= g.Key.Value
-                                ***REMOVED***).Distinct().ToList();
+                                    }).Distinct().ToList();
         
             return _objreturn;
-    ***REMOVED***
+        }
 
         public ModelContratosAnios ObtenerAnniosContratistas(string Contratista)
         {
@@ -53,10 +53,10 @@ namespace PlataformaTransparencia.Negocios.Contratos
                                    select new AnioContrato
                                    {
                                        valor = g.Key.Value
-                               ***REMOVED***).Distinct().ToList();
+                                   }).Distinct().ToList();
 
             return _objreturn;
-    ***REMOVED***
+        }
 
         public ModelContratosData ObtenerInformacionContratosPorFiltros(ContratosFiltros filtros)
         {
@@ -71,15 +71,15 @@ namespace PlataformaTransparencia.Negocios.Contratos
             String CodigoContrato = null;
             int? Annio = null;
 
-            if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; ***REMOVED***
-            if (filtros.NombreEntidad != null && filtros.NombreEntidad.Trim() != "") { NombreEntidad = filtros.NombreEntidad; ***REMOVED***
-            if (filtros.CodigoProveedor != null && filtros.CodigoProveedor.Trim() != "") { CodigoProveedor = filtros.CodigoProveedor; ***REMOVED***
-            if (filtros.CodigoContrato != null && filtros.CodigoContrato.Trim() != "") { CodigoContrato = filtros.CodigoContrato; ***REMOVED***
-            if (filtros.CodigoComprador != null && filtros.CodigoComprador.Trim() != "") { CodigoComprador = filtros.CodigoComprador; ***REMOVED***
-            if (filtros.Estado != null && filtros.Estado.Trim() != "") { Estado = filtros.Estado; ***REMOVED***
-            if (filtros.Moneda != null && filtros.Moneda.Trim() != "") { Moneda = filtros.Moneda; ***REMOVED***
-            if (filtros.OrigenInformacion != null && filtros.OrigenInformacion.Trim() != "") { OrigenInformacion = int.Parse( filtros.OrigenInformacion); ***REMOVED***
-            if (filtros.Annio > 0) { Annio = filtros.Annio; ***REMOVED***
+            if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; }
+            if (filtros.NombreEntidad != null && filtros.NombreEntidad.Trim() != "") { NombreEntidad = filtros.NombreEntidad; }
+            if (filtros.CodigoProveedor != null && filtros.CodigoProveedor.Trim() != "") { CodigoProveedor = filtros.CodigoProveedor; }
+            if (filtros.CodigoContrato != null && filtros.CodigoContrato.Trim() != "") { CodigoContrato = filtros.CodigoContrato; }
+            if (filtros.CodigoComprador != null && filtros.CodigoComprador.Trim() != "") { CodigoComprador = filtros.CodigoComprador; }
+            if (filtros.Estado != null && filtros.Estado.Trim() != "") { Estado = filtros.Estado; }
+            if (filtros.Moneda != null && filtros.Moneda.Trim() != "") { Moneda = filtros.Moneda; }
+            if (filtros.OrigenInformacion != null && filtros.OrigenInformacion.Trim() != "") { OrigenInformacion = int.Parse( filtros.OrigenInformacion); }
+            if (filtros.Annio > 0) { Annio = filtros.Annio; }
 
 
             try
@@ -101,10 +101,10 @@ namespace PlataformaTransparencia.Negocios.Contratos
                                                      orderby NUMBER descending
                                                      select NUMBER
                                ).First();
-        ***REMOVED***
+            }
             catch {
                 _objreturn.CantidadTotalRegistros = 0;
-        ***REMOVED***
+            }
 
             _objreturn.Data = (from cont in _connection.VwContratosDetalles
                         where
@@ -154,12 +154,12 @@ namespace PlataformaTransparencia.Negocios.Contratos
                             FechaInicioRecepcionOfertas = cont.FechaInicioRecepcionOfertas,
                             DescripcionContrato = cont.DescripcionContrato
                             
-                    ***REMOVED***
+                        }
                              ).ToList();
 
          
             return _objreturn;
-    ***REMOVED***
+        }
 
 
         public ModelContratosData ObtenerInformacionContratistaPorFiltros(ContratosFiltros filtros)
@@ -173,13 +173,13 @@ namespace PlataformaTransparencia.Negocios.Contratos
             String OrigenInformacion = null;
             int? Annio = null;
 
-            if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; ***REMOVED***
-            if (filtros.NombreEntidad != null && filtros.NombreEntidad.Trim() != "") { NombreEntidad = filtros.NombreEntidad; ***REMOVED***
-            if (filtros.CodigoProveedor != null && filtros.CodigoProveedor.Trim() != "") { CodigoProveedor = filtros.CodigoProveedor; ***REMOVED***
-            if (filtros.Estado != null && filtros.Estado.Trim() != "") { Estado = filtros.Estado; ***REMOVED***
-            if (filtros.Moneda != null && filtros.Moneda.Trim() != "") { Moneda = filtros.Moneda; ***REMOVED***
-            if (filtros.OrigenInformacion != null && filtros.OrigenInformacion.Trim() != "") { OrigenInformacion = filtros.OrigenInformacion; ***REMOVED***
-            if (filtros.Annio > 0) { Annio = filtros.Annio; ***REMOVED***
+            if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; }
+            if (filtros.NombreEntidad != null && filtros.NombreEntidad.Trim() != "") { NombreEntidad = filtros.NombreEntidad; }
+            if (filtros.CodigoProveedor != null && filtros.CodigoProveedor.Trim() != "") { CodigoProveedor = filtros.CodigoProveedor; }
+            if (filtros.Estado != null && filtros.Estado.Trim() != "") { Estado = filtros.Estado; }
+            if (filtros.Moneda != null && filtros.Moneda.Trim() != "") { Moneda = filtros.Moneda; }
+            if (filtros.OrigenInformacion != null && filtros.OrigenInformacion.Trim() != "") { OrigenInformacion = filtros.OrigenInformacion; }
+            if (filtros.Annio > 0) { Annio = filtros.Annio; }
 
             try
             {
@@ -196,11 +196,11 @@ namespace PlataformaTransparencia.Negocios.Contratos
                                                      orderby NUMBER descending
                                                      select NUMBER
                                        ).First();
-        ***REMOVED***
+            }
             catch {
 
                 _objreturn.CantidadTotalRegistros = 0;
-        ***REMOVED***
+            }
 
          
 
@@ -247,10 +247,10 @@ namespace PlataformaTransparencia.Negocios.Contratos
                                    FechaInicioContrato=cont.FechaInicioContrato,
                                    FechaInicioEjecucionContrato=cont.FechaInicioEjecucionContrato
 
-                           ***REMOVED***
+                               }
                              ).ToList();
             return _objreturn;
-    ***REMOVED***
+        }
 
         public  List<InfoContratosPerAnyo> ObtenerContratosPerAnyo(string Contratista)
         {
@@ -265,11 +265,11 @@ namespace PlataformaTransparencia.Negocios.Contratos
                                        rawValue = (decimal)(cont.NroContratos * 1),
                                        value = cont.NroContratos.ToString()
                                    
-                               ***REMOVED***).OrderBy(x => x.label).ToList();
+                                   }).OrderBy(x => x.label).ToList();
 
             return _objreturn;
 
-    ***REMOVED***
+        }
 
         public List<InfoContratosPerAnyo> ObtenerValorContratosPerAnyo(string Contratista)
         {
@@ -283,11 +283,11 @@ namespace PlataformaTransparencia.Negocios.Contratos
                               label = cont.Anio.ToString(),
                               rawValue = (decimal)cont.ValorContratado,
                               value = cont.ValorContratado.ToString()
-                      ***REMOVED***).OrderBy(x => x.label).ToList();
+                          }).OrderBy(x => x.label).ToList();
 
             return _objreturn;
 
-    ***REMOVED***
+        }
 
         public List<InfoContratosPerAnyo> ObtenerComprador(string Comprador)
         {
@@ -299,11 +299,11 @@ namespace PlataformaTransparencia.Negocios.Contratos
                           select new InfoContratosPerAnyo
                           {
                               label = g.Key
-                      ***REMOVED***).Distinct().ToList();
+                          }).Distinct().ToList();
 
             return _objreturn;
 
-    ***REMOVED***
+        }
 
 
         public List<ContratosConsolidado> ObtenerConsolidado(int annio, string moneda=null)
@@ -317,7 +317,7 @@ namespace PlataformaTransparencia.Negocios.Contratos
                                    && contr.ValorContratado != null
                                    && contr.Anio == annio
                                    orderby contr.Anio descending
-                                    group contr by new { contr.MonedaContrato, contr.CodigoOrigenInformacion, contr.OrigenInformacion ***REMOVED*** into datos
+                                    group contr by new { contr.MonedaContrato, contr.CodigoOrigenInformacion, contr.OrigenInformacion } into datos
                           select new ContratosConsolidado
                                    {
                                        OrigenInformacion = datos.Key.OrigenInformacion,
@@ -325,12 +325,12 @@ namespace PlataformaTransparencia.Negocios.Contratos
                                        MonedaContrato = datos.Key.MonedaContrato,
                                        ValorContratado = datos.Sum(x => x.ValorContratado),
                                        NroContratos = datos.Sum(x => x.NroContratos),
-                               ***REMOVED***).Distinct().ToList();
+                                   }).Distinct().ToList();
 
             return _objreturn;
 
 
-    ***REMOVED***
+        }
 
         public ModelArticulosContrato ObtenerArticulosContrato(string CodigoContrato)
         {
@@ -348,11 +348,11 @@ namespace PlataformaTransparencia.Negocios.Contratos
                                                ImpuestoTotal = info.ImpuestoTotal,
                                                Descuento = info.Descuento
 
-                                       ***REMOVED***).Distinct().ToList();
+                                           }).Distinct().ToList();
 
            
 
             return objreturn;
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

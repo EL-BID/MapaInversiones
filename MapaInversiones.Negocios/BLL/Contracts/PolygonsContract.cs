@@ -12,13 +12,13 @@ namespace PlataformaTransparencia.Negocios.Contracts
     public class PolygonsContract : RespuestaContratoBase
     {
 
-        public ModelDataAreaPolygons ModelDataAreaPolygons { get; set; ***REMOVED***
+        public ModelDataAreaPolygons ModelDataAreaPolygons { get; set; }
         /// <summary>
         /// Instancia clase 
         /// </summary>
         public PolygonsContract()
         {
-    ***REMOVED***
+        }
         ///// <summary>
         ///// Instancia la clase.
         ///// </summary>
@@ -26,7 +26,7 @@ namespace PlataformaTransparencia.Negocios.Contracts
         //public PolygonsContract(Dictionary<string, string> parameters)
         //{
         //    this.GetAtributtes(parameters);
-        //***REMOVED***
+        //}
 
         /// <summary>
         /// Metodo que me retorna los poligonos por tipo de region
@@ -41,24 +41,24 @@ namespace PlataformaTransparencia.Negocios.Contracts
                     if (GeographicKindEnumeration == GenericEnumerators.GeographicKindEnumeration.Region)
                     {
                         result = AreaPolygonBLL.GenerarPoligonosDeRegiones();
-                ***REMOVED***
+                    }
                     else if (GeographicKindEnumeration == GenericEnumerators.GeographicKindEnumeration.Department)
                     {
                         result = AreaPolygonBLL.GenerarPoligonosDeDepartamentos();
-                ***REMOVED***
+                    }
                     else
                     {
                         result = AreaPolygonBLL.GenerarPoligonosDeMunicipios();
-                ***REMOVED***               
-        ***REMOVED***
+                    }               
+            }
             catch (Exception ex)
             {
                 this.Status = false;
                 LogHelper.GenerateLog(ex);
                 this.Message = "Lo sentimos, ha ocurrido un error.";
-        ***REMOVED***
+            }
             return result;
-    ***REMOVED***
+        }
 
         /// <summary>
         /// Recorre los parametros y los mapea a cada una de las propiedades
@@ -72,20 +72,20 @@ namespace PlataformaTransparencia.Negocios.Contracts
                 if (parameters.Keys.Contains("lastUpdated"))
                 {
                     Secuence = Convert.ToInt32(parameters["lastUpdated"].ToString());
-            ***REMOVED***
+                }
                 else
                 {
                     Secuence = 123456789;
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             catch (Exception ex)
             {
                 this.Status = false;
                 LogHelper.GenerateLog(ex);
                 this.Message = "Lo sentimos, ha ocurrido un error.";
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         private int? Secuence;
        
-***REMOVED***
-***REMOVED***
+    }
+}

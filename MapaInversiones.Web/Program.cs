@@ -33,13 +33,13 @@ builder.Services.AddQuartz(q =>
         .WithIdentity("SolrJob-trigger")
         .WithCronSchedule(builder.Configuration.GetValue<string>("SolrCronExpression"))
     );
-***REMOVED***);
+});
 
 // ASP.NET Core hosting
 builder.Services.AddQuartzServer(options =>
 {
     options.WaitForJobsToComplete = true;
-***REMOVED***);
+});
 
 
 
@@ -86,7 +86,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-***REMOVED***
+}
 
 app.UseStaticFiles();
 app.UseSession();

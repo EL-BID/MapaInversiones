@@ -7,13 +7,13 @@ function GetProyectoById() {
         type: "GET",
         data: null,
 
-***REMOVED***).done(function (data) {
+    }).done(function (data) {
         // Some function
         alert("hecho");
-***REMOVED***).fail(function (handleError) {
+    }).fail(function (handleError) {
         // Some function
         alert("fail");
-***REMOVED***);
-***REMOVED***
+    });
+}
 
 

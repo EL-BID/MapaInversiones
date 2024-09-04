@@ -8,15 +8,15 @@ namespace PlataformaTransparencia.Modelos.Contratos
 {
     public class ContratistaData
     {
-        public string Contratista { get; set; ***REMOVED*** // varchar(250)
-        public string  Identificador       { get; set; ***REMOVED*** // varchar(50)
-        public string Tipodocumento { get; set; ***REMOVED*** // varchar(32)
-        public string Numerodocumento { get; set; ***REMOVED*** // varchar(100)
-        public decimal? ValorTotalContratos { get; set; ***REMOVED*** // float
-        public int?    NumContratos        { get; set; ***REMOVED*** // int
-        public int?    NumProcesos         { get; set; ***REMOVED*** // int
-        public string  MonedaContrato      { get; set; ***REMOVED*** // varchar(10)
-        public string OrigenInformacion { get; set; ***REMOVED*** // varchar(20)
-        public int CodigoOrigenInformacion { get; set; ***REMOVED*** // int
-***REMOVED***
-***REMOVED***
+        public string Contratista { get; set; } // varchar(250)
+        public string  Identificador       { get; set; } // varchar(50)
+        public string Tipodocumento { get; set; } // varchar(32)
+        public string Numerodocumento { get; set; } // varchar(100)
+        public decimal? ValorTotalContratos { get; set; } // float
+        public int?    NumContratos        { get; set; } // int
+        public int?    NumProcesos         { get; set; } // int
+        public string  MonedaContrato      { get; set; } // varchar(10)
+        public string OrigenInformacion { get; set; } // varchar(20)
+        public int CodigoOrigenInformacion { get; set; } // int
+    }
+}

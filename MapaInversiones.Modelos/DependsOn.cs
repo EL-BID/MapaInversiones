@@ -13,10 +13,10 @@ namespace PlataformaTransparencia.Modelos
         /// <summary>
         /// Tipo de entidad, puede ser region, department o municipally
         /// </summary>
-        public string type { get; set; ***REMOVED***
+        public string type { get; set; }
         /// <summary>
         /// id de la entidad territorial de mayor rango
         /// </summary>
-        public string id { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string id { get; set; }
+    }
+}

@@ -9,24 +9,24 @@ namespace PlataformaTransparencia.Modelos
         public MetricperYear()
         {
             metrics = new List<Metric>();
-    ***REMOVED***
-        public int year { get; set; ***REMOVED***
-        public List<Metric> metrics { get; set; ***REMOVED***
-***REMOVED***
+        }
+        public int year { get; set; }
+        public List<Metric> metrics { get; set; }
+    }
     public class Metric
     {
-        public string name { get; set; ***REMOVED***
-        public double goal { get; set; ***REMOVED***
-        public double? current { get; set; ***REMOVED***
-        public decimal PorcentajeEjecutado { get; set; ***REMOVED***
-        public string UnidadDeMedida { get; set; ***REMOVED***
+        public string name { get; set; }
+        public double goal { get; set; }
+        public double? current { get; set; }
+        public decimal PorcentajeEjecutado { get; set; }
+        public string UnidadDeMedida { get; set; }
         /// <summary>
         /// Objetivo
         /// </summary>
-        public string goalDescription { get; set; ***REMOVED***
-        public string product { get; set; ***REMOVED***
-        public string activities { get; set; ***REMOVED***
+        public string goalDescription { get; set; }
+        public string product { get; set; }
+        public string activities { get; set; }
 
-***REMOVED***
+    }
 
-***REMOVED***
+}

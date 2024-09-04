@@ -24,11 +24,11 @@ define(['app/network/Services','app/utils/Modal'], function( Services, Modal ){
 			.css({
 				left: $this.offset().left,
 				top: $this.offset().top
-			***REMOVED***)
+			})
 			.show()
 		$(document).on('click', hide)
 		return false
-	***REMOVED***
+	}
 	function send(evt){
 		var pre = location.href + '\n\n'
 		sharerContainer.addClass('loading')
@@ -44,15 +44,15 @@ define(['app/network/Services','app/utils/Modal'], function( Services, Modal ){
 		if( evt.preventDefault ) evt.preventDefault()
 		else evt.returnValue = false
 		return false
-	***REMOVED***
+	}
 	function hide( evt ){
 		if(!evt || $(evt.target).parents('.mail-sharer').length == 0 ){
 			sharerContainer
 				.hide()
 				.detach()
 			$(document).off('click', hide)
-		***REMOVED***
-	***REMOVED***
+		}
+	}
 
 	function updateUserOk( response ){
 		sharerContainer.removeClass('loading')
@@ -68,9 +68,9 @@ define(['app/network/Services','app/utils/Modal'], function( Services, Modal ){
 
 		hide()
 		Modal.info( message ).show()
-	***REMOVED***
+	}
 	function updateUserError(){
 		sharerContainer.removeClass('loading')
 		// hide()
-	***REMOVED***
-***REMOVED***)
+	}
+})

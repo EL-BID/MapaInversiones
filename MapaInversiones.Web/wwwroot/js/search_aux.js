@@ -6,7 +6,7 @@
         $("#ulPaginacion").attr("refine", val_sel);
 
 
-***REMOVED***);
+    });
 
     $("#ulPaginacion").on("click", "li", function (e) {
         var $target = $(e.target);
@@ -19,32 +19,32 @@
             $target.addClass("active");
             getListResult(index*1);
             $("#ulPaginacion").attr("actual", ((index <0)? 0:index));
-    ***REMOVED*** else {
+        } else {
             if (index === "ap" && !$target.hasClass("pagination-item-disabled")) {
                 getListResult(1 * $("#ulPaginacion").attr("siguiente"), true); // se envia la pagina a la que se quiere ir, booleano para indicar que se debe volver a paginar, cual boton fue el que se seleccionó
-        ***REMOVED***
+            }
             if (index === "bp" && !$target.hasClass("pagination-item-disabled") ) {
                 getListResult(1 * $("#ulPaginacion").attr("anterior"), true); // se envia la pagina a la que se quiere ir, booleano para indicar que se debe volver a paginar, cual boton fue el que se seleccionó
-        ***REMOVED***
+            }
 
             if (index === "fp" && !$target.hasClass("pagination-item-disabled")) {
                 getListResult(1 * $("#ulPaginacion").attr("inicial"), true); // se envia la pagina a la que se quiere ir, booleano para indicar que se debe volver a paginar, cual boton fue el que se seleccionó
-        ***REMOVED***
+            }
             if (index === "lp" && !$target.hasClass("pagination-item-disabled")) {
                 getListResult(1 * $("#ulPaginacion").attr("final"), true); // se envia la pagina a la que se quiere ir, booleano para indicar que se debe volver a paginar, cual boton fue el que se seleccionó
-        ***REMOVED***
+            }
                
-    ***REMOVED***
+        }
 
 
         
-***REMOVED***);
-***REMOVED***);
+    });
+});
 
 function getEventTarget(e) {
     e = e || window.event;
     return e.target || e.srcElement;
-***REMOVED***
+}
 
 
 function pintarPaginacion(totalResultados, pagina) { //total de resultados y pagina en la que inicia la fila a mostrar en la paginacion
@@ -65,10 +65,10 @@ function pintarPaginacion(totalResultados, pagina) { //total de resultados y pag
     var siguienteb = $("#ulPaginacion").attr("siguienteb") * 1;
     var anteriorb = $("#ulPaginacion").attr("anteriorb") * 1;
 
-    if (siguienteb < pagina + 1 && final <= pagina + 1) { siguienteb = final + paginasimp; ***REMOVED***
-    else if (siguienteb < pagina + 1 && final > pagina + 1) { siguienteb = siguienteb + paginasimp; ***REMOVED***
-    else if (pagina > 0 && pagina < siguienteb - paginasimp) { siguienteb = siguienteb - paginasimp; ***REMOVED***
-    else if (pagina == 0) { siguienteb = paginasimp; ***REMOVED***
+    if (siguienteb < pagina + 1 && final <= pagina + 1) { siguienteb = final + paginasimp; }
+    else if (siguienteb < pagina + 1 && final > pagina + 1) { siguienteb = siguienteb + paginasimp; }
+    else if (pagina > 0 && pagina < siguienteb - paginasimp) { siguienteb = siguienteb - paginasimp; }
+    else if (pagina == 0) { siguienteb = paginasimp; }
     anteriorb = siguienteb - paginasimp;
 
 
@@ -87,22 +87,22 @@ function pintarPaginacion(totalResultados, pagina) { //total de resultados y pag
         "<li class='pagination-item-arrow pagination-item-arrow-prev " + ((anterior < 0) ? "pagination-item-disabled" : "pagination-item-enabled") + " material-icons md-24' pagina = 'bp' > chevron_left</li >";
 
     for (var g = (siguienteb - paginasimp); g < (hasta); g++) {
-        if (g == pagina) { activo = true; ***REMOVED*** else { activo = false; ***REMOVED***
+        if (g == pagina) { activo = true; } else { activo = false; }
         if (activo) {
             htmlPaginacion += " <li pagina='" + g + "' class='paginacion active'>" + (g * 1 + 1) + "</li>";
 
-    ***REMOVED***
+        }
         else {
             htmlPaginacion += " <li pagina='" + g + "' class='paginacion'>" + (g * 1 + 1) + "</li>";
             activo = 0;
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
     htmlPaginacion += " <li class='pagination-item-arrow pagination-item-arrow-next material-icons md-24 " + ((siguiente >= paginas) ? "pagination-item-disabled" : "pagination-item-enabled") + " ' pagina='ap'>chevron_right</li>" +
         " <li class='pagination-item-arrow pagination-item-arrow-last material-icons md-24 " + ((siguienteb >= paginas) ? "pagination-item-disabled" : "pagination-item-enabled") + " ' pagina='lp'>last_page</li>";
 
     $("#ulPaginacion").html(htmlPaginacion);
-***REMOVED***
+}
 
 function getListResult(pagina, repaginar=false ) {
 
@@ -135,26 +135,26 @@ function getListResult(pagina, repaginar=false ) {
                             "</div>" +
                             "</div>" +
                             "</div>"
-                ***REMOVED***
+                    }
 
-            ***REMOVED***
+                }
                 Resultados.innerHTML = htmlResultados;
                 if (repaginar) {
                     totalResultados = ((data.length > 0) ? data[0].numFound : data.length);
                     pintarPaginacion(totalResultados, pagina);
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
             error: function (response) {
                 alert(response.responseText);
-          ***REMOVED***
+            },
             failure: function (response) {
                 alert(response.responseText);
-        ***REMOVED***
-    ***REMOVED***);
+            }
+        });
     
 
-***REMOVED***
+}
 
 $("#selectOrden").on("change", function (event) {
     getListResult(0,true);
-***REMOVED***);
+});

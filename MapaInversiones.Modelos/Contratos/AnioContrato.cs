@@ -6,6 +6,6 @@ namespace PlataformaTransparencia.Modelos.Contratos
 {
     public class AnioContrato
     {
-        public int valor { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public int valor { get; set; }
+    }
+}

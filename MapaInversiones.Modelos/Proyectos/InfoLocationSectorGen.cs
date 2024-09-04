@@ -6,13 +6,13 @@ namespace PlataformaTransparencia.Modelos.Proyectos
 {
     public class InfoLocationSectorGen
     {
-        public string IdDepartamento { get; set; ***REMOVED***
-        public string IdSector { get; set; ***REMOVED***
-        public decimal Costo { get; set; ***REMOVED***
-        public decimal Duracion { get; set; ***REMOVED***
-        public decimal CantProyectos { get; set; ***REMOVED***
-        public string UrlImgXL { get; set; ***REMOVED***
-        public string nomSector { get; set; ***REMOVED***
+        public string IdDepartamento { get; set; }
+        public string IdSector { get; set; }
+        public decimal Costo { get; set; }
+        public decimal Duracion { get; set; }
+        public decimal CantProyectos { get; set; }
+        public string UrlImgXL { get; set; }
+        public string nomSector { get; set; }
 
-***REMOVED***
-***REMOVED***
+    }
+}

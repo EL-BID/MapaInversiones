@@ -21,7 +21,7 @@ define([
 	var filtersCleared = false,
 		ignoreHash = false,
 		// , historyPush = !!(window.history && window.history.pushState),
-		infoTemplate = doT.compile('<div class="info"><h1>Información</h1><p>{{=it.message***REMOVED******REMOVED***</p>'+
+		infoTemplate = doT.compile('<div class="info"><h1>Información</h1><p>{{=it.message}}</p>'+
 			'<div class="txt-right"><a class="button close">Cerrar</a></div></div>'),
 		// This is for the selection of a territory
 		// Bing Animation is not cancelable so I had to set this
@@ -43,8 +43,8 @@ define([
 
 	/**
 	 * Returns the state from a hash
-	 * @param  {String***REMOVED*** hash from history
-	 * @return {Atring***REMOVED***      valid state
+	 * @param  {String} hash from history
+	 * @return {Atring}      valid state
 	 */
 	function getStateForHash( hash ){
 		var i = appStates.length,
@@ -55,29 +55,29 @@ define([
 			index = hash.indexOf( key.toLowerCase() )
 			if( index == 2 ){
 				return key
-			***REMOVED***
-		***REMOVED***
+			}
+		}
 
 		return ''//appStates[0]
-	***REMOVED***
+	}
 	
 
 	function areNotSameCorners( corners, corners2 ){
 		if( corners === null && corners2 !== null ||
 			corners2 === null && corners !== null ){
 			return true
-		***REMOVED***
+		}
 		return !( corners[0][0] == corners2 [0][0] &&
 				corners[0][1] == corners2 [0][1] &&
 				corners[1][0] == corners2 [1][0] &&
 				corners[1][1] == corners2 [1][1] )
-	***REMOVED***
+	}
 
 
 	$('#share p').on('click', function(){
 		///hideShow()
 		$('#share .container-share').add($(this)).toggleClass('show')
-	***REMOVED***)
+	})
 
 	var AppState = new Class( Observable, {
 		// Request params
@@ -106,7 +106,7 @@ define([
 			var router = new Router(),
 				self = this,
 				// hash = window.location.hash,
-				lambda = function() {***REMOVED***
+				lambda = function() {}
 
 			// router.historyList = []
 
@@ -123,27 +123,27 @@ define([
 					if(self.firstTime){
 						self.firstTime = false
 						return
-					***REMOVED***
+					}
 					// If the location is different is
 					// because it was fired by history
 					// and needs to be interpreted into filters
 					if( self.lastRequestedUrl !== location.hash ){
 						self.parseUrl()
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***)
+					}
+				}
+			})
 
 			router.on(/\/(proyectos|recursos|produccion|fiscalizacion|(\?.+)?)/, function(){
 				if(location.hash.match(/\?.+/)){
-				***REMOVED***else{
+				}else{
 					self.setListMode( false, false, false )
 					self.ignoreWeAreReseting()
-				***REMOVED***
+				}
 
 				// self.fireEvent('redraw-all')
 				// self.state = ''
 				// self.fireEvent('filter-reseted')
-			***REMOVED***)
+			})
 
 			//debugger;
 
@@ -157,9 +157,9 @@ define([
 			// 	else window.location.hash = '/proyectos'
 			// 	var modal = new Modal(infoTemplate({ message:
 			// 			'Esta funcionalidad se encuentra en construcción <br /><br />'
-			// 		***REMOVED***))
+			// 		}))
 			// 	modal.show()
-			// ***REMOVED***)
+			// })
 
 			this.on('state-change', updateStateMode)
 
@@ -168,9 +168,9 @@ define([
 					name = state
 				if( state == 'Fiscalizacion' ){
 					name = 'Fiscalización'
-				***REMOVED***else if( state == 'Produccion' ){
+				}else if( state == 'Produccion' ){
 					name = 'Producción'
-				***REMOVED***
+				}
 				if( state ){
 					// quitar landing mode
 					$('.map-container').removeClass('home-mode')
@@ -181,12 +181,12 @@ define([
 							state.toLowerCase()))
 						.parent().show()
 
-				***REMOVED***else{
+				}else{
 					// agregar landing mode
 					$stateName.parent().hide()
 					$('.map-container').addClass('home-mode')
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			this.state = getStateForHash( location.hash )
 			updateStateMode( this.state )
@@ -194,14 +194,14 @@ define([
 			router.init()
 			// console.log('after')
 
-		***REMOVED***,
+		},
 
 		ignoreWeAreReseting: function(){
 			ignoreWeAreReseting = true
 			setTimeout(function(){
 				ignoreWeAreReseting = false
-			***REMOVED***, 1500)
-		***REMOVED***,
+			}, 1500)
+		},
 
 		parseUrl: function( event ){
 			var params,
@@ -213,8 +213,8 @@ define([
 				zoomChanged,
 				cornersChanged,
 				newState = getStateForHash( location.hash ),
-				view = {***REMOVED***,
-				appStateView = {***REMOVED***,
+				view = {},
+				appStateView = {},
 				isGroup = false,
 				isList = false,
 				center = this.center
@@ -241,7 +241,7 @@ define([
 					// urlObj[paramName] = value
 					if(paramName == 'zoom'){
 						zoomValue = value
-					***REMOVED***else if(paramName == 'center'){
+					}else if(paramName == 'center'){
 						center = value.split(',')
 						tlArr = params[i+1].split('=')[1].split(',')
 						brArr = params[i+2].split('=')[1].split(',')
@@ -252,7 +252,7 @@ define([
 							brArr[0],
 							brArr[1])
 						i+=2
-					***REMOVED***else if(paramName == 'topLeft'){
+					}else if(paramName == 'topLeft'){
 						// I suppose it will always come in this order
 						tlArr = value.split(',')
 						brArr = params[i+1].split('=')[1].split(',')
@@ -264,15 +264,15 @@ define([
 							brArr[1])
 						//Captured the next, so go on
 						i++
-					***REMOVED***else if( paramName == 'listMode' ){
+					}else if( paramName == 'listMode' ){
 						isList = true
-					***REMOVED***else if( paramName == 'isGroup' ){
+					}else if( paramName == 'isGroup' ){
 						isGroup = true
-					***REMOVED***
+					}
 					else if( value && !filtersSettedByString ){
 						this.fireEvent('filter-activated', paramName, value.split(','))
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				this.setListMode( isList, isGroup, false )
 				filtersSettedByString = false
@@ -285,28 +285,28 @@ define([
 
 				if( zoomChanged ){
 					view.zoom = appStateView.zoom = zoomValue
-				***REMOVED***
+				}
 				if( cornersChanged ){
 					if( center !== this.center ){
 						this.center = view.center = center
 						appStateView.center = center
-					***REMOVED***else{
+					}else{
 						view.leftTop = tl
 						view.rightBottom = br
 						appStateView.corners = [ tlArr, brArr ]
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 				// console.log(view.zoom, appStateView.zoom, zoomChanged, this.zoom, zoomValue)
 				if( zoomChanged || cornersChanged ){
-					this.setZoomAndCorners( appStateView, { noNotify: true ***REMOVED*** )
+					this.setZoomAndCorners( appStateView, { noNotify: true } )
 					// Group list view is in one point
 					// console.log('--->',view.zoom, appStateView.zoom)
 					if( br != tl ) this.fireEvent('map-changed', view, true)
-				***REMOVED***
+				}
 
-			***REMOVED***else{
+			}else{
 				this.fireEvent('filter-reseted')
-			***REMOVED***
+			}
 			// console.log('parseURL ')
 			// console.log('this.state '+this.state)
 			// console.log('newState '+newState)
@@ -318,21 +318,21 @@ define([
 				this.fireEvent('state-change', newState, location.hash,
 					location.hash.replace(/^[^\?]+\?/, '') )
 
-			***REMOVED***else{
+			}else{
 				this.fireEvent('params-change', newState, location.hash,
 					location.hash.replace(/^[^\?]+\?/, '') )
-			***REMOVED***
+			}
 			this.updateQueryByURL()
-		***REMOVED***,
+		},
 
 		getState: function(){
 			return {
 				state: this.state,
 				hash: this.hash,
 				params: this.params
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		getStateArray: function(){
 			return [
@@ -340,10 +340,10 @@ define([
 				this.hash,
 				this.params
 			]
-		***REMOVED***,
+		},
 
 		setZoomAndCorners: function( view, options ){
-			options = options || {***REMOVED***
+			options = options || {}
 
 			// this.setListMode( false )
 			ignoreNextFilter = false
@@ -353,7 +353,7 @@ define([
 			if( ( view.zoom && this.zoom == view.zoom ) &&
 				( view.corners && !areNotSameCorners(this.corners, view.corners) ) ){
 				return
-			***REMOVED***
+			}
 			
 
 			if( view.zoom ) this.zoom = view.zoom
@@ -370,24 +370,24 @@ define([
 				this.page = 1
 				this.setListMode( true, options.isGroupList )
 
-			***REMOVED***else{
+			}else{
 				this.center[0] = view.center[0] //|| this.defaultCenter
 				this.center[1] = view.center[1] //|| this.defaultCenter
 				this.cachedCorners = view.corners
 				this.corners = view.corners || this.defaultCorners
 				this.setListMode( this.isListMode, options.isGroupList )
-			***REMOVED***
+			}
 			// console.log(view.center[0], view.center[1],'==', this.center[0], this.center[1])
 			// console.log('------------------------')
 
 			if( !options.noNotify )	this.updateURLTimed()
 
 			this.activateStateProyects()
-		***REMOVED***,
+		},
 
 		setDefaultCorners: function( corners ){
 			this.corners = this.defaultCorners = corners
-		***REMOVED***,
+		},
 
 		setFiltersString: function( filters ){
 			//console.log('FILTERS STRING ======> '+ ignoreNextFilter)
@@ -399,12 +399,12 @@ define([
 			if(!ignoreNextFilter){
 				this.updateURLTimed()
 				//console.log(filters)
-			***REMOVED***
-		***REMOVED***,
+			}
+		},
 
 		ignoreNextFilterSelection: function(){
 			ignoreNextFilter = true
-		***REMOVED***,
+		},
 
 		activateStateProyects: function(){
 			if(!this.state && !ignoreWeAreReseting){
@@ -412,9 +412,9 @@ define([
 				this.fireEvent('state-change', this.state, location.hash,
 					location.hash.replace(/^[^\?]+\?/, '') )
 				this.updateURLTimed()
-			***REMOVED***
+			}
 
-		***REMOVED***,
+		},
 
 		setQuery: function( query ){
 			//console.log('QUERY '+query)
@@ -423,14 +423,14 @@ define([
 
 			if(!ignoreNextFilter){
 				this.updateURLTimed()
-			***REMOVED***
-		***REMOVED***,
+			}
+		},
 
 		setPage: function( page ){
 			//console.log('PAGE '+page)
 			this.page = page
 			this.updateURLTimed()
-		***REMOVED***,
+		},
 
 		updateQueryByURL: function(){
 			var query = location.hash.replace(/^[^\?]+\??/,''),
@@ -444,9 +444,9 @@ define([
 						'&bottomRight=' + this.defaultCorners[1].join(',')
 				this.corners = this.defaultCorners
 				this.zoom = 6
-			***REMOVED***else{
+			}else{
 				if( lastRequestedQuery == this.state + query ) return
-			***REMOVED***
+			}
 
 			lastRequestedQuery = this.state + query
 			// console.log('requesting with '+this.state, this.isListMode)
@@ -456,13 +456,13 @@ define([
 					if( this.cachedRequest.abort ) this.cachedRequest.abort()
 					//Notify the Map to remove one loading
 					this.fireEvent('load-projects-aborded', query)
-				***REMOVED***
+				}
 				// Check if there is a running ajax anc cancel it
 				if( this.cachedRequest2 && this.cachedRequest2.readystate != 4){
 					if( this.cachedRequest2.abort ) this.cachedRequest2.abort()
 					//Notify the Map to remove one loading
 					this.fireEvent('load-projects-aborded', query)
-				***REMOVED***
+				}
 
 				this.cachedRequest = Services.search( this.state || 'Proyectos', query )
 				
@@ -471,40 +471,40 @@ define([
 					this.state !== 'Fiscalizacion' &&
 					this.cachedRequest ){
 					this.cachedRequest.done(this.projectsLoaded.bind(this))
-				***REMOVED***else if( this.state == 'Recursos' ){
-					this.cachedRequest2 = Services.search( this.state, query, {pushpins: true***REMOVED*** )
+				}else if( this.state == 'Recursos' ){
+					this.cachedRequest2 = Services.search( this.state, query, {pushpins: true} )
 					$.when(this.cachedRequest2, this.cachedRequest)
 							.done(this.resourcesLoaded.bind(this))
-				***REMOVED***else if( this.state == 'Produccion' ){
-					this.cachedRequest2 = Services.search( this.state, query, {pushpins: true***REMOVED*** )
+				}else if( this.state == 'Produccion' ){
+					this.cachedRequest2 = Services.search( this.state, query, {pushpins: true} )
 					$.when(this.cachedRequest2, this.cachedRequest)
 							.done(this.productionLoaded.bind(this))
-				***REMOVED***else if( this.state == 'Fiscalizacion' ){
-					this.cachedRequest2 = Services.search( this.state, query, {pushpins: true***REMOVED*** )
+				}else if( this.state == 'Fiscalizacion' ){
+					this.cachedRequest2 = Services.search( this.state, query, {pushpins: true} )
 					$.when(this.cachedRequest2, this.cachedRequest)
 							.done(this.fiscalizacionLoaded.bind(this))
-				***REMOVED***
+				}
 
 				this.fireEvent('loading-projects', query)
 				//console.log('FIREEEEEEEE '+ query)
 				// this.filtersChanged( query )
-			***REMOVED***else{
-				req = Services.search( this.state, query, {isList: true***REMOVED*** )
+			}else{
+				req = Services.search( this.state, query, {isList: true} )
 				this.fireEvent('loading-projects-list', query)
 				if( req ){
 					req.done(this.projectsListLoaded.bind(this))
 						//console.log('FIREEEEEEEE '+ query)
 					// this.filtersChanged( query )
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 			
-		***REMOVED***,
+		},
 
 		updateURLTimed: function(){
 			//console.log('TIMED ')
 			clearTimeout(this.timeout)
 			this.timeout = setTimeout(this.updateURL.bind(this), 100)
-		***REMOVED***,
+		},
 
 		updateURL: function(){
 			var query = '',
@@ -516,34 +516,34 @@ define([
 			if( this.firstTime ){
 				this.firstTime = false
 				return
-			***REMOVED***
+			}
 
 			if( this.query){
 				query += 'query=' + this.query
-			***REMOVED***
+			}
 			if( this.page){
 				query += '&page=' + this.page
-			***REMOVED***
+			}
 			if( this.zoom /*&& !this.isListMode && this.corners*/ ){
 				query += '&zoom=' + this.zoom
-			***REMOVED***
+			}
 			// console.log(JSON.stringify(this.center))
 			if( this.center ){
 				query += '&center=' + this.center[0] + ',' + this.center[1]
-			***REMOVED***
+			}
 			if( this.corners /*&& (!this.isListMode || this.isListMode.isGroup)*/ ){
 				query += '&topLeft=' + this.corners[0][0] + ',' + this.corners[0][1]
 				query += '&bottomRight=' + this.corners[1][0] + ',' + this.corners[1][1]
-			***REMOVED***
+			}
 			if( this.filters ){
 				query += '&' + this.filters
-			***REMOVED***
+			}
 			if( this.isListMode ){
 				query += '&listMode=true'
 				if( this.isListMode.isGroup ){
 					query += '&isGroup=true'
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			query = query.replace(/(?:^&)|(?:&$)/g,'')
 
@@ -555,41 +555,41 @@ define([
 
 			if( !this.state ){
 				posibleHash = '#/?' + query
-			***REMOVED***
+			}
 			// console.log('======================================='+this.lastQuery)
 			// console.log('======================================='+posibleHash)
 			if( this.lastQuery && ( this.lastQuery === posibleHash )/* || !this.state*/ ){
 				return
-			***REMOVED***
+			}
 			// console.log('=======================================PAST')
 			this.lastQuery =  posibleHash
 
 			location.hash = posibleHash
-		***REMOVED***,
+		},
 
 		projectsLoaded: function( data ){
 			this.fireEvent('projects-loaded', data)
-		***REMOVED***,
+		},
 
 		resourcesLoaded: function( data, data2 ){
 			if( data2 instanceof Array ){
 				data = data[0]
 				data2 = data2[0]
 				this.fireEvent('resources-loaded', data, data2)
-			***REMOVED***else{
+			}else{
 				this.fireEvent('resources-loaded', data)
-			***REMOVED***
-		***REMOVED***,
+			}
+		},
 
 		productionLoaded: function( data, data2 ){
 			if( data2 instanceof Array ){
 				data = data[0]
 				data2 = data2[0]
 				this.fireEvent('production-loaded', data, data2)
-			***REMOVED***else{
+			}else{
 				this.fireEvent('production-loaded', data)
-			***REMOVED***
-		***REMOVED***,
+			}
+		},
 
 		fiscalizacionLoaded: function( data, data2 ){
 
@@ -599,24 +599,24 @@ define([
 				data = data[0]
 				data2 = data2[0]
 				this.fireEvent('fiscalization-loaded', data, data2)
-			***REMOVED***else{
+			}else{
 				this.fireEvent('fiscalization-loaded', data)
-			***REMOVED***
+			}
 
 
-		***REMOVED***,
+		},
 
 		projectsListLoaded: function( data ){
 			this.fireEvent('projects-list-loaded', data)
-		***REMOVED***,
+		},
 
 		setListMode: function( bool, groupException, noForce ){
 			if( bool && $('#controls').css('left') != 0 ){
 				$('#controls')
 					.addClass('list-mode')
-					.animate({ marginLeft: 0, left: 0 ***REMOVED***)
+					.animate({ marginLeft: 0, left: 0 })
 				this.fireEvent('view-group-change', bool)
-			***REMOVED***
+			}
 
 			if( bool === !!this.isListMode ) return
 
@@ -630,26 +630,26 @@ define([
 				// if( !this.getState().state ){
 				// 	this.fireEvent('filter-reseted')
 				// 	this.fireEvent('redraw-all')
-				// ***REMOVED*** 
-			***REMOVED***else{
+				// } 
+			}else{
 				if( groupException ){
-					this.isListMode = { isGroup: true ***REMOVED***
-				***REMOVED***else{
-					this.isListMode = {***REMOVED***
-				***REMOVED***
+					this.isListMode = { isGroup: true }
+				}else{
+					this.isListMode = {}
+				}
 				$('#map-view').hide()
 				$('#projects-list-view').show()
 				// $('#controls')
 				// 	.addClass('list-mode')
-				// 	.animate({ marginLeft: 0, left: 0 ***REMOVED***)
-			***REMOVED***
+				// 	.animate({ marginLeft: 0, left: 0 })
+			}
 
 
 			if( !noForce ){
 				this.updateURLTimed( groupException )
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+			}
+		}
+	})
 
 	return new AppState()
-***REMOVED***)
+})

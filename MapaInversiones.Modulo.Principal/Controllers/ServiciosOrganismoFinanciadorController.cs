@@ -16,7 +16,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         public ServiciosOrganismoFinanciadorController(IFinanciadorBLL financiadorBll)
         {
             _financiadorBll = financiadorBll;
-    ***REMOVED***
+        }
 
         [HttpGet("GetOrganismosFinanciadoresPorAnioAndCodigoFuente")]
         public ModelDataConsolidadoFinanciador GetOrganismosFinanciadoresPorAnioAndCodigoFuente()
@@ -31,7 +31,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             ModelDataConsolidadoFinanciador rta = _financiadorBll.ObtenerConsolidadoOrganismosFinanciadoresPorAnioAndCodigoFuente(anio, codigoFuente);
             rta.Financiadores = financiadores;
             return rta;
-    ***REMOVED***
+        }
 
         [HttpGet("ObtenerOrganismosFinanciadoresPorAnioAndCodigoFinanciador")]
         public ModelDataFinanciador ObtenerOrganismosFinanciadoresPorAnioAndCodigoFinanciador()
@@ -42,39 +42,39 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             if (!int.TryParse(codigoFinanciador, out int codigoOrganismoFinanciador)) return new();
             ModelDataFinanciador rta = _financiadorBll.ObtenerDataFinanciadorPorAnioAndCodigoFinanciador(anio, codigoOrganismoFinanciador);
             return rta ?? (new());
-    ***REMOVED***
+        }
 
         [HttpGet("ObtenerRecursosGraficoTreeMapSectoresPorCodigoFinanciadorAnio")]
         public ModelPresupuestoData ObtenerRecursosGraficoTreeMapSectoresPorCodigoFinanciadorAnio(int anyo, int codigoFinanciador)
         {
-            ModelPresupuestoData objReturn = new() { Status=true ***REMOVED***;
+            ModelPresupuestoData objReturn = new() { Status=true };
             try
             {
                 objReturn.InfoRecursos = _financiadorBll.ObtenerRecursosGraficoTreeMapSectoresPorCodigoFinanciadorAnio(anyo, codigoFinanciador);
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception)
             {
                 objReturn.Status = false;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         [HttpGet("ObtenerProyectosPorCodigoFinanciadorAnio")]
         public ModelProyectoTrazabilidadFinanciadorData ObtenerProyectosPorCodigoFinanciadorAnio(int anio, int codigoFinanciador)
         {
-            ModelProyectoTrazabilidadFinanciadorData objReturn = new() { Status = true, Proyectos=new(), Message=string.Empty ***REMOVED***;
+            ModelProyectoTrazabilidadFinanciadorData objReturn = new() { Status = true, Proyectos=new(), Message=string.Empty };
             try
             {
                 objReturn.Proyectos = _financiadorBll.ObtenerDataProyectosPorAnioCodigoFinanciador(anio, codigoFinanciador);
                 return objReturn;
-        ***REMOVED***
+            }
             catch (Exception)
             {
                 objReturn.Status = false;
                 return objReturn;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

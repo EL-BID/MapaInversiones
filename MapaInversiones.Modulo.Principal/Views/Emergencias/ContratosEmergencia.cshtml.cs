@@ -7,6 +7,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Views.Emergencias
     {
         public void OnGet()
         {
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

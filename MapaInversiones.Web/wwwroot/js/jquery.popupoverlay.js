@@ -8,7 +8,7 @@
 ;(function ($) {
 
     var $window = $(window);
-    var options = {***REMOVED***;
+    var options = {};
     var zindexvalues = [];
     var lastclicked = [];
     var scrollbarwidth;
@@ -32,14 +32,14 @@
             if (!$el.data('popup-initialized')) {
                 $el.attr('data-popup-initialized', 'true');
                 methods._initonce(el);
-        ***REMOVED***
+            }
 
             if (options.autoopen) {
                 setTimeout(function() {
                     methods.show(el, 0);
-              ***REMOVED*** 0);
-        ***REMOVED***
-      ***REMOVED***
+                }, 0);
+            }
+        },
 
         _initonce: function (el) {
             var $el = $(el);
@@ -58,13 +58,13 @@
             if (options.type == 'tooltip') {
                 options.background = false;
                 options.scrolllock = false;
-        ***REMOVED***
+            }
 
             if (options.backgroundactive) {
                 options.background = false;
                 options.blur = false;
                 options.scrolllock = false;
-        ***REMOVED***
+            }
 
             if (options.scrolllock) {
                 // Calculate the browser's scrollbar width dynamically
@@ -75,12 +75,12 @@
                     child = parent.children();
                     scrollbarwidth = child.innerWidth() - child.height(99).innerWidth();
                     parent.remove();
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             if (!$el.attr('id')) {
                 $el.attr('id', 'j-popup-' + parseInt((Math.random() * 100000000), 10));
-        ***REMOVED***
+            }
 
             $el.addClass('popup_content');
 
@@ -99,16 +99,16 @@
                     right: 0,
                     bottom: 0,
                     left: 0
-            ***REMOVED***);
+                });
 
                 if (options.setzindex && !options.autozindex) {
                     $background.css('z-index', '100000');
-            ***REMOVED***
+                }
 
                 if (options.transition) {
                     $background.css('transition', options.transition);
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             $body.append(el);
 
@@ -120,35 +120,35 @@
                 opacity: 0,
                 visibility: 'hidden',
                 position: 'absolute'
-        ***REMOVED***);
+            });
 
             // Make div clickable in iOS
             if (iOS) {
                 $wrapper.css('cursor', 'pointer');
-        ***REMOVED***
+            }
 
             if (options.type == 'overlay') {
                 $wrapper.css('overflow','auto');
-        ***REMOVED***
+            }
 
             $el.css({
                 opacity: 0,
                 visibility: 'hidden',
                 display: 'inline-block'
-        ***REMOVED***);
+            });
 
             if (options.setzindex && !options.autozindex) {
                 $wrapper.css('z-index', '100001');
-        ***REMOVED***
+            }
 
             if (!options.outline) {
                 $el.css('outline', 'none');
-        ***REMOVED***
+            }
 
             if (options.transition) {
                 $el.css('transition', options.transition);
                 $wrapper.css('transition', options.transition);
-        ***REMOVED***
+            }
 
             // Hide popup content from screen readers initially
             $el.attr('aria-hidden', true);
@@ -158,7 +158,7 @@
                     textAlign: 'left',
                     position: 'relative',
                     verticalAlign: 'middle'
-            ***REMOVED***);
+                });
 
                 css = {
                     position: 'fixed',
@@ -167,13 +167,13 @@
                     top: 0,
                     left: 0,
                     textAlign: 'center'
-            ***REMOVED***;
+                };
 
                 if(options.backgroundactive){
                     css.position = 'absolute';
                     css.height = '0';
                     css.overflow = 'visible';
-            ***REMOVED***
+                }
 
                 $wrapper.css(css);
 
@@ -184,8 +184,8 @@
                     display: 'inline-block',
                     verticalAlign: 'middle',
                     height: '100%'
-            ***REMOVED***);
-        ***REMOVED***
+                });
+            }
 
             // Add WAI ARIA role to announce dialog to screen readers
             $el.attr('role', 'dialog');
@@ -197,13 +197,13 @@
 
                 if (!item.id) {
                     $(item).attr('id', 'open_' + parseInt((Math.random() * 100000000), 10));
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
 
             // Set aria-labelledby (if aria-label or aria-labelledby is not set in html)
             if (!($el.attr('aria-labelledby') || $el.attr('aria-label'))) {
                 $el.attr('aria-labelledby', $(openelement).attr('id'));
-        ***REMOVED***
+            }
 
             // Show and hide tooltips on hover
             if(options.action == 'hover'){
@@ -212,14 +212,14 @@
                 // Handler: mouseenter, focusin
                 $(openelement).on('mouseenter', function (event) {
                     methods.show(el, $(this).data('popup-ordinal'));
-            ***REMOVED***);
+                });
 
                 // Handler: mouseleave, focusout
                 $(openelement).on('mouseleave', function (event) {
                     methods.hide(el);
-            ***REMOVED***);
+                });
 
-        ***REMOVED*** else {
+            } else {
 
                 // Handler: Show popup when clicked on `open` element
                 $(document).on('click', openelement, function (event) {
@@ -228,26 +228,26 @@
                     var ord = $(this).data('popup-ordinal');
                     setTimeout(function() { // setTimeout is to allow `close` method to finish (for issues with multiple tooltips)
                         methods.show(el, ord);
-                  ***REMOVED*** 0);
-            ***REMOVED***);
-        ***REMOVED***
+                    }, 0);
+                });
+            }
 
             if (options.closebutton) {
                 methods.addclosebutton(el);
-        ***REMOVED***
+            }
 
             if (options.detach) {
                 $el.hide().detach();
-        ***REMOVED*** else {
+            } else {
                 $wrapper.hide();
-        ***REMOVED***
-      ***REMOVED***
+            }
+        },
 
         /**
          * Show method
          *
-         * @param {object***REMOVED*** el - popup instance DOM node
-         * @param {number***REMOVED*** ordinal - order number of an `open` element
+         * @param {object} el - popup instance DOM node
+         * @param {number} ordinal - order number of an `open` element
          */
         show: function (el, ordinal) {
             var $el = $(el);
@@ -257,7 +257,7 @@
             // Initialize if not initialized. Required for: $('#popup').popup('show')
             if (!$el.data('popup-initialized')) {
                 methods._init(el);
-        ***REMOVED***
+            }
             $el.attr('data-popup-initialized', 'true');
 
             var $body = $('body');
@@ -274,7 +274,7 @@
             // Add popup id to visiblePopupsArray
             setTimeout(function() {
                 visiblePopupsArray.push(el.id);
-          ***REMOVED*** 0);
+            }, 0);
 
             // Calculating maximum z-index
             if (options.autozindex) {
@@ -293,9 +293,9 @@
 
                       if(maxzindex < elementzindex){
                         maxzindex = elementzindex;
-                  ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
+                      }
+                    }
+                }
 
                 zindexvalues[el.id] = maxzindex;
 
@@ -304,42 +304,42 @@
                     if (zindexvalues[el.id] > 0) {
                         $('#' + el.id + '_background').css({
                             zIndex: (zindexvalues[el.id] + 1)
-                    ***REMOVED***);
-                ***REMOVED***
-            ***REMOVED***
+                        });
+                    }
+                }
 
                 // Add z-index to the wrapper
                 if (zindexvalues[el.id] > 0) {
                     $wrapper.css({
                         zIndex: (zindexvalues[el.id] + 2)
-                ***REMOVED***);
-            ***REMOVED***
-        ***REMOVED***
+                    });
+                }
+            }
 
             if (options.detach) {
                 $wrapper.prepend(el);
                 $el.show();
-        ***REMOVED*** else {
+            } else {
                 $wrapper.show();
-        ***REMOVED***
+            }
 
             opentimer = setTimeout(function() {
                 $wrapper.css({
                     visibility: 'visible',
                     opacity: 1
-            ***REMOVED***);
+                });
 
                 $('html').addClass('popup_visible').addClass('popup_visible_' + el.id);
                 $wrapper.addClass('popup_wrapper_visible');
-          ***REMOVED*** 20); // 20ms required for opening animation to occur in FF
+            }, 20); // 20ms required for opening animation to occur in FF
 
             // Disable background layer scrolling when popup is opened
             if (options.scrolllock) {
                 $body.css('overflow', 'hidden');
                 if ($body.height() > $window.height()) {
                     $body.css('margin-right', bodymarginright + scrollbarwidth);
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             if(options.backgroundactive){
                 //calculates the vertical align
@@ -351,28 +351,28 @@
                             parseInt($el.css('margin-bottom'), 10)
                         )
                     )/2 +'px'
-            ***REMOVED***);
-        ***REMOVED***
+                });
+            }
 
             $el.css({
                 'visibility': 'visible',
                 'opacity': 1
-        ***REMOVED***);
+            });
 
             // Show background
             if (options.background) {
                 $background.css({
                     'visibility': 'visible',
                     'opacity': options.opacity
-            ***REMOVED***);
+                });
 
                 // Fix IE8 issue with background not appearing
                 setTimeout(function() {
                     $background.css({
                         'opacity': options.opacity
-                ***REMOVED***);
-              ***REMOVED*** 0);
-        ***REMOVED***
+                    });
+                }, 0);
+            }
 
             $el.data('popup-visible', true);
 
@@ -393,14 +393,14 @@
                 setTimeout(function() {
                     if (options.focuselement === 'closebutton') {
                         $('#' + el.id + ' .' + el.id + closesuffix + ':first').focus();
-                ***REMOVED*** else if (options.focuselement) {
+                    } else if (options.focuselement) {
                         $(options.focuselement).focus();
-                ***REMOVED*** else {
+                    } else {
                         $el.focus();
-                ***REMOVED***
-              ***REMOVED*** options.focusdelay);
+                    }
+                }, options.focusdelay);
 
-        ***REMOVED***
+            }
 
             // Hide main content from screen readers
             $(options.pagecontainer).attr('aria-hidden', true);
@@ -413,18 +413,18 @@
             if (transitionsupport) {
                 $wrapper.one('transitionend', function() {
                     callback(el, ordinal, options.opentransitionend);
-            ***REMOVED***);
-        ***REMOVED*** else {
+                });
+            } else {
                 callback(el, ordinal, options.opentransitionend);
-        ***REMOVED***
+            }
 
             // Handler: Reposition tooltip when window is resized
             if (options.type == 'tooltip') {
                 $(window).on('resize.' + el.id, function () {
                     methods.reposition(el, ordinal);
-            ***REMOVED***);
-        ***REMOVED***
-      ***REMOVED***
+                });
+            }
+        },
 
         /**
          * Hide method
@@ -439,7 +439,7 @@
             // If popup is not opened, ignore the rest of the function
             if (popupIdIndex === -1) {
                 return;
-        ***REMOVED***
+            }
 
             if(opentimer) clearTimeout(opentimer);
 
@@ -453,45 +453,45 @@
 
             if (visiblePopupsArray.length === 1) {
                 $('html').removeClass('popup_visible').removeClass('popup_visible_' + el.id);
-        ***REMOVED*** else {
+            } else {
                 if($('html').hasClass('popup_visible_' + el.id)) {
                     $('html').removeClass('popup_visible_' + el.id);
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             // Remove popup from the visiblePopupsArray
             visiblePopupsArray.splice(popupIdIndex, 1);
 
             if($wrapper.hasClass('popup_wrapper_visible')) {
                 $wrapper.removeClass('popup_wrapper_visible');
-        ***REMOVED***
+            }
 
             // Focus back on saved element
             if (options.keepfocus && !outerClick) {
                 setTimeout(function() {
                     if ($($el.data('focusedelementbeforepopup')).is(':visible')) {
                         $el.data('focusedelementbeforepopup').focus();
-                ***REMOVED***
-              ***REMOVED*** 0);
-        ***REMOVED***
+                    }
+                }, 0);
+            }
 
             // Hide popup
             $wrapper.css({
                 'visibility': 'hidden',
                 'opacity': 0
-        ***REMOVED***);
+            });
             $el.css({
                 'visibility': 'hidden',
                 'opacity': 0
-        ***REMOVED***);
+            });
 
             // Hide background
             if (options.background) {
                 $background.css({
                     'visibility': 'hidden',
                     'opacity': 0
-            ***REMOVED***);
-        ***REMOVED***
+                });
+            }
 
             // Reveal main content to screen readers
             $(options.pagecontainer).attr('aria-hidden', false);
@@ -508,10 +508,10 @@
                     if (!($el.data('popup-visible'))) {
                         if (options.detach) {
                             $el.hide().detach();
-                    ***REMOVED*** else {
+                        } else {
                             $wrapper.hide();
-                    ***REMOVED***
-                ***REMOVED***
+                        }
+                    }
 
                     // Re-enable scrolling of background layer
                     if (options.scrolllock) {
@@ -519,18 +519,18 @@
                             $body.css({
                                 overflow: 'visible',
                                 'margin-right': bodymarginright
-                        ***REMOVED***);
-                      ***REMOVED*** 10); // 10ms added for CSS transition in Firefox which doesn't like overflow:auto
-                ***REMOVED***
+                            });
+                        }, 10); // 10ms added for CSS transition in Firefox which doesn't like overflow:auto
+                    }
 
                     callback(el, lastclicked[el.id], options.closetransitionend);
-            ***REMOVED***);
-        ***REMOVED*** else {
+                });
+            } else {
                 if (options.detach) {
                     $el.hide().detach();
-            ***REMOVED*** else {
+                } else {
                     $wrapper.hide();
-            ***REMOVED***
+                }
 
                 // Re-enable scrolling of background layer
                 if (options.scrolllock) {
@@ -538,39 +538,39 @@
                         $body.css({
                             overflow: 'visible',
                             'margin-right': bodymarginright
-                    ***REMOVED***);
-                  ***REMOVED*** 10); // 10ms added for CSS transition in Firefox which doesn't like overflow:auto
-            ***REMOVED***
+                        });
+                    }, 10); // 10ms added for CSS transition in Firefox which doesn't like overflow:auto
+                }
 
                 callback(el, lastclicked[el.id], options.closetransitionend);
-        ***REMOVED***
+            }
 
             if (options.type == 'tooltip') {
                 $(window).off('resize.' + el.id);
-        ***REMOVED***
-      ***REMOVED***
+            }
+        },
 
         /**
          * Toggle method
          *
-         * @param {object***REMOVED*** el - popup instance DOM node
-         * @param {number***REMOVED*** ordinal - order number of an `open` element
+         * @param {object} el - popup instance DOM node
+         * @param {number} ordinal - order number of an `open` element
          */
         toggle: function (el, ordinal) {
             if ($(el).data('popup-visible')) {
                 methods.hide(el);
-        ***REMOVED*** else {
+            } else {
                 setTimeout(function() {
                     methods.show(el, ordinal);
-              ***REMOVED*** 0);
-        ***REMOVED***
-      ***REMOVED***
+                }, 0);
+            }
+        },
 
         /**
          * Reposition method
          *
-         * @param {object***REMOVED*** el - popup instance DOM node
-         * @param {number***REMOVED*** ordinal - order number of an `open` element
+         * @param {object} el - popup instance DOM node
+         * @param {number} ordinal - order number of an `open` element
          */
         reposition: function (el, ordinal) {
             var $el = $(el);
@@ -584,92 +584,92 @@
             if (options.type == 'tooltip') {
                 $wrapper.css({
                     'position': 'absolute'
-            ***REMOVED***);
+                });
 
                 var $tooltipanchor;
                 if (options.tooltipanchor) {
                     $tooltipanchor = $(options.tooltipanchor);
-            ***REMOVED*** else if (options.openelement) {
+                } else if (options.openelement) {
                     $tooltipanchor = $(options.openelement).filter('[data-popup-ordinal="' + ordinal + '"]');
-            ***REMOVED*** else {
+                } else {
                     $tooltipanchor = $('.' + el.id + opensuffix + '[data-popup-ordinal="' + ordinal + '"]');
-            ***REMOVED***
+                }
 
                 var linkOffset = $tooltipanchor.offset();
 
                 // Horizontal position for tooltip
                 if (options.horizontal == 'right') {
                     $wrapper.css('left', linkOffset.left + $tooltipanchor.outerWidth() + options.offsetleft);
-            ***REMOVED*** else if (options.horizontal == 'leftedge') {
+                } else if (options.horizontal == 'leftedge') {
                     $wrapper.css('left', linkOffset.left + $tooltipanchor.outerWidth() - $tooltipanchor.outerWidth() +  options.offsetleft);
-            ***REMOVED*** else if (options.horizontal == 'left') {
+                } else if (options.horizontal == 'left') {
                     $wrapper.css('right', $window.width() - linkOffset.left  - options.offsetleft);
-            ***REMOVED*** else if (options.horizontal == 'rightedge') {
+                } else if (options.horizontal == 'rightedge') {
                     $wrapper.css('right', $window.width()  - linkOffset.left - $tooltipanchor.outerWidth() - options.offsetleft);
-            ***REMOVED*** else {
+                } else {
                     $wrapper.css('left', linkOffset.left + ($tooltipanchor.outerWidth() / 2) - ($el.outerWidth() / 2) - parseFloat($el.css('marginLeft')) + options.offsetleft);
-            ***REMOVED***
+                }
 
                 // Vertical position for tooltip
                 if (options.vertical == 'bottom') {
                     $wrapper.css('top', linkOffset.top + $tooltipanchor.outerHeight() + options.offsettop);
-            ***REMOVED*** else if (options.vertical == 'bottomedge') {
+                } else if (options.vertical == 'bottomedge') {
                     $wrapper.css('top', linkOffset.top + $tooltipanchor.outerHeight() - $el.outerHeight() + options.offsettop);
-            ***REMOVED*** else if (options.vertical == 'top') {
+                } else if (options.vertical == 'top') {
                     $wrapper.css('bottom', $window.height() - linkOffset.top - options.offsettop);
-            ***REMOVED*** else if (options.vertical == 'topedge') {
+                } else if (options.vertical == 'topedge') {
                     $wrapper.css('bottom', $window.height() - linkOffset.top - $el.outerHeight() - options.offsettop);
-            ***REMOVED*** else {
+                } else {
                     $wrapper.css('top', linkOffset.top + ($tooltipanchor.outerHeight() / 2) - ($el.outerHeight() / 2) - parseFloat($el.css('marginTop')) + options.offsettop);
-            ***REMOVED***
+                }
 
             // Overlay type
-        ***REMOVED*** else if (options.type == 'overlay') {
+            } else if (options.type == 'overlay') {
 
                 // Horizontal position for overlay
                 if (options.horizontal) {
                     $wrapper.css('text-align', options.horizontal);
-            ***REMOVED*** else {
+                } else {
                     $wrapper.css('text-align', 'center');
-            ***REMOVED***
+                }
 
                 // Vertical position for overlay
                 if (options.vertical) {
                     $el.css('vertical-align', options.vertical);
-            ***REMOVED*** else {
+                } else {
                     $el.css('vertical-align', 'middle');
-            ***REMOVED***
-        ***REMOVED***
-      ***REMOVED***
+                }
+            }
+        },
 
         /**
          * Add-close-button method
          *
-         * @param {object***REMOVED*** el - popup instance DOM node
+         * @param {object} el - popup instance DOM node
          */
         addclosebutton: function (el) {
             var genericCloseButton;
 
             if ($(el).data('popupoptions').closebuttonmarkup) {
                 genericCloseButton = $(options.closebuttonmarkup).addClass(el.id + '_close');
-        ***REMOVED*** else {
+            } else {
                 genericCloseButton = '<button class="popup_close ' + el.id + '_close" title="Close" aria-label="Close"><span aria-hidden="true">×</span></button>';
-        ***REMOVED***
+            }
 
             if ($(el).data('popup-initialized')){
                 $(el).append(genericCloseButton);
-        ***REMOVED***
+            }
 
-    ***REMOVED***
+        }
 
-***REMOVED***;
+    };
 
     /**
      * Callback event calls
      *
-     * @param {object***REMOVED*** el - popup instance DOM node
-     * @param {number***REMOVED*** ordinal - order number of an `open` element
-     * @param {function***REMOVED*** func - callback function
+     * @param {object} el - popup instance DOM node
+     * @param {number} ordinal - order number of an `open` element
+     * @param {function} func - callback function
      */
     var callback = function (el, ordinal, func) {
         var options = $(el).data('popupoptions');
@@ -680,8 +680,8 @@
         elementclicked = $(openelement + '[data-popup-ordinal="' + ordinal + '"]');
         if (typeof func == 'function') {
             func.call($(el), el, elementclicked);
-    ***REMOVED***
-***REMOVED***;
+        }
+    };
 
     // Hide popup if ESC key is pressed
     $(document).on('keydown', function (event) {
@@ -691,9 +691,9 @@
 
             if ($(el).data('popupoptions').escape && event.keyCode == 27) {
                 methods.hide(el);
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***);
+            }
+        }
+    });
 
     // Hide popup on click
     $(document).on('click', function (event) {
@@ -706,7 +706,7 @@
             if ($(event.target).closest(closeButton).length) {
                 event.preventDefault();
                 methods.hide(el);
-        ***REMOVED***
+            }
 
             // If clicked outside of popup
             if ($(el).data('popupoptions') && $(el).data('popupoptions').blur && !$(event.target).closest('#' + elementId).length && event.which !== 2 && $(event.target).is(':visible')) {
@@ -719,13 +719,13 @@
                     // when tapping on the cover, so the default action needs to be prevented.
                     event.preventDefault();
 
-            ***REMOVED*** else {
+                } else {
                     // If clicked on outer content
                     methods.hide(el, true);
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***);
+                }
+            }
+        }
+    });
 
     // Keep keyboard focus inside of popup
     $(document).on('keydown', function(event) {
@@ -754,26 +754,26 @@
             if (numberOfFocusableItems === 0) {
                 $(el).focus();
                 event.preventDefault();
-        ***REMOVED*** else {
+            } else {
                 if (event.shiftKey) {
                     // Back tab
                     // If focused on first item and user preses back-tab, go to the last focusable item
                     if (focusedItemIndex === 0) {
                         focusableItems.get(numberOfFocusableItems - 1).focus();
                         event.preventDefault();
-                ***REMOVED***
+                    }
 
-            ***REMOVED*** else {
+                } else {
                     // Forward tab
                     // If focused on the last item and user preses tab, go to the first focusable item
                     if (focusedItemIndex == numberOfFocusableItems - 1) {
                         focusableItems.get(0).focus();
                         event.preventDefault();
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***);
+                    }
+                }
+            }
+        }
+    });
 
     /**
      * Plugin API
@@ -783,33 +783,33 @@
 
             var $el = $(this);
 
-            if (typeof customoptions === 'object') {  // e.g. $('#popup').popup({'color':'blue'***REMOVED***)
-                var opt = $.extend({***REMOVED***, $.fn.popup.defaults, $el.data('popupoptions'), customoptions);
+            if (typeof customoptions === 'object') {  // e.g. $('#popup').popup({'color':'blue'})
+                var opt = $.extend({}, $.fn.popup.defaults, $el.data('popupoptions'), customoptions);
                 $el.data('popupoptions', opt);
                 options = $el.data('popupoptions');
 
                 methods._init(this);
 
-        ***REMOVED*** else if (typeof customoptions === 'string') { // e.g. $('#popup').popup('hide')
+            } else if (typeof customoptions === 'string') { // e.g. $('#popup').popup('hide')
                 if (!($el.data('popupoptions'))) {
                     $el.data('popupoptions', $.fn.popup.defaults);
                     options = $el.data('popupoptions');
-            ***REMOVED***
+                }
 
                 methods[customoptions].call(this, this);
 
-        ***REMOVED*** else { // e.g. $('#popup').popup()
+            } else { // e.g. $('#popup').popup()
                 if (!($el.data('popupoptions'))) {
                     $el.data('popupoptions', $.fn.popup.defaults);
                     options = $el.data('popupoptions');
-            ***REMOVED***
+                }
 
                 methods._init(this);
 
-        ***REMOVED***
+            }
 
-    ***REMOVED***);
-***REMOVED***;
+        });
+    };
 
     $.fn.popup.defaults = {
         type: 'overlay',
@@ -844,6 +844,6 @@
         onopen: null,
         opentransitionend: null,
         closetransitionend: null
-***REMOVED***;
+    };
 
-***REMOVED***)(jQuery);
+})(jQuery);

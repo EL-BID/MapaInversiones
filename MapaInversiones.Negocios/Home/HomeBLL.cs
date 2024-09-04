@@ -27,7 +27,7 @@ namespace PlataformaTransparencia.Negocios.Home
     public HomeBLL(TransparenciaDB connection)
     {
       _connection = connection;
-***REMOVED***
+    }
 
     public ModelContratistaData ObtenerDatosContratosGestion(int? tipoEmergencia, string Entidad = null)
     {
@@ -43,7 +43,7 @@ namespace PlataformaTransparencia.Negocios.Home
       objReturn.numProcesos = objReturn.listTotalProcesos.Sum(a => a.NroProcesos);
       objReturn.valorProcesos = (decimal?)objReturn.listTotalProcesos.Sum(a => a.ValorProceso);
       return objReturn;
-***REMOVED***
+    }
 
     public ModelHomeData ObtenerDatosModeloInicio(bool esHome = true)
     {
@@ -51,13 +51,13 @@ namespace PlataformaTransparencia.Negocios.Home
       if (!esHome)
       {
         return objReturn;
-  ***REMOVED***
+      }
 
       string maxPeriod_presupuesto = _connection.VwPresupuesto.Max(x => x.Periodo).ToString().Substring(0, 4);
       int anyo_max;
             if (int.TryParse(maxPeriod_presupuesto, out anyo_max) ==false) {
                 anyo_max = 0; 
-        ***REMOVED***
+            }
 
       objReturn.countOngoingProjects = GetCantProyActivos();
       objReturn.valPresupuestoEncabezado = GetCantidadesPresupuesto();
@@ -71,7 +71,7 @@ namespace PlataformaTransparencia.Negocios.Home
             objReturn.Status = true;
 
       return objReturn;
-***REMOVED***
+    }
 
         /// <summary>
         /// Funcion que retorna las n primeras entidades con mayor valor vigente para el año más actual, pendiente definir la cantidad de entidades
@@ -93,7 +93,7 @@ namespace PlataformaTransparencia.Negocios.Home
                               info.CodigoInstitucion,
                               info.Institucion
 
-                      ***REMOVED*** into g
+                          } into g
                           select new InfoEntidadesConsolida
                           {
                               id = g.Key.CodigoInstitucion.ToString(),
@@ -101,7 +101,7 @@ namespace PlataformaTransparencia.Negocios.Home
                               label="",
                               avance = ((decimal)g.Sum(x => x.EjecucionAcumulada)),
                               asignado = ((decimal)g.Sum(x => x.Vigente))
-                      ***REMOVED***
+                          }
      ).ToList();
 
             if (result != null)
@@ -112,23 +112,23 @@ namespace PlataformaTransparencia.Negocios.Home
                     if (result[i].asignado > 0)
                     {
                         result[i].porcentaje = Math.Round(((decimal)(result[i].avance / result[i].asignado) * 100), 2);
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
 
                 if (long_aux >= 8)
                 {
                     objReturn = result.OrderByDescending(x => x.avance).Take(8).ToList();
-            ***REMOVED***
+                }
                 else
                 {
                     objReturn = result.OrderByDescending(x => x.avance).Take(long_aux).ToList();
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             return objReturn;
 
 
-    ***REMOVED***
+        }
 
 
         public itemConteoProjects GetCantProyActivos()
@@ -143,14 +143,14 @@ namespace PlataformaTransparencia.Negocios.Home
                       {
                         IdProyecto = info.IdProyecto,
                         approvedTotalMoney = info.VlrTotalProyectoFuenteRegalias
-                  ***REMOVED***).Distinct().ToList();
+                      }).Distinct().ToList();
 
       objReturn.cantidad = consulta.Count();
       objReturn.costo = (double)consulta.Sum(x => x.approvedTotalMoney);
 
       return objReturn;
 
-***REMOVED***
+    }
 
         public InfoPresupuestoEncabezado GetCantidadesPresupuesto()
         {
@@ -158,13 +158,13 @@ namespace PlataformaTransparencia.Negocios.Home
             var consulta = (from info in _connection.VwPresupuesto
                             join ct in _connection.CatalogoTiempoes
                             on info.Periodo.ToString() equals ct.Periodo
-                            group info by new { ct.Año ***REMOVED*** into g
+                            group info by new { ct.Año } into g
 
                             select new
                             {
                                 Anio = g.Key.Año,
                                 AprobadoTotal = g.Sum(x => x.Vigente)
-                        ***REMOVED***).OrderByDescending(x => x.Anio).ToList();
+                            }).OrderByDescending(x => x.Anio).ToList();
 
             objReturn.AnioActual = consulta[0].Anio;
             objReturn.PresupuestoActual = (double)consulta[0].AprobadoTotal; 
@@ -173,7 +173,7 @@ namespace PlataformaTransparencia.Negocios.Home
             objReturn.Porcentaje = (100-(objReturn.PresupuestoActual * 100/objReturn.PresupuestoAnterior))*-1;
             return objReturn;
 
-    ***REMOVED***
+        }
 
         public InfoPresupuestoEncabezado GetContadorProcesosContratos(int periodo)
         {
@@ -184,21 +184,21 @@ namespace PlataformaTransparencia.Negocios.Home
                             select new 
                             {
                                 procesos = info.Codigoproceso
-                        ***REMOVED***).Distinct().ToList();
+                            }).Distinct().ToList();
             var consulta2 = (from info in _connection.VwContratosXProyectosInstitucionesAnios
                              where info.EstadoContrato == "Activo"
                             && info.AnioPresupuesto==periodo
                             select new
                             {
                                 bpin = info.Bpin
-                        ***REMOVED***).Distinct().ToList();
+                            }).Distinct().ToList();
             var consulta3 = (from info in _connection.VwContratosXProyectosInstitucionesAnios
                              
                              where info.EstadoContrato == "Cerrado"
                              select new
                              {
                                  bpin = info.Bpin
-                         ***REMOVED***).Distinct().ToList();
+                             }).Distinct().ToList();
 
             objReturn.CantProcesosAdjudicados = consulta.Count();
             objReturn.CantContratosActivos = consulta2.Count(); ;
@@ -206,7 +206,7 @@ namespace PlataformaTransparencia.Negocios.Home
            
             return objReturn;
 
-    ***REMOVED***
+        }
         
 
         public List<string> GetAniosPresupuesto()
@@ -215,12 +215,12 @@ namespace PlataformaTransparencia.Negocios.Home
              objReturn = (from info in _connection.VwPresupuesto
                             join ct in _connection.CatalogoTiempoes
                             on info.Periodo.ToString() equals ct.Periodo
-                            group info by new { ct.Año ***REMOVED*** into g
+                            group info by new { ct.Año } into g
                             orderby g.Key.Año descending
                             select  g.Key.Año.ToString()
                             ).ToList();
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<InfoFuentesporAnnio> GetFuentesAniosPresupuesto()
         {
@@ -230,7 +230,7 @@ namespace PlataformaTransparencia.Negocios.Home
                             join ct in _connection.CatalogoTiempoes
                             on info.Periodo.ToString() equals ct.Periodo
                             group info by new { ct.Año,info.CodigoFuenteDeFinanciamiento,info.FuenteDeFinanciamiento
-                        ***REMOVED*** into g
+                            } into g
                             select new InfoFuentesporAnnio
                             {
                                 Anio = g.Key.Año,
@@ -238,11 +238,11 @@ namespace PlataformaTransparencia.Negocios.Home
                                 Fuente = g.Key.FuenteDeFinanciamiento,
                                 ValorAprobado = Math.Round(g.Sum(x => x.Aprobado.Value)),
                                 ValorVigente = Math.Round(g.Sum(x => x.Vigente.Value))
-                        ***REMOVED***).OrderByDescending(x => x.Anio).ThenByDescending(x => x.ValorVigente).ToList();
+                            }).OrderByDescending(x => x.Anio).ThenByDescending(x => x.ValorVigente).ToList();
             objReturn = consulta;
             return objReturn;
 
-    ***REMOVED***
+        }
 
         public List<InfoProyectos> GetProyectosPrioritarios()
     {
@@ -267,17 +267,17 @@ namespace PlataformaTransparencia.Negocios.Home
                      FechaInicioProyecto = info.FechaInicioProyecto,
                      Megusta = info.MeGusta,
                      Comentarios = info.Comentarios
-               ***REMOVED***).Take(10).ToList();
+                   }).Take(10).ToList();
 
 
       if (query.Count > 0)
       {
         objReturn = query;
-  ***REMOVED***
+      }
 
       return objReturn;
 
-***REMOVED***
+    }
 
     public List<InfoProjectPerSector> ObtenerProyectoPorSectorGroupHome(int anyo)
     {
@@ -289,11 +289,11 @@ namespace PlataformaTransparencia.Negocios.Home
                                             join ct in _connection.CatalogoTiempoes on presupuesto.Periodo.ToString() equals ct.Periodo
                                             join iconos in _connection.VwEstadoImagenes on presupuesto.Sector equals iconos.NombreSector
                                             where ct.Año==anyo
-                                            group new { presupuesto,iconos ***REMOVED*** by new {
+                                            group new { presupuesto,iconos } by new {
                                                 presupuesto.Sector,
                                                 iconos.ImgSector,
                                                 presupuesto.IdSector
-                                        ***REMOVED*** into g
+                                            } into g
                                            select new InfoProjectPerSector
                                           {
                                               url_imagen = "/img/" + g.Key.ImgSector,
@@ -303,14 +303,14 @@ namespace PlataformaTransparencia.Negocios.Home
                                               rawValue = ((decimal)g.Sum(x => x.presupuesto.Vigente.Value)),
                                               ordenGroup = g.Max(x=>x.iconos.MostrarSector) == 1 ? 0 : 1,
                                               orden= g.Max(x => x.iconos.MostrarSector)
-                                       ***REMOVED***).OrderByDescending(x => x.rawValue).ToList();
+                                           }).OrderByDescending(x => x.rawValue).ToList();
 
 
 
             objReturn = ProjectsPerSectoresQuery;
             return objReturn;
 
-***REMOVED***
+    }
 
         public List<InfoOrganismosFinan> ObtenerOrganismosPorFuenteHome(string Annio, int IdFuente)
         {
@@ -325,7 +325,7 @@ namespace PlataformaTransparencia.Negocios.Home
                                 ct.Año,
                                 info.CodigoOrganismoFinanciador,
                                 info.OrganismoFinanciador
-                        ***REMOVED*** into g
+                            } into g
                             select new InfoOrganismosFinan
                             {
                                 Anio = g.Key.Año,
@@ -333,7 +333,7 @@ namespace PlataformaTransparencia.Negocios.Home
                                 OrganismoFinanciador = g.Key.OrganismoFinanciador,
                                 ValorAprobado = ((double)g.Sum(x => x.Aprobado.Value)),
                                 ValorVigente = ((double)g.Sum(x => x.Vigente.Value))
-                        ***REMOVED***);
+                            });
             
             var consulta2 = (from info in _connection.VwPresupuestoXProyInvs
                              join ct in _connection.CatalogoTiempoes
@@ -345,14 +345,14 @@ namespace PlataformaTransparencia.Negocios.Home
                                 ct.Año,
                                 info.CodigoOrganismoFinanciador,
                                 info.OrganismoFinanciador,
-                        ***REMOVED*** into g
+                            } into g
                             select new InfoOrganismosFinan
                             {
                                 Anio = g.Key.Año,
                                 CodigoOrganismoFinanciador = g.Key.CodigoOrganismoFinanciador,
                                 OrganismoFinanciador = g.Key.OrganismoFinanciador,
-                                NumeroProyectos = (double)(g.Select(m => new { m.Bpin, m.Nombreproyecto, m.IdProyecto ***REMOVED***)).Distinct().Count()
-                        ***REMOVED***);
+                                NumeroProyectos = (double)(g.Select(m => new { m.Bpin, m.Nombreproyecto, m.IdProyecto })).Distinct().Count()
+                            });
             var consulta = (from c1 in consulta1
                             from c2 in consulta2.LeftJoin(pr => pr.CodigoOrganismoFinanciador == c1.CodigoOrganismoFinanciador)
                             select new InfoOrganismosFinan
@@ -363,13 +363,13 @@ namespace PlataformaTransparencia.Negocios.Home
                                 ValorAprobado = c1.ValorAprobado,
                                 ValorVigente = c1.ValorVigente,
                                 NumeroProyectos = c2.NumeroProyectos,
-                        ***REMOVED***).OrderByDescending(x => x.Anio).ThenByDescending(x => x.ValorAprobado).ToList();
+                            }).OrderByDescending(x => x.Anio).ThenByDescending(x => x.ValorAprobado).ToList();
 
                             
             objReturn = consulta;
             return objReturn;
 
-    ***REMOVED***
+        }
 
 
 
@@ -384,7 +384,7 @@ namespace PlataformaTransparencia.Negocios.Home
                                   Id = p.Id,
                                   Url = p.Url,
                                   Param = p.Param
-                            ***REMOVED***).ToList();
+                                }).ToList();
 
       var objReturn = new List<HierarchyModel>();
 
@@ -392,19 +392,19 @@ namespace PlataformaTransparencia.Negocios.Home
       {
         if (!objReturn.Exists(x => x.Hierarchy.Equals(item.Hierarchy)))
         {
-          objReturn.Add(new HierarchyModel { Hierarchy = item.Hierarchy, ListaTipos = (from p in objResultParamList where p.Hierarchy.Equals(item.Hierarchy) select new TypeModel { Type = p.Type ***REMOVED***).ToList() ***REMOVED***);
-    ***REMOVED***
-  ***REMOVED***
+          objReturn.Add(new HierarchyModel { Hierarchy = item.Hierarchy, ListaTipos = (from p in objResultParamList where p.Hierarchy.Equals(item.Hierarchy) select new TypeModel { Type = p.Type }).ToList() });
+        }
+      }
 
       return objReturn;
-***REMOVED***
+    }
     public class itemEstado
     {
-      public int orden { get; set; ***REMOVED***
-      public string nombre { get; set; ***REMOVED***
-      public string alias { get; set; ***REMOVED***
-***REMOVED***
+      public int orden { get; set; }
+      public string nombre { get; set; }
+      public string alias { get; set; }
+    }
 
 
-  ***REMOVED***
-***REMOVED***
+  }
+}

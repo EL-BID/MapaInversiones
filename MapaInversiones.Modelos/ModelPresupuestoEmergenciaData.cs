@@ -9,48 +9,48 @@ namespace PlataformaTransparencia.Modelos
 {
   public class ModelPresupuestoEmergenciaData : RespuestaContratoBase
   {
-    public string NombreEmergencia { get; set; ***REMOVED***
-    public string TipoEmergencia { get; set; ***REMOVED***
-    public string FechaActualizacionHacienda { get; set; ***REMOVED***
-    public string FechaActualizacionContratos { get; set; ***REMOVED***
-    public string FechaCorteFuenteHacienda { get; set; ***REMOVED***
-    public string FechaCorteFuenteContratos { get; set; ***REMOVED***
-    public string FechaCorteFuenteProyectos { get; set; ***REMOVED***
-    public string FechaCorteGastosIncentivos { get; set; ***REMOVED***
+    public string NombreEmergencia { get; set; }
+    public string TipoEmergencia { get; set; }
+    public string FechaActualizacionHacienda { get; set; }
+    public string FechaActualizacionContratos { get; set; }
+    public string FechaCorteFuenteHacienda { get; set; }
+    public string FechaCorteFuenteContratos { get; set; }
+    public string FechaCorteFuenteProyectos { get; set; }
+    public string FechaCorteGastosIncentivos { get; set; }
     /// <summary>
     /// El valor del dinero recaudado en la historia.
     /// </summary>
-    public decimal CollectedMoney { get; set; ***REMOVED***
+    public decimal CollectedMoney { get; set; }
     /// <summary>
     /// El valor del dinero aprobado en la historia
     /// </summary>
-    public decimal ApprovedMoney { get; set; ***REMOVED***
+    public decimal ApprovedMoney { get; set; }
     /// <summary>
     /// El número de proyectos aprobados en la historia
     /// </summary>
-    public int ApprovedProjects { get; set; ***REMOVED***
+    public int ApprovedProjects { get; set; }
     /// <summary>
     /// El valor del dinero aprobado incluyendo otras fuentes no regalías
     /// </summary>
-    public decimal ApprovedMoneyTotal { get; set; ***REMOVED***
+    public decimal ApprovedMoneyTotal { get; set; }
     /// <summary>
     /// Arreglo con los periodos TO DO revisar como se cargan.
     /// </summary>
     [Newtonsoft.Json.JsonProperty("periods")]
     public List<Period> Periods
     {
-      get { return periods; ***REMOVED***
-      set { periods = value; ***REMOVED***
-***REMOVED***
+      get { return periods; }
+      set { periods = value; }
+    }
     private List<Period> periods = new();
 
     public class Data
     {
-      public string texto { get; set; ***REMOVED***
-***REMOVED***
+      public string texto { get; set; }
+    }
 
 
-    public string CadenaBuscador { get; set; ***REMOVED***
+    public string CadenaBuscador { get; set; }
 
     /// <summary>
     /// Arreglo con objetos representando el grafico de proyectos por sector en toda la historia. 
@@ -58,9 +58,9 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<InfoProjectPerSector> ProjectsPerSector
     {
-      get { return projectsPerSector; ***REMOVED***
-      set { projectsPerSector = value; ***REMOVED***
-***REMOVED***
+      get { return projectsPerSector; }
+      set { projectsPerSector = value; }
+    }
     private List<InfoProjectPerSector> projectsPerSector = new();
 
 
@@ -69,16 +69,16 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<InfoProyectos> ProyectosAprobados
     {
-      get { return proyectosAprobados; ***REMOVED***
-      set { proyectosAprobados = value; ***REMOVED***
-***REMOVED***
+      get { return proyectosAprobados; }
+      set { proyectosAprobados = value; }
+    }
     private List<InfoProyectos> proyectosAprobados = new();
 
     public List<InfoProyectos> ProyectosNacionales
     {
-      get { return proyectosNacionales; ***REMOVED***
-      set { proyectosNacionales = value; ***REMOVED***
-***REMOVED***
+      get { return proyectosNacionales; }
+      set { proyectosNacionales = value; }
+    }
     private List<InfoProyectos> proyectosNacionales = new();
 
 
@@ -88,9 +88,9 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<InfoResourcesPerSector> ResourcesPerSector
     {
-      get { return resourcesPerSector; ***REMOVED***
-      set { resourcesPerSector = value; ***REMOVED***
-***REMOVED***
+      get { return resourcesPerSector; }
+      set { resourcesPerSector = value; }
+    }
     private List<InfoResourcesPerSector> resourcesPerSector = new();
 
     /// <summary>
@@ -98,9 +98,9 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<Fact> Facts
     {
-      get { return facts; ***REMOVED***
-      set { facts = value; ***REMOVED***
-***REMOVED***
+      get { return facts; }
+      set { facts = value; }
+    }
     private List<Fact> facts = new();
 
     /// <summary>
@@ -109,9 +109,9 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<InfoResourcesPerRegion> ResourcesPerRegion
     {
-      get { return resourcesPerRegion; ***REMOVED***
-      set { resourcesPerRegion = value; ***REMOVED***
-***REMOVED***
+      get { return resourcesPerRegion; }
+      set { resourcesPerRegion = value; }
+    }
     private List<InfoResourcesPerRegion> resourcesPerRegion = new();
 
     /// <summary>
@@ -120,9 +120,9 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<InfoResourcesPerDepartment> ResourcesPerDepartment
     {
-      get { return resourcesPerDepartment; ***REMOVED***
-      set { resourcesPerDepartment = value; ***REMOVED***
-***REMOVED***
+      get { return resourcesPerDepartment; }
+      set { resourcesPerDepartment = value; }
+    }
     private List<InfoResourcesPerDepartment> resourcesPerDepartment = new();
 
 
@@ -131,9 +131,9 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<object> Agenda
     {
-      get { return agenda; ***REMOVED***
-      set { agenda = value; ***REMOVED***
-***REMOVED***
+      get { return agenda; }
+      set { agenda = value; }
+    }
     private List<object> agenda = new();
 
     /// <summary>
@@ -141,24 +141,24 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<ConsolidatedDepartmentProjects> DepartmentProjectData
     {
-      get { return departmentProjectData; ***REMOVED***
-      set { departmentProjectData = value; ***REMOVED***
-***REMOVED***
+      get { return departmentProjectData; }
+      set { departmentProjectData = value; }
+    }
     private List<ConsolidatedDepartmentProjects> departmentProjectData = new();
 
 
     public List<ProyectoConsolidadoPorMunicipio> MunicipioProjectData
     {
-      get { return municipioProjectData; ***REMOVED***
-      set { municipioProjectData = value; ***REMOVED***
-***REMOVED***
+      get { return municipioProjectData; }
+      set { municipioProjectData = value; }
+    }
     private List<ProyectoConsolidadoPorMunicipio> municipioProjectData = new();
 
     public List<InfoProyectos> ProyectoProjectData
     {
-      get { return proyectoProjectData; ***REMOVED***
-      set { proyectoProjectData = value; ***REMOVED***
-***REMOVED***
+      get { return proyectoProjectData; }
+      set { proyectoProjectData = value; }
+    }
     private List<InfoProyectos> proyectoProjectData = new();
 
 
@@ -167,9 +167,9 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<ConsolidateRegionsProjects> RegionProjectData
     {
-      get { return regionProjectData; ***REMOVED***
-      set { regionProjectData = value; ***REMOVED***
-***REMOVED***
+      get { return regionProjectData; }
+      set { regionProjectData = value; }
+    }
     private List<ConsolidateRegionsProjects> regionProjectData = new();
 
     /// <summary>
@@ -178,9 +178,9 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public DataCommonSections DataCommonSections
     {
-      get { return dataCommonSections; ***REMOVED***
-      set { dataCommonSections = value; ***REMOVED***
-***REMOVED***
+      get { return dataCommonSections; }
+      set { dataCommonSections = value; }
+    }
     private DataCommonSections dataCommonSections = new();
 
     /// <summary>
@@ -188,9 +188,9 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<InfoRecursosEmergenciaPerObjeto> RecursosPerObjeto
     {
-      get { return recursosPerObjeto; ***REMOVED***
-      set { recursosPerObjeto = value; ***REMOVED***
-***REMOVED***
+      get { return recursosPerObjeto; }
+      set { recursosPerObjeto = value; }
+    }
     private List<InfoRecursosEmergenciaPerObjeto> recursosPerObjeto = new();
 
     /// <summary>
@@ -198,9 +198,9 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<InfoRecursosEmergenciaPerObjeto> RecursosPerObjetoAvance
     {
-      get { return recursosPerObjetoAvance; ***REMOVED***
-      set { recursosPerObjetoAvance = value; ***REMOVED***
-***REMOVED***
+      get { return recursosPerObjetoAvance; }
+      set { recursosPerObjetoAvance = value; }
+    }
     private List<InfoRecursosEmergenciaPerObjeto> recursosPerObjetoAvance = new();
 
 
@@ -209,9 +209,9 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<InfoGraficoItemPrograma> RecursosAdministracionCentral
     {
-      get { return recursosAdministracionCentral; ***REMOVED***
-      set { recursosAdministracionCentral = value; ***REMOVED***
-***REMOVED***
+      get { return recursosAdministracionCentral; }
+      set { recursosAdministracionCentral = value; }
+    }
     private List<InfoGraficoItemPrograma> recursosAdministracionCentral = new();
 
 
@@ -220,31 +220,31 @@ namespace PlataformaTransparencia.Modelos
     /// </summary>
     public List<InfoGraficoItemPrograma> RecursosAdministracionDescentralizado
     {
-      get { return recursosAdministracionDescentralizado; ***REMOVED***
-      set { recursosAdministracionDescentralizado = value; ***REMOVED***
-***REMOVED***
+      get { return recursosAdministracionDescentralizado; }
+      set { recursosAdministracionDescentralizado = value; }
+    }
     private List<InfoGraficoItemPrograma> recursosAdministracionDescentralizado = new();
 
 
     public List<InfoGraficoItemPrograma> DetallePerObjetoGasto
     {
-      get { return detallegasto; ***REMOVED***
-      set { detallegasto = value; ***REMOVED***
-***REMOVED***
+      get { return detallegasto; }
+      set { detallegasto = value; }
+    }
     private List<InfoGraficoItemPrograma> detallegasto = new();
 
     public InfoDonacionesGen DonacionesConsolidado
     {
-      get { return donacionesConsolidado; ***REMOVED***
-      set { donacionesConsolidado = value; ***REMOVED***
-***REMOVED***
+      get { return donacionesConsolidado; }
+      set { donacionesConsolidado = value; }
+    }
     private InfoDonacionesGen donacionesConsolidado = new();
 
 
-    public decimal GastoTotalDevengado { get; set; ***REMOVED***
+    public decimal GastoTotalDevengado { get; set; }
 
-    public ModelContratistaData ResumenDatosContratos { get; set; ***REMOVED***
-    public string FechaActualizacionGastosIncentivos { get; set; ***REMOVED***
-    public List<InfoRecursosEmergenciaPerObjeto> InfoRecursosContratos { get; set; ***REMOVED*** = new ();
-  ***REMOVED***
-***REMOVED***
+    public ModelContratistaData ResumenDatosContratos { get; set; }
+    public string FechaActualizacionGastosIncentivos { get; set; }
+    public List<InfoRecursosEmergenciaPerObjeto> InfoRecursosContratos { get; set; } = new ();
+  }
+}

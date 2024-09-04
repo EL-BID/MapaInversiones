@@ -30,11 +30,11 @@
 'use strict';
 
 document.webL10n = (function(window, document, undefined) {
-  var gL10nData = {***REMOVED***;
+  var gL10nData = {};
   var gTextData = '';
   var gTextProp = 'textContent';
   var gLanguage = '';
-  var gMacros = {***REMOVED***;
+  var gMacros = {};
   var gReadyState = 'loading';
 
 
@@ -62,62 +62,62 @@ document.webL10n = (function(window, document, undefined) {
 
   function getL10nResourceLinks() {
     return document.querySelectorAll('link[type="application/l10n"]');
-  ***REMOVED***
+  }
 
   function getL10nDictionary() {
     var script = document.querySelector('script[type="application/l10n"]');
     // TODO: support multiple and external JSON dictionaries
     return script ? JSON.parse(script.innerHTML) : null;
-  ***REMOVED***
+  }
 
   function getTranslatableChildren(element) {
     return element ? element.querySelectorAll('*[data-l10n-id]') : [];
-  ***REMOVED***
+  }
 
   function getL10nAttributes(element) {
     if (!element)
-      return {***REMOVED***;
+      return {};
 
     var l10nId = element.getAttribute('data-l10n-id');
     var l10nArgs = element.getAttribute('data-l10n-args');
-    var args = {***REMOVED***;
+    var args = {};
     if (l10nArgs) {
       try {
         args = JSON.parse(l10nArgs);
-  ***REMOVED*** catch (e) {
+      } catch (e) {
         console.warn('could not parse arguments for #' + l10nId);
-  ***REMOVED***
-***REMOVED***
-    return { id: l10nId, args: args ***REMOVED***;
-  ***REMOVED***
+      }
+    }
+    return { id: l10nId, args: args };
+  }
 
   function fireL10nReadyEvent(lang) {
     var evtObject = document.createEvent('Event');
     evtObject.initEvent('localized', true, false);
     evtObject.language = lang;
     document.dispatchEvent(evtObject);
-  ***REMOVED***
+  }
 
   function xhrLoadText(url, onSuccess, onFailure, asynchronous) {
-    onSuccess = onSuccess || function _onSuccess(data) {***REMOVED***;
+    onSuccess = onSuccess || function _onSuccess(data) {};
     onFailure = onFailure || function _onFailure() {
       console.warn(url + ' not found.');
-***REMOVED***;
+    };
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, asynchronous);
     if (xhr.overrideMimeType) {
       xhr.overrideMimeType('text/plain; charset=utf-8');
-***REMOVED***
+    }
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4) {
         if (xhr.status == 200 || xhr.status === 0) {
           onSuccess(xhr.responseText);
-    ***REMOVED*** else {
+        } else {
           onFailure();
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***;
+        }
+      }
+    };
     xhr.onerror = onFailure;
     xhr.ontimeout = onFailure;
 
@@ -125,10 +125,10 @@ document.webL10n = (function(window, document, undefined) {
     // URL will raise an exception here -- hence this ugly try...catch.
     try {
       xhr.send(null);
-***REMOVED*** catch (e) {
+    } catch (e) {
       onFailure();
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
 
   /**
@@ -138,19 +138,19 @@ document.webL10n = (function(window, document, undefined) {
    *  - parses the text data (fills `gL10nData' and `gTextData');
    *  - triggers success/failure callbacks when done.
    *
-   * @param {string***REMOVED*** href
+   * @param {string} href
    *    URL of the l10n resource to parse.
    *
-   * @param {string***REMOVED*** lang
+   * @param {string} lang
    *    locale (language) to parse.
    *
-   * @param {Function***REMOVED*** successCallback
+   * @param {Function} successCallback
    *    triggered when the l10n resource has been successully parsed.
    *
-   * @param {Function***REMOVED*** failureCallback
+   * @param {Function} failureCallback
    *    triggered when the an error has occured.
    *
-   * @return {void***REMOVED***
+   * @return {void}
    *    uses the following global variables: gL10nData, gTextData, gTextProp.
    */
 
@@ -168,10 +168,10 @@ document.webL10n = (function(window, document, undefined) {
                  .replace(/\\b/g, '\b')
                  .replace(/\\f/g, '\f')
                  .replace(/\\{/g, '{')
-                 .replace(/\\***REMOVED***/g, '***REMOVED***')
+                 .replace(/\\}/g, '}')
                  .replace(/\\"/g, '"')
                  .replace(/\\'/g, "'");
-***REMOVED***
+    }
 
     // parse *.properties text data into an l10n dictionary
     function parseProperties(text) {
@@ -207,34 +207,34 @@ document.webL10n = (function(window, document, undefined) {
               skipLang = (currentLang !== '*') &&
                   (currentLang !== lang) && (currentLang !== genericLang);
               continue;
-        ***REMOVED*** else if (skipLang) {
+            } else if (skipLang) {
               continue;
-        ***REMOVED***
+            }
             if (reImport.test(line)) { // @import rule?
               match = reImport.exec(line);
               loadImport(baseURL + match[1]); // load the resource synchronously
-        ***REMOVED***
-      ***REMOVED***
+            }
+          }
 
           // key-value pair
           var tmp = line.match(reSplit);
           if (tmp && tmp.length == 3) {
             dictionary[tmp[1]] = evalString(tmp[2]);
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
+          }
+        }
+      }
 
       // import another *.properties file
       function loadImport(url) {
         xhrLoadText(url, function(content) {
           parseRawLines(content, false); // don't allow recursive imports
-      ***REMOVED*** null, false); // load synchronously
-  ***REMOVED***
+        }, null, false); // load synchronously
+      }
 
       // fill the dictionary
       parseRawLines(text, true);
       return dictionary;
-***REMOVED***
+    }
 
     // load and parse l10n data (warning: global variables are used here)
     xhrLoadText(href, function(response) {
@@ -249,26 +249,26 @@ document.webL10n = (function(window, document, undefined) {
         if (index > 0) { // an attribute has been specified
           id = key.substring(0, index);
           prop = key.substr(index + 1);
-    ***REMOVED*** else { // no attribute: assuming text content by default
+        } else { // no attribute: assuming text content by default
           id = key;
           prop = gTextProp;
-    ***REMOVED***
+        }
         if (!gL10nData[id]) {
-          gL10nData[id] = {***REMOVED***;
-    ***REMOVED***
+          gL10nData[id] = {};
+        }
         gL10nData[id][prop] = data[key];
-  ***REMOVED***
+      }
 
       // trigger callback
       if (successCallback) {
         successCallback();
-  ***REMOVED***
-  ***REMOVED*** failureCallback, gAsyncResourceLoading);
-  ***REMOVED***
+      }
+    }, failureCallback, gAsyncResourceLoading);
+  }
 
   // load and parse all resources for the specified locale
   function loadLocale(lang, callback) {
-    callback = callback || function _callback() {***REMOVED***;
+    callback = callback || function _callback() {};
 
     clear();
     gLanguage = lang;
@@ -284,14 +284,14 @@ document.webL10n = (function(window, document, undefined) {
         console.log('using the embedded JSON directory, early way out');
         gL10nData = dict.locales[lang] || dict.locales[dict.default_locale];
         callback();
-  ***REMOVED*** else {
+      } else {
         console.log('no resource to load, early way out');
-  ***REMOVED***
+      }
       // early way out
       fireL10nReadyEvent(lang);
       gReadyState = 'complete';
       return;
-***REMOVED***
+    }
 
     // start the callback when all resources are loaded
     var onResourceLoaded = null;
@@ -302,8 +302,8 @@ document.webL10n = (function(window, document, undefined) {
         callback();
         fireL10nReadyEvent(lang);
         gReadyState = 'complete';
-  ***REMOVED***
-***REMOVED***;
+      }
+    };
 
     // load all resource files
     function L10nResourceLink(link) {
@@ -314,10 +314,10 @@ document.webL10n = (function(window, document, undefined) {
         parseResource(href, lang, callback, function() {
           console.warn(href + ' not found.');
           applied = '';
-    ***REMOVED***);
+        });
         return applied; // return lang if found, an empty string if not found
-  ***REMOVED***;
-***REMOVED***
+      };
+    }
 
     for (var i = 0; i < langCount; i++) {
       var resource = new L10nResourceLink(langLinks[i]);
@@ -325,18 +325,18 @@ document.webL10n = (function(window, document, undefined) {
       if (rv != lang) { // lang not found, used default resource instead
         console.warn('"' + lang + '" resource not found');
         gLanguage = '';
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***
+      }
+    }
+  }
 
   // clear all l10n data
   function clear() {
-    gL10nData = {***REMOVED***;
+    gL10nData = {};
     gTextData = '';
     gLanguage = '';
     // TODO: clear all non predefined macros.
     // There's no such macro /yet/ but we're planning to have some...
-  ***REMOVED***
+  }
 
 
   /**
@@ -344,10 +344,10 @@ document.webL10n = (function(window, document, undefined) {
    * http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/language_plural_rules.html
    * https://github.com/mozilla/addon-sdk/blob/master/python-lib/plural-rules-generator.p
    *
-   * @param {string***REMOVED*** lang
+   * @param {string} lang
    *    locale (language) used.
    *
-   * @return {Function***REMOVED***
+   * @return {Function}
    *    returns a function that gives the plural form name for a given integer:
    *       var fun = getPluralRules('en');
    *       fun(1)    -> 'one'
@@ -527,22 +527,22 @@ document.webL10n = (function(window, document, undefined) {
       'yo': 0,
       'zh': 0,
       'zu': 3
-***REMOVED***;
+    };
 
     // utility functions for plural rules methods
     function isIn(n, list) {
       return list.indexOf(n) !== -1;
-***REMOVED***
+    }
     function isBetween(n, start, end) {
       return start <= n && n <= end;
-***REMOVED***
+    }
 
     // list of all plural rules methods:
     // map an integer to the plural form name to use
     var pluralRules = {
       '0': function(n) {
         return 'other';
-    ***REMOVED***
+      },
       '1': function(n) {
         if ((isBetween((n % 100), 3, 10)))
           return 'few';
@@ -555,7 +555,7 @@ document.webL10n = (function(window, document, undefined) {
         if (n == 1)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '2': function(n) {
         if (n !== 0 && (n % 10) === 0)
           return 'many';
@@ -564,36 +564,36 @@ document.webL10n = (function(window, document, undefined) {
         if (n == 1)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '3': function(n) {
         if (n == 1)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '4': function(n) {
         if ((isBetween(n, 0, 1)))
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '5': function(n) {
         if ((isBetween(n, 0, 2)) && n != 2)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '6': function(n) {
         if (n === 0)
           return 'zero';
         if ((n % 10) == 1 && (n % 100) != 11)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '7': function(n) {
         if (n == 2)
           return 'two';
         if (n == 1)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '8': function(n) {
         if ((isBetween(n, 3, 6)))
           return 'few';
@@ -604,21 +604,21 @@ document.webL10n = (function(window, document, undefined) {
         if (n == 1)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '9': function(n) {
         if (n === 0 || n != 1 && (isBetween((n % 100), 1, 19)))
           return 'few';
         if (n == 1)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '10': function(n) {
         if ((isBetween((n % 10), 2, 9)) && !(isBetween((n % 100), 11, 19)))
           return 'few';
         if ((n % 10) == 1 && !(isBetween((n % 100), 11, 19)))
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '11': function(n) {
         if ((isBetween((n % 10), 2, 4)) && !(isBetween((n % 100), 12, 14)))
           return 'few';
@@ -629,14 +629,14 @@ document.webL10n = (function(window, document, undefined) {
         if ((n % 10) == 1 && (n % 100) != 11)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '12': function(n) {
         if ((isBetween(n, 2, 4)))
           return 'few';
         if (n == 1)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '13': function(n) {
         if ((isBetween((n % 10), 2, 4)) && !(isBetween((n % 100), 12, 14)))
           return 'few';
@@ -647,7 +647,7 @@ document.webL10n = (function(window, document, undefined) {
         if (n == 1)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '14': function(n) {
         if ((isBetween((n % 100), 3, 4)))
           return 'few';
@@ -656,7 +656,7 @@ document.webL10n = (function(window, document, undefined) {
         if ((n % 100) == 1)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '15': function(n) {
         if (n === 0 || (isBetween((n % 100), 2, 10)))
           return 'few';
@@ -665,12 +665,12 @@ document.webL10n = (function(window, document, undefined) {
         if (n == 1)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '16': function(n) {
         if ((n % 10) == 1 && n != 11)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '17': function(n) {
         if (n == 3)
           return 'few';
@@ -683,21 +683,21 @@ document.webL10n = (function(window, document, undefined) {
         if (n == 1)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '18': function(n) {
         if (n === 0)
           return 'zero';
         if ((isBetween(n, 0, 2)) && n !== 0 && n != 2)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '19': function(n) {
         if ((isBetween(n, 2, 10)))
           return 'few';
         if ((isBetween(n, 0, 1)))
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '20': function(n) {
         if ((isBetween((n % 10), 3, 4) || ((n % 10) == 9)) && !(
             isBetween((n % 100), 10, 19) ||
@@ -712,24 +712,24 @@ document.webL10n = (function(window, document, undefined) {
         if ((n % 10) == 1 && !isIn((n % 100), [11, 71, 91]))
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '21': function(n) {
         if (n === 0)
           return 'zero';
         if (n == 1)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '22': function(n) {
         if ((isBetween(n, 0, 1)) || (isBetween(n, 11, 99)))
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '23': function(n) {
         if ((isBetween((n % 10), 1, 2)) || (n % 20) === 0)
           return 'one';
         return 'other';
-    ***REMOVED***
+      },
       '24': function(n) {
         if ((isBetween(n, 3, 10) || isBetween(n, 13, 19)))
           return 'few';
@@ -738,17 +738,17 @@ document.webL10n = (function(window, document, undefined) {
         if (isIn(n, [1, 11]))
           return 'one';
         return 'other';
-  ***REMOVED***
-***REMOVED***;
+      }
+    };
 
     // return a function that gives the plural form name for a given integer
     var index = locales2rules[lang.replace(/-.*$/, '')];
     if (!(index in pluralRules)) {
       console.warn('plural form unknown for [' + lang + ']');
-      return function() { return 'other'; ***REMOVED***;
-***REMOVED***
+      return function() { return 'other'; };
+    }
     return pluralRules[index];
-  ***REMOVED***
+  }
 
   // pre-defined 'plural' macro
   gMacros.plural = function(str, param, key, prop) {
@@ -763,24 +763,24 @@ document.webL10n = (function(window, document, undefined) {
     // initialize _pluralRules
     if (!gMacros._pluralRules) {
       gMacros._pluralRules = getPluralRules(gLanguage);
-***REMOVED***
+    }
     var index = '[' + gMacros._pluralRules(n) + ']';
 
     // try to find a [zero|one|two] key if it's defined
     if (n === 0 && (key + '[zero]') in gL10nData) {
       str = gL10nData[key + '[zero]'][prop];
-***REMOVED*** else if (n == 1 && (key + '[one]') in gL10nData) {
+    } else if (n == 1 && (key + '[one]') in gL10nData) {
       str = gL10nData[key + '[one]'][prop];
-***REMOVED*** else if (n == 2 && (key + '[two]') in gL10nData) {
+    } else if (n == 2 && (key + '[two]') in gL10nData) {
       str = gL10nData[key + '[two]'][prop];
-***REMOVED*** else if ((key + index) in gL10nData) {
+    } else if ((key + index) in gL10nData) {
       str = gL10nData[key + index][prop];
-***REMOVED*** else if ((key + '[other]') in gL10nData) {
+    } else if ((key + '[other]') in gL10nData) {
       str = gL10nData[key + '[other]'][prop];
-***REMOVED***
+    }
 
     return str;
-  ***REMOVED***;
+  };
 
 
   /**
@@ -794,28 +794,28 @@ document.webL10n = (function(window, document, undefined) {
       console.warn('#' + key + ' is undefined.');
       if (!fallback) {
         return null;
-  ***REMOVED***
+      }
       data = fallback;
-***REMOVED***
+    }
 
     /** This is where l10n expressions should be processed.
       * The plan is to support C-style expressions from the l20n project;
       * until then, only two kinds of simple expressions are supported:
-      *   {[ index ]***REMOVED*** and {{ arguments ***REMOVED******REMOVED***.
+      *   {[ index ]} and {{ arguments }}.
       */
-    var rv = {***REMOVED***;
+    var rv = {};
     for (var prop in data) {
       var str = data[prop];
       str = substIndexes(str, args, key, prop);
       str = substArguments(str, args, key);
       rv[prop] = str;
-***REMOVED***
+    }
     return rv;
-  ***REMOVED***
+  }
 
-  // replace {[macros]***REMOVED*** with their values
+  // replace {[macros]} with their values
   function substIndexes(str, args, key, prop) {
-    var reIndex = /\{\[\s*([a-zA-Z]+)\(([a-zA-Z]+)\)\s*\]\***REMOVED***/;
+    var reIndex = /\{\[\s*([a-zA-Z]+)\(([a-zA-Z]+)\)\s*\]\}/;
     var reMatch = reIndex.exec(str);
     if (!reMatch || !reMatch.length)
       return str;
@@ -827,21 +827,21 @@ document.webL10n = (function(window, document, undefined) {
     var param;
     if (args && paramName in args) {
       param = args[paramName];
-***REMOVED*** else if (paramName in gL10nData) {
+    } else if (paramName in gL10nData) {
       param = gL10nData[paramName];
-***REMOVED***
+    }
 
     // there's no macro parser yet: it has to be defined in gMacros
     if (macroName in gMacros) {
       var macro = gMacros[macroName];
       str = macro(str, param, key, prop);
-***REMOVED***
+    }
     return str;
-  ***REMOVED***
+  }
 
-  // replace {{arguments***REMOVED******REMOVED*** with their values
+  // replace {{arguments}} with their values
   function substArguments(str, args, key) {
-    var reArgs = /\{\{\s*(.+?)\s*\***REMOVED***\***REMOVED***/;
+    var reArgs = /\{\{\s*(.+?)\s*\}\}/;
     var match = reArgs.exec(str);
     while (match) {
       if (!match || match.length < 2)
@@ -851,19 +851,19 @@ document.webL10n = (function(window, document, undefined) {
       var sub = '';
       if (args && arg in args) {
         sub = args[arg];
-  ***REMOVED*** else if (arg in gL10nData) {
+      } else if (arg in gL10nData) {
         sub = gL10nData[arg][gTextProp];
-  ***REMOVED*** else {
-        console.log('argument {{' + arg + '***REMOVED******REMOVED*** for #' + key + ' is undefined.');
+      } else {
+        console.log('argument {{' + arg + '}} for #' + key + ' is undefined.');
         return str;
-  ***REMOVED***
+      }
 
       str = str.substring(0, match.index) + sub +
             str.substr(match.index + match[0].length);
       match = reArgs.exec(str);
-***REMOVED***
+    }
     return str;
-  ***REMOVED***
+  }
 
   // translate an HTML element
   function translateElement(element) {
@@ -876,13 +876,13 @@ document.webL10n = (function(window, document, undefined) {
     if (!data) {
       console.warn('#' + l10n.id + ' is undefined.');
       return;
-***REMOVED***
+    }
 
     // translate element (TODO: security checks?)
     if (data[gTextProp]) { // XXX
       if (getChildElementCount(element) === 0) {
         element[gTextProp] = data[gTextProp];
-  ***REMOVED*** else {
+      } else {
         // this element has element children: replace the content of the first
         // (non-empty) child textNode and clear other child textNodes
         var children = element.childNodes;
@@ -891,41 +891,41 @@ document.webL10n = (function(window, document, undefined) {
           if (children[i].nodeType === 3 && /\S/.test(children[i].nodeValue)) {
             if (found) {
               children[i].nodeValue = '';
-        ***REMOVED*** else {
+            } else {
               children[i].nodeValue = data[gTextProp];
               found = true;
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***
+            }
+          }
+        }
         // if no (non-empty) textNode is found, insert a textNode before the
         // first element child.
         if (!found) {
           var textNode = document.createTextNode(data[gTextProp]);
           element.insertBefore(textNode, element.firstChild);
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
       delete data[gTextProp];
-***REMOVED***
+    }
 
     for (var k in data) {
       element[k] = data[k];
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   // webkit browsers don't currently support 'children' on SVG elements...
   function getChildElementCount(element) {
     if (element.children) {
       return element.children.length;
-***REMOVED***
+    }
     if (typeof element.childElementCount !== 'undefined') {
       return element.childElementCount;
-***REMOVED***
+    }
     var count = 0;
     for (var i = 0; i < element.childNodes.length; i++) {
       count += element.nodeType === 1 ? 1 : 0;
-***REMOVED***
+    }
     return count;
-  ***REMOVED***
+  }
 
   // translate an HTML subtree
   function translateFragment(element) {
@@ -936,11 +936,11 @@ document.webL10n = (function(window, document, undefined) {
     var elementCount = children.length;
     for (var i = 0; i < elementCount; i++) {
       translateElement(children[i]);
-***REMOVED***
+    }
 
     // translate element itself if necessary
     translateElement(element);
-  ***REMOVED***
+  }
 
   // cross-browser API (sorry, oldIE doesn't support getters & setters)
   return {
@@ -951,26 +951,26 @@ document.webL10n = (function(window, document, undefined) {
       if (index > 0) { // An attribute has been specified
         prop = key.substr(index + 1);
         key = key.substring(0, index);
-  ***REMOVED***
+      }
       var fallback;
       if (fallbackString) {
-        fallback = {***REMOVED***;
+        fallback = {};
         fallback[prop] = fallbackString;
-  ***REMOVED***
+      }
       var data = getL10nData(key, args, fallback);
       if (data && prop in data) {
         return data[prop];
-  ***REMOVED***
-      return '{{' + key + '***REMOVED******REMOVED***';
-  ***REMOVED***
+      }
+      return '{{' + key + '}}';
+    },
 
     // debug
-    getData: function() { return gL10nData; ***REMOVED***,
-    getText: function() { return gTextData; ***REMOVED***,
+    getData: function() { return gL10nData; },
+    getText: function() { return gTextData; },
 
     // get|set the document language
-    getLanguage: function() { return gLanguage; ***REMOVED***,
-    setLanguage: function(lang) { loadLocale(lang, translateFragment); ***REMOVED***,
+    getLanguage: function() { return gLanguage; },
+    setLanguage: function(lang) { loadLocale(lang, translateFragment); },
 
     // get the direction (ltr|rtl) of the current language
     getDirection: function() {
@@ -978,27 +978,27 @@ document.webL10n = (function(window, document, undefined) {
       // Arabic, Hebrew, Farsi, Pashto, Urdu
       var rtlList = ['ar', 'he', 'fa', 'ps', 'ur'];
       return (rtlList.indexOf(gLanguage) >= 0) ? 'rtl' : 'ltr';
-  ***REMOVED***
+    },
 
     // translate an element or document fragment
     translate: translateFragment,
 
     // this can be used to prevent race conditions
-    getReadyState: function() { return gReadyState; ***REMOVED***,
+    getReadyState: function() { return gReadyState; },
     ready: function(callback) {
       if (!callback) {
         return;
-  ***REMOVED*** else if (gReadyState == 'complete' || gReadyState == 'interactive') {
+      } else if (gReadyState == 'complete' || gReadyState == 'interactive') {
         window.setTimeout(callback);
-  ***REMOVED*** else if (document.addEventListener) {
+      } else if (document.addEventListener) {
         document.addEventListener('localized', callback);
-  ***REMOVED*** else if (document.attachEvent) {
+      } else if (document.attachEvent) {
         document.documentElement.attachEvent('onpropertychange', function(e) {
           if (e.propertyName === 'localized') {
             callback();
-      ***REMOVED***
-    ***REMOVED***);
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***;
-***REMOVED***) (window, document);
+          }
+        });
+      }
+    }
+  };
+}) (window, document);

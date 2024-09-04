@@ -18,7 +18,7 @@ namespace PlataformaTransparencia.Negocios.Comunes
         public DatosAbiertosBLL(TransparenciaDB connection)
         {
             _connection = connection;
-    ***REMOVED***
+        }
 
         public List<infoFuentesRecursos> ObtenerFuentesDatosAbiertos()
         {
@@ -34,12 +34,12 @@ namespace PlataformaTransparencia.Negocios.Comunes
                                             Descripcion = fuente.Descripcion,
                                             FechaActualizacionFuente = fuente.FechaActualizacionFuente
 
-                                    ***REMOVED***).ToList();
+                                        }).ToList();
 
             objReturn = FuentesDeLosRecursos;
             return objReturn;
 
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

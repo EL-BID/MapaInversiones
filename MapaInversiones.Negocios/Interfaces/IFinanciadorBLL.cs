@@ -17,5 +17,5 @@ namespace PlataformaTransparencia.Negocios.Interfaces
         public List<InfograficoFuentes_Nivel_1> ObtenerDataGraficoSankeyPorAnioCodigoFinanciadorSector(int annio, int codigoOrganismoFinanciador, int sectorId);
         public List<itemGenPresupuesto> ObtenerDataProyectosPorAnioCodigoFinanciador(int annio, int codigoOrganismoFinanciador);
         public List<InfoConsolidadoPresupuesto> ObtenerRecursosGraficoTreeMapSectoresPorCodigoFinanciadorAnio(int annio, int codigoFinanciador);
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -39,7 +39,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             consolidadosHome = consolidadosHomeBLL;
             _financiadorBLL = financiadorBLL;
 
-    ***REMOVED***
+        }
 
         [HttpGet("ObtenerProyectosPorSectorGroupHome")]
         public ModelHomeData ObtenerIdeasProyectosPorSectorGroupHome(int anyo)
@@ -50,16 +50,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 objReturn.ProjectsPerSectorGroup = consolidadosHome.ObtenerProyectoPorSectorGroupHome(anyo);
                 objReturn.Status = true;
 
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
 
-        ***REMOVED***
+            }
 
             return objReturn;
-    ***REMOVED***
+        }
 
         [HttpGet("ObtenerOrganismosPorFuente")]
         public ModelHomeData ObtenerOrganismosPorFuente(string Annio, int idfuente)
@@ -70,16 +70,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 objReturn.OrganismosFinanciadores = consolidadosHome.ObtenerOrganismosPorFuenteHome(Annio, idfuente);
                 if (int.TryParse(Annio, out int anio)) objReturn.ConsolidadoOrganismoFinanciador = _financiadorBLL.ObtenerConsolidadoOrganismosFinanciadoresPorAnioAndCodigoFuente(anio, idfuente);
                 objReturn.Status = true;
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
 
-***REMOVED***
+}
 

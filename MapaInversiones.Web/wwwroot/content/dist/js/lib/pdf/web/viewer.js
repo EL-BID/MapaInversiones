@@ -46,13 +46,13 @@ var RenderingStates = {
   RUNNING: 1,
   PAUSED: 2,
   FINISHED: 3
-***REMOVED***;
+};
 var FindStates = {
   FIND_FOUND: 0,
   FIND_NOTFOUND: 1,
   FIND_WRAPPED: 2,
   FIND_PENDING: 3
-***REMOVED***;
+};
 
 PDFJS.imageResourcesPath = './images/';
   PDFJS.workerSrc = '../build/pdf.worker.js';
@@ -70,15 +70,15 @@ var CustomStyle = (function CustomStyleClosure() {
   // in some versions of IE9 it is critical that ms appear in this list
   // before Moz
   var prefixes = ['ms', 'Moz', 'Webkit', 'O'];
-  var _cache = {***REMOVED***;
+  var _cache = {};
 
-  function CustomStyle() {***REMOVED***
+  function CustomStyle() {}
 
   CustomStyle.getProp = function get(propName, element) {
     // check cache only when no element is given
     if (arguments.length === 1 && typeof _cache[propName] === 'string') {
       return _cache[propName];
-***REMOVED***
+    }
 
     element = element || document.documentElement;
     var style = element.style, prefixed, uPropName;
@@ -86,7 +86,7 @@ var CustomStyle = (function CustomStyleClosure() {
     // test standard property first
     if (typeof style[propName] === 'string') {
       return (_cache[propName] = propName);
-***REMOVED***
+    }
 
     // capitalize
     uPropName = propName.charAt(0).toUpperCase() + propName.slice(1);
@@ -96,22 +96,22 @@ var CustomStyle = (function CustomStyleClosure() {
       prefixed = prefixes[i] + uPropName;
       if (typeof style[prefixed] === 'string') {
         return (_cache[propName] = prefixed);
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     //if all fails then set to undefined
     return (_cache[propName] = 'undefined');
-  ***REMOVED***;
+  };
 
   CustomStyle.setProp = function set(propName, element, str) {
     var prop = this.getProp(propName);
     if (prop !== 'undefined') {
       element.style[prop] = str;
-***REMOVED***
-  ***REMOVED***;
+    }
+  };
 
   return CustomStyle;
-***REMOVED***)();
+})();
 
 function getFileName(url) {
   var anchor = url.indexOf('#');
@@ -120,11 +120,11 @@ function getFileName(url) {
     anchor > 0 ? anchor : url.length,
     query > 0 ? query : url.length);
   return url.substring(url.lastIndexOf('/', end) + 1, end);
-***REMOVED***
+}
 
 /**
  * Returns scale factor for the canvas. It makes sense for the HiDPI displays.
- * @return {Object***REMOVED*** The object with horizontal (sx) and vertical (sy)
+ * @return {Object} The object with horizontal (sx) and vertical (sy)
                     scales. The scaled property is set to false if scaling is
                     not required, true otherwise.
  */
@@ -140,13 +140,13 @@ function getOutputScale(ctx) {
     sx: pixelRatio,
     sy: pixelRatio,
     scaled: pixelRatio !== 1
-  ***REMOVED***;
-***REMOVED***
+  };
+}
 
 /**
  * Scrolls specified element into view of its parent.
- * element {Object***REMOVED*** The element to be visible.
- * spot {Object***REMOVED*** An object with optional top and left properties,
+ * element {Object} The element to be visible.
+ * spot {Object} An object with optional top and left properties,
  *               specifying the offset from the top left edge.
  */
 function scrollIntoView(element, spot) {
@@ -159,42 +159,42 @@ function scrollIntoView(element, spot) {
   if (!parent) {
     console.error('offsetParent is not set -- cannot scroll');
     return;
-  ***REMOVED***
+  }
   while (parent.clientHeight === parent.scrollHeight) {
     if (parent.dataset._scaleY) {
       offsetY /= parent.dataset._scaleY;
       offsetX /= parent.dataset._scaleX;
-***REMOVED***
+    }
     offsetY += parent.offsetTop;
     offsetX += parent.offsetLeft;
     parent = parent.offsetParent;
     if (!parent) {
       return; // no need to scroll
-***REMOVED***
-  ***REMOVED***
+    }
+  }
   if (spot) {
     if (spot.top !== undefined) {
       offsetY += spot.top;
-***REMOVED***
+    }
     if (spot.left !== undefined) {
       offsetX += spot.left;
       parent.scrollLeft = offsetX;
-***REMOVED***
-  ***REMOVED***
+    }
+  }
   parent.scrollTop = offsetY;
-***REMOVED***
+}
 
 /**
  * Event handler to suppress context menu.
  */
 function noContextMenuHandler(e) {
   e.preventDefault();
-***REMOVED***
+}
 
 /**
  * Returns the filename or guessed filename from the url (see issue 3455).
- * url {String***REMOVED*** The original PDF location.
- * @return {String***REMOVED*** Guessed PDF file name.
+ * url {String} The original PDF location.
+ * @return {String} Guessed PDF file name.
  */
 function getPDFFileNameFromURL(url) {
   var reURI = /^(?:([^:]+:)?\/\/[^\/]+)?([^?#]*)(\?[^#]*)?(#.*)?$/;
@@ -212,20 +212,20 @@ function getPDFFileNameFromURL(url) {
       try {
         suggestedFilename =
           reFilename.exec(decodeURIComponent(suggestedFilename))[0];
-  ***REMOVED*** catch(e) { // Possible (extremely rare) errors:
+      } catch(e) { // Possible (extremely rare) errors:
         // URIError "Malformed URI", e.g. for "%AA.pdf"
         // TypeError "null has no properties", e.g. for "%2F.pdf"
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***
+      }
+    }
+  }
   return suggestedFilename || 'document.pdf';
-***REMOVED***
+}
 
 var ProgressBar = (function ProgressBarClosure() {
 
   function clamp(v, min, max) {
     return Math.min(Math.max(v, min), max);
-  ***REMOVED***
+  }
 
   function ProgressBar(id, opts) {
 
@@ -243,7 +243,7 @@ var ProgressBar = (function ProgressBarClosure() {
     // Initialize heights.
     this.div.style.height = this.height + this.units;
     this.percent = 0;
-  ***REMOVED***
+  }
 
   ProgressBar.prototype = {
 
@@ -252,22 +252,22 @@ var ProgressBar = (function ProgressBarClosure() {
         this.div.classList.add('indeterminate');
         this.div.style.width = this.width + this.units;
         return;
-  ***REMOVED***
+      }
 
       this.div.classList.remove('indeterminate');
       var progressSize = this.width * this._percent / 100;
       this.div.style.width = progressSize + this.units;
-  ***REMOVED***
+    },
 
     get percent() {
       return this._percent;
-  ***REMOVED***
+    },
 
     set percent(val) {
       this._indeterminate = isNaN(val);
       this._percent = clamp(val, 0, 100);
       this.updateBar();
-  ***REMOVED***
+    },
 
     setWidth: function ProgressBar_setWidth(viewer) {
       if (viewer) {
@@ -276,18 +276,18 @@ var ProgressBar = (function ProgressBarClosure() {
         if (scrollbarWidth > 0) {
           this.bar.setAttribute('style', 'width: calc(100% - ' +
                                          scrollbarWidth + 'px);');
-    ***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
+        }
+      }
+    },
 
     hide: function ProgressBar_hide() {
       this.bar.classList.add('hidden');
       this.bar.removeAttribute('style');
-***REMOVED***
-  ***REMOVED***;
+    }
+  };
 
   return ProgressBar;
-***REMOVED***)();
+})();
 
 var Cache = function cacheCache(size) {
   var data = [];
@@ -295,19 +295,19 @@ var Cache = function cacheCache(size) {
     var i = data.indexOf(view);
     if (i >= 0) {
       data.splice(i, 1);
-***REMOVED***
+    }
     data.push(view);
     if (data.length > size) {
       data.shift().destroy();
-***REMOVED***
-  ***REMOVED***;
+    }
+  };
   this.resize = function (newSize) {
     size = newSize;
     while (data.length > size) {
       data.shift().destroy();
-***REMOVED***
-  ***REMOVED***;
-***REMOVED***;
+    }
+  };
+};
 
 
 
@@ -323,7 +323,7 @@ var DEFAULT_PREFERENCES = {
   disableFontFace: false,
   disableTextLayer: false,
   useOnlyCssZoom: false
-***REMOVED***;
+};
 
 
 var SidebarView = {
@@ -331,7 +331,7 @@ var SidebarView = {
   THUMBS: 1,
   OUTLINE: 2,
   ATTACHMENTS: 3
-***REMOVED***;
+};
 
 /**
  * Preferences - Utility for storing persistent settings.
@@ -345,7 +345,7 @@ var Preferences = {
 
   /**
    * Initialize and fetch the current preference values from storage.
-   * @return {Promise***REMOVED*** A promise that is resolved when the preferences
+   * @return {Promise} A promise that is resolved when the preferences
    *                   have been initialized.
    */
   initialize: function preferencesInitialize() {
@@ -354,47 +354,47 @@ var Preferences = {
       this.isInitializedPromiseResolved = true;
       if (prefObj) {
         this.prefs = prefObj;
-  ***REMOVED***
-***REMOVED***.bind(this));
-***REMOVED***
+      }
+    }.bind(this));
+  },
 
   /**
    * Stub function for writing preferences to storage.
    * NOTE: This should be overridden by a build-specific function defined below.
-   * @param {Object***REMOVED*** prefObj The preferences that should be written to storage.
-   * @return {Promise***REMOVED*** A promise that is resolved when the preference values
+   * @param {Object} prefObj The preferences that should be written to storage.
+   * @return {Promise} A promise that is resolved when the preference values
    *                   have been written.
    */
   _writeToStorage: function preferences_writeToStorage(prefObj) {
     return Promise.resolve();
-***REMOVED***
+  },
 
   /**
    * Stub function for reading preferences from storage.
    * NOTE: This should be overridden by a build-specific function defined below.
-   * @param {Object***REMOVED*** prefObj The preferences that should be read from storage.
-   * @return {Promise***REMOVED*** A promise that is resolved with an {Object***REMOVED*** containing
+   * @param {Object} prefObj The preferences that should be read from storage.
+   * @return {Promise} A promise that is resolved with an {Object} containing
    *                   the preferences that have been read.
    */
   _readFromStorage: function preferences_readFromStorage(prefObj) {
     return Promise.resolve();
-***REMOVED***
+  },
 
   /**
    * Reset the preferences to their default values and update storage.
-   * @return {Promise***REMOVED*** A promise that is resolved when the preference values
+   * @return {Promise} A promise that is resolved when the preference values
    *                   have been reset.
    */
   reset: function preferencesReset() {
     return this.initializedPromise.then(function() {
       this.prefs = Object.create(DEFAULT_PREFERENCES);
       return this._writeToStorage(DEFAULT_PREFERENCES);
-***REMOVED***.bind(this));
-***REMOVED***
+    }.bind(this));
+  },
 
   /**
    * Replace the current preference values with the ones from storage.
-   * @return {Promise***REMOVED*** A promise that is resolved when the preference values
+   * @return {Promise} A promise that is resolved when the preference values
    *                   have been updated.
    */
   reload: function preferencesReload() {
@@ -402,50 +402,50 @@ var Preferences = {
       this._readFromStorage(DEFAULT_PREFERENCES).then(function(prefObj) {
         if (prefObj) {
           this.prefs = prefObj;
-    ***REMOVED***
-  ***REMOVED***.bind(this));
-***REMOVED***.bind(this));
-***REMOVED***
+        }
+      }.bind(this));
+    }.bind(this));
+  },
 
   /**
    * Set the value of a preference.
-   * @param {string***REMOVED*** name The name of the preference that should be changed.
-   * @param {boolean|number|string***REMOVED*** value The new value of the preference.
-   * @return {Promise***REMOVED*** A promise that is resolved when the value has been set,
+   * @param {string} name The name of the preference that should be changed.
+   * @param {boolean|number|string} value The new value of the preference.
+   * @return {Promise} A promise that is resolved when the value has been set,
    *                   provided that the preference exists and the types match.
    */
   set: function preferencesSet(name, value) {
     return this.initializedPromise.then(function () {
       if (DEFAULT_PREFERENCES[name] === undefined) {
         throw new Error('preferencesSet: \'' + name + '\' is undefined.');
-  ***REMOVED*** else if (value === undefined) {
+      } else if (value === undefined) {
         throw new Error('preferencesSet: no value is specified.');
-  ***REMOVED***
+      }
       var valueType = typeof value;
       var defaultType = typeof DEFAULT_PREFERENCES[name];
 
       if (valueType !== defaultType) {
         if (valueType === 'number' && defaultType === 'string') {
           value = value.toString();
-    ***REMOVED*** else {
+        } else {
           throw new Error('Preferences_set: \'' + value + '\' is a \"' +
                           valueType + '\", expected \"' + defaultType + '\".');
-    ***REMOVED***
-  ***REMOVED*** else {
+        }
+      } else {
         if (valueType === 'number' && (value | 0) !== value) {
           throw new Error('Preferences_set: \'' + value +
                           '\' must be an \"integer\".');
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
       this.prefs[name] = value;
       return this._writeToStorage(this.prefs);
-***REMOVED***.bind(this));
-***REMOVED***
+    }.bind(this));
+  },
 
   /**
    * Get the value of a preference.
-   * @param {string***REMOVED*** name The name of the preference whose value is requested.
-   * @return {Promise***REMOVED*** A promise that is resolved with a {boolean|number|string***REMOVED***
+   * @param {string} name The name of the preference whose value is requested.
+   * @return {Promise} A promise that is resolved with a {boolean|number|string}
    *                   containing the value of the preference.
    */
   get: function preferencesGet(name) {
@@ -454,17 +454,17 @@ var Preferences = {
 
       if (defaultValue === undefined) {
         throw new Error('preferencesGet: \'' + name + '\' is undefined.');
-  ***REMOVED*** else {
+      } else {
         var prefValue = this.prefs[name];
 
         if (prefValue !== undefined) {
           return prefValue;
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
       return defaultValue;
-***REMOVED***.bind(this));
-  ***REMOVED***
-***REMOVED***;
+    }.bind(this));
+  }
+};
 
 
 
@@ -472,21 +472,21 @@ Preferences._writeToStorage = function (prefObj) {
   return new Promise(function (resolve) {
     localStorage.setItem('pdfjs.preferences', JSON.stringify(prefObj));
     resolve();
-  ***REMOVED***);
-***REMOVED***;
+  });
+};
 
 Preferences._readFromStorage = function (prefObj) {
   return new Promise(function (resolve) {
     var readPrefs = JSON.parse(localStorage.getItem('pdfjs.preferences'));
     resolve(readPrefs);
-  ***REMOVED***);
-***REMOVED***;
+  });
+};
 
 
 (function mozPrintCallbackPolyfillClosure() {
   if ('mozPrintCallback' in document.createElement('canvas')) {
     return;
-  ***REMOVED***
+  }
   // Cause positive result on feature-detection:
   HTMLCanvasElement.prototype.mozPrintCallback = undefined;
 
@@ -498,26 +498,26 @@ Preferences._readFromStorage = function (prefObj) {
     if (canvases) {
       console.warn('Ignored window.print() because of a pending print job.');
       return;
-***REMOVED***
+    }
     try {
       dispatchEvent('beforeprint');
-***REMOVED*** finally {
+    } finally {
       canvases = document.querySelectorAll('canvas');
       index = -1;
       next();
-***REMOVED***
-  ***REMOVED***;
+    }
+  };
 
   function dispatchEvent(eventType) {
     var event = document.createEvent('CustomEvent');
     event.initCustomEvent(eventType, false, false, 'custom');
     window.dispatchEvent(event);
-  ***REMOVED***
+  }
 
   function next() {
     if (!canvases) {
       return; // Print task cancelled by user (state reset in abort())
-***REMOVED***
+    }
 
     renderProgress();
     if (++index < canvases.length) {
@@ -527,24 +527,24 @@ Preferences._readFromStorage = function (prefObj) {
           context: canvas.getContext('2d'),
           abort: abort,
           done: next
-    ***REMOVED***);
-  ***REMOVED*** else {
+        });
+      } else {
         next();
-  ***REMOVED***
-***REMOVED*** else {
+      }
+    } else {
       renderProgress();
       print.call(window);
       setTimeout(abort, 20); // Tidy-up
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   function abort() {
     if (canvases) {
       canvases = null;
       renderProgress();
       dispatchEvent('afterprint');
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   function renderProgress() {
     var progressContainer = document.getElementById('mozPrintCallback-shim');
@@ -556,10 +556,10 @@ Preferences._readFromStorage = function (prefObj) {
       progressPerc.textContent = progress + '%';
       progressContainer.removeAttribute('hidden');
       progressContainer.onclick = abort;
-***REMOVED*** else {
+    } else {
       progressContainer.setAttribute('hidden', '');
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   var hasAttachEvent = !!document.attachEvent;
 
@@ -573,28 +573,28 @@ Preferences._readFromStorage = function (prefObj) {
         // Only attachEvent can cancel Ctrl + P dialog in IE <=10
         // attachEvent is gone in IE11, so the dialog will re-appear in IE11.
         return;
-  ***REMOVED***
+      }
       event.preventDefault();
       if (event.stopImmediatePropagation) {
         event.stopImmediatePropagation();
-  ***REMOVED*** else {
+      } else {
         event.stopPropagation();
-  ***REMOVED***
+      }
       return;
-***REMOVED***
+    }
     if (event.keyCode === 27 && canvases) { // Esc
       abort();
-***REMOVED***
-***REMOVED*** true);
+    }
+  }, true);
   if (hasAttachEvent) {
     document.attachEvent('onkeydown', function(event) {
       event = event || window.event;
       if (event.keyCode === 80/*P*/ && event.ctrlKey) {
         event.keyCode = 0;
         return false;
-  ***REMOVED***
-***REMOVED***);
-  ***REMOVED***
+      }
+    });
+  }
 
   if ('onbeforeprint' in window) {
     // Do not propagate before/afterprint events when they are not triggered
@@ -602,12 +602,12 @@ Preferences._readFromStorage = function (prefObj) {
     var stopPropagationIfNeeded = function(event) {
       if (event.detail !== 'custom' && event.stopImmediatePropagation) {
         event.stopImmediatePropagation();
-  ***REMOVED***
-***REMOVED***;
+      }
+    };
     window.addEventListener('beforeprint', stopPropagationIfNeeded, false);
     window.addEventListener('afterprint', stopPropagationIfNeeded, false);
-  ***REMOVED***
-***REMOVED***)();
+  }
+})();
 
 
 
@@ -631,68 +631,68 @@ var DownloadManager = (function DownloadManagerClosure() {
       // the file is downloaded instead of opened by another PDF plugin.
       if ('download' in a) {
         a.download = filename;
-  ***REMOVED***
+      }
       // <a> must be in the document for IE and recent Firefox versions.
       // (otherwise .click() is ignored)
       (document.body || document.documentElement).appendChild(a);
       a.click();
       a.parentNode.removeChild(a);
-***REMOVED*** else {
+    } else {
       if (window.top === window &&
           blobUrl.split('#')[0] === window.location.href.split('#')[0]) {
         // If _parent == self, then opening an identical URL with different
         // location hash will only cause a navigation, not a download.
         var padCharacter = blobUrl.indexOf('?') === -1 ? '?' : '&';
         blobUrl = blobUrl.replace(/#|$/, padCharacter + '$&');
-  ***REMOVED***
+      }
       window.open(blobUrl, '_parent');
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
-  function DownloadManager() {***REMOVED***
+  function DownloadManager() {}
 
   DownloadManager.prototype = {
     downloadUrl: function DownloadManager_downloadUrl(url, filename) {
       if (!PDFJS.isValidUrl(url, true)) {
         return; // restricted/invalid URL
-  ***REMOVED***
+      }
 
       download(url + '#pdfjs.action=download', filename);
-  ***REMOVED***
+    },
 
     downloadData: function DownloadManager_downloadData(data, filename,
                                                         contentType) {
       if (navigator.msSaveBlob) { // IE10 and above
-        return navigator.msSaveBlob(new Blob([data], { type: contentType ***REMOVED***),
+        return navigator.msSaveBlob(new Blob([data], { type: contentType }),
                                     filename);
-  ***REMOVED***
+      }
 
       var blobUrl = PDFJS.createObjectURL(data, contentType);
       download(blobUrl, filename);
-  ***REMOVED***
+    },
 
     download: function DownloadManager_download(blob, url, filename) {
       if (!URL) {
         // URL.createObjectURL is not supported
         this.downloadUrl(url, filename);
         return;
-  ***REMOVED***
+      }
 
       if (navigator.msSaveBlob) {
         // IE10 / IE11
         if (!navigator.msSaveBlob(blob, filename)) {
           this.downloadUrl(url, filename);
-    ***REMOVED***
+        }
         return;
-  ***REMOVED***
+      }
 
       var blobUrl = URL.createObjectURL(blob);
       download(blobUrl, filename);
-***REMOVED***
-  ***REMOVED***;
+    }
+  };
 
   return DownloadManager;
-***REMOVED***)();
+})();
 
 
 
@@ -719,28 +719,28 @@ var ViewHistory = (function ViewHistoryClosure() {
         this._readFromStorage().then(function (databaseStr) {
       this.isInitializedPromiseResolved = true;
 
-      var database = JSON.parse(databaseStr || '{***REMOVED***');
+      var database = JSON.parse(databaseStr || '{}');
       if (!('files' in database)) {
         database.files = [];
-  ***REMOVED***
+      }
       if (database.files.length >= VIEW_HISTORY_MEMORY) {
         database.files.shift();
-  ***REMOVED***
+      }
       var index;
       for (var i = 0, length = database.files.length; i < length; i++) {
         var branch = database.files[i];
         if (branch.fingerprint === this.fingerprint) {
           index = i;
           break;
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
       if (typeof index !== 'number') {
-        index = database.files.push({fingerprint: this.fingerprint***REMOVED***) - 1;
-  ***REMOVED***
+        index = database.files.push({fingerprint: this.fingerprint}) - 1;
+      }
       this.file = database.files[index];
       this.database = database;
-***REMOVED***.bind(this));
-  ***REMOVED***
+    }.bind(this));
+  }
 
   ViewHistory.prototype = {
     _writeToStorage: function ViewHistory_writeToStorage() {
@@ -751,45 +751,45 @@ var ViewHistory = (function ViewHistoryClosure() {
 
         localStorage.setItem('database', databaseStr);
         resolve();
-  ***REMOVED***.bind(this));
-  ***REMOVED***
+      }.bind(this));
+    },
 
     _readFromStorage: function ViewHistory_readFromStorage() {
       return new Promise(function (resolve) {
 
 
         resolve(localStorage.getItem('database'));
-  ***REMOVED***);
-  ***REMOVED***
+      });
+    },
 
     set: function ViewHistory_set(name, val) {
       if (!this.isInitializedPromiseResolved) {
         return;
-  ***REMOVED***
+      }
       this.file[name] = val;
       return this._writeToStorage();
-  ***REMOVED***
+    },
 
     setMultiple: function ViewHistory_setMultiple(properties) {
       if (!this.isInitializedPromiseResolved) {
         return;
-  ***REMOVED***
+      }
       for (var name in properties) {
         this.file[name] = properties[name];
-  ***REMOVED***
+      }
       return this._writeToStorage();
-  ***REMOVED***
+    },
 
     get: function ViewHistory_get(name, defaultValue) {
       if (!this.isInitializedPromiseResolved) {
         return defaultValue;
-  ***REMOVED***
+      }
       return this.file[name] || defaultValue;
-***REMOVED***
-  ***REMOVED***;
+    }
+  };
 
   return ViewHistory;
-***REMOVED***)();
+})();
 
 
 /**
@@ -815,47 +815,47 @@ var PDFFindBar = (function PDFFindBarClosure() {
     if (this.findController === null) {
       throw new Error('PDFFindBar cannot be used without a ' +
                       'PDFFindController instance.');
-***REMOVED***
+    }
 
     // Add event listeners to the DOM elements.
     var self = this;
     this.toggleButton.addEventListener('click', function() {
       self.toggle();
-***REMOVED***);
+    });
 
     this.findField.addEventListener('input', function() {
       self.dispatchEvent('');
-***REMOVED***);
+    });
 
     this.bar.addEventListener('keydown', function(evt) {
       switch (evt.keyCode) {
         case 13: // Enter
           if (evt.target === self.findField) {
             self.dispatchEvent('again', evt.shiftKey);
-      ***REMOVED***
+          }
           break;
         case 27: // Escape
           self.close();
           break;
-  ***REMOVED***
-***REMOVED***);
+      }
+    });
 
     this.findPreviousButton.addEventListener('click', function() {
       self.dispatchEvent('again', true);
-***REMOVED***);
+    });
 
     this.findNextButton.addEventListener('click', function() {
       self.dispatchEvent('again', false);
-***REMOVED***);
+    });
 
     this.highlightAll.addEventListener('click', function() {
       self.dispatchEvent('highlightallchange');
-***REMOVED***);
+    });
 
     this.caseSensitive.addEventListener('click', function() {
       self.dispatchEvent('casesensitivitychange');
-***REMOVED***);
-  ***REMOVED***
+    });
+  }
 
   PDFFindBar.prototype = {
     dispatchEvent: function PDFFindBar_dispatchEvent(type, findPrev) {
@@ -865,9 +865,9 @@ var PDFFindBar = (function PDFFindBarClosure() {
         caseSensitive: this.caseSensitive.checked,
         highlightAll: this.highlightAll.checked,
         findPrevious: findPrev
-  ***REMOVED***);
+      });
       return window.dispatchEvent(event);
-  ***REMOVED***
+    },
 
     updateUIState: function PDFFindBar_updateUIState(state, previous) {
       var notFound = false;
@@ -891,53 +891,53 @@ var PDFFindBar = (function PDFFindBarClosure() {
           if (previous) {
             findMsg = mozL10n.get('find_reached_top', null,
               'Reached top of document, continued from bottom');
-      ***REMOVED*** else {
+          } else {
             findMsg = mozL10n.get('find_reached_bottom', null,
               'Reached end of document, continued from top');
-      ***REMOVED***
+          }
           break;
-  ***REMOVED***
+      }
 
       if (notFound) {
         this.findField.classList.add('notFound');
-  ***REMOVED*** else {
+      } else {
         this.findField.classList.remove('notFound');
-  ***REMOVED***
+      }
 
       this.findField.setAttribute('data-status', status);
       this.findMsg.textContent = findMsg;
-  ***REMOVED***
+    },
 
     open: function PDFFindBar_open() {
       if (!this.opened) {
         this.opened = true;
         this.toggleButton.classList.add('toggled');
         this.bar.classList.remove('hidden');
-  ***REMOVED***
+      }
       this.findField.select();
       this.findField.focus();
-  ***REMOVED***
+    },
 
     close: function PDFFindBar_close() {
       if (!this.opened) {
         return;
-  ***REMOVED***
+      }
       this.opened = false;
       this.toggleButton.classList.remove('toggled');
       this.bar.classList.add('hidden');
       this.findController.active = false;
-  ***REMOVED***
+    },
 
     toggle: function PDFFindBar_toggle() {
       if (this.opened) {
         this.close();
-  ***REMOVED*** else {
+      } else {
         this.open();
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***;
+      }
+    }
+  };
   return PDFFindBar;
-***REMOVED***)();
+})();
 
 
 
@@ -949,18 +949,18 @@ var PDFFindController = (function PDFFindControllerClosure() {
   function PDFFindController(options) {
     this.startedTextExtraction = false;
     this.extractTextPromises = [];
-    this.pendingFindMatches = {***REMOVED***;
+    this.pendingFindMatches = {};
     this.active = false; // If active, find results will be highlighted.
     this.pageContents = []; // Stores the text for each page.
     this.pageMatches = [];
     this.selected = { // Currently selected match.
       pageIdx: -1,
       matchIdx: -1
-***REMOVED***;
+    };
     this.offset = { // Where the find algorithm currently is in the document.
       pageIdx: null,
       matchIdx: null
-***REMOVED***;
+    };
     this.resumePageIdx = null;
     this.state = null;
     this.dirtyMatch = false;
@@ -979,7 +979,7 @@ var PDFFindController = (function PDFFindControllerClosure() {
       '\u00BC': '1/4', // Vulgar fraction one quarter
       '\u00BD': '1/2', // Vulgar fraction one half
       '\u00BE': '3/4' // Vulgar fraction three quarters
-***REMOVED***;
+    };
     this.findBar = options.findBar || null;
 
     // Compile the regular expression for text normalization once
@@ -995,31 +995,31 @@ var PDFFindController = (function PDFFindControllerClosure() {
 
     this.firstPagePromise = new Promise(function (resolve) {
       this.resolveFirstPage = resolve;
-***REMOVED***.bind(this));
+    }.bind(this));
     this.handleEvent = this.handleEvent.bind(this);
 
     for (var i = 0, len = events.length; i < len; i++) {
       window.addEventListener(events[i], this.handleEvent);
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   PDFFindController.prototype = {
     setFindBar: function PDFFindController_setFindBar(findBar) {
       this.findBar = findBar;
-  ***REMOVED***
+    },
 
     reset: function PDFFindController_reset() {
       this.startedTextExtraction = false;
       this.extractTextPromises = [];
       this.active = false;
-  ***REMOVED***
+    },
 
     normalize: function PDFFindController_normalize(text) {
       var self = this;
       return text.replace(this.normalizationRegex, function (ch) {
         return self.charactersToNormalize[ch];
-  ***REMOVED***);
-  ***REMOVED***
+      });
+    },
 
     calcFindMatch: function PDFFindController_calcFindMatch(pageIndex) {
       var pageContent = this.normalize(this.pageContents[pageIndex]);
@@ -1029,12 +1029,12 @@ var PDFFindController = (function PDFFindControllerClosure() {
 
       if (queryLen === 0) {
         return; // Do nothing: the matches should be wiped out already.
-  ***REMOVED***
+      }
 
       if (!caseSensitive) {
         pageContent = pageContent.toLowerCase();
         query = query.toLowerCase();
-  ***REMOVED***
+      }
 
       var matches = [];
       var matchIdx = -queryLen;
@@ -1042,21 +1042,21 @@ var PDFFindController = (function PDFFindControllerClosure() {
         matchIdx = pageContent.indexOf(query, matchIdx + queryLen);
         if (matchIdx === -1) {
           break;
-    ***REMOVED***
+        }
         matches.push(matchIdx);
-  ***REMOVED***
+      }
       this.pageMatches[pageIndex] = matches;
       this.updatePage(pageIndex);
       if (this.resumePageIdx === pageIndex) {
         this.resumePageIdx = null;
         this.nextPageMatch();
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
 
     extractText: function PDFFindController_extractText() {
       if (this.startedTextExtraction) {
         return;
-  ***REMOVED***
+      }
       this.startedTextExtraction = true;
 
       this.pageContents = [];
@@ -1065,8 +1065,8 @@ var PDFFindController = (function PDFFindControllerClosure() {
       for (var i = 0; i < numPages; i++) {
         this.extractTextPromises.push(new Promise(function (resolve) {
           extractTextPromisesResolves.push(resolve);
-    ***REMOVED***));
-  ***REMOVED***
+        }));
+      }
 
       var self = this;
       function extractPageText(pageIndex) {
@@ -1077,7 +1077,7 @@ var PDFFindController = (function PDFFindControllerClosure() {
 
             for (var i = 0, len = textItems.length; i < len; i++) {
               str.push(textItems[i].str);
-        ***REMOVED***
+            }
 
             // Store the pageContent as a string.
             self.pageContents.push(str.join(''));
@@ -1085,17 +1085,17 @@ var PDFFindController = (function PDFFindControllerClosure() {
             extractTextPromisesResolves[pageIndex](pageIndex);
             if ((pageIndex + 1) < self.pdfPageSource.pages.length) {
               extractPageText(pageIndex + 1);
-        ***REMOVED***
-      ***REMOVED***
+            }
+          }
         );
-  ***REMOVED***
+      }
       extractPageText(0);
-  ***REMOVED***
+    },
 
     handleEvent: function PDFFindController_handleEvent(e) {
       if (this.state === null || e.type !== 'findagain') {
         this.dirtyMatch = true;
-  ***REMOVED***
+      }
       this.state = e.detail;
       this.updateUIState(FindStates.FIND_PENDING);
 
@@ -1106,11 +1106,11 @@ var PDFFindController = (function PDFFindControllerClosure() {
         if (e.type === 'find') {
           // Only trigger the find action after 250ms of silence.
           this.findTimeout = setTimeout(this.nextMatch.bind(this), 250);
-    ***REMOVED*** else {
+        } else {
           this.nextMatch();
-    ***REMOVED***
-  ***REMOVED***.bind(this));
-  ***REMOVED***
+        }
+      }.bind(this));
+    },
 
     updatePage: function PDFFindController_updatePage(index) {
       var page = this.pdfPageSource.pages[index];
@@ -1120,12 +1120,12 @@ var PDFFindController = (function PDFFindControllerClosure() {
         // rendering the page, which adds the textLayer. Once the textLayer is
         // build, it will scroll onto the selected match.
         page.scrollIntoView();
-  ***REMOVED***
+      }
 
       if (page.textLayer) {
         page.textLayer.updateMatches();
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
 
     nextMatch: function PDFFindController_nextMatch() {
       var previous = this.state.findPrevious;
@@ -1155,21 +1155,21 @@ var PDFFindController = (function PDFFindControllerClosure() {
             this.extractTextPromises[i].then(function(pageIdx) {
               delete self.pendingFindMatches[pageIdx];
               self.calcFindMatch(pageIdx);
-        ***REMOVED***);
-      ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
+            });
+          }
+        }
+      }
 
       // If there's no query there's no point in searching.
       if (this.state.query === '') {
         this.updateUIState(FindStates.FIND_FOUND);
         return;
-  ***REMOVED***
+      }
 
       // If we're waiting on a page, we return since we can't do anything else.
       if (this.resumePageIdx) {
         return;
-  ***REMOVED***
+      }
 
       var offset = this.offset;
       // If there's already a matchIdx that means we are iterating through a
@@ -1185,14 +1185,14 @@ var PDFFindController = (function PDFFindControllerClosure() {
                                         offset.matchIdx + 1);
           this.updateMatch(true);
           return;
-    ***REMOVED***
+        }
         // We went beyond the current page's matches, so we advance to
         // the next page.
         this.advanceOffsetPage(previous);
-  ***REMOVED***
+      }
       // Start searching through the page.
       this.nextPageMatch();
-  ***REMOVED***
+    },
 
     matchesReady: function PDFFindController_matchesReady(matches) {
       var offset = this.offset;
@@ -1205,7 +1205,7 @@ var PDFFindController = (function PDFFindControllerClosure() {
         offset.matchIdx = (previous ? numMatches - 1 : 0);
         this.updateMatch(true);
         return true;
-  ***REMOVED*** else {
+      } else {
         // No matches, so attempt to search the next page.
         this.advanceOffsetPage(previous);
         if (offset.wrapped) {
@@ -1216,17 +1216,17 @@ var PDFFindController = (function PDFFindControllerClosure() {
             // while matches were not found, searching for a page 
             // with matches should nevertheless halt.
             return true;
-      ***REMOVED***
-    ***REMOVED***
+          }
+        }
         // Matches were not found (and searching is not done).
         return false;
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
 
     nextPageMatch: function PDFFindController_nextPageMatch() {
       if (this.resumePageIdx !== null) {
         console.error('There can only be one pending page.');
-  ***REMOVED***
+      }
       do {
         var pageIdx = this.offset.pageIdx;
         var matches = this.pageMatches[pageIdx];
@@ -1235,9 +1235,9 @@ var PDFFindController = (function PDFFindControllerClosure() {
           // so set a resume point for when they do exist.
           this.resumePageIdx = pageIdx;
           break;
-    ***REMOVED***
-  ***REMOVED*** while (!this.matchesReady(matches));
-  ***REMOVED***
+        }
+      } while (!this.matchesReady(matches));
+    },
 
     advanceOffsetPage: function PDFFindController_advanceOffsetPage(previous) {
       var offset = this.offset;
@@ -1249,8 +1249,8 @@ var PDFFindController = (function PDFFindControllerClosure() {
         offset.pageIdx = (previous ? numPages - 1 : 0);
         offset.wrapped = true;
         return;
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
 
     updateMatch: function PDFFindController_updateMatch(found) {
       var state = FindStates.FIND_NOTFOUND;
@@ -1265,30 +1265,30 @@ var PDFFindController = (function PDFFindControllerClosure() {
         // Update the currently selected page to wipe out any selected matches.
         if (previousPage !== -1 && previousPage !== this.selected.pageIdx) {
           this.updatePage(previousPage);
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
     
       this.updateUIState(state, this.state.findPrevious);
       if (this.selected.pageIdx !== -1) {
         this.updatePage(this.selected.pageIdx, true);
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
 
     updateUIState: function PDFFindController_updateUIState(state, previous) {
       if (this.integratedFind) {
         FirefoxCom.request('updateFindControlState',
-                           { result: state, findPrevious: previous ***REMOVED***);
+                           { result: state, findPrevious: previous });
         return;
-  ***REMOVED***
+      }
       if (this.findBar === null) {
         throw new Error('PDFFindController is not initialized with a ' +
                         'PDFFindBar instance.');
-  ***REMOVED***
+      }
       this.findBar.updateUIState(state, previous);
-***REMOVED***
-  ***REMOVED***;
+    }
+  };
   return PDFFindController;
-***REMOVED***)();
+})();
 
 
 
@@ -1301,7 +1301,7 @@ var PDFHistory = {
       // The browsing history is only enabled when the viewer is standalone,
       // i.e. not when it is embedded in a web page.
       return;
-***REMOVED***
+    }
     this.initialized = true;
     this.reInitialized = false;
     this.allowHashChange = true;
@@ -1317,7 +1317,7 @@ var PDFHistory = {
 
     this.fingerprint = fingerprint;
     this.currentUid = this.uid = 0;
-    this.current = {***REMOVED***;
+    this.current = {};
 
     var state = window.history.state;
     if (this._isStateObjectDefined(state)) {
@@ -1325,22 +1325,22 @@ var PDFHistory = {
       // from another page in the browser history.
       if (state.target.dest) {
         this.initialDestination = state.target.dest;
-  ***REMOVED*** else {
+      } else {
         PDFView.initialBookmark = state.target.hash;
-  ***REMOVED***
+      }
       this.currentUid = state.uid;
       this.uid = state.uid + 1;
       this.current = state.target;
-***REMOVED*** else {
+    } else {
       // This corresponds to the loading of a new document.
       if (state && state.fingerprint &&
           this.fingerprint !== state.fingerprint) {
         // Reinitialize the browsing history when a new document
         // is opened in the web viewer.
         this.reInitialized = true;
-  ***REMOVED***
-      this._pushOrReplaceState({ fingerprint: this.fingerprint ***REMOVED***, true);
-***REMOVED***
+      }
+      this._pushOrReplaceState({ fingerprint: this.fingerprint }, true);
+    }
 
     var self = this;
     window.addEventListener('popstate', function pdfHistoryPopstate(evt) {
@@ -1349,11 +1349,11 @@ var PDFHistory = {
 
       if (!self.historyUnlocked) {
         return;
-  ***REMOVED***
+      }
       if (evt.state) {
         // Move back/forward in the history.
         self._goTo(evt.state);
-  ***REMOVED*** else {
+      } else {
         // Handle the user modifying the hash of a loaded document.
         self.previousHash = window.location.hash.substring(1);
 
@@ -1362,19 +1362,19 @@ var PDFHistory = {
         if (self.uid === 0) {
           var previousParams = (self.previousHash && self.currentBookmark &&
                                 self.previousHash !== self.currentBookmark) ?
-            { hash: self.currentBookmark, page: self.currentPage ***REMOVED*** :
-            { page: 1 ***REMOVED***;
+            { hash: self.currentBookmark, page: self.currentPage } :
+            { page: 1 };
           self.historyUnlocked = false;
           self.allowHashChange = false;
           window.history.back();
           self._pushToHistory(previousParams, false, true);
           window.history.forward();
           self.historyUnlocked = true;
-    ***REMOVED***
-        self._pushToHistory({ hash: self.previousHash ***REMOVED***, false, true);
+        }
+        self._pushToHistory({ hash: self.previousHash }, false, true);
         self._updatePreviousBookmark();
-  ***REMOVED***
-  ***REMOVED*** false);
+      }
+    }, false);
 
     function pdfHistoryBeforeUnload() {
       var previousParams = self._getPreviousParams(null, true);
@@ -1383,11 +1383,11 @@ var PDFHistory = {
                                self.current.hash !== self.previousHash);
         self._pushToHistory(previousParams, false, replacePrevious);
         self._updatePreviousBookmark();
-  ***REMOVED***
+      }
       // Remove the event listener when navigating away from the document,
       // since 'beforeunload' prevents Firefox from caching the document.
       window.removeEventListener('beforeunload', pdfHistoryBeforeUnload, false);
-***REMOVED***
+    }
     window.addEventListener('beforeunload', pdfHistoryBeforeUnload, false);
 
     window.addEventListener('pageshow', function pdfHistoryPageShow(evt) {
@@ -1395,28 +1395,28 @@ var PDFHistory = {
       // we need to reattach the 'beforeunload' event listener since
       // the 'DOMContentLoaded' event is not fired on 'pageshow'.
       window.addEventListener('beforeunload', pdfHistoryBeforeUnload, false);
-  ***REMOVED*** false);
-***REMOVED***
+    }, false);
+  },
 
   _isStateObjectDefined: function pdfHistory_isStateObjectDefined(state) {
     return (state && state.uid >= 0 &&
             state.fingerprint && this.fingerprint === state.fingerprint &&
             state.target && state.target.hash) ? true : false;
-***REMOVED***
+  },
 
   _pushOrReplaceState: function pdfHistory_pushOrReplaceState(stateObj,
                                                               replace) {
     if (replace) {
       window.history.replaceState(stateObj, '', document.URL);
-***REMOVED*** else {
+    } else {
       window.history.pushState(stateObj, '', document.URL);
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   get isHashChangeUnlocked() {
     if (!this.initialized) {
       return true;
-***REMOVED***
+    }
     // If the current hash changes when moving back/forward in the history,
     // this will trigger a 'popstate' event *as well* as a 'hashchange' event.
     // Since the hash generally won't correspond to the exact the position
@@ -1430,7 +1430,7 @@ var PDFHistory = {
     var temp = this.allowHashChange;
     this.allowHashChange = true;
     return temp;
-***REMOVED***
+  },
 
   _updatePreviousBookmark: function pdfHistory_updatePreviousBookmark() {
     if (this.updatePreviousBookmark &&
@@ -1438,8 +1438,8 @@ var PDFHistory = {
       this.previousBookmark = this.currentBookmark;
       this.previousPage = this.currentPage;
       this.updatePreviousBookmark = false;
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   updateCurrentBookmark: function pdfHistoryUpdateCurrentBookmark(bookmark,
                                                                   pageNum) {
@@ -1447,28 +1447,28 @@ var PDFHistory = {
       this.currentBookmark = bookmark.substring(1);
       this.currentPage = pageNum | 0;
       this._updatePreviousBookmark();
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   updateNextHashParam: function pdfHistoryUpdateNextHashParam(param) {
     if (this.initialized) {
       this.nextHashParam = param;
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   push: function pdfHistoryPush(params, isInitialBookmark) {
     if (!(this.initialized && this.historyUnlocked)) {
       return;
-***REMOVED***
+    }
     if (params.dest && !params.hash) {
       params.hash = (this.current.hash && this.current.dest &&
                      this.current.dest === params.dest) ?
         this.current.hash :
         PDFView.getDestinationHash(params.dest).split('#')[1];
-***REMOVED***
+    }
     if (params.page) {
       params.page |= 0;
-***REMOVED***
+    }
     if (isInitialBookmark) {
       var target = window.history.state.target;
       if (!target) {
@@ -1476,51 +1476,51 @@ var PDFHistory = {
         // thus setting PDFView.initialBookmark, when the document is loaded.
         this._pushToHistory(params, false);
         this.previousHash = window.location.hash.substring(1);
-  ***REMOVED***
+      }
       this.updatePreviousBookmark = this.nextHashParam ? false : true;
       if (target) {
         // If the current document is reloaded,
         // avoid creating duplicate entries in the history.
         this._updatePreviousBookmark();
-  ***REMOVED***
+      }
       return;
-***REMOVED***
+    }
     if (this.nextHashParam) {
       if (this.nextHashParam === params.hash) {
         this.nextHashParam = null;
         this.updatePreviousBookmark = true;
         return;
-  ***REMOVED*** else {
+      } else {
         this.nextHashParam = null;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     if (params.hash) {
       if (this.current.hash) {
         if (this.current.hash !== params.hash) {
           this._pushToHistory(params, true);
-    ***REMOVED*** else {
+        } else {
           if (!this.current.page && params.page) {
             this._pushToHistory(params, false, true);
-      ***REMOVED***
+          }
           this.updatePreviousBookmark = true;
-    ***REMOVED***
-  ***REMOVED*** else {
+        }
+      } else {
         this._pushToHistory(params, true);
-  ***REMOVED***
-***REMOVED*** else if (this.current.page && params.page &&
+      }
+    } else if (this.current.page && params.page &&
                this.current.page !== params.page) {
       this._pushToHistory(params, true);
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   _getPreviousParams: function pdfHistory_getPreviousParams(onlyCheckPage,
                                                             beforeUnload) {
     if (!(this.currentBookmark && this.currentPage)) {
       return null;
-***REMOVED*** else if (this.updatePreviousBookmark) {
+    } else if (this.updatePreviousBookmark) {
       this.updatePreviousBookmark = false;
-***REMOVED***
+    }
     if (this.uid > 0 && !(this.previousBookmark && this.previousPage)) {
       // Prevent the history from getting stuck in the current state,
       // effectively preventing the user from going back/forward in the history.
@@ -1534,57 +1534,57 @@ var PDFHistory = {
       //    (This is either due to a bad PDF generator, or the user making a
       //     mistake when entering a destination in the hash parameters.)
       return null;
-***REMOVED***
+    }
     if ((!this.current.dest && !onlyCheckPage) || beforeUnload) {
       if (this.previousBookmark === this.currentBookmark) {
         return null;
-  ***REMOVED***
-***REMOVED*** else if (this.current.page || onlyCheckPage) {
+      }
+    } else if (this.current.page || onlyCheckPage) {
       if (this.previousPage === this.currentPage) {
         return null;
-  ***REMOVED***
-***REMOVED*** else {
+      }
+    } else {
       return null;
-***REMOVED***
-    var params = { hash: this.currentBookmark, page: this.currentPage ***REMOVED***;
+    }
+    var params = { hash: this.currentBookmark, page: this.currentPage };
     if (PresentationMode.active) {
       params.hash = null;
-***REMOVED***
+    }
     return params;
-***REMOVED***
+  },
 
   _stateObj: function pdfHistory_stateObj(params) {
-    return { fingerprint: this.fingerprint, uid: this.uid, target: params ***REMOVED***;
-***REMOVED***
+    return { fingerprint: this.fingerprint, uid: this.uid, target: params };
+  },
 
   _pushToHistory: function pdfHistory_pushToHistory(params,
                                                     addPrevious, overwrite) {
     if (!this.initialized) {
       return;
-***REMOVED***
+    }
     if (!params.hash && params.page) {
       params.hash = ('page=' + params.page);
-***REMOVED***
+    }
     if (addPrevious && !overwrite) {
       var previousParams = this._getPreviousParams();
       if (previousParams) {
         var replacePrevious = (!this.current.dest &&
                                this.current.hash !== this.previousHash);
         this._pushToHistory(previousParams, false, replacePrevious);
-  ***REMOVED***
-***REMOVED***
+      }
+    }
     this._pushOrReplaceState(this._stateObj(params),
                              (overwrite || this.uid === 0));
     this.currentUid = this.uid++;
     this.current = params;
     this.updatePreviousBookmark = true;
-***REMOVED***
+  },
 
   _goTo: function pdfHistory_goTo(state) {
     if (!(this.initialized && this.historyUnlocked &&
           this._isStateObjectDefined(state))) {
       return;
-***REMOVED***
+    }
     if (!this.reInitialized && state.uid < this.currentUid) {
       var previousParams = this._getPreviousParams(true);
       if (previousParams) {
@@ -1593,50 +1593,50 @@ var PDFHistory = {
         this.currentUid = state.uid;
         window.history.back();
         return;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
     this.historyUnlocked = false;
 
     if (state.target.dest) {
       PDFView.navigateTo(state.target.dest);
-***REMOVED*** else {
+    } else {
       PDFView.setHash(state.target.hash);
-***REMOVED***
+    }
     this.currentUid = state.uid;
     if (state.uid > this.uid) {
       this.uid = state.uid;
-***REMOVED***
+    }
     this.current = state.target;
     this.updatePreviousBookmark = true;
 
     var currentHash = window.location.hash.substring(1);
     if (this.previousHash !== currentHash) {
       this.allowHashChange = false;
-***REMOVED***
+    }
     this.previousHash = currentHash;
 
     this.historyUnlocked = true;
-***REMOVED***
+  },
 
   back: function pdfHistoryBack() {
     this.go(-1);
-***REMOVED***
+  },
 
   forward: function pdfHistoryForward() {
     this.go(1);
-***REMOVED***
+  },
 
   go: function pdfHistoryGo(direction) {
     if (this.initialized && this.historyUnlocked) {
       var state = window.history.state;
       if (direction === -1 && state && state.uid > 0) {
         window.history.back();
-  ***REMOVED*** else if (direction === 1 && state && state.uid < (this.uid - 1)) {
+      } else if (direction === 1 && state && state.uid < (this.uid - 1)) {
         window.history.forward();
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***
-***REMOVED***;
+      }
+    }
+  }
+};
 
 
 var SecondaryToolbar = {
@@ -1666,123 +1666,123 @@ var SecondaryToolbar = {
     // Attach the event listeners.
     var elements = [
       // Button to toggle the visibility of the secondary toolbar:
-      { element: this.toggleButton, handler: this.toggle ***REMOVED***,
+      { element: this.toggleButton, handler: this.toggle },
       // All items within the secondary toolbar
       // (except for toggleHandTool, hand_tool.js is responsible for it):
       { element: this.presentationModeButton,
-        handler: this.presentationModeClick ***REMOVED***,
-      { element: this.openFile, handler: this.openFileClick ***REMOVED***,
-      { element: this.print, handler: this.printClick ***REMOVED***,
-      { element: this.download, handler: this.downloadClick ***REMOVED***,
-      { element: this.viewBookmark, handler: this.viewBookmarkClick ***REMOVED***,
-      { element: this.firstPage, handler: this.firstPageClick ***REMOVED***,
-      { element: this.lastPage, handler: this.lastPageClick ***REMOVED***,
-      { element: this.pageRotateCw, handler: this.pageRotateCwClick ***REMOVED***,
-      { element: this.pageRotateCcw, handler: this.pageRotateCcwClick ***REMOVED***,
+        handler: this.presentationModeClick },
+      { element: this.openFile, handler: this.openFileClick },
+      { element: this.print, handler: this.printClick },
+      { element: this.download, handler: this.downloadClick },
+      { element: this.viewBookmark, handler: this.viewBookmarkClick },
+      { element: this.firstPage, handler: this.firstPageClick },
+      { element: this.lastPage, handler: this.lastPageClick },
+      { element: this.pageRotateCw, handler: this.pageRotateCwClick },
+      { element: this.pageRotateCcw, handler: this.pageRotateCcwClick },
       { element: this.documentPropertiesButton,
-        handler: this.documentPropertiesClick ***REMOVED***
+        handler: this.documentPropertiesClick }
     ];
 
     for (var item in elements) {
       var element = elements[item].element;
       if (element) {
         element.addEventListener('click', elements[item].handler.bind(this));
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+      }
+    }
+  },
 
   // Event handling functions.
   presentationModeClick: function secondaryToolbarPresentationModeClick(evt) {
     this.presentationMode.request();
     this.close();
-***REMOVED***
+  },
 
   openFileClick: function secondaryToolbarOpenFileClick(evt) {
     document.getElementById('fileInput').click();
     this.close();
-***REMOVED***
+  },
 
   printClick: function secondaryToolbarPrintClick(evt) {
     window.print();
     this.close();
-***REMOVED***
+  },
 
   downloadClick: function secondaryToolbarDownloadClick(evt) {
     PDFView.download();
     this.close();
-***REMOVED***
+  },
 
   viewBookmarkClick: function secondaryToolbarViewBookmarkClick(evt) {
     this.close();
-***REMOVED***
+  },
 
   firstPageClick: function secondaryToolbarFirstPageClick(evt) {
     PDFView.page = 1;
     this.close();
-***REMOVED***
+  },
 
   lastPageClick: function secondaryToolbarLastPageClick(evt) {
     if (PDFView.pdfDocument) {
       PDFView.page = PDFView.pdfDocument.numPages;
-***REMOVED***
+    }
     this.close();
-***REMOVED***
+  },
 
   pageRotateCwClick: function secondaryToolbarPageRotateCwClick(evt) {
     PDFView.rotatePages(90);
-***REMOVED***
+  },
 
   pageRotateCcwClick: function secondaryToolbarPageRotateCcwClick(evt) {
     PDFView.rotatePages(-90);
-***REMOVED***
+  },
 
   documentPropertiesClick: function secondaryToolbarDocumentPropsClick(evt) {
     this.documentProperties.open();
     this.close();
-***REMOVED***
+  },
 
   // Misc. functions for interacting with the toolbar.
   setMaxHeight: function secondaryToolbarSetMaxHeight(container) {
     if (!container || !this.buttonContainer) {
       return;
-***REMOVED***
+    }
     this.newContainerHeight = container.clientHeight;
     if (this.previousContainerHeight === this.newContainerHeight) {
       return;
-***REMOVED***
+    }
     this.buttonContainer.setAttribute('style',
       'max-height: ' + (this.newContainerHeight - SCROLLBAR_PADDING) + 'px;');
     this.previousContainerHeight = this.newContainerHeight;
-***REMOVED***
+  },
 
   open: function secondaryToolbarOpen() {
     if (this.opened) {
       return;
-***REMOVED***
+    }
     this.opened = true;
     this.toggleButton.classList.add('toggled');
     this.toolbar.classList.remove('hidden');
-***REMOVED***
+  },
 
   close: function secondaryToolbarClose(target) {
     if (!this.opened) {
       return;
-***REMOVED*** else if (target && !this.toolbar.contains(target)) {
+    } else if (target && !this.toolbar.contains(target)) {
       return;
-***REMOVED***
+    }
     this.opened = false;
     this.toolbar.classList.add('hidden');
     this.toggleButton.classList.remove('toggled');
-***REMOVED***
+  },
 
   toggle: function secondaryToolbarToggle() {
     if (this.opened) {
       this.close();
-***REMOVED*** else {
+    } else {
       this.open();
-***REMOVED***
-  ***REMOVED***
-***REMOVED***;
+    }
+  }
+};
 
 
 var DELAY_BEFORE_HIDING_CONTROLS = 3000; // in ms
@@ -1793,7 +1793,7 @@ var PresentationMode = {
   active: false,
   args: null,
   contextMenuOpen: false,
-  prevCoords: { x: null, y: null ***REMOVED***,
+  prevCoords: { x: null, y: null },
 
   initialize: function presentationModeInitialize(options) {
     this.container = options.container;
@@ -1809,28 +1809,28 @@ var PresentationMode = {
     this.firstPage.addEventListener('click', function() {
       this.contextMenuOpen = false;
       this.secondaryToolbar.firstPageClick();
-***REMOVED***.bind(this));
+    }.bind(this));
     this.lastPage.addEventListener('click', function() {
       this.contextMenuOpen = false;
       this.secondaryToolbar.lastPageClick();
-***REMOVED***.bind(this));
+    }.bind(this));
 
     this.pageRotateCw.addEventListener('click', function() {
       this.contextMenuOpen = false;
       this.secondaryToolbar.pageRotateCwClick();
-***REMOVED***.bind(this));
+    }.bind(this));
     this.pageRotateCcw.addEventListener('click', function() {
       this.contextMenuOpen = false;
       this.secondaryToolbar.pageRotateCcwClick();
-***REMOVED***.bind(this));
-***REMOVED***
+    }.bind(this));
+  },
 
   get isFullscreen() {
     return (document.fullscreenElement ||
             document.mozFullScreen ||
             document.webkitIsFullScreen ||
             document.msFullscreenElement);
-***REMOVED***
+  },
 
   /**
    * Initialize a timeout that is used to reset PDFView.currentPosition when the
@@ -1843,47 +1843,47 @@ var PresentationMode = {
   _setSwitchInProgress: function presentationMode_setSwitchInProgress() {
     if (this.switchInProgress) {
       clearTimeout(this.switchInProgress);
-***REMOVED***
+    }
     this.switchInProgress = setTimeout(function switchInProgressTimeout() {
       delete this.switchInProgress;
-***REMOVED***.bind(this), DELAY_BEFORE_RESETTING_SWITCH_IN_PROGRESS);
+    }.bind(this), DELAY_BEFORE_RESETTING_SWITCH_IN_PROGRESS);
 
     PDFView.currentPosition = null;
-***REMOVED***
+  },
 
   _resetSwitchInProgress: function presentationMode_resetSwitchInProgress() {
     if (this.switchInProgress) {
       clearTimeout(this.switchInProgress);
       delete this.switchInProgress;
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   request: function presentationModeRequest() {
     if (!PDFView.supportsFullscreen || this.isFullscreen ||
         !this.viewer.hasChildNodes()) {
       return false;
-***REMOVED***
+    }
     this._setSwitchInProgress();
 
     if (this.container.requestFullscreen) {
       this.container.requestFullscreen();
-***REMOVED*** else if (this.container.mozRequestFullScreen) {
+    } else if (this.container.mozRequestFullScreen) {
       this.container.mozRequestFullScreen();
-***REMOVED*** else if (this.container.webkitRequestFullScreen) {
+    } else if (this.container.webkitRequestFullScreen) {
       this.container.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-***REMOVED*** else if (this.container.msRequestFullscreen) {
+    } else if (this.container.msRequestFullscreen) {
       this.container.msRequestFullscreen();
-***REMOVED*** else {
+    } else {
       return false;
-***REMOVED***
+    }
 
     this.args = {
       page: PDFView.page,
       previousScale: PDFView.currentScaleValue
-***REMOVED***;
+    };
 
     return true;
-***REMOVED***
+  },
 
   enter: function presentationModeEnter() {
     this.active = true;
@@ -1895,7 +1895,7 @@ var PresentationMode = {
     setTimeout(function enterPresentationModeTimeout() {
       PDFView.page = this.args.page;
       PDFView.setScale('page-fit', true);
-***REMOVED***.bind(this), 0);
+    }.bind(this), 0);
 
     window.addEventListener('mousemove', this.mouseMove, false);
     window.addEventListener('mousedown', this.mouseDown, false);
@@ -1905,7 +1905,7 @@ var PresentationMode = {
     HandTool.enterPresentationMode();
     this.contextMenuOpen = false;
     this.container.setAttribute('contextmenu', 'viewerContextMenu');
-***REMOVED***
+  },
 
   exit: function presentationModeExit() {
     var page = PDFView.page;
@@ -1918,7 +1918,7 @@ var PresentationMode = {
       PDFView.setScale(this.args.previousScale);
       PDFView.page = page;
       this.args = null;
-***REMOVED***.bind(this), 0);
+    }.bind(this), 0);
 
     window.removeEventListener('mousemove', this.mouseMove, false);
     window.removeEventListener('mousedown', this.mouseDown, false);
@@ -1933,43 +1933,43 @@ var PresentationMode = {
     // Ensure that the thumbnail of the current page is visible
     // when exiting presentation mode.
     scrollIntoView(document.getElementById('thumbnailContainer' + page));
-***REMOVED***
+  },
 
   showControls: function presentationModeShowControls() {
     if (this.controlsTimeout) {
       clearTimeout(this.controlsTimeout);
-***REMOVED*** else {
+    } else {
       this.container.classList.add(SELECTOR);
-***REMOVED***
+    }
     this.controlsTimeout = setTimeout(function hideControlsTimeout() {
       this.container.classList.remove(SELECTOR);
       delete this.controlsTimeout;
-***REMOVED***.bind(this), DELAY_BEFORE_HIDING_CONTROLS);
-***REMOVED***
+    }.bind(this), DELAY_BEFORE_HIDING_CONTROLS);
+  },
 
   hideControls: function presentationModeHideControls() {
     if (!this.controlsTimeout) {
       return;
-***REMOVED***
+    }
     this.container.classList.remove(SELECTOR);
     clearTimeout(this.controlsTimeout);
     delete this.controlsTimeout;
-***REMOVED***
+  },
 
   mouseMove: function presentationModeMouseMove(evt) {
     // Workaround for a bug in WebKit browsers that causes the 'mousemove' event
     // to be fired when the cursor is changed. For details, see:
     // http://code.google.com/p/chromium/issues/detail?id=103041.
 
-    var currCoords = { x: evt.clientX, y: evt.clientY ***REMOVED***;
+    var currCoords = { x: evt.clientX, y: evt.clientY };
     var prevCoords = PresentationMode.prevCoords;
     PresentationMode.prevCoords = currCoords;
 
     if (currCoords.x === prevCoords.x && currCoords.y === prevCoords.y) {
       return;
-***REMOVED***
+    }
     PresentationMode.showControls();
-***REMOVED***
+  },
 
   mouseDown: function presentationModeMouseDown(evt) {
     var self = PresentationMode;
@@ -1977,7 +1977,7 @@ var PresentationMode = {
       self.contextMenuOpen = false;
       evt.preventDefault();
       return;
-***REMOVED***
+    }
 
     if (evt.button === 0) {
       // Enable clicking of links in presentation mode. Please note:
@@ -1988,30 +1988,30 @@ var PresentationMode = {
         // Unless an internal link was clicked, advance one page.
         evt.preventDefault();
         PDFView.page += (evt.shiftKey ? -1 : 1);
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+      }
+    }
+  },
 
   contextMenu: function presentationModeContextMenu(evt) {
     PresentationMode.contextMenuOpen = true;
-  ***REMOVED***
-***REMOVED***;
+  }
+};
 
 (function presentationModeClosure() {
   function presentationModeChange(e) {
     if (PresentationMode.isFullscreen) {
       PresentationMode.enter();
-***REMOVED*** else {
+    } else {
       PresentationMode.exit();
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   window.addEventListener('fullscreenchange', presentationModeChange, false);
   window.addEventListener('mozfullscreenchange', presentationModeChange, false);
   window.addEventListener('webkitfullscreenchange', presentationModeChange,
                           false);
   window.addEventListener('MSFullscreenChange', presentationModeChange, false);
-***REMOVED***)();
+})();
 
 
 /* Copyright 2013 Rob Wu <gwnRob@gmail.com>
@@ -2035,9 +2035,9 @@ var PresentationMode = {
 var GrabToPan = (function GrabToPanClosure() {
   /**
    * Construct a GrabToPan instance for a given HTML element.
-   * @param options.element {Element***REMOVED***
-   * @param options.ignoreTarget {function***REMOVED*** optional. See `ignoreTarget(node)`
-   * @param options.onActiveChanged {function(boolean)***REMOVED*** optional. Called
+   * @param options.element {Element}
+   * @param options.ignoreTarget {function} optional. See `ignoreTarget(node)`
+   * @param options.onActiveChanged {function(boolean)} optional. Called
    *  when grab-to-pan is (de)activated. The first argument is a boolean that
    *  shows whether grab-to-pan is activated.
    */
@@ -2046,7 +2046,7 @@ var GrabToPan = (function GrabToPanClosure() {
     this.document = options.element.ownerDocument;
     if (typeof options.ignoreTarget === 'function') {
       this.ignoreTarget = options.ignoreTarget;
-***REMOVED***
+    }
     this.onActiveChanged = options.onActiveChanged;
 
     // Bind the contexts to ensure that `this` always points to
@@ -2062,7 +2062,7 @@ var GrabToPan = (function GrabToPanClosure() {
     // a grab operation, to ensure that the cursor has the desired appearance.
     var overlay = this.overlay = document.createElement('div');
     overlay.className = 'grab-to-pan-grabbing';
-  ***REMOVED***
+  }
   GrabToPan.prototype = {
     /**
      * Class name of element which can be grabbed
@@ -2079,9 +2079,9 @@ var GrabToPan = (function GrabToPanClosure() {
         this.element.classList.add(this.CSS_CLASS_GRAB);
         if (this.onActiveChanged) {
           this.onActiveChanged(true);
-    ***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
+        }
+      }
+    },
 
     /**
      * Removes all events. Any pending pan session is immediately stopped.
@@ -2094,24 +2094,24 @@ var GrabToPan = (function GrabToPanClosure() {
         this.element.classList.remove(this.CSS_CLASS_GRAB);
         if (this.onActiveChanged) {
           this.onActiveChanged(false);
-    ***REMOVED***
-  ***REMOVED***
-  ***REMOVED***
+        }
+      }
+    },
 
     toggle: function GrabToPan_toggle() {
       if (this.active) {
         this.deactivate();
-  ***REMOVED*** else {
+      } else {
         this.activate();
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
 
     /**
      * Whether to not pan if the target element is clicked.
      * Override this method to change the default behaviour.
      *
-     * @param node {Element***REMOVED*** The target of the event
-     * @return {boolean***REMOVED*** Whether to not react to the click event.
+     * @param node {Element} The target of the event
+     * @return {boolean} Whether to not react to the click event.
      */
     ignoreTarget: function GrabToPan_ignoreTarget(node) {
       // Use matchesSelector to check whether the clicked element
@@ -2119,7 +2119,7 @@ var GrabToPan = (function GrabToPanClosure() {
       return node[matchesSelector](
         'a[href], a[href] *, input, textarea, button, button *, select, option'
       );
-  ***REMOVED***
+    },
 
     /**
      * @private
@@ -2127,16 +2127,16 @@ var GrabToPan = (function GrabToPanClosure() {
     _onmousedown: function GrabToPan__onmousedown(event) {
       if (event.button !== 0 || this.ignoreTarget(event.target)) {
         return;
-  ***REMOVED***
+      }
       if (event.originalTarget) {
         try {
           /* jshint expr:true */
           event.originalTarget.tagName;
-    ***REMOVED*** catch (e) {
+        } catch (e) {
           // Mozilla-specific: element is a scrollbar (XUL element)
           return;
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
 
       this.scrollLeftStart = this.element.scrollLeft;
       this.scrollTopStart = this.element.scrollTop;
@@ -2151,7 +2151,7 @@ var GrabToPan = (function GrabToPanClosure() {
       event.preventDefault();
       event.stopPropagation();
       this.document.documentElement.classList.add(this.CSS_CLASS_GRABBING);
-  ***REMOVED***
+    },
 
     /**
      * @private
@@ -2161,15 +2161,15 @@ var GrabToPan = (function GrabToPanClosure() {
       if (isLeftMouseReleased(event)) {
         this._endPan();
         return;
-  ***REMOVED***
+      }
       var xDiff = event.clientX - this.clientXStart;
       var yDiff = event.clientY - this.clientYStart;
       this.element.scrollTop = this.scrollTopStart - yDiff;
       this.element.scrollLeft = this.scrollLeftStart - xDiff;
       if (!this.overlay.parentNode) {
         document.body.appendChild(this.overlay);
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
 
     /**
      * @private
@@ -2180,9 +2180,9 @@ var GrabToPan = (function GrabToPanClosure() {
       this.document.removeEventListener('mouseup', this._endPan, true);
       if (this.overlay.parentNode) {
         this.overlay.parentNode.removeChild(this.overlay);
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***;
+      }
+    }
+  };
 
   // Get the correct (vendor-prefixed) name of the matches method.
   var matchesSelector;
@@ -2190,13 +2190,13 @@ var GrabToPan = (function GrabToPanClosure() {
     var name = prefix + 'atches';
     if (name in document.documentElement) {
       matchesSelector = name;
-***REMOVED***
+    }
     name += 'Selector';
     if (name in document.documentElement) {
       matchesSelector = name;
-***REMOVED***
+    }
     return matchesSelector; // If found, then truthy, and [].some() ends.
-  ***REMOVED***);
+  });
 
   // Browser sniffing because it's impossible to feature-detect
   // whether event.which for onmousemove is reliable
@@ -2209,8 +2209,8 @@ var GrabToPan = (function GrabToPanClosure() {
 
   /**
    * Whether the left mouse is not pressed.
-   * @param event {MouseEvent***REMOVED***
-   * @return {boolean***REMOVED*** True if the left mouse button is not pressed.
+   * @param event {MouseEvent}
+   * @return {boolean} True if the left mouse button is not pressed.
    *                   False if unsure or if the left mouse button is pressed.
    */
   function isLeftMouseReleased(event) {
@@ -2219,17 +2219,17 @@ var GrabToPan = (function GrabToPanClosure() {
       // Firefox 15+
       // Internet Explorer 10+
       return !(event.buttons | 1);
-***REMOVED***
+    }
     if (isChrome15OrOpera15plus || isSafari6plus) {
       // Chrome 14+
       // Opera 15+
       // Safari 6.0+
       return event.which === 0;
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   return GrabToPan;
-***REMOVED***)();
+})();
 
 var HandTool = {
   initialize: function handToolInitialize(options) {
@@ -2239,20 +2239,20 @@ var HandTool = {
       onActiveChanged: function(isActive) {
         if (!toggleHandTool) {
           return;
-    ***REMOVED***
+        }
         if (isActive) {
           toggleHandTool.title =
             mozL10n.get('hand_tool_disable.title', null, 'Disable hand tool');
           toggleHandTool.firstElementChild.textContent =
             mozL10n.get('hand_tool_disable_label', null, 'Disable hand tool');
-    ***REMOVED*** else {
+        } else {
           toggleHandTool.title =
             mozL10n.get('hand_tool_enable.title', null, 'Enable hand tool');
           toggleHandTool.firstElementChild.textContent =
             mozL10n.get('hand_tool_enable_label', null, 'Enable hand tool');
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***);
+        }
+      }
+    });
     if (toggleHandTool) {
       toggleHandTool.addEventListener('click', this.toggle.bind(this), false);
 
@@ -2260,48 +2260,48 @@ var HandTool = {
         Preferences.get('enableHandToolOnLoad').then(function resolved(value) {
           if (value) {
             this.handTool.activate();
-      ***REMOVED***
-    ***REMOVED***.bind(this), function rejected(reason) {***REMOVED***);
-  ***REMOVED***.bind(this));
-***REMOVED***
-***REMOVED***
+          }
+        }.bind(this), function rejected(reason) {});
+      }.bind(this));
+    }
+  },
 
   toggle: function handToolToggle() {
     this.handTool.toggle();
     SecondaryToolbar.close();
-***REMOVED***
+  },
 
   enterPresentationMode: function handToolEnterPresentationMode() {
     if (this.handTool.active) {
       this.wasActive = true;
       this.handTool.deactivate();
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   exitPresentationMode: function handToolExitPresentationMode() {
     if (this.wasActive) {
       this.wasActive = null;
       this.handTool.activate();
-***REMOVED***
-  ***REMOVED***
-***REMOVED***;
+    }
+  }
+};
 
 
 var OverlayManager = {
-  overlays: {***REMOVED***,
+  overlays: {},
   active: null,
 
   /**
-   * @param {string***REMOVED*** name The name of the overlay that is registered. This must
+   * @param {string} name The name of the overlay that is registered. This must
    *                 be equal to the ID of the overlay's DOM element.
-   * @param {function***REMOVED*** callerCloseMethod (optional) The method that, if present,
+   * @param {function} callerCloseMethod (optional) The method that, if present,
    *                   will call OverlayManager.close from the Object
    *                   registering the overlay. Access to this method is
    *                   necessary in order to run cleanup code when e.g.
    *                   the overlay is force closed. The default is null.
-   * @param {boolean***REMOVED*** canForceClose (optional) Indicates if opening the overlay
+   * @param {boolean} canForceClose (optional) Indicates if opening the overlay
    *                  will close an active overlay. The default is false.
-   * @returns {Promise***REMOVED*** A promise that is resolved when the overlay has been
+   * @returns {Promise} A promise that is resolved when the overlay has been
    *                    registered.
    */
   register: function overlayManagerRegister(name,
@@ -2311,84 +2311,84 @@ var OverlayManager = {
       if (!name || !(element = document.getElementById(name)) ||
           !(container = element.parentNode)) {
         throw new Error('Not enough parameters.');
-  ***REMOVED*** else if (this.overlays[name]) {
+      } else if (this.overlays[name]) {
         throw new Error('The overlay is already registered.');
-  ***REMOVED***
+      }
       this.overlays[name] = { element: element,
                               container: container,
                               callerCloseMethod: (callerCloseMethod || null),
-                              canForceClose: (canForceClose || false) ***REMOVED***;
+                              canForceClose: (canForceClose || false) };
       resolve();
-***REMOVED***.bind(this));
-***REMOVED***
+    }.bind(this));
+  },
 
   /**
-   * @param {string***REMOVED*** name The name of the overlay that is unregistered.
-   * @returns {Promise***REMOVED*** A promise that is resolved when the overlay has been
+   * @param {string} name The name of the overlay that is unregistered.
+   * @returns {Promise} A promise that is resolved when the overlay has been
    *                    unregistered.
    */
   unregister: function overlayManagerUnregister(name) {
     return new Promise(function (resolve) {
       if (!this.overlays[name]) {
         throw new Error('The overlay does not exist.');
-  ***REMOVED*** else if (this.active === name) {
+      } else if (this.active === name) {
         throw new Error('The overlay cannot be removed while it is active.');
-  ***REMOVED***
+      }
       delete this.overlays[name];
 
       resolve();
-***REMOVED***.bind(this));
-***REMOVED***
+    }.bind(this));
+  },
 
   /**
-   * @param {string***REMOVED*** name The name of the overlay that should be opened.
-   * @returns {Promise***REMOVED*** A promise that is resolved when the overlay has been
+   * @param {string} name The name of the overlay that should be opened.
+   * @returns {Promise} A promise that is resolved when the overlay has been
    *                    opened.
    */
   open: function overlayManagerOpen(name) {
     return new Promise(function (resolve) {
       if (!this.overlays[name]) {
         throw new Error('The overlay does not exist.');
-  ***REMOVED*** else if (this.active) {
+      } else if (this.active) {
         if (this.overlays[name].canForceClose) {
           this._closeThroughCaller();
-    ***REMOVED*** else if (this.active === name) {
+        } else if (this.active === name) {
           throw new Error('The overlay is already active.');
-    ***REMOVED*** else {
+        } else {
           throw new Error('Another overlay is currently active.');
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
       this.active = name;
       this.overlays[this.active].element.classList.remove('hidden');
       this.overlays[this.active].container.classList.remove('hidden');
 
       window.addEventListener('keydown', this._keyDown);
       resolve();
-***REMOVED***.bind(this));
-***REMOVED***
+    }.bind(this));
+  },
 
   /**
-   * @param {string***REMOVED*** name The name of the overlay that should be closed.
-   * @returns {Promise***REMOVED*** A promise that is resolved when the overlay has been
+   * @param {string} name The name of the overlay that should be closed.
+   * @returns {Promise} A promise that is resolved when the overlay has been
    *                    closed.
    */
   close: function overlayManagerClose(name) {
     return new Promise(function (resolve) {
       if (!this.overlays[name]) {
         throw new Error('The overlay does not exist.');
-  ***REMOVED*** else if (!this.active) {
+      } else if (!this.active) {
         throw new Error('The overlay is currently not active.');
-  ***REMOVED*** else if (this.active !== name) {
+      } else if (this.active !== name) {
         throw new Error('Another overlay is currently active.');
-  ***REMOVED***
+      }
       this.overlays[this.active].container.classList.add('hidden');
       this.overlays[this.active].element.classList.add('hidden');
       this.active = null;
 
       window.removeEventListener('keydown', this._keyDown);
       resolve();
-***REMOVED***.bind(this));
-***REMOVED***
+    }.bind(this));
+  },
 
   /**
    * @private
@@ -2398,8 +2398,8 @@ var OverlayManager = {
     if (self.active && evt.keyCode === 27) { // Esc key.
       self._closeThroughCaller();
       evt.preventDefault();
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   /**
    * @private
@@ -2407,12 +2407,12 @@ var OverlayManager = {
   _closeThroughCaller: function overlayManager_closeThroughCaller() {
     if (this.overlays[this.active].callerCloseMethod) {
       this.overlays[this.active].callerCloseMethod();
-***REMOVED***
+    }
     if (this.active) {
       this.close(this.active);
-***REMOVED***
-  ***REMOVED***
-***REMOVED***;
+    }
+  }
+};
 
 
 var PasswordPrompt = {
@@ -2440,11 +2440,11 @@ var PasswordPrompt = {
     this.passwordField.addEventListener('keydown', function (e) {
       if (e.keyCode === 13) { // Enter key
         this.verifyPassword();
-  ***REMOVED***
-***REMOVED***.bind(this));
+      }
+    }.bind(this));
 
     OverlayManager.register(this.overlayName, this.close.bind(this), true);
-***REMOVED***
+  },
 
   open: function passwordPromptOpen() {
     OverlayManager.open(this.overlayName).then(function () {
@@ -2456,26 +2456,26 @@ var PasswordPrompt = {
       if (this.reason === PDFJS.PasswordResponses.INCORRECT_PASSWORD) {
         promptString = mozL10n.get('password_invalid', null,
           'Invalid password. Please try again.');
-  ***REMOVED***
+      }
 
       this.passwordText.textContent = promptString;
-***REMOVED***.bind(this));
-***REMOVED***
+    }.bind(this));
+  },
 
   close: function passwordPromptClose() {
     OverlayManager.close(this.overlayName).then(function () {
       this.passwordField.value = '';
-***REMOVED***.bind(this));
-***REMOVED***
+    }.bind(this));
+  },
 
   verifyPassword: function passwordPromptVerifyPassword() {
     var password = this.passwordField.value;
     if (password && password.length > 0) {
       this.close();
       return this.updatePassword(password);
-***REMOVED***
-  ***REMOVED***
-***REMOVED***;
+    }
+  }
+};
 
 
 var DocumentProperties = {
@@ -2516,97 +2516,97 @@ var DocumentProperties = {
     // Bind the event listener for the Close button.
     if (options.closeButton) {
       options.closeButton.addEventListener('click', this.close.bind(this));
-***REMOVED***
+    }
 
     this.dataAvailablePromise = new Promise(function (resolve) {
       this.resolveDataAvailable = resolve;
-***REMOVED***.bind(this));
+    }.bind(this));
 
     OverlayManager.register(this.overlayName, this.close.bind(this));
-***REMOVED***
+  },
 
   getProperties: function documentPropertiesGetProperties() {
     if (!OverlayManager.active) {
       // If the dialog was closed before dataAvailablePromise was resolved,
       // don't bother updating the properties.
       return;
-***REMOVED***
+    }
     // Get the file size (if it hasn't already been set).
     PDFView.pdfDocument.getDownloadInfo().then(function(data) {
       if (data.length === this.rawFileSize) {
         return;
-  ***REMOVED***
+      }
       this.setFileSize(data.length);
       this.updateUI(this.fileSizeField, this.parseFileSize());
-***REMOVED***.bind(this));
+    }.bind(this));
 
     // Get the document properties.
     PDFView.pdfDocument.getMetadata().then(function(data) {
       var fields = [
         { field: this.fileNameField,
-          content: getPDFFileNameFromURL(PDFView.url) ***REMOVED***,
-        { field: this.fileSizeField, content: this.parseFileSize() ***REMOVED***,
-        { field: this.titleField, content: data.info.Title ***REMOVED***,
-        { field: this.authorField, content: data.info.Author ***REMOVED***,
-        { field: this.subjectField, content: data.info.Subject ***REMOVED***,
-        { field: this.keywordsField, content: data.info.Keywords ***REMOVED***,
+          content: getPDFFileNameFromURL(PDFView.url) },
+        { field: this.fileSizeField, content: this.parseFileSize() },
+        { field: this.titleField, content: data.info.Title },
+        { field: this.authorField, content: data.info.Author },
+        { field: this.subjectField, content: data.info.Subject },
+        { field: this.keywordsField, content: data.info.Keywords },
         { field: this.creationDateField,
-          content: this.parseDate(data.info.CreationDate) ***REMOVED***,
+          content: this.parseDate(data.info.CreationDate) },
         { field: this.modificationDateField,
-          content: this.parseDate(data.info.ModDate) ***REMOVED***,
-        { field: this.creatorField, content: data.info.Creator ***REMOVED***,
-        { field: this.producerField, content: data.info.Producer ***REMOVED***,
-        { field: this.versionField, content: data.info.PDFFormatVersion ***REMOVED***,
-        { field: this.pageCountField, content: PDFView.pdfDocument.numPages ***REMOVED***
+          content: this.parseDate(data.info.ModDate) },
+        { field: this.creatorField, content: data.info.Creator },
+        { field: this.producerField, content: data.info.Producer },
+        { field: this.versionField, content: data.info.PDFFormatVersion },
+        { field: this.pageCountField, content: PDFView.pdfDocument.numPages }
       ];
 
       // Show the properties in the dialog.
       for (var item in fields) {
         var element = fields[item];
         this.updateUI(element.field, element.content);
-  ***REMOVED***
-***REMOVED***.bind(this));
-***REMOVED***
+      }
+    }.bind(this));
+  },
 
   updateUI: function documentPropertiesUpdateUI(field, content) {
     if (field && content !== undefined && content !== '') {
       field.textContent = content;
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   setFileSize: function documentPropertiesSetFileSize(fileSize) {
     if (fileSize > 0) {
       this.rawFileSize = fileSize;
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   parseFileSize: function documentPropertiesParseFileSize() {
     var fileSize = this.rawFileSize, kb = fileSize / 1024;
     if (!kb) {
       return;
-***REMOVED*** else if (kb < 1024) {
+    } else if (kb < 1024) {
       return mozL10n.get('document_properties_kb', {
         size_kb: (+kb.toPrecision(3)).toLocaleString(),
         size_b: fileSize.toLocaleString()
-    ***REMOVED*** '{{size_kb***REMOVED******REMOVED*** KB ({{size_b***REMOVED******REMOVED*** bytes)');
-***REMOVED*** else {
+      }, '{{size_kb}} KB ({{size_b}} bytes)');
+    } else {
       return mozL10n.get('document_properties_mb', {
         size_mb: (+(kb / 1024).toPrecision(3)).toLocaleString(),
         size_b: fileSize.toLocaleString()
-    ***REMOVED*** '{{size_mb***REMOVED******REMOVED*** MB ({{size_b***REMOVED******REMOVED*** bytes)');
-***REMOVED***
-***REMOVED***
+      }, '{{size_mb}} MB ({{size_b}} bytes)');
+    }
+  },
 
   open: function documentPropertiesOpen() {
     Promise.all([OverlayManager.open(this.overlayName),
                  this.dataAvailablePromise]).then(function () {
       this.getProperties();
-***REMOVED***.bind(this));
-***REMOVED***
+    }.bind(this));
+  },
 
   close: function documentPropertiesClose() {
     OverlayManager.close(this.overlayName);
-***REMOVED***
+  },
 
   parseDate: function documentPropertiesParseDate(inputDate) {
     // This is implemented according to the PDF specification (see
@@ -2617,12 +2617,12 @@ var DocumentProperties = {
     var dateToParse = inputDate;
     if (dateToParse === undefined) {
       return '';
-***REMOVED***
+    }
 
     // Remove the D: prefix if it is available.
     if (dateToParse.substring(0,2) === 'D:') {
       dateToParse = dateToParse.substring(2);
-***REMOVED***
+    }
 
     // Get all elements from the PDF date string.
     // JavaScript's Date object expects the month to be between
@@ -2642,20 +2642,20 @@ var DocumentProperties = {
     if (utRel === '-') {
       hours += offsetHours;
       minutes += offsetMinutes;
-***REMOVED*** else if (utRel === '+') {
+    } else if (utRel === '+') {
       hours -= offsetHours;
       minutes += offsetMinutes;
-***REMOVED***
+    }
 
     // Return the new date format from the user's locale.
     var date = new Date(Date.UTC(year, month, day, hours, minutes, seconds));
     var dateString = date.toLocaleDateString();
     var timeString = date.toLocaleTimeString();
     return mozL10n.get('document_properties_date_string',
-                       {date: dateString, time: timeString***REMOVED***,
-                       '{{date***REMOVED******REMOVED***, {{time***REMOVED******REMOVED***');
-  ***REMOVED***
-***REMOVED***;
+                       {date: dateString, time: timeString},
+                       '{{date}}, {{time}}');
+  }
+};
 
 
 var PDFView = {
@@ -2687,12 +2687,12 @@ var PDFView = {
   initialize: function pdfViewInitialize() {
     var self = this;
     var container = this.container = document.getElementById('viewerContainer');
-    this.pageViewScroll = {***REMOVED***;
+    this.pageViewScroll = {};
     this.watchScroll(container, this.pageViewScroll, updateViewarea);
 
     var thumbnailContainer = this.thumbnailContainer =
                              document.getElementById('thumbnailView');
-    this.thumbnailViewScroll = {***REMOVED***;
+    this.thumbnailViewScroll = {};
     this.watchScroll(thumbnailContainer, this.thumbnailViewScroll,
                      this.renderHighestPriority.bind(this));
 
@@ -2701,7 +2701,7 @@ var PDFView = {
     this.findController = new PDFFindController({
       pdfPageSource: this,
       integratedFind: this.supportsIntegratedFind
-***REMOVED***);
+    });
 
     this.findBar = new PDFFindBar({
       bar: document.getElementById('findbar'),
@@ -2714,14 +2714,14 @@ var PDFView = {
       findPreviousButton: document.getElementById('findPrevious'),
       findNextButton: document.getElementById('findNext'),
       findController: this.findController
-***REMOVED***);
+    });
 
     this.findController.setFindBar(this.findBar);
 
     HandTool.initialize({
       container: container,
       toggleHandTool: document.getElementById('toggleHandTool')
-***REMOVED***);
+    });
 
     SecondaryToolbar.initialize({
       toolbar: document.getElementById('secondaryToolbar'),
@@ -2739,7 +2739,7 @@ var PDFView = {
       pageRotateCcw: document.getElementById('pageRotateCcw'),
       documentProperties: DocumentProperties,
       documentPropertiesButton: document.getElementById('documentProperties')
-***REMOVED***);
+    });
 
     PresentationMode.initialize({
       container: container,
@@ -2748,7 +2748,7 @@ var PDFView = {
       lastPage: document.getElementById('contextLastPage'),
       pageRotateCw: document.getElementById('contextPageRotateCw'),
       pageRotateCcw: document.getElementById('contextPageRotateCcw')
-***REMOVED***);
+    });
 
     PasswordPrompt.initialize({
       overlayName: 'passwordOverlay',
@@ -2756,7 +2756,7 @@ var PDFView = {
       passwordText: document.getElementById('passwordText'),
       passwordSubmit: document.getElementById('passwordSubmit'),
       passwordCancel: document.getElementById('passwordCancel')
-***REMOVED***);
+    });
 
     DocumentProperties.initialize({
       overlayName: 'documentPropertiesOverlay',
@@ -2773,54 +2773,54 @@ var PDFView = {
       producerField: document.getElementById('producerField'),
       versionField: document.getElementById('versionField'),
       pageCountField: document.getElementById('pageCountField')
-***REMOVED***);
+    });
 
     container.addEventListener('scroll', function() {
       self.lastScroll = Date.now();
-  ***REMOVED*** false);
+    }, false);
 
     var initializedPromise = Promise.all([
       Preferences.get('enableWebGL').then(function resolved(value) {
         PDFJS.disableWebGL = !value;
-  ***REMOVED***),
+      }),
       Preferences.get('sidebarViewOnLoad').then(function resolved(value) {
         self.preferenceSidebarViewOnLoad = value;
-  ***REMOVED***),
+      }),
       Preferences.get('disableTextLayer').then(function resolved(value) {
         if (PDFJS.disableTextLayer === true) {
           return;
-    ***REMOVED***
+        }
         PDFJS.disableTextLayer = value;
-  ***REMOVED***),
+      }),
       Preferences.get('disableRange').then(function resolved(value) {
         if (PDFJS.disableRange === true) {
           return;
-    ***REMOVED***
+        }
         PDFJS.disableRange = value;
-  ***REMOVED***),
+      }),
       Preferences.get('disableAutoFetch').then(function resolved(value) {
         PDFJS.disableAutoFetch = value;
-  ***REMOVED***),
+      }),
       Preferences.get('disableFontFace').then(function resolved(value) {
         if (PDFJS.disableFontFace === true) {
           return;
-    ***REMOVED***
+        }
         PDFJS.disableFontFace = value;
-  ***REMOVED***),
+      }),
       Preferences.get('useOnlyCssZoom').then(function resolved(value) {
         PDFJS.useOnlyCssZoom = value;
-  ***REMOVED***)
+      })
       // TODO move more preferences and other async stuff here
-    ]).catch(function (reason) { ***REMOVED***);
+    ]).catch(function (reason) { });
 
     return initializedPromise.then(function () {
       PDFView.initialized = true;
-***REMOVED***);
-***REMOVED***
+    });
+  },
 
   getPage: function pdfViewGetPage(n) {
     return this.pdfDocument.getPage(n);
-***REMOVED***
+  },
 
   // Helper function to keep track whether a div was scrolled up or down and
   // then call a callback.
@@ -2831,67 +2831,67 @@ var PDFView = {
     viewAreaElement.addEventListener('scroll', function debounceScroll(evt) {
       if (state.rAF) {
         return;
-  ***REMOVED***
+      }
       // schedule an invocation of webViewerScrolled for next animation frame.
       state.rAF = window.requestAnimationFrame(function webViewerScrolled() {
         state.rAF = null;
         if (!PDFView.pdfDocument) {
           return;
-    ***REMOVED***
+        }
         var currentY = viewAreaElement.scrollTop;
         var lastY = state.lastY;
         if (currentY > lastY) {
           state.down = true;
-    ***REMOVED*** else if (currentY < lastY) {
+        } else if (currentY < lastY) {
           state.down = false;
-    ***REMOVED***
+        }
         // else do nothing and use previous value
         state.lastY = currentY;
         callback();
-  ***REMOVED***);
-  ***REMOVED*** true);
-***REMOVED***
+      });
+    }, true);
+  },
 
   _setScaleUpdatePages: function pdfView_setScaleUpdatePages(
       newScale, newValue, resetAutoSettings, noScroll) {
     this.currentScaleValue = newValue;
     if (newScale === this.currentScale) {
       return;
-***REMOVED***
+    }
     for (var i = 0, ii = this.pages.length; i < ii; i++) {
       this.pages[i].update(newScale);
-***REMOVED***
+    }
     this.currentScale = newScale;
 
     if (!noScroll) {
       var page = this.page, dest;
       if (this.currentPosition && !IGNORE_CURRENT_POSITION_ON_ZOOM) {
         page = this.currentPosition.page;
-        dest = [null, { name: 'XYZ' ***REMOVED***, this.currentPosition.left,
+        dest = [null, { name: 'XYZ' }, this.currentPosition.left,
                 this.currentPosition.top, null];
-  ***REMOVED***
+      }
       this.pages[page - 1].scrollIntoView(dest);
-***REMOVED***
+    }
     var event = document.createEvent('UIEvents');
     event.initUIEvent('scalechange', false, false, window, 0);
     event.scale = newScale;
     event.resetAutoSettings = resetAutoSettings;
     window.dispatchEvent(event);
-***REMOVED***
+  },
 
   setScale: function pdfViewSetScale(value, resetAutoSettings, noScroll) {
     if (value === 'custom') {
       return;
-***REMOVED***
+    }
     var scale = parseFloat(value);
 
     if (scale > 0) {
       this._setScaleUpdatePages(scale, value, true, noScroll);
-***REMOVED*** else {
+    } else {
       var currentPage = this.pages[this.page - 1];
       if (!currentPage) {
         return;
-  ***REMOVED***
+      }
       var hPadding = PresentationMode.active ? 0 : SCROLLBAR_PADDING;
       var vPadding = PresentationMode.active ? 0 : VERTICAL_PADDING;
       var pageWidthScale = (this.container.clientWidth - hPadding) /
@@ -2918,12 +2918,12 @@ var PDFView = {
           console.error('pdfViewSetScale: \'' + value +
                         '\' is an unknown zoom value.');
           return;
-  ***REMOVED***
+      }
       this._setScaleUpdatePages(scale, value, resetAutoSettings, noScroll);
 
       selectScaleOption(value);
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   zoomIn: function pdfViewZoomIn(ticks) {
     var newScale = this.currentScale;
@@ -2931,9 +2931,9 @@ var PDFView = {
       newScale = (newScale * DEFAULT_SCALE_DELTA).toFixed(2);
       newScale = Math.ceil(newScale * 10) / 10;
       newScale = Math.min(MAX_SCALE, newScale);
-***REMOVED*** while (--ticks && newScale < MAX_SCALE);
+    } while (--ticks && newScale < MAX_SCALE);
     this.setScale(newScale, true);
-***REMOVED***
+  },
 
   zoomOut: function pdfViewZoomOut(ticks) {
     var newScale = this.currentScale;
@@ -2941,9 +2941,9 @@ var PDFView = {
       newScale = (newScale / DEFAULT_SCALE_DELTA).toFixed(2);
       newScale = Math.floor(newScale * 10) / 10;
       newScale = Math.max(MIN_SCALE, newScale);
-***REMOVED*** while (--ticks && newScale > MIN_SCALE);
+    } while (--ticks && newScale > MIN_SCALE);
     this.setScale(newScale, true);
-***REMOVED***
+  },
 
   set page(val) {
     var pages = this.pages;
@@ -2955,7 +2955,7 @@ var PDFView = {
       event.pageNumber = this.page;
       window.dispatchEvent(event);
       return;
-***REMOVED***
+    }
 
     pages[val - 1].updateStats();
     this.previousPageNumber = currentPageNumber;
@@ -2967,17 +2967,17 @@ var PDFView = {
     // avoiding the creation of two "set page" method (internal and public)
     if (updateViewarea.inProgress) {
       return;
-***REMOVED***
+    }
     // Avoid scrolling the first page during loading
     if (this.loading && val === 1) {
       return;
-***REMOVED***
+    }
     pages[val - 1].scrollIntoView();
-***REMOVED***
+  },
 
   get page() {
     return currentPageNumber;
-***REMOVED***
+  },
 
   get supportsPrinting() {
     var canvas = document.createElement('canvas');
@@ -2986,9 +2986,9 @@ var PDFView = {
     Object.defineProperty(this, 'supportsPrinting', { value: value,
                                                       enumerable: true,
                                                       configurable: true,
-                                                      writable: false ***REMOVED***);
+                                                      writable: false });
     return value;
-***REMOVED***
+  },
 
   get supportsFullscreen() {
     var doc = document.documentElement;
@@ -3000,71 +3000,71 @@ var PDFView = {
         document.webkitFullscreenEnabled === false ||
         document.msFullscreenEnabled === false) {
       support = false;
-***REMOVED***
+    }
 
     Object.defineProperty(this, 'supportsFullscreen', { value: support,
                                                         enumerable: true,
                                                         configurable: true,
-                                                        writable: false ***REMOVED***);
+                                                        writable: false });
     return support;
-***REMOVED***
+  },
 
   get supportsIntegratedFind() {
     var support = false;
     Object.defineProperty(this, 'supportsIntegratedFind', { value: support,
                                                             enumerable: true,
                                                             configurable: true,
-                                                            writable: false ***REMOVED***);
+                                                            writable: false });
     return support;
-***REMOVED***
+  },
 
   get supportsDocumentFonts() {
     var support = true;
     Object.defineProperty(this, 'supportsDocumentFonts', { value: support,
                                                            enumerable: true,
                                                            configurable: true,
-                                                           writable: false ***REMOVED***);
+                                                           writable: false });
     return support;
-***REMOVED***
+  },
 
   get supportsDocumentColors() {
     var support = true;
     Object.defineProperty(this, 'supportsDocumentColors', { value: support,
                                                             enumerable: true,
                                                             configurable: true,
-                                                            writable: false ***REMOVED***);
+                                                            writable: false });
     return support;
-***REMOVED***
+  },
 
   get loadingBar() {
-    var bar = new ProgressBar('#loadingBar', {***REMOVED***);
+    var bar = new ProgressBar('#loadingBar', {});
     Object.defineProperty(this, 'loadingBar', { value: bar,
                                                 enumerable: true,
                                                 configurable: true,
-                                                writable: false ***REMOVED***);
+                                                writable: false });
     return bar;
-***REMOVED***
+  },
 
   get isHorizontalScrollbarEnabled() {
     return (PresentationMode.active ? false :
             (this.container.scrollWidth > this.container.clientWidth));
-***REMOVED***
+  },
 
 
   setTitleUsingUrl: function pdfViewSetTitleUsingUrl(url) {
     this.url = url;
     try {
       this.setTitle(decodeURIComponent(getFileName(url)) || url);
-***REMOVED*** catch (e) {
+    } catch (e) {
       // decodeURIComponent may throw URIError,
       // fall back to using the unprocessed url in that case
       this.setTitle(url);
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   setTitle: function pdfViewSetTitle(title) {
     document.title = title;
-***REMOVED***
+  },
 
   close: function pdfViewClose() {
     var errorWrapper = document.getElementById('errorWrapper');
@@ -3072,7 +3072,7 @@ var PDFView = {
 
     if (!this.pdfDocument) {
       return;
-***REMOVED***
+    }
 
     this.pdfDocument.destroy();
     this.pdfDocument = null;
@@ -3080,17 +3080,17 @@ var PDFView = {
     var thumbsView = document.getElementById('thumbnailView');
     while (thumbsView.hasChildNodes()) {
       thumbsView.removeChild(thumbsView.lastChild);
-***REMOVED***
+    }
 
     var container = document.getElementById('viewer');
     while (container.hasChildNodes()) {
       container.removeChild(container.lastChild);
-***REMOVED***
+    }
 
     if (typeof PDFBug !== 'undefined') {
       PDFBug.cleanup();
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   // TODO(mack): This function signature should really be pdfViewOpen(url, args)
   open: function pdfViewOpen(url, scale, password,
@@ -3098,21 +3098,21 @@ var PDFView = {
     if (this.pdfDocument) {
       // Reload the preferences if a document was previously opened.
       Preferences.reload();
-***REMOVED***
+    }
     this.close();
 
-    var parameters = {password: password***REMOVED***;
+    var parameters = {password: password};
     if (typeof url === 'string') { // URL
       this.setTitleUsingUrl(url);
       parameters.url = url;
-***REMOVED*** else if (url && 'byteLength' in url) { // ArrayBuffer
+    } else if (url && 'byteLength' in url) { // ArrayBuffer
       parameters.data = url;
-***REMOVED***
+    }
     if (args) {
       for (var prop in args) {
         parameters[prop] = args[prop];
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     var self = this;
     self.loading = true;
@@ -3122,18 +3122,18 @@ var PDFView = {
       PasswordPrompt.updatePassword = updatePassword;
       PasswordPrompt.reason = reason;
       PasswordPrompt.open();
-***REMOVED***;
+    };
 
     function getDocumentProgress(progressData) {
       self.progress(progressData.loaded / progressData.total);
-***REMOVED***
+    }
 
     PDFJS.getDocument(parameters, pdfDataRangeTransport, passwordNeeded,
                       getDocumentProgress).then(
       function getDocumentCallback(pdfDocument) {
         self.load(pdfDocument, scale);
         self.loading = false;
-    ***REMOVED***
+      },
       function getDocumentError(message, exception) {
         var loadingErrorMessage = mozL10n.get('loading_error', null,
           'An error occurred while loading the PDF.');
@@ -3142,32 +3142,32 @@ var PDFView = {
           // change error message also for other builds
           loadingErrorMessage = mozL10n.get('invalid_file_error', null,
                                         'Invalid or corrupted PDF file.');
-    ***REMOVED***
+        }
 
         if (exception && exception.name === 'MissingPDFException') {
           // special message for missing PDF's
           loadingErrorMessage = mozL10n.get('missing_file_error', null,
                                         'Missing PDF file.');
 
-    ***REMOVED***
+        }
 
         var moreInfo = {
           message: message
-    ***REMOVED***;
+        };
         self.error(loadingErrorMessage, moreInfo);
         self.loading = false;
-  ***REMOVED***
+      }
     );
 
     if (args && args.length) {
       DocumentProperties.setFileSize(args.length);
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   download: function pdfViewDownload() {
     function downloadByUrl() {
       downloadManager.downloadUrl(url, filename);
-***REMOVED***
+    }
 
     var url = this.url.split('#')[0];
     var filename = getPDFFileNameFromURL(url);
@@ -3176,30 +3176,30 @@ var PDFView = {
       // This error won't really be helpful because it's likely the
       // fallback won't work either (or is already open).
       PDFView.error('PDF failed to download.');
-***REMOVED***;
+    };
 
     if (!this.pdfDocument) { // the PDF is not ready yet
       downloadByUrl();
       return;
-***REMOVED***
+    }
 
     if (!this.downloadComplete) { // the PDF is still downloading
       downloadByUrl();
       return;
-***REMOVED***
+    }
 
     this.pdfDocument.getData().then(
       function getDataSuccess(data) {
         var blob = PDFJS.createBlob(data, 'application/pdf');
         downloadManager.download(blob, url, filename);
-    ***REMOVED***
+      },
       downloadByUrl // Error occurred try downloading with just the url.
     ).then(null, downloadByUrl);
-***REMOVED***
+  },
 
   fallback: function pdfViewFallback(featureId) {
     return;
-***REMOVED***
+  },
 
   navigateTo: function pdfViewNavigateTo(dest) {
     var destString = '';
@@ -3214,37 +3214,37 @@ var PDFView = {
       if (pageNumber) {
         if (pageNumber > self.pages.length) {
           pageNumber = self.pages.length;
-    ***REMOVED***
+        }
         var currentPage = self.pages[pageNumber - 1];
         currentPage.scrollIntoView(dest);
 
         // Update the browsing history.
-        PDFHistory.push({ dest: dest, hash: destString, page: pageNumber ***REMOVED***);
-  ***REMOVED*** else {
+        PDFHistory.push({ dest: dest, hash: destString, page: pageNumber });
+      } else {
         self.pdfDocument.getPageIndex(destRef).then(function (pageIndex) {
           var pageNum = pageIndex + 1;
           self.pagesRefMap[destRef.num + ' ' + destRef.gen + ' R'] = pageNum;
           goToDestination(destRef);
-    ***REMOVED***);
-  ***REMOVED***
-***REMOVED***;
+        });
+      }
+    };
 
     this.destinationsPromise.then(function() {
       if (typeof dest === 'string') {
         destString = dest;
         dest = self.destinations[dest];
-  ***REMOVED***
+      }
       if (!(dest instanceof Array)) {
         return; // invalid destination
-  ***REMOVED***
+      }
       goToDestination(dest[0]);
-***REMOVED***);
-***REMOVED***
+    });
+  },
 
   getDestinationHash: function pdfViewGetDestinationHash(dest) {
     if (typeof dest === 'string') {
       return PDFView.getAnchorUrl('#' + escape(dest));
-***REMOVED***
+    }
     if (dest instanceof Array) {
       var destRef = dest[0]; // see navigateTo method for dest format
       var pageNumber = destRef instanceof Object ?
@@ -3259,59 +3259,59 @@ var PDFView = {
           var scaleNumber = parseFloat(scale);
           if (scaleNumber) {
             scale = scaleNumber * 100;
-      ***REMOVED***
+          }
           pdfOpenParams += '&zoom=' + scale;
           if (dest[2] || dest[3]) {
             pdfOpenParams += ',' + (dest[2] || 0) + ',' + (dest[3] || 0);
-      ***REMOVED***
-    ***REMOVED***
+          }
+        }
         return pdfOpenParams;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
     return '';
-***REMOVED***
+  },
 
   /**
    * Prefix the full url on anchor links to make sure that links are resolved
    * relative to the current URL instead of the one defined in <base href>.
-   * @param {String***REMOVED*** anchor The anchor hash, including the #.
+   * @param {String} anchor The anchor hash, including the #.
    */
   getAnchorUrl: function getAnchorUrl(anchor) {
     return anchor;
-***REMOVED***
+  },
 
   /**
    * Show the error box.
-   * @param {String***REMOVED*** message A message that is human readable.
-   * @param {Object***REMOVED*** moreInfo (optional) Further information about the error
+   * @param {String} message A message that is human readable.
+   * @param {Object} moreInfo (optional) Further information about the error
    *                            that is more technical.  Should have a 'message'
    *                            and optionally a 'stack' property.
    */
   error: function pdfViewError(message, moreInfo) {
     var moreInfoText = mozL10n.get('error_version_info',
-      {version: PDFJS.version || '?', build: PDFJS.build || '?'***REMOVED***,
-      'PDF.js v{{version***REMOVED******REMOVED*** (build: {{build***REMOVED******REMOVED***)') + '\n';
+      {version: PDFJS.version || '?', build: PDFJS.build || '?'},
+      'PDF.js v{{version}} (build: {{build}})') + '\n';
     if (moreInfo) {
       moreInfoText +=
-        mozL10n.get('error_message', {message: moreInfo.message***REMOVED***,
-        'Message: {{message***REMOVED******REMOVED***');
+        mozL10n.get('error_message', {message: moreInfo.message},
+        'Message: {{message}}');
       if (moreInfo.stack) {
         moreInfoText += '\n' +
-          mozL10n.get('error_stack', {stack: moreInfo.stack***REMOVED***,
-          'Stack: {{stack***REMOVED******REMOVED***');
-  ***REMOVED*** else {
+          mozL10n.get('error_stack', {stack: moreInfo.stack},
+          'Stack: {{stack}}');
+      } else {
         if (moreInfo.filename) {
           moreInfoText += '\n' +
-            mozL10n.get('error_file', {file: moreInfo.filename***REMOVED***,
-            'File: {{file***REMOVED******REMOVED***');
-    ***REMOVED***
+            mozL10n.get('error_file', {file: moreInfo.filename},
+            'File: {{file}}');
+        }
         if (moreInfo.lineNumber) {
           moreInfoText += '\n' +
-            mozL10n.get('error_line', {line: moreInfo.lineNumber***REMOVED***,
-            'Line: {{line***REMOVED******REMOVED***');
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+            mozL10n.get('error_line', {line: moreInfo.lineNumber},
+            'Line: {{line}}');
+        }
+      }
+    }
 
     var errorWrapper = document.getElementById('errorWrapper');
     errorWrapper.removeAttribute('hidden');
@@ -3322,7 +3322,7 @@ var PDFView = {
     var closeButton = document.getElementById('errorClose');
     closeButton.onclick = function() {
       errorWrapper.setAttribute('hidden', 'true');
-***REMOVED***;
+    };
 
     var errorMoreInfo = document.getElementById('errorMoreInfo');
     var moreInfoButton = document.getElementById('errorShowMore');
@@ -3332,19 +3332,19 @@ var PDFView = {
       moreInfoButton.setAttribute('hidden', 'true');
       lessInfoButton.removeAttribute('hidden');
       errorMoreInfo.style.height = errorMoreInfo.scrollHeight + 'px';
-***REMOVED***;
+    };
     lessInfoButton.onclick = function() {
       errorMoreInfo.setAttribute('hidden', 'true');
       moreInfoButton.removeAttribute('hidden');
       lessInfoButton.setAttribute('hidden', 'true');
-***REMOVED***;
+    };
     moreInfoButton.oncontextmenu = noContextMenuHandler;
     lessInfoButton.oncontextmenu = noContextMenuHandler;
     closeButton.oncontextmenu = noContextMenuHandler;
     moreInfoButton.removeAttribute('hidden');
     lessInfoButton.setAttribute('hidden', 'true');
     errorMoreInfo.value = moreInfoText;
-***REMOVED***
+  },
 
   progress: function pdfViewProgress(level) {
     var percent = Math.round(level * 100);
@@ -3354,8 +3354,8 @@ var PDFView = {
     // increases.
     if (percent > PDFView.loadingBar.percent || isNaN(percent)) {
       PDFView.loadingBar.percent = percent;
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   load: function pdfViewLoad(pdfDocument, scale) {
     var self = this;
@@ -3363,17 +3363,17 @@ var PDFView = {
     var resolveOnePageRendered = null;
     var onePageRendered = new Promise(function (resolve) {
       resolveOnePageRendered = resolve;
-***REMOVED***);
+    });
     function bindOnAfterDraw(pageView, thumbnailView) {
       // when page is painted, using the image as thumbnail base
       pageView.onAfterDraw = function pdfViewLoadOnAfterDraw() {
         if (!isOnePageRenderedResolved) {
           isOnePageRenderedResolved = true;
           resolveOnePageRendered();
-    ***REMOVED***
+        }
         thumbnailView.setImage(pageView.canvas);
-  ***REMOVED***;
-***REMOVED***
+      };
+    }
 
     PDFView.findController.reset();
 
@@ -3386,13 +3386,13 @@ var PDFView = {
       PDFView.loadingBar.hide();
       var outerContainer = document.getElementById('outerContainer');
       outerContainer.classList.remove('loadingInProgress');
-***REMOVED***);
+    });
 
     var pagesCount = pdfDocument.numPages;
 
     var id = pdfDocument.fingerprint;
     document.getElementById('numPages').textContent =
-      mozL10n.get('page_of', {pageCount: pagesCount***REMOVED***, 'of {{pageCount***REMOVED******REMOVED***');
+      mozL10n.get('page_of', {pageCount: pagesCount}, 'of {{pageCount}}');
     document.getElementById('pageNumber').max = pagesCount;
 
     PDFView.documentFingerprint = id;
@@ -3401,13 +3401,13 @@ var PDFView = {
     this.pageRotation = 0;
 
     var pages = this.pages = [];
-    var pagesRefMap = this.pagesRefMap = {***REMOVED***;
+    var pagesRefMap = this.pagesRefMap = {};
     var thumbnails = this.thumbnails = [];
 
     var resolvePagesPromise;
     var pagesPromise = new Promise(function (resolve) {
       resolvePagesPromise = resolve;
-***REMOVED***);
+    });
     this.pagesPromise = pagesPromise;
 
     var firstPagePromise = pdfDocument.getPage(1);
@@ -3428,7 +3428,7 @@ var PDFView = {
         bindOnAfterDraw(pageView, thumbnailView);
         pages.push(pageView);
         thumbnails.push(thumbnailView);
-  ***REMOVED***
+      }
 
       // Fetch all the pages since the viewport is needed before printing
       // starts to create the correct size canvas. Wait until one page is
@@ -3441,26 +3441,26 @@ var PDFView = {
               var pageView = pages[pageNum - 1];
               if (!pageView.pdfPage) {
                 pageView.setPdfPage(pdfPage);
-          ***REMOVED***
+              }
               var refStr = pdfPage.ref.num + ' ' + pdfPage.ref.gen + ' R';
               pagesRefMap[refStr] = pageNum;
               getPagesLeft--;
               if (!getPagesLeft) {
                 resolvePagesPromise();
-          ***REMOVED***
-        ***REMOVED***.bind(null, pageNum));
-      ***REMOVED***
-    ***REMOVED*** else {
+              }
+            }.bind(null, pageNum));
+          }
+        } else {
           // XXX: Printing is semi-broken with auto fetch disabled.
           resolvePagesPromise();
-    ***REMOVED***
-  ***REMOVED***);
+        }
+      });
 
       downloadedPromise.then(function () {
         var event = document.createEvent('CustomEvent');
-        event.initCustomEvent('documentload', true, true, {***REMOVED***);
+        event.initCustomEvent('documentload', true, true, {});
         window.dispatchEvent(event);
-  ***REMOVED***);
+      });
 
       PDFView.loadingBar.setWidth(container);
 
@@ -3468,19 +3468,19 @@ var PDFView = {
 
       // Initialize the browsing history.
       PDFHistory.initialize(self.documentFingerprint);
-***REMOVED***);
+    });
 
     // Fetch the necessary preference values.
     var showPreviousViewOnLoad;
     var showPreviousViewOnLoadPromise =
       Preferences.get('showPreviousViewOnLoad').then(function (prefValue) {
         showPreviousViewOnLoad = prefValue;
-  ***REMOVED***);
+      });
     var defaultZoomValue;
     var defaultZoomValuePromise =
       Preferences.get('defaultZoomValue').then(function (prefValue) {
         defaultZoomValue = prefValue;
-  ***REMOVED***);
+      });
 
     var storePromise = store.initializedPromise;
     Promise.all([firstPagePromise, storePromise, showPreviousViewOnLoadPromise,
@@ -3494,23 +3494,23 @@ var PDFView = {
 
         storedHash = 'page=' + pageNum + '&zoom=' + zoom + ',' +
                      left + ',' + top;
-  ***REMOVED*** else if (defaultZoomValue) {
+      } else if (defaultZoomValue) {
         storedHash = 'page=1&zoom=' + defaultZoomValue;
-  ***REMOVED***
+      }
       self.setInitialView(storedHash, scale);
 
       // Make all navigation keys work on document load,
       // unless the viewer is embedded in a web page.
       if (!self.isViewerEmbedded) {
         self.container.focus();
-  ***REMOVED***
-  ***REMOVED*** function rejected(reason) {
+      }
+    }, function rejected(reason) {
       console.error(reason);
 
       firstPagePromise.then(function () {
         self.setInitialView(null, scale);
-  ***REMOVED***);
-***REMOVED***);
+      });
+    });
 
     pagesPromise.then(function() {
       if (PDFView.supportsPrinting) {
@@ -3518,7 +3518,7 @@ var PDFView = {
           if (javaScript.length) {
             console.warn('Warning: JavaScript is not supported');
             PDFView.fallback(PDFJS.UNSUPPORTED_FEATURES.javaScript);
-      ***REMOVED***
+          }
           // Hack to support auto printing.
           var regex = /\bprint\s*\(/g;
           for (var i = 0, ii = javaScript.length; i < ii; i++) {
@@ -3526,19 +3526,19 @@ var PDFView = {
             if (js && regex.test(js)) {
               setTimeout(function() {
                 window.print();
-          ***REMOVED***);
+              });
               return;
-        ***REMOVED***
-      ***REMOVED***
-    ***REMOVED***);
-  ***REMOVED***
-***REMOVED***);
+            }
+          }
+        });
+      }
+    });
 
     var destinationsPromise =
       this.destinationsPromise = pdfDocument.getDestinations();
     destinationsPromise.then(function(destinations) {
       self.destinations = destinations;
-***REMOVED***);
+    });
 
     // outline depends on destinations and pagesRefMap
     var promises = [pagesPromise, destinationsPromise,
@@ -3551,8 +3551,8 @@ var PDFView = {
         if (outline &&
             self.preferenceSidebarViewOnLoad === SidebarView.OUTLINE) {
           self.switchSidebarView('outline', true);
-    ***REMOVED***
-  ***REMOVED***);
+        }
+      });
       pdfDocument.getAttachments().then(function(attachments) {
         self.attachments = new DocumentAttachmentsView(attachments);
         document.getElementById('viewAttachments').disabled = !attachments;
@@ -3560,15 +3560,15 @@ var PDFView = {
         if (attachments &&
             self.preferenceSidebarViewOnLoad === SidebarView.ATTACHMENTS) {
           self.switchSidebarView('attachments', true);
-    ***REMOVED***
-  ***REMOVED***);
-***REMOVED***);
+        }
+      });
+    });
 
     if (self.preferenceSidebarViewOnLoad === SidebarView.THUMBS) {
       Promise.all([firstPagePromise, onePageRendered]).then(function () {
         self.switchSidebarView('thumbs', true);
-  ***REMOVED***);
-***REMOVED***
+      });
+    }
 
     pdfDocument.getMetadata().then(function(data) {
       var info = data.info, metadata = data.metadata;
@@ -3585,23 +3585,23 @@ var PDFView = {
       var pdfTitle;
       if (metadata && metadata.has('dc:title')) {
         pdfTitle = metadata.get('dc:title');
-  ***REMOVED***
+      }
 
       if (!pdfTitle && info && info['Title']) {
         pdfTitle = info['Title'];
-  ***REMOVED***
+      }
 
       if (pdfTitle) {
         self.setTitle(pdfTitle + ' - ' + document.title);
-  ***REMOVED***
+      }
 
       if (info.IsAcroFormPresent) {
         console.warn('Warning: AcroForm/XFA is not supported');
         PDFView.fallback(PDFJS.UNSUPPORTED_FEATURES.forms);
-  ***REMOVED***
+      }
 
-***REMOVED***);
-***REMOVED***
+    });
+  },
 
   setInitialView: function pdfViewSetInitialView(storedHash, scale) {
     // Reset the current scale, as otherwise the page's scale might not get
@@ -3619,30 +3619,30 @@ var PDFView = {
     if (PDFHistory.initialDestination) {
       this.navigateTo(PDFHistory.initialDestination);
       PDFHistory.initialDestination = null;
-***REMOVED*** else if (this.initialBookmark) {
+    } else if (this.initialBookmark) {
       this.setHash(this.initialBookmark);
-      PDFHistory.push({ hash: this.initialBookmark ***REMOVED***, !!this.initialBookmark);
+      PDFHistory.push({ hash: this.initialBookmark }, !!this.initialBookmark);
       this.initialBookmark = null;
-***REMOVED*** else if (storedHash) {
+    } else if (storedHash) {
       this.setHash(storedHash);
-***REMOVED*** else if (scale) {
+    } else if (scale) {
       this.setScale(scale, true);
       this.page = 1;
-***REMOVED***
+    }
 
     if (PDFView.currentScale === UNKNOWN_SCALE) {
       // Scale was not initialized: invalid bookmark or scale was not specified.
       // Setting the default one.
       this.setScale(DEFAULT_SCALE, true);
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   renderHighestPriority:
       function pdfViewRenderHighestPriority(currentlyVisiblePages) {
     if (PDFView.idleTimeout) {
       clearTimeout(PDFView.idleTimeout);
       PDFView.idleTimeout = null;
-***REMOVED***
+    }
 
     // Pages have a higher priority than thumbnails, so check them first.
     var visiblePages = currentlyVisiblePages || this.getVisiblePages();
@@ -3651,7 +3651,7 @@ var PDFView = {
     if (pageView) {
       this.renderView(pageView, 'page');
       return;
-***REMOVED***
+    }
     // No pages needed rendering so check thumbnails.
     if (this.sidebarOpen) {
       var visibleThumbs = this.getVisibleThumbs();
@@ -3661,30 +3661,30 @@ var PDFView = {
       if (thumbView) {
         this.renderView(thumbView, 'thumbnail');
         return;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     if (this.printing) {
       // If printing is currently ongoing do not reschedule cleanup.
       return;
-***REMOVED***
+    }
 
     PDFView.idleTimeout = setTimeout(function () {
       PDFView.cleanup();
-  ***REMOVED*** CLEANUP_TIMEOUT);
-***REMOVED***
+    }, CLEANUP_TIMEOUT);
+  },
 
   cleanup: function pdfViewCleanup() {
     for (var i = 0, ii = this.pages.length; i < ii; i++) {
       if (this.pages[i] &&
           this.pages[i].renderingState !== RenderingStates.FINISHED) {
         this.pages[i].reset();
-  ***REMOVED***
-***REMOVED***
+      }
+    }
     this.pdfDocument.cleanup();
 
     ThumbnailView.tempImageCache = null;
-***REMOVED***
+  },
 
   getHighestPriority: function pdfViewGetHighestPriority(visible, views,
                                                          scrolledDown) {
@@ -3699,13 +3699,13 @@ var PDFView = {
     var numVisible = visibleViews.length;
     if (numVisible === 0) {
       return false;
-***REMOVED***
+    }
     for (var i = 0; i < numVisible; ++i) {
       var view = visibleViews[i].view;
       if (!this.isViewFinished(view)) {
         return view;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     // All the visible views have rendered, try to render next/previous pages.
     if (scrolledDown) {
@@ -3713,21 +3713,21 @@ var PDFView = {
       // ID's start at 1 so no need to add 1.
       if (views[nextPageIndex] && !this.isViewFinished(views[nextPageIndex])) {
         return views[nextPageIndex];
-  ***REMOVED***
-***REMOVED*** else {
+      }
+    } else {
       var previousPageIndex = visible.first.id - 2;
       if (views[previousPageIndex] &&
           !this.isViewFinished(views[previousPageIndex])) {
         return views[previousPageIndex];
-  ***REMOVED***
-***REMOVED***
+      }
+    }
     // Everything that needs to be rendered has been.
     return false;
-***REMOVED***
+  },
 
   isViewFinished: function pdfViewIsViewFinished(view) {
     return view.renderingState === RenderingStates.FINISHED;
-***REMOVED***
+  },
 
   // Render a page or thumbnail view. This calls the appropriate function based
   // on the views state. If the view is already rendered it will return false.
@@ -3747,9 +3747,9 @@ var PDFView = {
         PDFView.highestPriorityPage = type + view.id;
         view.draw(this.renderHighestPriority.bind(this));
         break;
-***REMOVED***
+    }
     return true;
-***REMOVED***
+  },
 
   setHash: function pdfViewSetHash(hash) {
     var validFitZoomValues = ['Fit','FitB','FitH','FitBH',
@@ -3757,7 +3757,7 @@ var PDFView = {
 
     if (!hash) {
       return;
-***REMOVED***
+    }
 
     if (hash.indexOf('=') >= 0) {
       var params = PDFView.parseQueryString(hash);
@@ -3766,11 +3766,11 @@ var PDFView = {
         PDFHistory.updateNextHashParam(params.nameddest);
         PDFView.navigateTo(params.nameddest);
         return;
-  ***REMOVED***
+      }
       var pageNumber, dest;
       if ('page' in params) {
         pageNumber = (params.page | 0) || 1;
-  ***REMOVED***
+      }
       if ('zoom' in params) {
         var zoomArgs = params.zoom.split(','); // scale,left,top
         // building destination array
@@ -3782,41 +3782,41 @@ var PDFView = {
         var destName = 'XYZ';
         if (zoomArgNumber) {
           zoomArg = zoomArgNumber / 100;
-    ***REMOVED*** else if (validFitZoomValues.indexOf(zoomArg) >= 0) {
+        } else if (validFitZoomValues.indexOf(zoomArg) >= 0) {
           destName = zoomArg;
-    ***REMOVED***
-        dest = [null, { name: destName ***REMOVED***,
+        }
+        dest = [null, { name: destName },
                 zoomArgs.length > 1 ? (zoomArgs[1] | 0) : null,
                 zoomArgs.length > 2 ? (zoomArgs[2] | 0) : null,
                 zoomArg];
-  ***REMOVED***
+      }
       if (dest) {
         var currentPage = this.pages[(pageNumber || this.page) - 1];
         currentPage.scrollIntoView(dest);
-  ***REMOVED*** else if (pageNumber) {
+      } else if (pageNumber) {
         this.page = pageNumber; // simple page
-  ***REMOVED***
+      }
       if ('pagemode' in params) {
         if (params.pagemode === 'thumbs' || params.pagemode === 'bookmarks' ||
             params.pagemode === 'attachments') {
           this.switchSidebarView((params.pagemode === 'bookmarks' ?
                                   'outline' : params.pagemode), true);
-    ***REMOVED*** else if (params.pagemode === 'none' && this.sidebarOpen) {
+        } else if (params.pagemode === 'none' && this.sidebarOpen) {
           document.getElementById('sidebarToggle').click();
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED*** else if (/^\d+$/.test(hash)) { // page number
+        }
+      }
+    } else if (/^\d+$/.test(hash)) { // page number
       this.page = hash;
-***REMOVED*** else { // named destination
+    } else { // named destination
       PDFHistory.updateNextHashParam(unescape(hash));
       PDFView.navigateTo(unescape(hash));
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   switchSidebarView: function pdfViewSwitchSidebarView(view, openSidebar) {
     if (openSidebar && !this.sidebarOpen) {
       document.getElementById('sidebarToggle').click();
-***REMOVED***
+    }
     var thumbsView = document.getElementById('thumbnailView');
     var outlineView = document.getElementById('outlineView');
     var attachmentsView = document.getElementById('attachmentsView');
@@ -3843,7 +3843,7 @@ var PDFView = {
           // when switching from another view.
           scrollIntoView(document.getElementById('thumbnailContainer' +
                                                  this.page));
-    ***REMOVED***
+        }
         break;
 
       case 'outline':
@@ -3856,7 +3856,7 @@ var PDFView = {
 
         if (outlineButton.getAttribute('disabled')) {
           return;
-    ***REMOVED***
+        }
         break;
 
       case 'attachments':
@@ -3869,27 +3869,27 @@ var PDFView = {
 
         if (attachmentsButton.getAttribute('disabled')) {
           return;
-    ***REMOVED***
+        }
         break;
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   getVisiblePages: function pdfViewGetVisiblePages() {
     if (!PresentationMode.active) {
       return this.getVisibleElements(this.container, this.pages, true);
-***REMOVED*** else {
+    } else {
       // The algorithm in getVisibleElements doesn't work in all browsers and
       // configurations when presentation mode is active.
       var visible = [];
       var currentPage = this.pages[this.page - 1];
-      visible.push({ id: currentPage.id, view: currentPage ***REMOVED***);
-      return { first: currentPage, last: currentPage, views: visible ***REMOVED***;
-***REMOVED***
-***REMOVED***
+      visible.push({ id: currentPage.id, view: currentPage });
+      return { first: currentPage, last: currentPage, views: visible };
+    }
+  },
 
   getVisibleThumbs: function pdfViewGetVisibleThumbs() {
     return this.getVisibleElements(this.thumbnailContainer, this.thumbnails);
-***REMOVED***
+  },
 
   // Generic helper to find out what elements are visible within a scroll pane.
   getVisibleElements: function pdfViewGetVisibleElements(
@@ -3906,22 +3906,22 @@ var PDFView = {
       viewHeight = view.el.clientHeight;
       if ((currentHeight + viewHeight) < top) {
         continue;
-  ***REMOVED***
+      }
       if (currentHeight > bottom) {
         break;
-  ***REMOVED***
+      }
       currentWidth = view.el.offsetLeft + view.el.clientLeft;
       viewWidth = view.el.clientWidth;
       if ((currentWidth + viewWidth) < left || currentWidth > right) {
         continue;
-  ***REMOVED***
+      }
       hiddenHeight = Math.max(0, top - currentHeight) +
                      Math.max(0, currentHeight + viewHeight - bottom);
       percentHeight = ((viewHeight - hiddenHeight) * 100 / viewHeight) | 0;
 
       visible.push({ id: view.id, x: currentWidth, y: currentHeight,
-                     view: view, percent: percentHeight ***REMOVED***);
-***REMOVED***
+                     view: view, percent: percentHeight });
+    }
 
     var first = visible[0];
     var last = visible[visible.length - 1];
@@ -3931,25 +3931,25 @@ var PDFView = {
         var pc = a.percent - b.percent;
         if (Math.abs(pc) > 0.001) {
           return -pc;
-    ***REMOVED***
+        }
         return a.id - b.id; // ensure stability
-  ***REMOVED***);
-***REMOVED***
-    return {first: first, last: last, views: visible***REMOVED***;
-***REMOVED***
+      });
+    }
+    return {first: first, last: last, views: visible};
+  },
 
   // Helper function to parse query string (e.g. ?param1=value&parm2=...).
   parseQueryString: function pdfViewParseQueryString(query) {
     var parts = query.split('&');
-    var params = {***REMOVED***;
+    var params = {};
     for (var i = 0, ii = parts.length; i < ii; ++i) {
       var param = parts[i].split('=');
       var key = param[0];
       var value = param.length > 1 ? param[1] : null;
       params[decodeURIComponent(key)] = decodeURIComponent(value);
-***REMOVED***
+    }
     return params;
-***REMOVED***
+  },
 
   beforePrint: function pdfViewSetupBeforePrint() {
     if (!this.supportsPrinting) {
@@ -3957,26 +3957,26 @@ var PDFView = {
           'Warning: Printing is not fully supported by this browser.');
       this.error(printMessage);
       return;
-***REMOVED***
+    }
 
     var alertNotReady = false;
     var i, ii;
     if (!this.pages.length) {
       alertNotReady = true;
-***REMOVED*** else {
+    } else {
       for (i = 0, ii = this.pages.length; i < ii; ++i) {
         if (!this.pages[i].pdfPage) {
           alertNotReady = true;
           break;
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+        }
+      }
+    }
     if (alertNotReady) {
       var notReadyMessage = mozL10n.get('printing_not_ready', null,
           'Warning: The PDF is not fully loaded for printing.');
       window.alert(notReadyMessage);
       return;
-***REMOVED***
+    }
 
     this.printing = true;
     this.renderHighestPriority();
@@ -3985,19 +3985,19 @@ var PDFView = {
     body.setAttribute('data-mozPrintCallback', true);
     for (i = 0, ii = this.pages.length; i < ii; ++i) {
       this.pages[i].beforePrint();
-***REMOVED***
+    }
 
-***REMOVED***
+  },
 
   afterPrint: function pdfViewSetupAfterPrint() {
     var div = document.getElementById('printContainer');
     while (div.hasChildNodes()) {
       div.removeChild(div.lastChild);
-***REMOVED***
+    }
 
     this.printing = false;
     this.renderHighestPriority();
-***REMOVED***
+  },
 
   rotatePages: function pdfViewRotatePages(delta) {
     var currentPage = this.pages[this.page - 1];
@@ -4007,12 +4007,12 @@ var PDFView = {
     for (i = 0, l = this.pages.length; i < l; i++) {
       var page = this.pages[i];
       page.update(page.scale, this.pageRotation);
-***REMOVED***
+    }
 
     for (i = 0, l = this.thumbnails.length; i < l; i++) {
       var thumb = this.thumbnails[i];
       thumb.update(this.pageRotation);
-***REMOVED***
+    }
 
     this.setScale(this.currentScaleValue, true, true);
 
@@ -4020,15 +4020,15 @@ var PDFView = {
 
     if (currentPage) {
       currentPage.scrollIntoView();
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   /**
    * This function flips the page in presentation mode if the user scrolls up
    * or down with large enough motion and prevents page flipping too often.
    *
-   * @this {PDFView***REMOVED***
-   * @param {number***REMOVED*** mouseScrollDelta The delta value from the mouse event.
+   * @this {PDFView}
+   * @param {number} mouseScrollDelta The delta value from the mouse event.
    */
   mouseScroll: function pdfViewMouseScroll(mouseScrollDelta) {
     var MOUSE_SCROLL_COOLDOWN_TIME = 50;
@@ -4041,14 +4041,14 @@ var PDFView = {
     if (currentTime > storedTime &&
         currentTime - storedTime < MOUSE_SCROLL_COOLDOWN_TIME) {
       return;
-***REMOVED***
+    }
 
     // In case the user decides to scroll to the opposite direction than before
     // clear the accumulated delta.
     if ((this.mouseScrollDelta > 0 && mouseScrollDelta < 0) ||
         (this.mouseScrollDelta < 0 && mouseScrollDelta > 0)) {
       this.clearMouseScrollState();
-***REMOVED***
+    }
 
     this.mouseScrollDelta += mouseScrollDelta;
 
@@ -4058,7 +4058,7 @@ var PDFView = {
       var PageFlipDirection = {
         UP: -1,
         DOWN: 1
-  ***REMOVED***;
+      };
 
       // In presentation mode scroll one page at a time.
       var pageFlipDirection = (this.mouseScrollDelta > 0) ?
@@ -4073,24 +4073,24 @@ var PDFView = {
           (currentPage === this.pages.length &&
            pageFlipDirection === PageFlipDirection.DOWN)) {
         return;
-  ***REMOVED***
+      }
 
       this.page += pageFlipDirection;
       this.mouseScrollTimeStamp = currentTime;
-***REMOVED***
-***REMOVED***
+    }
+  },
 
   /**
    * This function clears the member attributes used with mouse scrolling in
    * presentation mode.
    *
-   * @this {PDFView***REMOVED***
+   * @this {PDFView}
    */
   clearMouseScrollState: function pdfViewClearMouseScrollState() {
     this.mouseScrollTimeStamp = 0;
     this.mouseScrollDelta = 0;
-  ***REMOVED***
-***REMOVED***;
+  }
+};
 
 
 var PageView = function pageView(container, id, scale,
@@ -4131,20 +4131,20 @@ var PageView = function pageView(container, id, scale,
     this.viewport = pdfPage.getViewport(this.scale * CSS_UNITS, totalRotation);
     this.stats = pdfPage.stats;
     this.reset();
-  ***REMOVED***;
+  };
 
   this.destroy = function pageViewDestroy() {
     this.zoomLayer = null;
     this.reset();
     if (this.pdfPage) {
       this.pdfPage.destroy();
-***REMOVED***
-  ***REMOVED***;
+    }
+  };
 
   this.reset = function pageViewReset(keepAnnotations) {
     if (this.renderTask) {
       this.renderTask.cancel();
-***REMOVED***
+    }
     this.resume = null;
     this.renderingState = RenderingStates.INITIAL;
 
@@ -4157,9 +4157,9 @@ var PageView = function pageView(container, id, scale,
       if ((this.zoomLayer && this.zoomLayer === node) ||
           (keepAnnotations && this.annotationLayer === node)) {
         continue;
-  ***REMOVED***
+      }
       div.removeChild(node);
-***REMOVED***
+    }
     div.removeAttribute('data-loaded');
 
     if (keepAnnotations) {
@@ -4167,10 +4167,10 @@ var PageView = function pageView(container, id, scale,
         // Hide annotationLayer until all elements are resized
         // so they are not displayed on the already-resized page
         this.annotationLayer.setAttribute('hidden', 'true');
-  ***REMOVED***
-***REMOVED*** else {
+      }
+    } else {
       this.annotationLayer = null;
-***REMOVED***
+    }
 
     if (this.canvas) {
       // Zeroing the width and height causes Firefox to release graphics
@@ -4178,25 +4178,25 @@ var PageView = function pageView(container, id, scale,
       this.canvas.width = 0;
       this.canvas.height = 0;
       delete this.canvas;
-***REMOVED***
+    }
 
     this.loadingIconDiv = document.createElement('div');
     this.loadingIconDiv.className = 'loadingIcon';
     div.appendChild(this.loadingIconDiv);
-  ***REMOVED***;
+  };
 
   this.update = function pageViewUpdate(scale, rotation) {
     this.scale = scale || this.scale;
 
     if (typeof rotation !== 'undefined') {
       this.rotation = rotation;
-***REMOVED***
+    }
 
     var totalRotation = (this.rotation + this.pdfPageRotate) % 360;
     this.viewport = this.viewport.clone({
       scale: this.scale * CSS_UNITS,
       rotation: totalRotation
-***REMOVED***);
+    });
 
     var isScalingRestricted = false;
     if (this.canvas && PDFJS.maxCanvasPixels > 0) {
@@ -4208,23 +4208,23 @@ var PageView = function pageView(container, id, scale,
           ((Math.floor(this.viewport.height) * outputScale.sy) | 0) >
           PDFJS.maxCanvasPixels) {
         isScalingRestricted = true;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     if (this.canvas &&
         (PDFJS.useOnlyCssZoom ||
           (this.hasRestrictedScaling && isScalingRestricted))) {
       this.cssTransform(this.canvas, true);
       return;
-***REMOVED*** else if (this.canvas && !this.zoomLayer) {
+    } else if (this.canvas && !this.zoomLayer) {
       this.zoomLayer = this.canvas.parentNode;
       this.zoomLayer.style.position = 'absolute';
-***REMOVED***
+    }
     if (this.zoomLayer) {
       this.cssTransform(this.zoomLayer.firstChild);
-***REMOVED***
+    }
     this.reset(true);
-  ***REMOVED***;
+  };
 
   this.cssTransform = function pageCssTransform(canvas, redrawAnnotations) {
     // Scale canvas, canvas wrapper, and page container.
@@ -4242,7 +4242,7 @@ var PageView = function pageView(container, id, scale,
       // Scale x and y because of the rotation.
       scaleX = height / width;
       scaleY = width / height;
-***REMOVED***
+    }
     var cssTransform = 'rotate(' + relativeRotation + 'deg) ' +
                        'scale(' + scaleX + ',' + scaleY + ')';
     CustomStyle.setProp('transform', canvas, cssTransform);
@@ -4259,7 +4259,7 @@ var PageView = function pageView(container, id, scale,
       var scale = width / textLayerViewport.width;
       if (textAbsRotation === 90 || textAbsRotation === 270) {
         scale = width / textLayerViewport.height;
-  ***REMOVED***
+      }
       var textLayerDiv = this.textLayer.textLayerDiv;
       var transX, transY;
       switch (textAbsRotation) {
@@ -4281,32 +4281,32 @@ var PageView = function pageView(container, id, scale,
         default:
           console.error('Bad rotation value.');
           break;
-  ***REMOVED***
+      }
       CustomStyle.setProp('transform', textLayerDiv,
                           'rotate(' + textAbsRotation + 'deg) ' +
                             'scale(' + scale + ', ' + scale + ') ' +
                             'translate(' + transX + ', ' + transY + ')');
       CustomStyle.setProp('transformOrigin', textLayerDiv, '0% 0%');
-***REMOVED***
+    }
 
     if (redrawAnnotations && this.annotationLayer) {
       setupAnnotations(div, this.pdfPage, this.viewport);
-***REMOVED***
-  ***REMOVED***;
+    }
+  };
 
   Object.defineProperty(this, 'width', {
     get: function PageView_getWidth() {
       return this.viewport.width;
-  ***REMOVED***
+    },
     enumerable: true
-  ***REMOVED***);
+  });
 
   Object.defineProperty(this, 'height', {
     get: function PageView_getHeight() {
       return this.viewport.height;
-  ***REMOVED***
+    },
     enumerable: true
-  ***REMOVED***);
+  });
 
   var self = this;
 
@@ -4317,13 +4317,13 @@ var PageView = function pageView(container, id, scale,
       link.onclick = function pageViewSetupLinksOnclick() {
         if (dest) {
           PDFView.navigateTo(dest);
-    ***REMOVED***
+        }
         return false;
-  ***REMOVED***;
+      };
       if (dest) {
         link.className = 'internalLink';
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     function bindNamedAction(link, action) {
       link.href = PDFView.getAnchorUrl('');
@@ -4345,7 +4345,7 @@ var PageView = function pageView(container, id, scale,
           case 'Find':
             if (!PDFView.supportsIntegratedFind) {
               PDFView.findBar.toggle();
-        ***REMOVED***
+            }
             break;
 
           case 'NextPage':
@@ -4366,14 +4366,14 @@ var PageView = function pageView(container, id, scale,
 
           default:
             break; // No action according to spec
-    ***REMOVED***
+        }
         return false;
-  ***REMOVED***;
+      };
       link.className = 'internalLink';
-***REMOVED***
+    }
 
     pdfPage.getAnnotations().then(function(annotationsData) {
-      viewport = viewport.clone({ dontFlip: true ***REMOVED***);
+      viewport = viewport.clone({ dontFlip: true });
       var transform = viewport.transform;
       var transformStr = 'matrix(' + transform.join(',') + ')';
       var data, element, i, ii;
@@ -4387,16 +4387,16 @@ var PageView = function pageView(container, id, scale,
             '[data-annotation-id="' + data.id + '"]');
           if (element) {
             CustomStyle.setProp('transform', element, transformStr);
-      ***REMOVED***
-    ***REMOVED***
+          }
+        }
         // See this.reset()
         self.annotationLayer.removeAttribute('hidden');
-  ***REMOVED*** else {
+      } else {
         for (i = 0, ii = annotationsData.length; i < ii; i++) {
           data = annotationsData[i];
           if (!data || !data.hasHtml) {
             continue;
-      ***REMOVED***
+          }
 
           element = PDFJS.AnnotationUtils.getHtmlElement(data,
                                                          pdfPage.commonObjs);
@@ -4424,28 +4424,28 @@ var PageView = function pageView(container, id, scale,
             if (link) {
               if (data.action) {
                 bindNamedAction(link, data.action);
-          ***REMOVED*** else {
+              } else {
                 bindLink(link, ('dest' in data) ? data.dest : null);
-          ***REMOVED***
-        ***REMOVED***
-      ***REMOVED***
+              }
+            }
+          }
 
           if (!self.annotationLayer) {
             var annotationLayerDiv = document.createElement('div');
             annotationLayerDiv.className = 'annotationLayer';
             pageDiv.appendChild(annotationLayerDiv);
             self.annotationLayer = annotationLayerDiv;
-      ***REMOVED***
+          }
 
           self.annotationLayer.appendChild(element);
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***);
-  ***REMOVED***
+        }
+      }
+    });
+  }
 
   this.getPagePoint = function pageViewGetPagePoint(x, y) {
     return this.viewport.convertToPdfPoint(x, y);
-  ***REMOVED***;
+  };
 
   this.scrollIntoView = function pageViewScrollIntoView(dest) {
     if (PresentationMode.active) {
@@ -4453,14 +4453,14 @@ var PageView = function pageView(container, id, scale,
         // Avoid breaking PDFView.getVisiblePages in presentation mode.
         PDFView.page = this.id;
         return;
-  ***REMOVED***
+      }
       dest = null;
       PDFView.setScale(PDFView.currentScaleValue, true, true);
-***REMOVED***
+    }
     if (!dest) {
       scrollIntoView(div);
       return;
-***REMOVED***
+    }
 
     var x = 0, y = 0;
     var width = 0, height = 0, widthScale, heightScale;
@@ -4511,18 +4511,18 @@ var PageView = function pageView(container, id, scale,
         break;
       default:
         return;
-***REMOVED***
+    }
 
     if (scale && scale !== PDFView.currentScale) {
       PDFView.setScale(scale, true, true);
-***REMOVED*** else if (PDFView.currentScale === UNKNOWN_SCALE) {
+    } else if (PDFView.currentScale === UNKNOWN_SCALE) {
       PDFView.setScale(DEFAULT_SCALE, true, true);
-***REMOVED***
+    }
 
     if (scale === 'page-fit' && !dest[4]) {
       scrollIntoView(div);
       return;
-***REMOVED***
+    }
 
     var boundingRect = [
       this.viewport.convertToViewportPoint(x, y),
@@ -4531,35 +4531,35 @@ var PageView = function pageView(container, id, scale,
     var left = Math.min(boundingRect[0][0], boundingRect[1][0]);
     var top = Math.min(boundingRect[0][1], boundingRect[1][1]);
 
-    scrollIntoView(div, { left: left, top: top ***REMOVED***);
-  ***REMOVED***;
+    scrollIntoView(div, { left: left, top: top });
+  };
 
   this.getTextContent = function pageviewGetTextContent() {
     return PDFView.getPage(this.id).then(function(pdfPage) {
       return pdfPage.getTextContent();
-***REMOVED***);
-  ***REMOVED***;
+    });
+  };
 
   this.draw = function pageviewDraw(callback) {
     var pdfPage = this.pdfPage;
 
     if (this.pagePdfPromise) {
       return;
-***REMOVED***
+    }
     if (!pdfPage) {
       var promise = PDFView.getPage(this.id);
       promise.then(function(pdfPage) {
         delete this.pagePdfPromise;
         this.setPdfPage(pdfPage);
         this.draw(callback);
-  ***REMOVED***.bind(this));
+      }.bind(this));
       this.pagePdfPromise = promise;
       return;
-***REMOVED***
+    }
 
     if (this.renderingState !== RenderingStates.INITIAL) {
       console.error('Must be in new state before drawing');
-***REMOVED***
+    }
 
     this.renderingState = RenderingStates.RUNNING;
 
@@ -4577,22 +4577,22 @@ var PageView = function pageView(container, id, scale,
     if (this.annotationLayer) {
       // annotationLayer needs to stay on top
       div.insertBefore(canvasWrapper, this.annotationLayer);
-***REMOVED*** else {
+    } else {
       div.appendChild(canvasWrapper);
-***REMOVED***
+    }
     this.canvas = canvas;
 
     var ctx = canvas.getContext('2d');
     var outputScale = getOutputScale(ctx);
 
     if (PDFJS.useOnlyCssZoom) {
-      var actualSizeViewport = viewport.clone({ scale: CSS_UNITS ***REMOVED***);
+      var actualSizeViewport = viewport.clone({ scale: CSS_UNITS });
       // Use a scale that will make the canvas be the original intended size
       // of the page.
       outputScale.sx *= actualSizeViewport.width / viewport.width;
       outputScale.sy *= actualSizeViewport.height / viewport.height;
       outputScale.scaled = true;
-***REMOVED***
+    }
 
     if (PDFJS.maxCanvasPixels > 0) {
       var pixelsInViewport = viewport.width * viewport.height;
@@ -4602,10 +4602,10 @@ var PageView = function pageView(container, id, scale,
         outputScale.sy = maxScale;
         outputScale.scaled = true;
         this.hasRestrictedScaling = true;
-  ***REMOVED*** else {
+      } else {
         this.hasRestrictedScaling = false;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     canvas.width = (Math.floor(viewport.width) * outputScale.sx) | 0;
     canvas.height = (Math.floor(viewport.height) * outputScale.sy) | 0;
@@ -4623,10 +4623,10 @@ var PageView = function pageView(container, id, scale,
       if (this.annotationLayer) {
         // annotationLayer needs to stay on top
         div.insertBefore(textLayerDiv, this.annotationLayer);
-  ***REMOVED*** else {
+      } else {
         div.appendChild(textLayerDiv);
-  ***REMOVED***
-***REMOVED***
+      }
+    }
     var textLayer = this.textLayer =
       textLayerDiv ? new TextLayerBuilder({
         textLayerDiv: textLayerDiv,
@@ -4635,13 +4635,13 @@ var PageView = function pageView(container, id, scale,
         viewport: this.viewport,
         isViewerInPresentationMode: PresentationMode.active,
         findController: PDFView.findController
-  ***REMOVED***) : null;
+      }) : null;
     // TODO(mack): use data attributes to store these
     ctx._scaleX = outputScale.sx;
     ctx._scaleY = outputScale.sy;
     if (outputScale.scaled) {
       ctx.scale(outputScale.sx, outputScale.sy);
-***REMOVED***
+    }
 
     // Rendering area
 
@@ -4652,43 +4652,43 @@ var PageView = function pageView(container, id, scale,
       // this callback.
       if (renderTask === self.renderTask) {
         self.renderTask = null;
-  ***REMOVED***
+      }
 
       if (error === 'cancelled') {
         return;
-  ***REMOVED***
+      }
 
       self.renderingState = RenderingStates.FINISHED;
 
       if (self.loadingIconDiv) {
         div.removeChild(self.loadingIconDiv);
         delete self.loadingIconDiv;
-  ***REMOVED***
+      }
 
       if (self.zoomLayer) {
         div.removeChild(self.zoomLayer);
         self.zoomLayer = null;
-  ***REMOVED***
+      }
 
       if (error) {
         PDFView.error(mozL10n.get('rendering_error', null,
           'An error occurred while rendering the page.'), error);
-  ***REMOVED***
+      }
 
       self.stats = pdfPage.stats;
       self.updateStats();
       if (self.onAfterDraw) {
         self.onAfterDraw();
-  ***REMOVED***
+      }
 
       var event = document.createEvent('CustomEvent');
       event.initCustomEvent('pagerender', true, true, {
         pageNumber: pdfPage.pageNumber
-  ***REMOVED***);
+      });
       div.dispatchEvent(event);
 
       callback();
-***REMOVED***
+    }
 
     var renderContext = {
       canvasContext: ctx,
@@ -4701,12 +4701,12 @@ var PageView = function pageView(container, id, scale,
           self.resume = function resumeCallback() {
             self.renderingState = RenderingStates.RUNNING;
             cont();
-      ***REMOVED***;
+          };
           return;
-    ***REMOVED***
+        }
         cont();
-  ***REMOVED***
-***REMOVED***;
+      }
+    };
     var renderTask = this.renderTask = this.pdfPage.render(renderContext);
 
     this.renderTask.promise.then(
@@ -4716,13 +4716,13 @@ var PageView = function pageView(container, id, scale,
           self.getTextContent().then(
             function textContentResolved(textContent) {
               textLayer.setTextContent(textContent);
-        ***REMOVED***
+            }
           );
-    ***REMOVED***
-    ***REMOVED***
+        }
+      },
       function pdfPageRenderError(error) {
         pageViewDrawCallback(error);
-  ***REMOVED***
+      }
     );
 
     setupAnnotations(div, pdfPage, this.viewport);
@@ -4731,7 +4731,7 @@ var PageView = function pageView(container, id, scale,
     // Add the page to the cache at the start of drawing. That way it can be
     // evicted from the cache and destroyed even if we pause its rendering.
     cache.push(this);
-  ***REMOVED***;
+  };
 
   this.beforePrint = function pageViewBeforePrint() {
     var pdfPage = this.pdfPage;
@@ -4770,45 +4770,45 @@ var PageView = function pageView(container, id, scale,
         canvasContext: ctx,
         viewport: viewport,
         intent: 'print'
-  ***REMOVED***;
+      };
 
       pdfPage.render(renderContext).promise.then(function() {
         // Tell the printEngine that rendering this canvas/page has finished.
         obj.done();
-    ***REMOVED*** function(error) {
+      }, function(error) {
         console.error(error);
         // Tell the printEngine that rendering this canvas/page has failed.
         // This will make the print proces stop.
         if ('abort' in obj) {
           obj.abort();
-    ***REMOVED*** else {
+        } else {
           obj.done();
-    ***REMOVED***
-  ***REMOVED***);
-***REMOVED***;
-  ***REMOVED***;
+        }
+      });
+    };
+  };
 
   this.updateStats = function pageViewUpdateStats() {
     if (!this.stats) {
       return;
-***REMOVED***
+    }
 
     if (PDFJS.pdfBug && Stats.enabled) {
       var stats = this.stats;
       Stats.add(this.id, stats);
-***REMOVED***
-  ***REMOVED***;
-***REMOVED***;
+    }
+  };
+};
 
 
 var ThumbnailView = function thumbnailView(container, id, defaultViewport) {
   var anchor = document.createElement('a');
   anchor.href = PDFView.getAnchorUrl('#page=' + id);
-  anchor.title = mozL10n.get('thumb_page_title', {page: id***REMOVED***, 'Page {{page***REMOVED******REMOVED***');
+  anchor.title = mozL10n.get('thumb_page_title', {page: id}, 'Page {{page}}');
   anchor.onclick = function stopNavigation() {
     PDFView.page = id;
     return false;
-  ***REMOVED***;
+  };
 
   this.pdfPage = undefined;
   this.viewport = defaultViewport;
@@ -4832,7 +4832,7 @@ var ThumbnailView = function thumbnailView(container, id, defaultViewport) {
     // Highlight the thumbnail of the first page when no page number is
     // specified (or exists in cache) when the document is loaded.
     div.classList.add('selected');
-  ***REMOVED***
+  }
 
   var ring = document.createElement('div');
   ring.className = 'thumbnailSelectionRing';
@@ -4852,17 +4852,17 @@ var ThumbnailView = function thumbnailView(container, id, defaultViewport) {
     var totalRotation = (this.rotation + this.pdfPageRotate) % 360;
     this.viewport = pdfPage.getViewport(1, totalRotation);
     this.update();
-  ***REMOVED***;
+  };
 
   this.update = function thumbnailViewUpdate(rotation) {
     if (rotation !== undefined) {
       this.rotation = rotation;
-***REMOVED***
+    }
     var totalRotation = (this.rotation + this.pdfPageRotate) % 360;
     this.viewport = this.viewport.clone({
       scale: 1,
       rotation: totalRotation
-***REMOVED***);
+    });
     this.pageWidth = this.viewport.width;
     this.pageHeight = this.viewport.height;
     this.pageRatio = this.pageWidth / this.pageHeight;
@@ -4878,7 +4878,7 @@ var ThumbnailView = function thumbnailView(container, id, defaultViewport) {
     this.hasImage = false;
     this.renderingState = RenderingStates.INITIAL;
     this.resume = null;
-  ***REMOVED***;
+  };
 
   this.getPageDrawContext = function thumbnailViewGetPageDrawContext() {
     var canvas = document.createElement('canvas');
@@ -4888,7 +4888,7 @@ var ThumbnailView = function thumbnailView(container, id, defaultViewport) {
     canvas.height = this.canvasHeight;
     canvas.className = 'thumbnailImage';
     canvas.setAttribute('aria-label', mozL10n.get('thumb_page_canvas',
-      {page: id***REMOVED***, 'Thumbnail of Page {{page***REMOVED******REMOVED***'));
+      {page: id}, 'Thumbnail of Page {{page}}'));
 
     div.setAttribute('data-loaded', true);
 
@@ -4900,11 +4900,11 @@ var ThumbnailView = function thumbnailView(container, id, defaultViewport) {
     ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
     ctx.restore();
     return ctx;
-  ***REMOVED***;
+  };
 
   this.drawingRequired = function thumbnailViewDrawingRequired() {
     return !this.hasImage;
-  ***REMOVED***;
+  };
 
   this.draw = function thumbnailViewDraw(callback) {
     if (!this.pdfPage) {
@@ -4912,23 +4912,23 @@ var ThumbnailView = function thumbnailView(container, id, defaultViewport) {
       promise.then(function(pdfPage) {
         this.setPdfPage(pdfPage);
         this.draw(callback);
-  ***REMOVED***.bind(this));
+      }.bind(this));
       return;
-***REMOVED***
+    }
 
     if (this.renderingState !== RenderingStates.INITIAL) {
       console.error('Must be in new state before drawing');
-***REMOVED***
+    }
 
     this.renderingState = RenderingStates.RUNNING;
     if (this.hasImage) {
       callback();
       return;
-***REMOVED***
+    }
 
     var self = this;
     var ctx = this.getPageDrawContext();
-    var drawViewport = this.viewport.clone({ scale: this.scale ***REMOVED***);
+    var drawViewport = this.viewport.clone({ scale: this.scale });
     var renderContext = {
       canvasContext: ctx,
       viewport: drawViewport,
@@ -4938,35 +4938,35 @@ var ThumbnailView = function thumbnailView(container, id, defaultViewport) {
           self.resume = function() {
             self.renderingState = RenderingStates.RUNNING;
             cont();
-      ***REMOVED***;
+          };
           return;
-    ***REMOVED***
+        }
         cont();
-  ***REMOVED***
-***REMOVED***;
+      }
+    };
     this.pdfPage.render(renderContext).promise.then(
       function pdfPageRenderCallback() {
         self.renderingState = RenderingStates.FINISHED;
         callback();
-    ***REMOVED***
+      },
       function pdfPageRenderError(error) {
         self.renderingState = RenderingStates.FINISHED;
         callback();
-  ***REMOVED***
+      }
     );
     this.hasImage = true;
-  ***REMOVED***;
+  };
 
   function getTempCanvas(width, height) {
     var tempCanvas = ThumbnailView.tempImageCache;
     if (!tempCanvas) {
       tempCanvas = document.createElement('canvas');
       ThumbnailView.tempImageCache = tempCanvas;
-***REMOVED***
+    }
     tempCanvas.width = width;
     tempCanvas.height = height;
     return tempCanvas;
-  ***REMOVED***
+  }
 
   this.setImage = function thumbnailViewSetImage(img) {
     if (!this.pdfPage) {
@@ -4974,12 +4974,12 @@ var ThumbnailView = function thumbnailView(container, id, defaultViewport) {
       promise.then(function(pdfPage) {
         this.setPdfPage(pdfPage);
         this.setImage(img);
-  ***REMOVED***.bind(this));
+      }.bind(this));
       return;
-***REMOVED***
+    }
     if (this.hasImage || !img) {
       return;
-***REMOVED***
+    }
     this.renderingState = RenderingStates.FINISHED;
     var ctx = this.getPageDrawContext();
 
@@ -5004,15 +5004,15 @@ var ThumbnailView = function thumbnailView(container, id, defaultViewport) {
                                   0, 0, reducedWidth >> 1, reducedHeight >> 1);
         reducedWidth >>= 1;
         reducedHeight >>= 1;
-  ***REMOVED***
-***REMOVED***
+      }
+    }
 
     ctx.drawImage(reducedImage, 0, 0, reducedWidth, reducedHeight,
                   0, 0, ctx.canvas.width, ctx.canvas.height);
 
     this.hasImage = true;
-  ***REMOVED***;
-***REMOVED***;
+  };
+};
 
 ThumbnailView.tempImageCache = null;
 
@@ -5026,7 +5026,7 @@ var NonWhitespaceRegexp = /\S/;
 
 function isAllWhitespace(str) {
   return !NonWhitespaceRegexp.test(str);
-***REMOVED***
+}
 
 /**
  * TextLayerBuilder provides text-selection functionality for the PDF.
@@ -5046,7 +5046,7 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
     this.isViewerInPresentationMode = options.isViewerInPresentationMode;
     this.textDivs = [];
     this.findController = options.findController || null;
-  ***REMOVED***
+  }
 
   TextLayerBuilder.prototype = {
     renderLayer: function TextLayerBuilder_renderLayer() {
@@ -5060,7 +5060,7 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
       // unusable even after the divs are rendered.
       if (textDivsLength > MAX_TEXT_DIVS_TO_RENDER) {
         return;
-  ***REMOVED***
+      }
 
       var lastFontSize;
       var lastFontFamily;
@@ -5068,7 +5068,7 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
         var textDiv = textDivs[i];
         if (textDiv.dataset.isWhitespace !== undefined) {
           continue;
-    ***REMOVED***
+        }
 
         var fontSize = textDiv.style.fontSize;
         var fontFamily = textDiv.style.fontFamily;
@@ -5078,7 +5078,7 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
           ctx.font = fontSize + ' ' + fontFamily;
           lastFontSize = fontSize;
           lastFontFamily = fontFamily;
-    ***REMOVED***
+        }
 
         var width = ctx.measureText(textDiv.textContent).width;
         if (width > 0) {
@@ -5089,16 +5089,16 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
           var transform = 'scale(' + textScale + ', 1)';
           if (rotation) {
             transform = 'rotate(' + rotation + 'deg) ' + transform;
-      ***REMOVED***
+          }
           CustomStyle.setProp('transform' , textDiv, transform);
           CustomStyle.setProp('transformOrigin' , textDiv, '0% 0%');
-    ***REMOVED***
-  ***REMOVED***
+        }
+      }
 
       this.textLayerDiv.appendChild(textLayerFrag);
       this.renderingDone = true;
       this.updateMatches();
-  ***REMOVED***
+    },
 
     setupRenderLayoutTimer:
         function TextLayerBuilder_setupRenderLayoutTimer() {
@@ -5110,15 +5110,15 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
 
       if (Date.now() - lastScroll > RENDER_DELAY) { // Render right away
         this.renderLayer();
-  ***REMOVED*** else { // Schedule
+      } else { // Schedule
         if (this.renderTimer) {
           clearTimeout(this.renderTimer);
-    ***REMOVED***
+        }
         this.renderTimer = setTimeout(function() {
           self.setupRenderLayoutTimer();
-      ***REMOVED*** RENDER_DELAY);
-  ***REMOVED***
-  ***REMOVED***
+        }, RENDER_DELAY);
+      }
+    },
 
     appendText: function TextLayerBuilder_appendText(geom, styles) {
       var style = styles[geom.fontName];
@@ -5127,29 +5127,29 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
       if (isAllWhitespace(geom.str)) {
         textDiv.dataset.isWhitespace = true;
         return;
-  ***REMOVED***
+      }
       var tx = PDFJS.Util.transform(this.viewport.transform, geom.transform);
       var angle = Math.atan2(tx[1], tx[0]);
       if (style.vertical) {
         angle += Math.PI / 2;
-  ***REMOVED***
+      }
       var fontHeight = Math.sqrt((tx[2] * tx[2]) + (tx[3] * tx[3]));
       var fontAscent = fontHeight;
       if (style.ascent) {
         fontAscent = style.ascent * fontAscent;
-  ***REMOVED*** else if (style.descent) {
+      } else if (style.descent) {
         fontAscent = (1 + style.descent) * fontAscent;
-  ***REMOVED***
+      }
 
       var left;
       var top;
       if (angle === 0) {
         left = tx[4];
         top = tx[5] - fontAscent;
-  ***REMOVED*** else {
+      } else {
         left = tx[4] + (fontAscent * Math.sin(angle));
         top = tx[5] - (fontAscent * Math.cos(angle));
-  ***REMOVED***
+      }
       textDiv.style.left = left + 'px';
       textDiv.style.top = top + 'px';
       textDiv.style.fontSize = fontHeight + 'px';
@@ -5161,17 +5161,17 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
       // not worth the effort to do a more accurate test.
       if (PDFJS.pdfBug) {
         textDiv.dataset.fontName = geom.fontName;
-  ***REMOVED***
+      }
       // Storing into dataset will convert number into string.
       if (angle !== 0) {
         textDiv.dataset.angle = angle * (180 / Math.PI);
-  ***REMOVED***
+      }
       if (style.vertical) {
         textDiv.dataset.canvasWidth = geom.height * this.viewport.scale;
-  ***REMOVED*** else {
+      } else {
         textDiv.dataset.canvasWidth = geom.width * this.viewport.scale;
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
 
     setTextContent: function TextLayerBuilder_setTextContent(textContent) {
       this.textContent = textContent;
@@ -5179,10 +5179,10 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
       var textItems = textContent.items;
       for (var i = 0, len = textItems.length; i < len; i++) {
         this.appendText(textItems[i], textContent.styles);
-  ***REMOVED***
+      }
       this.divContentDone = true;
       this.setupRenderLayoutTimer();
-  ***REMOVED***
+    },
 
     convertMatches: function TextLayerBuilder_convertMatches(matches) {
       var i = 0;
@@ -5201,18 +5201,18 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
         while (i !== end && matchIdx >= (iIndex + bidiTexts[i].str.length)) {
           iIndex += bidiTexts[i].str.length;
           i++;
-    ***REMOVED***
+        }
 
         if (i === bidiTexts.length) {
           console.error('Could not find a matching mapping');
-    ***REMOVED***
+        }
 
         var match = {
           begin: {
             divIdx: i,
             offset: matchIdx - iIndex
-      ***REMOVED***
-    ***REMOVED***;
+          }
+        };
 
         // Calculate the end position.
         matchIdx += queryLen;
@@ -5222,23 +5222,23 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
         while (i !== end && matchIdx > (iIndex + bidiTexts[i].str.length)) {
           iIndex += bidiTexts[i].str.length;
           i++;
-    ***REMOVED***
+        }
 
         match.end = {
           divIdx: i,
           offset: matchIdx - iIndex
-    ***REMOVED***;
+        };
         ret.push(match);
-  ***REMOVED***
+      }
 
       return ret;
-  ***REMOVED***
+    },
 
     renderMatches: function TextLayerBuilder_renderMatches(matches) {
       // Early exit if there is nothing to render.
       if (matches.length === 0) {
         return;
-  ***REMOVED***
+      }
 
       var bidiTexts = this.textContent.items;
       var textDivs = this.textDivs;
@@ -5252,13 +5252,13 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
       var infinity = {
         divIdx: -1,
         offset: undefined
-  ***REMOVED***;
+      };
 
       function beginText(begin, className) {
         var divIdx = begin.divIdx;
         textDivs[divIdx].textContent = '';
         appendTextToDiv(divIdx, 0, begin.offset, className);
-  ***REMOVED***
+      }
 
       function appendTextToDiv(divIdx, fromOffset, toOffset, className) {
         var div = textDivs[divIdx];
@@ -5270,18 +5270,18 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
           span.appendChild(node);
           div.appendChild(span);
           return;
-    ***REMOVED***
+        }
         div.appendChild(node);
-  ***REMOVED***
+      }
 
       var i0 = selectedMatchIdx, i1 = i0 + 1;
       if (highlightAll) {
         i0 = 0;
         i1 = matches.length;
-  ***REMOVED*** else if (!isSelectedPage) {
+      } else if (!isSelectedPage) {
         // Not highlighting all and this isn't the selected page, so do nothing.
         return;
-  ***REMOVED***
+      }
 
       for (var i = i0; i < i1; i++) {
         var match = matches[i];
@@ -5293,45 +5293,45 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
         if (isSelected && !this.isViewerInPresentationMode) {
           scrollIntoView(textDivs[begin.divIdx],
                          { top: FIND_SCROLL_OFFSET_TOP,
-                           left: FIND_SCROLL_OFFSET_LEFT ***REMOVED***);
-    ***REMOVED***
+                           left: FIND_SCROLL_OFFSET_LEFT });
+        }
 
         // Match inside new div.
         if (!prevEnd || begin.divIdx !== prevEnd.divIdx) {
           // If there was a previous div, then add the text at the end.
           if (prevEnd !== null) {
             appendTextToDiv(prevEnd.divIdx, prevEnd.offset, infinity.offset);
-      ***REMOVED***
+          }
           // Clear the divs and set the content until the starting point.
           beginText(begin);
-    ***REMOVED*** else {
+        } else {
           appendTextToDiv(prevEnd.divIdx, prevEnd.offset, begin.offset);
-    ***REMOVED***
+        }
 
         if (begin.divIdx === end.divIdx) {
           appendTextToDiv(begin.divIdx, begin.offset, end.offset,
                           'highlight' + highlightSuffix);
-    ***REMOVED*** else {
+        } else {
           appendTextToDiv(begin.divIdx, begin.offset, infinity.offset,
                           'highlight begin' + highlightSuffix);
           for (var n0 = begin.divIdx + 1, n1 = end.divIdx; n0 < n1; n0++) {
             textDivs[n0].className = 'highlight middle' + highlightSuffix;
-      ***REMOVED***
+          }
           beginText(end, 'highlight end' + highlightSuffix);
-    ***REMOVED***
+        }
         prevEnd = end;
-  ***REMOVED***
+      }
 
       if (prevEnd) {
         appendTextToDiv(prevEnd.divIdx, prevEnd.offset, infinity.offset);
-  ***REMOVED***
-  ***REMOVED***
+      }
+    },
 
     updateMatches: function TextLayerBuilder_updateMatches() {
       // Only show matches when all rendering is done.
       if (!this.renderingDone) {
         return;
-  ***REMOVED***
+      }
 
       // Clear all matches.
       var matches = this.matches;
@@ -5347,47 +5347,47 @@ var TextLayerBuilder = (function TextLayerBuilderClosure() {
           var div = textDivs[n];
           div.textContent = bidiTexts[n].str;
           div.className = '';
-    ***REMOVED***
+        }
         clearedUntilDivIdx = match.end.divIdx + 1;
-  ***REMOVED***
+      }
 
       if (this.findController === null || !this.findController.active) {
         return;
-  ***REMOVED***
+      }
 
       // Convert the matches on the page controller into the match format
       // used for the textLayer.
       this.matches = this.convertMatches(this.findController === null ?
         [] : (this.findController.pageMatches[this.pageIdx] || []));
       this.renderMatches(this.matches);
-***REMOVED***
-  ***REMOVED***;
+    }
+  };
   return TextLayerBuilder;
-***REMOVED***)();
+})();
 
 
 var DocumentOutlineView = function documentOutlineView(outline) {
   var outlineView = document.getElementById('outlineView');
   while (outlineView.firstChild) {
     outlineView.removeChild(outlineView.firstChild);
-  ***REMOVED***
+  }
 
   if (!outline) {
     if (!outlineView.classList.contains('hidden')) {
       PDFView.switchSidebarView('thumbs');
-***REMOVED***
+    }
     return;
-  ***REMOVED***
+  }
 
   function bindItemLink(domObj, item) {
     domObj.href = PDFView.getDestinationHash(item.dest);
     domObj.onclick = function documentOutlineViewOnclick(e) {
       PDFView.navigateTo(item.dest);
       return false;
-***REMOVED***;
-  ***REMOVED***
+    };
+  }
 
-  var queue = [{parent: outlineView, items: outline***REMOVED***];
+  var queue = [{parent: outlineView, items: outline}];
   while (queue.length > 0) {
     var levelData = queue.shift();
     var i, n = levelData.items.length;
@@ -5404,27 +5404,27 @@ var DocumentOutlineView = function documentOutlineView(outline) {
         var itemsDiv = document.createElement('div');
         itemsDiv.className = 'outlineItems';
         div.appendChild(itemsDiv);
-        queue.push({parent: itemsDiv, items: item.items***REMOVED***);
-  ***REMOVED***
+        queue.push({parent: itemsDiv, items: item.items});
+      }
 
       levelData.parent.appendChild(div);
-***REMOVED***
-  ***REMOVED***
-***REMOVED***;
+    }
+  }
+};
 
 
 var DocumentAttachmentsView = function documentAttachmentsView(attachments) {
   var attachmentsView = document.getElementById('attachmentsView');
   while (attachmentsView.firstChild) {
     attachmentsView.removeChild(attachmentsView.firstChild);
-  ***REMOVED***
+  }
 
   if (!attachments) {
     if (!attachmentsView.classList.contains('hidden')) {
       PDFView.switchSidebarView('thumbs');
-***REMOVED***
+    }
     return;
-  ***REMOVED***
+  }
 
   function bindItemLink(domObj, item) {
     domObj.onclick = function documentAttachmentsViewOnclick(e) {
@@ -5432,12 +5432,12 @@ var DocumentAttachmentsView = function documentAttachmentsView(attachments) {
       downloadManager.downloadData(item.content, getFileName(item.filename),
                                    '');
       return false;
-***REMOVED***;
-  ***REMOVED***
+    };
+  }
 
   var names = Object.keys(attachments).sort(function(a,b) {
     return a.toLowerCase().localeCompare(b.toLowerCase());
-  ***REMOVED***);
+  });
   for (var i = 0, ii = names.length; i < ii; i++) {
     var item = attachments[names[i]];
     var div = document.createElement('div');
@@ -5447,14 +5447,14 @@ var DocumentAttachmentsView = function documentAttachmentsView(attachments) {
     button.textContent = getFileName(item.filename);
     div.appendChild(button);
     attachmentsView.appendChild(div);
-  ***REMOVED***
-***REMOVED***;
+  }
+};
 
 
 
 function webViewerLoad(evt) {
   PDFView.initialize().then(webViewerInitialized);
-***REMOVED***
+}
 
 function webViewerInitialized() {
   var params = PDFView.parseQueryString(document.location.search.substring(1));
@@ -5470,9 +5470,9 @@ function webViewerInitialized() {
   if (!window.File || !window.FileReader || !window.FileList || !window.Blob) {
     document.getElementById('openFile').setAttribute('hidden', 'true');
     document.getElementById('secondaryOpenFile').setAttribute('hidden', 'true');
-  ***REMOVED*** else {
+  } else {
     document.getElementById('fileInput').value = null;
-  ***REMOVED***
+  }
 
   // Special debugging flags in the hash section of the URL.
   var hash = document.location.hash.substring(1);
@@ -5480,47 +5480,47 @@ function webViewerInitialized() {
 
   if ('disableWorker' in hashParams) {
     PDFJS.disableWorker = (hashParams['disableWorker'] === 'true');
-  ***REMOVED***
+  }
 
   if ('disableRange' in hashParams) {
     PDFJS.disableRange = (hashParams['disableRange'] === 'true');
-  ***REMOVED***
+  }
 
   if ('disableAutoFetch' in hashParams) {
     PDFJS.disableAutoFetch = (hashParams['disableAutoFetch'] === 'true');
-  ***REMOVED***
+  }
 
   if ('disableFontFace' in hashParams) {
     PDFJS.disableFontFace = (hashParams['disableFontFace'] === 'true');
-  ***REMOVED***
+  }
 
   if ('disableHistory' in hashParams) {
     PDFJS.disableHistory = (hashParams['disableHistory'] === 'true');
-  ***REMOVED***
+  }
 
   if ('webgl' in hashParams) {
     PDFJS.disableWebGL = (hashParams['webgl'] !== 'true');
-  ***REMOVED***
+  }
 
   if ('useOnlyCssZoom' in hashParams) {
     PDFJS.useOnlyCssZoom = (hashParams['useOnlyCssZoom'] === 'true');
-  ***REMOVED***
+  }
 
   if ('verbosity' in hashParams) {
     PDFJS.verbosity = hashParams['verbosity'] | 0;
-  ***REMOVED***
+  }
 
   if ('ignoreCurrentPositionOnZoom' in hashParams) {
     IGNORE_CURRENT_POSITION_ON_ZOOM =
       (hashParams['ignoreCurrentPositionOnZoom'] === 'true');
-  ***REMOVED***
+  }
 
 
 
   var locale = PDFJS.locale || navigator.language;
   if ('locale' in hashParams) {
     locale = hashParams['locale'];
-  ***REMOVED***
+  }
   mozL10n.setLanguage(locale);
 
   if ('textLayer' in hashParams) {
@@ -5534,8 +5534,8 @@ function webViewerInitialized() {
         var viewer = document.getElementById('viewer');
         viewer.classList.add('textLayer-' + hashParams['textLayer']);
         break;
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   if ('pdfBug' in hashParams) {
     PDFJS.pdfBug = true;
@@ -5543,22 +5543,22 @@ function webViewerInitialized() {
     var enabled = pdfBug.split(',');
     PDFBug.enable(enabled);
     PDFBug.init();
-  ***REMOVED***
+  }
 
   if (!PDFView.supportsPrinting) {
     document.getElementById('print').classList.add('hidden');
     document.getElementById('secondaryPrint').classList.add('hidden');
-  ***REMOVED***
+  }
 
   if (!PDFView.supportsFullscreen) {
     document.getElementById('presentationMode').classList.add('hidden');
     document.getElementById('secondaryPresentationMode').
       classList.add('hidden');
-  ***REMOVED***
+  }
 
   if (PDFView.supportsIntegratedFind) {
     document.getElementById('viewFind').classList.add('hidden');
-  ***REMOVED***
+  }
 
   // Listen for unsupported features to trigger the fallback UI.
   PDFJS.UnsupportedManager.listen(PDFView.fallback.bind(PDFView));
@@ -5574,8 +5574,8 @@ function webViewerInitialized() {
       event.initUIEvent('resize', false, false, window, 0);
       window.dispatchEvent(event);
       outerContainer.classList.remove('sidebarMoving');
-***REMOVED***
-***REMOVED*** true);
+    }
+  }, true);
 
   document.getElementById('sidebarToggle').addEventListener('click',
     function() {
@@ -5584,47 +5584,47 @@ function webViewerInitialized() {
       outerContainer.classList.toggle('sidebarOpen');
       PDFView.sidebarOpen = outerContainer.classList.contains('sidebarOpen');
       PDFView.renderHighestPriority();
-***REMOVED***);
+    });
 
   document.getElementById('viewThumbnail').addEventListener('click',
     function() {
       PDFView.switchSidebarView('thumbs');
-***REMOVED***);
+    });
 
   document.getElementById('viewOutline').addEventListener('click',
     function() {
       PDFView.switchSidebarView('outline');
-***REMOVED***);
+    });
 
   document.getElementById('viewAttachments').addEventListener('click',
     function() {
       PDFView.switchSidebarView('attachments');
-***REMOVED***);
+    });
 
   document.getElementById('previous').addEventListener('click',
     function() {
       PDFView.page--;
-***REMOVED***);
+    });
 
   document.getElementById('next').addEventListener('click',
     function() {
       PDFView.page++;
-***REMOVED***);
+    });
 
   document.getElementById('zoomIn').addEventListener('click',
     function() {
       PDFView.zoomIn();
-***REMOVED***);
+    });
 
   document.getElementById('zoomOut').addEventListener('click',
     function() {
       PDFView.zoomOut();
-***REMOVED***);
+    });
 
   document.getElementById('pageNumber').addEventListener('click',
     function() {
       this.select();
-***REMOVED***);
+    });
 
   document.getElementById('pageNumber').addEventListener('change',
     function() {
@@ -5633,13 +5633,13 @@ function webViewerInitialized() {
 
       if (this.value !== (this.value | 0).toString()) {
         this.value = PDFView.page;
-  ***REMOVED***
-***REMOVED***);
+      }
+    });
 
   document.getElementById('scaleSelect').addEventListener('change',
     function() {
       PDFView.setScale(this.value);
-***REMOVED***);
+    });
 
   document.getElementById('presentationMode').addEventListener('click',
     SecondaryToolbar.presentationModeClick.bind(SecondaryToolbar));
@@ -5662,22 +5662,22 @@ function webViewerInitialized() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function() {
       PDFView.open(new Uint8Array(xhr.response), 0);
-***REMOVED***;
+    };
     try {
       xhr.open('GET', file);
       xhr.responseType = 'arraybuffer';
       xhr.send();
-***REMOVED*** catch (e) {
+    } catch (e) {
       PDFView.error(mozL10n.get('loading_error', null,
             'An error occurred while loading the PDF.'), e);
-***REMOVED***
+    }
     return;
-  ***REMOVED***
+  }
 
   if (file) {
     PDFView.open(file, 0);
-  ***REMOVED***
-***REMOVED***
+  }
+}
 
 document.addEventListener('DOMContentLoaded', webViewerLoad, true);
 
@@ -5685,12 +5685,12 @@ function updateViewarea() {
 
   if (!PDFView.initialized) {
     return;
-  ***REMOVED***
+  }
   var visible = PDFView.getVisiblePages();
   var visiblePages = visible.views;
   if (visiblePages.length === 0) {
     return;
-  ***REMOVED***
+  }
 
   var suggestedCacheSize = Math.max(DEFAULT_CACHE_SIZE,
       2 * visiblePages.length + 1);
@@ -5707,22 +5707,22 @@ function updateViewarea() {
 
     if (page.percent < 100) {
       break;
-***REMOVED***
+    }
     if (page.id === PDFView.page) {
       stillFullyVisible = true;
       break;
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   if (!stillFullyVisible) {
     currentId = visiblePages[0].id;
-  ***REMOVED***
+  }
 
   if (!PresentationMode.active) {
     updateViewarea.inProgress = true; // used in "set page"
     PDFView.page = currentId;
     updateViewarea.inProgress = false;
-  ***REMOVED***
+  }
 
   var currentScale = PDFView.currentScale;
   var currentScaleValue = PDFView.currentScaleValue;
@@ -5742,9 +5742,9 @@ function updateViewarea() {
 
   if (PresentationMode.active || PresentationMode.switchInProgress) {
     PDFView.currentPosition = null;
-  ***REMOVED*** else {
-    PDFView.currentPosition = { page: pageNumber, left: intLeft, top: intTop ***REMOVED***;
-  ***REMOVED***
+  } else {
+    PDFView.currentPosition = { page: pageNumber, left: intLeft, top: intTop };
+  }
 
   PDFView.store.initializedPromise.then(function() {
     PDFView.store.setMultiple({
@@ -5753,17 +5753,17 @@ function updateViewarea() {
       'zoom': normalizedScaleValue,
       'scrollLeft': intLeft,
       'scrollTop': intTop
-***REMOVED***).catch(function() {
+    }).catch(function() {
       // unable to write to storage
-***REMOVED***);
-  ***REMOVED***);
+    });
+  });
   var href = PDFView.getAnchorUrl(pdfOpenParams);
   document.getElementById('viewBookmark').href = href;
   document.getElementById('secondaryViewBookmark').href = href;
 
   // Update the current bookmark in the browsing history.
   PDFHistory.updateCurrentBookmark(pdfOpenParams, pageNumber);
-***REMOVED***
+}
 
 window.addEventListener('resize', function webViewerResize(evt) {
   if (PDFView.initialized &&
@@ -5771,39 +5771,39 @@ window.addEventListener('resize', function webViewerResize(evt) {
        document.getElementById('pageFitOption').selected ||
        document.getElementById('pageAutoOption').selected)) {
     PDFView.setScale(document.getElementById('scaleSelect').value);
-  ***REMOVED***
+  }
   updateViewarea();
 
   // Set the 'max-height' CSS property of the secondary toolbar.
   SecondaryToolbar.setMaxHeight(PDFView.container);
-***REMOVED***);
+});
 
 window.addEventListener('hashchange', function webViewerHashchange(evt) {
   if (PDFHistory.isHashChangeUnlocked) {
     PDFView.setHash(document.location.hash.substring(1));
-  ***REMOVED***
-***REMOVED***);
+  }
+});
 
 window.addEventListener('change', function webViewerChange(evt) {
   var files = evt.target.files;
   if (!files || files.length === 0) {
     return;
-  ***REMOVED***
+  }
   var file = files[0];
 
   if (!PDFJS.disableCreateObjectURL &&
       typeof URL !== 'undefined' && URL.createObjectURL) {
     PDFView.open(URL.createObjectURL(file), 0);
-  ***REMOVED*** else {
+  } else {
     // Read the local file into a Uint8Array.
     var fileReader = new FileReader();
     fileReader.onload = function webViewerChangeFileReaderOnload(evt) {
       var buffer = evt.target.result;
       var uint8Array = new Uint8Array(buffer);
       PDFView.open(uint8Array, 0);
-***REMOVED***;
+    };
     fileReader.readAsArrayBuffer(file);
-  ***REMOVED***
+  }
 
   PDFView.setTitleUsingUrl(file.name);
 
@@ -5813,7 +5813,7 @@ window.addEventListener('change', function webViewerChange(evt) {
     setAttribute('hidden', 'true');
   document.getElementById('download').setAttribute('hidden', 'true');
   document.getElementById('secondaryDownload').setAttribute('hidden', 'true');
-***REMOVED***, true);
+}, true);
 
 function selectScaleOption(value) {
   var options = document.getElementById('scaleSelect').options;
@@ -5823,12 +5823,12 @@ function selectScaleOption(value) {
     if (option.value !== value) {
       option.selected = false;
       continue;
-***REMOVED***
+    }
     option.selected = true;
     predefinedValueFound = true;
-  ***REMOVED***
+  }
   return predefinedValueFound;
-***REMOVED***
+}
 
 window.addEventListener('localized', function localized(evt) {
   document.getElementsByTagName('html')[0].dir = mozL10n.getDirection();
@@ -5846,12 +5846,12 @@ window.addEventListener('localized', function localized(evt) {
                                    (width + SCALE_SELECT_PADDING) + 'px;');
       container.setAttribute('style', 'min-width: ' + width + 'px; ' +
                                       'max-width: ' + width + 'px;');
-***REMOVED***
+    }
 
     // Set the 'max-height' CSS property of the secondary toolbar.
     SecondaryToolbar.setMaxHeight(PDFView.container);
-  ***REMOVED***);
-***REMOVED***, true);
+  });
+}, true);
 
 window.addEventListener('scalechange', function scalechange(evt) {
   document.getElementById('zoomOut').disabled = (evt.scale === MIN_SCALE);
@@ -5866,15 +5866,15 @@ window.addEventListener('scalechange', function scalechange(evt) {
        document.getElementById('pageAutoOption').selected)) {
     updateViewarea();
     return;
-  ***REMOVED***
+  }
 
   var predefinedValueFound = selectScaleOption('' + evt.scale);
   if (!predefinedValueFound) {
     customScaleOption.textContent = Math.round(evt.scale * 10000) / 100 + '%';
     customScaleOption.selected = true;
-  ***REMOVED***
+  }
   updateViewarea();
-***REMOVED***, true);
+}, true);
 
 window.addEventListener('pagechange', function pagechange(evt) {
   var page = evt.pageNumber;
@@ -5883,7 +5883,7 @@ window.addEventListener('pagechange', function pagechange(evt) {
     var selected = document.querySelector('.thumbnail.selected');
     if (selected) {
       selected.classList.remove('selected');
-***REMOVED***
+    }
     var thumbnail = document.getElementById('thumbnailContainer' + page);
     thumbnail.classList.add('selected');
     var visibleThumbs = PDFView.getVisibleThumbs();
@@ -5895,10 +5895,10 @@ window.addEventListener('pagechange', function pagechange(evt) {
       // Account for only one thumbnail being visible.
       var last = (numVisibleThumbs > 1 ? visibleThumbs.last.id : first);
       if (page <= first || page >= last) {
-        scrollIntoView(thumbnail, { top: THUMBNAIL_SCROLL_MARGIN ***REMOVED***);
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***
+        scrollIntoView(thumbnail, { top: THUMBNAIL_SCROLL_MARGIN });
+      }
+    }
+  }
   var numPages = PDFView.pages.length;
 
   document.getElementById('previous').disabled = (page <= 1);
@@ -5906,7 +5906,7 @@ window.addEventListener('pagechange', function pagechange(evt) {
 
   document.getElementById('firstPage').disabled = (page <= 1);
   document.getElementById('lastPage').disabled = (page >= numPages);
-***REMOVED***, true);
+}, true);
 
 function handleMouseWheel(evt) {
   var MOUSE_WHEEL_DELTA_FACTOR = 40;
@@ -5917,10 +5917,10 @@ function handleMouseWheel(evt) {
   if (evt.ctrlKey) { // Only zoom the pages, not the entire viewer
     evt.preventDefault();
     PDFView[direction](Math.abs(ticks));
-  ***REMOVED*** else if (PresentationMode.active) {
+  } else if (PresentationMode.active) {
     PDFView.mouseScroll(ticks * MOUSE_WHEEL_DELTA_FACTOR);
-  ***REMOVED***
-***REMOVED***
+  }
+}
 
 window.addEventListener('DOMMouseScroll', handleMouseWheel);
 window.addEventListener('mousewheel', handleMouseWheel);
@@ -5929,18 +5929,18 @@ window.addEventListener('click', function click(evt) {
   if (!PresentationMode.active) {
     if (SecondaryToolbar.opened && PDFView.container.contains(evt.target)) {
       SecondaryToolbar.close();
-***REMOVED***
-  ***REMOVED*** else if (evt.button === 0) {
+    }
+  } else if (evt.button === 0) {
     // Necessary since preventDefault() in 'mousedown' won't stop
     // the event propagation in all circumstances in presentation mode.
     evt.preventDefault();
-  ***REMOVED***
-***REMOVED***, false);
+  }
+}, false);
 
 window.addEventListener('keydown', function keydown(evt) {
   if (OverlayManager.active) {
     return;
-  ***REMOVED***
+  }
 
   var handled = false;
   var cmd = (evt.ctrlKey ? 1 : 0) |
@@ -5957,13 +5957,13 @@ window.addEventListener('keydown', function keydown(evt) {
         if (!PDFView.supportsIntegratedFind) {
           PDFView.findBar.open();
           handled = true;
-    ***REMOVED***
+        }
         break;
       case 71: // g
         if (!PDFView.supportsIntegratedFind) {
           PDFView.findBar.dispatchEvent('again', cmd === 5 || cmd === 12);
           handled = true;
-    ***REMOVED***
+        }
         break;
       case 61: // FF/Mac '='
       case 107: // FF '+' and '='
@@ -5984,11 +5984,11 @@ window.addEventListener('keydown', function keydown(evt) {
         setTimeout(function () {
           // ... and resetting the scale after browser adjusts its scale
           PDFView.setScale(DEFAULT_SCALE, true);
-    ***REMOVED***);
+        });
         handled = false;
         break;
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   // CTRL or META without shift
   if (cmd === 1 || cmd === 8) {
@@ -5997,8 +5997,8 @@ window.addEventListener('keydown', function keydown(evt) {
         PDFView.download();
         handled = true;
         break;
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   // CTRL+ALT or Option+Command
   if (cmd === 3 || cmd === 10) {
@@ -6012,13 +6012,13 @@ window.addEventListener('keydown', function keydown(evt) {
         document.getElementById('pageNumber').select();
         handled = true;
         break;
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   if (handled) {
     evt.preventDefault();
     return;
-  ***REMOVED***
+  }
 
   // Some shortcuts should not get handled if a control/input element
   // is selected.
@@ -6030,8 +6030,8 @@ window.addEventListener('keydown', function keydown(evt) {
     // Make sure that the secondary toolbar is closed when Escape is pressed.
     if (evt.keyCode !== 27) { // 'Esc'
       return;
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   if (cmd === 0) { // no control key pressed at all.
     switch (evt.keyCode) {
@@ -6041,14 +6041,14 @@ window.addEventListener('keydown', function keydown(evt) {
         if (!PresentationMode.active &&
             PDFView.currentScaleValue !== 'page-fit') {
           break;
-    ***REMOVED***
+        }
         /* in presentation mode */
         /* falls through */
       case 37: // left arrow
         // horizontal scrolling using arrow keys
         if (PDFView.isHorizontalScrollbarEnabled) {
           break;
-    ***REMOVED***
+        }
         /* falls through */
       case 75: // 'k'
       case 80: // 'p'
@@ -6059,11 +6059,11 @@ window.addEventListener('keydown', function keydown(evt) {
         if (SecondaryToolbar.opened) {
           SecondaryToolbar.close();
           handled = true;
-    ***REMOVED***
+        }
         if (!PDFView.supportsIntegratedFind && PDFView.findBar.opened) {
           PDFView.findBar.close();
           handled = true;
-    ***REMOVED***
+        }
         break;
       case 40: // down arrow
       case 34: // pg down
@@ -6071,13 +6071,13 @@ window.addEventListener('keydown', function keydown(evt) {
         if (!PresentationMode.active &&
             PDFView.currentScaleValue !== 'page-fit') {
           break;
-    ***REMOVED***
+        }
         /* falls through */
       case 39: // right arrow
         // horizontal scrolling using arrow keys
         if (PDFView.isHorizontalScrollbarEnabled) {
           break;
-    ***REMOVED***
+        }
         /* falls through */
       case 74: // 'j'
       case 78: // 'n'
@@ -6089,26 +6089,26 @@ window.addEventListener('keydown', function keydown(evt) {
         if (PresentationMode.active || PDFView.page > 1) {
           PDFView.page = 1;
           handled = true;
-    ***REMOVED***
+        }
         break;
       case 35: // end
         if (PresentationMode.active || (PDFView.pdfDocument &&
             PDFView.page < PDFView.pdfDocument.numPages)) {
           PDFView.page = PDFView.pdfDocument.numPages;
           handled = true;
-    ***REMOVED***
+        }
         break;
 
       case 72: // 'h'
         if (!PresentationMode.active) {
           HandTool.toggle();
-    ***REMOVED***
+        }
         break;
       case 82: // 'r'
         PDFView.rotatePages(90);
         break;
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   if (cmd === 4) { // shift-key
     switch (evt.keyCode) {
@@ -6116,7 +6116,7 @@ window.addEventListener('keydown', function keydown(evt) {
         if (!PresentationMode.active &&
             PDFView.currentScaleValue !== 'page-fit') {
           break;
-    ***REMOVED***
+        }
         PDFView.page--;
         handled = true;
         break;
@@ -6124,8 +6124,8 @@ window.addEventListener('keydown', function keydown(evt) {
       case 82: // 'r'
         PDFView.rotatePages(-90);
         break;
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   if (!handled && !PresentationMode.active) {
     // 33=Page Up  34=Page Down  35=End    36=Home
@@ -6136,14 +6136,14 @@ window.addEventListener('keydown', function keydown(evt) {
       // pressed. Change the focus to the viewer container to make sure that
       // navigation by keyboard works as expected.
       PDFView.container.focus();
-***REMOVED***
+    }
     // 32=Spacebar
     if (evt.keyCode === 32 && curElementTagName !== 'BUTTON') {
       if (!PDFView.container.contains(curElement)) {
         PDFView.container.focus();
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***
+      }
+    }
+  }
 
   if (cmd === 2) { // alt-key
     switch (evt.keyCode) {
@@ -6151,37 +6151,37 @@ window.addEventListener('keydown', function keydown(evt) {
         if (PresentationMode.active) {
           PDFHistory.back();
           handled = true;
-    ***REMOVED***
+        }
         break;
       case 39: // right arrow
         if (PresentationMode.active) {
           PDFHistory.forward();
           handled = true;
-    ***REMOVED***
+        }
         break;
-***REMOVED***
-  ***REMOVED***
+    }
+  }
 
   if (handled) {
     evt.preventDefault();
     PDFView.clearMouseScrollState();
-  ***REMOVED***
-***REMOVED***);
+  }
+});
 
 window.addEventListener('beforeprint', function beforePrint(evt) {
   PDFView.beforePrint();
-***REMOVED***);
+});
 
 window.addEventListener('afterprint', function afterPrint(evt) {
   PDFView.afterPrint();
-***REMOVED***);
+});
 
 (function animationStartedClosure() {
   // The offsetParent is not set until the pdf.js iframe or object is visible.
   // Waiting for first animation.
   PDFView.animationStartedPromise = new Promise(function (resolve) {
     window.requestAnimationFrame(resolve);
-  ***REMOVED***);
-***REMOVED***)();
+  });
+})();
 
 

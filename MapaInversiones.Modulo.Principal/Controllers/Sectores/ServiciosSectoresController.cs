@@ -19,56 +19,56 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Sectores
             _logger = logger;
             _connection = connection;
             _cargasector = cargasector;
-    ***REMOVED***
+        }
 
         [HttpGet("ConsolidadoProyectosAnioEstado")]
         public ModelLocationData ConsolidadoProyectosAnioEstado(string idSector, string idDepto, string? anio, string? estado)
         {
-            ModelLocationData objReturn = new() { Status=true ***REMOVED***;
+            ModelLocationData objReturn = new() { Status=true };
             try
             {
                 objReturn = _cargasector.ObtenerProyectosAnioEstado(idSector, idDepto, anio, estado); 
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
 
         [HttpGet("GetAniosProyectos")]
         public ModelLocationData GetAniosProyectos(string idSector, string idDepto)
         {
-            ModelLocationData objReturn = new() { Status=true ***REMOVED***;
+            ModelLocationData objReturn = new() { Status=true };
             try
             {
                 objReturn = _cargasector.ObtenerProyectosAnios(idSector, idDepto);
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
         [HttpGet("GetAniosProyectosPerfilSector")]
         public ModelLocationData GetAniosProyectosPerfilSector(string idSector, string idDepto)
         {
-            ModelLocationData objReturn = new() { Status = true ***REMOVED***;
+            ModelLocationData objReturn = new() { Status = true };
             try
             {
                 objReturn = _cargasector.ObtenerProyectosAniosPerfilSector(idSector,idDepto);
-        ***REMOVED***
+            }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

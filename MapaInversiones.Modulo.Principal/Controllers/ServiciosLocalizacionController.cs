@@ -16,7 +16,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
     {
       _logger = logger;
       locationProfileBLL = locationBLL;
-***REMOVED***
+    }
 
     
     [HttpGet("GetDetailLocationProfileByLocationIdAndTypeLocation")]
@@ -27,13 +27,13 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       {
         objReturn = locationProfileBLL.GetDetailLocationProfileByLocationIdAndTypeLocation(locationId, typeLocation, jurisdictionId);
         return objReturn;
-  ***REMOVED***
+      }
       catch (Exception exception)
       {
         objReturn.Status = false;
         objReturn.Message = "Error: " + exception.Message;
         return objReturn;
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***
-***REMOVED***
+      }
+    }
+  }
+}

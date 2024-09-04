@@ -13,14 +13,14 @@
           var map;
           function GetMap() {
               // Initialize the map
-              map = new Microsoft.Maps.Map(document.getElementById("myMap"), { credentials: "Ah7mafuzHQjBcBfHXRNcyucmUVbzczI7SPzmWvoXhIxnDH-4fUcSKiPpR2kcDZLn" ***REMOVED***);
+              map = new Microsoft.Maps.Map(document.getElementById("myMap"), { credentials: "Ah7mafuzHQjBcBfHXRNcyucmUVbzczI7SPzmWvoXhIxnDH-4fUcSKiPpR2kcDZLn" });
 
               //Register and load the GeoRSS Module
               // Microsoft.Maps.registerModule("GeoJSONModule", "scripts/GeoJSONModule.js");
               // DONT forget to use minified in production 
               Microsoft.Maps.registerModule("GeoJSONModule", "scripts/minified/GeoJSONModule.min.js");
               Microsoft.Maps.loadModule("GeoJSONModule");
-      ***REMOVED***
+          }
 
           function LoadGeoJSON(url) {
               // map.entities.clear();
@@ -29,23 +29,23 @@
 
               var polylineOptions = {
                   strokeColor: new Microsoft.Maps.Color(156, 0, 0, 255)
-          ***REMOVED***;
+              };
 
               var polygonOptions = {
                   fillColor: new Microsoft.Maps.Color(156, 0, 0, 255),
                   strokeColor: new Microsoft.Maps.Color(156, 0, 255, 0)
-          ***REMOVED***;
+              };
 
-              new GeoJSONModule().ImportGeoJSON(url, GeoJSONImportedCallback, { polylineOptions: polylineOptions, polygonOptions: polygonOptions ***REMOVED***);
-      ***REMOVED***
+              new GeoJSONModule().ImportGeoJSON(url, GeoJSONImportedCallback, { polylineOptions: polylineOptions, polygonOptions: polygonOptions });
+          }
 
           function GeoJSONImportedCallback(items, bounds) {
               map.entities.push(items);
 
-              map.setView({ bounds: bounds ***REMOVED***);
+              map.setView({ bounds: bounds });
 
               //Advance functionalities can be added here such as adding event handlers.
-      ***REMOVED***
+          }
       </script>
    </head>
    <body onload="GetMap();">

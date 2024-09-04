@@ -8,7 +8,7 @@ namespace PlataformaTransparencia.Modelos.Proyectos
 {
     public class itemConteoProjects
     {
-        public int cantidad { get; set; ***REMOVED***
-        public double costo { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public int cantidad { get; set; }
+        public double costo { get; set; }
+    }
+}

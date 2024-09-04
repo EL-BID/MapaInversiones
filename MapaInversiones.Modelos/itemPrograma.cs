@@ -2,16 +2,16 @@
 {
   public class itemPrograma
     {
-        public int orden { get; set; ***REMOVED***
-        public string nombre { get; set; ***REMOVED***
-        public bool estado { get; set; ***REMOVED***
-        public bool externo { get; set; ***REMOVED***
-        public decimal? valor { get; set; ***REMOVED***
-        public string label_nombre { get; set; ***REMOVED***
-        public string label_valor { get; set; ***REMOVED***
-        public long cantBeneficiarios { get; set; ***REMOVED***
-        public string label_beneficiarios { get; set; ***REMOVED***
-        public string label_boton { get; set; ***REMOVED***
+        public int orden { get; set; }
+        public string nombre { get; set; }
+        public bool estado { get; set; }
+        public bool externo { get; set; }
+        public decimal? valor { get; set; }
+        public string label_nombre { get; set; }
+        public string label_valor { get; set; }
+        public long cantBeneficiarios { get; set; }
+        public string label_beneficiarios { get; set; }
+        public string label_boton { get; set; }
 
-***REMOVED***
-***REMOVED***
+    }
+}

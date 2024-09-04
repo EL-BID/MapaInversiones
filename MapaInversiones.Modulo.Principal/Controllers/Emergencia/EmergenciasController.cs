@@ -25,19 +25,19 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
             _logger = logger;
             _connection = connection;
             _cargaemergencia = cargaemergencia;
-    ***REMOVED***
+        }
 
         public IActionResult Index()
         {
             return View();
-    ***REMOVED***
+        }
 
         public ActionResult Emergencia(int emergencia)
         {
             ModelHomeEmergencias Data = new ModelHomeEmergencias();
             Data = _cargaemergencia.ObtenerDatosModeloInicio(emergencia);
             return View(Data);
-    ***REMOVED***
+        }
 
         public ActionResult ContratosEmergencia(int emergencia, string entidad = null, string proceso = null)
         {
@@ -48,7 +48,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
             return View(Data);
 
 
-    ***REMOVED***
+        }
 
         public ActionResult ProcesosCanceladosEmergencia(int emergencia, string entidad = null, string proceso = null)
         {
@@ -58,8 +58,8 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
             Data = _cargaemergencia.ObtenerDatosProcesosCanceladosEmergencia(emergencia, entidad);
             return View(Data);
 
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
 
-***REMOVED***
+}

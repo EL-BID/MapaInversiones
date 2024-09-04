@@ -15,17 +15,17 @@ function InicializaDatos() {
         $("#divUsuarioLog").slideUp(100, function () {
             $("#divCuentaNueva").slideDown(function () {
                 limpiarCamposUsuario("login");
-        ***REMOVED***);
-    ***REMOVED***);
-***REMOVED***);
+            });
+        });
+    });
 
     $("#btnAddCuentaUsu").click(function () {
         AddNuevaCuentaUsuario();
-***REMOVED***);
+    });
 
     $("#btnIngresarUsuLog").click(function () {
         validaLoginUsu();
-***REMOVED***);
+    });
 
 
 
@@ -33,17 +33,17 @@ function InicializaDatos() {
         $("#divUsuarioLog").slideUp(100, function () {
             $("#divOlvidoClave").slideDown(function () {
                 limpiarCamposUsuario("clave");
-        ***REMOVED***);
-    ***REMOVED***);
+            });
+        });
 
-***REMOVED***);
+    });
 
     $("#btnEnviaCodigoClave").click(function () {
         //valida correo
         var correo_usu = $("#txtEmailReset").val();
         if (validaEmail(correo_usu)) {
 
-            var params_usu = { "email": correo_usu ***REMOVED***;
+            var params_usu = { "email": correo_usu };
             $.ajax({
                 type: 'POST',
                 contentType: "application/json; charset=utf-8",
@@ -58,37 +58,37 @@ function InicializaDatos() {
                         $("#divOlvidoClave").slideUp(100, function () {
                             $("#divConfirmaCodigo").slideDown(function () {
                                 limpiarCamposUsuario("clave");
-                        ***REMOVED***);
-                    ***REMOVED***);
+                            });
+                        });
 
 
-                ***REMOVED*** else {
+                    } else {
                         bootbox.alert("Error: " + result.message, function () {
 
-                    ***REMOVED***);
-                ***REMOVED***
+                        });
+                    }
 
-              ***REMOVED***
+                },
                 error: function (response) {
                     alert(response.responseText);
-              ***REMOVED***
+                },
                 failure: function (response) {
                     alert(response.responseText);
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
 
-    ***REMOVED*** else {
+        } else {
             bootbox.alert("Email inválido");
 
-    ***REMOVED***
+        }
 
 
 
 
-***REMOVED***);
+    });
 
     $("#btnVerificaCodigoClave").click(function () {
-        var params_usu = { "email": $("#txtEmailVerifica").val(), "cod_verifica": $("#txtCodigoVerifica").val() ***REMOVED***;
+        var params_usu = { "email": $("#txtEmailVerifica").val(), "cod_verifica": $("#txtCodigoVerifica").val() };
         $.ajax({
             type: 'POST',
             contentType: "application/json; charset=utf-8",
@@ -103,32 +103,32 @@ function InicializaDatos() {
                     $("#divConfirmaCodigo").slideUp(100, function () {
                         $("#divResetPassword").slideDown(function () {
                             limpiarCamposUsuario("clave");
-                    ***REMOVED***);
-                ***REMOVED***);
-            ***REMOVED*** else {
+                        });
+                    });
+                } else {
                     $("#hdIdUsuario").val("");
                     if (result.message == null || result.message == undefined) {
                         bootbox.alert("Error: " + "Fallo la verificación", function () {
 
-                    ***REMOVED***);
-                ***REMOVED*** else {
+                        });
+                    } else {
                         bootbox.alert("Error: " + result.message, function () {
 
-                    ***REMOVED***);
-                ***REMOVED***
+                        });
+                    }
 
-            ***REMOVED***
+                }
 
-          ***REMOVED***
+            },
             error: function (response) {
                 alert(response.responseText);
-          ***REMOVED***
+            },
             failure: function (response) {
                 alert(response.responseText);
-        ***REMOVED***
-    ***REMOVED***);
+            }
+        });
 
-***REMOVED***);
+    });
 
 
     $("#btnCambiarClaveOlvido").click(function () {
@@ -138,21 +138,21 @@ function InicializaDatos() {
         if (formularioOK == false) {
             if (camposReq != "") {
                 bootbox.alert("Faltan campos obligatorios");
-        ***REMOVED***
-    ***REMOVED*** else {
+            }
+        } else {
             //validarClave
             if ($("#txtPassword_re").val() != $("#txtPassword_re_2").val()) {
                 bootbox.alert("Confirmación nueva clave incorrecta");
-        ***REMOVED*** else {
+            } else {
                 var clave_usu = $("#txtPassword_re").val();
                 if (validaClaveUsu(clave_usu) == false) {
                     bootbox.alert("Formato de clave incorrecto: La clave debe tener al menos 8 carácteres, entre ellos, una letra mayúscula y un número");
-            ***REMOVED*** else {
+                } else {
                     if ($("#hdIdUsuario").val() != "") {
                         var params_usu = {
                             IdUsuario: $("#hdIdUsuario").val(),
                             hash_clave: clave_usu,
-                    ***REMOVED***;
+                        };
                         //add nuevo registro
                         $.ajax({
                             type: 'POST',
@@ -167,31 +167,31 @@ function InicializaDatos() {
                                         $("#divResetPassword").slideUp(100, function () {
                                             $("#divUsuarioLog").slideDown(function () {
                                                 limpiarCamposUsuario("all");
-                                        ***REMOVED***);
-                                    ***REMOVED***);
-                                ***REMOVED***);
+                                            });
+                                        });
+                                    });
 
-                            ***REMOVED*** else {
+                                } else {
                                     bootbox.alert("@Error: " + result.message);
-                            ***REMOVED***
+                                }
 
-                          ***REMOVED***
+                            },
                             error: function (response) {
                                 bootbox.alert(response.responseText);
-                          ***REMOVED***
+                            },
                             failure: function (response) {
                                 bootbox.alert(response.responseText);
-                        ***REMOVED***
-                    ***REMOVED***);
-                ***REMOVED*** else {
+                            }
+                        });
+                    } else {
                         bootbox.alert("Codigo no verificado");
-                ***REMOVED***
+                    }
 
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                }
+            }
+        }
 
-***REMOVED***);
+    });
 
     $("#btnGuardarComent").click(function () {
         //valida campos obligatorios
@@ -201,8 +201,8 @@ function InicializaDatos() {
         if (formularioOK == false) {
             if (camposReq != "") {
                 bootbox.alert("Campos requeridos");
-        ***REMOVED***
-    ***REMOVED*** else {
+            }
+        } else {
             var formularioOK = true;
             var camposReq = "";
             $(".alert-danger").hide();
@@ -217,11 +217,11 @@ function InicializaDatos() {
             if (id_tipo == "" || id_tipo == undefined) {
                 formularioOK = false;
                 bootbox.alert("Seleccione un tipo de comentario");
-        ***REMOVED***
+            }
             else if (text_coment == "") {
                 formularioOK = false;
                 bootbox.alert("Ingresar un comentario");
-        ***REMOVED***
+            }
 
             if (formularioOK == true) {
                 var params_com = {
@@ -238,7 +238,7 @@ function InicializaDatos() {
                     UsuarioComenta: 0,
                     IdAsociacion: 3,
                     CodigoContrato: CodigoContrato
-            ***REMOVED***;
+                };
                 //add nuevo registro
                 $.ajax({
                     type: 'POST',
@@ -257,48 +257,48 @@ function InicializaDatos() {
                                 $("#divConfirmaEnvio").slideDown(function () {
                                     if ($("#contrato").val() != undefined) {
                                         GetComentarios($("#contrato").val());
-                                ***REMOVED***
-                            ***REMOVED***);
-                        ***REMOVED***);
+                                    }
+                                });
+                            });
 
-                    ***REMOVED*** else {
+                        } else {
                             bootbox.alert("@Error: " + result.message);
-                    ***REMOVED***
+                        }
 
-                  ***REMOVED***
+                    },
                     error: function (response) {
                         bootbox.alert(response.responseText);
-                  ***REMOVED***
+                    },
                     failure: function (response) {
                         bootbox.alert(response.responseText);
-                ***REMOVED***
-            ***REMOVED***);
-        ***REMOVED***
-    ***REMOVED***
+                    }
+                });
+            }
+        }
         $("#btnGuardarComent").show();
 
-***REMOVED***);
+    });
     $(".btnMegusta").click(function () {
         var tipoFoto = ($(this).attr('tipofoto'));
         var idFoto = ($(this).attr('idfoto'));
         guardarMeGusta('M', tipoFoto, idFoto);
-***REMOVED***);
+    });
 
     $(".btnNoMegusta").click(function () {
         var tipoFoto = ($(this).attr('tipofoto'));
         var idFoto = ($(this).attr('idfoto'));
         guardarMeGusta('N', tipoFoto, idFoto);
-***REMOVED***);
+    });
 
     $("#enlace_cierre").click(function () {
         cerrarSesionUsu();
-***REMOVED***);
+    });
 
     if ($("#contrato").val() != undefined) {
         GetComentarios($("#contrato").val());
-***REMOVED***
+    }
 
-***REMOVED***
+}
 
 function iniUsuarioLog() {
     $("#hdIdUsuario").val(PerfilUsuario[0].idUsuParticipa);
@@ -310,10 +310,10 @@ function iniUsuarioLog() {
             $("#divCloseSesion").show();
             $("#divPregParticipacion").css("visibility", "visible");
             $("#divPregParticipacion").attr("class", "objVisible");
-    ***REMOVED***);
+        });
 
-***REMOVED*** 
-***REMOVED***
+    } 
+}
 
 function limpiarCamposUsuario(opc) {
     if (opc == "login") {
@@ -327,15 +327,15 @@ function limpiarCamposUsuario(opc) {
         $("#hdIdUsuario").val("");
         $('.btn-select-value').each(function (i, e) {
             $(e).html($(e).attr("etiqueta"));
-    ***REMOVED***);
+        });
 
-***REMOVED*** else if (opc == "clave") {
+    } else if (opc == "clave") {
         $("#txtPassword_re").val("");
         $("#txtPassword_re_2").val("");
         $("#txtCodigoVerifica").val("");
         $("#txtEmailReset").val("");
 
-***REMOVED*** else if (opc == "all") {
+    } else if (opc == "all") {
         $("#txtEmailLog").val("");
         $("#txtClaveLog").val("");
         $("#txtNombre").val("");
@@ -351,9 +351,9 @@ function limpiarCamposUsuario(opc) {
         $("#txtEmailVerifica").val("");
         $('.btn-select-value').each(function (i, e) {
             $(e).html($(e).attr("etiqueta"));
-    ***REMOVED***);
-***REMOVED***
-***REMOVED***
+        });
+    }
+}
 
 
 function AddNuevaCuentaUsuario() {
@@ -369,35 +369,35 @@ function AddNuevaCuentaUsuario() {
                 camposReq += "[" + id_txt + "]";
                 $("#error_" + id_txt).show();
                 formularioOK = false;
-        ***REMOVED*** else {
+            } else {
                 $("#error_" + id_txt).hide();
-        ***REMOVED***
-    ***REMOVED*** else {
+            }
+        } else {
             if ($('#' + id_txt + ' li.selected').attr('id') == "0") {
                 camposReq += "[" + id_txt + "]";
                 $("#error_" + id_txt).show();
                 formularioOK = false;
-        ***REMOVED*** else {
+            } else {
                 $("#error_" + id_txt).hide();
-        ***REMOVED***
+            }
 
-    ***REMOVED***
+        }
 
-***REMOVED***);
+    });
 
     if (formularioOK == false) {
         if (camposReq != "") {
             bootbox.alert("Faltan campos obligatorios");
-    ***REMOVED***
-***REMOVED*** else {
+        }
+    } else {
         //validarCorreo
         if ($("#txtPassword").val() != $("#txtPassword_2").val()) {
             bootbox.alert("Confirmación Password incorrecta");
-    ***REMOVED*** else {
+        } else {
             var clave_usu = $("#txtPassword").val();
             if (validaClaveUsu(clave_usu) == false) {
                 bootbox.alert("Formato de clave incorrecto: La clave debe tener al menos 8 carácteres, entre ellos, una letra mayúscula y un número");
-        ***REMOVED*** else {
+            } else {
                 //validarCorreo
                 if (validaEmail($('#txtEmail').val())) {
                     //validar edad
@@ -411,7 +411,7 @@ function AddNuevaCuentaUsuario() {
                             IdRol: $("#filtro_Rol option:selected").attr("id_rol"),
                             IdMedio: $("#filtro_Medios option:selected").attr("id_medio"),
                             CodigoContrato: $("#contrato").val()
-                    ***REMOVED***;
+                        };
                         //add nuevo registro
                         $.ajax({
                             type: 'POST',
@@ -426,62 +426,62 @@ function AddNuevaCuentaUsuario() {
                                         $("#divCuentaNueva").slideUp(100, function () {
                                             $("#divUsuarioLog").slideDown(function () {
                                                 limpiarCamposUsuario();
-                                        ***REMOVED***);
-                                    ***REMOVED***);
-                                ***REMOVED***);
+                                            });
+                                        });
+                                    });
 
-                            ***REMOVED*** else {
+                                } else {
                                     bootbox.alert("@Error: " + result.message);
-                            ***REMOVED***
+                                }
 
-                          ***REMOVED***
+                            },
                             error: function (response) {
                                 alert(response.responseText);
-                          ***REMOVED***
+                            },
                             failure: function (response) {
                                 alert(response.responseText);
-                        ***REMOVED***
-                    ***REMOVED***);
+                            }
+                        });
 
-                ***REMOVED*** else {
+                    } else {
                         bootbox.alert("Edad inválida");
 
-                ***REMOVED***
-            ***REMOVED*** else {
+                    }
+                } else {
                     bootbox.alert("Email inválido");
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
 
 
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}
 
 function validaClaveUsu(cadena) {
     //que tenga mayusculas, numeros,de 8 digitos al menos
-    var clave = new RegExp(/^(?=(?:.*\d){1***REMOVED***)(?=(?:.*[A-Z]){1***REMOVED***)\S{8,***REMOVED***$/);
+    var clave = new RegExp(/^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})\S{8,}$/);
     valida = clave.test(cadena);
     return valida;
-***REMOVED***
+}
 
 //Comunes
 
 //validación de correo electrónico
 function validaEmail(cadena) {
-    if (cadena.match(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3***REMOVED***)$/)) {
+    if (cadena.match(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/)) {
         return true;
-***REMOVED*** else {
+    } else {
         return false;
-***REMOVED***
-***REMOVED***
+    }
+}
 function validaEnteroMayorCero(cadena) {
     if (cadena.match(/^[1-9]+[0-9]*$/)) {
         return true;
-***REMOVED*** else {
+    } else {
         return false;
-***REMOVED***
-***REMOVED***
+    }
+}
 
 
 function validaLoginUsu() {
@@ -498,23 +498,23 @@ function validaLoginUsu() {
             camposReq += "[" + id_txt + "]";
             $("#error_" + id_txt).show();
             formularioOK = false;
-    ***REMOVED*** else {
+        } else {
             $("#error_" + id_txt).hide();
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
 
     if (formularioOK == false) {
         if (camposReq != "") {
             bootbox.alert("Faltan campos obligatorios");
-    ***REMOVED***
-***REMOVED*** else {
+        }
+    } else {
         //validarCorreo
         if (validaEmail($('#txtEmailLog').val())) {
             var params_usu = {
                 email: $("#txtEmailLog").val(),
                 hash_clave: $("#txtClaveLog").val(),
                 valida_rol: 'n'
-        ***REMOVED***;
+            };
             //add nuevo registro
             $.ajax({
                 type: 'POST',
@@ -532,29 +532,29 @@ function validaLoginUsu() {
                         $("#divUsuarioLog").slideUp(100, function () {
                             $("#divCloseSesion").show();
                             $("#divPregParticipacion").attr("class", "objVisible");
-                    ***REMOVED***);
+                        });
 
 
-                ***REMOVED*** else {
+                    } else {
                         bootbox.alert("Error: " + result.message, function () {
 
-                    ***REMOVED***);
-                ***REMOVED***
+                        });
+                    }
 
-              ***REMOVED***
+                },
                 error: function (response) {
                     alert(response.responseText);
-              ***REMOVED***
+                },
                 failure: function (response) {
                     alert(response.responseText);
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
 
-    ***REMOVED*** else {
+        } else {
             bootbox.alert("Email inválido");
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}
 
 
 function cerrarSesionUsu() {
@@ -575,19 +575,19 @@ function cerrarSesionUsu() {
                     $("#divCloseSesion").show();
                     $("#divPregParticipacion").attr("class", "objHidden");
                     location.reload();
-            ***REMOVED***);
-        ***REMOVED*** else {
+                });
+            } else {
                 bootbox.alert("@Error: " + result.message);
-        ***REMOVED***
-      ***REMOVED***
+            }
+        },
         error: function (response) {
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
-***REMOVED***
+        }
+    });
+}
 
 
 function validaCamposOblig(contenedor) {
@@ -600,25 +600,25 @@ function validaCamposOblig(contenedor) {
             camposReq += "[" + id_txt + "]";
             $("#error_" + id_txt).show();
             formularioOK = false;
-    ***REMOVED*** else {
+        } else {
             $("#error_" + id_txt).hide();
-    ***REMOVED***
-***REMOVED***);
+        }
+    });
     return formularioOK;
-***REMOVED***
+}
 
 
 function GetComentarios(id) {
     if ($("#content-2").length > 0) {
         $("#content-2").remove();
-***REMOVED***
+    }
     var param = "CodigoContrato=" + id;
     $.ajax({
         url: "/api/ServiciosParticipacion/GetComentarios",
         type: "GET",
         data: param,
 
-***REMOVED***).done(function (result) {
+    }).done(function (result) {
         var items_result = result.itemcomentario;
         if ($("#content-2").length <= 0) {
             d3.select("#divComentarios")
@@ -626,7 +626,7 @@ function GetComentarios(id) {
                 .attr("id", "content-2")
                 .attr("class", "content mCustomScrollbar")
                 .attr("data-mcs-theme", "minimal")
-    ***REMOVED***
+        }
 
         var cont_resp = 0;
 
@@ -645,10 +645,10 @@ function GetComentarios(id) {
                     var nombre = "";
                     if (items_result[i].anonimo == false) {
                         nombre = items_result[i].nom_usuario.toString();
-                ***REMOVED***
+                    }
                     else {
                         nombre = " Anónimo";
-                ***REMOVED***
+                    }
                     if (id_padre == null) {
                         cont_resp = cont_resp + 1;
                         var div_commenta = d3.select("#content-2")
@@ -674,7 +674,7 @@ function GetComentarios(id) {
                             .append("text").text("Fecha de Publicación: " + fecha_aux)
                         var divhijo = div_comment.append("div")
                             .attr("id", dividcomm)
-                ***REMOVED***
+                    }
                     else {
                         var dividcomm = "#divPadre" + id_padre;
                         var div_res = d3.select(dividcomm)
@@ -692,15 +692,15 @@ function GetComentarios(id) {
                         var usr_date = usr_poster.append("div")
                             .attr("class", "Post_date")
                             .append("text").text("Fecha de Publicación: " + fecha_aux)
-                ***REMOVED***
+                    }
 
 
-            ***REMOVED***
+                }
 
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
         $("#txtNumComentarios").text("(" + cont_resp + ") ");
 
-***REMOVED***);
+    });
 
-***REMOVED***
+}

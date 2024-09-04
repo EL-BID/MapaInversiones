@@ -1,7 +1,7 @@
 /*global define, Microsoft, Raphael*/
 define(['./Infobox'/*, 'app/utils/allColors'*/], function( Infobox ){
 	
-	var colorsAssignation = {***REMOVED***,
+	var colorsAssignation = {},
 		indexAssignation = 0,
 		isIE8 = jQuery.browser.msie && jQuery.browser.version.match(/^8/)
 		// isIE10 = jQuery.browser.msie && jQuery.browser.version.match(/^10/),
@@ -10,16 +10,16 @@ define(['./Infobox'/*, 'app/utils/allColors'*/], function( Infobox ){
 			municipio: '#F8921C',
 			departamento: '#29ADEE',
 			region: '#EC008E'
-		***REMOVED***
+		}
 
 	function panIntoView(){
 		var coords =  this.getLocation()
-		if( this._map ) this._map.setView({center: coords, zoom: 20***REMOVED***)
-	***REMOVED***
+		if( this._map ) this._map.setView({center: coords, zoom: 20})
+	}
 
 	function testCSS(prop) {
 		return prop in document.documentElement.style;
-	***REMOVED***
+	}
 
 	function Pushpin( properties, bingMap, MapView ){
 		var rootElem = document.createElement('div'),
@@ -37,7 +37,7 @@ define(['./Infobox'/*, 'app/utils/allColors'*/], function( Infobox ){
 
 		// if( isIE10 || isSafari ){
 		// 	rootElem.style.background = 'rgba(0,0,0,0)'
-		// ***REMOVED***
+		// }
 
 		if(number > 100) radius = 24
 		else if(number > 10) radius = 18
@@ -51,10 +51,10 @@ define(['./Infobox'/*, 'app/utils/allColors'*/], function( Infobox ){
 		// Firefox and IE8 draw the text upper
 		if( navigator.userAgent.match(/firefox/ig) ){
 			textPosY = Math.round(textPosY * 2)
-		***REMOVED***
+		}
 		if( isIE8 ){
 			textPosY = Math.round(textPosY * 1.6)
-		***REMOVED***
+		}
 
 		width = radius * 2
 		rootElem.style.width = width+2 + 'px'
@@ -70,41 +70,41 @@ define(['./Infobox'/*, 'app/utils/allColors'*/], function( Infobox ){
 			paper.circle(x, y, Math.round(radius * 1) ).attr({
 				fill: color,
 				stroke: color
-			***REMOVED***)
+			})
 			paper.circle(x, y, Math.round(radius * 0.75)).attr({
 				fill: color,
 				stroke: '#fff',
 				'stroke-width': 2
-			***REMOVED***)
-		***REMOVED***else if( properties.isProduction || properties.isFiscalization ){
+			})
+		}else if( properties.isProduction || properties.isFiscalization ){
 			color = (properties.Tipo == "NoCoM") ? '#E2E22F': '#29ADEC'
 			paper.circle(x, y, Math.round(radius * 1) ).attr({
 				fill: color,
 				stroke: color
-			***REMOVED***)
+			})
 			paper.circle(x, y, Math.round(radius * 0.75)).attr({
 				fill: color,
 				stroke: '#fff',
 				'stroke-width': 2
-			***REMOVED***)
-		***REMOVED***else{
+			})
+		}else{
 			paper.circle(x, y, Math.round(radius * 1) ).attr({
 			    fill: '#dd2400',
 			    stroke: '#dd2400'
-			***REMOVED***)
+			})
 			paper.circle(x, y, radius * 0.75).attr({
 			    fill: '#dd2400',
 				stroke: '#fff',
 				'stroke-width': 2
-			***REMOVED***)
+			})
 			paper.text(x, textPosY, number).attr({
 			    stroke: '#dd2400',
 				'stroke-width': 0,
 				fill: '#fff',
 				'text-anchor': 'middle',
 				'font-size': '15px'
-			***REMOVED***)
-		***REMOVED***
+			})
+		}
 
 		htmlContent = rootElem.outerHTML
 
@@ -112,46 +112,46 @@ define(['./Infobox'/*, 'app/utils/allColors'*/], function( Infobox ){
 			htmlContent: htmlContent,
 			zIndex: 99,
 			anchor: new Microsoft.Maps.Point(x, y)
-		***REMOVED***)
+		})
 
 		pushpin.map = bingMap
 
 		if( properties.isResource ){
 			pushpin._infobox = new Infobox('resource', bingMap, pushpin, properties)
-		***REMOVED***else if( properties.isProduction ){
+		}else if( properties.isProduction ){
 			pushpin._infobox = new Infobox('production', bingMap, pushpin, properties)
-		***REMOVED***else if( properties.isFiscalization ){
+		}else if( properties.isFiscalization ){
 			pushpin._infobox = new Infobox('fiscalization', bingMap, pushpin, properties)
-		***REMOVED***else if(properties.type == 'project'){
+		}else if(properties.type == 'project'){
 			pushpin._infobox = new Infobox(properties.type, bingMap, pushpin, properties)
-		***REMOVED***else{
+		}else{
 			// If group in same place
 			// Back misspelling ¬¬
 			if( properties.UsanMismaGeorefenciacion ){
 				pushpin._infobox = new Infobox(properties.type, bingMap, pushpin, properties)
-			***REMOVED***else{
+			}else{
 				//or simply a group to zoom
 				Microsoft.Maps.Events.addHandler(pushpin, 'click', function(){
 					bingMap.setView({
 						zoom: bingMap.getZoom()+2,
 						center: pushpin.getLocation()
-					***REMOVED***)
-				***REMOVED***)
-			***REMOVED***
-		***REMOVED***
+					})
+				})
+			}
+		}
 
 		if( properties.url ){
 			pushpin.panIntoView = panIntoView
-		***REMOVED***
+		}
 
 		pushpin.radius = radius
 
 		pushpin.viewGroupList = function( dataGroup ){
 			MapView.viewGroupList( dataGroup )
-		***REMOVED***
+		}
 
 		return pushpin
-	***REMOVED***
+	}
 
 	return Pushpin
-***REMOVED***)
+})

@@ -4,4 +4,4 @@
  * Infographs and their construction
  */
 define(function(){
-***REMOVED***)
+})

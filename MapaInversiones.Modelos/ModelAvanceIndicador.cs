@@ -2,5 +2,5 @@
 {
   public class ModelAvanceIndicador : InformationGraphics
   {
-  ***REMOVED***
-***REMOVED***
+  }
+}

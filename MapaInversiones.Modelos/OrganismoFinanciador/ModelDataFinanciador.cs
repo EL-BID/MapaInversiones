@@ -6,39 +6,39 @@ namespace PlataformaTransparencia.Modelos.OrganismoFinanciador
 
     public class ModelDataConsolidadoFinanciador : RespuestaContratoBase
     {
-        public List<ModelDataFinanciador> Financiadores { get; set; ***REMOVED*** = new();
-        public int TotalFinanciadores { get; set; ***REMOVED***
-        public int TotalProyectosFinanciados { get; set; ***REMOVED***
-        public double TotalAportado { get; set; ***REMOVED***
-***REMOVED***
+        public List<ModelDataFinanciador> Financiadores { get; set; } = new();
+        public int TotalFinanciadores { get; set; }
+        public int TotalProyectosFinanciados { get; set; }
+        public double TotalAportado { get; set; }
+    }
 
     public class ModelDataFinanciador
     {
-        public int CodigoOrganismo { get; set; ***REMOVED***
-        public string Nombre { get; set; ***REMOVED*** = string.Empty;
-        public double MontoFinanciado { get; set; ***REMOVED***
-        public List<Item> Estados { get; set; ***REMOVED*** = new();
-        public int ProyectosFinanciados { get; set; ***REMOVED***
-        public List<ModelDataConsolidadosPorOrganismoFinanciador> MontosPorFuenteFinanciacion { get; set; ***REMOVED*** = new();
-***REMOVED***
+        public int CodigoOrganismo { get; set; }
+        public string Nombre { get; set; } = string.Empty;
+        public double MontoFinanciado { get; set; }
+        public List<Item> Estados { get; set; } = new();
+        public int ProyectosFinanciados { get; set; }
+        public List<ModelDataConsolidadosPorOrganismoFinanciador> MontosPorFuenteFinanciacion { get; set; } = new();
+    }
 
     public class ModelDataConsolidadosPorOrganismoFinanciador
     {
-        public int Anio { get; set; ***REMOVED***
-        public int CodigoOrganismo { get; set; ***REMOVED***
-        public string Fuente { get; set; ***REMOVED*** = string.Empty;
-        public string Organismo { get; set; ***REMOVED*** = string.Empty;
-        public double Aprobado { get; set; ***REMOVED***
-        public double Vigente { get; set; ***REMOVED***
-***REMOVED***
+        public int Anio { get; set; }
+        public int CodigoOrganismo { get; set; }
+        public string Fuente { get; set; } = string.Empty;
+        public string Organismo { get; set; } = string.Empty;
+        public double Aprobado { get; set; }
+        public double Vigente { get; set; }
+    }
 
     public class ModelDataProyectosPorOrganismoFinanciador
     {
-        public int Anio { get; set; ***REMOVED***
-        public int CodigoOrganismo { get; set; ***REMOVED***
-        public int EstadoId { get; set; ***REMOVED***
-        public string Organismo { get; set; ***REMOVED*** = string.Empty;
-        public string Estado { get; set; ***REMOVED*** = string.Empty;
-        public int TotalProyectos { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public int Anio { get; set; }
+        public int CodigoOrganismo { get; set; }
+        public int EstadoId { get; set; }
+        public string Organismo { get; set; } = string.Empty;
+        public string Estado { get; set; } = string.Empty;
+        public int TotalProyectos { get; set; }
+    }
+}

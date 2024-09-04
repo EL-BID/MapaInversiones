@@ -2,9 +2,9 @@
 {
   public class InfoPresupuestoGeneralPorAnio
   {
-    public int Anio { get; set; ***REMOVED***
-    public double PresupuestoAsignado { get; set; ***REMOVED***
-    public double PresupuestoEjecutado { get; set; ***REMOVED***
-    public double PorcentajeAvance { get; set; ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+    public int Anio { get; set; }
+    public double PresupuestoAsignado { get; set; }
+    public double PresupuestoEjecutado { get; set; }
+    public double PorcentajeAvance { get; set; }
+  }
+}

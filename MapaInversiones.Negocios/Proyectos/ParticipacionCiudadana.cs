@@ -15,7 +15,7 @@ namespace PlataformaTransparencia.Negocios.Project
         public ParticipacionCiudadana(TransparenciaDB connection)
         {
             _connection = connection;
-    ***REMOVED***
+        }
 
         public List<itemcomentario> ObtenerComentariosProyAsync(int Id)
         {
@@ -39,12 +39,12 @@ namespace PlataformaTransparencia.Negocios.Project
                                               IdComentario = Comentario.IdComentario,
                                               Anonimo = Comentario.Anonimo
 
-                                      ***REMOVED***).OrderBy(p => p.fechaCreacion).ToList();
+                                          }).OrderBy(p => p.fechaCreacion).ToList();
 
                 objReturn = infoProyecto;
 
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<itemcomentario> ObtenerComentariosContAsync(string Id)
         {
@@ -69,12 +69,12 @@ namespace PlataformaTransparencia.Negocios.Project
                                     IdComentario = Comentario.IdComentario,
                                     Anonimo = Comentario.Anonimo
 
-                            ***REMOVED***).OrderBy(p => p.fechaCreacion).ToList();
+                                }).OrderBy(p => p.fechaCreacion).ToList();
 
             objReturn = infoProyecto;
 
             return objReturn;
-    ***REMOVED***
+        }
 
 
         public itemUsuarios ValidaLogin(string correo, string clave, string validarol)
@@ -94,9 +94,9 @@ namespace PlataformaTransparencia.Negocios.Project
                                            IdUsuario = query.IdUsuario,
                                            Estado = query.Estado,
                                            Nombre = query.Nombre
-                                   ***REMOVED***).FirstOrDefault();
+                                       }).FirstOrDefault();
                     lstUsuarios = infoUsuario;
-            ***REMOVED***
+                }
                 else {
                     var infoUsuario = (from query in _connection.Usuarios
                                        where query.Email == correo
@@ -106,12 +106,12 @@ namespace PlataformaTransparencia.Negocios.Project
                                            IdUsuario = query.IdUsuario,
                                            Estado = query.Estado,
                                            Nombre = query.Nombre
-                                   ***REMOVED***).FirstOrDefault();
+                                       }).FirstOrDefault();
                     lstUsuarios = infoUsuario;
-            ***REMOVED***
+                }
            
             return lstUsuarios;
-    ***REMOVED***
+        }
 
         public  itemUsuarios validaCreado(string correo, string clave)
         {
@@ -126,12 +126,12 @@ namespace PlataformaTransparencia.Negocios.Project
                                        IdUsuario = query.IdUsuario,
                                        Estado = query.Estado,
                                        Nombre = query.Nombre
-                               ***REMOVED***).FirstOrDefault();
+                                   }).FirstOrDefault();
                 lstUsuarios = infoUsuario;
 
            
             return lstUsuarios;
-    ***REMOVED***
+        }
 
 
         public List<RolParticipa> ObtenerRolesProyAsync()
@@ -143,13 +143,13 @@ namespace PlataformaTransparencia.Negocios.Project
                                    select new RolParticipa {
                                        id = roles.IdRolUsuario,
                                        name = roles.NombreRol
-                               ***REMOVED***).ToList();
+                                   }).ToList();
 
 
            
 
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<RolParticipa> ObtenerRolesProy()
         {
@@ -160,10 +160,10 @@ namespace PlataformaTransparencia.Negocios.Project
                              select new RolParticipa {
                                  id = roles.IdRolUsuario,
                                  name = roles.NombreRol
-                         ***REMOVED***).ToList();
+                             }).ToList();
            
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<GenerosParticipacion> ObtenerGenerosProyAsync()
         {
@@ -174,13 +174,13 @@ namespace PlataformaTransparencia.Negocios.Project
                                    select new GenerosParticipacion {
                                        id = generos.IdGeneroUsuario,
                                        name = generos.NombreGenero
-                               ***REMOVED***).ToList();
+                                   }).ToList();
 
 
            
 
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<GenerosParticipacion> ObtenerGenerosProy()
         {
@@ -191,10 +191,10 @@ namespace PlataformaTransparencia.Negocios.Project
                              select new GenerosParticipacion {
                                  id = generos.IdGeneroUsuario,
                                  name = generos.NombreGenero
-                         ***REMOVED***).ToList();
+                             }).ToList();
             
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<MediosParticipacion> ObtenerMotivosProyAsync()
         {
@@ -205,11 +205,11 @@ namespace PlataformaTransparencia.Negocios.Project
                                    select new MediosParticipacion {
                                        id = medios.IdMedioMapaIUsuario,
                                        name = medios.NombreMedio
-                               ***REMOVED***).ToList();
+                                   }).ToList();
             
 
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<MediosParticipacion> ObtenerMotivosProy()
         {
@@ -220,10 +220,10 @@ namespace PlataformaTransparencia.Negocios.Project
                              select new MediosParticipacion {
                                  id = medios.IdMedioMapaIUsuario,
                                  name = medios.NombreMedio
-                         ***REMOVED***).ToList();
+                             }).ToList();
            
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<TiposComentario> ObtenerTipoComentarioAsync(int Asociacion)
         {
@@ -236,10 +236,10 @@ namespace PlataformaTransparencia.Negocios.Project
                                    select new TiposComentario {
                                        idTC = TipoComentario.Id,
                                        nameTC = TipoComentario.TipoComentarioColumn
-                               ***REMOVED***).ToList();
+                                   }).ToList();
             
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<TiposComentario> ObtenerTipoComentario()
         {
@@ -250,9 +250,9 @@ namespace PlataformaTransparencia.Negocios.Project
                              select new TiposComentario {
                                  idTC = TipoComentario.Id,
                                  nameTC = TipoComentario.TipoComentarioColumn
-                         ***REMOVED***).ToList();
+                             }).ToList();
             return objReturn;
-    ***REMOVED***
+        }
         public string GuardarComentario(int idUsuario, int? idProyecto, int idAsociacion, int idTipoComentario, string comentarioOriginal, bool? anonimo, int IdEstado, int? ComentarioRelacionado, string id_departamento, string id_municipio, string CodigoContrato, int? TipoSubsidio)
         {
             int idProy = Convert.ToInt32(idProyecto);
@@ -275,21 +275,21 @@ namespace PlataformaTransparencia.Negocios.Project
                         IdEstado = IdEstado,
                         IdTipoRespuesta = 1,
                         ComentarioRelacionado = ComentarioRelacionado,
-                ***REMOVED***);
+                    });
 
                 if (idRegNew > 0 ) {
                     outTxt = "0<||>";
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             catch (Exception exe) {
                 if (exe.InnerException.InnerException.Message.IndexOf("UNIQUE KEY") > -1) {
                     outTxt = "-1<||>" + "Ya se registró el comentario";
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             return outTxt;
-    ***REMOVED***
+        }
 
 
         public itemUsuarios ValidaSessionUsu(int id_usuario, string validarol)
@@ -309,9 +309,9 @@ namespace PlataformaTransparencia.Negocios.Project
                                            Estado = query.Estado,
                                            Nombre = query.Nombre,
                                            email = query.Email
-                                   ***REMOVED***).FirstOrDefault();
+                                       }).FirstOrDefault();
                     lstUsuarios = infoUsuario;
-            ***REMOVED***
+                }
                 else {
                     var infoUsuario = (from query in _connection.Usuarios
                                        where query.IdUsuario == id_usuario
@@ -321,12 +321,12 @@ namespace PlataformaTransparencia.Negocios.Project
                                            Estado = query.Estado,
                                            Nombre = query.Nombre,
                                            email = query.Email
-                                   ***REMOVED***).FirstOrDefault();
+                                       }).FirstOrDefault();
                     lstUsuarios = infoUsuario;
-            ***REMOVED***
+                }
             
             return lstUsuarios;
-    ***REMOVED***
+        }
 
 
         public String ObtenerCorreosAprobadores()
@@ -341,17 +341,17 @@ namespace PlataformaTransparencia.Negocios.Project
                                    select new itemUsuarios {
                                        IdUsuario = usuario.IdUsuario,
                                        email = usuario.Email
-                               ***REMOVED***).ToList();
+                                   }).ToList();
                 lstUsuarios = infoUsuario;
            
             String destinatarios = "";
             foreach (itemUsuarios item in lstUsuarios) {
                 destinatarios += item.email + ";";
-        ***REMOVED***
+            }
 
             return destinatarios;
 
-    ***REMOVED***
+        }
 
 
         public itemEstadisticas ObtenerEstadisticasProyAsync(int Id)
@@ -364,14 +364,14 @@ namespace PlataformaTransparencia.Negocios.Project
                                               cantComentarios = aprobadosInv.Comentarios,
                                               cantFotos = aprobadosInv.NumeroImagenes,
                                               cantMegusta = aprobadosInv.MeGusta
-                                      ***REMOVED***).FirstOrDefault();
+                                          }).FirstOrDefault();
 
                 objReturn = infoProyecto;
 
             
 
             return objReturn;
-    ***REMOVED***
+        }
 
 
         public string RegistroNuevoUsuario(string nombre, string correo, string hash_clave, Nullable<int> edad, Nullable<int> genero, Nullable<int> rol, Nullable<int> medio)
@@ -392,26 +392,26 @@ namespace PlataformaTransparencia.Negocios.Project
                         IdGeneroUsuario = genero,
                         IdRolUsuario = rol,
                         IdMedioMapaIUsuario = medio,
-                ***REMOVED***);
+                    });
 
                 
                 if (id > 0) {
                     outTxt = "0<||>" + id.ToString();
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             catch (Exception exe) {
                 if (exe.Message.IndexOf("UNIQUE KEY") > -1)
                 {
                     outTxt = "-1<||>" + "Ya existe una cuenta asociada al correo electrónico digitado";
-            ***REMOVED***
+                }
                 else {
                     outTxt = "-1<||>" + exe.Message;
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             return outTxt;
-    ***REMOVED***
+        }
 
 
         public string updCodigoVerifica(int id_usuario, string hash_codigo)
@@ -425,20 +425,20 @@ namespace PlataformaTransparencia.Negocios.Project
                     .Where(t => t.IdUsuario == id_usuario)
                     .Update(t => new Usuario {
                         CodVerifica = hash_codigo,
-                ***REMOVED***);
+                    });
                 
                 if (cantReg > 0) {
                     outTxt = "0<||>";
-            ***REMOVED***
+                }
                 else {
                     outTxt = "-1<||>" + "No se actualizaron registros";
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             catch (Exception exe) {
                 outTxt = "-1<||>" + exe.InnerException.Message.ToString();
-        ***REMOVED***
+            }
             return outTxt;
-    ***REMOVED***
+        }
 
         public string GuardaMeGusta(int idUsuario, int? idFoto, int? idFotoUsuario, bool megusta1, bool noMegusta, int idProyecto)
         {
@@ -455,21 +455,21 @@ namespace PlataformaTransparencia.Negocios.Project
                         NoMeGusta = noMegusta,
                         IdProyecto = idProyecto,
                         Fecha = DateTime.Now,
-                ***REMOVED***);
+                    });
                 
                 if (idRegNew > 0) {
                     outTxt = "0<||>";
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             catch (Exception exe) {
                 if (exe.InnerException.InnerException.Message.IndexOf("UNIQUE KEY") > -1) {
                     outTxt = "-1<||>" + "Ya se registró la opinión para esta foto o proyecto";
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             return outTxt;
-    ***REMOVED***
+        }
 
 
         public itemUsuarios validaEmail(string correo)
@@ -482,13 +482,13 @@ namespace PlataformaTransparencia.Negocios.Project
                                    select new itemUsuarios {
                                        IdUsuario = query.IdUsuario,
                                        cod_verifica = query.CodVerifica
-                               ***REMOVED***).FirstOrDefault();
+                                   }).FirstOrDefault();
                 lstUsuarios = infoUsuario;
            
 
             return lstUsuarios;
 
-    ***REMOVED***
+        }
 
 
         public string updClaveUsuario(int id_usuario, string hash_clave_new)
@@ -504,29 +504,29 @@ namespace PlataformaTransparencia.Negocios.Project
                                                ).FirstOrDefault();
                     if (actualUsuario.HashClave.Equals(hash_clave_new)) {
                         outTxt = "-1<||>" + "La nueva clave debe ser diferente a la actual";
-                ***REMOVED***
+                    }
                     else {
                         cantReg = _connection
                            .GetTable<Usuario>()
                            .Where(t => t.IdUsuario == id_usuario)
                            .Update(t => new Usuario {
                                HashClave = hash_clave_new,
-                       ***REMOVED***);
+                           });
 
                         if (cantReg > 0) {
                             outTxt = "0<||>";
-                    ***REMOVED***
-                ***REMOVED***
+                        }
+                    }
 
               
 
-        ***REMOVED***
+            }
             catch (Exception exe) {
                 outTxt = "-1<||>" + exe.InnerException.Message.ToString();
-        ***REMOVED***
+            }
 
             return outTxt;
-    ***REMOVED***
+        }
 
 
         public string RegistrarNuevaFotoUsuario(string descripcion, string nombreArchivo, string idDepartamento, string idMunicipio, int proyectoId, int idUsuario)
@@ -549,22 +549,22 @@ namespace PlataformaTransparencia.Negocios.Project
                             IdMunicipio = idMunicipio,
                             IdProyecto = proyectoId,
                             IdUsuario = idUsuario,
-                ***REMOVED***);
+                    });
           
             if (idRegNew > 0) {
                     outTxt = "0<||>";
-            ***REMOVED***
+                }
 
-        ***REMOVED***
+            }
             catch (Exception exe) {
                 if (exe.InnerException.InnerException.Message.IndexOf("UNIQUE KEY") > -1) {
                     outTxt = "-1<||>" + "Ya existe una foto con ese nombre en la base de datos";
-            ***REMOVED***
+                }
                 else outTxt = exe.InnerException.InnerException.Message;
-        ***REMOVED***
+            }
             return outTxt;
 
-    ***REMOVED***
+        }
 
 
 
@@ -578,11 +578,11 @@ namespace PlataformaTransparencia.Negocios.Project
                                        IdUsuario = query.IdUsuario,
                                        email = query.Email,
                                        Nombre = query.Nombre
-                               ***REMOVED***).FirstOrDefault();
+                                   }).FirstOrDefault();
                 lstUsuarios = infoUsuario;
            
             return lstUsuarios;
-    ***REMOVED***
+        }
 
 
         public string updEstadoUsuario(int id_usuario, string estado)
@@ -596,17 +596,17 @@ namespace PlataformaTransparencia.Negocios.Project
                            .Where(t => t.IdUsuario == id_usuario)
                            .Update(t => new Usuario {
                                Estado = estado,
-                       ***REMOVED***);
+                           });
 
                 if (cantReg > 0) {
                     outTxt = "0<||>";
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             catch (Exception exe) {
                 outTxt = "-1<||>" + exe.InnerException.Message.ToString();
-        ***REMOVED***
+            }
             return outTxt;
-    ***REMOVED***
+        }
 
 
         public List<filtrosParticipacion> ObtenerEstadosComentarioAsync()
@@ -618,10 +618,10 @@ namespace PlataformaTransparencia.Negocios.Project
                                    select new filtrosParticipacion {
                                        id = TipoComentario.Id,
                                        name = TipoComentario.EstadoComentarioColumn
-                               ***REMOVED***).ToList();
+                                   }).ToList();
             
             return objReturn;
-    ***REMOVED***
+        }
 
 
         public ModelDataParticipacion ObtenerTipologiasComentariosAsync(int idcomentario)
@@ -637,12 +637,12 @@ namespace PlataformaTransparencia.Negocios.Project
                             IdTipologia = x.IdTipologia,
                             Tipologia = x.Tipologia,
                             Relacion = x.Relacion
-                    ***REMOVED***).OrderBy(p => p.Tipologia).ToList();
+                        }).OrderBy(p => p.Tipologia).ToList();
 
             objReturn.itemcomentario = listInfo;
 
             return objReturn;
-    ***REMOVED***
+        }
 
 
         public int ObtenerComentariosAproCant()
@@ -657,13 +657,13 @@ namespace PlataformaTransparencia.Negocios.Project
                         select new itemcomentario {
                             IdComentario = Comentario.IdComentario,
 
-                    ***REMOVED***).ToList();
+                        }).ToList();
 
                 total_pendientes += total_registros.Value;
 
     
             return total_pendientes;
-    ***REMOVED***
+        }
 
 
         public ModelDataParticipacion ObtenerComentariosAproAsync(int page, int estado)
@@ -701,7 +701,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                 nom_municipio = x.NombreMunicipio,
                                 nom_departamento = x.NombreDepartamento
 
-                        ***REMOVED***).OrderBy(p => p.fechaCreacion).ToList();
+                            }).OrderBy(p => p.fechaCreacion).ToList();
 
                 total_reg = (int)total_registros.Value;
            
@@ -709,11 +709,11 @@ namespace PlataformaTransparencia.Negocios.Project
             objReturn.totalPages = (objReturn.totalNumber > reg_per_page) ? ((objReturn.totalNumber - (objReturn.totalNumber % reg_per_page)) / reg_per_page) : 1;
             if ((objReturn.totalNumber >= reg_per_page) && ((objReturn.totalNumber % reg_per_page) > 0)) {
                 objReturn.totalPages++;
-        ***REMOVED***
+            }
 
             objReturn.itemcomentario = listInfo;
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<filtrosParticipacion> ObtenerAsociacionComentarioAsync()
         {
@@ -724,12 +724,12 @@ namespace PlataformaTransparencia.Negocios.Project
                                        {
                                            name = info.TipoAsociacion,
                                            id = info.IdAsociacion
-                                   ***REMOVED***).OrderBy(p => p.id).ToList();
+                                       }).OrderBy(p => p.id).ToList();
 
                 objReturn = queryInfo;
 
             return objReturn;
-    ***REMOVED***
+        }
 
         public List<filtrosParticipacion> ObtenerAsociacionComentario()
         {
@@ -739,12 +739,12 @@ namespace PlataformaTransparencia.Negocios.Project
                                  {
                                      name = info.TipoAsociacion,
                                      id = info.IdAsociacion
-                             ***REMOVED***).OrderBy(p => p.id).ToList();
+                                 }).OrderBy(p => p.id).ToList();
 
                 objReturn = queryInfo;
 
             return objReturn;
-    ***REMOVED***
+        }
 
 
         public string deleteTipologiaComent(int id_comentario)
@@ -756,13 +756,13 @@ namespace PlataformaTransparencia.Negocios.Project
                 cantReg = _connection.GetTable<TipologiasComentario>()
                .Where(dl => dl.IdComentario == id_comentario).Delete();
                 outTxt = "0<||>";
-        ***REMOVED***
+            }
             catch (Exception exe)
             {
                 outTxt = "-1<||>" + exe.InnerException.Message.ToString();
-        ***REMOVED***
+            }
             return outTxt;
-    ***REMOVED***
+        }
 
 
         public string insertarTipologiaComent(int id_comentario, string str_tipologias)
@@ -770,7 +770,7 @@ namespace PlataformaTransparencia.Negocios.Project
             string outTxt = "";
             try
             {
-                string[] separador = new string[] { "," ***REMOVED***;
+                string[] separador = new string[] { "," };
                 var vec_info = str_tipologias.Split(separador, StringSplitOptions.None);
                 int idRegNew = 0;
                 IList<TipologiasComentario> listado_aux = new List<TipologiasComentario>();
@@ -782,18 +782,18 @@ namespace PlataformaTransparencia.Negocios.Project
                    {
                        IdComentario = id_comentario,
                        IdTipologia = Int32.Parse(cad_tipologia)
-               ***REMOVED***);
-            ***REMOVED***
+                   });
+                }
                 if (idRegNew > 0)
                 {
                     outTxt = "0<||>";
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             catch (Exception exe)
             {
                 outTxt = "-1<||>" + exe.InnerException.Message.ToString();
-        ***REMOVED***
+            }
             return outTxt;
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

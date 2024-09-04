@@ -6,7 +6,7 @@ function InicializaDatos() {
 
     GetProyectosNacionales();
     
-***REMOVED***
+}
 
 
 function GetProyectosNacionales() {
@@ -21,31 +21,31 @@ function GetProyectosNacionales() {
             if (datos.length > 0) {
                 loadProyectosPrioritarios(datos);
 
-        ***REMOVED***
+            }
             else {
                 $("#divNoEncontradoEjec").show();
-        ***REMOVED***
-      ***REMOVED***
+            }
+        },
         error: function (response) {
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
-***REMOVED***
+        }
+    });
+}
 
 function filterChanged() {
     var filtro = $("#sorty").val();
     if (filtro != "") {
         GetProyectosNacionalesFiltro(filtro);
-***REMOVED***
-***REMOVED***
+    }
+}
 
 function GetProyectosNacionalesFiltro(camp) {
         var filtros = {
         campo: camp
-***REMOVED***;
+    };
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -58,19 +58,19 @@ function GetProyectosNacionalesFiltro(camp) {
             if (datos.length > 0) {
                 loadProyectosPrioritarios(datos);
 
-        ***REMOVED***
+            }
             else {
                 $("#divNoEncontradoEjec").show();
-        ***REMOVED***
-      ***REMOVED***
+            }
+        },
         error: function (response) {
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
-***REMOVED***
+        }
+    });
+}
 
 Number.prototype.formatMoney = function (c, d, t) {
     var n = this,
@@ -80,8 +80,8 @@ Number.prototype.formatMoney = function (c, d, t) {
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-***REMOVED***;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
 
 function makeCellHtml(resultados) {
     var limite = 60;
@@ -91,7 +91,7 @@ function makeCellHtml(resultados) {
         var nombre_aux = resultados[i].nombreProyecto.toString();
         if (nombre_aux.length > limite) {
             nombre_aux = nombre_aux.substr(0, limite) + "...";
-    ***REMOVED***
+        }
 
         str_cad += '<div class="project-col project-col-carusel">';
         str_cad += '<div class="project-card">';
@@ -105,9 +105,9 @@ function makeCellHtml(resultados) {
 
         if (resultados[i].approvedTotalMoney > 1000000) {
             cad_valor = "$ " + (convertirMillones(resultados[i].approvedTotalMoney)*1).formatMoney(0, '.', ',').toString()  + " Millones";
-    ***REMOVED*** else {
+        } else {
             cad_valor = "$ " + (resultados[i].approvedTotalMoney*1).formatMoney(0, '.', ',').toString() ;
-    ***REMOVED***
+        }
         str_cad += '<div class="amount"><span class="bigNumber">' + cad_valor + '</span></div>';
         str_cad += '</a>';
         str_cad += '</div>';
@@ -138,15 +138,15 @@ function makeCellHtml(resultados) {
         str_cad += '</div>';
         str_cad += '</div>';
         str_cad += '</div>';
-***REMOVED***
+    }
     return str_cad;
-***REMOVED***
+}
 
 
 function convertirMillones(num) {
     return num > 999999 ? (num / 1000000).toFixed(0) : num
 
-***REMOVED***
+}
 
 
 
@@ -158,13 +158,13 @@ function loadProyectosPrioritarios(resultados) {
         
         var $cellElems = $(makeCellHtml(resultados));
         $("#divContenedorFichas").html($cellElems);
-***REMOVED***
+    }
     else {
         //no existen proyectos en ejecucion
         $("#divContenedorFichas").hide();
         $("#divNoExistenEjec").show();
 
-***REMOVED***
+    }
 
 
-***REMOVED***
+}

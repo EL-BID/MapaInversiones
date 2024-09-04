@@ -18,17 +18,17 @@ namespace PlataformaTransparencia.Negocios.BLL.Comunes
             var objReturn = new ModelDataFilters();
             var objNegocioFiltros = new BllSearchFilters();
             try {
-                objNegocioFiltros.GenerateGeographicFilters(objReturn);//Trae los filtros geograficos {Region/Dpto/Municipio***REMOVED***                
+                objNegocioFiltros.GenerateGeographicFilters(objReturn);//Trae los filtros geograficos {Region/Dpto/Municipio}                
                 objNegocioFiltros.ObtenerFiltrosEspecificosParaProyectos(objReturn);
 
                 objReturn.Status = true;
-        ***REMOVED***
+            }
             catch (Exception ex) {
                 LogHelper.GenerateLog(ex);
                 objReturn.Message = MENSAJE_ERROR;
-        ***REMOVED***
+            }
             return objReturn;
-    ***REMOVED***
+        }
 
         public static Filter ObtenerFiltrosPeriodosAplicativo(GenericEnumerators.SeccionFuncionalAplicativo seccion, string nombreFiltro)
         {
@@ -40,12 +40,12 @@ namespace PlataformaTransparencia.Negocios.BLL.Comunes
             {
                 value = tipoRecurso.ToString(),
                 name = tipoRecurso.ToString()
-        ***REMOVED***).ToList();
+            }).ToList();
             objReturn.items = lst;
 
             System.Diagnostics.Trace.WriteLine("Obtenidos la lista del filtro de periodos.");
             return objReturn;
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

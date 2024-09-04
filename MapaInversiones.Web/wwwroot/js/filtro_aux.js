@@ -2,20 +2,20 @@
 $("#entidad").on("keyup", function (event) {
     if (event.keyCode == 9 || event.keyCode == 13) {
         event.preventDefault();
-***REMOVED*** else {
+    } else {
         if (event.keyCode == 8) {
             if ($(this).val().length <= 1) {
                 $(this).val("");
 
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
-***REMOVED***).autocomplete({
+            }
+        }
+    }
+}).autocomplete({
     source: function (request, response) {
         var filtros = {
             filtro: request.term,
             anyo: 2022
-    ***REMOVED***;
+        };
         $.ajax({
             type: 'GET',
             contentType: "application/json; charset=utf-8",
@@ -29,37 +29,37 @@ $("#entidad").on("keyup", function (event) {
                 if (datos == null || datos.funciones.length <= 0) {
                     $("#divNoEncontrado").show();
                     $("#ui-id-1").hide();
-            ***REMOVED*** else {
+                } else {
                     $("#divNoEncontrado").hide();
                     response($.map(datos.funciones, function (item) {
 
                         return {
                             label: item.label,
                             value: item.label
-                    ***REMOVED***;
+                        };
 
-                ***REMOVED***
+                    }
                     ));
 
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
             error: function (response) {
                 alert(response.responseText);
-          ***REMOVED***
+            },
             failure: function (response) {
                 alert(response.responseText);
-        ***REMOVED***
-    ***REMOVED***);
-  ***REMOVED***
+            }
+        });
+    },
     delay: 300,
     minLength: 1,
     select: function (event, ui) {
 
-***REMOVED***
-***REMOVED***).bind('blur onblur', function () {
+    }
+}).bind('blur onblur', function () {
     if ($(this).val() == "") {
         $(this).val("");
         $("#divNoEncontrado").hide();
-***REMOVED***
+    }
 
-***REMOVED***);
+});

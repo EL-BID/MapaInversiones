@@ -9,22 +9,22 @@ namespace PlataformaTransparencia.Modelos
     {
         /// Datos encabezado
         /// </summary>
-        public string nomContratista { get; set; ***REMOVED***
-        public Nullable<int> numContratos { get; set; ***REMOVED***
-        public Nullable<decimal> valorContratos { get; set; ***REMOVED***
+        public string nomContratista { get; set; }
+        public Nullable<int> numContratos { get; set; }
+        public Nullable<decimal> valorContratos { get; set; }
         /// <summary>
         /// id identificador 
         /// </summary>
-        public string ruc { get; set; ***REMOVED***
-        public string codigoContrato { get; set; ***REMOVED***
+        public string ruc { get; set; }
+        public string codigoContrato { get; set; }
 
         /// <summary>
         /// Arreglo con objetos representando el grafico de contratos por año
         /// </summary>
         public List<InfoContratosPerAnyo> ContratosPerAnyo {
-            get { return contratosPerAnyo; ***REMOVED***
-            set { contratosPerAnyo = value; ***REMOVED***
-    ***REMOVED***
+            get { return contratosPerAnyo; }
+            set { contratosPerAnyo = value; }
+        }
         private List<InfoContratosPerAnyo> contratosPerAnyo = new List<InfoContratosPerAnyo>();
 
         public ModelContratistaData()
@@ -37,16 +37,16 @@ namespace PlataformaTransparencia.Modelos
             listInformacion = new List<InformacionContratos>();
 
 
-    ***REMOVED***
-        public List<RolParticipa> rol_participacion { get; set; ***REMOVED***
+        }
+        public List<RolParticipa> rol_participacion { get; set; }
 
-        public List<GenerosParticipacion> genero_participacion { get; set; ***REMOVED***
+        public List<GenerosParticipacion> genero_participacion { get; set; }
 
-        public List<MediosParticipacion> medios_participacion { get; set; ***REMOVED***
+        public List<MediosParticipacion> medios_participacion { get; set; }
 
-        public List<TiposComentario> tipo_comentario { get; set; ***REMOVED***
+        public List<TiposComentario> tipo_comentario { get; set; }
 
-        public List<ActorFicha> entes_beneficiarios { get; set; ***REMOVED***
+        public List<ActorFicha> entes_beneficiarios { get; set; }
 
         public List<InformacionContratos> listInformacion;
 
@@ -59,17 +59,17 @@ namespace PlataformaTransparencia.Modelos
 
 
         public List<TotalProceso> listTotalProcesos;
-        public Nullable<int> numProcesos { get; set; ***REMOVED***
-        public Nullable<decimal> valorProcesos { get; set; ***REMOVED***
-        public Nullable<decimal> valorEjecutado { get; set; ***REMOVED***
+        public Nullable<int> numProcesos { get; set; }
+        public Nullable<decimal> valorProcesos { get; set; }
+        public Nullable<decimal> valorEjecutado { get; set; }
 
-        public Nullable<int> numProcesosCancelados { get; set; ***REMOVED***
-        public Nullable<decimal> valProcesosCancelados { get; set; ***REMOVED***
+        public Nullable<int> numProcesosCancelados { get; set; }
+        public Nullable<decimal> valProcesosCancelados { get; set; }
 
         public List<ContratosEstado> listEstadosContratos;
-        public Nullable<int> tipoEmergencia { get; set; ***REMOVED***
-        public string nombreUnidadCompra { get; set; ***REMOVED***
+        public Nullable<int> tipoEmergencia { get; set; }
+        public string nombreUnidadCompra { get; set; }
 
-        public string nombreEntidad { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string nombreEntidad { get; set; }
+    }
+}

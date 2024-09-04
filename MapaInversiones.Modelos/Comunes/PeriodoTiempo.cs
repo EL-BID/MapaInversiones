@@ -10,12 +10,12 @@ namespace PlataformaTransparencia.Modelos.Comunes
 
 
         #region Properties
-        public int AñoInicial {get;set;***REMOVED***
+        public int AñoInicial {get;set;}
 
 
-        public int AñoFinal { get; set; ***REMOVED***
+        public int AñoFinal { get; set; }
 
-        public List<int> FechasEjecucion { get; set; ***REMOVED***
+        public List<int> FechasEjecucion { get; set; }
         #endregion
 
         public PeriodoDeTiempo()
@@ -26,7 +26,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
             AñoFinal = DateTime.Today.Year + 4;
             //CMC: Comite tecnico 19 de Junio de 2013: a.	Los periodos se comparten durante todo el aplicativo b.	Los periodos saldrán a partir del 2012 al año actual +2           
             ConstruirListaDeAños(AñoInicial, AñoFinal);
-    ***REMOVED***
+        }
 
         [ExcludeFromCodeCoverage]
         private void ConstruirListaDeAños(int añoInicio, int añoFin)
@@ -38,11 +38,11 @@ namespace PlataformaTransparencia.Modelos.Comunes
             {
                 this.FechasEjecucion.Add(añoAgregar);
                 añoAgregar++;
-        ***REMOVED***
+            }
             while (añoAgregar <= añoMaximo);
-    ***REMOVED***
+        }
 
      
 
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -10,5 +10,5 @@ namespace PlataformaTransparencia.Utilitarios
         public const int DuracionApiCacheClienteCorto = 60 * 60 * 1;
         public const int DuracionApiCacheMedio = 60 * 60 * 3;
         public const int DuracionApiCacheLargo = 60 * 60 * 24 * 7;
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -10,17 +10,17 @@ namespace PlataformaTransparencia.Modelos
         {
             ListaResultados = new List<ResultadoBusquedaItem>();
             ListaJerarquia = new List<HierarchyModel>();
-    ***REMOVED***
-        public List<ResultadoBusquedaItem> ListaResultados { get; set; ***REMOVED***
+        }
+        public List<ResultadoBusquedaItem> ListaResultados { get; set; }
 
-        public string CadenaBusqueda { get; set; ***REMOVED***
-        public string Type { get; set; ***REMOVED***
+        public string CadenaBusqueda { get; set; }
+        public string Type { get; set; }
 
-        public int TotalResultados { get; set; ***REMOVED***
+        public int TotalResultados { get; set; }
 
-        public List<HierarchyModel> ListaJerarquia { get; set; ***REMOVED***
+        public List<HierarchyModel> ListaJerarquia { get; set; }
 
-***REMOVED***
+    }
 
     public class HierarchyModel
     {
@@ -28,21 +28,21 @@ namespace PlataformaTransparencia.Modelos
         public HierarchyModel()
         {
             ListaTipos = new List<TypeModel>();
-    ***REMOVED***
-        public string Hierarchy { get; set; ***REMOVED***
+        }
+        public string Hierarchy { get; set; }
 
-        public List<TypeModel> ListaTipos { get; set; ***REMOVED***
+        public List<TypeModel> ListaTipos { get; set; }
 
-        public int TotalResultados { get; set; ***REMOVED***
+        public int TotalResultados { get; set; }
 
 
-***REMOVED***
+    }
 
     public class TypeModel
     {
-        public string Type { get; set; ***REMOVED***
+        public string Type { get; set; }
 
-        public int TotalResultados { get; set; ***REMOVED***
+        public int TotalResultados { get; set; }
 
-***REMOVED***
-***REMOVED***
+    }
+}

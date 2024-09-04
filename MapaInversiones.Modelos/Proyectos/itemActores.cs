@@ -6,10 +6,10 @@ namespace PlataformaTransparencia.Modelos.Proyectos
 {
     public class itemActores
     {
-        public int idCategoria { get; set; ***REMOVED***
-        public string Categoria { get; set; ***REMOVED***
+        public int idCategoria { get; set; }
+        public string Categoria { get; set; }
 
-        public string idActor { get; set; ***REMOVED***
-        public string nomActor { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string idActor { get; set; }
+        public string nomActor { get; set; }
+    }
+}

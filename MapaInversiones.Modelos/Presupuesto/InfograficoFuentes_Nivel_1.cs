@@ -8,13 +8,13 @@ namespace PlataformaTransparencia.Modelos.Presupuesto
 {
     public class InfograficoFuentes_Nivel_1
     {
-        public string Id { get; set; ***REMOVED***
-        public string Nombre { get; set; ***REMOVED***
-        public decimal presupuesto { get; set; ***REMOVED***
-        public decimal avance { get; set; ***REMOVED***
-        public decimal total_presupuesto { get; set; ***REMOVED***
-        public decimal total_avance { get; set; ***REMOVED***
-        public List<InfograficoFuentes_Nivel_2> Detalles { get; set; ***REMOVED***
+        public string Id { get; set; }
+        public string Nombre { get; set; }
+        public decimal presupuesto { get; set; }
+        public decimal avance { get; set; }
+        public decimal total_presupuesto { get; set; }
+        public decimal total_avance { get; set; }
+        public List<InfograficoFuentes_Nivel_2> Detalles { get; set; }
 
         public InfograficoFuentes_Nivel_1(string id, string nombre)
         {
@@ -23,6 +23,6 @@ namespace PlataformaTransparencia.Modelos.Presupuesto
             Detalles = new List<InfograficoFuentes_Nivel_2>();
             presupuesto = 0;
             avance = 0;
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

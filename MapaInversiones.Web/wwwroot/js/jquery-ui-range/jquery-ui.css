@@ -7,7 +7,7 @@
 ----------------------------------*/
 .ui-helper-hidden {
 	display: none;
-***REMOVED***
+}
 .ui-helper-hidden-accessible {
 	border: 0;
 	clip: rect(0 0 0 0);
@@ -17,7 +17,7 @@
 	padding: 0;
 	position: absolute;
 	width: 1px;
-***REMOVED***
+}
 .ui-helper-reset {
 	margin: 0;
 	padding: 0;
@@ -27,16 +27,16 @@
 	text-decoration: none;
 	font-size: 100%;
 	list-style: none;
-***REMOVED***
+}
 .ui-helper-clearfix:before,
 .ui-helper-clearfix:after {
 	content: "";
 	display: table;
 	border-collapse: collapse;
-***REMOVED***
+}
 .ui-helper-clearfix:after {
 	clear: both;
-***REMOVED***
+}
 .ui-helper-zfix {
 	width: 100%;
 	height: 100%;
@@ -45,11 +45,11 @@
 	position: absolute;
 	opacity: 0;
 	filter:Alpha(Opacity=0); /* support: IE8 */
-***REMOVED***
+}
 
 .ui-front {
 	z-index: 100;
-***REMOVED***
+}
 
 
 /* Interaction Cues
@@ -57,7 +57,7 @@
 .ui-state-disabled {
 	cursor: default !important;
 	pointer-events: none;
-***REMOVED***
+}
 
 
 /* Icons
@@ -70,13 +70,13 @@
 	text-indent: -99999px;
 	overflow: hidden;
 	background-repeat: no-repeat;
-***REMOVED***
+}
 
 .ui-widget-icon-block {
 	left: 50%;
 	margin-left: -8px;
 	display: block;
-***REMOVED***
+}
 
 /* Misc visuals
 ----------------------------------*/
@@ -88,11 +88,11 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-***REMOVED***
+}
 .ui-slider {
 	position: relative;
 	text-align: left;
-***REMOVED***
+}
 .ui-slider .ui-slider-handle {
 	position: absolute;
 	z-index: 2;
@@ -101,7 +101,7 @@
 	cursor: default;
 	-ms-touch-action: none;
 	touch-action: none;
-***REMOVED***
+}
 .ui-slider .ui-slider-range {
 	position: absolute;
 	z-index: 1;
@@ -109,48 +109,48 @@
 	display: block;
 	border: 0;
 	background-position: 0 0;
-***REMOVED***
+}
 
 /* support: IE8 - See #6727 */
 .ui-slider.ui-state-disabled .ui-slider-handle,
 .ui-slider.ui-state-disabled .ui-slider-range {
 	filter: inherit;
-***REMOVED***
+}
 
 .ui-slider-horizontal {
 	height: .8em;
-***REMOVED***
+}
 .ui-slider-horizontal .ui-slider-handle {
 	top: -.3em;
 	margin-left: -.6em;
-***REMOVED***
+}
 .ui-slider-horizontal .ui-slider-range {
 	top: 0;
 	height: 100%;
-***REMOVED***
+}
 .ui-slider-horizontal .ui-slider-range-min {
 	left: 0;
-***REMOVED***
+}
 .ui-slider-horizontal .ui-slider-range-max {
 	right: 0;
-***REMOVED***
+}
 
 .ui-slider-vertical {
 	width: .8em;
 	height: 100px;
-***REMOVED***
+}
 .ui-slider-vertical .ui-slider-handle {
 	left: -.3em;
 	margin-left: 0;
 	margin-bottom: -.6em;
-***REMOVED***
+}
 .ui-slider-vertical .ui-slider-range {
 	left: 0;
 	width: 100%;
-***REMOVED***
+}
 .ui-slider-vertical .ui-slider-range-min {
 	bottom: 0;
-***REMOVED***
+}
 .ui-slider-vertical .ui-slider-range-max {
 	top: 0;
-***REMOVED***
+}

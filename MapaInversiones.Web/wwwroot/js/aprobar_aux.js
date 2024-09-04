@@ -14,9 +14,9 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                 Hmask = element[0].offsetHeight;
 
             maskElem.appendTo(document.body)
-            maskElem.css({ 'width': Wmask, 'height': Hmask, 'left': position.left, 'top': position.top ***REMOVED***)
+            maskElem.css({ 'width': Wmask, 'height': Hmask, 'left': position.left, 'top': position.top })
             element.data('mask', maskElem)
-    ***REMOVED***
+        }
 
         function InicializaDatos() {
             $("#secEncabezado").hide();
@@ -32,7 +32,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             $("#hdNomUsuario").val(projectPerfil[0].nomUsuParticipa);
             if ($("#hdIdUsuario").val() != "") {
                 validaSesionUsu();
-        ***REMOVED*** else {
+            } else {
                 $("#divNomUsuarioLog").text("");
                 $("#hdNomUsuario").val("");
                 $("#hdIdUsuario").val("");
@@ -40,9 +40,9 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                     $("#divCloseSesion").hide();
                     $("#divFotos").hide();
                     $("#divComentarios").hide();
-            ***REMOVED***);
+                });
 
-        ***REMOVED***
+            }
             //add funciones login
             $("#txtEmailLog").val("");
             $("#txtClaveLog").val("");
@@ -51,13 +51,13 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 
             $("#btnIngresarUsuLog").click(function () {
                 validaLoginUsu();
-        ***REMOVED***);
+            });
 
 
             $("#enlace_cierre").click(function () {
                 cerrarSesionUsu();
 
-        ***REMOVED***);
+            });
 
             $("#btnAccionDenegar").click(function () {
                 var tipo = $("#justificaModal").attr("data-type");
@@ -72,7 +72,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                     var codigoContrato = ($("#" + obj_param).attr('codigoContrato'));
                     var textoJustifica = $("#txtJustificacion").val();
                     UpdateComentario('4', idcoment, idusuario, IdProyecto, idasociacion, idprograma, codigoContrato, textoJustifica);
-            ***REMOVED***
+                }
                 if (tipo == "foto") {
                     var tipoFoto = $("#" + obj_param).attr('tipofoto');
                     var idFoto = $("#" + obj_param).attr('idfoto');
@@ -80,10 +80,10 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                     var idusuario = $("#" + obj_param).attr('idusuario');
                     var textoJustifica = $("#txtJustificacion").val();
                     guardarAprobado('E', tipoFoto, idFoto, IdProyecto, idusuario, textoJustifica);
-            ***REMOVED***
+                }
                 $('#justificaModal').modal('hide');
 
-        ***REMOVED***);
+            });
 
 
             $("#recategorizarModalGuardar").click(function () {
@@ -93,18 +93,18 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                 if (id_tipo == "" || id_tipo == undefined) {
                     formularioOK = false;
                     bootbox.alert("Seleccione un tipo de comentario");
-            ***REMOVED***
+                }
                 else {
                     CambiaTipoComentario(idcoment, id_tipo);
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
 
 
             configurarEnlaceTabs();
             configuraFiltros();
             configBtnTipologia();
 
-    ***REMOVED***
+        }
 
 
 
@@ -115,7 +115,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             var obj_texto = obj.text();
             $("#filtro_estados_foto").find(".btn-select-input").val(obj_valor);
             $("#filtro_estados_foto").find(".btn-select-value").html(obj_texto);
-    ***REMOVED***
+        }
 
         function inicializaFiltrosComent() {
             var obj_estado = $("#filtro_estados option:eq(0)");
@@ -128,7 +128,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             var obj_asoc_texto = obj_asoc.text();
             $("#filtro_asociacion").find(".btn-select-input").val(obj_asoc_valor);
             $("#filtro_asociacion").find(".btn-select-value").html(obj_asoc_texto);
-    ***REMOVED***
+        }
 
         function configurarEnlaceTabs() {
             $('.enlace_comentarios').each(function (i, e) {
@@ -144,8 +144,8 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                     ObtenerComentarios(estado, asociacion, 1);
                     ObtenerComentariosCant();
                     ObtenerImgAprobCant();
-            ***REMOVED***);
-        ***REMOVED***);
+                });
+            });
 
             $('.enlace_fotos').each(function (i, e) {
                 $(e).bind('click', function () {
@@ -157,10 +157,10 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                     ObtenerImgAprobar(estado, 1);
                     ObtenerComentariosCant();
                     ObtenerImgAprobCant();
-            ***REMOVED***);
-        ***REMOVED***);
+                });
+            });
 
-    ***REMOVED***
+        }
 
         function configuraFiltros() {
             $('#filtro_estados').on('change', function () {
@@ -170,11 +170,11 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                     $("#divDetComent").html("");
                     $("#divDetComent").html(loader_proy);
                     ObtenerComentarios(val_Sel, opc_asoc, 1);
-            ***REMOVED*** else {
+                } else {
                     $("#divDetComent").attr("estado", "");
-            ***REMOVED***
+                }
 
-        ***REMOVED***);
+            });
 
             $('#filtro_asociacion').on('change', function () {
                 var val_sel = this.value;
@@ -183,25 +183,25 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                     $("#divDetComent").html("");
                     $("#divDetComent").html(loader_proy);
                     ObtenerComentarios(opc_estado, val_sel, 1);
-            ***REMOVED*** else {
+                } else {
                     $("#divdetcoment").attr("asoc", "");
-            ***REMOVED***
+                }
 
-        ***REMOVED***);
+            });
 
             $('#filtro_estados_foto').on('change', function () {
                 var val_Sel = this.value;
                 if (val_Sel != "") {
                     ObtenerImgAprobar(val_Sel, 1);
-            ***REMOVED*** else {
+                } else {
                     //opcion vacia
                     //ObtenerImgAprobar(1, 1);
                     $("#divDetImg").attr("estado", "");
-            ***REMOVED***
+                }
 
-        ***REMOVED***);
+            });
 
-    ***REMOVED***
+        }
 
 
         function configuraBtn(idfoto) {
@@ -213,7 +213,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                 var idusuario = ($(this).attr('idusuario'));
                 var textoJustifica = "";
                 guardarAprobado('A', tipoFoto, idFoto, IdProyecto, idusuario, textoJustifica);
-        ***REMOVED***);
+            });
 
 
             $("#btnElimina" + idfoto).click(function () {
@@ -221,9 +221,9 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                 var obj_aux = this.id;
                 openModalDenegar("foto", obj_aux);
 
-        ***REMOVED***);
+            });
 
-    ***REMOVED***
+        }
 
         function configuraBtns(id) {
 
@@ -236,23 +236,23 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                 var codigoContrato = ($(this).attr('codigoContrato'));
                 var textoJustifica = "";
                 UpdateComentario('3', idcoment, idusuario, IdProyecto, idasociacion, idprograma, codigoContrato, textoJustifica);
-        ***REMOVED***);
+            });
 
             $("#btnRecategorizar" + id).click(function () {
                 var obj_aux = this.id;
                 openModalCambiarTipoComentario(obj_aux);
-        ***REMOVED***);
+            });
 
 
             $("#btnTipologia" + id).click(function () {
                 ObtenerTipologiasComentario(id);
                 openModalTipologia(id);
-        ***REMOVED***);
+            });
 
             $("#btnEliminaC" + id).click(function () {
                 var obj_aux = this.id;
                 openModalDenegar("comentario", obj_aux);
-        ***REMOVED***);
+            });
 
             $("#btnRespuesta" + id).click(function () {
                 $("#btnRespuesta" + id).hide();
@@ -267,8 +267,8 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                 var tiporespuestaaux = "optionsRadiostxtRespuesta" + idcoment;
                 var tiporespuesta = $("input:radio[name='" + tiporespuestaaux + "']:checked").val();
                 GuardaRepuesta(idcoment, idproyecto, idprograma, idusuario, idasociacion, codigoContrato, tiporespuesta);
-        ***REMOVED***);
-    ***REMOVED***
+            });
+        }
 
         function configBtnTipologia() {
             $("#topoModalGuardar").click(function () {
@@ -277,12 +277,12 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                 var vec_old = [];
                 if (tipo_old != "" && tipo_old != undefined) {
                     vec_old = tipo_old.split(',');
-            ***REMOVED***
+                }
                 var valoresCheck = [];
 
                 $("input[type=checkbox]:checked").each(function () {
                     valoresCheck.push(this.value);
-            ***REMOVED***);
+                });
 
                 if (arraysEqual(vec_old, valoresCheck) == false) {
                     //son diferentes
@@ -290,37 +290,37 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                     if (vec_old.length > 0) {
                         var tipologias_aux = valoresCheck.join(',');
                         CambiaTipologiaComentario(idcoment, tipologias_aux);
-                ***REMOVED*** else {
+                    } else {
                         if (valoresCheck.length > 0) {
                             var tipologias_aux = valoresCheck.join(',');
                             CambiaTipologiaComentario(idcoment, tipologias_aux);
-                    ***REMOVED*** else {
+                        } else {
                             bootbox.alert({
                                 message: 'Debe seleccionar al menos un tipo de comentario',
                                 buttons: {
                                     ok: {
                                         label: 'Aceptar'
-                                ***REMOVED***
-                            ***REMOVED***
-                        ***REMOVED***);
-                    ***REMOVED***
-                ***REMOVED***
+                                    }
+                                }
+                            });
+                        }
+                    }
 
-            ***REMOVED*** else {
+                } else {
                     bootbox.alert({
                         message: 'No existe cambio en los tipos de comentarios asociados',
                         buttons: {
                             ok: {
                                 label: 'Aceptar'
-                        ***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***);
+                            }
+                        }
+                    });
 
-            ***REMOVED***
+                }
 
-        ***REMOVED***);
+            });
 
-    ***REMOVED***
+        }
 
         function arraysEqual(_arr1, _arr2) {
 
@@ -328,20 +328,20 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                 return false;
 
             var arr1 = _arr1.concat().sort((a, b) => isFinite(a[0]) - isFinite(b[0])
-                || a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' ***REMOVED***));
+                || a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
             var arr2 = _arr2.concat().sort((a, b) => isFinite(a[0]) - isFinite(b[0])
-                || a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' ***REMOVED***));
+                || a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
 
             for (var i = 0; i < arr1.length; i++) {
 
                 if (arr1[i] !== arr2[i])
                     return false;
 
-        ***REMOVED***
+            }
 
             return true;
 
-    ***REMOVED***
+        }
 
         function openModalCambiarTipoComentario(obj) {
             var texto = "";
@@ -358,8 +358,8 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             $("#recategorizarModal").on('hide.bs.modal', function () {
                 $("#recategorizarModal").attr("data-type", "");
                 $("#recategorizarModal").attr("data-parameter", "");
-        ***REMOVED***);
-    ***REMOVED***
+            });
+        }
 
         function openModalTipologia(obj) {
             var texto = "";
@@ -376,8 +376,8 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             $("#topoModal").on('hide.bs.modal', function () {
                 $("#topoModal").attr("data-type", "");
                 $("#topoModal").attr("data-parameter", "");
-        ***REMOVED***);
-    ***REMOVED***
+            });
+        }
 
 
         function openModalDenegar(opcion, obj) {
@@ -389,17 +389,17 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                 titulo = "NO PUBLICAR";
                 $("#justificaModal").attr("data-type", "comentario");
                 $("#justificaModal").attr("data-parameter", obj);
-        ***REMOVED*** else if (opcion == "foto") {
+            } else if (opcion == "foto") {
                 texto = "Describa el motivo por la cual no aprueba la fotografía. Recuerde que éste será enviado a quién la subió.";
                 titulo = "NO APROBAR";
                 $("#justificaModal").attr("data-type", "foto");
                 $("#justificaModal").attr("data-parameter", obj);
-        ***REMOVED*** else {
+            } else {
                 texto = "";
                 titulo = "";
                 $("#justificaModal").attr("data-type", "");
                 $("#justificaModal").attr("data-parameter", "");
-        ***REMOVED***
+            }
             $("#modalJustificaLabel").text(titulo);
             $("#textoGuia").text(texto);
 
@@ -409,10 +409,10 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             $("#justificaModal").on('hide.bs.modal', function () {
                 $("#justificaModal").attr("data-type", "");
                 $("#justificaModal").attr("data-parameter", "");
-        ***REMOVED***);
+            });
 
 
-    ***REMOVED***
+        }
 
         function cerrarSesionUsu() {
             $.ajax({
@@ -434,29 +434,29 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                             $("#divComentarios").hide();
                             $("#secEncabezado").hide();
                             location.reload();
-                    ***REMOVED***);
+                        });
 
 
-                ***REMOVED*** else {
+                    } else {
                         bootbox.alert("@Error: " + result.message);
-                ***REMOVED***
+                    }
 
-              ***REMOVED***
+                },
                 error: function (response) {
                     alert(response.responseText);
-              ***REMOVED***
+                },
                 failure: function (response) {
                     alert(response.responseText);
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
+                }
+            });
+        }
 
 
         function validaSesionUsu() {
             var params_usu = {
                 IdUsuario: $("#hdIdUsuario").val(),
                 valida_rol: 'S'
-        ***REMOVED***;
+            };
             //add nuevo registro
             $.ajax({
                 type: 'POST',
@@ -487,22 +487,22 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                         $("#secEncabezado").show();
 
 
-                ***REMOVED*** else {
+                    } else {
                         bootbox.alert("@Error: " + result.message, function () {
                             cerrarSesionUsu();
-                    ***REMOVED***);
-                ***REMOVED***
+                        });
+                    }
 
-              ***REMOVED***
+                },
                 error: function (response) {
                     alert(response.responseText);
-              ***REMOVED***
+                },
                 failure: function (response) {
                     alert(response.responseText);
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
 
-    ***REMOVED***
+        }
 
         function validaLoginUsu() {
             //valida campos obligatorios
@@ -518,23 +518,23 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                     camposReq += "[" + id_txt + "]";
                     $("#error_" + id_txt).show();
                     formularioOK = false;
-            ***REMOVED*** else {
+                } else {
                     $("#error_" + id_txt).hide();
-            ***REMOVED***
-        ***REMOVED***);
+                }
+            });
 
             if (formularioOK == false) {
                 if (camposReq != "") {
                     bootbox.alert("Faltan campos obligatorios");
-            ***REMOVED***
-        ***REMOVED*** else {
+                }
+            } else {
                 //validarCorreo
                 if (validaEmail($('#txtEmailLog').val().toLowerCase())) {
                     var params_usu = {
                         email: $("#txtEmailLog").val(),
                         hash_clave: $("#txtClaveLog").val(),
                         valida_rol: 'S'
-                ***REMOVED***;
+                    };
                     //add nuevo registro
                     $.ajax({
                         type: 'POST',
@@ -563,27 +563,27 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                                     $("#divCloseSesion").show();
                                     $("#divFotos").show();
                                     //$("#divComentarios").show();
-                            ***REMOVED***);
+                                });
 
 
-                        ***REMOVED*** else {
+                            } else {
                                 bootbox.alert("@Error: " + result.message);
-                        ***REMOVED***
+                            }
 
-                      ***REMOVED***
+                        },
                         error: function (response) {
                             alert(response.responseText);
-                      ***REMOVED***
+                        },
                         failure: function (response) {
                             alert(response.responseText);
-                    ***REMOVED***
-                ***REMOVED***);
+                        }
+                    });
 
-            ***REMOVED*** else {
+                } else {
                     bootbox.alert("Email inválido");
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                }
+            }
+        }
 
 
 
@@ -596,11 +596,11 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             var eliminado = false;
             var idFoto = '';
             var idFotoUsuario = '';
-            if (ax == 'A') { aprobado = true ***REMOVED***
-            else if (ax == 'E') { eliminado = true ***REMOVED***
-            else { bootbox.alert("Error"); ***REMOVED***
-            if (tipoFoto == 'U') { idFotoUsuario = id; ***REMOVED***
-            else { bootbox.alert("Error"); ***REMOVED***
+            if (ax == 'A') { aprobado = true }
+            else if (ax == 'E') { eliminado = true }
+            else { bootbox.alert("Error"); }
+            if (tipoFoto == 'U') { idFotoUsuario = id; }
+            else { bootbox.alert("Error"); }
 
             var formularioOK = true;
             var camposReq = "";
@@ -610,8 +610,8 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             if (formularioOK == false) {
                 if (camposReq != "") {
                     bootbox.alert("Faltan campos obligatorios");
-            ***REMOVED***
-        ***REMOVED*** else {
+                }
+            } else {
                 if ($("#hdIdUsuario").val() != 0) {
                     var params_foto = {
                         Aprobadopor: $("#hdIdUsuario").val(),
@@ -621,7 +621,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                         IdProyecto: idproyecto,
                         IdUsuario: idusuario,
                         textoJustifica: textoJustifica
-                ***REMOVED***;
+                    };
                     //add nuevo registro
                     $.ajax({
                         type: 'GET',
@@ -634,26 +634,26 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                             if (result.status == true) {
                                 bootbox.alert("Registro actualizado", function () {
                                     ObtenerImgAprobar(1, 1);
-                            ***REMOVED***);
+                                });
 
-                        ***REMOVED*** else {
+                            } else {
                                 bootbox.alert("@Error: " + result.message);
-                        ***REMOVED***
+                            }
 
-                      ***REMOVED***
+                        },
                         error: function (response) {
                             alert(response.responseText);
-                      ***REMOVED***
+                        },
                         failure: function (response) {
                             alert(response.responseText);
-                    ***REMOVED***
-                ***REMOVED***);
+                        }
+                    });
 
-            ***REMOVED*** else {
+                } else {
                     bootbox.alert("Ingrese con su usuario");
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                }
+            }
+        }
 
         function UpdateComentario(estado, idcomentario, IdUsuario, IdProyecto, idsociacion, idprograma, codigoContrato, textoJustifica) {
             //valida campos obligatorios
@@ -669,8 +669,8 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             if (formularioOK == false) {
                 if (camposReq != "") {
                     bootbox.alert("Faltan campos obligatorios");
-            ***REMOVED***
-        ***REMOVED*** else {
+                }
+            } else {
                 if ($("#hdIdUsuario").val() != 0) {
                     var params_comen = {
                         IdComentario: idcomentario,
@@ -682,7 +682,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                         codigoContrato: codigoContrato,
                         textoJustifica: textoJustifica
 
-                ***REMOVED***;
+                    };
                     $.ajax({
                         type: 'POST',
                         contentType: "application/json; charset=utf-8",
@@ -696,35 +696,35 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                                     var estado = $("#divDetComent").attr("estado");
                                     var asociacion = $("#divDetComent").attr("asoc");
                                     ObtenerComentarios(estado, asociacion, 1);
-                            ***REMOVED***);
+                                });
 
-                        ***REMOVED*** else {
+                            } else {
                                 bootbox.alert("@Error: " + result.message);
                                 var estado = $("#divDetComent").attr("estado");
                                 var asociacion = $("#divDetComent").attr("asoc");
                                 ObtenerComentarios(estado, asociacion, 1);
-                        ***REMOVED***
+                            }
 
-                      ***REMOVED***
+                        },
                         error: function (response) {
                             alert(response.responseText);
                             var estado = $("#divDetComent").attr("estado");
                             var asociacion = $("#divDetComent").attr("asoc");
                             ObtenerComentarios(estado, asociacion, 1);
-                      ***REMOVED***
+                        },
                         failure: function (response) {
                             alert(response.responseText);
                             var estado = $("#divDetComent").attr("estado");
                             var asociacion = $("#divDetComent").attr("asoc");
                             ObtenerComentarios(estado, asociacion, 1);
-                    ***REMOVED***
-                ***REMOVED***);
+                        }
+                    });
 
-            ***REMOVED*** else {
+                } else {
                     bootbox.alert("Ingrese con su usuario");
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                }
+            }
+        }
 
         function CambiaTipoComentario(idcomentario, idtipocomentario) {
             $("#divDetComent").html("");
@@ -732,7 +732,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             var params_comen = {
                 IdComentario: idcomentario,
                 IdTipoComentario: idtipocomentario
-        ***REMOVED***;
+            };
             $.ajax({
                 type: 'POST',
                 contentType: "application/json; charset=utf-8",
@@ -748,30 +748,30 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                             ObtenerComentarios(estado, asociacion, 1);
                             $('#recategorizarModal').modal('hide');
 
-                    ***REMOVED***);
+                        });
 
-                ***REMOVED*** else {
+                    } else {
                         bootbox.alert("@Error: " + result.message);
                         var estado = $("#divDetComent").attr("estado");
                         var asociacion = $("#divDetComent").attr("asoc");
                         ObtenerComentarios(estado, asociacion, 1);
-                ***REMOVED***
+                    }
 
-              ***REMOVED***
+                },
                 error: function (response) {
                     alert(response.responseText);
                     var estado = $("#divDetComent").attr("estado");
                     var asociacion = $("#divDetComent").attr("asoc");
                     ObtenerComentarios(estado, asociacion, 1);
-              ***REMOVED***
+                },
                 failure: function (response) {
                     alert(response.responseText);
                     var estado = $("#divDetComent").attr("estado");
                     var asociacion = $("#divDetComent").attr("asoc");
                     ObtenerComentarios(estado, asociacion, 1);
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
+                }
+            });
+        }
 
         function GuardaRepuesta(idcomentario, idproyecto, idprograma, IdUsuariocomenta, Idasociacion, codigoContrato, tiporespuesta) {
             var text_coment = '';
@@ -785,16 +785,16 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             var IdEstadoRelacionado = 0;
             if (tiporespuesta == "option1") {
                 IdEstadoRelacionado = 5;
-        ***REMOVED***
+            }
             else if (tiporespuesta == "option2") {
                 IdEstadoRelacionado = 6;
-        ***REMOVED***
+            }
             else {
                 bootbox.alert("La respuesta debe ser parcial o final");
-        ***REMOVED***
+            }
             if (text_coment == "") {
                 bootbox.alert("Faltan campos obligatorios");
-        ***REMOVED*** else {
+            } else {
                 if ($("#hdIdUsuario").val() != 0) {
                     var params_comen = {
                         IdUsuario: $("#hdIdUsuario").val(),
@@ -811,7 +811,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                         codigoContrato: codigoContrato
 
 
-                ***REMOVED***;
+                    };
                     $.ajax({
                         type: 'POST',
                         contentType: "application/json; charset=utf-8",
@@ -825,41 +825,41 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                                     var estado = $("#divDetComent").attr("estado");
                                     var asociacion = $("#divDetComent").attr("asoc");
                                     ObtenerComentarios(estado, asociacion, 1);
-                            ***REMOVED***);
+                                });
 
-                        ***REMOVED*** else {
+                            } else {
                                 bootbox.alert("@Error: " + result.message);
                                 var estado = $("#divDetComent").attr("estado");
                                 var asociacion = $("#divDetComent").attr("asoc");
                                 ObtenerComentarios(estado, asociacion, 1);
-                        ***REMOVED***
+                            }
 
-                      ***REMOVED***
+                        },
                         error: function (response) {
                             alert(response.responseText);
                             var estado = $("#divDetComent").attr("estado");
                             var asociacion = $("#divDetComent").attr("asoc");
                             ObtenerComentarios(estado, asociacion, 1);
-                      ***REMOVED***
+                        },
                         failure: function (response) {
                             alert(response.responseText);
                             var estado = $("#divDetComent").attr("estado");
                             var asociacion = $("#divDetComent").attr("asoc");
                             ObtenerComentarios(estado, asociacion, 1);
-                    ***REMOVED***
-                ***REMOVED***);
+                        }
+                    });
 
-            ***REMOVED*** else {
+                } else {
                     bootbox.alert("Ingrese con su usuario");
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                }
+            }
+        }
 
 function ObtenerImgAprobar(estado, pagina) {
     var param = {
         "page": pagina,
         "estado": estado,
-***REMOVED***;
+    };
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -929,7 +929,7 @@ function ObtenerImgAprobar(estado, pagina) {
                                     .text("check_circle_outline")
                                 div_det2.append("p")
                                     .text("Aprobar")
-                        ***REMOVED***
+                            }
                             if (estado != 3) {
                                 var div_det3 = div_det.append("div")
                                     .attr("class", "col-md-6 text-center")
@@ -945,31 +945,31 @@ function ObtenerImgAprobar(estado, pagina) {
                                     .attr("class", "glyphicon glyphicon-remove")
                                 div_det4.append("p")
                                     .text("No Aprobar")
-                        ***REMOVED***
+                            }
                             configuraBtn(data.fotosU[cont].idFoto);
 
-                    ***REMOVED***
+                        }
                         cont += 1;
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
 
                 dibujarPagNumeradasFotos(pagina, data.totalNumber, data.totalPages);
 
-        ***REMOVED*** else {
+            } else {
                 $("#divPaginacion").html("");
                 $("#divPaginacion").hide();
                 $("#divMensaje").show();
                 $("#divDetImg").hide();
 
-        ***REMOVED***
+            }
             //if ($('#divFotos').data('mask'))
             //    $('#divFotos').data('mask').fadeOut(function () {
             //        $(this).remove();
 
-            //***REMOVED***);
-    ***REMOVED***
-***REMOVED***);
-***REMOVED***
+            //    });
+        }
+    });
+}
 
         function dibujarPag(actual, total, totalPag) {
             var pag_actual = parseInt(actual);
@@ -987,7 +987,7 @@ function ObtenerImgAprobar(estado, pagina) {
                         .attr("data-page", i)
                     pag_enlace.append("text")
                         .text(i)
-            ***REMOVED*** else {
+                } else {
                     var pag_enlace = divPag.append("a")
                         //.attr("id", "page_left")
                         .attr("class", "page_left")
@@ -999,17 +999,17 @@ function ObtenerImgAprobar(estado, pagina) {
                         .attr("class", "paginacion")
                         .text(i)
 
-            ***REMOVED***
+                }
 
 
-        ***REMOVED***
+            }
 
             $('.page_left').bind('click', function () {
                 pagina_actual = $(this).attr("data-page");
                 ObtenerImgAprobar("", pagina_actual);
-        ***REMOVED***);
+            });
 
-    ***REMOVED***
+        }
 
         function dibujarPagNumeradasFotos(actual, total, totalPag) {
 
@@ -1027,14 +1027,14 @@ function ObtenerImgAprobar(estado, pagina) {
             var inicio = 1;
             if (residuo == 0) {
                 inicio = (pag_actual - cant_por_linea) + 1;
-        ***REMOVED*** else {
+            } else {
                 inicio = (cociente * cant_por_linea) + 1;
-        ***REMOVED***
+            }
 
             var fin = inicio + (cant_por_linea - 1);
             if (totalPag < cant_por_linea) {
                 fin = totalPag;
-        ***REMOVED***
+            }
 
 
             if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
@@ -1046,7 +1046,7 @@ function ObtenerImgAprobar(estado, pagina) {
                     .attr("class", "glyphicon glyphicon-arrow-left")
                 pag_enlace.append("text")
                     .text(" Anterior")
-        ***REMOVED***
+            }
 
             for (var i = inicio; i <= fin; i++) {
 
@@ -1056,7 +1056,7 @@ function ObtenerImgAprobar(estado, pagina) {
                         .attr("data-page", i)
                     pag_enlace.append("text")
                         .text(i)
-            ***REMOVED*** else {
+                } else {
                     var pag_enlace = divPag.append("a")
                         //.attr("id", "page_left")
                         .attr("class", "page_left")
@@ -1068,10 +1068,10 @@ function ObtenerImgAprobar(estado, pagina) {
                         .attr("class", "paginacion")
                         .text(i)
 
-            ***REMOVED***
+                }
 
 
-        ***REMOVED***
+            }
 
             if (pag_actual < totalPag) {
                 if ((totalPag - pag_actual) > cant_por_linea) {
@@ -1083,16 +1083,16 @@ function ObtenerImgAprobar(estado, pagina) {
                     pag_enlace_der.append("span")
                         .attr("class", "glyphicon glyphicon-arrow-right")
 
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             $('#page_right,#page_left,.page_left').bind('click', function () {
                 pagina_actual = $(this).attr("data-page");
                 var estado = $("#divDetImg").attr("estado");
                 ObtenerImgAprobar(estado, pagina_actual);
-        ***REMOVED***);
+            });
 
-    ***REMOVED***
+        }
 
 
         function dibujarPagNumeradasComent(actual, total, totalPag) {
@@ -1111,14 +1111,14 @@ function ObtenerImgAprobar(estado, pagina) {
             var inicio = 1;
             if (residuo == 0) {
                 inicio = (pag_actual - cant_por_linea) + 1;
-        ***REMOVED*** else {
+            } else {
                 inicio = (cociente * cant_por_linea) + 1;
-        ***REMOVED***
+            }
 
             var fin = inicio + (cant_por_linea - 1);
             if (totalPag < cant_por_linea) {
                 fin = totalPag;
-        ***REMOVED***
+            }
 
 
             if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
@@ -1130,7 +1130,7 @@ function ObtenerImgAprobar(estado, pagina) {
                     .attr("class", "glyphicon glyphicon-arrow-left")
                 pag_enlace.append("text")
                     .text(" Anterior")
-        ***REMOVED***
+            }
 
             for (var i = inicio; i <= fin; i++) {
 
@@ -1140,7 +1140,7 @@ function ObtenerImgAprobar(estado, pagina) {
                         .attr("data-page", i)
                     pag_enlace.append("text")
                         .text(i)
-            ***REMOVED*** else {
+                } else {
                     var pag_enlace = divPag.append("a")
                         //.attr("id", "page_left")
                         .attr("class", "page_left")
@@ -1152,10 +1152,10 @@ function ObtenerImgAprobar(estado, pagina) {
                         .attr("class", "paginacion")
                         .text(i)
 
-            ***REMOVED***
+                }
 
 
-        ***REMOVED***
+            }
 
             if (pag_actual < totalPag) {
                 if ((totalPag - pag_actual) > cant_por_linea) {
@@ -1167,8 +1167,8 @@ function ObtenerImgAprobar(estado, pagina) {
                     pag_enlace_der.append("span")
                         .attr("class", "glyphicon glyphicon-arrow-right")
 
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             $('#page_right,#page_left,.page_left').bind('click', function () {
                 pagina_actual = $(this).attr("data-page");
@@ -1177,9 +1177,9 @@ function ObtenerImgAprobar(estado, pagina) {
                 $("#divDetComent").html("");
                 $("#divDetComent").html(loader_proy);
                 ObtenerComentarios(estado, asociacion, pagina_actual);
-        ***REMOVED***);
+            });
 
-    ***REMOVED***
+        }
 
 
 
@@ -1199,7 +1199,7 @@ function ObtenerImgAprobar(estado, pagina) {
                     .attr("class", "glyphicon glyphicon-arrow-left")
                 pag_enlace.append("text")
                     .text(" Anterior")
-        ***REMOVED***
+            }
             divPag.append("span")
                 .attr("class", "totalpages")
                 .text("Página " + actual + " de " + totalPag)
@@ -1214,17 +1214,17 @@ function ObtenerImgAprobar(estado, pagina) {
                     pag_enlace_der.append("span")
                         .attr("class", "glyphicon glyphicon-arrow-right")
 
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             $('#page_right,#page_left').bind('click', function () {
                 d3.select("#divDetImg").html("");
                 pagina_actual = $(this).attr("data-page");
                 ObtenerImgAprobar("", pagina_actual);
-        ***REMOVED***);
+            });
 
 
-    ***REMOVED***
+        }
 
 
         function pad(n, length) {
@@ -1232,19 +1232,19 @@ function ObtenerImgAprobar(estado, pagina) {
             while (n.length < length)
                 n = "0" + n;
             return n;
-    ***REMOVED***
+        }
 
 function ObtenerComentariosCant() {
     $.ajax({
         url: "/api/ServiciosParticipacion/GetCometAprobarCant",
         type: "GET",
 
-***REMOVED***).done(function (data) {
+    }).done(function (data) {
         var totalComentAprob = data.totalNumber;
         $("#lblCantComentarios").text("(" + totalComentAprob + ")");
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 
 function ObtenerImgAprobCant() {
@@ -1252,19 +1252,19 @@ function ObtenerImgAprobCant() {
         url: "/api/ServiciosProyectos/GetFotosAprobarCant",
         type: "GET",
 
-***REMOVED***).done(function (data) {
+    }).done(function (data) {
         var totalImagAprob = data.totalNumber;
         $("#lblCantFotos").text("(" + totalImagAprob + ")");
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 
         function ObtenerTipologiasComentario(idcomentario) {
             if ($("#tipologia_old_" + idcomentario).length > 0) {
                 $("#tipologia_old_" + idcomentario).val("");
                 $("#tipologia_old_" + idcomentario).remove();
-        ***REMOVED***
+            }
 
             $.ajax({
                 contentType: "application/json; charset=utf-8",
@@ -1272,8 +1272,8 @@ function ObtenerImgAprobCant() {
                 type: "GET",
                 data: {
                     idcomentario: idcomentario
-            ***REMOVED***
-        ***REMOVED***).done(function (data) {
+                }
+            }).done(function (data) {
                 $("#divTipologiaComentario").show();
                     //---------------------------------------------
                     var div_com = d3.select("#divTipologiaComentario")
@@ -1306,12 +1306,12 @@ function ObtenerImgAprobCant() {
                                 //div_info.append("span").attr("class", "text-bold").text("SI-")
                                 check_tipo.attr("checked", "true");
                                 tipologia_old.push(IdTipologia);
-                        ***REMOVED***
+                            }
 
                             div_info.append("span").attr("class", "text-bold").text(Tipologia)
 
 
-                    ***REMOVED***
+                        }
 
 
                         var jsonObj = tipologia_old.join(',');
@@ -1321,13 +1321,13 @@ function ObtenerImgAprobCant() {
                         tipo_input.attr("value", jsonObj)
 
 
-                ***REMOVED***
+                    }
                     else {
                         $("#divTipologiaComentario").html("No hay tipos de comentario asociados en la base de datos");
-                ***REMOVED***
+                    }
 
-            ***REMOVED***);
-    ***REMOVED***
+                });
+        }
 
 
 
@@ -1338,7 +1338,7 @@ function ObtenerImgAprobCant() {
                         "estado": estado,
                         "asociacion": asociacion,
                         "tipocomentario": tipocomentario
-                ***REMOVED***;
+                    };
                     $.ajax({
                         type: 'GET',
                         contentType: "application/json; charset=utf-8",
@@ -1379,11 +1379,11 @@ function ObtenerImgAprobCant() {
                             var municipio = "-";
                             if (data.itemcomentario[cont].nom_municipio != null) {
                                 municipio = data.itemcomentario[cont].nom_municipio + " - " + data.itemcomentario[cont].nom_departamento;
-                        ***REMOVED***
+                            }
                             var respuesta_aux = "Respuesta:";
                             if (data.itemcomentario[cont].nom_municipio != null) {
                                 encabezado = data.itemcomentario[cont].nom_municipio + " - ";
-                        ***REMOVED***
+                            }
 
                             if (data.itemcomentario[cont].idAsociacion == 3) {
                                 entidad_aux = "CONTRATO";
@@ -1391,25 +1391,25 @@ function ObtenerImgAprobCant() {
                                 encabezado = data.itemcomentario[cont].codigoContrato;
                                 logoresponde = "/content/img/PCM_Haciendapy.jpg";
 
-                        ***REMOVED*** else if (data.itemcomentario[cont].idAsociacion == 2) {
+                            } else if (data.itemcomentario[cont].idAsociacion == 2) {
                                 entidad_aux = "PROGRAMA";
                                 encabezado_aux = "Programa";
                                 encabezado = data.itemcomentario[cont].nombrePrograma;
                                 logoresponde = "/content/img/PCM_Haciendapy.jpg";
 
-                        ***REMOVED*** else {
+                            } else {
                                 var nombreproy = data.itemcomentario[cont].nombreProyecto;
                                 if (nombreproy != null) {
                                     entidad_aux = "PROYECTO";
                                     encabezado_aux = "Proyecto";
                                     encabezado = nombreproy.toString();
                                     logoresponde = "/content/img/PCM_profile.jpg";
-                            ***REMOVED***
-                        ***REMOVED***
+                                }
+                            }
                             var textocomentario = "";
                             if (data.itemcomentario[cont].comentarioOriginal) {
                                 textocomentario = data.itemcomentario[cont].comentarioOriginal.toString();
-                        ***REMOVED***
+                            }
                             if (id_padre == null) {
                                 var div_content = div_com.append("div")
                                     .attr("class", "borderbox-Coments")
@@ -1430,7 +1430,7 @@ function ObtenerImgAprobCant() {
 
                                         .append("p")
                                         .text(encabezado)
-                            ***REMOVED***
+                                }
 
                                 if (entidad_aux.toUpperCase() == "PROGRAMA") {
                                     div_info.append("a")
@@ -1439,7 +1439,7 @@ function ObtenerImgAprobCant() {
                                         .append("span").attr("class", "text-bold").text(encabezado_aux)
 
                                         .append("p").text(encabezado)
-                            ***REMOVED***
+                                }
 
                                 if (entidad_aux.toUpperCase() == "CONTRATO") {
                                     div_info.append("a")
@@ -1448,22 +1448,22 @@ function ObtenerImgAprobCant() {
                                         .append("span").attr("class", "text-bold").text(encabezado_aux)
 
                                         .append("p").text(encabezado)
-                            ***REMOVED***
+                                }
 
                                 var nombremostrar = "";
                                 var emailmostrar = "";
                                 
                                 if (data.itemcomentario[cont].email_usuario != undefined) {
                                     emailmostrar = data.itemcomentario[cont].email_usuario.toString();
-                            ***REMOVED***
+                                }
                                 if (data.itemcomentario[cont].nom_usuario != undefined) {
                                     nombremostrar = data.itemcomentario[cont].nom_usuario.toString();
-                            ***REMOVED***
+                                }
 
                                 if (data.itemcomentario[cont].anonimo) {
                                     nombremostrar = "Anónimo"
                                     emailmostrar = "Anónimo"
-                            ***REMOVED***
+                                }
                                 var div_fila_aux = div_info.append("div")
                                     .attr("class", "row")
                                 var div_col1 = div_fila_aux.append("div")
@@ -1536,7 +1536,7 @@ function ObtenerImgAprobCant() {
                                     .attr("class", "respuestas_ant")
                                     .attr("id", "divPadre_" + id_comentario)
 
-                        ***REMOVED***
+                            }
                             else {
 
                                 var dividcomm = "#divPadre_" + id_padre;
@@ -1558,7 +1558,7 @@ function ObtenerImgAprobCant() {
                                 var usr_date = usr_poster.append("div")
                                     .attr("class", "Post_date")
                                     .append("text").text("Fecha de Publicación: " + fecha_aux)
-                        ***REMOVED***
+                            }
 
 
                             if (id_padre == null) {
@@ -1578,7 +1578,7 @@ function ObtenerImgAprobCant() {
                                         .attr("class", "glyphicon glyphicon-ok")
                                     div_det2.append("p")
                                         .text("Publicar")
-                            ***REMOVED***
+                                }
                                 if (data.itemcomentario[cont].idEstado != 4) {
                                     var div_det1 = div_btn.append("div")
                                         .attr("class", "btnEliminaC btn btn-default")
@@ -1601,8 +1601,8 @@ function ObtenerImgAprobCant() {
                                     if (data.itemcomentario[cont].idEstado != 4) {
                                         if (data.itemcomentario[cont].idEstado >= 5) {
                                             respuesta_aux = "Ampliar Respuesta:"
-                                    ***REMOVED***
-                                ***REMOVED***
+                                        }
+                                    }
                                     var div_fila3 = div_content.append("div")
                                         .attr("class", "row")
                                     var div_col5 = div_fila3.append("div")
@@ -1647,37 +1647,37 @@ function ObtenerImgAprobCant() {
                                         .attr("class", "material-icons md-18")
                                     div_btn.append("p")
                                         .text("Publicar Respuesta")
-                            ***REMOVED***
-                        ***REMOVED***
+                                }
+                            }
 
                             configuraBtns(data.itemcomentario[cont].idComentario);
-                    ***REMOVED***
+                        }
 
                         dibujarPagNumeradasComent(pagina, totalComentAprob, totalPag);
 
-                ***REMOVED*** else {
+                    } else {
                         $("#divPaginacionComent").html("");
                         $("#divPaginacionComent").hide();
                         $("#divMensaje2").show();
                         $("#divDetComent").show();
 
-                ***REMOVED***
+                    }
 
                     //if ($('#divComentarios').data('mask'))
                     //    $('#divComentarios').data('mask').fadeOut(function () {
                     //        $(this).remove();
 
-                    //***REMOVED***);
+                    //    });
 
-                    ***REMOVED***
-            ***REMOVED***);
-    ***REMOVED***
+                        }
+                });
+        }
 
         function CambiaTipologiaComentario(idcomentario, tipologia) {
             var params_comen = {
                 idComentario: idcomentario,
                 idTipologiaStr: tipologia
-        ***REMOVED***;
+            };
             $.ajax({
                 type: 'POST',
                 contentType: "application/json; charset=utf-8",
@@ -1692,47 +1692,47 @@ function ObtenerImgAprobCant() {
                             buttons: {
                                 ok: {
                                     label: 'Aceptar'
-                            ***REMOVED***
-                          ***REMOVED***
+                                }
+                            },
                             callback: function () {
                                 $('#topoModal').modal('hide');
-                        ***REMOVED***
-                    ***REMOVED***);
+                            }
+                        });
 
 
-                ***REMOVED*** else {
+                    } else {
                         bootbox.alert("@Error: " + result.message);
-                ***REMOVED***
+                    }
 
-              ***REMOVED***
+                },
                 error: function (response) {
                     bootbox.alert(response.responseText);
-              ***REMOVED***
+                },
                 failure: function (response) {
                     bootbox.alert(response.responseText);
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
+                }
+            });
+        }
 
 
 //Comunes
 
 //validación de correo electrónico
 function validaEmail(cadena) {
-    if (cadena.match(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3***REMOVED***)$/)) {
+    if (cadena.match(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/)) {
         return true;
-***REMOVED*** else {
+    } else {
         return false;
-***REMOVED***
-***REMOVED***
+    }
+}
 
 function validaEnteroMayorCero(cadena) {
     if (cadena.match(/^[1-9]+[0-9]*$/)) {
         return true;
-***REMOVED*** else {
+    } else {
         return false;
-***REMOVED***
-***REMOVED***
+    }
+}
 
 
 

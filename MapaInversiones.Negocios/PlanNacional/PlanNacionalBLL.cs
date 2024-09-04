@@ -14,7 +14,7 @@ namespace PlataformaTransparencia.Negocios.PlanNacional
     public PlanNacionalBLL(TransparenciaDB connection)
     {
       _connection = connection;
-***REMOVED***
+    }
    
     /// <summary>
     /// Datos para treemap presupuestado y vista plan Nacional
@@ -31,7 +31,7 @@ namespace PlataformaTransparencia.Negocios.PlanNacional
                               Nombre= info.NombreObjetivoEstrategico,
                               Descripcion=info.DescripcionObjetivoEstrategico,
                               Ods= new List<AlineacionOds>()
-                        ***REMOVED***
+                            }
                            ).Distinct().OrderBy(x=>x.Nombre).ToList();
       for (var j = 0; j < objetivosQuery.Count; j++) {
         var alineacionOds = (from info in _connection.ConsultaVinculacionPNDPresupuestoXEntidadStp//   VinculacionIndicadoresPNDPresupuestoXEntidadesSTPV2 //VwObjetivosPNDStp
@@ -39,10 +39,10 @@ namespace PlataformaTransparencia.Negocios.PlanNacional
                              select new AlineacionOds {
                                CodOds = info.CodODS,
                                Nombre = info.NombreODS
-                         ***REMOVED***
+                             }
                            ).Distinct().OrderBy(x => x.CodOds.Value).ToList();
         objetivosQuery[j].Ods = alineacionOds;
-  ***REMOVED***
+      }
       foreach (var objetivoQuery in objetivosQuery) {
         var objetivosEspecificosQuery = (from info in _connection.VinculacionIndicadoresPNDXEntidadesStps0  //VinculacionIndicadoresPNDXEntidadesStp //VwObjetivosPNDStp
                                          where info.CodObjetivoEspecifico.HasValue && info.CodObjetivoEstrategico.HasValue &&  info.CodEjeEstrategico.HasValue &&   info.CodEjeEstrategico.Value == idEjeEstrategico && info.CodObjetivoEstrategico.Value == objetivoQuery.Id
@@ -50,14 +50,14 @@ namespace PlataformaTransparencia.Negocios.PlanNacional
                                            Id = info.CodObjetivoEspecifico.Value,
                                            Nombre=  info.NombreObjetivoEspecifico.Trim().Replace(info.CodEjeEstrategico.Value + "." + info.CodObjetivoEstrategico.Value + "." + info.CodObjetivoEspecifico.Value + ".", string.Empty).Trim().Replace(info.CodEjeEstrategico.Value + "." + info.CodObjetivoEstrategico.Value + "." + info.CodObjetivoEspecifico.Value, string.Empty).Trim(),
                                            Codigo= info.CodEjeEstrategico.Value + "." + info.CodObjetivoEstrategico.Value + "." + info.CodObjetivoEspecifico.Value
-                                     ***REMOVED***
+                                         }
                                         ).Distinct().OrderBy(x => x.Id).ToList();
 
         objetivoQuery.ObjetivoEspecifico = objetivosEspecificosQuery;
-  ***REMOVED***
+      }
       objReturn = new List<ObjetivosGeneralPorEjeEstrategico>(objetivosQuery);
       return objReturn;
-***REMOVED***
+    }
 
     /// <summary>
     /// Entidades que hacen parte del plan nacional de desarrollo
@@ -70,11 +70,11 @@ namespace PlataformaTransparencia.Negocios.PlanNacional
                                    select new InfoEntidad {
                                      CodEntidad = info.CodigoInstitucion,
                                      Nombre = info.Institucion,
-                               ***REMOVED***
+                                   }
                                    ).Distinct().OrderBy(x => x.Nombre).ToList();
       objReturn = new List<InfoEntidad>(entidadesPlanNacional.Count>6 ?  entidadesPlanNacional.OrderBy(x=>x.Nombre).Take(6) : entidadesPlanNacional.OrderBy(x => x.Nombre));
       return objReturn;
-***REMOVED***
+    }
 
     /// <summary>
     /// Entidades que hacen parte del plan nacional de desarrollo sin alcaldías
@@ -89,11 +89,11 @@ namespace PlataformaTransparencia.Negocios.PlanNacional
                                    {
                                      CodEntidad = info.CodigoInstitucion,
                                      Nombre = info.Institucion,
-                               ***REMOVED***
+                                   }
                                    ).Distinct().OrderBy(x => x.Nombre).ToList();
       objReturn = new List<InfoEntidad>(entidadesPlanNacional.Count > 6 ? entidadesPlanNacional.OrderBy(x => x.Nombre).Take(6) : entidadesPlanNacional.OrderBy(x => x.Nombre));
       return objReturn;
-***REMOVED***
+    }
 
     /// <summary>
     /// Datos para treemap presupuestado y vista plan Nacional
@@ -114,10 +114,10 @@ namespace PlataformaTransparencia.Negocios.PlanNacional
                               Meta2023 = info.Meta2023.HasValue? Math.Round(info.Meta2023.Value, 2):  info.Meta2023,
                               Meta2030= info.Meta2030.HasValue ? Math.Round(info.Meta2030.Value, 2) : info.Meta2030,
                               Avance= info.Avance.HasValue? Math.Round(info.Avance.Value,2): info.Avance
-                        ***REMOVED***
+                            }
                            ).Distinct().OrderBy(x => x.IdIndicador).ToList();
       objReturn = new List<IndicadorObjetivoEspecifico>(indicadoresQuery);
       return objReturn;
-***REMOVED***
-  ***REMOVED***
-***REMOVED***
+    }
+  }
+}

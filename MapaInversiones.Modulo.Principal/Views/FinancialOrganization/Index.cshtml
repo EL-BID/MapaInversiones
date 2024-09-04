@@ -3,7 +3,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-***REMOVED***
+}
 <section class="banner-main">
 
 <div class="container">
@@ -56,8 +56,8 @@
                                 <text>
                                 <option value="@item">@item</option>
                                 </text>
-                        ***REMOVED***
-                    ***REMOVED***
+                            }
+                        }
                     </select>
                 </div>
             </div>
@@ -179,15 +179,15 @@
         inicializarDatos();
         function inicializarDatos() {
             obtenerOrganismoFinanciador(anio, codigoFuente);
-    ***REMOVED***
+        }
         function organismoFinanciadorSelected(codigoFuenteSeleccionado) {
             codigoFuente = codigoFuenteSeleccionado;
             obtenerOrganismoFinanciador(anio, codigoFuente);
-    ***REMOVED***
+        }
         function anioSeleccionado(sel) {
             anio = sel.options[sel.selectedIndex].text;
             obtenerOrganismoFinanciador(anio, codigoFuente);
-    ***REMOVED***
+        }
         function obtenerOrganismoFinanciador(anio, codigoFuente) {
             $("#divDatosConsolidado").empty();
             $.ajax({
@@ -197,15 +197,15 @@
                 data: {
                     anio: anio,
                     codigofuente: codigoFuente
-            ***REMOVED***
-        ***REMOVED***).done(function (data) {
+                }
+            }).done(function (data) {
 
                 $("#totalFinanciadores").empty();
                 $("#totalFinanciadores").html(data.totalFinanciadores);
                 $("#totalProyectosFinanciados").empty();
                 $("#totalProyectosFinanciados").html(data.totalProyectosFinanciados);
                 $("#totalAportado").empty();
-                $("#totalAportado").html("RD " + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 ***REMOVED***).format(data.totalAportado) + " M");
+                $("#totalAportado").html("RD " + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(data.totalAportado) + " M");
                 let dataTable = "";
                 for (var i = 0; i < data.financiadores.length; i++) {
                     let estadosProyectos="";
@@ -218,8 +218,8 @@
                                 '<span class="labelTit">' +data.financiadores[i].estados[j].nombre + '</span>' +
                                 '<span class="td1">' + data.financiadores[i].estados[j].valor + '</span>' +
                              '</div>' ;
-                    ***REMOVED***
-                ***REMOVED***
+                        }
+                    }
                     dataTable = dataTable + '<div class="card-entidades-group">' +
                         '<div class="card d-flex">' +
                         '<div class="headEnt">' +
@@ -228,7 +228,7 @@
                         '</div>' +
                         '<div class="data1">' +
                         '<span class="labelTit">Monto financiado</span>' +
-                        '<span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 ***REMOVED***).format(data.financiadores[i].montoFinanciado) + ' M</span>' +
+                        '<span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(data.financiadores[i].montoFinanciado) + ' M</span>' +
                         '</div>' +
                         estadosProyectos +
                         '<div class="btn-action">' +
@@ -238,12 +238,12 @@
                         '</div>' +
                         '</div>' +
                         '</div >';
-            ***REMOVED***
+                }
                 $("#table_financiadores").empty();
                 $("#table_financiadores").html(dataTable);
-        ***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+            }).fail(function (xhr, ajaxOptions, thrownError) {
                 alert("Error 1 " + xhr.status + "_" + thrownError);
-        ***REMOVED***);
-    ***REMOVED***
+            });
+        }
     </script>
-***REMOVED***
+}

@@ -28,7 +28,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             _gestorTitulos = gestorTitulos;
             Configuration = configuration;
             CommonLabel.Init(connection, configuration);
-    ***REMOVED***
+        }
         public IActionResult MapView()
         {
             var horaInicio = DateTime.UtcNow;
@@ -36,9 +36,9 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
             HomeContract homeContract = new HomeContract(_connection);
             homeContract.Fill();
-            Debug.WriteLine("HomeController - Acción Index ejecutó en {0***REMOVED*** ms", (horaInicio - DateTime.UtcNow).Milliseconds);
+            Debug.WriteLine("HomeController - Acción Index ejecutó en {0} ms", (horaInicio - DateTime.UtcNow).Milliseconds);
             return View(homeContract.HomeModel);
-    ***REMOVED***
+        }
 
         public IActionResult MapViewMobile()
         {
@@ -47,8 +47,8 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
             HomeContract homeContract = new HomeContract(_connection);
             homeContract.Fill();
-            Debug.WriteLine("HomeController - Acción Index ejecutó en {0***REMOVED*** ms", (horaInicio - DateTime.UtcNow).Milliseconds);
+            Debug.WriteLine("HomeController - Acción Index ejecutó en {0} ms", (horaInicio - DateTime.UtcNow).Milliseconds);
             return View(homeContract.HomeModel);
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

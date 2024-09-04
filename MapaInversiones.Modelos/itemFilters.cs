@@ -6,12 +6,12 @@ namespace PlataformaTransparencia.Modelos
         /// <summary>
         /// Es el nombre del item del filtro
         /// </summary>
-        public string name { get; set; ***REMOVED***
+        public string name { get; set; }
         /// <summary>
         /// Valo del filtro.
         /// </summary>
-        public string value { get; set; ***REMOVED***
+        public string value { get; set; }
 
-        public string subTipo { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string subTipo { get; set; }
+    }
+}

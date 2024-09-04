@@ -24,7 +24,7 @@ define(['lib/mvc/Observable',
 			if( this.parameter === 'campoProyecto' ){
 				this.isExclusive = true
 				this.excludes = ['region', 'departamento', 'municipio']
-			***REMOVED***
+			}
 
 			if( !this.usaServicioAjax ){
 				for(var i=0; i<this.items.length; i++){
@@ -33,9 +33,9 @@ define(['lib/mvc/Observable',
 					option.on('require-activate', this.optionActivated.bind(this))
 					option.on('options-changed', this.optionActivatedByUser.bind(this))
 					tempArray[i] = option
-				***REMOVED***
+				}
 				tempArray.sort( this.alphabetSorting )
-			***REMOVED***
+			}
 			
 			this.options( tempArray )
 
@@ -44,30 +44,30 @@ define(['lib/mvc/Observable',
 			this.hidden = ko.observable(true)
 			// this.hidden.subscribe(function(){
 			// 	console.log(self.hidden(), self.parameter)
-			// ***REMOVED***)
+			// })
 
 			this.optionChanged = ko.observable()
 
 
-			this.elems = {***REMOVED***
+			this.elems = {}
 			this.isLoading = ko.observable( false )
 			this.extraClasses =  ko.computed(function(){
 				if( self.usaServicioAjax ){
 					if( self.isLoading() ){
 						return 'loading'
-					***REMOVED***
+					}
 					if( !self.options().length ){
 						return 'empty'
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				return ''
-			***REMOVED***)
+			})
 			this.testcat = ko.computed(function(){
 				
 				
 
-			***REMOVED***, this)
+			}, this)
 			this.getNameStatus =  ko.computed(function(){
 
 				var actived = '',
@@ -79,7 +79,7 @@ define(['lib/mvc/Observable',
 				for(var i = opts.length; i--;){
 					option = opts[i]
 					if(option.active()) actived +=  option.name + ', '
-				***REMOVED***
+				}
 
 				var nameoption = actived.replace(/\,\s$/, '');
 				
@@ -92,9 +92,9 @@ define(['lib/mvc/Observable',
 
 					if( nameoption === "Todos"){
 						valueSubtipo = "-1"
-					***REMOVED***else{
+					}else{
 						valueSubtipo = nameoption.substr(0, 1)
-					***REMOVED***
+					}
 
 					nameoption = nameoption.toLowerCase()
 
@@ -106,13 +106,13 @@ define(['lib/mvc/Observable',
 
 					$('.filter-group[data-parameter=campoProyectoFiscalizacion] .txt').text($('.buttons-filter-fiscalization a.active').attr('data-text-filter'))
 					
-				***REMOVED***
+				}
 
 				if(this.name == $('.filter-group[data-parameter=campoProyectoFiscalizacion] .txt').text() ){
 					//debugger;
 					this.name = $('.buttons-filter-fiscalization a.active').attr('data-text-filter')
 					//this.name = $('.filter-group[data-parameter=campoProyectoFiscalizacion] .txt').text()
-				***REMOVED***
+				}
 
 
 				if(actived)
@@ -122,7 +122,7 @@ define(['lib/mvc/Observable',
 
 				
 				return actived
-			***REMOVED***, this)
+			}, this)
 
 			this.getNameDefault =  ko.computed(function(){
 				var actived = '',
@@ -132,21 +132,21 @@ define(['lib/mvc/Observable',
 				for(var i = opts.length; i--;){
 					option = opts[i]
 					if(option.active()) actived +=  option.name + ', '
-				***REMOVED***
+				}
 				if(actived){
 					actived = actived.replace(/\,\s$/, '')
-				***REMOVED***
+				}
 				else{
 					actived = defaultText
-				***REMOVED***
+				}
 				return actived
-			***REMOVED***, this)
+			}, this)
 
 			this.toggleVisibleBinded = this.toggleVisible.bind(this)
-		***REMOVED***,
+		},
 
 		filter: function(){
-		***REMOVED***,
+		},
 
 		toggleVisible: function(data, evt){
 			var elem = evt && $(evt.target),
@@ -154,25 +154,25 @@ define(['lib/mvc/Observable',
 
 			if( elem ){
 				this.elem = elem
-			***REMOVED***
+			}
 			
 			this.onToggle()
 
 			if(!isVisible){
 				this.show()
-			***REMOVED***else{
+			}else{
 				if( evt ) evt.stopPropagation()
 				this.hide()
-			***REMOVED***
+			}
 
 			if(evt instanceof Event){
 				if(evt.stopPropagation){
 					evt.stopPropagation()
-				***REMOVED***else{
+				}else{
 					window.event.cancelBubble = true
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***,
+				}
+			}
+		},
 
 		setActive: function(){
 			// console.log('damn')
@@ -182,9 +182,9 @@ define(['lib/mvc/Observable',
 				//debugger;
 				// console.log('firing unselectall', this.parameter, false, this.excludes) 
 				this.fireEvent('unselect-all-filters', this.parameter, false, this.excludes)
-			***REMOVED***
+			}
 			this.fireEvent('option-activated', this, areActive)
-		***REMOVED***,
+		},
 
 		getActive: function(){
 			var opts = this.options(),
@@ -193,9 +193,9 @@ define(['lib/mvc/Observable',
 			for(var i = 0; i < opts.length; i++){
 				option = opts[i]
 				if(option.active()) areActive.push( option )
-			***REMOVED***
+			}
 			return areActive
-		***REMOVED***,
+		},
 
 		disActive: function(){
 			var opts = this.options(),
@@ -203,8 +203,8 @@ define(['lib/mvc/Observable',
 			for(var i = opts.length; i--;){
 				option = opts[i]
 				if(option.active()) option.setActive(false)
-			***REMOVED***
-		***REMOVED***,
+			}
+		},
 
 		optionClicked: function(parent, evt, option){
 			var target = evt.target,
@@ -223,15 +223,15 @@ define(['lib/mvc/Observable',
 
 					$('.map-container').attr('data-option-subtipo', state.toLowerCase() + '-option-subtipo-'+value)
 
-				***REMOVED***
+				}
 
 			if($(evt.target).hasClass('option'))
 				child.toggleActive()
-		***REMOVED***,
+		},
 
 		optionActivated: function(options){
 			this.fireEvent('activate-options-related', options)
-		***REMOVED***,
+		},
 
 		optionActivatedByUser: function(option, stopBubbling){
 			var opt,
@@ -242,30 +242,30 @@ define(['lib/mvc/Observable',
 				if( !this.esMultiple &&
 					option.value !== opt.value ){
 					opt.setActive( false, 'ignoreNotification' )
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			if('periodosFiscalizacion' == this.parameter){
 				$('#info-select-list-period').trigger('click')
-			***REMOVED***
+			}
 			
 			if( !stopBubbling ){
 				this.fireEvent('activated-by-user', this.parameter, this.getActive())
-			***REMOVED***
-		***REMOVED***,
+			}
+		},
 
 		getOptionByValue: function(value){
 			var opts = this.options(), i = 0
 			for(; i<opts.length; i++){
 				if(opts[i].value === value)
 					return opts[i]
-			***REMOVED***
-		***REMOVED***,
+			}
+		},
 
 		activateOptionByValue: function( value ){
 			var opt = this.getOptionByValue( value )
 			if( opt ) opt.setActive()
-		***REMOVED***,
+		},
 
 		filterOptions: function(data, evt){
 			var srt = evt.target.value,
@@ -276,8 +276,8 @@ define(['lib/mvc/Observable',
 				for(var i=0; i<opts.length; i++){
 					opt = opts[i]
 					opt.setVisibility(!srt || opt.name.score(srt) > 0)
-				***REMOVED***
-			***REMOVED***else if( srt.length > 2 ){
+				}
+			}else if( srt.length > 2 ){
 				self.options([])
 				self.isLoading(true)
 				clearTimeout( searchTimeout )
@@ -287,8 +287,8 @@ define(['lib/mvc/Observable',
 						url: self.urlServicioAjax,
 						data: {
 							query: srt
-						***REMOVED***
-					***REMOVED***).done(function( data ) {
+						}
+					}).done(function( data ) {
 						var opts = data.filters ? data.filters[0].items : [],
 							tempArray = []
 
@@ -298,16 +298,16 @@ define(['lib/mvc/Observable',
 							opt.on('require-activate', self.optionActivated.bind(self))
 							opt.on('options-changed', self.optionActivatedByUser.bind(self))
 							tempArray[i] = opt
-						***REMOVED***
+						}
 						
 						self.options( tempArray )
 						self.isLoading(false)
-					***REMOVED***)
-				***REMOVED***, 1000)
-			***REMOVED***else{
+					})
+				}, 1000)
+			}else{
 				self.options([])
-			***REMOVED***
-		***REMOVED***,
+			}
+		},
 
 		getQuery: function(){
 			if(this.active()){
@@ -318,14 +318,14 @@ define(['lib/mvc/Observable',
 				for(var i = opts.length; i--;){
 					option = opts[i]
 					if(option.active()) query +=  encodeURIComponent( option.value ) + ','
-				***REMOVED***
+				}
 
 				query = query.replace(/\,$/, '')
 
 				return query
-			***REMOVED***
+			}
 			return ''
-		***REMOVED***,
+		},
 
 		onToggle: function(){
 			this.elem.parents('.filters-group')
@@ -337,8 +337,8 @@ define(['lib/mvc/Observable',
 			if( !this.usaServicioAjax ){
 				this.elem.parents('.filters-group input')
 					.val('').keyup()
-			***REMOVED***
-		***REMOVED***,
+			}
+		},
 
 		hide: function(){
 			var self = this
@@ -356,16 +356,16 @@ define(['lib/mvc/Observable',
 					.slideUp(200, function(){
 						$(this).hide().parent()
 							.removeClass('visible')
-					***REMOVED***)
-			***REMOVED***else{
+					})
+			}else{
 				this.elem.next().delay(100)
-					.animate({width: 0***REMOVED***, 250, function(){
+					.animate({width: 0}, 250, function(){
 						$(this).hide().parent()
 							.removeClass('visible')
 						self.visible(false)
-					***REMOVED***)
-			***REMOVED***
-		***REMOVED***,
+					})
+			}
+		},
 
 		show: function(){
 			var self = this
@@ -378,23 +378,23 @@ define(['lib/mvc/Observable',
 					.slideDown(200)
 				setTimeout(function(){
 					$(document).on('click', self.toggleVisibleBinded)
-				***REMOVED***, 10)
-			***REMOVED***else{
+				}, 10)
+			}else{
 				this.elem.next()
 					.width(0)
 					.show()
 					.delay(100)
-					.animate({width: 200***REMOVED***, 250)
-			***REMOVED***
+					.animate({width: 200}, 250)
+			}
 			this.elem.parent().addClass('visible')
 
 			// SORTING
 			this.fireEvent('filters-gonna-show', this)
-		***REMOVED***,
+		},
 
 		alphabetSorting: function(left, right){
 			return left.name == right.name ? 0 : (left.name < right.name ? -1 : 1)
-		***REMOVED***,
+		},
 
 		sortOptionsBy: function( fgsActive ){
 			var opts = this.options(),
@@ -409,34 +409,34 @@ define(['lib/mvc/Observable',
 							if(	fgsActive[i].parameter == dependency.type &&
 								activedOptions[j].value == dependency.id ){
 								return true
-							***REMOVED***
-						***REMOVED***
-					***REMOVED***
+							}
+						}
+					}
 					return false
 					// return dependency.type === type &&  dependency.id === id
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 			
 			for(var i = opts.length; i--;){
 				option = opts[i]
 				if(!option.dependsOn){
 					option.sortBy = 2+option.name
 					option.important(false)
-				***REMOVED***else{
+				}else{
 					if( option.dependsOn.filter( this.filterByType ).length ){
 						option.sortBy = 1+option.name
 						option.important(true)
-					***REMOVED***else{
+					}else{
 						option.sortBy = 2+option.name
 						option.important(false)
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+					}
+				}
+			}
 
 			this.options.sort( function( left, right ) {
 				return left.sortBy == right.sortBy ? 0 : (left.sortBy < right.sortBy ? -1 : 1)
-			***REMOVED***)
-		***REMOVED***,
+			})
+		},
 
 		selectOption: function( id ) {
 			var opts = this.options(),
@@ -448,14 +448,14 @@ define(['lib/mvc/Observable',
 				option = opts[i]
 				if( option.value == id ){
 					option.setActive( true )
-				***REMOVED***else if( !this.esMultiple ){
-				//***REMOVED***else if( !this.esMultiple ||
+				}else if( !this.esMultiple ){
+				//}else if( !this.esMultiple ||
 				//	( this.parameter.indexOf('period') && AppState.getState().state === 'Fiscalizacion' ) ){
 					option.setActive( false, 'ignoreNotification' )
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+				}
+			}
+		}
+	})
 
 	return Filter
-***REMOVED***)
+})

@@ -12,13 +12,13 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
     {
       try {
         ViewData["tab"] = id;
-  ***REMOVED***
+      }
       catch (Exception ex) 
       {
-  ***REMOVED***
+      }
       
       return View();
-***REMOVED***
+    }
 
     public IActionResult Contactanos(int? id=null)
     {
@@ -26,24 +26,24 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       ViewData["tab"] = id;
       ViewData["ShowContacts"] = false;
       return View();
-***REMOVED***
+    }
     public IActionResult Acercade()
     {
       return View();
-***REMOVED***
+    }
 
         public IActionResult MarcoLegal()
         {
             return View();
-    ***REMOVED***
+        }
         public IActionResult PoliticasdePrivacidad()
         {
             return View();
-    ***REMOVED***
+        }
         public IActionResult TerminosyCondiciones()
         {
             return View();
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

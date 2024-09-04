@@ -4,9 +4,9 @@ ko.bindingHandlers.enterKey = {
             if (event.keyCode === 13) {
                 ko.utils.triggerEvent(element, "change");
                 valueAccessor().call(vm, vm); //set "this" to the data and also pass it as first arg, in case function has "this" bound
-        ***REMOVED***
+            }
 
             return true;
-    ***REMOVED***);
-***REMOVED***         
-***REMOVED***;
+        });
+    }         
+};

@@ -2,7 +2,7 @@
 @inject OrchardCore.IOrchardHelper Orchard
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+}
 @{
     var decreto = "";
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
@@ -18,36 +18,36 @@
     var TituloDecreto = "";
     System.IFormatProvider culture =
     new System.Globalization.CultureInfo("es-RD");
-***REMOVED***
+}
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
     if (@etiqueta.AliasPart.Alias == "Emergencia" + Model.TipoEmergencia)
     {
         LabelEmergencias = @etiqueta.HtmlBodyPart.Html;
         TituloEmergencias = @etiqueta.TitlePart.Title;
-***REMOVED***
+    }
 
     if (@etiqueta.AliasPart.Alias == "EmergenciaTab1_" + Model.TipoEmergencia)
     {
         LabelEmergenciasTab1 = @etiqueta.HtmlBodyPart.Html;
         TituloEmergenciasTab1 = @etiqueta.TitlePart.Title;
-***REMOVED***
+    }
         if (@etiqueta.AliasPart.Alias == "EmergenciaTab2_" + Model.TipoEmergencia)
     {
         LabelEmergenciasTab2 = @etiqueta.HtmlBodyPart.Html;
         TituloEmergenciasTab2 = @etiqueta.TitlePart.Title;
-***REMOVED***
+    }
     if (@etiqueta.AliasPart.Alias == "EmergenciaTab3_" + Model.TipoEmergencia)
     {
         LabelEmergenciasTab3 = @etiqueta.HtmlBodyPart.Html;
         TituloEmergenciasTab3 = @etiqueta.TitlePart.Title;
-***REMOVED***
+    }
     if (@etiqueta.AliasPart.Alias == "EmergenciaDecreto" + Model.TipoEmergencia)
     {
         LabelDecreto = @etiqueta.HtmlBodyPart.Html;
         TituloDecreto = @etiqueta.TitlePart.Title;
-***REMOVED***
-***REMOVED***
+    }
+}
 
 
 <!--HEADER-->
@@ -89,7 +89,7 @@
                         <form class="">
                             <div class="row">
 
-                                @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" ***REMOVED***))
+                                @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" }))
                                 {
                                     <div class="form-field whiteSearch mb-4" id="contentSearchDiv">
                                         <label for="SearchString" class="form-field-label">
@@ -104,7 +104,7 @@
                                         <!--id="page-field-search"-->
                                     </div>
 
-                            ***REMOVED***
+                                }
 
 
                             </div>
@@ -172,7 +172,7 @@
                                 Monto total procesos de compra
                             </span>
                             <span class="bigNumber" id="valProcesos">
-                                $ @String.Format("{0:n2***REMOVED***", (@Model.resumenDatosContratos.valorProcesos / 1000000)) millones
+                                $ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorProcesos / 1000000)) millones
                             </span>
                         </div>
                         <div class="cta-wrapper text-center p25">
@@ -218,7 +218,7 @@
                     <div class="col-lg-12">
                         <h3 class="text-center mb25 h4">Procesos de compra con mayor valor asignado</h3>
                         <div class="card-carusel-wrap">
-                            <div id="divResumenProcesos" class="project-carusel carouselData" data-flickity='{ "initialIndex": 0, "pageDots": false, "groupCells": true, "contain": true, "prevNextButtons": true , "freeScroll":true,"wrapAround":false ***REMOVED***'>
+                            <div id="divResumenProcesos" class="project-carusel carouselData" data-flickity='{ "initialIndex": 0, "pageDots": false, "groupCells": true, "contain": true, "prevNextButtons": true , "freeScroll":true,"wrapAround":false }'>
                                 @foreach (var item in Model.resumenDatosContratos.listUnidadCompra)
                                 {
                                     <div class="carousel-cell col-lg-3">
@@ -239,7 +239,7 @@
                                                         Monto total contratado
                                                     </span>
                                                     <span class="bigNumber">
-                                                        $ @String.Format("{0:n2***REMOVED***", (item.ValorContratado / 1000000)) millones
+                                                        $ @String.Format("{0:n2}", (item.ValorContratado / 1000000)) millones
                                                     </span>
                                                 </div>
                                             </div>
@@ -248,7 +248,7 @@
                                             </div>
                                         </div>
                                     </div>
-                            ***REMOVED***
+                                }
 
                             </div>
                         </div>
@@ -285,7 +285,7 @@
                                 Valor total contratos
                             </span>
                             <span class="bigNumber" id="valContratos">
-                                $ @String.Format("{0:n2***REMOVED***", (@Model.resumenDatosContratos.valorContratos / 1000000)) millones
+                                $ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorContratos / 1000000)) millones
                             </span>
                         </div>
                         <div class="cta-wrapper text-center p25">
@@ -323,7 +323,7 @@
                     <div class="col-lg-12">
                         <h3 class="text-center mb25 h4">Contratistas y contratos con mayor valor adjudicado</h3>
                         <div class="card-carusel-wrap">
-                            <div id="divResumenContratos" class="project-carusel carouselData" data-flickity='{"initialIndex": 0, "pageDots": false, "groupCells": true, "contain": true, "prevNextButtons": true , "freeScroll":true,"wrapAround":false ***REMOVED***'>
+                            <div id="divResumenContratos" class="project-carusel carouselData" data-flickity='{"initialIndex": 0, "pageDots": false, "groupCells": true, "contain": true, "prevNextButtons": true , "freeScroll":true,"wrapAround":false }'>
                                 @foreach (var item in Model.resumenDatosContratos.listContratista)
                                 {
                                     <div class="carousel-cell col-lg-3">
@@ -344,7 +344,7 @@
                                                         Monto total contratado
                                                     </span>
                                                     <span class="bigNumber">
-                                                        $ @String.Format("{0:n2***REMOVED***", (item.ValorTotalContratos / 1000000)) millones
+                                                        $ @String.Format("{0:n2}", (item.ValorTotalContratos / 1000000)) millones
                                                     </span>
                                                 </div>
                                             </div>
@@ -353,7 +353,7 @@
                                             </div>
                                         </div>
                                     </div>
-                            ***REMOVED***
+                                }
                             </div>
 
                         </div>
@@ -383,7 +383,7 @@
                                 Total ejecutado
                             </span>
                             <span class="bigNumber" id="valContratos">
-                                $ @String.Format("{0:n2***REMOVED***", (@Model.resumenDatosContratos.valorEjecutado / 1000000)) millones
+                                $ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorEjecutado / 1000000)) millones
                             </span>
                         </div>
                         <div class="cta-wrapper text-center p25">
@@ -573,7 +573,7 @@
                                 @if (TituloDecreto != null && TituloDecreto.Split(" ").Count() > 1)
                                 {
                                     decreto = @TituloDecreto.Split(" ")[1];
-                            ***REMOVED***
+                                }
 
                                 <a href="https://presidencia.gob.do/decretos/@decreto" target="_blank" rel="noopener">Ver <i class="material-icons md-22">chevron_right</i></a>
                             </div>
@@ -594,7 +594,7 @@
 
     if (window.location.host == url1 || window.location.host == url2) {
         document.getElementById('navigationTabs').style.display = 'none';
-***REMOVED***
+    }
 </script>
 
 <script src="~/js/flickity/flickity.pkgd.min.js" type="text/javascript"></script>
@@ -604,30 +604,30 @@
 
 @section DataBody {
 
-        @* data-contrato='[{"CodigoContrato":"@Model.resumenDatosContratos.listUnidadCompra"***REMOVED***]' *@
-        data-contrato='[{"CodigoContrato":"@Model.resumenDatosContratos.listUnidadCompra"***REMOVED***]'
+        @* data-contrato='[{"CodigoContrato":"@Model.resumenDatosContratos.listUnidadCompra"}]' *@
+        data-contrato='[{"CodigoContrato":"@Model.resumenDatosContratos.listUnidadCompra"}]'
 
         data-resourcesPerContratos='[@foreach (var item in @Model.InfoRecursosContratos)
     {
         <text>
-            {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "rawValue": "@item.rawValue"***REMOVED***@if (item != @Model.InfoRecursosContratos.Last())
+            {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "rawValue": "@item.rawValue"}@if (item != @Model.InfoRecursosContratos.Last())
             {
                 <text>,</text>
-        ***REMOVED***
+            }
         </text>
-***REMOVED***]'
+    }]'
 
         data-resourcesPerProcesos='[@foreach (var item in @Model.InfoRecursosProcesos)
     {
         <text>
-            {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "rawValue": "@item.rawValue"***REMOVED***@if (item != @Model.InfoRecursosProcesos.Last())
+            {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "rawValue": "@item.rawValue"}@if (item != @Model.InfoRecursosProcesos.Last())
             {
                 <text>,</text>
-        ***REMOVED***
+            }
         </text>
-***REMOVED***]'
+    }]'
 
-***REMOVED***
+}
 
 
 <script>
@@ -642,13 +642,13 @@
             "prevNextButtons": true,
             "freeScroll": true,
             "wrapAround": false
-    ***REMOVED***);
+        });
 
         var cellElements = $carousel.flickity('getCellElements');
 
         if (cellElements.length > 0) {
             $carousel.flickity('resize');
-    ***REMOVED***
+        }
 
         $('ul.tabs li').click(function () {
             var tab_id = $(this).attr('data-tab');
@@ -667,15 +667,15 @@
                 "freeScroll": true,
                 "wrapAround": false
 
-        ***REMOVED***);
+            });
             var cellElements = $carousel.flickity('getCellElements');
 
         $carousel.flickity('resize');
 
 
-    ***REMOVED***)
+        })
 
-***REMOVED***)
+    })
 </script>
 <script>
     $('.tab').on('click', function (evt) {
@@ -683,6 +683,6 @@
         $(this).toggleClass('active');
         var sel = this.getAttribute('data-toggle-target');
         $('.tab-content').removeClass('active').filter(sel).addClass('active');
-***REMOVED***);
+    });
 
 </script>

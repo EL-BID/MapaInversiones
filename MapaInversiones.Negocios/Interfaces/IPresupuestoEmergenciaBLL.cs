@@ -25,5 +25,5 @@ namespace PlataformaTransparencia.Negocios.Interfaces
 
     public List<InfograficoFuentePrograma> ObtDistribucionPresupuestalPorTipoEmergencia(int? tipoEmergencia);
 
-  ***REMOVED***
-***REMOVED***
+  }
+}

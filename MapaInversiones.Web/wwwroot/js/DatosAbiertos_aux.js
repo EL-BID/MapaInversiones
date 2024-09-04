@@ -3,7 +3,7 @@
 function inicializaDatos() {
 
     cargarfuentesdatos();
-***REMOVED***
+}
 
 function cargarfuentesdatos() {
     $.ajax({
@@ -34,25 +34,25 @@ function cargarfuentesdatos() {
                         $("." + classdivfuente).html(htmldivfuente);
 
 
-                ***REMOVED***
+                    }
                     
-            ***REMOVED***
+                }
 
-        ***REMOVED*** else {
+            } else {
                 bootbox.alert("Error: " + result.Message, function () {
 
-            ***REMOVED***);
-        ***REMOVED***
+                });
+            }
 
-      ***REMOVED***
+        },
         error: function (response) {
             bootbox.alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             bootbox.alert(response.responseText);
-    ***REMOVED***
-***REMOVED***);
-***REMOVED***
+        }
+    });
+}
 
 function cargaannos(setdatos,datos,elemsel,elemdic,elemultimaact,elemfuente) {
     var results = [];
@@ -68,37 +68,37 @@ function cargaannos(setdatos,datos,elemsel,elemdic,elemultimaact,elemfuente) {
                 var urlxls = datosannos.ContentItems[j].LinkDatosAbiertos.EnlaceXLS.Url;
                 if (j == 0) {
                     selectannos += '<option selected value="' + anno + '" urlcvs="' + urlcvs + '" urlxls="' + urlxls + '" >' + anno + '</option>';
-            ***REMOVED*** else {
+                } else {
                     selectannos += '<option value="' + anno + '" urlcvs="' + urlcvs + '" urlxls="' + urlxls + '" >' + anno + '</option>';
-            ***REMOVED***
+                }
                 $("#" + elemsel).html(selectannos);
-        ***REMOVED***
+            }
             document.getElementById(elemdic).href = setdatos.ContentItems[i].DescargaDatosAbiertos.UrlBotonDiccionario.Url;
             $("#" + elemultimaact).text(setdatos.ContentItems[i].DescargaDatosAbiertos.Ultimaactualizacion.Text);
             $("#" + elemfuente).text(setdatos.ContentItems[i].DescargaDatosAbiertos.Fuente.Text);
             
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}
 
 function descargar(sel, rad) {
     var valrad = $('input[name="' + rad + '"]:checked').val();
     var url = "";
     if (valrad == 'CVS') {
         url = $("#" + sel + " option:selected").attr("urlcvs");
-***REMOVED*** else if (valrad == 'XLS') {
+    } else if (valrad == 'XLS') {
         url = $("#" + sel + " option:selected").attr("urlxls");
-***REMOVED***
+    }
     if ((url == undefined) || (url == "") || (url == null) || (url == "null")) {
         alert('No existe set de datos en el formato seleccionado');
 
-***REMOVED***
+    }
     else {
         window.location.href = url;
-***REMOVED***
-***REMOVED***
+    }
+}
 
 $("#datoscontratos").on("change", function () {
     var datos = $("#datoscontratos option:selected").val()
     cargaannos(datoscontrato, datos, 'annocontratos', 'idDicContratos', 'idUltimaActContratos', 'FuenteContratos');
-***REMOVED***);
+});

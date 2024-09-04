@@ -35,7 +35,7 @@
  o legendothers (string) text that will be used in legend to describe options that are collapsed into 1 slice, because they are too small to render [default `"Others"`]
  o legendmark (string) symbol used as a bullet point in legend that has the same colour as the chart slice [default `"circle"`]
  o legendpos (string) position of the legend on the chart [default `"east"`]. Other options are `"north"`, `"south"`, `"west"`
- o ***REMOVED***
+ o }
  **
  = (object) path element of the popup
  > Usage
@@ -45,7 +45,7 @@
 ;(function () {
 
     function semiPiechart(paper, cx, cy, r, values, opts, valueLabel) {
-        opts = opts || {***REMOVED***;
+        opts = opts || {};
 
         var chartinst = this,
             sectors = [],
@@ -87,54 +87,54 @@
                     "z"
                 ];
 
-            res.middle = { x: xm, y: ym ***REMOVED***;
-            res.realMiddle = { x: xl, y: yl ***REMOVED***;
+            res.middle = { x: xm, y: ym };
+            res.realMiddle = { x: xl, y: yl };
 
             return res;
-    ***REMOVED***
+        }
 
         chart.covers = covers;
         
         for (var i = 0; i < len; i++) {
             total += values[i];
-            values[i] = { value: values[i], order: i, valueOf: function () { return this.value; ***REMOVED*** ***REMOVED***;
-    ***REMOVED***
+            values[i] = { value: values[i], order: i, valueOf: function () { return this.value; } };
+        }
         
         //values are sorted numerically
         values.sort(function (a, b) {
             return b.value - a.value;
-    ***REMOVED***);
+        });
         if( valueLabel ){ 
             valueLabel.sort(function (a, b) {
                 return parseInt(b,10) - parseInt(a,10);
-        ***REMOVED***);
-    ***REMOVED***
+            });
+        }
         
         for (i = 0; i < len; i++) {
             if (defcut && values[i] * 100 / total < minPercent) {
                 cut = i;
                 defcut = false;
-        ***REMOVED***
+            }
 
             if (i > cut) {
                 defcut = false;
                 values[cut].value += values[i];
                 values[cut].others = true;
                 others = values[cut].value;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         if (len == 1) {
-            // series.push(paper.circle(cx, cy, r).attr({ fill: opts.colors && opts.colors[0] || chartinst.colors[0], stroke: opts.stroke || "#fff", "stroke-width": opts.strokewidth == null ? 1 : opts.strokewidth ***REMOVED***));
+            // series.push(paper.circle(cx, cy, r).attr({ fill: opts.colors && opts.colors[0] || chartinst.colors[0], stroke: opts.stroke || "#fff", "stroke-width": opts.strokewidth == null ? 1 : opts.strokewidth }));
             // covers.push(paper.circle(cx, cy, r).attr(chartinst.shim));
             // total = values[0];
-            // values[0] = { value: values[0], order: 0, valueOf: function () { return this.value; ***REMOVED*** ***REMOVED***;
-            // opts.href && opts.href[0] && covers[0].attr({ href: opts.href[0] ***REMOVED***);
-            // series[0].middle = {x: cx, y: cy***REMOVED***;
+            // values[0] = { value: values[0], order: 0, valueOf: function () { return this.value; } };
+            // opts.href && opts.href[0] && covers[0].attr({ href: opts.href[0] });
+            // series[0].middle = {x: cx, y: cy};
             // series[0].mangle = 180;
             var path = sector(cx, cy, r, 90, -269.9);
             var j = (opts.matchColors && opts.matchColors == true) ? values[0].order : i;
-            var p = paper.path(opts.init ? ipath : path).attr({ fill: opts.colors[0] || chartinst.colors[0], stroke: opts.stroke && opts.stroke[0] || "#fff", "stroke-width": (opts.strokewidth == null ? 1 : opts.strokewidth), "stroke-linejoin": "round" ***REMOVED***);
+            var p = paper.path(opts.init ? ipath : path).attr({ fill: opts.colors[0] || chartinst.colors[0], stroke: opts.stroke && opts.stroke[0] || "#fff", "stroke-width": (opts.strokewidth == null ? 1 : opts.strokewidth), "stroke-linejoin": "round" });
 
             p.value = values[0];
             p.middle = path.middle;
@@ -156,14 +156,14 @@
                             opacity: 0.9,
                             'font-size': '18px',
                             'font-family': 'Lato'
-                    ***REMOVED***)
-            ***REMOVED***
-        ***REMOVED***
+                        })
+                }
+            }
                 
-            opts.init && p.animate({ path: path.join(",") ***REMOVED***, (+opts.init - 1) || 1000, ">");
+            opts.init && p.animate({ path: path.join(",") }, (+opts.init - 1) || 1000, ">");
 
             covers.push(p);
-    ***REMOVED*** else {
+        } else {
 
             len = Math.min(cut + 1, values.length);
             others && values.splice(len) && (values[cut].others = true);
@@ -178,16 +178,16 @@
                     if (!i) {
                         angle = 90 - mangle;
                         mangle = angle - 360 * values[i] / total / 2;
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
 
                 if (opts.init) {
                     var ipath = sector(cx, cy, 1, angle, angle - 360 * values[i] / total).join(",");
-            ***REMOVED***
+                }
 
                 var path = sector(cx, cy, r, angle, angle -= 360 * values[i] / total);
                 var j = (opts.matchColors && opts.matchColors == true) ? values[i].order : i;
-                var p = paper.path(opts.init ? ipath : path).attr({ fill: opts.colors && opts.colors[j] || chartinst.colors[j] || "#666", stroke: opts.stroke && opts.stroke[j] || "#fff", "stroke-width": (opts.strokewidth == null ? 1 : opts.strokewidth), "stroke-linejoin": "round" ***REMOVED***);
+                var p = paper.path(opts.init ? ipath : path).attr({ fill: opts.colors && opts.colors[j] || chartinst.colors[j] || "#666", stroke: opts.stroke && opts.stroke[j] || "#fff", "stroke-width": (opts.strokewidth == null ? 1 : opts.strokewidth), "stroke-linejoin": "round" });
 
                 p.value = values[i];
                 p.middle = path.middle;
@@ -209,24 +209,24 @@
                                 opacity: 0.9,
                                 'font-size': '18px',
                                 'font-family': 'Lato'
-                        ***REMOVED***)
-                ***REMOVED***
-            ***REMOVED***
+                            })
+                    }
+                }
                 
-                opts.init && p.animate({ path: path.join(",") ***REMOVED***, (+opts.init - 1) || 1000, ">");
-        ***REMOVED***
+                opts.init && p.animate({ path: path.join(",") }, (+opts.init - 1) || 1000, ">");
+            }
 
             for (i = 0; i < len; i++) {
                 p = paper.path(sectors[i].attr("path")).attr(chartinst.shim);
-                opts.href && opts.href[i] && p.attr({ href: opts.href[i] ***REMOVED***);
-                p.attr = function () {***REMOVED***;
+                opts.href && opts.href[i] && p.attr({ href: opts.href[i] });
+                p.attr = function () {};
                 covers.push(p);
                 series.push(p);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         chart.hover = function (fin, fout) {
-            fout = fout || function () {***REMOVED***;
+            fout = fout || function () {};
 
             var that = this;
 
@@ -244,16 +244,16 @@
                         value: values[j],
                         total: total,
                         label: that.labels && that.labels[j]
-                ***REMOVED***;
+                    };
                     cover.mouseover(function () {
                         fin.call(o);
-                ***REMOVED***).mouseout(function () {
+                    }).mouseout(function () {
                         fout.call(o);
-                ***REMOVED***);
-            ***REMOVED***)(series[i], covers[i], i);
-        ***REMOVED***
+                    });
+                })(series[i], covers[i], i);
+            }
             return this;
-    ***REMOVED***;
+        };
 
         // x: where label could be put
         // y: where label could be put
@@ -276,12 +276,12 @@
                         value: values[j],
                         total: total,
                         label: that.labels && that.labels[j]
-                ***REMOVED***;
+                    };
                     f.call(o);
-            ***REMOVED***)(series[i], covers[i], i);
-        ***REMOVED***
+                })(series[i], covers[i], i);
+            }
             return this;
-    ***REMOVED***;
+        };
 
         chart.click = function (f) {
             var that = this;
@@ -300,16 +300,16 @@
                         value: values[j],
                         total: total,
                         label: that.labels && that.labels[j]
-                ***REMOVED***;
-                    cover.click(function () { f.call(o); ***REMOVED***);
-            ***REMOVED***)(series[i], covers[i], i);
-        ***REMOVED***
+                    };
+                    cover.click(function () { f.call(o); });
+                })(series[i], covers[i], i);
+            }
             return this;
-    ***REMOVED***;
+        };
 
         chart.inject = function (element) {
             element.insertBefore(covers[0]);
-    ***REMOVED***;
+        };
 
         var legend = function (labels, otherslabel, mark, dir) {
             var x = cx + r + r / 5,
@@ -329,11 +329,11 @@
                 values[i].others && (labels[j] = otherslabel || "Others");
                 labels[j] = chartinst.labelise(labels[j], values[i], total);
                 chart.labels.push(paper.set());
-                chart.labels[i].push(paper[mark](x + 5, h, 5).attr({ fill: clr, stroke: "none" ***REMOVED***));
-                chart.labels[i].push(txt = paper.text(x + 20, h, labels[j] || values[j]).attr(chartinst.txtattr).attr({ fill: opts.legendcolor || "#000", "text-anchor": "start"***REMOVED***));
+                chart.labels[i].push(paper[mark](x + 5, h, 5).attr({ fill: clr, stroke: "none" }));
+                chart.labels[i].push(txt = paper.text(x + 20, h, labels[j] || values[j]).attr(chartinst.txtattr).attr({ fill: opts.legendcolor || "#000", "text-anchor": "start"}));
                 covers[i].label = chart.labels[i];
                 h += txt.getBBox().height * 1.2;
-        ***REMOVED***
+            }
 
             var bb = chart.labels.getBBox(),
                 tr = {
@@ -341,31 +341,31 @@
                     west: [-bb.width - 2 * r - 20, -bb.height / 2],
                     north: [-r - bb.width / 2, -r - bb.height - 10],
                     south: [-r - bb.width / 2, r + 10]
-            ***REMOVED***[dir];
+                }[dir];
 
             chart.labels.translate.apply(chart.labels, tr);
             chart.push(chart.labels);
-    ***REMOVED***;
+        };
 
         if (opts.legend) {
             legend(opts.legend, opts.legendothers, opts.legendmark, opts.legendpos);
-    ***REMOVED***
+        }
 
         chart.push(series, covers);
         chart.series = series;
         chart.covers = covers;
 
         return chart;
-***REMOVED***;
+    };
     
     //inheritance
-    var F = function() {***REMOVED***;
+    var F = function() {};
     F.prototype = Raphael.g;
     semiPiechart.prototype = new F;
     
     //public
     Raphael.fn.semiPiechart = function(cx, cy, r, values, opts, valueLabel) {
         return new semiPiechart(this, cx, cy, r, values, opts, valueLabel);
-***REMOVED***
+    }
     
-***REMOVED***)();
+})();

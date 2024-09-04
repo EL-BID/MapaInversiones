@@ -14,13 +14,13 @@ function inicializaDatos() {
         $("#entidadProcesoG").val(unidadcompra).data('search');
         $("#entidadProcesoG").visible = false;
         $("#grpentidad").css("display", "none");
-***REMOVED***
+    }
 
 
         getContratos(1, cant_contratos, "", $('#entidadProcesoG').val(), $('#proceso').val(), tipoemergencia);
 
 
-***REMOVED***
+}
 
 
 function configuraEnlaceContratista() {
@@ -32,17 +32,17 @@ function configuraEnlaceContratista() {
         var url = "/contratista?" + dataType + "=" + dataValue;
         window.location.href = url;
 
-***REMOVED***);
+    });
 
 
-***REMOVED***
+}
 
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     var results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-***REMOVED***
+}
 
 
 Number.prototype.formatMoney = function (c, d, t) {
@@ -53,12 +53,12 @@ Number.prototype.formatMoney = function (c, d, t) {
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-***REMOVED***;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
 
 function cambiarTipoTexto(cadena) {
     return cadena.charAt(0).toUpperCase() + cadena.slice(1).toLowerCase();
-***REMOVED***
+}
 
 
 var disableClick = false;
@@ -68,31 +68,31 @@ function deshabilita(des) {
         $("#btn-buscar").prop("disabled", des);
         $('#btnLimpiar').attr("disabled", "disabled");
         $("#divPagContratos").addClass("disabledbutton");
-***REMOVED*** else {
+    } else {
         $("#btn-buscar").prop("disabled", des);
         $('#btnLimpiar').removeAttr("disabled");
         $("#divPagContratos").removeClass("disabledbutton");
-***REMOVED***
-***REMOVED***
+    }
+}
 
 $("#btnLimpiar").click(function () {
     if (!disableClick) {
         $("#top_contratista_periodos").val($("#top_contratista_periodos").attr("default"));
-        if (!unidadcompra) { $("#entidadProcesoG").val(""); ***REMOVED***
+        if (!unidadcompra) { $("#entidadProcesoG").val(""); }
         $("#proceso").val("");
         deshabilita(true);
         getContratos(1, cant_contratos, "", $("#entidadProcesoG").val(), "", tipoemergencia);
-***REMOVED***
-***REMOVED***);
+    }
+});
 
 $("#btn-buscar").click(function () {
     if (!disableClick) {
         deshabilita(true);//procesoaData
         getContratos(1, cant_contratos,"" , $('#entidadProcesoG').val(), $('#proceso').val(), tipoemergencia);
 
-***REMOVED***
+    }
 
-***REMOVED***);
+});
 
 
 function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
@@ -112,17 +112,17 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     var inicio = 1;
     if (residuo == 0) {
         inicio = (pag_actual - cant_por_linea) + 1;
-***REMOVED*** else {
+    } else {
         inicio = (cociente * cant_por_linea) + 1;
-***REMOVED***
+    }
 
     var fin = inicio + (cant_por_linea - 1);
     if (totalPag < cant_por_linea) {
         fin = totalPag;
-***REMOVED***
+    }
     if (fin > totalPag) {
         fin = totalPag;
-***REMOVED***
+    }
 
 
     if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
@@ -135,7 +135,7 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
             .attr("class", "glyphicon glyphicon-arrow-left")
         pag_enlace.append("text")
             .text(" Anteriores")
-***REMOVED***
+    }
 
 
 
@@ -147,7 +147,7 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
                 .attr("data-page", i)
             pag_enlace.append("text")
                 .text(i)
-    ***REMOVED*** else {
+        } else {
             var pag_enlace = divPag.append("a")
 
                 .attr("class", "page_left")
@@ -159,10 +159,10 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
                 .attr("class", "paginacion")
                 .text(i)
 
-    ***REMOVED***
+        }
 
 
-***REMOVED***
+    }
 
     if (pag_actual < totalPag) {
 
@@ -176,8 +176,8 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
             pag_enlace_der.append("span")
                 .attr("class", "glyphicon glyphicon-arrow-right")
 
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
 
@@ -187,9 +187,9 @@ function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
         pagina_actual = $(this).attr("data-page");
 
         getContratos(pagina_actual, cant_contratos, "", $('#entidadProcesoG').val(), $('#proceso').val(), tipoemergencia);
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 function getContratos(pagina, registros, codigo, entidad, proceso, tipoemergencia) {
 
@@ -202,7 +202,7 @@ function getContratos(pagina, registros, codigo, entidad, proceso, tipoemergenci
         CodigoProceso: codigo,
         TipoEmergencia: tipoemergencia
 
-***REMOVED***;
+    };
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -235,7 +235,7 @@ function getContratos(pagina, registros, codigo, entidad, proceso, tipoemergenci
                             estado = "";
                             cuentaentrada = 0;
 
-                    ***REMOVED***
+                        }
                         if (entidad != info[i].unidadCompra.toString()) {
                             if (i > 0) //Cambio de entidad
                             {
@@ -247,13 +247,13 @@ function getContratos(pagina, registros, codigo, entidad, proceso, tipoemergenci
                                 inicio = "";
                                 fin = "";
                                 cuentaentrada = 0;
-                        ***REMOVED***
+                            }
 
                             inicio = '<div class="cotractName"><div class="row"><div class="col-xs-12 col-md-12"><span class="small">Entidad</span><div class="clearfix"></div>'
                                 + '                 <span class="h4">' + info[i].unidadCompra.toString() + '</span>'
                                 + ' </div></div></div>';
                             entidad = info[i].unidadCompra.toString();
-                    ***REMOVED***
+                        }
 
 
 
@@ -275,7 +275,7 @@ function getContratos(pagina, registros, codigo, entidad, proceso, tipoemergenci
                                 + '			<div class="col-xs-12 col-md-4">'
                                 + '				<span class="txt_small">Estado del proceso</span>'
                                 + '				<span class="amount_adj">';
-                            if (info[i].estadoProceso) { fila += info[i].estadoProceso.toString(); ***REMOVED***
+                            if (info[i].estadoProceso) { fila += info[i].estadoProceso.toString(); }
                             fila += '</span></div>'
                                 + '			<div class="col-xs-6 col-md-4"><span class="txt_small">Monto Estimado<span class="amount_adj">$ ' + (info[i].MontoEstimadoProceso * 1).formatMoney(2, '.', ',').toString() + '</span></div>'
                                 + '			    <div class="col-xs-6 col-md-2">'
@@ -293,21 +293,21 @@ function getContratos(pagina, registros, codigo, entidad, proceso, tipoemergenci
                                     + '		    <span class="txt_small">Fecha de Inicio</span>'
                                     + '         <span class="amount_adj">' + info[i].fechaPublicacion.toString().substr(0, 10) + '</span>'
                                     + '			    </div>';
-                        ***REMOVED***
+                            }
                             if (info[i].fechaFinRecepcionOfertas) {
                                 fila += ''
                                     + '			<div class="col-xs-12 col-md-4">'
                                     + '		    <span class="txt_small">Fecha de Recepción</span>'
                                     + '         <span class="amount_adj">' + info[i].fechaFinRecepcionOfertas.toString().substr(0, 10) + '</span>'
                                     + '			    </div>';
-                        ***REMOVED***
+                            }
                             if (info[i].fechaEstimadaAdjudicacion) {
                                 fila += ''
                                     + '			<div class="col-xs-12 col-md-4">'
                                     + '		    <span class="txt_small">Fecha estimada de adjudicación</span>'
                                     + '         <span class="amount_adj">' + info[i].fechaEstimadaAdjudicacion.toString().substr(0, 10) + '</span>'
                                     + '			    </div>';
-                        ***REMOVED***
+                            }
 
                             fila += '</div>'
                                 + '	';
@@ -321,7 +321,7 @@ function getContratos(pagina, registros, codigo, entidad, proceso, tipoemergenci
                                     + '		    <span class="txt_small">Motivo de cancelación</span>'
                                     + '         <p>' + info[i].motivoCancelacion + '</p>'
                                     + '			    </div>';
-                        ***REMOVED***
+                            }
                             fila += '</div>'
                                 + '	';
 
@@ -337,10 +337,10 @@ function getContratos(pagina, registros, codigo, entidad, proceso, tipoemergenci
                                 + '<div class="col-xs-12 col-md-12"><a href="' + info[i].url.toString() + '" target="_blank" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> <span class="txt_small">Conozca mas de este proceso</span></a></div>'
                                 + '</div>';
 
-                    ***REMOVED***
+                        }
 
 
-                ***REMOVED***
+                    }
 
 
                     data += inicioLuis + inicio + fila + '</div>' + referencia + finLuis;
@@ -348,12 +348,12 @@ function getContratos(pagina, registros, codigo, entidad, proceso, tipoemergenci
 
                     $("#srcContratos").html(data);
                     if (scrol >= 1) {
-                        $('html, body').animate({ scrollTop: $('#secInfoContratos').offset().top ***REMOVED***, 1500);
-                ***REMOVED*** else { scrol = scrol + 1; ***REMOVED***
+                        $('html, body').animate({ scrollTop: $('#secInfoContratos').offset().top }, 1500);
+                    } else { scrol = scrol + 1; }
 
                     dibujaPaginacionContrato(pagina, result.cantidadTotalRegistros, Math.ceil(result.cantidadTotalRegistros / registros), registros);
                     configuraEnlaceContratista();
-            ***REMOVED***
+                }
                 else {
                     $("#srcContratos").html("");
                     var fila = '<div class="contractBox" >'
@@ -362,19 +362,19 @@ function getContratos(pagina, registros, codigo, entidad, proceso, tipoemergenci
 
                     $("#divPagContratos").html("");
                     $("#srcContratos").html(fila);
-            ***REMOVED***
-        ***REMOVED*** else {
+                }
+            } else {
                 alert("Message: " + result.message);
-        ***REMOVED***
+            }
             deshabilita(false);
-      ***REMOVED***
+        },
         error: function (response) {
             deshabilita(false);
             alert(response.responseText);
-      ***REMOVED***
+        },
         failure: function (response) {
             deshabilita(false);
             alert(response.responseText);
-    ***REMOVED***
-***REMOVED***)
-***REMOVED***
+        }
+    })
+}

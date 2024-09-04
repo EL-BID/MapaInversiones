@@ -13,10 +13,10 @@ define([], function() {
 			$target = $(this).attr('href');
 
 		$tabbed.addClass('.show-tabbed')
-		$('.main-content__consolidated-data').css({opacity: 1 zIndex: 10***REMOVED***)//.addClass('show-tabbed')
+		$('.main-content__consolidated-data').css({opacity: 1 zIndex: 10})//.addClass('show-tabbed')
 			
 		return false
-	***REMOVED***);
+	});
 
 
-***REMOVED***)
+})

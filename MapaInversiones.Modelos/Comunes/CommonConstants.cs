@@ -133,7 +133,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
         /// <summary>
         /// Constante para uso de Links para servicios
         /// </summary>
-          public const string ServicesLink = "/projectprofile/{0***REMOVED***"; // "/projectprofile/{0***REMOVED***";
+          public const string ServicesLink = "/projectprofile/{0}"; // "/projectprofile/{0}";
         /// <summary>
         /// Constante que se usa como identificador de
         /// imágenes pequeñas
@@ -152,7 +152,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
         /// <summary>
         /// Constante para uso de url's de imágenes
         /// </summary>
-        public const string ImagesLink = "/Imagenes/{0***REMOVED***/{0***REMOVED***{1***REMOVED***.jpg";
+        public const string ImagesLink = "/Imagenes/{0}/{0}{1}.jpg";
 
 
         public const int FiftyKilometers = 50000;
@@ -169,7 +169,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
         /// <summary>
         /// Contrante para la generación de datos geográficos usando POINT con string.Format
         /// </summary>
-        public const string PointsCoordinates = "POINT ({0***REMOVED*** {1***REMOVED***)";
+        public const string PointsCoordinates = "POINT ({0} {1})";
         /// <summary>
         /// Máximo de resultados por página
         /// </summary>
@@ -376,5 +376,5 @@ namespace PlataformaTransparencia.Modelos.Comunes
         public const string EstadoProyEjecucion = "2";
 
 
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -20,7 +20,7 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
         public FinanciadorBLL(TransparenciaDB connection)
         {
             _connection = connection;
-    ***REMOVED***
+        }
 
         #region Organismo Financiador
         public List<int> ObtenerAniosVistaPresupuesto()
@@ -29,7 +29,7 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                 join tiempo in _connection.CatalogoTiempoes on presupuesto.Periodo.ToString() equals tiempo.Periodo
                                 select tiempo.Año).Distinct().OrderByDescending(x => x).ToList();
             return result;
-    ***REMOVED***
+        }
         public List<int> ObtenerAniosVistaPresupuestoPorCodigoFinanciador(int id)
         {
             List<int> result = (from presupuesto in _connection.VwPresupuestoes
@@ -37,7 +37,7 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                 where presupuesto.CodigoOrganismoFinanciador == id
                                 select tiempo.Año).Distinct().OrderByDescending(x => x).ToList();
             return result;
-    ***REMOVED***
+        }
         public ModelDataConsolidadoFinanciador ObtenerConsolidadoOrganismosFinanciadoresPorAnioAndCodigoFuente(int anio, int codigoFuente)
         {
             var query = from vp in _connection.VwPresupuestoXProyInvs
@@ -49,7 +49,7 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                             vp.Bpin,
                             vp.OrganismoFinanciador,
                             vp.ValorFinanciado
-                    ***REMOVED***;
+                        };
             var result = query.GroupBy(x => 1)
                               .Select(g => new ModelDataConsolidadoFinanciador
                               {
@@ -59,9 +59,9 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                   TotalProyectosFinanciados = g.Select(x => x.Bpin).Distinct().Count(),
                                   TotalFinanciadores = g.Select(x => x.OrganismoFinanciador).Distinct().Count(),
                                   TotalAportado = Convert.ToDouble(g.Sum(x => x.ValorFinanciado ?? 0)/1000000)
-                          ***REMOVED***).FirstOrDefault();
-            return result != null ? result : new ModelDataConsolidadoFinanciador { TotalAportado=0, TotalFinanciadores=0, TotalProyectosFinanciados=0, Status=true, Message=string.Empty, Financiadores=new() ***REMOVED***;
-    ***REMOVED***
+                              }).FirstOrDefault();
+            return result != null ? result : new ModelDataConsolidadoFinanciador { TotalAportado=0, TotalFinanciadores=0, TotalProyectosFinanciados=0, Status=true, Message=string.Empty, Financiadores=new() };
+        }
         public string ObtenerNombreOrganismoPorCodigoFinanciador(int id)
         {
             var organismoFinanciador = (from catalogoOrganismoFinanciador in _connection.CatalogoOrganismoFinanciadors
@@ -69,14 +69,14 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                         select catalogoOrganismoFinanciador).First();
             if (organismoFinanciador == null) return string.Empty;
             return organismoFinanciador.OrganismoFinanciador;
-    ***REMOVED***
+        }
         public List<ModelDataFinanciador> ObtenerOrganismosFinanciadoresPorAnioAndCodigoFuente(int anio, int codigoFuente)
         {
             List<ModelDataFinanciador> rta = new();
             List<ModelDataConsolidadosPorOrganismoFinanciador> consolidadoFinanciadores = (from info in _connection.VwPresupuestoes
                                                                                            join ct in _connection.CatalogoTiempoes on info.Periodo.ToString() equals ct.Periodo
                                                                                            where ct.Año == anio && info.CodigoFuenteDeFinanciamiento == codigoFuente
-                                                                                           group info by new { ct.Año, info.CodigoOrganismoFinanciador, info.OrganismoFinanciador ***REMOVED*** into g
+                                                                                           group info by new { ct.Año, info.CodigoOrganismoFinanciador, info.OrganismoFinanciador } into g
                                                                                            select new ModelDataConsolidadosPorOrganismoFinanciador
                                                                                            {
                                                                                                Anio = g.Key.Año,
@@ -84,31 +84,31 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                                                                                Organismo = g.Key.OrganismoFinanciador,
                                                                                                Aprobado = g.Sum(x => x.Aprobado ?? 0),
                                                                                                Vigente = g.Sum(x => x.Vigente ?? 0)
-                                                                                       ***REMOVED***).ToList();
+                                                                                           }).ToList();
             if (consolidadoFinanciadores == null || consolidadoFinanciadores.Count == 0) return new();
             List<ModelDataProyectosPorOrganismoFinanciador> organismosFinanciadorEstadosProyectos = ObtenerConsolidadoProyectosPorOrganismoFinanciadorPorPorAnioAndCodigoFuente(anio, codigoFuente);
             List<Item> estados = new();
             if (organismosFinanciadorEstadosProyectos != null && organismosFinanciadorEstadosProyectos.Count > 0)
-                estados= organismosFinanciadorEstadosProyectos.Select(x=>new Item { Id=x.EstadoId.ToString(), Nombre= x.Estado***REMOVED***).DistinctBy(x=>x.Id).ToList();
+                estados= organismosFinanciadorEstadosProyectos.Select(x=>new Item { Id=x.EstadoId.ToString(), Nombre= x.Estado}).DistinctBy(x=>x.Id).ToList();
             foreach (ModelDataConsolidadosPorOrganismoFinanciador consolidadoFinanciador in consolidadoFinanciadores)
             {
-                ModelDataFinanciador financiador = new () { CodigoOrganismo = consolidadoFinanciador.CodigoOrganismo, Nombre = consolidadoFinanciador.Organismo, MontoFinanciado = consolidadoFinanciador.Vigente / 1000000.0, Estados = new() ***REMOVED***;
+                ModelDataFinanciador financiador = new () { CodigoOrganismo = consolidadoFinanciador.CodigoOrganismo, Nombre = consolidadoFinanciador.Organismo, MontoFinanciado = consolidadoFinanciador.Vigente / 1000000.0, Estados = new() };
                 foreach (Item estado in estados)
                 {
                     int proyectosPorEstado = organismosFinanciadorEstadosProyectos.Where(x => x.CodigoOrganismo == consolidadoFinanciador.CodigoOrganismo && x.EstadoId.ToString() == estado.Id).Count();
-                    financiador.Estados.Add(new Item { Id= estado.Id, Nombre= estado.Nombre, Valor= proyectosPorEstado ***REMOVED***);
-            ***REMOVED***
-                financiador.Estados.Add(financiador.Estados.Count == 0 ? new Item { Id = "-1", Nombre = "FINANCIADOS", Valor = 0 ***REMOVED*** : new Item { Id = "-1", Nombre = "FINANCIADOS", Valor = financiador.Estados.Sum(x => x.Valor) ***REMOVED***);
+                    financiador.Estados.Add(new Item { Id= estado.Id, Nombre= estado.Nombre, Valor= proyectosPorEstado });
+                }
+                financiador.Estados.Add(financiador.Estados.Count == 0 ? new Item { Id = "-1", Nombre = "FINANCIADOS", Valor = 0 } : new Item { Id = "-1", Nombre = "FINANCIADOS", Valor = financiador.Estados.Sum(x => x.Valor) });
                 rta.Add(financiador);
-        ***REMOVED***
+            }
             return rta;
-    ***REMOVED***
+        }
         public List<ModelDataProyectosPorOrganismoFinanciador> ObtenerConsolidadoProyectosPorOrganismoFinanciadorPorPorAnioAndCodigoFuente(int anio, int codigoFuente)
         {
             List<ModelDataProyectosPorOrganismoFinanciador> result = (from vppi in _connection.VwPresupuestoXProyInvs
                                                                       join tiempo in _connection.CatalogoTiempoes on vppi.Periodo.ToString() equals tiempo.Periodo
                                                                       where vppi.CodigoFuenteDeFinanciamiento == codigoFuente && tiempo.Año == anio 
-                                                                      group vppi by new { tiempo.Año, vppi.IdEstado, vppi.NombreEstado, vppi.CodigoOrganismoFinanciador, vppi.OrganismoFinanciador, vppi.Nombreproyecto ***REMOVED*** into g
+                                                                      group vppi by new { tiempo.Año, vppi.IdEstado, vppi.NombreEstado, vppi.CodigoOrganismoFinanciador, vppi.OrganismoFinanciador, vppi.Nombreproyecto } into g
                                                                       select new ModelDataProyectosPorOrganismoFinanciador
                                                                       {
                                                                           Anio = g.Key.Año,
@@ -117,9 +117,9 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                                                           Estado= g.Key.NombreEstado,
                                                                           EstadoId= g.Key.IdEstado,
                                                                           TotalProyectos = g.Count(),
-                                                                  ***REMOVED***).ToList();
+                                                                      }).ToList();
             return result;
-    ***REMOVED***
+        }
 
         public List<ModelDataProyectosPorOrganismoFinanciador> ObtenerConsolidadoProyectosOrganismoFinanciadorPorPorAnioAndCodigoOrganismoFinanciador(int anio, int codigoFinanciador)
         {
@@ -135,9 +135,9 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                                    info.IdEstado,
                                                    info.NombreEstado,
                                                    info.Nombreproyecto
-                                           ***REMOVED***).Distinct().ToList();
+                                               }).Distinct().ToList();
             List<ModelDataProyectosPorOrganismoFinanciador> result = (from ppfa in proyectosPorFinanciadorAnio
-                                                                group ppfa by new { ppfa.Año, ppfa.CodigoOrganismoFinanciador, ppfa.OrganismoFinanciador, ppfa.IdEstado, ppfa.NombreEstado ***REMOVED*** into g
+                                                                group ppfa by new { ppfa.Año, ppfa.CodigoOrganismoFinanciador, ppfa.OrganismoFinanciador, ppfa.IdEstado, ppfa.NombreEstado } into g
                                                                 select new ModelDataProyectosPorOrganismoFinanciador
                                                                 {
                                                                     Anio = g.Key.Año,
@@ -146,15 +146,15 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                                                     Estado= g.Key.NombreEstado.ToUpper().Trim(),
                                                                     EstadoId= g.Key.IdEstado,
                                                                     TotalProyectos = g.Count(),
-                                                            ***REMOVED***).ToList();
+                                                                }).ToList();
             return result;
-    ***REMOVED***
+        }
         public ModelDataFinanciador ObtenerDataFinanciadorPorAnioAndCodigoFinanciador(int anio, int codigoOrganismoFinanciador)
         {
             List<ModelDataConsolidadosPorOrganismoFinanciador> datosOrganismoFinanciador = (from presupuesto in _connection.VwPresupuestoes
                                                                                             join tiempo in _connection.CatalogoTiempoes on presupuesto.Periodo.ToString() equals tiempo.Periodo
                                                                                             where presupuesto.CodigoOrganismoFinanciador == codigoOrganismoFinanciador && tiempo.Año == anio
-                                                                                            group presupuesto by new { tiempo.Año, presupuesto.CodigoOrganismoFinanciador, presupuesto.OrganismoFinanciador, presupuesto.FuenteDeFinanciamiento ***REMOVED*** into g
+                                                                                            group presupuesto by new { tiempo.Año, presupuesto.CodigoOrganismoFinanciador, presupuesto.OrganismoFinanciador, presupuesto.FuenteDeFinanciamiento } into g
                                                                                             select new ModelDataConsolidadosPorOrganismoFinanciador
                                                                                             {
                                                                                                 Anio = g.Key.Año,
@@ -163,16 +163,16 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                                                                                 Fuente = g.Key.FuenteDeFinanciamiento,
                                                                                                 Aprobado = g.Sum(x => x.Aprobado ?? 0)/1000000,
                                                                                                 Vigente = g.Sum(x => x.Vigente ?? 0) / 1000000
-                                                                                        ***REMOVED***).ToList();
+                                                                                            }).ToList();
             if (datosOrganismoFinanciador == null) return new();
             string organismo = datosOrganismoFinanciador.Count > 0 ? datosOrganismoFinanciador.First().Organismo : string.Empty;
             List <ModelDataProyectosPorOrganismoFinanciador> organismosFinanciadorProyectos = ObtenerConsolidadoProyectosOrganismoFinanciadorPorPorAnioAndCodigoOrganismoFinanciador(anio, codigoOrganismoFinanciador);
             organismosFinanciadorProyectos ??= new();
-            List<Item> estados= organismosFinanciadorProyectos.Select(x=>new Item { Id= x.EstadoId.ToString(), Nombre= x.Estado, Valor= x.TotalProyectos ***REMOVED***).DistinctBy(x=>x.Id).ToList();
-            //estados.Insert(0, new Item { Id = "-1", Nombre = "FINANCIADOS", Valor = estados.Any()? estados.Sum(x => x.Valor): 0 ***REMOVED***);
-            ModelDataFinanciador rta = new() { CodigoOrganismo = codigoOrganismoFinanciador, MontoFinanciado = datosOrganismoFinanciador.Sum(x=>x.Vigente), Nombre = organismo, Estados= estados, MontosPorFuenteFinanciacion= datosOrganismoFinanciador, ProyectosFinanciados = estados.Any() ? estados.Sum(x => x.Valor) : 0  ***REMOVED***;
+            List<Item> estados= organismosFinanciadorProyectos.Select(x=>new Item { Id= x.EstadoId.ToString(), Nombre= x.Estado, Valor= x.TotalProyectos }).DistinctBy(x=>x.Id).ToList();
+            //estados.Insert(0, new Item { Id = "-1", Nombre = "FINANCIADOS", Valor = estados.Any()? estados.Sum(x => x.Valor): 0 });
+            ModelDataFinanciador rta = new() { CodigoOrganismo = codigoOrganismoFinanciador, MontoFinanciado = datosOrganismoFinanciador.Sum(x=>x.Vigente), Nombre = organismo, Estados= estados, MontosPorFuenteFinanciacion= datosOrganismoFinanciador, ProyectosFinanciados = estados.Any() ? estados.Sum(x => x.Valor) : 0  };
             return rta;
-    ***REMOVED***
+        }
         #endregion Organismo Financiador
 
         #region Organismo Financiador Detalle
@@ -208,7 +208,7 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                                            nomNivel_4 = "obj|" + info.ObjetoDeGasto,
                                                            Avance = (decimal)info.EjecucionAcumulada,
                                                            Presupuesto = (decimal)info.Vigente
-                                                   ***REMOVED***).ToList();
+                                                       }).ToList();
             InfograficoFuentes_Nivel_1 objNivel_1 = null;  //fuente de financiacion/recurso
             InfograficoFuentes_Nivel_2 objNivel_2 = null;   //entidad o institucion
             InfograficoFuentes_Nivel_3 objNivel_3 = null;  //tipo de gasto
@@ -243,14 +243,14 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                                 objNivel_4.avance += (decimal)fila.Avance;
                                 objNivel_3.Detalles.Add(objNivel_4);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                                 objNivel_4.avance += (decimal)fila.Avance;
-                        ***REMOVED***
+                            }
                             objNivel_2.Detalles.Add(objNivel_3);
-                    ***REMOVED***
+                        }
                         else
                         {
                             objNivel_3.presupuesto += (decimal)fila.Presupuesto;
@@ -262,15 +262,15 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                                 objNivel_4.avance += (decimal)fila.Avance;
                                 objNivel_3.Detalles.Add(objNivel_4);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                                 objNivel_4.avance += (decimal)fila.Avance;
-                        ***REMOVED***
-                    ***REMOVED***
+                            }
+                        }
                         objNivel_1.Detalles.Add(objNivel_2);
-                ***REMOVED***
+                    }
                     else
                     {
                         objNivel_2.presupuesto += (decimal)fila.Presupuesto;
@@ -289,23 +289,23 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                 objNivel_4.avance += (decimal)fila.Avance;
 
                                 objNivel_3.Detalles.Add(objNivel_4);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                                 objNivel_4.avance += (decimal)fila.Avance;
-                        ***REMOVED***
+                            }
                             objNivel_2.Detalles.Add(objNivel_3);
-                    ***REMOVED***
+                        }
                         else
                         {
                             objNivel_3.presupuesto += (decimal)fila.Presupuesto;
                             objNivel_3.avance += (decimal)fila.Avance;
 
-                    ***REMOVED***
-                ***REMOVED***
+                        }
+                    }
                     objReturn.Add(objNivel_1);
-            ***REMOVED***
+                }
                 else
                 {
                     objNivel_1.presupuesto += (decimal)fila.Presupuesto;
@@ -331,14 +331,14 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                 objNivel_4.avance += (decimal)fila.Avance;
 
                                 objNivel_3.Detalles.Add(objNivel_4);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                                 objNivel_4.avance += (decimal)fila.Avance;
-                        ***REMOVED***
+                            }
                             objNivel_2.Detalles.Add(objNivel_3);
-                    ***REMOVED***
+                        }
                         else
                         {
                             objNivel_3.presupuesto += (decimal)fila.Presupuesto;
@@ -352,15 +352,15 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                 objNivel_4.avance += (decimal)fila.Avance;
 
                                 objNivel_3.Detalles.Add(objNivel_4);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                                 objNivel_4.avance += (decimal)fila.Avance;
-                        ***REMOVED***
-                    ***REMOVED***
+                            }
+                        }
                         objNivel_1.Detalles.Add(objNivel_2);
-                ***REMOVED***
+                    }
                     else
                     {
                         objNivel_2.presupuesto += (decimal)fila.Presupuesto;
@@ -380,14 +380,14 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                 objNivel_4.avance += (decimal)fila.Avance;
 
                                 objNivel_3.Detalles.Add(objNivel_4);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                                 objNivel_4.avance += (decimal)fila.Avance;
-                        ***REMOVED***
+                            }
                             objNivel_2.Detalles.Add(objNivel_3);
-                    ***REMOVED***
+                        }
                         else
                         {
                             objNivel_3.presupuesto += (decimal)fila.Presupuesto;
@@ -400,16 +400,16 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                 objNivel_4.avance += (decimal)fila.Avance;
 
                                 objNivel_3.Detalles.Add(objNivel_4);
-                        ***REMOVED***
+                            }
                             else
                             {
                                 objNivel_4.presupuesto += (decimal)fila.Presupuesto;
                                 objNivel_4.avance += (decimal)fila.Avance;
-                        ***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
+                            }
+                        }
+                    }
+                }
+            }
             ///ordena primer nivel
             var result = objReturn.OrderByDescending(x => x.presupuesto).ToList();
             foreach (var item_nivel1 in result)
@@ -424,11 +424,11 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                     {
                         //ordena nivel 4
                         item_nivel3.Detalles = item_nivel3.Detalles.OrderByDescending(x => x.presupuesto).Take(5).ToList();
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
+                    }
+                }
+            }
             return result;
-    ***REMOVED***
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -455,9 +455,9 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                                    ValorEjecutadoxOrganismo =info.ValorEjecutado??0,
                                                    ValorProyecto= info.ValorProyecto??0,
                                                    AvanceFinanciero= info.Avancefinanciero ?? 0
-                                           ***REMOVED***).OrderByDescending(x=>x.IdEstado).ThenBy(x=>x.Nombreproyecto).ToList();
+                                               }).OrderByDescending(x=>x.IdEstado).ThenBy(x=>x.Nombreproyecto).ToList();
             List<itemGenPresupuesto> objReturn = (from ppfa in proyectosPorFinanciadorAnio
-                                                  group ppfa by new { ppfa.Bpin, ppfa.IdProyecto, ppfa.Nombreproyecto, ppfa.NombreEstado***REMOVED*** into g
+                                                  group ppfa by new { ppfa.Bpin, ppfa.IdProyecto, ppfa.Nombreproyecto, ppfa.NombreEstado} into g
                                                   select new itemGenPresupuesto
                                                   {
                                                     id= g.Key.IdProyecto.ToString(),
@@ -468,9 +468,9 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                                     avance_financiero= Convert.ToDouble(g.Max(x=>x.AvanceFinanciero)),
                                                     AvanceFinancieroOrganismo= g.Average(x => x.ValorFinanciadoxOrganismo)== 0? 0:  Convert.ToDouble(Math.Round(g.Average(x => x.ValorEjecutadoxOrganismo)/ g.Average(x => x.ValorFinanciadoxOrganismo),3)),
                                                     estado = g.Key.NombreEstado
-                                              ***REMOVED***).ToList();
+                                                  }).ToList();
             return objReturn;
-    ***REMOVED***
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -491,10 +491,10 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                                    info.NombreEstado,
                                                    info.Nombreproyecto,
                                                    info.IdProyecto
-                                           ***REMOVED***).Distinct().ToList();
+                                               }).Distinct().ToList();
             if (proyectosPorSector == null || proyectosPorSector.Count == 0) return new();
             var RecursosPerObjetoQuery = (from ppfa in proyectosPorSector
-                                          group ppfa by new { ppfa.NombreSector ***REMOVED*** into g
+                                          group ppfa by new { ppfa.NombreSector } into g
                                           select new InfoConsolidadoPresupuesto
                                           {
                                               //labelGroup = g.Key.Finalidad,
@@ -502,10 +502,10 @@ namespace PlataformaTransparencia.Negocios.OrganismoFinanciador
                                               labelGroup= g.Key.NombreSector,
                                               label= string.Empty,
                                               rawValueDouble = Convert.ToDouble(g.Count())
-                                      ***REMOVED***).OrderBy(x => x.labelGroup).ThenBy(n => n.label).ToList();
+                                          }).OrderBy(x => x.labelGroup).ThenBy(n => n.label).ToList();
             objReturn = RecursosPerObjetoQuery;
             return objReturn;
-    ***REMOVED***
+        }
         #endregion Organismo Financiador Detalle
-***REMOVED***
-***REMOVED***
+    }
+}

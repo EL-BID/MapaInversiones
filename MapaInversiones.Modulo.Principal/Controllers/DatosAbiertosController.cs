@@ -12,6 +12,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
     {
       ViewData["ruta"] = "Datos abiertos";
       return View();
-***REMOVED***
-  ***REMOVED***
-***REMOVED***
+    }
+  }
+}

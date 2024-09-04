@@ -11,32 +11,32 @@
 
 		if( obj instanceof Function ){
 			newObj = obj
-		***REMOVED***else if( obj instanceof Array ){
+		}else if( obj instanceof Array ){
 			arr = []
 			for(i=0;i<obj.length; i++){
 				arr[i] = obj[i]
-			***REMOVED***
+			}
 			newObj = arr
-		***REMOVED***else if( obj instanceof Number ){
+		}else if( obj instanceof Number ){
 			newObj = new Number(prop)
-		***REMOVED***else if( obj instanceof String ){
+		}else if( obj instanceof String ){
 			newObj = new String(prop)
-		***REMOVED***else if( obj instanceof Object ){
-			newObj = {***REMOVED***
+		}else if( obj instanceof Object ){
+			newObj = {}
 			for(key in obj){
 				if(hasOwn.call( obj, key )){
 					prop = obj[key]
 					if( prop instanceof Object ){
 						newObj[key] = cloneObject( prop )
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***else{
+					}
+				}
+			}
+		}else{
 			newObj = obj
-		***REMOVED***
+		}
 
 		return newObj
-	***REMOVED***
+	}
 	/**
 	 * Defines a new Class
 	 * This is based in daClass https://github.com/jseros/daClass
@@ -48,8 +48,8 @@
 	 *  - the new class will be instanceof base and older bases
 	 *  - you can define the properties of the class
 	 *
-	 * @param {Object***REMOVED*** [base]  Constructor of the class to extend
-	 * @param {Object***REMOVED*** [properties]	Attributes of the class
+	 * @param {Object} [base]  Constructor of the class to extend
+	 * @param {Object} [properties]	Attributes of the class
 	 */
 	global['Class'] = function(base, properties){
 		var prop
@@ -58,21 +58,21 @@
 		if( base && !properties ){
 			properties = base
 			base = null
-		***REMOVED***
+		}
 
 		function extend(Base, Class) {
 			// Copy the prototype from the base to setup inheritance
 			Class.prototype = new Base()
 			// Remember the constructor property was set wrong, let's fix it
 			Class.prototype.constructor = Class
-		***REMOVED***
+		}
 
 		function Clss(){
 			if(base){
 				base.call(this)
 				// Assign the super prototype for convenient
 				// invocation
-			***REMOVED***
+			}
 			
 			if(properties){
 				for( prop in properties ){
@@ -81,16 +81,16 @@
 						
 						if( !( properties[prop] instanceof Object ) ){
 							this[prop] = properties[prop]
-						***REMOVED***
+						}
 						else{
 							this[prop] = cloneObject( properties[prop] )
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
+						}
+					}
+				}
+			}
 
 			if(Clss.prototype.initialize) Clss.prototype.initialize.apply(this, arguments)
-		***REMOVED***
+		}
 
 		//Extend the prototype and set the constructor right
 		if(base) extend(base, Clss)
@@ -101,12 +101,12 @@
 					( properties[prop] instanceof Function ) ) {
 					Clss.prototype[prop] = properties[prop]
 					Clss._super_ = base.prototype
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
+				}
+			}
+		}
 
 		return Clss
-	***REMOVED***
+	}
 
 
-***REMOVED***)(window);
+})(window);

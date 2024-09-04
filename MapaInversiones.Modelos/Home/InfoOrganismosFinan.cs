@@ -8,11 +8,11 @@ namespace PlataformaTransparencia.Modelos.Home
 {
     public class InfoOrganismosFinan
     {
-        public int Anio { get; set; ***REMOVED***
-        public int CodigoOrganismoFinanciador { get; set; ***REMOVED***
-        public string OrganismoFinanciador { get; set; ***REMOVED***
-        public double ValorVigente { get; set; ***REMOVED***
-        public double ValorAprobado { get; set; ***REMOVED***
-        public double NumeroProyectos { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public int Anio { get; set; }
+        public int CodigoOrganismoFinanciador { get; set; }
+        public string OrganismoFinanciador { get; set; }
+        public double ValorVigente { get; set; }
+        public double ValorAprobado { get; set; }
+        public double NumeroProyectos { get; set; }
+    }
+}

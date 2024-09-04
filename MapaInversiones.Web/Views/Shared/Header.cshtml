@@ -90,12 +90,12 @@
                                                     if (enlace != "")
                                                     {
                                                         enlace_aux = enlace;
-                                                ***REMOVED***
+                                                    }
                                                     var claseLi = "main-mnu-item-has-child";
                                                     @if (ViewBag != null && ViewBag.ruta != null && ViewBag.ruta == @nameEnlace)
                                                     {
                                                         claseLi = "main-mnu-item-has-child-activeTab";
-                                                ***REMOVED***
+                                                    }
 
                                                     <li class=@claseLi>
 
@@ -118,30 +118,30 @@
                                                                             if (enlace_sub != "")
                                                                             {
                                                                                 enlace_sub_aux = enlace_sub;
-                                                                        ***REMOVED***
+                                                                            }
                                                                             <li>
                                                                                 <a href="@enlace_sub_aux" data-title="@submenu.LinkMenuItemPart.Name">
                                                                                     <span>@submenu.LinkMenuItemPart.Name</span>
                                                                                 </a>
                                                                             </li>
-                                                                    ***REMOVED***
-                                                                ***REMOVED***
+                                                                        }
+                                                                    }
                                                                 </ul>
-                                                        ***REMOVED***
+                                                            }
 
-                                                    ***REMOVED***
+                                                        }
                                                         else
                                                         {
                                                             <a href="@enlace_aux" data-title="@menuitem.LinkMenuItemPart.Name">
                                                                 <span>@menuitem.LinkMenuItemPart.Name</span>
                                                             </a>
 
-                                                    ***REMOVED***
+                                                        }
                                                     </li>
-                                            ***REMOVED***
-                                        ***REMOVED***
+                                                }
+                                            }
                                         </ul>
-                                ***REMOVED***
+                                    }
                                 </nav>
                                 <!-- End main menu -->
                             </div>
@@ -202,7 +202,7 @@
                                                         </a>
                                                     </li>
                                                     </text>
-                                            ***REMOVED***
+                                                }
                                                 else
                                                 {
                                                     <li>
@@ -215,7 +215,7 @@
                                                             New users
                                                         </a>
                                                     </li>
-                                            ***REMOVED***
+                                                }
 
                                             </ul>
                                         </div>
@@ -236,7 +236,7 @@
     <script src="https://www.googletagmanager.com/gtag/js?id=G-Q4H714KM4Z" integrity="sha384-VNIXgAfnXrBQKU+BNlPdO82beO9YSwERuCf5149ppVS/q3VOxeG6Qm4ylAz2Mnnr" crossorigin="anonymous"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); ***REMOVED***
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'G-Q4H714KM4Z');

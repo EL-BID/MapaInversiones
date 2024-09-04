@@ -17,5 +17,5 @@ namespace PlataformaTransparencia.Negocios.Interfaces
         public ModelLocationData ObtenerProyectosAniosPerfilSector(string sector_id, string departamento_id);
 
 
-***REMOVED***
-***REMOVED***
+    }
+}

@@ -28,7 +28,7 @@
                             patternUnits: 'userSpaceOnUse',
                             width: color.width,
                             height: color.height
-                    ***REMOVED***)
+                        })
                         .add(this.defs),
                     image = this.image(
                         color.pattern, 0, 0, color.width, color.height
@@ -37,21 +37,21 @@
                 return 'url(' + this.url + '#' + id + ')';
             
             // VML renderer
-        ***REMOVED*** else {
+            } else {
                 
                 // Remove previous fills
                 if (elem.getElementsByTagName('fill').length) {
                     elem.removeChild(elem.getElementsByTagName('fill')[0]);
-            ***REMOVED***
+                }
                  
                 // If colors are given, use those, else use the original colors
                 // of the pattern tile
                 if (color.color1 && color.color2) {
                     markup = ['<hcv:', prop, ' color="', color.color1, '" color2="',
                               color.color2, '" type="pattern" src="', color.pattern, '" />'].join('');
-            ***REMOVED*** else {
+                } else {
                     markup = this.prepVML(['<', prop, ' type="tile" src="', color.pattern, '" />']);
-            ***REMOVED***
+                }
                 
                 elem.appendChild(
                     document.createElement(markup)
@@ -60,11 +60,11 @@
                 // Work around display bug on updating attached nodes
                 if (elem.parentNode.nodeType === 1) {
                     elem.outerHTML = elem.outerHTML
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
             
-    ***REMOVED*** else {
+        } else {
             return proceed.call(this, color, elem, prop);
-    ***REMOVED***
-***REMOVED***);    
-***REMOVED***)();
+        }
+    });    
+})();

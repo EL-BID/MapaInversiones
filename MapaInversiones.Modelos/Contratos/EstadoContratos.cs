@@ -2,7 +2,7 @@
 {
   public class EstadoContratos
   {
-    public string EstadoContrato { get; set; ***REMOVED*** = string.Empty;
-    public string Nombre { get; set; ***REMOVED*** = string.Empty;
-  ***REMOVED***
-***REMOVED***
+    public string EstadoContrato { get; set; } = string.Empty;
+    public string Nombre { get; set; } = string.Empty;
+  }
+}

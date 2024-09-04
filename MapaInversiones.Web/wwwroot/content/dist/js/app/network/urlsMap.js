@@ -84,4 +84,4 @@ define({
 	getValorAnnioContratos: '/api/serviciosContratistas/GetAnniosContratosByRUC',
 	getContratosContratista: '/api/serviciosContratistas/GetInformacionContratosPorFiltros',
 	getAnnioContratosProyecto: '/api/serviciosContratistas/GetAnniosContratosByProyecto'
-***REMOVED***)
+})

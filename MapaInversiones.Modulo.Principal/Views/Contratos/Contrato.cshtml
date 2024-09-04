@@ -2,22 +2,22 @@
 @inject OrchardCore.IOrchardHelper Orchard
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+}
 @{
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
     var LabelContrato = "";
     var TituloContrato = "";
     System.IFormatProvider culture =
 new System.Globalization.CultureInfo("es-RD");
-***REMOVED***
+}
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
     if (@etiqueta.AliasPart.Alias == "Contrato")
     {
         LabelContrato = @etiqueta.HtmlBodyPart.Html;
         TituloContrato = @etiqueta.TitlePart.Title;
-***REMOVED***
-***REMOVED***
+    }
+}
 <input type="hidden" id="hdNomUsuario" value="" />
 <input type="hidden" id="hdIdUsuario" value="" />
 <section class="banner-main">
@@ -219,11 +219,11 @@ new System.Globalization.CultureInfo("es-RD");
                                                 @foreach (var item in Model.genero_participacion)
                                                 {
                                                     <option id="@item.id" id_gen="@item.id" nom_gen="@item.name">@item.name</option>
-                                            ***REMOVED***
+                                                }
 
                                             </select>
                                         </text>
-                                ***REMOVED***
+                                    }
                                     <div id="error_filtro_Genero" class="alert-danger" hidden="hidden">Género no puede ser vacío</div>
                                 </div>
                                 <div class="form-group">
@@ -242,9 +242,9 @@ new System.Globalization.CultureInfo("es-RD");
                                             @foreach (var item in Model.rol_participacion)
                                             {
                                                 <option id="@item.id" id_rol="@item.id" nom_rol="@item.id">@item.name</option>
-                                        ***REMOVED***
+                                            }
                                         </select>
-                                ***REMOVED***
+                                    }
                                     <div id="error_filtro_Rol" class="alert-danger" hidden="hidden">Rol no puede ser vacío </div>
                                 </div>
                                 <div class="form-group">
@@ -271,9 +271,9 @@ new System.Globalization.CultureInfo("es-RD");
                                             @foreach (var item in Model.medios_participacion)
                                             {
                                                 <option id="@item.id" id_medio="@item.id" nom_medio="@item.id">@item.name</option>
-                                        ***REMOVED***
+                                            }
                                         </select>
-                                ***REMOVED***
+                                    }
                                     <div id="error_filtro_Medios" class="alert-danger" hidden="hidden">"¿Cómo se enteró de Mapa Inversiones?" No puede ser vacío</div>
                                 </div>
                                 <div class="disclaimer well mb-3">
@@ -378,8 +378,8 @@ new System.Globalization.CultureInfo("es-RD");
                                         @foreach (var item in Model.tipo_comentario)
                                         {
                                             <option id_tipo="@item.idTC">@item.nameTC</option>
-                                    ***REMOVED***
-                                ***REMOVED***
+                                        }
+                                    }
 
                                 </select>
                             </div>
@@ -480,7 +480,7 @@ new System.Globalization.CultureInfo("es-RD");
 
 
 <script>
-    window.onscroll = function () { myFunction() ***REMOVED***;
+    window.onscroll = function () { myFunction() };
 
     var header = document.getElementById("navs-header");
     var sticky = header.offsetTop;
@@ -489,11 +489,11 @@ new System.Globalization.CultureInfo("es-RD");
         //if (window.pageYOffset > sticky) {
         //    header.classList.add("sticky");
         //    header.classList.add("bg-white");
-        //***REMOVED*** else {
+        //} else {
         //    header.classList.remove("sticky");
         //    header.classList.remove("bg-white");
-        //***REMOVED***
-***REMOVED***
+        //}
+    }
 </script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" integrity="sha384-KUSBBRKMO05pX3xNidXAX5N1p4iNwntmhHY4iugl7mINOyOXFL4KZWceJtMj7M0A" crossorigin="anonymous"></script>
@@ -505,5 +505,5 @@ new System.Globalization.CultureInfo("es-RD");
 <script src="js/participacion_aux.js"></script>
 
 @section DataBody {
-        data-profile='[{"idUsuParticipa":"@Model.id_usu_participa" , "nomUsuParticipa" : "@Model.nom_usu_participa"***REMOVED***]'
-***REMOVED***
+        data-profile='[{"idUsuParticipa":"@Model.id_usu_participa" , "nomUsuParticipa" : "@Model.nom_usu_participa"}]'
+}

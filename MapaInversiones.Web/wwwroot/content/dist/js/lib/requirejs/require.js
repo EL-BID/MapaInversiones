@@ -34,18 +34,18 @@ var requirejs, require, define;
         defContextName = '_',
         //Oh the tragedy, detecting opera. See the usage of isOpera for reason.
         isOpera = typeof opera !== 'undefined' && opera.toString() === '[object Opera]',
-        contexts = {***REMOVED***,
-        cfg = {***REMOVED***,
+        contexts = {},
+        cfg = {},
         globalDefQueue = [],
         useInteractive = false;
 
     function isFunction(it) {
         return ostring.call(it) === '[object Function]';
-***REMOVED***
+    }
 
     function isArray(it) {
         return ostring.call(it) === '[object Array]';
-***REMOVED***
+    }
 
     /**
      * Helper function for iterating over an array. If the func returns
@@ -57,10 +57,10 @@ var requirejs, require, define;
             for (i = 0; i < ary.length; i += 1) {
                 if (ary[i] && func(ary[i], i, ary)) {
                     break;
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
+                }
+            }
+        }
+    }
 
     /**
      * Helper function for iterating over an array backwards. If the func
@@ -72,18 +72,18 @@ var requirejs, require, define;
             for (i = ary.length - 1; i > -1; i -= 1) {
                 if (ary[i] && func(ary[i], i, ary)) {
                     break;
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
+                }
+            }
+        }
+    }
 
     function hasProp(obj, prop) {
         return hasOwn.call(obj, prop);
-***REMOVED***
+    }
 
     function getOwn(obj, prop) {
         return hasProp(obj, prop) && obj[prop];
-***REMOVED***
+    }
 
     /**
      * Cycles over properties in an object and calls a function for each
@@ -96,10 +96,10 @@ var requirejs, require, define;
             if (hasProp(obj, prop)) {
                 if (func(obj[prop], prop)) {
                     break;
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
-***REMOVED***
+                }
+            }
+        }
+    }
 
     /**
      * Simple function to mix in properties from source into target,
@@ -111,50 +111,50 @@ var requirejs, require, define;
                 if (force || !hasProp(target, prop)) {
                     if (deepStringMixin && typeof value !== 'string') {
                         if (!target[prop]) {
-                            target[prop] = {***REMOVED***;
-                    ***REMOVED***
+                            target[prop] = {};
+                        }
                         mixin(target[prop], value, force, deepStringMixin);
-                ***REMOVED*** else {
+                    } else {
                         target[prop] = value;
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***);
-    ***REMOVED***
+                    }
+                }
+            });
+        }
         return target;
-***REMOVED***
+    }
 
     //Similar to Function.prototype.bind, but the 'this' object is specified
     //first, since it is easier to read/figure out what 'this' will be.
     function bind(obj, fn) {
         return function () {
             return fn.apply(obj, arguments);
-    ***REMOVED***;
-***REMOVED***
+        };
+    }
 
     function scripts() {
         return document.getElementsByTagName('script');
-***REMOVED***
+    }
 
     //Allow getting a global that expressed in
     //dot notation, like 'a.b.c'.
     function getGlobal(value) {
         if (!value) {
             return value;
-    ***REMOVED***
+        }
         var g = global;
         each(value.split('.'), function (part) {
             g = g[part];
-    ***REMOVED***);
+        });
         return g;
-***REMOVED***
+    }
 
     /**
      * Constructs an error with a pointer to an URL with more information.
-     * @param {String***REMOVED*** id the error ID that maps to an ID on a web page.
-     * @param {String***REMOVED*** message human readable error.
-     * @param {Error***REMOVED*** [err] the original error, if there is one.
+     * @param {String} id the error ID that maps to an ID on a web page.
+     * @param {String} message human readable error.
+     * @param {Error} [err] the original error, if there is one.
      *
-     * @returns {Error***REMOVED***
+     * @returns {Error}
      */
     function makeError(id, msg, err, requireModules) {
         var e = new Error(msg + '\nhttp://requirejs.org/docs/errors.html#' + id);
@@ -162,31 +162,31 @@ var requirejs, require, define;
         e.requireModules = requireModules;
         if (err) {
             e.originalError = err;
-    ***REMOVED***
+        }
         return e;
-***REMOVED***
+    }
 
     if (typeof define !== 'undefined') {
         //If a define is already in play via another AMD loader,
         //do not overwrite.
         return;
-***REMOVED***
+    }
 
     if (typeof requirejs !== 'undefined') {
         if (isFunction(requirejs)) {
             //Do not overwrite and existing requirejs instance.
             return;
-    ***REMOVED***
+        }
         cfg = requirejs;
         requirejs = undefined;
-***REMOVED***
+    }
 
     //Allow for a require config object
     if (typeof require !== 'undefined' && !isFunction(require)) {
         //assume it is a config object.
         cfg = require;
         require = undefined;
-***REMOVED***
+    }
 
     function newContext(contextName) {
         var inCheckLoaded, Module, context, handlers,
@@ -194,17 +194,17 @@ var requirejs, require, define;
             config = {
                 waitSeconds: 7,
                 baseUrl: './',
-                paths: {***REMOVED***,
-                pkgs: {***REMOVED***,
-                shim: {***REMOVED***,
-                map: {***REMOVED***,
-                config: {***REMOVED***
-          ***REMOVED***
-            registry = {***REMOVED***,
-            undefEvents = {***REMOVED***,
+                paths: {},
+                pkgs: {},
+                shim: {},
+                map: {},
+                config: {}
+            },
+            registry = {},
+            undefEvents = {},
             defQueue = [],
-            defined = {***REMOVED***,
-            urlFetched = {***REMOVED***,
+            defined = {},
+            urlFetched = {},
             requireCounter = 1,
             unnormalizedCounter = 1;
 
@@ -215,7 +215,7 @@ var requirejs, require, define;
          * which act like paths, but can be remapped. But the end result,
          * all paths that use this function should look normalized.
          * NOTE: this method MODIFIES the input array.
-         * @param {Array***REMOVED*** ary the array of path segments.
+         * @param {Array} ary the array of path segments.
          */
         function trimDots(ary) {
             var i, part;
@@ -224,7 +224,7 @@ var requirejs, require, define;
                 if (part === '.') {
                     ary.splice(i, 1);
                     i -= 1;
-            ***REMOVED*** else if (part === '..') {
+                } else if (part === '..') {
                     if (i === 1 && (ary[2] === '..' || ary[0] === '..')) {
                         //End of the line. Keep at least one non-dot
                         //path segment at the front so it can be mapped
@@ -233,23 +233,23 @@ var requirejs, require, define;
                         //This can still fail, but catches the most reasonable
                         //uses of ..
                         break;
-                ***REMOVED*** else if (i > 0) {
+                    } else if (i > 0) {
                         ary.splice(i - 1, 2);
                         i -= 2;
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                    }
+                }
+            }
+        }
 
         /**
          * Given a relative module name, like ./something, normalize it to
          * a real name that can be mapped to a path.
-         * @param {String***REMOVED*** name the relative name
-         * @param {String***REMOVED*** baseName a real name that the name arg is relative
+         * @param {String} name the relative name
+         * @param {String} baseName a real name that the name arg is relative
          * to.
-         * @param {Boolean***REMOVED*** applyMap apply the map config to the value. Should
+         * @param {Boolean} applyMap apply the map config to the value. Should
          * only be done if this normalization is for a dependency ID.
-         * @returns {String***REMOVED*** normalized name
+         * @returns {String} normalized name
          */
         function normalize(name, baseName, applyMap) {
             var pkgName, pkgConfig, mapValue, nameParts, i, j, nameSegment,
@@ -269,14 +269,14 @@ var requirejs, require, define;
                         //If the baseName is a package name, then just treat it as one
                         //name to concat the name with.
                         normalizedBaseParts = baseParts = [baseName];
-                ***REMOVED*** else {
+                    } else {
                         //Convert baseName to array, and lop off the last part,
                         //so that . matches that 'directory' and not name of the baseName's
                         //module. For instance, baseName of 'one/two/three', maps to
                         //'one/two/three.js', but we want the directory, 'one/two' for
                         //this normalization.
                         normalizedBaseParts = baseParts.slice(0, baseParts.length - 1);
-                ***REMOVED***
+                    }
 
                     name = normalizedBaseParts.concat(name.split('/'));
                     trimDots(name);
@@ -287,13 +287,13 @@ var requirejs, require, define;
                     name = name.join('/');
                     if (pkgConfig && name === pkgName + '/' + pkgConfig.main) {
                         name = pkgName;
-                ***REMOVED***
-            ***REMOVED*** else if (name.indexOf('./') === 0) {
+                    }
+                } else if (name.indexOf('./') === 0) {
                     // No baseName, so this is ID is resolved relative
                     // to baseUrl, pull off the leading dot.
                     name = name.substring(2);
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             //Apply map config if available.
             if (applyMap && (baseParts || starMap) && map) {
@@ -317,14 +317,14 @@ var requirejs, require, define;
                                     foundMap = mapValue;
                                     foundI = i;
                                     break;
-                            ***REMOVED***
-                        ***REMOVED***
-                    ***REMOVED***
-                ***REMOVED***
+                                }
+                            }
+                        }
+                    }
 
                     if (foundMap) {
                         break;
-                ***REMOVED***
+                    }
 
                     //Check for a star map match, but just hold on to it,
                     //if there is a shorter segment match later in a matching
@@ -332,22 +332,22 @@ var requirejs, require, define;
                     if (!foundStarMap && starMap && getOwn(starMap, nameSegment)) {
                         foundStarMap = getOwn(starMap, nameSegment);
                         starI = i;
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
 
                 if (!foundMap && foundStarMap) {
                     foundMap = foundStarMap;
                     foundI = starI;
-            ***REMOVED***
+                }
 
                 if (foundMap) {
                     nameParts.splice(0, foundI, foundMap);
                     name = nameParts.join('/');
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             return name;
-    ***REMOVED***
+        }
 
         function removeScript(name) {
             if (isBrowser) {
@@ -356,10 +356,10 @@ var requirejs, require, define;
                             scriptNode.getAttribute('data-requirecontext') === context.contextName) {
                         scriptNode.parentNode.removeChild(scriptNode);
                         return true;
-                ***REMOVED***
-            ***REMOVED***);
-        ***REMOVED***
-    ***REMOVED***
+                    }
+                });
+            }
+        }
 
         function hasPathFallback(id) {
             var pathConfig = getOwn(config.paths, id);
@@ -371,8 +371,8 @@ var requirejs, require, define;
                 context.require.undef(id);
                 context.require([id]);
                 return true;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         //Turns a plugin!resource to [plugin, resource]
         //with the plugin being undefined if the name
@@ -383,24 +383,24 @@ var requirejs, require, define;
             if (index > -1) {
                 prefix = name.substring(0, index);
                 name = name.substring(index + 1, name.length);
-        ***REMOVED***
+            }
             return [prefix, name];
-    ***REMOVED***
+        }
 
         /**
          * Creates a module mapping that includes plugin prefix, module
          * name, and path. If parentModuleMap is provided it will
          * also normalize the name via require.normalize()
          *
-         * @param {String***REMOVED*** name the module name
-         * @param {String***REMOVED*** [parentModuleMap] parent module map
+         * @param {String} name the module name
+         * @param {String} [parentModuleMap] parent module map
          * for the module name, used to resolve relative names.
-         * @param {Boolean***REMOVED*** isNormalized: is the ID already normalized.
+         * @param {Boolean} isNormalized: is the ID already normalized.
          * This is true if this call is done for a define() module ID.
-         * @param {Boolean***REMOVED*** applyMap: apply the map config to the ID.
+         * @param {Boolean} applyMap: apply the map config to the ID.
          * Should only be true if this map is for a dependency.
          *
-         * @returns {Object***REMOVED***
+         * @returns {Object}
          */
         function makeModuleMap(name, parentModuleMap, isNormalized, applyMap) {
             var url, pluginModule, suffix, nameParts,
@@ -415,7 +415,7 @@ var requirejs, require, define;
             if (!name) {
                 isDefine = false;
                 name = '_@r' + (requireCounter += 1);
-        ***REMOVED***
+            }
 
             nameParts = splitPrefix(name);
             prefix = nameParts[0];
@@ -424,7 +424,7 @@ var requirejs, require, define;
             if (prefix) {
                 prefix = normalize(prefix, parentName, applyMap);
                 pluginModule = getOwn(defined, prefix);
-        ***REMOVED***
+            }
 
             //Account for relative paths if there is a base name.
             if (name) {
@@ -433,11 +433,11 @@ var requirejs, require, define;
                         //Plugin is loaded, use its normalize method.
                         normalizedName = pluginModule.normalize(name, function (name) {
                             return normalize(name, parentName, applyMap);
-                    ***REMOVED***);
-                ***REMOVED*** else {
+                        });
+                    } else {
                         normalizedName = normalize(name, parentName, applyMap);
-                ***REMOVED***
-            ***REMOVED*** else {
+                    }
+                } else {
                     //A regular module.
                     normalizedName = normalize(name, parentName, applyMap);
 
@@ -450,8 +450,8 @@ var requirejs, require, define;
                     isNormalized = true;
 
                     url = context.nameToUrl(normalizedName);
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             //If the id is a plugin id that cannot be determined if it needs
             //normalization, stamp it with a unique ID so two matching relative
@@ -471,8 +471,8 @@ var requirejs, require, define;
                 id: (prefix ?
                         prefix + '!' + normalizedName :
                         normalizedName) + suffix
-        ***REMOVED***;
-    ***REMOVED***
+            };
+        }
 
         function getModule(depMap) {
             var id = depMap.id,
@@ -480,10 +480,10 @@ var requirejs, require, define;
 
             if (!mod) {
                 mod = registry[id] = new context.Module(depMap);
-        ***REMOVED***
+            }
 
             return mod;
-    ***REMOVED***
+        }
 
         function on(depMap, name, fn) {
             var id = depMap.id,
@@ -493,11 +493,11 @@ var requirejs, require, define;
                     (!mod || mod.defineEmitComplete)) {
                 if (name === 'defined') {
                     fn(defined[id]);
-            ***REMOVED***
-        ***REMOVED*** else {
+                }
+            } else {
                 getModule(depMap).on(name, fn);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         function onError(err, errback) {
             var ids = err.requireModules,
@@ -505,7 +505,7 @@ var requirejs, require, define;
 
             if (errback) {
                 errback(err);
-        ***REMOVED*** else {
+            } else {
                 each(ids, function (id) {
                     var mod = getOwn(registry, id);
                     if (mod) {
@@ -514,15 +514,15 @@ var requirejs, require, define;
                         if (mod.events.error) {
                             notified = true;
                             mod.emit('error', err);
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***);
+                        }
+                    }
+                });
 
                 if (!notified) {
                     req.onError(err);
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                }
+            }
+        }
 
         /**
          * Internal method to transfer globalQueue items to this context's
@@ -537,54 +537,54 @@ var requirejs, require, define;
                 apsp.apply(defQueue,
                            [defQueue.length - 1, 0].concat(globalDefQueue));
                 globalDefQueue = [];
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         handlers = {
             'require': function (mod) {
                 if (mod.require) {
                     return mod.require;
-            ***REMOVED*** else {
+                } else {
                     return (mod.require = context.makeRequire(mod.map));
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
             'exports': function (mod) {
                 mod.usingExports = true;
                 if (mod.map.isDefine) {
                     if (mod.exports) {
                         return mod.exports;
-                ***REMOVED*** else {
-                        return (mod.exports = defined[mod.map.id] = {***REMOVED***);
-                ***REMOVED***
-            ***REMOVED***
-          ***REMOVED***
+                    } else {
+                        return (mod.exports = defined[mod.map.id] = {});
+                    }
+                }
+            },
             'module': function (mod) {
                 if (mod.module) {
                     return mod.module;
-            ***REMOVED*** else {
+                } else {
                     return (mod.module = {
                         id: mod.map.id,
                         uri: mod.map.url,
                         config: function () {
-                            return (config.config && getOwn(config.config, mod.map.id)) || {***REMOVED***;
-                      ***REMOVED***
+                            return (config.config && getOwn(config.config, mod.map.id)) || {};
+                        },
                         exports: defined[mod.map.id]
-                ***REMOVED***);
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***;
+                    });
+                }
+            }
+        };
 
         function cleanRegistry(id) {
             //Clean up machinery used for waiting modules.
             delete registry[id];
-    ***REMOVED***
+        }
 
         function breakCycle(mod, traced, processed) {
             var id = mod.map.id;
 
             if (mod.error) {
                 mod.emit('error', mod.error);
-        ***REMOVED*** else {
+            } else {
                 traced[id] = true;
                 each(mod.depMaps, function (depMap, i) {
                     var depId = depMap.id,
@@ -598,14 +598,14 @@ var requirejs, require, define;
                         if (getOwn(traced, depId)) {
                             mod.defineDep(i, defined[depId]);
                             mod.check(); //pass false?
-                    ***REMOVED*** else {
+                        } else {
                             breakCycle(dep, traced, processed);
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***);
+                        }
+                    }
+                });
                 processed[id] = true;
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         function checkLoaded() {
             var map, modId, err, usingPathFallback,
@@ -620,7 +620,7 @@ var requirejs, require, define;
             //Do not bother if this call was a result of a cycle break.
             if (inCheckLoaded) {
                 return;
-        ***REMOVED***
+            }
 
             inCheckLoaded = true;
 
@@ -632,11 +632,11 @@ var requirejs, require, define;
                 //Skip things that are not enabled or in error state.
                 if (!mod.enabled) {
                     return;
-            ***REMOVED***
+                }
 
                 if (!map.isDefine) {
                     reqCalls.push(mod);
-            ***REMOVED***
+                }
 
                 if (!mod.error) {
                     //If the module should be executed, and it has not
@@ -645,11 +645,11 @@ var requirejs, require, define;
                         if (hasPathFallback(modId)) {
                             usingPathFallback = true;
                             stillLoading = true;
-                    ***REMOVED*** else {
+                        } else {
                             noLoads.push(modId);
                             removeScript(modId);
-                    ***REMOVED***
-                ***REMOVED*** else if (!mod.inited && mod.fetched && map.isDefine) {
+                        }
+                    } else if (!mod.inited && mod.fetched && map.isDefine) {
                         stillLoading = true;
                         if (!map.prefix) {
                             //No reason to keep looking for unfinished
@@ -658,24 +658,24 @@ var requirejs, require, define;
                             //because it may be that a plugin resource
                             //is waiting on a non-plugin cycle.
                             return (needCycleCheck = false);
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***);
+                        }
+                    }
+                }
+            });
 
             if (expired && noLoads.length) {
                 //If wait time expired, throw error of unloaded modules.
                 err = makeError('timeout', 'Load timeout for modules: ' + noLoads, null, noLoads);
                 err.contextName = context.contextName;
                 return onError(err);
-        ***REMOVED***
+            }
 
             //Not expired, check for a cycle.
             if (needCycleCheck) {
                 each(reqCalls, function (mod) {
-                    breakCycle(mod, {***REMOVED***, {***REMOVED***);
-            ***REMOVED***);
-        ***REMOVED***
+                    breakCycle(mod, {}, {});
+                });
+            }
 
             //If still waiting on loads, and the waiting load is something
             //other than a plugin resource, or there are still outstanding
@@ -687,52 +687,52 @@ var requirejs, require, define;
                     checkLoadedTimeoutId = setTimeout(function () {
                         checkLoadedTimeoutId = 0;
                         checkLoaded();
-                  ***REMOVED*** 50);
-            ***REMOVED***
-        ***REMOVED***
+                    }, 50);
+                }
+            }
 
             inCheckLoaded = false;
-    ***REMOVED***
+        }
 
         Module = function (map) {
-            this.events = getOwn(undefEvents, map.id) || {***REMOVED***;
+            this.events = getOwn(undefEvents, map.id) || {};
             this.map = map;
             this.shim = getOwn(config.shim, map.id);
             this.depExports = [];
             this.depMaps = [];
             this.depMatched = [];
-            this.pluginMaps = {***REMOVED***;
+            this.pluginMaps = {};
             this.depCount = 0;
 
             /* this.exports this.factory
                this.depMaps = [],
                this.enabled, this.fetched
             */
-    ***REMOVED***;
+        };
 
         Module.prototype = {
             init: function (depMaps, factory, errback, options) {
-                options = options || {***REMOVED***;
+                options = options || {};
 
                 //Do not do more inits if already done. Can happen if there
                 //are multiple define calls for the same module. That is not
                 //a normal, common case, but it is also not unexpected.
                 if (this.inited) {
                     return;
-            ***REMOVED***
+                }
 
                 this.factory = factory;
 
                 if (errback) {
                     //Register for errors on this module.
                     this.on('error', errback);
-            ***REMOVED*** else if (this.events.error) {
+                } else if (this.events.error) {
                     //If no errback already, but there are error listeners
                     //on this module, set up an errback to pass to the deps.
                     errback = bind(this, function (err) {
                         this.emit('error', err);
-                ***REMOVED***);
-            ***REMOVED***
+                    });
+                }
 
                 //Do a copy of the dependency array, so that
                 //source inputs are not modified. For example
@@ -756,10 +756,10 @@ var requirejs, require, define;
                     //Enable this module and dependencies.
                     //Will call this.check()
                     this.enable();
-            ***REMOVED*** else {
+                } else {
                     this.check();
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
 
             defineDep: function (i, depExports) {
                 //Because of cycles, defined callback for a given
@@ -768,13 +768,13 @@ var requirejs, require, define;
                     this.depMatched[i] = true;
                     this.depCount -= 1;
                     this.depExports[i] = depExports;
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
 
             fetch: function () {
                 if (this.fetched) {
                     return;
-            ***REMOVED***
+                }
                 this.fetched = true;
 
                 context.startTime = (new Date()).getTime();
@@ -786,14 +786,14 @@ var requirejs, require, define;
                 if (this.shim) {
                     context.makeRequire(this.map, {
                         enableBuildCallback: true
-                ***REMOVED***)(this.shim.deps || [], bind(this, function () {
+                    })(this.shim.deps || [], bind(this, function () {
                         return map.prefix ? this.callPlugin() : this.load();
-                ***REMOVED***));
-            ***REMOVED*** else {
+                    }));
+                } else {
                     //Regular dependency.
                     return map.prefix ? this.callPlugin() : this.load();
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
 
             load: function () {
                 var url = this.map.url;
@@ -802,8 +802,8 @@ var requirejs, require, define;
                 if (!urlFetched[url]) {
                     urlFetched[url] = true;
                     context.load(this.map.id, url);
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
 
             /**
              * Checks is the module is ready to define itself, and if so,
@@ -812,7 +812,7 @@ var requirejs, require, define;
             check: function () {
                 if (!this.enabled || this.enabling) {
                     return;
-            ***REMOVED***
+                }
 
                 var err, cjsModule,
                     id = this.map.id,
@@ -822,9 +822,9 @@ var requirejs, require, define;
 
                 if (!this.inited) {
                     this.fetch();
-            ***REMOVED*** else if (this.error) {
+                } else if (this.error) {
                     this.emit('error', this.error);
-            ***REMOVED*** else if (!this.defining) {
+                } else if (!this.defining) {
                     //The factory could trigger another require call
                     //that would result in checking this module to
                     //define itself again. If already in the process
@@ -838,12 +838,12 @@ var requirejs, require, define;
                             if (this.events.error) {
                                 try {
                                     exports = context.execCb(id, factory, depExports, exports);
-                            ***REMOVED*** catch (e) {
+                                } catch (e) {
                                     err = e;
-                            ***REMOVED***
-                        ***REMOVED*** else {
+                                }
+                            } else {
                                 exports = context.execCb(id, factory, depExports, exports);
-                        ***REMOVED***
+                            }
 
                             if (this.map.isDefine) {
                                 //If setting exports via 'module' is in play,
@@ -855,23 +855,23 @@ var requirejs, require, define;
                                         //Make sure it is not already the exports value
                                         cjsModule.exports !== this.exports) {
                                     exports = cjsModule.exports;
-                            ***REMOVED*** else if (exports === undefined && this.usingExports) {
+                                } else if (exports === undefined && this.usingExports) {
                                     //exports already set the defined value.
                                     exports = this.exports;
-                            ***REMOVED***
-                        ***REMOVED***
+                                }
+                            }
 
                             if (err) {
                                 err.requireMap = this.map;
                                 err.requireModules = [this.map.id];
                                 err.requireType = 'define';
                                 return onError((this.error = err));
-                        ***REMOVED***
+                            }
 
-                    ***REMOVED*** else {
+                        } else {
                             //Just a literal value
                             exports = factory;
-                    ***REMOVED***
+                        }
 
                         this.exports = exports;
 
@@ -880,14 +880,14 @@ var requirejs, require, define;
 
                             if (req.onResourceLoad) {
                                 req.onResourceLoad(context, this.map, this.depMaps);
-                        ***REMOVED***
-                    ***REMOVED***
+                            }
+                        }
 
                         //Clean up
                         delete registry[id];
 
                         this.defined = true;
-                ***REMOVED***
+                    }
 
                     //Finished the define stage. Allow calling check again
                     //to allow define notifications below in the case of a
@@ -898,10 +898,10 @@ var requirejs, require, define;
                         this.defineEmitted = true;
                         this.emit('defined', this.exports);
                         this.defineEmitComplete = true;
-                ***REMOVED***
+                    }
 
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
 
             callPlugin: function () {
                 var map = this.map,
@@ -920,7 +920,7 @@ var requirejs, require, define;
                         localRequire = context.makeRequire(map.parentMap, {
                             enableBuildCallback: true,
                             skipMap: true
-                    ***REMOVED***);
+                        });
 
                     //If current map is not normalized, wait for that
                     //normalized name to load instead of continuing.
@@ -929,8 +929,8 @@ var requirejs, require, define;
                         if (plugin.normalize) {
                             name = plugin.normalize(name, function (name) {
                                 return normalize(name, parentName, true);
-                        ***REMOVED***) || '';
-                    ***REMOVED***
+                            }) || '';
+                        }
 
                         //prefix and name should already be normalized, no need
                         //for applying map config again either.
@@ -938,11 +938,11 @@ var requirejs, require, define;
                                                       this.map.parentMap);
                         on(normalizedMap,
                             'defined', bind(this, function (value) {
-                                this.init([], function () { return value; ***REMOVED***, null, {
+                                this.init([], function () { return value; }, null, {
                                     enabled: true,
                                     ignore: true
-                            ***REMOVED***);
-                        ***REMOVED***));
+                                });
+                            }));
 
                         normalizedMod = getOwn(registry, normalizedMap.id);
                         if (normalizedMod) {
@@ -953,19 +953,19 @@ var requirejs, require, define;
                             if (this.events.error) {
                                 normalizedMod.on('error', bind(this, function (err) {
                                     this.emit('error', err);
-                            ***REMOVED***));
-                        ***REMOVED***
+                                }));
+                            }
                             normalizedMod.enable();
-                    ***REMOVED***
+                        }
 
                         return;
-                ***REMOVED***
+                    }
 
                     load = bind(this, function (value) {
-                        this.init([], function () { return value; ***REMOVED***, null, {
+                        this.init([], function () { return value; }, null, {
                             enabled: true
-                    ***REMOVED***);
-                ***REMOVED***);
+                        });
+                    });
 
                     load.error = bind(this, function (err) {
                         this.inited = true;
@@ -977,11 +977,11 @@ var requirejs, require, define;
                         eachProp(registry, function (mod) {
                             if (mod.map.id.indexOf(id + '_unnormalized') === 0) {
                                 cleanRegistry(mod.map.id);
-                        ***REMOVED***
-                    ***REMOVED***);
+                            }
+                        });
 
                         onError(err);
-                ***REMOVED***);
+                    });
 
                     //Allow plugins to load other code without having to know the
                     //context or how to 'complete' the load.
@@ -997,13 +997,13 @@ var requirejs, require, define;
                         //that moduleName in favor of the internal ref.
                         if (textAlt) {
                             text = textAlt;
-                    ***REMOVED***
+                        }
 
                         //Turn off interactive script matching for IE for any define
                         //calls in the text, then turn it back on at the end.
                         if (hasInteractive) {
                             useInteractive = false;
-                    ***REMOVED***
+                        }
 
                         //Prime the system by creating a module instance for
                         //it.
@@ -1012,18 +1012,18 @@ var requirejs, require, define;
                         //Transfer any config to this other module.
                         if (hasProp(config.config, id)) {
                             config.config[moduleName] = config.config[id];
-                    ***REMOVED***
+                        }
 
                         try {
                             req.exec(text);
-                    ***REMOVED*** catch (e) {
+                        } catch (e) {
                             throw new Error('fromText eval for ' + moduleName +
                                             ' failed: ' + e);
-                    ***REMOVED***
+                        }
 
                         if (hasInteractive) {
                             useInteractive = true;
-                    ***REMOVED***
+                        }
 
                         //Mark this as a dependency for the plugin
                         //resource
@@ -1035,17 +1035,17 @@ var requirejs, require, define;
                         //Bind the value of that module to the value for this
                         //resource ID.
                         localRequire([moduleName], load);
-                ***REMOVED***);
+                    });
 
                     //Use parentName here since the plugin's name is not reliable,
                     //could be some weird string with no path that actually wants to
                     //reference the parentName's path.
                     plugin.load(map.name, localRequire, load, config);
-            ***REMOVED***));
+                }));
 
                 context.enable(pluginMap, this);
                 this.pluginMaps[pluginMap.id] = pluginMap;
-          ***REMOVED***
+            },
 
             enable: function () {
                 this.enabled = true;
@@ -1074,19 +1074,19 @@ var requirejs, require, define;
                         if (handler) {
                             this.depExports[i] = handler(this);
                             return;
-                    ***REMOVED***
+                        }
 
                         this.depCount += 1;
 
                         on(depMap, 'defined', bind(this, function (depExports) {
                             this.defineDep(i, depExports);
                             this.check();
-                    ***REMOVED***));
+                        }));
 
                         if (this.errback) {
                             on(depMap, 'error', this.errback);
-                    ***REMOVED***
-                ***REMOVED***
+                        }
+                    }
 
                     id = depMap.id;
                     mod = registry[id];
@@ -1096,8 +1096,8 @@ var requirejs, require, define;
                     //important in circular dependency cases.
                     if (!hasProp(handlers, id) && mod && !mod.enabled) {
                         context.enable(depMap, this);
-                ***REMOVED***
-            ***REMOVED***));
+                    }
+                }));
 
                 //Enable each plugin that is used in
                 //a dependency
@@ -1105,41 +1105,41 @@ var requirejs, require, define;
                     var mod = getOwn(registry, pluginMap.id);
                     if (mod && !mod.enabled) {
                         context.enable(pluginMap, this);
-                ***REMOVED***
-            ***REMOVED***));
+                    }
+                }));
 
                 this.enabling = false;
 
                 this.check();
-          ***REMOVED***
+            },
 
             on: function (name, cb) {
                 var cbs = this.events[name];
                 if (!cbs) {
                     cbs = this.events[name] = [];
-            ***REMOVED***
+                }
                 cbs.push(cb);
-          ***REMOVED***
+            },
 
             emit: function (name, evt) {
                 each(this.events[name], function (cb) {
                     cb(evt);
-            ***REMOVED***);
+                });
                 if (name === 'error') {
                     //Now that the error handler was triggered, remove
                     //the listeners, since this broken Module instance
                     //can stay around for a while in the registry.
                     delete this.events[name];
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***;
+                }
+            }
+        };
 
         function callGetModule(args) {
             //Skip modules already defined.
             if (!hasProp(defined, args[0])) {
                 getModule(makeModuleMap(args[0], null, true)).init(args[1], args[2]);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         function removeListener(node, func, name, ieName) {
             //Favor detachEvent because of IE9
@@ -1150,17 +1150,17 @@ var requirejs, require, define;
                 //useful to know.
                 if (ieName) {
                     node.detachEvent(ieName, func);
-            ***REMOVED***
-        ***REMOVED*** else {
+                }
+            } else {
                 node.removeEventListener(name, func, false);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         /**
          * Given an event from a script node, get the requirejs info from it,
          * and then removes the event listeners on the node.
-         * @param {Event***REMOVED*** evt
-         * @returns {Object***REMOVED***
+         * @param {Event} evt
+         * @returns {Object}
          */
         function getScriptData(evt) {
             //Using currentTarget instead of target for Firefox 2.0's sake. Not
@@ -1175,8 +1175,8 @@ var requirejs, require, define;
             return {
                 node: node,
                 id: node && node.getAttribute('data-requiremodule')
-        ***REMOVED***;
-    ***REMOVED***
+            };
+        }
 
         function intakeDefines() {
             var args;
@@ -1189,13 +1189,13 @@ var requirejs, require, define;
                 args = defQueue.shift();
                 if (args[0] === null) {
                     return onError(makeError('mismatch', 'Mismatched anonymous define() module: ' + args[args.length - 1]));
-            ***REMOVED*** else {
+                } else {
                     //args are id, deps, factory. Should be normalized by the
                     //define() function.
                     callGetModule(args);
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                }
+            }
+        }
 
         context = {
             config: config,
@@ -1210,15 +1210,15 @@ var requirejs, require, define;
 
             /**
              * Set a configuration for the context.
-             * @param {Object***REMOVED*** cfg config object to integrate.
+             * @param {Object} cfg config object to integrate.
              */
             configure: function (cfg) {
                 //Make sure the baseUrl ends in a slash.
                 if (cfg.baseUrl) {
                     if (cfg.baseUrl.charAt(cfg.baseUrl.length - 1) !== '/') {
                         cfg.baseUrl += '/';
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
 
                 //Save off the paths and packages since they require special processing,
                 //they are additive.
@@ -1228,19 +1228,19 @@ var requirejs, require, define;
                         paths: true,
                         config: true,
                         map: true
-                ***REMOVED***;
+                    };
 
                 eachProp(cfg, function (value, prop) {
                     if (objs[prop]) {
                         if (prop === 'map') {
                             mixin(config[prop], value, true, true);
-                    ***REMOVED*** else {
+                        } else {
                             mixin(config[prop], value, true);
-                    ***REMOVED***
-                ***REMOVED*** else {
+                        }
+                    } else {
                         config[prop] = value;
-                ***REMOVED***
-            ***REMOVED***);
+                    }
+                });
 
                 //Merge shim
                 if (cfg.shim) {
@@ -1249,22 +1249,22 @@ var requirejs, require, define;
                         if (isArray(value)) {
                             value = {
                                 deps: value
-                        ***REMOVED***;
-                    ***REMOVED***
+                            };
+                        }
                         if ((value.exports || value.init) && !value.exportsFn) {
                             value.exportsFn = context.makeShimExports(value);
-                    ***REMOVED***
+                        }
                         shim[id] = value;
-                ***REMOVED***);
+                    });
                     config.shim = shim;
-            ***REMOVED***
+                }
 
                 //Adjust packages if necessary.
                 if (cfg.packages) {
                     each(cfg.packages, function (pkgObj) {
                         var location;
 
-                        pkgObj = typeof pkgObj === 'string' ? { name: pkgObj ***REMOVED*** : pkgObj;
+                        pkgObj = typeof pkgObj === 'string' ? { name: pkgObj } : pkgObj;
                         location = pkgObj.location;
 
                         //Create a brand new object on pkgs, since currentPackages can
@@ -1280,12 +1280,12 @@ var requirejs, require, define;
                             main: (pkgObj.main || 'main')
                                   .replace(currDirRegExp, '')
                                   .replace(jsSuffixRegExp, '')
-                    ***REMOVED***;
-                ***REMOVED***);
+                        };
+                    });
 
                     //Done with modifications, assing packages back to context config
                     config.pkgs = pkgs;
-            ***REMOVED***
+                }
 
                 //If there are any "waiting to execute" modules in the registry,
                 //update the maps for them, since their info, like URLs to load,
@@ -1296,56 +1296,56 @@ var requirejs, require, define;
                     //since they are transient.
                     if (!mod.inited && !mod.map.unnormalized) {
                         mod.map = makeModuleMap(id);
-                ***REMOVED***
-            ***REMOVED***);
+                    }
+                });
 
                 //If a deps array or a config callback is specified, then call
                 //require with those args. This is useful when require is defined as a
                 //config object before require.js is loaded.
                 if (cfg.deps || cfg.callback) {
                     context.require(cfg.deps || [], cfg.callback);
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
 
             makeShimExports: function (value) {
                 function fn() {
                     var ret;
                     if (value.init) {
                         ret = value.init.apply(global, arguments);
-                ***REMOVED***
+                    }
                     return ret || (value.exports && getGlobal(value.exports));
-            ***REMOVED***
+                }
                 return fn;
-          ***REMOVED***
+            },
 
             makeRequire: function (relMap, options) {
-                options = options || {***REMOVED***;
+                options = options || {};
 
                 function localRequire(deps, callback, errback) {
                     var id, map, requireMod;
 
                     if (options.enableBuildCallback && callback && isFunction(callback)) {
                         callback.__requireJsBuild = true;
-                ***REMOVED***
+                    }
 
                     if (typeof deps === 'string') {
                         if (isFunction(callback)) {
                             //Invalid call
                             return onError(makeError('requireargs', 'Invalid require call'), errback);
-                    ***REMOVED***
+                        }
 
                         //If require|exports|module are requested, get the
                         //value for them from the special handlers. Caveat:
                         //this only works while module is being defined.
                         if (relMap && hasProp(handlers, deps)) {
                             return handlers[deps](registry[relMap.id]);
-                    ***REMOVED***
+                        }
 
                         //Synchronous access to one module. If require.get is
                         //available (as in the Node adapter), prefer that.
                         if (req.get) {
                             return req.get(context, deps, relMap);
-                    ***REMOVED***
+                        }
 
                         //Normalize module name, if it contains . or ..
                         map = makeModuleMap(deps, relMap, false, true);
@@ -1357,9 +1357,9 @@ var requirejs, require, define;
                                         '" has not been loaded yet for context: ' +
                                         contextName +
                                         (relMap ? '' : '. Use require([])')));
-                    ***REMOVED***
+                        }
                         return defined[id];
-                ***REMOVED***
+                    }
 
                     //Grab defines waiting in the global queue.
                     intakeDefines();
@@ -1378,13 +1378,13 @@ var requirejs, require, define;
 
                         requireMod.init(deps, callback, errback, {
                             enabled: true
-                    ***REMOVED***);
+                        });
 
                         checkLoaded();
-                ***REMOVED***);
+                    });
 
                     return localRequire;
-            ***REMOVED***
+                }
 
                 mixin(localRequire, {
                     isBrowser: isBrowser,
@@ -1401,21 +1401,21 @@ var requirejs, require, define;
                         if (index !== -1) {
                             ext = moduleNamePlusExt.substring(index, moduleNamePlusExt.length);
                             moduleNamePlusExt = moduleNamePlusExt.substring(0, index);
-                    ***REMOVED***
+                        }
 
                         return context.nameToUrl(normalize(moduleNamePlusExt,
                                                 relMap && relMap.id, true), ext);
-                  ***REMOVED***
+                    },
 
                     defined: function (id) {
                         return hasProp(defined, makeModuleMap(id, relMap, false, true).id);
-                  ***REMOVED***
+                    },
 
                     specified: function (id) {
                         id = makeModuleMap(id, relMap, false, true).id;
                         return hasProp(defined, id) || hasProp(registry, id);
-                ***REMOVED***
-            ***REMOVED***);
+                    }
+                });
 
                 //Only allow undef on top level require calls
                 if (!relMap) {
@@ -1437,15 +1437,15 @@ var requirejs, require, define;
                             //using a different config.
                             if (mod.events.defined) {
                                 undefEvents[id] = mod.events;
-                        ***REMOVED***
+                            }
 
                             cleanRegistry(id);
-                    ***REMOVED***
-                ***REMOVED***;
-            ***REMOVED***
+                        }
+                    };
+                }
 
                 return localRequire;
-          ***REMOVED***
+            },
 
             /**
              * Called to enable a module if it is still in the registry
@@ -1456,18 +1456,18 @@ var requirejs, require, define;
                 var mod = getOwn(registry, depMap.id);
                 if (mod) {
                     getModule(depMap).enable();
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
 
             /**
              * Internal method used by environment adapters to complete a load event.
              * A load event could be a script load or just a load pass from a synchronous
              * load call.
-             * @param {String***REMOVED*** moduleName the name of the module to potentially complete.
+             * @param {String} moduleName the name of the module to potentially complete.
              */
             completeLoad: function (moduleName) {
                 var found, args, mod,
-                    shim = getOwn(config.shim, moduleName) || {***REMOVED***,
+                    shim = getOwn(config.shim, moduleName) || {},
                     shExports = shim.exports;
 
                 takeGlobalQueue();
@@ -1481,15 +1481,15 @@ var requirejs, require, define;
                         //waiting for its completeLoad to fire.
                         if (found) {
                             break;
-                    ***REMOVED***
+                        }
                         found = true;
-                ***REMOVED*** else if (args[0] === moduleName) {
+                    } else if (args[0] === moduleName) {
                         //Found matching define call for this script!
                         found = true;
-                ***REMOVED***
+                    }
 
                     callGetModule(args);
-            ***REMOVED***
+                }
 
                 //Do this after the cycle of callGetModule in case the result
                 //of those calls/init calls changes the registry.
@@ -1499,21 +1499,21 @@ var requirejs, require, define;
                     if (config.enforceDefine && (!shExports || !getGlobal(shExports))) {
                         if (hasPathFallback(moduleName)) {
                             return;
-                    ***REMOVED*** else {
+                        } else {
                             return onError(makeError('nodefine',
                                              'No define call for ' + moduleName,
                                              null,
                                              [moduleName]));
-                    ***REMOVED***
-                ***REMOVED*** else {
+                        }
+                    } else {
                         //A script that does not call define(), so just simulate
                         //the call for it.
                         callGetModule([moduleName, (shim.deps || []), shim.exportsFn]);
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
 
                 checkLoaded();
-          ***REMOVED***
+            },
 
             /**
              * Converts a module name to a file path. Supports cases where
@@ -1535,7 +1535,7 @@ var requirejs, require, define;
                     //Add extension if it is included. This is a bit wonky, only non-.js things pass
                     //an extension, this method probably needs to be reworked.
                     url = moduleName + (ext || '');
-            ***REMOVED*** else {
+                } else {
                     //A module that needs to be converted to a path.
                     paths = config.paths;
                     pkgs = config.pkgs;
@@ -1553,38 +1553,38 @@ var requirejs, require, define;
                             //Choose the one that is desired
                             if (isArray(parentPath)) {
                                 parentPath = parentPath[0];
-                        ***REMOVED***
+                            }
                             syms.splice(0, i, parentPath);
                             break;
-                    ***REMOVED*** else if (pkg) {
+                        } else if (pkg) {
                             //If module name is just the package name, then looking
                             //for the main module.
                             if (moduleName === pkg.name) {
                                 pkgPath = pkg.location + '/' + pkg.main;
-                        ***REMOVED*** else {
+                            } else {
                                 pkgPath = pkg.location;
-                        ***REMOVED***
+                            }
                             syms.splice(0, i, pkgPath);
                             break;
-                    ***REMOVED***
-                ***REMOVED***
+                        }
+                    }
 
                     //Join the path parts together, then figure out if baseUrl is needed.
                     url = syms.join('/');
                     url += (ext || (/\?/.test(url) ? '' : '.js'));
                     url = (url.charAt(0) === '/' || url.match(/^[\w\+\.\-]+:/) ? '' : config.baseUrl) + url;
-            ***REMOVED***
+                }
 
                 return config.urlArgs ? url +
                                         ((url.indexOf('?') === -1 ? '?' : '&') +
                                          config.urlArgs) : url;
-          ***REMOVED***
+            },
 
             //Delegates to req.load. Broken out as a separate function to
             //allow overriding in the optimizer.
             load: function (id, url) {
                 req.load(context, id, url);
-          ***REMOVED***
+            },
 
             /**
              * Executes a module callack function. Broken out as a separate function
@@ -1595,12 +1595,12 @@ var requirejs, require, define;
              */
             execCb: function (name, callback, args, exports) {
                 return callback.apply(exports, args);
-          ***REMOVED***
+            },
 
             /**
              * callback for script loads, used to check status of loading.
              *
-             * @param {Event***REMOVED*** evt the event from the browser for the script
+             * @param {Event} evt the event from the browser for the script
              * that was loaded.
              */
             onScriptLoad: function (evt) {
@@ -1616,8 +1616,8 @@ var requirejs, require, define;
                     //Pull out the name of the module and the context.
                     var data = getScriptData(evt);
                     context.completeLoad(data.id);
-            ***REMOVED***
-          ***REMOVED***
+                }
+            },
 
             /**
              * Callback for script errors.
@@ -1626,13 +1626,13 @@ var requirejs, require, define;
                 var data = getScriptData(evt);
                 if (!hasPathFallback(data.id)) {
                     return onError(makeError('scripterror', 'Script error', evt, [data.id]));
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***;
+                }
+            }
+        };
 
         context.require = context.makeRequire();
         return context;
-***REMOVED***
+    }
 
     /**
      * Main entry point.
@@ -1663,26 +1663,26 @@ var requirejs, require, define;
                 deps = callback;
                 callback = errback;
                 errback = optional;
-        ***REMOVED*** else {
+            } else {
                 deps = [];
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         if (config && config.context) {
             contextName = config.context;
-    ***REMOVED***
+        }
 
         context = getOwn(contexts, contextName);
         if (!context) {
             context = contexts[contextName] = req.s.newContext(contextName);
-    ***REMOVED***
+        }
 
         if (config) {
             context.configure(config);
-    ***REMOVED***
+        }
 
         return context.require(deps, callback, errback);
-***REMOVED***;
+    };
 
     /**
      * Support require.config() to make it easier to cooperate with other
@@ -1690,24 +1690,24 @@ var requirejs, require, define;
      */
     req.config = function (config) {
         return req(config);
-***REMOVED***;
+    };
 
     /**
      * Execute something after the current tick
      * of the event loop. Override for other envs
      * that have a better solution than setTimeout.
-     * @param  {Function***REMOVED*** fn function to execute later.
+     * @param  {Function} fn function to execute later.
      */
     req.nextTick = typeof setTimeout !== 'undefined' ? function (fn) {
         setTimeout(fn, 4);
-***REMOVED*** : function (fn) { fn(); ***REMOVED***;
+    } : function (fn) { fn(); };
 
     /**
      * Export require as a global, but only if it does not already exist.
      */
     if (!require) {
         require = req;
-***REMOVED***
+    }
 
     req.version = version;
 
@@ -1717,10 +1717,10 @@ var requirejs, require, define;
     s = req.s = {
         contexts: contexts,
         newContext: newContext
-***REMOVED***;
+    };
 
     //Create default context.
-    req({***REMOVED***);
+    req({});
 
     //Exports some context-sensitive methods on global require.
     each([
@@ -1735,8 +1735,8 @@ var requirejs, require, define;
         req[prop] = function () {
             var ctx = contexts[defContextName];
             return ctx.require[prop].apply(ctx, arguments);
-    ***REMOVED***;
-***REMOVED***);
+        };
+    });
 
     if (isBrowser) {
         head = s.head = document.getElementsByTagName('head')[0];
@@ -1746,29 +1746,29 @@ var requirejs, require, define;
         baseElement = document.getElementsByTagName('base')[0];
         if (baseElement) {
             head = s.head = baseElement.parentNode;
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     /**
      * Any errors that require explicitly generates will be passed to this
      * function. Intercept/override it if you want custom error handling.
-     * @param {Error***REMOVED*** err the error object.
+     * @param {Error} err the error object.
      */
     req.onError = function (err) {
         throw err;
-***REMOVED***;
+    };
 
     /**
      * Does the request to load a module for the browser case.
      * Make this a separate function to allow other environments
      * to override it.
      *
-     * @param {Object***REMOVED*** context the require context to find state.
-     * @param {String***REMOVED*** moduleName the name of the module.
-     * @param {Object***REMOVED*** url the URL to the module.
+     * @param {Object} context the require context to find state.
+     * @param {String} moduleName the name of the module.
+     * @param {Object} url the URL to the module.
      */
     req.load = function (context, moduleName, url) {
-        var config = (context && context.config) || {***REMOVED***,
+        var config = (context && context.config) || {},
             node;
         if (isBrowser) {
             //In the browser so use a script tag
@@ -1819,10 +1819,10 @@ var requirejs, require, define;
                 //Best hope: IE10 fixes the issues,
                 //and then destroys all installs of IE 6-9.
                 //node.attachEvent('onerror', context.onScriptError);
-        ***REMOVED*** else {
+            } else {
                 node.addEventListener('load', context.onScriptLoad, false);
                 node.addEventListener('error', context.onScriptError, false);
-        ***REMOVED***
+            }
             node.src = url;
 
             //For some cache cases in IE 6-8, the script executes before the end
@@ -1832,13 +1832,13 @@ var requirejs, require, define;
             currentlyAddingScript = node;
             if (baseElement) {
                 head.insertBefore(node, baseElement);
-        ***REMOVED*** else {
+            } else {
                 head.appendChild(node);
-        ***REMOVED***
+            }
             currentlyAddingScript = null;
 
             return node;
-    ***REMOVED*** else if (isWebWorker) {
+        } else if (isWebWorker) {
             //In a web worker, use importScripts. This is not a very
             //efficient use of importScripts, importScripts will block until
             //its script is downloaded and evaluated. However, if web workers
@@ -1849,21 +1849,21 @@ var requirejs, require, define;
 
             //Account for anonymous modules
             context.completeLoad(moduleName);
-    ***REMOVED***
-***REMOVED***;
+        }
+    };
 
     function getInteractiveScript() {
         if (interactiveScript && interactiveScript.readyState === 'interactive') {
             return interactiveScript;
-    ***REMOVED***
+        }
 
         eachReverse(scripts(), function (script) {
             if (script.readyState === 'interactive') {
                 return (interactiveScript = script);
-        ***REMOVED***
-    ***REMOVED***);
+            }
+        });
         return interactiveScript;
-***REMOVED***
+    }
 
     //Look for a data-main script attribute, which could also adjust the baseUrl.
     if (isBrowser) {
@@ -1873,7 +1873,7 @@ var requirejs, require, define;
             //using the script's parent.
             if (!head) {
                 head = script.parentNode;
-        ***REMOVED***
+            }
 
             //Look for a data-main attribute to set main script for the page
             //to load. If it is there, the path to data main becomes the
@@ -1890,7 +1890,7 @@ var requirejs, require, define;
 
                     cfg.baseUrl = subPath;
                     dataMain = mainScript;
-            ***REMOVED***
+                }
 
                 //Strip off any trailing .js since dataMain is now
                 //like a module name.
@@ -1900,9 +1900,9 @@ var requirejs, require, define;
                 cfg.deps = cfg.deps ? cfg.deps.concat(dataMain) : [dataMain];
 
                 return true;
-        ***REMOVED***
-    ***REMOVED***);
-***REMOVED***
+            }
+        });
+    }
 
     /**
      * The function that handles definitions of modules. Differs from
@@ -1920,13 +1920,13 @@ var requirejs, require, define;
             callback = deps;
             deps = name;
             name = null;
-    ***REMOVED***
+        }
 
         //This module may not have dependencies
         if (!isArray(deps)) {
             callback = deps;
             deps = [];
-    ***REMOVED***
+        }
 
         //If no name, and callback is a function, then figure out if it a
         //CommonJS thing with dependencies.
@@ -1940,7 +1940,7 @@ var requirejs, require, define;
                     .replace(commentRegExp, '')
                     .replace(cjsRequireRegExp, function (match, dep) {
                         deps.push(dep);
-                ***REMOVED***);
+                    });
 
                 //May be a CommonJS thing even without require calls, but still
                 //could use exports, and module. Avoid doing exports and module
@@ -1948,8 +1948,8 @@ var requirejs, require, define;
                 //REQUIRES the function to expect the CommonJS variables in the
                 //order listed below.
                 deps = (callback.length === 1 ? ['require'] : ['require', 'exports', 'module']).concat(deps);
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         //If in IE 6-8 and hit an anonymous define() call, do the interactive
         //work.
@@ -1958,10 +1958,10 @@ var requirejs, require, define;
             if (node) {
                 if (!name) {
                     name = node.getAttribute('data-requiremodule');
-            ***REMOVED***
+                }
                 context = contexts[node.getAttribute('data-requirecontext')];
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         //Always save off evaluating the def call until the script onload handler.
         //This allows multiple modules to be in a file without prematurely
@@ -1970,24 +1970,24 @@ var requirejs, require, define;
         //occurs. If no context, use the global queue, and get it processed
         //in the onscript load callback.
         (context ? context.defQueue : globalDefQueue).push([name, deps, callback]);
-***REMOVED***;
+    };
 
     define.amd = {
         jQuery: true
-***REMOVED***;
+    };
 
 
     /**
      * Executes the text. Normally just uses eval, but can be modified
      * to use a better, environment-specific call. Only used for transpiling
      * loader plugins, not for plain JS modules.
-     * @param {String***REMOVED*** text the text to execute/evaluate.
+     * @param {String} text the text to execute/evaluate.
      */
     req.exec = function (text) {
         /*jslint evil: true */
         return eval(text);
-***REMOVED***;
+    };
 
     //Set up with config info.
     req(cfg);
-***REMOVED***(this));
+}(this));

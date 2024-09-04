@@ -14,29 +14,29 @@ namespace PlataformaTransparencia.Modelos
         {
             this.objects = new List<objectProjectsSearchMap>();          
            
-    ***REMOVED***
+        }
 
-        public List<objectProjectsSearchMap> objects { get; set; ***REMOVED***
+        public List<objectProjectsSearchMap> objects { get; set; }
         /// <summary>
         /// Es el valor recaudado, tener en cuenta el nivel geografico y 
         /// el periodo.
         /// </summary>
-        public decimal collectedMoney { get; set; ***REMOVED***
+        public decimal collectedMoney { get; set; }
         /// <summary>
         /// Valor aprobado, tener en cuenta los parametros.
         /// </summary>
-        public decimal approvedMoney { get; set; ***REMOVED***
+        public decimal approvedMoney { get; set; }
         /// <summary>
         /// Es el numero de proyectos aprobados tener en cuenta los parametros.
         /// </summary>
-        public decimal approvedProjects { get; set; ***REMOVED***
+        public decimal approvedProjects { get; set; }
         /// <summary>
         /// Es el valor aprobado tener en cuenta los parametros.
         /// </summary>
-        public decimal approvedMoneyTotal { get; set; ***REMOVED***
+        public decimal approvedMoneyTotal { get; set; }
         /// <summary>
         /// número total de proyectos
         /// </summary>
-        public int totalProjectsNumber { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public int totalProjectsNumber { get; set; }
+    }
+}

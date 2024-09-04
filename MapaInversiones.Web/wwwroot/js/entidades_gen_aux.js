@@ -11,7 +11,7 @@ GetRecursosPorNivel(anyo_actual);
 function inicializaDatos() {
     configuraSelectPeriodo();
     
-***REMOVED***
+}
 
 
 function getAnnios() {
@@ -21,23 +21,23 @@ function getAnnios() {
     for (var i = actual; i >= limite; i--) {
         if (i == actual) {
             select += '<option value="' + i.toString() + '" selected>' + i.toString() + '</option>';
-    ***REMOVED*** else {
+        } else {
             select += '<option value="' + i.toString() + '">' + i.toString() + '</option>';
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
 
     $("#annioEntidad").html(select);
-***REMOVED***
+}
 
 function configuraSelectPeriodo() {
     $('#annioEntidad').on('change', function () {
         anyo_actual = this.value;
         $("#divListado").empty();
         GetRecursosPorNivel(anyo_actual);
-***REMOVED***)
+    })
 
-***REMOVED***
+}
 
 
 function configuraFiltro_DesgloseIconos() {
@@ -49,26 +49,26 @@ function configuraFiltro_DesgloseIconos() {
         getDataTab(tipo);
         
 
-***REMOVED***);
-***REMOVED***
+    });
+}
 
 function getDataTab(nom_tab) {
     if (nom_tab != "") {
         var filtrados = $.grep(globales, function (n, i) {
             return n.labelGroup === nom_tab;
-    ***REMOVED***);
+        });
         globales_tab = filtrados;
         var pagina_actual = 1;
         var ini_data = ((pagina_actual - 1) * cantXPagina);
         var fin_data = (pagina_actual * cantXPagina) - 1;
         var data_pagina = arr = jQuery.grep(globales_tab, function (n, i) {
             return (i >= ini_data && i <= fin_data);
-    ***REMOVED***);
+        });
         getEstructuraInfograficoPerEntidad(data_pagina, pagina_actual);
 
-***REMOVED***
+    }
 
-***REMOVED***
+}
 
 function GetRecursosPorNivel(anyo) {
     $.ajax({
@@ -77,8 +77,8 @@ function GetRecursosPorNivel(anyo) {
         type: "GET",
         data: {
             anyo: anyo
-    ***REMOVED***
-***REMOVED***).done(function (data) {
+        }
+    }).done(function (data) {
         if (data.infoRecursos != null) {
             globales = data.infoRecursos;
             var textoVigente = "L " + ((data.totalPresupuesto) / 1000000).formatMoney(1, '.', ',').toString() + " Millones";
@@ -105,12 +105,12 @@ function GetRecursosPorNivel(anyo) {
                     str_html += '</a>';
                     nom_tab_1 = distintos[0]["labelGroup"];
                     
-            ***REMOVED*** else {
+                } else {
                     str_html += '<a id="enlacelistado_gasto_' + i + '" role="button" class="tipo_grafica btn" param="' + distintos[i]["labelGroup"] + '">';
                     str_html += '<span class="txt-bold">' + distintos[i]["labelGroup"] + '</span>';
                     str_html += '</a>';
-            ***REMOVED***
-        ***REMOVED***
+                }
+            }
 
             str_cad = str_cad.replace(/,\s*$/, "");
             $("#filtro_iconos").html(str_html);
@@ -121,15 +121,15 @@ function GetRecursosPorNivel(anyo) {
 
             if (nom_tab_1 != "") {
                 getDataTab(nom_tab_1);
-        ***REMOVED***
+            }
            
             
-    ***REMOVED***
-***REMOVED***).fail(function (xhr, ajaxOptions, thrownError) {
+        }
+    }).fail(function (xhr, ajaxOptions, thrownError) {
         alert("Error " + xhr.status + "_" + thrownError);
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 function getEstructuraInfograficoPerEntidad(datos, pagina) {
     var i_aux = 0;
@@ -143,15 +143,15 @@ function getEstructuraInfograficoPerEntidad(datos, pagina) {
 
     total_avance = globales_tab.reduce((sum, currentValue) => {
         return sum + currentValue.ejecutado;
-  ***REMOVED*** 0);
+    }, 0);
 
     total_presupuesto = globales_tab.reduce((sum, currentValue) => {
         return sum + currentValue.vigente;
-  ***REMOVED*** 0);
+    }, 0);
 
     total_aprobado = globales_tab.reduce((sum, currentValue) => {
         return sum + currentValue.aprobado;
-  ***REMOVED*** 0);
+    }, 0);
     total_porc_ejecutado = total_presupuesto == 0 ? 0 : total_avance * 100 / total_presupuesto;
 
 
@@ -164,7 +164,7 @@ function getEstructuraInfograficoPerEntidad(datos, pagina) {
         var porc_ejecutado = 0;
         if (datos[i].vigente > 0) {
             porc_ejecutado = (datos[i].ejecutado / datos[i].vigente) * 100;
-    ***REMOVED***
+        }
 
 
         html_str += '<div class="panel panel-default">';
@@ -180,27 +180,27 @@ function getEstructuraInfograficoPerEntidad(datos, pagina) {
         html_str += '<span class="labelTit">Presupuesto Aprobado</span>';
         if (datos[i].aprobado / 1000000 > 1) {
             html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].aprobado / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-    ***REMOVED*** else {
+        } else {
             html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].aprobado / 1).formatMoney(0, '.', ',').toString() + ' </span>';
-    ***REMOVED***
+        }
 
         html_str += '</div>';
         html_str += '<div class="data1">';
         html_str += '<span class="labelTit">Presupuesto Vigente</span>';
         if (datos[i].vigente / 1000000 > 1) {
             html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].vigente / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-    ***REMOVED*** else {
+        } else {
             html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].vigente / 1).formatMoney(0, '.', ',').toString() + ' </span>';
-    ***REMOVED***
+        }
 
         html_str += '</div>';
         html_str += '<div class="data1">';
         html_str += '<span class="labelTit">Ejecutado</span>';
         if (datos[i].ejecutado / 1000000 > 1) {
             html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].ejecutado / 1000000).formatMoney(1, '.', ',').toString() + ' Millones </span>';
-    ***REMOVED*** else {
+        } else {
             html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (datos[i].ejecutado / 1).formatMoney(0, '.', ',').toString() + '  </span>';
-    ***REMOVED***
+        }
 
         html_str += '</div>';
         html_str += '<div class="data1">';
@@ -218,7 +218,7 @@ function getEstructuraInfograficoPerEntidad(datos, pagina) {
 
         i_aux = i_aux + 1;
 
-***REMOVED***
+    }
     html_str += "</div>";
 
     ///----------------
@@ -237,9 +237,9 @@ function getEstructuraInfograficoPerEntidad(datos, pagina) {
     html_str += '<span class="labelTit">Presupuesto Aprobado</span>';
     if (total_aprobado / 1000000 > 1) {
         html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_aprobado / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-***REMOVED*** else {
+    } else {
         html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_aprobado / 1).formatMoney(0, '.', ',').toString() + '</span>';
-***REMOVED***
+    }
     html_str += '</div>';
 
     //--------------------------------
@@ -247,18 +247,18 @@ function getEstructuraInfograficoPerEntidad(datos, pagina) {
     html_str += '<span class="labelTit">Presupuesto Vigente</span>';
     if (total_presupuesto / 1000000 > 1) {
         html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_presupuesto / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-***REMOVED*** else {
+    } else {
         html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_presupuesto / 1).formatMoney(0, '.', ',').toString() + '</span>';
-***REMOVED***
+    }
     html_str += '</div>';
     //--------------------------
     html_str += '<div class="data1">';
     html_str += '<span class="labelTit">Ejecutado</span>';
     if (total_avance / 1000000 > 1) {
         html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_avance / 1000000).formatMoney(1, '.', ',').toString() + ' Millones</span>';
-***REMOVED*** else {
+    } else {
         html_str += '<span class="td1">' + monedaSimbolo("HND") + ' ' + (total_avance / 1).formatMoney(0, '.', ',').toString() + '</span>';
-***REMOVED***
+    }
     html_str += '</div>';
     //--------------------------
     html_str += '<div class="data1">';
@@ -277,10 +277,10 @@ function getEstructuraInfograficoPerEntidad(datos, pagina) {
     var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
     if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
         totalPages = totalPages + 1;
-***REMOVED***
+    }
     dibujarPagNumeradas(pagina, totalNumber, totalPages);
 
-***REMOVED***
+}
 
 function dibujarPagNumeradas(actual, total, totalPag) {
     var pag_actual = parseInt(actual);
@@ -297,40 +297,40 @@ function dibujarPagNumeradas(actual, total, totalPag) {
     var inicio = 1;
     if (residuo == 0) {
         inicio = (pag_actual - cant_por_linea) + 1;
-***REMOVED*** else {
+    } else {
         inicio = (cociente * cant_por_linea) + 1;
-***REMOVED***
+    }
 
     var fin = inicio + (cant_por_linea - 1);
     if (totalPag < cant_por_linea) {
         fin = totalPag;
-***REMOVED***
+    }
     if (fin > totalPag) {
         fin = totalPag;
-***REMOVED***
+    }
     if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
         pag_enlace += '<a id="page_left" role="button" class="material-icons md-24" data-page="' + (inicio - cant_por_linea) + '"><span class="">chevron_left</span></a>';
-***REMOVED***
+    }
 
 
     for (var i = inicio; i <= fin; i++) {
 
         if (i == pag_actual) {
             pag_enlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
-    ***REMOVED*** else {
+        } else {
             pag_enlace += '<a class="page_left" role="button" data-page="' + i + '">';
             pag_enlace += '<span class="glyphicon"></span>';
             pag_enlace += '<text class="paginacion">' + i + '</text>';
             pag_enlace += '</a>';
-    ***REMOVED***
+        }
 
-***REMOVED***
+    }
 
     if (pag_actual < totalPag) {
         if (fin < totalPag) {
             pag_enlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     $("#divPagFichas").html(pag_enlace);
 
@@ -340,12 +340,12 @@ function dibujarPagNumeradas(actual, total, totalPag) {
         var fin_data = (pagina_actual * cantXPagina) - 1;
         var data_pagina = arr = jQuery.grep(globales_tab, function (n, i) {
             return (i >= ini_data && i <= fin_data);
-    ***REMOVED***);
+        });
         $("#divListado").empty();
         getEstructuraInfograficoPerEntidad(data_pagina, pagina_actual);
-***REMOVED***);
+    });
 
-***REMOVED***
+}
 
 
 function monedaSimbolo(codigo) {
@@ -354,7 +354,7 @@ function monedaSimbolo(codigo) {
     moneda["HND"] = "B/.";
 
     return moneda[codigo];
-***REMOVED***
+}
 
 Number.prototype.formatMoney = function (c, d, t) {
     var n = this,
@@ -364,5 +364,5 @@ Number.prototype.formatMoney = function (c, d, t) {
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3***REMOVED***)(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-***REMOVED***;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};

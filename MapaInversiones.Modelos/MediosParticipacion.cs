@@ -6,7 +6,7 @@ namespace PlataformaTransparencia.Modelos
 {
     public class MediosParticipacion
     {
-        public string name { get; set; ***REMOVED***
-        public int id { get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string name { get; set; }
+        public int id { get; set; }
+    }
+}

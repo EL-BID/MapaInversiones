@@ -20,5 +20,5 @@ namespace PlataformaTransparencia.Negocios.Interfaces
     public ModelProcesoContratacionAnios ObtenerAnniosProcesoContratacion(int? IdProyecto);
     public ModelProcesosContratacionData ObtenerInformacionProcesosContratacionPorFiltros(ProcesosContratacionFiltros filtro);
 
-  ***REMOVED***
-***REMOVED***
+  }
+}

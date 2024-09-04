@@ -2,7 +2,7 @@
 @inject OrchardCore.IOrchardHelper Orchard
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+}
 @{
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
     var LabelDistPresupuesto = "";
@@ -20,45 +20,45 @@
     var LabelDistSankeySectores = "";
     var TituloDistSankeySectores = "";
 
-***REMOVED***
+}
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
     if (@etiqueta.AliasPart.Alias == "DistribucionPresupuesto")
     {
         LabelDistPresupuesto = @etiqueta.HtmlBodyPart.Html;
         TituloDistPresupuesto = @etiqueta.TitlePart.Title;
-***REMOVED***
+    }
     else if (@etiqueta.AliasPart.Alias == "AvanceSectores")
     {
         LabelAvanceSectores = @etiqueta.HtmlBodyPart.Html;
         TituloAvanceSectores = @etiqueta.TitlePart.Title;
-***REMOVED***
+    }
     else if (@etiqueta.AliasPart.Alias == "GrupoGasto")
     {
         LabelGrupoGasto = @etiqueta.HtmlBodyPart.Html;
         TituloGrupoGasto = @etiqueta.TitlePart.Title;
-***REMOVED***
+    }
     else if (@etiqueta.AliasPart.Alias == "DistObjetosGasto")
     {
         LabelDistObjetosGasto = @etiqueta.HtmlBodyPart.Html;
         TituloDistObjetosGasto = @etiqueta.TitlePart.Title;
-***REMOVED***
+    }
     else if (@etiqueta.AliasPart.Alias == "VersionesPresupuesto")
     {
         LabelVersionesPresupuesto = @etiqueta.HtmlBodyPart.Html;
         TituloVersionesPresupuesto = @etiqueta.TitlePart.Title;
-***REMOVED***
+    }
     else if (@etiqueta.AliasPart.Alias == "FuncionesGobPresupuesto")
     {
         LabelFuncionesGobPresupuesto = @etiqueta.HtmlBodyPart.Html;
         TituloFuncionesGobPresupuesto = @etiqueta.TitlePart.Title;
-***REMOVED***
+    }
     else if (@etiqueta.AliasPart.Alias == "DistSankeySectores")
     {
         LabelDistSankeySectores = @etiqueta.HtmlBodyPart.Html;
         TituloDistSankeySectores = @etiqueta.TitlePart.Title;
-***REMOVED***
-***REMOVED***
+    }
+}
 <head>
     <link rel="stylesheet" href="~/css/sankey.css" />
 </head>
@@ -72,8 +72,8 @@
         // Ocultar el div después de 3000 milisegundos (3 segundos)
         setTimeout(function () {
             miDiv.style.display = "none";
-      ***REMOVED*** 8000);
-***REMOVED***);
+        }, 8000);
+    });
 </script>
 <section class="banner-main">
 
@@ -123,7 +123,7 @@
                             <option value="@item.id">@item.id</option>
                             </text>
 
-                    ***REMOVED***
+                        }
                     </select>
                 </div>
             </div>
@@ -496,7 +496,7 @@
 
 
 <script>
-    window.onscroll = function () { myFunction() ***REMOVED***;
+    window.onscroll = function () { myFunction() };
 
     var header = document.getElementById("navs-header");
     var sticky = header.offsetTop;
@@ -505,11 +505,11 @@
         if (window.pageYOffset > sticky) {
             header.classList.add("sticky");
             header.classList.add("bg-white");
-    ***REMOVED*** else {
+        } else {
             header.classList.remove("sticky");
             header.classList.remove("bg-white");
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 </script>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">

@@ -6,12 +6,12 @@ namespace PlataformaTransparencia.Modelos.Presupuesto
 {
     public class infograficoFuenteActividad
     {
-        public string Id { get; set; ***REMOVED***
-        public string Nombre { get; set; ***REMOVED***
+        public string Id { get; set; }
+        public string Nombre { get; set; }
 
-        public double presupuesto { get; set; ***REMOVED***
+        public double presupuesto { get; set; }
 
-        public double avance { get; set;  ***REMOVED***
+        public double avance { get; set;  }
         public infograficoFuenteActividad()
         {
             Id = "";
@@ -20,7 +20,7 @@ namespace PlataformaTransparencia.Modelos.Presupuesto
             avance = 0;
 
 
-    ***REMOVED***
+        }
 
-***REMOVED***
-***REMOVED***
+    }
+}

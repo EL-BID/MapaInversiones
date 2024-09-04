@@ -2,22 +2,22 @@
 @inject OrchardCore.IOrchardHelper Orchard
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+}
 @{
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
     var LabelContratos = "";
     var TituloContratos = "";
     System.IFormatProvider culture =
 new System.Globalization.CultureInfo("es-RD");
-***REMOVED***
+}
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
     if (@etiqueta.AliasPart.Alias == "Contratos")
     {
         LabelContratos = @etiqueta.HtmlBodyPart.Html;
         TituloContratos = @etiqueta.TitlePart.Title;
-***REMOVED***
-***REMOVED***
+    }
+}
 
 <section class="banner-main">
 
@@ -99,18 +99,18 @@ new System.Globalization.CultureInfo("es-RD");
 
                                                     <text>
                                                         <div class="h6">Contratos @item.OrigenInformacion</div>
-                                                        <div class="h4"> @String.Format(culture, "{0:n0***REMOVED***", @item.NroContratos)</div>
+                                                        <div class="h4"> @String.Format(culture, "{0:n0}", @item.NroContratos)</div>
                                                         <div class="h6">Valor</div>
                                                         <div class="h4">
                                                             @item.MonedaContrato
                                                             @if (@item.ValorContratado >= 1000000)
                                                             {
-                                                                <text> @String.Format(culture, "{0:n1***REMOVED***", @item.ValorContratado / 1000000) Millones</text>
-                                                        ***REMOVED***
+                                                                <text> @String.Format(culture, "{0:n1}", @item.ValorContratado / 1000000) Millones</text>
+                                                            }
                                                             else
                                                             {
-                                                    <text> @String.Format(culture, "{0:n1***REMOVED***", @item.ValorContratado)</text>
-                                                        ***REMOVED***
+                                                    <text> @String.Format(culture, "{0:n1}", @item.ValorContratado)</text>
+                                                            }
                                                         </div>
                                                         </text>
                                    
@@ -120,8 +120,8 @@ new System.Globalization.CultureInfo("es-RD");
                             </div>
                         </div>
                     </div>
-                ***REMOVED***
-            ***REMOVED***
+                    }
+                }
                 else
                 {
                     <div class="col-md-4">
@@ -147,7 +147,7 @@ new System.Globalization.CultureInfo("es-RD");
                             </div>
                         </div>
                     </div>
-            ***REMOVED***
+                }
             <div class="col-md-12">
                 <div class="alertCont alert-info" role="alert">Para evitar duplicaciones en los análisis, se recomienda utilizar las publicaciones de manera separada, usando los datos de <strong>ONCAE</strong> para análisis sobre licitaciones, y <strong>SEFIN</strong> para análisis de presupuesto y pago de contratos.</div>
             </div>
@@ -173,12 +173,12 @@ new System.Globalization.CultureInfo("es-RD");
                                                     <div class="h2" id="ValorHNL">@item.MonedaContrato
                                                             @if (@item.ValorContratado >= 1000000)
                                                             {
-                                                                <text> @String.Format("{0:n0***REMOVED***", @item.ValorContratado / 1000000) Millones</text>
-                                                        ***REMOVED***
+                                                                <text> @String.Format("{0:n0}", @item.ValorContratado / 1000000) Millones</text>
+                                                            }
                                                             else
                                                             {
-                                                                <text> @String.Format("{0:n0***REMOVED***", @item.ValorContratado)</text>
-                                                        ***REMOVED***</div>
+                                                                <text> @String.Format("{0:n0}", @item.ValorContratado)</text>
+                                                            }</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -195,11 +195,11 @@ new System.Globalization.CultureInfo("es-RD");
                         @:</div>
                         @: <div class="row">
 
-                    ***REMOVED***
+                        }
 
-                ***REMOVED***
+                    }
 
-            ***REMOVED***
+                }
                 else
                 {
                     <div class="col-md-4">
@@ -221,7 +221,7 @@ new System.Globalization.CultureInfo("es-RD");
                             </div>
                         </div>
                     </div>
-            ***REMOVED***
+                }
 
                 @if (Oncae.Count() > 0)
                 {
@@ -243,12 +243,12 @@ new System.Globalization.CultureInfo("es-RD");
                                                     <div class="h2" id="ValorOncae">@item.MonedaContrato
                                                             @if (@item.ValorContratado >= 1000000)
                                                             {
-                                                                <text> @String.Format("{0:n0***REMOVED***", @item.ValorContratado / 1000000) Millones</text>
-                                                        ***REMOVED***
+                                                                <text> @String.Format("{0:n0}", @item.ValorContratado / 1000000) Millones</text>
+                                                            }
                                                             else
                                                             {
-                                                                <text> @String.Format("{0:n0***REMOVED***", @item.ValorContratado)</text>
-                                                        ***REMOVED***</div>
+                                                                <text> @String.Format("{0:n0}", @item.ValorContratado)</text>
+                                                            }</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -265,12 +265,12 @@ new System.Globalization.CultureInfo("es-RD");
                             @:</div>
                             @: <div class="row">
 
-                    ***REMOVED***
+                        }
 
-                ***REMOVED***
+                    }
 
 
-            ***REMOVED***
+                }
                 else
                 {
                     <div class="col-md-6">
@@ -292,13 +292,13 @@ new System.Globalization.CultureInfo("es-RD");
                             </div>
                         </div>
                     </div>
-            ***REMOVED***
+                }
 
             </div>*@
     </div>
 </section>
 
-***REMOVED***
+}
 
 <section class="section" id="secInfoContratos">
     <div class="container">
@@ -322,8 +322,8 @@ new System.Globalization.CultureInfo("es-RD");
                                         <text>
                                             <option value="@item.EstadoContrato">@item.EstadoContrato</option>
                                         </text>
-                                ***REMOVED***
-                            ***REMOVED***
+                                    }
+                                }
                             </select>
 
                         </div>*@
@@ -348,9 +348,9 @@ new System.Globalization.CultureInfo("es-RD");
                                     <text>
                                         <option value="@item.CodigoOrigenInformacion">@item.OrigenInformacion.ToUpper()</option>
                                     </text>
-                            ***REMOVED***
+                                }
 
-                        ***REMOVED***
+                            }
                         </select>
                     </div>
 

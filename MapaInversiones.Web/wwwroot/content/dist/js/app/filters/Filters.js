@@ -23,7 +23,7 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 			this.mode = null
 
 			// Elements
-			this.elems = {***REMOVED***
+			this.elems = {}
 			this.elems.root = $('#controls')
 			this.elems.search = $('#search')
 			this.elems.filtersProjects = $('#filters-projects')
@@ -37,12 +37,12 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 			setTimeout(function(){
 				//debugger;
 				Services.filters.forProjects().done( self.initializeModels.bind( self ) )
-			***REMOVED***, 0)
+			}, 0)
 			
 			// get the filters
 			setTimeout(function(){
 				self.fireEvent('loading-filters')
-			***REMOVED***, 20)
+			}, 20)
 			
 			MapState.on('projects-loaded', this.updateStatistics.bind(this))
 			
@@ -62,24 +62,24 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 					if(bool instanceof Event){
 						if(bool.stopPropagation){
 							bool.stopPropagation()
-						***REMOVED***else if(typeof bool != 'boolean'){
+						}else if(typeof bool != 'boolean'){
 							window.event.cancelBubble = true
-						***REMOVED***
-					***REMOVED***
+						}
+					}
 
 					return false
-				***REMOVED***
+				}
 				return false
-			***REMOVED***
+			}
 			
 			function searchQuery(){
 				function notifyChange(){
 					self.notifyNewSearch()
-				***REMOVED***
+				}
 				this.query = ko.observable('')
 				this.query.subscribe(notifyChange)
 				this.search = notifyChange
-			***REMOVED***
+			}
 
 			this.searchQuery = new searchQuery()
 			this.viewMode = new viewMode()
@@ -90,7 +90,7 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 			ko.applyBindings( this.searchQuery, $('#search')[0] )
 
 			this.elems.initLink.on( 'click', this.unselectAll.bind(this) )
-		***REMOVED***,
+		},
 		
 		activate: function( type, enforce ){
 			var root = this.elems.root,
@@ -101,14 +101,14 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 				//debugger;
 				activated = this.filtersProjects().filter(function( fg ){
 					return fg.active()
-				***REMOVED***)
-			***REMOVED***
+				})
+			}
 
 			if( !enforce && ( type === this.project ) && ( activated.length === 1  &&
 				activated[0].parameter === 'periods' ) ){
 				// weirdPeriodFirstTimeChecked = true
 				return
-			***REMOVED***
+			}
 
 			// Applies to all elements
 			if(type === this.project || type === this.resources){
@@ -118,14 +118,14 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 				$('#filter-results').show()
 				this.elems.search.show()
 				this.elems.share.show()
-			***REMOVED***else{
+			}else{
 				root.removeClass('tabs-mode')
 				root.find('.statistics').removeClass('small')
 				root.find('.intro').show()
 				$('#filter-results').hide()
 				this.elems.search.hide()
 				this.elems.share.hide()
-			***REMOVED***
+			}
 
 			//if(type === this.supervision)
 			
@@ -142,7 +142,7 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 				actions.find('.search-resources')
 					.addClass('inactive')
 					.siblings().removeClass('inactive')
-			***REMOVED***
+			}
 			else if(type === this.resources){
 				this.mode = this.resources
 				this.elems.filtersProjects.hide()
@@ -150,31 +150,31 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 				actions.find('.search-projects')
 					.addClass('inactive')
 					.siblings().removeClass('inactive')
-			***REMOVED***else{
+			}else{
 				this.mode = null
 				this.elems.filtersResources.hide()
 				this.elems.filtersProjects.hide()
 				actions.find('a').removeClass('inactive')
-			***REMOVED***
+			}
 			
-		***REMOVED***,
+		},
 
 		toggleControl: function(bool){
 			this.activated = true
 
 			if(bool){
-				this.elems.root.animate({ marginLeft: 0, left: 0 ***REMOVED***)
-			***REMOVED***
+				this.elems.root.animate({ marginLeft: 0, left: 0 })
+			}
 			else {
-				this.elems.root.animate({ marginLeft: 0, left: -350 ***REMOVED***)
+				this.elems.root.animate({ marginLeft: 0, left: -350 })
 				this.hideAllFilters()
 				
 				if(MapState.listMode)
 					MapState.setListMode(false)
-			***REMOVED***
+			}
 
 			return false
-		***REMOVED***,
+		},
 
 		initializeModels: function(response){
 			var rawData = response.filters,
@@ -189,7 +189,7 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 
 					function reloadGraphsCallback( periodFilter ){
 						Infographic.reloadGraphs( periodFilter.getQuery() )
-					***REMOVED***
+					}
 					
 					for(; i<length; i++){
 						filterGroup = new FilterGroup( rawData[i] )
@@ -207,7 +207,7 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 							ko.applyBindings( filterGroup, $('#filters-stats-info')[0] )
 							// When period changes... we have to load new graphics
 							filterGroup.on('option-activated', reloadGraphsCallback)
-						***REMOVED***
+						}
 
 						if( filterGroup.parameter == 'tipoRecursoNaturalFiscalizacion'){
 							ko.applyBindings( filterGroup, $('#map-select-period')[0] )
@@ -215,22 +215,22 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 							ko.applyBindings( filterGroup, $('#filters-stats-info')[0] )
 							// When period changes... we have to load new graphics
 							filterGroup.on('option-activated', reloadGraphsCallback)
-						***REMOVED***
-					***REMOVED***
+						}
+					}
 					self.filtersProjects = ko.observableArray( tempArray )
 					
 					setTimeout(function(){
 						ko.applyBindings(self, self.elems.filtersProjects[0])
 						ko.applyBindings(self, self.elems.resetFilters[0])
 						self.fireEvent('filters-loaded')
-					***REMOVED***, 0)
-				***REMOVED***, 0)
-			***REMOVED***
+					}, 0)
+				}, 0)
+			}
 
 
 			//At the end
 
-		***REMOVED***,
+		},
 
 		activateOptionsRelated: function( opts ){
 			var filters = this.filtersProjects(),
@@ -244,14 +244,14 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 					if( filter.parameter == option.type ){
 						filter.selectOption( option.id )
 						break;
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***,
+					}
+				}
+			}
+		},
 
 		activatedByUser: function( parameter, opts ){
 			this.fireEvent('territory-activated', parameter, opts)
-		***REMOVED***,
+		},
 
 		notifyNewSearch: function(){
 			//Recorrer filtros y armar nuevo query
@@ -266,7 +266,7 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 
 				// if(self.searchQuery.query()){
 				MapState.setQuery( encodeURIComponent( self.searchQuery.query() ) )
-				// ***REMOVED***
+				// }
 
 				self.resetFilters(false)
 
@@ -275,21 +275,21 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 						activated.push( filters[i] )
 						filtersString += filters[i].getQuery() + '&'
 						self.resetFilters(true)
-					***REMOVED***
-				***REMOVED***
+					}
+				}
 
 				// Hide or show clear filters
 				if( activated.length || self.searchQuery.query()){
 					self.elems.resetFiltersWrapper.show()
-				***REMOVED***else{
+				}else{
 					self.elems.resetFiltersWrapper.hide()
-				***REMOVED***
+				}
 
 				filtersString = filtersString.replace(/&$/, '')
 				MapState.setFiltersString(filtersString)
-			***REMOVED***, 0 )
+			}, 0 )
 
-		***REMOVED***,
+		},
 
 		unselectAll: function( noNotify ){
 			if( !this.filtersProjects ) return
@@ -300,12 +300,12 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 
 			for(var i = filters.length; i--;){
 				filters[i].disActive()
-			***REMOVED***
+			}
 
-			$('html, body').animate({ scrollTop: 0 ***REMOVED***, 200);
+			$('html, body').animate({ scrollTop: 0 }, 200);
 			this.searchQuery.query('')
 			this.hideAllFilters()
-		***REMOVED***,
+		},
 
 		updateStatistics: function( data ){
 			var root = this.elems.root
@@ -316,15 +316,15 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 				root.animate({
 					marginLeft: 0,
 					left: 0
-				***REMOVED***)
+				})
 				this.activated = true
-			***REMOVED***
+			}
 			root.find('#collected-money').html( parseInt( data.collectedMoney ).toCurrency() )
 			root.find('#approved-money').html( parseInt( data.approvedMoney ).toCurrency() )
 			root.find('#approved-projects').html( data.approvedProjects )
 			root.find('#total-sources').html( parseInt( data.approvedMoneyTotal ).toCurrency() )
 			//TODO update search results
-		***REMOVED***,
+		},
 
 		hideAllFilters: function(){
 			if( !this.filtersProjects ) return
@@ -334,9 +334,9 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 				filter = filters[i]
 				if(filter.visible()){
 					filter.hide()
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***,
+				}
+			}
+		},
 
 		checkActivated: function( filterGroup ){
 			var filters = this.filtersProjects(),
@@ -349,16 +349,16 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 				filter = filters[i]
 				if( filter.active() ){
 					activated.push( filter )
-				***REMOVED*** 
+				} 
 				// Hide other filters
 				if( filter.visible() &&
 					filter.parameter != filterGroup.parameter ){
 					filter.hide()
-				***REMOVED***
-			***REMOVED***
+				}
+			}
 
 			filterGroup.sortOptionsBy( activated )
-		***REMOVED***,
+		},
 
 		select: function( type, id ){
 			var historyPush = !!(window.history && window.history.pushState),
@@ -369,7 +369,7 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 
 			if( type == 'query' ){
 				this.searchQuery.query( id )
-			***REMOVED***else{
+			}else{
 				filters = this.filtersProjects()
 				for(i = filters.length; i--;){
 					filter = filters[i]
@@ -377,15 +377,15 @@ define(['lib/mvc/Observable', 'app/network/Services', './FilterGroup',
 						if( id instanceof Array ){
 							for(j=id.length; j--;){
 								filter.selectOption( id[j] )
-							***REMOVED***
-						***REMOVED***else{
+							}
+						}else{
 							filter.selectOption( id )
-						***REMOVED***
-					***REMOVED***
-				***REMOVED***
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***)
+						}
+					}
+				}
+			}
+		}
+	})
 
 	return Filter
-***REMOVED***)
+})

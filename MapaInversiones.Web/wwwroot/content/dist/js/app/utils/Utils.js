@@ -6,18 +6,18 @@ define(function(){
 			data: [],
 			log: function(){
 				this.data.push([].slice.call(arguments))
-			***REMOVED***,
+			},
 			warn: function(){
 				this.data.push([].slice.call(arguments))
-			***REMOVED***,
+			},
 			error: function(){
 				this.data.push([].slice.call(arguments))
-			***REMOVED***
-		***REMOVED***
-	***REMOVED***
+			}
+		}
+	}
 
 
 	return {
 		// toCurrency: toCurrency
-	***REMOVED***
-***REMOVED***)
+	}
+})

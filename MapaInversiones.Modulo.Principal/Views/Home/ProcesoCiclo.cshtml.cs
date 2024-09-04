@@ -11,6 +11,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Views.Home
     {
         public void OnGet()
         {
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

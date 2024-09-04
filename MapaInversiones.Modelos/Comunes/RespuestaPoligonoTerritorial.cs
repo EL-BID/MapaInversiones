@@ -5,67 +5,67 @@ namespace PlataformaTransparencia.Modelos.Comunes
 {
     public class RespuestaPoligonoTerritorial
     {
-        public string type { get; set; ***REMOVED***
-        public string lastUpdated { get; set; ***REMOVED***
-        public Geojson geojson { get; set; ***REMOVED***
+        public string type { get; set; }
+        public string lastUpdated { get; set; }
+        public Geojson geojson { get; set; }
 
 
-        public bool status { get; set; ***REMOVED***
+        public bool status { get; set; }
 
-        public string message { get; set; ***REMOVED***
+        public string message { get; set; }
 
         public RespuestaPoligonoTerritorial()
         {
             type = "";
             geojson = new Geojson();
             lastUpdated = "1";
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     public class Geojson
     {
-        public string type { get; set; ***REMOVED***
-        public List<Object> features { get; set; ***REMOVED***
+        public string type { get; set; }
+        public List<Object> features { get; set; }
 
         public Geojson()
         {
             features = new List<object>();
             type = "FeatureCollection";
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     public class Feature
     {
-        //public PropJ properties { get; set; ***REMOVED***
-        public Object geometry { get; set; ***REMOVED***
+        //public PropJ properties { get; set; }
+        public Object geometry { get; set; }
         public Feature()
         {
             //properties = new PropJ()
             //{
             //    //type = "departamento" 
-            //***REMOVED***;
+            //};
             //geometry = new GeometriaJ();
-    ***REMOVED***
+        }
 
 
-***REMOVED***
+    }
 
     public class GeometriaJ
     {
-        public string type { get; set; ***REMOVED***
-        public string coordinates { get; set; ***REMOVED***
+        public string type { get; set; }
+        public string coordinates { get; set; }
         public GeometriaJ()
         {
 
-    ***REMOVED***
-***REMOVED***
+        }
+    }
 
     public class PropJ
     {
-        //public string type { get; set; ***REMOVED***
-        public string name { get; set; ***REMOVED***
-        public string id { get; set; ***REMOVED***
-***REMOVED***
+        //public string type { get; set; }
+        public string name { get; set; }
+        public string id { get; set; }
+    }
 
 
-***REMOVED***
+}

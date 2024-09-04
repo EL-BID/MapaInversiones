@@ -2,22 +2,22 @@
 @inject OrchardCore.IOrchardHelper Orchard
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-***REMOVED***
+}
  @{
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
     var LabelProcesosCancelados = "";
     var TituloProcesosCancelados = "";
     System.IFormatProvider culture =
         new System.Globalization.CultureInfo("es-RD");
-***REMOVED***
+}
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
     if (@etiqueta.AliasPart.Alias == "ProcesosCanceladosEmergencia" + @Model.tipoEmergencia)
     {
         LabelProcesosCancelados = @etiqueta.HtmlBodyPart.Html;
         TituloProcesosCancelados = @etiqueta.TitlePart.Title;
-***REMOVED***
-***REMOVED***
+    }
+}
 
 <section id="s0" class="banner-main">
     <div class="container">
@@ -56,7 +56,7 @@
                                 <text>
                                     Entidad:
                                 @Model.nombreUnidadCompra</text>
-                        ***REMOVED***
+                            }
                         </h1>
                     </div>
 
@@ -151,7 +151,7 @@
         data-locationID=''
         data-locationType=''
         data-locationLoaded='false'
-        data-unidadcompra='[{"unidadcompra":"@Model.nombreUnidadCompra"***REMOVED***]',
-        data-tipoEmergencia='[{"tipoEmergencia":"@Model.tipoEmergencia"***REMOVED***]'
+        data-unidadcompra='[{"unidadcompra":"@Model.nombreUnidadCompra"}]',
+        data-tipoEmergencia='[{"tipoEmergencia":"@Model.tipoEmergencia"}]'
 
-***REMOVED***
+}

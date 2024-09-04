@@ -10,5 +10,5 @@ namespace PlataformaTransparencia.Negocios.Comunes
     public interface IDatosAbiertosBLL
     {
         public List<infoFuentesRecursos> ObtenerFuentesDatosAbiertos();
-***REMOVED***
-***REMOVED***
+    }
+}

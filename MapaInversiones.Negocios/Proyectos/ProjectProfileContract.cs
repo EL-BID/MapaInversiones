@@ -19,7 +19,7 @@ namespace PlataformaTransparencia.Negocios.Project
     /// <summary>
     /// Es el modelo que vamos a retornar.
     /// </summary>
-    public ModelProjectProfile ModelProjectProfile { get; set; ***REMOVED***
+    public ModelProjectProfile ModelProjectProfile { get; set; }
     /// <summary>
     /// Constructor de la clase
     /// </summary>
@@ -35,7 +35,7 @@ namespace PlataformaTransparencia.Negocios.Project
       _connection = connection;
       id_usuario_aux = id_usuario;
       nom_usuario_aux = nom_usuario;
-***REMOVED***
+    }
     /// <summary>
     /// Llena la propiedad ModelProjectProfile.
     /// </summary>
@@ -63,13 +63,13 @@ namespace PlataformaTransparencia.Negocios.Project
         ModelProjectProfile.avanceFisicoFaseInversion = BusquedasProyectosBLL.ObtenerAvanceFisicoPorComponenteProductoFaseProyecto(projectId);
 
         Status = true;
-  ***REMOVED***
+      }
       catch (Exception ex)
       {
         Status = false;
         Message = "Lo sentimos, ha ocurrido un error.";
-  ***REMOVED***
-***REMOVED***
-  ***REMOVED***
+      }
+    }
+  }
 
-***REMOVED***
+}
