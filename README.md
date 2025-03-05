@@ -50,28 +50,16 @@ Los objetivos principales de la plataforma son:
 ---
 
 #### Usuario
-Cuando el usuario ingresa a la página inicial o índex de MapaInversiones, y observar un encabezado que se compone de una parte superior que contiene los enlaces a secciones como, “Acerca de” del sitio, marco legal, centro de ayuda y contáctenos. A continuación, se encuentra con los logos del sitio.
-En el menú de la parte superior podrá acceder a secciones que pueden variar según la configuración en el WCM, y pueden ser por ejemplo, inversión pública, presupuesto, instituciones, participación ciudadana, emergencias, contratación pública, la posibilidad de ir a una sección donde se pueden descargar los archivos de datos abiertos, y un glosario.
+Cuando el usuario ingresa a la página inicial o índex de MapaInversiones, y observar un encabezado que se compone de una parte superior, endonde encuentra en la parte superior derecha unos enlaces con información legal, preguntas frecuentes y contacto;
+más abajo un buscador configurado en un servidor Apache Solr y que indexa la diferente información que ofrece el sitio web.
+En el menú que tambien encuentra el usuario en la parte superior, podrá acceder a secciones que pueden variar según la configuración en el WCM, y para esta versión se encuentran, Proyectos, Procesos y Contratos, Pa que hagás parte, plan de desarrollo, y la posibilidad de ir a una sección donde se pueden descargar los archivos de datos abiertos.
 
 ![buscador](/MapaInversiones.Web/media/encabezado.jpg "buscador")
 
-
-Lo siguiente en pantalla es un buscador configurado en un servidor Apache Solr y que indexa la diferente información que ofrece el sitio web.
-
-![buscador](/MapaInversiones.Web/media/buscadornew.jpg "buscador")
-
-También cualquier versión puede tener la sección de banner y anuncios, la cual sirve mostrar imágenes, para resaltar los aspectos principales del sitio, y redirigir la navegación de los usuarios a tópicos específicos, como en el caso de la siguiente imagen, a las del ciclo presupuestario, a descargar una ley, y a revisar las diferentes fuentes de financiación.
+También cualquier versión puede tener la sección de banner y anuncios, la cual sirve mostrar imágenes, para resaltar los aspectos principales del sitio, y redirigir la navegación de los usuarios a tópicos específicos, como en el caso de la siguiente imagen, se dan detalles de que es el sitio web, junto con un video, y en enlace a otra seccion donde se profundiza mas en el tema.
 
 ![carrusel](/MapaInversiones.Web/media/carrusel.jpg "carrusel")
 
-La siguiente sección presenta un Mapa de Inversión Publica, para explorar la información correspondiente a los proyectos por cada una de las regiones. Además de esta sección, también es posible ir al mapa por el menú de la parte superior, mencionado con anterioridad.
-
-![enlace mapa de inversión](/MapaInversiones.Web/media/maparesumen.jpg "enlace mapa de inversión")
-
-La sprincipal sección y unade las primeras características que se desarrollaron de la Plataforma, es el Mapa de Inversión Publica. Este puede ser accedido de diferentes formas, en algunos paises beneficiarios se puede por un enlace generado por medio del WCM, pero en todas es posible ir al mapa por el menú de la parte superior, mencionado con anterioridad.
-Una vez se ingrese al enlace, como se ve en la siguiente imagen, Mapa de Inversión presenta en la parte izquierda un filtro por diferentes características, estas sirven para ir reduciendo la cantidad de elementos mostrados en el mismo.
-
-![mapa de inversión](/MapaInversiones.Web/media/mapa.jpg "mapa de inversión")
 
 Uno de los elementos con los que el usuario puede interactuar, son las fichas resumen. Las primeras de estas muestran algunas preguntas con su respuesta, relacionadas con los presupuestos ciudadanos, y un botón que envía a la sección correspondiente. 
 
@@ -84,6 +72,14 @@ Después el usuario puede encontrar otras fichas con el presupuesto ejecutado po
 Dad la utilidad del WCM tambien el usuario puede encontrar fichas resumen como lo son las correspondientes a los contratos, en el caso del país de ejemplo la fuente de datos proviene de dos fuentes diferentes.
 
 ![contratos](/MapaInversiones.Web/media/contratos.jpg "contratos")
+La siguiente sección presenta un Mapa de Inversión Publica, para explorar la información correspondiente a los proyectos por cada una de las regiones. Además de esta sección, también es posible ir al mapa por el menú de la parte superior, mencionado con anterioridad.
+
+![enlace mapa de inversión](/MapaInversiones.Web/media/maparesumen.jpg "enlace mapa de inversión")
+
+La sprincipal sección y unade las primeras características que se desarrollaron de la Plataforma, es el Mapa de Inversión Publica. Este puede ser accedido de diferentes formas, en algunos paises beneficiarios se puede por un enlace generado por medio del WCM, pero en todas es posible ir al mapa por el menú de la parte superior, mencionado con anterioridad.
+Una vez se ingrese al enlace, como se ve en la siguiente imagen, Mapa de Inversión presenta en la parte izquierda un filtro por diferentes características, estas sirven para ir reduciendo la cantidad de elementos mostrados en el mismo.
+
+![mapa de inversión](/MapaInversiones.Web/media/mapa.jpg "mapa de inversión")
 
 La siguiente sección de la página principal muestra una sección dividida. En la parte de la izquierda aparece un listado de noticias, las cuales se configuran desde el administrador de contenido, en estas secciones pueden ver las 4 noticias más recientes, ver una imagen, el titulo y un pequeño resumen o subtitulo, junto con la fecha publicación, en la parte del título de noticias redirige a la sección completa de noticias, donde se pueden ver todas las que han sido publicadas.
 
