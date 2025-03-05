@@ -1,8 +1,46 @@
-﻿inicializaDatos();
+﻿inicializaDatosAbiertos();
 
-function inicializaDatos() {
+function inicializaDatosAbiertos() {
+    //cargarfuentesdatos();
+    cargarfuentesdatos2();
+}
 
-    cargarfuentesdatos();
+function cargarfuentesdatos2() {
+    $.ajax({
+        type: 'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        url: "/api/ServiciosDatosAbiertos/ObtenerFuentesDatos",
+        cache: false,
+        data: false,
+        success: function (result) {
+            if (result.status == true) {
+                var info = result.fuentesRecursos;               
+                var htmldivfuente = '';
+                if (info != null) {
+                    var htmldivfuente = '';
+                    for (var i = 0; i < info.length; i++) {
+                        htmldivfuente += '<div class="columna">';
+                        htmldivfuente += '<h3>' + info[i].nombreFuente + '</h3>';
+                        htmldivfuente += '<p>Última actualización<br>' + info[i].fechaActualizacionFuente.toString().substr(0, 10) + '</p>';
+                        htmldivfuente += '<p>Corte de los datos<br>' + info[i].fechaCorteFuente.toString().substr(0, 10) + '</p>';
+                        htmldivfuente += '</div>';
+                    }
+                    $("#datosAbiertosFooter").html(htmldivfuente);
+                }
+            } else {
+                bootbox.alert("Error: " + result.Message, function () {
+
+                });
+            }
+        },
+        error: function (response) {
+            bootbox.alert(response.responseText);
+        },
+        failure: function (response) {
+            bootbox.alert(response.responseText);
+        }
+    });
 }
 
 function cargarfuentesdatos() {

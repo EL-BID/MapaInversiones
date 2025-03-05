@@ -53,21 +53,18 @@ namespace PlataformaTransparencia.Negocios.Comunes
             string outTxt = "";
             try
             {
-                //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
-                //pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
-                //pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 idRegNew = _connection
-                .GetTable<Comentarios>()
+                .GetTable<Comentario>()
                 .Where(t => t.IdComentario == IdComentario)
-                .Update(t => new Comentarios
+                .Update(t => new Comentario
                 {
                     IdEstado = IdEstado,
-                    fechaPublicacion = DateTime.Now,
+                    FechaPublicacion = DateTime.Now,
                     JustificacionParaNoPublicar = textoJustifica,
                 });
 
-                //}
+              
                 if (idRegNew > 0)
                 {
                     outTxt = "0<||>";
@@ -95,9 +92,9 @@ namespace PlataformaTransparencia.Negocios.Comunes
             {
 
                 idRegNew = _connection
-                .GetTable<Comentarios>()
+                .GetTable<Comentario>()
                 .Where(t => t.IdComentario == IdComentario)
-                .Update(t => new Comentarios
+                .Update(t => new Comentario
                 {
                     IdTipoComentario = IdTipoComentario,
                 });

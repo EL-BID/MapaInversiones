@@ -49,14 +49,14 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             decimal latitudInferior = bottomRight[0];
             decimal longitudDer = bottomRight[1];
 
-            if (latitudSuperior > 19.9M)
-                latitudSuperior = 19.9M;//Punto mas al Oeste
-            if (latitudInferior < 17.58M)
-                latitudInferior = 17.58M;//Punto mas al Este
-            if (longitudIzq < -71.96M)
-                longitudIzq = -71.96M;//Punto mas al Norte
-            if (longitudDer > -68.15M)
-                longitudDer = -68.15M;//Punto mas al oeste
+            if (latitudSuperior > 3.57M)
+                latitudSuperior = 3.57M;//Punto mas al Norte 
+            if (latitudInferior < 3.20M)
+                latitudInferior = 3.20M;//Punto mas al Sur 
+            if (longitudIzq < -76.88M)
+                longitudIzq = -76.88M;//Punto mas al Oeste 
+            if (longitudDer > -76.39M)
+                longitudDer = -76.39M;//Punto mas al Este 
 
             decimal incrementoLatitud = Math.Abs(latitudSuperior - latitudInferior) / segmentosCuadricula;
             decimal incrementoLongitud = Math.Abs(longitudIzq - longitudDer) / segmentosCuadricula;

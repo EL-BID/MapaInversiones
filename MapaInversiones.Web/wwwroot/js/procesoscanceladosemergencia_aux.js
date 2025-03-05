@@ -97,7 +97,7 @@ $("#btn-buscar").click(function () {
 
 function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     var pag_actual = parseInt(actual);
-    var pagina_actual = pag_actual;
+    pagina_actual = pag_actual;
     var pagesHTML = '';
 
     var cant_por_linea = 10;

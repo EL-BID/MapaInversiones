@@ -1745,7 +1745,7 @@ define('app/controller/AppState', [
 
     var AppState = new Class(Observable, {
         // Request params
-        zoom: 8, // 1,..,n
+        zoom: 13, // 1,..,n
         corners: [[10.29307824326959, -85.92019692979007], [6.598905774706054, -76.23574868760257]], // [[4.667292,-74.059508], [4.667292,-74.059508]]
         center: [8.45041485786858, -81.07797280869632],
         defaultCenter: [8.45041485786858, -81.07797280869632],
@@ -2286,8 +2286,9 @@ define('app/controller/AppState', [
 
             if (!bool) {
                 this.isListMode = null
-                $('#projects-list-view').hide()
+                
                 $('#map-view').show()
+                $('#projects-list-view').hide()
                 $('#controls').removeClass('list-mode')
                 // this.center = this.cachedCenter || this.defaultCenter
                 this.corners = this.cachedCorners || this.defaultCorners

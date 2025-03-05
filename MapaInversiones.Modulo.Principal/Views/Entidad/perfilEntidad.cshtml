@@ -81,6 +81,8 @@
             padding: 5px;
             text-align: center;
         }
+
+    
     </style>
 </head>
 <body>
@@ -117,7 +119,7 @@
                             <h1>@Model.NombreEntidad</h1>
                         </div>
                         <div class="banner-main-desc">
-                            <span class="h5">Institución</span>
+                            <span class="h5">Ente Gestor</span>
                         </div>
 
                     </div>
@@ -133,7 +135,7 @@
 
                         <a class="btn-section" href="#presupuestoentidad">
                     <span class="ic-shortcut"><i class="material-icons md-24">device_hub</i></span>
-                    <span class="text-btn">Presupuesto de la Institución</span>
+                    <span class="text-btn">Presupuesto del Ente Gestor</span>
                 </a>
                 <a class="btn-section" href="#trazabilidad">
                     <span class="ic-shortcut"><i class="material-icons md-24">grid_view</i></span>
@@ -153,7 +155,7 @@
         <div class="container">
            
             <div class="section-heading heading-left">
-                <h2>Presupuesto de la Institución</h2>
+                <h2>Presupuesto del Ente Gestor</h2>
             </div>
             <!--SELECT AÑO-->
             <div class="row justify-content-center">
@@ -214,14 +216,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-     @*                <div class="section-heading heading-center mb-3"> 
-                        <!--<h3>@TituloDistribucionPresupuestalEntidad</h3>
-                <div class="section-subheading">@Html.Raw(LabelDistribucionPresupuestalEntidad)</div>-->
-                    </div> *@
                     <div class="section-heading heading-left">
                         <h2>Trazabilidad de recursos</h2>
                     </div>
-                    <div class="desc-heading"><p>Conoce como se están usando los fondos, ¿en qué se gasta?, ¿en qué se invierte el dinero? y controla los procesos contractuales de la institución.</p></div>
+                    <div class="desc-heading"><p>Conoce como se están usando los fondos, ¿en qué se gasta?, ¿en qué se invierte el dinero? y controla los procesos contractuales del ente gestor.</p></div>
                 </div>
 
             </div>
@@ -230,7 +228,7 @@
                 <ul id="tabTipoPrograma" class="tabs-nav">
                     <li class="active enlace_tipo_contrato" id="analisis">
                         <div class="goal-number"></div>
-                        <div class="goal-name"><div class="h4">Análisis institución</div></div>
+                        <div class="goal-name"><div class="h4">Análisis ente</div></div>
                     </li>
                     <li id="inversion" class="enlace_tipo_contrato">
                         <div class="goal-number"></div>
@@ -254,7 +252,7 @@
                                     <div class="">
                                         <h3>Distribución del presupuesto</h3>
                                         <div class="section-subheading">
-                                            <p>La distribución del presupuesto varía según las necesidades y prioridades específicas de la institución. <span class="text-bold">Haz clic en cada uno de los recuadros para conocer con mayor detalle las categorías de distribución.</span></p>
+                                            <p>La distribución del presupuesto varía según las necesidades y prioridades específicas del ente. <span class="text-bold">Haz clic en cada uno de los recuadros para conocer con mayor detalle las categorías de distribución.</span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -272,7 +270,7 @@
                             <div class="row py-4">
                                 <div class="col-12">
                                     <div class="">
-                                        <h3>¿En que gasta la entidad?</h3>
+                                        <h3>¿En que gasta el Ente gestor?</h3>
                                         <div class="section-subheading">
                                             <p>Conoce las principales categorías del gasto institucional tales como Infraestructura, personal, operaciones, etc. <span class="text-bold">Posiciona el cursor sobre cada sector de la gráfica para tener información más detallada.</span></p>
                                         </div>
@@ -297,19 +295,17 @@
                             <div class="row py-4">
                                 <div class="col-12">
                                     <div class="">
-                                        <h3>Modalidad de procesos adelantados por la institución</h3>
+                                        <h3>Modalidad de procesos adelantados por el ente</h3>
                                         <div class="section-subheading">
-                                            <p>Las siguientes son las diferentes modalidades en las que se han adelantados procesos en la institución<span class="text-bold"></span></p>
+                                            <p>Las siguientes son las diferentes modalidades en las que se han adelantados procesos en el ente<span class="text-bold"></span></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row" id="divBarrasContent">
                                 <div class="offset-1 col-md-10 col-sm-10">
-                                    <div class="pChart">
-                                        <div id="divGraphProcesos" style="min-height:500px;min-width:80px;width:960px;">&nbsp;</div>
-                                    </div>
+                                    <div id="divGraphProcesos" style="width:100%;height:auto;"></div>
                                 </div>
                             </div>
                         </div>
@@ -393,12 +389,10 @@
 
     <!--HELP CENTER SHORTCUT-->
     <div id="helpCenter"></div>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha384-EZJUCwX9EfOmrML5/1WejmhFx/azi54nnVfOndPu+VTQKOHabXXC9eS7VFdkLz0V" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
-
+    
+    <script src="~/js/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/js/lib/d3/d3.v7.min.js"></script>
+    <script type="text/javascript" src="~/js/lib/d3/d3plus@2.js"></script>
     <script src="js/entidad_aux.js"></script>
 
     <script>
@@ -406,41 +400,22 @@
         window.onscroll = function () { myFunction() };
 
         var header = document.getElementById("navs-header");
-        var sticky = header.offsetTop;
+        var sticky = header ? header.offsetTop : 0;
 
         function myFunction() {
-            if (window.pageYOffset > sticky) {
-                header.classList.add("sticky");
-                header.classList.add("bg-white");
-            } else {
-                header.classList.remove("sticky");
-                header.classList.remove("bg-white");
+            if (header) {
+                if (window.scrollY > sticky) {
+                    header.classList.add("sticky");
+                    header.classList.add("bg-white");
+                } else {
+                    header.classList.remove("sticky");
+                    header.classList.remove("bg-white");
+                }
             }
         }
     </script>
-    <style>
-        body {
-            font-family: "Arial", sans-serif;
-        }
 
-        .bar {
-            fill: #5f89ad;
-        }
-
-        .axis {
-            font-size: 13px;
-        }
-
-            .axis path,
-            .axis line {
-                fill: none;
-                display: none;
-            }
-
-        .label {
-            font-size: 13px;
-        }
-    </style>
+    
 </body>
 
 

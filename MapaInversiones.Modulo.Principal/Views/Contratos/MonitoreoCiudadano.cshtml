@@ -1,0 +1,569 @@
+﻿@model PlataformaTransparencia.Modelos.Contratos.ModelContratosConsolidados
+@using OrchardCore.ContentManagement
+@using OrchardCore.ContentManagement.Models
+@using Newtonsoft.Json.Linq
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
+    var LabelContratos = "";
+    var TituloContratos = "";
+    System.IFormatProvider culture =
+        new System.Globalization.CultureInfo("es-CO");
+}
+@foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
+{
+    if (@etiqueta.AliasPart.Alias == "MonitoreoCiudadano")
+    {
+        LabelContratos = @etiqueta.HtmlBodyPart.Html;
+        TituloContratos = @etiqueta.TitlePart.Title;
+    }
+}
+
+@{
+
+    var datosIndicadores = await Orchard.GetContentItemByHandleAsync("alias:MonitoreoCiudadanoIndicadores");
+    var datosReportes= await Orchard.GetContentItemByHandleAsync("alias:MonitoreoCiudadanoReportes");
+    var datosCursos = await Orchard.GetContentItemByHandleAsync("alias:MonitoreoCiudadanoCursos");
+    
+    List<List<string>> Indicadores = new List<List<string>>();
+    Indicadores.Add(new List<string>()); //crear posicion 0
+    Indicadores.Add(new List<string>());// crear posicion 1
+    List<List<string>> Reportes = new List<List<string>>();
+    Reportes.Add(new List<string>()); //crear posicion 0
+    Reportes.Add(new List<string>());// crear posicion 1
+    List<List<string>> Cursos = new List<List<string>>();
+    Cursos.Add(new List<string>()); //crear posicion 0
+    Cursos.Add(new List<string>());// crear posicion 1
+}
+
+
+@foreach (var item in datosIndicadores.Content.BagPart.ContentItems)
+{
+    string taxonomy = item.MonitoreoIndicadores.TUsuario.TaxonomyContentItemId + "";
+
+    foreach (var itemid in item.MonitoreoIndicadores.TUsuario.TermContentItemIds)
+    {
+        string term = itemid + "";
+        string dato = "";
+        var nombre = await Orchard.GetTaxonomyTermAsync(taxonomy, term);
+
+        dato += "<div class='card shadow tool-card-box'>";
+        dato += "<div class='card-body'>";
+        dato += " 	<div class='h4'>" + @item.TitlePart.Title + "</div>";
+        dato += " 		<div class='row'>";
+        dato += " 			<div class='col-lg-8'>" + @Html.Raw(item.HtmlBodyPart.Html) + "</div>";
+        dato += " 			<div class='col-lg-4'><div class='ratio ratio-16x9'> <iframe width = '280' height='157' src='" + @item.MonitoreoIndicadores.EnlaceVideo.Url + "' title='" + @item.MonitoreoIndicadores.EnlaceVideo.Text + "' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe></div></div>";
+        dato += " 		</div>";
+        dato += " 		<div class='wrap-cta my-2'>";
+        dato += " 			<a href = '" + @item.MonitoreoIndicadores.EnlaceBoton.Url + "' class='btn btn-primary btn-lg'>";
+        dato += " 				<span title = '" + @item.MonitoreoIndicadores.EnlaceBoton.Text + "' >" + @item.MonitoreoIndicadores.EnlaceBoton.Text + "</span>";
+        dato += " 				<svg class='btn-icon-right' viewBox='0 0 13 9' width='13' height='9'>";
+        dato += " 					<use xlink:href='../../../img/sprite.svg#arrow-right'></use>";
+        dato += " 				</svg>";
+        dato += " 			</a>";
+        dato += " 		</div>";
+        dato += "     </div>";
+        dato += " 	</div>";
+
+        if (nombre.ToString().ToLower().Trim() == "empresarios")
+        {
+
+            Indicadores[0].Add(dato);
+        }
+
+        if (nombre.ToString().ToLower().Trim() == "veedores")
+        {
+
+            Indicadores[1].Add(dato);
+        } 
+
+    }
+}
+
+
+@foreach (var item in datosReportes.Content.BagPart.ContentItems)
+{
+    string taxonomy = item.MonitoreoReportes.TUsuario.TaxonomyContentItemId + "";
+
+    foreach (var itemid in item.MonitoreoReportes.TUsuario.TermContentItemIds)
+    {
+        string term = itemid + "";
+        string dato = "";
+        var nombre = await Orchard.GetTaxonomyTermAsync(taxonomy, term);
+
+        dato += "<div class='card shadow tool-card-box'>";
+        dato += "<div class='card-body'>";
+        dato += " 	<div class='h4'>" + @item.TitlePart.Title + "</div>";
+        dato += " 		<div class='row'>";
+        dato += " 			<div class='col-lg-8'>" + @Html.Raw(item.HtmlBodyPart.Html) + "</div>";
+        dato += " 			<div class='col-lg-4'><div class='ratio ratio-16x9'><iframe width = '280' height='157' src='" + @item.MonitoreoReportes.EnlaceVideo.Url + "' title='" + @item.MonitoreoReportes.EnlaceVideo.Text + "' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe></div></div>";
+        dato += " 		</div>";
+        dato += " 		<div class='wrap-cta my-2'>";
+        dato += " 			<a href = '" + @item.MonitoreoReportes.EnlaceBoton.Url + "' class='btn btn-primary btn-lg'>";
+        dato += " 				<span title = '" + @item.MonitoreoReportes.EnlaceBoton.Text + "' >" + @item.MonitoreoReportes.EnlaceBoton.Text + "</span>";
+        dato += " 				<svg class='btn-icon-right' viewBox='0 0 13 9' width='13' height='9'>";
+        dato += " 					<use xlink:href='../../../img/sprite.svg#arrow-right'></use>";
+        dato += " 				</svg>";
+        dato += " 			</a>";
+        dato += " 		</div>";
+        dato += "     </div>";
+        dato += " </div>";
+    
+        if (nombre.ToString().ToLower().Trim() == "empresarios")
+        {
+            Reportes[0].Add(dato);
+        }
+
+        if (nombre.ToString().ToLower().Trim() == "veedores")
+        {
+
+            Reportes[1].Add(dato);
+        }
+
+    }
+}
+
+@foreach (var item in datosCursos.Content.BagPart.ContentItems)
+{
+    string taxonomy = item.MonitoreoCursos.TUsuario.TaxonomyContentItemId + "";
+
+    foreach (var itemid in item.MonitoreoCursos.TUsuario.TermContentItemIds)
+    {
+        string term = itemid + "";
+        string dato = "";
+        var nombre = await Orchard.GetTaxonomyTermAsync(taxonomy, term);
+        dato = "<div class='card shadow tool-card-box'>";
+        dato += "<div class='card-body'>";
+        dato += " 	<div class='row'>";
+        dato += " 	    <div class='col-lg-8'>";
+        dato += " 	        <div class='h4'>" + @item.TitlePart.Title + "</div>";
+        dato += " 			<p>" + @Html.Raw(item.HtmlBodyPart.Html) + "</p>";
+        dato += " 		</div>";
+        dato += " 		<div class='col-lg-4'>";
+        dato += " 		    <div class='wrap-cta my-2'>";
+        dato += " 			<a href = '" + @item.MonitoreoCursos.EnlaceBoton.Url + "' class='btn btn-primary btn-lg'>";
+        dato += " 				<span title = '" + @item.MonitoreoCursos.EnlaceBoton.Text + "' >" + @item.MonitoreoCursos.EnlaceBoton.Text + "</span>";
+        dato += " 				<svg class='btn-icon-right' viewBox='0 0 13 9' width='13' height='9'>";
+        dato += " 					<use xlink:href='../../../img/sprite.svg#arrow-right'></use>";
+        dato += " 				</svg>";
+        dato += " 			</a>";
+        dato += " 		    </div>";
+        dato += " 	    </div>";
+        dato += "   </div>";
+        dato += "</div>";
+        dato += "</div>";
+
+
+        if (nombre.ToString().ToLower().Trim() == "empresarios")
+        {
+            Cursos[0].Add(dato);
+        }
+
+        if (nombre.ToString().ToLower().Trim() == "veedores")
+        {
+            Cursos[1].Add(dato);
+        }
+
+    }
+}
+
+<main>
+<section class="banner-main">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                                <li>¡Pa' que hagás parte!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="banner-main-info">
+                    <div class="banner-main-title mb-0">
+                            <h1>¡Pa' que hagás parte!</h1>
+                    </div>
+                    <div class="banner-main-desc">
+                            <p>¿Tenés una empresa y te gustaría contratar con la Alcaldía? ¿Te apasiona el control social y querés saber cómo se invierte cada peso? Pa’ que Veás que la contratación está al alcance de todos y todas, te presentamos las herramientas, servicios de apoyo y recursos educativos para que conozcás cómo avanza la contratación de la Alcaldía y podás participar. </p>
+                            <p class="text-bold">Elegí si sos empresario/a o veedor/a para acceder a las herramientas.</p>
+                        </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+   
+</section>
+
+
+<section class="section toolbox-citizens">
+    <div class="container">
+            <div class="tabs goals">
+                <ul class="tabs-nav">
+                    <li class="@(string.IsNullOrEmpty(Model.tab_enlace) || Model.tab_enlace == "1" ? "active" : "")" id="tab_empresario">
+                        <div class="goal-number">
+                            <img class="img-responsive" src="../img/ic-ut1.svg" alt="icono decorativo relacionado a empresarios" />
+                        </div>
+                        <div class="goal-name">
+                            <div class="h4">Soy empresario/a</div>
+                        </div>
+                    </li>
+                    <li class="@(Model.tab_enlace == "2" ? "active" : "")" id="tab_veedor">
+                        <div class="goal-number">
+                            <img class="img-responsive" src="../img/ic-ut2.svg" alt="icono decorativo relacionado a veedores" />
+                        </div>
+                        <div class="goal-name">
+                            <div class="h4">Soy veedor/a</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="goal-number">
+                            <img class="img-responsive" src="../img/ic-ut3.svg" alt="icono decorativo relacionado a denuncias ciudadanas" />
+                        </div>
+                        <div class="goal-name">
+                            <div class="h4">Denunciá</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="goal-number">
+                            <img class="img-responsive" src="../img/ic-ut4.svg" alt="icono decorativo relacionado a participacion en encuesta" />
+                        </div>
+                        <div class="goal-name">
+                            <div class="h4">Ayudános a mejorar ¡Pa' que Veás!</div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="tabs-container mt-2">
+                    <!--TAB EMPRESARIOS-->
+                    <div class="tabs-item content active">
+                        <div class="section-heading heading-left py-4">
+                            <h2 class="">Soy empresario/a</h2>
+                        </div>
+                        <div class="section-subheading">
+                            <p><span class="text-bold">Si sos una persona natural o jurídica constituida legalmente que ofrece bienes o servicios y estás interesado/a en convertirte en proveedor de la Alcaldía Distrital de Santiago de Cali, llegaste al lugar indicado.</span> Podrás comprender los conceptos clave para entender la contratación, encontrar oportunidades de negocio para presentar tu oferta, y hasta pedir cita para que te ayuden con el registro en SECOP II. <span class="text-bold">¡Revisálas todas!</span>.</p>
+                        </div>
+
+                        @* si no hay datos no imprime *@
+                        @if (Indicadores[0].Count()>0){
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h3>Participá</h3>
+                                <img class="img-fluid" src="../img/info-1.svg" alt="imagen decorativa pantalla de computador con graficos y barras" />
+
+                            </div>
+                                    <div class="col-lg-9">
+                                     @* Dinamico *@
+                                    @foreach (var empresario in Indicadores[0])
+                                    {
+                                        @Html.Raw(empresario)
+                                    }
+                                </div>
+                        </div>
+
+                        }
+
+                         @* si no hay datos no imprime *@
+                        @if (Reportes[0].Count() > 0)
+                        {
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h3>Reportes</h3>
+                                <img class="img-fluid" src="../img/info-2.svg" alt="imagen decorativa pantalla de computador con graficos y barras" />
+
+                            </div>
+                                <div class="col-lg-9">
+                                    @* Dinamico *@
+                                    @foreach (var empresario in Reportes[0])
+                                    {
+                                        @Html.Raw(empresario)
+                                        
+                                    }
+                                </div>
+                        </div>
+                        }
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h3>Resolvé tus dudas con nosotros</h3>
+                                <img class="img-fluid" src="../img/info-1.svg" alt="imagen decorativa pantalla de computador con graficos y barras" />
+
+                            </div>
+                            <div class="col-lg-9">
+                                <div class="card shadow tool-card-box">
+                                    <div class="card-body">
+                                        <div class="h4">Agendá tu cita virtual o presencial</div>
+                                        <p><span class="text-bold">Te explicamos cómo acceder y usar el listado de compras de la Alcaldía de Cali para que identifiqués oportunidades de negocio para tu empresa</span> y te ayudamos en la creación de tu usuario en el Sistema de Contratación SECOP II</p>
+                                    
+                                        <div class="embed-calendly">
+                                            <div class="calendly-inline-widget" data-url="https://calendly.com/atencion_proveedores" style="min-width:320px;height:700px;"></div>
+                                            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+                                        </div>
+                                    
+                                    </div>
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--CURSOS-->
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <h3>Aprendé con nosotros</h3>
+                                <img class="img-fluid" src="../img/info-3.svg" alt="imagen decorativa pantalla de computador con graficos y barras" />
+                            </div>
+                            <div class="col-lg-9">
+                                @* Dinamico *@
+                                @foreach (var empresario in Cursos[0])
+                                {
+                                    @Html.Raw(empresario)
+
+                                }
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!--TAB VEEDORES-->
+                    <div class="tabs-item content">
+                        <div class="section-heading heading-left py-4">
+                            <h2 class="">Soy veedor/a</h2>
+                        </div>
+                        <div class="section-subheading">
+                            <p><span class="text-bold">Si te apasiona el control social de los recursos y querés saber en qué se invierte cada peso desde la Alcaldía de Cali, este es tu lugar.</span> Acá encontrarás herramientas interactivas y reportes que te permitirán comprender qué se invierte, cómo y cuándo. También hemos dispuesto de cursos digitales gratuitos para que sigás aprendiendo y nos ayudés a recuperar a Cali.</p>
+                        </div>
+
+                        @* si no hay datos no imprime *@
+                        @if (Indicadores[1].Count() > 0)
+                        {
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h3>Participá</h3>
+                                    <img class="img-fluid" src="../img/info-1.svg" alt="imagen decorativa pantalla de computador con graficos y barras" />
+
+                                </div>
+                                <div class="col-lg-9">
+                                        @* Dinamico *@
+                                        @foreach (var veedor in Indicadores[1])
+                                        {
+                                            @Html.Raw(veedor)
+                                        }
+                                </div>
+                            </div>
+
+                        }
+
+                        @* si no hay datos no imprime *@
+
+                        @if (Reportes[1].Count() > 0)
+                        {
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h3>Reportes</h3>
+                                    <img class="img-fluid" src="../img/info-2.svg" alt="imagen decorativa pantalla de computador con graficos y barras" />
+
+                                </div>
+
+                                <div class="col-lg-9">
+                                        @* Dinamico *@
+                                        @foreach (var veedor in Reportes[1])
+                                        {
+                                            @Html.Raw(veedor)
+
+                                        }
+                                </div>
+                            </div>
+                        }
+
+
+                        <!--CURSOS-->
+                        @if (Cursos[1].Count() > 0)
+                        {
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h3>Aprendé con nosotros</h3>
+                                    <img class="img-fluid" src="../img/info-3.svg" alt="imagen decorativa pantalla de computador con graficos y barras" />
+                                </div>
+                                <div class="col-lg-9">
+
+                                    @* Dinamico *@
+                                    @foreach (var veedor in Cursos[1])
+                                    {
+                                        @Html.Raw(veedor)
+
+                                    }
+                                </div>
+
+                            </div>
+
+                        }
+                    </div>
+
+                    <!--TAB DENUNCIá-->
+                    <div class="tabs-item content">
+                        <div class="section-heading heading-left py-4">
+                            <h2 class="">¡Denunciá!</h2>
+                        </div>
+                        <div class="row mb-4 align-items-center">
+                            <div class="col-lg-8">
+                                <div class="section-subheading">
+                                    <p><span class="text-bold">¿Conocés de alguna presunta irregularidad en la ejecución de algún proyecto o contrato? ¡Denunciá!</span> </p>
+                                    <p>En la Alcaldía de Cali tenemos cero tolerancia con la corrupción y contamos con un canal directo para que podás levantar tu voz. Es fácil, rápido y seguro. Recordá: ¡Tus ojos son poderosos!</p>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="wrap-btn text-center mb-4">
+                                    <a href="https://transparencia.cali.gov.co/formulario-denuncias/" target="_blank" class="btn btn-primary btn-lg">
+                                        <span>¡Denunciá aquí!</span>
+                                        <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
+                                            <use xlink:href="../../../img/sprite.svg#arrow-right"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section">
+                        <div class="row justify-content-center mb-4">
+                            <div class="col-lg-12">
+                                <h3 class="py-4">¿Cómo denunciar?</h3>
+                            </div>
+                            <div class="row how-to-report">
+                              
+                            <div class="col-lg-3">
+                                    <div class="card shadow border-0 h-100">
+                                            <div class="wrap-icon"><img class="img-fluid" src="../img/16.png" alt="icono decorativo" /></div>
+                                        <div class="card-body">
+                                                <span class="h5 d-block">1. Visitá el link de denuncias</span>
+                                                <a href="https://transparencia.cali.gov.co/formulario-denuncias/" target="_blank" class="btn btn-primary btn-lg">
+                                                    <span>¡Denunciá aquí!</span>
+                                                    <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
+                                                        <use xlink:href="../../../img/sprite.svg#arrow-right"></use>
+                                                    </svg>
+                                                </a>
+                                        </div>
+                                </div>
+                            </div>
+                                <div class="col-lg-3">
+                                    <div class="card shadow border-0 h-100">
+                                            <div class="wrap-icon"><img class="img-fluid" src="../img/17.png" alt="icono decorativo de un formulario y un computador" /></div>
+                                        <div class="card-body"><span class="h5">2. Llená el formulario (con tus datos o de forma anónima), contános detalles de los presuntos hechos de corrupción y anexá las pruebas.</span> </div>
+                                </div>
+                            </div>
+                                <div class="col-lg-3">
+                                    <div class="card shadow border-0 h-100">
+                                            <div class="wrap-icon"><img class="img-fluid" src="../img/18.png" alt="icono decorativo relacionado a un tablero de control de denuncias" /></div>
+                                        <div class="card-body"><span class="h5">3. ¡Listo! Tu denuncia será recibida y evaluada por el equipo de la Oficina de Transparencia.</span> </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                    <div class="card shadow border-0 h-100">
+                                            <div class="wrap-icon"><img class="img-fluid" src="../img/19.png" alt="icono decorativo indicando confirmación de denuncias" /></div>
+                                        <div class="card-body"><span class="h5">4. ¡Gracias por tu apoyo! En tu correo electrónico te informaremos cómo avanza tu denuncia.</span>  </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        <!--¿QUE SE PUEDE DENUNCIAR?-->
+                        
+                        <div class="row justify-content-center mb-4">
+                            <div class="col-lg-12">
+                                <h3 class="py-4">¿Qué podés denunciar?</h3>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6">
+                                    <div class="wrap-cards-grid">
+                                        <div class="card border-0">
+                                            <div class="wrap-icon"><img class="img-fluid" src="../img/20.png" alt="icono relacionado al soborno" /></div>
+                                            <div class="card-body"><span class="h6">Sobornos y pagos indebidos</span></div>
+                                        </div>
+                                        <div class="card border-0">
+                                            <div class="wrap-icon"><img class="img-fluid" src="../img/22.png" alt="icono relacionado al delito y trafico de influencias" /></div>
+                                            <div class="card-body"><span class="h6">Abuso de poder y tráfico de influencias</span></div>
+                                        </div>
+                                        <div class="card border-0">
+                                            <div class="wrap-icon"><img class="img-fluid" src="../img/21.png" alt="icono relacionado al delito de desviacion de dinero" /></div>
+                                            <div class="card-body"><span class="h6">Desvío de recursos públicos</span></div>
+                                        </div>
+                                        <div class="card border-0">
+                                            <div class="wrap-icon"><img class="img-fluid" src="../img/23.png" alt="icono relacionado la negligencia de funcionarios públicos" /></div>
+                                            <div class="card-body"><span class="h6">Negligencia en la administración pública</span> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="highlightedMSG h-100 d-flex align-items-center">
+                                        <div class="p-5">
+                                            <div class="wrap-img"><img class="img-fluid" src="../img/ic-alcaldia.svg" alt="icono decorativo relacionando personas dentro de un edificio recibiendo denuncias" /></div>
+                                            <h4>¡Recordá que en la Alcaldía atendemos denuncias relacionadas con nuestros servidores públicos o contratistas!</h4>
+                                            <p class="h6"> En caso de tener conocimiento de malas prácticas de otras entidades acudí a las autoridades competente.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--TAB Ayudános a mejorar-->
+                    <div class="tabs-item content">
+                        <div class="section-heading heading-left py-4">
+                            <h2 class="">Ayudános a mejorar ¡Pa' que Veás!</h2>
+                        </div>
+                        <div class="section-subheading">
+                            <p><span class="text-bold">¡Tu participación es clave para potenciar la plataforma!</span> </p>
+                            <p>Respondé esta breve encuesta y contános lo que más te gustó, lo que no y si tenés alguna propuesta de mejora para ¡Pa' que Veás! ¡Es con vos que recuperamos a Cali!</p>
+                           
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+
+                                <div class="wrap-form py-4 text-center">
+                                    <div class="ratio ratio-1x1">
+                                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeloaKIn7tyPtSSXI4Uxla6ryqPdF-W_IHs1gceQcRd7mIaDw/viewform?embedded=true" width="768" height="477" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+    </div>
+</section>
+</main>
+<!--HELP CENTER SHORTCUT-->
+<div id="helpCenter"></div>
+<script src="~/js/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="~/js/lib/d3/d3.v7.min.js"></script>
+
+
+

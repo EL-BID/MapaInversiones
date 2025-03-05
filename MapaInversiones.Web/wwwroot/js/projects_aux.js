@@ -4,11 +4,26 @@ var avance_financiero = (parseFloat(projectPerfil[0].avance_financiero.replace("
 var cant_contratos = 5;
 var scrol = 0;
 
-InicializaDatos();
-graficarAvance("divGraphAvanceFinanciero", avance_financiero);
+var proyectos_eje = JSON.parse(document.body.getAttribute('data-proyectoProjectData'));
+
+InicializaDatosProyectos();
+
+//    graficarAvance("divGraphAvanceFinanciero", avance_financiero);
+    //
+
+Number.prototype.formatMoney = function (c, d, t) {
+    var n = this,
+        c = isNaN(c = Math.abs(c)) ? 2 : c,
+        d = d == undefined ? "." : d,
+        t = t == undefined ? "," : t,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+};
 
 
-function InicializaDatos() {
+function InicializaDatosProyectos() {
 	//usuario en session
 	iniUsuarioLog();
 	//add funciones login
@@ -389,54 +404,72 @@ function InicializaDatos() {
 
     });
 
+
+    loadProyectosEjecucion(proyectos_eje);
 }
 
-function listarActores() {
-    $("#divGruposActores").empty();
-    $("#listActPerGrupo").empty();
-    if (actoresGlobal != null) {
-        var distintos = actoresGlobal.map(item => item.Categoria)
-            .filter((value, index, self) => self.indexOf(value) === index);
-
-        if (distintos.length > 0) {
-            var str_cad = '<select class="form-select" aria-label="Institucionales:" id="selectGrupActores">';
-            for (var i = 0; i < distintos.length; i++) {
-                var nombre = distintos[i].split("|")[1];
-                var id = distintos[i].split("|")[0];
-                str_cad += ' <option value="' + id + '">' + nombre + '</option>';
-
+function loadProyectosEjecucion(resultados) {
+    var limite = 60;
+    $("#divNoEncontradoEjec").hide();
+    $("#divNoExistenEjec").hide();
+    if (resultados.length > 0) {
+        for (var i = 0; i < resultados.length; i++) {
+            var valor_aux = parseFloat(resultados[i].approvedTotalMoney);
+            var nombre_aux = resultados[i].NombreProyecto.toString();
+            if (nombre_aux.length > limite) {
+                nombre_aux = nombre_aux.substr(0, limite) + "...";
             }
-            str_cad += '</select>';
-            $("#divGruposActores").html(str_cad);
-            configuraSelectActores();
-        } else {
-            $("#divContainerActores").hide();
-        }
-    } else {
-        $("#divContainerActores").hide();
-    }
 
-    
-}
-
-function configuraSelectActores() {
-    if ($("#selectGrupActores").length > 0) {
-        $('#selectGrupActores').on('change', function () {
-            var val_Sel = $(this).val();
-            $(this).attr("class", "selected");
-            if ($.trim(val_Sel) != "" && val_Sel != undefined) {
-                GetActoresByCat(val_Sel);
-
+            var div_proy = d3.select("#divContenedorFichas")
+            var div_ficha = div_proy.append("div")
+            div_ficha.attr("class", "project-col project-col-carusel")
+            var div_card = div_ficha.append("div").attr("class", "project-card")
+            var div_borde = div_card.append("div").attr("class", "card h-100 shadow border-0")
+            div_borde.append("div").attr("class", "img-card").attr("style", "background: url('/img/default_SM.jpg')")
+            div_borde.append("div").attr("class", "labelCategory").text(resultados[i].NombreSector)
+            var div_caption = div_borde.append("div").attr("class", "caption")
+            var div_enlace = div_caption.append("a").attr("href", "../../perfilProyecto/" + resultados[i].IdProyecto).attr("target", "_blank");
+            //var div_enlace = div_caption.append("a").attr("target", "_blank")
+            div_enlace.append("h3").text(nombre_aux)
+            if (resultados[i].approvedTotalMoney > 1000000) {
+                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + separar_milesv2(valor_aux / 1000000, 2, '.', ',').toString() + ' Millones');
             } else {
-                //opcion vacia
-                $("#divDetFuentes").children().remove();
-            }
-        });
+                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + separar_milesv2(valor_aux / 1, 2, '.', ',').toString() + ' Millones');
 
+            }
+
+            div_card.append("div").attr("class", "clearfix")
+            var div_porcentaje = div_card.append("div").attr("class", "percentage")
+            div_porcentaje.append("div").attr("class", "completed").attr("style", "width:" + resultados[i].porcentajeGastado + "%")
+            var div_indicador = div_porcentaje.append("div").attr("class", "indicatorValues")
+            div_indicador.append("span").attr("class", "startPoint").html(resultados[i].MesInicioProyecto + "<br/>" + resultados[i].AnioInicioProyecto)
+            div_indicador.append("span").attr("class", "endPoint").html(resultados[i].MesFinProyecto + "<br/>" + resultados[i].AnioFinProyecto)
+            div_indicador.append("span").attr("class", "middlePoint text-center").html(resultados[i].porcentajeGastado + " %" + "<br/>" + "gastado")
+            div_card.append("div").attr("class", "clearfix")
+
+            var div_detalles = div_card.append("div").attr("class", "row detailedLinks")
+
+            var div_photo = div_detalles.append("div").attr("class", "col-6")
+            var enlace_photo = div_photo.append("a").attr("href", "../projectprofile/" + resultados[i].IdProyecto)
+            enlace_photo.append("span").attr("class", "material-icons").text("photo_library")
+            enlace_photo.append("span").attr("class", "text-ic").text("(" + resultados[i].cantidadFotos + ")")
+
+            var div_question = div_detalles.append("div").attr("class", "col-6")
+            var enlace_question = div_question.append("a").attr("href", "../projectprofile/" + resultados[i].IdProyecto)
+            enlace_question.append("span").attr("class", "material-icons").text("question_answer")
+            enlace_question.append("span").attr("class", "text-ic").text("(" + resultados[i].Comentarios + ")")
+
+        }
+    }
+    else {
+        //no existen proyectos en ejecucion
+        $("#divNoExistenEjec").show();
 
     }
 
+
 }
+
 
 function GetActoresByCat(idCat) {
     $("#listActPerGrupo").empty();
@@ -633,16 +666,16 @@ function GetFuentesByPeriodo(id_proyecto, id_periodo) {
                 var cad_ejecutado = "";
 
                 if (val_presupuestado > 999999) {
-                    cad_presupuestado = (val_presupuestado / 1000000).formatMoney(1, '.', ',').toString();
+                    cad_presupuestado = (val_presupuestado / 1000000).formatMoney(1, ',', '.').toString();
                     cad_presupuestado += " Millones";
                 } else {
-                    cad_presupuestado = (val_presupuestado).formatMoney(1, '.', ',').toString();
+                    cad_presupuestado = (val_presupuestado).formatMoney(1, ',', '.').toString();
                 }
                 if (val_ejecutado > 999999) {
-                    cad_ejecutado = (val_ejecutado / 1000000).formatMoney(1, '.', ',').toString();
+                    cad_ejecutado = (val_ejecutado / 1000000).formatMoney(1, ',', '.').toString();
                     cad_ejecutado += " Millones";
                 } else {
-                    cad_ejecutado = (val_ejecutado).formatMoney(1, '.', ',').toString();
+                    cad_ejecutado = (val_ejecutado).formatMoney(1, ',', '.').toString();
                 }
 
                 var residuo_aux = i % colores.length;
@@ -680,79 +713,20 @@ function GetFuentesByPeriodo(id_proyecto, id_periodo) {
 }
 
 
-function make_viz_fuentes(divContenedor, data_contenido, titulo, color, etiqueta) {
-    new d3plus.BarChart()
-        .select("#" + divContenedor)
-        .config({
-            backgroundConfig: {
-                "strokeWidth": 2,
-                "stroke": color,
-                "fill": "transparent",
-            },
-            font: { "family": "inherit", "size": 14 },
-            data: data_contenido,
-            height: 80,
-            title: titulo,
-            titleConfig: {
-                "ariaHidden": true,
-                "fontSize": 14,
-                "resize": false,
-                "weight": 600,
-                "textAnchor": "left"
-            },
-            colorScale: 'name',
-            colorScaleConfig: {
-                color: [
-                    color,
-                ]
-            },
-            discrete: 'y',
-            groupBy: 'name',
-            stacked: true,
-            tooltip: false,
-            label: d => `${(d['value'])}%`,
+function separar_milesv2(num, decimales = 2, separadorMiles = '.', separadorDecimales = ',') {
+    if (isNaN(num) || num === null || num === undefined) return "";
 
-            x: 'value',
-            xConfig: {
-                title: false,
-                tickFormat: d => `${d}%`,
-                ticks: [],
-                labels: [0, 20, 40, 60, 80, 100],
-                color: "#666",
-                grid: false
-            },
-            xDomain: [
-                0,
-                100
-            ],
-            y: 'year',
-            yConfig: {
-                tickFormat: d => `${d}%`,
-                title: false,
-                ticks: []
-            }
-        }
-        )
-        .legend(false)
-        .render();
-}
+    try {
+        let num_aux = parseFloat(num).toFixed(decimales); // Redondear a los decimales especificados
+        let partes = num_aux.split("."); // Separar parte entera y decimal
 
-//comunes
-function separar_miles(num) {
-    var num_aux = num;
-    if (num != "0" && num != undefined) {
-        try {
-            num_aux = num.toString().replace(/\./g, '');
-            if (!isNaN(num_aux)) {
-                num_aux = num_aux.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
-                num_aux = num_aux.split('').reverse().join('').replace(/^[\.]/, '');
-            }
-        }
-        catch (error) {
-            console.error("function separar_miles: " + error);
-        }
+        partes[0] = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, separadorMiles); // Agregar separador de miles
+
+        return partes.join(separadorDecimales); // Unir con separador de decimales especificado
+    } catch (error) {
+        console.error("function separar_miles: ", error);
+        return "";
     }
-    return num_aux;
 }
 
 function convertirMillones(num) {
@@ -794,7 +768,7 @@ function getAnnio(IdProyecto) {
             
             $('#top_origen_informacion').html(select).fadeIn();
             if (items_result.length > 0) {
-                getSemestre(data.detalles);
+                //getSemestre(data.detalles);
                 getProcesosContratacion($("#top_origen_informacion option:selected").val(), 1, cant_contratos, IdProyecto, $("#proceso").val());
                 
             } else {
@@ -892,7 +866,6 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                     var data = "";
                     var fila = "";
                     var filaconfirma = "";
-                    var filasinfirma = "";
                     var inicioLuis = '<div class="contractBox">';
                     var finLuis = '</div>';
                     var inicio = "";
@@ -914,7 +887,6 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                                 inicio = "";
                                 fin = "";
                             }
-                            var stilo = "";
                             if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" } else { stilo = "contractSEFIN" }
                             inicio = '<div class="cotractName ' + stilo + '"><div class="row"><div class="col-xs-12 col-md-12"><span class="small">Entidad</span><div class="clearfix"></div>'
                                 + '                 <span class="h4">' + info[i].comprador.toString() + '</span>'
@@ -925,10 +897,13 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                         if (proceso != info[i].codigoProceso.toString()) {
 
                             fila += '<div class="contractNumberRP"><span class="">Código proceso: </span>'
-                                + '	<span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div>'
-                                + '<div class="contractNumberRP"><span class="">Proceso: </span>'
-                                + '	<span class="text-bold">' + info[i].descripcionProceso.toString() + '</span></div>'
-                                + '<div class="wrap-head-process">';
+                                + '	<span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div>';
+                                
+                            if(info[i].descripcionProceso) {
+                                    fila += '<div class="contractNumberRP"><span class="">Proceso: </span>';
+                                    fila += '	<span class="text-bold">' + info[i].descripcionProceso.toString() + '</span></div>';
+                            }
+                            fila += '<div class="wrap-head-process">';
                             fila += '<div class="contractData">';
 
                             fila += ''
@@ -938,7 +913,7 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                                 + '				<span class="amount_adj">';
                             if (info[i].estadoProceso) { fila += info[i].estadoProceso.toString(); }
                             fila += '</span></div>'
-                                + '			<div class="col-xs-6 col-md-4"><span class="txt_small">Monto Estimado</span> <span class="amount_adj"> ' + (info[i].valorPlaneado * 1).formatMoney(2, '.', ',').toString() + ' </span></div>'
+                                + '			<div class="col-xs-6 col-md-4"><span class="txt_small">Monto Estimado</span> <span class="amount_adj"> ' + separar_milesv2((info[i].valorPlaneado * 1), 2, '.', ',') + ' </span></div>'
                                 + '			    <div class="col-xs-6 col-md-2">'
                                 + '				   <span class="txt_small">Moneda</span>'
                                 + '				   <span class="amount_adj"> ' + info[i].monedaContrato.toString() + ' </span>'
@@ -976,14 +951,17 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                             fila += '</div>'
                                 + '<div class="clearfix"></div>';
                             filaconfirma += ' <div class="related-contracts">'
-                                + '     <span class="h4">Contratos de ' + info[i].origenInformacion + ' asociados a este proceso:</span>'
+                                + '     <span class="h4">Contrato(s) u órden(es) de compra:</span>'//Contratos de ' + info[i].origenInformacion + ' asociados a este proceso
                                 + '     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
                             proceso = info[i].codigoProceso.toString();
 
 
-                            referencia = '<div class="row text-center">'
-                                + '<div class="col-xs-12 col-md-12"><a href="' + info[i].docURL.toString() + '" target="_blank" class="btn btn-outlined"><i class="material-icons md-22">launch</i> <span class="txt_small">Conozca mas de este proceso</span></a></div>'
-                                + '</div>';
+                            if (info[i].docURL) {
+                                referencia = '<div class="row text-center">'
+                                    + '<div class="col-xs-12 col-md-12"><a href="' + info[i].docURL.toString() + '" target="_blank" class="btn btn-outlined"><i class="material-icons md-22">launch</i> <span class="txt_small">Conozca mas de este proceso</span></a></div>'
+                                    + '</div>';
+                            }
+                            
 
                         }
 
@@ -1002,13 +980,13 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                             + '                <div class="panel-body">';
                         if (info[i].descripcionContrato) {
                             filaconfirma += '          <div class="row border-b">'
-                                + '                        <div class="col-md-12"><span class="small"> CONTRATO</span><span class="amount_adj">' + info[i].descripcionContrato.toString() + '</span></div>'
+                                + '                        <div class="col-md-12"><span class="small"> CONTRATO U ORDEN DE COMPRA</span><span class="amount_adj">' + info[i].descripcionContrato.toString() + '</span></div>'
                                 + '                    </div>';
                         }
                         var moneda = '$';
                         if (info[i].monedaContrato.toString()) {
                             if (info[i].monedaContrato.toString() == 'USD') {
-                                moneda = '';
+                                moneda = '$';
                             }
                         }
                         filaconfirma += '        <div class="row border-b">'
@@ -1020,7 +998,7 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
                             + '                        <div class="col-md-4"><span class="small"> NÚMERO DE DOCUMENTO</span><span class="amount_adj">' + info[i].codigoProveedor.toString() + '</span></div>'
                             + '                    </div>'
                             + '                    <div class="row border-b">'
-                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> VALOR CONTRATADO</span><span class="amount_adj"> ' + moneda + ' ' + (info[i].valorContratado * 1).formatMoney(2, '.', ',').toString() + '</span></div>'
+                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> VALOR CONTRATADO</span><span class="amount_adj"> ' + moneda + ' ' + separar_milesv2((info[i].valorContratado * 1), 2, '.', ',') + '</span></div>'
                             + '                        <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span><span class="amount_adj"> ' + info[i].monedaContrato.toString() + ' </span></div>'
                             + '                    </div>'
  
@@ -1097,7 +1075,7 @@ function getProcesosContratacion(annio, pagina, registros,idproyecto, proceso) {
 
                     $("#srcContratos").html(data);
                     if (scrol >= 1) {
-                        $('html, body').animate({ scrollTop: $('#secInfoContratos').offset().top }, 2000);
+                        $('html, body').animate({ scrollTop: $('#srcContratos').offset().top }, 2000);
                     } else { scrol = scrol + 1; }
 
                     dibujaPaginacionContrato(pagina, result.cantidadTotalRegistros, Math.ceil(result.cantidadTotalRegistros / registros), registros);
@@ -1137,16 +1115,6 @@ $("#top_origen_informacion").change(function () {
 });
 
 
-Number.prototype.formatMoney = function (c, d, t) {
-    var n = this,
-        c = isNaN(c = Math.abs(c)) ? 2 : c,
-        d = d == undefined ? "." : d,
-        t = t == undefined ? "," : t,
-        s = n < 0 ? "-" : "",
-        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-        j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-};
 
 
 function iniUsuarioLog() {
@@ -1224,8 +1192,8 @@ function GetComentarios(id) {
                 id_padre = items_result[i].comentarioRelacionado;
                 if ($("#content-2").length > 0) {
 
-                    var d = new Date(items_result[i].fechaCreacion);
-                    var fecha_aux = pad(d.getDate(), 2) + "/" + pad(parseInt((d.getMonth()) + 1), 2) + "/" + d.getFullYear();
+                    const d = new Date(items_result[i].fechaCreacion);
+                    const fecha_aux = new Intl.DateTimeFormat('es-ES').format(d);
                     var nombre = "";
                     if (items_result[i].anonimo == false) {
                         nombre = items_result[i].nom_usuario.toString();
@@ -1267,7 +1235,7 @@ function GetComentarios(id) {
                         var usr_pic = div_gov.append("div")
                             .attr("class", "Pic_user")
                             .append("img")
-                            .attr("src", "/content/img/PCM_profile.jpg")
+                            .attr("src", "/img/PCM_profile.jpg")
                         var usr_poster = div_gov.append("div")
                             .attr("class", "Post_user")
                         var usr_txt = usr_poster.append("div")
@@ -1676,21 +1644,9 @@ function validaCamposOblig(contenedor) {
     return formularioOK;
 }
 
-
-Number.prototype.formatMoney = function (c, d, t) {
-    var n = this,
-        c = isNaN(c = Math.abs(c)) ? 2 : c,
-        d = d == undefined ? "." : d,
-        t = t == undefined ? "," : t,
-        s = n < 0 ? "-" : "",
-        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
-        j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-};
-
 function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
     var pag_actual = parseInt(actual);
-    var pagina_actual = pag_actual;
+    pagina_actual = pag_actual;
     var pagesHTML = '';
     var cant_por_linea = 10;
 

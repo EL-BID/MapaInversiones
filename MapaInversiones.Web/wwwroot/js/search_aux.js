@@ -4,7 +4,7 @@
         var val_sel = $(this).attr("data-title");
         $("#tipoRefine").html('"' + val_sel+'"');
         $("#ulPaginacion").attr("refine", val_sel);
-
+        getListResult(0, true);
 
     });
 

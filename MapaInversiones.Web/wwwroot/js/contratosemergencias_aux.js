@@ -100,7 +100,7 @@
 
     function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
         var pag_actual = parseInt(actual);
-        var pagina_actual = pag_actual;
+        pagina_actual = pag_actual;
         var pagesHTML = '';
         var cant_por_linea = 10;
         deshabilita(false);
@@ -254,11 +254,16 @@
                                     + '	<span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div></div>'
                                     + '<div class="processName">'
                                     + '		<div class="row">'
-                                    + '			<div class="col-xs-12 col-md-12">'
-                                    + '				<span class="small">PROCESO</span><div class="clearfix"></div>'
-                                    + '				<span class="h3">' + info[i].descripcionProceso.toString() + '</span>  </div>         </div> '
-                                    + '	</div>'
+                                    + '			<div class="col-xs-12 col-md-12">';
+                                if (info[i].descripcionProceso) {
+                                    fila += '				<span class="small">PROCESO</span><div class="clearfix"></div>'
+                                         + '				<span class="h3">' + info[i].descripcionProceso.toString() + '</span>';
 
+                                }
+
+                                fila +='         </div >'
+                                    + '      </div > '
+                                    + '	</div>'
                                     + '<div class="wrap-head-process">';
 
                                 fila += '<div class="contractData">';
@@ -315,12 +320,13 @@
 
                                 proceso = info[i].codigoProceso.toString();
 
-
-                                referencia = '<div class="wrap-btn p15">'
-                                    + '  <a href="' + info[i].docURL.toString() + '" target="_blank" class="btn btn-primary btn-outlined">'
-                                    + '     <span class="glyphicon glyphicon-new-window"></span> <span class="txt_small">Conozca mas de este proceso</span>'
-                                    + ' </a>'
-                                    + '</div>';
+                                if (info[i].docURL) {
+                                    referencia = '<div class="wrap-btn p15">'
+                                        + '  <a href="' + info[i].docURL.toString() + '" target="_blank" class="btn btn-primary btn-outlined">'
+                                        + '     <span class="glyphicon glyphicon-new-window"></span> <span class="txt_small">Conozca mas de este proceso</span>'
+                                        + ' </a>'
+                                        + '</div>';
+                                }
 
                             }
                             if (info[i].codigoContrato) {

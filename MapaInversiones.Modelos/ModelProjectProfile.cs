@@ -33,6 +33,8 @@ namespace PlataformaTransparencia.Modelos
 
         public string urlAuditoriaVisible { get; set; }
 
+        public string OrigenDelProyecto { get; set; }
+
         public string urlReporteEmpalme { get; set; }
 
         private Project projectInformation;
@@ -101,5 +103,12 @@ namespace PlataformaTransparencia.Modelos
 
         public List<itemActores> actores_proy { get; set; }
         public List<itemEntregable> entregables { get; set; }
+
+        public List<InfoProyectos> ProyectosEjecucion
+        {
+            get { return proyectosEjecucion; }
+            set { proyectosEjecucion = value; }
+        }
+        private List<InfoProyectos> proyectosEjecucion = new List<InfoProyectos>();
     }
 }

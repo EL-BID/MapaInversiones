@@ -3,11 +3,13 @@ using LinqToDB.AspNet.Logging;
 using LinqToDB.Configuration;
 using LinqToDB.Data;
 using LinqToDB.DataProvider.SqlServer;
+using Microsoft.AspNetCore.Localization;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Negocios;
 using Quartz;
 using Quartz.AspNetCore;
 using SolrNet;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -87,6 +89,19 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+var supportedCultures = new[]
+{
+ new CultureInfo("es-CO")
+};
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("es-CO"),
+    // Formatting numbers, dates, etc.
+    SupportedCultures = supportedCultures,
+    // UI strings that we have localized.
+    SupportedUICultures = supportedCultures
+});
 
 app.UseStaticFiles();
 app.UseSession();

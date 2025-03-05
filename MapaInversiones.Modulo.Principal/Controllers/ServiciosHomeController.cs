@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataModels;
-//using AngleSharp.Dom.Events;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PlataformaTransparencia.Infrastructura.DataModels;
@@ -41,34 +40,33 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
         }
 
-        [HttpGet("ObtenerProyectosPorSectorGroupHome")]
-        public ModelHomeData ObtenerIdeasProyectosPorSectorGroupHome(int anyo)
+
+        [HttpGet("ObtenerPorcentajeParticipacionSector")]
+        public ModelHomeData ObtenerPorcentajeParticipacionSector(string Annio)
         {
-            ModelHomeData objReturn = new ModelHomeData();
+            ModelHomeData objReturn = new();
             try
             {
-                objReturn.ProjectsPerSectorGroup = consolidadosHome.ObtenerProyectoPorSectorGroupHome(anyo);
+                objReturn.ParticipacionSector = consolidadosHome.ObtenerPorcentajeParticipacionSector(Annio);
                 objReturn.Status = true;
-
             }
             catch (Exception exception)
             {
                 objReturn.Status = false;
                 objReturn.Message = "Error: " + exception.Message;
-
             }
-
             return objReturn;
         }
 
-        [HttpGet("ObtenerOrganismosPorFuente")]
-        public ModelHomeData ObtenerOrganismosPorFuente(string Annio, int idfuente)
+
+
+        [HttpGet("ObtenerPorcentajeParticipacionEntidad")]
+        public ModelHomeData ObtenerPorcentajeParticipacionEntidad(string Annio)
         {
             ModelHomeData objReturn = new();
             try
             {
-                objReturn.OrganismosFinanciadores = consolidadosHome.ObtenerOrganismosPorFuenteHome(Annio, idfuente);
-                if (int.TryParse(Annio, out int anio)) objReturn.ConsolidadoOrganismoFinanciador = _financiadorBLL.ObtenerConsolidadoOrganismosFinanciadoresPorAnioAndCodigoFuente(anio, idfuente);
+                objReturn.ParticipacionEntidad = consolidadosHome.ObtenerPorcentajeParticipacionEntidad(Annio);
                 objReturn.Status = true;
             }
             catch (Exception exception)

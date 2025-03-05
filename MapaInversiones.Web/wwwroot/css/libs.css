@@ -4665,7 +4665,7 @@ html {
     width: 10px;
     height: 10px;
     margin: 0 8px;
-    background: #FFC726 /* var(--Bordertitle)*/ /*#333*/;
+    background: #5916c3;
     border-radius: 50%;
     opacity: 1;
     cursor: pointer;
@@ -4673,7 +4673,7 @@ html {
 
     .flickity-page-dots .dot.is-selected {
         opacity: 1;
-        background: #fff;
+        background: #dddddd;
     }
 
 /* flickity-fade */

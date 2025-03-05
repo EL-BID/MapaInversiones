@@ -27,7 +27,54 @@
 
 }
 <head>
-    <link rel="stylesheet" href="~/css/sankey.css" />
+    <style>
+
+        .node rect {
+            cursor: move;
+            fill-opacity: .8;
+            shape-rendering: crispEdges;
+        }
+
+        .node text {
+            pointer-events: none;
+            /*text-shadow: 0 1px 0 #fff;*/
+        }
+
+        .link {
+            fill: none;
+            stroke: #000;
+            stroke-opacity: .1;
+        }
+
+            .link:hover {
+                stroke-opacity: .2;
+            }
+
+        .arc text {
+            font: 12px sans-serif;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+
+        .arc path {
+            stroke: #fff;
+        }
+
+        .toolTip {
+            position: absolute;
+            display: none;
+            width: auto;
+            height: auto;
+            background: none repeat scroll 0 0 white;
+            border: 0 none;
+            border-radius: 8px 8px 8px 8px;
+            box-shadow: -3px 3px 15px #888888;
+            color: black;
+            font: 12px sans-serif;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <!--MAIN BANNER-->

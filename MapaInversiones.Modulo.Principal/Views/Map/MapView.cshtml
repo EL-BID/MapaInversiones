@@ -19,7 +19,7 @@
                                         <i class="material-icons md-18">chevron_right</i>
                                     </li>
                                     <li><a href="#!">Inversión Pública</a><i class="material-icons md-18">chevron_right</i></li>
-                                    <li>Mapa de Inversión Pública</li>
+                                    <li>Mapa de proyectos</li>
                                 </ul>
                             </div>
                         </div>
@@ -32,14 +32,11 @@
                     <div class="col-lg-8">
                         <div class="banner-main-info">
                             <div class="banner-main-title mb-0">
-                                <h1>Mapa de Inversión Pública</h1>
+                                <h1>Mapa de proyectos</h1>
                             </div>
                             <div class="banner-main-desc">
 
-                                <p>
-                                    <strong>Los proyectos que se muestran a continuación son aquellos que cuentan con presupuesto vigente asignado en la gestión.</strong>
-                                </p>
-
+                                <p>En este mapa podés filtrar los proyectos activos en el Distrito por ubicación (comuna o corregimiento), sector de la inversión (educación, deporte, infraestructura, cultura, entre otros), ente gestor (dependencia encargada) y estado del proyecto (aprobado, en ejecución, finalizado). <span class="text-bold">¡Usálo para hacer tu búsqueda más sencilla!</span></p>
                             </div>
                         </div>
                     </div>
@@ -171,12 +168,6 @@
                             </div>
                             <div id="map-legend">
                                 <span data-bind="text: 'Approved resources ( ' + scaleUnit() + ' dollars )'"></span>
-                                <!--ul data-bind="foreach: scales()">
-                                <li>
-                                    <span data-bind="text: val"></span>
-                                    <div class="color color1"  data-bind="css: 'color'+$index()"></div>
-                                </li>
-                            </ul-->
                                 <div class="vals">
                                     <span class="value lower" data-bind="text: scalesLower()+scaleUnit()[0]">0</span>
                                     <span class="value higher" data-bind="text: scalesLarger()+scaleUnit()[0]">10</span>
@@ -263,11 +254,9 @@
                                             </div>
                                             <div class="statistics hidden" style="display: none">
                                                 <h2 class="subtitle-consolidated">
-                                                    @*@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Busqueda_DatosConsolidados")*@
                                                     <span id="filters-stats-list-info" data-bind="foreach: periods">
                                                         <span data-bind="css: { selected: active(), hidden: hidden }">
                                                             <span class="txt extra" data-bind="html: getNameDefault(), tap: toggleVisible">
-                                                                @*<span>2012 hacia adelante</span>*@
                                                             </span>
                                                         </span>
                                                     </span>
@@ -295,7 +284,7 @@
                                                 </div>
                                                 <div style="visibility: hidden; display: none;" class="statistic-group approved-money">
                                                     <div class="label">
-                                                        @ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_RecursosAprobadosSGR")
+                                                        @ViewBag.TitulosHome.BuscarTituloPorLlave("w_BuscarProyectos_RecursosAprobadosSGR")
                                                     </div>
                                                     <div class="money" id="approved-money">
                                                         @String.Format("{0:C0}", Model.ApprovedMoney)
@@ -448,7 +437,6 @@
                                                     <span class="options" data-bind="foreach: options, tap: optionClicked">
                                                         <span class="inner">
                                                             <span class="option" data-bind="text: name, css: { selected: active() }, style: { display: visible() ? 'block' : 'none' }">
-                                                                @*2012 en adelante*@
                                                             </span>
                                                         </span>
                                                     </span>
@@ -499,7 +487,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="section-heading heading-left">
-                    <h2>Proyectos nacionales</h2>
+                    <h2>Proyectos distritales</h2>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -512,7 +500,10 @@
                     </select>
                 </div>
             </div>
+            <input type="hidden" id="cantidaddist" value="" />
             <div id="divContenedorFichas" class="grid-nationalprojects"></div>
+            <div id="divPagDist" class="">
+            </div>
             <!--END MAQUETA BASICA PROJECTOS-->
             <div id="divNoEncontradoEjec" class="no-search-results objHidden">No se encontraron resultados</div>
             <div id="divNoExistenEjec" class="no-search-results objHidden">No se encontraron resultados</div>
@@ -522,6 +513,7 @@
                 
 
         </div>
+
     </div>
 </div>
 <div class="clearfix"></div>

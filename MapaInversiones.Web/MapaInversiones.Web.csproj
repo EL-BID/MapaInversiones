@@ -511,6 +511,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Update="wwwroot\img\salud-y-proteccion-social.svg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="wwwroot\img\svg-icons\DESCONOCIDO.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

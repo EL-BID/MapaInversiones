@@ -24,8 +24,8 @@ using Microsoft.SqlServer.Types;
 namespace PlataformaTransparencia.Infrastructura.DataModels
 {
   /// <summary>
-  /// Database       : PISGR_PY_COVID19
-  /// Data Source    : 20.55.34.170,5085
+  /// Database       : 
+  /// Data Source    : 
   /// Server Version : 14.00.3370
   /// </summary>
   public partial class TransparenciaDB : LinqToDB.Data.DataConnection
@@ -39,7 +39,9 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public ITable<CatalogoOrganismoFinanciador> CatalogoOrganismoFinanciadors { get { return this.GetTable<CatalogoOrganismoFinanciador>(); } }
     public ITable<consulta_CatalogoTiempo> CatalogoTiempoes { get { return this.GetTable<consulta_CatalogoTiempo>(); } }
     public ITable<Comentario> Comentarios { get { return this.GetTable<Comentario>(); } }
+    public ITable<consulta_VwConsolidadoContratacion> VwConsolidadoContratacions { get { return this.GetTable<consulta_VwConsolidadoContratacion>(); } }
     public ITable<VwConsolidadoContratacionEmergencia> VwConsolidadoContratacionEmergencias { get { return this.GetTable<VwConsolidadoContratacionEmergencia>(); } }
+    public ITable<consulta_VwConsolidadoProcesosContratacion> VwConsolidadoProcesosContratacions { get { return this.GetTable<consulta_VwConsolidadoProcesosContratacion>(); } }
     public ITable<VwConsolidadoProcesosContratacionEmergencia> VwConsolidadoProcesosContratacionEmergencias { get { return this.GetTable<VwConsolidadoProcesosContratacionEmergencia>(); } }
     public ITable<VwDetalleContratacionArticulosEmergencia> VwDetalleContratacionArticulosEmergencias { get { return this.GetTable<VwDetalleContratacionArticulosEmergencia>(); } }
     public ITable<VwDetalleProcesosArticulosEmergencia> VwDetalleProcesosArticulosEmergencias { get { return this.GetTable<VwDetalleProcesosArticulosEmergencia>(); } }
@@ -76,7 +78,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public ITable<SearchResultParam> SearchResultParams { get { return this.GetTable<SearchResultParam>(); } }
     public ITable<Sector> Sectors { get { return this.GetTable<Sector>(); } }
     public ITable<SeguimientoEsquemaFinanciacionProyecto> SeguimientoEsquemaFinanciacionProyectos { get { return this.GetTable<SeguimientoEsquemaFinanciacionProyecto>(); } }
-    public ITable<VwSubsidiosEmergenciaConsolidado> VwSubsidiosEmergenciaConsolidadoes { get { return this.GetTable<VwSubsidiosEmergenciaConsolidado>(); } }
+    public ITable<VwSubsidiosCovidConsolidado> VwSubsidiosCovidConsolidadoes { get { return this.GetTable<VwSubsidiosCovidConsolidado>(); } }
     public ITable<SeguimientoMetaIndicadorProducto> SeguimientoMetaIndicadorProductos { get { return this.GetTable<SeguimientoMetaIndicadorProducto>(); } }
     public ITable<TipoComentario> TipoComentarios { get { return this.GetTable<TipoComentario>(); } }
     public ITable<UnidadMedida> UnidadMedidas { get { return this.GetTable<UnidadMedida>(); } }
@@ -91,6 +93,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public ITable<VwContratosPerfilContratistaXAnio> VwContratosPerfilContratistaXAnios { get { return this.GetTable<VwContratosPerfilContratistaXAnio>(); } }
     public ITable<VWContratosXPresupuesto> VWContratosXPresupuestoes { get { return this.GetTable<VWContratosXPresupuesto>(); } }
     public ITable<consulta_VwContratosXEntidad> VwContratosXEntidads { get { return this.GetTable<consulta_VwContratosXEntidad>(); } }
+    public ITable<consulta_VwContratosXProcesosEntidad> VwContratosXProcesosEntidads { get { return this.GetTable<consulta_VwContratosXProcesosEntidad>(); } }
     public ITable<consulta_VwContratosXProyectosInstitucionesAnio> VwContratosXProyectosInstitucionesAnios { get { return this.GetTable<consulta_VwContratosXProyectosInstitucionesAnio>(); } }
     public ITable<VwEntidadEjecutora> VwEntidadEjecutoras { get { return this.GetTable<VwEntidadEjecutora>(); } }
     public ITable<VwEstadoImagene> VwEstadoImagenes { get { return this.GetTable<VwEstadoImagene>(); } }
@@ -105,6 +108,8 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public ITable<VwInformacionGeneralPerfilSector> VwInformacionGeneralPerfilSectors { get { return this.GetTable<VwInformacionGeneralPerfilSector>(); } }
     public ITable<consulta_VwProcesosXProyectosInstitucionesAnio> VwProcesosXProyectosInstitucionesAnios { get { return this.GetTable<consulta_VwProcesosXProyectosInstitucionesAnio>(); } }
     public ITable<consulta_VwPresupuesto> VwPresupuestoes { get { return this.GetTable<consulta_VwPresupuesto>(); } }
+    public ITable<consulta_VwPresupuestoAsignadoEntidad> VwPresupuestoAsignadoEntidads { get { return this.GetTable<consulta_VwPresupuestoAsignadoEntidad>(); } }
+    public ITable<consulta_VwPresupuestoAsignadoSector> VwPresupuestoAsignadoSectors { get { return this.GetTable<consulta_VwPresupuestoAsignadoSector>(); } }
     public ITable<consulta_VwPresupuestoHistorico> VwPresupuestoHistoricoes { get { return this.GetTable<consulta_VwPresupuestoHistorico>(); } }
     public ITable<consulta_VwPresupuestoXProyInv> VwPresupuestoXProyInvs { get { return this.GetTable<consulta_VwPresupuestoXProyInv>(); } }
     public ITable<consulta_VwPresupuesto> VwPresupuesto { get { return this.GetTable<consulta_VwPresupuesto>(); } }
@@ -112,6 +117,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     public ITable<consulta_VwProcesosXInstitucionModalidad> VwProcesosXInstitucionModalidads { get { return this.GetTable<consulta_VwProcesosXInstitucionModalidad>(); } }
     public ITable<VwProyectosAprobado> VwProyectosAprobados { get { return this.GetTable<VwProyectosAprobado>(); } }
     public ITable<VwProyectosAprobadosInv> VwProyectosAprobadosInvs { get { return this.GetTable<VwProyectosAprobadosInv>(); } }
+    public ITable<consulta_VwSectoresGroupInfo> VwSectoresGroupInfo { get { return this.GetTable<consulta_VwSectoresGroupInfo>(); } }
     public ITable<VwSectorListadoPorDeptoInv> VwSectorListadoPorDeptoInvs { get { return this.GetTable<VwSectorListadoPorDeptoInv>(); } }
     public ITable<VwSectorPerfilDeptoInv> VwSectorPerfilDeptoInvs { get { return this.GetTable<VwSectorPerfilDeptoInv>(); } }
     public ITable<VwSectorProyectosDeptoInv> VwSectorProyectosDeptoInvs { get { return this.GetTable<VwSectorProyectosDeptoInv>(); } }
@@ -556,9 +562,9 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     {
         [Column("año"), NotNull] public int Año { get; set; } // int
         [Column("mes"), Nullable] public int? Mes { get; set; } // int
-        [Column("periodo"), PrimaryKey, NotNull] public string Periodo { get; set; } // varchar(6)
+        [Column("periodo"), PrimaryKey, NotNull] public int Periodo { get; set; } // int
     }
-    
+
     [Table(Schema = "dbo", Name = "Comentario")]
   public partial class Comentario
   {
@@ -593,6 +599,20 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     #endregion
   }
 
+    [Table(Schema = "consulta", Name = "VwConsolidadoContratacion", IsView = true)]
+    public partial class consulta_VwConsolidadoContratacion
+    {
+        [Column(), NotNull] public int RowId { get; set; } // int
+        [Column("anio"), Nullable] public int? Anio { get; set; } // int
+        [Column(), Nullable] public string CodigoEntidad { get; set; } // varchar(100)
+        [Column(), Nullable] public string Entidad { get; set; } // nvarchar(150)
+        [Column(), Nullable] public string EstadoContrato { get; set; } // varchar(100)
+        [Column(), Nullable] public string MonedaContrato { get; set; } // varchar(100)
+        [Column(), Nullable] public decimal? ValorContratado { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public int? NroContratos { get; set; } // int
+        [Column(), Nullable] public byte? Origen { get; set; } // tinyint
+    }
+
     [Table(Schema = "dbo", Name = "VwConsolidadoContratacionEmergencias", IsView = true)]
     public partial class VwConsolidadoContratacionEmergencia
     {
@@ -606,6 +626,20 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         [Column(), Nullable] public int? NroContratos { get; set; } // int
         [Column(), Nullable] public byte? Origen { get; set; } // tinyint
     }
+
+    [Table(Schema = "consulta", Name = "VwConsolidadoProcesosContratacion", IsView = true)]
+    public partial class consulta_VwConsolidadoProcesosContratacion
+    {
+        [Column("anio"), Nullable] public int? Anio { get; set; } // int
+        [Column(), NotNull] public string Entidad { get; set; } // varchar(200)
+        [Column(), NotNull] public string EstadoProceso { get; set; } // varchar(100)
+        [Column(), NotNull] public int EstadoProcesoOrden { get; set; } // int
+        [Column(), Nullable] public string MonedaProceso { get; set; } // varchar(50)
+        [Column(), Nullable] public decimal? ValorProceso { get; set; } // numeric(38, 6)
+        [Column(), Nullable] public int? NroProcesos { get; set; } // int
+        [Column(), Nullable] public int? Origen { get; set; } // int
+    }
+
 
     [Table(Schema = "dbo", Name = "VwConsolidadoProcesosContratacionEmergencias", IsView = true)]
     public partial class VwConsolidadoProcesosContratacionEmergencia
@@ -1358,6 +1392,8 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     [Column, Nullable] public string NombreFuente { get; set; } // nvarchar(150)
     [Column, NotNull] public string Descripcion { get; set; } // nvarchar(500)
     [Column, NotNull] public DateTime FechaActualizacionFuente { get; set; } // datetime
+    [Column, Nullable] public byte? Perfil { get; set; } // tinyint
+    [Column, Nullable] public DateTime? FechaCorteFuente { get; set; } // datetime
   }
 
   [Table(Schema = "dbo", Name = "FuenteFinancieraPrograma")]
@@ -1981,29 +2017,52 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         [Column(), Nullable] public string OrganismoFinanciador { get; set; } // varchar(500)
         [Column(), NotNull] public string CodigoPrograma { get; set; } // varchar(50)
         [Column(), Nullable] public string Programa { get; set; } // varchar(max)
-        [Column("CodigoSub_Programa"), NotNull] public string CodigoSubPrograma { get; set; } // varchar(50)
-        [Column(), Nullable] public string SubPrograma { get; set; } // varchar(max)
+        [Column(), NotNull] public string CodigoProducto { get; set; } // varchar(50)
+        [Column(), NotNull] public string Producto { get; set; } // varchar(max)
         [Column(), NotNull] public string CodigoProyecto { get; set; } // varchar(50)
         [Column(), Nullable] public string Proyecto { get; set; } // varchar(max)
         [Column(), NotNull] public string CodigoActividadObra { get; set; } // varchar(50)
         [Column(), Nullable] public string ActividadObra { get; set; } // varchar(max)
-        [Column("CodigoGrupo_de_gasto"), NotNull] public string CodigoGrupoDeGasto { get; set; } // varchar(30)
-        [Column("Grupo_de_gasto"), Nullable] public string GrupoDeGasto { get; set; } // varchar(500)
+        [Column(), Nullable] public string CodigoReto { get; set; } // nvarchar(50)
+        [Column(), Nullable] public string Reto { get; set; } // nvarchar(500)
         [Column(), NotNull] public string CodigoFinalidad { get; set; } // varchar(50)
         [Column(), Nullable] public string Finalidad { get; set; } // varchar(max)
-        [Column("CodigoObjeto_de_gasto"), NotNull] public string CodigoObjetoDeGasto { get; set; } // varchar(30)
-        [Column("Objeto_de_gasto"), Nullable] public string ObjetoDeGasto { get; set; } // varchar(500)
+        [Column(), Nullable] public string CodigoFondo { get; set; } // nvarchar(100)
+        [Column(), Nullable] public string Fondo { get; set; } // varchar(500)
+        [Column(), Nullable] public string ClasificacionFondo { get; set; } // varchar(500)
         [Column(), Nullable] public double? Aprobado { get; set; } // float
         [Column(), Nullable] public double? Vigente { get; set; } // float
         [Column(), Nullable] public double? EjecucionAcumulada { get; set; } // float
-        [Column(), NotNull] public int Obligacion { get; set; } // int
+        [Column(), Nullable] public double? Obligacion { get; set; } // float
         [Column(), Nullable] public double? Pagos { get; set; } // float
         [Column("%_de_Ejecucion"), Nullable] public double? DeEjecucion { get; set; } // float
-        [Column(), NotNull] public int IdSector { get; set; } // int
-        [Column(), NotNull] public string Sector { get; set; } // varchar(200)
+        [Column(), NotNull] public string IdSector { get; set; } // varchar(30)
+        [Column(), Nullable] public string Sector { get; set; } // varchar(500)
         [Column(), NotNull] public string CodigoSubFuncion { get; set; } // varchar(50)
         [Column(), Nullable] public string SubFuncion { get; set; } // varchar(max)
         [Column(), NotNull] public int IdCatalogoLineaPresupuestal { get; set; } // int
+    }
+
+    [Table(Schema = "consulta", Name = "VwPresupuestoAsignadoEntidad", IsView = true)]
+    public partial class consulta_VwPresupuestoAsignadoEntidad
+    {
+        [Column(), NotNull] public string CodigoInstitucion { get; set; } // varchar(30)
+        [Column(), Nullable] public string Institucion { get; set; } // varchar(500)
+        [Column("año"), NotNull] public int Año { get; set; } // int
+        [Column(), Nullable] public double? ValorVigente { get; set; } // float
+        [Column(), Nullable] public double? ValorVigenteTotal { get; set; } // float
+        [Column(), Nullable] public double? PorcPartipacion { get; set; } // float
+    }
+
+    [Table(Schema = "consulta", Name = "VwPresupuestoAsignadoSector", IsView = true)]
+    public partial class consulta_VwPresupuestoAsignadoSector
+    {
+        [Column(), NotNull] public string CodigoSector { get; set; } // varchar(30)
+        [Column(), Nullable] public string Sector { get; set; } // varchar(500)
+        [Column("año"), NotNull] public int Año { get; set; } // int
+        [Column(), Nullable] public double? ValorVigente { get; set; } // float
+        [Column(), Nullable] public double? ValorVigenteTotal { get; set; } // float
+        [Column(), Nullable] public double? PorcPartipacion { get; set; } // float
     }
 
 
@@ -2038,15 +2097,16 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         [Column(), Nullable] public string FuenteEspecifica { get; set; } // varchar(max)
         [Column(), NotNull] public int CodigoOrganismoFinanciador { get; set; } // int
         [Column(), Nullable] public string OrganismoFinanciador { get; set; } // varchar(500)
-        [Column("CodigoObjeto_de_gasto"), NotNull] public string CodigoObjetoDeGasto { get; set; } // varchar(30)
-        [Column("Objeto_de_gasto"), Nullable] public string ObjetoDeGasto { get; set; } // varchar(500)
+        [Column(), Nullable] public string CodigoFondo { get; set; } // nvarchar(100)
+        [Column(), Nullable] public string Fondo { get; set; } // varchar(500)
+        [Column(), Nullable] public string ClasificacionFondo { get; set; } // varchar(500)
         [Column(), NotNull] public string CodigoFinalidad { get; set; } // varchar(50)
         [Column(), Nullable] public string Finalidad { get; set; } // varchar(max)
         [Column(), NotNull] public int IdSector { get; set; } // int
         [Column(), NotNull] public string NombreSector { get; set; } // varchar(200)
         [Column(), NotNull] public string CodigoSubFuncion { get; set; } // varchar(50)
         [Column(), Nullable] public string SubFuncion { get; set; } // varchar(max)
-        [Column("bpin"), NotNull] public string Bpin { get; set; } // varchar(20)
+        [Column("bpin"), Nullable] public string Bpin { get; set; } // varchar(20)
         [Column("nombreproyecto"), Nullable] public string Nombreproyecto { get; set; } // varchar(max)
         [Column("objetivogeneral"), NotNull] public string Objetivogeneral { get; set; } // varchar(max)
         [Column("avancefinancieroLinea"), Nullable] public decimal? AvancefinancieroLinea { get; set; } // decimal(18, 2)
@@ -2058,10 +2118,10 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         [Column(), Nullable] public decimal? ValorProyecto { get; set; } // decimal(18, 2)
         [Column(), Nullable] public decimal? ValorFinanciado { get; set; } // decimal(38, 2)
         [Column(), Nullable] public decimal? ValorEjecutado { get; set; } // decimal(18, 2)
-        [Column(), NotNull] public string URLProyecto { get; set; } // varchar(75)
+        [Column(), NotNull] public string URLProyecto { get; set; } // varchar(28)
     }
 
-  [Table(Schema = "dbo", Name = "Procesos")]
+    [Table(Schema = "dbo", Name = "Procesos")]
   public partial class Proceso
   {
     [Column(), PrimaryKey(2), NotNull] public string IdProceso { get; set; } // varchar(150)
@@ -2770,8 +2830,8 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     [Column("param"), Nullable] public string Param { get; set; } // varchar(250)
   }
 
-    [Table(Schema = "dbo", Name = "VwSubsidiosEmergenciaConsolidado", IsView = true)]
-    public partial class VwSubsidiosEmergenciaConsolidado
+    [Table(Schema = "dbo", Name = "VwSubsidiosCovidConsolidado", IsView = true)]
+    public partial class VwSubsidiosCovidConsolidado
     {
         [Column(), NotNull] public int Id { get; set; } // int
         [Column("origen"), NotNull] public string Origen { get; set; } // varchar(15)
@@ -3359,6 +3419,18 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
         [Column(), Nullable] public DateTime? FechaFinEjecucionContrato { get; set; } // datetime2(7)
     }
 
+    [Table(Schema = "consulta", Name = "VwContratosXProcesosEntidad", IsView = true)]
+    public partial class consulta_VwContratosXProcesosEntidad
+    {
+        [Column, Nullable] public string CodigoUnidadCompra { get; set; } // varchar(100)
+        [Column, Nullable] public string UnidadCompra { get; set; } // nvarchar(150)
+        [Column, Nullable] public string CodigoProceso { get; set; } // nvarchar(200)
+        [Column, NotNull] public decimal ValorProceso { get; set; } // numeric(38, 6)
+        [Column, NotNull] public int CantidadContratos { get; set; } // int
+        [Column, NotNull] public decimal ValorContratos { get; set; } // numeric(38, 6)
+        [Column, Nullable] public int? AnioProceso { get; set; } // int
+    }
+
     [Table(Schema = "consulta", Name = "VwContratosXProyectosInstitucionesAnio", IsView = true)]
     public partial class consulta_VwContratosXProyectosInstitucionesAnio
     {
@@ -3427,20 +3499,34 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     [Column(), NotNull] public decimal PresupuestoPagado { get; set; } // decimal(18, 2)
   }
 
-  [Table(Schema = "dbo", Name = "VwFuentesFinanciacion", IsView = true)]
-  public partial class VwFuentesFinanciacion
-  {
-    [Column, NotNull] public int IdProyecto { get; set; } // int
-    [Column, NotNull] public int IdOrganismoFinanciador { get; set; } // int
-    [Column, NotNull] public string OrganismoFinanciador { get; set; } // varchar(200)
-    [Column, NotNull] public int IdFuenteFinanciacion { get; set; } // int
-    [Column, NotNull] public string FuenteFinanciacion { get; set; } // varchar(200)
-    [Column, Nullable] public decimal? ValorVigente { get; set; } // decimal(38, 2)
-    [Column, Nullable] public decimal? ValorEjecutado { get; set; } // decimal(38, 2)
-    [Column, Nullable] public int? Periodo { get; set; } // int
-  }
+    //[Table(Schema = "dbo", Name = "VwFuentesFinanciacion", IsView = true)]
+    //public partial class VwFuentesFinanciacion
+    //{
+    //  [Column, NotNull] public int IdProyecto { get; set; } // int
+    //  [Column, NotNull] public int IdOrganismoFinanciador { get; set; } // int
+    //  [Column, NotNull] public string OrganismoFinanciador { get; set; } // varchar(200)
+    //  [Column, NotNull] public int IdFuenteFinanciacion { get; set; } // int
+    //  [Column, NotNull] public string FuenteFinanciacion { get; set; } // varchar(200)
+    //  [Column, Nullable] public decimal? ValorVigente { get; set; } // decimal(38, 2)
+    //  [Column, Nullable] public decimal? ValorEjecutado { get; set; } // decimal(38, 2)
+    //  [Column, Nullable] public int? Periodo { get; set; } // int
+    //}
 
-  [Table(Schema = "dbo", Name = "VwGaleriaEntidadesTerritorialesDepartamentos", IsView = true)]
+    [Table(Schema = "dbo", Name = "VwFuentesFinanciacion", IsView = true)]
+    public partial class VwFuentesFinanciacion
+    {
+        [Column, NotNull] public int IdProyecto { get; set; } // int
+        [Column, NotNull] public int IdOrganismoFinanciador { get; set; } // int
+        [Column, NotNull] public string OrganismoFinanciador { get; set; } // varchar(200)
+        [Column, NotNull] public int IdFuenteFinanciacion { get; set; } // int
+        [Column, NotNull] public string FuenteFinanciacion { get; set; } // varchar(200)
+        [Column, Nullable] public decimal? ValorVigente { get; set; } // decimal(38, 2)
+        [Column, Nullable] public decimal? ValorObligado { get; set; } // decimal(38, 2)
+        [Column, Nullable] public decimal? ValorEjecutado { get; set; } // decimal(38, 2)
+        [Column, Nullable] public int? Periodo { get; set; } // int
+    }
+
+    [Table(Schema = "dbo", Name = "VwGaleriaEntidadesTerritorialesDepartamentos", IsView = true)]
   public partial class VwGaleriaEntidadesTerritorialesDepartamento
   {
     [Column, Nullable] public int? IdImageXEnteTerritorial { get; set; } // int
@@ -3604,7 +3690,20 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     //[Column, Nullable] public decimal? TasaCambio { get; set; } // numeric(22, 4)
   }
 
-  [Table(Schema = "dbo", Name = "VwSectorListadoPorDeptoInv", IsView = true)]
+    [Table(Schema = "consulta", Name = "VwSectoresGroupInfo", IsView = true)]
+    public partial class consulta_VwSectoresGroupInfo
+    {
+        [Column("año"), NotNull] public int Año { get; set; } // int
+        [Column("url_imagen"), NotNull] public string UrlImagen { get; set; } // varchar(20)
+        [Column("idSector"), NotNull] public int IdSector { get; set; } // int
+        [Column("label"), NotNull] public string Label { get; set; } // varchar(200)
+        [Column("labelGroup"), NotNull] public string LabelGroup { get; set; } // varchar(200)
+        [Column("rawValue"), Nullable] public double? RawValue { get; set; } // float
+        [Column("ordenGroup"), NotNull] public int OrdenGroup { get; set; } // int
+        [Column("orden"), Nullable] public int? Orden { get; set; } // int
+    }
+
+    [Table(Schema = "dbo", Name = "VwSectorListadoPorDeptoInv", IsView = true)]
   public partial class VwSectorListadoPorDeptoInv
   {
     [Column, NotNull] public string IdDepartamento { get; set; } // varchar(10)
@@ -3652,22 +3751,31 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     [Column, Nullable] public int? NumeroProyectosxEstado { get; set; } // int
   }
 
-  [Table(Schema = "dbo", Name = "VwSeguimientoAvanceFisico", IsView = true)]
-  public partial class VwSeguimientoAvanceFisico
-  {
-    [Column, NotNull] public int IdProyecto { get; set; } // int
-    [Column, NotNull] public int IdentificadorFase { get; set; } // int
-    [Column, NotNull] public int IdFase { get; set; } // int
-    [Column, NotNull] public string Fase { get; set; } // varchar(max)
-    [Column, Nullable] public int? IdComponente { get; set; } // int
-    [Column, NotNull] public string Componente { get; set; } // varchar(max)
-    [Column, NotNull] public int IdProducto { get; set; } // int
-    [Column, NotNull] public string Producto { get; set; } // varchar(max)
-    [Column, NotNull] public string UnidadProducto { get; set; } // varchar(max)
-    [Column, NotNull] public double MetaProgramada { get; set; } // float
-    [Column, NotNull] public double MetaEjecutada { get; set; } // float
-    [Column, NotNull] public double PorcentajeAvanceFisico { get; set; } // float
-  }
+    //[Table(Schema = "dbo", Name = "VwSeguimientoAvanceFisico", IsView = true)]
+    //public partial class VwSeguimientoAvanceFisico
+    //{
+    //  [Column, NotNull] public int IdProyecto { get; set; } // int
+    //  [Column, NotNull] public int IdentificadorFase { get; set; } // int
+    //  [Column, NotNull] public int IdFase { get; set; } // int
+    //  [Column, NotNull] public string Fase { get; set; } // varchar(max)
+    //  [Column, Nullable] public int? IdComponente { get; set; } // int
+    //  [Column, NotNull] public string Componente { get; set; } // varchar(max)
+    //  [Column, NotNull] public int IdProducto { get; set; } // int
+    //  [Column, NotNull] public string Producto { get; set; } // varchar(max)
+    //  [Column, NotNull] public string UnidadProducto { get; set; } // varchar(max)
+    //  [Column, NotNull] public double MetaProgramada { get; set; } // float
+    //  [Column, NotNull] public double MetaEjecutada { get; set; } // float
+    //  [Column, NotNull] public double PorcentajeAvanceFisico { get; set; } // float
+    //}
+
+    [Table(Schema = "dbo", Name = "VwSeguimientoAvanceFisico", IsView = true)]
+    public partial class VwSeguimientoAvanceFisico
+    {
+        [Column, Nullable] public string IdProyecto { get; set; } // varchar(20)
+        [Column, Nullable] public string CodigoBpin { get; set; } // varchar(15)
+        [Column, Nullable] public double? PorcentajeAvanceFisico { get; set; } // float
+        [Column, NotNull] public int Periodo { get; set; } // int
+    }
 
     [Table(Schema = "dbo", Name = "VwTotalProcesosSinContratoEmergencia", IsView = true)]
     public partial class VwTotalProcesosSinContratoEmergencia
@@ -6775,10 +6883,10 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
             t.CodigoSector == CodigoSector);
     }
 
-    public static consulta_CatalogoTiempo Find(this ITable<consulta_CatalogoTiempo> table, string Periodo)
+    public static consulta_CatalogoTiempo Find(this ITable<consulta_CatalogoTiempo> table, int Periodo)
     {
         return table.FirstOrDefault(t =>
-             t.Periodo == Periodo);
+            t.Periodo == Periodo);
     }
         public static Comentario Find(this ITable<Comentario> table, int IdComentario)
     {

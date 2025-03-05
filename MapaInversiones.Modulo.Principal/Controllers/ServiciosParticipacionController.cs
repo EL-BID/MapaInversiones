@@ -71,7 +71,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     //envio correo para verificacion de la cuenta
                     string mensajeCorreo = ObtHtmlVerificacionCuenta(id_usuario, id_proy, id_prog, contrato);
                     CorreoController instanciaControladorCorreo = new CorreoController(Configuration);
-                    ModeloRespuestaCorreo rptaCorreo = instanciaControladorCorreo.EnviarCorreoHtml(params_usu.email, mensajeCorreo, "Verificar Correo MapaInversiones");
+                    ModeloRespuestaCorreo rptaCorreo = instanciaControladorCorreo.EnviarCorreoHtml(params_usu.email, mensajeCorreo, "Verificar Correo");
                     objReturn.Status = rptaCorreo.Status;
                     objReturn.Message = rptaCorreo.Message;
                 }
@@ -156,11 +156,11 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
 
         [HttpGet("GetCometAprobar")]
-        public object GetCometAprobar(int page, int estado)
+        public object GetCometAprobar(int page, int estado, int asociacion)
         {
             ModelDataParticipacion objReturn = new ModelDataParticipacion();
             ParticipacionCiudadana part = new ParticipacionCiudadana(_connection);
-            objReturn = part.ObtenerComentariosAproAsync(page, estado);
+            objReturn = part.ObtenerComentariosAproAsync(page, estado,asociacion);
             objReturn.Status = true;
 
             return objReturn;
@@ -274,27 +274,28 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             string mensaje = "";
             mensaje += "<html>";
             mensaje += "<head>";
-            mensaje += "<title>MapaInversiones - Notificaciones</title>";
-            mensaje += "<style>a{color:#0D3B59; text-decoration:underline}";
-            mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;}";
+            mensaje += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-10\" />";
+            mensaje += "<title>¡Pa' que veás! Monitor de Inversión Pública - Verificar Cuenta</title>";
+            mensaje += "<style>a{color:#5916C3; text-decoration:underline}";
+            mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#5916C3;}";
             mensaje += "</style>";
             mensaje += "</head>";
-            mensaje += "<body style=\"background-color:#fff; font-family:'Arial', Helvetica, sans-serif; margin:0; padding:0\">";
-            mensaje += "<div style=\"background:#ffffff; width:700px; color:#0D284B; margin:0 auto\">";
+            mensaje += "<body style=\"background-color:#F8F8F8; font-family:'Arial', Helvetica, sans-serif; margin:0; padding:0\">";
+            mensaje += "<div style=\"background:#ffffff; width:750px; color:#0D284B; margin:0 auto\">";
             mensaje += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">";
-            mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:3px solid #ccc; \"><a href=\"\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"Mapa Inversiones\" width=\"280px\"/></a></td>";
+            mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:3px solid #ccc; \"><a href=\"\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"¡Pa' que veás! Monitor de Inversión Pública\" width=\"400px\"/></a></td>";
             mensaje += "</tr>";
-            mensaje += "<tr><td><div style=\"width:100%; margin:0 auto; text-align:center\">";
+            mensaje += "<tr><td><div style=\"width:90%; margin:0 auto; text-align:center\">";
             mensaje += "<table width=\"100%\" style=\"text-align:left\">";
             mensaje += "<tr><td colspan=\"2\"><h2 style=\"text-align:center; font-size:40px; font-weight:bold; margin-top:10px; margin-bottom:0px\">Verifica tu Cuenta</h2></td></tr>";
             mensaje += "<tr>";
-            mensaje += "<td valign=\"bottom\"><img src=\"" + url_local + "/content/img/icono.jpg\" alt=\"Icono de Notificacion MapaInversiones\" width=\"250px\"/></td>";
+            mensaje += "<td valign=\"bottom\"><img src=\"" + url_local + "/content/img/icono.jpg\" alt=\"Icono de Notificacion ¡Pa' que veás! Monitor de Inversión Pública\" width=\"250px\"/></td>";
             mensaje += "<td style=\"padding-left:25px\">";
-            mensaje += "<p>Te has Registrado en MapaInversiones, para participar debes validar tu correo</p>";
-            mensaje += "<p style=\"text-align:left; margin:50px auto\"><a href=\"" + url_local + "/VerificaCuenta/" + key + "\" style=\"background-color:#2e528d; color:#fff; padding:15px 25px;\">Verificar Cuenta</a></p>";
+            mensaje += "<p>Te has Registrado en ¡Pa' que veás!, para participar debes validar tu correo</p>";
+            mensaje += "<p style=\"text-align:left; margin:50px auto\"><a href=\"" + url_local + "/VerificaCuenta/" + key + "\" style=\"background-color:#5916C3; color:#fff; padding:15px 25px;\">Verificar Cuenta</a></p>";
             mensaje += "<table style=\"width:100%; text-align:center; border:1px solid #ccc; padding:5px; font-style:italic; font-size:12px\">";
             mensaje += "<tr><td><img src=\"" + url_local + "/content/img/iconoReminder.jpg\" style=\"float:left; margin-bottom:5px; display:block; width:50px\"/></td>";
-            mensaje += "<td><p style=\"text-align:left\"> Recuerda, las opiniones publicadas en MapaInversiones pueden ser anónimas </p></td>";
+            mensaje += "<td><p style=\"text-align:left\"> Recuerda, las opiniones publicadas en ¡Pa' que veás! pueden ser anónimas </p></td>";
             mensaje += "</tr>";
             mensaje += "</table>";
             mensaje += "</td>";
@@ -344,7 +345,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                         itemUsuarios infoUsuario = part.ValidaSessionUsu(params_com.UsuarioComenta, "N");
                         if (!string.IsNullOrEmpty(infoUsuario.email))
                         {
-                            string mensajeCorreo = ObtHtmlCorreoComent("Notificaciones", "Respuesta a comentario", "Tu opinión tiene una respuesta.", params_com.IdProyecto, 1, null, null, "S", "N");
+                            string mensajeCorreo = ObtHtmlCorreoComent("Notificaciones", "Respuesta a comentario", "Tu opinión tiene una respuesta.", params_com.IdProyecto, params_com.IdAsociacion, null, params_com.CodigoContrato, "S", "N");
 
                             CorreoController instanciaControladorCorreo = new CorreoController(Configuration);
                             ModeloRespuestaCorreo rptaCorreo = instanciaControladorCorreo.EnviarCorreoHtml(infoUsuario.email, mensajeCorreo, "Participación Ciudadana");
@@ -365,7 +366,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
                     if (!string.IsNullOrEmpty(destinatarios))
                     {
-                        string mensajeCorreo = ObtHtmlCorreoComent("Notificaciones", "Nuevo comentario", "Hay un nuevo comentario por aprobar en MapaInversiones.", params_com.IdProyecto, 1, null, null, "N", "S");
+                        string mensajeCorreo = ObtHtmlCorreoComent("Notificaciones", "Nuevo comentario", "Hay un nuevo comentario por aprobar en ¡Pa' que veás! Monitor de Inversión Pública.", params_com.IdProyecto, params_com.IdAsociacion, null, params_com.CodigoContrato, "N", "S");
 
                         CorreoController instanciaControladorCorreo = new CorreoController(Configuration);
                         ModeloRespuestaCorreo rptaCorreo = instanciaControladorCorreo.EnviarCorreoHtml(destinatarios, mensajeCorreo, "Participación Ciudadana");
@@ -399,25 +400,26 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             string mensaje = "";
             mensaje += "<html>";
             mensaje += "<head>";
-            mensaje += "<title>MapaInversiones - ";
+            mensaje += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-10\" />";
+            mensaje += "<title>¡Pa' que veás! Monitor de Inversión Pública - ";
             mensaje += titulo;
             mensaje += "</title>";
-            mensaje += "<style>a{color:#0D3B59; text-decoration:underline}";
+            mensaje += "<style>a{color:#F8F8F8; text-decoration:underline}";
             mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;}";
             mensaje += "</style>";
             mensaje += "</head>";
             mensaje += "<body style=\"background-color:#fff; font-family:'Arial', Helvetica, sans-serif; margin:0; padding:0\">";
-            mensaje += "<div style=\"background:#ffffff; width:700px; color:#0D284B; margin:0 auto\">";
+            mensaje += "<div style=\"background:#ffffff; width:750px; color:#0D284B; margin:0 auto\">";
             mensaje += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">";
-            mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:1px solid #ccc; \"><a href=\"" + url_local + "\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"MapaInversiones\" width=\"280px\"/></a></td>";
+            mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:2px solid #5916C3; \"><a href=\"" + url_local + "\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"¡Pa' que veás! Monitor de Inversión Pública\" width=\"400px\"/></a></td>";
             mensaje += "</tr>";
             mensaje += "<tr><td><div style=\"width:100%; margin:0 auto; text-align:center\">";
             mensaje += "<table width=\"100%\" style=\"text-align:left\">";
-            mensaje += "<tr><td colspan=\"2\"><h2 style=\"text-align:center; font-size:40px; font-weight:bold; margin-top:40px; margin-bottom:40px\">";
+            mensaje += "<tr><td colspan=\"2\"><h2 style=\"text-align:center; font-size:28px; font-weight:bold; margin-top:40px; margin-bottom:40px\">";
             mensaje += saludo;
             mensaje += "</h2></td></tr>";
             mensaje += "<tr>";
-            mensaje += "<td><img src=\"" + url_local + "/content/img/icono2.jpg\" alt=\"Icono de Notificación MapaInversiones\" width=\"250px\"/></td>";
+            mensaje += "<td><img src=\"" + url_local + "/content/img/icono2.jpg\" alt=\"Icono de Notificacion ¡Pa' que veás!\" width=\"250px\"/></td>";
             mensaje += "<td style=\"padding-left:25px\">";
             mensaje += "<p>";
             mensaje += txtmensaje;
@@ -438,19 +440,11 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             {
                 mensaje += "<p> <a href =\"" + urlproyecto + "\" style=\"color:#241588!important\">Ver Contrato</a></p>";
             }
-            if (mensajeanonimo == "S")
-            {
-                mensaje += "<table style=\"width:100%; margin:15px auto; text-align:center; border:1px solid #ccc; padding:5px; font-style:italic; font-size:12px\">";
-                mensaje += "<tr><td><img src=\"" + url_local + "/content/img/iconoReminder.jpg\" style=\"float:left; margin-bottom:15px; display:block; width:50px\"/></td>";
-                mensaje += "<td><p style=\"text-align:left\"> Se informa que los comentarios de su participación antes de ser publicados son validados por MapaInversiones. Si desea, su opinión puede ser anónima. </p></td>";
-                mensaje += "</tr>";
-                mensaje += "</table>";
-            }
             mensaje += "</td>";
             mensaje += "</tr>";
             mensaje += "</table>";
             mensaje += "</div></td></tr>";
-            mensaje += "<tr><td style=\"text-align:center; \" colspan=\"2\">";
+            mensaje += "<tr><td style=\"text-align:center; padding: 24px 0px; background-color:#F8F8F8 ;\" colspan=\"2\">";
             mensaje += "<img src=\"" + url_local + "/content/img/footer.jpg\"/></td></tr>";
             mensaje += "</tbody></table>";
             mensaje += "</div>";
@@ -573,32 +567,32 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
                 mensaje += "<html>";
                 mensaje += "<head>";
-                mensaje += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />";
-                mensaje += "<title>MapaInversiones - Notificaciones</title>";
-                mensaje += "<style>a{color:#0D3B59; text-decoration:underline}";
-                mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;}";
+                mensaje += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-10\" />";
+                mensaje += "<title>¡Pa' que veás! Monitor de Inversión Pública</title>";
+                mensaje += "<style>a{color:#5916C3; text-decoration:underline}";
+                mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#5916C3;}";
                 mensaje += "</style>";
                 mensaje += "</head>";
-                mensaje += "<body style=\"background-color:#fff; font-family:'Arial', Helvetica, sans-serif; border-top:2px; margin:0; padding:0\">";
-                mensaje += "<div style=\"background:#ffffff; width:700px; color:#0D284B; margin:0 auto\">";
+                mensaje += "<body style=\"background-color:#F8F8F8; font-family:'Arial', Helvetica, sans-serif; border-top:2px; margin:0; padding:0\">";
+                mensaje += "<div style=\"background:#ffffff; width:750px; color:#0D284B; margin:0 auto\">";
                 mensaje += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">";
-                mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:1px solid #ccc; \"><a href=\"" + url_local + "\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"Logo MapaInversiones\" width=\"280px\"/></a></td>";
+                mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:1px solid #5916C3; \"><a href=\"" + url_local + "\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"¡Pa' que veás! Monitor de Inversión Pública\" width=\"400px\"/></a></td>";
                 mensaje += "</tr>";
                 mensaje += "<tr><td><div style=\"width:90%; margin:0 auto; text-align:center\">";
                 mensaje += "<table width=\"100%\" style=\"text-align:left\">";
                 mensaje += "<tbody><tr><td colspan=\"2\"><h2 style=\"text-align:center; font-size:40px; font-weight:bold; margin-bottom:40px; margin-top:40px\">Restablecimiento de Clave</h2></td></tr>";
                 mensaje += "<tr>";
-                mensaje += "<td valign=\"bottom\"><img src=\"" + url_local + "/content/img/icono3.jpg\" alt=\"Icono de Notificacion MapaInversiones\" width=\"250px\"/></td>";
+                mensaje += "<td valign=\"bottom\"><img src=\"" + url_local + "/content/img/icono3.jpg\" alt=\"Icono de Notificacion ¡Pa' que veás! Monitor de Inversión Pública\" width=\"250px\"/></td>";
                 mensaje += "<td style=\"padding-left:25px\">";
-                mensaje += "<p>MapaInversiones le informa que su solicitud de restablecimiento de clave ha sido iniciada</p>";
+                mensaje += "<p>¡Pa' que veás! Monitor de Inversión Pública le informa que su solicitud de restablecimiento de clave ha sido iniciada</p>";
                 mensaje += "<p>Por favor ingrese el siguiente código en el sitio web para continuar en el proceso</p>";
-                mensaje += "<div style=\"background-color:#fff; color:#0D3B59; font-weight:bold; font-size:30px; text-align:center; padding:15px\">" + codigo_verifica + "</div>";
+                mensaje += "<div style=\"background-color:#fff; color:#18A19C; font-weight:bold; font-size:30px; text-align:center; padding:15px\">" + codigo_verifica + "</div>";
                 mensaje += "<p style=\"text-align:center\">Gracias por usar nuestros servicios</p>";
                 mensaje += "</td>";
                 mensaje += "</tr>";
                 mensaje += "</tbody></table>";
                 mensaje += "</div></td></tr>";
-                mensaje += "<tr><td style=\"text-align:center; padding:40px 0px\">";
+                mensaje += "<tr><td style=\"text-align:center;padding: 24px 0px; background-color:#F8F8F8 ;\">";
                 mensaje += "<a href=\"" + url_local + "\"><img src=\"" + url_local + "/content/img/footer.jpg\"/></a> </td></tr>";
                 mensaje += "</tbody></table>";
                 mensaje += "</div>";
@@ -710,7 +704,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             string destinatarios = part.ObtenerCorreosAprobadores();
             if (!string.IsNullOrEmpty(destinatarios))
             {
-                string mensajeCorreo = ObtHtmlCorreoComent("Notificaciones", "Nueva Foto", "Hay una nueva foto por aprobar en MapaInversiones.", idproyecto, 1, null, null, "N", "S");
+                string mensajeCorreo = ObtHtmlCorreoComent("Notificaciones", "Nueva Foto", "Hay una nueva foto por aprobar en ¡Pa' que veás! Monitor de Inversión Pública.", idproyecto, 1, null, null, "N", "S");
                 CorreoController instanciaControladorCorreo = new CorreoController(Configuration);
                 ModeloRespuestaCorreo rptaCorreo = instanciaControladorCorreo.EnviarCorreoHtml(destinatarios, mensajeCorreo, "Participación Ciudadana");
                 objReturn.Status = rptaCorreo.Status;
@@ -838,6 +832,83 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 {
                     objReturn.Status = true;
                 }
+            }
+            else
+            {
+                objReturn.Status = false;
+                objReturn.Message = result[1];
+            }
+            return objReturn;
+        }
+
+
+        [HttpPost("PublicarComentario")]
+        [IgnoreAntiforgeryTokenAttribute]
+        public object PublicarComentario([FromBody] itemcomentario params_comen)
+        {
+            ParticipacionCiudadana part = new ParticipacionCiudadana(_connection);
+            Admin ad = new Admin(_connection);
+            ModelDataParticipacion objReturn = new ModelDataParticipacion();
+            string outTxt = ad.ActualizaComent(params_comen.IdComentario, params_comen.IdEstado, params_comen.textoJustifica);
+            string[] separador = new string[] { "<||>" };
+            var result = outTxt.Split(separador, StringSplitOptions.None);
+            if (result[0].Equals("0"))
+            {
+                objReturn.Status = true;
+
+                //enviar correo al usuario
+                itemUsuarios infoUsuario = part.ValidaSessionUsu(params_comen.IdUsuario, "N");
+                if (!string.IsNullOrEmpty(infoUsuario.email))
+                {
+                    string mensajeCorreo = "";
+                    if (params_comen.IdEstado == 3)
+                    {
+                        mensajeCorreo = ObtHtmlCorreoComent("Notificaciones", "Gracias por Participar", "Tu opinión ha sido publicada.", params_comen.IdProyecto, params_comen.IdAsociacion, 0, params_comen.CodigoContrato, "S", "N");
+                    }
+                    if (params_comen.IdEstado == 4)
+                    {
+                        string nopublicado = "";
+                        nopublicado += "Tu opinión no ha sido aprobada para su publicación debido a que no cumple con los términos y condiciones de participación ciudadana.</p>";
+                        nopublicado += "<p>Te invitamos a revisar los términos y condiciones.</p>";
+                        nopublicado += "<p>Mensaje del administrador:<p>";
+                        nopublicado += "<p>" + params_comen.textoJustifica;
+                        mensajeCorreo = ObtHtmlCorreoComent("Notificaciones", "Gracias por Participar", nopublicado, params_comen.IdProyecto, params_comen.IdAsociacion, 0, params_comen.CodigoContrato, "S", "N");
+                    }
+                    CorreoController instanciaControladorCorreo = new CorreoController(Configuration);
+                    ModeloRespuestaCorreo rptaCorreo = instanciaControladorCorreo.EnviarCorreoHtml(infoUsuario.email, mensajeCorreo, "Participación Ciudadana");
+                    objReturn.Status = rptaCorreo.Status;
+                    objReturn.Message = rptaCorreo.Message;
+                }
+
+
+                else
+                {
+                    objReturn.Status = false;
+                    objReturn.Message = "Error al guardar comentarios";
+                }
+            }
+            else
+            {
+                objReturn.Status = false;
+                objReturn.Message = result[1];
+            }
+
+            return objReturn;
+
+        }
+
+        [HttpPost("CambiaTComentario")]
+        [IgnoreAntiforgeryTokenAttribute]
+        public object CambiaTComentario([FromBody] itemcomentario params_comen)
+        {
+            ModelDataParticipacion objReturn = new ModelDataParticipacion();
+            Admin ad = new Admin(_connection);
+            string outTxt = ad.ActualizaTipoComent(params_comen.IdComentario, params_comen.IdTipoComentario);
+            string[] separador = new string[] { "<||>" };
+            var result = outTxt.Split(separador, StringSplitOptions.None);
+            if (result[0].Equals("0"))
+            {
+                objReturn.Status = true;
             }
             else
             {

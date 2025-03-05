@@ -1,512 +1,492 @@
-﻿var fuentesporAnnios = JSON.parse(document.body.getAttribute('data-fuentesporAnnios'));
-var sector_ideas_globales = [];
-var anyo_actual = $("#anioPresupuesto option:selected").val();
+﻿var sector_ideas_globales = [];
+var anyo_actual = $("#anioPresupuesto").val();
 $("#lblAnyoBannerSec").text(anyo_actual);
+var graficaDibujada = false;
 ///-------------------------------------------------------
-loadFuentesporAnnios();
 
-ObtenerGraphBySectorPerGroup(anyo_actual);
-
-function loadProyectosPrioritarios(resultados) {
-    var limite = 60;
-    $("#divNoEncontradoEjec").hide();
-    $("#divNoExistenEjec").hide();
-    if (resultados.length > 0) {
-        for (var i = 0; i < resultados.length; i++) {
-            var valor_aux = parseFloat(resultados[i].approvedTotalMoney);
-            var nombre_aux = resultados[i].NombreProyecto.toString();
-            if (nombre_aux.length > limite) {
-                nombre_aux = nombre_aux.substr(0, limite) + "...";
-            }
-
-            var div_proy = d3.select("#divContenedorFichas")
-            var div_ficha = div_proy.append("div")
-            div_ficha.attr("class", "project-col project-col-carusel")
-            var div_card = div_ficha.append("div").attr("class", "project-card")
-            var div_borde = div_card.append("div").attr("class", "card h-100 shadow border-0")
-            div_borde.append("div").attr("class", "img-card").attr("style", "background: url('/img/TTpic_01_MD.jpg')")
-            div_borde.append("div").attr("class", "labelCategory").text(resultados[i].NombreSector)
-            var div_caption = div_borde.append("div").attr("class", "caption")
-            var div_enlace = div_caption.append("a").attr("href", "../../perfilProyecto/" + resultados[i].IdProyecto)
-            div_enlace.append("h3").text(nombre_aux)
-            if (resultados[i].approvedTotalMoney > 1000000) {
-                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + formatMoney(valor_aux / 1000000, 2, ".", ",").toString() + ' Millones');
-            } else {
-                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + formatMoney(valor_aux / 1, 2, ".", ",").toString());
-
-            }
-
-            div_card.append("div").attr("class", "clearfix")
-            var div_porcentaje = div_card.append("div").attr("class", "percentage")
-            div_porcentaje.append("div").attr("class", "completed").attr("style", "width:" + resultados[i].porcentajeGastado + "%")
-            var div_indicador = div_porcentaje.append("div").attr("class", "indicatorValues")
-            div_indicador.append("span").attr("class", "startPoint").html(resultados[i].MesInicioProyecto + "<br/>" + resultados[i].AnioInicioProyecto)
-            div_indicador.append("span").attr("class", "endPoint").html(resultados[i].MesFinProyecto + "<br/>" + resultados[i].AnioFinProyecto)
-            div_indicador.append("span").attr("class", "middlePoint text-center").html(resultados[i].porcentajeGastado + " %" + "<br/>" + "Gastado")
-            div_card.append("div").attr("class", "clearfix")
-
-            var div_detalles = div_card.append("div").attr("class", "row detailedLinks")
-
-            var div_photo = div_detalles.append("div").attr("class", "col-6")
-            var enlace_photo = div_photo.append("a").attr("href", "../projectprofile/" + resultados[i].IdProyecto)
-            enlace_photo.append("span").attr("class", "material-icons").text("photo_library")
-            enlace_photo.append("span").attr("class", "text-ic").text("(" + resultados[i].cantidadFotos + ")")
-
-            var div_question = div_detalles.append("div").attr("class", "col-6")
-            var enlace_question = div_question.append("a").attr("href", "../projectprofile/" + resultados[i].IdProyecto)
-            enlace_question.append("span").attr("class", "material-icons").text("question_answer")
-            enlace_question.append("span").attr("class", "text-ic").text("(" + resultados[i].Comentarios + ")")
-
-        }
-    }
-    else {
-        //no existen proyectos en ejecucion
-        $("#divNoExistenEjec").show();
-
-    }
-
-
+document.addEventListener("DOMContentLoaded", function () {
+    configRedirectMonitoreo();
+    ObtenerPorcentajeParticipacionSector(anyo_actual);
+    ObtenerPorcentajeParticipacionEntidad(anyo_actual);
+});
+///--------------------------------------------------------
+function configRedirectMonitoreo() {
+    $(document).on('click', '.enlace_monitoreo', function (e) {
+        e.preventDefault();
+        var parametro_aux = $(this).attr("parametro");
+        var url = "/MonitoreoCiudadano?type=" + parametro_aux; // Verifica que la URL sea correcta
+        window.open(url, "_blank");
+    });
 }
 
-function ObtenerGraphBySectorPerGroup(anyo_actual) {
-    $("#divGraphRecursosObj").empty();
-    $("#divContadores").empty();
+function ObtenerPorcentajeParticipacionSector(anyo_actual) {
+    $("#divEnQueInvirtieron").empty();
+    $("#cardEnQueInvirtieron").empty();
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        url: "/api/ServiciosHome/ObtenerProyectosPorSectorGroupHome",
+        url: "/api/ServiciosHome/ObtenerPorcentajeParticipacionSector",
         cache: false,
-        data: {anyo:anyo_actual},
+        data: { Annio: anyo_actual },
         success: function (result) {
             if (result.status == true) {
-                var data = result.projectsPerSectorGroup;
+                var data = result.participacionSector;
                 if (data != null) {
-                    
-                    const sum_sectores = groupAndSum(data, ['ordenGroup', 'idSector', 'labelGroup', 'url_imagen'], ['rawValue']);
-                    const sum_ordenado = sum_sectores.sort(function (a, b) {
-                        if (a.ordenGroup !== b.ordenGroup) {
-                            return a.ordenGroup - b.ordenGroup;
-                        }
-                        return b.rawValue - a.rawValue;
-                    });
-                    sector_ideas_globales = data;
+                    loadDonaGraph("divEnQueInvirtieron", data);
+                    loadSectores("cardEnQueInvirtieron", data);
 
-                    getGraphPorSectorByObrasTab(sum_ordenado, "divContentSectores");
-                    ///-------------------------------------------------------------------
-                    ///TOP SECTORES BANNER
-                    const sum_all = groupAndSum(data, ['label', 'url_imagen','orden'], ['rawValue']);
-                    var filter_sec = $(sum_all).filter(function () {
-                        return this.orden ===1;
-                    });
-                    var prioritarios_sec = filter_sec.sort((a, b) => b.rawValue - a.rawValue);
-                    if (prioritarios_sec.length >= 3) {
-                        var topSectores = prioritarios_sec.slice(0, 3);
-                        loadSectoresBanner(topSectores);
-                    }
-                    ///-----------------------------------------------------------------------
-                    
                 }
 
             } else {
-                bootbox.alert("Error: " + result.Message, function () {
-
-                });
+                alert("Error: " + result.Message);
             }
 
         },
         error: function (response) {
-            bootbox.alert(response.responseText);
+            alert(response.responseText);
         },
         failure: function (response) {
-            bootbox.alert(response.responseText);
+            alert(response.responseText);
         }
     });
 
 
 }
 
-function groupAndSum(arr, groupKeys, sumKeys) {
-    return Object.values(
-        arr.reduce((acc, curr) => {
-            const group = groupKeys.map(k => curr[k]).join('-');
-            acc[group] = acc[group] || Object.fromEntries(
-                groupKeys.map(k => [k, curr[k]]).concat(sumKeys.map(k => [k, 0])));
-            sumKeys.forEach(k => acc[group][k] += curr[k]);
-            return acc;
-
-        }, {})
-    );
+function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func.apply(this, args);
+        }, wait);
+    };
 }
+function loadDonaGraph(divContenedor, myData) {
+    
+    function drawDona(divContenedor, myData) {
+        $("#" + divContenedor).empty();
+        const container = document.getElementById(divContenedor);
+        var parentCarousel = container.closest('.carousel');
 
+        if (parentCarousel) {
+            var parentStyles = window.getComputedStyle(parentCarousel);
+            if (parentStyles.display !== "none" && parentStyles.visibility !== "hidden")
+            {
+               
 
-function filtrarSector(data, sector) {
-    var filtrados = jQuery.grep(data, function (n, i) {
-        return (n.labelGroup == sector.toString().toUpperCase());
-    });
-    return filtrados;
-}
+                if (myData != undefined && myData != null) {
 
-function getGraphPorSectorByObrasTab(objSectores, divContenedor) {
-    var str_aux = '';
-    var cont = 0;
-    var max_fila = 4;
-    var total_tab = 0;
-    str_aux += '<div class="row">';
+                    const containerWidth = container.getBoundingClientRect().width;
+                    const containerHeight = containerWidth * 1.2;  // Por ejemplo, 60% del ancho
 
+                    new d3plus.Donut()
+                        .select("#" + divContenedor)
+                        .config({
+                            data: myData,
+                            groupBy: "label",
+                            label: d => formatoDecimales(d["porcentaje"], 1, ',', '.').toString() + "%",
+                            padAngle: 0.01,
+                            legend: true,
+                            legendPosition: function () {
+                                return this._width > this._height ? "bottom" : "bottom";
+                            },
+                            value: "valorVigente",
+                            color: (d, i) => assignColorPaleta(i),
+                            width: containerWidth,
+                            height: Math.min(containerHeight, 450),
+                            tooltipConfig: {
+                                title: function (d) {
+                                    return d["label"];
+                                },
+                                tbody: [
+                                    [function (d) {
 
+                                        var cad_aux = "L " + formatoDecimales(["valorVigente"] / 1000000, 1, ',', '.').toString() + " millones";
+                                        if (d["porcentaje"] != undefined && d["porcentaje"] != null) {
+                                            cad_aux = formatoDecimales(d["valorVigente"] / 1000000, 1, ',', '.').toString() + " millones" + " <strong>(" + formatoDecimales(d["porcentaje"], 1, ',', '.').toString() + " %)</strong>";
+                                        }
+                                        return cad_aux;
 
-    for (var i = 0; i < objSectores.length; i++) {
-        var idSector = objSectores[i].idSector;
-        var valor = objSectores[i].rawValue/1000000;
-        
-        total_tab += objSectores[i].rawValue;
+                                    }]
+                                ]
+                            }
+                            , legendConfig: {
+                                label(d, i) {
+                                    return d["label"];
+                                },
 
-        var fondo = "/img/otros-mas.svg";
-        if (objSectores[i].url_imagen != null) {
-            fondo = objSectores[i].url_imagen;
-        }
+                            },
+                            //cache: true
+                        })
+                        .legendTooltip({ footer: "" })
+                        .on({ "click.legend": () => { } })
+                        .render();
 
-        if (idSector == 0 || cont < 7) {
-            str_aux += '<div id="div_' + + i.toString() + '" class="col-lg-3 mb-3" location_id="' + objSectores[i].labelGroup + '" location_cant="' + objSectores[i].rawValue + '">';
-            str_aux += '<div class="card h-100 shadow border-0 card-entidad">';
-            str_aux += '<div class="card-body CTASectores">';
-            str_aux += '<div class="icon-sectores">';
-            str_aux += '<img src = "' + fondo + '" alt = "icono' + objSectores[i].labelGroup + '">';
-            str_aux += '</div>';
-            str_aux += '<div class="card-content-container">';
-            str_aux += '<span class="crdtitle-entidad">' + objSectores[i].labelGroup + '</span>';
-            str_aux += '<div class="card-subtitle-container">';
-            str_aux += '<span class="SbtPresupuesto">Presupuesto vigente</span><br/>';
-            str_aux += '<span class="SbtBigNumber">$ ' + formatMoney(valor, 2, ".", ",") + ' Millones' + '</span>';
-            str_aux += '</div>';
-            str_aux += '<a href="/PerfilSector?id=' + idSector + '">';
-            str_aux += '<div class="btn btn-outlined">';
-            str_aux += '<span>Ver sector &nbsp;<i class="material-icons md-28">navigate_next</i> ';
-            str_aux += '</span>';
-            str_aux += '</div>';
-            str_aux += '</a>';
-            str_aux += '</div>';
-            str_aux += '</div>';
-            str_aux += '</div>';
-            str_aux += '</div>';
-
-        }
-
-
-        cont += 1;
-
-    }
-    str_aux += '</div>';
-
-    $("#" + divContenedor).html(str_aux);
-    $("#" + divContenedor).attr("total", total_tab);
-    $(".category_sector").bind('mouseover onmouseover', function (e) {
-        var porcentaje = 0;
-        var total_sector = 0;
-        var total_all = 0;
-        $(".sector_tooltip").remove();
-
-        if ($(this).parent().length > 0) {
-            total_all = $(this).parent().attr("total");
-        }
-
-        var sel_sector = $(this).attr("location_id");
-        var tipo_tab = $(this).attr("tipo");
-
-
-        var id = $(this).attr("id");
-        var str_estados = "";
-        var estados_aux = "";
-        var total_tab = 0;
-
-        var data_filter = [];
-        data_filter = $.grep(sector_ideas_globales, function (element, index) {
-            return element.labelGroup == sel_sector;
-        });
-
-
-
-
-        if (data_filter != null) {
-            //agrupar y sumar
-            const suma = groupAndSum(data_filter, ['orden', 'label', 'alias'], ['rawValue']).sort((a, b) => Number(a.orden) - Number(b.orden));
-
-            $(suma).each(function (element, index) {
-                total_sector += this.rawValue;
-                var cad_estado = this.alias;
-
-                estados_aux += '<span class="label_tooltipSec">' + cad_estado + '</span>';
-                estados_aux += '<span class="label_tooltipSecNumber">' + this.rawValue.toString() + '</span>';
-                if (element < suma.length - 1) {
-                    estados_aux += '<hr class="linea_tooltipSec"></hr>';
+ 
                 }
 
-            });
-
-            porcentaje = ((total_sector / total_all) * 100).toFixed(2);
-
+            }
         }
 
-        var elm = $(this);
-        var id = elm.attr("id");
-        var xPos = (e.pageX - elm.offset().left) + 10;
-        var yPos = (e.pageY - elm.offset().top) + 10;
+       
 
-        xPos = 50;
-        yPos = 50;
-
-        var estilo = "position:absolute;z-index:1;opacity:1;width: 200px;height:auto;min-height:100px;top:" + yPos + "px;left:" + xPos + "px;";
-        var htmlpop = '<span class="sector_tooltip_grupo">' + sel_sector + '</span><span class="sector_tooltip_percent">' + porcentaje.toString() + '% </span>';
-
-        htmlpop += '<div class="estados_tooltip_body">' + estados_aux + '</div> ';
-
-
-
-
-        // create a tooltip
-        if ($("#" + id).length > 0) {
-            var tooltip = d3.select("#" + id)
-                .append("div")
-                .attr("class", "sector_tooltip")
-                .attr("style", "position:absolute;opacity:1;width: 0px;height:0px;top:0px;left:0px;")
-                .append("div")
-                .attr("class", "sector_tooltip_body")
-                .attr("style", estilo)
-                .html(htmlpop)
+        
+        
         }
 
+    function updateDona() {
 
-
-
-    });
-
-    $("#divContentSectores").bind('mouseout', function (e) {
-        setTimeout(
-            function () {
-                //do something special
-                $(".sector_tooltip").remove();
-            }, 2000);
-    });
-}
-
-function loadSectoresBanner(result) {
- var str_cad = "";
-    if (result != null) {
-        for (var i = 0; i < result.length; i++) {
-            var valor = result[i].rawValue / 1000000;
-            str_cad += '<div class="col-lg-3">';
-            str_cad += '<div class="card shadow card-sector h-100">';
-            str_cad += '<div class="CTASectores">';
-            str_cad += '<div class="icon-sectores"><img src="' + result[i].url_imagen + '" alt="icono relacionado" /></div>';
-            str_cad += '<div class="card-content-container">';
-            str_cad += '<span class="crdtitle-entidad">' + result[i].label + '</span>';
-            str_cad += '<div class="card-subtitle-container "><span class="SbtPresupuesto">Presupuesto vigente</span><br><span class="SbtBigNumber">$ ' + formatMoney(valor,0,".",",") + ' Millones</span></div>';
-            str_cad += '<a href="/PresupuestoGeneral?sector=undefined#RecPerSector">';
-            str_cad += '<div class="btn btn-link"><span>Ver sector &nbsp;<i class="material-icons md-28">navigate_next</i> </span></div>';
-            str_cad += '</a>';
-            str_cad += '</div>';
-            str_cad += '</div>';
-            str_cad += '</div>';
-            str_cad += '</div>';
+        // Solo se renderiza si el contenedor es visible y la gráfica aún no se ha dibujado.
+        if (!graficaDibujada && $("#" + divContenedor).is(":visible")) {
+            drawDona(divContenedor, myData);
+            graficaDibujada = true;
         }
-        $("#bannerSectoresGasto").html(str_cad)
     }
+
+    // Intento inicial de renderizar
+
+
+    /// Listener para redibujar la gráfica cuando se haga visible la diapositiva en el carrusel.
+    $('.carousel').on('settle.flickity', function () {
+        // Si la diapositiva activa contiene el contenedor y la gráfica aún no se ha dibujado.
+        var $activeSlide = $(this).find('.is-selected');
+        if ($activeSlide.find('#' + divContenedor).length > 0) {
+
+            updateDona();
+        }
+    });
+
+    // Cada vez que se redimensiona la ventana, usa debounce para evitar llamadas múltiples.
+    window.addEventListener("resize", debounce(() => {
+
+        drawDona(divContenedor, myData);
+    }, 300));
+
     
 
+
 }
 
-
-function formatMoney(number, c, d, t) {
-    var n = number,
-        c = isNaN(c = Math.abs(c)) ? 2 : c,
+function formatoDecimales(n, c, d, t) {
+    //var n = this,
+    c = isNaN(c = Math.abs(c)) ? 2 : c,
         d = d == undefined ? "." : d,
         t = t == undefined ? "," : t,
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+
 }
 
-$("#anioPresupuesto").on("change", function (event) {
-    anyo_actual = this.value;
-    loadFuentesporAnnios();
-
-    
-});
-
-function loadFuentesporAnnios() {
-        if (fuentesporAnnios.length > 0) {
-        var annio_aux = $("#anioPresupuesto").val();
-        var tabfuentes = '';
-        var valor_aux = 0;
-        var flagprimero = 0;
-        tabfuentes += ' <ul class="tabs-nav">';
-
-        for (var i = 0; i < fuentesporAnnios.length; i++) {
-            if (fuentesporAnnios[i].Anio.toString() == annio_aux) {
-                valor_aux += parseFloat(fuentesporAnnios[i].ValorVigente);
-                if (flagprimero == 0) {
-                    tabfuentes += ' <li id="' + annio_aux + '-' + fuentesporAnnios[i].CodigoFuente + '" class="enlace_nivel_administracion active">';
-                }
-                else { 
-                    tabfuentes += ' <li id="' + annio_aux + '-' + fuentesporAnnios[i].CodigoFuente + '" class="enlace_nivel_administracion">';
-                }
-                tabfuentes += '<div class="goal-number"></div>';
-                tabfuentes += '<div class="goal-name"><div class="h4">' + fuentesporAnnios[i].Fuente + '</div></div>';
-                tabfuentes += '</li >';
-                flagprimero++;
-            }
-        }
-        tabfuentes += ' </ul>';
-        $("#tabsfuentes").html(tabfuentes);
-        cargardatosorganismos(fuentesporAnnios[0].CodigoFuente);
-        $("#valorvigente").html('$ ' + formatMoney(valor_aux / 1000000, 0, ".", ",").toString() + ' Millones');
-
-        ///graficoDonaPerFuentes
-         getGraphDonaFuentesPerAnyo(annio_aux);
-        ///---------------------------------------------
-
-        $('.enlace_nivel_administracion').on('click', function () {
-            $('.enlace_nivel_administracion').each(function (i, obj) {
-                $(obj).removeClass("active");
-            });
-            $(this).addClass("active");
-            var id = this.id;
-            var cod = id.split("-");
-            cargardatosorganismos(cod[1]);
-        });
+function assignColorPaleta(indice) {
+    var color_aux = "#CCCCCC";
+    var col_sel = color_aux;
+    var colores_default = ["#8B3CB8","#459F7D", "F19D5B", "#E3CF85", "#E99FD4", "#99A7CC", "#97CFAE", "#BCD7CE", "#F19996"];
+    if (indice < colores_default.length) {
+        col_sel = colores_default[indice];
     }
-   
+    return col_sel;
 }
 
-function getGraphDonaFuentesPerAnyo(anyo) {
-    $("#divGraphDonaPerFuentes").empty();
-    var filter_obj = $(fuentesporAnnios).filter(function () {
-        return this.Anio === parseInt(anyo);
-    });
-
-    if (filter_obj != null) {
-        const width = 600;
-        const height = 400;
-        const radius = Math.min(width, height) / 2;
-
-        d3.select("#divGraphDonaPerFuentes")
-            .append("g")
-            .attr("transform", "translate(100,100)");
-
-        const colores = ["#4040b0", "#06a7d6", "#f8fb54", "#ff8975", "#ff0024"];
-
-        const colorScale = d3.scaleOrdinal()
-            .domain(d3.range(colores.length)) // Dominio basado en la longitud del array de colores
-            .range(colores); // Rango de colores
-
-        const angulo = d3.scaleLinear()
-            .domain([0, 180]) // Limita el ángulo de 0 a 180 grados
-            .range([0, Math.PI * 2]); // Convierte el rango a radianes
-
-        var angleGen = d3.pie()
-            .startAngle(angulo(-45))
-            .endAngle(angulo(45))
-            .padAngle(.05)
-            .value((d) => d.ValorVigente)
-            .sortValues((a, b) => a < b ? 1 : -1);
-
-        var data = angleGen(filter_obj);
-
-        var arcGen = d3.arc()
-            .innerRadius(50)
-            .outerRadius(90);
-
-        d3.select("#divGraphDonaPerFuentes g")
-            .selectAll("path")
-            .data(data)
-            .enter()
-            .append("path")
-            .attr("d", arcGen)
-            .attr("fill", (d, i) => colorScale(i))
-            .attr("stroke", "gray")
-            .attr("stroke-width", 1);
-
-
-
-
+function loadSectores(divContenedor, objData) {
+    var limite = 3;
+    var html = "";
+    if (objData.length < 3) {
+        limite = objData.length;
     }
 
-}
 
-function cargardatosorganismos(idfuente) {
-    var annio_aux = $("#anioPresupuesto").val();
-    var filtros = {
-        Annio: annio_aux,
-        idfuente: idfuente
-    };
+    for (var j = 0; j < limite; j++) {
+        var icono = objData[j]["label"].toLowerCase().replace('á', 'a').replace('é', 'e').replace('í', 'i').replace('ó', 'o').replace('ú', 'u').replace(/\s+/g, '-')
+
+        html += '<div class="col-xl-4">';
+        html += '<div class="card-info">';
+        html += '<a href="/PerfilSector?id=' + objData[j]["codigoSector"] +'" target="_blank">';
+        html += '<div class="wrap-icon"><img src="/img/' + icono + '.svg" alt="icono sectores" /></div>';
+        html += '<div class="card-info-content">';
+        html += '<span class="h5">' + objData[j]["label"] + '</span>';
+        html += '<span class="number-data">$' + formatoDecimales(objData[j]["valorVigente"] / 1000000, 1, ",", ".").toString()  +' millones</span>                                                           ';
+        html += '<small>Presupuesto vigente</small>';
+        html += '</div>';
+        html += '</a>';
+        html += '</div>';
+        html += '</div>';
+    }
+
+    $("#" + divContenedor).html(html);                                                                                            
+
+
+}
+function ObtenerPorcentajeParticipacionEntidad(anyo_actual) {
+    $("#divQuienInvirtio").empty();
+    $("#cardQuienInvirtio").empty();
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        url: "/api/ServiciosHome/ObtenerOrganismosPorFuente",
+        url: "/api/ServiciosHome/ObtenerPorcentajeParticipacionEntidad",
         cache: false,
-        data: filtros,
+        data: { Annio: anyo_actual },
         success: function (result) {
             if (result.status == true) {
-                var info = result.organismosFinanciadores;
-                if (result.consolidadoOrganismoFinanciador != null && result.consolidadoOrganismoFinanciador != undefined) {
-                    $("#numorganismos").html(result.consolidadoOrganismoFinanciador.totalFinanciadores);
-                    $("#numproyectos").html(result.consolidadoOrganismoFinanciador.totalProyectosFinanciados);
-                    $("#numaportado").html('$ ' + formatMoney(result.consolidadoOrganismoFinanciador.totalAportado, 0, ".", ",").toString() + ' Millones');
-                }
+                var data = result.participacionEntidad;
+                if (data != null) {
+                    createBubbleChart("divQuienInvirtio", data);
+                    loadEntidades("cardQuienInvirtio", data);
 
-                var htmldivorganismos = '';
-                var numeroorganismosmostrar = 3;
-                if (info != null) {
-                    for (var i = 0; i < info.length; i++) {
-
-                        if (i < numeroorganismosmostrar) { 
-                            htmldivorganismos += '<div class="col-lg-4 mb-4">';
-                            htmldivorganismos += '    <div class="card h-100 shadow border-0 card-entidad">';
-                            htmldivorganismos += '        <div class="card-body CTASectores">';
-                            htmldivorganismos += '            <div class="card-title-container">';
-                            htmldivorganismos += '                <span class="h4">';
-                            htmldivorganismos += info[i].organismoFinanciador;
-                            htmldivorganismos += '                </span>';
-                            htmldivorganismos += '            </div>';
-                            htmldivorganismos += '            <div class="wrap-content-fuente">';
-                            htmldivorganismos += '                <div class="icon-sectores">';
-                            htmldivorganismos += '                    <img class="img-fluid" src="img/ic-entidad.svg" alt="icono decorativo relacionado al organismo financiador" />';
-                            htmldivorganismos += '                </div>';
-                            htmldivorganismos += '                <div class="card-subtitle-container">';
-                            htmldivorganismos += '                    <span class="SbtBigNumber">' + info[i].numeroProyectos +'</span>';
-                            htmldivorganismos += '                    <span class="SbtPresupuesto">Proyectos Financiados</span>';
-                            htmldivorganismos += '                    <span class="SbtBigNumber"> $ ' + formatMoney(info[i].valorVigente / 1000000, 0, ".", ",").toString() +'Millones </span>';
-                            htmldivorganismos += '                    <span class="SbtPresupuesto">Monto total financiado</span>';
-                            htmldivorganismos += '                    <a href="/FinancialOrganizationDetail?id=' + info[i].codigoOrganismoFinanciador + '&anio=' + annio_aux +'">';
-                            htmldivorganismos += '                        <div class="btn btn-link"><span>Ver organismo financiador &nbsp;<i class="material-icons md-28">navigate_next</i> </span></div>';
-                            htmldivorganismos += '                    </a>';
-                            htmldivorganismos += '                </div>';
-                            htmldivorganismos += '            </div>';
-                            htmldivorganismos += '        </div>';
-                            htmldivorganismos += '        </div>';
-                            htmldivorganismos += '    </div>';
-                        }
-                    }
-
-
-                    $("#divorganismos").html(htmldivorganismos);
                 }
 
             } else {
-                bootbox.alert("Error: " + result.Message, function () {
-
-                });
+                alert("Error: " + result.Message);
             }
 
         },
         error: function (response) {
-            bootbox.alert(response.responseText);
+            alert(response.responseText);
         },
         failure: function (response) {
-            bootbox.alert(response.responseText);
+            alert(response.responseText);
         }
     });
+
+
 }
+
+
+function loadEntidades(divContenedor, objData) {
+    var limite = 3;
+    var cont = limite;
+    var html = "";
+    if (objData != undefined && objData != null) {
+        if (objData.length < limite) {
+            cont = objData.length;
+        }
+
+        for (var j = 0; j < cont; j++) {
+            html += '<div class="col-xl-4"> ';
+            html += '<div class="card-info">';
+            html += '<a href="/PerfilEntidad?codEntidad=' + objData[j]["codigoInstitucion"] + '" target="_blank">';
+            html += '<div class="card-info-content">';
+            html += '<span class="h5">' + objData[j]["label"] + '</span>';
+            html += '<span class="number-data">$' + formatoDecimales(objData[j]["valorVigente"] / 1000000, 1, ",", ".").toString() + ' millones</span>';
+            html += '<small>Presupuesto vigente</small>';
+            html += '</div>';
+            html += '</a>';
+            html += '</div>';
+            html += '</div>';
+        }
+    }
+    
+    $("#" + divContenedor).html(html);
+
+
+}
+
+/*Crea un gráfico de burbujas en el contenedor especificado.*/
+function createBubbleChart(contenedorId, data) {
+    const contenedor = document.getElementById(contenedorId);
+    const colores_default = [
+        "#459F81", "#C6C95E", "#7DC95E",
+        "#C9598C", "#C159CB", "#5983CB",
+        "#59C9C9", "#59C982", "#7DC95E"
+    ];
+
+    let width = contenedor.clientWidth;
+    let height = Math.min(width*1.2, 450);
+
+    const tooltip = d3.select(contenedor)
+        .append("div")
+        .attr("class", "bubble-chart-tooltip");
+
+    const svg = d3.select(contenedor)
+        .append("svg")
+        .attr("class", "bubble-chart-svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    function formatNumber(value) {
+        return new Intl.NumberFormat('es-CO', {
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1
+        }).format(value);
+    }
+
+    function getTextColor(bgColor) {
+        const rgb = d3.color(bgColor).rgb();  // Convierte a formato RGB
+        // Calcula la luminancia (según la percepción humana del color)
+        const luminance = 0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b;
+        // Si la luminancia es alta, usa texto negro; si es baja, texto blanco
+        return luminance > 150 ? "#555555" : "#fff";
+    }
+
+    function renderChart() {
+        svg.selectAll("g").remove();
+
+        const pack = d3.pack()
+            .size([width, height])
+            .padding(10);
+
+        const root = d3.hierarchy({ children: data })
+            .sum(d => d.porcentaje);
+
+        const nodes = pack(root).leaves();
+
+        // Calcula la caja delimitadora de todos los nodos
+        const minX = d3.min(nodes, d => d.x - d.r);
+        const maxX = d3.max(nodes, d => d.x + d.r);
+        const minY = d3.min(nodes, d => d.y - d.r);
+        const maxY = d3.max(nodes, d => d.y + d.r);
+
+        // Calcula el offset para centrar el pack en el SVG
+        const offsetX = (width - (maxX - minX)) / 2 - minX;
+        const offsetY = (height - (maxY - minY)) / 2 - minY;
+
+        const color = d3.scaleOrdinal()
+            .domain(data.map(d => d.label))
+            .range(colores_default);
+
+        // Aplica el offset al grupo que contendrá cada burbuja
+        const bubbles = svg.selectAll(".bubble-chart-bubble")
+            .data(nodes)
+            .enter()
+            .append("g")
+            .attr("transform", d => `translate(${d.x + offsetX}, ${d.y + offsetY})`);
+
+        bubbles.append("circle")
+            .attr("class", "bubble-chart-bubble")
+            .attr("r", d => d.r)
+            .style("fill", d => color(d.data.label))
+            .style("stroke", "#fff")
+            .on("mouseover", function (event, d) {
+                d3.select(this)
+                    .transition()
+                    .duration(150)
+                    .attr("stroke", d3.color(color(d.data.label)).darker(1))
+                    .attr("stroke-width", 4)
+                    .attr("r", d.r * 1.1);
+
+                tooltip.style("visibility", "visible")
+                    .html(`
+                    <strong>${d.data.label}</strong><br>
+                    $ ${formatoDecimales(d.data.valorVigente / 1000000, 1, ",", ".")} millones
+                    (${d.data.porcentaje ? formatoDecimales(d.data.porcentaje, 1, ",", ".") : '0'}%)
+                `);
+            })
+            .on("mousemove", function (event) {
+                const containerRect = contenedor.getBoundingClientRect();
+                const tooltipRect = tooltip.node().getBoundingClientRect();
+
+                let left = event.clientX - containerRect.left + 10;
+                let top = event.clientY - containerRect.top + 10;
+
+                if (left + tooltipRect.width > containerRect.width) {
+                    left = containerRect.width - tooltipRect.width - 10;
+                }
+                if (left < 0) left = 10;
+
+                if (top + tooltipRect.height > containerRect.height) {
+                    top = containerRect.height - tooltipRect.height - 10;
+                }
+                if (top < 0) top = 10;
+
+                tooltip.style("top", `${top}px`).style("left", `${left}px`);
+            })
+            .on("mouseout", function () {
+                d3.select(this)
+                    .transition()
+                    .duration(150)
+                    .attr("stroke", "#fff")
+                    .attr("stroke-width", 1)
+                    .attr("r", d => d.r);
+
+                tooltip.style("visibility", "hidden");
+            });
+
+        function wrapText(text, radius) {
+            const maxWidth = radius * 1.6;
+            const approxCharWidth = 6;
+            const maxCharsPerLine = Math.floor(maxWidth / approxCharWidth);
+            const words = text.split(/\s+/);
+            const lines = [];
+            let line = "";
+
+            words.forEach(word => {
+                const testLine = line ? `${line} ${word}` : word;
+                if (testLine.length <= maxCharsPerLine) {
+                    line = testLine;
+                } else {
+                    lines.push(line);
+                    line = word;
+                }
+            });
+
+            if (line) lines.push(line);
+
+            const maxLines = Math.floor(radius / 8);
+            if (lines.length > maxLines) {
+                lines.splice(maxLines - 1, lines.length - maxLines, `${lines[maxLines - 1].slice(0, maxCharsPerLine - 3)}...`);
+            }
+
+            return lines;
+        }
+
+        // Agrega el texto y (porcentaje) centrado en cada burbuja
+        // Dentro del bucle de creación de burbujas:
+        bubbles.each(function (d) {
+            const bubbleColor = color(d.data.label);        // Color de la burbuja
+            const textColor = getTextColor(bubbleColor);    // Color de texto calculado
+
+            const lines = wrapText(d.data.label, d.r);      // Ajusta el texto a la burbuja
+            //const fontSize = Math.max(d.r * 0.3, 10);       // Tamaño proporcional
+            const fontSize = Math.max(Math.min((2 * d.r) / (lines.length + 1), 12), 8);
+            const lineSpacingFactor = 1.2;                  // Separación entre líneas
+
+            // Texto del label (nombre de la entidad)
+            d3.select(this)
+                .selectAll("text.label")
+                .data(lines)
+                .enter()
+                .append("text")
+                .attr("class", "bubble-chart-text label")
+                //.attr("y", (_, i) => (i - (lines.length - 1) / 2) * (fontSize * lineSpacingFactor))
+                .attr("y", (_, i) => (i - (lines.length - 1) / 2) * (fontSize + 2) - fontSize / 2)
+                .attr("text-anchor", "middle")
+                .style("font-size", `${fontSize}px`)
+                .style("fill", textColor)
+                .text(line => line);
+
+            // Texto del porcentaje
+            d3.select(this)
+                .append("text")
+                .attr("class", "bubble-chart-text percentage")
+                .attr("y", (lines.length * (fontSize + 2)) / 2)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
+                .style("font-size", `${fontSize-2}px`)
+                .style("fill", textColor)                   // ← Aplica color calculado
+                .text(`${d.data.porcentaje ? formatoDecimales(d.data.porcentaje, 1, ",", ".") : '0'}%`);
+        });
+
+
+
+
+    }
+
+
+
+    renderChart();
+
+    window.addEventListener("resize", () => {
+        width = contenedor.clientWidth;
+        height = Math.min(width*1.2, 450),
+        svg.attr("width", width).attr("height", height);
+        renderChart();
+    });
+}
+
+
+
+

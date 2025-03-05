@@ -37,9 +37,6 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         public void GetSourcesByProject(ModelProjectProfile ModelProjectProfile, int IdProject)
         {
             try {
-                //Seleccionamos los años.
-                //BllPeriods period = new BllPeriods();
-                //List<int> listYears = period.GetYearsList();
 
 
                 List<int> listYears = new List<int>();
@@ -48,7 +45,6 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                              where p.IdProyecto == IdProject
                              select p.FechaInicioVigencia.Year).Distinct().ToList();
 
-                //TODO Falta consulta de linq de metricas por Id, Comentariar metrics, Revisar dependiendo del modelo
                 List<Sources> sources = new List<Sources>();
                 foreach (int year in listYears) {
                     List<SourcesPerYear> sourcebyYear;
@@ -139,7 +135,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                     avance_financiero = aprobadosInv.AvanceFinanciero.Value/100,
                                     contMegusta = aprobadosInv.MeGusta,
                                     contComentarios = aprobadosInv.Comentarios,
-                                    duracion = Convert.ToDecimal(aprobadosInv.DuracionProyecto),
+                                    duracion =Math.Round(Convert.ToDecimal((project.FechaFinProyecto- project.FechaInicioProyecto).TotalDays*12.0/365.0),2), //Convert.ToDecimal(aprobadosInv.DuracionProyecto),
                                     Etapa = etapa.NombreEtapa,
                                     Fase = fase.NombreFase,
                                     NombreActor = Actor.NombreActor,
@@ -308,7 +304,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
         }
 
-        [ExcludeFromCodeCoverage]
+        
         private List<Images> ObtenerListadoDeImagenesPorDefecto()
         {
             List<Images> lstReturn = new List<Images>();

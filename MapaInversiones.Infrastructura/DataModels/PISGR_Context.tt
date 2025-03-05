@@ -50,13 +50,13 @@
 		Custom tool must be set to TextTemplatingFileGenerator, not TextTemplatingFilePreprocessor or any other value.
 	*/
 
-	NamespaceName = "DataModels";
+	NamespaceName = "DataModels";;
 
 
 	// to configure GetSchemaOptions properties, add them here, before load metadata call
 	GetSchemaOptions.GetProcedures  = true;
 
-	LoadSqlServerMetadata("ip,puerto", "base_datos", "usuario", "passw");
+	LoadSqlServerMetadata("", "", "", "");;
 
 //	LoadSqlServerMetadata(".", "MyDatabase"); // Integrated Security;
 //	LoadSqlServerMetadata(string connectionString);

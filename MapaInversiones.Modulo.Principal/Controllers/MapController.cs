@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -18,7 +15,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         private readonly ILogger<MapController> _logger;
         private readonly TransparenciaDB _connection;
         private readonly IGestorTitulos _gestorTitulos;
-        private readonly IConfiguration Configuration;
+        private readonly IConfiguration _configuration;
 
 
         public MapController(ILogger<MapController> logger, TransparenciaDB connection, IGestorTitulos gestorTitulos, IConfiguration configuration)
@@ -26,15 +23,14 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             _logger = logger;
             _connection = connection;
             _gestorTitulos = gestorTitulos;
-            Configuration = configuration;
+            _configuration = configuration;
             CommonLabel.Init(connection, configuration);
         }
         public IActionResult MapView()
         {
             var horaInicio = DateTime.UtcNow;
             ViewBag.TitulosHome = _gestorTitulos;
-
-            HomeContract homeContract = new HomeContract(_connection);
+            HomeContract homeContract = new HomeContract(_configuration,_connection);
             homeContract.Fill();
             Debug.WriteLine("HomeController - Acción Index ejecutó en {0} ms", (horaInicio - DateTime.UtcNow).Milliseconds);
             return View(homeContract.HomeModel);
@@ -44,8 +40,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         {
             var horaInicio = DateTime.UtcNow;
             ViewBag.TitulosHome = _gestorTitulos;
-
-            HomeContract homeContract = new HomeContract(_connection);
+            HomeContract homeContract = new HomeContract(_configuration, _connection);
             homeContract.Fill();
             Debug.WriteLine("HomeController - Acción Index ejecutó en {0} ms", (horaInicio - DateTime.UtcNow).Milliseconds);
             return View(homeContract.HomeModel);

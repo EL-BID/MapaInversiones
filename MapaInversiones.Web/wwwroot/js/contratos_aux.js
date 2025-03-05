@@ -2,13 +2,17 @@
         var cant_graficas = 5;
         var cant_contratos = 20;
         var scrol = 0;
-
+        var unidadcompra = JSON.parse(document.body.getAttribute('data-unidadcompra'))[0].unidadcompra;
 
         inicializaDatos();
 
         function inicializaDatos() {
 
+            if (unidadcompra) {
 
+                $("#entidad").val(unidadcompra).data('search');
+
+            }
             getAnnio($("#moneda").val());
 
         }
@@ -85,7 +89,7 @@ function getAnnio(moneda, nombreProceso = null) {
                     $('#top_contratos_periodos').html(select).fadeIn();
                     if (items_result.length > 0) {
                         $("#top_contratos_periodos").val($('#maxyear').val());
-                        getContratos($("#top_contratos_periodos option:selected").val(), 1, cant_contratos, $("#top_origen_informacion option:selected").val(), "", $('#proceso').val(), $("#moneda").val());
+                        getContratos($("#top_contratos_periodos option:selected").val(), 1, cant_contratos, $("#top_origen_informacion option:selected").val(), unidadcompra, $('#proceso').val(), $("#moneda").val());
 
                     } else {
                         $("#srcContratos").html("");
@@ -124,6 +128,7 @@ function getAnnio(moneda, nombreProceso = null) {
                 $("#top_origen_informacion").val("");
                 $("#entidad").val("");
                 $("#proceso").val("");
+                if (!unidadcompra) { $("#entidadfiona").val(""); }
                 deshabilita(true);
                 getContratos($("#top_contratos_periodos option:selected").val(), 1, cant_contratos, $("#top_origen_informacion option:selected").val(), "", "",$("#moneda").val());
             }
@@ -141,7 +146,7 @@ function getAnnio(moneda, nombreProceso = null) {
 
    function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
             var pag_actual = parseInt(actual);
-            var pagina_actual = pag_actual;
+            pagina_actual = pag_actual;
             var pagesHTML = '';
             var cant_por_linea = 10;
 
@@ -263,7 +268,6 @@ function getAnnio(moneda, nombreProceso = null) {
                             var data = "";
                             var fila = "";
                             var filaconfirma = "";
-                            var filasinfirma = "";
                             var inicioLuis = '<div class="contractBox">';
                             var finLuis = '</div>';
                             var inicio = "";
@@ -285,7 +289,6 @@ function getAnnio(moneda, nombreProceso = null) {
                                         inicio = "";
                                         fin = "";
                                     }
-                                    var stilo = "";
                                     if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" } else { stilo = "contractSEFIN" }
                                     inicio = '<div class="cotractName ' + stilo+'"><div class="row"><div class="col-xs-12 col-md-12"><span class="small">Entidad</span><div class="clearfix"></div>'
                                         + '                 <span class="h4">' + info[i].comprador.toString() + '</span>'
@@ -297,10 +300,15 @@ function getAnnio(moneda, nombreProceso = null) {
                                     
 
                                     fila += '<div class="contractNumberRP"><span class="">Código proceso: </span>'
-                                        + '	<span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div>'
-                                        + '<div class="contractNumberRP"><span class="">Proceso: </span>'
-                                        + '	<span class="text-bold">' + info[i].descripcionProceso.toString() + '</span></div>'
-							            + '<div class="wrap-head-process">';
+                                        + '	<span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div>';
+
+                                    if (info[i].descripcionProceso) {
+                                        fila += '<div class="contractNumberRP"><span class="">Proceso: </span>'
+                                            + '	<span class="text-bold">' + info[i].descripcionProceso.toString() + '</span></div>';
+
+                                    }
+
+                                    fila += '<div class="wrap-head-process">';
                                     fila += '<div class="contractData">';
 
                                     fila += ''
@@ -310,7 +318,7 @@ function getAnnio(moneda, nombreProceso = null) {
 							            + '				<span class="amount_adj">';
                                     if (info[i].estadoProceso) { fila += info[i].estadoProceso.toString(); }
                                     fila += '</span></div>'
-                                        + '			<div class="col-xs-6 col-md-4"><span class="txt_small">Monto Estimado</span> <span class="amount_adj"> ' + (info[i].valorPlaneado * 1).formatMoney(2, '.', ',').toString() + ' </span></div>'
+                                        + '			<div class="col-xs-6 col-md-4"><span class="txt_small">Monto Estimado</span> <span class="amount_adj"> ' + (info[i].valorPlaneado * 1).formatMoney(2, ',', '.').toString() + ' </span></div>'
                                         + '			    <div class="col-xs-6 col-md-2">'
                                         + '				   <span class="txt_small">Moneda</span>'
                                         + '				   <span class="amount_adj"> ' + info[i].monedaContrato.toString() + ' </span>'
@@ -348,14 +356,15 @@ function getAnnio(moneda, nombreProceso = null) {
                                     fila += '</div>'
                                            + '<div class="clearfix"></div>';
                                     filaconfirma += ' <div class="related-contracts">'
-                                        + '     <span class="h4">Contratos de ' + info[i].origenInformacion+' asociados a este proceso:</span>'
+                                        + '     <span class="h4">Contrato(s) u órden(es) de compra :</span>' //' + info[i].origenInformacion+' asociados a este proceso
                                         + '     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
                                     proceso = info[i].codigoProceso.toString();
 
-
-                                    referencia = '<div class="row text-center">'
-                                        + '<div class="col-xs-12 col-md-12"><a href="' + info[i].docURL.toString() + '" target="_blank" class="btn btn-outlined"><i class="material-icons md-22">launch</i> <span class="txt_small">Conozca mas de este proceso</span></a></div>'
-                                    + '</div>';
+                                    if (info[i].docURL) {
+                                        referencia = '<div class="row text-center">'
+                                            + '<div class="col-xs-12 col-md-12"><a href="' + info[i].docURL.toString() + '" target="_blank" class="btn btn-outlined"><i class="material-icons md-22">launch</i> <span class="txt_small">¡Conocé más de este proceso!</span></a></div>'
+                                            + '</div>';
+                                    }
 
                                 }
 
@@ -374,7 +383,7 @@ function getAnnio(moneda, nombreProceso = null) {
                                     + '                <div class="panel-body">';
                                 if (info[i].descripcionContrato) {
                                     filaconfirma += '          <div class="row border-b">'
-                                        + '                        <div class="col-md-12"><span class="small"> CONTRATO</span><span class="amount_adj">' + info[i].descripcionContrato.toString() + '</span></div>'
+                                        + '                        <div class="col-md-12"><span class="small"> CONTRATO U ORDEN DE COMPRA</span><span class="amount_adj">' + info[i].descripcionContrato.toString() + '</span></div>'
                                         + '                    </div>';
                                 }
                                 var moneda = '$'; //'L';
@@ -392,7 +401,7 @@ function getAnnio(moneda, nombreProceso = null) {
                                     + '                        <div class="col-md-4"><span class="small"> NÚMERO DE DOCUMENTO</span><span class="amount_adj">' + info[i].codigoProveedor.toString() + '</span></div>'
                                     + '                    </div>'
                                    + '                    <div class="row border-b">'
-                                    + '                        <div class="col-xs-6 col-md-6"><span class="small"> VALOR CONTRATADO</span><span class="amount_adj"> ' + moneda + ' ' + (info[i].valorContratado * 1).formatMoney(2, '.', ',').toString() + '</span></div>'
+                                    + '                        <div class="col-xs-6 col-md-6"><span class="small"> VALOR CONTRATADO</span><span class="amount_adj"> ' + moneda + ' ' + (info[i].valorContratado * 1).formatMoney(2, ',', '.').toString() + '</span></div>'
                                     + '                        <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span><span class="amount_adj"> ' + info[i].monedaContrato.toString() + ' </span></div>'
                                    + '                    </div>'
 

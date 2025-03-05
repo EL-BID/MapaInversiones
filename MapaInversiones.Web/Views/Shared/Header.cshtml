@@ -3,20 +3,26 @@
     <!-- TOP HEADER -->
     <nav class="header-top">
         <div class="container-fluid">
-            <div class="row justify-content-end">
+            <div class="row justify-content-between">
+                <div class="col-md-1 col-lg-1 col-xl-1">
+                    <a href="https://www.gov.co" target="_blank">
+                        <img class="img-fluid" src="~/img/govco-logo.png" alt="Logotipo de Gobierno de Colombia">
+                    </a>
+                </div>
                 <div class="col-auto">
                     <div class="header-top-links">
+                        
                         <!-- secondary pages -->
                         <ul class="nav">
 
                             <li class="nav-item">
-                                <a href="/Acercade" title="Acerca de MapaInversiones">
-                                    Acerca de MapaInversiones
+                                <a href="/Acercade" title="¿Qué es ¡Pa' que Veás!?">
+                                    ¿Qué es ¡Pa' que Veás!?
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/CentroAyuda?id=2" title="Centro de Ayuda">
-                                    Centro de Ayuda
+                                <a href="/CentroAyuda" title="CentroAyuda">
+                                    Resolvé tus dudas
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -25,8 +31,8 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/Contactanos" title="Contáctenos">
-                                    Contáctenos
+                                <a href="/Contactanos" title="Contactános">
+                                    Contactános
                                 </a>
                             </li>
                           
@@ -43,8 +49,8 @@
 
     <nav class="header-fixed">
         <div class="wrap-head">
-            <div class="container">
-               <div class="row flex-nowrap align-items-center justify-content-between">
+            <div class="container-fluid">
+               <div class="row flex-nowrap align-items-center justify-content-between main-head-section">
                 <div class="col-auto d-block d-lg-none header-fixed-col">
                     <div class="main-mnu-btn">
                         <span class="bar bar-1"></span>
@@ -53,27 +59,66 @@
                         <span class="bar bar-4"></span>
                     </div>
                 </div>
-                <div class="main-header col-md-12 header-fixed-col">
+                    <div class="main-header col-auto header-fixed-col">
                     <!-- Begin logo -->
                     <div class="logoHinv">
-                            <a href="/" target="_blank" rel="noopener" title="Nombre Gobierno">
-                                <img class="img-fluid" src="~/img/logoGobierno.svg" alt="Nombre Gobierno">
+                            <a href="/" target="_blank" rel="noopener" title="Volver al inicio">
+                                <img class="img-fluid" src="~/img/logoGobierno.png" alt="Escudo Alcaldia de Cali">
                         </a>
                     </div>
                     <div class="logoIntro">
-                        <a href="/" class="logo-ico-widht-text" title="MapaInversiones">
-                            <img class="img-fluid" src="~/img/logoMIV.svg" alt="Logo MapaInversiones">
+                            <a href="/" class="logo-ico-widht-text" title="¡Pa' que Veás!">
+                                <img class="img-fluid" src="~/img/logoMIV.svg" alt="Logo ¡Pa' que Veás!">
                         </a>
                     </div>
 
                 </div>
+                <div class="col-auto col-lg-7">
+                        <div class="header-search d-sm-block d-lg-none d-xl-none d-xxl-none">
+                            <div class="header-action-icon header-search-ico">
+                                <a role="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter"><i class="material-icons md-22 header-search-ico-search">search</i></a>
+                                
+                                <i class="material-icons md-22 header-search-ico-close">close</i>
+                            </div>
+                        </div>
+                        <div class="d-none d-lg-block">
+                        <div class="row">
+                            
+                            <div class="col-lg-12">
+
+                                @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" }))
+                                {
+                                    <div class="form-field whiteSearch mb-4" id="contentSearchDiv">
+                                        <label for="SearchString" class="form-field-label"> <b>Busca información específica:</b><br /> Contratos, Contratistas y Entes gestores, por ejemplo: Secretaría de educación</label>
+                                        <button type="submit" class="buttonsearBTN" title="Click para Iniciar Buqueda">
+                                            <i class="material-icons md-22">search</i> <span class="">Buscar</span>
+                                        </button>
+                                        <input type="search" class="form-field-input" name="SearchString" id="SearchString" value=""
+                                               autocomplete="off" required="required">
+                                        <!--id="page-field-search"-->
+                                    </div>
+
+                                }
+
+
+                                <div id="search-home" class="search-body">
+                                    <div id="divNoEncontrado" class="no-search-results" style="display: none;">
+                                        No se han encontrado resultados
+                                    </div>
+                                    <div class="search-results objHidden" id="divResultados">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
 
             </div>
             </div>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg col-auto col-static header-fixed-col main-navigation-bar">
-                        <div class="row flex-nowrap align-items-center justify-content-end">
+                        <div class="row flex-nowrap align-items-center justify-content-center">
                             <div class="col-auto header-fixed-col d-none d-lg-block col-static">
                                 <!-- Begin main menu -->
                                 <nav class="main-mnu">
@@ -179,8 +224,8 @@
                                             <ul class="header-navbar-content">
 
                                                 <li>
-                                                    <a href="#!" title="About InvestmentMap">
-                                                        About InvestmentMap
+                                                    <a href="#!" title="Qué es ¡Pa' que Veás!">
+                                                        ¿Qué es ¡Pa' que Veás!?
                                                     </a>
                                                 </li>
                                                 <li>
@@ -230,8 +275,57 @@
         </div>
     </nav>
     <!-- End header fixed -->
-    <!-- Google tag (gtag.js) -->
+    <!-- modal search bar mobile -->
+    <!-- Button trigger modal -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-btn-close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-header">
+                    <h2 class="modal-title text-center" id="searchTitle">Encuentra información clave sobre proyectos, contratos, contratistas y Entes gestores</h2>
+                    
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12">
+
+                        @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" }))
+                        {
+                            <div class="form-field whiteSearch mb-4" id="contentSearchDiv">
+                                <label for="SearchString" class="form-field-label"> Digita el término de tu búsqueda</label>
+                                <button type="submit" class="buttonsearBTN" title="Click para Iniciar Buqueda">
+                                    <i class="material-icons md-22">search</i>
+                                </button>
+                                <input type="search" class="form-field-input" name="SearchString" id="SearchString" value=""
+                                       autocomplete="off" required="required">
+                                <!--id="page-field-search"-->
+                            </div>
+
+                        }
+
+
+                        <div id="search-home" class="search-body">
+                            <div id="divNoEncontrado" class="no-search-results" style="display: none;">
+                                No se han encontrado resultados
+                            </div>
+                            <div class="search-results objHidden" id="divResultados">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Google tag (gtag.js) -->
+    
 
     <script src="https://www.googletagmanager.com/gtag/js?id=G-Q4H714KM4Z" integrity="sha384-VNIXgAfnXrBQKU+BNlPdO82beO9YSwERuCf5149ppVS/q3VOxeG6Qm4ylAz2Mnnr" crossorigin="anonymous"></script>
     <script>

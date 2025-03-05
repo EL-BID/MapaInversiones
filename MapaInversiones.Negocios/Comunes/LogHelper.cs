@@ -6,7 +6,7 @@ namespace PlataformaTransparencia.Negocios.BLL.Comunes
 {
     public class LogHelper
     {
-        [ExcludeFromCodeCoverage]
+        
         static internal void GenerateLog(Exception ex)
         {
             try

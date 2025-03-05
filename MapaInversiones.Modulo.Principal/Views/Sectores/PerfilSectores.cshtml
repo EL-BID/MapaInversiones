@@ -7,8 +7,7 @@
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
     var LabelSector = "";
     var TituloSector = "";
-    System.IFormatProvider culture =
-        new System.Globalization.CultureInfo("es-RD");
+    System.IFormatProvider culture = new System.Globalization.CultureInfo("es-CO");
 }
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
@@ -60,10 +59,10 @@
                 <ul class="list-inline details">
                     <li>
                         <span class="h3 text-center">$ @String.Format("{0:n0}", @Model.EncabezadoSector.Costo)</span>
-                        <span class="text-center h6">Valor total proyectos</span>
+                        <span class="text-center h6">Presupuesto asignado acumulado desde 2024</span>
                     </li>
                     <li>
-                        <span class="h3 text-center">@String.Format("{0:n2}", @Model.EncabezadoSector.Duracion) Años</span>
+                        <span class="h3 text-center">@String.Format("{0:n2}", @Model.EncabezadoSector.Duracion * 12) Meses</span>
                         <span class="text-center h6">Duración promedio del proyecto</span>
                     </li>
                     <li>
@@ -100,32 +99,22 @@
         </div>
     </div>
 </section>
-<style>
-    .box {
-        margin: 10px;
-        width: 200px;
-        height: 100px;
-        border-radius: 3px;
-        background: linear-gradient(to right, #38b8cd 8px, #f2f2f2 0);
-        box-shadow: 0 5px 5px #e4dcdc;
-        padding-top :22px;
-        padding-left : 26px;
-    }
-</style>
+
 <section class="s1E-section whiteBg" id="s1">
     <div class="container">
         <div class="row sep mb-4">
             <div class="section-heading heading-left">
                 <h2>Información General</h2>
             </div>
-            <div class="row col-md-8" id="divTxtTodosProy">
+            <div class="contadores">
+                <div class="row" id="divTxtTodosProy"></div>
 
             </div>
         </div>
     </div>
 </section>
 
-<section class="s1E-section whiteBg" id="s2">
+<section class="s1E-section whiteBg section" id="s2">
     <div class="container">
         <div class="row sep mb-4">
             <div class="section-heading heading-left">
@@ -159,12 +148,10 @@
                 <div class="form-group mb-5">
                     <label for="tipo-contrato">Estado</label>
                     <select class="form-select" id="estadoProyecto">
-
                         <option selected value="">TODOS</option>
-                        <option value="1">EJECUCIÓN</option>
-                        <option  value="2">PARALIZADO</option>
-                        <option  value="3">REEVALUACIÓN</option>
-                        
+                        <option value="1">EN EJECUCIÓN</option>
+                        <option value="2">APROBADO</option>
+                        <option value="3">TERMINADO</option>
                     </select>
                 </div>
 
@@ -294,7 +281,7 @@
 }
 
 </style>
-<section id="s3" class="s2-section">
+<section id="s3" class="s2-section section">
     <div class="container" id="">
         <div class="row">
             <div class="col-md-7">
@@ -325,10 +312,10 @@
     </div>
     <div id="divNoEncontradoEjec" class="no-search-results objHidden">No se han encontrado resultados</div>
     <div id="divNoExistenEjec" class="no-search-results objHidden">No existen proyectos en Ejecución.</div>
-
+    </div>
 </section>
 
-<section class="s1E-section whiteBg" id="s4">
+<section class="s1E-section whiteBg section" id="s4">
     <div class="container">
         <div class="row sep mb-4">
             <div class="section-heading heading-left">
@@ -383,7 +370,7 @@
     data-proyectoProjectData='[@foreach (var proy in @Model.ProyectosEjecucion)
     {
         <text>
-            {"IdDepartamento":"@proy.IdDepartamento",  "IdProyecto": "@proy.IdProyecto","NombreProyecto": "@proy.NombreProyecto","cantidadFotos": @proy.cantidadFotos, "approvedTotalMoney": "@proy.approvedTotalMoney.ToString("N0").Replace(",", string.Empty)","NombreMunicipio" : "@proy.NombreMunicipio" , "UrlImagen" : "@proy.UrlImagen" , "MesInicioProyecto" : "@proy.MesInicioProyecto" , "AnioInicioProyecto" : "@proy.AnioInicioProyecto" , "MesFinProyecto" : "@proy.MesFinProyecto" , "AnioFinProyecto" : "@proy.AnioFinProyecto" , "NombreSector": "@proy.NombreSector", "IdSector": "@proy.IdSector","porcentajeGastado":"@proy.porcentajeGastado","Megusta":"@proy.Megusta","Comentarios":"@proy.Comentarios","FechaInicioProyecto":"@proy.FechaInicioProyecto"}@if (proy != @Model.ProyectosEjecucion.Last())
+            {"IdDepartamento":"@proy.IdDepartamento",  "IdProyecto": "@proy.IdProyecto","NombreProyecto": "@proy.NombreProyecto.Replace("\"", string.Empty)","cantidadFotos": @proy.cantidadFotos, "approvedTotalMoney": "@proy.approvedTotalMoney.ToString("N0").Replace(".", string.Empty)","NombreMunicipio" : "@proy.NombreMunicipio" , "UrlImagen" : "@proy.UrlImagen" , "MesInicioProyecto" : "@proy.MesInicioProyecto" , "AnioInicioProyecto" : "@proy.AnioInicioProyecto" , "MesFinProyecto" : "@proy.MesFinProyecto" , "AnioFinProyecto" : "@proy.AnioFinProyecto" , "NombreSector": "@proy.NombreSector.Replace("\r", string.Empty).Replace("\n", string.Empty)", "IdSector": "@proy.IdSector","porcentajeGastado":"@proy.porcentajeGastado","Megusta":"@proy.Megusta","Comentarios":"@proy.Comentarios","FechaInicioProyecto":"@proy.FechaInicioProyecto"}@if (proy != @Model.ProyectosEjecucion.Last())
             {
                 <text>,</text>
             }

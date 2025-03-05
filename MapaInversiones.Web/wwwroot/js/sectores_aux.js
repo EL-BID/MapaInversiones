@@ -34,7 +34,7 @@ function GetAnio() {
     proyectos = [];
     $.ajax({
         contentType: "application/json; charset=utf-8",
-        url: "api/ServiciosSectores/GetAniosProyectos",
+        url: "api/ServiciosSectores/GetAniosProyectosPerfilSector",
         type: "GET",
         data: {
             idSector: $("#idSector").val(),
@@ -70,10 +70,13 @@ function loadConsolidaEstados() {
     var txt_aux = "";
 
     for (var i = 0; i < projectsPerEstado.length; i++) {
-        txt_aux += "<div class='box'>"
-            + "<div class='h3'>" + projectsPerEstado[i].rawValue.toString() + "</div>"
-            + "<div style='margin-top:-15px;'>Proyectos en</div>"
-            + "<div style='margin-top:-5px;'>" + projectsPerEstado[i].label + "</div>"
+        txt_aux += "<div class='col-xs-4 col-sm-4 col-md-6 col-lg-3 mb-3'>"
+            + "<div class='card h-100 shadow card-entidad b1'>"
+            + "<div class='card-body'>"
+            + "<div class='h1'>" + projectsPerEstado[i].rawValue.toString() + "</div>"
+            + "<div class='h5'>Proyectos "+ projectsPerEstado[i].label +"</div>"
+            + "</div>"
+            + "</div>"
             + "</div>";
     }
 
@@ -199,16 +202,15 @@ function GetRecursosPorNivelYAnio(annio, estado) {
 function GetListadoProyectos(institucionesPorPagina) {
 
     $("#divListadoInstituciones").html("");
-
     var html_list = '<div class="card-entidades-group">';
     for (var i = 0; i < institucionesPorPagina.length; i++) {
 
         html_list += '<div id="institucion_' + i.toString() + '" class="card d-flex">';
         html_list += '<div class="headEnt">';
-        html_list += '<div class="data1 mainDataEntidad" style="min-width: 60% !important;max-width:60% !important;"><span class="labelTit">Código SNIP: <strong>' + institucionesPorPagina[i]['codigoSnip'] +'</strong></span>';
+        html_list += '<div class="data1 mainDataEntidad" style="min-width: 60% !important;max-width:60% !important;"><span class="labelTit">Código BPIN: <strong>' + institucionesPorPagina[i]['codigoSnip'] +'</strong></span>';
         html_list += '<span class="td1">' + institucionesPorPagina[i]['nombreProyecto'] + ' </span>';
         html_list += '</div>';
-        html_list += '<div class="data1"><span class="labelTit">Valor inicial estimado</span><span class="td1">$ ' + institucionesPorPagina[i]['vlrTotalProyectoFuenteRegalias'].formatMoney(2, '.', ',').toString() + ' </span ></div > ';
+        html_list += '<div class="data1"><span class="labelTit">Presupuesto asignado acumulado</span><span class="td1">$ ' + institucionesPorPagina[i]['vlrTotalProyectoFuenteRegalias'].formatMoney(2, '.', ',').toString() + ' </span ></div > ';
         html_list += '<div class="data1"><span class="labelTit">Valor ejecutado</span><span class="td1">$ ' + institucionesPorPagina[i]['vlrTotalProyectoTodasLasFuentes'].formatMoney(2, '.', ',').toString() + ' </span></div>';
         html_list += '</div>';
         html_list += '<div class="btn-action">';
@@ -228,6 +230,7 @@ function GetListadoProyectos(institucionesPorPagina) {
 
 function dibujarPagNumeradas(paginaActual) {
     var totalNumber = proyectos.length;
+    var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
 
     if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
         totalPages = totalPages + 1;
@@ -236,7 +239,6 @@ function dibujarPagNumeradas(paginaActual) {
 
     var totalNumerosPaginador = 10;
     $("#divPagFichas").html("");
-
     var pagEnlace = "";
 
     var cociente = Math.floor(pagActual / totalNumerosPaginador);
@@ -277,7 +279,7 @@ function dibujarPagNumeradas(paginaActual) {
             pagEnlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
         }
     }
-
+    
     $("#divPagFichas").html(pagEnlace);
 
     $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
@@ -318,11 +320,10 @@ function loadProyectosEjecucion(resultados) {
             div_ficha.attr("class", "project-col project-col-carusel")
             var div_card = div_ficha.append("div").attr("class", "project-card")
             var div_borde = div_card.append("div").attr("class", "card h-100 shadow border-0")
-            div_borde.append("div").attr("class", "img-card").attr("style", "background: url('/img/TTpic_01_MD.jpg')")
+            div_borde.append("div").attr("class", "img-card").attr("style", "background: url('/img/default_SM.jpg')")
             div_borde.append("div").attr("class", "labelCategory").text(resultados[i].NombreSector)
             var div_caption = div_borde.append("div").attr("class", "caption")
             var div_enlace = div_caption.append("a").attr("href", "../../perfilProyecto/" + resultados[i].IdProyecto).attr("target", "_blank");
-            //var div_enlace = div_caption.append("a").attr("target", "_blank")
             div_enlace.append("h3").text(nombre_aux)
             if (resultados[i].approvedTotalMoney > 1000000) {
                 div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + formatMoney(valor_aux / 1000000, 2, ".", ",").toString() + ' Millones');
@@ -381,7 +382,6 @@ function quitardecimal(num) {
             return num[0]
         }
         else {
-            //var num = num.toFixed(0);
             return num;
         }
     }
