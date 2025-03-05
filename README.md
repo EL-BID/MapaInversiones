@@ -60,10 +60,11 @@ También cualquier versión puede tener la sección de banner y anuncios, la cua
 
 ![carrusel](/MapaInversiones.Web/media/carrusel.jpg "carrusel")
 
+Uno de los elementos con los que el usuario puede interactuar, son las fichas resumen. 
+Las primeras que se ven en esta version muestran algunas preguntas con su respuesta de manera grafica, relacionadas con el dinero que estaba disponible, en que se invirtio y quien lo invirtio.
+En esta fichs se pueden incluir graficas con librerias como d3.js que permiten mostrar de manera interactiva la información. 
 
-Uno de los elementos con los que el usuario puede interactuar, son las fichas resumen. Las primeras de estas muestran algunas preguntas con su respuesta, relacionadas con los presupuestos ciudadanos, y un botón que envía a la sección correspondiente. 
-
-![fichas presupuesto ciudadano](/MapaInversiones.Web/media/fichapresupuestociudadano.jpg "fichas presupuesto ciudadano")
+![fichas presupuesto ciudadano](/MapaInversiones.Web/media/fichapresenqueseinvirtio.jpg "en que se invirtio?")
 
 Después el usuario puede encontrar otras fichas con el presupuesto ejecutado por institución, junto con el enlace para ir a la sección de Presupuestos por Instituciones.
 
