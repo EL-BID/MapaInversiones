@@ -68,32 +68,37 @@ En esta fichs se pueden incluir graficas con librerias como d3.js que permiten m
 
 Después el usuario puede encontrar otro ejemplo de fichas, en la que se puede ver como va la ejecucion del presupuesto.
 
-![fichas presupuesto por institucion](/MapaInversiones.Web/media/presupuestointitucion.jpg "fichas presupuesto")
+![fichas presupuesto](/MapaInversiones.Web/media/presupuestointitucion.jpg "fichas presupuesto")
 
-Al incluir la utilidad del WCM se puede presentar al usuario diferentes elementos que se pueden actualizar desde el modulo de administracion, permitiendo que las fichas puedan actualizar su información sin la necesidad de realizar una publicación nueva en el servidor.
+Al incluir la utilidad del WCM se puede presentar al usuario diferentes elementos que se pueden actualizar desde el modulo de administracion, permitiendo que las fichas puedan actualizar su 
+información sin la necesidad de realizar una publicación nueva en el servidor.
 
+Otros elementos interactivos que se han usado son los carruseles, con estos se puede presentar información realcionada, por ejemplo la ejecución del presupuesto de cada una de las secretarías del Municipio
 
-![contratos](/MapaInversiones.Web/media/contratos.jpg "contratos")
-La siguiente sección presenta un Mapa de Inversión Publica, para explorar la información correspondiente a los proyectos por cada una de las regiones. Además de esta sección, también es posible ir al mapa por el menú de la parte superior, mencionado con anterioridad.
+![presupuestos](/MapaInversiones.Web/media/fichapresupuestociudadano.jpg "presupuestos")
+
+MapaInversiones tambien usa diferentes perfiles para presnetar al usuario la información, estos pueden ser accedidos desde su correspondiente menú, desde el buscador o desde las fichas de la pagina inicial.
+
+![municipios](/MapaInversiones.Web/media/fichamunicipios.jpg "municipio")
+
+Tambien esta la sección/perfil de la cual la aplicacion toma originalmente su nombre, la cual presenta un Mapa de Inversión Publica, para explorar la información correspondiente a los proyectos por cada una de las comunas y corregimientos. Además de esta sección, también es posible ir al mapa por el menú de la parte superior, mencionado con anterioridad.
 
 ![enlace mapa de inversión](/MapaInversiones.Web/media/maparesumen.jpg "enlace mapa de inversión")
 
-La sprincipal sección y unade las primeras características que se desarrollaron de la Plataforma, es el Mapa de Inversión Publica. Este puede ser accedido de diferentes formas, en algunos paises beneficiarios se puede por un enlace generado por medio del WCM, pero en todas es posible ir al mapa por el menú de la parte superior, mencionado con anterioridad.
+La principal sección y una de las primeras características que se desarrollaron de la Plataforma desde sus versiones iniciales, es el Mapa de Inversión Publica. Este puede ser accedido de diferentes formas, en algunos paises beneficiarios se puede por un enlace generado por medio del WCM, pero en todas es posible ir al mapa por el menú de la parte superior, mencionado con anterioridad.
 Una vez se ingrese al enlace, como se ve en la siguiente imagen, Mapa de Inversión presenta en la parte izquierda un filtro por diferentes características, estas sirven para ir reduciendo la cantidad de elementos mostrados en el mismo.
 
 ![mapa de inversión](/MapaInversiones.Web/media/mapa.jpg "mapa de inversión")
 
-La siguiente sección de la página principal muestra una sección dividida. En la parte de la izquierda aparece un listado de noticias, las cuales se configuran desde el administrador de contenido, en estas secciones pueden ver las 4 noticias más recientes, ver una imagen, el titulo y un pequeño resumen o subtitulo, junto con la fecha publicación, en la parte del título de noticias redirige a la sección completa de noticias, donde se pueden ver todas las que han sido publicadas.
-
-En la parte izquierda, que se ha incorporado en alguno de los paises donde se ha instalado MapaInversiones, se encuentra “sigue la conversación”, en donde se encuentra un widget de Twitter para ver los últimos mensajes publicados por la entidad en esa red social.
+Con la inclusion del WCM tambien se pueden crear secciones como la de noticias, las cuales se presenta como un listado y configuran desde el administrador de contenido, en estas secciones pueden ver las noticias más recientes, ver una imagen, el titulo y un pequeño resumen o subtitulo, según la version de MapaInversiones puede tener tambien la fecha publicación, usar el título de noticias para dirigirse a la sección completa de noticias, o usar un botón para ver todas las que han sido publicadas.
 
 ![noticias](/MapaInversiones.Web/media/noticias.jpg "noticias")
 
-Mas adelante el usuario encontrara la sección que envía a formato de contacto que sirve para enviar una opinión correo configurado en la aplicación.
+En la version actual el usuario encontrara la sección que envía a formato de contacto que sirve para enviar una opinión correo configurado en la aplicación.
 
 ![contacto](/MapaInversiones.Web/media/contacto.jpg "contacto")
 
-La siguiente sección es un menú de pie de página, mostrando nuevamente las diferentes secciones de la aplicación. Adicional, al final existe otro apartado que muestra los diferentes logos de las entidades participantes.
+Todas las versiones de MapaInversiones cuentan tambien con un menú de pie de página, mostrando nuevamente las diferentes secciones de la aplicación. Adicional, al final existe otro apartado que muestra los diferentes logos de las entidades participantes.
 
 ![pie de pagina](/MapaInversiones.Web/media/pie.jpg "pie de página")
 
