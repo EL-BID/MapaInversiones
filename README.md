@@ -66,7 +66,7 @@ En esta fichs se pueden incluir graficas con librerias como d3.js que permiten m
 
 ![en que se invirtio](/MapaInversiones.Web/media/fichapresenqueseinvirtio.jpg "en que se invirtio?")
 
-Después el usuario puede encontrar otro ejemplo de fichas, en la que se puede ver como va la ejecucion del presupuesto ejecutado por institución.
+Después el usuario puede encontrar otro ejemplo de fichas, en la que se puede ver como va la ejecucion del presupuesto.
 
 ![fichas presupuesto por institucion](/MapaInversiones.Web/media/presupuestointitucion.jpg "fichas presupuesto")
 
