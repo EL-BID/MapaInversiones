@@ -1,4 +1,4 @@
-# MapaInversiones
+# MapaInversiones Branch Modificado para Santiago de Cali en Colombia Publicado como ¡Pa’ qué Veás!
 ---
 Los objetivos principales de la plataforma son:
 
@@ -64,13 +64,14 @@ Uno de los elementos con los que el usuario puede interactuar, son las fichas re
 Las primeras que se ven en esta version muestran algunas preguntas con su respuesta de manera grafica, relacionadas con el dinero que estaba disponible, en que se invirtio y quien lo invirtio.
 En esta fichs se pueden incluir graficas con librerias como d3.js que permiten mostrar de manera interactiva la información. 
 
-![fichas presupuesto ciudadano](/MapaInversiones.Web/media/fichapresenqueseinvirtio.jpg "en que se invirtio?")
+![en que se invirtio](/MapaInversiones.Web/media/fichapresenqueseinvirtio.jpg "en que se invirtio?")
 
-Después el usuario puede encontrar otras fichas con el presupuesto ejecutado por institución, junto con el enlace para ir a la sección de Presupuestos por Instituciones.
+Después el usuario puede encontrar otro ejemplo de fichas, en la que se puede ver como va la ejecucion del presupuesto ejecutado por institución.
 
-![fichas presupuesto por institucion](/MapaInversiones.Web/media/presupuestointitucion.jpg "fichas presupuesto por institución")
+![fichas presupuesto por institucion](/MapaInversiones.Web/media/presupuestointitucion.jpg "fichas presupuesto")
 
-Dad la utilidad del WCM tambien el usuario puede encontrar fichas resumen como lo son las correspondientes a los contratos, en el caso del país de ejemplo la fuente de datos proviene de dos fuentes diferentes.
+Al incluir la utilidad del WCM se puede presentar al usuario diferentes elementos que se pueden actualizar desde el modulo de administracion, permitiendo que las fichas puedan actualizar su información sin la necesidad de realizar una publicación nueva en el servidor.
+
 
 ![contratos](/MapaInversiones.Web/media/contratos.jpg "contratos")
 La siguiente sección presenta un Mapa de Inversión Publica, para explorar la información correspondiente a los proyectos por cada una de las regiones. Además de esta sección, también es posible ir al mapa por el menú de la parte superior, mencionado con anterioridad.
