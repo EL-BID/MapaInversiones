@@ -1,4 +1,4 @@
-# MapaInversiones Branch Modificado para Santiago de Cali en Colombia Publicado como ¡Pa’ qué Veás!
+# MapaInversiones - Santiago de Cali Colombia -  ¡Pa’ qué Veás!
 ---
 Los objetivos principales de la plataforma son:
 
