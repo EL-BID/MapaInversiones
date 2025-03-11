@@ -360,9 +360,9 @@ function InicializaDatosProyectos() {
 
 
     configurarEnlaceLocation();
-    $("#btnSubirFoto_AUX").click(function () {
-        if ($("#hdIdUsuario").val() != "") {
-            $("#btnSubirFoto").trigger("click");
+    $("#btnSubirFoto_AUX").on("click", function () {
+            if ($("#hdIdUsuario").val() != "") {
+                $("#myModal").modal({ backdrop: 'static', keyboard: false, show: true });
 
         } else {
 

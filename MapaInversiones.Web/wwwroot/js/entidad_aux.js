@@ -936,12 +936,12 @@ function getEstructuraInfograficoNew(datos, pagina) {
 
             html_str += '<div class="data1">';
             html_str += '<span class="labelTit">Presupuesto Asignado</span>';
-            html_str += '<span class="td1p">' + '$' + ' ' + presup_aprobado.formatMoney(1, ',', '.').toString() + ' Millones</span>';
+            html_str += '<span class="td1p">' + '$' + ' ' + presup_vigente.formatMoney(1, ',', '.').toString() + ' Millones</span>';
             html_str += '</div>';
 
             html_str += '<div class="data1">';
             html_str += '<span class="labelTit">Presupuesto Obligado</span>';
-            html_str += '<span class="td1p">' + '$' + ' ' + presup_vigente.formatMoney(0, ',', '.').toString() + ' Millones</span>';
+            html_str += '<span class="td1p">' + '$' + ' ' + presup_aprobado.formatMoney(0, ',', '.').toString() + ' Millones</span>';
             html_str += '</div>';
 
             html_str += '<div class="data1">';

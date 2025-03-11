@@ -1273,6 +1273,7 @@ namespace PlataformaTransparencia.Infrastructura.DataModels
     [Column, Nullable] public string RutaFotoMediano { get; set; } // nvarchar(4000)
     [Column, Nullable] public string RutaFotoPequeno { get; set; } // nvarchar(4000)
     [Column, Nullable] public string Descripcion { get; set; } // nvarchar(4000)
+    [Column(), Nullable] public bool? Header { get; set; } // bit
     [Column, NotNull] public DateTime FechaUltimaModificacion { get; set; } // datetime
     [Column, NotNull] public int ConsecutivoCarga { get; set; } // int
     [Column, NotNull] public string Modificadopor { get; set; } // varchar(30)

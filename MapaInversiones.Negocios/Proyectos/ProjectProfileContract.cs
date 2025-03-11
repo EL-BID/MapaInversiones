@@ -4,6 +4,8 @@ using PlataformaTransparencia.Modelos;
 using PlataformaTransparencia.Negocios.Proyectos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace PlataformaTransparencia.Negocios.Project
@@ -38,6 +40,8 @@ namespace PlataformaTransparencia.Negocios.Project
         /// </summary>
         public async void Fill()
         {
+            List<Images> imagesProyecto = new List<Images>();
+            string urlImgPrincipal = "/img/preview-project.jpg";
             Status = false;
             try
             {
@@ -50,7 +54,21 @@ namespace PlataformaTransparencia.Negocios.Project
                 ModelProjectProfile.OrigenDelProyecto = BusquedasProyectosBLL.ObtenerNombreOrganismoFinanciadorPorProyecto(projectId);
                 ModelProjectProfile.componentes_proy = new();// CodComponentes;
                 ModelProjectProfile.actores_proy = new();// ActoresProy;
-                ModelProjectProfile.Images = BusquedasProyectosBLL.ObtenerImagenesParaProyecto(projectId);
+                //-----------------------------------------------------------------------------
+                imagesProyecto = BusquedasProyectosBLL.ObtenerImagenesParaProyecto(projectId);
+                ModelProjectProfile.Images = imagesProyecto;
+                
+                if (imagesProyecto.Count > 0)
+                {
+                    urlImgPrincipal = imagesProyecto.FirstOrDefault(x => x.priority.HasValue && x.priority.Value)?.large;
+                    if (urlImgPrincipal == null)
+                    {
+                        urlImgPrincipal = "/img/preview-project.jpg";
+                    }
+                }
+                //----------------------------------------------------------------
+                ModelProjectProfile.FotosU= BusquedasProyectosBLL.ObtenerFotosUsusarioPerProyecto(projectId);
+                ModelProjectProfile.urlImgBackground = urlImgPrincipal;
                 ModelProjectProfile.id_usu_participa = id_usuario_aux;
                 ModelProjectProfile.nom_usu_participa = nom_usuario_aux;
                 ModelProjectProfile.rol_participacion = part.ObtenerRolesProyAsync();

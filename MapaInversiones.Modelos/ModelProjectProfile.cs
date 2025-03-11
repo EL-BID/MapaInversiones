@@ -110,5 +110,7 @@ namespace PlataformaTransparencia.Modelos
             set { proyectosEjecucion = value; }
         }
         private List<InfoProyectos> proyectosEjecucion = new List<InfoProyectos>();
+
+        public string urlImgBackground { get; set; }
     }
 }

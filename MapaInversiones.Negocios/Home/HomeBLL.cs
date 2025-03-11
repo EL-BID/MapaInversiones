@@ -85,10 +85,26 @@ namespace PlataformaTransparencia.Negocios.Home
             List<InfoEntidadTerritorial> proyectosPorEnteTerritorial = GetProyectosPorEnteTerritorial();
             objReturn.Comunas = proyectosPorEnteTerritorial.Where(x => x.Tipo != null && x.Tipo.ToUpper().Trim() == comuna).OrderBy(x => x.Id).ToList();
             objReturn.Corregimientos = proyectosPorEnteTerritorial.Where(x => x.Tipo != null && x.Tipo.ToUpper().Trim() == centroPoblado).OrderBy(x => x.Nombre).ToList();
-            objReturn.countOngoingProjects = new() { costo = Convert.ToDouble(proyectosPorEnteTerritorial.Sum(x => x.ValorProyectos)), cantidad = proyectosPorEnteTerritorial.Sum(x => x.CantidadProyectos) };
+            objReturn.countOngoingProjects = GetTotalesProyectos();
+            
             //--------------------
             objReturn.Status = true;
             return objReturn;
+        }
+
+        public itemConteoProjects GetTotalesProyectos()
+        {
+            var resultado =
+                (from info in _connection.VwEstadoProyectosInvs
+                 group info by 1 into g
+                 select new itemConteoProjects
+                 {
+                     cantidad = g.Sum(x => x.NumeroProyectos ?? 0),
+                     costo = Convert.ToDouble(g.Sum(x => x.ValorProyectos ?? 0))
+                 })
+                .FirstOrDefault();
+
+            return resultado ?? new itemConteoProjects();
         }
 
         private itemFechasCorte GetCorteInformacion() {

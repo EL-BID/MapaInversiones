@@ -20,10 +20,11 @@ function cargarfuentesdatos2() {
                 if (info != null) {
                     var htmldivfuente = '';
                     for (var i = 0; i < info.length; i++) {
-                        htmldivfuente += '<div class="columna">';
+                        htmldivfuente += '<div class="columna fuentes_content">';
                         htmldivfuente += '<h3>' + info[i].nombreFuente + '</h3>';
-                        htmldivfuente += '<p>Última actualización<br>' + info[i].fechaActualizacionFuente.toString().substr(0, 10) + '</p>';
-                        htmldivfuente += '<p>Corte de los datos<br>' + info[i].fechaCorteFuente.toString().substr(0, 10) + '</p>';
+                        htmldivfuente += '<p class="fuente_act">Última actualización<br>' + info[i].fechaActualizacionFuente.toString().substr(0, 10) + '</p>';
+                        htmldivfuente += '<p class="fuente_corte">Corte de los datos<br>' + info[i].fechaCorteFuente.toString().substr(0, 10) + '</p>';
+                        htmldivfuente += '<p class="fuente_desc">Fuente:<br><span class="semibold">' + info[i].descripcion + '</span></p>';
                         htmldivfuente += '</div>';
                     }
                     $("#datosAbiertosFooter").html(htmldivfuente);

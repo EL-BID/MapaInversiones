@@ -41,6 +41,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
         public List<infograficoPrograma> GetProgramasByEntidad(int annio, string codEntidad) {
             List<infograficoPrograma> objReturn = new List<infograficoPrograma>();
+
             var RecursosPerObjetoQuery = (from a in _connection.VwPresupuesto
                                           where a.Periodo.ToString().StartsWith(annio.ToString()) && a.CodigoInstitucion == codEntidad
                                           group a by new { a.CodigoPrograma, a.Programa } into g
@@ -816,10 +817,12 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                          avance_financiero = g.Max(x => x.info.Avancefinanciero),
                                          url = g.Max(x => x.info.URLProyecto),
                                          Vigente = g.Sum(x => x.pre.Vigente) / 1000000,
-                                         Aprobado = g.Sum(x => x.pre.Aprobado) / 1000000,
+                                         Aprobado = g.Sum(x => x.pre.Obligacion) / 1000000,
                                          Ejecutado = g.Sum(x => x.pre.EjecucionAcumulada) / 1000000,
                                          valor_proyecto = g.Max(x => x.info.ValorProyecto)
                                      }).Distinct().ToList();
+
+
                     itemGenPresupuesto objProy = null;
                     itemLineaPresupuestal objLineas = null;
                     itemLineaPresupuestal objRecursos = null;

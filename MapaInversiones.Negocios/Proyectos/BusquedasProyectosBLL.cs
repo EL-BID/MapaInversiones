@@ -19,6 +19,7 @@ using PlataformaTransparencia.Modelos.Contratos;
 using DataModels;
 using System.Linq.Expressions;
 using System.Data.Entity.Core.Objects;
+using System.Reflection.PortableExecutable;
 
 namespace PlataformaTransparencia.Negocios.Proyectos
 {
@@ -742,6 +743,28 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
         }
 
+        public static List<ImagesUsuario> ObtenerFotosUsusarioPerProyecto(int Id)
+        {
+            var objReturn = new List<ImagesUsuario>();
+            using (var DataModel = new TransparenciaDB())
+            {
+
+                objReturn = (from images in DataModel.FotoUsuarios
+                                .Where(p => p.IdProyecto == Id && p.Aprobado == true && p.Eliminado == false).OrderBy(p => p.Fecha)
+                             select new ImagesUsuario
+                             {
+                                 description = images.Descripcion,
+                                 large = images.RutaFotoGrande,
+                                 thumbnail = images.RutaFotoPequeno,
+                                 idFoto = images.IdFotoUsuario,
+                                 fechaFoto = images.Fecha
+                                
+
+                             }).ToList();
+            }
+            return objReturn;
+        }
+
 
         public static List<Images> ObtenerImagenesParaProyecto(int Id)
         {
@@ -757,7 +780,9 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                  large = images.RutaFotoGrande,
                                  thumbnail = images.RutaFotoPequeno,
                                  idFoto = images.IdFoto,
-                                 fechaFoto = images.Fecha
+                                 fechaFoto = images.Fecha,
+                                 priority= images.Header
+
                              }).ToList();
             }
             return objReturn;

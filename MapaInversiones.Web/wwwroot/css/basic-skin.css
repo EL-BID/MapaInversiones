@@ -424,11 +424,11 @@ code {
     .logoIntro img {
         width: 300px;
     }
-
-
-    /***LogosEmergencia*/
-
-    .wp70 { width: 70%;}
+.semibold{ font-weight:600;}
+/***LogosEmergencia*/
+.wp70 {
+    width: 70%;
+}
 
 .objHidden {
     /*visibility:collapse;*/
@@ -1527,7 +1527,7 @@ div.soft-blue-card {
         background: #dddddd;
     }
 .welcome {
-    background: #3F305A url(../img/bg-main.jpg) no-repeat;
+    background: #3F305A url(../img/bg-main.webp) no-repeat;
     background-size: cover;
 }
 .welcome *{
@@ -2374,11 +2374,12 @@ div.soft-blue-card {
     padding: 15px 0px
 }
 
-.btn-top.active {
-    opacity: 1;
-    visibility: visible;
-    bottom: 100px;
-}
+    .actions-links .badge{white-space:normal}
+    .btn-top.active {
+        opacity: 1;
+        visibility: visible;
+        bottom: 100px;
+    }
 
 .btn-top:hover {
     border-color: var(--main-color);
@@ -5639,8 +5640,13 @@ input[type="search"] {
     color: #fff;
 }
 .banner-main-info .bread-crumbs-list li a, .banner-main-section .bread-crumbs-list li a, .banner-main-section .bread-crumbs-list *, .banner-main-info .bread-crumbs-list *{color:#fff}
-.banner-main-info .h6, .banner-main .h6{ /*display:flex;*/}
-    .banner-main-info .h6 yearSelected{ margin-left:15px}
+.banner-main-info .h6 { display:flex;}
+.ic-ttip {
+    color: #5916c3;
+}
+.banner-main-info .h6 yearSelected {
+    margin-left: 15px
+}
     .navs-shortcuts {
         margin: 2rem 0;
         text-align: center;
@@ -6540,6 +6546,12 @@ section {
 }
 
 .gallery-card .enlace_img {
+    height: 24rem;
+    background-position: center center;
+    background-size: cover
+}
+
+.gallery-card .enlace_img_ciudadanos {
     height: 24rem;
     background-position: center center;
     background-size: cover
@@ -9366,7 +9378,8 @@ li.main-mnu-item-has-child-activeTab ul li a {
                 .main-mnu-list > li > ul li a:hover::after {
                     transform: translateY(0);
                 }
-
+.mmm ul li a{ display:flex!important; align-items:center!important}
+.mmm ul li a i{margin-right:.5rem!important}
 .mnu-label {
     font-size: 0.5rem;
     text-transform: uppercase;
@@ -10566,7 +10579,7 @@ p.disclaimer i {
     }
 
     .fuentes-datos .columna {
-        width: 250px; 
+        width: 350px; 
         padding: 15px;
         background-color: #ffffff;
         border: 1px solid #e0e0e0;
@@ -10585,7 +10598,11 @@ p.disclaimer i {
             color: #666;
             margin: 5px 0;
         }
-.border-t-1{ border-top: 1px solid #ccc}
+.fuente_act, .fuente_corte{ border-bottom:1px solid #f3f3f3}
+
+.border-t-1 {
+    border-top: 1px solid #ccc
+}
 .footer-company-top img {
 }
 
@@ -10897,9 +10914,9 @@ p.disclaimer i {
 .footer-company-top a {
     text-align: center;
 }
-
+.progress{ height:1.5rem}
 .progress-bar {
-    background-color: #29C2BD !important
+    background-color: #1c8262 !important
 }
 
 .footer-company-top a img {
@@ -10992,7 +11009,7 @@ p.disclaimer i {
     }
 
     #section-home #controls #map-view, #section-home .projects-list-view {
-        height: 680px;
+        height: 960px;
         min-width: 290px;
     }
 
@@ -11066,7 +11083,9 @@ p.disclaimer i {
         }
 
     .mainData, .data1 {
-        max-width: 100% !important
+        max-width: 100% !important;
+        width:100%;
+
     }
 
     .w-88 {
@@ -11828,6 +11847,12 @@ p.disclaimer i {
     background-size: cover !important;
 }
 
+.enlace_img_ciudadanos {
+    height: 400px;
+    background-size: cover !important;
+}
+
+
 .labelCategory {
     padding: 3px;
     position: absolute;
@@ -11885,7 +11910,7 @@ p.disclaimer i {
 }
 .middlePoint {
     text-align: center;
-    display: inline-block;
+    display: none;/*provisionalmente*/
 }
 .detailedLinks {
     padding: 8px 15px;
@@ -12323,7 +12348,7 @@ executeV
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 1.1rem;/*No esto muy seguro de esta medida, recomendalble mirar estructura para ajustar alineaciones by enrique*/
+    gap: 1.1rem;
 }
 
     .grid-nationalprojects .project-col-carusel {
@@ -12511,7 +12536,10 @@ executeV
         margin-left: -8px;
     }
     .header-top {
-        display: none;
+       display:none
+    }
+    .header-top img {
+        max-height:25px;
     }
 
     .header-fixed {
@@ -13618,7 +13646,7 @@ a.back {
         display: none
     }
 
-    .hidden {
+    #section-home #controls #map-view, #section-home .projects-list-view .hidden {
         display: none
     }
 
@@ -16478,8 +16506,6 @@ thead td.name, thead td.value, thead td.type, thead td.status {
     z-index: -1;
 }
 
-
-
 /*Emergencias*/
 #d3plus_back_button {
     color: #000 !important;
@@ -17316,6 +17342,17 @@ ul.tabs li {
 
 /* Large screens ----------- */
 @media only screen and (max-width : 991px) {
+    .fuentes-datos .contenedor-columnas{ flex-direction:column; justify-content:center; text-align:center}
+    .fuentes-datos .columna{ margin:0 auto;}
+    .welcome {
+        background: #3F305A url(../img/bg-main-mobile.webp) no-repeat;
+        background-size: cover;
+    }
+    .box-od .btn{margin-bottom:1rem}
+    .panel-title {
+        flex-direction: column
+    }
+    .actions-links span.badge{white-space:normal}
     .carousel-mainX .card-info a {
         display: flex;
         gap: 1rem
@@ -17333,6 +17370,7 @@ ul.tabs li {
         height: 80px;
         transform: rotate(0deg) translate(0px,0px);
         transform-origin: left top;
+        padding:0px
     }
         .thumb-left .carousel-nav .carousel-cell {
             height: 65px;
