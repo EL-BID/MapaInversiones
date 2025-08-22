@@ -1,0 +1,163 @@
+@inject OrchardCore.IOrchardHelper Orchard
+<!DOCTYPE html>
+<html lang="@Orchard.CultureName()">
+<head>
+    <meta charset="utf-8" />
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Plataforma de trazabilidad de inversiones públicas, accede a información detallada sobre presupuesto, instituciones, contratos y proyectos" />
+    <meta name="author" content="Alcaldía de Santiago de Cali" />
+    <title>¡Pa' que veás! Monitor de Inversión Pública</title>
+    <!-- Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/favicon-16x16.png">
+    <link rel="manifest" href="~/assets/site.webmanifest">
+    <link rel="mask-icon" href="~/assets/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" type="image/x-icon" href="~/assets/favicon.ico" />
+    <!-- FONTS-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="preload" href="~/assets/fonts/material-design-icons/material-design-icons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="~/assets/fonts/material-design-icons/material-design-icons-outlined.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <link href="~/css/glide.core.min.css" rel="stylesheet" />
+    <link href="~/css/basic-skin.css" rel="stylesheet" />
+    <link href="~/css/libs.css" rel="stylesheet" />
+    <!--CHAT BOT COMPONENT -->
+    <script src="~/js/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="~/js/shared_utils.js" type="text/javascript"></script>
+    
+</head>
+
+<!body class="d-flex flex-column h-100" @RenderSection("DataBody", required: false)>
+    <!-- Begin mobile main menu -->
+    <nav class="mob-main-mnu">
+        <div class="mob-main-mnu-content">
+            @{ var menu = await Orchard.GetContentItemByHandleAsync("alias:second-menu");
+    <ul class="mob-main-mnu-list">
+        @foreach (var menuitem in menu.Content.MenuItemsListPart.MenuItems)
+        {
+@if (@menuitem.LinkMenuItemPart.Name != null)
+{
+    var enlace = @menuitem.LinkMenuItemPart.Url;
+    var enlace_aux = "#!";
+    if (enlace != "")
+    {
+        enlace_aux = enlace;
+    }
+<li>
+
+    @if (menuitem.MenuItemsListPart != null)
+    {
+<a href="#!">@menuitem.LinkMenuItemPart.Name</a>
+                        <div class="mmm-btn"><i class="material-icons md-24">expand_more</i></div> var cant = @menuitem.MenuItemsListPart.MenuItems.Count;
+                        if (@cant > 0)
+                        {
+<div class="mob-main-submnu">
+    <div class="mob-main-submnu-item">
+        <ul>
+            @foreach (var submenu in menuitem.MenuItemsListPart.MenuItems)
+            {
+@if (@submenu.LinkMenuItemPart.Name != null)
+{
+    var enlace_sub = @submenu.LinkMenuItemPart.Url;
+    var enlace_sub_aux = "#!";
+    if (enlace_sub != "")
+    {
+        enlace_sub_aux = enlace_sub;
+    }
+<li>
+    <a href="@enlace_sub_aux" data-title="@submenu.LinkMenuItemPart.Name">
+        <span>@submenu.LinkMenuItemPart.Name</span>
+    </a>
+</li>}}
+        </ul>
+    </div>
+</div> }
+
+}
+else
+{
+<a href="@enlace_aux" data-title="@menuitem.LinkMenuItemPart.Name">
+    <span>@menuitem.LinkMenuItemPart.Name</span>
+</a>}
+</li>}}
+    </ul> }
+        </div>
+        <div class="mob-top-Head-options">
+        <ul class="mob-main-mnu-list mmm-list">
+            <li>
+                <a href="/Acercade" title="¿Qué es ¡Pa' que Veás!?">
+                    <i class="material-icons material-icons-outlined md-24">info_outline</i>
+                    <span>¿Qué es ¡Pa' que Veás!?</span>
+                </a>
+            </li>
+            <li>
+                <a href="/CentroAyuda" title="CentroAyuda">
+                    <i class="material-icons material-icons-outlined md-24">help_outline</i>
+                    <span>Resolvé tus dudas</span>
+                </a>
+            </li>
+            <li>
+                <a href="/MarcoLegal" title="Marco Legal">
+                    <i class="material-icons material-icons-outlined md-24">gavel</i>
+                    <span>Marco Legal</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Contactanos" title="Contactános">
+                    <i class="material-icons material-icons-outlined md-24">forward_to_inbox</i>
+                    <span>Contactános</span>
+                </a>
+            </li>
+        </ul>
+        </div>
+        <div class="mob-main-mnu-footer">
+            <p>Con el apoyo del Banco Interamericano de Desarrollo - BID</p>
+        </div>
+    </nav>
+    <!-- End mobile main menu -->
+    <!-- Begin header -->
+    @Html.Partial("Header")
+    <div class="flex-shrink-0">
+        <!-- Navigation-->
+        <!-- Header-->
+        @RenderBody()
+    </div>
+
+    <!-- FOOTER -->
+    @Html.Partial("Footer")
+    <!-- End footer -->
+<!-- JS: dependencias globales en orden correcto -->
+<script src="~/js/jquery-3.6.0.min.js"></script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/lozad.min.js"></script>
+<script src="~/js/jquery.popupoverlay.js"></script>
+<script src="~/js/autosize.min.js"></script>
+@* 
+<!-- Plugins -->
+<script src="~/js/flickity/flickity.pkgd.min.js"></script>
+<script src="~/js/flickity/flickity-imagesloaded.js"></script>
+<script src="~/js/flickity/bg-lazyload.js"></script>
+<script src="~/js/flickity/flickity-fade.js"></script>
+
+<!-- JS principal -->
+ <script src="~/js/custom.js"></script>
+ 
+    //@RenderSection("scripts", required: false)
+
+    @if (IsSectionDefined("scripts"))
+    {
+            RenderSection("scripts", required: false);
+    }
+ *@
+
+</!body>
+</html>
