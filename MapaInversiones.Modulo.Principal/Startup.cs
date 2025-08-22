@@ -51,6 +51,13 @@ namespace PlataformaTransparencia.Modulo.Principal
             );
 
             routes.MapAreaControllerRoute(
+                name: "Geo",
+                areaName: "PlataformaTransparencia.Modulo.Principal",
+                pattern: "AzureMapView",
+                defaults: new { controller = "Map", action = "AzureMapView" }
+            );
+
+            routes.MapAreaControllerRoute(
             name: "LocationProfile",
             areaName: "PlataformaTransparencia.Modulo.Principal",
             pattern: "Location/{type?}/{idLoc?}",
