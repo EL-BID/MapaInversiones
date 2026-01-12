@@ -1,13 +1,18 @@
-﻿using LinqToDB.AspNet;
+﻿using LinqToDB;
+using LinqToDB.AspNet;
 using LinqToDB.AspNet.Logging;
 using LinqToDB.Configuration;
 using LinqToDB.Data;
 using LinqToDB.DataProvider.SqlServer;
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Localization;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Negocios;
 using Quartz;
 using Quartz.AspNetCore;
 using SolrNet;
+using System.Globalization;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +22,7 @@ builder.Services.AddOrchardCms();
 
 var ConnectionString = builder.Configuration.GetConnectionString("Default").ToString();
 
-builder.Services.AddLinqToDbContext<TransparenciaDB>((provider, options) => options
+builder.Services.AddLinqToDBContext<TransparenciaDB>((provider, options) => options
     .UseSqlServer(ConnectionString)
     .UseDefaultLogging(provider));
 
@@ -70,15 +75,25 @@ builder.Services.AddTransient(typeof(PlataformaTransparencia.Negocios.Interfaces
 builder.Services.AddTransient(typeof(PlataformaTransparencia.Negocios.Interfaces.IConsolidadosNacionalesBLL), typeof(PlataformaTransparencia.Negocios.Proyectos.ConsolidadosNacionalesBLL));
 builder.Services.AddTransient(typeof(PlataformaTransparencia.Negocios.Comunes.IDatosAbiertosBLL), typeof(PlataformaTransparencia.Negocios.Comunes.DatosAbiertosBLL));
 builder.Services.AddTransient(typeof(PlataformaTransparencia.Negocios.Interfaces.IPresupuestoEmergenciaBLL), typeof(PlataformaTransparencia.Negocios.Presupuesto.PresupuestoEmergenciaBLL));
+builder.Services.AddSingleton(typeof(PlataformaTransparencia.Negocios.Comunes.ICdnService), typeof(PlataformaTransparencia.Negocios.Comunes.CdnService));
 
 //AND Para participacion
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddRouting();
+builder.Services.AddHttpClient();
 //builder.Services.AddControllersWithViews();
 
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost;
+});
+
 var app = builder.Build();
+
+app.UseForwardedHeaders();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -88,7 +103,26 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+var supportedCultures = new[]
+{
+ new CultureInfo("es-CO")
+};
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("es-CO"),
+    // Formatting numbers, dates, etc.
+    SupportedCultures = supportedCultures,
+    // UI strings that we have localized.
+    SupportedUICultures = supportedCultures
+});
+
+
+//app.UsePathBase("/testmapa");
+
 app.UseStaticFiles();
+
+app.UseRouting();
+
 app.UseSession();
 
 app.UseOrchardCore();

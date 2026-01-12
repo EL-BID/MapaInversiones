@@ -1,6 +1,9 @@
 ﻿@model PlataformaTransparencia.Modelos.Entidad.ModelEntidadData
 
 @inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -81,15 +84,22 @@
             padding: 5px;
             text-align: center;
         }
+
+        #divGraphPerTab .d3plus-viz-back text {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            fill: #000000 !important;
+        }
+
+    
     </style>
 </head>
 <body>
-    <!--MAIN BANNER-->
-    <section class="banner-main mb-0">
-
+    <section class="banner-main-section s0-section" style="background-image: url('GaleriaEnteTerritorial/XL/default_XL.jpg')">
+        <div class="bgBlueOverlay">&nbsp;</div><!-- DON'T EREASE-->
         <div class="container">
             <!-- Begin bread crumbs -->
-            <nav class="bread-crumbs">
+            <nav class="bread-crumbs mb-5">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -99,348 +109,349 @@
                                     <i class="material-icons md-18">chevron_right</i>
                                 </li>
                                 <li><a href="/BusquedaResultados">Resultados de búsqueda</a><i class="material-icons md-18">chevron_right</i></li>
-                                <li>@Model.NombreEntidad</li>
+                                <li>@Model.Nombre</li>
 
                             </ul>
                         </div>
                     </div>
-                    <input type="hidden" id="codigoEntidadId" value="@Model.CodigoEntidad" />
+                    <input type="hidden" id="codigoIdentidad" value="@Model.Codigo" />
                 </div>
-            </nav><!-- End bread crumbs -->
-
-
+            </nav>
+            <!-- End bread crumbs -->
             <div class="row justify-content-center">
-
                 <div class="col-lg-8">
                     <div class="banner-main-info pb-0">
                         <div class="banner-main-title">
-                            <h1>@Model.NombreEntidad</h1>
+                            <h1>@Model.Nombre</h1>
                         </div>
-                        <div class="banner-main-desc">
-                            <span class="h5">Institución</span>
+                        <div class="banner-main-desc ">
+                            <span class="h5">Entidad</span>
                         </div>
 
                     </div>
-
-                   
-
                 </div>
-                <!--NAVIGATION ON PAGE-->
                 
-        <div class="row navs-shortcuts">
+            </div>
+            <!--NAVIGATION ON PAGE-->
+            <div class="row navs-shortcuts">
+                <div class="" id="navs-header">
+                    <a class="btn-section" href="#s1">
+                        <span class="ic-shortcut"><i class="material-icons md-24">device_hub</i></span>
+                        <span class="text-btn">Presupuesto de la entidad</span>
+                    </a>
+                    <a class="btn-section" href="#s2">
+                        <span class="ic-shortcut"><i class="material-icons md-24">grid_view</i></span>
+                        <span class="text-btn">Trazabilidad de los recursos</span>
+                    </a>
+                    <a class="btn-section" href="#s3">
+                        <span class="ic-shortcut"><i class="material-icons md-24">speaker_notes</i></span>
+                        <span class="text-btn">Proyectos POT</span>
+                    </a>
+                </div>
+            </div>
+            <!--FIN NAVIGATION ON PAGE-->
+        </div>
+    </section>
+    <section class="section" id="s1">
+        <div class="container">
+            <div class="row sep mb-4">
+                <div class="section-heading heading-left">
+                    <h2>Presupuesto de la entidad</h2>
+                </div>
+                <div class="contadores">
+                    <div class="row" id="divTxtTodosProy"></div>
+                </div>
+                <!--SELECT AÑO-->
+                <div class="row justify-content-center mb-4 py-4">
+                    <div class="col-lg-4">
+                        <!--YEAR FILTER-->
+                        <div class="form-group mb-5">
+                            <label for="input-select">Selecciona un año</label>
+                            <select class="form-select" aria-label="Selecciona un año:" id="annioPresupuesto">
+                                @foreach (var item in Model.periodos)
+                                {
+                                    <option value="@item.id">@item.name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mb-4">
+                        <div class="col-lg-7">
+                            <div class="Section-infograph mb-4">
+                                <div class="main-icon-value">
+                                    <img src="~/img/svg-icons/ICO-Org-009.svg" class="img-fluid" alt="Icono decorativo Presupuesto vigente" />
+                                </div>
+                                <div class="cont-pres-infograph">
+                                    <span class="h4 d-block mb-3">Presupuesto total vigente año <span class="lblAnyoSelected"></span></span>
+                                    <div class="h2 mb-0">
+                                        <span class="big-number valor-vigente" tipo="general"></span>
+                                        
+                                    </div>
+                                </div>
+                            </div>
 
-            <div class="" id="navs-header">
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <div class="card white-card comprometido">
+                                <div class="card-body">
+                                    <div class="main-icon-value">
+                                        <div class="ic-wrap">
+                                            <img src="~/img/ic-comprometido.svg" class="img-fluid" alt="Icono decorativo Presupuesto comprometido" />
+                                        </div>
+                                        <div class="desc-data">
+                                            <div class="executeV">
+                                                Presupuesto Disponible <span class="text-bold">COMPROMETIDO</span><a href="#popup1" class="p-2 popup1_open ic-ttip">
+                                                    <span class="material-icons md-32">
+                                                        info
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            <div class="presupuestoN valor-comprometido" tipo="general"></div>
 
-                        <a class="btn-section" href="#presupuestoentidad">
-                    <span class="ic-shortcut"><i class="material-icons md-24">device_hub</i></span>
-                    <span class="text-btn">Presupuesto de la Institución</span>
-                </a>
-                <a class="btn-section" href="#trazabilidad">
-                    <span class="ic-shortcut"><i class="material-icons md-24">grid_view</i></span>
-                    <span class="text-btn">Trazabilidad de los recursos</span>
-                </a>
-               
+                                            <small>Ejecución</small>
+                                            <div class="percentage">
+                                                <div class="completed comprometido" tipo="general"></div>
+                                                <div class="indicatorValues">
+                                                    <span class="startPoint text-center porcentaje-comprometido" tipo="general"></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <div class="card white-card girado">
+                                <div class="card-body">
+                                    <div class="main-icon-value">
+                                        <div class="ic-wrap">
+                                            <img src="~/img/ic-girado.svg" class="img-fluid" alt="Icono decorativo Presupuesto girado" />
+                                        </div>
+                                        <div class="desc-data">
+                                            <div class="executeV">Presupuesto Disponible <span class="text-bold">GIRADO</span><a href="#popup2" class="p-2 popup2_open ic-ttip">
+                                                    <span class="material-icons md-32">
+                                                        info
+                                                    </span>
+                                                </a></div>
+                                            <div class="presupuestoN valor-girado" tipo="general"></div>
+                                            <small>Porcentaje de ejecución</small>
+                                            <div class="percentage">
+                                                <div class="completed girado" tipo="general"></div>
+                                                <div class="indicatorValues">
+                                                    <span class="startPoint text-center porcentaje-girado" tipo="general"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row sep">
+                <div class="section-heading heading-left" id="s2">
+                    <h2>Trazabilidad de los recursos</h2>
+                </div>
+                <div class="col-md-12">
+                    <div class="tabs-content py-4">
+                        <div class="tabs goals">
+                            <ul class="tabs-nav" id="tabs_contenedor">
+                            </ul>
+                            <div class="container">
+                                <div class="tabs-container">
+                                    <div class="tabs-item content active">
+                                        <!--Inicia Tab Contentido-->
+                                        <div class="row">
+                                            <div class="section-subheading" id="divTextosProgramas">
+                                                <p class="texto_tab" data-tipo="O21" hidden><strong>Funcionamiento</strong> son los recursos necesarios para que las entidades puedan cumplir con sus funciones y desarrollar de manera adecuada sus actividades administrativas, técnicas y operativas.</p>
+                                                <p class="texto_tab" data-tipo="O22" hidden><strong>El Servicio de la Deuda </strong> son los gastos necesarios para cumplir con las obligaciones de créditos, deuda y otros compromisos financieros que vencen durante la vigencia fiscal.</p>
+                                                <p class="texto_tab" data-tipo="O23" hidden><strong>Inversión</strong> son los gastos que hace el Distrito Capital para impulsar el desarrollo económico, social y cultural de la ciudad, mejorar la calidad de vida de los ciudadanos y cumplir con los planes de desarrollo.</p>
+                                            </div>
+                                            <div class="col-lg-12 py-4">
+                                                <div class="pChart">
+                                                    <div id="divGraphPerTab">
+                                                        <!--TREEMAP -->
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <!--Selector Programas-->
+                                        <div class="row">
+                                            <div class="col-lg-12 text-center py-4">
+                                                <div class="comparativeTable" id="divInversionSection">
+                                                    <div id="divProgramas"></div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div id="loadingAsignacion" class="asigFin">
+                                                                <h3 id="lblValorAsignacionPrograma"></h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="divInversion"></div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Fin Selector Programas-->
+                                        <!--Ini Listado proyectos de inversion-->
+                                        <div class="row" id="divContentProyectosInv">
+                                            <div class="col-lg-12 text-center py-4">
+                                                <div class="comparativeTable">
+                                                    <div class="card-entidades-group" id="divListado">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="divPagFichas" class="">
+                                            </div>
+                                        </div>
+                                        <!--Fin Listado proyectos de inversion-->
+                                        <!--Fin Tab 1-->
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-                
-                <!--FIN NAVIGATION ON PAGE-->
-            </div>
-            </div>
 
     </section>
-    <!--PRESUPUESTO INSTITUCION-->
-    <section class="section" id="presupuestoentidad">
+    <!--perfil segun XD-->
+    <section class="section section-gray" id="s3">
         <div class="container">
-           
-            <div class="section-heading heading-left">
-                <h2>Presupuesto de la Institución</h2>
-            </div>
-            <!--SELECT AÑO-->
-            <div class="row justify-content-center">
-                <div class="col-lg-4">
-                    <!--YEAR FILTER-->
+            <div class="row sep mb-4">
+                <div class="section-heading heading-left">
+                    <h2>Proyectos POT</h2>
+                </div>
+                
+                <div class="section-subheading">
+                    <div class="wrap-desc-pot">
+                        <p>En Bogotá se dividen los proyectos de inversión y los de desarrollo local porque tienen diferentes alcances: los de inversión responden a necesidades de toda la ciudad, mientras que los locales atienden prioridades específicas de cada localidad. Así se asegura una mejor gestión y uso de los recursos.</p>
+                        <div class="city-card-logopot">
+                            <img alt="logo del Plan de ordenamiento territorial" src="..\img\imgsector\Logopot.png" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-4" id="divFiltroLocalidad">
                     <div class="form-group">
-                        <label for="annioEntidad">Selecciona un año:</label>
-                        <select class="form-select" aria-label="Selecciona un año:" id="annioEntidad" onchange="seleccionoAnio($('#annioEntidad option:selected').val());">
-                            @if (Model.Annios.Count() > 0)
-                            {
-                                foreach (var item in Model.Annios)
-                                {
-                                    <text>
-                                    <option value="@item">@item</option>
-                                    </text>
-                                }
-                            }
+                        <label for="selectLocalidades" class="small">Filtrar por localidad</label>
+                        <select class="form-select" aria-label="Filtrar por" id="selectLocalidades">
                         </select>
                     </div>
                 </div>
-            </div>
-            <div class="row py-4 justify-content-center" id="divResumen">
-                <div class="col-lg-4 mb-3">
-                    <div class="card h-100 shadow border-0 card-entidad b1">
-                        <div class="card-body">
-                            <div class="wrap-desc-entidad">
-                                <div class="h5">Presupuesto Vigente</div>
-                                <div class="h1" id="PresupuestoVigente">$ @String.Format("{0:n2}", (@Model.PresupuestoVigenteAnnioDisplay / 1000000)) millones </div>
-                            </div>
-                        </div>
+               
+                <div class="col-lg-12 wrap-pry-destacados mb-4" >
+                    <div class="row py-4" id="divProyectosPot">
+                    </div>
+                    <div id="divPagPot" class="">
+                    </div>
+                    <!--ESTRUCTURA QUEMADA PARA PODER COMPARAR DISEÑO-->
+                    <div id="divPagDist" class="" style="display:none">
+                        <span class="pag_actual" data-page="1">
+                            <text>1</text>
+                        </span>
+                        <a class="page_left" role="button" data-page="2">
+                            <span class="glyphicon"></span>
+                            <text class="paginacion">2</text>
+                        </a>
+                        <a class="page_left" role="button" data-page="3">
+                            <span class="glyphicon"></span>
+                            <text class="paginacion">3</text>
+                        </a>
+                        <a class="page_left" role="button" data-page="4">
+                            <span class="glyphicon"></span>
+                            <text class="paginacion">4</text>
+                        </a>
+                        <a class="page_left" role="button" data-page="5">
+                            <span class="glyphicon"></span>
+                            <text class="paginacion">5</text>
+                        </a>
+                        <a class="page_left" role="button" data-page="6">
+                            <span class="glyphicon"></span>
+                            <text class="paginacion">6</text>
+                        </a>
+                        <a class="page_left" role="button" data-page="7">
+                            <span class="glyphicon"></span>
+                            <text class="paginacion">7</text>
+                        </a>
                     </div>
                 </div>
-                <div class="col-lg-4 mb-3 ">
-                    <div class="card h-100 shadow border-0 card-entidad b2">
-                        <div class="card-body">
-                            <div class="wrap-desc-entidad">
-                                <div class="h5">Presupuesto Ejecutado</div>
-                                <div class="h1" id="PresupuestoEjecutado">$ @String.Format("{0:n2}", (@Model.PresupuestoEjecutadoAnnioDisplay / 1000000)) millones</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-3">
-                    <div class="card h-100 shadow border-0 card-entidad b3">
-                        <div class="card-body">
-                            <div class="wrap-desc-entidad">
-                                <div class="h5">% Ejecutado</div>
-                                <div class="h1" id="PorcEjecutado">@String.Format("{0:n2}", (@Model.PorcEjecutadoAnnioDisplay))  %</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
+        <!--MODAL 1-->
+        <div id="popup1" class="popup_style popup_style_wide popup_style_sally open_popup" style="display:none;">
+            <div class="popup">
+                <div class="popup_content">
+                    <h4 class="popup_title">Tipos de presupuesto</h4>
+                    <div class="content2">
+                        <ul>
+                            <li>
+                                <span class="text-bold">Presupuesto Comprometido:</span>  <br />Es la parte del dinero ya reservada para cumplir obligaciones, como contratos, órdenes de compra o convenios.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="popup1_close popup_close"><i class="material-icons md-24">close</i></div>
+            </div>
+        </div>
+        <!--MODAL 2-->
+        <div id="popup2" class="popup_style popup_style_wide popup_style_sally open_popup" style="display:none;">
+            <div class="popup">
+                <div class="popup_content">
+                    <h4 class="popup_title">Tipos de presupuesto</h4>
+                    <div class="content2">
+                        <ul>
+                            <li>
+                                <span class="text-bold">Presupuesto Girado:</span>  <br />Es el dinero efectivamente pagado, una vez que se han recibido los bienes o servicios contratados.
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="popup2_close popup_close"><i class="material-icons md-24">close</i></div>
+            </div>
+        </div>
+
     </section>
-    <section class="section" id="trazabilidad">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-     @*                <div class="section-heading heading-center mb-3"> 
-                        <!--<h3>@TituloDistribucionPresupuestalEntidad</h3>
-                <div class="section-subheading">@Html.Raw(LabelDistribucionPresupuestalEntidad)</div>-->
-                    </div> *@
-                    <div class="section-heading heading-left">
-                        <h2>Trazabilidad de recursos</h2>
-                    </div>
-                    <div class="desc-heading"><p>Conoce como se están usando los fondos, ¿en qué se gasta?, ¿en qué se invierte el dinero? y controla los procesos contractuales de la institución.</p></div>
-                </div>
-
-            </div>
-            <!--TABS SUBPROGRAMAS Y PROYECTOS-->
-            <div class="tabs goals">
-                <ul id="tabTipoPrograma" class="tabs-nav">
-                    <li class="active enlace_tipo_contrato" id="analisis">
-                        <div class="goal-number"></div>
-                        <div class="goal-name"><div class="h4">Análisis institución</div></div>
-                    </li>
-                    <li id="inversion" class="enlace_tipo_contrato">
-                        <div class="goal-number"></div>
-                        <div class="goal-name"><div class="h4">Inversión</div></div>
-                    </li>
-                     <li id="procesos" class="enlace_tipo_contrato">
-                        <div class="goal-number"></div>
-                        <div class="goal-name"><div class="h4">Procesos</div></div>
-                    </li>
-                    <li id="contratos" class="enlace_tipo_contrato">
-                        <div class="goal-number"></div>
-                        <div class="goal-name"><div class="h4">Contratos</div></div>
-                    </li>
-                </ul>
-                <div id="contentTabTipoPrograma" class="tabs-container mt-5">
-                    <div class="comparativeTable" id="divAnalisis">
-
-                        <div class="container">
-                            <div class="row py-4">
-                                <div class="col-12">
-                                    <div class="">
-                                        <h3>Distribución del presupuesto</h3>
-                                        <div class="section-subheading">
-                                            <p>La distribución del presupuesto varía según las necesidades y prioridades específicas de la institución. <span class="text-bold">Haz clic en cada uno de los recuadros para conocer con mayor detalle las categorías de distribución.</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="offset-1 col-md-10 col-sm-10">
-                                    <div class="pChart">
-                                        <div id="divGraphPerFuncion"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row py-4">
-                                <div class="col-12">
-                                    <div class="">
-                                        <h3>¿En que gasta la entidad?</h3>
-                                        <div class="section-subheading">
-                                            <p>Conoce las principales categorías del gasto institucional tales como Infraestructura, personal, operaciones, etc. <span class="text-bold">Posiciona el cursor sobre cada sector de la gráfica para tener información más detallada.</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-center">
-                                <div class="col-lg-3">
-                                    <div class="group-expenditure" id="divTxtGrupoGasto">
-                                    </div>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="pChart">
-                                        <div id="divGraphPerGrupoGasto" style="height:auto;width:auto;"></div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="row py-4">
-                                <div class="col-12">
-                                    <div class="">
-                                        <h3>Modalidad de procesos adelantados por la institución</h3>
-                                        <div class="section-subheading">
-                                            <p>Las siguientes son las diferentes modalidades en las que se han adelantados procesos en la institución<span class="text-bold"></span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="offset-1 col-md-10 col-sm-10">
-                                    <div class="pChart">
-                                        <div id="divGraphProcesos" style="min-height:500px;min-width:80px;width:960px;">&nbsp;</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comparativeTable" id="divInversionSection">
-                        <div id="divProgramas"></div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div id="loadingAsignacion" class="asigFin" >
-                                    <h3 id="lblValorAsignacionPrograma"></h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="divInversion"></div>
-                        
-                    </div>
-                    <div class="comparativeTable" id="divProcesosSection">
-                        <div id="divProcesos"></div>
-                        <div id="divPagFichasPro"></div>
-
-                    </div>
-                    <div class="comparativeTable" id="divListadoContratos">
-                        <div class="container">
-                            <div class="section-heading text-center">
-                                <h3>Buscador Contratos</h3>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-3 col-md-12 col-sm-12">
-
-                                    <form class="contractList bgSoftGray">
-
-                                        <div class="form-group">
-                                            <label class="year" for="entidad">Proveedor</label>
-
-                                            <input type="search" data-results="search-home" data-search="home" id="entidad" class="search-input form-control input-lg" autocomplete="on" placeholder="Proveedor">
-
-                                            <div id="search-home" class="search-body">
-                                                <div id="divNoEncontrado" class="no-search-results" style="display: none;">No se han encontrado proveedores</div>
-
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="year" for="proceso">Palabra Clave </label>
-
-                                            <input type="search" data-results="search-home" data-search="home" id="proceso" class="search-input form-control input-lg" autocomplete="on" placeholder="Servicio, salud, nacional, etc." value="">
-
-                                        </div>
-                                        <div class="triggerForm">
-                                            <input type="button" class="btn btn-primary" value="Buscar" id="btn-buscar" disabled=""><div class="clearfix"></div>
-                                            <a class="btn btn-link text-center" id="btnLimpiar" disabled="disabled">LIMPIAR FILTROS</a>
-                                        </div>
-
-                                    </form>
-
-                                </div>
-                                <!--CONTRACT-LIST-->
-                                <div class="col-lg-8">
-                                    <h5 style="text-align: left"><span class="bpinfilter" id="spanfiltrado" hidden>Filtrado por BPIN</span></h5>
-                                    <!--ESTRUCTURA HTML PARA TOMAR COMO REFERENCIA-->
-                                    <!--CIERRE DE ESTRUCTURA-->
-                                    <div class="wrap-proceso whiteBg" id="srcContratos">
-                                    </div>
-                                    <div id="divPagContratos" class="">
-                                    </div>
-
-                                </div>
-                                <!--END CONTAINER-->
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                
-
-                    
-            </div>
-        </div>
-</section>
-
+    <!---Fin Pefil segun XD-->
 
     <!--HELP CENTER SHORTCUT-->
     <div id="helpCenter"></div>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha384-EZJUCwX9EfOmrML5/1WejmhFx/azi54nnVfOndPu+VTQKOHabXXC9eS7VFdkLz0V" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
-
-    <script src="js/entidad_aux.js"></script>
+    
+    <script type="text/javascript" src="@Cdn.Url(Url, "~/js/jquery/jquery-ui.min.js")"></script>
+    <script type="text/javascript" src="@Cdn.Url(Url, "~/js/lib/D3/d3.v7.min.js")"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+    <script src="@Cdn.Url(Url, "~/js/entidad_aux.js")"></script>
 
     <script>
 
         window.onscroll = function () { myFunction() };
 
         var header = document.getElementById("navs-header");
-        var sticky = header.offsetTop;
+        var sticky = header ? header.offsetTop : 0;
 
         function myFunction() {
-            if (window.pageYOffset > sticky) {
-                header.classList.add("sticky");
-                header.classList.add("bg-white");
-            } else {
-                header.classList.remove("sticky");
-                header.classList.remove("bg-white");
+            if (header) {
+                if (window.scrollY > sticky) {
+                    header.classList.add("sticky");
+                    header.classList.add("bg-white");
+                } else {
+                    header.classList.remove("sticky");
+                    header.classList.remove("bg-white");
+                }
             }
         }
     </script>
-    <style>
-        body {
-            font-family: "Arial", sans-serif;
-        }
 
-        .bar {
-            fill: #5f89ad;
-        }
-
-        .axis {
-            font-size: 13px;
-        }
-
-            .axis path,
-            .axis line {
-                fill: none;
-                display: none;
-            }
-
-        .label {
-            font-size: 13px;
-        }
-    </style>
+    
 </body>
 
 

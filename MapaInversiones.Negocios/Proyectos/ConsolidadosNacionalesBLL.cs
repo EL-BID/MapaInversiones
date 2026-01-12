@@ -1182,7 +1182,9 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             List<InfoProyectos> objReturn = new List<InfoProyectos>();
             objReturn = (from info in DataModel.VwProyectosAprobadosInvs
                          join sector in DataModel.Sectors on info.IdSector equals sector.IdSector
-                         where info.VlrTotalProyectoFuenteRegalias > 0 && info.TipoProyecto == "NACIONAL"
+                         join ent in DataModel.ProyectoXEntidadTerritorials on info.IdProyecto equals ent.IdProyecto
+                         where info.VlrTotalProyectoFuenteRegalias > 0 && (ent.IdDepartamento == "00000" && ent.IdMunicipio == "00000")
+                         orderby info.VlrTotalProyectoFuenteRegalias ascending
                          select new InfoProyectos
                          {
                              IdProyecto = info.IdProyecto,
@@ -1200,7 +1202,9 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                              FechaInicioProyecto = info.FechaInicioProyecto,
                              Megusta = info.MeGusta,
                              Comentarios = info.Comentarios,
+                             
                          }).ToList();
+            objReturn[0].Value = objReturn.Count();
             if (objReturn.Count > 8)
             {
                 objReturn = objReturn.Take(8).ToList();
@@ -1210,14 +1214,16 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
         }
 
-        public List<InfoProyectos> GetProyectosNacionalesfiltro(string campo)
+        public List<InfoProyectos> GetProyectosNacionalesfiltro(string campo, int pagina=0, int cantidad=8)
         {
+            int startIndex = (pagina - 1) * cantidad;
             List<InfoProyectos> objReturn = new List<InfoProyectos>();
-            if (campo == "montodesc")
+            if ( campo == "montodesc")
             {
                 objReturn = (from info in DataModel.VwProyectosAprobadosInvs
                              join sector in DataModel.Sectors on info.IdSector equals sector.IdSector
-                             where info.VlrTotalProyectoFuenteRegalias > 0 && info.TipoProyecto == "NACIONAL"
+                             join ent in DataModel.ProyectoXEntidadTerritorials on info.IdProyecto equals ent.IdProyecto
+                             where info.VlrTotalProyectoFuenteRegalias > 0 && (ent.IdDepartamento=="00000" && ent.IdMunicipio=="00000")
                              orderby info.VlrTotalProyectoFuenteRegalias descending
                              select new InfoProyectos
                              {
@@ -1236,13 +1242,16 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                  FechaInicioProyecto = info.FechaInicioProyecto,
                                  Megusta = info.MeGusta,
                                  Comentarios = info.Comentarios,
-                             }).ToList();
+                             }).Skip(startIndex)  // Omitir los registros de las páginas anteriores
+                                .Take(cantidad)  // Tomar solo la cantidad de registros necesarios
+                                .ToList();
             }
-            else if (campo == "montoasc")
+            else if (campo == null || campo == "montoasc")
             {
                 objReturn = (from info in DataModel.VwProyectosAprobadosInvs
                              join sector in DataModel.Sectors on info.IdSector equals sector.IdSector
-                             where info.VlrTotalProyectoFuenteRegalias > 0 && info.TipoProyecto == "NACIONAL"
+                             join ent in DataModel.ProyectoXEntidadTerritorials on info.IdProyecto equals ent.IdProyecto
+                             where info.VlrTotalProyectoFuenteRegalias > 0 && (ent.IdDepartamento == "00000" && ent.IdMunicipio == "00000")
                              orderby info.VlrTotalProyectoFuenteRegalias ascending
                              select new InfoProyectos
                              {
@@ -1261,7 +1270,9 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                  FechaInicioProyecto = info.FechaInicioProyecto,
                                  Megusta = info.MeGusta,
                                  Comentarios = info.Comentarios,
-                             }).ToList();
+                             }).Skip(startIndex)  // Omitir los registros de las páginas anteriores
+                                .Take(cantidad)  // Tomar solo la cantidad de registros necesarios
+                                                 .ToList();
             }
             if (objReturn.Count > 8)
             {

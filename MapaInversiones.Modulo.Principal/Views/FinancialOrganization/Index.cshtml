@@ -103,7 +103,7 @@
                                 <div class="card-body">
                                     <div class="wrap-desc-entidad d-flex">
                                         <div class="ic-wrap">
-                                            <img src="../img/svg-icons/ICO-Org-001.svg" alt="Icono decorativo Organismo Financiador" />
+                                            <img src="~/img/svg-icons/ICO-Org-001.svg" alt="Icono decorativo Organismo Financiador" />
                                         </div>
                                         <div class="desc-data">
                                             <div id="totalFinanciadores" class="organismoN">0</div>
@@ -118,7 +118,7 @@
                                 <div class="card-body">
                                     <div class="wrap-desc-entidad d-flex">
                                         <div class="ic-wrap">
-                                            <img src="../img/svg-icons/ICO-Org-002.svg" alt="Icono decorativo Organismo Financiador" />
+                                            <img src="~/img/svg-icons/ICO-Org-002.svg" alt="Icono decorativo Organismo Financiador" />
                                         </div>
                                         <div class="desc-data">
                                             <div id="totalProyectosFinanciados" class="organismoN">0</div>
@@ -133,7 +133,7 @@
                                 <div class="card-body">
                                     <div class="wrap-desc-entidad d-flex">
                                         <div class="ic-wrap">
-                                            <img src="../img/svg-icons/ICO-Org-003.svg" alt="Icono decorativo Organismo Financiador" />
+                                            <img src="~/img/svg-icons/ICO-Org-003.svg" alt="Icono decorativo Organismo Financiador" />
                                         </div>
                                         <div class="desc-data">
                                             <div id="totalAportado" class="organismoN">$0 M.</div>
@@ -199,7 +199,7 @@
                     codigofuente: codigoFuente
                 }
             }).done(function (data) {
-
+                //console.log("data", data);
                 $("#totalFinanciadores").empty();
                 $("#totalFinanciadores").html(data.totalFinanciadores);
                 $("#totalProyectosFinanciados").empty();

@@ -462,7 +462,7 @@
                         for (var k = 0; k < data.objects.length; k++) {
                             div_proy.append("a")
                            .attr("class", "list-group-item")
-                           .attr("href", "../projectprofile/" + data.objects[k].location)
+                                .attr("href", "../PerfilProyecto/" + data.objects[k].location)
                            .text(data.objects[k].name)
                         }
                         //loading(false);

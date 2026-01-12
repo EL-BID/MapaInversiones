@@ -133,7 +133,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
         /// <summary>
         /// Constante para uso de Links para servicios
         /// </summary>
-          public const string ServicesLink = "/projectprofile/{0}"; // "/projectprofile/{0}";
+          public const string ServicesLink = "/PerfilProyectoPot/{0}"; // "/PerfilProyecto/{0}";
         /// <summary>
         /// Constante que se usa como identificador de
         /// imágenes pequeñas

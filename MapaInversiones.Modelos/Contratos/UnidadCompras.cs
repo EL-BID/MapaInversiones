@@ -15,5 +15,8 @@ namespace PlataformaTransparencia.Modelos.Contratos
         public string MonedaProceso { get; set; }
         public Nullable<double> ValorProceso { get; set; }
         public Nullable<int> NroProcesos { get; set; }
+        public Nullable<int> Annio { get; set; }
+        public string CodigoProceso { get; set; }
+
     }
 }

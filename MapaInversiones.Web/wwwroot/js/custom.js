@@ -366,13 +366,19 @@
 			$(this).parent().toggleClass("open");
 
 		},
-		headerNavbarNotEl: function(e) {
-
-			if ($(e.originalEvent.target).closest(".header-navbar").length) return;
+		headerNavbarNotEl: function (e) {
+			// Si no hay originalEvent, asumimos que el evento fue disparado programáticamente y salimos
+			if (!e.originalEvent) {
+				return;
+			}
+			var target = e.originalEvent.target || e.target;
+			if ($(target).closest(".header-navbar").length) {
+				return;
+			}
 			$(".header-navbar").removeClass("open");
 			e.originalEvent.stopPropagation();
-
 		},
+
 
 		//=== Side toggle ===\\
 		sideOpen: function(e) {

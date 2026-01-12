@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace PlataformaTransparencia.Modelos
@@ -34,7 +36,12 @@ namespace PlataformaTransparencia.Modelos
     public string Anio { get; set; } = string.Empty;
   }
 
-  public class InfoPresupuesto : InformationGraphics
+    public class InfoRecursosContratosPerObjeto : InformationGraphics
+    {
+        public string Anio { get; set; } = string.Empty;
+    }
+
+    public class InfoPresupuesto : InformationGraphics
   {
     public decimal? totalGasto { get; set; }
     public decimal? totalPresupuesto { get; set; }
@@ -124,19 +131,43 @@ namespace PlataformaTransparencia.Modelos
 
   public class InfoConsolidadoPresupuesto : InformationGraphics
   {
-    public int periodo { get; set; }
-    public double? vigente { get; set; }
-    public double? aprobado { get; set; }
 
-    public double? ejecutado { get; set; }
+        public int Periodo { get; set; }
 
-    public int Id { get; set; }
+        public double Vigente { get; set; }
+        public double Ejecutado { get; set; }
 
-    public string TipoGasto { get; set; }
+        public double ValorComprometido { get; set; }
 
-    public float? pagos { get; set; }
+        public double ValorGiros { get; set; }
 
+        public string TipoGasto { get; set; }
 
+  
+    }
+
+    public class InfoConsolidadoEntidad : InformationGraphics
+    {
+
+        public int Periodo { get; set; }
+
+        public double Vigente { get; set; }
+        public double Ejecutado { get; set; }
+
+        public double ValorComprometido { get; set; }
+
+        public double ValorGiros { get; set; }
+
+        public string TipoGasto { get; set; }
+
+        public List<FinalidadItem> Finalidades { get; set; }
+
+    }
+
+    public class FinalidadItem
+    {
+        public string Codigo { get; set; }
+        public string Nombre { get; set; }
     }
 
 
@@ -148,4 +179,55 @@ namespace PlataformaTransparencia.Modelos
         public string alias { get; set; }
         public int ordenGroup { get; set; }
     }
+
+
+    public class InfoParticipacionSector : InformationGraphics
+    {
+
+        public string CodigoSector { get; set; } // varchar(30)
+        public string Sector { get; set; } // varchar(500)
+        public int Año { get; set; } // int
+        public double? ValorVigente { get; set; } // float
+        public double? ValorComprometido { get; set; } // float
+        public double? ValorGiros { get; set; } // float
+        public double? ValorVigenteTotal { get; set; } // float
+        public double? PorcPartipacion { get; set; } // float
+
+        public string IconoSector { get; set; }  //nvarchar(100)
+
+        public int orden { get; set; }
+
+    }
+
+
+    public class InfoParticipacionEntidad: InformationGraphics
+    {
+
+        public string CodigoInstitucion { get; set; } // varchar(30)
+        public string Institucion { get; set; } // varchar(500)
+        public int Año { get; set; } // int
+        public double? ValorVigente { get; set; } // float
+        public double? ValorVigenteTotal { get; set; } // float
+        public double? PorcPartipacion { get; set; } // float
+
+        public string parent { get; set; } // varchar(30)
+        public string id { get; set; } // varchar(30)
+        public double? value { get; set; } // float
+    }
+
+    public class SectoresEstrategicos
+    {
+        public int CodigoSector { get; set; } 
+        public string Sector { get; set; } // varchar(200)
+
+        public int NumeroProyectos { get; set; }
+
+        public double TotalProgramado { get; set; }
+
+        public double TotalGirado { get; set; }
+
+        public string Icono { get; set;  }
+
+    }
+
 }

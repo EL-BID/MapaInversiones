@@ -1,12 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PlataformaTransparencia.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/PlataformaTransparencia.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="@Cdn.Url(Url, "~/lib/bootstrap/dist/css/bootstrap.min.css")" />
+    <link rel="stylesheet" href="@Cdn.Url(Url, "~/css/site.css")" asp-append-version="true" />
+    <link rel="stylesheet" href="@Cdn.Url(Url, "~/PlataformaTransparencia.Web.styles.css")" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -42,9 +45,9 @@
         </div>
     </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="@Cdn.Url(Url, "~/lib/jquery/dist/jquery.min.js")"></script>
+    <script src="@Cdn.Url(Url, "~/lib/bootstrap/dist/js/bootstrap.bundle.min.js")"></script>
+    <script src="@Cdn.Url(Url, "~/js/site.js")" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

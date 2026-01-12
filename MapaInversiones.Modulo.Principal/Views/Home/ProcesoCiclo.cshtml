@@ -1,5 +1,7 @@
 ﻿@page
 @inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
 @{ Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <!--MAIN BANNER-->
@@ -281,25 +283,24 @@
 <!-- Call to action-->
 <!--HELP CENTER SHORTCUT-->
 <div id="helpCenter"></div>
-<script src="js/comunes_infografias.js"></script>
+<script type="text/javascript" src="@Cdn.Url(Url, "~/js/comunes_infografias.js")"></script>
 
 <script>
-    $(document).ready(function () {
-        GetEntidadesPresupuestoNoAlcaldias();
-    });
 
     window.onscroll = function () { myFunction() };
 
     var header = document.getElementById("navs-header");
-    var sticky = header.offsetTop;
+    var sticky = header ? header.offsetTop : 0;
 
     function myFunction() {
-        if (window.pageYOffset > sticky) {
-            header.classList.add("sticky");
-            header.classList.add("bg-white");
-        } else {
-            header.classList.remove("sticky");
-            header.classList.remove("bg-white");
+        if (header) {
+            if (window.scrollY > sticky) {
+                header.classList.add("sticky");
+                header.classList.add("bg-white");
+            } else {
+                header.classList.remove("sticky");
+                header.classList.remove("bg-white");
+            }
         }
     }
 </script>

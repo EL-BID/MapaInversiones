@@ -1,19 +1,18 @@
 ﻿@inject OrchardCore.IOrchardHelper Orchard
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 @model PlataformaTransparencia.Modelos.ModelProjectProfile
-@section scripts
-{
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha384-KcyRSlC9FQog/lJsT+QA8AUIFBgnwKM7bxm7/YaX+NTr4D00npYawrX0h+oXI3a2" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha384-JPbtLYL10d/Z1crlc6GGGGM3PavCzzoUJ1UxH0bXHOfguWHQ6XAWrIzW+MBGGXe5" crossorigin="anonymous"></script>
-}
+@using System.Text.Json
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
 
 @{
     ViewBag.Title = "Proyecto " + @Truncate(Model.ProjectInformation.name, 20) + " en " + @Model.ProjectInformation.location + "";
     ViewBag.SectionId = "section-projects";
     ViewBag.ProjectsSelected = "selected";
-    System.IFormatProvider cultureCountry = new System.Globalization.CultureInfo("es-RD");
+    System.IFormatProvider cultureCountry = new System.Globalization.CultureInfo("es-CO");
 
     var beneficiarios = "";
+    var anioActual = DateTime.Now.Year;
 
     string Truncate(string input, int length)
     {
@@ -32,13 +31,41 @@
     }
 
 }
-
+<input type="hidden" id="hdIdProyecto" value="@Model.ProjectInformation.ProjectId" />
+<input type="hidden" id="hdTipoProyecto" value="@Model.ProjectInformation.TipoDeProyecto" />
 <input type="hidden" id="hdNomUsuario" value="" />
 <input type="hidden" id="hdIdUsuario" value="" />
+<head>
+    <style>
+          body {
+      font-family: sans-serif;
+  }
+
+  .bar {
+      fill: #f9d9a9;
+  }
+
+  .label {
+      font-weight: bold;
+      fill: #333;
+  }
+
+  .frame {
+      fill: none;
+      stroke: #eed3a8; /* borde suave como en la imagen */
+      stroke-width: 1;
+      shape-rendering: crispEdges;
+  }
+
+  .axis text {
+      font-size: 12px;
+  }
+    </style>
+</head>
 <body>
     <!--MAIN BANNER-->
-    <section id="s0" class="banner-main-section s0-section" style="background-image: url('../img/preview-project.jpg')">
-        <div class="bgBlueOverlay">&nbsp;</div><!-- DON'T EREASE-->
+    <section id="s0" class="banner-main-section s0-section" style="background-image: url(@Model.urlImgBackground)">
+        <div class="bgBlueOverlay op-80">&nbsp;</div><!-- DON'T EREASE-->
         <div class="container">
             <!-- Begin bread crumbs -->
             <nav class="bread-crumbs">
@@ -70,19 +97,16 @@
                 <div class="col-lg-12">
                     <div class="banner-main-info">
                         <div class="banner-main-title">
-                            <h2 class="text-center">
+                            <h1 class="text-center">
                                 @if (@Model.ProjectInformation.name != null)
                                 {
-                                    @Model.ProjectInformation.name.Trim();
+                                    @Model.ProjectInformation.name.Trim()
+                                    ;
                                 }
-                            </h2>
+                            </h1>
                         </div>
-                        <div class="banner-main-desc">
-                            <h6 class="sub_t1_red text-center">
-                                SECTOR
-                                <br />
-                                @Model.ProjectInformation.sector
-                            </h6>
+                        <div class="banner-main-desc text-center mb-4">
+                            <span class="project-pill">@Model.ProjectInformation.TipoDeProyecto: @Model.ProjectInformation.BPIN</span>
                         </div>
                         <div class="sub_t2_red text-center">
                             <ul class="list-inline">
@@ -138,20 +162,20 @@
                                             <text>
                                                 @if (@item.Tipo == "MUNICIPIO" || @item.Tipo == "COUNTY")
                                                 {
-                                                    <li>@item.Nombre ,</li>
+                                                <li>@item.Nombre ,</li>
                                                 }
                                                 else if (@item.Tipo == "DEPARTAMENTO" || @item.Tipo == "REGION")
                                                 {
-                                                    <li>@item.Nombre ,</li>
+                                                <li>@item.Nombre ,</li>
                                                 }
                                                 else
                                                 {
-                                                    <li>@item.Nombre ,</li>
+                                                <li>@item.Nombre ,</li>
                                                 }
                                             </text>
                                         }
 
-                                        beneficiarios += ""+@item.Nombre+", ";
+                                        beneficiarios += "" + @item.Nombre + ", ";
                                         count++;
                                     }
                                     <li> y <a href="#benefi">otros @String.Format("{0}", @count - 3)</a></li>
@@ -160,152 +184,242 @@
                             </ul>
                         </div>
                         <ul class="list-inline details">
-                            <li>
-
-                                <h3>@String.Format(cultureCountry, "{0:n1}", @Model.ProjectInformation.duracion) Años</h3>
-                                <h6>Duración Del Proyecto</h6>
+                            <li class="text-center">
+                                @if (@Model.ProjectInformation.duracion < 1)
+                                {
+                                    <span class="h3">@String.Format(cultureCountry, "{0:n0}", @Model.ProjectInformation.duracion) Año</span>
+                                }
+                                else
+                                {
+                                    <span class="h3">@String.Format(cultureCountry, "{0:n0}", @Model.ProjectInformation.duracion) Años</span>
+                                }
+                                <div class="h6">Duración del proyecto</div>
                             </li>
-                            <li>
-                                <h3 id="lblCostoEstimado">$ @String.Format(cultureCountry, "{0:n1}", Model.ProjectInformation.TotalValue)</h3>
-                                <h6>Costo Estimado</h6>
+                            <li class="text-center">
+                                <span class="h3" id="lblCostoEstimado">
+                                    $ @ManejoNumeros.EscalaNumericaDecimalString(Model.ProjectInformation.TotalValueProgramado, Convert.ToString(Configuration["FormatearNumeros:Cultura"]), nivel: 1)
+                                </span>
+                                <div class="h6">Total programado</div>
                             </li>
-                          
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
         <!--NAVIGATION ON PAGE-->
-        <div class="row navs-shortcuts">
-            <div class="" id="navs-header">
-                <a class="btn-section" href="#s1">
-                    <span class="ic-shortcut"><i class="material-icons md-24">feed</i></span>
-                    <span class="text-btn">Información General</span>
-                </a>
-              
-                <a class="btn-section" href="#s2">
-                    <span class="ic-shortcut"><i class="material-icons md-24">earbuds</i></span>
-                    <span class="text-btn">Proceso de Contratación</span>
-                </a>
-                <a class="btn-section" href="#s3">
-                    <span class="ic-shortcut"><i class="material-icons md-24">collections</i></span>
-                    <span class="text-btn">Fotos</span>
-                </a>
-                <a class="btn-section" href="#s4">
-                    <span class="ic-shortcut"><i class="material-icons md-24">speaker_notes</i></span>
-                    <span class="text-btn">Participación Ciudadana</span>
-                </a>
-
+    </section>
+    <section class="banner-ppd" >
+        <div class="container px-4">
+            <div class="row align-items-center banner-content">
+                <div class="col-lg-4 col-md-5 text-center d-none d-md-block">
+                    <div class="character-placeholder mx-auto">
+                        <img src="~/img/Proyecto/ppd-001.png" />
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-7">
+                    <span class=" h3 display-4 fw-bolder text-primary-red text-uppercase mb-2">
+                        PROYECTOS DE INVERSIÓN
+                    </span><br/>
+                    <span class="h3 fw-bold text-primary-blue text-uppercase mb-4">
+                        PLAN DISTRITAL DE DESARROLLO
+                    </span>
+                    <p class="fs-6 text-dark lh-base mb-4">
+                       La Secretaría Distrital de Planeación elabora un diagnóstico estratégico de la comunidad de manera participativa, integrando la visión de los sectores y el enfoque territorial, con el fin de definir de manera conjunta los objetivos, metas y programas.
+                    </p>
+                    <a href="#modal-pdd" class="btn btn-pdd btn-lg text-white text-decoration-none">
+                        Aquí te contamos 
+                    </a>
+                </div>
             </div>
         </div>
     </section>
+    <!--Inicia Plantilla segun XD -->
+    <section class="s1E-section whiteBg" id="s1">
+        <!--Col-infoproyecto->
+            <div class="container">
+                <div class="row sep mb-4">
+                    <div
+                </div>
+            </div>
+        <!--Fin infoproyecto-->
+    </section>
+    <!--FIn Plantilla-->
     <!-- Informacion Proyecto -->
     <section class="s1E-section whiteBg" id="s1">
         <div class="container">
             <div class="row sep mb-4">
                 <div class="section-heading heading-left">
-                    <h2>Información General del Proyecto</h2>
+                    <h2>Información General</h2>
                 </div>
                 <!--GENERAL INFO COLUMN-->
                 <div class="col-lg-4">
-                    <div class="card description-box">
+                    <div class="card description-box mb-4">
                         <div class="section-heading-Project">
-                      
-                                <ul class="listDetail">
-                                    <li class="data-list">
-                                        <span class="label-desc">Institución Ejecutora Principal</span>
-                                        <span class="text-desc">@Model.ProjectInformation.NombreActor</span>
-                                    </li>
-                                   
-                                    <li class="data-list">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <span class="label-desc">Estado</span>
-                                                <span class="text-desc">@Model.ProjectInformation.Status</span>
-                                            </div>
 
+                            <ul class="listDetail">
+                                <li class="data-list">
+                                    <span class="label-desc">Objetivo estratégico</span>
+                                    <span class="text-desc">@Model.ProjectInformation.ObjetivoEstrategico</span>
+                                </li>
+                                 <li class="data-list">
+                                    <span class="label-desc">Programa</span>
+                                    <span class="text-desc">@Model.ProjectInformation.ProgramaPlanDesarrolloDistrital</span>
+                                </li>
+
+                                <li class="data-list">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="label-desc">Estado</span>
+                                            <span class="text-desc">@Model.ProjectInformation.Status</span>
                                         </div>
-                                    </li>
-                                    <li class="data-list">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <span class="label-desc">Fecha de Inicio</span>
-                                                <span class="text-desc">@Model.ProjectInformation.startdate</span>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <span class="label-desc">Fecha de Finalización</span>
-                                                <span class="text-desc">@Model.ProjectInformation.enddate</span>
-                                            </div>
+
+                                    </div>
+                                </li>
+                                <li class="data-list">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="label-desc">Fecha de Inicio</span>
+                                            <span class="text-desc">@Model.ProjectInformation.startdate</span>
                                         </div>
-                                    </li>
-                                    <li class="data-list" id="benefi">
-                                        <span class="label-desc">Código SNIP</span>
-                                        <span class="text-desc">@Model.ProjectInformation.BPIN</span>
-                                    </li>
-                                     @if (beneficiarios.Trim() != "")
+                                        <div class="col-md-6">
+                                            <span class="label-desc">Fecha de Finalización</span>
+                                            <span class="text-desc">@Model.ProjectInformation.enddate</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="data-list" id="benefi">
+                                     @if (@Model.ProjectInformation.TipoDeProyecto == "Proyecto Inversión") 
                                      {
-                                        <text>
-                                        <li class="data-list" >
-                                            <span class="label-desc"><strong>Beneficiarios</strong></span>
-                                            <span class=""><br>@Html.Raw(@beneficiarios.Substring(0, @beneficiarios.Length - 1))</span>
+                                       <span class="label-desc">  Código BPIN
+                                           <a href="#popup4" class="p-2 popup4_open ic-ttip"><span class="material-icons md-32">info</span></a>
+                                       </span>
+                                     } 
+                                     else 
+                                     { 
+                                       <span class="label-desc">  Código Segplan
+                                           <a href="#popup4" class="p-2 popup4_open ic-ttip"><span class="material-icons md-32">info</span></a>
+                                       </span>
+                                     } 
+                                    <span class="text-desc">@Model.ProjectInformation.BPIN</span>
+                                </li>
+                                <li class="data-list">
+                                    <span class="label-desc">Sector</span>
+                                    <span class="text-desc">@Model.ProjectInformation.sector.Replace("Sector ", "")</span>
+                                </li>
+                                 <li class="data-list">
+                                    <span class="label-desc">Entidad</span> <br />
+                                   @*  <span class="text-desc">@Model.ProjectInformation.NombreEntidad</span> *@
+                                   <a class="text-desc" target="_blank" href="~/PerfilEntidad?codEntidad=@Model.ProjectInformation.IdEntidad">
+                                                        @Model.ProjectInformation.NombreEntidad
+                                   </a>
+                                </li>
+                                @if (beneficiarios.Trim() != "")
+                                {
+                                    <text>
+                                    <li class="data-list">
+                                        <span class="label-desc"><strong>Beneficiarios</strong></span>
+                                        <span class=""><br>@Html.Raw(@beneficiarios.Substring(0, @beneficiarios.Length - 1))</span>
+                                    </li>
+                                    </text>
+                                }
 
-
-                                        </li>
-                                        </text>
-                                     }
-                                
-                                </ul>
-                            </div>
-
+                            </ul>
                         </div>
 
+                    </div>
                 </div>
+                <!--AVANCE FINANCIERO-->
                 <!--GRAPH SIDE-->
                 <div class="col-lg-8">
-
-                     <div class="mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="heading-Project">
-                                        <h3>Avance Financiero Acumulado</h3>
-                                    </div>
-                                    <div class="containerGraph" style="width:auto;height:auto;" id="divGraphAvanceFinanciero"></div>
+                    <div class="col-lg-10 offset-lg-1 mb-4">
+                <div class="alert alert-info d-flex align-items-center" role="alert">
+                    <i class="bi bi-lightbulb bulbicn me-2"></i>
+                    <span>Los datos de <strong>Avance financiero y Presupuesto</strong> cambian según el año seleccionado.</span>
+                </div>
+            </div>
+                    <div class="containerBoxExec mb-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="filtro_periodo" class="text-bold">Seleccione el año a consultar</label>
+                                <div class="form-group">
+                                    <select class="form-select" aria-label="periodo" id="filtro_periodo_info_general">
+                                        @if (Model.periodos_fuentes != null)
+                                        {
+                                            foreach (var item in Model.periodos_fuentes)
+                                            {
+                                                <text>
+                                                <option value="@item.id" class="export_option">@item.id</option>
+                                                </text>
+                                            }
+                                        }
+                                    </select>
                                 </div>
                             </div>
+                        </div>
                     </div>
-
                     <div class="mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="heading-Project">
-                                        <h3>Ejecución Presupuestal Anual</h3>
-                                    </div>
-                                    <div class="containerBoxExec">
-                                        <label for="filtro_periodo">Seleccione el periodo de análisis</label>
-                                        <div class="form-group">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="heading-Project">
+                                    <h4>
+                                        Avance financiero <a href="#popup1" class="p-2 popup1_open ic-ttip">
+                                            <span class="material-icons md-32">
+                                                info
+                                            </span>
+                                        </a>
+                                    </h4>
+                                    <p>Muestra el porcentaje del presupuesto total del proyecto que ha sido ejecutado o desembolsado en un periodo determinado..</p>
+                                </div>
+                                <div class="containerGraph" style="width:auto;height:auto;" id="divGraphAvanceFinancieroInfoGeneral"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--PRESPUESTO-->
+                    <div class="py-4">
+                        <div class="heading-Project">
+                            <h4>
+                                Presupuesto <span id="info_general_annio" class="yearSelected">2024</span>&nbsp;<a href="#popup1" class="p-2 popup1_open ic-ttip">
+                                    <span class="material-icons md-32">
+                                        info
+                                    </span>
+                                </a>
+                            </h4>
 
-                                            <select class="form-select" aria-label="periodo" id="filtro_periodo">
-                                                @if (Model.periodos_fuentes != null)
-                                                {
-                                                    int i = 0;
-                                                    foreach (var item in Model.periodos_fuentes)
-                                                    {<text>
-                                                            <option value="@item.id" class="export_option">@item.id</option>
-                                                    </text>
-                                                    i++;
-                                                }
-                                            }
-                                            </select>
+                        </div>
+                        <div class="container-fluid py-4">
+                            <div class="row g-3">
+                                <!-- Programa -->
+                                <div class="col-lg-4 col-md-6 col-12">
+                                    <div class="program-card programa">
+                                        <div class="program-title">Total Vigente</div>
+                                        <div class="meta-amount" id="presupuestoProgramadoInfoGeneral">
+                                            $ @ManejoNumeros.EscalaNumericaDecimalString(Model.ProjectInformation.TotalValueProgramado, Convert.ToString(Configuration["FormatearNumeros:Cultura"]), nivel: 1)
                                         </div>
                                     </div>
-                                    <div id="divDetFuentes">
+                                </div>
+
+                                <!-- Comprometido -->
+                                <div class="col-lg-4 col-md-6 col-12">
+                                    <div class="program-card subprograma">
+                                        <div class="program-title">Comprometido</div>
+                                        <div class="meta-amount" id="presupuestoComprometido">
+                                            $ @ManejoNumeros.EscalaNumericaDecimalString(Model.ProjectInformation.TotalValue, Convert.ToString(Configuration["FormatearNumeros:Cultura"]), nivel: 1)
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Girado-->
+                                <div class="col-lg-4 col-md-12 col-12">
+                                    <div class="program-card meta">
+                                        <div class="program-title">Girado</div>
+                                        <div class="meta-amount" id="presupuestoGirado">
+                                            $ @ManejoNumeros.EscalaNumericaDecimalString(Model.ProjectInformation.TotalValueAll, Convert.ToString(Configuration["FormatearNumeros:Cultura"]), nivel: 1)
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
-                                   
-                   
-                    
                     <div class="row">
                         @if (Model.componentes_proy.Count > 0)
                         {
@@ -322,19 +436,15 @@
                                                 <select class="form-select" aria-label="periodo" id="filtro_Componente">
                                                     @if (Model.componentes_proy.Count > 0)
                                                     {
-                                                        int i = 0;
                                                         foreach (var item in Model.componentes_proy)
-                                                        {<text>
-                                                                <option codigo="@item.Id" value="@item.Id">
-                                                                    <span class="indicatorCat"> @item.Id </span>@item.Nombre
-                                                                </option>
-                                                        </text>
-                                                        i++;
+                                                        {
+                                                            <text>
+                                                            <option codigo="@item.Id" value="@item.Id">
+                                                                <span class="indicatorCat"> @item.Id </span>@item.Nombre
+                                                            </option>
+                                                            </text>
+                                                        }
                                                     }
-
-                                                }
-
-
                                                 </select>
                                             </div>
                                         </div>
@@ -342,117 +452,284 @@
                                     </div>
                                 </div>
                             </div>
-
                         }
-                    </div>                    
+                    </div>
                 </div>
                 <div class="row mb-4">
-                        <div class="col-lg-12">                            
-                                <div class="heading-Project">
-                                    <h3>Objetivo General</h3>
+                    <div class="col-lg-12">
+                        <div class="heading-Project">
+                            <h4>Objetivo General</h4>
+                        </div>
+                        <p class="text-desc">@Model.ProjectInformation.objGeneral</p>
+                    </div>
+                </div>
+                <section class="separator-H py-4">
+                    <div class="main-container">
+                        <div class="content-wrapper">
+                            <!-- Título principal -->
+                            <div class="section-heading heading-center">
+                                <h2>Avance por metas y actividades</h2>
+                            </div>
+                            <!-- Descripción -->
+                            <p class="text-desc py-4">
+                                Aquí puedes ver cómo va el cumplimiento de cada actividad del proyecto. Las ‘magnitudes’ muestran cuánto se comprometio a hacer y cuánto ya se ha logrado.
+                                @* Lorem ipsum dolor sit amet consectetur, adipiscing elit gravida porta leo tincidunt cursus vulputate nam et vehicula lorem lorem mauris diam et libero laoreet vulputate rhoncus quisque sociosqu magna maecenas vestibulum pellentesque. *@
+                            </p>
+
+                            <!-- Selectores -->
+                            <div class="containerBoxAct mb-4">
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <label class="text-bold">Selecciona una meta producto</label>
+                                        <select id="selectMetaProducto" class="form-select">
+                                             @if (Model.PlanesMetaProducto != null)
+                                              {
+                                                  foreach (var item in Model.PlanesMetaProducto)
+                                                  {
+                                                      <text>
+                                                      <option value="@item.Id" class="export_option">@item.Nombre</option>
+                                                      </text>
+                                                  }
+                                              }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="text-bold">Selecciona una Actividad</label>
+                                        <select id="selectActividadMetaProducto" class="form-select">
+                                        </select>
+                                    </div>
                                 </div>
-                                <span class="text-desc">@Model.ProjectInformation.objGeneral</span>                            
+                            </div>
+
+                            <!-- Sección Actividad -->
+                            <div class="activity-section">
+                                <h3 class="activity-title">Actividad</h3>
+                                <p class="activity-description" id="nombreActividad">
+                                </p>
+                            </div>
+
+                            <!-- Cards de progreso -->
+                            <div class="progress-cards py-4">
+                                <div class="row">
+                                    <!-- Avance financiero -->
+                                    <div class="col-lg-6">
+                                        <div class="card white-card">
+                                            <div class="card-body">
+                                                <h4 class="text-center">Avance financiero</h4>
+                                                <div class="financial-item">
+                                                    <div class="ic-wrap">
+                                                        <img src="~/img/ic-programado.svg" class="img-fluid" alt="Icono decorativo Presupuesto">
+                                                    </div>
+                                                    <div class="financial-info">
+                                                        <h6>Programado</h6>
+                                                        <p id="avanceFinancieroPrograma" class="amount"></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="financial-item">
+                                                    <div class="ic-wrap">
+                                                        <img src="~/img/ic-comprometido.svg" class="img-fluid" alt="Icono decorativo Presupuesto">
+                                                    </div>
+                                                    <div class="desc-data">
+                                                        <h6>Comprometido</h6>
+                                                        <p id="avanceFinancieroComprometido" class="amount"></p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="financial-item">
+                                                    <div class="ic-wrap">
+                                                        <img src="~/img/ic-girado.svg" class="img-fluid" alt="Icono decorativo Presupuesto">
+                                                    </div>
+                                                    <div class="financial-info">
+                                                        <h6>Girado</h6>
+                                                        <p id="avanceFinancieroGirado" class="amount"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Avance físico -->
+                                    <div class="col-lg-6">
+                                        <div class="card white-card">
+                                            <div class="card-body">
+                                                <h4 class="text-center">Avance físico</h4>
+
+                                                <div class="physical-progress py-4">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="chart-container">
+                                                                <span class="textmagnitud">% MAGNITUD COMPROMETIDO</span>
+                                                                <div class="chart-placeholder">
+                                                                    <div id="graphDonaMagnitudComprometido"></div>
+                                                                </div>
+                                                                <div class="chart-info">
+                                                                    <p>Magnitud Programada</p>
+                                                                    <p  id="avanceFisicoMagnitudProgramada" class="value"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="chart-container">
+                                                                <span class="textmagnitud">% MAGNITUD ENTREGADO</span>
+                                                                <div class="chart-placeholder">
+                                                                    <div id="graphDonaMagnitudEntregado"></div>
+                                                                </div>
+                                                                <div class="chart-info">
+                                                                    <p>Magnitud Entregada</p>
+                                                                    <p id="avanceFisicoMagnitudEntregada" class="value"></p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tabla de detalle -->
+                            <div class="detail-section py-4">
+                                <div class=" card white-card">
+                                    <div class="card-header">
+                                            <h4 class="text-center">Detalle avance actividad por vigencia</h4>
+                                        </div>
+                                    <div class="card-body">                                    
+                                        <div class="col-md-12">
+                                            <p class="detail-description">
+                                                 @* Lorem ipsum dolor sit amet consectetur, adipiscing elit gravida porta leo tincidunt cursus turpis lobortis cras cursus mauris molestiae laoreet pellentesque, neque magna nam ante nibh maecenas eleifend mauris erat libero. *@
+                                            </p>
+                                             <div id="detalleActividadTable" class="table-responsive">
+
+                                            </div>
+                                        </div>
+                                    </div>              
+                                </div
+                            </div>
+                            <!-- Botón de descarga -->
                         </div>
                     </div>
+                </section> 
+                <section class="separator-H py-4" id="sctejecucionfinanciera">
+                    <div class="row mb-4">
+                        <div class="col-lg-4">
+                            <div class="heading-Project">
+                                <h4 class="mb-4">Ejecución presupuestal por clasificación de fondo</h4>
+                                    <p><strong>Fuente de financiación (fondo):</strong> Es de donde proviene el dinero que usa una entidad pública para realizar sus actividades, proyectos o prestar sus servicios. En otras palabras, muestra el Origen de los recursos para cubrir los gastos. Estos pueden venir de los impuestos que pagan las personas, de transferencias del Gobierno Nacional, de recursos propios de la entidad o de aportes de otras instituciones
+                                       <br /><br /> A continuación, se presenta la definición sobre cómo se agrupan estas fuentes de financiación (fondos):</p>
+                                <ul>
+                                    <li><span class="text-bold">Ordinario:</span> agrupa los fondos cuyo uso es libre, es decir, la entidad puede decidir en qué gastarlos según su plan de Inversiones y de funcionamiento. Estos recursos provienen de ingresos comunes como los impuestos de industria y comercio (ICA), predial y vehículos.</li><br/>
+                                    <li>
+                                        <span class="text-bold">Destinación específica:</span> son recursos que, por ley, deben usarse únicamente para los fines que esa misma norma indique. No pueden destinarse a otros gastos.
+
+                                    </li><br />
+                                    <li><span class="text-bold">Administrados:</span> son recursos que generan los establecimientos públicos al cumplir sus funciones o actividades principales.</li><br />
+                                    <li><span class="text-bold">Crédito:</span> son recursos que se obtienen mediante endeudamiento, a través de los cupos de crédito aprobados por el Concejo para la Administración Distrital.</li><br />
+                                    <li><span class="text-bold">SGP y Otras Nación:</span> corresponden a recursos del Sistema General de Participaciones, un mecanismo mediante el cual la Nación transfiere dinero a las entidades territoriales para financiar servicios básicos como educación, salud y agua potable.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label for="filtro_periodo">Seleccione el periodo de análisis</label>
+                                    <div class="form-group">
+
+                                        <select class="form-select" aria-label="periodo" id="filtro_ejecucion_presupuestal_por_fondo">
+                                            @if (Model.periodos_fuentes != null)
+                                            {
+                                                foreach (var item in Model.periodos_fuentes)
+                                                {
+                                                    <option value="@item.id" class="export_option" @(item.id == anioActual ? "selected" : "")>
+                                                        @item.id
+                                                    </option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrap-fuenteFinance" id="ejecucion_presupuestal_fondo"></div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
     </section>
     <!--Entregables-->
-@*    @if (Model.avanceFisicoFaseInversion.Count > 0)
-    {*@
-        <section class="section section-bg2" id="s5">
-            <div class="container">
+    <section class="section" id="sectionProyectosPot">
+        <div class="container">
+            <div class="row">
                 <div class="section-heading heading-left">
-                    <h2>Avance por producto</h2>
+                    <h2>Listado de proyectos POT asociados</h2>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="" id="divFasesComponentes">
-                        @if (Model.avanceFisicoFaseInversion.Count() > 0)
-                            {
-                                <text>
-                                    <div class="boxCompoComponentes">
-                                </text>
-                                int i = 0;
-                                int j = 0;
-                                int k = 0;
-                                //string k = "0";
-                                bool cerrarDiv = false;
-                                <text>
-                                    <div class="BoxComFases">
-                                        <div class="list-item">
-                                            @foreach (var item in Model.avanceFisicoFaseInversion)
-                                            {
-                                                if (k != Convert.ToInt32(item.CodComponente))
-                                                {
-                                                    <div class=" row">
-                                                        <div class="col-lg-9">
-                                                            <span class="badgeF">@item.CodComponente</span>
-                                                            <span class="tit-compo">@item.Componente</span>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                        </div>
-                                                    </div>
-                                                }
-                                                <div class="wraptable-fase">
-                                                    <div class="row">
-                                                        <div class="col-lg-9">
-                                                            <div class="wraptable-product">
-                                                                <div class="wproductleft">
-                                                                    <div class="tproduct">Producto</div>
-                                                                    <div class="tname">@item.Producto</div>
-                                                                </div>
-                                                                <div class="wproduct">
-                                                                    <div class="tproduct">Unidad del Producto</div>
-                                                                    <div class="tname">@item.UnidadProducto</div>
-                                                                </div>
-                                                                <div class="wproduct">
-                                                                    <div class="tproduct">Meta</div>
-                                                                    <div class="tname">@item.Meta</div>
-                                                                </div>
-                                                                <div class="wproduct">
-                                                                    <div class="tproduct">Ejecutado</div>
-                                                                    <div class="tname">@item.Ejecutado</div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-3">
-                                                            <div class="wproduct producto">
-                                                                <div class="tproduct">Avance de producto <span>@String.Format("{0:0.00}", item.AvanceFisico) %</span></div>
-                                                                <div class="tpercent" style="width:@item.AvanceFisico%"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                i++;
-                                                j = item.IdentificadorFase;
-                                                k = item.CodComponente;
-                                            }
-                                        </div>
-                                    </div>
-                                </text>
-                            }
+                <p>Aquí puedes ver los proyectos asociados al POT y organizarlos según distintos criterios, para que sea más fácil encontrar y consultar la información</p>
+                <div class="row py-4">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="estadoProyectosPOT" class="small">Filtrar por estado:</label>
+                            <select class="form-select" aria-label="Filtrar por" id="estadoProyectosPOT">
+                               @if (Model.EstadosProyectos != null)
+                               {
+                                   foreach (var item in Model.EstadosProyectos)
+                                   {
+                                       <text>
+                                       <option value="@item.Id" class="export_option">@item.Nombre</option>
+                                       </text>
+                                   }
+                               }
+                            </select>
                         </div>
                     </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="tiposHorizontesPOT" class="small">Filtrar por horizonte:</label>
+                            <select class="form-select" aria-label="Filtrar por" id="tiposHorizontesPOT">
+                               @if (Model.Horizontes != null)
+                               {
+                                   foreach (var item in Model.Horizontes)
+                                   {
+                                       <text>
+                                       <option value="@item.Id" class="export_option">@item.Nombre</option>
+                                       </text>
+                                   }
+                               }
+                            </select>
+                        </div>
+                    </div>
+                   @*  <div class="col-lg-12 text-center py-4">
+                        <div class="comparativeTable">
+                            <div id="listproyectosPot" class="card-entidades-group">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPagProyectosPot" class="">
+                    </div> *@
                 </div>
             </div>
+            <div class="row">
+              <div class="col-lg-12 text-center py-4">
+                <div class="comparativeTable">
+                  <div id="listproyectosPot" class="card-entidades-group">
+                  </div>
+                </div>
+              </div>
+              <div id="divPagProyectosPot" class="">
+              </div>
             </div>
-        </section>
-
-    @*}*@
-   
+        </div>
+    </section>
     <!--Fin entregables-->
-
     <!--Ordenes de Pago-->
-    <section class="section" id="s2">
+     <section class="section" id="s2">
         <div class="container">
             <div class="section-heading heading-left">
                 <h2>Proceso de Contratación</h2>
             </div>
             <div class="row">
-                <div class="col-md-3">
-
+                <div class="col-md-12 col-lg-4">
                     <form class="contractList bgSoftGray">
                         <div class="form-group">
                             <label class="year" for="entidad">Año</label>
@@ -461,45 +738,36 @@
                         </div>
                         <div class="form-group">
                             <label class="year" for="proceso">Proceso Palabra Clave </label>
-
                             <input type="search" data-results="search-home" data-search="home" id="proceso" class="search-input form-control input-lg" autocomplete="on" placeholder="Código ó Ventilador, reactivos, etc." value="">
-
                         </div>
                         <div class="triggerForm">
-                            <input type="button" class="btn btn-primary" value="Buscar" id="btn-buscar" disabled=""><div class="clearfix"></div>
+                            <input type="button" class="btn btn-primary" value="Buscar" id="btn-buscar" disabled="">
+                            <div class="clearfix"></div>
                             <a class="btn btn-link text-center" id="btnLimpiar" disabled="disabled">LIMPIAR FILTROS</a>
                         </div>
-
                     </form>
-
                 </div>
-                <!--CONTRACT-LIST-->
                 <div class="col-lg-8">
-                    <!--ESTRUCTURA HTML PARA TOMAR COMO REFERENCIA-->
-                    <!--CIERRE DE ESTRUCTURA-->
                     <div class="wrap-proceso whiteBg" id="srcContratos">
-                     
                     </div>
-
                     <div id="divPagContratos" class="">
                     </div>
 
                 </div>
-                <!--END CONTAINER-->
             </div>
         </div>
-    </section>
+    </section> 
     <!--fin ordenes de pago-->
     <!-- En Ejecución Section -->
     <section class="section section-bg2" id="s3">
         <div class="container">
             <div class="section-heading heading-left">
-                <h2>Fotos de la unidad ejecutora</h2>
+                <h2>Fotos oficiales</h2>
             </div>
             @if (Model.Images.Count() == 0)
             {
                 <text>
-                    <div class="empty-gallery">No existen imágenes aún para este proyecto</div>
+                    <div class="empty-gallery">No existen imágenes aún para este obra</div>
                 </text>
             }
             else
@@ -514,7 +782,120 @@
                                 <div class="thumbnail type5">
 
                                     <div class="enlace_img" descrip="@photo.description" data-src="@photo.large" style="background-image: url('@photo.large')">
-                                        <div class="btn-zoom" data-toggle="modal" data-target="#FotoModal"><div class="ic-gal"><i class="material-icons md-48">zoom_in</i></div></div>
+                                        <div class="btn-zoom" data-toggle="modal" data-target="#FotoModalOficial">
+                                            <div class="ic-gal"><i class="material-icons md-48">zoom_in</i></div>
+                                        </div>
+                                        <div class="labelCategory">
+                                            <div class="d-flex">
+                                                <div class="desc-gal">
+                                                    <span class="clearfix">Subido el @photo.fechaFoto</span>
+                                                    <span class="text-elipsis">@photo.description</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </div>
+                            </div><!-- End project item -->
+                        </div>
+                    }
+                </div>
+            }
+            <div id="FotoModalOficial" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
+                <div class="modal-dialog MIVBox">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title">Fotos Oficiales</h3>
+                            <button type="button" id="btnCloseFotoModalOficial" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="divDatosModalOficial">
+                            <img class="img-fluid" id="img-modal-oficial" alt="imagen complementaria" src="">
+                            <div id="des-oficial"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--MODAL 2-->
+            <div id="popup1" class="popup_style popup_style_wide popup_style_sally open_popup" style="display:none;">
+                <div class="popup">
+                    <div class="popup_content">
+                        <h4 class="popup_title">Tipos de presupuesto</h4>
+                        <div class="content2">
+                            <ul>
+                                <li><span class="text-bold">Presupuesto asignado/vigente:</span> <br />Es la cantidad total de dinero aprobada para gastar en un año, que va del 1 de enero al 31 de diciembre.</li>
+                                <li>
+                                    <span class="text-bold">Presupuesto Comprometido:</span>  <br />Es la parte del dinero ya reservada para cumplir obligaciones, como contratos, órdenes de compra o convenios.
+                                </li>
+                                <li>
+                                    <span class="text-bold">Presupuesto Girado:</span>  <br />Es el dinero efectivamente pagado, una vez que se han recibido los bienes o servicios contratados.
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="popup1_close popup_close"><i class="material-icons md-24">close</i></div>
+                </div>
+            </div>
+
+            <!--MODAL 4-->
+            <div id="popup4" class="popup_style popup_style_wide popup_style_sally open_popup" style="display:none;">
+                <div class="popup">
+                    <div class="popup_content">
+                        <h4 class="popup_title">Tipos de Código</h4>
+                        <div class="content2">
+                            <ul>
+                                   <li><span class="text-bold">Código BPIN:</span> <br />El código BPIN es una secuencia de dígitos que identifica de manera única y específica un proyecto de inversión. Este sistema es parte del Banco de Programas y Proyectos de Inversión Nacional, que apoya los procesos de planeación, presupuestación y evaluación de resultados de la inversión pública en Colombia.</li>
+                                <li>
+                                    <span class="text-bold">Código SEGPLAN:</span>  <br />es un identificador interno o clave asignado a proyectos, programas o metas dentro de ese sistema.
+
+Sirve para rastrear, registrar y hacer seguimiento a la ejecución presupuestal o al cumplimiento de los objetivos del plan de desarrollo.
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="popup4_close popup_close"><i class="material-icons md-24">close</i></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <div class="clearfix"></div>
+
+    <!-- En Ejecución Section -->
+    <section class="section section-bg2" id="s3">
+
+        <div class="container">
+
+            <div class="section-heading heading-left">
+                <h2 class="mb-3">Fotos cargadas por los ciudadanos </h2>
+            </div>
+            @if (Model.FotosU.Count() == 0)
+            {
+                <text>
+
+                    <div class="empty-gallery">No existen imágenes aún para este obra</div>
+                </text>
+            }
+            else
+            {
+                <div class="project-carusel w2col" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true }'>
+                    @foreach (var photo in Model.FotosU)
+                    {
+                        <!--ITEM 1-->
+                        <div class="project-col gallery-col-carusel">
+                            <!-- Begin project item -->
+                            <div class="gallery-card">
+                                <div class="thumbnail type5">
+
+                                    <div class="enlace_img_ciudadanos" descrip="@photo.description" data-src="@photo.large" style="background-image: url('@photo.large')">
+                                        <div class="btn-zoom" data-toggle="modal" data-target="#FotoModalCiudadano">
+                                            <div class="ic-gal"><i class="material-icons md-48">zoom_in</i></div>
+                                        </div>
                                         <div class="labelCategory">
                                             <div class="d-flex">
                                                 <div class="desc-gal">
@@ -532,104 +913,42 @@
 
                     }
                 </div>
-
             }
-
-            <!--MODAL-->
-            <div id="FotoModal" class="modal fade" role="dialog">
-                <div class="modal-dialog MIVBox">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title">Fotos</h3>
-                            <button type="button" id="btnCloseFotoModal" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
-                        </div>
-                        <div class="modal-body" id="divDatosModal">
-                            <img class="img-fluid" id="img-modal" alt="imagen complementaria" src="">
-                            <div id="des"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="clearfix"></div>
-
-    <!-- En Ejecución Section -->
-    <section class="section section-bg2" id="s3">
-
-        <div class="container">
-
-            @if (Model.FotosU.Count() == 0)
-            {
-                <text>
-                    <div class="section-heading heading-left">
-                        <h2 class="mb-3">Fotos cargadas por los ciudadanos </h2>
-                    </div>
-                    <div class="empty-gallery">No existen imágenes aún para este proyecto</div>
-                </text> }
-            else
-            {
-                <div class="section-heading heading-left">
-                    <h2 class="mb-3">Fotos cargadas por los ciudadanos(@Model.FotosU.Count()) </h2>
-                </div>
-                <div class="project-carusel w4col" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true }'>
-                    @foreach (var photo in Model.FotosU)
-                    {<!--ITEM 1-->
-                        <div class="project-col gallery-col-carusel">
-                            <!-- Begin project item -->
-                            <div class="gallery-card">
-                                <div class="thumbnail type5">
-
-                                    <div class="enlace_img" descrip="@photo.description" data-src="@photo.large" style="background-image: url('@photo.large')">
-                                        <div class="btn-zoom" data-toggle="modal" data-target="#FotoModal"><div class="ic-gal"><i class="material-icons md-48">zoom_in</i></div></div>
-                                        <div class="labelCategory">
-                                            <div class="d-flex">
-                                                <div class="desc-gal">
-                                                    <span class="clearfix">Subido el @photo.fechaFoto</span>
-                                                    <span class="text-elipsis">@photo.description</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-
-                                </div>
-                            </div><!-- End project item -->
-                        </div>}
-                </div>}
             <!--BOTONERA-->
             <div class="col-md-12">
                 <div class="filtersBox">
                     <div class="row">
 
                         <div class="col-md-12 text-center py-5" id="divFotoUsuario">
-                            <a class="btn btn-primary" id="btnSubirFoto_AUX" role="button"><i class="material-icons md-24">add_photo_alternate</i> SUBIR FOTO</a>
-                            <button class="btn btn-primary" id="btnSubirFoto" data-toggle="modal" data-target="#myModal" role="button" style="display:none;"><i class="material-icons md-24">add_photo_alternate</i> SUBIR FOTO2</button>
+                            <a class="btn btn-outlined btn-simple" id="btnSubirFoto_AUX" role="button"><i class="material-icons md-24">add_photo_alternate</i> SUBIR FOTO</a>
+                            <button type="button" class="btn outlined btn-simple" id="btnSubirFoto" data-toggle="modal" data-target="#myModal" role="button" style="display:none;">
+                                <i class="material-icons md-24">add_photo_alternate</i> SUBIR FOTO2
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
             <!--MODAL-->
-            <div id="FotoModal" class="modal fade" role="dialog">
+            <div id="FotoModalCiudadano" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
                 <div class="modal-dialog MIVBox">
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">Fotos</h3>
-                            <button type="button" id="btnCloseFotoModal" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
+                            <h3 class="modal-title">Fotos Ciudadanas</h3>
+                            <button type="button" id="btnCloseFotoModalCiudadano" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="modal-body" id="divDatosModal">
-                            <img class="img-fluid" id="img-modal" alt="imagen complementaria" src="">
-                            <div id="des"></div>
+                        <div class="modal-body" id="divDatosModalCiudadano">
+                            <img class="img-fluid" id="img-modal-ciudadano" alt="imagen complementaria" src="">
+                            <div id="des-ciudadano"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="myModal" class="modal fade" role="dialog">
+
+            <div id="myModal" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
                 <div class="modal-dialog MIVBox">
                     <!-- Modal content-->
                     <div class="modal-content">
@@ -638,19 +957,19 @@
                             <h4 class="modal-title"><i class="material-icons md-24">add_photo_alternate</i> Subir Foto</h4>
                         </div>
                         <div class="modal-body" id="divDatosModal">
-                            <div class="form-group">
+@*                             <div class="form-group">
                                 <label for="filtro_AreaFotoUsuUpload">Seleccione el ente territorial:</label>
                                 <select id="filtro_AreaFotoUsuUpload" class="form-control">
                                     @if (Model.ProjectInformation.EntesBeneficiados.Count() > 0)
                                     {
                                         foreach (var item in Model.ProjectInformation.EntesBeneficiados)
                                         {
-                                            <option value="@(item.IdMunicipio)-@(item.IdDepartamento)"> @item.Nombre </option>
+                                            <option value="@(item.IdMunicipio)@(item.IdDepartamento)"> @item.Nombre </option> //poner el * entre municipio y depto
 
                                         }
                                     }
                                 </select>
-                            </div>
+                            </div> *@
                             <div class="form-group">
                                 <label for="tbDescripcion">Realice una descripción relacionada con la imagen:</label><br>
                                 <textarea class="form-control" rows="5" id="tbDescripcion"></textarea>
@@ -677,205 +996,25 @@
     <!-- Participación ciudadana -->
     <section id="s4" class="section">
         <div class="container">
-            <div class="section-heading heading-left">
+            <div class="section-heading heading-center">
                 <h2 class="mb-4">Tu participación es importante para nosotros</h2>
-                <p class="section-subheading">Participa deja tu comentario sobre este proyecto</p>
+                <p class="section-subheading">Participa dejando tu comentario sobre este proyecto</p>
             </div>
-            <div class="row">
-                <div class="col-md-4 user-form-login">
-                    <!--NEW user-->
-                    <div class="light-bg">
-                        <div id="divUsuarioLog">
-                            <div class="p-3">
-                                <p>Ingresa tus datos a continuación</p>
-                                <div id="divDatosLogin">
-                                    <div class="form-group">
-                                        <label for="txtEmailLog" class="required">Email</label>
-                                        <input type="email" class="form-control" id="txtEmailLog" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtClaveLog" class="required">Password</label>
-                                        <input type="password" class="form-control" id="txtClaveLog" placeholder="">
-                                    </div>
-                                    @Html.AntiForgeryToken()
-                                </div>
+            <div class="row justify-content-center">
+                <div class="col-md-7 col-lg-7 user-form-login mb-4">
+                    <!--usuario logueado-->
+                    <div id="divUsuarioLog">
+                        <div class="light-bg">
 
-                                <div class="form-group text-center mb-5">
-                                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btnIngresarUsuLog">INGRESAR </button><br><br>
-                                    <a id="btnEnlaceOlvidoClave" role="button">Olvid&eacute; la contraseña</a>
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-md-12 text-center">
-                                        <div class="btn btn-lg btn-primary" id="btnNuevaCuenta">Crear Nueva Cuenta</div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
+
                     </div>
-                    <!--NEW ACCOUNT-->
-                    <div class="light-bg">
-                        <div id="divCuentaNueva" style="display:none;">
-                            <div class="p-3" id="divInfoUsuario">
-                                <h4>NUEVA CUENTA</h4>
-                                <div class="form-group">
-                                    <label for="txtNombre" class="required">Nombre</label>
-                                    <input type="text" class="form-control" id="txtNombre">
-                                    <div id="error_txtNombre" class="alert-danger" hidden="hidden">Nombre no puede ser vacío</div>
-                                </div>
-                                <div class="form-group" id="divGenero">
-
-                                    @if (Model.genero_participacion.Count() > 0)
-                                    {
-                                        <text>
-                                            <label for="filtro_Genero" class="required">Género:</label>
-                                            <select class="form-select" aria-label="Selecciona un género:" id="filtro_Genero">
-                                                <option id="0" id_gen="0" nom_gen="" class="selected">Género</option>
-                                                @foreach (var item in Model.genero_participacion)
-                                                {
-                                                    <option id="@item.id" id_gen="@item.id" nom_gen="@item.name">@item.name</option>
-                                                }
-
-                                            </select>
-                                        </text>
-                                    }
-                                    <div id="error_filtro_Genero" class="alert-danger" hidden="hidden">Género no puede ser vacío</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtEdad" class="required">Edad</label>
-                                    <input type="text" class="form-control" id="txtEdad">
-                                    <div id="error_txtEdad" class="alert-danger" hidden="hidden">Edad no puede ser vacía</div>
-                                </div>
-                                <div class="form-group" id="divRol">
-
-                                    @if (Model.rol_participacion.Count() > 0)
-                                    {
-                                        <label for="filtro_Rol" class="required">Rol</label>
-                                        <select class="form-select" aria-label="Selecciona un rol:" id="filtro_Rol">
-                                            <option id="0" id_rol="0" nom_rol="" class="selected">Rol Actual</option>
-
-                                            @foreach (var item in Model.rol_participacion)
-                                            {
-                                                <option id="@item.id" id_rol="@item.id" nom_rol="@item.id">@item.name</option>
-                                            }
-                                        </select>
-                                    }
-                                    <div id="error_filtro_Rol" class="alert-danger" hidden="hidden">Rol no puede ser vacío </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtEmail" class="required">Email</label>
-                                    <input type="text" class="form-control" id="txtEmail">
-                                    <div id="error_txtEmail" class="alert-danger" hidden="hidden">Email no puede ser vacío</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtPassword" class="required">Password</label>
-                                    <input type="password" class="form-control" id="txtPassword">
-                                    <div id="error_txtPassword" class="alert-danger" hidden="hidden">Password no puede ser vacío</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtPassword_2" class="required">Confirme su Password</label>
-                                    <input type="password" class="form-control" id="txtPassword_2">
-                                    <div id="error_txtPassword_2" class="alert-danger" hidden="hidden">Confirmación no puede ser vacía</div>
-                                </div>
-                                <div class="form-group mb-3" id="divMedio">
-                                    @if (Model.medios_participacion.Count() > 0)
-                                    {
-                                        <label for="filtro_Medios" class="required">¿Cómo se enteró de Mapa Inversiones?</label>
-                                        <select class="form-select" aria-label="Selecciona un medio:" id="filtro_Medios">
-                                            <option id="0" id_medio="0" nom_medio="" class="selected">¿Cómo se enteró de Mapa Inversiones?</option>
-                                            @foreach (var item in Model.medios_participacion)
-                                            {
-                                                <option id="@item.id" id_medio="@item.id" nom_medio="@item.id">@item.name</option>
-                                            }
-                                        </select>
-                                    }
-                                    <div id="error_filtro_Medios" class="alert-danger" hidden="hidden">"¿Cómo se enteró de Mapa Inversiones?" No puede ser vacío</div>
-                                </div>
-                                <div class="disclaimer well mb-3">
-                                    <div class="row">
-                                        <div class="col-md-1 iconLarge text-center"><span class="glyphicon glyphicon-info-sign"></span></div>
-                                        <div class="col-md-11"><p>Con la activación de la cuenta usted acepta los <a href="~/TerminosyCondiciones"> términos y condiciones.</a></p></div>
-                                    </div>
-                                </div>
-                                <div class="form-group text-center">
-                                    <button type="button" class="btn btn-primary btn-block" id="btnAddCuentaUsu"> ENVIAR </button><br><br>
-                                    <a href="" class="btn btn-default">CANCEL</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--FORGOT PASSWORD-->
-                    <div class="light-bg">
-                        <div id="divOlvidoClave" class="objHidden">
-                            <div class="p-3">
-                                <span class="h4">Re establecimiento de clave</span>
-                                <div class="center-block w60">
-
-                                    <div class="well">
-                                        <span id="textoVerifica">Para asignar una nueva clave ingrese el correo electrónico registrado, se enviará un código de verificación al mismo.</span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtEmailReset" class="required">Email</label>
-                                        <input type="text" class="form-control" id="txtEmailReset">
-                                        <div id="error_txtEmailReset" class="alert alert-danger alert-dismissible" hidden="hidden">Email no puede ser vacio</div>
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <button type="button" class="btn btn-primary" id="btnEnviaCodigoClave"> ENVIAR </button><br><br>
-                                        <a href="">CANCELAR</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--CONFIRM PASSWORD-->
-                    <div class="light-bg">
-                        <div id="divConfirmaCodigo" class="objHidden">
-                            <div class="p-3">
-                                <span class="h4 orangeLink">Re establecimiento de clave</span>
-                                <div class="center-block w60">
-                                    <div class="well">
-                                        <span class="h4" id="textoVerifica"><strong>Ingresar código de verificación</strong></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtCodigoVerifica" class="required">Código:</label>
-                                        <input type="text" class="form-control" id="txtCodigoVerifica">
-                                        <input type="hidden" id="txtEmailVerifica" />
-                                        <div id="error_txtCodigoVerifica" class="alert alert-danger alert-dismissible" hidden="hidden">Código no puede ser vacío</div>
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <button type="button" class="btn btn-primary" id="btnVerificaCodigoClave"> ENVIAR </button><br><br>
-                                        <a href="">CANCELAR</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--RESET PASSWORD-->
-                    <div class="light-bg">
-                        <div id="divResetPassword" class="objHidden">
-                            <div class="p-3">
-                                <span class="h4 orangeLink">Re establecimiento de clave</span>
-                                <div class="center-block w60">
-                                    <div class="well">
-                                        <span class="h4" id="textoVerifica"><strong>Cambio de clave</strong></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtPassword_re" class="required">Nueva Clave</label>
-                                        <input type="password" class="form-control" id="txtPassword_re">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtPassword_re_2" class="required">Confirma nueva Clave</label>
-                                        <input type="password" class="form-control" id="txtPassword_re_2">
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <button type="button" class="btn btn-primary" id="btnCambiarClaveOlvido"> GUARDAR </button><br><br>
-                                        <a href="">CANCELAR</a>
-                                    </div>
-
-                                </div>
-                            </div>
+                
+                    <!--usuario sin loguear este div se debe ocultar cuando ya el usuario está logueado-->
+                    <div class="user-wrap">
+                        <div class="wrap-btn">
+                            <a id="btnLoginGab" class="btn btn-link">Iniciar sesión</a>
+                            <a id="btnUserGab" target="_blank" rel="noopener" href="@Convert.ToString(Configuration["GabAuth:UserRegister"])" class="btn btn-outlined">Registrarse</a>
                         </div>
                     </div>
                     <!--SURVEY-->
@@ -899,7 +1038,7 @@
 
                                     </select>
                                 </div>
-                                <div class="highlightBox">
+                                @* <div class="highlightBox">
                                     <div id="divAreaInfluencia" class="form-group">
                                         <label for="sel_area_influencia" class="required">Municipio afectado:</label>
                                         <select class="form-select" aria-label="Selecciona un tipo comentario" id="filtro_AreaInfluencia">
@@ -916,8 +1055,8 @@
 
                                     </div>
 
-                                </div>
-                               
+                                </div> *@
+
                                 <div>
                                     <label for="txtcomentario" class="required">Escribe tu comentario:</label>
                                     <div id="divComentario">
@@ -925,10 +1064,10 @@
                                     </div>
                                 </div>
                                 <div class="disclaimer well">
-                                    <span class="glyphicon glyphicon-alert"></span>
-                                    <p>Se informa que los comentarios de su participación antes de ser publicados serán validados por MapaInversiones. Si desea, su opinión puede ser anónima. </p>
+                                    <span class="material-icons">info</span>
+                                    <p>Se informa que los comentarios de su participación antes de ser publicados serán validados por Gobierno Abierto Bogotá. Si desea, su opinión puede ser anónima. </p>
                                 </div>
-                                <div>
+                                <div class="py-3">
                                     <input type="checkbox" id="anonimo" class="" /> Anónimo
                                 </div>
                                 <div class="form-group text-center">
@@ -943,17 +1082,18 @@
                     <div class="light-bg">
                         <div id="divConfirmaEnvio" style="display:none;">
                             <div class="p-3 text-center">
-                                <img src="~/content/img/icSuccess.jpg" /><br><br>
+                                <img src="@Cdn.Url(Url, "~/content/img/icSuccess.jpg")" /><br><br>
                                 <span class="h3 orangeLink" id="txtMsgConfirmaEnvio"></span><br>
                                 <span class="h4">Tu comentario será publicado cuando el administrador lo verifique</span>
-                                <div class="closeSesion"><a href="../../" class="btn btn-default">Comentar otro proyecto</a></div>
+                                <div class="closeSesion"><a href="../../" class="btn btn-default">Comentar otra obra</a></div>
                             </div>
                         </div>
                     </div>
                     <div class="text-center closeSesion" id="divCloseSesion" style="display:none;">
-                        <a role="button" id="enlace_cierre"><i class="material-icons md-24">logout</i> Cerrar Sesión </a></div>
+                        <a role="button" id="enlace_cierre"><i class="material-icons md-24">logout</i> Cerrar Sesión </a>
+                    </div>
                 </div>
-                <div class="col-md-8 s2" id="divComentarios">
+                <div class="col-md-7 col-lg-7 s2" id="divComentarios">
                     <div class="Tcomments">
                         <div class="lcomments">
                             <span class="h3" id="txtNumComentarios"> </span>
@@ -961,7 +1101,6 @@
                         </div>
                     </div>
                     <div id="content-2" class="content mCustomScrollbar" data-mcs-theme="dark">
-
                     </div>
 
                 </div>
@@ -972,66 +1111,169 @@
     </section>
     <div class="clearfix"></div>
     <!-- Fin Participación ciudadana -->
-        <!-- PROYECTOS RELACIONADOS -->
-    <section class="section proy-relacionados section-bg2">
+    <!-- obraS RELACIONADOS -->
+     @*<section class="section proy-relacionados section-bg2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-heading heading-center">
-                        <h2 class="mb-4">Otros proyectos que te pueden interesar</h2>
+                        <h2 class="mb-4">Obras que te pueden interesar</h2>
                     </div>
                 </div>
-            </div>
+            </div> 
             <div class="row">
                 <div class="col-lg-12">
                     <div id="divContenedorFichas" class="project-carusel carouselData" data-flickity='{ "initialIndex": 0, "pageDots": false, "groupCells": true, "contain": true, "prevNextButtons": true , "freeScroll":true,"wrapAround":false }'>
                     </div>
-                    <!--END MAQUETA BASICA PROJECTOS-->
                     <div id="divNoEncontradoEjec" class="no-search-results objHidden">No se encontraron resultados</div>
                     <div id="divNoExistenEjec" class="no-search-results objHidden">
                         No se encontraron resultados
                     </div>
                 </div>
                 <div class="section-btns justify-content-center py-3">
-                    <a href="/BusquedaResultados?SearchString=%27%27&type=Proyecto" class="btn btn-cards">
-                        <span>Buscar proyectos</span>
-                        <span class="el-ripple-circle" style="left: 326.5px; top: 313px;"></span>
+                    <a href="/BusquedaResultados?SearchString=%27%27&type=obra" class="btn btn-primary">
+                        <span>Buscar obras</span>
+                        <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
+                            <use xlink:href="img/sprite.svg#arrow-right"></use>
+                        </svg>
                     </a>
                 </div>
             </div>
         </div>
+    </section>*@
 
-    </section>
+    <!-- Modal usando Bootstrap 5 structure -->
+    <div id="modal-pdd" class="modal-overlay">
+        <a href="#close" class="modal-backdrop-custom"></a>
+        
+        <div class="modal-dialog-custom">
+            <div class="modal-content-custom">
+
+                <!-- Modal Header -->
+                <div class="modal-header-custom p-4 text-center">
+                    <a href="#close" class="btn-close-custom text-white">
+                        x
+                    </a>
+                </div>
+                
+                <!-- Modal Body -->
+                <div class="modal-body p-4">
+                    <div class="row">
+                        <!-- Columna del contenido -->
+                        <div class="col-lg-9 col-md-8 offset-md-3 card h-100">
+                            <div class="card-body">
+                                 <span class="h4 display-5 fw-bolder text-primary-red text-uppercase mb-2">
+                                PROYECTOS DE INVERSIÓN
+                            </span><br/>
+                            <span class="h4 fw-bold text-primary-blue text-uppercase mb-3">
+                                PLAN DISTRITAL DE DESARROLLO
+                            </span>
+                            <p class="fs-6 text-dark lh-base mb-4">
+                                El Plan Distrital de Desarrollo (PDD) es la guía del gobierno para mejorar la calidad de vida en la ciudad. Incluye 
+                                propuestas para fortalecer la seguridad, mejorar infraestructura, garantizar salud, educación, promover la 
+                                cultura y el deporte, así como, enfrentar el cambio climático y generar oportunidades en distintos sectores.
+                            </p>
+                            <!-- Primeras dos preguntas -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <span class="h5 text-primary-red fw-bold fs-6 mb-3">
+                                            ¿Cómo se le asigna dinero a los proyectos del PDD?
+                                        </span>
+                                        <p class="card-text fs-6 text-dark lh-base mb-0">
+                                            Los recursos para los proyectos de inversión del PDD dependen del Marco de Gasto de Mediano Plazo del plan y deben estar registrados en el banco de proyectos del Distrito.
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <span class="h5 text-primary-red fw-bold fs-6 mb-3">
+                                            ¿Quién determina la ejecución presupuestal de los proyectos?
+                                       </span>
+                                       <p class="card-text fs-6 text-dark lh-base mb-0">
+                                            La ejecución presupuestal depende de cada entidad ejecutora, quien gestiona sus recursos dentro de su presupuesto asignado y cumple con los principios de eficiencia, eficacia y efectividad.
+                                       </p>
+                                    </div>
+                                    <div class="col-md-12 py-4">
+                                        <span class="h5 text-primary-red fw-bold fs-6 mb-3">
+                                        ¿Cuál es el criterio de selección de los proyectos del PDD?
+                                        </span>
+                                    <p class="card-text fs-6 text-dark lh-base mb-4">
+                                        Deben estar orientados al cumplimiento de las 125 metas de producto del plan, las cuales están enmarcadas en:
+                                    </p>
+                                    
+                                    <!-- Estadísticas usando-->
+                                        <div class="datos">
+                                            <div class="row g-3 mb-4">
+                                                <div class="col-6 col-lg-3 d-flex dData">
+                                                   <div class="stat-number text-primary-blue fw-bolder">5</div>
+                                                        <div class="stat-label text-dark fw-semibold align-middle">
+                                                            Objetivos<br>estratégicos
+                                                        </div>
+                                                </div>
+                                                <div class="col-6 col-lg-3 d-flex dData">
+                                                    <div class="stat-number text-primary-blue fw-bolder">15</div>
+                                                        <div class="stat-label text-dark fw-semibold align-middle">
+                                                            Estrategias
+                                                        </div>
+                                                </div>
+                                                <div class="col-6 col-lg-3 d-flex dData">
+                                                    <div class="stat-number text-primary-blue fw-bolder">39</div>
+                                                        <div class="stat-label text-dark fw-semibold align-middle">
+                                                            Programas
+                                                        </div>
+                                                </div>
+                                                <div class="col-6 col-lg-3 d-flex dData">
+                                                    <div class="stat-number text-primary-blue fw-bolder">84</div>
+                                                        <div class="stat-label text-dark fw-semibold align-middle">
+                                                            Metas<br>estratégicas
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <span class="h4 text-primary-red fw-bold text-uppercase letter-spacing-1 text-center">
+                                                    ¡INVERSIÓN CON VISIÓN ESTRATÉGICA PARA TODA BOGOTÁ!
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Elemento invisible para cerrar modal -->
+    <div id="close"></div>
+
+
 
 
     <div class="clearfix"></div>
-
-    <script src="~/js/lib/D3/d3.min.js" charset="utf-8"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
-
-    <script src="~/js/bootstrap/3.3.5/bootstrap.min.js" type="text/javascript"></script>
-    <script src="~/js/Bootbox/bootbox.min.js" type="text/javascript"></script>
-
-    <script src="~/js/projects_aux.js"></script>
-
+    <script src="@Cdn.Url(Url, "~/js/jquery/jquery-ui.min.js")"></script>
+    <script type="text/javascript" src="@Cdn.Url(Url, "~/js/lib/D3/d3.v7.min.js")"></script>
+   @*  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+    <script src="@Cdn.Url(Url, "~/js/lib/D3/d3.min.js")" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3plus@3/build/d3plus.full.min.js"></script> *@
+    <script src="@Cdn.Url(Url, "~/js/bootstrap/3.3.5/bootstrap.min.js")" type="text/javascript"></script>
+    <script src="@Cdn.Url(Url, "~/js/Bootbox/bootbox.min.js")" type="text/javascript"></script>
+    <script src="@Cdn.Url(Url, "~/js/proyectosinv_aux.js")"></script>
     <script>
-
-        window.onscroll = function () { myFunction() };
+       window.onscroll = function () { myFunction() };
 
         var header = document.getElementById("navs-header");
-        var sticky = header.offsetTop;
+        var sticky = header ? header.offsetTop : 0;
 
         function myFunction() {
-            if (window.pageYOffset > sticky) {
-                header.classList.add("sticky");
-                header.classList.add("bg-white");
-            } else {
-                header.classList.remove("sticky");
-                header.classList.remove("bg-white");
+            if (header) {
+                if (window.scrollY > sticky) {
+                    header.classList.add("sticky");
+                    header.classList.add("bg-white");
+                } else {
+                    header.classList.remove("sticky");
+                    header.classList.remove("bg-white");
+                }
             }
         }
     </script>
-
     @using (Html.BeginForm("GeneratePDF_ARC", "Proyecto", FormMethod.Post, new { id = "formPdfProy" }))
     {
         <input type="hidden" name="id_obj_pdf" id="id_obj_pdf" />
@@ -1039,218 +1281,157 @@
         <input type="hidden" name="annio" id="annio" value="" />
         <input type="button" id="btnEnviar" value="Download Pdf" style="display:none;" />
     }
-
     <script type="text/javascript">
-    $(function () {
-        $("#btnGenPdfProy").click(function () {
-            var id_proy=@Model.idproject;
-            var cant_cont= 50000;
-            var annio=$("#top_contratista_periodos").val();
-            $("#id_obj_pdf").val(id_proy);
-            $("#cant_cont").val(cant_cont);
-            $("#annio").val(annio);
-            $("#formPdfProy").submit();
+        $(function () {
+            $("#btnGenPdfProy").click(function () {
+                var id_proy=@Model.idproject;
+                var cant_cont= 50000;
+                var annio=$("#top_contratista_periodos").val();
+                $("#id_obj_pdf").val(id_proy);
+                $("#cant_cont").val(cant_cont);
+                $("#annio").val(annio);
+                $("#formPdfProy").submit();
+            });
+            $("#btnEnviarExc").click(function () {
+                var id_proy=@Model.idproject;
+                $("#id_obj_exc").val(id_proy);
+                $("#formExComent").submit();
 
+            });
         });
-
-
-        $("#btnEnviarExc").click(function () {
-            var id_proy=@Model.idproject;
-            $("#id_obj_exc").val(id_proy);
-            $("#formExComent").submit();
-
-        });
-
-    });
     </script>
 
-
-
     <script type="text/javascript">
-        $(document).ready(function () {
-            var submitIcon = $('.searchbox-icon');
-            var inputBox = $('.searchbox-input');
-            var searchBox = $('.searchbox2');
-            var isOpen = false;
-            submitIcon.click(function () {
-                if (isOpen == false) {
-                    searchBox.addClass('searchbox-open');
-                    inputBox.focus();
-                    isOpen = true;
-                } else {
-                    searchBox.removeClass('searchbox-open');
-                    inputBox.focusout();
-                    isOpen = false;
+
+$(document).ready(function () {
+    $('#btnUploadFile').on('click', function () {
+        var data = new FormData();
+        var maxFileSize = 10485760; // 10MB ->  1024 * 1024
+      var files = $("#fileUpload").get(0).files;
+      //console.log("Entro por clic:");
+        // Add the uploaded image content to the form data collection
+        if (files.length > 0)
+        {
+          //console.log("Entró por files:");
+            //using(var ms = new MemoryStream())
+            //{
+            //  files[0].CopyTo(ms);
+            //  var fileBytes = ms.ToArray();
+            //  string s = Convert.ToBase64String(fileBytes);
+            //  console.log("Imagen:" + s);
+            //  // act on the Base64 data
+            //}
+
+            if (files[0].size < maxFileSize) {
+                /*data.append("UploadedImage", files[0]);
+                data.append("DescripcionImage", $('#tbDescripcion').val());
+                data.append("LocationImage", $('#filtro_AreaFotoUsuUpload option:selected').val());*/
+                //data.append("ProjectImage",@Model.idproject);
+              //console.log(files[0]);
+
+
+              var reader = new FileReader();
+              const fileByteArray = [];
+              reader.readAsArrayBuffer(files[0]);
+              reader.onloadend = (evt) => {
+                if (evt.target.readyState === FileReader.DONE) {
+                  const arrayBuffer = evt.target.result,
+                    array = new Uint8Array(arrayBuffer);
+                  for (const a of array) {
+                    fileByteArray.push(a);
+                  }
+                  var params_img = {
+                    UploadedImage: fileByteArray,
+                    DescripcionImage: $('#tbDescripcion').val(),
+                    LocationImage: $('#filtro_AreaFotoUsuUpload option:selected').val(),
+                    ProjectImageInv:@Model.idproject,
+                    TipoImage:"Usuario"
+                        };
+                  $.ajax({
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    url: "/api/ServiciosParticipacion/SubirArchivo",
+                    cache: false,
+                    data: JSON.stringify(params_img),
+                    success: function (result) {
+                      //separa error y mensaje
+                      var cad_result = result.message.split("<||>");
+                      if (cad_result.length > 1) {
+                        var cod_error = cad_result[0];
+                        var mensaje_error = cad_result[1];
+                        if (cod_error == "0") {
+                          bootbox.alert(mensaje_error, function () {
+                            $('select,input[type=text],input[type=radio],textarea', $('#divDatosModal')).each(function (i, e) {
+                              $(e).val("");
+                            });
+                            $("#btnCloseFotos").trigger("click");
+                          });
+                        } else {
+                          bootbox.alert(mensaje_error);
+                        }
+                      } else {
+                        bootbox.alert(result);
+                      }
+                    },
+                    error: function (response) {
+                      bootbox.alert('Error: ' + response.responseText);
+                    },
+                    failure: function (response) {
+                      bootbox.alert('Fallo: ' + response.responseText);
+                    }
+                  });
+
                 }
-            });
-            submitIcon.mouseup(function () {
-                return false;
-            });
-            searchBox.mouseup(function () {
-                return false;
-            });
-            $(document).mouseup(function () {
-                if (isOpen == true) {
-                    $('.searchbox-icon').css('display', 'block');
-                    submitIcon.click();
-                }
-            });
-
-
-
-
-
-
-        });
-        function buttonUp() {
-            var inputVal = $('.searchbox-input').val();
-            inputVal = $.trim(inputVal).length;
-            if (inputVal !== 0) {
-                $('.searchbox-icon').css('display', 'none');
-            } else {
-                $('.searchbox-input').val('');
-                $('.searchbox-icon').css('display', 'block');
-            }
-        }
-
-
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".btn-select").each(function (e) {
-                var value = $(this).find("ul li.selected").html();
-                if (value != undefined) {
-                    $(this).find(".btn-select-input").val(value);
-                    $(this).find(".btn-select-value").html(value);
-                }
-            });
-        });
-
-        $(document).on('click', '.btn-select', function (e) {
-            e.preventDefault();
-            var ul = $(this).find("ul");
-            if ($(this).hasClass("active")) {
-                if (ul.find("li").is(e.target)) {
-                    var target = $(e.target);
-                    target.addClass("selected").siblings().removeClass("selected");
-                    var value = target.html();
-                    $(this).find(".btn-select-input").val(value);
-                    $(this).find(".btn-select-value").html(value);
-                }
-                ul.hide();
-                $(this).removeClass("active");
+              }
             }
             else {
-                $('.btn-select').not(this).each(function () {
-                    $(this).removeClass("active").find("ul").hide();
-                });
-                ul.slideDown();
-                $(this).addClass("active");
+                var tamanoArchivo = Math.round(files[0].size / maxFileSize);
+                bootbox.alert('Lo sentimos, el archivo tiene un tamaño de ' + tamanoArchivo +' MB y supera el máximo tamaño permitido que es de 1MB.\nPor favor, modifique la imagen disminuyendo el tamaño del archivo antes de subirlo al sistema.');
             }
-        });
-
-        $(document).on('click', function (e) {
-            var target = $(e.target).closest(".btn-select");
-            if (!target.length) {
-                $(".btn-select").removeClass("active").find("ul").hide();
-            }
-        });
-
-
-    </script>
-
-    <script type="text/javascript">
-
-    $(document).ready(function () {
-        $('#btnUploadFile').on('click', function () {
-            var data = new FormData();
-            var maxFileSize = 1048576; // 1MB ->  1024 * 1024
-          var files = $("#fileUpload").get(0).files;
-            // Add the uploaded image content to the form data collection
-            if (files.length > 0)
-            {
-
-
-                if (files[0].size < maxFileSize) {
-
-                  var reader = new FileReader();
-                  const fileByteArray = [];
-                  reader.readAsArrayBuffer(files[0]);
-                  reader.onloadend = (evt) => {
-                    if (evt.target.readyState === FileReader.DONE) {
-                      const arrayBuffer = evt.target.result,
-                        array = new Uint8Array(arrayBuffer);
-                      for (const a of array) {
-                        fileByteArray.push(a);
-                      }
-                      var params_img = {
-                        UploadedImage: fileByteArray,
-                        DescripcionImage: $('#tbDescripcion').val(),
-                        LocationImage: $('#filtro_AreaFotoUsuUpload option:selected').val(),
-                        ProjectImage:@Model.idproject
-	                        };
-                      $.ajax({
-                        type: 'POST',
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                                    url: "/api/ServiciosParticipacion/SubirArchivo",
-                        cache: false,
-                        data: JSON.stringify(params_img),
-                        success: function (result) {
-                          //separa error y mensaje
-                          var cad_result = result.message.split("<||>");
-                          if (cad_result.length > 1) {
-                            var cod_error = cad_result[0];
-                            var mensaje_error = cad_result[1];
-                            if (cod_error == "0") {
-                              bootbox.alert(mensaje_error, function () {
-                                $('select,input[type=text],input[type=radio],textarea', $('#divDatosModal')).each(function (i, e) {
-                                  $(e).val("");
-                                });
-                                $("#btnCloseFotos").trigger("click");
-                              });
-                            } else {
-                              bootbox.alert(mensaje_error);
-                            }
-                          } else {
-                            bootbox.alert(result);
-                          }
-                        },
-                        error: function (response) {
-                          bootbox.alert('Error: ' + response.responseText);
-                        },
-                        failure: function (response) {
-                          bootbox.alert('Fallo: ' + response.responseText);
-                        }
-                      });
-
-                    }
-                  }
-                }
-                else {
-                    var tamanoArchivo = Math.round(files[0].size / maxFileSize);
-                    bootbox.alert('Lo sentimos, el archivo tiene un tamaño de ' + tamanoArchivo +' MB y supera el máximo tamaño permitido que es de 1MB.\nPor favor, modifique la imagen disminuyendo el tamaño del archivo antes de subirlo al sistema.');
-                }
-            }
-            else bootbox.alert('No existe archivo para subir.');
-        });
-
-        $('.enlace_img').on('click' , function(e){
-            var id = $(this).attr("data-src");
-            $('#img-modal').attr("src", id);
-            var des = $(this).attr("descrip");
-
-
-        });
+        }
+        else bootbox.alert('No existe archivo para subir.');
     });
-    </script>
+
+    $('.enlace_img').on('click' , function(e){
+        var id = $(this).attr("data-src");
+        $('#img-modal').attr("src", id);
+        var des = $(this).attr("descrip");
+
+
+    });
+});
+</script>
+
 
     <div id="fb-root"></div>
-    @section DataBody {
-        data-profile='[{"avance_financiero":"@Model.ProjectInformation.avance_financiero","id_project":"@Model.idproject"}]'
-        data-actores='[@foreach (var info in @Model.actores_proy)
-        {<text> {"idCategoria":"@info.idCategoria","Categoria": "@info.Categoria","nomActor": "@info.nomActor"}@if (info != @Model.actores_proy.Last())
-        {<text>,</text>}</text>}]'
+    @{
+        var jsonOptions = new JsonSerializerOptions
+            {
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping // Permite caracteres especiales sin codificar
+            };
+
+        var jsonData = JsonSerializer.Serialize(Model.ProyectosEjecucion, jsonOptions);
     }
+    @section DataBody {
+        data-profile-inv='[{"avance_financiero":"@Model.ProjectInformation.avance_financiero","id_project":"@Model.idproject" ,"idUsuParticipa":"@Model.id_usu_participa" , "nomUsuParticipa" : "@Model.nom_usu_participa"}]'
+        data-actores-inv='[@foreach (var info in @Model.actores_proy)
+        {
+            <text>
+                {"idCategoria":"@info.idCategoria","Categoria": "@info.Categoria","nomActor": "@info.nomActor"}@if (info != @Model.actores_proy.Last())
+                {
+                    <text>,</text>
+                }
+            </text>
+        }]'
+        data-proyectoInvData='@Html.Raw(jsonData)'
+    }
+
+
+    
+   
+ 
+
+
 
 </body>

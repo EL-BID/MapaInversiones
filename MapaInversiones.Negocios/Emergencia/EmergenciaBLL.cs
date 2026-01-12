@@ -18,6 +18,7 @@ using PlataformaTransparencia.Modelos.Presupuesto;
 using SolrNet;
 using static LinqToDB.Reflection.Methods.LinqToDB;
 using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
+using Quartz.Util;
 
 namespace PlataformaTransparencia.Negocios.Emergencia
 {
@@ -202,7 +203,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
 
             objreturn = (from info in _connection.VwConsolidadoContratacionEmergencias
-                         where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrEmpty())
+                         where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrWhiteSpace())
                          group info by new { info.EstadoContrato, info.MonedaContrato } into g
                          orderby g.Sum(x => x.ValorContratado)
                          orderby g.Sum(x => x.NroContratos)
@@ -215,7 +216,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
                          }).OrderBy(x => x.EstadoContrato).ToList();
 
             var RecursosPerObjetoQuery = (from info in _connection.VwConsolidadoContratacionEmergencias
-                                          where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrEmpty())
+                                          where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrWhiteSpace())
                                           group info by new { info.EstadoContrato, info.MonedaContrato } into g
                                           orderby g.Sum(x => x.ValorContratado)
                                           orderby g.Sum(x => x.NroContratos)
@@ -239,7 +240,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
 
             objreturn = (from info in _connection.VwConsolidadoProcesosContratacionEmergencias
-                         where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrEmpty())
+                         where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrWhiteSpace())
                          group info by new { info.EstadoProceso, info.MonedaProceso, info.EstadoProcesoOrden } into g
                          orderby g.Sum(x => x.ValorProceso)
                          orderby g.Sum(x => x.NroProcesos)
@@ -254,11 +255,11 @@ namespace PlataformaTransparencia.Negocios.Emergencia
 
 
             numProcesosCancelados = (from info in _connection.VwTotalProcesosSinContratoEmergencias
-                                          where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrEmpty())
+                                          where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrWhiteSpace())
                                           select info.NroProcesos).Sum();
 
             valProcesosCancelados = (from info in _connection.VwTotalProcesosSinContratoEmergencias
-                                     where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrEmpty())
+                                     where info.Origen == tipoEmergencia && (info.Entidad.Contains(Entidad) || Entidad.IsNullOrWhiteSpace())
                                      select info.ValorProcesos).Sum();
 
 
@@ -1254,7 +1255,7 @@ namespace PlataformaTransparencia.Negocios.Emergencia
             objContrato.total_beneficiarios = NumContratosActivos;
             objContrato.total_valor = ValorTotalContratosActivos;
 
-            var RecursosPerObjetoQuery = (from cifras in _connection.VwSubsidiosEmergenciaConsolidadoes
+            var RecursosPerObjetoQuery = (from cifras in _connection.VwSubsidiosCovidConsolidados
                                           where cifras.NumeroBeneficarios.HasValue && cifras.Valor.HasValue
                                           select new InfoConsolidadoRecursos
                                           {

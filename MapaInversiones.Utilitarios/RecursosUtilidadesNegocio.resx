@@ -196,7 +196,7 @@
     <comment>Texto label filtro periodos en pagina Recursos</comment>
   </data>
   <data name="URLFichaProyectos" xml:space="preserve">
-    <value>/projectprofile/{0}</value>
+    <value>/PerfilProyecto/{0}</value>
     <comment>URL ficha de proyecto</comment>
   </data>
   <data name="URLFichaRecursos" xml:space="preserve">

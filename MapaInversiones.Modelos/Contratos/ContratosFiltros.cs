@@ -11,8 +11,8 @@ namespace PlataformaTransparencia.Modelos.Contratos
         public string? Moneda { get; set; }
         public string? NombreEntidad { get; set; }
         public string? NombreProceso { get; set; }
-        public int? NumeroPagina { get; set; }
-        public int? RegistrosPorPagina { get; set; }
+        public int NumeroPagina { get; set; }
+        public int RegistrosPorPagina { get; set; }
         
         public string CodigoProveedor { get; set; }
         public string CodigoComprador{ get; set; }

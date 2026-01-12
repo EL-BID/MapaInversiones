@@ -1745,7 +1745,7 @@ define('app/controller/AppState', [
 
     var AppState = new Class(Observable, {
         // Request params
-        zoom: 8, // 1,..,n
+        zoom: 13, // 1,..,n
         corners: [[10.29307824326959, -85.92019692979007], [6.598905774706054, -76.23574868760257]], // [[4.667292,-74.059508], [4.667292,-74.059508]]
         center: [8.45041485786858, -81.07797280869632],
         defaultCenter: [8.45041485786858, -81.07797280869632],
@@ -2286,8 +2286,9 @@ define('app/controller/AppState', [
 
             if (!bool) {
                 this.isListMode = null
-                $('#projects-list-view').hide()
+                
                 $('#map-view').show()
+                $('#projects-list-view').hide()
                 $('#controls').removeClass('list-mode')
                 // this.center = this.cachedCenter || this.defaultCenter
                 this.corners = this.cachedCorners || this.defaultCorners
@@ -3442,7 +3443,7 @@ define('app/map/Map', ['lib/mvc/Observable',
                     map = new Microsoft.Maps.Map(
                         document.getElementById('map-div'),
                         {
-                            credentials: 'Apwt9Qe5hfw-HjZ-yMqofEVWtwyAdIfAvFg6B-pmoa_7zI08a0EAx5vwjT5miN0M',
+                            credentials: '',
                             zoom: defaultZoom,
                             showMapTypeSelector: false,
                             showLocateMeButton: false,
@@ -7896,7 +7897,7 @@ define('location_profile', [
           for (var i = 0; i < resultados.length; i++) {
             if (i >= (pagina - 1) * 20 && i < (pagina * 20)) {
               htmlListProjects = htmlListProjects +
-                '<a class="list-group-item" href="../../projectprofile/' + resultados[i].IdProyecto + '">' + resultados[i].NombreProyecto + '</a>';
+                '<a class="list-group-item" href="../../PerfilProyecto/' + resultados[i].IdProyecto + '">' + resultados[i].NombreProyecto + '</a>';
             } else if (i > pagina * 20) {
               i = resultados.length;
             }
@@ -8287,7 +8288,7 @@ define('location_profile', [
 
                             div_proy.append("a")
                                 .attr("class", "list-group-item")
-                                .attr("href", "../projectprofile/" + data.objects[k].location)
+                                .attr("href", "../PerfilProyecto/" + data.objects[k].location)
                                 .text(data.objects[k].name)
                         }
                         //loading(false);
@@ -8629,7 +8630,7 @@ require([
         $("#divResultados").on('click', '.enlace_proyecto', function (e) {
             e.preventDefault()
             var dataValue = $(this).attr('data-parameter')
-            var url = "/projectprofile/" + dataValue
+            var url = "/PerfilProyecto/" + dataValue
             window.location.href = url
         });
 

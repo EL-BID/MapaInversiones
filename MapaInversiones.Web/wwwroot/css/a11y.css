@@ -1,0 +1,289 @@
+﻿/* ==============================================
+   Accesibilidad – Estilos externos (a11y.css)
+   ============================================== */
+
+:root {
+    --a11y-font-scale: 1;
+    --a11y-focus: #1e90ff;
+}
+
+html.a11y-font-scale {
+    font-size: calc(16px * var(--a11y-font-scale));
+}
+
+/* ==============================================
+   CONTRASTES
+   ============================================== */
+html.a11y-contrast-dark body,
+html.a11y-contrast-dark body *:not(svg):not(path) {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+html.a11y-contrast-dark a {
+    color: #00b7ff !important;
+}
+
+html.a11y-contrast-light body,
+html.a11y-contrast-light body *:not(svg):not(path) {
+    background-color: #fff !important;
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+html.a11y-contrast-light a {
+    color: #0033cc !important;
+}
+
+/* === CONTRASTE FUERTE (inversión global) === */
+html.a11y-contrast-strong {
+    -webkit-filter: invert(1);
+    filter: invert(1);
+    background-color: white;
+}
+
+/* Fix Firefox */
+@-moz-document url-prefix() {
+    html.a11y-contrast-strong {
+        mix-blend-mode: difference;
+        background-color: white;
+        filter: none;
+    }
+}
+
+/* Evitar doble inversión */
+html.a11y-contrast-strong img,
+html.a11y-contrast-strong video,
+html.a11y-contrast-strong canvas,
+html.a11y-contrast-strong iframe {
+    filter: invert(1) hue-rotate(180deg);
+}
+
+/* ==============================================
+   LEGIBILIDAD
+   ============================================== */
+html.a11y-legible body,
+html.a11y-legible body * {
+    font-family: 'Atkinson Hyperlegible', 'OpenDyslexic', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif !important;
+}
+
+html.a11y-letter-spacing body,
+html.a11y-letter-spacing body * {
+    letter-spacing: 0.04em !important;
+}
+
+html.a11y-line-height body,
+html.a11y-line-height body * {
+    line-height: 1.6 !important;
+}
+
+/* ==============================================
+   FOCO Y CURSOR
+   ============================================== */
+html.a11y-focus-ring :focus {
+    outline: 3px solid var(--a11y-focus) !important;
+    outline-offset: 2px !important;
+}
+
+html.a11y-focus-ring a,
+html.a11y-focus-ring button,
+html.a11y-focus-ring [role="button"],
+html.a11y-focus-ring input,
+html.a11y-focus-ring select,
+html.a11y-focus-ring textarea {
+    cursor: pointer;
+}
+
+/* ==============================================
+   REDUCIR ANIMACIONES
+   ============================================== */
+html.a11y-reduce-motion *,
+html.a11y-reduce-motion *::before,
+html.a11y-reduce-motion *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+}
+
+/* ==============================================
+   INVERTIR SITIO
+   ============================================== */
+html.a11y-invert body {
+    filter: invert(1) hue-rotate(180deg) !important;
+}
+
+    html.a11y-invert body img,
+    html.a11y-invert body video,
+    html.a11y-invert body iframe,
+    html.a11y-invert body canvas {
+        filter: invert(1) hue-rotate(180deg) !important;
+    }
+
+/* Protección para mapas y SVG/canvas */
+html.a11y-protect-maps .map,
+html.a11y-protect-maps .leaflet-container,
+html.a11y-protect-maps .mapboxgl-canvas,
+html.a11y-protect-maps .azure-map-canvas,
+html.a11y-protect-maps .esri-view,
+html.a11y-protect-maps .ol-viewport,
+html.a11y-protect-maps canvas,
+html.a11y-protect-maps svg {
+    filter: none !important;
+    mix-blend-mode: normal !important;
+}
+
+/* ==============================================
+   REGLAS EXTRAS
+   ============================================== */
+html.a11y-contrast-dark .card,
+html.a11y-contrast-dark .modal,
+html.a11y-contrast-dark .dropdown-menu,
+html.a11y-contrast-dark .navbar,
+html.a11y-contrast-dark header,
+html.a11y-contrast-dark footer {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+html.a11y-contrast-light .card,
+html.a11y-contrast-light .modal,
+html.a11y-contrast-light .dropdown-menu,
+html.a11y-contrast-light .navbar,
+html.a11y-contrast-light header,
+html.a11y-contrast-light footer {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+/* Botones */
+html.a11y-contrast-dark button,
+html.a11y-contrast-dark .btn {
+    background-color: #222 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+html.a11y-contrast-light button,
+html.a11y-contrast-light .btn {
+    background-color: #eee !important;
+    color: #000 !important;
+    border-color: #000 !important;
+}
+
+/* Inputs */
+html.a11y-contrast-dark input,
+html.a11y-contrast-dark select,
+html.a11y-contrast-dark textarea {
+    background-color: #111 !important;
+    color: #fff !important;
+    border: 1px solid #fff !important;
+}
+
+html.a11y-contrast-light input,
+html.a11y-contrast-light select,
+html.a11y-contrast-light textarea {
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+}
+
+/* ==============================================
+   Protección toolbar (iframe)
+   ============================================== */
+html.a11y-invert iframe#a11y-iframe,
+html.a11y-contrast-dark iframe#a11y-iframe,
+html.a11y-contrast-light iframe#a11y-iframe,
+html.a11y-contrast-strong iframe#a11y-iframe {
+    filter: none !important;
+    mix-blend-mode: normal !important;
+}
+
+iframe#a11y-iframe {
+    position: fixed !important;
+    bottom: 15px !important;
+    right: 15px !important;
+    z-index: 2147483647 !important;
+    background: transparent !important;
+    border: none !important;
+    pointer-events: auto !important;
+    transform: none !important;
+}
+
+body iframe#a11y-iframe {
+    position: fixed !important;
+}
+
+/* ==============================================
+   Azure Maps (controles UI)
+   ============================================== */
+html.a11y-contrast-dark .azure-maps-control-container,
+html.a11y-invert .azure-maps-control-container,
+html.a11y-contrast-strong .azure-maps-control-container,
+html.a11y-contrast-dark .azure-maps-zoomcontrol,
+html.a11y-invert .azure-maps-zoomcontrol,
+html.a11y-contrast-strong .azure-maps-zoomcontrol {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 1px solid #444 !important;
+}
+
+html.a11y-contrast-light .azure-maps-control-container,
+html.a11y-contrast-light .azure-maps-zoomcontrol {
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+}
+
+.azure-maps-control-container button,
+.azure-maps-zoomcontrol button {
+    border-radius: 6px !important;
+    padding: 4px 6px !important;
+}
+
+.azure-maps-control-container {
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
+}
+
+/* ==============================================
+   D3plus
+   ============================================== */
+svg.d3plus-chart.a11y-font-scale text {
+    font-size: calc(12px * var(--a11y-font-scale, 1)) !important;
+}
+
+svg.d3plus-chart.a11y-contrast-dark text,
+svg.d3plus-chart.a11y-contrast-strong text {
+    fill: #fff !important;
+}
+
+svg.d3plus-chart.a11y-contrast-dark rect,
+svg.d3plus-chart.a11y-contrast-dark circle,
+svg.d3plus-chart.a11y-contrast-dark path,
+svg.d3plus-chart.a11y-contrast-dark line,
+svg.d3plus-chart.a11y-contrast-dark polygon,
+svg.d3plus-chart.a11y-contrast-strong rect,
+svg.d3plus-chart.a11y-contrast-strong circle,
+svg.d3plus-chart.a11y-contrast-strong path,
+svg.d3plus-chart.a11y-contrast-strong line,
+svg.d3plus-chart.a11y-contrast-strong polygon {
+    stroke: #fff !important;
+    fill: #222 !important;
+}
+
+svg.d3plus-chart.a11y-contrast-light text {
+    fill: #000 !important;
+}
+
+svg.d3plus-chart.a11y-contrast-light rect,
+svg.d3plus-chart.a11y-contrast-light circle,
+svg.d3plus-chart.a11y-contrast-light path,
+svg.d3plus-chart.a11y-contrast-light line,
+svg.d3plus-chart.a11y-contrast-light polygon {
+    stroke: #000 !important;
+    fill: #ddd !important;
+}
+
+/* ==============================================
+   FIN de a11y.css
+   ============================================== */

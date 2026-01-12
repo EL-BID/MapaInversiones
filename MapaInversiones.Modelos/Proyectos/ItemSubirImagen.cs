@@ -10,5 +10,7 @@ namespace PlataformaTransparencia.Modelos.Proyectos
     public string DescripcionImage { get; set; }
     public string LocationImage { get; set; }
     public string ProjectImage { get; set; }
+    public string ProjectImageInv  { get; set; }
+
   }
 }

@@ -1,8 +1,57 @@
 ﻿@model PlataformaTransparencia.Modelos.ModelPresupuestoEmergenciaData
 @inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
+
 @{ Layout = "~/Views/Shared/_Layout.cshtml"; }
 
+<style>
+    .node rect {
+        cursor: move;
+        fill-opacity: .8;
+        shape-rendering: crispEdges;
+    }
 
+    .node text {
+        pointer-events: none;
+
+    }
+
+    .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .1;
+    }
+
+        .link:hover {
+            stroke-opacity: .2;
+        }
+
+    .arc text {
+        font: 12px sans-serif;
+        text-anchor: middle;
+        font-weight: bold;
+    }
+
+    .arc path {
+        stroke: #fff;
+    }
+
+    .toolTip {
+        position: absolute;
+        display: none;
+        width: auto;
+        height: auto;
+        background: none repeat scroll 0 0 white;
+        border: 0 none;
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font: 12px sans-serif;
+        padding: 5px;
+        text-align: center;
+    }
+</style>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-bottom" class="contractProfile">
 
@@ -646,7 +695,7 @@
                     <div class="card wrap-participe">
                         <div class="card-header"> <span class="h4">Participa</span></div>
                         <div class="card-body">
-                            <div class="wrap-icon"><img src="../img/ic_control1.svg" alt="Solicita mas información"></div>
+                            <div class="wrap-icon"><img src="~/img/ic_control1.svg" alt="Solicita mas información"></div>
                             <div class="text-section">
                                 <p>
                                     En una interacción rápida con las autoridades sobre la información de la plataforma, podrás hacer comentarios, preguntas, recomendaciones, recibir respuestas y conocer la participación realizada por otras personas.
@@ -668,7 +717,7 @@
                             <span class="h4">Solicita más información</span>
                         </div>
                         <div class="card-body">
-                            <div class="wrap-icon"><img src="../img/ic_control2.svg" alt="Solicita mas informacion"></div>
+                            <div class="wrap-icon"><img src="~/img/ic_control2.svg" alt="Solicita mas informacion"></div>
                             <div class="text-section">
                                 <p>
                                     Gracias al libre acceso a la información pública y la transparencia gubernamental puedes realizar solicitudes de información pública específica y detallada a las instituciones responsables.
@@ -678,7 +727,7 @@
                         </div>
                         <div class="card-footer">
                             <div class="text-center">
-                                <a class="btn btn-outlined" href="https://sitio.com/apps/sip/?step=one" target="_blank" rel="noopener"> Solicitar <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                                <a class="btn btn-outlined" href="https://saip.gob.do/apps/sip/?step=one" target="_blank" rel="noopener"> Solicitar <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
                                
                             </div>
                         </div>
@@ -740,8 +789,8 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
-    <script src="~/content/dist/js/sankey.js"></script>
-    <script src="js/emergencia_presupuesto_aux.js"></script>
+    <script src="@Cdn.Url(Url, "~/js/sankey.js")"></script>
+    <script src="@Cdn.Url(Url, "~/js/emergencia_presupuesto_aux.js")"></script>
 
     @using (Html.BeginForm("DescargarIndicadoresProgramaDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProg" }))
     {

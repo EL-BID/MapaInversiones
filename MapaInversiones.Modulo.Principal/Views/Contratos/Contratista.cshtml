@@ -1,27 +1,15 @@
 ﻿@model PlataformaTransparencia.Modelos.Contratos.ModelContratistaData
 @inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
     // var TextMoneda = "";
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
-    @*       var LabelContratista = "";
-            var TituloContratista = "";
-
-        }
-        @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
-        {
-            if (@etiqueta.AliasPart.Alias == "Contratista")
-            {
-                LabelContratista = @etiqueta.HtmlBodyPart.Html;
-                TituloContratista = @etiqueta.TitlePart.Title;
-            }
-
-        }*@
-
-System.IFormatProvider culture =
-new System.Globalization.CultureInfo("es-RD");
+    System.IFormatProvider culture =
+    new System.Globalization.CultureInfo("es-CO");
 }
 <section class="banner-main">
     <div class="container">
@@ -46,15 +34,19 @@ new System.Globalization.CultureInfo("es-RD");
 
         <div class="row justify-content-center">
 
-            <div class="col-lg-8">
+            <div class="col-lg-10">
                 <div class="banner-main-info">
                 @if (Model.Data.Count > 0)
                     {
                         <div class="banner-main-title mb-0 text-center">
-                            <h1 class="mainTit_t1" id="nomLocation">@Model.Data[0].Contratista</h1>
-                            <span class="h6 sub_t1_red">CONTRATISTA</span>
+                            <h1 id="nomLocation">@Model.Data[0].Contratista</h1>
+                            
 
                         </div>
+                        <div class="banner-main-desc text-center">
+                            <span class="h6 sub_t1_red">CONTRATISTA</span>
+                        </div>
+                        
                         <div class="banner-main-desc py-4 text-center">
                             
                             <ul class="list-inline details">
@@ -117,9 +109,9 @@ new System.Globalization.CultureInfo("es-RD");
                     }
                     else{
                     <div class="banner-main-desc">
-                        <p>
+                       @*  <p>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                        </p>
+                        </p> *@
 
                     </div>
                     }
@@ -207,41 +199,11 @@ new System.Globalization.CultureInfo("es-RD");
 </section>
 <div class="clearfix"></div>
 
-<!--RELATED INFO-->
-<section class="relatedInfo">
-    <div class="container">
-        <!--LINKS OTRAS SECCIONES-->
-        <div class="row">
-            <!--LEFT COLUMN-->
-            <div class="col-lg-8">
-                <!--LINKS seccion infografia planificacion-->
-                <h2>Otros contratistas</h2>
-                
-
-                <!--LINKS seccion infografia planificacion-->
-
-                <div class="wrap-cta py-5">
-                    <div class="wrap-cta py-5">
-                        <p class="card-title mb-4">Información suministrada por:</p>
-                        <a href="https://www.dgcp.gob.do/" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="../img/logo-dgcp.svg" alt="ir a Secretaria de planeación" />
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
 <!--HELP CENTER SHORTCUT-->
 <div id="helpCenter"></div>
 
 <input id="contratista" name="contratista" type="hidden" value="@Model.Contratista">
-
-<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
-<script src="js/contratista_aux.js"></script>
-<script src="https://d3js.org/d3.v4.min.js" integrity="sha384-1EOYqz4UgZkewWm70NbT1JBUXSQpOIS2AaJy6/evZH+lXOrt9ITSJbFctNeyBoIJ" crossorigin="anonymous"></script>
+<script type="text/javascript" src="@Cdn.Url(Url, "~/js/lib/D3/d3.v7.min.js")"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+<script type="text/javascript" src="@Cdn.Url(Url, "~/js/contratista_aux.js")"></script>
 

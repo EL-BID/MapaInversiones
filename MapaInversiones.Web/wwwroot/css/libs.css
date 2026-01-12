@@ -4582,9 +4582,9 @@ html {
 
 .flickity-button {
     position: absolute;
-    background: rgba(255, 255, 255, 0.75);
+    background: #FF0000;
     border: none;
-    color: #333;
+    color: #fff;
 }
 
 .flickity-button:hover {
@@ -4665,7 +4665,7 @@ html {
     width: 10px;
     height: 10px;
     margin: 0 8px;
-    background: #FFC726 /* var(--Bordertitle)*/ /*#333*/;
+    background: #FF0000;
     border-radius: 50%;
     opacity: 1;
     cursor: pointer;
@@ -4673,7 +4673,7 @@ html {
 
     .flickity-page-dots .dot.is-selected {
         opacity: 1;
-        background: #fff;
+        background: #dddddd;
     }
 
 /* flickity-fade */
@@ -5037,15 +5037,15 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 }
 
 .lg-outer .lg-has-vimeo .lg-video-play {
-    background: url("../img/vimeo-play.png") no-repeat scroll 0 0 transparent;
+    background: url("~/img/vimeo-play.png") no-repeat scroll 0 0 transparent;
 }
 
 .lg-outer .lg-has-vimeo:hover .lg-video-play {
-    background: url("../img/vimeo-play.png") no-repeat scroll 0 -58px transparent;
+    background: url("~/img/vimeo-play.png") no-repeat scroll 0 -58px transparent;
 }
 
 .lg-outer .lg-has-html5 .lg-video-play {
-    background: transparent url("../img/video-play.png") no-repeat scroll 0 0;
+    background: transparent url("~/img/video-play.png") no-repeat scroll 0 0;
     height: 64px;
     margin-left: -32px;
     margin-top: -32px;
@@ -5058,11 +5058,11 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 }
 
 .lg-outer .lg-has-youtube .lg-video-play {
-    background: url("../img/youtube-play.png") no-repeat scroll 0 0 transparent;
+    background: url("~/img/youtube-play.png") no-repeat scroll 0 0 transparent;
 }
 
 .lg-outer .lg-has-youtube:hover .lg-video-play {
-    background: url("../img/youtube-play.png") no-repeat scroll 0 -60px transparent;
+    background: url("~/img/youtube-play.png") no-repeat scroll 0 -60px transparent;
 }
 
 .lg-outer .lg-video-object {
@@ -5466,7 +5466,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 }
 
 .lg-outer .lg-item {
-    background: url("../img/loading.gif") no-repeat scroll center center transparent;
+    background: url("~/img/loading.gif") no-repeat scroll center center transparent;
     display: none !important;
 }
 

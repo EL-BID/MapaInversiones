@@ -26,7 +26,11 @@ namespace PlataformaTransparencia.Modelos
       Etapa = "";
       Fase = "";
       NombreActor = "";
-
+      name = string.Empty;
+      sector = string.Empty;
+      ObjetivoEstrategico = string.Empty;// = "Fortalecimiento del tejido empresarial";
+      ProgramaPlanDesarrolloDistrital = string.Empty; // = "Movilidad sostenible";
+      IdEntidad = "https://desarrolloeconomico.gov.co/wp-content/uploads/2023/12/LOGO-ENTIDAD.png";
     }
     /// <summary>
     /// Este es el id del proyecto.
@@ -172,6 +176,20 @@ namespace PlataformaTransparencia.Modelos
     public string NombreActor { get; set; }
 
     public string TipoDeProyecto { get; set; }
+
+    public string Horizonte { get; set; } // varchar(100)
+
+    /// <summary>
+    /// Es el valor total programado del proyecto SGR.
+    /// </summary>
+    public decimal? TotalValueProgramado { get; set; }
+
+    //Atributos perfil de proyecto
+    public string ObjetivoEstrategico { get; set; }
+    public string ProgramaPlanDesarrolloDistrital { get; set; }
+    //Proyectos de inversión
+    public string IdEntidad { get; set; }
+    public string NombreEntidad { get; set; }
 
   }
 }

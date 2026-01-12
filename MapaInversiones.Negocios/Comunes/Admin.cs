@@ -58,12 +58,12 @@ namespace PlataformaTransparencia.Negocios.Comunes
                 //pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
                 //pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 idRegNew = _connection
-                .GetTable<Comentarios>()
+                .GetTable<Comentario>()
                 .Where(t => t.IdComentario == IdComentario)
-                .Update(t => new Comentarios
+                .Update(t => new Comentario
                 {
                     IdEstado = IdEstado,
-                    fechaPublicacion = DateTime.Now,
+                    FechaPublicacion = DateTime.Now,
                     JustificacionParaNoPublicar = textoJustifica,
                 });
 
@@ -95,9 +95,9 @@ namespace PlataformaTransparencia.Negocios.Comunes
             {
 
                 idRegNew = _connection
-                .GetTable<Comentarios>()
+                .GetTable<Comentario>()
                 .Where(t => t.IdComentario == IdComentario)
-                .Update(t => new Comentarios
+                .Update(t => new Comentario
                 {
                     IdTipoComentario = IdTipoComentario,
                 });

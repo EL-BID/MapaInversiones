@@ -1,5 +1,7 @@
 ﻿@page
 @inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -153,7 +155,7 @@
                 <div class="wrap-cta py-5">
                     <p class="card-title mb-4">Información suministrada por:</p>
                     <a href="https://www.stp.gov.py/v1/" target="_blank" rel="noopener">
-                        <img class="img-fluid" src="../img/Logostp.png" alt="ir a Secretaria tecnica de planeación" />
+                        <img class="img-fluid" src="~/img/Logostp.png" alt="ir a Secretaria tecnica de planeación" />
                     </a>
                 </div>
             </div>
@@ -172,7 +174,7 @@
 <!--CONTACT US-->
 <!--HELP CENTER SHORTCUT-->
 <div id="helpCenter"></div>
-<script src="js/comunes_infografias.js"></script>
+<script type="text/javascript" src="@Cdn.Url(Url, "~/js/comunes_infografias.js")"></script>
 <script>
     $(document).ready(function () {
         obtListadoEntidades();

@@ -8,9 +8,11 @@ namespace PlataformaTransparencia.Negocios.Interfaces
 {
   public interface IPresupuestoBLL
   {
-    public InfoConsolidadoPresupuesto GetConsolidadoPeriodos(int anyo);
+    public List<InfoConsolidadoPresupuesto> GetConsolidadoPeriodos(int anyo);
 
-    public List<InfoConsolidadoPresupuesto> GetRecursosPerfinalidad(int annio);
+    public List<InfoConsolidadoPresupuesto> GetRecursosPerPlan(int annio);
+
+    public List<InfoConsolidadoPresupuesto> GetRecursosPerInstitucion(int annio);
 
     public List<InfoPerSector> ObtenerSectoresPerNombre(int anyo);
 
@@ -20,11 +22,11 @@ namespace PlataformaTransparencia.Negocios.Interfaces
 
     public List<infograficoEntidadPerPresup> GetInfograficoPerEntidad(int annio, string id, string tipo);
 
-    public List<InfoConsolidadoPresupuesto> ObtenerGastoEntidades(int anyo, List<string> filtro_sec);
+    public List<InfoConsolidadoPresupuesto> ObtenerGastoEntidades(int anyo, List<string> filtro_sec,string tipoGasto);
 
     public List<InformationGraphics> ObtenerEntidadesPerNombre(int anyo);
 
-    public List<InfoConsolidadoPresupuesto> ObtenerGastoPerTiempoEntidades(int anyo, List<string> filtro_sec);
+    public List<InfoConsolidadoPresupuesto> ObtenerGastoPerTiempoEntidades(int anyo, List<string> filtro_sec,string tipoGasto);
 
     public List<itemGenPresupuesto> GetInfograficoPerProyecto(int annio, string id);
 

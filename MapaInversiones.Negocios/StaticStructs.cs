@@ -4,6 +4,10 @@
   {
     public struct LocationType
     {
+      public struct PopulatedCenter
+      {
+        public const string Name = "CPOBLADO";
+      }
       public struct Department
       {
         public const string Name = "DEPARTAMENTO";
@@ -38,6 +42,15 @@
         {
           public const string Name = "Distritos";
           public const string Type = "DISTRITO";
+        }
+      }
+      public struct Commune
+      {
+        public const string Name = "COMUNA";
+        public struct ChildLocation
+        {
+          public const string Name = "Barrios";
+          public const string Type = "BARRIO";
         }
       }
     }

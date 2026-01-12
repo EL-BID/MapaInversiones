@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using PlataformaTransparencia.Modelos.Comunes;
+using PlataformaTransparencia.Modelos.Proyectos;
+using System.Collections.Generic;
 
 namespace PlataformaTransparencia.Modelos
 {
-  public class ModelHeaderLocalitacionProfileData: RespuestaContratoBase
+  public class ModelHeaderLocalitacionProfileData : RespuestaContratoBase
   {
     #region Header Data
     public string Name { get; set; } = string.Empty;
+    public string NameType { get; set; } = string.Empty;
     public int NumberProjects { get; set; }
     /// <summary>
     /// Duración promedio de todos los proyectos de la localización
@@ -19,7 +22,11 @@ namespace PlataformaTransparencia.Modelos
     public string Type { get; set; } = string.Empty;
     public bool IsProvince { get; set; }
     public string UrlImage { get; set; }
-    public List<itemFilters> Locations { get; set; }= new();
+    //public string FechaCorteDistribucionTipoGasto { get; set; }
+    //public string FechaCorteInversionLocal { get; set; }
+    public List<itemFilters> Locations { get; set; } = new();
+    public List<Period> Years { get; set; } = new();
+    public itemConteoProjects GeneralInformacion { get; set; } = new();
     //public List<itemFilters> LocationsRelated { get; set; }
     #endregion Header Data
   }

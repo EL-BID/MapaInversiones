@@ -2,8 +2,6 @@
 define(function (require) {
 
     function cortarTexto(texto, numMaxCaract) {
-        var textoCortado = "";
-        var ultimoEspacio = -1;
         if (texto.length < numMaxCaract) {
             textoCortado = texto;
         } else {
@@ -41,7 +39,7 @@ define(function (require) {
                 .attr("class", "bigNumber").text("TT$ " + convertirMillones(resultados.approvedTotalMoney) + " Million")
             aux_div_proy_celda.append("a")
                 //.attr("href", "")
-                .attr("href", "../projectprofile/" + resultados.IdProyecto)
+                .attr("href", "../PerfilProyectoPot/" + resultados.IdProyecto)
                 .append("h4").text(resultados.NombreProyecto)
             var aux_div_proy_clear = aux_div_col.append("div")
                 .attr("class", "clearfix")
@@ -67,21 +65,21 @@ define(function (require) {
             var aux_div_proy_links = aux_div_col.append("div")
                 .attr("class", "row detailedLinks")
             var aux_div_col_int = aux_div_proy_links.append("div").attr("class", "col-md-12")
-            var aux_a13 = aux_div_col_int.append("a").attr("href", "../projectprofile/" + resultados.IdProyecto)
+            var aux_a13 = aux_div_col_int.append("a").attr("href", "../PerfilProyectoPot/" + resultados.IdProyecto)
             var aux_a14 = aux_a13.append("span").attr("class", "Iconcarrusel")
             var aux_a15 = aux_a14.append("img").attr("src", "../content/img/icons/iconLike.svg").html('&nbsp;')
             aux_a14.append("text").text("Like")
             aux_a14.append("span").attr("class", "badge pull-right").text(resultados.Megusta)
 
             var aux_div_col_int2 = aux_div_proy_links.append("div").attr("class", "col-md-12")
-            var aux_a23 = aux_div_col_int2.append("a").attr("href", "../projectprofile/" + resultados.IdProyecto)
+            var aux_a23 = aux_div_col_int2.append("a").attr("href", "../PerfilProyectoPot/" + resultados.IdProyecto)
             var aux_a24 = aux_a23.append("span").attr("class", "Iconcarrusel")
             var aux_a25 = aux_a24.append("img").attr("src", "../content/img/icons/IconChat.svg").html('&nbsp;')
             aux_a24.append("text").text("Comments")
             aux_a24.append("span").attr("class", "badge pull-right").text(resultados.Comentarios)
 
             var aux_div_col_int3 = aux_div_proy_links.append("div").attr("class", "col-md-12")
-            var aux_a3 = aux_div_col_int3.append("a").attr("href", "../projectprofile/" + resultados.IdProyecto)
+            var aux_a3 = aux_div_col_int3.append("a").attr("href", "../PerfilProyectoPot/" + resultados.IdProyecto)
             var aux_a4 = aux_a3.append("span").attr("class", "Iconcarrusel")
             var aux_a5 = aux_a4.append("img").attr("src", "../content/img/icons/IconPictureC.svg").html('&nbsp;')
             aux_a4.append("text").text("Photos")
@@ -112,7 +110,7 @@ define(function (require) {
                 .attr("class", "bigNumber").text("TT$ " + convertirMillones(resultados.approvedTotalMoney) + " Million")
             aux_div_proy_celda.append("a")
                 //.attr("href", "")
-                .attr("href", "../projectprofile/" + resultados.IdProyecto)
+                .attr("href", "../PerfilProyectoPot/" + resultados.IdProyecto)
                 .append("h4").text(resultados.NombreProyecto)
             var aux_div_proy_clear = aux_div_col.append("div")
                 .attr("class", "clearfix")
@@ -139,21 +137,21 @@ define(function (require) {
                 .attr("class", "row detailedLinks")
 
             var aux_div_col_int = aux_div_proy_links.append("div").attr("class", "col-md-12")
-            var aux_a13 = aux_div_col_int.append("a").attr("href", "../projectprofile/" + resultados.IdProyecto)
+            var aux_a13 = aux_div_col_int.append("a").attr("href", "../PerfilProyectoPot/" + resultados.IdProyecto)
             var aux_a14 = aux_a13.append("span").attr("class", "Iconcarrusel")
             var aux_a15 = aux_a14.append("img").attr("src", "../content/img/icons/iconLike.svg").html('&nbsp;')
             aux_a14.append("text").text("Like")
             aux_a14.append("span").attr("class", "badge pull-right").text(resultados.Megusta)
 
             var aux_div_col_int2 = aux_div_proy_links.append("div").attr("class", "col-md-12")
-            var aux_a23 = aux_div_col_int2.append("a").attr("href", "../projectprofile/" + resultados.IdProyecto)
+            var aux_a23 = aux_div_col_int2.append("a").attr("href", "../PerfilProyectoPot/" + resultados.IdProyecto)
             var aux_a24 = aux_a23.append("span").attr("class", "Iconcarrusel")
             var aux_a25 = aux_a24.append("img").attr("src", "../content/img/icons/IconChat.svg").html('&nbsp;')
             aux_a24.append("text").text("Comments")
             aux_a24.append("span").attr("class", "badge pull-right").text(resultados.Comentarios)
 
             var aux_div_col_int3 = aux_div_proy_links.append("div").attr("class", "col-md-12")
-            var aux_a3 = aux_div_col_int3.append("a").attr("href", "../projectprofile/" + resultados.IdProyecto)
+            var aux_a3 = aux_div_col_int3.append("a").attr("href", "../PerfilProyectoPot/" + resultados.IdProyecto)
             var aux_a4 = aux_a3.append("span").attr("class", "Iconcarrusel")
             var aux_a5 = aux_a4.append("img").attr("src", "../content/img/icons/IconPictureC.svg").html('&nbsp;')
             aux_a4.append("text").text("Photos")
@@ -176,7 +174,7 @@ define(function (require) {
                     .attr("class", "flexContainer")
                     .attr("id", div_contenedor.toString())
             }
-            for (var i = 0; i < contador; i++) {
+            for (i = 0; i < contador; i++) {
                 var nom_ficha = "ficha_" + i.toString();
                 div_aux_fila.append("div")
                     .attr("class", "flex-item")

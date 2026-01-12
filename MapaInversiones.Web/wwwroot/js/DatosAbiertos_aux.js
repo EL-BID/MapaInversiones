@@ -1,8 +1,56 @@
-﻿inicializaDatos();
+﻿inicializaDatosAbiertos();
 
-function inicializaDatos() {
+function inicializaDatosAbiertos() {
+    //cargarfuentesdatos();
+    cargarfuentesdatos2();
+}
 
-    cargarfuentesdatos();
+function cargarfuentesdatos2() {
+  $.ajax({
+    type: 'GET',
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    url: "/api/ServiciosDatosAbiertos/ObtenerFuentesDatos",
+    cache: false,
+    data: false,
+    success: function (result) {
+      if (result.status == true) {
+        var info = result.fuentesRecursos;
+        var htmldivfuente = '';
+        if (info != null) {
+          var htmldivfuente = '';
+          for (var i = 0; i < info.length; i++) {
+            htmldivfuente += '<div class="columna fuentes_content">';
+            htmldivfuente += '<h3>' + info[i].nombreFuente + '</h3>';
+            htmldivfuente += '<p class="fuente_act">Última actualización<br>' + info[i].fechaActualizacionFuente.toString().substr(0, 10) + '</p>';
+            htmldivfuente += '<p class="fuente_corte">Corte de los datos<br>' + info[i].fechaCorteFuente.toString().substr(0, 10) + '</p>';
+            htmldivfuente += '<p class="fuente_desc">Fuente:<br><span class="semibold">' + info[i].descripcion + '</span></p>';
+            htmldivfuente += '</div>';
+
+            var classdivfuente = "fuente" + info[i].idFuente;
+            var htmldivfuenteDatosAbiertos = '';
+            htmldivfuenteDatosAbiertos += '<div class="fuentes-data">';
+            htmldivfuenteDatosAbiertos += '<div class="source-fuente" ><span class="">Fuente de datos:</span><span class="text-bold"> ' + info[i].nombreFuente + '</span></div>';
+            htmldivfuenteDatosAbiertos += '<div class="source-fuente"><span class="">Última actualización:</span><span class="text-bold"> ' + info[i].fechaFuente + '</span></div>';
+            htmldivfuenteDatosAbiertos += '<div class="source-fuente"><span class="">Fecha de corte:</span><span class="text-bold"> ' + info[i].fechaCorte + '</span></div>';
+            htmldivfuenteDatosAbiertos += '</div>';
+            $("." + classdivfuente).html(htmldivfuenteDatosAbiertos);
+          }
+          $("#datosAbiertosFooter").html(htmldivfuente);
+        }
+      } else {
+        bootbox.alert("Error: " + result.Message, function () {
+
+        });
+      }
+    },
+    error: function (response) {
+      bootbox.alert(response.responseText);
+    },
+    failure: function (response) {
+      bootbox.alert(response.responseText);
+    }
+  });
 }
 
 function cargarfuentesdatos() {
@@ -14,12 +62,13 @@ function cargarfuentesdatos() {
         cache: false,
         data: false,
         success: function (result) {
-            if (result.status == true) {
+          if (result.status == true) {
+                //console.log("result datos abiertos:", result);
                 var info = result.fuentesRecursos;
                 var numproyectos = 0;
                 var aportado = 0;
                 var htmldivfuente = '';
-                var numeroorganismosmostrar = 3;
+                //var numeroorganismosmostrar = 3;
                 if (info != null) {
                     for (var i = 0; i < info.length; i++) {
                         var classdivfuente = "fuente" + info[i].idFuente;
@@ -27,23 +76,17 @@ function cargarfuentesdatos() {
                         aportado += info[i].valorVigente;
                         var htmldivfuente = '';
                             htmldivfuente += '<div class="fuentes-data">';
-                            htmldivfuente += '<div class="source-fuente" ><span class="">Fuente de datos:</span><span class="text-bold">' + info[i].nombreFuente + '</span></div>';
-                        htmldivfuente += '<div class="source-fuente"><span class="">Última actualización:</span><span class="text-bold">' + info[i].fechaActualizacionFuente.toString().substr(0, 10) + '</span></div>';
-                        htmldivfuente += '</div>';
-
+                            htmldivfuente += '<div class="source-fuente" ><span class="">Fuente de datos:</span><span class="text-bold"> ' + info[i].nombreFuente + '</span></div>';
+                      htmldivfuente += '<div class="source-fuente"><span class="">Última actualización:</span><span class="text-bold"> ' + info[i].fechaFuente + '</span></div>';
+                      htmldivfuente += '<div class="source-fuente"><span class="">Fecha de corte:</span><span class="text-bold"> ' + info[i].fechaCorte + '</span></div>';
+                            htmldivfuente += '</div>';
                         $("." + classdivfuente).html(htmldivfuente);
-
-
                     }
-                    
                 }
-
             } else {
                 bootbox.alert("Error: " + result.Message, function () {
-
                 });
             }
-
         },
         error: function (response) {
             bootbox.alert(response.responseText);

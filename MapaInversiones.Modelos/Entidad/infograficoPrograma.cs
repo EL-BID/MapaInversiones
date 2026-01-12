@@ -6,17 +6,21 @@ namespace PlataformaTransparencia.Modelos.Entidad
 {
     public class infograficoPrograma
     {
-        public string Id { get; set; }
-        public string Nombre { get; set; }
+        public string codFinalidad { get; set; }
+        public string CodClasificacion { get; set; }
+        public string Clasificacion { get; set; }
+        public string CodDetalleClasificacion { get; set; }
+        public string DetalleClasificacion { get; set; }
 
-        public double presupuesto { get; set; }
+        public double Vigente { get; set; }
+        public double Ejecutado { get; set; }
 
-        public List<string> estados { get; set; }
+        public double ValorComprometido { get; set; }
 
-        public double formulado { get; set; }
+        public double ValorGiros { get; set; }
 
-        public double aprobado { get; set; }
+       
 
-        public double ejecutado { get; set; }
+
     }
 }

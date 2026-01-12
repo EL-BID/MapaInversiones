@@ -54,7 +54,7 @@ namespace PlataformaTransparencia.Negocios.Project
             var infoProyecto = (from Comentario in _connection.Comentarios
                                 join usuarios in _connection.Usuarios
                                 on Comentario.IdUsuario equals usuarios.IdUsuario
-                                where Comentario.Codigocontrato == Id
+                                where Comentario.CodigoContrato == Id
                                 && (Comentario.IdEstado == 3 || Comentario.IdEstado == 5 || Comentario.IdEstado == 6)
                                 orderby Comentario.ComentarioRelacionado ascending
                                 select new itemcomentario
@@ -77,14 +77,14 @@ namespace PlataformaTransparencia.Negocios.Project
         }
 
 
-        public itemUsuarios ValidaLogin(string correo, string clave, string validarol)
+        public itemUsuarios ValidaLogin(string correo, string clave, string validarol, int? idNumber=null)
         {
 
             itemUsuarios lstUsuarios = new itemUsuarios();
 
                 if (validarol == "S") {
                     var infoUsuario = (from query in _connection.Usuarios
-                                       join entidad in _connection.UsuarioPermisoes
+                                       join entidad in _connection.UsuarioPermisos
                                        on query.IdUsuario equals entidad.IdUsuario
                                        where query.Email == correo
                                        && query.HashClave == clave
@@ -264,7 +264,7 @@ namespace PlataformaTransparencia.Negocios.Project
 
                         IdUsuario = idUsuario,
                         IdProyecto = idProy,
-                        Codigocontrato = CodigoContrato,
+                        CodigoContrato = CodigoContrato,
                         IdDepartamento = id_departamento,
                         IdMunicipio = id_municipio,
                         FechaCreacion = DateTime.Now,
@@ -299,7 +299,7 @@ namespace PlataformaTransparencia.Negocios.Project
 
                 if (validarol == "S") {
                     var infoUsuario = (from query in _connection.Usuarios
-                                       join entidad in _connection.UsuarioPermisoes
+                                       join entidad in _connection.UsuarioPermisos
                                        on query.IdUsuario equals entidad.IdUsuario
                                        where query.IdUsuario == id_usuario
                                        && query.Estado == "ACTIVO"
@@ -334,7 +334,7 @@ namespace PlataformaTransparencia.Negocios.Project
             List<itemUsuarios> lstUsuarios = new List<itemUsuarios>();
 
                 var infoUsuario = (from usuario in _connection.Usuarios
-                                   join UsuarioXEntidad in _connection.UsuarioPermisoes
+                                   join UsuarioXEntidad in _connection.UsuarioPermisos
                                    on usuario.IdUsuario equals UsuarioXEntidad.IdUsuario
                                    where usuario.Estado == "ACTIVO"
                                     && UsuarioXEntidad.IdTipoPermiso == 3
@@ -374,7 +374,7 @@ namespace PlataformaTransparencia.Negocios.Project
         }
 
 
-        public string RegistroNuevoUsuario(string nombre, string correo, string hash_clave, Nullable<int> edad, Nullable<int> genero, Nullable<int> rol, Nullable<int> medio)
+        public string RegistroNuevoUsuario(string nombre, string correo, string hash_clave, Nullable<int> edad, Nullable<int> genero, Nullable<int> rol, Nullable<int> medio, Nullable<int> cedula)
         {
 
            
@@ -385,13 +385,14 @@ namespace PlataformaTransparencia.Negocios.Project
                     .InsertWithInt32Identity(() => new Usuario {
                         Nombre = nombre,
                         Email = correo,
-                        Estado = "CREADO",
+                        Estado = "ACTIVO",
                         HashClave = hash_clave,
                         FechaCreacion = DateTime.Now,
                         Edad = edad,
                         IdGeneroUsuario = genero,
                         IdRolUsuario = rol,
                         IdMedioMapaIUsuario = medio,
+                        IdNumber = cedula
                     });
 
                 
@@ -529,7 +530,7 @@ namespace PlataformaTransparencia.Negocios.Project
         }
 
 
-        public string RegistrarNuevaFotoUsuario(string descripcion, string nombreArchivo, string idDepartamento, string idMunicipio, int proyectoId, int idUsuario)
+        public string RegistrarNuevaFotoUsuario(string descripcion, string nombreArchivo, string? idDepartamento, string? idMunicipio, int idUsuario, int? proyectoId = null, int? proyectoIdInv = null)
         {
             string outTxt = "";
             try {
@@ -547,8 +548,9 @@ namespace PlataformaTransparencia.Negocios.Project
                             RutaFotoPequeno = nombreArchivo,
                             IdDepartamento = idDepartamento,
                             IdMunicipio = idMunicipio,
-                            IdProyecto = proyectoId,
-                            IdUsuario = idUsuario,
+                            IdProyectoPOT = proyectoId,
+                            IdProyectoInv = proyectoIdInv,
+                             IdUsuario = idUsuario,
                     });
           
             if (idRegNew > 0) {
@@ -666,7 +668,7 @@ namespace PlataformaTransparencia.Negocios.Project
         }
 
 
-        public ModelDataParticipacion ObtenerComentariosAproAsync(int page, int estado)
+        public ModelDataParticipacion ObtenerComentariosAproAsync(int page, int estado, int asociacion)
         {
             ModelDataParticipacion objReturn = new ModelDataParticipacion();
             var comentarios = new List<object>();
@@ -678,7 +680,7 @@ namespace PlataformaTransparencia.Negocios.Project
 
             int? total_registros = 0;
 
-            listInfo = (from x in _connection.ObtenerComentariosPorEstados(estado,1,0, page, reg_per_page, ref total_registros)
+            listInfo = (from x in _connection.ObtenerComentariosPorEstados(estado,asociacion,0, page, reg_per_page, ref total_registros)
                             select new itemcomentario {
                                 IdUsuario = x.IdUsuario,
                                 nom_usuario = x.Nombre,
@@ -699,7 +701,10 @@ namespace PlataformaTransparencia.Negocios.Project
                                 NombreTipoComentario = x.TipoComentario,
                                 CodEnteTerritorialBeneficiario = x.CodEnteTerritorialBeneficiario,
                                 nom_municipio = x.NombreMunicipio,
-                                nom_departamento = x.NombreDepartamento
+                                nom_departamento = x.NombreDepartamento,
+                                IdAsociacion = (int)x.IdAsociacion,
+                                CodigoContrato = x.CodigoContrato,
+                                email_usuario = x.email
 
                             }).OrderBy(p => p.fechaCreacion).ToList();
 

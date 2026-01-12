@@ -18,7 +18,7 @@ namespace PlataformaTransparencia.Modelos
         public decimal TotalAprobado { get; set; }
         public decimal TotalEjecutado { get; set; }
 
-        public InfoConsolidadoPresupuesto InfoConsolidado { get; set; }
+        public List<InfoConsolidadoPresupuesto> InfoConsolidado { get; set; }
 
         public List<InfoConsolidadoPresupuesto> ListInfoConsolidado { get; set; }
 
@@ -41,7 +41,7 @@ namespace PlataformaTransparencia.Modelos
 
         public List<itemFuente> fuentes { get; set; }
 
-        public string Sector { get; set; }
+        public string Default_Seccion { get; set; }
 
         public List<InfoPerSector> sectores { get; set; }
 

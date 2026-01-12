@@ -1,5 +1,8 @@
 ﻿@model PlataformaTransparencia.Modelos.Emergencia.ModelPresupuestoGeneralEmergenciaData
 @inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,7 +11,7 @@
     var LabelContratos = "";
     var TituloContratos = "";
     System.IFormatProvider culture =
-        new System.Globalization.CultureInfo("es-RD");
+        new System.Globalization.CultureInfo("es-CO");
 }
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
@@ -23,7 +26,53 @@
 
 
 <head>
-    <link rel="stylesheet" href="~/css/sankey.css" />
+    <style>
+    .node rect {
+        cursor: move;
+        fill-opacity: .8;
+        shape-rendering: crispEdges;
+    }
+
+    .node text {
+        pointer-events: none;
+        /*text-shadow: 0 1px 0 #fff;*/
+    }
+
+    .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .1;
+    }
+
+        .link:hover {
+            stroke-opacity: .2;
+        }
+
+    .arc text {
+        font: 12px sans-serif;
+        text-anchor: middle;
+        font-weight: bold;
+    }
+
+    .arc path {
+        stroke: #fff;
+    }
+
+    .toolTip {
+        position: absolute;
+        display: none;
+        width: auto;
+        height: auto;
+        background: none repeat scroll 0 0 white;
+        border: 0 none;
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font: 12px sans-serif;
+        padding: 5px;
+        text-align: center;
+    }
+</style
 </head>
 
 <section id="s0" class="banner-main">
@@ -196,10 +245,10 @@
 <link rel="stylesheet" href="js/jquery-ui-range/jquery-ui.min.jsjquery-ui.css">
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-<script src="js/presupuestogeneralemergencia_aux.js"></script>
-<script src="~/Content/dist/js/lib/D3/d3.min.js" charset="utf-8"></script>
-<script src="~/content/dist/js/lib/D3/d3plus.js"></script>
-<script src="~/content/dist/js/sankey.js"></script>
+<script type="text/javascript" src="@Cdn.Url(Url, "~/js/presupuestogeneralemergencia_aux.js")"></script>
+<script src="@Cdn.Url(Url, "~/Content/dist/js/lib/D3/d3.min.js")" charset="utf-8"></script>
+<script src="@Cdn.Url(Url, "~/content/dist/js/lib/D3/d3plus.js")"></script>
+<script src="@Cdn.Url(Url, "~/content/dist/js/sankey.js")"></script>
 
 
 @section DataBody {

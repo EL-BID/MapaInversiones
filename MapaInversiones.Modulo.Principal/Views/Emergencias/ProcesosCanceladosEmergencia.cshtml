@@ -1,5 +1,7 @@
 ﻿@model PlataformaTransparencia.Modelos.ModelContratistaData
 @inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,7 +10,7 @@
     var LabelProcesosCancelados = "";
     var TituloProcesosCancelados = "";
     System.IFormatProvider culture =
-        new System.Globalization.CultureInfo("es-RD");
+        new System.Globalization.CultureInfo("es-CO");
 }
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
@@ -106,12 +108,12 @@
             </form>
                 <div class="link_external disNone">
                 <span> Información suministrada por:</span>
-                    <a href="https://www.dgcp.gob.do/" target="_blank" rel="noopener"><img class="img-responsive text-center" title="ir a la Dirección General de Contrataciones Públicas (DGCP)" src="../img/logo_dgcp.png"></a>
+                    <a href="https://www.dgcp.gob.do/" target="_blank" rel="noopener"><img class="img-responsive text-center" title="ir a la Dirección General de Contrataciones Públicas (DGCP)" src="~/img/logo_dgcp.png"></a>
                 <br />
                 <div class="sepH"></div>
                 <br />
                 <p>Para mayor información consulte:</p>
-                    <a href="https://comunidad.comprasdominicana.gob.do/Public/Tendering/ContractNoticeManagement/Index?currentLanguage=es-DO&amp;Country=DO&amp;Theme=DGCP&amp;Page=Login" target="_blank" rel="noopener"><img class="img-responsive" title="ir al portal transaccional" src="../img/logo_trasaccional.jpg"></a>
+                    <a href="https://comunidad.comprasdominicana.gob.do/Public/Tendering/ContractNoticeManagement/Index?currentLanguage=es-CO&amp;Country=DO&amp;Theme=DGCP&amp;Page=Login" target="_blank" rel="noopener"><img class="img-responsive" title="ir al portal transaccional" src="~/img/logo_trasaccional.jpg"></a>
                 <br>
                 <div class="sepH"></div>
                 <br />
@@ -143,7 +145,7 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha384-EZJUCwX9EfOmrML5/1WejmhFx/azi54nnVfOndPu+VTQKOHabXXC9eS7VFdkLz0V" crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
-<script src="js/procesoscanceladosemergencia_aux.js"></script>
+<script type="text/javascript" src="@Cdn.Url(Url, "~/js/procesoscanceladosemergencia_aux.js")"></script>
 <script src="https://d3js.org/d3.v4.min.js" integrity="sha384-1EOYqz4UgZkewWm70NbT1JBUXSQpOIS2AaJy6/evZH+lXOrt9ITSJbFctNeyBoIJ" crossorigin="anonymous"></script>
 
 

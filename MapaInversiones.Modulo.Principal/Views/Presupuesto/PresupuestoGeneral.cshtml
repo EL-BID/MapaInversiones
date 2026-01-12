@@ -1,5 +1,8 @@
 ﻿@model PlataformaTransparencia.Modelos.ModelPresupuestoData
 @inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -60,23 +63,83 @@
     }
 }
 <head>
-    <link rel="stylesheet" href="~/css/sankey.css" />
+    <style>
+        .node rect {
+            cursor: pointer;
+            fill-opacity: .8;
+            shape-rendering: crispEdges;
+        }
+
+            .node rect:hover {
+                fill: #CF2E2E
+            }
+        .node text {
+            pointer-events: none;
+        }
+
+        .link {
+            fill: none;
+            stroke: #000;
+            stroke-opacity: .1;
+        }
+
+            .link:hover {
+                stroke-opacity: .2;
+            }
+
+        .arc text {
+            font: 12px sans-serif;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+
+        .arc path {
+            stroke: #fff;
+        }
+
+        .toolTip {
+            position: absolute;
+            display: none;
+            width: auto;
+            height: auto;
+            background: none repeat scroll 0 0 white;
+            border: 0 none;
+            border-radius: 8px 8px 8px 8px;
+            box-shadow: -3px 3px 15px #888888;
+            color: red;
+            font: 12px sans-serif;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .seccion-breadcrumb {
+            display: none;
+        }
+
+        .d3plus-Axis text {
+            font-size: 11px;
+        }
+
+        #divGraphPerPlan .d3plus-viz-back text {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            fill: #000000 !important;
+        }
+
+        #divGraphPerInstitucion .d3plus-viz-back text {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            fill: #000000 !important;
+        }
+
+        #divGraphBarChartGastoEntidades .d3plus-Bar-text .d3plus-textBox text {
+            font-size: 11px !important;
+            /*font-weight: bold !important;*/
+        }
+
+    </style>
 </head>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var miDiv = document.getElementById("miDiv");
-
-        // Mostrar el div
-        miDiv.style.display = "block";
-
-        // Ocultar el div después de 3000 milisegundos (3 segundos)
-        setTimeout(function () {
-            miDiv.style.display = "none";
-        }, 8000);
-    });
-</script>
 <section class="banner-main">
-
     <div class="container">
         <!-- Begin bread crumbs -->
         <nav class="bread-crumbs">
@@ -88,7 +151,7 @@
                                 <a href="\">Inicio</a>
                                 <i class="material-icons md-18">chevron_right</i>
                             </li>
-                            <li>Trazabilidad al presupuesto nacional</li>
+                            <li>Presupuesto General de Bogotá</li>
                         </ul>
                     </div>
                 </div>
@@ -100,10 +163,10 @@
             <div class="col-lg-8">
                 <div class="banner-main-info">
                     <div class="banner-mai-title">
-                        <h1>Trazabilidad al presupuesto nacional</h1>
+                        <h1>Presupuesto General de Bogotá</h1>
                     </div>
                     <div class="banner-main-desc">
-                        <p>Realice el seguimiento detallado del flujo de fondos desde su origen hasta su aplicación en diversos sectores e instituciones.</p>
+                        <p>El Presupuesto General del Distrito incluye el Presupuesto Anual del Distrito Capital, Presupuesto de las empresas y Presupuesto de los fondos de desarrollo local.</p>
                     </div>
                 </div>
             </div>
@@ -114,7 +177,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-4">
                 <!--YEAR FILTER-->
-                <div class="form-group">
+                <div class="form-group mb-5">
                     <label for="input-select">Selecciona un año</label>
                     <select class="form-select" aria-label="Selecciona un año:" id="annioPresupuesto">
                         @foreach (var item in Model.periodos)
@@ -129,88 +192,309 @@
             </div>
         </div>
 
-    </div>
-
+    </div> 
 </section>
-<section class="section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-sm-6">
-                <div class="section-heading heading-left">
-                    <h2>
-                        El presupuesto de<br />
-                        inversión pública año <span id="annioPresupuestoText"></span>
-                    </h2>
-                </div>
-                <div class="section-body">
-                    <p>
-                        El Presupuesto General de la Nación, un instrumento financiero esencial, proporciona un desglose detallado de los ingresos y gastos proyectados del gobierno para un año fiscal determinado.
-                    </p>
-                    <p>
-                        Este presupuesto, que regula el uso de los recursos públicos a nivel nacional, es presentado por el Gobierno Nacional para su aprobación al Congreso de la República.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12">
-
-                <!--Inicia Info Presupuesto-->
-                <div class="card h-100 shadow border-0 card-presupuesto">
-                    <div class="card-body">
-                        <div class="Section-infograph">
-                            <div class="row">
-                                <div class="col-md-4 main-icon-value">
-                                    <img src="../img/svg-icons/ICO-Org-009.svg" alt="Icono decorativo Presupuesto" />
+<!--TABS-->
+    <div class="tabs-content">
+        <div class="tabs goals">
+        <ul class="tabs-nav justify-content-center soft-bg-4">
+            <li class="enlace_nivel_administracion active">
+                <div class="goal-name h5" tipo="general">Presupuesto Anual</div>
+            </li>
+            <li class="enlace_nivel_administracion">
+                <div class="goal-name h5" tipo="empresas">Presupuesto de las Empresas</div>
+            </li>
+            <li class="enlace_nivel_administracion">
+                <div class="goal-name h5" tipo="fondos">Presupuesto de los Fondos de Desarrollo Local</div>
+            </li>
+        </ul>
+        <div class="container">
+            <div class="tabs-container">
+                <div class="tabs-item content active" id="divPresupuestoTotal">
+                    <div class="containerOld">
+                            <div class="section-heading heading-left">
+                                <h2>
+                                Presupuesto Anual <span class="lblAnyoSelected"></span>
+                                </h2>
+                                <div class="section-subheading" id="lblTextoTotalGeneral">
+                                    <p>El Presupuesto Anual del Distrito Capital comprende el presupuesto del Concejo de Bogotá, la Contraloría de Bogotá, La Personería de Bogotá, la Administración Central Distrital y los Establecimientos Públicos Distritales y el Ente Autónomo universitario.</p>
                                 </div>
-                                <div class="col-md-8 cont-pres-infograph">
-                                    <span class="h4">Presupuesto de inversión aprobado </span>
-                                    <h2 class="mb-0"><span class="big-number" id="lblValorAprobado"></span></h2>
-                                    <span class="executeV" id="lblEtiquetaMoneda"></span>
+
+                            </div>
+                            <div class="row align-items-center">
+                                <div class="col-lg-7">
+                                    <div class="Section-infograph mb-4">
+                                        <div class="main-icon-value">
+                                            <img src="~/img/svg-icons/ICO-Org-009.svg" class="img-fluid" alt="Icono decorativo Presupuesto" />
+                                        </div>
+                                        <div class="cont-pres-infograph">
+                                            <span class="h4 d-block mb-3">Presupuesto total vigente </span>
+                                            <div class="h2 mb-0">
+                                                <span class="big-number valor-vigente" tipo="general"></span>
+                                                <span class="lblEtiquetaMoneda"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-5">
+
+                                    <div class="card white-card comprometido">
+                                        <div class="card-body">
+                                            <div class="main-icon-value">
+                                                <div class="ic-wrap">
+                                                    <img src="~/img/ic-comprometido.svg" class="img-fluid" alt="Icono decorativo Presupuesto" />
+                                                </div>
+                                                <div class="desc-data">
+                                                <div class="executeV">
+                                                    Presupuesto <span class="text-bold">COMPROMETIDO</span>
+                                                    <a href="#popup1" class="p-2 popup1_open ic-ttip">
+                                                        <span class="material-icons md-32">
+                                                            info
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                                    <div class="presupuestoN valor-comprometido" tipo="general"></div>
+
+                                                    <small>Ejecución</small>
+                                                    <div class="percentage">
+                                                        <div class="completed comprometido" tipo="general"></div>
+                                                        <div class="indicatorValues">
+                                                        <span class="startPoint text-center porcentaje-comprometido" tipo="general"></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card white-card girado">
+                                        <div class="card-body">
+                                            <div class="main-icon-value">
+                                                <div class="ic-wrap">
+                                                    <img src="~/img/ic-girado.svg" class="img-fluid" alt="Icono decorativo Presupuesto" />
+                                                </div>
+                                                <div class="desc-data">
+                                                <div class="executeV">
+                                                    Presupuesto <span class="text-bold">GIRADO</span>
+                                                    <a href="#popup2" class="p-2 popup2_open ic-ttip">
+                                                        <span class="material-icons md-32">
+                                                            info
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                                    <div class="presupuestoN valor-girado" tipo="general"></div>
+                                                    <small>Porcentaje de ejecución</small>
+                                                    <div class="percentage">
+                                                    <div class="completed girado" tipo="general"></div>
+                                                        <div class="indicatorValues">
+                                                        <span class="startPoint text-center porcentaje-girado" tipo="general"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="cont-infograph-valores py-2">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-12 py-2">
-                                    <div class="main-icon-value">
-                                        <div class="ic-wrap">
-                                            <img src="../img/svg-icons/ICO-Org-010.svg" alt="Icono decorativo Presupuesto" />
-                                        </div>
-                                        <div class="desc-data">
-                                            <div class="executeV">Presupuesto Vigente</div>
-                                            <div class="presupuestoN" id="lblValorVigente"></div>
+                    
 
+                </div>
+                <div class="tabs-item content" id="divPresupuestoEmpresas">
+                    <div class="containerOld">
+                        <div class="section-heading heading-left">
+                            <h2>
+                               Presupuesto de las empresas <span class="lblAnyoSelected"></span>
+                            </h2>
+                            <div class="section-subheading" id="lblTextoTotalEmpresas">
+                                <p>El presupuesto de las empresas distritales es el plan financiero anual que organiza los ingresos y gastos de las empresas públicas de Bogotá, garantizando que puedan operar, invertir y cumplir sus funciones sociales, en coherencia con el presupuesto global del Distrito y el Plan de Desarrollo.</p>
+                            </div>
+
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-lg-7">
+                                <div class="Section-infograph mb-4">
+                                    <div class="main-icon-value">
+                                        <img src="~/img/svg-icons/ICO-Org-009.svg" class="img-fluid" alt="Icono decorativo Presupuesto" />
+                                    </div>
+                                    <div class="cont-pres-infograph">
+                                        <span class="h4 d-block mb-3">Presupuesto total vigente </span>
+                                        <div class="h2 mb-0">
+                                            <span class="big-number valor-vigente" tipo="empresas"></span>
+                                            <span class="lblEtiquetaMoneda"></span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 py-2">
-                                    <div class="main-icon-value">
-                                        <div class="ic-wrap">
-                                            <img src="../img/svg-icons/ICO-Org-010.svg" alt="Icono decorativo Presupuesto" />
-                                        </div>
-                                        <div class="desc-data">
-                                            <div class="executeV">Presupuesto Ejecutado</div>
-                                            <div class="presupuestoN" id="lblValorEjecutado"></div>
 
+                            </div>
+                            <div class="col-lg-5">
+
+                                <div class="card white-card comprometido">
+                                    <div class="card-body">
+                                        <div class="main-icon-value">
+                                            <div class="ic-wrap">
+                                                <img src="~/img/ic-comprometido.svg" class="img-fluid" alt="Icono decorativo Presupuesto" />
+                                            </div>
+                                            <div class="desc-data">
+                                                <div class="executeV">Presupuesto <span class="text-bold">COMPROMETIDO</span>
+                                                    <a href="#popup1" class="p-2 popup1_open ic-ttip">
+                                                        <span class="material-icons md-32">
+                                                            info
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                                <div class="presupuestoN valor-comprometido" tipo="empresas"></div>
+                                                <small>Ejecución</small>
+                                                <div class="percentage">
+                                                    <div class="completed comprometido" tipo="empresas"></div>
+                                                    <div class="indicatorValues">
+                                                        <span class="startPoint text-center porcentaje-comprometido" tipo="empresas"></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="card white-card girado">
+                                    <div class="card-body">
+                                        <div class="main-icon-value">
+                                            <div class="ic-wrap">
+                                                <img src="~/img/ic-girado.svg" class="img-fluid" alt="Icono decorativo Presupuesto" />
+                                            </div>
+                                            <div class="desc-data">
+                                                <div class="executeV">Presupuesto <span class="text-bold">GIRADO</span>
+                                                    <a href="#popup2" class="p-2 popup2_open ic-ttip">
+                                                        <span class="material-icons md-32">
+                                                            info
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                                <div class="presupuestoN valor-girado" tipo="empresas"></div>
+                                                <small>Ejecución</small>
+                                                <div class="percentage">
+                                                    <div class="completed girado" tipo="empresas"></div>
+                                                    <div class="indicatorValues">
+                                                        <span class="startPoint text-center porcentaje-girado" tipo="empresas"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--Fin Info Presupuesto-->
+                <div class="tabs-item content" id="divPresupuestoFondos">
+                    <div class="containerOld">
+                        <div class="section-heading heading-left">
+                            <h2>
+                                Presupuesto de los fondos de desarrollo local <span class="lblAnyoSelected"></span>
+                            </h2>
+                            <div class="section-subheading" id="lblTextoTotalFondos">
+                                <p>Presupuesto asignado a las 20 localidades para gestionar recursos públicos y atender las necesidades específicas de su territorio, financiar proyectos de inversión social, infraestructura y servicios que mejoren la calidad de vida de los habitantes, promoviendo la participación ciudadana y la equidad territorial.</p>
+                            </div>
+
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-lg-7">
+                                <div class="Section-infograph mb-4">
+                                    <div class="main-icon-value">
+                                        <img src="~/img/svg-icons/ICO-Org-009.svg" class="img-fluid" alt="Icono decorativo Presupuesto" />
+                                    </div>
+                                    <div class="cont-pres-infograph">
+                                        <span class="h4 d-block mb-3">Presupuesto total vigente </span>
+                                        <div class="h2 mb-0">
+                                            <span class="big-number valor-vigente" tipo="fondos"></span>
+                                            <span class="lblEtiquetaMoneda"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-5">
+
+                                <div class="card white-card comprometido">
+                                    <div class="card-body">
+                                        <div class="main-icon-value">
+                                            <div class="ic-wrap">
+                                                <img src="~/img/ic-comprometido.svg" class="img-fluid" alt="Icono decorativo Presupuesto" />
+                                            </div>
+                                            <div class="desc-data">
+                                                <div class="executeV">Presupuesto <span class="text-bold">COMPROMETIDO</span>
+                                                    <a href="#popup1" class="p-2 popup1_open ic-ttip">
+                                                        <span class="material-icons md-32">
+                                                            info
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                                <div class="presupuestoN valor-comprometido" tipo="fondos"></div>
+                                                <small>Ejecución</small>
+                                                <div class="percentage">
+                                                    <div class="completed comprometido" tipo="fondos"></div>
+                                                    <div class="indicatorValues">
+                                                        <span class="startPoint text-center porcentaje-comprometido" tipo="fondos"></span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card white-card girado">
+                                    <div class="card-body">
+                                        <div class="main-icon-value">
+                                            <div class="ic-wrap">
+                                                <img src="~/img/ic-girado.svg" class="img-fluid" alt="Icono decorativo Presupuesto" />
+                                            </div>
+                                            <div class="desc-data">
+                                                <div class="executeV">Presupuesto <span class="text-bold">GIRADO</span>
+                                                    <a href="#popup2" class="p-2 popup2_open ic-ttip">
+                                                        <span class="material-icons md-32">
+                                                            info
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                                <div class="presupuestoN valor-girado" tipo="fondos"></div>
+                                                <small>Ejecución</small>
+                                                <div class="percentage">
+                                                    <div class="completed girado" tipo="fondos"></div>
+                                                    <div class="indicatorValues">
+                                                        <span class="startPoint text-center porcentaje-girado" tipo="fondos"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+         </div>
     </div>
-</section>
+        
+
+
+</div>
+
 <section class="section section-gray" id="RecPerFuncionBySector">
-    <div class="container">
+    <div class="container" id="divContenedorPerPlan">
         <div class="row py-4">
             <div class="col-12">
                 <div class="section-heading heading-left mb-0">
-                    <h2>¿Para qué se gasta?</h2>
+                    <h2>¿En qué se gasta?</h2>
                     <div class="section-subheading">
-                        <p>El presupuesto general de inversiones se gasta en una variedad de áreas con el objetivo de satisfacer las necesidades de la población. <span class="text-bold">Haciendo clic en los cuadros del siguiente gráfico podrá ver, por ejemplo, el monto del presupuesto vigente para servicios sociales, protección del medio ambiente y más.</span></p>
+                        <p>El presupuesto se distribuye entre los diferentes sectores de la Administración Distrital para responder a las necesidades de la población. En el siguiente gráfico, puede hacer clic en las áreas para navegar por los distintos niveles y conocer los montos correspondientes.</p>
                     </div>
                 </div>                
             </div>
@@ -219,230 +503,52 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="pChart">
-                    <div id="divGraphPerFuncion"></div>
+                    <div id="divGraphPerPlan"></div>
+                </div>
+            </div>
+            <div class="row justify-content-center" id="divDisposicionFinal" style="display:none">
+                <div class="col-lg-8">
+                    <div class="alert alert-info d-flex align-items-center my-3" role="alert">
+                        <i class="bi bi-lightbulb bulbicn me-2"></i>
+                        <p class="small"><span class="text-bold">Disponibilidad final</span> es el dinero que le queda a una entidad al cierre del año, después de sumar los ingresos y restar los gastos. Sirve para mostrar si el presupuesto quedó equilibrado.</p>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
 </section>
-<section class="section" id="RecPerSector">
+<section class="section section-gray" id="RecursosPerByInstitucion">
     <div class="container">
-         <div class="row py-4">
+        <div class="row py-4">
             <div class="col-12">
                 <div class="section-heading heading-left mb-0">
-                    <h2>Trazabilidad del presupuesto</h2>
-                    <div class="section-subheading">
-                        <p>Visualiza el flujo del presupuesto desde su origen (Fuentes de financiación) hasta su ejecución (proyectos de inversión).</p>
-                    </div>
-                </div>                
+                    <h2>¿Cuánto presupuesto ejecutan <span id="lblTipoInstitucion"></span> en el <span class="lblAnyoSelected"></span>?</h2>
+                </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-12">
-                <div class="tabs goals">
-                    <ul id="tabTipoContratos" class="tabs-nav">
-                        <li id="tab_perSector" class="enlace_tab active">
-                            <div class="goal-number"></div>
-                            <div class="goal-name"><div class="h4">Por sector</div></div>
-                        </li>
-                        <li id="tab_perOrganismo" class="enlace_tab">
-                            <div class="goal-number"></div>
-                            <div class="goal-name"><div class="h4">Por organismo financiador</div></div>
-                        </li>
-                    </ul>
-
-                    <div class="row justify-content-center" id="divPerSectorTab">
-
-                        <div class="col-md-12 col-sm-12">
-                            <div class="card shadow border-0 card-entidad">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="filter_sector_sankey">Seleccione un sector</label>
-                                                <select class="form-select selectSecSankey" aria-label="Selecciona un sector:" id="filter_sector_sankey">
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <span class="h4">Presupuesto Vigente</span><br />
-                                            <span class="presvalor2" id="totalSankeyPerSector"></span>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <span class="h4">Ejecutado</span><br />
-                                            <span class="presvalor2" id="PorcEjecPerSector"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--TEXTO COMPLEMENTARIO-->
-                            <!--Inicia Graficos-->
-                            <div class="row">
-                                <div class="col-lg-12 col-sm-12">
-                                    <p>@Html.Raw(LabelDistSankeySectores)</p>
-                                </div>
-                            </div>
-                            <div class="hint-help">
-                                    <div class="row justify-content-center">
-                                            <div class="col-lg-4">
-                                                <div class="wrap-hint-section">
-                                                    <div class="wrap-icon-hint">
-                                                        <img src="../img/ic-sankey1.svg" alt="icono decorativo relacionado a la acción" />
-                                                    </div>
-                                                    <div class="text-hint">
-                                                        <span class="text-bold">Haz clic en cada columna</span> para identificar rápidamente la distribución de recursos en las diferentes etapas (Subfunción, Institución, objetos de gasto y proyectos de inversión).
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="wrap-hint-section">
-                                                        <div class="wrap-icon-hint">
-                                                            <img src="../img/ic-sankey2.svg" alt="icono decorativo relacionado a desplazar el cursor" />
-                                                        </div>
-                                                        <div class="text-hint">
-                                                            <span class="text-bold">Desplaza el cursor sobre las lineas que conectan las columnas</span> para conocer el monto de los recursos que fluyen entre si.
-                                                        </div>
-                                                 </div>
-                                             </div>
-                                           
-                                    </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                        </div>
-                    </div>
-                    <div class="row justify-content-center" id="divPerOrganismoTab" style="display:none;">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="card shadow border-0 card-entidad">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label for="input-select">Seleccione un organismo</label>
-                                                <select class="form-select selectSecSankey" aria-label="Selecciona un organismo:" id="filter_organismo_sankey">
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                    <span class="h4">Monto Financiado</span><br />
-                                            <span class="presvalor2" id="totalSankeyPerOrganismo"></span>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <span class="h4">Ejecutado</span><br />
-                                            <span class="presvalor2" id="PorcEjecPerOrganismo"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="hint-help">
-                                <div class="row justify-content-center">
-                                        <div class="col-lg-4">
-                                            <div class="wrap-hint-section">
-                                                <div class="wrap-icon-hint">
-                                                    <img src="../img/ic-sankey1.svg" alt="icono decorativo relacionado a la acción" />
-                                                </div>
-                                                <div class="text-hint">
-                                                    <span class="text-bold">Haz clic en cada columna</span> para identificar rápidamente la distribución de recursos en las diferentes etapas (Sector, Institución y proyectos de inversión).
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="wrap-hint-section">
-                                                <div class="wrap-icon-hint"><img src="../img/ic-sankey2.svg" alt="icono decorativo relacionado a desplazar el cursor" /></div>
-                                                <div class="text-hint">
-                                                    <span class="text-bold">Desplaza el cursor sobre las lineas que conectan las columnas</span> para conocer el monto de los recursos que fluyen entre si.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--<div class="col-lg-3">
-                                            <div class="wrap-hint-section">
-                                                <div class="wrap-icon-hint"><img src="../img/ic-sankey3.svg" alt="icono decorativo relacionado a desplazar el cursor" /></div>
-                                                <div class="text-hint">
-                                                    <span class="text-bold">Escoge la densidad de los datos (vista compacta, vista extendida)</span>  que más se adapte a tus necesidades.
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-1">
-                                            <a class="btn btn-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                X
-                                            </a>
-                            </div>-->
-                                </div>
-
-                            </div>
-                           <!--VISTA EXTENDIDA O COMPACTA-->
-                           <div class="control-switch" style="display:none;">
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="tipoVistaSankey" id="vistaExtendida" value="extendida" >
-                                  <label class="form-check-label" for="vistaExtendida">Vista extendida</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="tipoVistaSankey" id="vistaCompacta" value="compacta" checked>
-                                      <label class="form-check-label" for="vistaCompacta">Vista compacta</label>
-                                </div>
-                           </div>
-
-                        </div>
-
-                    </div>
-                    <!--Fin graficos-->
-
-                </div>
-            
-        <div class="row">
-            <div class="col-lg-12 mt-4 mb-4">
-
-                <div class="wrap_sankey">
-                    <div class="quick-hint">
-                        <div id="miDiv"><span class="text-bold">Haz clic en cada columna para identificar la distribución de recursos.</span>
-                            <div class="arrow-clip"><img src="../img/black-arrow-down.svg" alt="haga clic en las columnas" /></div>
-                        </div>
-                    </div>
-                    <button id="btnAtras">Atrás</button>
-                    <div id="sankey_basic" style="width: 100%; height: auto;"></div>
-                </div>
-            </div>
-            <div class="row py-4" id="divInstitucionesPerSector" style="display:none;">
-                <h4 class="prestitle text-center" id="lblTituloListadoSec">Instituciones del Sector</h4>
-                <div id="divListadoRecursosObje">
-                    <!--TABLA COMPARATIVA-->
-                    <input type="hidden" id="migapanlistado" value="" />
-                    <div class="comparativeTable" id="divListado">
-                    </div>
-                </div>
-                
-            </div>
-            <div class="row py-4" id="divProyectosPerOrganismo" style="display:none;">
-            <h4 class="prestitle text-center" id="lblTituloListadoProy">Proyectos del Organismo</h4>
-               <div id="divListadoRecursosObje_proy">
-                    <!--TABLA COMPARATIVA-->
-                <input type="hidden" id="migapanlistado_proy" value="" />
-                <div class="comparativeTable" id="divListado_proy">
+                <div class="pChart">
+                    <div id="divGraphPerInstitucion"></div>
                 </div>
             </div>
         </div>
 
-        </div>
-         
     </div>
 </section>
-
-<section class="section section-gray" id="EjecutadoVsAprobado">
+<section class="section" id="EjecutadoVsAprobado">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-heading heading-left">
                     <h2 class="mb-0">
-                        Presupuesto Vigente vs presupuesto Ejecutado
+                        Comparativo presupuestal por entidades
                     </h2>
                     <div class="section-subheading">
-                        <p><span class="text-bold">El presupuesto vigente</span> es el monto total que ha sido asignado y aprobado para un período determinado, pero que aún no ha sido gastado o comprometido en su totalidad. <span class="text-bold">El presupuesto ejecutado</span>  se refiere a la cantidad de recursos que efectivamente se ha gastado o utilizado durante un período específico. </p>
-                        <p class="text-bold">Seleccione las instituciones (máximo 5) en las que desea realizar el comparativo. </p>
+                        <p><strong>Presupuesto vigente</strong> es la cantidad total de dinero aprobada para gastar en un año, que va del 1 de enero al 31 de diciembre. <strong>Presupuesto Comprometido</strong> es la parte del dinero ya reservada para cumplir obligaciones, como contratos, órdenes de compra o convenios. <strong>Presupuesto Girado</strong> es el dinero efectivamente pagado, una vez que se han recibido los bienes o servicios contratados.</p>
+                        <p class="text-bold">Seleccione (máximo 5) <span class="lblEtiquetaEntidad"></span> para realizar el comparativo. </p>
                     </div>
                 </div>
             </div>
@@ -453,23 +559,23 @@
                 </div>
             </div>
             <div class="col-md-8 col-sm-8 text-center">
-                <span class="h5" id="topEntidadesG" cons="0">Top instituciones</span>
-                <div class="mt-4" id="divGraphBarChartGastoEntidades"></div>
+                <span class="h5" id="topEntidadesG" cons="0">Top</span>
+                <div class="mt-4" id="divGraphBarChartGastoEntidades" style="min-width:600px; min-height: 360px;"></div>
             </div>
         </div>
     </div>
 </section>
-<section class="section" id="HistoricoPagado">
+<section class="section section-gray" id="HistoricoPagado" style="display:none;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-heading heading-left">
                     <h2 class="mb-0">
-                        Histórico de ejecución presupuestaria
+                        Resumen de ejecución presupuestaria a la fecha
                     </h2>
                     <div class="section-subheading">
-                        <p>Este gráfico proporciona una visión histórica de cómo se han ejecutado los recursos financieros a nivel institucional.</p>
-                        <p class="text-bold">Seleccione las instituciones (máximo 5) en las que desea realizar el comparativo. </p>
+                        <p>Este gráfico proporciona una visión histórica <b> acumulada </b> de cómo se han ejecutado los recursos financieros.</p>
+                        <p class="text-bold">Seleccione (máximo 5) <span class="lblEtiquetaEntidad"></span> para realizar el comparativo. </p>
                     </div>
                 </div>
             </div>
@@ -480,40 +586,74 @@
                 </div>
             </div>
             <div class="col-lg-8 text-center">
-                <span class="h5" id="topEntidadesPag" cons="0">Top instituciones </span>
+                <span class="h5" id="topEntidadesPag" cons="0">Top</span>
                 <div class="mt-4" id="grafico_lineas"></div>
 
             </div>
         </div>
     </div>
 </section>
+<section class="section CTA-hero">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-5"> 
+                <img src="img/preview-tablero-presupuesto.png" class="img-fluid" alt="Previsualización interfaz de tablero de power BI enfocado a presupuesto" />
+            </div>
+            <div class="col-lg-5">
+                <h2 class="white-text">Explora más:</h2>
+                <p>Conoce con mayor detalle cómo se está ejecutando el presupuesto a través de tableros interactivos oficiales de Secretaría de Hacienda.</p>
+                
+                <p>¡El control ciudadano comienza con la información!</p>
 
+                <div class="wrap-cta my-3">
+                    <a href="https://gobiernoabiertobogota.gov.co/gab/presupuesto/presupuesto-general" class="btn btn-primary btn-lg" target="_blank">
+                        <span title="Ver más">Ver Tablero</span>
 
-<!--HELP CENTER SHORTCUT-->
+                        <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
+                            <use xlink:href="img/sprite.svg#arrow-right"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--MODAL 1-->
+    <div id="popup1" class="popup_style popup_style_wide popup_style_sally open_popup" style="display:none;">
+        <div class="popup">
+            <div class="popup_content">
+                <h4 class="popup_title">Tipos de presupuesto</h4>
+                <div class="content2">
+                    <ul>
+                        <li>
+                            <span class="text-bold">Presupuesto Comprometido:</span>  <br />Es la parte del dinero ya reservada para cumplir obligaciones, como contratos, órdenes de compra o convenios.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="popup1_close popup_close"><i class="material-icons md-24">close</i></div>
+        </div>
+    </div>
+    <!--MODAL 2-->
+    <div id="popup2" class="popup_style popup_style_wide popup_style_sally open_popup" style="display:none;">
+        <div class="popup">
+            <div class="popup_content">
+                <h4 class="popup_title">Tipos de presupuesto</h4>
+                <div class="content2">
+                    <ul>
+                        <li>
+                            <span class="text-bold">Presupuesto Girado:</span>  <br />Es el dinero efectivamente pagado, una vez que se han recibido los bienes o servicios contratados.
+                        </li>
 
-<input id="Sector" name="Sector" type="hidden" value="@Model.Sector">
-
-
-
-<script>
-    window.onscroll = function () { myFunction() };
-
-    var header = document.getElementById("navs-header");
-    var sticky = header.offsetTop;
-
-    function myFunction() {
-        if (window.pageYOffset > sticky) {
-            header.classList.add("sticky");
-            header.classList.add("bg-white");
-        } else {
-            header.classList.remove("sticky");
-            header.classList.remove("bg-white");
-        }
-    }
-</script>
+                    </ul>
+                </div>
+            </div>
+            <div class="popup2_close popup_close"><i class="material-icons md-24">close</i></div>
+        </div>
+    </div>
+</section>
+<input type="hidden" name="type_section" id="type_section" value="@Model.Default_Seccion" />
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
+<script type="text/javascript" src="@Cdn.Url(Url, "~/js/lib/D3/d3.v7.min.js")"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
-<script src="/content/dist/js/sankey.js"></script>
-<script src="js/presupuesto_aux.js"></script>
+<script src="@Cdn.Url(Url, "~/js/presupuesto_aux.js")"></script>

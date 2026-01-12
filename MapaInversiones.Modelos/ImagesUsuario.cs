@@ -38,5 +38,8 @@ namespace PlataformaTransparencia.Modelos
         public int idUsuario { get; set; }
 
 
+        public String asociacion { get; set; }
+
+
     }
 }

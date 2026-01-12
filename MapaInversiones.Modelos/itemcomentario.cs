@@ -39,5 +39,7 @@ namespace PlataformaTransparencia.Modelos
         public string NombreSubsidio { get; set; }
         public string CodigoContrato { get; set; }
 
+        public string email_usuario { get; set; }
+
     }
 }

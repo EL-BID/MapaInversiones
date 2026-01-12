@@ -1,0 +1,190 @@
+﻿@inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--MAIN BANNER-->
+<section class="banner-main mb-0">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="/">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>Plan de Desarrollo ‘Cali, Capital Pacífica de Colombia’</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+                <div class="banner-main-info pb-0">
+                    <div class="banner-main-title">
+                        <h1>Plan de Desarrollo ‘Cali, Capital Pacífica de Colombia’</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="clearfix"></div>
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="section-heading heading-center mb-3">
+                <h2>¿Qué es un Plan de Desarrollo?</h2>
+            </div>
+            <div class="col-md-10 mb-3">
+
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <img class="img-fluid img-rounded" src="..\img\Foto_principal.jpg" alt="Mujer de pie con pantalla de fondo exponiendo acerca del Plan de desarrollo" />
+                    </div>
+                    <div class="col-md-6">
+
+                        <p>Un Plan de Desarrollo es un documento que organiza las acciones del gobierno para mejorar la calidad de vida de las personas en un lugar determinado, como un municipio, un departamento o en el país, durante un periodo de cuatro años. Este plan establece las metas que se quieren lograr, las estrategias para alcanzarlas y los recursos necesarios para hacerlo</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-10 ">
+                <div class="row py-2 align-items-center">
+
+                    <div class="col-md-6">
+                        <p>En el caso de Cali, el Plan de Desarrollo Distrital 2024-2027, titulado "Cali, Capital Pacífica de Colombia", busca enfrentar los principales retos de la ciudad y aprovechar sus fortalezas para construir un futuro mejor para todos los caleños.</p>
+                    </div>
+                    <div class="col-md-6 ">
+                        <img class="img-fluid img-rounded" src="..\img\Foto5.jpg" alt="Grupo de personas reunidas en un salon escuchando la conferencia acerca del Plan de desarrollo" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="section-heading heading-center">
+                <h2 class="text-center">Estructura del Plan de Desarrollo</h2>
+                <p class="section-subheading">El Plan de Desarrollo de Santiago de Cali está organizado en tres niveles principales: Propósitos, Retos y Programas. Cada nivel tiene un rol específico en la construcción de un mejor futuro para el distrito.</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow border-0 b1 h-100">
+                    <img class="img-fluid img-rounded" src="..\img\foto1.jpg" alt="ilustración decorativa" />
+                    <div class="card-body">
+                        <h3 class="card-title">Propósitos</h3>
+                        <div class="wrap-desc-entidad">
+                            <p class="card-text">Son los grandes objetivos que se quieren alcanzar con el Plan de Desarrollo. Representan la visión general de lo que se busca para la ciudad y aborda temas que afectan a toda la población. </p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow border-0 b2 h-100">
+                    <img class="img-fluid img-rounded" src="..\img\Foto11.jpg" alt="ilustración decorativa" />
+                    <div class="card-body">
+                        <h3 class="card-title">Retos</h3>
+                        <div class="wrap-desc-entidad">
+                            <p>Son las áreas específicas de acción necesarias para alcanzar los propósitos. Cada reto aborda problemas concretos que deben ser solucionados.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-8 col-lg-4">
+                <div class="card shadow border-0 b3">
+                    <img class="img-fluid img-rounded" src="..\img\Foto8.jpg" alt="Grupo de personas recibiendo información respecto al componente programático del plan de desarrollo" />
+                    <div class="card-body">
+                        <h3 class="card-title">Programas</h3>
+                        <div class="wrap-desc-entidad">
+                            <p>Son las acciones concretas que se llevarán a cabo para cumplir con los retos. Cada programa tiene objetivos claros y cuenta con indicadores de producto que permiten medir la gestión de la administración frente a los compromisos adquiridos en el Plan de Desarrollo.</p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="wrap-image p-3 text-center">
+            <img class="img-fluid" src="~/img/estructura-plan.jpg" alt="descripcion gráfica de la estructura del plan de desarrollo distrital 2024-2027" />
+        </div>
+        <div class="wrap-image p-3 text-center">
+            <img class="img-fluid" src="~/img/indicadores-trazadores.jpg" alt="descripcion gráfica del componente programático del plan de desarrollo distrital 2024-2027" />
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-10">
+                <div class="section-heading heading-center">
+                    <h2>¿Por qué es importante un Plan de Desarrollo?</h2>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>El Plan de Desarrollo es importante porque es una herramienta que organiza los esfuerzos de la Alcaldía de Cali para atender las necesidades de las personas. </p>
+                    </div>
+                    <div class="col-md-6">
+                        <img class="img-fluid img-rounded" src="..\img\Foto3.jpg" alt="Mujer de pie escribiendo su concepto de cómo dejar huella en cali" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row py-2 align-items-center">
+                    <div class="col-md-6">
+                        <img class="img-fluid img-rounded" src="..\img\Foto9.jpg" alt="" />
+                    </div>
+                    <div class="col-md-6 align-middle">
+                        <p>También permite a los ciudadanos saber cuáles son las prioridades de la Administración y cómo se están utilizando los recursos públicos. Además, este plan fomenta la participación ciudadana, ya que las personas pueden hacer seguimiento y aportar ideas para mejorar su implementación.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section highlightedMSG">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-heading heading-center">
+                    <h2>Conocé el Plan con mayor detalle</h2>
+                </div>
+                <div class="text-center">
+                <img src="~/img/cali-coverBook.png" alt="Portada del libro impreso del Plan hidden Desarrollo Cali, Capital Pacífica de Colombia" />
+                <div class="p-4">
+                    <a href="https://www.cali.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=94200&id_comunidad=planeacion" target="_blank" class="btn btn-primary btn-lg">
+                        <span>Descargá el PDF</span>
+                        <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
+                            <use xlink:href="img/sprite.svg#arrow-right"></use>
+                        </svg>
+                    </a>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="@Cdn.Url(Url, "~/js/Bootbox/bootbox.min.js")" type="text/javascript"></script>

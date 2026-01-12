@@ -1,5 +1,10 @@
 ﻿@model PlataformaTransparencia.Modelos.ModelLocationData
 @inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
+
+
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -7,386 +12,921 @@
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
     var LabelSector = "";
     var TituloSector = "";
-    System.IFormatProvider culture =
-        new System.Globalization.CultureInfo("es-RD");
+    System.IFormatProvider culture = new System.Globalization.CultureInfo("es-CO");
 }
-@foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
-{
-    if (@etiqueta.AliasPart.Alias == "Sector")
+@{
+    var items = etiquetas?.Content?.BagPart?.ContentItems;
+    if (items != null && items.Count > 0)
     {
-        LabelSector = @etiqueta.HtmlBodyPart.Html;
-        TituloSector = @etiqueta.TitlePart.Title;
+
+        @foreach (var etiqueta in items)
+        {
+            if (@etiqueta.AliasPart.Alias == "Sector")
+            {
+                LabelSector = @etiqueta.HtmlBodyPart.Html;
+                TituloSector = @etiqueta.TitlePart.Title;
+            }
+        }
+
     }
 }
-    
+@{
+    var top = Model.ProjectsPerSectorGroup
+                   .OrderByDescending(x => x.rawValue)
+                   .FirstOrDefault();
+}
+
+ 
     <!-- Landing Section -->
-<section id="s0" class="banner-main">
 
-        <div class="container">
 
-            <!-- Begin bread crumbs -->
-            <nav class="bread-crumbs">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <ul class="bread-crumbs-list">
-                                <li>
-                                    <a href="\">Inicio</a>
-                                    <i class="material-icons md-18">chevron_right</i>
-                                </li>
-                            <li>Sector @Model.EncabezadoSector.nomSector</li>
-                            </ul>
+
+<section class="banner-main-section s0-section" style="background-image: url('GaleriaEnteTerritorial/XL/default_XL.jpg')">
+    <div class="bgBlueOverlay">&nbsp;</div><!-- DON'T EREASE-->
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>
+                                @Model.EncabezadoSector.nomSector
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- End bread crumbs -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="banner-main-info pb-0">
+                    <div class="banner-main-title">
+                        <h1>@Model.EncabezadoSector.nomSector</h1>
+                    </div>
+                    <div class="banner-main-desc ">
+                        <span class="h5">SECTOR</span>
+                        <input id="idSector" name="idSector" type="hidden" value="@Model.location_id">
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!--NAVIGATION ON PAGE-->
+        <div class="row navs-shortcuts">
+            <div class="" id="navs-header">
+                <a class="btn-section" href="#s1">
+                    <span class="ic-shortcut"><i class="material-icons md-24">feed</i></span>
+                    <span class="text-btn">Presupuesto sector</span>
+                </a>
+                <a class="btn-section" href="#s2">
+                    <span class="ic-shortcut"><i class="material-icons md-24">earbuds</i></span>
+                    <span class="text-btn">Distribución tipo de gasto</span>
+                </a>
+                <a class="btn-section" href="#s3">
+                    <span class="ic-shortcut"><i class="material-icons md-24">collections</i></span>
+                    <span class="text-btn">Estrategias de Inversión</span>
+                </a>
+                <a class="btn-section" href="#s4">
+                    <span class="ic-shortcut"><i class="material-icons md-24">speaker_notes</i></span>
+                    <span class="text-btn">Proyectos POT</span>
+                </a>
+            </div>
+        </div>
+        <!--FIN NAVIGATION ON PAGE-->
+    </div>
+</section>
+<section class="section" id="s1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="alert alert-info d-flex align-items-center" role="alert">
+                    <i class="bi bi-lightbulb bulbicn me-2"></i>
+                    <span>Los datos de <strong>presupuesto y distribución</strong> cambian según el año seleccionado.</span>
+                </div>
+            </div>
+        </div>
+        <div class="row sep mb-4 py-4">
+            <div class="section-heading heading-left">
+                <h2>Presupuesto por sector</h2>
+            </div>
+            <div class="contadores">
+                <div class="row" id="divTxtTodosProy"></div>
+            </div>
+            <!--SELECT AÑO-->
+            <div class="row justify-content-center mb-4 py-4">
+                <div class="col-lg-4">
+                    <!--YEAR FILTER-->
+                    <div class="form-group mb-5">
+                        <label for="input-select">Selecciona un año</label>
+                        <select class="form-select" aria-label="Selecciona un año:" id="annioPresupuesto">
+                            @foreach (var item in Model.Anios)
+                            {
+                                <text>
+                                <option value="@item">@item</option>
+                                </text>
+
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-4">
+                    <div class="col-lg-8 offset-lg-1">
+                        <div class="Section-infograph mb-4">
+                            <div class="main-icon-value">
+                                <img src="~/img/svg-icons/ICO-Org-009.svg" class="img-fluid" alt="Icono decorativo Presupuesto vigente" />
+                            </div>
+                            <div class="cont-pres-infograph">
+                                <span class="h4 d-block mb-3">Presupuesto total vigente </span>
+                                <div class="h2 mb-0">
+                                    <span class="big-number valor-vigente" tipo="general"></span>
+                                    <span class="lblEtiquetaMoneda"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <div class="card white-card comprometido">
+                            <div class="card-body">
+                                <div class="main-icon-value">
+                                    <div class="ic-wrap">
+                                        <img src="~/img/ic-comprometido.svg" class="img-fluid" alt="Icono decorativo Presupuesto comprometido" />
+                                    </div>
+                                    <div class="desc-data">
+                                        <div class="executeV">Presupuesto Disponible <span class="text-bold">COMPROMETIDO</span>
+                                            <a href="#popup1" class="p-2 popup1_open ic-ttip">
+                                                <span class="material-icons md-32">
+                                                    info
+                                                </span>
+                                            </a>
+                                        </div>
+                                        <div class="presupuestoN valor-comprometido" tipo="general"></div>
+
+                                        <small>Ejecución</small>
+                                        <div class="percentage">
+                                            <div class="completed comprometido" tipo="general"></div>
+                                            <div class="indicatorValues">
+                                                <span class="startPoint text-center porcentaje-comprometido" tipo="general"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <div class="card white-card girado">
+                            <div class="card-body">
+                                <div class="main-icon-value">
+                                    <div class="ic-wrap">
+                                        <img src="~/img/ic-girado.svg" class="img-fluid" alt="Icono decorativo Presupuesto Girado" />
+                                    </div>
+                                    <div class="desc-data">
+                                        <div class="executeV">Presupuesto Disponible <span class="text-bold">GIRADO</span></>
+                                            <a href="#popup2" class="p-2 popup2_open ic-ttip">
+                                                <span class="material-icons md-32">
+                                                    info
+                                                </span>
+                                            </a>
+                                            
+                                        </div>
+                                        <div class="presupuestoN valor-girado" tipo="general"></div>
+                                        <small>Porcentaje de ejecución</small>
+                                        <div class="percentage">
+                                            <div class="completed girado" tipo="general"></div>
+                                            <div class="indicatorValues">
+                                                <span class="startPoint text-center porcentaje-girado" tipo="general"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </nav><!-- End bread crumbs -->
-
-
-        <div class="row justify-content-center">
-
-            <div class="banner-main-info">
-                <div class="banner-main-title">
-                    <h1>@Model.EncabezadoSector.nomSector</h1>
-                </div>
-                <div class="banner-main-desc">
-                    <p>SECTOR</p>
-                    <input id="idSector" name="idSector" type="hidden" value="@Model.location_id">
-                    <input id="idDepto" name="idDepto" type="hidden" value="@Model.ProjectsPerSectorGroup.OrderByDescending(x => x.rawValue).ToList()[0].alias">
-                </div>
-                
-            </div>
-            <div class="col-md-12 text-center">
-
-                <ul class="list-inline details">
-                    <li>
-                        <span class="h3 text-center">$ @String.Format("{0:n0}", @Model.EncabezadoSector.Costo)</span>
-                        <span class="text-center h6">Valor total proyectos</span>
-                    </li>
-                    <li>
-                        <span class="h3 text-center">@String.Format("{0:n2}", @Model.EncabezadoSector.Duracion) Años</span>
-                        <span class="text-center h6">Duración promedio del proyecto</span>
-                    </li>
-                    <li>
-                        <span class="h3 text-center">@String.Format("{0:n0}", @Model.EncabezadoSector.CantProyectos)</span>
-                        <span class="text-center h6">Número de Proyectos</span>
-                    </li>
-
-
-                </ul>
-
-            </div>
-       
-        </div>
-        </div>
-
-    <div class="row navs-shortcuts">
-        <div class="" id="navs-header">
-            <a class="btn-section" href="#s1">
-                <span class="ic-shortcut"><i class="material-icons md-24">feed</i></span>
-                <span class="text-btn">Información General</span>
-            </a>
-            <a class="btn-section" href="#s2">
-                <span class="ic-shortcut"><i class="material-icons md-24">earbuds</i></span>
-                <span class="text-btn">Proyecto por ente territorial</span>
-            </a>
-            <a class="btn-section" href="#s3">
-                <span class="ic-shortcut"><i class="material-icons md-24">collections</i></span>
-                <span class="text-btn">Proyectos en ejecución</span>
-            </a>
-            <a class="btn-section" href="#s4">
-                <span class="ic-shortcut"><i class="material-icons md-24">speaker_notes</i></span>
-                <span class="text-btn">Explora otros sectores</span>
-            </a>
-        </div>
-    </div>
-</section>
-<style>
-    .box {
-        margin: 10px;
-        width: 200px;
-        height: 100px;
-        border-radius: 3px;
-        background: linear-gradient(to right, #38b8cd 8px, #f2f2f2 0);
-        box-shadow: 0 5px 5px #e4dcdc;
-        padding-top :22px;
-        padding-left : 26px;
-    }
-</style>
-<section class="s1E-section whiteBg" id="s1">
-    <div class="container">
-        <div class="row sep mb-4">
-            <div class="section-heading heading-left">
-                <h2>Información General</h2>
-            </div>
-            <div class="row col-md-8" id="divTxtTodosProy">
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="s1E-section whiteBg" id="s2">
-    <div class="container">
-        <div class="row sep mb-4">
-            <div class="section-heading heading-left">
-                <h2>Proyectos por ente territorial</h2>
-            </div>
-            <div class="section-heading heading-center">
-                <h5>Seleccione un ente territorial</h5>
-            </div>
-            <div class="section-heading heading-center" id="divGraphProySector">
-
-            </div>
-        </div>
-
-        <div class="row sep mb-8">
-            <div class="col-lg-6 mb-3">
-                <h5 id="deptoproyecto">Proyectos en @Model.ProjectsPerSectorGroup.OrderByDescending(x => x.rawValue).ToList()[0].labelGroup</h5>
-                <span style="font-style: italic;">Se muestra por defecto el ente territorial con mayor número de proyectos</span>
-            </div>
-            <div class="col-lg-3">
-                <div class="form-group mb-5">
-                    <label for="tipo-contrato">Año</label>
-                    <select class="form-select" id="anioProyecto">
-                       
-
-
-                    </select>
-                </div>
-
-            </div>
-            <div class="col-lg-3">
-                <div class="form-group mb-5">
-                    <label for="tipo-contrato">Estado</label>
-                    <select class="form-select" id="estadoProyecto">
-
-                        <option selected value="">TODOS</option>
-                        <option value="1">EJECUCIÓN</option>
-                        <option  value="2">PARALIZADO</option>
-                        <option  value="3">REEVALUACIÓN</option>
-                        
-                    </select>
-                </div>
-
-            </div>
-        </div>
-        <div class="comparativeTable" id="divListadoInstituciones">
-
-        </div>
-        <div id="divPagFichas"></div>
-    </div>
-</section>
-<style>
-
-    
-/*PROJECT CAROUSEL*/
-.thumbnail {
-    position: relative
-}
-
-.carousel {
-    margin-bottom: 0;
-    /*padding: 0 40px 30px 40px;*/
-    padding: 0px 25px 19px 25px;
-    margin-top: 25px;
-}
-/* The controlsy */
-.carousel-control {
-    left: -12px;
-    height: 40px;
-    width: 40px !important;
-    /*margin-top: 5vw;*/
-    opacity: 1;
-    border-radius: 50%;
-    padding: 5px;
-    text-align: center;
-    display: inline-block;
-}
-
-.carousel-inner {
-    min-height: 250px; /*temporary style*/
-}
-
-.carousel-control.left {
-    background-image: none;
-    background-color: #9D1717
-}
-
-.carousel-control i {
-    color: #fff !important;
-    font-size: inherit;
-    width: auto
-}
-
-.glyphicon-menu-left:before, .glyphicon-menu-right:before {
-    font-size: 50px;
-}
-
-.carousel-control.right {
-    /*right: -12px;*/ background: #9D1717
-}
-
-.carousel-indicators {
-    right: 50%;
-    top: auto;
-    bottom: -10px;
-    margin-right: -19px;
-}
-
-    .carousel-indicators li {
-    }
-
-    .carousel-indicators .active {
-    }
-
-.tabs{display: flex; justify-content: center}
-.tab-link {
-    font-size: 2rem;
-    font-weight: 700;
-    padding: 8px 25px;
-    border: 1px solid #D5D5D5;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    margin-right: 15px;
-    border-bottom-color: #D5D5D5;
-    border-bottom-width: 1px;
-}
-.tab-link.current {
-    margin-bottom: -1px;
-    border-bottom-width: 2px;
-    border-bottom-color: #FCFCFC !important;
-}
-.pCancelado {
-    border: 1px solid #8CC3F4;
-    background-color: #F6F8F9;
-    border-radius: 9px!important; margin: 15px!important;
-}
-.table-striped {
-    background-color: #fff;
-    border: 1px solid #2E528D
-}
-.table-striped thead {
-    background-color: #2E528D;
-    color: #fff;
-    font-weight: 700;
-    border-top-left-radius: 6px;
-    border-bottom: 0px;
-}
-.table-striped thead th {
-    font-weight: 700!important;
-}
-.acciones .card{ max-width:33%}
-.wrap-contract-cards .card-title { display: flex; align-items:center
-}
-
-.enlace_ficha {
-    margin-top: 17px;
-    display: block
-}
-.enlace_ficha_inversiones {
-    margin-top: 17px;
-    display: block
-}
-
-
-.dropdown .glyphicon {
-    margin-left: 5px
-}
-
-</style>
-<section id="s3" class="s2-section">
-    <div class="container" id="">
-        <div class="row">
-            <div class="col-md-7">
-                <h2>Proyectos en Ejecución Sectores</h2>
-            </div>
-            <!--FILTERS-->
-            <div class="col-md-5">
-                <div class="filtersBox">
+                <div class="row sep mb-4">
+                    <div class="section-heading heading-left">
+                        <h2>Distribución por tipo de gasto año <span class="lblAnyoSelected" id="s2"></span></h2>
+                    </div>
+                    <div class="section-subheading">
+                        <p>El presupuesto actual del sector @Model.EncabezadoSector.nomSector se distribuye en diferentes lineas estratégicas para garantizar el acceso, la protección y la promoción de este sector en Bogotá.</p>
+                    </div>
                     <div class="row">
-                        @*<div class="col-xs-12 col-md-6" id="divFiltrosFichaOrdena">*@
+                        <div class="pChart">
+                            <div id="divGraphGastoSector" style="position: relative;">
+                        </div>
                     </div>
-                    <div class="col-xs-12 col-md-6" id="divFiltrosFichaDepartamento">
-                        <!--Estaba divFiltrosFichaSector -->
-                    </div>
-            </div>
-        </div>
-            <div class="row">
-                <div class="col-12">
-                    <div id="divContenedorFichas" class="project-carusel" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true, "autoPlay": 8000 }'>
-                    </div>
-                    <!--END MAQUETA BASICA PROJECTOS-->
-                    <div id="divNoEncontradoEjec" class="no-search-results objHidden">No se encontraron resultados</div>
-                    <div id="divNoExistenEjec" class="no-search-results objHidden">
-                        No se encontraron resultados
                     </div>
                 </div>
             </div>
+        </div>
     </div>
-    <div id="divNoEncontradoEjec" class="no-search-results objHidden">No se han encontrado resultados</div>
-    <div id="divNoExistenEjec" class="no-search-results objHidden">No existen proyectos en Ejecución.</div>
-
 </section>
+<section class="section section-gray" id="s3">
 
-<section class="s1E-section whiteBg" id="s4">
     <div class="container">
         <div class="row sep mb-4">
             <div class="section-heading heading-left">
-                <h2>Explora otros Sectores</h2>
+                <h2>Estrategias de Inversión</h2>
             </div>
-            <div class="" id="">
-               <div class="row sep mb-8">
-                <div class="info-cards" id="divContentSectores" >
-                        @foreach (var sector in @Model.Datossectores)
+            <div class="section-subheading">
+                <p>Las estrategias de inversión en @Model.EncabezadoSector.nomSector  permiten fortalecer el acceso, la participacion y el disfrute de los derechos en toda la ciudad. Estas inversiones promueven la transformacion del territorio, impulsan la economía.</p>
+            </div>
+            @if (Model.ProyectosEjecucion != null && Model.ProyectosEjecucion.Any())
+            {
+                <div class="col-lg-12 wrap-pry-destacados mb-4">
+                <div class="text-center">
+                    <h3>Proyectos destacados</h3>
+                </div>
+                <div class="row py-4">
+
+                        @foreach (var proydes in @Model.ProyectosEjecucion)
                         {
+                            var badge = "project-badge-purple";
+                            if (@proydes.TipoProyecto.ToUpper() == "PROYECTO INVERSIÓN") { badge = "project-badge-green"; }
                             <text>
-                                <div id="div_0" class="card category-proy category_sector" location_id="@sector.nomSector" location_cant="@sector.CantProyectos">
-                                    <div class="wrap-ic-category">
-                                        <img src="@("/img/"+sector.UrlImgXL)" alt="@("icono "+sector.nomSector)">
-                                    </div><span class="h5"><a href="/PerfilSector?id=@sector.IdSector">@sector.nomSector</span><span class="number-proy">@sector.CantProyectos proyectos</span>
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-body-pry">
+                                        <div class="cardimg-city">
+                                            <img src="..\img\ciudad1.png" />
+                                        </div>
+                                        <div class="cardcont-city">
+                                                <a href="\PerfilProyecto\@proydes.IdProyecto" class="item-link" target="_blank" rel="noopener noreferrer">
+                                                <div class="project-badge @badge">
+                                                        @proydes.TipoProyecto
+                                                </div>
+                                                <div class="project-title py-4">
+                                                        <h3>@proydes.NombreProyecto</h3>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </text>
+                            </div>
+                                </text>
                         }
-                    
                    
+                    
+                   @*  else
+                    {
+                        <text>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <div class="card-body-pry">
+                                    <div class="cardimg-city">
+                                        <img src="..\img\ciudad1.png" />
+                                    </div>
+                                    <div class="cardcont-city">
+                                        <a href="#" class="item-link">
+                                            <div class="project-badge project-badge-purple">
+                                                
+                                            </div>
+                                            <div class="project-title py-4">
+                                                <h3>NO SE ENCONTRATORN PROYECTOS DESTACADOS PARA EL SECTOR @Model.EncabezadoSector.nomSector</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </text>
+                    
+                    }
+ *@
+@*                     <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body-pry">
+                                <div class="cardimg-city">
+                                    <img src="..\img\ciudad1.png" />
+                                </div>
+                                <div class="cardcont-city">
+                                    <a href="#" class="item-link">
+                                        <div class="project-badge project-badge-green">
+                                            PROYECTO EN INVERSIÓN
+                                        </div>
+                                        <div class="project-title py-4">
+                                            <h3>CIUDADELA EDUCATIVA Y DEL CUIDADO</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body-pry">
+                                <div class="cardimg-city">
+                                    <img src="..\img\ciudad1.png" />
+                                </div>
+                                <div class="cardcont-city">
+                                    <a href="#" class="item-link">
+                                        <div class="project-badge project-badge-purple">
+                                            PROYECTO EN INVERSIÓN
+                                        </div>
+                                        <div class="project-title py-4">
+                                            <h3>CIUDADELA EDUCATIVA Y DEL CUIDADO</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body-pry">
+                                <div class="cardimg-city">
+                                    <img src="..\img\ciudad1.png" />
+                                </div>
+                                <div class="cardcont-city">
+                                    <a href="#" class="item-link">
+                                        <div class="project-badge project-badge-green">
+                                            PROYECTO EN INVERSIÓN
+                                        </div>
+                                        <div class="project-title py-4">
+                                            <h3>CIUDADELA EDUCATIVA Y DEL CUIDADO</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-body-pry">
+                                <div class="cardimg-city">
+                                    <img src="..\img\ciudad1.png" />
+                                </div>
+                                <div class="cardcont-city">
+                                    <a href="#" class="item-link">
+                                        <div class="project-badge project-badge-purple">
+                                            PROYECTO EN INVERSIÓN
+                                        </div>
+                                        <div class="project-title py-4">
+                                            <h3>CIUDADELA EDUCATIVA Y DEL CUIDADO</h3>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> *@
                 </div>
             </div>
+            }
+            <div class="col-md-12">
+                <div class="text-center">
+                    <h3>Tipos de Proyectos</h3>
+                </div>
+                <div class="section-subheading">
+                    <p>En Bogotá se dividen los proyectos de inversión y los de desarrollo local porque tienen diferentes alcances: los de inversión responden a necesidades de toda la ciudad, mientras que los locales atienden prioridades específicas de cada localidad. Así se asegura una mejor gestión y uso de los recursos.</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1 py-4 mb-4">
+                        <div class="alert alert-info d-flex align-items-center" role="alert">
+                            <i class="bi bi-lightbulb me-2 bulbicn"></i>
+                            <span class="text-center lh-sm">
+                                En la siguiente tabla se muestran los <strong>valores totales programados, comprometidos y girados</strong>. Si desea consultar los valores por año, puede hacerlo en el perfil individual de cada proyecto.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tabs-content py-4">
+                    <div class="tabs goals">
+                        <ul class="tabs-nav">
+                            <li class="enlace_nivel_administracion active">
+                                <div class="goal-name h5">Proyecto de inversión</div>
+                            </li>
+                            <li class="enlace_nivel_administracion">
+                                <div class="goal-name h5">Proyectos de desarrollo local</div>
+                            </li>
+                        </ul>
+                        <div class="container">
+                            <div class="tabs-container">
+                                <div class="tabs-item content active">
+                                    <!--Inicia Tab 1-->
+                                    <!-- Encabezado con icono y número de proyectos -->
+                                    <div class="row justify-content-center mb-4 py-4">
+                                        <div class="col-12 d-flex justify-content-center align-items-center mb-3 wrap-pryheader">
+                                            <img alt="icono decorativo de proyecto destacado" src="..\img\imgsector\icn_proyectodestacado.png" />
+                                            <span class="display-4 fw-bold mb-0" id="cantidadinversion">@* 19 Proyectos *@</span>
+                                        </div>
+                                        <!-- Descripción -->
+                                        <div class="col-lg-10 col-xl-8 mb-4">
+                                            <div class="text-center">
+                                                <p>
+                                                    Los Objetivos de Desarrollo Sostenible (ODS) son 17 objetivos globales adoptados por la ONU en 2015 para abordar los desafíos más apremiantes del mundo y garantizar un futuro sostenible para todos.<br /><br />
+
+                                                    Los proyectos de inversión en Bogotá están ajustados a los ODS porque estos
+                                                    objetivos ofrecen una guía global para lograr desarrollo sostenible. Alinearlos garantiza
+                                                    que las inversiones locales contribuyan al bienestar social, económico y ambiental, en
+                                                    coherencia con metas internacionales.
+                                                </p>
+                                                <p class="mb-4">
+                                                    Estos proyectos contribuyen estratégicamente a estos ODS.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!--ODS-->
+                                        <div class="col-lg-8 col-xl-8 col-md-8">
+                                            <input id="proyInversion" name="proyInversion" type="hidden" value="">
+                                            <div class="row justify-content-center" id="odsinversion">
+@*                                                 <div class="col-lg-3">
+                                                    <div class="city-ods">
+                                                        <img src="..\img\imgsector\icn_ODS4.png" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="city-ods">
+                                                        <img src="..\img\imgsector\icn_ODS8.png" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="city-ods">
+                                                        <img src="..\img\imgsector\icn_ODS10.png" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="city-ods">
+                                                        <img src="..\img\imgsector\icn_ODS11.png" />
+                                                    </div>
+                                                </div> *@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                     <div class="col-lg-8">
+
+                                            <div class="form-group row">
+                                                <div class="col-6">
+                                                <label for="sortyinversion" class="small">Filtrar por ODS</label>
+                                                <select class="form-select" aria-label="Filtrar por" id="sortyinversion" >
+@*                                                     <option value="">Todos</option>
+                                                    <option value="">ODS 4</option>
+                                                    <option value="">ODS 8</option> *@
+                                                </select>
+                                                </div>
+                                                <div class="col-6">
+                                                <label for="sortyinversionentidad" class="small">Filtrar por Entidad</label>
+                                                <select class="form-select" aria-label="Filtrar por" id="sortyinversionentidad">
+                                                    @*                                                     <option value="">Todos</option>
+                                                    <option value="">ODS 4</option>
+                                                    <option value="">ODS 8</option> *@
+                                                </select>
+                                                </div>
+                                            </div>
+
+
+                                     </div>
+                                    <div class="col-lg-12 text-center py-4">
+                                        <div class="comparativeTable">
+                                            <div class="card-entidades-group" id="listinversion">
+@*                                                     <div class="card d-flex cardborder">
+                                                    <div class="headEnt">
+                                                        <div class="data1 mainDataEntidad3">
+                                                                <span class="labelTit">Código BPIN: 9951000</span>
+                                                                <span class="td1">Restauración Centro Histórico La Candelaria</span>
+                                                        </div>
+                                                        <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto vigente
+                                                                </span>
+                                                            <span class="td1">$124 Millones</span>
+                                                        </div>
+                                                        <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto comprometido
+                                                                </span>
+                                                            <span class="td1">$60 Millones</span>
+                                                        </div>
+                                                        <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto girado
+                                                                </span>
+                                                            <span class="td1">$14 Millones</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="btn-action">
+                                                        <div class="btnPerfil">
+                                                            <a class="text-small"><i class="material-icons md-18">arrow_forward</i><br /><span>Ver perfil</span></a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                    <div class="card d-flex cardborder">
+                                                        <div class="headEnt">
+                                                            <div class="data1 mainDataEntidad3">
+                                                                <span class="labelTit">Código BPIN: 9951000</span>
+                                                                <span class="td1">Restauración Centro Histórico La Candelaria</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto vigente
+                                                                </span>
+                                                                <span class="td1">$124 Millones</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto comprometido
+                                                                </span>
+                                                                <span class="td1">$60 Millones</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto girado
+                                                                </span>
+                                                                <span class="td1">$14 Millones</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="btn-action">
+                                                            <div class="btnPerfil">
+                                                                <a class="text-small"><i class="material-icons md-18">arrow_forward</i><br /><span>Ver perfil</span></a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card d-flex cardborder">
+                                                        <div class="headEnt">
+                                                            <div class="data1 mainDataEntidad3">
+                                                                <span class="labelTit">Código BPIN: 9951000</span>
+                                                                <span class="td1">Restauración Centro Histórico La Candelaria</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto vigente
+                                                                </span>
+                                                                <span class="td1">$124 Millones</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto comprometido
+                                                                </span>
+                                                                <span class="td1">$60 Millones</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto girado
+                                                                </span>
+                                                                <span class="td1">$14 Millones</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="btn-action">
+                                                            <div class="btnPerfil">
+                                                                <a class="text-small"><i class="material-icons md-18">arrow_forward</i><br /><span>Ver perfil</span></a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div> *@
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div id="divPagDistInversion" class="">
+@*                                             <span class="pag_actual" data-page="1">
+                                                <text>1</text>
+                                             </span>
+                                            <a class="page_left" role="button" data-page="2">
+                                                <span class="glyphicon"></span>
+                                                <text class="paginacion">2</text>
+                                            </a>
+                                            <a class="page_left" role="button" data-page="3">
+                                                <span class="glyphicon"></span>
+                                                <text class="paginacion">3</text>
+                                            </a>
+                                            <a class="page_left" role="button" data-page="4">
+                                                <span class="glyphicon"></span>
+                                                <text class="paginacion">4</text>
+                                            </a>
+                                            <a class="page_left" role="button" data-page="5">
+                                                <span class="glyphicon"></span>
+                                                <text class="paginacion">5</text>
+                                            </a>
+                                            <a class="page_left" role="button" data-page="6">
+                                                <span class="glyphicon"></span>
+                                                <text class="paginacion">6</text>
+                                            </a>
+                                            <a class="page_left" role="button" data-page="7">
+                                                <span class="glyphicon"></span>
+                                                <text class="paginacion">7</text>
+                                            </a> *@
+                                        </div>
+                                </div>
+                                    <!--Fin Tab 1-->
+                                </div>
+                                <div class="tabs-item content">
+                                    <!--Inicia Tab 2-->
+                                    <!-- Encabezado con icono y número de proyectos -->
+                                    <div class="row justify-content-center mb-4">
+                                        <div class="col-12 d-flex justify-content-center align-items-center mb-3 wrap-pryheader">
+                                            <img alt="icono de proyectos destacados y su alineacion a ODS" src="..\img\imgsector\icn_proyectodestacado.png" />
+                                            <h2 class="display-4 fw-bold mb-0" id="cantidaddesarrollo">19 Proyectos</h2>
+                                        </div>
+                                        <!-- Descripción -->
+                                        <div class="col-lg-10 col-xl-8 mb-4">
+                                            <div class="text-center">
+                                                <p>
+                                                    Los proyectos de inversión en Bogotá están ajustados a los ODS porque estos
+                                                    objetivos ofrecen una guía global para lograr desarrollo sostenible. Alinearlos garantiza
+                                                    que las inversiones locales contribuyan al bienestar social, económico y ambiental, en
+                                                    coherencia con metas internacionales.
+                                                </p>
+                                                <p class="mb-4">
+                                                    Estos proyectos contribuyen estratégicamente a estos ODS.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!--ODS-->
+                                        <div class="col-lg-8 col-xl-8 col-md-8">
+                                            <input id="proyDesarrollo" name="proyDesarrollo" type="hidden" value="">
+                                            <div class="row" id="odsdesarrollo">
+ @*                                                <div class="col-lg-3">
+                                                    <div class="city-ods">
+                                                        <img src="..\img\imgsector\icn_ODS4.png" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="city-ods">
+                                                        <img src="..\img\imgsector\icn_ODS8.png" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="city-ods">
+                                                        <img src="..\img\imgsector\icn_ODS10.png" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="city-ods">
+                                                        <img src="..\img\imgsector\icn_ODS11.png" />
+                                                    </div>
+                                                </div> *@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group row">
+                                                <div class="col-6">
+                                                    <label for="sortydesarrollo" class="small">Filtrar por ODS</label>
+                                                    <select class="form-select" aria-label="Filtrar por" id="sortydesarrollo">
+                                                        @*                                                     <option value="">Todos</option>
+                                                    <option value="">ODS 4</option>
+                                                    <option value="">ODS 8</option> *@
+                                                    </select>
+                                                </div>
+                                                <div class="col-6">
+                                                    <label for="sortydesarrolloentidad" class="small">Filtrar por Entidad</label>
+                                                    <select class="form-select" aria-label="Filtrar por" id="sortydesarrolloentidad">
+                                                        @*                                                     <option value="">Todos</option>
+                                                    <option value="">ODS 4</option>
+                                                    <option value="">ODS 8</option> *@
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-12 text-center">
+                                            <div class="comparativeTable">
+                                                <div class="card-entidades-group" id="listdesarrollo">
+@*                                                     <div class="card d-flex cardborder">
+                                                        <div class="headEnt">
+                                                            <div class="data1 mainDataEntidad3">
+                                                                <span class="labelTit">Código BPIN: 9951000</span>
+                                                                <span class="td1">Restauración Centro Histórico La Candelaria</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto vigente
+                                                                </span>
+                                                                <span class="td1">$124 Millones</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto comprometido
+                                                                </span>
+                                                                <span class="td1">$60 Millones</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto girado
+                                                                </span>
+                                                                <span class="td1">$14 Millones</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="btn-action">
+                                                            <div class="btnPerfil">
+                                                                <a class="text-small"><i class="material-icons md-18">arrow_forward</i><br /><span>Ver perfil</span></a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card d-flex cardborder">
+                                                        <div class="headEnt">
+                                                            <div class="data1 mainDataEntidad3">
+                                                                <span class="labelTit">Código BPIN: 9951000</span>
+                                                                <span class="td1">Restauración Centro Histórico La Candelaria</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto vigente
+                                                                </span>
+                                                                <span class="td1">$124 Millones</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto comprometido
+                                                                </span>
+                                                                <span class="td1">$60 Millones</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto girado
+                                                                </span>
+                                                                <span class="td1">$14 Millones</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="btn-action">
+                                                            <div class="btnPerfil">
+                                                                <a class="text-small"><i class="material-icons md-18">arrow_forward</i><br /><span>Ver perfil</span></a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card d-flex cardborder">
+                                                        <div class="headEnt">
+                                                            <div class="data1 mainDataEntidad3">
+                                                                <span class="labelTit">Código BPIN: 9951000</span>
+                                                                <span class="td1">Restauración Centro Histórico La Candelaria</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto vigente
+                                                                </span>
+                                                                <span class="td1">$124 Millones</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto comprometido
+                                                                </span>
+                                                                <span class="td1">$60 Millones</span>
+                                                            </div>
+                                                            <div class="data1">
+                                                                <span class="labelTit">
+                                                                    Presupuesto girado
+                                                                </span>
+                                                                <span class="td1">$14 Millones</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="btn-action">
+                                                            <div class="btnPerfil">
+                                                                <a class="text-small"><i class="material-icons md-18">arrow_forward</i><br /><span>Ver perfil</span></a>
+
+                                                            </div>
+                                                        </div>
+                                                    </div> *@
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="divPagDistDesarrollo" class="">
+@*                                             <span class="pag_actual" data-page="1">
+                                                <text>1</text>
+                                            </span>
+                                            <a class="page_left" role="button" data-page="2">
+                                                <span class="glyphicon"></span>
+                                                <text class="paginacion">2</text>
+                                            </a>
+                                            <a class="page_left" role="button" data-page="3">
+                                                <span class="glyphicon"></span>
+                                                <text class="paginacion">3</text>
+                                            </a>
+                                            <a class="page_left" role="button" data-page="4">
+                                                <span class="glyphicon"></span>
+                                                <text class="paginacion">4</text>
+                                            </a>
+                                            <a class="page_left" role="button" data-page="5">
+                                                <span class="glyphicon"></span>
+                                                <text class="paginacion">5</text>
+                                            </a>
+                                            <a class="page_left" role="button" data-page="6">
+                                                <span class="glyphicon"></span>
+                                                <text class="paginacion">6</text>
+                                            </a>
+                                            <a class="page_left" role="button" data-page="7">
+                                                <span class="glyphicon"></span>
+                                                <text class="paginacion">7</text>
+                                            </a> *@
+                                        </div>
+                                    </div>
+                                    <!--Fin Tab 2-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+</section>
+
+<section class="section" id="s4">
+    <div class="container">
+        <div class="row sep mb-4">
+            <div class="section-heading heading-left">
+                <h2>Proyectos POT</h2>
+            </div>
+            
+                <div class="section-subheading">
+                    <div class="wrap-desc-pot">
+                        <p>En Bogotá se dividen los proyectos de inversión y los de desarrollo local porque tienen diferentes alcances: los de inversión responden a necesidades de toda la ciudad, mientras que los locales atienden prioridades específicas de cada localidad. Así se asegura una mejor gestión y uso de los recursos.</p>
+                        <div class="city-card-logopot">
+                            <img alt="logo del Plan del ordenamiento territorial" src="..\img\imgsector\Logopot.png" />
+                        </div>
+                    </div>
+                
+                </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="selectLocalidades" class="small">Filtrar por localidad</label>
+                    <select class="form-select" aria-label="Filtrar por" id="selectLocalidades">
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-12 wrap-pry-destacados mb-4">
+                <div class="row py-4" id="divProyectosPot">
+                </div>
+                <div id="divPagPot" class="">
+                </div>
+             
+            </div>
+        </div>
+    </div>
+    <!--MODAL 1-->
+    <div id="popup1" class="popup_style popup_style_wide popup_style_sally open_popup" style="display:none;">
+        <div class="popup">
+            <div class="popup_content">
+                <h4 class="popup_title">Tipos de presupuesto</h4>
+                <div class="content2">
+                    <ul>
+                        <li>
+                            <span class="text-bold">Presupuesto Comprometido:</span>  <br />Es la parte del dinero ya reservada para cumplir obligaciones, como contratos, órdenes de compra o convenios.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="popup1_close popup_close"><i class="material-icons md-24">close</i></div>
+        </div>
+    </div>
+    <!--MODAL 2-->
+    <div id="popup2" class="popup_style popup_style_wide popup_style_sally open_popup" style="display:none;">
+        <div class="popup">
+            <div class="popup_content">
+                <h4 class="popup_title">Tipos de presupuesto</h4>
+                <div class="content2">
+                    <ul>
+                        <li>
+                            <span class="text-bold">Presupuesto Girado:</span>  <br />Es el dinero efectivamente pagado, una vez que se han recibido los bienes o servicios contratados.
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="popup2_close popup_close"><i class="material-icons md-24">close</i></div>
+        </div>
 </section>
 
 
-<script src="/Content/dist/js/lib/D3/d3.min.js" charset="utf-8"></script>
-<script src="/content/dist/js/lib/D3/d3plus.js"></script>
-<script src="js/sectores_aux.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+<script src="@Cdn.Url(Url, "~/js/sectores_aux.js")"></script>
+<script>
+
+    window.onscroll = function () { myFunction() };
+
+    var header = document.getElementById("navs-header");
+    var sticky = header ? header.offsetTop : 0;
+
+    function myFunction() {
+        if (header) {
+            if (window.scrollY > sticky) {
+                header.classList.add("sticky");
+                header.classList.add("bg-white");
+            } else {
+                header.classList.remove("sticky");
+                header.classList.remove("bg-white");
+            }
+        }
+    }
+</script>
 
 @section DataBody {
-    data-projectsPerEstado='[@foreach (var estado in @Model.ProjectsPerEstado)
-    {
-        <text>
-            {"label":"@estado.label", "value": "@estado.value", "rawValue": @estado.rawValue}@if (estado != @Model.ProjectsPerEstado.Last())
-            {
-                <text>,</text>
-            }
-        </text>
-    }]'
-    data-projectsPerSectorGroup='[@foreach (var grupo_sector in @Model.ProjectsPerSectorGroup)
-    {
-        <text>
-            {"labelGroup": "@grupo_sector.labelGroup" , "label":"@grupo_sector.label", "value": "@grupo_sector.value", "rawValue": @grupo_sector.rawValue, "alias": "@grupo_sector.alias"}@if (grupo_sector != @Model.ProjectsPerSectorGroup.Last())
-            {
-                <text>,</text>
-            }
-        </text>
-    }]'
-    data-proyectoProjectData='[@foreach (var proy in @Model.ProyectosEjecucion)
-    {
-        <text>
-            {"IdDepartamento":"@proy.IdDepartamento",  "IdProyecto": "@proy.IdProyecto","NombreProyecto": "@proy.NombreProyecto","cantidadFotos": @proy.cantidadFotos, "approvedTotalMoney": "@proy.approvedTotalMoney.ToString("N0").Replace(",", string.Empty)","NombreMunicipio" : "@proy.NombreMunicipio" , "UrlImagen" : "@proy.UrlImagen" , "MesInicioProyecto" : "@proy.MesInicioProyecto" , "AnioInicioProyecto" : "@proy.AnioInicioProyecto" , "MesFinProyecto" : "@proy.MesFinProyecto" , "AnioFinProyecto" : "@proy.AnioFinProyecto" , "NombreSector": "@proy.NombreSector", "IdSector": "@proy.IdSector","porcentajeGastado":"@proy.porcentajeGastado","Megusta":"@proy.Megusta","Comentarios":"@proy.Comentarios","FechaInicioProyecto":"@proy.FechaInicioProyecto"}@if (proy != @Model.ProyectosEjecucion.Last())
-            {
-                <text>,</text>
-            }
-        </text>
-    }]'
+
 }

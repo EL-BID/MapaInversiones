@@ -1,0 +1,17 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@functions {
+    public string Cdn(string path)
+    {
+        var cdnBase = (Configuration["CDN:BaseUrl"] ?? "").TrimEnd('/');
+        var localPath = Url.Content(path);
+
+        if (string.IsNullOrEmpty(cdnBase))
+        {
+            return localPath; // dev/qa usa wwwroot
+        }
+
+        return $"{cdnBase}{localPath}"; // prod usa CDN externo
+    }
+}

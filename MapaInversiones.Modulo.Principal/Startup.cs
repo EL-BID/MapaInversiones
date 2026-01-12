@@ -51,13 +51,6 @@ namespace PlataformaTransparencia.Modulo.Principal
             );
 
             routes.MapAreaControllerRoute(
-                name: "Geo",
-                areaName: "PlataformaTransparencia.Modulo.Principal",
-                pattern: "AzureMapView",
-                defaults: new { controller = "Map", action = "AzureMapView" }
-            );
-
-            routes.MapAreaControllerRoute(
             name: "LocationProfile",
             areaName: "PlataformaTransparencia.Modulo.Principal",
             pattern: "Location/{type?}/{idLoc?}",
@@ -128,9 +121,9 @@ namespace PlataformaTransparencia.Modulo.Principal
             );
 
             routes.MapAreaControllerRoute(
-                name: "ProcesoPresupuesto",
+                name: "como-funciona-la-inversion",
                 areaName: "PlataformaTransparencia.Modulo.Principal",
-                pattern: "ProcesoPresupuesto",
+                pattern: "como-funciona-la-inversion",
                 defaults: new { controller = "Presupuesto", action = "ProcesoPresupuesto" }
             );
 
@@ -366,6 +359,42 @@ namespace PlataformaTransparencia.Modulo.Principal
            pattern: "PresupuestoGeneralEmergencia",
            defaults: new { controller = "PresupuestoGeneralEmergencias", action = "PresupuestoGeneralEmergencia" }
            );
+
+            routes.MapAreaControllerRoute(
+            name: "HomeContratos",
+            areaName: "PlataformaTransparencia.Modulo.Principal",
+            pattern: "HomeContratos",
+            defaults: new { controller = "Contratos", action = "HomeContratos" }
+            );
+
+            routes.MapAreaControllerRoute(
+              name: "MonitoreoCiudadano",
+              areaName: "PlataformaTransparencia.Modulo.Principal",
+              pattern: "MonitoreoCiudadano",
+              defaults: new { controller = "Contratos", action = "MonitoreoCiudadano" }
+              );
+
+            routes.MapAreaControllerRoute(
+                      name: "plan-de-desarrollo-cali",
+                      areaName: "PlataformaTransparencia.Modulo.Principal",
+                      pattern: "plan-de-desarrollo-cali",
+                      defaults: new { controller = "CentroAyuda", action = "PlanDesarrolloCali" }
+             );
+
+            routes.MapAreaControllerRoute(
+                name: "PerfilProyectoPot",
+                areaName: "PlataformaTransparencia.Modulo.Principal",
+                pattern: "{PerfilProyectoPot}/{id}",
+                defaults: new { controller = "ProyectoPot", action = "PerfilProyectoPot" }
+            );
+
+            routes.MapAreaControllerRoute(
+                name: "auth",
+                areaName: "PlataformaTransparencia.Modulo.Principal",
+                pattern: "auth/callback",
+                defaults: new { controller = "auth", action = "callback" }
+            );
+
         }
     }
 }

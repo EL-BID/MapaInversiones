@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
 using PlataformaTransparencia.Negocios.Proyectos;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace PlataformaTransparencia.Negocios.Project
@@ -39,8 +38,45 @@ namespace PlataformaTransparencia.Negocios.Project
     /// <summary>
     /// Llena la propiedad ModelProjectProfile.
     /// </summary>
-    public async void Fill()
+    public void Fill()
     {
+      List<Images> imagesProyecto = [];
+      string urlImgPrincipal = "/img/preview-project.jpg";
+      Status = false;
+      try
+      {
+        BllProjectProfile bussines = new(_connection);
+        ModelProjectProfile.idproject = projectId;
+        ParticipacionCiudadana part = new(_connection);
+        //----------------------------------------------------------------------------------------
+        ModelProjectProfile.ProjectInformation = bussines.GetInvestmentProjectInformation(projectId);
+        ModelProjectProfile.periodos_fuentes = BusquedasProyectosBLL.ObtenerAniosFuentesFinanciacionPorProyectoInversion(projectId); //BusquedasProyectosBLL.ObtenerAniosFuentesFinanciacionPorProyecto(projectId); //    new();// CodPeriodos;
+        ModelProjectProfile.PlanesMetaProducto= BusquedasProyectosBLL.ObtenerPlanesMetaProductoPorProyectoInversion(projectId);
+        ModelProjectProfile.EstadosProyectos = BusquedasProyectosBLL.EstadosProyectos();
+        ModelProjectProfile.urlImgBackground = urlImgPrincipal;
+        //----------------------------------------------------------------
+        ModelProjectProfile.FotosU = BusquedasProyectosBLL.ObtenerFotosUsusarioPerProyecto(projectId);
+        imagesProyecto = BusquedasProyectosBLL.ObtenerImagenesParaProyecto(projectId);
+        ModelProjectProfile.Images = imagesProyecto;
+        ModelProjectProfile.id_usu_participa = id_usuario_aux;
+        ModelProjectProfile.nom_usu_participa = nom_usuario_aux;
+        ModelProjectProfile.rol_participacion = part.ObtenerRolesProyAsync();
+        ModelProjectProfile.genero_participacion = part.ObtenerGenerosProyAsync();
+        ModelProjectProfile.medios_participacion = part.ObtenerMotivosProyAsync();
+        ModelProjectProfile.tipo_comentario = part.ObtenerTipoComentarioAsync(1);
+        ModelProjectProfile.Horizontes = BusquedasProyectosBLL.ObtenerHorizontesProyectosInversionAsync();
+        Status = true;
+      }
+      catch (Exception)
+      {
+        Status = false;
+        Message = "Lo sentimos, ha ocurrido un error.";
+      }
+    }
+    public void FillPOT()
+    {
+      List<Images> imagesProyecto = new List<Images>();
+      string urlImgPrincipal = "/img/preview-project.jpg";
       Status = false;
       try
       {
@@ -50,17 +86,30 @@ namespace PlataformaTransparencia.Negocios.Project
 
         //----------------------------------------------------------------------------------------
         ModelProjectProfile.ProjectInformation = bussines.GetProjectInformation(projectId);
-        ModelProjectProfile.periodos_fuentes = BusquedasProyectosBLL.ObtenerAniosFuentesFinanciacionPorProyecto(projectId); //    new();// CodPeriodos;
-        ModelProjectProfile.componentes_proy = new();// CodComponentes;
-        ModelProjectProfile.actores_proy = new();// ActoresProy;
-        ModelProjectProfile.Images = BusquedasProyectosBLL.ObtenerImagenesParaProyecto(projectId);
+        ModelProjectProfile.PlanOrdenamientoTerriotrial = BusquedasProyectosBLL.ObtenerPlanOrdenamientoTerritorialProyectos(projectId); //    new();// CodPeriodos;
+        ModelProjectProfile.PlanDesarrollo = BusquedasProyectosBLL.ObtenerPlanDesarrolloProyectos(projectId);
+        //-----------------------------------------------------------------------------
+        imagesProyecto = BusquedasProyectosBLL.ObtenerImagenesParaProyecto(projectId);
+        ModelProjectProfile.Images = imagesProyecto;
+
+        if (imagesProyecto.Count > 0)
+        {
+          urlImgPrincipal = imagesProyecto.FirstOrDefault(x => x.priority.HasValue && x.priority.Value)?.large;
+          if (urlImgPrincipal == null)
+          {
+            urlImgPrincipal = "/img/preview-project.jpg";
+          }
+        }
+        //----------------------------------------------------------------
+        ModelProjectProfile.FotosU = BusquedasProyectosBLL.ObtenerFotosUsusarioPerProyecto(projectId);
+        ModelProjectProfile.urlImgBackground = urlImgPrincipal;
         ModelProjectProfile.id_usu_participa = id_usuario_aux;
         ModelProjectProfile.nom_usu_participa = nom_usuario_aux;
         ModelProjectProfile.rol_participacion = part.ObtenerRolesProyAsync();
         ModelProjectProfile.genero_participacion = part.ObtenerGenerosProyAsync();
         ModelProjectProfile.medios_participacion = part.ObtenerMotivosProyAsync();
         ModelProjectProfile.tipo_comentario = part.ObtenerTipoComentarioAsync(1);
-        ModelProjectProfile.avanceFisicoFaseInversion = BusquedasProyectosBLL.ObtenerAvanceFisicoPorComponenteProductoFaseProyecto(projectId);
+        ModelProjectProfile.avanceFisicoFaseInversion = new();
 
         Status = true;
       }
@@ -71,5 +120,4 @@ namespace PlataformaTransparencia.Negocios.Project
       }
     }
   }
-
 }

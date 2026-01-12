@@ -22,13 +22,13 @@ namespace PlataformaTransparencia.Utilitarios
         /// <typeparam name="T">Type of cached item</typeparam>
         /// <param name="o">Item to be cached</param>
         /// <param name="key">Name of item</param>
-        [ExcludeFromCodeCoverage]
+        
         public static void Add<T>(T o, string key)
         {
             Add(o, key, DuracionCache.Corto);
         }
 
-        [ExcludeFromCodeCoverage]
+        
         public static void Add<T>(T o, string key, DuracionCache duracion)
         {
             int duracionMinutos = (int)duracion;
@@ -64,7 +64,7 @@ namespace PlataformaTransparencia.Utilitarios
         /// </summary>
         /// <param name="key">Name of cached item</param>
         /// <returns></returns>
-        [ExcludeFromCodeCoverage]
+        
         internal static bool Exists(string key)
         {
             return _cache == null ? false : _cache.Get(key) != null;
@@ -78,7 +78,7 @@ namespace PlataformaTransparencia.Utilitarios
         /// <param name="value">Cached value. Default(T) if
         /// item doesn't exist.</param>
         /// <returns>Cached item as type</returns>
-        [ExcludeFromCodeCoverage]
+        
         public static bool Get<T>(string key, out T value)
         {
             try {

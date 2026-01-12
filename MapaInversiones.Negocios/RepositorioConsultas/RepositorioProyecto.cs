@@ -16,7 +16,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
     public static class RepositorioProyectos
     {
 
-        [ExcludeFromCodeCoverage]
+        
         internal static List<ObtenerProyectosPorRegionPorFiltrosResult> ObtenerProyectosPorRegionPorFiltros(FiltroBusquedaProyecto filtro)
         {
             List<ObtenerProyectosPorRegionPorFiltrosResult> objReturn = new List<ObtenerProyectosPorRegionPorFiltrosResult>();
@@ -37,7 +37,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             return objReturn;
         }
 
-        [ExcludeFromCodeCoverage]
+        
         internal static List<ObtenerProyectosPorDepartamentoPorFiltrosResult> ObtenerProyectosPorDepartamentoPorFiltros(FiltroBusquedaProyecto filtro)
         {
             List<ObtenerProyectosPorDepartamentoPorFiltrosResult> objReturn = new List<ObtenerProyectosPorDepartamentoPorFiltrosResult>();
@@ -58,7 +58,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             return objReturn;
         }
 
-        [ExcludeFromCodeCoverage]
+        
         internal static List<ObtenerProyectosPorMunicipioPorFiltrosResult> ObtenerProyectosPorMunicipioPorFiltros(FiltroBusquedaProyecto filtro)
         {
             List<ObtenerProyectosPorMunicipioPorFiltrosResult> objReturn = new List<ObtenerProyectosPorMunicipioPorFiltrosResult>();
@@ -78,7 +78,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             return objReturn;
         }
 
-        [ExcludeFromCodeCoverage]
+        
         internal static List<ObtenerResumenesProyectosPorFiltrosResult> ObtenerResumenesProyectosPorFiltros(FiltroBusquedaProyecto filtro)
         {
             List<ObtenerResumenesProyectosPorFiltrosResult> objReturn = new List<ObtenerResumenesProyectosPorFiltrosResult>();
@@ -99,7 +99,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             return objReturn;
         }
 
-        [ExcludeFromCodeCoverage]
+        
         internal static List<ObtenerProyectosConsistentesMapListModeResult> ObtenerProyectosConsistentesMapListMode(FiltroBusquedaProyecto filtro)
         {
             List<ObtenerProyectosConsistentesMapListModeResult> objReturn = new List<ObtenerProyectosConsistentesMapListModeResult>();
@@ -121,7 +121,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             return objReturn;
         }
 
-        [ExcludeFromCodeCoverage]
+        
         internal static List<ActorFicha> ObtenerNombresActoresPorRolYProyecto(Int32 idProyecto, Int32 idRol)
         {
             List<ActorFicha> objReturn = null;
@@ -138,7 +138,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             return objReturn;
         }
 
-        [ExcludeFromCodeCoverage]
+        
         internal static List<ActorFicha> ObtenerNombresGeografiasBeneficiadasProyecto(Int32 idProyecto)
         {
             List<ActorFicha> objReturn = null;
@@ -165,21 +165,21 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             return objReturn;
         }
 
-        internal static async System.Threading.Tasks.Task<string> ObtenerUrlReporteEmpalmeEjecutorAsync(int idProyecto)
-        {
-            string objReturn = null;
-            using (var db = new TransparenciaDB()) {
+        //internal static async System.Threading.Tasks.Task<string> ObtenerUrlReporteEmpalmeEjecutorAsync(int idProyecto)
+        //{
+        //    string objReturn = null;
+        //    using (var db = new TransparenciaDB()) {
 
-                var codigoEntidadGesproy = await (from ejecutor in db.DatosAdicionalesEjecutores
-                                                  join ejecutorGesProy in db.EntidadesEjecutorasGesProys
-                                                  on ejecutor.NitEjecutor equals ejecutorGesProy.NIT
-                                                  where ejecutor.IdProyecto == idProyecto
-                                                  select ejecutorGesProy.CodigoEntidad).FirstOrDefaultAsync();
-                if (codigoEntidadGesproy != 0) {
-                    objReturn = codigoEntidadGesproy.ToString();
-                }
-            }
-            return objReturn;
-        }
+        //        var codigoEntidadGesproy = await (from ejecutor in db.DatosAdicionalesEjecutores
+        //                                          join ejecutorGesProy in db.EntidadesEjecutorasGesProys
+        //                                          on ejecutor.NitEjecutor equals ejecutorGesProy.NIT
+        //                                          where ejecutor.IdProyecto == idProyecto
+        //                                          select ejecutorGesProy.CodigoEntidad).FirstOrDefaultAsync();
+        //        if (codigoEntidadGesproy != 0) {
+        //            objReturn = codigoEntidadGesproy.ToString();
+        //        }
+        //    }
+        //    return objReturn;
+        //}
     }
 }

@@ -1,16 +1,33 @@
 ﻿@inject OrchardCore.IOrchardHelper Orchard
-    <!--CONTACT US-->
-<!-- Call to action-->
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
+
+<section class="section data-source border-t-1" id="data-fuente-cortes">
+    <div class="container">
+        <div class="fuentes-datos">
+            <div class="section-heading heading-center py-4">
+                <h2 class="h3">Fuentes de los datos</h2>
+            </div>
+            <div id="datosAbiertosFooter" class="contenedor-columnas">
+               
+            </div>
+        </div>
+    </div>
+
+</section>
 
 @if (ViewData["ShowContacts"] as bool? ?? true)
 {
     <section class="section border-t-1">
         <div class="container">
             <div class="col-12 text-center">
-                <h3>&#191;No has encontrado lo que estabas buscando&#63;</h3>
+                <h2 class="h3">¿No encontraste lo que buscabas?</h2>
                 <div class="section-btns justify-content-center py-3">
-                    <a aria-label="Contactenos" href="/Contactanos" class="btn btn-cards">
-                        <span>CONT&Aacute;CTANOS</span>
+                    <a aria-label="Contactenos" href="/Contactanos" class="btn btn-primary">
+                        <span>Contáctanos</span>
+                        <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
+                            <use xlink:href="img/sprite.svg#arrow-right"></use>
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -21,16 +38,18 @@
 }
 
 
+
 <footer class="footer">
     <div class="footer-main">
+
         <div class="container">
-            <div class="row">
-                <div class="col-lg-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
                     <!-- Begin company info -->
                     <div class="footer-company-info">
-                        <div class="footer-company-top">
+                        <div class="footer-company-top text-center">
                             <a href="/">
-                                <img class="img-fluid" src="/img/logoMIV.svg" alt="Logo MapaInversiones">
+                                <img class="img-fluid" src="/img/logoBogota.webp" alt="Logo Mapa de Inversiones Bogotá">
                             </a>
 
 
@@ -40,7 +59,7 @@
                     <!-- End company info -->
 
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-10">
                     <div class="items">
                         @{
                         var menu = await Orchard.GetContentItemByHandleAsync("alias:second-menu");
@@ -56,37 +75,47 @@
                                     enlace_aux = enlace;
                                 }
                             
-                                    <div class="item">
-                                            <p class="footer-item-heading"><a href="@menuitem.LinkMenuItemPart.Url">@menuitem.LinkMenuItemPart.Name</a></p>
-                                        <nav class="footer-nav">
+                                <div class="item">
+                                        <div class="footer-item-heading">
+                                             <!--<a href="@menuitem.LinkMenuItemPart.Url">@menuitem.LinkMenuItemPart.Name</a>-->
+                                            <!--MENU PADRE-->
+                                            @await Html.PartialAsync("_MenuAnchor", new {
+                                                Href = menuitem.LinkMenuItemPart.Url,
+                                                Text = menuitem.LinkMenuItemPart.Name
+                                            })
+                                           
+                                        </div>
+                                        
                                             @if (menuitem.MenuItemsListPart != null)
                                             {
-
                                                 var cant = @menuitem.MenuItemsListPart.MenuItems.Count;
-                                                <ul class="footer-mnu">
-                                                    @foreach (var submenu in menuitem.MenuItemsListPart.MenuItems)
-                                                    {
-                                                        @if (@submenu.LinkMenuItemPart.Name != null)
-                                                        {
-                                                            var enlace_sub = @submenu.LinkMenuItemPart.Url;
-                                                            var enlace_sub_aux = "#!";
-                                                            if (enlace_sub != "")
-                                                            {
-                                                                enlace_sub_aux = enlace_sub;
-                                                            }
-                                                            <li>
-                                                                <a href="@enlace_sub_aux" class="hover-link" data-title="@submenu.LinkMenuItemPart.Name">
-                                                                    <span>@submenu.LinkMenuItemPart.Name</span>
-                                                                </a>
-                                                            </li>
-                                                        }
-                                                    }
-                                                </ul>
+                                                if (@cant > 0)
+                                                {
+                                                    <nav class="footer-nav">
+                                                        <ul class="footer-mnu">
+                                                                @foreach (var submenu in menuitem.MenuItemsListPart.MenuItems)
+                                                                {
+                                                                    @if (@submenu.LinkMenuItemPart.Name != null)
+                                                                    {
+                                                                        <li>
+                                                                            @await Html.PartialAsync("_MenuAnchor", new {
+                                                                            Href = submenu.LinkMenuItemPart.Url,
+                                                                            Text = submenu.LinkMenuItemPart.Name,
+                                                                            Class = "hover-link"
+                                                                            })
+                                                                        </li>
+                                                                    }
+                                                                }
+                                                        </ul>
+                                                    </nav>
+                                                    
+                                                }
+                                                
 
                                             }
 
 
-                                        </nav>
+                                        
                                     </div>
                             
 
@@ -99,15 +128,14 @@
             </div>
 
         </div>
+        
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="footer-company-links text-lg-center py-5">
 
-                        <a href="/Acercade">Acerca de MapaInversiones</a>
-                        <a href="/CentroAyuda?id=2">Centro de Ayuda</a>
+                        <a href="/CentroAyuda">Centro de Ayuda</a>
                         <a href="/MarcoLegal">Marco Legal</a>
-                        <a href="/Contactanos">Contáctenos</a>
                         <a href="/PoliticasdePrivacidad">Pol&iacute;tica de Privacidad</a>
                         <a href="/TerminosyCondiciones">T&eacute;rminos y Condiciones</a>
                         
@@ -116,31 +144,299 @@
                 </div>
             </div>
         </div>
+
+    </div>
+    <div class="logos-entidades">
+        <a href="https://www.iadb.org/es/quienes-somos/topicos/modernizacion-del-estado/mapainversiones" target="_blank" rel="noopener">
+            <img alt="Logo Mapa de Inversiones Bogotá" class="img-fluid footerMIV" src="@Cdn.Url(Url, "~/img/Footer/logo-mapa-inversiones.svg")" />
+        </a>
+        <a href="https://www.iadb.org/es" target="_blank" rel="noopener">
+            <img alt="Logo Banco Inter-Americano de Desarrollo" class="img-fluid footerMIV" src="@Cdn.Url(Url, "~/img/Footer/logo-bid.svg")" />
+        </a>
     </div>
 
     <div class="footer-bottom">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12 justify-content-center">
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Gobierno" class="img-fluid" src="~/img/logoEntidad.svg" />
-                    </a>
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Entidad" class="img-fluid" src="~/img/logoEntidad2.svg" />
-                    </a>
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Logo Entidad" class="img-fluid" src="~/img/logoEntidad0.svg" />
-                    </a>
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Logo Entidad" class="img-fluid" src="~/img/logoEntidad3.svg" />
-                    </a>
-                    <br />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-xl-2 col-lg-2 footerlogos">
+                    <img class="govco" src="@Cdn.Url(Url, "~/img/go-co.webp")" alt="logo bogotá" />
+                    <img class="coco" src="@Cdn.Url(Url, "~/img/co-colombia.webp")" alt="logo Colombia" />
+                </div>
+                <div class="col-sm-12 col-md-12 col-xl-6 col-lg-6 footerdir footerborder">
+                    <h2 class="h6"><strong>ALCALDÍA DE BOGOTÁ</strong></h2>
+                    <ul>
+                        <li>Carrera 8 N° 10 - 65 Bogotá D.C.</li>
+                        <li>Horario de atención al público:</li>
+                        <li>Lunes a viernes de 7:00 a.m. a 4:30 p.m</li>
+                    </ul>
+                    <div class="socialnetwork py-4">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <a href="https://twitter.com/gab_bogota" aria-label="Ir a página de Twitter de Gobierno Abierto Bogotá" target="_blank" class="social-link">
+                                    <img src="/img/twt.webp" alt="icono Twitter" /> <span>GAB_Bogota</span>
 
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Mapainversiones" class="img-fluid footerMIV" src="~/img/Footer/logo-mapa-inversiones.png" />
-                    </a>
+                                </a>
+                            </div>
+                            <div class="col-lg-4">
+                                <a href="https://www.instagram.com/gobiernoabiertobogota/?hl=es-la" aria-label="Ir a página de instagram de Gobierno Abierto Bogotá" target="_blank" class="social-link">
+                                    <img src="/img/instagram.png" alt="icono instagram" /> <span>gobiernoabiertobogota</span>
+
+                                </a>
+                            </div>
+                            <div class="col-lg-4">
+                                <a href="https://www.facebook.com/Gobierno-Abierto-de-Bogot%C3%A1-103258734959591" aria-label="Ir a la página de Facebook de Gobierno abierto Bogotá" target="_blank" class="social-link">
+                                    <img src="/img/facebook.png" alt="icono facebook" /> <span>gobiernoabiertobogota</span>
+
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stores">
+                        <div class="row py-4">
+                            <div class="col-4">
+                                <a href="https://apps.apple.com/co/app/gabo/id1454387523">
+                                    <img src="@Cdn.Url(Url, "~/img/mob-button-appstore.webp")" alt="Descargar aplicación en appstore" /> 
+                                </a>
+                            </div>
+                            <div class="col-4">
+                                <a href="https://play.google.com/store/apps/details?id=com.supercade&hl=es_CO&pli=1">
+                                    <img src="@Cdn.Url(Url, "~/img/mob-button-gplay-es.webp")" alt="Descargar aplicación en googleplay" />
+                                </a>
+                            </div>
+                            <div class="col-4">
+                                <a href="https://appgallery.huawei.com/app/C103344061">
+                                    <img src="@Cdn.Url(Url, "~/img/mob-button-appgallery.webp")" alt="descargar aplicación en AppGallery" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-xl-4 col-lg-4 footerdir footerborder">
+                    <h2 class="h6"><strong>Contacto</strong></h2>
+                    <ul>
+                        <li>Tel: +57 (601) 3813000</li>
+                        <li>PBX: +57 (601) 3813000 Linea 195</li>
+                        <li><a href="notificacionesjudiciales@secretariajuridica.gov.co" aria-label="Enviar correo a notificaciones judiciales"></a>notificacionesjudiciales@secretariajuridica.gov.co</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- TOP HEADER -->
+    <nav class="header-top">
+        <div class="container-fluid">
+            <div class="row justify-content-between">
+                <div class="col-md-1 col-lg-1 col-xl-1">
+                    <a href="https://www.gov.co/home/">
+                        <img class="img-fluid" src="@Cdn.Url(Url, "~/img/govco-logo.png")" alt="Logotipo de Gobierno de Colombia">
+                    </a>
+                </div>
+                <div class="col-auto">
+                    <p>Todos los derechos Reservados 2025</p>
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- End header top -->
+
 </footer>
+
+<script src="@Cdn.Url(Url, "~/js/DatosAbiertos_aux.js")"></script>
+
+
+<!-- Barra de Accesibilidad -->
+<div class="container-buttons-accesibility">
+    <button onclick="changeStyle()" class="btn-accessibility-panel border-round-top-right" title="Cambiar contraste">
+        <!-- SVG para contraste -->
+        <img src="~/img/contraste.svg" class="img-fluid" alt="icono de cambio de contraste" />
+    </button>
+    <button onclick="changeFont('+')" class="btn-accessibility-panel" title="Aumentar fuente">
+        <!-- SVG para aumentar -->
+        <img src="~/img/aumento_negro.svg" class="img-fluid" alt="icono de aumento de texto" />
+    </button>
+    <button onclick="changeFont('-')" class="btn-accessibility-panel border-round-bottom-right" title="Reducir fuente">
+        <!-- SVG para reducir -->
+        <img src="~/img/reduccion_negro.svg" class="img-fluid" alt="icono de reducción de texto" />
+    </button>
+</div>
+
+<script>
+    // Variables para manejar el estado
+    let currentTheme = 'light';
+    let fontSize = 16;
+
+    // Función para cambiar el tema
+    function changeStyle() {
+        if (currentTheme === 'light') {
+            setDarkTheme();
+        } else {
+            setLightTheme();
+        }
+    }
+
+    // Función para cambiar el tamaño de fuente
+    function changeFont(operator) {
+        // Validar fontSize actual y operador
+        if (operator === '+' && fontSize < 24) {
+            fontSize = fontSize + 2;
+        } else if (operator === '-' && fontSize > 12) {
+            fontSize = fontSize - 2;
+        }
+
+        // Obtener contexto HTML
+        const htmlRoot = document.getElementsByTagName("html")[0];
+        const body = document.getElementsByTagName('body')[0];
+
+        // Validar si el contexto HTML existe y establecer nuevo valor de fontSize
+        if (htmlRoot != null) {
+            htmlRoot.style.fontSize = `${fontSize}px`;
+            body.style.fontSize = `${fontSize}px`;
+        }
+    }
+
+    // Función para establecer tema claro
+    function setLightTheme() {
+        currentTheme = 'light';
+        sessionStorage.setItem('theme', 'light');
+        const htmlRoot = document.getElementsByTagName("html")[0];
+        if (htmlRoot != null) {
+            htmlRoot.classList.remove("altoContraste");
+        }
+    }
+
+    // Función para establecer tema oscuro
+    function setDarkTheme() {
+        currentTheme = 'dark';
+        sessionStorage.setItem('theme', 'dark');
+        const htmlRoot = document.getElementsByTagName("html")[0];
+        if (htmlRoot != null) {
+            htmlRoot.classList.add("altoContraste");
+        }
+    }
+
+    // Validación inicial del tema
+    function currenThemeValidation() {
+        let sessionTheme = sessionStorage.getItem('theme');
+        if (sessionTheme == undefined ||
+            sessionTheme == 'null' ||
+            sessionTheme == null ||
+            !sessionTheme) {
+            setLightTheme();
+        } else {
+            if (sessionTheme === 'dark') {
+                setDarkTheme();
+            } else if (sessionTheme === 'light') {
+                setLightTheme();
+            } else {
+                setLightTheme();
+            }
+        }
+    }
+
+    // Inicializar al cargar la página
+    window.onload = function() {
+        currenThemeValidation();
+    };
+</script>
+
+
+<style>
+    /* Estilos de la barra de accesibilidad */
+    .btn-accessibility-panel {
+        background-color: white;
+        border: black 1px solid;
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 16px !important;
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 0px !important;
+        cursor: pointer;
+    }
+
+    .border-round-top-right {
+        border-top-right-radius: 7px;
+    }
+
+    .border-round-bottom-right {
+        border-bottom-right-radius: 7px;
+    }
+
+    .btn-accessibility-panel:active {
+        outline: none !important;
+    }
+
+    .container-buttons-accesibility {
+        position: fixed;
+        top: 45%;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 9999999999 !important;
+    }
+
+        .container-buttons-accesibility img{ margin:.5rem}
+
+    /* Tema de alto contraste */
+    .altoContraste {
+        -webkit-filter: invert(1);
+        filter: invert(1);
+        background-color: white;
+    }
+
+    @@-moz-document url-prefix() {
+        .altoContraste {
+            mix-blend-mode: difference;
+            background-color: white;
+            filter: none;
+        }
+    }
+
+    /* Estilos para el contenido de demostración */
+
+
+    .demo-content {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+
+    .instructions {
+        background: #e8f4fd;
+        padding: 20px;
+        border-left: 4px solid #007bff;
+        margin: 20px 0;
+    }
+
+    .sample-text {
+        background: #f8f9fa;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        margin: 20px 0;
+    }
+
+    /* SVG Icons inline para evitar dependencias externas */
+    .icon-contrast {
+        width: 20px;
+        height: 20px;
+    }
+
+    .icon-font {
+        width: 13px;
+        height: 13px;
+    }
+</style>
+
+
+
+@* 
+<link rel="stylesheet" href="@Cdn.Url(Url, "~/css/a11y.css")">
+<script src="@Cdn.Url(Url, "~/js/accesibilidad_aux.js")"></script> *@

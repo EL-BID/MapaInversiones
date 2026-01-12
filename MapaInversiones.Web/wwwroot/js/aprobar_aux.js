@@ -50,7 +50,8 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 
 
             $("#btnIngresarUsuLog").click(function () {
-                validaLoginUsu();
+                //validaLoginUsu();
+                iniciarLogin()
             });
 
 
@@ -62,7 +63,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             $("#btnAccionDenegar").click(function () {
                 var tipo = $("#justificaModal").attr("data-type");
                 var obj_param = $("#justificaModal").attr("data-parameter");
-
+                //alert("comentario");
                 if (tipo == "comentario") {
                     var idcoment = $("#" + obj_param).attr('idcoment');
                     var idusuario = $("#" + obj_param).attr('idusuario');
@@ -906,9 +907,14 @@ function ObtenerImgAprobar(estado, pagina) {
                             var div_thumbnail = div_col.append("div")
                                 .attr("class", "dataThumbnail")
                             div_thumbnail.append("div")
+                                .style("font-weight", "bold")   // negrita
+                                .style("font-size", "18px")     // más grand
+                                .text(data.fotosU[cont].asociacion)
+                            div_thumbnail.append("div")
                                 .text("Descripción: " + data.fotosU[cont].description)
                             div_thumbnail.append("div")
-                                .text("Proyecto: " + data.fotosU[cont].nombreProyecto + " en " + data.fotosU[cont].nombreMunicipio)
+                                .text("Proyecto: " + data.fotosU[cont].nombreProyecto
+                                    + (data.fotosU[cont].nombreMunicipio ? " en " + data.fotosU[cont].nombreMunicipio : ""))
                             div_thumbnail.append("div")
                                 .text("Usuario: " + data.fotosU[cont].nombreUsuario)
                             var div_det = div_col.append("div")
@@ -1185,7 +1191,7 @@ function ObtenerImgAprobar(estado, pagina) {
 
         function dibujaPaginacion(actual, total, totalPag) {
             var pag_actual = parseInt(actual);
-            var pagina_actual = pag_actual;
+            pagina_actual = pag_actual;
             var pagesHTML = '';
             var cant_por_pag = 2;
             $("#divPaginacion").html("");
@@ -1332,7 +1338,7 @@ function ObtenerImgAprobCant() {
 
 
         function ObtenerComentarios(estado, asociacion, pagina) {
-            var tipocomentario = 0;
+            tipocomentario = 0;
                     var param = {
                         "page": pagina,
                         "estado": estado,
@@ -1365,9 +1371,9 @@ function ObtenerImgAprobCant() {
                         for (var cont = 0; cont < data.itemcomentario.length; cont++) {
                             var id_comentario = data.itemcomentario[cont].idComentario;
                             var id_padre = data.itemcomentario[cont].comentarioRelacionado;
-                            var d = new Date(data.itemcomentario[cont].fechaCreacion);
+                            const d = new Date(data.itemcomentario[cont].fechaCreacion);
+                            const fecha_aux = new Intl.DateTimeFormat('es-ES').format(d);
                             var fecha_actual = new Date();
-                            var fecha_aux = pad(d.getDate(), 2) + "/" + pad(parseInt((d.getMonth()) + 1), 2) + "/" + d.getFullYear();
                             var difM = fecha_actual - d; // diferencia en milisegundos
                             var dif_dias = Math.trunc((difM / (1000 * 60 * 60 * 24))); // diferencia en dias
                             var idtextarea = "txtModera" + data.itemcomentario[cont].idComentario;
@@ -1403,7 +1409,7 @@ function ObtenerImgAprobCant() {
                                     entidad_aux = "PROYECTO";
                                     encabezado_aux = "Proyecto";
                                     encabezado = nombreproy.toString();
-                                    logoresponde = "/content/img/PCM_profile.jpg";
+                                    logoresponde = "/img/PCM_profile.jpg";
                                 }
                             }
                             var textocomentario = "";
@@ -1422,7 +1428,7 @@ function ObtenerImgAprobCant() {
 
                                 if (entidad_aux.toUpperCase() == "PROYECTO") {
                                     div_info.append("a")
-                                        .attr("href", "../../projectprofile/" + data.itemcomentario[cont].idProyecto)
+                                        .attr("href", "../../PerfilProyecto/" + data.itemcomentario[cont].idProyecto)
                                         .attr("target", "_blank")
                                         .append("span")
                                         .attr("class", "text-bold")
@@ -1443,7 +1449,7 @@ function ObtenerImgAprobCant() {
 
                                 if (entidad_aux.toUpperCase() == "CONTRATO") {
                                     div_info.append("a")
-                                        .attr("href", "../../contrato/?CodigoContrato=" + data.itemcomentario[cont].codigoContrato)
+                                        .attr("href", "../../contrato?codcontrato=" + data.itemcomentario[cont].codigoContrato)
                                         .attr("target", "_blank")
                                         .append("span").attr("class", "text-bold").text(encabezado_aux)
 
@@ -1473,12 +1479,14 @@ function ObtenerImgAprobCant() {
                                     .append("span").attr("class", "badge").text("Hace " + dif_dias.toString() + " días")
                                 var div_col2 = div_fila_aux.append("div")
                                     .attr("class", "col-xs-4 col-md-4")
-                                div_col2.append("span").attr("class", "text-bold").text("Desde donde escribe:")
-                                div_col2.append("p").text(municipio)
+                                //div_col2.append("span").attr("class", "text-bold").text("Desde donde escribe:")
+                                // div_col2.append("p").text(municipio)
+                                div_col2.append("span").attr("class", "text-bold").text("Estado:")
+                                div_col2.append("p").text(data.itemcomentario[cont].nombreEstado.toString())
                                 var div_col3 = div_fila_aux.append("div")
                                     .attr("class", "col-xs-4 col-md-4")
-                                div_col3.append("span").attr("class", "text-bold").text("Estado:")
-                                div_col3.append("p").text(data.itemcomentario[cont].nombreEstado.toString())
+                                //div_col3.append("span").attr("class", "text-bold").text("Estado:")
+                                //div_col3.append("p").text(data.itemcomentario[cont].nombreEstado.toString())
                                 var div_fila_aux3 = div_info.append("div")
                                     .attr("class", "row")
                                 var div_col31 = div_fila_aux3.append("div")
@@ -1491,15 +1499,15 @@ function ObtenerImgAprobCant() {
                                 div_col32.append("p").text(emailmostrar)
                                 var div_col33 = div_fila_aux3.append("div")
                                     .attr("class", "col-xs-6 col-md-4")
-                                div_col33.append("span").attr("class", "text-bold").text("Género del Usuario:")
-                                div_col33.append("p").text(data.itemcomentario[cont].genero_usuario)
+                               // div_col33.append("span").attr("class", "text-bold").text("Género del Usuario:")
+                                //div_col33.append("p").text(data.itemcomentario[cont].genero_usuario)
 
                                 var div_fila_aux2 = div_info.append("div")
                                     .attr("class", "row")
                                 var div_col23 = div_fila_aux2.append("div")
                                     .attr("class", "col-xs-6 col-md-4")
-                                div_col23.append("span").attr("class", "text-bold").text("Rol del Usuario:")
-                                div_col23.append("p").text(data.itemcomentario[cont].rol_usuario)
+                               // div_col23.append("span").attr("class", "text-bold").text("Rol del Usuario:")
+                                //div_col23.append("p").text(data.itemcomentario[cont].rol_usuario)
 
                                 var div_col21 = div_fila_aux2.append("div")
                                     .attr("class", "col-xs-6 col-md-4")

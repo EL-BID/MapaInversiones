@@ -5,8 +5,6 @@ using PlataformaTransparencia.Negocios.RepositorioConsultas;
 using PlataformaTransparencia.Utilitarios;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Data.Entity.Spatial;
@@ -15,13 +13,14 @@ using PlataformaTransparencia.Negocios.Comunes;
 using PlataformaTransparencia.Negocios.BLL.Comunes;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using LinqToDB;
-using LinqToDB.Common;
 using PlataformaTransparencia.Negocios.Interfaces;
-using LinqToDB.Data;
-using Proyecto = PlataformaTransparencia.Infrastructura.DataModels.Proyecto;
 using PlataformaTransparencia.Modelos.Reportes;
 using PlataformaTransparencia.Modelos.Contratos;
-using SolrNet;
+using DataModels;
+using System.Linq.Expressions;
+using System.Data.Entity.Core.Objects;
+using System.Reflection.PortableExecutable;
+using PlataformaTransparencia.Modelos.Location;
 
 namespace PlataformaTransparencia.Negocios.Proyectos
 {
@@ -151,7 +150,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       return objReturn;
     }
 
-    [ExcludeFromCodeCoverage]
+
     private static bool FiltroBusquedaContieneMismaGeoreferenciacion(FiltroBusquedaProyecto filtro)
     {
       if (filtro.TopLeft.Count > 1 && filtro.BottomRight.Count > 1 && filtro.TopLeft[0] == filtro.BottomRight[0] && filtro.TopLeft[1] == filtro.BottomRight[1])
@@ -159,7 +158,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       return false;
     }
 
-    [ExcludeFromCodeCoverage]
+
     public List<objectProjectsSearchMap> ObtenerInfograficosOld(FiltroBusquedaProyecto filtro, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
     {
 
@@ -278,7 +277,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       return objReturn;
     }
 
-    [ExcludeFromCodeCoverage]
+
     public List<objectProjectsSearchMap> ObtenerInfograficos(FiltroBusquedaProyecto filtro, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
     {
 
@@ -406,7 +405,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
 
 
-    [ExcludeFromCodeCoverage]
+
     private static bool FiltroContieneUnDeptoMuyGrande(FiltroBusquedaProyecto filtro)
     {
       //Resuelve problema rompimiento Deparatmentos muy grandes para resolucion minima
@@ -422,7 +421,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         return false;
     }
 
-    [ExcludeFromCodeCoverage]
+
     private static List<ObjectProjectsSearchMapGeography> FormarInfograficoPorRegion(FiltroBusquedaProyecto filtro, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
     {
       List<ObjectProjectsSearchMapGeography> objReturn = new List<ObjectProjectsSearchMapGeography>();
@@ -456,7 +455,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       return objReturn;
     }
 
-    [ExcludeFromCodeCoverage]
+
     private static List<ObjectProjectsSearchMapGeography> FormarInfograficoPorRegion2(FiltroBusquedaProyecto filtro, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
     {
       List<ObjectProjectsSearchMapGeography> objReturn = new List<ObjectProjectsSearchMapGeography>();
@@ -490,7 +489,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
     }
 
 
-    [ExcludeFromCodeCoverage]
+
     private static List<ObjectProjectsSearchMapGeography> FormarInfograficoPorDepartamento(FiltroBusquedaProyecto filtros, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
     {
       List<ObjectProjectsSearchMapGeography> objReturn = new List<ObjectProjectsSearchMapGeography>();
@@ -530,7 +529,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       return objReturn;
     }
 
-    [ExcludeFromCodeCoverage]
+
     private static List<ObjectProjectsSearchMapGeography> FormarInfograficoPorDepartamento2(FiltroBusquedaProyecto filtros, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
     {
       List<ObjectProjectsSearchMapGeography> objReturn = new List<ObjectProjectsSearchMapGeography>();
@@ -570,7 +569,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
     }
 
 
-    [ExcludeFromCodeCoverage]
+
     private static List<ObjectProjectsSearchMapGeography> FormarInfograficoPorMunicipio(FiltroBusquedaProyecto filtro, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
     {
       List<ObjectProjectsSearchMapGeography> objReturn = new List<ObjectProjectsSearchMapGeography>();
@@ -609,7 +608,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       return objReturn;
     }
 
-    [ExcludeFromCodeCoverage]
+
     private static List<ObjectProjectsSearchMapGeography> FormarInfograficoPorMunicipio2(FiltroBusquedaProyecto filtro, out int cantidadProyectos, out decimal valorRegalias, out decimal valorTotalRegalias)
     {
       List<ObjectProjectsSearchMapGeography> objReturn = new List<ObjectProjectsSearchMapGeography>();
@@ -742,7 +741,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       {
 
         var imageList = (from fotos in DataModel.Fotos
-                         where fotos.IdProyecto == idProyecto
+                         where (fotos.IdProyectoPOT == idProyecto || fotos.IdProyectoInv == idProyecto)
                          orderby fotos.Fecha descending
                          select fotos.RutaFotoPequeno).FirstOrDefault();
 
@@ -766,7 +765,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       {
 
 
-        var lstEstados = await (from maestro in db.GetTable<Estado>()
+        var lstEstados = await (from maestro in db.GetTable<DataModels.Estado>()
                                 select new
                                 {
                                   name = maestro.NombreEstado,
@@ -774,7 +773,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                   //subTipo = default(string)
                                 }).ToListAsync();
 
-        var lstSectores = await (from maestro in db.GetTable<Sector>()
+        var lstSectores = await (from maestro in db.GetTable<DataModels.Sector>()
                                  select new
                                  {
                                    name = maestro.NombreSector,
@@ -783,7 +782,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                  }).OrderBy(p => p.name).ToListAsync();
 
         List<ItemFilter> lstOrgFinanciador = new List<ItemFilter>();
-        var instituciones = await (from maestro in db.GetTable<Fuente>()
+        var instituciones = await (from maestro in db.GetTable<DataModels.Fuente>()
                                    select new ItemFilter
                                    {
                                      name = maestro.NombreTipoEntidad,
@@ -801,7 +800,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
           }
         }
 
-        var lstEntidadEjecutora = await (from maestro in db.GetTable<VwEntidadEjecutora>()
+        var lstEntidadEjecutora = await (from maestro in db.GetTable<DataModels.VwEntidadEjecutora>()
                                          select new ItemFilter
                                          {
                                            name = maestro.NombreEntidad,
@@ -861,6 +860,28 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
     }
 
+    public static List<ImagesUsuario> ObtenerFotosUsusarioPerProyecto(int Id)
+    {
+      var objReturn = new List<ImagesUsuario>();
+      using (var DataModel = new TransparenciaDB())
+      {
+
+        objReturn = (from images in DataModel.FotoUsuarios
+                        .Where(p => (p.IdProyectoPOT == Id || p.IdProyectoInv == Id) && p.Aprobado == true && p.Eliminado == false).OrderBy(p => p.Fecha)
+                     select new ImagesUsuario
+                     {
+                       description = images.Descripcion,
+                       large = images.RutaFotoGrande,
+                       thumbnail = images.RutaFotoPequeno,
+                       idFoto = images.IdFotoUsuario,
+                       fechaFoto = images.Fecha
+
+
+                     }).ToList();
+      }
+      return objReturn;
+    }
+
 
     public static List<Images> ObtenerImagenesParaProyecto(int Id)
     {
@@ -869,14 +890,16 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       {
 
         objReturn = (from images in DataModel.Fotos
-                        .Where(p => p.IdProyecto == Id && p.Aprobado == true && p.Eliminado == false).OrderBy(p => p.Fecha)
+                        .Where(p => (p.IdProyectoPOT == Id || p.IdProyectoInv == Id) && p.Aprobado == true && p.Eliminado == false).OrderBy(p => p.Fecha)
                      select new Images
                      {
                        description = images.Descripcion,
                        large = images.RutaFotoGrande,
                        thumbnail = images.RutaFotoPequeno,
                        idFoto = images.IdFoto,
-                       fechaFoto = images.Fecha
+                       fechaFoto = images.Fecha,
+                       priority = images.Header
+
                      }).ToList();
       }
       return objReturn;
@@ -911,7 +934,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       {
 
         objReturn = await (from images in DataModel.Fotos
-                                    .Where(p => p.IdProyecto == Id && p.Aprobado == true && p.Eliminado == false).OrderBy(p => p.Fecha)
+                                    .Where(p => (p.IdProyectoPOT == Id || p.IdProyectoInv == Id) && p.Aprobado == true && p.Eliminado == false).OrderBy(p => p.Fecha)
                            select new Images
                            {
                              description = images.Descripcion,
@@ -952,7 +975,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                       idProyecto = images.IdProyecto,
                       nombreProyecto = images.NombreProyecto,
                       idUsuario = images.IdUsuario,
-                      nombreUsuario = images.Nombre
+                      nombreUsuario = images.Nombre,
+                      asociacion = images.Tipo
 
                     }).OrderBy(p => p.fechaFoto).ToList();
 
@@ -988,7 +1012,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                               IdDepartamento = Entidades.IdDepartamento,
                               IdMunicipio = Entidades.IdMunicipio
                             }
-                           where (images.IdProyecto == Id && images.Aprobado == true && images.Eliminado == false)
+                           where ((images.IdProyectoPOT == Id || images.IdProyectoInv == Id) && images.Aprobado == true && images.Eliminado == false)
                            orderby (images.Fecha)
                            select new ImagesUsuario
                            {
@@ -1030,42 +1054,123 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       using (var DataModel = new TransparenciaDB())
       {
 
-        objReturn = await (from images in DataModel.FotoUsuarios
-                           join Proyectos in DataModel.Proyectos
-                           on images.IdProyecto equals Proyectos.IdProyecto
-                           join Usuarios in DataModel.Usuarios
-                           on images.IdUsuario equals Usuarios.IdUsuario
-                           join Entidades in DataModel.EnteTerritorials
-                            on new
-                            {
-                              IdDepartamento = images.IdDepartamento,
-                              IdMunicipio = images.IdMunicipio
-                            }
-                            equals
-                            new
-                            {
-                              IdDepartamento = Entidades.IdDepartamento,
-                              IdMunicipio = Entidades.IdMunicipio
-                            }
-                           where (images.Aprobado == false && images.Eliminado == false)
-                           orderby (images.Fecha)
-                           select new ImagesUsuario
-                           {
-                             description = images.Descripcion,
-                             large = images.RutaFotoGrande,
-                             thumbnail = images.RutaFotoPequeno,
-                             idFoto = images.IdFotoUsuario,
-                             fechaFoto = images.Fecha,
-                             idDepartamento = images.IdDepartamento,
-                             idMunicipio = images.IdMunicipio,
-                             nombreDepartamento = Entidades.NombreDepartamento,
-                             nombreMunicipio = Entidades.NombreMunicipio,
-                             idProyecto = Proyectos.IdProyecto,
-                             nombreProyecto = Proyectos.NombreProyecto,
-                             idUsuario = Usuarios.IdUsuario,
-                             nombreUsuario = Usuarios.Nombre
-                           }).ToListAsync();
-      }
+                //objReturn = await (from images in DataModel.FotoUsuarios
+                //                   join Proyectos in DataModel.Proyectos
+                //                   on images.IdProyectoPOT equals Proyectos.IdProyecto
+                //                   join Usuarios in DataModel.Usuarios
+                //                   on images.IdUsuario equals Usuarios.IdUsuario
+                //                   join Entidades in DataModel.EnteTerritorials
+                //                    on new
+                //                    {
+                //                      IdDepartamento = images.IdDepartamento,
+                //                      IdMunicipio = images.IdMunicipio
+                //                    }
+                //                    equals
+                //                    new
+                //                    {
+                //                      IdDepartamento = Entidades.IdDepartamento,
+                //                      IdMunicipio = Entidades.IdMunicipio
+                //                    }
+                //                   where (images.Aprobado == false && images.Eliminado == false)
+                //                   orderby (images.Fecha)
+                //                   select new ImagesUsuario
+                //                   {
+                //                     description = images.Descripcion,
+                //                     large = images.RutaFotoGrande,
+                //                     thumbnail = images.RutaFotoPequeno,
+                //                     idFoto = images.IdFotoUsuario,
+                //                     fechaFoto = images.Fecha,
+                //                     idDepartamento = images.IdDepartamento,
+                //                     idMunicipio = images.IdMunicipio,
+                //                     nombreDepartamento = Entidades.NombreDepartamento,
+                //                     nombreMunicipio = Entidades.NombreMunicipio,
+                //                     idProyecto = Proyectos.IdProyecto,
+                //                     nombreProyecto = Proyectos.NombreProyecto,
+                //                     idUsuario = Usuarios.IdUsuario,
+                //                     nombreUsuario = Usuarios.Nombre
+                //                   }).ToListAsync();
+
+
+                // primera consulta: con Proyectos
+                var query1 = from images in DataModel.FotoUsuarios
+                             join Proyectos in DataModel.Proyectos
+                                 on images.IdProyectoPOT equals Proyectos.IdProyecto
+                             join Usuarios in DataModel.Usuarios
+                                 on images.IdUsuario equals Usuarios.IdUsuario
+                             join Entidades in DataModel.EnteTerritorials
+                                 on new
+                                 {
+                                     IdDepartamento = images.IdDepartamento,
+                                     IdMunicipio = images.IdMunicipio
+                                 }
+                                 equals
+                                 new
+                                 {
+                                     IdDepartamento = Entidades.IdDepartamento,
+                                     IdMunicipio = Entidades.IdMunicipio
+                                 }
+                             where (images.Aprobado == false && images.Eliminado == false)
+                             select new ImagesUsuario
+                             {
+                                 description = images.Descripcion,
+                                 large = images.RutaFotoGrande,
+                                 thumbnail = images.RutaFotoPequeno,
+                                 idFoto = images.IdFotoUsuario,
+                                 fechaFoto = images.Fecha,
+                                 idDepartamento = images.IdDepartamento,
+                                 idMunicipio = images.IdMunicipio,
+                                 nombreDepartamento = Entidades.NombreDepartamento,
+                                 nombreMunicipio = Entidades.NombreMunicipio,
+                                 idProyecto = Proyectos.IdProyecto,
+                                 nombreProyecto = Proyectos.NombreProyecto,
+                                 idUsuario = Usuarios.IdUsuario,
+                                 nombreUsuario = Usuarios.Nombre,
+                                 asociacion = "POT"
+                             };
+
+                // segunda consulta: con ProyectosPry
+                var query2 = from images in DataModel.FotoUsuarios
+                             join ProyectosPry in DataModel.ProyectoPries
+                                 on images.IdProyectoInv equals ProyectosPry.IdProyecto
+                             join Usuarios in DataModel.Usuarios
+                                 on images.IdUsuario equals Usuarios.IdUsuario
+                             join Entidades in DataModel.EnteTerritorials
+                                 on new
+                                 {
+                                     IdDepartamento = images.IdDepartamento,
+                                     IdMunicipio = images.IdMunicipio
+                                 }
+                                 equals
+                                 new
+                                 {
+                                     IdDepartamento = Entidades.IdDepartamento,
+                                     IdMunicipio = Entidades.IdMunicipio
+                                 }
+                             where (images.Aprobado == false && images.Eliminado == false)
+                             select new ImagesUsuario
+                             {
+                                 description = images.Descripcion,
+                                 large = images.RutaFotoGrande,
+                                 thumbnail = images.RutaFotoPequeno,
+                                 idFoto = images.IdFotoUsuario,
+                                 fechaFoto = images.Fecha,
+                                 idDepartamento = images.IdDepartamento,
+                                 idMunicipio = images.IdMunicipio,
+                                 nombreDepartamento = Entidades.NombreDepartamento,
+                                 nombreMunicipio = Entidades.NombreMunicipio,
+                                 idProyecto = ProyectosPry.IdProyecto,
+                                 nombreProyecto = ProyectosPry.NombreProyecto,
+                                 idUsuario = Usuarios.IdUsuario,
+                                 nombreUsuario = Usuarios.Nombre,
+                                 asociacion = "INV"
+                             };
+
+                // unión de ambas
+                objReturn = await query1
+                    .Union(query2) // o .Concat(query2) si no quieres eliminar duplicados
+                    .OrderBy(x => x.fechaFoto)
+                    .ToListAsync();
+            }
       return objReturn;
     }
 
@@ -1392,7 +1497,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                      } into g
                      select new ComponentesProy
                      {
-                       Id = g.Key.IdComponente,
+                       Id = (int)g.Key.IdComponente,
                        Nombre = g.Key.Componente
                      }).OrderBy(p => p.Codigo).ToList();
       }
@@ -1406,16 +1511,16 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       using (var DataModel = new TransparenciaDB())
       {
 
-        objReturn = (from fuentes in DataModel.VwFuenteFinanciacions
+        objReturn = (from fuentes in DataModel.VwFuentesFinanciacion
                      where fuentes.IdProyecto == Id
                      group fuentes by new
                      {
-                       fuentes.Vigencia
+                       fuentes.Periodo
                      } into g
                      select new Period
                      {
-                       id = g.Key.Vigencia,
-                       name = g.Key.Vigencia.ToString()
+                       id = (int)g.Key.Periodo,
+                       name = g.Key.Periodo.ToString()
                      }).OrderBy(p => p.id).ToList();
       }
       return objReturn;
@@ -1434,14 +1539,14 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                      where componentes.IdProyecto == id_proy && componentes.IdComponente.ToString().Equals(cod_componente)
                      group componentes by new
                      {
-                       componentes.CodigoActividad,
-                       componentes.Actividades
+                       componentes.CodigoComponente,
+                       componentes.Componente
                      } into g
                      select new ComponentesProy
                      {
-                       Codigo = g.Key.CodigoActividad,
-                       Nombre = g.Key.Actividades,
-                       CodigoNum = g.Key.CodigoActividad.Substring(1, g.Key.CodigoActividad.Length)
+                       Codigo = g.Key.CodigoComponente,
+                       Nombre = g.Key.Componente,
+                       CodigoNum = g.Key.CodigoComponente.Substring(1, g.Key.CodigoComponente.Length)
                      }).ToList();
 
         objReturn_aux = objReturn.OrderBy(o => Convert.ToInt16(o.CodigoNum)).ToList();
@@ -1462,8 +1567,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                        Id = fuentes.IdFuenteFinanciacion,
                        Nombre = fuentes.OrganismoFinanciador + "-" + fuentes.FuenteFinanciacion,
                        Porcentaje = fuentes.ValorVigente.HasValue && fuentes.ValorEjecutado.HasValue && fuentes.ValorVigente.Value > 0 ? Math.Round(((fuentes.ValorEjecutado.Value / fuentes.ValorVigente.Value) * 100), 2) : 0,
-                       ValorEjecutado = fuentes.ValorEjecutado??0,
-                       ValorPresupuesto = fuentes.ValorVigente??0
+                       ValorEjecutado = fuentes.ValorEjecutado ?? 0,
+                       ValorPresupuesto = fuentes.ValorVigente ?? 0
                      }).OrderBy(p => p.Id).ToList();
       }
       return objReturn;
@@ -1508,30 +1613,106 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                  id = fuente.Periodo.Value,
                  name = fuente.Periodo.Value.ToString()
                }).Distinct().ToList();
+        if (rta.Count == 0) rta.Add(new Period() { id = 2024, name = "2024" });
+      }
+      if (rta.Count > 1) rta = new List<Period>(rta.OrderByDescending(x => x.id));
+      return rta;
+    }
+
+    public static List<Period> ObtenerAniosFuentesFinanciacionPorProyectoInversion(int id)
+    {
+      List<Period> rta = [];
+      using (var DataModel = new TransparenciaDB())
+      {
+        //Informacion basica del proyecto SACAMOS: 
+        rta = (from fuente in DataModel.VwProyectosInversionPresupuestoxVigencias
+               where fuente.IdProyecto == id.ToString()
+               select new Period
+               {
+                 id = fuente.Vigencia,
+                 name = fuente.Vigencia.ToString()
+               }).Distinct().ToList();
       }
       if (rta.Count > 1) rta = new List<Period>(rta.OrderBy(x => x.id));
       return rta;
     }
+
+    public static List<Item> ObtenerPlanesMetaProductoPorProyectoInversion(int id)
+    {
+      List<Item> rta = [];
+      using (var DataModel = new TransparenciaDB())
+      {
+        //Informacion basica del proyecto SACAMOS: 
+        rta = (from actividad in DataModel.VwActividadesPries
+               where actividad.IdProyecto == id.ToString()
+               select new Item
+               {
+                 Id = actividad.PlanMetaProductoId,
+                 Nombre = actividad.PlanMetaProductoNombre
+               }).Distinct().ToList();
+      }
+      if (rta.Count > 1) rta = new List<Item>(rta.OrderBy(x => x.Nombre));
+      return rta;
+    }
+
+    public static List<Item> EstadosProyectos()
+    {
+      List<Item> rta = [];
+      using (var DataModel = new TransparenciaDB())
+      {
+        //Informacion basica del proyecto SACAMOS: 
+        rta = [.. (from actividad in DataModel.Estados
+               select new Item
+               {
+                 Id = actividad.IdEstado.ToString(),
+                 Nombre = actividad.NombreEstado
+               }).Distinct().OrderBy(x=>x.Nombre)];
+        rta.Insert(0,new Item() { Id = "0", Nombre = "TODOS" });
+      }
+      return rta;
+    }
+
+    public static List<Item> ObtenerHorizontesProyectosInversionAsync()
+    {
+      List<Item> rta = [];
+      using (var DataModel = new TransparenciaDB())
+      {
+        //Informacion basica del proyecto SACAMOS: 
+        rta = [.. (from proyecto in DataModel.Proyectos
+                   where proyecto.Horizonte!=null
+               select new Item
+               {
+                 Id = proyecto.Horizonte.ToString(),
+                 Nombre = proyecto.Horizonte.ToString().ToUpper().Trim()
+               }).Distinct().OrderBy(x=>x.Nombre)];
+        rta.Insert(0, new Item() { Id = "0", Nombre = "TODOS" });
+      }
+      return rta;
+    }
+
+
+
     public static List<ModeloAvanceFinancieroPorComponenteProducto> ObtenerAvanceFisicoPorComponenteProductoFaseProyecto(int id)
     {
       List<ModeloAvanceFinancieroPorComponenteProducto> objReturn = new();
       using (var DataModel = new TransparenciaDB())
       {
-        objReturn = (from transferencias in DataModel.VwSeguimientoAvanceFisicoes
-                           where transferencias.IdProyecto == id
-                           select new ModeloAvanceFinancieroPorComponenteProducto
-                           {
-                             IdentificadorFase = transferencias.IdFase,
-                             Fase = transferencias.Fase,
-                             CodComponente = transferencias.IdComponente.HasValue? transferencias.IdComponente.Value: 0,
-                             Componente = transferencias.Componente,
-                             idProducto = transferencias.IdProducto,
-                             Producto = transferencias.Producto,
-                             UnidadProducto = transferencias.UnidadProducto,
-                             Meta = transferencias.MetaProgramada,
-                             Ejecutado = transferencias.MetaEjecutada,
-                             AvanceFisico = transferencias.PorcentajeAvanceFisico
-                           }
+        objReturn = (from transferencias in DataModel.VwSeguimientoAvanceFisicos
+                     where transferencias.IdProyecto == id.ToString()
+                     select new ModeloAvanceFinancieroPorComponenteProducto
+                     {
+                       //IdentificadorFase = transferencias.IdFase,
+                       //Fase = transferencias.Fase,
+                       //CodComponente = transferencias.IdComponente.HasValue ? transferencias.IdComponente.Value : 0,
+                       //Componente = transferencias.Componente,
+                       //idProducto = transferencias.IdProducto,
+                       //Producto = transferencias.Producto,
+                       //UnidadProducto = transferencias.UnidadProducto,
+                       //Meta = transferencias.MetaProgramada,
+                       //Ejecutado = transferencias.MetaEjecutada,
+                       AvanceFisico = transferencias.PorcentajeAvanceFisico,
+                       Componente = string.Empty
+                     }
                           ).OrderBy(m => new { m.IdentificadorFase, m.CodComponente, m.idProducto }).ToList();
 
         foreach (var obj in objReturn)
@@ -1546,25 +1727,25 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       if (IdProyecto != null && IdProyecto != 0) { IdProyect = IdProyecto; }
       using (var DataModel = new TransparenciaDB())
       {
+
         _objreturn.Detalles = (from cont in DataModel.VwContratosXProyectoInvDetalles
                                where (cont.IdProyecto == IdProyect || IdProyect == null)
-                               group cont by new { cont.AnioUltimaActualizacion} into g
+                               group cont by new { cont.AnioUltimaActualizacion } into g
                                orderby g.Key.AnioUltimaActualizacion descending
                                select new AnioProcesoContratacion
                                {
                                  anio = (int)g.Key.AnioUltimaActualizacion
-                               }).Distinct().OrderBy(x => x.anio).ThenBy(y => y.semestre).ToList();
+                               }).Distinct().OrderBy(x => x.anio).ToList();
       }
       return _objreturn;
     }
-
     public ModelProcesosContratacionData ObtenerInformacionProcesosContratacionPorFiltros(ProcesosContratacionFiltros filtros)
     {
       ModelProcesosContratacionData _objreturn = new ModelProcesosContratacionData();
       int? Annio = null;
       int? IdProyecto = null;
-        String NombreProceso = null;
-       
+      String NombreProceso = null;
+
 
 
       if (filtros.Annio > 0) { Annio = filtros.Annio; }
@@ -1572,72 +1753,377 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; }
       using (var DataModel = new TransparenciaDB())
       {
-                try
-                {
-                    _objreturn.CantidadTotalRegistros = (from cont in DataModel.VwContratosXProyectoInvDetalles
-                    where (cont.AnioUltimaActualizacion == Annio || Annio == null)
-                                                           && (cont.DescripcionProceso.Contains(NombreProceso)
-                                                            || cont.CodigoProceso.TrimStart() == NombreProceso || NombreProceso == null)
-                                                           && (cont.IdProyecto == IdProyecto || IdProyecto == null)
-                                                           && cont.ValorContratado != 0
-                                                            && cont.CodigoOrigenInformacion == 0
-                                                         let NUMBER = Sql.Ext.DenseRank().Over().OrderBy(cont.Comprador).ThenBy(cont.CodigoProceso).ThenBy(cont.OrigenInformacion).ToValue()
-                                                         orderby NUMBER descending
-                                                         select NUMBER
-                                   ).First();
-                }
-                catch
-                {
-                    _objreturn.CantidadTotalRegistros = 0;
-                }
+        try
+        {
+          _objreturn.CantidadTotalRegistros = (from cont in DataModel.VwContratosXProyectoInvDetalles
+                                               where (cont.AnioUltimaActualizacion == Annio || Annio == null)
+                                                                                      && (cont.DescripcionProceso.Contains(NombreProceso)
+                                                                                       || cont.CodigoProceso.TrimStart() == NombreProceso || NombreProceso == null)
+                                                                                      && (cont.IdProyecto == IdProyecto || IdProyecto == null)
+                                                                                      && cont.ValorContratado != 0
+                                                                                       && cont.CodigoOrigenInformacion == 0
+                                               let NUMBER = Sql.Ext.DenseRank().Over().OrderBy(cont.Comprador).ThenBy(cont.CodigoProceso).ThenBy(cont.OrigenInformacion).ToValue()
+                                               orderby NUMBER descending
+                                               select NUMBER
+                         ).First();
+        }
+        catch
+        {
+          _objreturn.CantidadTotalRegistros = 0;
+        }
 
-                _objreturn.Data = (from cont in DataModel.VwContratosXProyectoInvDetalles
-                                   where
-                                   (cont.AnioUltimaActualizacion == Annio || Annio == null)
-                                   && (cont.DescripcionProceso.Contains(NombreProceso)
-                                   || cont.CodigoProceso.TrimStart() == NombreProceso || NombreProceso == null)
-                                  && (cont.IdProyecto == IdProyecto || IdProyecto == null)
-                                   && cont.ValorContratado != 0
-                                    && cont.CodigoOrigenInformacion == 0
-                                   let NUMBER = Sql.Ext.DenseRank().Over().OrderBy(cont.Comprador).ThenBy(cont.CodigoProceso).ThenBy(cont.OrigenInformacion).ToValue()
-                                   where
-                                   NUMBER > ((filtros.NumeroPagina - 1) * filtros.RegistrosPorPagina)
-                                   && NUMBER <= (filtros.NumeroPagina * filtros.RegistrosPorPagina)
-                                   select new ContratosData
-                                   {
-                                       AnioUltimaActualizacion = cont.AnioUltimaActualizacion,
-                                       DescripcionProceso = cont.DescripcionProceso,
-                                       EstadoProceso = cont.EstadoProceso,
-                                       CodigoContrato = cont.CodigoContrato,
-                                       CodigoProceso = cont.CodigoProceso,
-                                       CodigoProveedor = cont.CodigoProveedor,
-                                       TipoCodigoProveedor = cont.TipoCodigoProveedor,
-                                       Contratista = cont.Contratista,
-                                       ValorPlaneado = (double)cont.ValorPlaneado,
-                                       ValorAdjudicado = cont.ValorAdjudicado,
-                                       ValorContratado = (double)cont.ValorContratado,
-                                       MonedaContrato = cont.MonedaContrato,
-                                       UrlContrato = cont.UrlContrato,
-                                       CodigoComprador = cont.CodigoComprador,
-                                       Comprador = cont.Comprador,
-                                       DocURL = cont.DocURL,
-                                       OrigenInformacion = cont.OrigenInformacion,
-                                       FechaInicioContrato = cont.FechaInicioContrato,
-                                       FechaFinContrato = cont.FechaFinContrato,
-                                       FechaInicioEjecucionContrato = cont.FechaInicioEjecucionContrato,
-                                       FechaFinEjecucionContrato = cont.FechaFinEjecucionContrato,
-                                       FechaEstimadaAdjudicacion = cont.FechaEstimadaAdjudicacion,
-                                       FechaIncioPublicacionProceso = cont.FechaIncioPublicacionProceso,
-                                       FechaInicioRecepcionOfertas = cont.FechaInicioRecepcionOfertas,
-                                       DescripcionContrato = cont.DescripcionContrato
+        _objreturn.Data = (from cont in DataModel.VwContratosXProyectoInvDetalles
+                           where
+                           (cont.AnioUltimaActualizacion == Annio || Annio == null)
+                           && (cont.DescripcionProceso.Contains(NombreProceso)
+                           || cont.CodigoProceso.TrimStart() == NombreProceso || NombreProceso == null)
+                          && (cont.IdProyecto == IdProyecto || IdProyecto == null)
+                           && cont.ValorContratado != 0
+                            && cont.CodigoOrigenInformacion == 0
+                           let NUMBER = Sql.Ext.DenseRank().Over().OrderBy(cont.Comprador).ThenBy(cont.CodigoProceso).ThenBy(cont.OrigenInformacion).ToValue()
+                           where
+                           NUMBER > ((filtros.NumeroPagina - 1) * filtros.RegistrosPorPagina)
+                           && NUMBER <= (filtros.NumeroPagina * filtros.RegistrosPorPagina)
+                           select new ContratosData
+                           {
+                             AnioUltimaActualizacion = cont.AnioUltimaActualizacion,
+                             DescripcionProceso = cont.DescripcionProceso,
+                             EstadoProceso = cont.EstadoProceso,
+                             CodigoContrato = cont.CodigoContrato,
+                             CodigoProceso = cont.CodigoProceso,
+                             CodigoProveedor = cont.CodigoProveedor,
+                             TipoCodigoProveedor = cont.TipoCodigoProveedor,
+                             Contratista = cont.Contratista,
+                             ValorPlaneado = (double)cont.ValorPlaneado,
+                             ValorAdjudicado = cont.ValorAdjudicado,
+                             ValorContratado = (double)cont.ValorContratado,
+                             MonedaContrato = cont.MonedaContrato,
+                             UrlContrato = cont.UrlContrato.ToString(),
+                             CodigoComprador = cont.CodigoComprador,
+                             Comprador = cont.Comprador,
+                             DocURL = cont.DocURL,
+                             OrigenInformacion = cont.OrigenInformacion,
+                             FechaInicioContrato = cont.FechaInicioContrato,
+                             FechaFinContrato = cont.FechaFinContrato,
+                             FechaInicioEjecucionContrato = cont.FechaInicioEjecucionContrato,
+                             FechaFinEjecucionContrato = cont.FechaFinEjecucionContrato,
+                             FechaEstimadaAdjudicacion = cont.FechaEstimadaAdjudicacion,
+                             FechaIncioPublicacionProceso = cont.FechaIncioPublicacionProceso,
+                             FechaInicioRecepcionOfertas = cont.FechaInicioRecepcionOfertas,
+                             DescripcionContrato = cont.DescripcionContrato
 
-                                   }
-                                 ).ToList();
+                           }
+                         ).ToList();
 
 
-            }
+      }
       return _objreturn;
     }
+
+    public ModelDataPresupuestoAnualProyecto GetInformacionGeneralProyectoPorAnioPresupuestal(int proyectoId, int anio)
+    {
+      ModelDataPresupuestoAnualProyecto rta = new() { EjecucionFinanciera = 0, EjecucionFisica = 0, PropuestoAsignadoVigencia = 0, PropuestoEjecutado = 0, PropuestoObligado = 0 };
+      using (var DataModel = new TransparenciaDB())
+      {
+        var data = (from fuente in DataModel.VwFuentesFinanciacions2024
+                    where fuente.IdProyecto == proyectoId && fuente.Periodo.HasValue && fuente.Periodo.Value == anio
+                    select new ModelDataPresupuestoAnualProyecto
+                    {
+                      PropuestoAsignadoVigencia = fuente.ValorVigente ?? 0,
+                      PropuestoEjecutado = fuente.ValorEjecutado ?? 0,
+                      PropuestoObligado = fuente.ValorObligado ?? 0
+                    }).Distinct().ToList();
+        var dataFisica = (from seguimiento in DataModel.VwSeguimientoAvanceFisicos
+                          where seguimiento.IdProyecto == proyectoId.ToString() && seguimiento.Periodo == anio
+                          select new ModelDataPresupuestoAnualProyecto
+                          {
+                            EjecucionFisica = seguimiento.PorcentajeAvanceFisico ?? 0,
+                          }).Distinct().ToList();
+        if (data != null && data.Count > 0)
+        {
+          rta = new ModelDataPresupuestoAnualProyecto() { PropuestoAsignadoVigencia = data.Sum(x => x.PropuestoAsignadoVigencia), PropuestoEjecutado = data.Sum(x => x.PropuestoEjecutado), PropuestoObligado = data.Sum(x => x.PropuestoObligado) };
+          rta.EjecucionFinanciera = rta.PropuestoAsignadoVigencia == 0 ? 0 : Math.Round(rta.PropuestoObligado * 100 / rta.PropuestoAsignadoVigencia, 2);
+        }
+        if (dataFisica != null && dataFisica.Count > 0) rta.EjecucionFisica = dataFisica.Sum(x => x.EjecucionFisica);
+        rta.PropuestoEjecutado = Math.Round(rta.PropuestoEjecutado / 1000000, 3);
+        rta.PropuestoAsignadoVigencia = Math.Round(rta.PropuestoAsignadoVigencia / 1000000, 3);
+        rta.PropuestoObligado = Math.Round(rta.PropuestoObligado / 1000000, 3);
+      }
+      return rta;
+    }
+
+    public ModelDataPresupuestoAnualProyecto GetInformacionGeneralProyectoInversionPorAnioPresupuestal(int proyectoId, int anio)
+    {
+      ModelDataPresupuestoAnualProyecto rta = new() { EjecucionFinanciera = 0, EjecucionFisica = 0, PropuestoAsignadoVigencia = 0, PropuestoEjecutado = 0, PropuestoObligado = 0 };
+      using (var DataModel = new TransparenciaDB())
+      {
+        var data = (from fuente in DataModel.VwProyectosInversionPresupuestoxVigencias
+                    where fuente.IdProyecto == proyectoId.ToString() && fuente.Vigencia == anio
+                    select new ModelDataPresupuestoAnualProyecto
+                    {
+                      PropuestoAsignadoVigencia = fuente.ValorProgramado ?? 0,
+                      PropuestoEjecutado = fuente.ValorGirado ?? 0,
+                      PropuestoObligado = fuente.ValorComprometido ?? 0,
+                    }).Distinct().ToList();
+        if (data != null && data.Count > 0)
+        {
+          rta = new ModelDataPresupuestoAnualProyecto() { PropuestoAsignadoVigencia = data.Sum(x => x.PropuestoAsignadoVigencia), PropuestoEjecutado = data.Sum(x => x.PropuestoEjecutado), PropuestoObligado = data.Sum(x => x.PropuestoObligado) };
+          rta.EjecucionFinanciera = rta.PropuestoObligado == 0 ? 0 : Math.Round(rta.PropuestoEjecutado * 100 / rta.PropuestoAsignadoVigencia, 2);
+        }
+        rta.PropuestoEjecutado = Math.Round(rta.PropuestoEjecutado, 3);
+        rta.PropuestoAsignadoVigencia = Math.Round(rta.PropuestoAsignadoVigencia, 3);
+        rta.PropuestoObligado = Math.Round(rta.PropuestoObligado, 3);
+      }
+      return rta;
+    }
+    public List<Item> GetActividadesPorProyectoMeta(int proyectoId, string meta)
+    {
+      List<Item> rta = [];
+      using (var DataModel = new TransparenciaDB())
+      {
+        rta = (from proyecto in DataModel.VwActividadesPries
+                    where proyecto.IdProyecto == proyectoId.ToString() && proyecto.PlanMetaProductoId == meta
+                    select new Item
+                    {
+                      Id= proyecto.ActividadCodigo,
+                      Nombre= proyecto.ActividadNombre//.Substring(4)
+                    }).Distinct().OrderBy(x=>x.Nombre).ToList();
+      }
+      return rta;
+    }
+    public ActividadProyectoInversion GetActividadesPorProyectoMetaActividad(int proyectoId, string meta, string actividad)
+    {
+      ActividadProyectoInversion rta =new();
+      using (var DataModel = new TransparenciaDB())
+      {
+        var actividadPorMetaProyecto = (from acti in DataModel.VwActividadesPries
+                                        where acti.IdProyecto == proyectoId.ToString() && acti.PlanMetaProductoId == meta && acti.ActividadCodigo == actividad
+                                        select acti).FirstOrDefault();
+        if (actividadPorMetaProyecto != null)
+        {
+          rta.Nombre = actividadPorMetaProyecto.ActividadNombre;
+          rta.AvanceFinancieroGirado = actividadPorMetaProyecto.ValorGiradoTotal ??= 0;
+          rta.AvanceFinancieroComprometido = actividadPorMetaProyecto.ValorComprometidoTotal ??= 0;
+          rta.AvanceFinancieroProgramado = actividadPorMetaProyecto.ValorProgramadoTotal ??= 0;
+          rta.AvanceFisicoMagnitudEntregada= actividadPorMetaProyecto.MagnitudEntregadoTotal ??= 0;
+          rta.AvanceFisicoMagnitudProgramada = actividadPorMetaProyecto.MagnitudProgramadaTotal ??= 0;
+          rta.AvanceFisicoPorcentajeMagnitudComprometida = (actividadPorMetaProyecto.MagnitudPorcentajeComprometidoTotal ??=0)/100;
+          rta.AvanceFisicoPorcentajeMagnitudEntregada = (actividadPorMetaProyecto.MagnitudPorcentajeEntregadoTotal ??= 0)/100;
+          var actividadesPorPeriodo = (from acti in DataModel.VwActividadesxPresupuestoxAvanceFisicoxVigenciaPries
+                                       where acti.IdProyecto == proyectoId.ToString() && acti.PlanMetaProductoId == meta && acti.ActividadCodigo == actividad
+                                       select acti).OrderBy(x => x.Vigencia).ToList();
+          foreach (var actividadPorPeriodo in actividadesPorPeriodo)
+          {
+            decimal valorProgramado = actividadPorPeriodo.ValorProgramado ??= 0;
+            decimal valorGirado = actividadPorPeriodo.ValorGirado ??= 0;
+            rta.Detalle.Add(new DetalleActividadProyectoInversion
+            {
+              Anio = actividadPorPeriodo.Vigencia,
+              AvanceFinancieroComprometido = actividadPorPeriodo.ValorCompromiso ??= 0,
+              AvanceFinancieroGirado = valorGirado,
+              AvanceFinancieroProgramado = valorProgramado,
+              AvanceFisicoMagnitudProgramada = actividadPorPeriodo.MagnitudProgramada ??= 0,
+              AvanceFisicoMagnitudComprometida = actividadPorPeriodo.MagnitudComprometido ??=0,
+              AvanceFinancieroPorcentaje = valorProgramado != 0 ? valorGirado*100/ valorProgramado: 0,
+              AvanceFisicoPorcentajeMagnitudComprometida = actividadPorPeriodo.MagnitudPorcentajeComprometido ??= 0
+            });
+          }
+        }
+
+      }
+      return rta;
+    }
+    public List<ModelDataInformacionPresupuestalPorClasificacionDeFondo> GetInformacionPresupuestalProyectoAnioPorClasificacionDeFondo(int proyectoId, int anio)
+    {
+      List<ModelDataInformacionPresupuestalPorClasificacionDeFondo> rta = new();
+      using (var DataModel = new TransparenciaDB())
+      {
+        var data = (from fuente in DataModel.VwFuentesFinanciacionPries
+                    where fuente.IdProyecto == proyectoId && fuente.Periodo != null && fuente.Periodo == anio.ToString()
+                    select new ModelDataInformacionPresupuestalPorClasificacionDeFondo
+                    {
+                      ClasificacionFondo = fuente.ClasificacionFondo,
+                      PresupuestoAsignado = fuente.ValorVigente ?? 0,
+                      PresupuestoObligado = fuente.ValorGirado ?? 0,
+                    }).ToList();
+        if (data != null && data.Count > 0)
+        {
+          List<ModelDataInformacionPresupuestalPorClasificacionDeFondo> dataByClasificacion = (from dt in data
+                                                                                               group dt by new
+                                                                                               {
+                                                                                                 dt.ClasificacionFondo
+                                                                                               } into g
+                                                                                               select new ModelDataInformacionPresupuestalPorClasificacionDeFondo()
+                                                                                               {
+                                                                                                 ClasificacionFondo = g.Key.ClasificacionFondo,
+                                                                                                 PresupuestoAsignado = Math.Round(g.Sum(x => x.PresupuestoAsignado) / 1000000, 3),
+                                                                                                 PresupuestoObligado = Math.Round(g.Sum(x => x.PresupuestoObligado) / 1000000, 3)
+                                                                                               }).ToList();
+          foreach (ModelDataInformacionPresupuestalPorClasificacionDeFondo dtByClasificacion in dataByClasificacion)
+          {
+            rta.Add(new ModelDataInformacionPresupuestalPorClasificacionDeFondo() { ClasificacionFondo = dtByClasificacion.ClasificacionFondo, IdClasificacion = dtByClasificacion.IdClasificacion, PresupuestoAsignado = dtByClasificacion.PresupuestoAsignado, PresupuestoObligado = dtByClasificacion.PresupuestoObligado, Porcentaje = dtByClasificacion.PresupuestoAsignado == 0 ? 0 : Math.Round(dtByClasificacion.PresupuestoObligado * 100 / dtByClasificacion.PresupuestoAsignado, 2) });
+          }
+          if (rta.Count > 1) rta = rta.OrderByDescending(x => x.PresupuestoAsignado).ToList();
+        }
+      }
+      return rta;
+    }
+
+    public static string ObtenerNombreOrganismoFinanciadorPorProyecto(int proyectoId)
+    {
+      string rta = string.Empty;
+      using (var DataModel = new TransparenciaDB())
+      {
+        var data = (from fuente in DataModel.VwFuentesFinanciacions2024
+                    where fuente.IdProyecto == proyectoId && fuente.OrganismoFinanciador != null
+                    select new
+                    {
+                      fuente.OrganismoFinanciador
+                    }).Distinct().ToList();
+        if (data != null && data.Count > 0)
+        {
+          string organismoFinanciador = data.First().OrganismoFinanciador.ToUpper().Trim();
+          if (Configuration != null)
+          {
+            rta = Convert.ToString(Configuration["Proyectos:" + organismoFinanciador]);
+          }
+          else
+          {
+            if (organismoFinanciador == "ORGANISMO") rta = "Definido por el ente gestor";
+            else if (organismoFinanciador == "TERRITORIO") rta = "Definido por la comunidad en el presupuesto participativo";
+          }
+        }
+      }
+      return rta;
+    }
+
+
+    public static List<PlanOrdenamientoTerritorialProyectos> ObtenerPlanOrdenamientoTerritorialProyectos(int id_proy)
+    {
+      List<PlanOrdenamientoTerritorialProyectos> objReturn = new List<PlanOrdenamientoTerritorialProyectos>();
+      using (var DataModel = new TransparenciaDB())
+      {
+        objReturn = (from info in DataModel.VwPlanOrdenamientoTerritorialProyectosPots
+                     where info.IdProyecto == id_proy
+                     select new PlanOrdenamientoTerritorialProyectos
+                     {
+                       IdProyecto = info.IdProyecto,
+                       CodigoBPIN = info.CodigoBPIN,
+                       CodigoObjetivoEstrategicoPOT = info.CodigoObjetivoEstrategicoPOT,
+                       ObjetivoEstrategicoPOT = info.ObjetivoEstrategicoPOT,
+                       CodigoEstrategiaPOT = info.CodigoEstrategiaPOT,
+                       EstrategiaPOT = info.EstrategiaPOT,
+                       CodigoProgramaPOT = info.CodigoProgramaPOT,
+                       ProgramaPOT = info.ProgramaPOT,
+                       CodigoSubProgramaPOT = info.CodigoSubProgramaPOT,
+                       SubProgramaPOT = info.SubProgramaPOT,
+                       CodigoMetaPOT = info.CodigoMetaPOT,
+                       MetaSubprogramaPOT = info.MetaSubprogramaPOT
+                     }).OrderBy(x => x.EstrategiaPOT).ToList();
+      }
+      return objReturn;
+    }
+
+    public static List<PlanDesarrolloProyectos> ObtenerPlanDesarrolloProyectos(int id_proy)
+    {
+      List<PlanDesarrolloProyectos> objReturn = new List<PlanDesarrolloProyectos>();
+      using (var DataModel = new TransparenciaDB())
+      {
+        objReturn = (from info in DataModel.VwPlanDesarrolloProyectoPots
+                     where info.IdProyecto == id_proy
+                     select new PlanDesarrolloProyectos
+                     {
+                       IdProyecto = info.IdProyecto,
+                       CodigoBPIN = info.CodigoBPIN,
+                       CodigoObjetivoPlanDesarrollo = info.CodigoObjetivoPlanDesarrollo,
+                       ObjetivoPlanDesarrollo = info.ObjetivoPlanDesarrollo,
+                       CodigoProgramaPOT = info.CodigoProgramaPOT,
+                       ProgramaPlanDesarrollo = info.ProgramaPlanDesarrollo,
+                       CodigoMetaProductoPlanDesarrollo = info.CodigoMetaProductoPlanDesarrollo,
+                       MetaPlanDesarrollo = info.MetaPlanDesarrollo,
+                       ProgramadoMeta = info.ProgramadoMeta,
+                       Anio = info.Anio
+                     }).OrderBy(x => x.CodigoObjetivoPlanDesarrollo).ToList();
+      }
+      return objReturn;
+    }
+
+    public List<InfoProyectos> ObtenerListadoProyectosPry(string id_proy)
+    {
+      List<InfoProyectos> objReturn = new List<InfoProyectos>();
+      using (var DataModel = new TransparenciaDB())
+      {
+        objReturn = (from a in DataModel.VwProyectosPOTxProyectosInvs
+                     where a.IdProyectoPOT == id_proy
+                     from c in DataModel.VwProyectosAprobadosInvPries
+                     .Where(c => c.IdProyecto.ToString() == a.CodigoProyectoInv)
+                     .DefaultIfEmpty() // LEFT JOIN 
+                     select new InfoProyectos
+                     {
+                       IdProyecto = c.IdProyecto,
+                       NombreSector = c.NombreSector,
+                       NombreProyecto = c.NombreProyecto,
+                       EntidadEjecutora = c.EntidadEjecutora,
+                       CodigoSnip = a.CodigoBPINProyectoInv
+
+                     }).OrderBy(x => x.IdProyecto).ToList();
+      }
+      return objReturn;
+    }
+
+
+    public ModelLocationProjectInv ObtenerListadoProyectosPotByProyectoInversionId(string idProyectoInversion,string idEstado, int pagina, int tamanoPagina)
+    {
+      ModelLocationProjectInv objReturn = new() { InvProjects = [] };
+      idEstado ??= string.Empty;
+      using (var DataModel = new TransparenciaDB())
+      {
+        objReturn.InvProjects = [.. (from a in DataModel.VwProyectosPOTxProyectosInvs
+                                        join c in DataModel.VwProyectosAprobadosInvs on a.IdProyectoPOT equals c.IdProyecto.ToString()
+                                        where a.CodigoProyectoInv == idProyectoInversion
+                                        select new InfoProyectos
+                                        {
+                                          IdProyecto = c.IdProyecto,
+                                          TipoProyecto = c.TipoProyecto,
+                                          NombreProyecto = c.NombreProyecto,
+                                          HorizontePot = c.Horizonte,
+                                          Estado = c.NombreEstado,
+                                          IdEstado= c.IdEstado.ToString()
+                                        }).OrderBy(x => x.IdProyecto)];
+        if (objReturn.InvProjects != null && objReturn.InvProjects.Count > 0 && idEstado != "0") objReturn.InvProjects = objReturn.InvProjects.Where(x => x.IdEstado == idEstado).ToList();
+        objReturn.TotalProjects = objReturn.InvProjects.Count;
+        if (objReturn.InvProjects != null && objReturn.InvProjects.Count > 0) objReturn.InvProjects = objReturn.InvProjects.Skip((pagina - 1) * tamanoPagina).Take(tamanoPagina).ToList();
+      }
+      return objReturn;
+    }
+
+    public ModelLocationProjectInv ObtenerListadoProyectosPotByProyectoInversionIdEstadoHorizonte(string idProyectoInversion, string idEstado, string horizonte, int pagina, int tamanoPagina)
+    {
+      ModelLocationProjectInv objReturn = new() { InvProjects = [] };
+      idEstado ??= string.Empty;
+      horizonte ??= string.Empty;
+      using (var DataModel = new TransparenciaDB())
+      {
+        objReturn.InvProjects = [.. (from a in DataModel.VwProyectosPOTxProyectosInvs
+                                        join c in DataModel.VwProyectosAprobadosInvs on a.IdProyectoPOT equals c.IdProyecto.ToString()
+                                        where a.CodigoProyectoInv == idProyectoInversion && c.Horizonte!=null
+                                        select new InfoProyectos
+                                        {
+                                          IdProyecto = c.IdProyecto,
+                                          TipoProyecto = c.TipoProyecto,
+                                          NombreProyecto = c.NombreProyecto,
+                                          HorizontePot = c.Horizonte,
+                                          Estado = c.NombreEstado,
+                                          IdEstado= c.IdEstado.ToString()
+                                        }).OrderBy(x => x.NombreProyecto)];
+        if (objReturn.InvProjects != null && objReturn.InvProjects.Count > 0 && idEstado != "0") objReturn.InvProjects = objReturn.InvProjects.Where(x => x.IdEstado == idEstado).ToList();
+        if (objReturn.InvProjects != null && objReturn.InvProjects.Count > 0 && horizonte != "0") objReturn.InvProjects = objReturn.InvProjects.Where(x => x.HorizontePot.ToUpper().Trim() == horizonte.ToUpper().Trim()).ToList();
+        objReturn.TotalProjects = objReturn.InvProjects.Count;
+        if (objReturn.InvProjects != null && objReturn.InvProjects.Count > 0) objReturn.InvProjects = objReturn.InvProjects.Skip((pagina - 1) * tamanoPagina).Take(tamanoPagina).ToList();
+      }
+      return objReturn;
+    }
+
 
   }
 

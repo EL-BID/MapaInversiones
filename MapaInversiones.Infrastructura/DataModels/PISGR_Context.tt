@@ -10,7 +10,7 @@
 
 			MyProject 
 				DataModels 
-					MyDatabase.tt 
+					MyDatabase.tt
 
 		2. Modify the connection settings below to connect to your database.
 
@@ -26,7 +26,7 @@
 			using (var db = new MyDatabaseDB())
 			{
 				var q =
-					from c in db.Customers
+					from c in db.Customers 
 					select c;
 
 				foreach (var c in q)
@@ -50,17 +50,17 @@
 		Custom tool must be set to TextTemplatingFileGenerator, not TextTemplatingFilePreprocessor or any other value.
 	*/
 
-	NamespaceName = "DataModels";
+	NamespaceName = "DataModels";;
 
 
 	// to configure GetSchemaOptions properties, add them here, before load metadata call
 	GetSchemaOptions.GetProcedures  = true;
 
-	LoadSqlServerMetadata("ip,puerto", "base_datos", "usuario", "passw");
+	LoadSqlServerMetadata("", "", "", "");
 
 //	LoadSqlServerMetadata(".", "MyDatabase"); // Integrated Security;
 //	LoadSqlServerMetadata(string connectionString);
 // to adjust loaded database model before generation, add your code here, after load metadata, but before GenerateModel() call
 
 	GenerateModel(); 
-#> 
+#>

@@ -3,13 +3,8 @@ using Microsoft.Extensions.Logging;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
 using PlataformaTransparencia.Negocios.Comunes;
-using PlataformaTransparencia.Negocios.Home;
 using SolrNet;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlataformaTransparencia.Modulo.Principal.Controllers
 {
@@ -29,18 +24,15 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             _connection = connection;
             _solr = solr;
             datosAbiertos = DatosAbiertosNewBLL;
-
         }
 
         [HttpGet("ObtenerFuentesDatos")]
         public ModelDatosAbiertosData ObtenerFuentesDatos()
         {
-            ModelDatosAbiertosData objReturn = new ModelDatosAbiertosData();
+            ModelDatosAbiertosData objReturn = new ModelDatosAbiertosData() { Status=true };
             try
             {
                 objReturn.FuentesRecursos = datosAbiertos.ObtenerFuentesDatosAbiertos();
-                objReturn.Status = true;
-
             }
             catch (Exception exception)
             {
@@ -48,7 +40,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 objReturn.Message = "Error: " + exception.Message;
 
             }
-
             return objReturn;
         }
     }

@@ -8,7 +8,7 @@ namespace PlataformaTransparencia.Negocios.Interfaces
     public interface IConsolidadosNacionalesBLL
     {
         List<InfoProyectos> GetProyectosNacionales();
-        List<InfoProyectos> GetProyectosNacionalesfiltro(string campo);
+        List<InfoProyectos> GetProyectosNacionalesfiltro(string campo, int pagina, int cantidad);
         List<InfoProjectPerSector> ObtenerCostoProyectosPorDepartamentoDadoSector(string sectorId);
         ModelContratistaData ObtenerDatosContratista(string ruc);
         ModelContratistaData ObtenerDatosContratos();

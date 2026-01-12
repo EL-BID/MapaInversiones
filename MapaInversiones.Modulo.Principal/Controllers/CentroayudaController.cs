@@ -45,5 +45,11 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             return View();
         }
 
+        public ActionResult PlanDesarrolloCali()
+        {
+            
+            return View("plan-de-desarrollo-cali");
+        }
+
     }
 }

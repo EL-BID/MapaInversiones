@@ -69,7 +69,6 @@
                             var data = "";
                             var fila = "";
                             var filaconfirma = "";
-                            var filasinfirma = "";
                             var inicioLuis = '<div class="contractBox">';
                             var finLuis = '</div>';
                             var inicio = "";
@@ -91,7 +90,6 @@
                                         inicio = "";
                                         fin = "";
                                     }
-                                    var stilo = "";
                                     if (info[i].origenInformacion.toString().toUpperCase().includes("ONCAE")) { stilo = "contractONCAE" } else { stilo = "contractSEFIN" }
                                     inicio = '<div class="cotractName ' + stilo+'"><div class="row"><div class="col-xs-12 col-md-12"><span class="small">Entidad</span><div class="clearfix"></div>'
                                         + '                 <span class="h4">' + info[i].comprador.toString() + '</span>'
@@ -103,6 +101,9 @@
                                     
 
                                     $('#srcProceso').html('Proceso: ' + info[i].descripcionProceso.toString());
+                                    if (info[i].descripcionProceso) {
+                                        $('#srcProceso').hide();
+                                    }
                                     fila += '<div class="contractNumberRP"><span class="">Código proceso: </span>'
                                         + '	<span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div>'
 
@@ -116,7 +117,7 @@
 							            + '				<span class="amount_adj">';
                                     if (info[i].estadoProceso) { fila += info[i].estadoProceso.toString(); }
                                     fila += '</span></div>'
-                                        + '			<div class="col-xs-6 col-md-4"><span class="txt_small">Monto Estimado</span> <span class="amount_adj"> ' + (info[i].valorPlaneado * 1).formatMoney(2, '.', ',').toString() + ' </span></div>'
+                                        + '			<div class="col-xs-6 col-md-4"><span class="txt_small">Monto Estimado</span> <span class="amount_adj"> ' + (info[i].valorPlaneado * 1).formatMoney(2, ',', '.').toString() + ' </span></div>'
                                         + '			    <div class="col-xs-6 col-md-2">'
                                         + '				   <span class="txt_small">Moneda</span>'
                                         + '				   <span class="amount_adj"> ' + info[i].monedaContrato.toString() + ' </span>'
@@ -154,12 +155,14 @@
                                     fila += '</div>'
                                            + '<div class="clearfix"></div>';
                                     filaconfirma += ' <div class="related-contracts">'
-                                        + '     <span class="h4">Contratos de ' + info[i].origenInformacion+' asociados a este proceso:</span>'
+                                        + '     <span class="h4">Contrato(s) u órden(es) de compra:</span>' //Contratos de ' + info[i].origenInformacion+' asociados a este proceso
                                         + '     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
                                     proceso = info[i].codigoProceso.toString();
 
 
-                                    $("#enlaceproceso").attr('href', info[i].docURL.toString())
+                                    if (info[i].docURL) { $("#enlaceproceso").attr('href', info[i].docURL.toString()) } else { $("#enlaceproceso").hide(); }
+                            
+                                    if (info[i].docURL) { $("#proceso_header").attr('href', info[i].docURL.toString()) } else { $("#proceso_header").hide(); }
 
                                 }
 
@@ -178,7 +181,7 @@
                                     + '                <div class="panel-body">';
                                 if (info[i].descripcionContrato) {
                                     filaconfirma += '          <div class="row border-b">'
-                                        + '                        <div class="col-md-12"><span class="small"> CONTRATO</span><span class="amount_adj">' + info[i].descripcionContrato.toString() + '</span></div>'
+                                        + '                        <div class="col-md-12"><span class="small"> CONTRATO U ORDEN DE COMPRA</span><span class="amount_adj">' + info[i].descripcionContrato.toString() + '</span></div>'
                                         + '                    </div>';
                                 }
                                 var moneda = '$'; //'L';
@@ -196,7 +199,7 @@
                                     + '                        <div class="col-md-4"><span class="small"> NÚMERO DE DOCUMENTO</span><span class="amount_adj">' + info[i].codigoProveedor.toString() + '</span></div>'
                                     + '                    </div>'
                                    + '                    <div class="row border-b">'
-                                    + '                        <div class="col-xs-6 col-md-6"><span class="small"> VALOR CONTRATADO</span><span class="amount_adj"> ' + moneda + ' ' + (info[i].valorContratado * 1).formatMoney(2, '.', ',').toString() + '</span></div>'
+                                    + '                        <div class="col-xs-6 col-md-6"><span class="small"> VALOR CONTRATADO</span><span class="amount_adj"> ' + moneda + ' ' + (info[i].valorContratado * 1).formatMoney(2, ',', '.').toString() + '</span></div>'
                                     + '                        <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span><span class="amount_adj"> ' + info[i].monedaContrato.toString() + ' </span></div>'
                                    + '                    </div>'
 
@@ -336,6 +339,10 @@ function getArticulosContrato(CodigoContrato) {
                     fila = '<tr>                                         '
                         + '    <td colspan="3">No se encontraron articulos</td>                   '
                         + '</tr> ';
+
+                    
+                    $("#obj-gasto").hide();
+                    $("#obj-gasto-header").hide();
                 }
                 $("#articulos").html(fila);
             } else {

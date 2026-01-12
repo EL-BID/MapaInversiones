@@ -51,15 +51,36 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       }
     }
 
-        [HttpGet("GetRecursosPerfinalidad")]
-        public ModelPresupuestoData GetRecursosPerfinalidad(int anyo)
+        [HttpGet("GetRecursosPerPlan")]
+        public ModelPresupuestoData GetRecursosPerPlan(int anyo)
         {
             List<itemNiveles> objGrupo = new List<itemNiveles>();
             List<InfoConsolidadoPresupuesto> info = new List<InfoConsolidadoPresupuesto>();
             ModelPresupuestoData objReturn = new ModelPresupuestoData();
             try
             {
-                info = consolidadoPresupuesto.GetRecursosPerfinalidad(anyo);
+                info = consolidadoPresupuesto.GetRecursosPerPlan(anyo);
+                objReturn.InfoRecursos = info;
+                objReturn.Status = true;
+                return objReturn;
+            }
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.Message;
+                return objReturn;
+            }
+        }
+
+        [HttpGet("GetRecursosPerInstitucion")]
+        public ModelPresupuestoData GetRecursosPerInstitucion(int anyo)
+        {
+            List<itemNiveles> objGrupo = new List<itemNiveles>();
+            List<InfoConsolidadoPresupuesto> info = new List<InfoConsolidadoPresupuesto>();
+            ModelPresupuestoData objReturn = new ModelPresupuestoData();
+            try
+            {
+                info = consolidadoPresupuesto.GetRecursosPerInstitucion(anyo);
                 objReturn.InfoRecursos = info;
                 objReturn.Status = true;
                 return objReturn;
@@ -156,7 +177,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         }
 
         [HttpGet("BarChartEntidades")]
-        public ModelPresupuestoData BarChartEntidades(int anyo, string filtro)
+        public ModelPresupuestoData BarChartEntidades(int anyo, string filtro,string tipoGasto)
         {
             ModelPresupuestoData Presupuesto = new ModelPresupuestoData();
             List<string> filtro_aux_sec = new List<string>();
@@ -170,7 +191,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     .Distinct().ToList();
                     filtro_aux_sec = cadList;
                 }
-                Presupuesto.InfoRecursos = consolidadoPresupuesto.ObtenerGastoEntidades(anyo, filtro_aux_sec);
+                Presupuesto.InfoRecursos = consolidadoPresupuesto.ObtenerGastoEntidades(anyo, filtro_aux_sec,tipoGasto);
                 Presupuesto.Status = true;
                 return Presupuesto;
             }
@@ -203,7 +224,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         }
 
         [HttpGet("BarChartTiempoEntidades")]
-        public ModelPresupuestoData BarChartTiempoEntidades(int anyo, string filtro)
+        public ModelPresupuestoData BarChartTiempoEntidades(int anyo, string filtro,string tipoGasto)
         {
             ModelPresupuestoData Presupuesto = new ModelPresupuestoData();
             List<string> filtro_aux_sec = new List<string>();
@@ -217,7 +238,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     .Distinct().ToList();
                     filtro_aux_sec = cadList;
                 }
-                Presupuesto.InfoRecursos = consolidadoPresupuesto.ObtenerGastoPerTiempoEntidades(anyo, filtro_aux_sec);
+                Presupuesto.InfoRecursos = consolidadoPresupuesto.ObtenerGastoPerTiempoEntidades(anyo, filtro_aux_sec,tipoGasto);
                 Presupuesto.Status = true;
                 return Presupuesto;
             }

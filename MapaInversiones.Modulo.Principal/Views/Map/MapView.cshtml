@@ -19,7 +19,7 @@
                                         <i class="material-icons md-18">chevron_right</i>
                                     </li>
                                     <li><a href="#!">Inversión Pública</a><i class="material-icons md-18">chevron_right</i></li>
-                                    <li>Mapa de Inversión Pública</li>
+                                    <li>Mapa de Proyectos POT</li>
                                 </ul>
                             </div>
                         </div>
@@ -32,16 +32,39 @@
                     <div class="col-lg-8">
                         <div class="banner-main-info">
                             <div class="banner-main-title mb-0">
-                                <h1>Mapa de Inversión Pública</h1>
+                                <h1>Mapa de Proyectos POT</h1>
                             </div>
                             <div class="banner-main-desc">
 
-                                <p>
-                                    <strong>Los proyectos que se muestran a continuación son aquellos que cuentan con presupuesto vigente asignado en la gestión.</strong>
-                                </p>
-
+                                <!--<p>En este mapa podrás filtrar los proyectos POT por ubicación (localidad), sector de la inversión (educación, deporte, infraestructura, cultura, entre otros), entidad (dependencia encargada) y estado del proyecto (aprobado, en ejecución, finalizado). </p>-->
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="banner-ppd">
+            <div class="container px-4">
+                <div class="row align-items-center banner-content">
+                    <div class="col-lg-4 col-md-5 text-center d-none d-md-block">
+                        <div class="character-placeholder mx-auto">
+                            <img src="~/img/Proyecto/ppd-003.png" />
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-7">
+                        <!--<span class=" h2 display-4 fw-bolder text-primary-red text-uppercase mb-2">
+                            PROYECTOS
+                        </span><br />-->
+                        <span class="h3 fw-bold text-primary-blue text-uppercase mb-4">
+                            Descubre qué está pasando en tu Ciudad
+                        </span>
+                        <p class="fs-6 text-dark lh-base mb-4">
+                            En este mapa podrás explorar los proyectos del POT que cuentan con inversión a través del Plan Distrital de Desarrollo (PDD).
+                            Podrás filtrarlos por localidad, sector (educación, cultura, infraestructura, entre otros), entidad encargada, estado del proyecto (aprobado, en ejecución o finalizado) y horizonte de ejecución (corto, mediano o largo plazo).
+                        </p>
+                        <a href="#modal-pdd" class="btn btn-pdd btn-lg text-white text-decoration-none">
+                            Conoce qué son los proyectos POT
+                        </a>
                     </div>
                 </div>
             </div>
@@ -55,7 +78,7 @@
                         <img src="/img/ic-filter.svg" alt="Filtro icono" /><span>Filtros</span>
                     </button>
                     <button id="btnTabVerListado" type="button" class="btn btn-outlined">
-                        <img src="/img/ic-listView.svg" alt="listado icono" /><span>Ver lista<span id="tabCantProyList"></span></span>
+                        <img src="/img/ic-listView.svg" alt="listado icono" /><span>Ver lista &nbsp;<span id="tabCantProyList"></span></span>
                     </button>
 
                 </div>
@@ -67,7 +90,7 @@
         </div>
         <!--MAP CONTAINER-->
         <section class="c-generalData">
-            <div class="container">
+            <div class="container-fluid">
 
                  <div class="row">
                     <div class="map-container proyectos-mode" data-option-subtipo="fiscalizacion-option-subtipo--1">
@@ -295,7 +318,7 @@
                                                 </div>
                                                 <div style="visibility: hidden; display: none;" class="statistic-group approved-money">
                                                     <div class="label">
-                                                        @ViewBag.TitulosHome.BuscarTituloPorLlave("Proyectos_BuscarProyectos_RecursosAprobadosSGR")
+                                                        @ViewBag.TitulosHome.BuscarTituloPorLlave("w_BuscarProyectos_RecursosAprobadosSGR")
                                                     </div>
                                                     <div class="money" id="approved-money">
                                                         @String.Format("{0:C0}", Model.ApprovedMoney)
@@ -331,7 +354,7 @@
 
                                     </div><!-- END MAP VIEW -->
 
-                                    <div id="projects-list-view" class="projects-list-view hidden">
+                                    <div id="projects-list-view" style="display:none" class="projects-list-view">
                                         <div class="projects-list-view-inner">
                                             <div class="head-control">
                                                 <h5 class="modal-title">Listado de proyectos</h5>
@@ -361,7 +384,7 @@
                                                         <tr data-bind="css: {odd: $index()%2 == 1}">
                                                             <td class="name" width="40%"><a data-bind="attr: {href: url}, text:name"></a></td>
                                                             <td class="type hidden-xs" width="25%"><a data-bind="attr: {href: url}, text:ejecutor"></a></td>
-                                                            <td class="number hidden-xs" width="20%"><a data-bind="attr: {href: url}, text:value.toCurrency()"></a></td>
+                                                            <td class="number hidden-xs" width="20%"><a data-bind="attr: {href: url}, text: '$' + shared.formatoMoneda(value,0,1)"></a></td>
                                                             <td class="status hidden-xs" width="15%"><a data-bind="attr: {href: url}, text:state"></a></td>
                                                         </tr>
                                                     </tbody>
@@ -499,7 +522,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="section-heading heading-left">
-                    <h2>Proyectos nacionales</h2>
+                    <h2>Proyectos POT distritales</h2>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -512,7 +535,10 @@
                     </select>
                 </div>
             </div>
+            <input type="hidden" id="cantidaddist" value="" />
             <div id="divContenedorFichas" class="grid-nationalprojects"></div>
+            <div id="divPagDist" class="">
+            </div>
             <!--END MAQUETA BASICA PROJECTOS-->
             <div id="divNoEncontradoEjec" class="no-search-results objHidden">No se encontraron resultados</div>
             <div id="divNoExistenEjec" class="no-search-results objHidden">No se encontraron resultados</div>
@@ -522,10 +548,132 @@
                 
 
         </div>
+
     </div>
 </div>
 <div class="clearfix"></div>
 
+
+<!-- Modal usando Bootstrap 5 structure -->
+    <div id="modal-pdd" class="modal-overlay">
+        <a href="#close" class="modal-backdrop-custom"></a>
+
+        <div class="modal-dialog-custom">
+            <div class="modal-content-custom POT">
+
+                <!-- Modal Header -->
+                <div class="modal-header-custom p-4 text-center">
+                    <a href="#close" class="btn-close-custom text-white">
+                        x
+                    </a>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body p-4">
+                    <div class="row">
+                        <!-- Columna del contenido -->
+                        <div class="col-lg-9 col-md-8 offset-md-3 card h-100">
+                            <div class="card-body">
+                            <span class=" h3 display-4 fw-bolder text-primary-red text-uppercase mb-2">
+                                MAPA DE PROYECTOS
+                            </span><br />
+                            <span class="h4 fw-bold text-primary-blue text-uppercase mb-4">
+                                PLAN DE ORDENAMIENTO TERRTITORIAL
+                            </span>
+                                <!-- Primeras dos preguntas -->
+                                <div class="row">
+                                    <div class="col-md-12 mb-2">
+                                        <span class="h5 text-primary-red fw-bold fs-6">
+                                        ¿Cual es el contenido prográmatico de un POT?
+                                        </span>
+                                        <p class="small text-dark lh-base">
+                                        El contenido programático comprende los programas, proyectos y estrategias de intervención que tienen por objetivo concretar los objetivos de largo plazo del Plan.
+                                        </p>
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <p class="small text-dark lh-base">
+                                                    <strong>Programas:<br/></strong>
+                                                    Agrupan varias acciones o intervenciones que responden a objetivos comunes.
+                                                </p>
+                                            </div>
+                                        <div class="col-4">
+                                            <p class="small text-dark lh-base">
+                                                <strong>Proyectos:</strong><br />
+                                                Transforman de manera estructural la ciudad. Están alineados con la visión de largo plazo y buscan un gran impacto territorial, social o ambiental.
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p class="small text-dark lh-base">
+                                                <strong>
+                                                    Estrategias:
+                                                </strong><br />
+                                                Define el rumbo general y coordinado para alcanzar objetivos territoriales.
+                                            </p>
+                                        </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-md-12 mb-2 d-flex">
+                                          <div class="row">
+                                              <div class="col-md-12">
+                                                  <span class="h5 text-primary-red fw-bold fs-6">
+                                                ¿Cuántos proyectos tiene el POT?
+                                            </span>                                              
+                                          
+                                            </div>
+                                        <div class="col-md-10 offset-md-1 bd-callout bd-callout-info d-flex dData p-1">
+                                                <div class="stat-number text-primary-blue fw-bolder text-center">814<br /><p class="fs-6 lh-1">Proyectos</p></div>
+                                                        <p class="small text-dark lh-base align-middle">
+                                                Proyectos de intervención hacen parte del POT Bogotá Reverdece 2024–2035.<br/>
+                                                De estos, <strong>162 corresponden a estrategias de intervención</strong> y <strong>562 a proyectos que orientan la transformación del territorio.</strong>
+                                                        </p>
+                                             </div>
+                                          </div>
+                                      </div>
+
+                                <div class="col-md-12 mb-2 d-flex">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="h5 text-primary-red fw-bold fs-6">
+                                                ¿Cuantos proyectos POT están en el PDD?
+                                            </span>
+
+                                        </div>
+                                        <div class="col-md-10 offset-md-1 bd-callout bd-callout-info">
+                                            <div class="row">
+                                                <div class="col-md-12 d-flex p-2 dData">
+                                                    <div class="stat-number text-primary-blue fw-bolder text-center">284<br /><p class="fs-6 lh-1">Proyectos</p></div>
+                                                    <p class="small text-dark lh-base align-middle">
+                                                        A corte de diciembre de 2024 estaban incluidos en el Plan Distrital de Desarrollo <br />
+                                                    </p>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <p class="small text-dark lh-base align-middle dData">
+                                                        <strong>¿Por qué? <br /></strong>
+                                                        Porque el PDD es el instrumento que concreta en el corto plazo la ejecución del POT, integrando una selección de proyectos prioritarios definidos en su Programa de Ejecución.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 py-4 text-center">
+                                        <!-- Estadísticas usando-->
+                                        <span class="h4 text-primary-red fw-bold text-uppercase letter-spacing-1 ">
+                                        ¡PROYECTOS EN TODA LA CIUDAD!
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Elemento invisible para cerrar modal -->
+    <div id="close"></div>
 
 
 
@@ -570,7 +718,7 @@
     </script>
     <script type="html/x-handlebars" id="template-infobox-group">
         <div class="bingmap-infobox-info bingmap-infobox-group">
-                <p>Proyectos ubicados en el mismo sitio.</p>
+                <p>Proyectos POT ubicadas en el mismo sitio.</p>
                 <a href="#" class="button">Ver lista</a>
         </div>
     </script>

@@ -250,7 +250,7 @@ namespace PlataformaTransparencia.Negocios {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a /projectprofile/{0}.
+        ///   Busca una cadena traducida similar a /PerfilProyecto/{0}.
         /// </summary>
         internal static string URLFichaProyectos {
             get {

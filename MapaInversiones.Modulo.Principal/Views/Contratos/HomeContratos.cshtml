@@ -1,0 +1,341 @@
+﻿@model PlataformaTransparencia.Modelos.Emergencia.ModelHomeContratos
+@inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    System.IFormatProvider culture =
+    new System.Globalization.CultureInfo("es-CO");
+}
+
+<!--HEADER-->
+<section id="s0" class="banner-main s0-section">
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li><a href="#!">Procesos y Contratos</a><i class="material-icons md-18">chevron_right</i></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+
+                <div class="banner-main-info">
+                    <div class="banner-main-title mb-0">
+                        <h1>Procesos y Contratos</h1>
+                    </div>
+                    <div class=" banner-main-desc">
+                        <p>Los contratos son el vehículo que permite acceder a los bienes, obras y servicios que hacen posible cada proyecto. Un proceso de compra comprende los pasos necesarios para suscribir un contrato.</p>
+                        <p class="text-bold">Aquí podrás conocer cada proceso de compra y cada contrato.</p>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>          
+
+        <!--SELECT AÑO-->
+        <div class="row justify-content-center">
+            <div class="col-lg-4">
+                <!--YEAR FILTER-->
+                <div class="form-group">
+                    <label for="top_contratos_periodos">Seleccione un año que desea consultar:</label>
+                    <div class="empty" id="divAnioCarga" style="display:none;">Cargando...</div>
+                    <select class="form-select" id="top_contratos_periodos">
+
+                         @foreach (var item in Model.annios)
+                        {
+                            <option value=@item> @item</option>
+                        } 
+
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+<!--CIFRAS CONSOLIDADAS-->
+<section class="section">
+    <div class="container">
+        <div class="section-heading heading-left">
+            <h2>Cifras consolidadas</h2>
+        </div>
+
+        <!--TABS-->
+        <ul class="tabs tabData">
+            <li class="tab-link current" data-tab="tab-2">Procesos de compras</li>
+            <li class="tab-link" data-tab="tab-1">Contratos</li>
+
+        </ul>
+
+        <!--CONTENIDO PROCESOS DE COMPRAS-->
+        <div id="tab-2" class="tab-content current">
+            <div class="wrap-content-gen">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <p class="text-center text-bold p15">
+                            Resumen total de los procesos de compras ejecutados
+                        </p>
+                    </div>
+                </div>
+                <!--DATOS MACRO-->
+                <div class="row-cards-stacked">
+                    <div class="card d-flex summ-data">
+                        <div class="wrap-data-contract">
+                            <span class="label">
+                                Procesos de compra
+                            </span>
+                            <span class="bigNumber" id="numProcesos">
+                                 @* @String.Format("{0:n0}",@Model.resumenDatosContratos.numProcesos) *@
+                            </span>
+                        </div>
+                        <div class="wrap-data-contract">
+                            <span class="label">
+                                Monto total procesos de compra
+                            </span>
+                            <span class="bigNumber" id="valProcesos">
+                                @* $ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorProcesos / 1000000)) millones *@
+                            </span>
+                        </div>
+                        <div class="cta-wrapper text-center p25">
+                            <div class="btn btn-primary" id="enlace_procesos" data-entidad="">Ver entes gestores y procesos de compra <i class="material-icons md-22">chevron_right</i></div>
+                        </div>
+
+                    </div>
+                    <div class="sep-H-shadow"></div>
+                </div>
+                <!--COMPRAS REALIZADAS-->
+                <div class="row section justify-content-center">
+                    <div class="col-lg-10">
+                        <h3 class="text-center mb25 h4">Entes gestores y sus procesos de compras</h3>
+                        <p class="text-left"><text>Distribución porcentual de los procesos de compras realizados</text></p>
+
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="btnback btn" style="display:none;">
+                            <div id="btnVolver"><a><i class="material-icons md-22">chevron_left</i>&nbsp; Atrás</a></div>
+                        </div>
+                        <div class="grafica-container text-center">
+                            <div id="divGraphRecursosProcesos"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--CONTENIDO CONTRATOS-->
+        <div id="tab-1" class="tab-content">
+            <div class="wrap-content-gen">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <p class="text-center p15 text-bold">
+                            Resumen total de los contratos válidos asociados a los procesos de compras
+                        </p>
+
+                    </div>
+                </div>
+                <!--DATOS MACRO-->
+                <div class="row-cards-stacked">
+                    <div class="card d-flex summ-data">
+                        <div class="wrap-data-contract">
+                            <span class="label">
+                                Total Contratos
+                            </span>
+                            <span class="bigNumber" id="numContratos">
+                                
+                                @* @String.Format("{0:n0}", @Model.resumenDatosContratos.numContratos) *@
+                            </span>
+                        </div>
+                        <div class="wrap-data-contract">
+                            <span class="label">
+                                Valor total contratos
+                            </span>
+                            <span class="bigNumber" id="valContratos">
+                                @* $ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorContratos / 1000000)) millones *@
+                            </span>
+                        </div>
+                        <div class="cta-wrapper text-center p25">
+                            <div class="btn btn-primary" id="enlace_contratos" data-entidad="">Ver contratos <i class="material-icons md-22">chevron_right</i></div>
+                        </div>
+
+                    </div>
+                    <div class="sep-H-shadow"></div>
+                </div>
+                <!--COMPRAS REALIZADAS-->
+                <div class="row section justify-content-center">
+                    <div class="col-lg-12">
+                        <h3 class="text-center mb25 h4">Compras realizadas</h3>
+                        <p class="text-left">Distribución porcentual de las contrataciones realizadas </p>
+                    </div>
+                    <div class="col-lg-12 justify-content-center">
+                        <div class="btnback btn" style="display:none;">
+                            <div id="btnVolverContr"><a><i class="material-icons md-22">chevron_left</i>&nbsp; Atrás</a></div>
+                        </div>
+                        <div class="grafica-container text-center">
+                            <div id="divGraphRecursosObj"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--Presupuesto-->
+
+        <nav>
+            <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab">
+                <!-- Tabs -->
+                <a href="#" class="tab active" data-toggle-target=".tab-content-1"></a>
+                <a href="#" class="tab" data-toggle-target=".tab-content-2"></a>
+
+            </div>
+        </nav>
+
+        <div class="tab-content tab-content-1 active">
+        </div>
+
+        <div class="tab-content tab-content-2">
+        </div>
+
+        <div class="tab-content tab-content-3">
+        </div>
+
+
+    </div>
+</section>
+
+<!--PROCESOS DE COMRA-->
+<section class="section">
+    <div class="container">
+    <div class="section-heading heading-left">
+        <h2>Procesos de compra con mayor valor asignado</h2>
+    </div>
+        <div class="row">
+           <div class="col-lg-8">
+                <div class="form-group mb-5">
+                    <label for="tipo-contrato">Procesos de compra en</label>
+                    <select class="form-select" id="sltEntidad">
+
+                    </select>
+                </div>
+
+            </div>
+        </div>
+      <div class="comparativeTable" id="divListadoEntidad">
+    </div>
+    <div id="divPagFichas"></div>
+   </div>
+</section>
+
+<input type="hidden" id="origen" value="0" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+<script type="text/javascript" src="@Cdn.Url(Url, "~/js/home_contratos_aux.js")"></script>
+
+@section DataBody {
+      
+
+    @* data-resourcesEncabezado_@Model.annios[0]='{"numProcesos":"@Model.resumenDatosContratos.numProcesos","valorProcesos":" $ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorProcesos / 1000000)) millones","numContratos":"@Model.resumenDatosContratos.numContratos","valorContratos":"$ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorContratos / 1000000)) millones "}' *@
+
+@*     data-resourcesPerContratos_@Model.annios[0]='[@foreach (var item in @Model.InfoRecursosContratos)
+    {
+        <text>
+            {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "rawValue": "@item.rawValue", "rawValueInt": "@item.rawValue"}@if (item != @Model.InfoRecursosContratos.Last())
+            {
+                <text>,</text>
+            }
+        </text>
+    }]'
+     
+    data-resourcesPerProcesos_@Model.annios[0]='[@foreach (var item in @Model.InfoRecursosProcesos)
+    {
+        <text>
+            {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "rawValue": "@item.rawValue", "rawValueInt": "@item.rawValue"}@if (item != @Model.InfoRecursosProcesos.Last())
+            {
+                <text>,</text>
+            }
+        </text>
+    }]' *@
+
+}
+
+
+<script>
+    $(document).ready(function () {
+
+        ///tabs
+        var $carousel = $('.carouselData').flickity({
+            "initialIndex": 0,
+            "pageDots": false,
+            "groupCells": true,
+            "contain": true,
+            "prevNextButtons": true,
+            "freeScroll": true,
+            "wrapAround": false
+        });
+
+        var cellElements = $carousel.flickity('getCellElements');
+
+        if (cellElements.length > 0) {
+            $carousel.flickity('resize');
+        }
+
+        $('ul.tabs li').click(function () {
+            var tab_id = $(this).attr('data-tab');
+            $('ul.tabs li').removeClass('current');
+            $('.tab-content').removeClass('current');
+
+            $(this).addClass('current');
+            $("#" + tab_id).addClass('current');
+
+            var $carousel = $('.carouselData').flickity({
+                "initialIndex": 0,
+                "pageDots": false,
+                "groupCells": true,
+                "contain": true,
+                "prevNextButtons": true,
+                "freeScroll": true,
+                "wrapAround": false
+
+            });
+            var cellElements = $carousel.flickity('getCellElements');
+
+        $carousel.flickity('resize');
+
+
+        })
+
+    })
+</script>
+<script>
+    $('.tab').on('click', function (evt) {
+        evt.preventDefault();
+        $(this).toggleClass('active');
+        var sel = this.getAttribute('data-toggle-target');
+        $('.tab-content').removeClass('active').filter(sel).addClass('active');
+    });
+
+</script>

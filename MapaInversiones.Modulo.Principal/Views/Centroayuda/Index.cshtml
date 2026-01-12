@@ -21,7 +21,7 @@
             }
 
 <!--MAIN BANNER-->
-<section class="banner-main-asc mb-0">
+<section class="banner-main mb-0">
 
     <div class="container">
         <!-- Begin bread crumbs -->
@@ -46,8 +46,8 @@
 
             <div class="col-lg-8">
                 <div class="banner-main-info pb-0">
-                    <div class="banner-main-title">
-                        <h1>Centro de ayuda</h1>
+                    <div class="banner-main-title py-4">
+                        <h1>Centro de Ayuda</h1>
                     </div>
                     <div class="banner-main-desc">
                         <!--<p>Lorem ipsum dolor sit amet consectetur adipiscing elit, rutrum vulputate fermentum ullamcorper litora vel, suspendisse ac consequat rhoncus lectus ligula.</p>-->
@@ -68,11 +68,14 @@
             <div class="navHdisplay" id="navs-header">
                
                     <a class="@displaytabglosario" id="glosario" style="display: inline;" href="#!">
-                        Glosario
+                        <img src="img/ic-hc1.svg" alt="icono decorativo" /> <span>Glosario</span>
                     </a>
                     <a class="@displaytabpreguntas" id="preguntas" style="display: inline;" href="#!">
-                        Preguntas Frecuentes
+                        <img src="img/ic-hc2.svg" alt="icono decorativo" /><span>Preguntas Frecuentes</span>
                     </a>
+                    <!--<a class="" id="guias" style="display: inline;" href="#nav-guides">
+                        <img src="img/ic-hc3.svg" alt="icono decorativo" /><span>Guías de Navegación</span>
+                    </a>-->
       
             </div>
         </div>
@@ -167,12 +170,38 @@
                 </div>
             </div>
         </div>
+
+
     </div>
 </section>
 
 <script type="text/javascript">
 
     $(document).ready(function () {
+        //NAVEGACION HEADER 
+      window.onscroll = function () { myFunction() };
+
+      var header = document.getElementById("navs-header");
+      var sticky = header ? header.offsetTop : 0;
+
+      function myFunction() {
+          if (header) {
+              var sticky = header.offsetTop;
+              window.onscroll = function () {
+                  if (window.scrollY > sticky) {
+                      header.classList.add("sticky");
+                      header.classList.add("bg-white");
+                  } else {
+                      header.classList.remove("sticky");
+                      header.classList.remove("bg-white");
+                  }
+              };
+        }
+      
+      }
+      //FIN NAVEGACION
+
+      // MANEJO PREGUNTAS
       var enlacePregunta = document.getElementById("preguntas");
       if (enlacePregunta.style.display != "none") {
         //Muestra las preguntas de la primera categoria
@@ -229,7 +258,7 @@
         this.className = "indice focused-glo"
     });
   function Mostrar(ocultar, mostrar) {
-
+    
         var y = document.getElementsByClassName(ocultar);
         var i;
         for (i = 0; i < y.length; i++) {

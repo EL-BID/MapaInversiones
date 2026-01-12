@@ -3417,7 +3417,7 @@ textarea.form-control-lg {
   text-decoration: underline;
 }
 .btn-link:hover {
-  color: #0a58ca;
+  
 }
 .btn-link:disabled, .btn-link.disabled {
   color: #6c757d;
@@ -4108,10 +4108,11 @@ textarea.form-control-lg {
 @media (min-width: 992px) {
   .navbar-expand-lg {
     flex-wrap: nowrap;
-    justify-content: flex-start;
+    justify-content: space-between;
   }
   .navbar-expand-lg .navbar-nav {
     flex-direction: row;
+    gap:3rem;
   }
   .navbar-expand-lg .navbar-nav .dropdown-menu {
     position: absolute;
@@ -4332,7 +4333,7 @@ textarea.form-control-lg {
 
 .card a:hover { text-decoration: none;}
 
-
+.cards-News-container{ display:flex; flex-direction:row; justify-content:center; gap:1rem}
 .cards-News-container .card {
     position: relative;
     display: flex;
@@ -4341,10 +4342,19 @@ textarea.form-control-lg {
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: none !important; /*
-    1px solid rgba(0, 0, 0, 0.125) !important;*/
-    border-radius: 0.25rem;
+    border: 1px solid #EFEFEF !important;
+    border-radius: 20px;
+    width: 40%;
 }
+.location-card .card{ padding:0px; border-radius:20px}
+    .location-card .card-body{ padding:0px; }
+    .location-card .card .identificador-comuna {
+        width: 100%;
+        height: 200px;
+        background-size: cover; border-radius:20px 20px 0px 0px
+    }
+.wrap-desc-comuna{ background-color:#fff; padding:1rem; display:flex; flex-direction:column; justify-content:space-between; border-radius:20px }
+.number-proyecto{ color:#000}
 
 .card-login {
     position: relative;
@@ -4365,7 +4375,10 @@ textarea.form-control-lg {
 .fontSoftBlue { color: var(--SoftBlue); }
 .fontDarkBlue {color: var(--heading-font-color)}
 .Bignumber{ font-size: 4rem; font-weight: 600;}
-.BignumberAdv{ font-size: 3rem; font-weight: 600;
+.BignumberAdv {
+    font-size: 3rem;
+    font-weight: 600;
+}
 
 .no-rounded{ border-radius:0!important; padding: 4px;}
 
@@ -5518,12 +5531,18 @@ textarea.form-control-lg {
 }
 
 @media (max-width: 575.98px) {
-  .modal-fullscreen-sm-down {
-    width: 100vw;
-    max-width: none;
-    height: 100%;
-    margin: 0;
-  }
+    .cards-News-container {
+        display: flex;
+        flex-direction: column;
+
+    }
+        .cards-News-container .card{width:100%}
+        .modal-fullscreen-sm-down {
+            width: 100vw;
+            max-width: none;
+            height: 100%;
+            margin: 0;
+        }
   .modal-fullscreen-sm-down .modal-content {
     height: 100%;
     border: 0;

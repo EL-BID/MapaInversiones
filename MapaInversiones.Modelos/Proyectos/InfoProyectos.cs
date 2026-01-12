@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PlataformaTransparencia.Modelos.Comunes;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity.Spatial;
 
 namespace PlataformaTransparencia.Modelos.Proyectos
@@ -7,6 +9,7 @@ namespace PlataformaTransparencia.Modelos.Proyectos
   {
     public int IdProyecto { get; set; }
     public string NombreProyecto { get; set; }
+    public string TipoProyecto { get; set; }
     public DbGeography Geography { get; set; }
     public string State { get; set; }
     public string Location { get; set; }
@@ -34,6 +37,10 @@ namespace PlataformaTransparencia.Modelos.Proyectos
     public string GrupoFuncional { get; set; }
     public string PartidaPresupuestaria { get; set; }
     public string IdMunicipio { get; set; }
-        public string NombreDepartamento { get; set; }
-    }
+    public string NombreDepartamento { get; set; }
+    public List<Period> Periodos { get; set; }
+    public string HorizontePot { get; set; }
+    public string Estado { get; set; }
+    public string IdEstado { get; set; }
+  }
 }

@@ -1,37 +1,84 @@
 ﻿@inject OrchardCore.IOrchardHelper Orchard
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@using Newtonsoft.Json
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
+@{
+    var userJson = Context.Session.GetString("NomUsuario");
+    dynamic user = null;
+
+    if (!string.IsNullOrEmpty(userJson))
+    {
+        user = userJson;
+    }
+}
+<style>
+    .navbar-custom {
+        background-color: #003366;
+    }
+
+        .navbar-custom .navbar-nav .nav-link {
+            color: #ffffff;
+            font-weight: 500;
+            padding: 0.75rem 1rem;
+        }
+
+            .navbar-custom .navbar-nav .nav-link:hover,
+            .navbar-custom .navbar-nav .dropdown-menu a:hover {
+                background-color: #005599;
+                border-radius: 0.5rem;
+                color: #ffffff;
+            }
+
+    .navbar-brand {
+        color: #ffffff;
+        font-weight: bold;
+    }
+
+    .navbar-toggler {
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255,255,255,0.9%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
+    .dropdown-menu {
+        margin-top: 0;
+        padding: .5rem;
+        border: none;
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 10px 25px #0000001a;
+    }
+
+        .dropdown-menu a {
+            color: #2d3436;
+            padding: .75rem 1rem;
+            border-radius: 8px;
+            margin: 2px 0;
+            font-weight: 500;
+        }
+
+        .dropdown-menu a:hover {
+                background-color: #f8f9fa;
+                color: #dc3545;
+                transform: translate(5px);
+                transition:all .3s ease;
+
+        }
+
+
+</style>
 <header id="header" class="header">
     <!-- TOP HEADER -->
     <nav class="header-top">
         <div class="container-fluid">
-            <div class="row justify-content-end">
-                <div class="col-auto">
-                    <div class="header-top-links">
-                        <!-- secondary pages -->
-                        <ul class="nav">
-
-                            <li class="nav-item">
-                                <a href="/Acercade" title="Acerca de MapaInversiones">
-                                    Acerca de MapaInversiones
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/CentroAyuda?id=2" title="Centro de Ayuda">
-                                    Centro de Ayuda
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/MarcoLegal" title="Marco Legal">
-                                    Marco Legal
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="/Contactanos" title="Contáctenos">
-                                    Contáctenos
-                                </a>
-                            </li>
-                          
-                        </ul>
-                    </div>
+            <div class="row justify-content-between">
+                <div class="col-md-1 col-lg-1 col-xl-1">
+                    <a href="https://www.gov.co" target="_blank">
+                        <img class="img-fluid" src="@Cdn.Url(Url, "~/img/govco-logo.png")" alt="Logotipo de Gobierno de Colombia">
+                    </a>
                 </div>
 
             </div>
@@ -39,41 +86,158 @@
         </div>
     </nav>
     <!-- End header top -->
-    <!-- Begin header fixed -->
-
-    <nav class="header-fixed">
+    <!-- GAB HEADER ORIGINAL -->
+    <div class="gab-header">
         <div class="wrap-head">
             <div class="container">
-               <div class="row flex-nowrap align-items-center justify-content-between">
-                <div class="col-auto d-block d-lg-none header-fixed-col">
+                <div class="row gab-wrapper">
+
+                    <div class="col-xs-4 col-lg-3">
+                        <!-- Begin logo -->
+                        <div class="logoHinv">
+                            <a href="/" target="_blank" rel="noopener" title="Volver al inicio">
+                                <img class="img-fluid" src="@Cdn.Url(Url, "~/img/logo_header.svg")" alt="Escudo Alcaldia de Bogota">
+                            </a>
+                        </div>
+
+
+                    </div>
+                    <div class="col-xs-6 col-lg-9">
+                        <div class="user-wrap">
+                            @if (user != null)
+                            {
+                                <div class="user-info" id="nombreUsuario">
+                                    <span>👋 Hola, @user</span>
+                                </div>
+                            }
+                            <div class="wrap-btn">
+                                <input type="hidden" id="userName" name="userName" value="@user">
+                                <a id="btnLoginGabH"  class="btn btn-link">Iniciar sesión</a>
+                                <a id="btnUserGabH" target="_blank" rel="noopener" href="@Convert.ToString(Configuration["GabAuth:UserRegister"])" class="btn btn-outlined">Registrarse</a>
+                                <a id="btnLogoutGab" style="display:none;" class="btn btn-link">Cerrar sesión</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                 </div>
+                 
+            </div>
+        </div>
+
+        <div class="nav-gab">
+            <nav class="navbar navbar-expand-lg gab-menu">
+                <div class="container">
+                    <a href="https://gobiernoabiertobogota.gov.co/" class="navbar-brand"><img src="/img/gab_logo.webp" alt="icono de gobierno abierto" /></a>
+                    <div class="col-auto d-block d-lg-none header-fixed-col">
+                        <div class="main-mnu-btn">
+                            <span class="bar bar-1"></span>
+                            <span class="bar bar-2"></span>
+                            <span class="bar bar-3"></span>
+                            <span class="bar bar-4"></span>
+                        </div>
+                    </div>
+            <div class="collapse navbar-collapse gab-menu" id="menuGAB">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="sobreGABDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sobre GAB
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="sobreGABDropdown">
+                            <li><a class="dropdown-item" href="https://gobiernoabiertobogota.gov.co/gab" target="_blank">¿Qué es GAB?</a></li>
+                            <li><a class="dropdown-item" href="https://gobiernoabiertobogota.gov.co/gab/alianza" target="_blank">Alianza para el Gobierno Abierto</a></li>
+                                    <li><a class="dropdown-item" href="https://gobiernoabiertobogota.gov.co/gab/aliados" target="_blank">Aliados para la Transparencia</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link active dropdown-toggle" href="#" id="transparenciaDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Transparencia</a>
+                        <ul class="dropdown-menu" aria-labelledby="transparenciaDropdown">
+                            <li>
+                                <a class="dropdown-item" href="https://gobiernoabiertobogota.gov.co/transparencia" target="_blank">Datos para la Transparencia</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="http://mapainversiones-preprod.eastus.cloudapp.azure.com:85/Home">Mapa de Inversiones Bogotá</a>
+                            </li>
+                                    
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link" href="https://gobiernoabiertobogota.gov.co/participacion" target="_blank">Participación</a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link" href="https://gobiernoabiertobogota.gov.co/gab/colaboracion" target="_blank">Colaboración</a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link" href="https://bogota.gov.co/servicios/supercade-virtual" target="_blank">SuperCade Virtual</a>
+                    </li>
+                    <li class="nav-item">
+                       <a class="nav-link" href="https://gobiernoabiertobogota.gov.co/gab/bogota-cuidadora" target="_blank">Servicios</a>
+                    </li>
+  
+            </ul>
+            </div>
+            </div>
+        </nav>
+        </div>
+    </div>
+    <!--END GAB HEADER-->
+ 
+    <!-- Begin header fixed -->
+    <nav class="header-fixed">
+        <div class="wrap-head2">
+            <div class="container-fluid d-none">
+               <div class="row flex-nowrap align-items-center justify-content-between main-head-section">
+                    @*<div class="col-auto d-block d-lg-none header-fixed-col">
                     <div class="main-mnu-btn">
                         <span class="bar bar-1"></span>
                         <span class="bar bar-2"></span>
                         <span class="bar bar-3"></span>
                         <span class="bar bar-4"></span>
                     </div>
-                </div>
-                <div class="main-header col-md-12 header-fixed-col">
-                    <!-- Begin logo -->
-                    <div class="logoHinv">
-                            <a href="/" target="_blank" rel="noopener" title="Nombre Gobierno">
-                                <img class="img-fluid" src="~/img/logoGobierno.svg" alt="Nombre Gobierno">
-                        </a>
-                    </div>
-                    <div class="logoIntro">
-                        <a href="/" class="logo-ico-widht-text" title="MapaInversiones">
-                            <img class="img-fluid" src="~/img/logoMIV.svg" alt="Logo MapaInversiones">
-                        </a>
-                    </div>
+                </div>*@
 
-                </div>
+                <div class="col-auto col-lg-7">
+
+                        <div class="d-none d-lg-block">
+                        <div class="row">
+                            
+                            <div class="col-lg-12">
+
+                                @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" }))
+                                {
+                                    <div class="form-field whiteSearch mb-4" id="contentSearchDiv">
+                                        <label for="SearchString" class="form-field-label"> <b>Busca información específica:</b><br /> Contratos, Contratistas y Entes gestores, por ejemplo: Secretaría de educación</label>
+                                        <button type="submit" class="buttonsearBTN" title="Click para Iniciar Buqueda">
+                                            <i class="material-icons md-22">search</i> <span class="">Buscar</span>
+                                        </button>
+                                        <input type="search" class="form-field-input" name="SearchString" id="SearchString" value=""
+                                               autocomplete="off" required="required">
+                                        <!--id="page-field-search"-->
+                                    </div>
+
+                                }
+
+
+                                <div id="search-home" class="search-body">
+                                    <div id="divNoEncontrado" class="no-search-results" style="display: none;">
+                                        No se han encontrado resultados
+                                    </div>
+                                    <div class="search-results objHidden" id="divResultados">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
 
             </div>
             </div>
             <div class="container-fluid">
                 <div class="row">
+
                     <div class="col-lg col-auto col-static header-fixed-col main-navigation-bar">
-                        <div class="row flex-nowrap align-items-center justify-content-end">
+                        <div class="row flex-nowrap align-items-center justify-content-center">
                             <div class="col-auto header-fixed-col d-none d-lg-block col-static">
                                 <!-- Begin main menu -->
                                 <nav class="main-mnu">
@@ -84,13 +248,7 @@
                                             {
                                                 @if (@menuitem.LinkMenuItemPart.Name != null)
                                                 {
-                                                    var enlace = @menuitem.LinkMenuItemPart.Url;
                                                     var nameEnlace = @menuitem.LinkMenuItemPart.Name.Value;
-                                                    var enlace_aux = "#!";
-                                                    if (enlace != "")
-                                                    {
-                                                        enlace_aux = enlace;
-                                                    }
                                                     var claseLi = "main-mnu-item-has-child";
                                                     @if (ViewBag != null && ViewBag.ruta != null && ViewBag.ruta == @nameEnlace)
                                                     {
@@ -101,48 +259,58 @@
 
                                                         @if (menuitem.MenuItemsListPart != null)
                                                         {
-                                                            <a href="@enlace_aux" data-title="@menuitem.LinkMenuItemPart.Name">
-                                                                <span>@menuitem.LinkMenuItemPart.Name</span>
-                                                                <i class="material-icons">expand_more</i>
-                                                            </a>
+                                                            <!--MENU PADRE-->
+                                                            @await Html.PartialAsync("_MenuAnchor", new {
+                                                                Href = menuitem.LinkMenuItemPart.Url,
+                                                                Text = menuitem.LinkMenuItemPart.Name
+                                                            })
+                                                            <!--FIN MENU PADRE-->
+
                                                             var cant = @menuitem.MenuItemsListPart.MenuItems.Count;
                                                             if (@cant > 0)
                                                             {
+                                                                <!--SUB MENUS-->
                                                                 <ul>
                                                                     @foreach (var submenu in menuitem.MenuItemsListPart.MenuItems)
                                                                     {
                                                                         @if (@submenu.LinkMenuItemPart.Name != null)
                                                                         {
-                                                                            var enlace_sub = @submenu.LinkMenuItemPart.Url;
-                                                                            var enlace_sub_aux = "#!";
-                                                                            if (enlace_sub != "")
-                                                                            {
-                                                                                enlace_sub_aux = enlace_sub;
-                                                                            }
                                                                             <li>
-                                                                                <a href="@enlace_sub_aux" data-title="@submenu.LinkMenuItemPart.Name">
-                                                                                    <span>@submenu.LinkMenuItemPart.Name</span>
-                                                                                </a>
+                                                                                @await Html.PartialAsync("_MenuAnchor", new {
+                                                                                Href = submenu.LinkMenuItemPart.Url,
+                                                                                Text = submenu.LinkMenuItemPart.Name                                                                                
+                                                                                })
                                                                             </li>
                                                                         }
                                                                     }
                                                                 </ul>
+                                                                <!--FIN SUB MENUS-->
                                                             }
 
                                                         }
                                                         else
                                                         {
-                                                            <a href="@enlace_aux" data-title="@menuitem.LinkMenuItemPart.Name">
-                                                                <span>@menuitem.LinkMenuItemPart.Name</span>
-                                                            </a>
-
+                                                                <!--SINGLE MENU-->
+                                                                @await Html.PartialAsync("_MenuAnchor", new {
+                                                                Href = menuitem.LinkMenuItemPart.Url,
+                                                                Text = menuitem.LinkMenuItemPart.Name
+                                                                
+                                                                })
                                                         }
                                                     </li>
+
                                                 }
                                             }
                                         </ul>
                                     }
                                 </nav>
+                                <div class="header-search align-items-center d-none">
+                                    <div class="header-action-icon header-search-ico">
+                                        <a role="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter">Buscar<i class="material-icons md-22 header-search-ico-search">search</i></a>
+
+                                        <i class="material-icons md-22 header-search-ico-close">close</i>
+                                    </div>
+                                </div>
                                 <!-- End main menu -->
                             </div>
                             <div class="col-auto header-fixed-col col-static">
@@ -152,26 +320,29 @@
                                     <li>
                                         <div class="header-search">
                                             <div class="header-action-icon header-search-ico">
-                                                <i class="material-icons md-22 header-search-ico-search">search</i>
+                                                    <i class="material-icons md-22 header-search-ico-search">search</i>
+
                                                 <i class="material-icons md-22 header-search-ico-close">close</i>
                                             </div>
-                                            <form action="#!" method="post" class="header-search-form">
+                                            @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "header-search-form" }))
+                                            {
                                                 <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-12">
+                                                    <div class="row justify-content-center">
+                                                        <div class="col-8">
+
                                                             <div class="form-field">
-                                                                <label for="field-search" class="form-field-label">Search...</label>
-                                                                <input type="search" class="form-field-input" name="Search" value="" autocomplete="off" required="required" id="field-search">
-                                                                <button type="submit" class="header-search-btn"><i class="material-icons md-22">search</i></button>
+                                                                <label for="field-search" class="form-field-label">Localidades, Proyectos POT, Proyectos de inversión PDL, sectores, instituciones, por ejemplo: Metro de Bogotá</label>
+                                                                <input type="search" class="form-field-input" name="SearchString" value="" autocomplete="off" required="required" id="SearchString">
+                                                                <button type="submit" class="header-search-btn"><i class="material-icons md-22">search</i> Buscar</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            }
                                         </div>
                                     </li><!-- End header search -->
                                     <!-- Begin header navbar -->
-                                    <li class="d-block d-lg-none">
+                                    <li class="d-none d-lg-none">
                                         <div class="header-navbar">
                                             <div class="header-navbar-btn">
                                                 <i class="material-icons md-24">more_vert</i>
@@ -179,8 +350,8 @@
                                             <ul class="header-navbar-content">
 
                                                 <li>
-                                                    <a href="#!" title="About InvestmentMap">
-                                                        About InvestmentMap
+                                                    <a href="#!" title="Qué es Mapa de Inversiones Bogotá">
+                                                        ¿Qué es Mapa de Inversiones Bogotá?
                                                     </a>
                                                 </li>
                                                 <li>
@@ -221,7 +392,8 @@
                                         </div>
 
                                     </li><!-- End header navbar -->
-                                </ul><!-- End header actions -->
+                                </ul>
+                                <!-- End header actions -->
                             </div>
                         </div>
                     </div>
@@ -230,15 +402,68 @@
         </div>
     </nav>
     <!-- End header fixed -->
+    <!-- modal search bar mobile -->
+    <!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-btn-close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-header">
+                    <h2 class="modal-title text-center" id="searchTitle">Encuentra información clave sobre proyectos, contratos, contratistas y Entes gestores</h2>
+                    
+                </div>
+                <div class="modal-body">
+                    <div class="col-lg-12">
+
+                        @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" }))
+                        {
+                            <div class="form-field whiteSearch mb-4" id="contentSearchDiv">
+                                <label for="SearchString" class="form-field-label"> Digita el término de tu búsqueda</label>
+                                <button type="submit" class="buttonsearBTN" title="Click para Iniciar Buqueda">
+                                    <i class="material-icons md-22">search</i>
+                                </button>
+                                <input type="search" class="form-field-input" name="SearchString" id="SearchString" value=""
+                                       autocomplete="off" required="required">
+                                <!--id="page-field-search"-->
+                            </div>
+
+                        }
+
+
+                        <div id="search-home" class="search-body">
+                            <div id="divNoEncontrado" class="no-search-results" style="display: none;">
+                                No se han encontrado resultados
+                            </div>
+                            <div class="search-results objHidden" id="divResultados">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
     <!-- Google tag (gtag.js) -->
 
-
-    <script src="https://www.googletagmanager.com/gtag/js?id=G-Q4H714KM4Z" integrity="sha384-VNIXgAfnXrBQKU+BNlPdO82beO9YSwERuCf5149ppVS/q3VOxeG6Qm4ylAz2Mnnr" crossorigin="anonymous"></script>
+    <script src="https://www.googletagmanager.com/gtag/js?id=G-XVRSBRCLQ6" crossorigin="anonymous"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'G-Q4H714KM4Z');
+        gtag('config', 'G-XVRSBRCLQ6');
     </script>
 </header><!-- End header -->

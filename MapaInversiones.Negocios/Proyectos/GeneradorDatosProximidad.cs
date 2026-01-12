@@ -49,14 +49,14 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             decimal latitudInferior = bottomRight[0];
             decimal longitudDer = bottomRight[1];
 
-            if (latitudSuperior > 19.9M)
-                latitudSuperior = 19.9M;//Punto mas al Oeste
-            if (latitudInferior < 17.58M)
-                latitudInferior = 17.58M;//Punto mas al Este
-            if (longitudIzq < -71.96M)
-                longitudIzq = -71.96M;//Punto mas al Norte
-            if (longitudDer > -68.15M)
-                longitudDer = -68.15M;//Punto mas al oeste
+            if (latitudSuperior > 4.86M)
+                latitudSuperior = 4.86M;//Punto mas al Norte 
+            if (latitudInferior < 3.71M)
+                latitudInferior = 3.71M;//Punto mas al Sur 
+            if (longitudIzq < -74.40M)
+                longitudIzq = -74.40M;//Punto mas al Oeste 
+            if (longitudDer > -73.97M)
+                longitudDer = -73.97M;//Punto mas al Este 
 
             decimal incrementoLatitud = Math.Abs(latitudSuperior - latitudInferior) / segmentosCuadricula;
             decimal incrementoLongitud = Math.Abs(longitudIzq - longitudDer) / segmentosCuadricula;
@@ -135,7 +135,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
             retonroProyecto.name = infoProyectos.NombreProyecto.ToUpper();
             retonroProyecto.state = infoProyectos.State;
-            retonroProyecto.image = BusquedasProyectosBLL.GenerarUrlImagenProyecto(infoProyectos.IdProyecto);
+            //retonroProyecto.image = ""; BusquedasProyectosBLL.GenerarUrlImagenProyecto(infoProyectos.IdProyecto);
             retonroProyecto.url = string.Format(CommonConstants.ServicesLink, infoProyectos.IdProyecto);
             retonroProyecto.value = Math.Round(infoProyectos.Value);
             retonroProyecto.approvedTotalMoney = Math.Round(infoProyectos.approvedTotalMoney);

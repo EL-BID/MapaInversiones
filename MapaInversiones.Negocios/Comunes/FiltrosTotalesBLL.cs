@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace PlataformaTransparencia.Negocios.BLL.Comunes
 {
-    [ExcludeFromCodeCoverage]
+    
     public class FiltrosTotalesBLL
     {
         static string MENSAJE_ERROR = "Lo sentimos, ha ocurrido un error.";

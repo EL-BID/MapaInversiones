@@ -1,5 +1,8 @@
 ﻿@model PlataformaTransparencia.Modelos.Contratos.ModelContrato
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 @inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,7 +11,7 @@
     var LabelContrato = "";
     var TituloContrato = "";
     System.IFormatProvider culture =
-new System.Globalization.CultureInfo("es-RD");
+    new System.Globalization.CultureInfo("es-CO");
 }
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
@@ -55,8 +58,8 @@ new System.Globalization.CultureInfo("es-RD");
                         <p>
                             @LabelContrato
                         </p>
-                        <p><strong>Lorem ipsum</strong> Lorem ipsum <strong>Lorem ipsum</strong>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</p>
-                    </div>
+@*                         <p><strong>Lorem ipsum</strong> Lorem ipsum <strong>Lorem ipsum</strong>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</p>
+ *@                    </div>
 
                 </div>
             </div>
@@ -66,24 +69,24 @@ new System.Globalization.CultureInfo("es-RD");
 
             <div class="" id="navs-header">
                 <a class="page-scroll" href="#secInfoContratos">
-                    <span class="ic-shortcut"><img class="md-22" src="~/img/ic_contract_link1.svg" alt="icono decorativo" /></span>
-                    <span class="text-btn">Información del contrato</span>
+                    <span class="ic-shortcut"><img class="md-22" src="@Cdn.Url(Url, "~/img/ic_contract_link1.svg")" alt="icono decorativo" /></span>
+                    <span class="text-btn">Información del contrato u orden de compra</span>
                 </a>
-                <a class="page-scroll" href="#obj-gasto">
-                    <span class="ic-shortcut"><img class="md-22" src="~/img/ic_contract_link4.svg" alt="icono decorativo" /></span>
+                <a class="page-scroll" href="#obj-gasto" id="obj-gasto-header">
+                    <span class="ic-shortcut"><img class="md-22" src="@Cdn.Url(Url, "~/img/ic_contract_link4.svg")" alt="icono decorativo" /></span>
                     <span class="text-btn">Artículos comprados</span>
                 </a>
                 <a class="page-scroll" href="#s5">
-                    <span class="ic-shortcut"><img class="md-22" src="~/img/ic_contract_link2.svg" alt="icono decorativo" /></span>
+                    <span class="ic-shortcut"><img class="md-22" src="@Cdn.Url(Url, "~/img/ic_contract_link2.svg")" alt="icono decorativo" /></span>
                     <span class="text-btn">¿Qué opinas de este contrato?</span>
                 </a>
             </div>
         </div>
 
         <!--NAVIGATION ON PAGE -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-5">
             <div class="col-md-12 text-center p25">
-                <a class="btn btn-outlined" href="" target="_blank" rel="noopener"><i class="material-icons md-22">launch</i> Ver Detalles del Proceso</a>
+                <a class="btn btn-outlined" href="" target="_blank" rel="noopener" id="proceso_header"><i class="material-icons md-22">launch</i> Ver Detalles del Proceso</a>
             </div>
         </div>
 
@@ -159,208 +162,30 @@ new System.Globalization.CultureInfo("es-RD");
 <section id="s5" class="section whiteBg">
     <div class="container">
         <div class="row text-center mb25">
-            <div class="section-heading heading-left mb-3">
+            <div class="section-heading heading-center mb-3">
                 <h2 class="mb-3">¿Qué opinas de este contrato?</h2>
                 <span class="text-bold">Tu participación es importante para nosotros, participa escribiendo un comentario reportando el avance de este contrato.</span>
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4 user-form-login">
-                    <!--NEW user-->
+        <div class="row justify-content-center">
+            <div class="col-md-7 user-form-login">
+                <!--usuario logueado-->
+                <div id="divUsuarioLog">
                     <div class="light-bg">
-                        <div id="divUsuarioLog">
-                            <div class="p-3">
-                                <p>Ingresa tus datos a continuación</p>
-                                <div id="divDatosLogin">
-                                    <div class="form-group">
-                                        <label for="txtEmailLog" class="required">Email</label>
-                                        <input type="email" class="form-control" id="txtEmailLog" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="txtClaveLog" class="required">Password</label>
-                                        <input type="password" class="form-control" id="txtClaveLog" placeholder="">
-                                    </div>
-                                    @Html.AntiForgeryToken()
-                                </div>
 
-                                <div class="form-group text-center mb-5">
-                                    <button type="button" class="btn btn-primary btn-lg btn-block" id="btnIngresarUsuLog">INGRESAR </button><br><br>
-                                    <a id="btnEnlaceOlvidoClave" role="button">Olvid&eacute; la contraseña</a>
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-md-12 text-center">
-                                        <div class="btn btn-lg btn-primary" id="btnNuevaCuenta">Crear Nueva Cuenta</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                    <!--NEW ACCOUNT-->
-                    <div class="light-bg">
-                        <div id="divCuentaNueva" style="display:none;">
-                            <div class="p-3" id="divInfoUsuario">
-                                <h4>NUEVA CUENTA</h4>
-                                <div class="form-group">
-                                    <label for="txtNombre" class="required">Nombre</label>
-                                    <input type="text" class="form-control" id="txtNombre">
-                                    <div id="error_txtNombre" class="alert-danger" hidden="hidden">Nombre no puede ser vacío</div>
-                                </div>
-                                <div class="form-group" id="divGenero">
 
-                                    @if (Model.genero_participacion.Count() > 0)
-                                    {
-                                        <text>
-                                            <label for="filtro_Genero" class="required">Género:</label>
-                                            <select class="form-select" aria-label="Selecciona un género:" id="filtro_Genero">
-                                                <option id="0" id_gen="0" nom_gen="" class="selected">Género</option>
-                                                @foreach (var item in Model.genero_participacion)
-                                                {
-                                                    <option id="@item.id" id_gen="@item.id" nom_gen="@item.name">@item.name</option>
-                                                }
-
-                                            </select>
-                                        </text>
-                                    }
-                                    <div id="error_filtro_Genero" class="alert-danger" hidden="hidden">Género no puede ser vacío</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtEdad" class="required">Edad</label>
-                                    <input type="text" class="form-control" id="txtEdad">
-                                    <div id="error_txtEdad" class="alert-danger" hidden="hidden">Edad no puede ser vacía</div>
-                                </div>
-                                <div class="form-group" id="divRol">
-
-                                    @if (Model.rol_participacion.Count() > 0)
-                                    {
-                                        <label for="filtro_Rol" class="required">Rol</label>
-                                        <select class="form-select" aria-label="Selecciona un rol:" id="filtro_Rol">
-                                            <option id="0" id_rol="0" nom_rol="" class="selected">Rol Actual</option>
-
-                                            @foreach (var item in Model.rol_participacion)
-                                            {
-                                                <option id="@item.id" id_rol="@item.id" nom_rol="@item.id">@item.name</option>
-                                            }
-                                        </select>
-                                    }
-                                    <div id="error_filtro_Rol" class="alert-danger" hidden="hidden">Rol no puede ser vacío </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtEmail" class="required">Email</label>
-                                    <input type="text" class="form-control" id="txtEmail">
-                                    <div id="error_txtEmail" class="alert-danger" hidden="hidden">Email no puede ser vacío</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtPassword" class="required">Password</label>
-                                    <input type="password" class="form-control" id="txtPassword">
-                                    <div id="error_txtPassword" class="alert-danger" hidden="hidden">Password no puede ser vacío</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtPassword_2" class="required">Confirme su Password</label>
-                                    <input type="password" class="form-control" id="txtPassword_2">
-                                    <div id="error_txtPassword_2" class="alert-danger" hidden="hidden">Confirmación no puede ser vacía</div>
-                                </div>
-                                <div class="form-group mb-3" id="divMedio">
-                                    @if (Model.medios_participacion.Count() > 0)
-                                    {
-                                        <label for="filtro_Medios" class="required">¿Cómo se enteró de Mapa Inversiones?</label>
-                                        <select class="form-select" aria-label="Selecciona un medio:" id="filtro_Medios">
-                                            <option id="0" id_medio="0" nom_medio="" class="selected">¿Cómo se enteró de Mapa Inversiones?</option>
-                                            @foreach (var item in Model.medios_participacion)
-                                            {
-                                                <option id="@item.id" id_medio="@item.id" nom_medio="@item.id">@item.name</option>
-                                            }
-                                        </select>
-                                    }
-                                    <div id="error_filtro_Medios" class="alert-danger" hidden="hidden">"¿Cómo se enteró de Mapa Inversiones?" No puede ser vacío</div>
-                                </div>
-                                <div class="disclaimer well mb-3">
-                                    <div class="row">
-                                        <div class="col-md-1 iconLarge text-center"><span class="glyphicon glyphicon-info-sign"></span></div>
-                                        <div class="col-md-11"><p>Con la activación de la cuenta usted acepta los <a href="~/TerminosyCondiciones/"> términos y condiciones.</a></p></div>
-                                    </div>
-                                </div>
-                                <div class="form-group text-center">
-                                    <button type="button" class="btn btn-primary btn-block" id="btnAddCuentaUsu"> ENVIAR </button><br><br>
-                                    <a href="" class="btn btn-default">CANCEL</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <!--FORGOT PASSWORD-->
-                <div class="light-bg">
-                    <div id="divOlvidoClave" class="objHidden">
-                        <div class="p-3">
-                            <span class="h4">Re establecimiento de clave</span>
-                            <div class="center-block w60">
-
-                                <div class="well">
-                                    <span id="textoVerifica">Para asignar una nueva clave ingrese el correo electrónico registrado, se enviará un código de verificación al mismo.</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtEmailReset" class="required">Email</label>
-                                    <input type="text" class="form-control" id="txtEmailReset">
-                                    <div id="error_txtEmailReset" class="alert alert-danger alert-dismissible" hidden="hidden">Email no puede ser vacio</div>
-                                </div>
-                                <div class="form-group text-center">
-                                    <button type="button" class="btn btn-primary" id="btnEnviaCodigoClave"> ENVIAR </button><br><br>
-                                    <a href="">CANCELAR</a>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                
+                <!--usuario sin loguear este div se debe ocultar cuando ya el usuario está logueado-->
+                <div class="user-wrap">
+                    <div class="wrap-btn">
+                        <a id="btnLoginGab" class="btn btn-link">Iniciar sesión</a>
+                        <a id="btnUserGab" target="_blank" rel="noopener" href="@Convert.ToString(Configuration["GabAuth:UserRegister"])" class="btn btn-outlined">Registrarse</a>
                     </div>
                 </div>
-                <!--CONFIRM PASSWORD-->
-                <div class="light-bg">
-                    <div id="divConfirmaCodigo" class="objHidden">
-                        <div class="p-3">
-                            <span class="h4 orangeLink">Re establecimiento de clave</span>
-                            <div class="center-block w60">
-                                <div class="well">
-                                    <span class="h4" id="textoVerifica"><strong>Ingresar código de verificación</strong></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtCodigoVerifica" class="required">Código:</label>
-                                    <input type="text" class="form-control" id="txtCodigoVerifica">
-                                    <input type="hidden" id="txtEmailVerifica" />
-                                    <div id="error_txtCodigoVerifica" class="alert alert-danger alert-dismissible" hidden="hidden">Código no puede ser vacío</div>
-                                </div>
-                                <div class="form-group text-center">
-                                    <button type="button" class="btn btn-primary" id="btnVerificaCodigoClave"> ENVIAR </button><br><br>
-                                    <a href="">CANCELAR</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--RESET PASSWORD-->
-                <div class="light-bg">
-                    <div id="divResetPassword" class="objHidden">
-                        <div class="p-3">
-                            <span class="h4 orangeLink">Re establecimiento de clave</span>
-                            <div class="center-block w60">
-                                <div class="well">
-                                    <span class="h4" id="textoVerifica"><strong>Cambio de clave</strong></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtPassword_re" class="required">Nueva Clave</label>
-                                    <input type="password" class="form-control" id="txtPassword_re">
-                                </div>
-                                <div class="form-group">
-                                    <label for="txtPassword_re_2" class="required">Confirma nueva Clave</label>
-                                    <input type="password" class="form-control" id="txtPassword_re_2">
-                                </div>
-                                <div class="form-group text-center">
-                                    <button type="button" class="btn btn-primary" id="btnCambiarClaveOlvido"> GUARDAR </button><br><br>
-                                    <a href="">CANCELAR</a>
-                                </div>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!--SURVEY-->
                 <div class="light-bg">
                     <div id="divPregParticipacion" class="objHidden">
@@ -383,21 +208,21 @@ new System.Globalization.CultureInfo("es-RD");
 
                                 </select>
                             </div>
-                            <div>
+                            <div class ="mb-3">
                                 <label for="txtcomentario" class="required">Escribe tu comentario:</label>
                                 <div id="divComentario">
                                     <textarea rows="4" class="txtAbierto form-control" id="txtcomentario" name="" value="" id_tipo=""></textarea>
                                 </div>
                             </div>
                             <div class="disclaimer well">
-                                <span class="glyphicon glyphicon-alert"></span>
-                                <p>Se informa que los comentarios de su participación antes de ser publicados serán validados por MapaInversiones. Si desea, su opinión puede ser anónima. </p>
+                                <span class="material-icons">info</span>
+                                <p>Se informa que los comentarios de su participación antes de ser publicados serán validados por Gobierno Abierto Bogotá. Si desea, su opinión puede ser anónima. </p>
                             </div>
                             <div class="disclaimer well">
-                                <span class="glyphicon glyphicon-alert"></span>
+                                <span class="material-icons">info</span>
                                 <p>El responsable de proveer la información para la respuesta a los ciudadanos es el organismo o entidad del estado que ha recibido los recursos y por ende, encargado de la ejecución de los programas o contratos .El administrador de la plataforma gestionará la comunicación con dicha entidad. </p>
                             </div>
-                            <div>
+                            <div class="py-3">
                                 <input type="checkbox" id="anonimo" class="" /> Anónimo
                             </div>
                             <div class="form-group text-center">
@@ -412,18 +237,15 @@ new System.Globalization.CultureInfo("es-RD");
                 <div class="light-bg">
                     <div id="divConfirmaEnvio" style="display:none;">
                         <div class="p-3 text-center">
-                            <img src="~/content/img/icSuccess.jpg" /><br><br>
+                            <img src="@Cdn.Url(Url, "~/content/img/icSuccess.jpg")" /><br><br>
                             <span class="h3 orangeLink" id="txtMsgConfirmaEnvio"></span><br>
                             <span class="h4">Tu comentario será publicado cuando el administrador lo verifique</span>
-                            <div class="closeSesion"><a href="../../" class="btn btn-default">Comentar otro proyecto</a></div>
+                            <div class="closeSesion"><a href="/contratos" class="btn btn-default">Comentar otro contrato</a></div>
                         </div>
                     </div>
                 </div>
-                <div class="text-center closeSesion" id="divCloseSesion" style="display:none;">
-                    <a role="button" id="enlace_cierre"><i class="material-icons md-24">logout</i> Cerrar Sesión </a>
-                </div>
             </div>
-            <div class="col-md-8 s2" id="divComentarios">
+            <div class="col-md-7 s2" id="divComentarios">
                 <div class="Tcomments">
                     <div class="lcomments">
                         <span class="h3" id="txtNumComentarios"> 0 </span>
@@ -441,35 +263,6 @@ new System.Globalization.CultureInfo("es-RD");
 </section>
 
 
-<!--RELATED INFO-->
-<section class="relatedInfo">
-    <div class="container">
-        <!--LINKS OTRAS SECCIONES-->
-        <div class="row">
-            <!--LEFT COLUMN-->
-            <div class="col-lg-8">
-                <!--LINKS seccion infografia planificacion-->
-                <h2>Otros contratistas</h2>
-
-
-                <!--LINKS seccion infografia planificacion-->
-
-                <div class="wrap-cta py-5">
-                    <div class="wrap-cta py-5">
-                        <p class="card-title mb-4">Información suministrada por:</p>
-                        <a href="https://www.dgcp.gob.do/" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="../img/logo-dgcp.svg" alt="ir a Secretaria tecnica de planeación" />
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</section>
-
 <!--HELP CENTER SHORTCUT-->
 <div id="helpCenter"></div>
 
@@ -480,29 +273,25 @@ new System.Globalization.CultureInfo("es-RD");
 
 
 <script>
-    window.onscroll = function () { myFunction() };
-
     var header = document.getElementById("navs-header");
-    var sticky = header.offsetTop;
-
-    function myFunction() {
-        //if (window.pageYOffset > sticky) {
-        //    header.classList.add("sticky");
-        //    header.classList.add("bg-white");
-        //} else {
-        //    header.classList.remove("sticky");
-        //    header.classList.remove("bg-white");
-        //}
-    }
+    if (header) {       
+        var sticky = header.offsetTop;
+        window.onscroll = function () {
+            if (window.scrollY > sticky) {
+                header.classList.add("sticky");
+                header.classList.add("bg-white");
+            } else {
+                header.classList.remove("sticky");
+                header.classList.remove("bg-white");
+            }
+        };
+    } 
 </script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" integrity="sha384-KUSBBRKMO05pX3xNidXAX5N1p4iNwntmhHY4iugl7mINOyOXFL4KZWceJtMj7M0A" crossorigin="anonymous"></script>
-<script src="https://d3js.org/d3.v4.min.js" integrity="sha384-1EOYqz4UgZkewWm70NbT1JBUXSQpOIS2AaJy6/evZH+lXOrt9ITSJbFctNeyBoIJ" crossorigin="anonymous"></script>
-<script src="~/js/bootstrap/3.3.5/bootstrap.min.js" type="text/javascript"></script>
-<script src="~/js/Bootbox/bootbox.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="@Cdn.Url(Url, "~/js/lib/D3/d3.v7.min.js")"></script>
+<script type="text/javascript" src="@Cdn.Url(Url, "~/js/Bootbox/bootbox.min.js")"></script>
+<script type="text/javascript" src="@Cdn.Url(Url, "~/js/contrato_aux.js")"></script>
+<script type="text/javascript" src="@Cdn.Url(Url, "~/js/participacion_aux.js")"></script>
 
-<script src="js/contrato_aux.js"></script>
-<script src="js/participacion_aux.js"></script>
 
 @section DataBody {
         data-profile='[{"idUsuParticipa":"@Model.id_usu_participa" , "nomUsuParticipa" : "@Model.nom_usu_participa"}]'

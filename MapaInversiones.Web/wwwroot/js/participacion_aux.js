@@ -1,8 +1,8 @@
 ﻿var PerfilUsuario = JSON.parse(document.body.getAttribute('data-profile'));
 
-InicializaDatos();
+InicializaDatosParticipacion();
 
-function InicializaDatos() {
+function InicializaDatosParticipacion() {
     //usuario en session
     iniUsuarioLog();
     //add funciones login
@@ -11,21 +11,21 @@ function InicializaDatos() {
     $("#divCloseSesion").hide();
 
 
-    $("#btnNuevaCuenta").click(function () {
-        $("#divUsuarioLog").slideUp(100, function () {
-            $("#divCuentaNueva").slideDown(function () {
-                limpiarCamposUsuario("login");
-            });
-        });
-    });
+    //$("#btnNuevaCuenta").click(function () {
+    //    $("#divUsuarioLog").slideUp(100, function () {
+    //        $("#divCuentaNueva").slideDown(function () {
+    //            limpiarCamposUsuario("login");
+    //        });
+    //    });
+    //});
 
     $("#btnAddCuentaUsu").click(function () {
         AddNuevaCuentaUsuario();
     });
 
-    $("#btnIngresarUsuLog").click(function () {
-        validaLoginUsu();
-    });
+    //$("#btnIngresarUsuLog").click(function () {
+    //    validaLoginUsu();
+    //});
 
 
 
@@ -194,6 +194,21 @@ function InicializaDatos() {
     });
 
     $("#btnGuardarComent").click(function () {
+        //validar sesion
+        const token = localStorage.getItem('access_token');
+        if (!isTokenValid(token)) {
+            alert("Sesión Finalizada por Tiempo");
+            cerrarSesion();
+            $("#divNomUsuarioLog").text("");
+            $("#hdNomUsuario").val("");
+            $("#hdIdUsuario").val("");
+            $("#divUsuarioLog").slideDown(100, function () {
+                $("#divCloseSesion").show();
+                $("#divPregParticipacion").attr("class", "objHidden");
+                //location.reload();
+            });
+            return;
+        }
         //valida campos obligatorios
         $("#btnGuardarComent").hide();
         var formularioOK = validaCamposOblig("divPregParticipacion");
@@ -249,6 +264,8 @@ function InicializaDatos() {
                     data: JSON.stringify(params_com),
                     success: function (result) {
                         if (result.status == true) {
+                            $('#filtro_TipoCometario option[id_tipo=""]').prop('selected', true);
+                            $("#txtcomentario").val("");
                             //COMENTARIOS GUARDADOS EXITOSAMENTE
                             $("#divPregParticipacion").slideUp(100, function () {
                                 $("#divCloseSesion").show();
@@ -306,7 +323,7 @@ function iniUsuarioLog() {
     if ($("#hdIdUsuario").val() != "") {
 
         $("#divUsuarioLog").slideUp(100, function () {
-            $("#divNomUsuarioLog").text("Hi, " + $("#hdNomUsuario").val());
+            //$("#divNomUsuarioLog").text("Hi, " + $("#hdNomUsuario").val());
             $("#divCloseSesion").show();
             $("#divPregParticipacion").css("visibility", "visible");
             $("#divPregParticipacion").attr("class", "objVisible");
@@ -640,8 +657,8 @@ function GetComentarios(id) {
                 id_padre = items_result[i].comentarioRelacionado;
                 if ($("#content-2").length > 0) {
 
-                    var d = new Date(items_result[i].fechaCreacion);
-                    var fecha_aux = pad(d.getDate(), 2) + "/" + pad(parseInt((d.getMonth()) + 1), 2) + "/" + d.getFullYear();
+                    const d = new Date(items_result[i].fechaCreacion);
+                    const fecha_aux = new Intl.DateTimeFormat('es-ES').format(d);
                     var nombre = "";
                     if (items_result[i].anonimo == false) {
                         nombre = items_result[i].nom_usuario.toString();
@@ -683,7 +700,7 @@ function GetComentarios(id) {
                         var usr_pic = div_gov.append("div")
                             .attr("class", "Pic_user")
                             .append("img")
-                            .attr("src", "/content/img/PCM_profile.jpg")
+                            .attr("src", "/img/PCM_profile.jpg")
                         var usr_poster = div_gov.append("div")
                             .attr("class", "Post_user")
                         var usr_txt = usr_poster.append("div")

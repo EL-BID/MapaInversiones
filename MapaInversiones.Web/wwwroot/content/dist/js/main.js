@@ -1802,10 +1802,10 @@ define('app/controller/AppState',[
 
 	var AppState = new Class( Observable, {
 		// Request params
-		zoom: 8, // 1,..,n
-		corners: [[20.85490611380081, -74.84092544261283], [17.341405560037188, -67.09556411448783]], // [[4.667292,-74.059508], [4.667292,-74.059508]]
-		center: [19.107484799229553, -70.96824477855033],
-		defaultCenter: [19.107484799229553, -70.96824477855033],
+		zoom: 11, // 1,..,n
+		corners: [[4.8420719779046095, -74.83275205039051], [3.85616192134691, -73.55559140585926]], // [[4.667292,-74.059508], [4.667292,-74.059508]]
+		center: [4.349278232812495, -74.19417172812489],
+		defaultCenter: [4.349278232812495, -74.19417172812489],
 		filters: null, //"departamento=1,2&estado=1"
 		query: '',
 		// Whether the request is directed to the list mode
@@ -2263,11 +2263,11 @@ define('app/controller/AppState',[
 			 //console.log('>>>>>>>>>>>>>>>>>>>>>>')
 			// If not query
 			if (!query){
-			    query = 'zoom=8'
+			    query = 'zoom=12'
 
 				if (!this.center)
 				{
-					this.center = [19.107484799229553, -70.96824477855033]
+					this.center = [4.349278232812495, -74.19417172812489]
 				}
 
 			    query = query + '&center=' + this.center[0] + ',' + this.center[1]
@@ -2277,7 +2277,7 @@ define('app/controller/AppState',[
                     '&bottomRight=' + this.defaultCorners[1].join(',')
                     this.corners = this.defaultCorners
 				}
-				this.zoom = 8
+				this.zoom = 12
 			}else{
 				if( lastRequestedQuery == this.state + query ) return
 			}
@@ -2300,8 +2300,8 @@ define('app/controller/AppState',[
 				console.log('requesting query ', query)
 
 				if (query.indexOf("center") != -1 && (query.indexOf("bottomRight") == -1 || query.indexOf("topLeft") == -1)) {
-					query += '&topLeft=20.862605835398384,-74.86839126292533'
-					query += '&bottomRight=17.333540177711853,-67.06809829417533'
+					query += '&topLeft=4.8420719779046095,-74.83275205039051'
+					query += '&bottomRight=3.85616192134691,-73.55559140585926'
 				}
 
 				if (query.indexOf("center") != -1 && query.indexOf("bottomRight") != -1 && query.indexOf("topLeft") != -1)
@@ -3490,7 +3490,7 @@ define('app/map/Map', ['lib/mvc/Observable',
 			//center = new Microsoft.Maps.Location(8.45041485786858,-81.07797280869632),
 			// zoom to show plygons
 			// departments and regions zoom
-			defaultZoom = 8,
+			defaultZoom = 11,
 			// Maps view mode
 			viewMode,
 			// Actual map zoom
@@ -3578,9 +3578,9 @@ define('app/map/Map', ['lib/mvc/Observable',
 		        //    zoom: defaultZoom
 		        //})
 		        //var cp = map.tryLocationToPixel(map.getCenter());
-					//cp.x += 19.107484799229553;
-					//cp.y -= -70.96824477855033;
-				map.setView({ center: new Microsoft.Maps.Location(19.107484799229553, -70.96824477855033), zoom: defaultZoom });
+					//cp.x += 3.45522846356981;
+					//cp.y -= -76.56526040047012;
+				map.setView({ center: new Microsoft.Maps.Location(4.349278232812495, -74.19417172812489), zoom: defaultZoom });
 
 		    }
 		    //var targetBounds = map.getTargetBounds()
@@ -3662,12 +3662,12 @@ define('app/map/Map', ['lib/mvc/Observable',
 			    map = new Microsoft.Maps.Map(
                     document.getElementById('map-div'),
                     {
-						credentials: 'AppF4dAe6qSALnU-EClRnRKDUFezTalWjiuPhmNUMGpvrSLUhnWAzQWuYKhRM4Ha',
+						credentials: '',
 						zoom: defaultZoom,
 						showMapTypeSelector: false,
 						showLocateMeButton: false,
 						disableScrollWheelZoom: true,
-						center: new Microsoft.Maps.Location(19.107484799229553, -70.96824477855033),
+						center: new Microsoft.Maps.Location(4.349278232812495, -74.19417172812489),
                         enableSearchLogo: false,
                         enableClickableLogo: false,
                         mapTypeId: Microsoft.Maps.MapTypeId.road,
@@ -8660,7 +8660,7 @@ define('location_profile',[
 
                         div_proy.append("a")
                        .attr("class", "list-group-item")
-                       .attr("href", "../projectprofile/" + data.objects[k].location)
+                       .attr("href", "../PerfilProyectoPot/" + data.objects[k].location)
                        .text(data.objects[k].name)
                     }
                     //loading(false);
@@ -8983,13 +8983,11 @@ require([
 	FiltersManager.on('filters-loaded', function () {
 
 		AppState.filtersLoaded = true
+		
 
-		if(location.pathname.indexOf('LocationProfile') !== -1 &&  AppState.TerritoryLoaded)
+		if(AppState.TerritoryLoaded)
 		{
-			var locationID = document.body.getAttribute('data-locationID');
-			var locationType = document.body.getAttribute('data-locationType');
-
-			setFilterLocationProfileMap(locationType,locationID)
+			document.getElementById('projects-list-view').style.display = 'none'
 		}
 	})
 
@@ -9067,7 +9065,7 @@ require([
 	$("#divResultados").on('click', '.enlace_proyecto', function (e) {
 	    e.preventDefault()
 	    var dataValue = $(this).attr('data-parameter')
-	    var url = "/projectprofile/"+dataValue
+		var url = "/PerfilProyectoPot/"+dataValue
 	    window.location.href = url
 	});
 	$("#divResultados").on('click', '.enlace_covid_location', function (e) {

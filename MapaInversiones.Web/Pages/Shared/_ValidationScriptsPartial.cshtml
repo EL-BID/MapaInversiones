@@ -1,3 +1,6 @@
-﻿<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+﻿@using PlataformaTransparencia.Negocios.Comunes
+@inject ICdnService Cdn
+
+<script src="@Cdn.Url(Url, "~/lib/jquery-validation/dist/jquery.validate.min.js")"></script>
+<script src="@Cdn.Url(Url, "~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js")"></script>
 

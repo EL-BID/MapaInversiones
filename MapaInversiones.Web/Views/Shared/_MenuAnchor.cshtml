@@ -1,0 +1,45 @@
+﻿@using System.Web
+@model dynamic
+
+@functions {
+    // Puede devolver null → object?
+    object? Prop(object? m, string name)
+        => m?.GetType().GetProperty(name)?.GetValue(m);
+}
+
+@{
+    var rawHref = Convert.ToString(Prop(Model, "Href"));
+    var href = string.IsNullOrWhiteSpace(rawHref) ? "#!" : rawHref;
+
+
+    var text = Convert.ToString(Prop(Model, "Text")) ?? "";
+    var dataTitle = text;
+    var cssClass = Convert.ToString(Prop(Model, "Class")); // opcional
+
+    if (string.IsNullOrWhiteSpace(dataTitle)) dataTitle = text;
+
+    // ¿?type=externo? (soporta #)
+    bool abrir = false;
+    var i = href.IndexOf('?');
+    if (i >= 0)
+    {
+        var j = href.IndexOf('#', i);
+        var qs = href.Substring(i + 1, (j >= 0 ? j : href.Length) - (i + 1));
+        var typeParam = HttpUtility.ParseQueryString(qs)["type"];
+        abrir = string.Equals(typeParam, "externo", StringComparison.OrdinalIgnoreCase);
+    }
+
+    var targetRel = abrir ? " target=\"_blank\" rel=\"noopener noreferrer\"" : "";
+    var classAttr = string.IsNullOrWhiteSpace(cssClass) ? "" : $" class=\"{cssClass}\"";
+}
+<a href="@href" @Html.Raw(targetRel)@Html.Raw(classAttr) data-title="@dataTitle">
+    <span>@text</span>
+</a>
+
+
+
+
+
+
+
+
