@@ -53,7 +53,7 @@ Los objetivos principales de la plataforma son:
 Cuando el usuario ingresa a la página inicial o índex de MapaInversiones, y observar un encabezado que se compone de una parte superior que contiene los enlaces a secciones como, “Acerca de” del sitio, marco legal, centro de ayuda y contáctenos. A continuación, se encuentra con los logos del sitio.
 En el menú de la parte superior podrá acceder a secciones que pueden variar según la configuración en el WCM, y pueden ser por ejemplo, inversión pública, presupuesto, instituciones, participación ciudadana, emergencias, contratación pública, la posibilidad de ir a una sección donde se pueden descargar los archivos de datos abiertos, y un glosario.
 
-![buscador](/MapaInversiones.Web/media/encabezado.jpg "buscador")
+![buscador](/MapaInversiones.Web/media/encabezado.jpg "encabezado")
 
 
 Lo siguiente en pantalla es un buscador configurado en un servidor Apache Solr y que indexa la diferente información que ofrece el sitio web.
