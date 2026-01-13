@@ -1,11 +1,20 @@
 ﻿    var contratistaData = JSON.parse(document.body.getAttribute('data-contratista'));
     var ruc_contratista = null;
-    var unidadcompra = JSON.parse(document.body.getAttribute('data-unidadcompra'))[0].unidadcompra;
-    var tipoemergencia = JSON.parse(document.body.getAttribute('data-tipoEmergencia'))[0].tipoEmergencia;
+    //var unidadcompra = JSON.parse(document.body.getAttribute('data-unidadcompra'))[0].unidadcompra;
+    //var tipoemergencia = JSON.parse(document.body.getAttribute('data-tipoEmergencia'))[0].tipoEmergencia;
+
+        const data = document.getElementById("data-body");
+        console.log(data.dataset.unidadcompra);
+        console.log(data.dataset.tipoemergencia);
+        var unidadcompra = data.dataset.unidadcompra;
+        var tipoemergencia = data.dataset.tipoemergencia;
+
     if (contratistaData != null && contratistaData != undefined && contratistaData.length > 0) {
         ruc_contratista = contratistaData[0].contratista_id;
     }
-
+    //if (tipoemergencia === "") {
+    //    tipoemergencia = null;
+    //}
     var cant_contratos = 5;
     var scrol = 0;
 
@@ -18,7 +27,7 @@
 
                 $("#entidadfiona").val(unidadcompra).data('search');
                 $("#entidadfiona").visible = false;
-            $("#grpentidad").css("display", "none"); 
+                $("#grpentidad").css("display", "none"); 
         }
 
         getContratos(1, cant_contratos, "", unidadcompra, $('#proceso').val(), tipoemergencia);
@@ -44,6 +53,7 @@
         if (!disableClick) {
             $("#top_contratista_periodos").val($("#top_contratista_periodos").attr("default"));
             if (!unidadcompra) { $("#entidadfiona").val(""); }
+            //alert($("#entidadfiona").val())
             $("#proceso").val("");
             deshabilita(true);
             getContratos(1, cant_contratos, $("#top_contratista_estados option:selected").val(), $('#entidadfiona').val(), "", tipoemergencia);
@@ -66,7 +76,7 @@
                 dataType = $(this).attr('data-type').toLowerCase();
             document.cookie = "ruc=" + ruc + ";path=/;";
             var url = "/contratista?" + dataType + "=" + dataValue;
-            window.location.href = url;
+            window.open(url, '_blank');
 
         });
 
@@ -100,9 +110,11 @@
 
     function dibujaPaginacionContrato(actual, total, totalPag, cant_por_pag) {
         var pag_actual = parseInt(actual);
-        var pagina_actual = pag_actual;
+        pagina_actual = pag_actual;
         var pagesHTML = '';
+        //var cant_por_pag = 6;
         var cant_por_linea = 10;
+        //$("#divPagContratos").prop("disabled", false); 
         deshabilita(false);
         $("#divPagContratos").empty();
 
@@ -150,6 +162,7 @@
                     .text(i)
             } else {
                 var pag_enlace = divPag.append("a")
+                    //.attr("id", "page_left")
                     .attr("class", "page_left")
                     .attr("role", "button")
                     .attr("data-page", i)
@@ -165,6 +178,7 @@
         }
 
         if (pag_actual < totalPag) {
+            //(totalPag - pag_actual) > cant_por_linea
             if (fin < totalPag) {
                 var pag_enlace_der = divPag.append("a")
                     .attr("id", "page_right")
@@ -190,301 +204,286 @@
 
     }
 
-    function getContratos(pagina, registros, estado, entidad, proceso, tipoemergencia) {
+function getContratos(pagina, registros, estado, entidad, proceso, tipoemergencia) {
 
+    const filtros = {
+        NumeroPagina: pagina,
+        RegistrosPorPagina: registros,
+        NombreEntidad: entidad,
+        NombreProceso: proceso,
+        Estado: estado,
+        TipoEmergencia: tipoemergencia
+    };
 
-        var filtros = {
-            //Annio: annio,
-            NumeroPagina: pagina,
-            RegistrosPorPagina: registros,
-            NombreEntidad: entidad,
-            NombreProceso: proceso,
-            Estado: estado,
-            TipoEmergencia: tipoemergencia
+    $.ajax({
+        type: 'GET',
+        url: "/api/serviciosEmergencias/GetInformacionContratosEmergenciaPorFiltros/",
+        data: filtros,
+        dataType: "json",
+        cache: false,
 
-        };
-        $.ajax({
-            type: 'GET',
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            url: "/api/serviciosEmergencias/GetInformacionContratosEmergenciaPorFiltros/",
-            cache: false,
-            data: filtros,
-            success: function (result) {
-                if (result.status == true) {
-                    if (result.cantidadTotalRegistros > 0) {
-                        var info = result.data;
-                        var proceso = "";
-                        var entidad = "";
-                        var filaproceso = "";
-                        var referencia = "";
-                        var data = "";
-                        var fila = "";
-                        var filaconfirma = "";
-                        var inicioLuis = '<div class="contractBox ges-contract">';
-                        var finLuis = '</div>';
-                        var inicio = "";
-                        var fin = "";
-                        var estado = "";
-                        var cuentaentrada = 0;
-                        $("#srcContratos").html("");
-                        for (var i = 0; i < info.length; i++) {
+        success: function (result) {
 
-                            if (proceso != info[i].codigoProceso.toString()) {
-                                if (i > 0) //Cambio de entidad
-                                {
-                                    data += inicioLuis + inicio + fila + filaconfirma + '</div></div>' + referencia + finLuis;
-                                    fila = "";
-                                    filaconfirma = "";
-                                    estado = "";
-                                    filasinfirma = "";
-                                    inicio = "";
-                                    fin = "";
-                                    cuentaentrada = 0;
-                                }
-
-                                entidad = info[i].unidadCompra.toString();
-                            }
-
-
-
-                            if (proceso != info[i].codigoProceso.toString()) {
-
-                                fila += '<div class="contractNumberRP"><div class="wrap-numberC"><span class="">Código proceso: </span>'
-                                    + '	<span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div></div>'
-                                    + '<div class="processName">'
-                                    + '		<div class="row">'
-                                    + '			<div class="col-xs-12 col-md-12">'
-                                    + '				<span class="small">PROCESO</span><div class="clearfix"></div>'
-                                    + '				<span class="h3">' + info[i].descripcionProceso.toString() + '</span>  </div>         </div> '
-                                    + '	</div>'
-
-                                    + '<div class="wrap-head-process">';
-
-                                fila += '<div class="contractData">';
-
-                                fila += ''
-                                    + '		<div class="row border-b">'
-                                    + '			<div class="col-xs-12 col-md-3">'
-                                    + '				<span class="txt_small">Unidad de Compra</span>'
-                                    + '				<span class="amount_adj">';
-                                if (info[i].unidadCompra) { fila += info[i].unidadCompra.toString(); }
-                                fila += '</span></div>'
-                                    + '			<div class="col-xs-12 col-md-3">'
-                                    + '				<span class="txt_small">Estado del proceso</span>'
-                                    + '				<span class="amount_adj">';
-                                if (info[i].estadoProceso) { fila += info[i].estadoProceso.toString(); }
-                                fila += '</span></div>'
-                                    + '			<div class="col-xs-6 col-md-3"><span class="txt_small">Monto Estimado<span class="amount_adj">$ ' + (info[i].MontoEstimadoProceso * 1).formatMoney(2, '.', ',').toString() + '</span></div>'
-                                    + '			    <div class="col-xs-6 col-md-3">'
-                                    + '				   <span class="txt_small">Moneda</span>'
-                                    + '				   <span class="amount_adj">DOP</span>'
-                                    + '			    </div>'
-                                    + '			</div>';
-
-
-                                fila += ''
-                                    + '		<div class="row border-b">';
-                                if (info[i].fechaIncioPublicacionProceso) {
-                                    fila += ''
-                                        + '			<div class="col-xs-12 col-md-3">'
-                                        + '		    <span class="txt_small">Fecha de Publicación</span>'
-                                        + '         <span class="amount_adj">' + info[i].fechaIncioPublicacionProceso.toString().substr(0, 10) + '</span>'
-                                        + '			    </div>';
-                                }
-                                if (info[i].fechaInicioRecepcionOfertas) {
-                                    fila += ''
-                                        + '			<div class="col-xs-12 col-md-3">'
-                                        + '		    <span class="txt_small">Fecha de Recepción</span>'
-                                        + '         <span class="amount_adj">' + info[i].fechaInicioRecepcionOfertas.toString().substr(0, 10) + '</span>'
-                                        + '			    </div>';
-                                }
-                                if (info[i].fechaEstimadaAdjudicacion) {
-                                    fila += ''
-                                        + '			<div class="col-xs-12 col-md-3">'
-                                        + '		    <span class="txt_small">Fecha estimada de adjudicación</span>'
-                                        + '         <span class="amount_adj">' + info[i].fechaEstimadaAdjudicacion.toString().substr(0, 10) + '</span>'
-                                        + '			    </div>';
-                                }
-
-                                fila += '	</div>'
-                                    + '	</div>';
-
-                                fila += '</div>'
-                                    + '<div class="clearfix"></div>';
-
-                                proceso = info[i].codigoProceso.toString();
-
-
-                                referencia = '<div class="wrap-btn p15">'
-                                    + '  <a href="' + info[i].docURL.toString() + '" target="_blank" class="btn btn-primary btn-outlined">'
-                                    + '     <span class="glyphicon glyphicon-new-window"></span> <span class="txt_small">Conozca mas de este proceso</span>'
-                                    + ' </a>'
-                                    + '</div>';
-
-                            }
-                            if (info[i].codigoContrato) {
-                                if (info[i].estadoContrato && estado != info[i].estadoContrato.toString() && proceso == info[i].codigoProceso.toString()) {
-                                    if (cuentaentrada > 0) {
-                                        filaconfirma += '</div></div>';
-                                    }
-
-                                    filaconfirma += ' <div class="related-contracts">'
-                                        + '     <span class="h4" wfd-id="830">Contratos en estado <span class="estcont" style="COLOR: #e14d20;">' + info[i].estadoContrato.toString() + '</span> asociados a este proceso:</span>'
-                                        + '     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
-
-
-                                    cuentaentrada = cuentaentrada + 1;
-                                    estado = info[i].estadoContrato.toString();
-                                }
-
-
-                                filaconfirma += '<div class="panel panel-default">'
-                                    + '            <div class="panel-heading" role="tab" id="headingOne' + i + '">'
-                                    + '                <h4 class="panel-title">'
-                                    + '                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse' + i + '" aria-expanded="false" aria-controls="collapse' + i + '">';
-
-                                if (info[i].codigoOrigenInformacion === 2 || info[i].codigoOrigenInformacion === 1) { filaconfirma += '                        <span class="badge"><img src="../img/ic-mini-contract.svg" alt="icono contrato"> HURACAN</span>'; }
-                                if (info[i].codigoOrigenInformacion === 3) { filaconfirma += '                        <span class="badge"><img src="../../../content/img/ic-mini-lluvia.svg" alt="icono contrato"> LLUVIAS</span>'; }
-                                if (info[i].codigoContrato) { filaconfirma += '                        Código de contratación:  ' + info[i].codigoContrato.toString() + ''; } else { filaconfirma += '                      Pendiente emisión código contratación  ' }
-
-                                filaconfirma += '     </a>'
-                                    + '                </h4>'
-                                    + '            </div>'
-                                    + '            <div id="collapse' + i + '" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading' + i + '" aria-expanded="false" style="height: 0px;">'
-                                    + '                <div class="panel-body">'
-                                    + '                    <div class="row border-b">'
-                                    + '                        <div class="col-md-12"><span class="small"> CONTRATO</span><span class="amount_adj">' + info[i].descripcionContrato.toString() + '</span></div>'
-                                    + '                    </div>'
-                                    + '                    <div class="row border-b">'
-                                    + '                        <div class="col-md-6">'
-                                    + '                            <span class="small"> RAZÓN SOCIAL</span>'
-                                    + '                            <a role="button" class="enlace_contratista" data-type="CONTRATISTA" data-parameter="' + info[i].codigoProveedor.toString() + '"><span class="amount_adj"><span class="glyphicon glyphicon-share-alt"></span>' + info[i].contratista.toString() + '</span></a>'
-                                    + '                        </div>'
-                                    + '                    </div>'
-                                    + '                    <div class="row border-b">'
-                                    + '                        <div class="col-md-3"><span class="small"> TIPO DE DOCUMENTO</span><span class="amount_adj">' + info[i].tipoCodigoProveedor.toString() + '</span>';
-                                if (info[i].tipodocumento && (info[i].tipodocumento == "DO-RPE" || info[i].tipodocumento == "RPE")) { filaconfirma += '<span class="tipoDocumento">Registro de Proveedores del Estado</span>'; }
-                                filaconfirma += '</div>'
-                                    + '                        <div class="col-md-3"><span class="small"> NÚMERO DE DOCUMENTO</span><span class="amount_adj">' + info[i].codigoProveedor.toString() + '</span></div>'
-                                    + '                        <div class="col-xs-8 col-md-3"><span class="small"> VALOR CONTRATADO</span><span class="amount_adj">$ ' + (info[i].valorContratado * 1).formatMoney(2, '.', ',').toString() + ' </span></div>' //$ ' + (info[i].MontoContratadoTotalContrato * 1).formatMoney(2, '.', ',').toString() + ' 
-                                    + '                        <div class="col-xs-4 col-md-3"><span class="small"> MONEDA</span><span class="amount_adj">DOP</span></div>' //DOP 
-                                    + '                    </div>';
-
-                                filaconfirma += '                    <div class="row border-b">';
-
-                                if (info[i].fechaInicioContrato && info[i].fechaInicioContrato.toString().substr(0, 10) !== "1900-01-01") {
-                                    filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">FECHA DE INICIO CONTRATO</span>'
-                                        + '                                                                     <span class="amount_adj">'
-                                        + info[i].fechaInicioContrato.toString().substr(0, 10)
-                                        + '                                                                      </span></div>';
-                                }
-                                if (info[i].fechaFinContrato && info[i].fechaFinContrato.toString().substr(0, 10) !== "1900-01-01") {
-                                    filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">'
-                                        + 'FECHA DE FIN CONTRATO'
-                                        + '</span><span class="amount_adj">'
-                                        + info[i].fechaFinContrato.toString().substr(0, 10)
-                                        + '        </span></div>';
-                                }
-
-                                if (info[i].fechaInicioEjecucionContrato && info[i].fechaInicioEjecucionContrato.toString().substr(0, 10) !== "1900-01-01") {
-                                    filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">'
-                                        + 'FECHA DE INICIO EJECUCIÓN'
-                                        + '</span><span class="amount_adj">'
-                                        + info[i].fechaInicioEjecucionContrato.toString().substr(0, 10)
-                                        + '        </span></div>';
-                                }
-                                if (info[i].fechaFinEjecucionContrato && info[i].fechaFinEjecucionContrato.toString().substr(0, 10) !== "1900-01-01") {
-                                    filaconfirma += '                        <div class="col-xs-6 col-md-3"><span class="small">'
-                                        + 'FECHA DE FIN EJECUCIÓN'
-                                        + '</span><span class="amount_adj">'
-                                        + info[i].fechaFinEjecucionContrato.toString().substr(0, 10)
-                                        + '        </span></div>';
-                                }
-
-                                filaconfirma += '                    </div>';
-
-                                if (info[i].fechaIncioPublicacionProceso) {
-                                    filaconfirma += '                    <div class="row border-b">'
-
-
-                                    filaconfirma += '                  <div class="col-xs-6 col-md-3"><span class="small"> FECHA DE FIRMA CONTRATO</span><span class="amount_adj">';
-
-                                    if (info[i].fechaIncioPublicacionProceso !== null && info[i].fechaIncioPublicacionProceso.toString().substr(0, 10) !== "1900-01-01") {
-                                        filaconfirma += info[i].fechaIncioPublicacionProceso.toString().substr(0, 10) + '</span></div>';
-                                    }
-                                    else {
-                                        filaconfirma += '</span></div>';
-                                    }
-
-                                    filaconfirma += '                    </div>';
-
-                                }
-
-
-                                filaconfirma += '                </div>'
-                                    + '               <div class="panel-footer" style="align:center">';
-
-                                if (info[i].codigoContrato) {
-                                    filaconfirma += '                    <a href="../../contrato/?CodigoContrato=' + info[i].codigoContrato.toString() + '" class="btn btn-primary btn-primary btn-participe"><span class="glyphicon glyphicon-comment"></span> Más detalles del contrato </a>';
-                                }
-                                filaconfirma += '                 </div>'
-                                    + '            </div>'
-                                    + '        </div>';
-                            }
-                            else {
-
-
-                                if (cuentaentrada > 0) {
-                                    filaconfirma += '</div></div>';
-                                }
-
-                                filaconfirma += ' <div class="related-contracts">'
-                                    + '     <span class="h4" wfd-id="830"></span>'
-                                    + '     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">';
-
-
-                                cuentaentrada = cuentaentrada + 1;
-
-                            }
-
-                        }
-
-
-                        data += inicioLuis + inicio + fila + filaconfirma + '</div></div>' + referencia + finLuis;
-
-
-                        $("#srcContratos").html(data);
-                        if (scrol >= 1) {
-                            $('html, body').animate({ scrollTop: $('#secInfoContratos').offset().top }, 1500);
-                        } else { scrol = scrol + 1; }
-
-                        dibujaPaginacionContrato(pagina, result.cantidadTotalRegistros, Math.ceil(result.cantidadTotalRegistros / registros), registros);
-                        configuraEnlaceContratista();
-                    }
-                    else {
-                        $("#srcContratos").html("");
-                        var fila = '<div class="contractBox" >'
-                            + '<div class="contractNumberRP"><span class="text-bold NoResultC">No se encuentran resultados con los filtros solicitados</span></div>'
-                            + '</div>';
-
-                        $("#divPagContratos").html("");
-                        $("#srcContratos").html(fila);
-                    }
-                } else {
-                    alert("Message: " + result.message);
-                }
+            if (!result.status) {
+                alert("Message: " + result.message);
                 deshabilita(false);
-            },
-            error: function (response) {
-                deshabilita(false);
-                alert(response.responseText);
-            },
-            failure: function (response) {
-                deshabilita(false);
-                alert(response.responseText);
+                return;
             }
-        });
+
+            if (result.cantidadTotalRegistros == 0) {
+                $("#srcContratos").html(`
+                    <div class="contractBox">
+                        <div class="contractNumberRP">
+                            <span class="text-bold NoResultC">
+                                No se encuentran resultados con los filtros solicitados
+                            </span>
+                        </div>
+                    </div>
+                `);
+                $("#divPagContratos").html("");
+                deshabilita(false);
+                return;
+            }
+
+            const info = result.data;
+            let htmlFinal = "";
+            let htmlProceso = "";
+            let htmlContratos = "";
+            let procesoActual = "";
+            let estadoActual = "";
+            let contadorEstado = 0;
+
+            const inicioLuis = '<div class="contractBox ges-contract">';
+            const finLuis = '</div>';
+
+            const htmlHeaderProceso = (item) => `
+                <div class="contractNumberRP">
+                    <div class="wrap-numberC">
+                        <span>Código proceso: </span>
+                        <span class="text-bold">${item.codigoProceso}</span>
+                    </div>
+                </div>
+
+                <div class="processName">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12">
+                            <span class="small">PROCESO</span>
+                            <div class="clearfix"></div>
+                            <span class="h3">${item.descripcionProceso}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wrap-head-process">
+                    <div class="contractData">
+                        <div class="row border-b">
+                            <div class="col-xs-12 col-md-3">
+                                <span class="txt_small">Unidad de Compra</span>
+                                <span class="amount_adj">${item.unidadCompra || ""}</span>
+                            </div>
+                            <div class="col-xs-12 col-md-3">
+                                <span class="txt_small">Estado del proceso</span>
+                                <span class="amount_adj">${item.estadoProceso || ""}</span>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <span class="txt_small">Monto Estimado</span>
+                                <span class="amount_adj">RD$ ${(item.MontoEstimadoProceso * 1).formatMoney(2, '.', ',')}</span>
+                            </div>
+                            <div class="col-xs-6 col-md-3">
+                                <span class="txt_small">Moneda</span>
+                                <span class="amount_adj">DOP</span>
+                            </div>
+                        </div>
+
+                        <div class="row border-b">
+                            ${item.fechaIncioPublicacionProceso ? `
+                                <div class="col-xs-12 col-md-3">
+                                    <span class="txt_small">Fecha de Publicación</span>
+                                    <span class="amount_adj">${item.fechaIncioPublicacionProceso.substr(0, 10)}</span>
+                                </div>` : ""}
+
+                            ${item.fechaInicioRecepcionOfertas ? `
+                                <div class="col-xs-12 col-md-3">
+                                    <span class="txt_small">Fecha de Recepción</span>
+                                    <span class="amount_adj">${item.fechaInicioRecepcionOfertas.substr(0, 10)}</span>
+                                </div>` : ""}
+
+                            ${item.fechaEstimadaAdjudicacion ? `
+                                <div class="col-xs-12 col-md-3">
+                                    <span class="txt_small">Fecha estimada de adjudicación</span>
+                                    <span class="amount_adj">${item.fechaEstimadaAdjudicacion.substr(0, 10)}</span>
+                                </div>` : ""}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            `;
+
+            const htmlFooterProceso = (url) => `
+                <div class="wrap-btn p15">
+                    <a href="${url}" target="_blank" class="btn btn-primary btn-outlined">
+                        <span class="glyphicon glyphicon-new-window"></span> 
+                        <span class="txt_small">Conozca mas de este proceso</span>
+                    </a>
+                </div>
+            `;
+
+            const iniciarBloqueContratos = (estado) => `
+                <div class="related-contracts">
+                    <span class="h4">Contratos en estado 
+                        <span class="estcont" style="color:#e14d20;">${estado}</span> 
+                        asociados a este proceso:
+                    </span>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            `;
+
+            const htmlDetalleContrato = (item, i) => `
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="heading${i}">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapse${i}" aria-expanded="false">
+                                ${item.codigoOrigenInformacion === 1 || item.codigoOrigenInformacion === 2
+                    ? `<span class="badge"><img src="../img/ic-mini-contract.svg"> FIONA</span>`
+                    : item.codigoOrigenInformacion === 3
+                        ? `<span class="badge"><img src="../../../content/img/ic-mini-lluvia.svg"> LLUVIAS</span>`
+                        : ""
+                }
+                                ${item.codigoContrato
+                    ? `Código de contratación: ${item.codigoContrato}`
+                    : `Pendiente emisión código contratación`
+                }
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div id="collapse${i}" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <div class="row border-b">
+                                <div class="col-md-12">
+                                    <span class="small">CONTRATO</span>
+                                    <span class="amount_adj">${item.descripcionContrato}</span>
+                                </div>
+                            </div>
+
+                            <div class="row border-b">
+                                <div class="col-md-6">
+                                    <span class="small">RAZÓN SOCIAL</span>
+                                    <a class="enlace_contratista" data-type="CONTRATISTA" data-parameter="${item.codigoProveedor}">
+                                        <span class="amount_adj">
+                                            <span class="glyphicon glyphicon-share-alt"></span>
+                                            ${item.contratista}
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row border-b">
+                                <div class="col-md-3">
+                                    <span class="small">TIPO DE DOCUMENTO</span>
+                                    <span class="amount_adj">${item.tipoCodigoProveedor}</span>
+                                    ${item.tipodocumento === "DO-RPE" || item.tipodocumento === "RPE"
+                    ? `<span class="tipoDocumento">Registro de Proveedores del Estado</span>`
+                    : ""
+                }
+                                </div>
+
+                                <div class="col-md-3">
+                                    <span class="small">NÚMERO DE DOCUMENTO</span>
+                                    <span class="amount_adj">${item.codigoProveedor}</span>
+                                </div>
+
+                                <div class="col-xs-8 col-md-3">
+                                    <span class="small">VALOR CONTRATADO</span>
+                                    <span class="amount_adj">
+                                        RD$ ${(item.valorContratado * 1).formatMoney(2, '.', ',')}
+                                    </span>
+                                </div>
+
+                                <div class="col-xs-4 col-md-3">
+                                    <span class="small">MONEDA</span>
+                                    <span class="amount_adj">DOP</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="panel-footer">
+                            ${item.codigoContrato
+                ? `<a href="../../contrato?codcontrato=${item.codigoContrato}" class="btn btn-primary btn-participe">
+                                        <span class="glyphicon glyphicon-comment"></span> 
+                                        Más detalles del contrato
+                                   </a>`
+                    : ""
+                }
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // ---------------------
+            // 🔄 RECORRER RESULTADOS
+            // ---------------------
+
+            info.forEach((item, i) => {
+
+                // Nuevo proceso ⇒ cerrar el anterior
+                if (procesoActual !== item.codigoProceso) {
+
+                    if (htmlProceso !== "") {
+                        htmlFinal += `${inicioLuis}${htmlProceso}${htmlContratos}</div></div>${htmlFooterProceso(item.docURL)}${finLuis}`;
+                    }
+
+                    htmlProceso = htmlHeaderProceso(item);
+                    htmlContratos = "";
+                    procesoActual = item.codigoProceso;
+                    estadoActual = "";
+                    contadorEstado = 0;
+                }
+
+                // Nuevo estado dentro del mismo proceso
+                if (item.codigoContrato && item.estadoContrato !== estadoActual) {
+                    if (contadorEstado > 0) htmlContratos += "</div></div>";
+                    htmlContratos += iniciarBloqueContratos(item.estadoContrato);
+                    estadoActual = item.estadoContrato;
+                    contadorEstado++;
+                }
+
+                // Detalle de contrato
+                if (item.codigoContrato) {
+                    htmlContratos += htmlDetalleContrato(item, i);
+                }
+            });
+
+            // Cerrar último proceso
+            htmlFinal += `${inicioLuis}${htmlProceso}${htmlContratos}</div></div>${htmlFooterProceso(info[info.length - 1].docURL)}${finLuis}`;
+
+            // Render
+            $("#srcContratos").html(htmlFinal);
+
+            // Scroll + paginación
+            if (scrol >= 1) {
+                $('html, body').animate({ scrollTop: $('#secInfoContratos').offset().top }, 1500);
+            } else scrol++;
+
+            dibujaPaginacionContrato(
+                pagina,
+                result.cantidadTotalRegistros,
+                Math.ceil(result.cantidadTotalRegistros / registros),
+                registros
+            );
+
+            configuraEnlaceContratista();
+            deshabilita(false);
+        },
+
+        error: function (response) {
+            deshabilita(false);
+            alert(response.responseText);
+        }
+    });
 
 }
 
@@ -525,6 +524,7 @@ $("#entidadfiona").on("keyup", function (event) {
                 } else {
                     $("#divNoEncontradoFiona").hide();
                     response($.map(datos.nombre, function (item) {
+                        //x alert(item);
                         return {
                             label: item,
                             value: item
@@ -546,7 +546,9 @@ $("#entidadfiona").on("keyup", function (event) {
     delay: 300,
     minLength: 3,
     select: function (event, ui) {
-
+        //$(this).val(ui.item.Nombre).next().val(ui.item.Id);
+        //$("#divResultados").html("");
+        //return false;
     }
 }).bind('blur onblur', function () {
     if ($(this).val() == "") {

@@ -38,7 +38,10 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
 
         public IActionResult EntidadesGeneral()
         {
-
+            //EntidadContract entidad = new EntidadContract(_connection);
+            //string nombreEntidad = entidad.ObtenerNombreEntidad(codEntidad);
+            //entidad.Fill(nombreEntidad, codEntidad);
+            //ViewBag.dataSource = entidad.ObtFuenteDatos();
             return View();
         }
 

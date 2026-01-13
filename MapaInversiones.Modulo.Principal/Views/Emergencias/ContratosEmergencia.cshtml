@@ -152,11 +152,14 @@
                                         <span class="text-bold">Modificado</span>Contrato modificado o afectado por adenda. Los tipos de adenda en el al Contrato, Reducción del valor del Contrato, Prórroga de Tiempo del Contrato, Incumplimientos al Contrato.
                                     </li>
                                     <li class="list-group-item">
-                                        <span class="text-bold">En Edición</span>Contrato en etapa de revisión por parte de la entidad contratante
+                                        <span class="text-bold">En Edición</span>Contrato en etapa de revisión por parte de la entidad contratante.
                                     </li>
-                                    <li class="list-group-item"><span class="text-bold">Cancelado</span>Contrato no ejecutado por razones institucionales</li>
-                                    <li class="list-group-item"><span class="text-bold">Rescindido</span>Contrato que inició ejecución y que posteriormente la entidad contratante por razones institucionales decide revocar</li>
-                                    <li class="list-group-item"><span class="text-bold">Cerrado</span>Contrato cuya ejecución ya finalizó</li>
+                                    <li class="list-group-item">
+                                        <span class="text-bold">Flujo aprobado</span>Contrato con autorización oficial para el uso o desembolso de fondos asignados.
+                                    </li>
+                                    <li class="list-group-item"><span class="text-bold">Cancelado</span>Contrato no ejecutado por razones institucionales.</li>
+                                    <li class="list-group-item"><span class="text-bold">Rescindido</span>Contrato que inició ejecución y que posteriormente la entidad contratante por razones institucionales decide revocar.</li>
+                                    <li class="list-group-item"><span class="text-bold">Cerrado</span>Contrato cuya ejecución ya finalizó.</li>
                                 </ul>
                             </div>
                         </div>
@@ -211,7 +214,7 @@
                                 </div>
                                 <div class="col-lg-2">
                                     <div class="txt-small">Procesos cancelados y desiertos</div>
-                                    <span class="bigNumber">$ @String.Format("{0:n0}", @Model.valProcesosCancelados / 1000000) Millones</span>
+                                    <span class="bigNumber">RD$ @String.Format("{0:n0}", @Model.valProcesosCancelados / 1000000) Millones</span>
                                 </div>
 
                                 <div class="col-md-4">
@@ -289,17 +292,17 @@
                 <br />
                 <div class="link_external disNone">
                     <span> Información suministrada por:</span>
-                    <a href="#" target="_blank" rel="noopener"><img class="wp70" title="ir a la Dirección General de Contrataciones Públicas (DGCP)" src="../img/logo_dgcp.png"></a>
+                    <a href="https://www.dgcp.gob.do/" target="_blank"><img class="wp70" title="ir a la Dirección General de Contrataciones Públicas (DGCP)" src="../img/logo_dgcp.png"></a>
                     <br>
                     <div class="sepH"></div>
                     <br>
                     <p>Para mayor información consulte:</p>
-                    <a href="#" target="_blank" rel="noopener"><img class="img-fluid" title="ir al portal transaccional" src="../img/logo_trasaccional.jpg"></a>
+                    <a href="https://comunidad.comprasdominicana.gob.do/Public/Tendering/ContractNoticeManagement/Index?currentLanguage=es-DO&amp;Country=DO&amp;Theme=DGCP&amp;Page=Login" target="_blank"><img class="img-fluid" title="ir al portal transaccional" src="../img/logo_trasaccional.jpg"></a>
                     <br>
                     <div class="sepH"></div>
                     <br>
                     <p class="text-center">Powered by:</p>
-                    <a href="#" target="_blank" rel="noopener"><img class="wp70" title="conocer mas de Estándar de Datos para las Contrataciones Abiertas (OCDS)" src="../img/logo_entidad7.jpg"></a>
+                    <a href="https://www.open-contracting.org/es/data-standard/" target="_blank"><img class="wp70" title="conocer mas de Estándar de Datos para las Contrataciones Abiertas (OCDS)" src="../img/logo-ocp.png" alt="logo de Contrataciones abiertas"></a>
                 </div>
 
             </div>
@@ -328,15 +331,15 @@
                 <div class="wrap-cta py-5">
                     <div class="wrap-cta py-5">
                         <p class="card-title mb-4">Información suministrada por:</p>
-                        <a href="#" target="_blank" rel="noopener">
+                        <a href="https://www.dgcp.gob.do/" target="_blank">
                             <img class="img-fluid" src="../img/logo-dgcp.svg" alt="ir a Secretaria tecnica de planeación">
                         </a>
 
                     </div>
                     <div class="wrap-cta py-5">
                         <p class="card-title mb-4">Powered by:</p>
-                        <a href="#" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="../img/logo_entidad7.jpg" alt="ir a OCP">
+                        <a href="https://www.dgcp.gob.do/" target="_blank">
+                            <img class="img-fluid" src="https://ocp.imgix.net/wp-content/uploads/2020/01/OCDS-logo-grey.png" alt="ir a OCP">
                         </a>
 
                     </div>
@@ -352,19 +355,34 @@
 <input type="hidden" id="hdnentidad" value="@Model.nombreUnidadCompra" />
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha384-EZJUCwX9EfOmrML5/1WejmhFx/azi54nnVfOndPu+VTQKOHabXXC9eS7VFdkLz0V" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
 <script src="js/contratosemergencias_aux.js"></script>
-<script src="https://d3js.org/d3.v4.min.js" integrity="sha384-1EOYqz4UgZkewWm70NbT1JBUXSQpOIS2AaJy6/evZH+lXOrt9ITSJbFctNeyBoIJ" crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 
 
 
 
 @section DataBody {
-            data-unidadcompra='[{"unidadcompra":"@Model.nombreUnidadCompra"}]',
-        data-tipoEmergencia='[{"tipoEmergencia":"@Model.tipoEmergencia"}]'
-
-
+    <div id="data-body"
+         data-unidadcompra="@Model.nombreUnidadCompra"
+         data-tipoemergencia="@Model.tipoEmergencia">
+    </div>
 }
 
+
+@* <script type="text/javascript">
+
+    // @if (@Model.nombreUnidadCompra != null)
+    // {
+
+    //     <text>
+    //         $("#entidadfiona").val($("#hdnentidad").val()).data('search');
+    //     $("#entidadfiona").disabled = true;
+    //     </text>
+    // }
+
+
+</script>
+ *@

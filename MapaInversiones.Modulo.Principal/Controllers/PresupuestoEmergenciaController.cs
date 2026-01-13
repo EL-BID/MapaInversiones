@@ -25,13 +25,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
     public ActionResult EmergenciaPresupuesto(string emergencia)
     {
       _ = int.TryParse(emergencia, out int tipoDeEmergenciaId);
+      
       HomePresupuestoEmergenciaContract homeContract = new(_connection);
       homeContract.Fill(tipoDeEmergenciaId);
       if (homeContract.HomePresupuestoEmergenciaModel != null)
       {
+        
         homeContract.HomePresupuestoEmergenciaModel.TipoEmergencia = tipoDeEmergenciaId.ToString();
       }
 
+      
       return View(homeContract.HomePresupuestoEmergenciaModel);
     }
 

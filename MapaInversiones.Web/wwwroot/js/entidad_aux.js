@@ -1,6 +1,6 @@
 ﻿var cant_contratos = 5;
+/*getAnnios();*/
 
-inicializaDatos();
 var pestaniaSeleccionada = 1;
 var scrol = 0;
 var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
@@ -13,18 +13,25 @@ var proyectos = [];
 var findata = 0;
 var inidata = 0;
 var paginaActual = 1;
+
+//---------------------
+configuraSelectTabContratos("analisis");
+inicializaDatos();
+//---------------------
 function seleccionoAnio(sel) {
     scrol = 0;
+    
     inicializaDatos();
-    GetDatosPorAnnio(sel);
+
+    
 }
 
 function inicializaDatos() {
-    
-
     var selectAnio = document.getElementById("annioEntidad");
     var anioEntidad = selectAnio.options[selectAnio.selectedIndex].text;
-    configuraSelectTabContratos("analisis");
+    
+    //----------------------------------
+    GetDatosPorAnnio(anioEntidad);
     //---------------------------------- Analisis
     GetRecursosPorFinalidad(anioEntidad);
     getDataByFuncion(anioEntidad);
@@ -34,7 +41,7 @@ function inicializaDatos() {
     getProgramasByEntidad(anioEntidad);
     getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val());
 
-    GetRecursosPorNivelYAnio(anioEntidad);
+    GetProcesosPorAnio(anioEntidad);
 
 }
 
@@ -75,85 +82,104 @@ $('.enlace_tipo_contrato').on('click', function () {
 });
 
 function GetDatosPorAnnio(anio) {
+
     var codigoEntidad = $("#codigoEntidadId").val();
     var anioEntidad = anio;
-  $.ajax({
-      url: "api/serviciosentidad/GetPresupuestoByAnnio/",
-    type: "GET",
-    data: {
-      anio: anioEntidad,
-      codEntidad: codigoEntidad
-    },
 
-  }).done(function (data) {
+    $.ajax({
+        url: "api/serviciosentidad/GetPresupuestoByAnnio/",
+        type: "GET",
+        data: {
+            anio: anioEntidad,
+            codEntidad: codigoEntidad
+        },
 
-      var html = "";
-      if (data.presupuestoVigenteAnnioDisplay) { 
-          html += '<div class="col-lg-4 mb-3">                                                                                                                              '
-          + '    <div class="card h-100 shadow border-0 card-entidad b1">                                                                                                 '
-          + '        <div class="card-body">                                                                                                                           '
-          + '            <div class="wrap-desc-entidad">                                                                                                               '
-          + '                <div class="h5">Presupuesto Vigente</div>                                                                                                 '
-          + '                <div class="h1" id="PresupuestoVigente">$ ' + ((data.presupuestoVigenteAnnioDisplay *1)/1000000).formatMoney(2, ',', '.').toString().trim() +' millones </div>   '
-          + '            </div>                                                                                                                                        '
-          + '        </div>                                                                                                                                            '
-          + '    </div>                                                                                                                                                '
-          + '</div>                                                                                                                                                   ';
-      }
-      if (data.presupuestoEjecutadoAnnioDisplay) { 
-          html +='<div class="col-lg-4 mb-3 ">                                                                                                                               '
-          + '    <div class="card h-100 shadow border-0 card-entidad b2">                                                                                                 '
-          + '        <div class="card-body">                                                                                                                           '
-          + '            <div class="wrap-desc-entidad">                                                                                                               '
-          + '                <div class="h5">Presupuesto Ejecutado</div>                                                                                               '
-          + '                <div class="h1" id="PresupuestoEjecutado">$ ' + ((data.presupuestoEjecutadoAnnioDisplay * 1) / 1000000).formatMoney(2, ',', '.').toString().trim() +' millones</div>'
-          + '            </div>                                                                                                                                        '
-          + '        </div>                                                                                                                                            '
-          + '    </div>                                                                                                                                                '
-              + '</div>                                                                                                                                                    ';
-      }
-      if (data.porcEjecutadoAnnioDisplay) {
-          html += '<div class="col-lg-4 mb-3">                                                                                                                               '
-              + '    <div class="card h-100 shadow border-0 card-entidad b3">                                                                                                 '
-              + '        <div class="card-body">                                                                                                                           '
-              + '            <div class="wrap-desc-entidad">                                                                                                               '
-              + '                <div class="h5">% Ejecutado</div>                                                                                                         '
-              + '                <div class="h1" id="PorcEjecutado">$ ' + ((data.porcEjecutadoAnnioDisplay * 1)).formatMoney(2, ',', '.').toString().trim() +' %</div>                              '
-              + '            </div>                                                                                                                                        '
-              + '        </div>                                                                                                                                            '
-              + '    </div>                                                                                                                                                '
-          '</div>                                                                                                                                                     ';
-      }
+    }).done(function (data) {
 
-      if (html != "") {
-          $("#divResumen").html(html);
-      } else {
-          html += '<div class="col-lg-3 mb-3">                                                                                                                               '
-              + '    <div class="card h-100 shadow border-0 card-entidad">                                                                                                 '
-              + '        <div class="card-body">                                                                                                                           '
-              + '            <div class="wrap-desc-entidad">                                                                                                               '
-              + '                <div class="h5">NO se han encontrado datos para el año seleccionado</div>                                                                                                         '
-              + '                <div class="h1" id="">$ 000</div>                              '
-              + '            </div>                                                                                                                                        '
-              + '        </div>                                                                                                                                            '
-              + '    </div>                                                                                                                                                '
-              + '</div>';
-      }
+        var html = "";
+        if (data.presupuestoVigenteAnnioDisplay) {
 
-  }).fail(function (handleError) {
-    // Some function
-      alert("Error al traer los datos de la Entidad");
-  });
+            const vigenteMillones = formatMoney(((data.presupuestoVigenteAnnioDisplay * 1) / 1000000), 2).toString().trim();
+            html += `
+            <div class="col-lg-4 mb-3">
+                <div class="card h-100 shadow border-0 card-entidad b1">
+                    <div class="card-body">
+                        <div class="wrap-desc-entidad">
+                            <div class="h5">Presupuesto Vigente</div>
+                            <div class="h1" id="PresupuestoVigente">RD$ ${vigenteMillones} millones </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        if (data.presupuestoEjecutadoAnnioDisplay) {
+
+            const ejecutadoMillones = 
+                formatMoney(((data.presupuestoEjecutadoAnnioDisplay * 1) / 1000000),2)
+                .toString()
+                .trim();
+
+            html += `
+            <div class="col-lg-4 mb-3 ">
+                <div class="card h-100 shadow border-0 card-entidad b2">
+                    <div class="card-body">
+                        <div class="wrap-desc-entidad">
+                            <div class="h5">Presupuesto Ejecutado</div>
+                            <div class="h1" id="PresupuestoEjecutado">RD$ ${ejecutadoMillones} millones</div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        if (data.porcEjecutadoAnnioDisplay) {
+
+            const porcEjecutado = 
+                formatMoney(((data.porcEjecutadoAnnioDisplay * 1)),2)
+                .toString()
+                .trim();
+
+            html += `
+            <div class="col-lg-4 mb-3">
+                <div class="card h-100 shadow border-0 card-entidad b3">
+                    <div class="card-body">
+                        <div class="wrap-desc-entidad">
+                            <div class="h5">% Ejecutado</div>
+                            <div class="h1" id="PorcEjecutado">RD$ ${porcEjecutado} %</div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+        }
+
+        if (html != "") {
+            $("#divResumen").html(html);
+        } else {
+            $("#divResumen").html(`
+                <div class="col-lg-3 mb-3">
+                    <div class="card h-100 shadow border-0 card-entidad">
+                        <div class="card-body">
+                            <div class="wrap-desc-entidad">
+                                <div class="h5">NO se han encontrado datos para el año seleccionado</div>
+                                <div class="h1" id="">RD$ 000</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`);
+        }
+
+    }).fail(function (handleError) {
+        alert("Error al traer los datos de la Entidad");
+    });
 
 }
-
-
 
 
 function monedaSimbolo(codigo) {
     var moneda = [];
     moneda["USD"] = "USD$";
-    moneda["RD"] = "$";
+    moneda["RD"] = "RD$";
 
     return moneda[codigo];
 }
@@ -182,6 +208,7 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
         cache: false,
         data: filtros,
         success: function (result) {
+            //  deshabilita(true);
             if (scrol >= 1) {
                 $('html, body').animate({ scrollTop: $('#trazabilidad').offset().top }, 2000);
             } else { scrol = scrol + 1; }
@@ -201,7 +228,7 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                     var fin = "";
                     $("#srcContratos").html("");
                     for (var i = 0; i < info.length; i++) {
-                        if (i > 0 && proceso != info[i].codigoProceso.toString()) { 
+                        if (i > 0 && proceso != info[i].codigoProceso.toString()) { // && entidad == info[i].comprador.toString()
                             fila += filaconfirma + '</div>' + referencia + '</div>';
                             filaconfirma = "";
 
@@ -241,6 +268,19 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                                 + '<div class="wrap-head-process">';
                             fila += '<div class="contractData">';
 
+                            //fila += ''
+                            //    + '		<div class="row border-b">'
+                            //    + '			<div class="col-xs-12 col-md-4">'
+                            //    + '				<span class="txt_small">Estado del proceso</span>'
+                            //    + '				<span class="amount_adj">';
+                            ////if (info[i].estadoProceso) { fila += info[i].estadoProceso.toString(); }
+                            //fila += '</span></div>'
+                            //    + '			<div class="col-xs-6 col-md-4"><span class="txt_small"></div>'/*   Monto Estimado<span class="amount_adj"> NA </span>*/
+                            //    + '			    <div class="col-xs-6 col-md-2">'
+                            //    + '				   <span class="txt_small">Moneda</span>'
+                            //    + '				   <span class="amount_adj"> ' + 'COP' + ' </span>' // info[i].monedaContrato.toString()
+                            //    + '			    </div>'
+                            //    + '			</div>';
 
 
                             fila += ''
@@ -307,18 +347,20 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                             if (info[i].monedaContrato.toString() == 'USD') {
                                 moneda = '$';
                             }
-                        } else { moneda = '$'; }
+                        } else { moneda = 'RD$'; }
                         filaconfirma += '        <div class="row border-b">'
                             + '                        <div class="col-md-12">'
                             + '                            <span class="small"> Objeto del Contrato </span>'
                             + '                            <span class="amount_adj"><span class="glyphicon glyphicon-share-alt"></span>' + info[i].objetodelcontrato.toString() + '</span>'
                             + '                        </div>'
+                            
                             + '                    </div>'
                             + '                    <div class="row border-b">'
-                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> Estado </span><span class="amount_adj"> ' + info[i].estadocontrato.toString() + ' </span></div>' // ' + (info[i].valorPlaneado * 1).formatMoney(1, '.', ',').toString() + '
+                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> Estado </span><span class="amount_adj"> ' + info[i].estadocontrato.toString() + ' </span></div>'
+                          
                             + '                    </div>'
                             + '                    <div class="row border-b">'
-                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> Valor Contrato</span><span class="amount_adj"> ' + moneda + ' ' + (info[i].valorcontrato * 1).formatMoney(1, '.', ',').toString() + ' </span></div>'
+                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> Valor Contrato</span><span class="amount_adj"> ' + moneda + ' ' + formatMoney((info[i].valorcontrato * 1),1).toString() + ' </span></div>'
                             + '                        <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span><span class="amount_adj">RD</span></div>' //DOP //' + info[i].monedaContrato.toString() + '
                             + '                    </div>';
 
@@ -380,11 +422,12 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                             + '               <div class="panel-footer" style="align:center">';
 
                         if (info[i].codigoContrato) {
+                            //  filaconfirma += '                    <a href="../../contratista/contratoprofile/?CodigoContrato=' + info[i].codigoContrato.toString() + '" class="btn btn-primary btn-primary btn-participe"><span class="glyphicon glyphicon-comment"></span> Hacer comentario al contrato</a>';
                         }
                         filaconfirma += '                 </div>'
                             + '            </div>'
                             + '        </div>';
-
+                        //+ '  </div>';
                     }
 
 
@@ -394,6 +437,7 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                     $("#srcContratos").html(data);
                    
 
+                    // dibujaPaginacionContrato(pagina, result.cantidadTotalRegistros, Math.ceil(result.cantidadTotalRegistros / registros), registros);
                     configuraEnlaceContratista();
                     if (Math.ceil(result.cantidadTotalRegistros / registros) > 1) {
                         dibujarPagNumeradasPerContratos(pagina, Math.ceil(result.cantidadTotalRegistros / registros));
@@ -428,7 +472,7 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
 
 function dibujarPagNumeradasPerContratos(actual, totalPag) {
     var pag_actual = parseInt(actual);
-    var cant_por_linea = 10;
+    var cant_por_linea = 20;
     $("#divPagContratos").html("");
     var pag_enlace = "";
     
@@ -475,6 +519,7 @@ function dibujarPagNumeradasPerContratos(actual, totalPag) {
 
     $('#page_right_c,#page_left_c,.page_left_c,.page_right_c').bind('click', function () {
         pagina_actual = $(this).attr("data-page_c");
+        //$("#srcContratos").empty();
         getContratos(pagina_actual, cant_contratos, $("#entidad").val(), $('#proceso').val());
     });
 
@@ -497,11 +542,14 @@ function clickbotoncontratosasoc(id) {
 
     var nombreenlace = ".enlacecontratosasoc" + id;
     idproyecto = $(nombreenlace).attr("data-parameter");
-    $("#spanfiltrado").html("Filtrado por BPIN " + idproyecto);
+    $("#spanfiltrado").html("Filtrado por SNIP " + idproyecto);
     $("#spanfiltrado").removeAttr("hidden");
     $(".enlace_tipo_contrato").removeClass("active");
     $("#contratos").addClass("active");
-
+    //$("#divPagFichas").html("");
+    //$("#divInversion").empty();
+    //$("#divInversion").html(loader_proy);
+    //$("#divInversion").empty().delay(200);
     $("#divInversionSection").hide();
     $("#divListadoContratos").show().delay(800);
 
@@ -514,6 +562,7 @@ $("#btnLimpiar").click(function () {
     if (!disableClick) {
         $("#spanfiltrado").attr("hidden", "hidden");
         $("#top_contratos_periodos").val(0);
+        //$("#top_contratos_estados").val("");
         $("#top_origen_informacion").val("");
         $("#entidad").val("");
         $("#proceso").val("");
@@ -564,7 +613,7 @@ $("#entidad").on("keyup", function (event) {
                 } else {
                     $("#divNoEncontrado").hide();
                     response($.map(datos.data, function (item) {
-
+                        //x alert(item);
                         return {
                             label: item.proveedor,
                             value: item.documentoproveedor
@@ -586,7 +635,9 @@ $("#entidad").on("keyup", function (event) {
     delay: 300,
     minLength: 1,
     select: function (event, ui) {
-
+        //$(this).val(ui.item.Nombre).next().val(ui.item.Id);
+        //$("#divResultados").html("");
+        //return false;
     }
 }).bind('blur onblur', function () {
     if ($(this).val() == "") {
@@ -672,7 +723,7 @@ function configuraSelectProgramas() {
             setValoresXPrograma(filter_prog);
         }
 
-        consultaInfograficoPerPrograma(prog_actual);
+        consultaInfograficoPerPrograma(prog_actual, true);
     });
 
 }
@@ -682,23 +733,21 @@ function setValoresXPrograma(data) {
     var valor_aprobado = data[0].aprobado;
     //--------------------------------------------------------------------
 
-    var texto_aprobado = '<span class="">' + monedaSimbolo("RD") + ' ' + (valor_aprobado / 1000000).formatMoney(1, ',', '.').toString() + ' Millones</span>';
-    var texto_vigente = '<span class="">' + monedaSimbolo("RD") + ' ' + (valor_vigente / 1000000).formatMoney(1, ',', '.').toString() + ' Millones</span>';
-    var texto_ejecutado = '<span class="">' + monedaSimbolo("RD") + ' ' + (valor_ejecutado / 1000000).formatMoney(1, ',', '.').toString() + ' Millones</span>';
+    var texto_aprobado = '<span class="">' + monedaSimbolo("RD") + ' ' + formatMoney((valor_aprobado / 1000000),1).toString() + ' Millones</span>';
+    var texto_vigente = '<span class="">' + monedaSimbolo("RD") + ' ' + formatMoney((valor_vigente / 1000000),1).toString() + ' Millones</span>';
+    var texto_ejecutado = '<span class="">' + monedaSimbolo("RD") + ' ' + formatMoney((valor_ejecutado / 1000000),1).toString() + ' Millones</span>';
 
     var porcentaje_programa = 0;
     if (valor_vigente > 0) {
-        porcentaje_programa = ((valor_ejecutado / valor_vigente) * 100).formatMoney(1, ',', '.').toString() + "%";
+        porcentaje_programa = formatMoney(((valor_ejecutado / valor_vigente) * 100),1).toString() + "%";
     }
 
     //-----------------------------------------------------------
     var str_programa = '<div class="row justify-content-center">';  //inicio row
-
-
-
     str_programa += '<div class="col-md-10">';
     str_programa += '<div class="row">';
-
+    
+    //---------------------------------------------------
     str_programa += '<div class="presini col-md-4">';
     str_programa += '<span class="h5">Presupuesto Vigente</span>';
     str_programa += '<div class="clearfix"></div>';
@@ -753,9 +802,10 @@ function GetDatosByTipo(anyo, tipo, programa)
     }
     $("#divPagFichas").html("");
     $("#divInversion").empty();
+    //$("#divOtrasLineas").empty();
     $("#divInversion").html(loader_proy);
     var codigoEntidad = $("#codigoEntidadId").val();
-    var moneda = '$ ';
+    var moneda = 'RD$ ';
     $.ajax({
         url: "api/ServiciosEntidad/GetGastoByTipo",
         type: "GET",
@@ -773,51 +823,34 @@ function GetDatosByTipo(anyo, tipo, programa)
         var gen_tipo = resultado.genericoTipo;
         var pagina_actual = 1;
         if (resultado != null) {
-            if (tipo_aux != "INVERSION" && tipo_aux != "INVERSIÓN") {
-                globales_gasto = gen_tipo;
-                if (gen_tipo != null) {
-                    var ini_data = ((pagina_actual - 1) * cantXPagina);
-                    var fin_data = (pagina_actual * cantXPagina) - 1;
-                    var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
-                        return (i >= ini_data && i <= fin_data);
-                    });
-                    getEstructuraInfograficoPerTipo(data_pagina, 1);
+            if (tipo_aux == "INVERSION" || tipo_aux == "INVERSIÓN") 
+            {
+                    if (proyectos == null && otras_lineas == null) {
+                        $("#divInversion").html("<span class='lblErrorNoData'>Información No Disponible</span>");
 
-                } else {
-                    $("#divInversion").html("<span class='lblErrorNoData'>Información No Disponible</span>");
-                }
+                    } else {
+                        if (proyectos != null) {
+                            globales_gasto = proyectos;
 
+                            var ini_data = ((pagina_actual - 1) * cantXPaginaInv);
+                            var fin_data = (pagina_actual * cantXPaginaInv) - 1;
+                            var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
+                                return (i >= ini_data && i <= fin_data);
+                            });
+                            getEstructuraInfograficoNew(data_pagina, 1);
 
-
-            } else {
-                if (proyectos == null && otras_lineas == null) {
-                    $("#divInversion").html("<span class='lblErrorNoData'>Información No Disponible</span>");
-
-                } else {
-                    if (proyectos != null) {
-                        globales_gasto = proyectos;
-
-                        var ini_data = ((pagina_actual - 1) * cantXPaginaInv);
-                        var fin_data = (pagina_actual * cantXPaginaInv) - 1;
-                        var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
-                            return (i >= ini_data && i <= fin_data);
-                        });
-                        getEstructuraInfograficoNew(data_pagina, 1);
+                        }
+                        if (otras_lineas != null) {
+                            globales_lineas = otras_lineas;
+                            var ini_data_lineas = ((pagina_actual - 1) * cantXPaginaInv);
+                            var fin_data_lineas = (pagina_actual * cantXPaginaInv) - 1;
+                            var data_pagina_lineas = arr = jQuery.grep(globales_lineas, function (n, i) {
+                                return (i >= ini_data && i <= fin_data);
+                            });
+                            getEstructuraInfograficoPerLineas(data_pagina_lineas, 1);
+                        }
 
                     }
-                    if (otras_lineas != null) {
-                        globales_lineas = otras_lineas;
-                        var ini_data_lineas = ((pagina_actual - 1) * cantXPaginaInv);
-                        var fin_data_lineas = (pagina_actual * cantXPaginaInv) - 1;
-                        var data_pagina_lineas = arr = jQuery.grep(globales_lineas, function (n, i) {
-                            return (i >= ini_data && i <= fin_data);
-                        });
-                        getEstructuraInfograficoPerLineas(data_pagina_lineas, 1);
-                    }
-
-                }
-
-
 
             }
         } else {
@@ -861,26 +894,23 @@ function getEstructuraInfograficoNew(datos, pagina) {
         html_str += '<a class="w-90" role="button" data-toggle="collapse" data-parent="#accordion" href="#' + nomCollapse + '" aria-expanded="true" aria-controls="' + nomCollapse + '">';
         html_str += '<div class="head">';
         html_str += '<div class="data0 mainData">';
-        html_str += '<div class="badge badge-outlined"><span class="labelTit">CÓDIGO BPIN: ' + '<strong>' + codigo + '</strong></span></div></br>';
+        html_str += '<div class="badge badge-outlined"><span class="labelTit">CÓDIGO SNIP: ' + '<strong>' + codigo + '</strong></span></div></br>';
         html_str += '<span class="td1">' + nombre + '</span>';
         html_str += '</div>';
         html_str += '<div class="data1">';
         html_str += '<span class="labelTit">Valor Proyecto</span>';
-        html_str += '<span class="td1">$ ' + (valor_proyecto*1/1000000).formatMoney(2, ',', '.').toString() + ' Millones</span>';
+        html_str += '<span class="td1">RD$ ' + formatMoney((valor_proyecto*1/1000000),2).toString() + ' Millones</span>';
         html_str += '</div>';
 
         html_str += '<div class="data1">';
         html_str += '<span class="labelTit">Avance Financiero</span>';
-        html_str += '<span class="td1">' + avance_financiero.formatMoney(2, ',', '.').toString() + '%</span>';
+        html_str += '<span class="td1">' + formatMoney(avance_financiero,2).toString() + '%</span>';
         html_str += '</div>';
-
 
 
         html_str += '<div class="actions-links">';
         html_str += '<span class="badge badge-pill badge-primary">Ver líneas presupuestales</span>';
         html_str += '</div>';
-
-
 
         html_str += '</div>';
 
@@ -929,23 +959,23 @@ function getEstructuraInfograficoNew(datos, pagina) {
 
             html_str += '<div class="data1">';
             html_str += '<span class="labelTit">Presupuesto Aprobado</span>';
-            html_str += '<span class="td1p">' + '$' + ' ' + presup_aprobado.formatMoney(1, ',', '.').toString() + ' Millones</span>';
+            html_str += '<span class="td1p">' + 'RD$' + ' ' + formatMoney(presup_aprobado,1).toString() + ' Millones</span>';
             html_str += '</div>';
 
             html_str += '<div class="data1">';
             html_str += '<span class="labelTit">Presupuesto Vigente</span>';
-            html_str += '<span class="td1p">' + '$' + ' ' + presup_vigente.formatMoney(0, ',', '.').toString() + ' Millones</span>';
+            html_str += '<span class="td1p">' + 'RD$' + ' ' + formatMoney(presup_vigente,0).toString() + ' Millones</span>';
             html_str += '</div>';
 
             html_str += '<div class="data1">';
             html_str += '<span class="labelTit">Ejecución Acumulada</span>';
-            html_str += '<span class="td1p">' + '$' + ' ' + presup_ejecutado.formatMoney(0, ',', '.').toString() + ' Millones</span>';
+            html_str += '<span class="td1p">' + 'RD$' + ' ' + formatMoney(presup_ejecutado,0).toString() + ' Millones</span>';
             html_str += '</div>';
 
 
             html_str += '<div class="data1a">';
             html_str += '<span class="labelTit">% Ejecución</span>';
-            html_str += '<span class="">' + porc_ejecutado.formatMoney(1, ',', '.').toString() + '%</span>';
+            html_str += '<span class="">' + formatMoney(porc_ejecutado,1).toString() + '%</span>';
             html_str += '</div>';
 
             html_str += '</div>';//head
@@ -963,6 +993,7 @@ function getEstructuraInfograficoNew(datos, pagina) {
 
         ///----------------------------------BOTONES
         html_str += '<div class="row align-items-center">';
+       
         html_str += '</div>';
         html_str += '</div>';
 
@@ -1008,7 +1039,7 @@ function dibujarPagNumeradasPerTipoInv(actual, total, totalPag) {
     var pag_actual = parseInt(actual);
     var pagina_actual = pag_actual;
     var pagesHTML = '';
-    var cant_por_linea = 10;
+    var cant_por_linea = 20;
     $("#divPagFichas").html("");
     var divPag = $("#divPagFichas")
     var pag_enlace = "";
@@ -1098,15 +1129,15 @@ function getEstructuraInfograficoPerLineas(datos_lineas, pagina) {
             str_lineas += '</div>';
             str_lineas += '<div class="data1">';
             str_lineas += '<span class="labelTit">Presupuesto Aprobado</span>';
-            str_lineas += '<span class="td1">$ ' + presup_aprobado.formatMoney(2, '.', ', ').toString() + ' Millones</span>';
+            str_lineas += '<span class="td1">RD$ ' + formatMoney(presup_aprobado,2).toString() + ' Millones</span>';
             str_lineas += '</div>';
             str_lineas += '<div class="data1">';
             str_lineas += '<span class="labelTit">Presupuesto Vigente</span>';
-            str_lineas += '<span class="td1">$ ' + presup_vigente.formatMoney(2, '.', ', ').toString() + ' Millones</span>';
+            str_lineas += '<span class="td1">RD$ ' + formatMoney(presup_vigente,2).toString() + ' Millones</span>';
             str_lineas += '</div>';
             str_lineas += '<div class="data1">';
             str_lineas += '<span class="labelTit">Ejecución Acumulada</span>';
-            str_lineas += '<span class="td1">$ ' + presup_ejecutado.formatMoney(2, '.', ', ').toString() + ' Millones</span>';
+            str_lineas += '<span class="td1">RD$ ' + formatMoney(presup_ejecutado,2).toString() + ' Millones</span>';
             str_lineas += '</div>';
             str_lineas += '<div class="data1">';
             str_lineas += '<span class="labelTit">Porcentaje de ejecución</span>';
@@ -1210,6 +1241,7 @@ function dibujarPagNumeradasPerLineas(actual, total, totalPag) {
 
 function GetRecursosPorFinalidad(anyo) {
     $("#divGraphPerFuncion").empty();
+    //finalidad_per_funcion(sector)
     $.ajax({
         contentType: "application/json; charset=utf-8",
         url: "api/serviciosentidad/GetRecursosPorFinalidad",
@@ -1262,7 +1294,25 @@ function loadRecursosPerFinalidad(objData) {
             data_filter[i].porcentaje = (((data_filter[i].rawValueDouble / sumaTotal) * 100)).toFixed(2);
         }
 
-     
+        //var paleta = {
+        //    colores: [
+        //        "#e6e6e6",
+        //        "#c4e5ee",
+        //        "#fcd96c",
+        //        "#3e5174",
+        //        "#ea5670",
+        //        "#999999",
+        //        "#1c717f",
+        //        "#64b5e2",
+        //        "#7fcbdc",
+        //        "#e7753d"
+        //    ]
+        //};
+
+        //function colorPorPosicion(posicion) {
+        //    return paleta.colores[posicion % paleta.colores.length];
+        //}
+
         var distintos = objData.map(item => item.labelGroup)
             .filter((value, index, self) => self.indexOf(value) === index);
 
@@ -1277,6 +1327,7 @@ function loadRecursosPerFinalidad(objData) {
                     transform: "capitalize"
                 },
                  fill: function (d, index) {
+                    //var index = distintos.indexOf(d["parent"]); 
                     return assignColorPaleta(index);
 
                 }
@@ -1323,7 +1374,7 @@ function loadRecursosPerFinalidad(objData) {
                         [function (d) {
                             var valor = d["rawValueDouble"] / 1000000;
                             var cad = "";
-                            cad += "<span>Presupuesto Vigente " + "$ " + valor.formatMoney( 0, '.', ',').toString() + " Millones" + "</span></br>";
+                            cad += "<span>Presupuesto Vigente " + "RD$ " + formatMoney(valor,0).toString() + " Millones" + "</span></br>";
                             return cad;
                         }]
                     ]
@@ -1362,7 +1413,7 @@ function loadDonaGraph(myData,divContenedor) {
         .config({
             data: myData,
             groupBy: "labelGroup",
-            label: d => (d["porcentaje"]*1).formatMoney(2, ',', '.')+ "%",
+            label: d => formatMoney((d["porcentaje"]*1),2)+ "%",
 
             height: 665,
             //innerRadius: 50,
@@ -1382,9 +1433,9 @@ function loadDonaGraph(myData,divContenedor) {
                 tbody: [
                     [function (d) {
 
-                        var cad_aux = "$ " + d["rawValue"].formatMoney(1, ',', '.').toString() + " ";
+                        var cad_aux = "RD$ " + formatMoney(d["rawValue"],1).toString() + " ";
                         if (d["porcentaje"] != undefined && d["porcentaje"] != null) {
-                            cad_aux = "$ " + d["rawValue"].formatMoney(1, ',', '.').toString() + " " + " <strong>(" + d["porcentaje"].formatMoney(1, '.', ',').toString() + " %)</strong>";
+                            cad_aux = "RD$ " + formatMoney(d["rawValue"],1).toString() + " " + " <strong>(" + formatMoney(d["porcentaje"],1).toString() + " %)</strong>";
                         }
                         return cad_aux;
 
@@ -1409,7 +1460,7 @@ function loadConsolidaGastoEntidad(data, div) {
 
     for (var i = 0; i < data.length; i++) {
         txt_aux += "<div class='box' style='background:linear-gradient(to right, " + assignColorPaletaD(i) +" 20px, #f2f2f2 0) !important;'>"
-            + "<div class='h3'>$ " + (data[i].rawValue*1).formatMoney(1, ',', '.').toString() + "</div>"
+            + "<div class='h3'>RD$ " + formatMoney((data[i].rawValue*1),1).toString() + "</div>"
             + "<div class='desc-item-expenditure'>" + data[i].labelGroup + "</div>"
             + "<div class='wrap-expenditure-link'></div>"
             + "</div>";
@@ -1542,6 +1593,7 @@ function horizontalBar(data, div) {
         .selectAll(".tick text")
         .call(wrap, 75)
         .attr("transform", "translate(-2,-30)")
+    //alert(y.rangeBand() - 150);
 
     var bars = svg.selectAll(".bar")
         .data(data)
@@ -1603,7 +1655,7 @@ function wrap(text, width) {
 
 
 ////////////////////////////////////////// Procesos ////////////////////////////////////////////////////
-function GetRecursosPorNivelYAnio(anio) {
+function GetProcesosPorAnio(anio) {
     procesos = [];
     $.ajax({
         contentType: "application/json; charset=utf-8",
@@ -1619,11 +1671,11 @@ function GetRecursosPorNivelYAnio(anio) {
         inidata = ((paginaActual - 1) * cantXPagina);
         findata = (paginaActual * cantXPagina) - 1;
 
-        var institucionesPorPagina = jQuery.grep(procesos, function (n, i) {
+        var dataPagina = jQuery.grep(procesos, function (n, i) {
             return (i >= inidata && i <= findata);
         });
-        GetListadoInstituciones(institucionesPorPagina);
-        dibujarPagNumeradas(paginaActual);
+        showListadoProcesos(dataPagina);
+        dibujarPagNumeradasProcesos(paginaActual);
     }).fail(function (xhr, ajaxOptions, thrownError) {
         alert("Error " + xhr.status + "_" + thrownError);
     });
@@ -1631,24 +1683,25 @@ function GetRecursosPorNivelYAnio(anio) {
 }
 
 
-function GetListadoInstituciones(institucionesPorPagina) {
+function showListadoProcesos(datos) {
 
     $("#divProcesos").html("");
+  
     var html_list = '<div class="card-entidades-group">';
-    for (var i = 0; i < institucionesPorPagina.length; i++) {
+    for (var i = 0; i < datos.length; i++) {
 
         html_list += '<div id="proceso_' + i.toString() + '" class="card d-flex">';
         html_list += '<div class="headEnt">';
-        html_list += '<div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>' + institucionesPorPagina[i]['codigoproceso'] + '</strong></span>';
-        html_list += '<span class="td1">' + institucionesPorPagina[i]['descripcion'] + ' </span>';
+        html_list += '<div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>' + datos[i]['codigoproceso'] + '</strong></span>';
+        html_list += '<span class="td1">' + datos[i]['descripcion'] + ' </span>';
         html_list += '</div>';
-        html_list += '<div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">' + institucionesPorPagina[i]['estadoProceso'].toString() + ' </span ></div > ';
-        html_list += '<div class="data1"><span class="labelTit">Modalidad</span><span class="td1">' + institucionesPorPagina[i]['modalidad'].toString() + ' </span></div>';
-        html_list += '<div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">$ ' + institucionesPorPagina[i]['montoEstimado'].formatMoney(2, '.', ',').toString() + ' </span></div>';
+        html_list += '<div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">' + datos[i]['estadoProceso'].toString() + ' </span ></div > ';
+        html_list += '<div class="data1"><span class="labelTit">Modalidad</span><span class="td1">' + datos[i]['modalidad'].toString() + ' </span></div>';
+        html_list += '<div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">RD$ ' + formatMoney(datos[i]['montoEstimado'],2).toString() + ' </span></div>';
         html_list += '</div>';
         html_list += '<div class="btn-action">';
         html_list += '<div class="btnPerfil">';
-        html_list += '<a target="_blank" href="' + institucionesPorPagina[i]['url'] + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br /> <span>VER PROCESO</span></a>';
+        html_list += '<a target="_blank" href="' + datos[i]['url'] + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br /> <span>VER PROCESO</span></a>';
         html_list += '</div>';
         html_list += '</div>';
         html_list += '</div>';
@@ -1657,15 +1710,18 @@ function GetListadoInstituciones(institucionesPorPagina) {
     html_list += '</div>';
     $("#divProcesos").html(html_list);
 
-    dibujarPagNumeradas(1);
+    dibujarPagNumeradasProcesos(1);
 }
 
 //paginador
 
-function dibujarPagNumeradas(paginaActual) {
+function dibujarPagNumeradasProcesos(paginaActual) {
+    var cantXPagina = 20;
     var totalNumber = proyectos.length;
     var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
-
+    //console.log("TotalNumber:", totalNumber);
+    //console.log("Total pages:", totalPages);
+    //console.log("CantXPagina:", cantXPagina);
     if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
         totalPages = totalPages + 1;
     }
@@ -1696,6 +1752,7 @@ function dibujarPagNumeradas(paginaActual) {
         pagEnlace += '<a id="page_left" role="button" class="material-icons md-24" data-page="' + (inicio - totalNumerosPaginador) + '"><span class="">chevron_left</span></a>';
     }
 
+    
     for (var i = inicio; i <= fin; i++) {
         if (i == pagActual) {
             pagEnlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
@@ -1713,28 +1770,27 @@ function dibujarPagNumeradas(paginaActual) {
             pagEnlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
         }
     }
-
+    
     $("#divPagFichasPro").html(pagEnlace);
 
     $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
         paginaActual = $(this).attr("data-page");
-
         $("#divProcesos").empty();
         inidata = ((paginaActual - 1) * cantXPagina);
         findata = (paginaActual * cantXPagina) - 1;
-
+        
         var institucionesPorPagina = jQuery.grep(proyectos, function (n, i) {
             return (i >= inidata && i <= findata);
         });
 
         GetListadoInstituciones(institucionesPorPagina);
-        dibujarPagNumeradas(paginaActual);
+        dibujarPagNumeradasProcesos(paginaActual);
     });
 
 }
 
-        function configuraEnlaceContratista() {
-            $(".enlace_contratista").click(function () {
+function configuraEnlaceContratista() {
+    $(".enlace_contratista").bind("click",function () {
                 var ruc = $(this).attr('data-parameter');
                 var dataValue = $(this).attr('data-parameter'),
                     dataType = $(this).attr('data-type').toLowerCase();
@@ -1745,14 +1801,19 @@ function dibujarPagNumeradas(paginaActual) {
             });
 
 
-        }
-Number.prototype.formatMoney = function (c, d, t) {
-    var n = this,
+}
+
+/*
+//Coma(,) →  para separador de miles
+//Punto(.) → para separador decimal
+formatMoney(valor,cantDecimales,SeparadorDecimales,SeparadorMiles)*/
+function formatMoney(number, c, d, t) {
+    var n = number,
         c = isNaN(c = Math.abs(c)) ? 2 : c,
         d = d == undefined ? "." : d,
         t = t == undefined ? "," : t,
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
-};
+    return s + (j ? i.slice(0, j) + t : "") + i.slice(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+}

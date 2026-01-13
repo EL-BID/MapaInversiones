@@ -4,6 +4,7 @@ var anyo_actual = $("#anioPresupuesto option:selected").val();
 $("#lblAnyoBannerSec").text(anyo_actual);
 ///-------------------------------------------------------
 loadFuentesporAnnios();
+//loadProyectosPrioritarios(proyectos_eje);
 
 ObtenerGraphBySectorPerGroup(anyo_actual);
 
@@ -30,9 +31,9 @@ function loadProyectosPrioritarios(resultados) {
             var div_enlace = div_caption.append("a").attr("href", "../../perfilProyecto/" + resultados[i].IdProyecto)
             div_enlace.append("h3").text(nombre_aux)
             if (resultados[i].approvedTotalMoney > 1000000) {
-                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + formatMoney(valor_aux / 1000000, 2, ".", ",").toString() + ' Millones');
+                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('RD$ ' + formatMoney(valor_aux / 1000000, 2).toString() + ' Millones');
             } else {
-                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + formatMoney(valor_aux / 1, 2, ".", ",").toString());
+                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('RD$ ' + formatMoney(valor_aux / 1, 2).toString());
 
             }
 
@@ -95,7 +96,7 @@ function ObtenerGraphBySectorPerGroup(anyo_actual) {
                     getGraphPorSectorByObrasTab(sum_ordenado, "divContentSectores");
                     ///-------------------------------------------------------------------
                     ///TOP SECTORES BANNER
-                    const sum_all = groupAndSum(data, ['label', 'url_imagen','orden'], ['rawValue']);
+                    const sum_all = groupAndSum(data, ['idSector','label', 'url_imagen','orden'], ['rawValue']);
                     var filter_sec = $(sum_all).filter(function () {
                         return this.orden ===1;
                     });
@@ -178,7 +179,7 @@ function getGraphPorSectorByObrasTab(objSectores, divContenedor) {
             str_aux += '<span class="crdtitle-entidad">' + objSectores[i].labelGroup + '</span>';
             str_aux += '<div class="card-subtitle-container">';
             str_aux += '<span class="SbtPresupuesto">Presupuesto vigente</span><br/>';
-            str_aux += '<span class="SbtBigNumber">$ ' + formatMoney(valor, 2, ".", ",") + ' Millones' + '</span>';
+            str_aux += '<span class="SbtBigNumber">RD$ ' + formatMoney(valor, 2) + ' Millones' + '</span>';
             str_aux += '</div>';
             str_aux += '<a href="/PerfilSector?id=' + idSector + '">';
             str_aux += '<div class="btn btn-outlined">';
@@ -301,8 +302,8 @@ function loadSectoresBanner(result) {
             str_cad += '<div class="icon-sectores"><img src="' + result[i].url_imagen + '" alt="icono relacionado" /></div>';
             str_cad += '<div class="card-content-container">';
             str_cad += '<span class="crdtitle-entidad">' + result[i].label + '</span>';
-            str_cad += '<div class="card-subtitle-container "><span class="SbtPresupuesto">Presupuesto vigente</span><br><span class="SbtBigNumber">$ ' + formatMoney(valor,0,".",",") + ' Millones</span></div>';
-            str_cad += '<a href="/PresupuestoGeneral?sector=undefined#RecPerSector">';
+            str_cad += '<div class="card-subtitle-container "><span class="SbtPresupuesto">Presupuesto vigente</span><br><span class="SbtBigNumber">RD$ ' + formatMoney(valor,0) + ' Millones</span></div>';
+            str_cad += '<a href="/PresupuestoGeneral?sector=' + result[i].idSector + '#RecPerSector">';
             str_cad += '<div class="btn btn-link"><span>Ver sector &nbsp;<i class="material-icons md-28">navigate_next</i> </span></div>';
             str_cad += '</a>';
             str_cad += '</div>';
@@ -315,8 +316,10 @@ function loadSectoresBanner(result) {
     
 
 }
-
-
+/*
+//Coma(,) →  para separador de miles
+//Punto(.) → para separador decimal
+formatMoney(valor,cantDecimales,SeparadorDecimales,SeparadorMiles)*/
 function formatMoney(number, c, d, t) {
     var n = number,
         c = isNaN(c = Math.abs(c)) ? 2 : c,
@@ -325,12 +328,14 @@ function formatMoney(number, c, d, t) {
         s = n < 0 ? "-" : "",
         i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
         j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+    return s + (j ? i.slice(0, j) + t : "") + i.slice(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 }
 
 $("#anioPresupuesto").on("change", function (event) {
     anyo_actual = this.value;
+    //$("#lblAnyoBannerSec").text(anyo_actual);
     loadFuentesporAnnios();
+    //ObtenerGraphBySectorPerGroup(anyo_actual);
 
     
 });
@@ -361,7 +366,7 @@ function loadFuentesporAnnios() {
         tabfuentes += ' </ul>';
         $("#tabsfuentes").html(tabfuentes);
         cargardatosorganismos(fuentesporAnnios[0].CodigoFuente);
-        $("#valorvigente").html('$ ' + formatMoney(valor_aux / 1000000, 0, ".", ",").toString() + ' Millones');
+        $("#valorvigente").html('RD$ ' + formatMoney(valor_aux / 1000000, 0).toString() + ' Millones');
 
         ///graficoDonaPerFuentes
          getGraphDonaFuentesPerAnyo(annio_aux);
@@ -428,6 +433,23 @@ function getGraphDonaFuentesPerAnyo(anyo) {
             .attr("stroke", "gray")
             .attr("stroke-width", 1);
 
+        //const textEl = d3.select("#divGraphDonaPerFuentes")
+        //    .selectAll("newText")
+        //    .data(data)
+        //    .enter()
+        //    .append("text")
+        //    .attr("x", function (d) {
+        //        return d3.pointRadial((d.startAngle + d.endAngle - 0.1) / 2, (50 + 90) / 2)[0];
+        //    })
+        //    .attr("y", d => d3.pointRadial((d.startAngle + d.endAngle - 0.1) / 2, (50 + 90) / 2)[1])
+        //    .attr("text-anchor", d => {
+        //        //return (d.startAngle + d.endAngle) / 2 > Math.PI ? "end" : "start";
+        //        return "middle";
+        //    })
+        //    .text(d => d.data.Fuente)
+        //    .attr("font-size", "10px")
+        //    .attr("fill", "black")
+        //    .attr("transform", "translate(100,100)")
 
 
 
@@ -454,20 +476,23 @@ function cargardatosorganismos(idfuente) {
                 if (result.consolidadoOrganismoFinanciador != null && result.consolidadoOrganismoFinanciador != undefined) {
                     $("#numorganismos").html(result.consolidadoOrganismoFinanciador.totalFinanciadores);
                     $("#numproyectos").html(result.consolidadoOrganismoFinanciador.totalProyectosFinanciados);
-                    $("#numaportado").html('$ ' + formatMoney(result.consolidadoOrganismoFinanciador.totalAportado, 0, ".", ",").toString() + ' Millones');
+                    $("#numaportado").html('RD$ ' + formatMoney(result.consolidadoOrganismoFinanciador.totalAportado, 0).toString() + ' Millones');
                 }
-
+                //var numproyectos = 0;
+                //var aportado = 0;
                 var htmldivorganismos = '';
                 var numeroorganismosmostrar = 3;
                 if (info != null) {
                     for (var i = 0; i < info.length; i++) {
-
+                        //numproyectos += info[i].numeroProyectos;
+                        //aportado += info[i].valorVigente;
                         if (i < numeroorganismosmostrar) { 
                             htmldivorganismos += '<div class="col-lg-4 mb-4">';
                             htmldivorganismos += '    <div class="card h-100 shadow border-0 card-entidad">';
                             htmldivorganismos += '        <div class="card-body CTASectores">';
                             htmldivorganismos += '            <div class="card-title-container">';
                             htmldivorganismos += '                <span class="h4">';
+                            //htmldivorganismos += '                    Banco Interamericano de Desarrollo - BID';
                             htmldivorganismos += info[i].organismoFinanciador;
                             htmldivorganismos += '                </span>';
                             htmldivorganismos += '            </div>';
@@ -478,10 +503,11 @@ function cargardatosorganismos(idfuente) {
                             htmldivorganismos += '                <div class="card-subtitle-container">';
                             htmldivorganismos += '                    <span class="SbtBigNumber">' + info[i].numeroProyectos +'</span>';
                             htmldivorganismos += '                    <span class="SbtPresupuesto">Proyectos Financiados</span>';
-                            htmldivorganismos += '                    <span class="SbtBigNumber"> $ ' + formatMoney(info[i].valorVigente / 1000000, 0, ".", ",").toString() +'Millones </span>';
+                            //htmldivorganismos += '                    <span class="SbtBigNumber">RD$ 3,161.73 Millones</span>';
+                            htmldivorganismos += '                    <span class="SbtBigNumber"> RD$ ' + formatMoney(info[i].valorVigente / 1000000, 0).toString() +' Millones </span>';
                             htmldivorganismos += '                    <span class="SbtPresupuesto">Monto total financiado</span>';
-                            htmldivorganismos += '                    <a href="/FinancialOrganizationDetail?id=' + info[i].codigoOrganismoFinanciador + '&anio=' + annio_aux +'">';
-                            htmldivorganismos += '                        <div class="btn btn-link"><span>Ver organismo financiador &nbsp;<i class="material-icons md-28">navigate_next</i> </span></div>';
+                            htmldivorganismos += '                    <a class="btn btn-outlined" href="/FinancialOrganizationDetail?id=' + info[i].codigoOrganismoFinanciador + '&anio=' + annio_aux +'">';
+                            htmldivorganismos += '                        <div class="d-flex"><span>Ver organismo financiador</span><i class="material-icons md-28">navigate_next</i> </div>';
                             htmldivorganismos += '                    </a>';
                             htmldivorganismos += '                </div>';
                             htmldivorganismos += '            </div>';
@@ -490,8 +516,10 @@ function cargardatosorganismos(idfuente) {
                             htmldivorganismos += '    </div>';
                         }
                     }
-
-
+                    console.log("result.ConsolidadoOrganismoFinanciador", result);
+                    //$("#numorganismos").html(i);
+                    //$("#numproyectos").html(numproyectos);
+                    //$("#numaportado").html('RD$ ' + formatMoney(aportado / 1000000, 0, ".", ",").toString() + ' Millones');
                     $("#divorganismos").html(htmldivorganismos);
                 }
 

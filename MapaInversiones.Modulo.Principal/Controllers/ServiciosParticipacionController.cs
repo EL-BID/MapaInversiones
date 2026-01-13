@@ -268,13 +268,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             string url_local = obtUrlLocal();
             string key = "";
             key += SHA256Encripta(id_usuario) + "_p_" + id_proyecto.ToString() + "_p_" + id_programa.ToString() + "_p_" + CodigoContrato;
+            //key += SHA256Encripta(id_usuario) + "_p_" + id_proyecto.ToString();
             string path_aux = Path.Combine(_hostingEnvironment.WebRootPath, "content", "img", "logoMIV.png");
- 
+            //string path = HttpContext.Current.Server.MapPath(@"../../content/img/logoMIV.png"); // my logo is placed in images folder
+            //LinkedResource logo = new LinkedResource(path_aux);
+            //logo.ContentId = "companylogo";
 
             string mensaje = "";
             mensaje += "<html>";
             mensaje += "<head>";
-            mensaje += "<title>MapaInversiones - Notificaciones</title>";
+            mensaje += "<title>MapaInversiones República Dominicana- Notificaciones</title>";
             mensaje += "<style>a{color:#0D3B59; text-decoration:underline}";
             mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;}";
             mensaje += "</style>";
@@ -282,19 +285,19 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             mensaje += "<body style=\"background-color:#fff; font-family:'Arial', Helvetica, sans-serif; margin:0; padding:0\">";
             mensaje += "<div style=\"background:#ffffff; width:700px; color:#0D284B; margin:0 auto\">";
             mensaje += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">";
-            mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:3px solid #ccc; \"><a href=\"\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"Mapa Inversiones\" width=\"280px\"/></a></td>";
+            mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:3px solid #ccc; \"><a href=\"\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"Mapa Inversiones República Dominicana\" width=\"280px\"/></a></td>";
             mensaje += "</tr>";
             mensaje += "<tr><td><div style=\"width:100%; margin:0 auto; text-align:center\">";
             mensaje += "<table width=\"100%\" style=\"text-align:left\">";
             mensaje += "<tr><td colspan=\"2\"><h2 style=\"text-align:center; font-size:40px; font-weight:bold; margin-top:10px; margin-bottom:0px\">Verifica tu Cuenta</h2></td></tr>";
             mensaje += "<tr>";
-            mensaje += "<td valign=\"bottom\"><img src=\"" + url_local + "/content/img/icono.jpg\" alt=\"Icono de Notificacion MapaInversiones\" width=\"250px\"/></td>";
+            mensaje += "<td valign=\"bottom\"><img src=\"" + url_local + "/content/img/icono.jpg\" alt=\"Icono de Notificacion MapaInversiones República Dominicana\" width=\"250px\"/></td>";
             mensaje += "<td style=\"padding-left:25px\">";
-            mensaje += "<p>Te has Registrado en MapaInversiones, para participar debes validar tu correo</p>";
+            mensaje += "<p>Te has Registrado en MapaInversiones República Dominicana, para participar debes validar tu correo</p>";
             mensaje += "<p style=\"text-align:left; margin:50px auto\"><a href=\"" + url_local + "/VerificaCuenta/" + key + "\" style=\"background-color:#2e528d; color:#fff; padding:15px 25px;\">Verificar Cuenta</a></p>";
             mensaje += "<table style=\"width:100%; text-align:center; border:1px solid #ccc; padding:5px; font-style:italic; font-size:12px\">";
             mensaje += "<tr><td><img src=\"" + url_local + "/content/img/iconoReminder.jpg\" style=\"float:left; margin-bottom:5px; display:block; width:50px\"/></td>";
-            mensaje += "<td><p style=\"text-align:left\"> Recuerda, las opiniones publicadas en MapaInversiones pueden ser anónimas </p></td>";
+            mensaje += "<td><p style=\"text-align:left\"> Recuerda, las opiniones publicadas en MapaInversiones República Dominicana pueden ser anónimas </p></td>";
             mensaje += "</tr>";
             mensaje += "</table>";
             mensaje += "</td>";
@@ -399,7 +402,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             string mensaje = "";
             mensaje += "<html>";
             mensaje += "<head>";
-            mensaje += "<title>MapaInversiones - ";
+            mensaje += "<title>MapaInversiones República Dominicana - ";
             mensaje += titulo;
             mensaje += "</title>";
             mensaje += "<style>a{color:#0D3B59; text-decoration:underline}";
@@ -409,7 +412,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             mensaje += "<body style=\"background-color:#fff; font-family:'Arial', Helvetica, sans-serif; margin:0; padding:0\">";
             mensaje += "<div style=\"background:#ffffff; width:700px; color:#0D284B; margin:0 auto\">";
             mensaje += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">";
-            mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:1px solid #ccc; \"><a href=\"" + url_local + "\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"MapaInversiones\" width=\"280px\"/></a></td>";
+            mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:1px solid #ccc; \"><a href=\"" + url_local + "\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"MapaInversiones República Dominicana\" width=\"280px\"/></a></td>";
             mensaje += "</tr>";
             mensaje += "<tr><td><div style=\"width:100%; margin:0 auto; text-align:center\">";
             mensaje += "<table width=\"100%\" style=\"text-align:left\">";
@@ -417,7 +420,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             mensaje += saludo;
             mensaje += "</h2></td></tr>";
             mensaje += "<tr>";
-            mensaje += "<td><img src=\"" + url_local + "/content/img/icono2.jpg\" alt=\"Icono de Notificación MapaInversiones\" width=\"250px\"/></td>";
+            mensaje += "<td><img src=\"" + url_local + "/content/img/icono2.jpg\" alt=\"Icono de Notificación MapaInversiones República Dominicana\" width=\"250px\"/></td>";
             mensaje += "<td style=\"padding-left:25px\">";
             mensaje += "<p>";
             mensaje += txtmensaje;
@@ -442,7 +445,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             {
                 mensaje += "<table style=\"width:100%; margin:15px auto; text-align:center; border:1px solid #ccc; padding:5px; font-style:italic; font-size:12px\">";
                 mensaje += "<tr><td><img src=\"" + url_local + "/content/img/iconoReminder.jpg\" style=\"float:left; margin-bottom:15px; display:block; width:50px\"/></td>";
-                mensaje += "<td><p style=\"text-align:left\"> Se informa que los comentarios de su participación antes de ser publicados son validados por MapaInversiones. Si desea, su opinión puede ser anónima. </p></td>";
+                mensaje += "<td><p style=\"text-align:left\"> Se informa que los comentarios de su participación antes de ser publicados son validados por MapaInversiones República Dominicana. Si desea, su opinión puede ser anónima. </p></td>";
                 mensaje += "</tr>";
                 mensaje += "</table>";
             }
@@ -574,7 +577,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 mensaje += "<html>";
                 mensaje += "<head>";
                 mensaje += "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />";
-                mensaje += "<title>MapaInversiones - Notificaciones</title>";
+                mensaje += "<title>MapaInversiones República Dominicana - Notificaciones</title>";
                 mensaje += "<style>a{color:#0D3B59; text-decoration:underline}";
                 mensaje += "h1, h2, h3, h4{ font-weight:normal; color:#2e528d;}";
                 mensaje += "</style>";
@@ -582,15 +585,15 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 mensaje += "<body style=\"background-color:#fff; font-family:'Arial', Helvetica, sans-serif; border-top:2px; margin:0; padding:0\">";
                 mensaje += "<div style=\"background:#ffffff; width:700px; color:#0D284B; margin:0 auto\">";
                 mensaje += "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">";
-                mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:1px solid #ccc; \"><a href=\"" + url_local + "\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"Logo MapaInversiones\" width=\"280px\"/></a></td>";
+                mensaje += "<tbody><tr><td style=\"text-align:center;height:80px; padding-left:15px; border-bottom:1px solid #ccc; \"><a href=\"" + url_local + "\" title=\"\"><img src=\"" + url_local + "/content/img/logoMIV.jpg\" title=\"Logo MapaInversiones República Dominicana\" width=\"280px\"/></a></td>";
                 mensaje += "</tr>";
                 mensaje += "<tr><td><div style=\"width:90%; margin:0 auto; text-align:center\">";
                 mensaje += "<table width=\"100%\" style=\"text-align:left\">";
                 mensaje += "<tbody><tr><td colspan=\"2\"><h2 style=\"text-align:center; font-size:40px; font-weight:bold; margin-bottom:40px; margin-top:40px\">Restablecimiento de Clave</h2></td></tr>";
                 mensaje += "<tr>";
-                mensaje += "<td valign=\"bottom\"><img src=\"" + url_local + "/content/img/icono3.jpg\" alt=\"Icono de Notificacion MapaInversiones\" width=\"250px\"/></td>";
+                mensaje += "<td valign=\"bottom\"><img src=\"" + url_local + "/content/img/icono3.jpg\" alt=\"Icono de Notificacion MapaInversiones República Dominicana\" width=\"250px\"/></td>";
                 mensaje += "<td style=\"padding-left:25px\">";
-                mensaje += "<p>MapaInversiones le informa que su solicitud de restablecimiento de clave ha sido iniciada</p>";
+                mensaje += "<p>MapaInversiones República Dominicana le informa que su solicitud de restablecimiento de clave ha sido iniciada</p>";
                 mensaje += "<p>Por favor ingrese el siguiente código en el sitio web para continuar en el proceso</p>";
                 mensaje += "<div style=\"background-color:#fff; color:#0D3B59; font-weight:bold; font-size:30px; text-align:center; padding:15px\">" + codigo_verifica + "</div>";
                 mensaje += "<p style=\"text-align:center\">Gracias por usar nuestros servicios</p>";
@@ -929,7 +932,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                         #endregion  Defino el formato de la imagen
                         if (frmt != null)
                         {
-
+                            //string path = AppDomain.CurrentDomain.BaseDirectory + "Images";
                             string path = Environment.CurrentDirectory + "\\wwwroot\\Images\\";
                             string pathBd = "/Images";
                             if (!Directory.Exists(path))

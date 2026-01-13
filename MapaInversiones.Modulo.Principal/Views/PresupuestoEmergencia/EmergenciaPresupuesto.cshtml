@@ -2,7 +2,64 @@
 @inject OrchardCore.IOrchardHelper Orchard
 @{ Layout = "~/Views/Shared/_Layout.cshtml"; }
 
+<style>
+    .node rect {
+        cursor: move;
+        fill-opacity: .8;
+        shape-rendering: crispEdges;
+    }
 
+    .node text {
+        pointer-events: none;
+        /*text-shadow: 0 1px 0 #fff;*/
+    }
+
+    .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .1;
+    }
+
+        .link:hover {
+            stroke-opacity: .2;
+        }
+
+    .arc text {
+        font: 12px sans-serif;
+        text-anchor: middle;
+        font-weight: bold;
+    }
+
+    .arc path {
+        stroke: #fff;
+    }
+
+    .toolTip {
+        position: absolute;
+        display: none;
+        width: auto;
+        height: auto;
+        background: none repeat scroll 0 0 white;
+        border: 0 none;
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font: 12px sans-serif;
+        padding: 5px;
+        text-align: center;
+    }
+
+    #divGraphRecursosObj .d3plus-viz-back text,
+    #divGraphRecursosArticulos .d3plus-viz-back text {
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        fill: #000000 !important;
+        
+    }
+
+    
+
+</style>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-bottom" class="contractProfile">
 
@@ -155,7 +212,7 @@
                                                                                                     </div>
                                                                                                     <div class="data2">
                                                                                                         <span class="labelTit">Ejecutado</span>
-                                                                                                        <span class="td1p">$ @String.Format("{0:n2}", @act.avance / 1000000) Millones</span>
+                                                                                                        <span class="td1p">RD$ @String.Format("{0:n2}", @act.avance / 1000000) Millones</span>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </a>
@@ -275,7 +332,7 @@
                                                                                                     </div>
                                                                                                     <div class="data2 mainDatalvl2">
                                                                                                         <span class="labelTit">Ejecutado</span>
-                                                                                                        <span class="td1p">$ @String.Format("{0:n2}", @act.avance / 1000000) Millones</span>
+                                                                                                        <span class="td1p">RD$ @String.Format("{0:n2}", @act.avance / 1000000) Millones</span>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </a>
@@ -376,7 +433,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="wrap_sankey">
-                                <div id="sankey_basic" style="width: 100%; height: auto;"></div>
+                                <div id="sankey_basic" style="width: 90%; height: auto;"></div>
                             </div>
                             <div style="width:100%;" id="divListadoRecursosObje" class="objHidden">
                                 <!--TABLA COMPARATIVA-->
@@ -491,11 +548,11 @@
                                                                                                                 <span class="labelTit">Gastos devengados</span>
                                                                                                                 @if (val_nivel3 < 1)
                                                                                                                 {
-                                                                                                                    <span class="td1p">$ @String.Format("{0:n2}", @act.avance / 1000000) Millones</span>
+                                                                                                                    <span class="td1p">RD$ @String.Format("{0:n2}", @act.avance / 1000000) Millones</span>
                                                                                                                 }
                                                                                                                 else
                                                                                                                 {
-                                                                                                                    <span class="td1p">$ @String.Format("{0:n0}", @act.avance / 1000000) Millones</span>
+                                                                                                                    <span class="td1p">RD$ @String.Format("{0:n0}", @act.avance / 1000000) Millones</span>
                                                                                                                 }
 
                                                                                                             </div>
@@ -572,7 +629,6 @@
                                                         <span class="labelTit">&nbsp;</span>
                                                         <span class="td1">Totales</span>
                                                     </div>
-
                                                     <div class="data1">
                                                         <span class="labelTit">Gastos devengados</span>
                                                         <span class="td1">RD $ @String.Format("{0:n0}", @total_avance / 1000000) Millones</span>
@@ -589,13 +645,14 @@
                                 </div>
 
                             </div>
- 
+                            
+                           
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="pChart">
-                                <div id="divGraphRecursosObj"></div>
+                                <div id="divGraphRecursosObj" style="padding-top:20px;"></div>
                             </div>
                         </div>
                     </div>
@@ -606,7 +663,6 @@
     </section>
 
     <!--FIN GRAFICA-->
-
     <section class="section">
         <div class="container">
             <div class="row justify-content-center">
@@ -619,7 +675,6 @@
                     <div class="banner-main-desc">
                         <p>Explora los detalles y el estado de los contratos asociados a la atención de la emergencia @Model.NombreEmergencia </p>
                     </div>
-
                 </div>
             </div>
             <div class="row">
@@ -632,17 +687,14 @@
         </div>
     </section>
     <!--SOLICITAR MAS INFORMACION-->
-    <!--participacion y denuncias-->
     <section class="section">
         <div class="container">
             <div class="section-heading heading-left">
                 <h2>Control ciudadano</h2>
-
             </div>
-
             <div class="row justify-content-center">
                 <!--Participa-->
-                <div class="col-lg-5 tParticipe">
+                <div class="col-lg-4 tParticipe">
                     <div class="card wrap-participe">
                         <div class="card-header"> <span class="h4">Participa</span></div>
                         <div class="card-body">
@@ -655,14 +707,17 @@
                         </div>
                         <div class="card-footer">
                             <div class="text-center">
-                                <a class="btn btn-outlined" id="divEnlaceParticipaCon" href="/Participa/Comentarios/">Contratos <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                                <a class="btn btn-outlined" id="divEnlaceParticipaCon" href="/ContratosEmergencia?emergencia=@Model.TipoEmergencia">Contratos 
+                                <i class="material-icons md-22">chevron_right</i>
+                            </a>
+                            
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <!--mas imformación-->
-                <div class="col-lg-5 tParticipe">
+                <div class="col-lg-4 tParticipe">
                     <div class="card wrap-participe">
                         <div class="card-header">
                             <span class="h4">Solicita más información</span>
@@ -678,8 +733,8 @@
                         </div>
                         <div class="card-footer">
                             <div class="text-center">
-                                <a class="btn btn-outlined" href="https://sitio.com/apps/sip/?step=one" target="_blank" rel="noopener"> Solicitar <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
-                               
+                                <a class="btn btn-outlined" href="https://saip.gob.do/apps/sip/?step=one" target="_blank"> Solicitar <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                              
                             </div>
                         </div>
                     </div>
@@ -688,19 +743,15 @@
             </div>
 
         </div>
-
+       
     </section>
-
-
     <!--DATOS ABIERTOS-->
-
-
     @{
         var parame = "emergencia" + @Model.TipoEmergencia;
     }
     <input type="hidden" id="param" value="@parame" />
-     <div class="clearfix"></div>
-
+    <div class="clearfix"></div>
+    <section>
     @if (ViewBag.dataSource != null)
     {
         <text>
@@ -709,37 +760,37 @@
             {
                 <text>
 
-                                    <div class="boxDataSource">
-                                        <h6 class="text-center">@source.data</h6>
-                                        <div class="row">
-                                            <div class="col-md-4">
+                    <div class="boxDataSource">
+                        <h6 class="text-center">@source.data</h6>
+                        <div class="row">
+                            <div class="col-md-4">
                                 <span class="t1">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_FuentesDatos_Fuente") </span>
-                                                <span>@source.source</span>
-                                            </div>
-                                            <div class="col-md-6 col-xs-6 border-right">
+                                <span>@source.source</span>
+                            </div>
+                            <div class="col-md-6 col-xs-6 border-right">
                                 <span class="t1">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_FuentesDatos_lblFechaData") </span>
-                                                <span>@source.lastUpdate.ToShortDateString()</span>
-                                            </div>
-                                            <div class="col-md-6 col-xs-6">
+                                <span>@source.lastUpdate.ToShortDateString()</span>
+                            </div>
+                            <div class="col-md-6 col-xs-6">
                                 <span class="t1">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_FuentesDatos_lblFechaCorteData") </span>
-                                                <span>@source.FechaCorteData.ToShortDateString()</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <span>@source.FechaCorteData.ToShortDateString()</span>
+                            </div>
+                        </div>
+                    </div>
                 </text>
             }
         </text>
     }
-     
-
+       
+    </section>
 
 </body>
 
 
 @section Scripts {
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
     <script src="~/content/dist/js/sankey.js"></script>
     <script src="js/emergencia_presupuesto_aux.js"></script>
 

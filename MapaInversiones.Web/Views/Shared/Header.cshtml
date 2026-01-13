@@ -1,4 +1,10 @@
 ﻿@inject OrchardCore.IOrchardHelper Orchard
+@using PlataformaTransparencia.Modelos.Comunes
+
+@model HeaderViewModel
+
+
+
 <header id="header" class="header">
     <!-- TOP HEADER -->
     <nav class="header-top">
@@ -8,12 +14,11 @@
                     <div class="header-top-links">
                         <!-- secondary pages -->
                         <ul class="nav">
-
                             <li class="nav-item">
                                 <a href="/Acercade" title="Acerca de MapaInversiones">
-                                    Acerca de MapaInversiones
+                                    Acerca de MapaInversiones Republica Dominicana
                                 </a>
-                            </li>
+                            </li>                           
                             <li class="nav-item">
                                 <a href="/CentroAyuda?id=2" title="Centro de Ayuda">
                                     Centro de Ayuda
@@ -29,7 +34,6 @@
                                     Contáctenos
                                 </a>
                             </li>
-                          
                         </ul>
                     </div>
                 </div>
@@ -55,17 +59,27 @@
                 </div>
                 <div class="main-header col-md-12 header-fixed-col">
                     <!-- Begin logo -->
-                    <div class="logoHinv">
-                            <a href="/" target="_blank" rel="noopener" title="Nombre Gobierno">
-                                <img class="img-fluid" src="~/img/logoGobierno.svg" alt="Nombre Gobierno">
-                        </a>
-                    </div>
-                    <div class="logoIntro">
-                        <a href="/" class="logo-ico-widht-text" title="MapaInversiones">
-                            <img class="img-fluid" src="~/img/logoMIV.svg" alt="Logo MapaInversiones">
-                        </a>
-                    </div>
-
+                        <div class="Logo d-flex aling-items-center">
+                            <div class="logoHinv">
+                                <a href="/" target="_blank" title="Gobierno de la República Dominicana">
+                                    <img class="img-fluid" src="~/img/logoGobierno.svg" alt="Gobierno de la República Dominicana">
+                                </a>
+                            </div>
+                            <div class="logoIntro">
+                                <a href="/" class="logo-ico-widht-text" title="MapaInversiones República Dominicana">
+                                    <img class="img-fluid" src="~/img/logoMIV.svg" alt="Logo MapaInversiones">
+                                </a>
+                            </div>
+                        </div>
+                        @if (Model.HabilitarChatBot)
+                        {
+                            <div id="btnChatBot" class="btnchat">
+                                <a title="Chatea con MapaInversiones" href="@Model.ChatBotUrl" target="_blank" class="btn btn-cards">
+                                    <img class="img-fluid" src="~/img/logoChat.svg" alt="Chatea con Mapa Inversiones" />
+                                    <span>Chatea con MapaInversiones</span>
+                                </a>
+                            </div>
+                        }                         
                 </div>
 
             </div>
@@ -73,7 +87,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg col-auto col-static header-fixed-col main-navigation-bar">
-                        <div class="row flex-nowrap align-items-center justify-content-end">
+                        <div class="row flex-nowrap align-items-center justify-content-center">
                             <div class="col-auto header-fixed-col d-none d-lg-block col-static">
                                 <!-- Begin main menu -->
                                 <nav class="main-mnu">
@@ -231,14 +245,12 @@
     </nav>
     <!-- End header fixed -->
     <!-- Google tag (gtag.js) -->
-
-
-    <script src="https://www.googletagmanager.com/gtag/js?id=G-Q4H714KM4Z" integrity="sha384-VNIXgAfnXrBQKU+BNlPdO82beO9YSwERuCf5149ppVS/q3VOxeG6Qm4ylAz2Mnnr" crossorigin="anonymous"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W4WV3T279K"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
-        gtag('config', 'G-Q4H714KM4Z');
+        gtag('config', 'G-W4WV3T279K');
     </script>
 </header><!-- End header -->

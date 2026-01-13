@@ -25,7 +25,8 @@ namespace PlataformaTransparencia.Negocios.Entidad
       try {
 
         HomeBLL objNegocioConsolidados = new HomeBLL(_connection);
-
+        //EntidadModel = objNegocioConsolidados.ObtenerDatosEntidad(codEntidad,nombreEntidad, DateTime.Now.Year+1);
+        //Consolidados = objNegocioConsolidados.ObtenerOrigenContratos(null, "ONCAE", codEntidad);
         Status = true;
 
       }
@@ -39,6 +40,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
       try {
 
         HomeBLL objNegocioConsolidados = new HomeBLL(_connection);
+                //return objNegocioConsolidados.ObtenerNombreEntidad(codEntidad
                 return null;
       }
       catch (Exception) {
@@ -49,6 +51,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
         {
             int.TryParse(anioEntidad, out int anio);
             HomeBLL objNegocioConsolidados = new HomeBLL(_connection);
+            //return objNegocioConsolidados.GetDatosEntidadPorAnnio(anio, codEntidad);
             return null;
         }
 
@@ -58,6 +61,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
             try {
                 List<InformationSource> objReturn = new List<InformationSource>();
                 HomeBLL objNegocioConsolidados = new HomeBLL(_connection);
+                //return objNegocioConsolidados.ObtFuenteDatos();
                 return objReturn;
             }
             catch (Exception)

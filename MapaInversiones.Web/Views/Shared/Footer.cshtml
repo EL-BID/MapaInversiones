@@ -1,5 +1,20 @@
 ﻿@inject OrchardCore.IOrchardHelper Orchard
-    <!--CONTACT US-->
+   
+<!--DISCLAIMER -->
+    <section class="section disclaimer" id="d1">
+           <div class="container">
+               <div class="row justify-content-center">
+                   <div class="col-lg-8 text-center">
+                    <h2>Información importante</h2>
+                <p class="py-3"><span class="text-bold">Debido a diferencias metodológicas y de actualización entre ambos sistemas, pueden observarse discrepancias en las variables de presupuesto, ejecución y unidad ejecutora.</span> Estas variaciones responden a la naturaleza y alcance propios de cada sistema y no deben interpretarse como inconsistencias de la plataforma.</p>
+                   </div>
+               </div>
+
+           </div>
+
+    </section>
+
+<!--CONTACT US-->
 <!-- Call to action-->
 
 @if (ViewData["ShowContacts"] as bool? ?? true)
@@ -104,7 +119,7 @@
                 <div class="col-lg-12">
                     <div class="footer-company-links text-lg-center py-5">
 
-                        <a href="/Acercade">Acerca de MapaInversiones</a>
+                        <a href="/Acercade">Acerca de MapaInversiones República Dominicana</a>
                         <a href="/CentroAyuda?id=2">Centro de Ayuda</a>
                         <a href="/MarcoLegal">Marco Legal</a>
                         <a href="/Contactanos">Contáctenos</a>
@@ -122,22 +137,21 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12 justify-content-center">
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Gobierno" class="img-fluid" src="~/img/logoEntidad.svg" />
+                    <a href="https://www.presidencia.gob.do/" target="_blank">
+                        <img alt="Logo Presidencia República Dominicana" class="img-fluid" src="~/img/logoEntidad.svg" />
                     </a>
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Entidad" class="img-fluid" src="~/img/logoEntidad2.svg" />
+                    <a href="https://www.hacienda.gob.do/" target="_blank">
+                        <img alt="Logo Ministerio de hacieda y economía" class="img-fluid" src="~/img/logoEntidad0.svg" />
                     </a>
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Logo Entidad" class="img-fluid" src="~/img/logoEntidad0.svg" />
-                    </a>
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Logo Entidad" class="img-fluid" src="~/img/logoEntidad3.svg" />
+                    <a href="https://www.dgcp.gob.do/" target="_blank">
+                        <img alt="Logo Dirección general de contrataciones públicas" class="img-fluid" src="~/img/logoEntidad3.svg" />
                     </a>
                     <br />
-
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Mapainversiones" class="img-fluid footerMIV" src="~/img/Footer/logo-mapa-inversiones.png" />
+                    <a href="https://www.iadb.org/" target="_blank">
+                        <img alt="Logo iadb" class="img-fluid" src="~/img/Footer/logo-bid.png" />
+                    </a>
+                    <a href="http://www.iadb.org/mapainversiones" target="_blank">
+                        <img alt="Logo Mapainversiones" class="img-fluid" src="~/img/Footer/logo-mapa-inversiones.png" />
                     </a>
                 </div>
             </div>

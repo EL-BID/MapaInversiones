@@ -68,7 +68,7 @@ new System.Globalization.CultureInfo("es-RD");
                                 </li>
                                 <li>
                                     <span class="h2 text-center">
-                                        $
+                                        RD$
                                         @if (Model.Data.Sum(l => l.ValorTotalContratos) >= 1000000)
                                         {
                                             <text> @String.Format(culture, "{0:n0}",((double)((double)@Model.Data.Sum(l => l.ValorTotalContratos) / (double)1000000)))  Millones</text>
@@ -98,7 +98,7 @@ new System.Globalization.CultureInfo("es-RD");
                                             if (@item.CodigoOrigenInformacion == -1)
                                             {
                                                 <text>
-                                                <option selected value="">@item.OrigenInformacion (@item.NroContratos)</option>
+                                                <option selected="true" value="">@item.OrigenInformacion (@item.NroContratos)</option>
                                                 </text>
                                             }
                                             else
@@ -182,7 +182,40 @@ new System.Globalization.CultureInfo("es-RD");
 
 
                     </div>
+                    @* <div class="form-group">
+                        <label class="origen" for="top_origen_informacion">Fuente de Datos</label>
+                        <select class="form-select" id="top_origen_informacion">
+                            <option value="">Todos</option>
+                            @if (Model.OrigenInformacion.Count > 0)
+                            {
+                                foreach (var item in Model.OrigenInformacion)
+                                {
+                                    <text>
+                                        <option value="@item">@item.Trim().ToUpper().Replace("ONCAE - CATALOGO ELECTRÓNICO", "ONCAE - CATÁLOGO ELECTRÓNICO")</option>
+                                    </text>
+                                }
 
+                            }
+                        </select>
+                    </div> *@
+
+                    @*<div class="form-group">
+                            <label class="year" for="entidad">Entidad</label>
+
+                            <input type="search" data-results="search-home" data-search="home" id="entidad" class="search-input form-control input-lg" autocomplete="on" placeholder="Entidad">
+
+                            <div id="search-home" class="search-body">
+                                <div id="divNoEncontrado" class="no-search-results" style="display: none;">No se han encontrado entidades</div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="year" for="proceso">Palabra Clave</label>
+
+                            <input type="search" data-results="search-home" data-search="home" id="proceso" class="search-input form-control input-lg" autocomplete="on" placeholder="Ventilador, reactivos, etc.">
+
+                        </div>*@
                     <div class="triggerForm">
                         <input type="button" class="btn btn-primary" value="Buscar" id="btn-buscar" disabled=""><div class="clearfix"></div>
                         <a class="btn btn-link" id="btnLimpiar" disabled="disabled">LIMPIAR FILTROS</a>
@@ -223,8 +256,8 @@ new System.Globalization.CultureInfo("es-RD");
                 <div class="wrap-cta py-5">
                     <div class="wrap-cta py-5">
                         <p class="card-title mb-4">Información suministrada por:</p>
-                        <a href="https://www.dgcp.gob.do/" target="_blank" rel="noopener">
-                            <img class="img-fluid" src="../img/logo-dgcp.svg" alt="ir a Secretaria de planeación" />
+                        <a href="https://www.dgcp.gob.do/" target="_blank">
+                            <img class="img-fluid" src="../img/logo-dgcp.svg" alt="ir a Secretaria tecnica de planeación" />
                         </a>
 
                     </div>
@@ -241,7 +274,23 @@ new System.Globalization.CultureInfo("es-RD");
 
 <input id="contratista" name="contratista" type="hidden" value="@Model.Contratista">
 
-<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+<script>
+    //window.onscroll = function () { myFunction() };
+
+    ////var header = document.getElementById("navs-header");
+    ////var sticky = header.offsetTop;
+
+    //function myFunction() {
+    //    //if (window.pageYOffset > sticky) {
+    //    //    header.classList.add("sticky");
+    //    //    header.classList.add("bg-white");
+    //    //} else {
+    //    //    header.classList.remove("sticky");
+    //    //    header.classList.remove("bg-white");
+    //    //}
+    //}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
 <script src="js/contratista_aux.js"></script>
-<script src="https://d3js.org/d3.v4.min.js" integrity="sha384-1EOYqz4UgZkewWm70NbT1JBUXSQpOIS2AaJy6/evZH+lXOrt9ITSJbFctNeyBoIJ" crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 

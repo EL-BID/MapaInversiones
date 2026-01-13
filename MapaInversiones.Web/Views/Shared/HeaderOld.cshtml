@@ -1,0 +1,206 @@
+﻿<header class="header">
+    <!-- TOP HEADER -->
+    <nav class="header-top">
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-auto">
+                    <div class="header-top-links">
+                        <!-- secondary pages -->
+                        <ul class="nav">
+
+                            <li class="nav-item">
+                                <a href="/Acercade" title="Acerca de Datos fiscales">
+                                    Acerca de Datos fiscales
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/CentroAyuda" title="LinkedIn">
+                                    Centro de ayuda
+                                </a>
+                            </li>
+                            @if (User.Identity.IsAuthenticated)
+                            {<text>
+                                    <li>
+                                            <form method="post" class="form-inline" action="/Users/LogOff">
+                                                <button type="submit" class="btn-sesionHome" role="button">Cerrar sesión</button>
+                                                @Html.AntiForgeryToken()
+                                            </form>                                      
+                                                                   
+                                    </li>
+                                    <li>
+                                        <a href="#!" title="@User.Identity.Name">
+                                            @User.Identity.Name
+                                        </a>
+                                    </li>
+                            </text>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="/Login" title="Inicie sesión">
+                                    Inicie sesión
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Register" title="Registrese">
+                                    ¿Nuevo usuario?
+                                </a>
+                            </li>
+                        }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End header top -->
+    <!-- Begin header fixed -->
+    <nav class="header-fixed">
+        <div class="container">
+            <div class="row flex-nowrap align-items-center justify-content-between">
+                <div class="col-auto d-block d-lg-none header-fixed-col">
+                    <div class="main-mnu-btn">
+                        <span class="bar bar-1"></span>
+                        <span class="bar bar-2"></span>
+                        <span class="bar bar-3"></span>
+                        <span class="bar bar-4"></span>
+                    </div>
+                </div>
+                <div class="col-auto header-fixed-col">
+                    <!-- Begin logo -->
+                    <a href="/" class="logo logo-ico-widht-text" title="TRANSPARENCIA FISCAL">
+                        <!--<img class="lazy logo-ico" data-src="" width="36" height="35" src="" alt="">-->
+                        <span class="logo-text">TRANSPARENCIA FISCAL</span>
+                    </a>
+                </div>
+                <div class="col-lg col-auto col-static header-fixed-col">
+                    <div class="row flex-nowrap align-items-center justify-content-end">
+                        <div class="col-auto header-fixed-col d-none d-lg-block col-static">
+                            <!-- Begin main menu -->
+                            <nav class="main-mnu">
+                                <ul class="main-mnu-list">
+
+                                    <li class="main-mnu-item-has-child">
+                                        <a href="#!" data-title="Planificación">
+                                            <span>Planificación</span>
+                                            <i class="material-icons">expand_more</i>
+                                        </a>
+                                        <ul>
+                                            <li><a href="" data-title="Proceso de planeación"><span>Proceso de planeación</span></a></li>
+                                            <li><a href="/PlanNacional" data-title="Plan Nacional de Desarrollo"><span>Plan Nacional de Desarrollo</span></a></li>
+                                            <li><a href="" data-title="Planes operativos institucionales"><span>Planes operativos institucionales</span></a></li>
+                                            <li><a href="" data-title="Planes de acción nacional"><span>Planes de acción nacional</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="main-mnu-item-has-child open main-mnu-item-mega-mnu">
+                                        <a href="#!" data-title="Presupuesto">
+                                            <span>Presupuesto</span>
+                                            <i class="material-icons">expand_more</i>
+                                        </a>
+                                        <ul>
+                                            <li><a href="" data-title="Proceso presupuestario"><span>Proceso presupuestario</span></a></li>
+                                            <li><a href="/PresupuestoGeneral" data-title="Presupuesto general de la nación"><span>Presupuesto general de la nación</span></a></li>
+                                            <li><a href="" data-title="Financiación"><span>Financiación</span></a></li>
+                                            <li><a href="" data-title="Atención a emergencias"><span>Atención a emergencias</span></a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="main-mnu-item-has-child main-mnu-item-mega-mnu">
+                                        <a href="#!" data-title="Datos abiertos">
+                                            <span>Datos abiertos</span>
+                                        </a>
+
+                                    </li>
+                                    <li class="main-mnu-item-has-child">
+                                        <a href="#!" data-title="Participación ciudadana">
+                                            <span>Participación ciudadana</span>
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                            </nav><!-- End main menu -->
+                        </div>
+                        <div class="col-auto header-fixed-col col-static">
+                            <!-- Begin header actions -->
+                            <ul class="header-actions">
+                                <!-- Begin header search -->
+                                <li>
+                                    <div class="header-search">
+                                        <div class="header-action-icon header-search-ico">
+                                            <i class="material-icons md-22 header-search-ico-search">search</i>
+                                            <i class="material-icons md-22 header-search-ico-close">close</i>
+                                        </div>
+                                        <form action="#!" method="post" class="header-search-form">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="form-field">
+                                                            <label for="field-search" class="form-field-label">Search...</label>
+                                                            <input type="search" class="form-field-input" name="Search" value="" autocomplete="off" required="required" id="field-search">
+                                                            <button type="submit" class="header-search-btn"><i class="material-icons md-22">search</i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </li><!-- End header search -->
+                                <!-- Begin header navbar -->
+                                <li class="d-block d-lg-none">
+                                    <div class="header-navbar">
+                                        <div class="header-navbar-btn">
+                                            <i class="material-icons md-24">more_vert</i>
+                                        </div>
+                                        <ul class="header-navbar-content">
+
+                                            <li>
+                                                <a href="#!" title="Acerca de Datos fiscales">
+                                                    Acerca de Datos fiscales
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#!" title="LinkedIn">
+                                                    Centro de ayuda
+                                                </a>
+                                            </li>
+                                            @if (User.Identity.IsAuthenticated)
+                                            {<text>
+                                                    <li>
+                                                        <a href="/Users/LogOff" title="Cerrar sesión">
+                                                            Cerrar sesión
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#!" title="@User.Identity.Name">
+                                                            @User.Identity.Name
+                                                        </a>
+                                                    </li>
+                                            </text>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <a href="/Login" title="Inicie sesión">
+                                                    Inicie sesión
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/Register" title="Registrarse">
+                                                    ¿Nuevo usuario?
+                                                </a>
+                                            </li>
+                                        }
+
+                                        </ul>
+                                    </div>
+
+                                </li><!-- End header navbar -->
+                            </ul><!-- End header actions -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- End header fixed -->
+</header><!-- End header -->

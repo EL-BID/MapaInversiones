@@ -40,6 +40,7 @@ namespace PlataformaTransparencia.Negocios
         {
             int WordsCount = 0;
             SolrQueryResults<Modelos.SolrResponse> SolrResponse;
+            //SolrQuery query2 = new SolrQuery("");
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -94,6 +95,7 @@ namespace PlataformaTransparencia.Negocios
             QueryOptions query_options = new QueryOptions {
                 StartOrCursor = new StartOrCursor.Start(0),
                 Rows = 10//,
+                //OrderBy = { new SortOrder("principal", Order.ASC) }
             };
 
             SolrQuery query = new SolrQuery(searchString);

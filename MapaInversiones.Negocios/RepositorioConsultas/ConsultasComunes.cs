@@ -35,9 +35,29 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             List<TotalContrato> objreturn = new();
             using (var DataModel = new TransparenciaDB())
             {
-              
+                //listInfo = await(from aprobado in DataModel.ObtenerEncabezadoContratos
+                //                 where aprobado.TipoProyecto.ToUpper().Equals("NACIONAL")
+                //                 where aprobado.IdSector == id_sector
+                //                 select new InfoProyectos
+                //                 {
+                //                     IdProyecto = aprobado.IdProyecto,
+                //                     NombreProyecto = aprobado.NombreProyecto
+                //                 }).OrderBy(p => p.NombreProyecto).ToListAsync();
             }
-               
+                //using (PISGREntities DataModel = new PISGREntities())
+                //{
+                //  DataModel.Configuration.AutoDetectChangesEnabled = false;
+                //  DataModel.Configuration.LazyLoadingEnabled = false;
+                //  objreturn = (from data in DataModel.ObtenerEncabezadoContratos(Entidad, tipoEmergencia)
+                //               select new TotalContratos
+                //               {
+                //                 MonedaContrato = data.MonedaContrato,
+                //                 EstadoContrato = data.EstadoContrato,
+                //                 ValorContratado = data.ValorContratado,
+                //                 NroContratos = data.NroContratos
+                //               }
+                //                                ).ToList();
+                //}
             return objreturn;
         }
         public static List<TotalProceso> ObtenerEncabezadoProcesosGestionContratos(out int? numProcesosCancelados, out decimal? valProcesosCancelados, int? tipoEmergencia, string Entidad = null)
@@ -45,13 +65,39 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             List<TotalProceso> objreturn = new();
             numProcesosCancelados = 0;
             valProcesosCancelados = 0;
-            
+            //ObjectParameter numProcesosCanceladosParameter = new("TOTALPROCESOSCANCELADOS", 0);
+            //ObjectParameter valProcesosCanceladosParameter = new("VALORPROCESOSCANCELADOS", 0);
+            //using (PISGREntities DataModel = new PISGREntities())
+            //{
+            //  DataModel.Configuration.AutoDetectChangesEnabled = false;
+            //  DataModel.Configuration.LazyLoadingEnabled = false;
+            //  objreturn = (from data in DataModel.ObtenerEncabezadoProcesos(Entidad, numProcesosCanceladosParameter, valProcesosCanceladosParameter, tipoEmergencia)
+            //               select new TotalProcesos
+            //               {
+            //                 MonedaProceso = data.MonedaProceso,
+            //                 EstadoProceso = data.EstadoProceso,
+            //                 ValorProceso = (double?)data.ValorProceso,
+            //                 NroProcesos = data.NroProcesos
+            //               }).ToList();
+            //  if (numProcesosCanceladosParameter.Value.Equals(String.Empty) || numProcesosCanceladosParameter.Value.Equals(System.DBNull.Value)) { numProcesosCancelados = 0; } else { numProcesosCancelados = int.Parse(numProcesosCanceladosParameter.Value.ToString()); }
+            //  if (valProcesosCanceladosParameter.Value.Equals(String.Empty) || valProcesosCanceladosParameter.Value.Equals(System.DBNull.Value)) { valProcesosCancelados = 0; } else { valProcesosCancelados = decimal.Parse(valProcesosCanceladosParameter.Value.ToString()); }
+            //}
             return objreturn;
         }
         public static List<EstadoContratos> ObtenerEstadosGestionContratos(int? tipoEmergencia)
         {
             List<EstadoContratos> objreturn = new();
-           
+            //using (PISGREntities DataModel = new PISGREntities())
+            //{
+            //  DataModel.Configuration.AutoDetectChangesEnabled = false;
+            //  DataModel.Configuration.LazyLoadingEnabled = false;
+            //  objreturn = (from data in DataModel.EstadosGestionContratos(tipoEmergencia)
+            //               select new EstadoContratos
+            //               {
+            //                 Nombre = data.Nombre,
+            //                 EstadoContrato = data.EstadoContrato
+            //               }).ToList();
+            //}
             return objreturn;
         }
         public List<Infrastructura.DataModels.Proyecto> ObtenerProyectosConsistentes2(FiltroBusquedaProyecto filtros)
@@ -167,7 +213,9 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
             Func<PlataformaTransparencia.Infrastructura.DataModels.Proyecto, bool> predicate = null;
             List<PlataformaTransparencia.Infrastructura.DataModels.Proyecto> list = new List<Infrastructura.DataModels.Proyecto>();
             string search = string.Empty;
-
+            //string criterioEstadosPendientes = ArchivoRecursosNegocioMapaInversiones.CriterioEstadosPendientesSegunHistorico;
+            //string criterioEstadosEjecucion = ArchivoRecursosNegocioMapaInversiones.CriterioEstadosEjecucion;
+            //string criterioEstadosEjecutados = ArchivoRecursosNegocioMapaInversiones.CriterioEstadosEjecutado;
 
             string key = "ObtenerProyectosConsistentes" + ObtenerKeyPorEstadoFiltro(filtros);
             if (!ShortCacheHelper.Get<List<PlataformaTransparencia.Infrastructura.DataModels.Proyecto>>(key, out list))
@@ -210,6 +258,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                     && (filtros.CodigosMunicipios.Contains(pxe.IdMunicipio) || (filtros.CodigosMunicipios.Count == 0)))
                                     && (filtros.CodigosSector.Contains(aprobado.IdSector) || (filtros.CodigosSector.Count == 0))
                                     && (filtros.CodigosOrgFinanciador.Contains(int.Parse(financiador.IdOrganismoFinanciador)) || (filtros.CodigosOrgFinanciador.Count == 0))
+                                    //&& (filtros.CodigosEntidadEjecutora.Contains(int.Parse(entEjecutora.IdEntidad)) || (filtros.CodigosEntidadEjecutora.Count == 0))
                                     select proyecto).Distinct<PlataformaTransparencia.Infrastructura.DataModels.Proyecto>().ToList<PlataformaTransparencia.Infrastructura.DataModels.Proyecto>();
                         }
                     }
@@ -394,6 +443,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                         Megusta = aprobado.MeGusta,
                                         Comentarios = aprobado.Comentarios,
 
+                                        //).Distinct<InfoProyectos>().ToList<InfoProyectos>().GetRange(0,1);
                                     }).Distinct<InfoProyectos>().ToList<InfoProyectos>();
                     }
                     else
@@ -956,6 +1006,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                 Location = string.Empty,// filtros.CodigosDepartamentos.Count() > 0 ? filtros.CodigosDepartamentos.FirstOrDefault() : proyecto.NombreProyecto.ToUpper(),
                                 State = estado.NombreEstado
                             }).ToList().Distinct(new PredicateEqualityComparer<InfoProyectos>((x, y) => (x.IdProyecto == y.IdProyecto)));
+                    //}).Distinct(new PredicateEqualityComparer<InfoProyectos>((x, y) => (x.IdProyecto == y.IdProyecto && x.NombreMunicipio == y.NombreMunicipio)));
                     if (!string.IsNullOrEmpty(filtros.ContieneNombreProyecto))//Busqueda no sensible a acentos
                     {
                         search = new String(filtros.ContieneNombreProyecto.ToLower().Trim().Normalize(NormalizationForm.FormD).Where(c => c < 128).ToArray());
@@ -1430,7 +1481,8 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                                    where c < '\x0080'
                                                                    select c).ToArray<char>()).ToLower().Contains(search.ToLower());
                         }
-
+                        //listInfo = listInfo.Where<InfoProyectos>(predicate).ToList<InfoProyectos>();
+                        //PENDIENTE REVISAR
                     }
                 }
                 ShortCacheHelper.Add<List<InfoProyectos>>(listInfo, key);
@@ -1466,10 +1518,11 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                              {
                                  InformacionGeneral = new InformacionGeneralProyectoPdf
                                  {
-
+                                     //CodigoBIP = proyectoInversion.CodigoSNIP,
                                      AnioInicio = proyectoInversion.AnioInicioProyecto.ToString(),
                                      AnioFinalizacion = proyectoInversion.AnioFinProyecto.ToString(),
-
+                                     //TotalBeneficiariosHombres =  (proyectoInversion.NumeroBeneficiariosHombres ?? 0).ToString(),
+                                     //TotalBeneficiariosMujeres = (proyectoInversion.NumeroBeneficiariosMujeres ?? 0).ToString(),
                                      InstitucionEjecutoraPrincipal = proyectoInversion.EntidadEjecutora,
                                      FechaInicio = proyectoInversion.FechaInicioProyecto.ToShortDateString(),
                                      FechaFinalizacion = proyectoInversion.FechaFinProyecto.ToShortDateString(),
@@ -1482,10 +1535,11 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                      Sector = proyectoInversion.NombreSector,
                                      Duracion = $"{Math.Round(proyectoInversion.DuracionProyecto ?? 0, 2).ToString().Replace(',', '.')} años",
                                      CostoEstimado = Math.Round(proyectoInversion.VlrTotalProyectoTodasLasFuentes, 2),
-
+                                     //TasaCambio= proyectoInversion.TasaCambio.HasValue? Math.Round(proyectoInversion.TasaCambio.Value,4):0,
+                                     //CostoOtraMoneda= proyectoInversion.TasaCambio.HasValue ? Math.Round(proyectoInversion.TasaCambio.Value==1?0:  proyectoInversion.TasaCambio.Value* proyectoInversion.VlrTotalProyectoTodasLasFuentes, 2) : 0,
                                      Nombre = proyectoInversion.NombreProyecto,
                                      Objetivo = proyecto.ObjetivoGeneral,
-
+                                     //MonedaCostoProyecto= proyectoInversion.IDMoneda
                                  },
                                  InformacionFinanciera = new InformacionFinancieraProyectoPdf
                                  {
@@ -1526,6 +1580,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
     [ExcludeFromCodeCoverage]
     internal static class PredicateBuilder
     {
+        //public static Expression<Func<T, bool>> True<T>() { return f => true; }
         public static Expression<Func<T, bool>> False<T>() { return f => false; }
 
         public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> expr1,
@@ -1542,6 +1597,13 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
 
         }
 
+        //public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> expr1,
+        //                                                     Expression<Func<T, bool>> expr2)
+        //{
+        //    var invokedExpr = Expression.Invoke(expr2, expr1.Parameters.Cast<Expression>());
+        //    return Expression.Lambda<Func<T, bool>>
+        //          (Expression.AndAlso(expr1.Body, invokedExpr), expr1.Parameters);
+        //}
 
         // Helper class to replace all parameters with the specified one
         public class ParameterReplacer : ExpressionVisitor
@@ -1584,6 +1646,10 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                 bReturn = this.predicate(x, y);
             }
 
+            //if (y != null)
+            //{
+            //    return false;
+            //}
 
             return bReturn;
         }

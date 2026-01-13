@@ -78,7 +78,11 @@
         
 
             <form class="contractList bgSoftGray p15">
+                @*<div class="form-group">
+                <label class="year" for="year">Año</label>
+                <select class="form-control" id="top_contratista_periodos"></select>
 
+                </div>*@
                 <div class="form-group" id="grpentidad">
                     <label class="year" for="entidadProcesoG">Entidad</label>
 
@@ -104,19 +108,19 @@
 
 
             </form>
-                <div class="link_external disNone">
+                <div class="link_external p-4">
                 <span> Información suministrada por:</span>
-                    <a href="https://www.dgcp.gob.do/" target="_blank" rel="noopener"><img class="img-responsive text-center" title="ir a la Dirección General de Contrataciones Públicas (DGCP)" src="../img/logo_dgcp.png"></a>
+                    <a href="https://www.dgcp.gob.do/" target="_blank"><img class="img-fluid" title="ir a la Dirección General de Contrataciones Públicas (DGCP)" src="../img/logo_dgcp.png"></a>
                 <br />
                 <div class="sepH"></div>
                 <br />
                 <p>Para mayor información consulte:</p>
-                    <a href="https://comunidad.comprasdominicana.gob.do/Public/Tendering/ContractNoticeManagement/Index?currentLanguage=es-DO&amp;Country=DO&amp;Theme=DGCP&amp;Page=Login" target="_blank" rel="noopener"><img class="img-responsive" title="ir al portal transaccional" src="../img/logo_trasaccional.jpg"></a>
+                    <a href="https://comunidad.comprasdominicana.gob.do/Public/Tendering/ContractNoticeManagement/Index?currentLanguage=es-DO&amp;Country=DO&amp;Theme=DGCP&amp;Page=Login" target="_blank"><img class="img-fluid" title="ir al portal transaccional" src="../img/logo_trasaccional.jpg"></a>
                 <br>
                 <div class="sepH"></div>
                 <br />
                 <p class="text-center">Powered by:</p>
-                    <a href="https://www.open-contracting.org/es/data-standard/" target="_blank" rel="noopener"><img class="img-responsive" title="conocer mas de Estándar de Datos para las Contrataciones Abiertas (OCDS)" src="https://ocp.imgix.net/wp-content/uploads/2020/01/OCDS-logo-grey.png"></a>
+                    <a href="https://www.open-contracting.org/es/data-standard/" target="_blank"><img class="img-fluid" title="conocer mas de Estándar de Datos para las Contrataciones Abiertas (OCDS)" src="../img/logo-ocp.png"></a>
             </div>
             </div>
 
@@ -140,11 +144,11 @@
 <input type="hidden" id="tipoemergencia" value="@Model.tipoEmergencia" />
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha384-EZJUCwX9EfOmrML5/1WejmhFx/azi54nnVfOndPu+VTQKOHabXXC9eS7VFdkLz0V" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
 <script src="js/procesoscanceladosemergencia_aux.js"></script>
-<script src="https://d3js.org/d3.v4.min.js" integrity="sha384-1EOYqz4UgZkewWm70NbT1JBUXSQpOIS2AaJy6/evZH+lXOrt9ITSJbFctNeyBoIJ" crossorigin="anonymous"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 
 
 @section DataBody {

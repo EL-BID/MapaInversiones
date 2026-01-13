@@ -23,7 +23,7 @@ namespace PlataformaTransparencia.Negocios.Interfaces
     public List<InfoRecursosEmergenciaPerObjeto> ObtenerRecursosPerProcesosPorTipoEmergencia(int tipoEmergencia);
     public List<InfoRecursosEmergenciaPerObjeto> ObtenerRecursosPorOrganismoFinanciadorPorTipoEmergencia(int tipoEmergencia);
 
-    public List<InfograficoFuentePrograma> ObtDistribucionPresupuestalPorTipoEmergencia(int? tipoEmergencia);
+    public List<InfograficoFuentes_Nivel_1> ObtDistribucionPresupuestalPorTipoEmergencia(int? tipoEmergencia, int? anyo);
 
   }
 }

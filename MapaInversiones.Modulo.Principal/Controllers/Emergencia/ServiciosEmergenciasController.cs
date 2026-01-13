@@ -68,7 +68,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
                 OrigenInformacion = TipoEmergencia.ToString()
             };
 
-
+            // var data = req.Content.ReadAsStringAsync().Result;// to extract data
             ModelNombreEntidad objReturn = new ModelNombreEntidad();
             try
             {
@@ -118,12 +118,12 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
 
 
         [HttpGet("ObtDistribucionPresupuestalGeneralPorTipoEmergencia")]
-        public ModelCovidFuentesData ObtDistribucionPresupuestalGeneralPorTipoEmergencia()
+        public ModelCovidFuentesData ObtDistribucionPresupuestalGeneralPorTipoEmergencia(int? anyo)
         {
             ModelCovidFuentesData objReturn = new ModelCovidFuentesData();
             try
             {
-                objReturn.distribucionItem = _cargapresupuestoemergencia.ObtDistribucionPresupuestalPorTipoEmergencia(null);
+                objReturn.distribucionItem = _cargapresupuestoemergencia.ObtDistribucionPresupuestalPorTipoEmergencia(null,anyo);
                 objReturn.Status = true;
                 return objReturn;
             }
@@ -148,6 +148,8 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
             }
             catch (Exception)
             {
+                //objReturn.Status = false;
+                //objReturn.Message = "Error: " + exception.Message;
                 return objReturn;
             }
         }

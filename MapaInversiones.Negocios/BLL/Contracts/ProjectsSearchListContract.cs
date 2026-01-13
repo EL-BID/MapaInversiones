@@ -69,6 +69,7 @@ namespace PlataformaTransparencia.Negocios.Contracts
             this.DataProjectsSearchList.Status = true;
             try
             {
+                filtroListadoPrueba filtro_aux = new filtroListadoPrueba();
                 List<objectProjectsSearchMap> source = new List<objectProjectsSearchMap>();
                 FiltroBusquedaProyecto filtro = this.ObtenerFiltroPorParametros();
                 decimal valorTotalTodasFuentes = 0M;
@@ -95,7 +96,23 @@ namespace PlataformaTransparencia.Negocios.Contracts
                     this.DataProjectsSearchList.Status = true;
                 }
 
+                filtro_aux.CodigosRegiones = filtro.CodigosRegion;
+                filtro_aux.CodigosDepartamentos = filtro.CodigosDepartamentos;
+                filtro_aux.CodigosMunicipios = filtro.CodigosMunicipios;
+                filtro_aux.CodigosEstado = filtro.CodigosEstado;
+                filtro_aux.CodigosSector = filtro.CodigosSector;
+                filtro_aux.CodigosOrgFinanciador = filtro.CodigosOrgFinanciador;
+                filtro_aux.fechasEjecucion = filtro.fechasEjecucion;
 
+                DataProjectsSearchList.filtro = filtro_aux;
+
+
+                //CMC: Agregar el Ejecutor a los proyectos
+                //foreach ( objectProjectsSearchMapProject proyecto in this.DataProjectsSearchList.objects)
+                //{
+
+                //    proyecto.Ejecutor = string.Concat(new BllProjectProfile().NameActorByProject(CommonConstants.CodigoEjecutor, Convert.ToInt32(proyecto.location)).Select(p => p.Nombre));
+                //}
             }
             catch (Exception exception)
             {

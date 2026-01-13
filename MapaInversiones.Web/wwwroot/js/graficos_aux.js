@@ -1,4 +1,6 @@
-﻿
+﻿//loadBarChartGraph("divGraphBarras");
+//loadDonaGraph("divGraphDona");
+//loadTreeMapGraph("divTreemap");
 
 prueba3();
 
@@ -53,6 +55,8 @@ function prueba3() {
     d3.select("#divGraphDonaPerFuentes g")
         .selectAll("path")
         .data(data)
+        //.attr("width", width)
+        //.attr("height", height)
         .enter()
         .append("path")
         .attr("d", arcGen)
@@ -70,7 +74,7 @@ function prueba3() {
         })
         .attr("y", d => d3.pointRadial((d.startAngle + d.endAngle -0.1 )/2, (50 + 90) / 2)[1])
         .attr("text-anchor", d => {
-
+            //return (d.startAngle + d.endAngle) / 2 > Math.PI ? "end" : "start";
             return "middle";
         })
         .text(d => "T")
@@ -141,6 +145,7 @@ function loadDonaGraph(divContenedor) {
             groupBy: "labelGroup",
             label: d => d["porcentaje"] + "%",
             height: 665,
+            //innerRadius: 50,
             padAngle: 0.01,
             legend: true,
             legendPosition: function () {
@@ -291,7 +296,9 @@ function loadBarChartGraph(divContenedor) {
                     title: "Millones de Lempiras",
                     scale: "pow",
                     ticks:false,
-
+                    //tickFormat: function (d) {
+                    //    return " ";
+                    //}
                 },
                 yConfig: {
                     title: "Sectores",
@@ -371,7 +378,7 @@ function loadTreeMapGraph(divContenedor) {
     }, 0);
 
     $.each(objData, function (key, item) {
-
+        //console.log(item.com);
         var porc_aux = (item.rawValueDouble / sumaTotal) * 100;
         item.porcentaje = porc_aux;
     });

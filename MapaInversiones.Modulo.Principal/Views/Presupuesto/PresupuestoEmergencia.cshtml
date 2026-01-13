@@ -1,0 +1,1225 @@
+﻿@model PlataformaTransparencia.Modelos.ModelPresupuestoEmergenciaData
+
+@{
+    //Layout = "~/Views/Shared/_LayoutEmergencias.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.SectionId = "section-contratosCovid";
+}
+@*@{
+        ViewBag.Title = "MapaInversiones + Módulo COVID-19 República Dominicana";
+        ViewBag.SectionId = "section-homecovid";
+        Layout = "~/Views/Shared/_LayoutEmergencias.cshtml";
+    }*@
+
+<!-- Bootstrap Core CSS -->
+<link href="~/content/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="~/content/scrolling-nav.css" rel="stylesheet">
+<link href="~/content/css/MIVCustomSkin.css" rel="stylesheet" type="text/css">
+<link href="~/content/css/module_COVID.css" rel="stylesheet" />
+<link href="~/content/css/customizedScrollBar.css" rel="stylesheet" type="text/css">
+<link href="~/content/css/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css">
+<style>
+    .node rect {
+        cursor: move;
+        fill-opacity: .8;
+        shape-rendering: crispEdges;
+    }
+
+    .node text {
+        pointer-events: none;
+        /*text-shadow: 0 1px 0 #fff;*/
+    }
+
+    .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .1;
+    }
+
+        .link:hover {
+            stroke-opacity: .2;
+        }
+
+    .arc text {
+        font: 12px sans-serif;
+        text-anchor: middle;
+        font-weight: bold;
+    }
+
+    .arc path {
+        stroke: #fff;
+    }
+
+    .toolTip {
+        position: absolute;
+        display: none;
+        width: auto;
+        height: auto;
+        background: none repeat scroll 0 0 white;
+        border: 0 none;
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font: 12px sans-serif;
+        padding: 5px;
+        text-align: center;
+    }
+</style>
+
+
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-bottom" class="contractProfile">
+
+    <section id="s0" class="s0-section">
+        <div class="bgBlueOverlay">&nbsp;</div><!-- DON'T EREASE-->
+        <div class="container">
+            <div class="row">
+                <!-- intro map-->
+                <div class="col-md-8 col-md-offset-2">
+                    <h1 class="mainTit_t1 text-center" id="nomLocation">
+                        @*@if (@Model.nombreUnidadCompra != null)
+                            {
+                                <text>
+                                    @Model.nombreUnidadCompra
+                                </text>
+                            }
+                            else
+                            {
+                                <text>*@
+                        Ejecución para atender emergencia @Model.NombreEmergencia
+                        @*</text>
+
+                            }*@
+
+                    </h1>
+
+                    <div class="col-md-8 col-md-offset-2">
+                        <p class="text-center">Productos bienes y servicios</p>
+                    </div>
+                </div>
+
+                @*<div class="col-md-8 col-md-offset-2">
+                        <div class="col-md-3">
+                            @if (Model.numContratosActivos > 0)
+                            {
+                                <span class="h3"> @Model.numContratosActivos </span>
+                            }
+                            <span>Procesos</span>
+
+                        </div>
+                        <div class="col-md-3">
+                            @if (Model.numContratosActivos > 0)
+                            {
+                                <span class="h3"> @Model.numContratosActivos </span>
+                            }
+                            <span>Contratos</span>
+
+                        </div>
+                        <div class="col-md-3">
+                            <span class="h3"> RD$ @String.Format("{0:n0}", @Model.valContratosActivos / 1000000) Millones</span>
+                            <span>Valor total de los contratos</span>
+
+                        </div>
+                    </div>*@
+            </div>
+
+        </div>
+    </section>
+    <section class="contratos-Data">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="headTit">
+                        <!--<img src="/content/img/covid/icchart.svg">--> <h2>Distribución de la ejecución de gastos</h2>
+                        <div class="clearfix"></div>
+                        <p class="text-center">Explora la distribución de las fuentes internas y externas de los recursos, destinados a cubrir la emergencia @Model.NombreEmergencia </p>
+                    </div>
+                    <!-- VIEW OPTIONS-->
+                    <div class="col-md-10col-md-offset-1">
+                        <div class="Options">
+                            <div class="switchTable" id="filtro_iconos" opc="">
+                                <p class="vis-none">Tipo de visualización</p>
+                                <a role="button" id="btnGastoAdminCentral" codigo="gastoAdminCentral" class="tipo_presupuesto btn activo">
+                                    <span class="txt-bold">ADMINISTRACIÓN CENTRAL</span>
+                                </a>
+                                <a codigo="gastoDescentralizado" role="button" class="tipo_presupuesto btn ">
+                                    <span class="txt-bold">ADMINISTRACIÓN DESCENTRALIZADA</span>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div id="divListadoRecursosObjeEnte">
+                        <!--TABLA COMPARATIVA-->
+                        <input type="hidden" id="migapanlistado" value="" />
+                        <div class="comparativeTable" id="divListadoRecursosAdminCentral">
+                            @if (Model.RecursosAdministracionCentral.Count() > 0)
+                            {
+                                int i = 0;
+                                int j = 0;
+                                int k = 0;
+                                int l = 0;
+                                decimal total_avance = 0;
+                                decimal total_presupuesto = 0;
+                                <div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                    @foreach (var item in Model.RecursosAdministracionCentral)
+                                    {
+                                        var nomCollapse = "collapseAdminOne_" + i.ToString() + "_" + j.ToString();
+                                        var nomHeading = "headingAdminOne_" + i.ToString() + "_" + j.ToString();
+                                        total_avance += item.total_avance;
+                                        total_presupuesto += item.total_presupuesto;
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="@nomHeading">
+                                                <div class="panel-title">
+                                                    <a role="button" id="a_@item.IdItem" class="prueba_enlace" item="@item.IdItem" data-toggle="collapse" data-parent="#accordion" href="#@nomCollapse" aria-expanded="true" aria-controls="@nomCollapse">
+                                                        <div class="head">
+                                                            <div class="mainData">
+                                                                <span class="labelTit">Institución</span>
+                                                                <span class="td1"> @item.NomItem</span>
+                                                            </div>
+                                                            @*<div class="data1">
+                                                                    <span class="labelTit">Presupuestado</span>
+                                                                    <span class="td1">RD $ @String.Format("{0:n2}", @item.total_presupuesto / 1000000) Millones</span>
+                                                                </div>*@
+                                                            <div class="data1">
+                                                                <span class="labelTit">Ejecutado</span>
+                                                                <span class="td1">RD $ @String.Format("{0:n2}", @item.total_avance / 1000000) Millones</span>
+                                                            </div>
+                                                            @*<div class="data1">
+                                                                    <span class="labelTit">Cumplimiento</span>
+                                                                    <span class="td1">@String.Format("{0:n2}", @item.porcentajeCumplimiento) %</span>
+                                                                </div>*@
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div id="@nomCollapse" class="panel-collapse collapse nivel1" role="tabpanel" aria-labelTitledby="@nomHeading" item="@item.NomItem.ToUpper()">
+                                                <div class="panel-body">
+                                                    @foreach (var ent in item.Detalles)
+                                                    {
+                                                        var nomNivel2 = "accordionAdmin_l2_" + i.ToString() + "_" + j.ToString();
+                                                        var headNivel2 = "headLevelAdmin2_" + i.ToString() + "_" + j.ToString();
+                                                        var panelHijo2 = "cAdmin2_" + j.ToString() + "_" + k.ToString();
+                                                        var nomHeadLevel3 = "headLevelAdmin3_" + j.ToString() + "_" + k.ToString();
+                                                        <div class="panel-group nivel22" id="@nomNivel2" role="tablist" aria-multiselectable="true">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading" role="tab" id="@headNivel2">
+                                                                    <div class="panel-title">
+                                                                        <a role="button" data-toggle="collapse" data-parent="#@nomNivel2" href="#@panelHijo2" aria-expanded="true" aria-controls="@nomCollapse">
+                                                                            <div class="head">
+                                                                                <div class="data2 mainData">
+                                                                                    <span class="labelTit">Unidad ejecutora</span>
+                                                                                    <span class="td1p">@ent.NomCapitulo</span>
+                                                                                </div>
+                                                                                @*<div class="data2">
+                                                                                        <span class="labelTit">Presupuestado</span>
+                                                                                        <span class="td1p">RD $ @String.Format("{0:n2}", @ent.presupuesto / 1000000) Millones</span>
+                                                                                    </div>*@
+                                                                                <div class="data2">
+                                                                                    <span class="labelTit">Ejecutado</span>
+                                                                                    <span class="td1p">RD $ @String.Format("{0:n2}", @ent.avance / 1000000) Millones</span>
+                                                                                </div>
+                                                                                @*<div class="data2">
+                                                                                        <span class="labelTit">Cumplimiento</span>
+                                                                                        <span class="td1">@String.Format("{0:n2}", @ent.porcentajeCumplimiento) %</span>
+                                                                                    </div>*@
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="@panelHijo2" class="panel-collapse collapse level3 nivel2" role="tabpanel" aria-labelledby="@nomHeadLevel3" entidad="@ent.NomCapitulo.ToUpper()">
+                                                                    <div class="panel-body">
+                                                                        @foreach (var act in ent.Detalles)
+                                                                        {
+                                                                            var nomNivel3 = "accordionAdmin_l3_" + j.ToString() + "_" + k.ToString();
+                                                                            var nomCnivel3 = "cAdmin3_" + j.ToString() + "_" + k.ToString();
+                                                                            <div class="panel-group nivel33" id="@nomNivel3" role="tablist" aria-multiselectable="true">
+                                                                                <div class="panel panel-default">
+                                                                                    <div class="panel-heading" role="tab" id="@nomHeadLevel3">
+                                                                                        <div class="panel-title">
+                                                                                            <a role="button" data-toggle="collapse" data-parent="#@nomNivel3" aria-expanded="true" aria-controls="@nomCollapse">
+                                                                                                <div class="head">
+                                                                                                    <div class="data2 mainData">
+                                                                                                        <span class="labelTit">Cuenta</span>
+                                                                                                        <span class="td1p">@act.NomConcepto</span>
+                                                                                                    </div>
+                                                                                                    @*<div class="data2">
+                                                                                                            <span class="labelTit">Presupuestado</span>
+                                                                                                            <span class="td1p">RD$ @String.Format("{0:n2}", @act.presupuesto / 1000000) Millones</span>
+                                                                                                        </div>*@
+                                                                                                    <div class="data2">
+                                                                                                        <span class="labelTit">Ejecutado</span>
+                                                                                                        <span class="td1p">RD$ @String.Format("{0:n2}", @act.avance / 1000000) Millones</span>
+                                                                                                    </div>
+                                                                                                    @*<div class="data2">
+                                                                                                            <span class="labelTit">Cumplimiento</span>
+                                                                                                            <span class="td1p">@String.Format("{0:n2}", @act.porcentajeCumplimiento) %</span>
+                                                                                                        </div>*@
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            k++;
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        j++;
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        i++;
+                                    }
+                                </div>
+                                <div id="divAdminTotales" class="summUp">
+                                    <div class="panel-title">
+
+                                        <div class="head">
+                                            <div class="mainData">
+                                                <span class="labelTit">&nbsp;</span>
+                                                <span class="td1">Totales</span>
+                                            </div>
+                                            @*<div class="data2">
+                                                    <span class="labelTit">Presupuestado</span>
+                                                    <span class="td1">RD $ @String.Format("{0:n0}", @total_presupuesto / 1000000) Millones</span>
+                                                </div>*@
+                                            <div class="data2">
+                                                <span class="labelTit">Ejecutado</span>
+                                                <span class="td1">RD $ @String.Format("{0:n0}", @total_avance / 1000000) Millones</span>
+                                            </div>
+                                            @*<div class="data2">
+                                                    <span class="labelTit">Cumplimiento</span>
+                                                    <span class="td1">@String.Format("{0:n2}", @total_avance * 100 / @total_presupuesto)%</span>
+                                                </div>*@
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div id="divListadoRecursosObjeEnteNoCentral" hidden="hidden">
+                        <!--TABLA COMPARATIVA-->
+                        <input type="hidden" id="migapanlistado" value="" />
+                        <div class="comparativeTable" id="divListadoRecursosAdminNoCentral">
+                            @if (Model.RecursosAdministracionDescentralizado.Count() > 0)
+                            {
+                                int i = 0;
+                                int j = 0;
+                                int k = 0;
+                                int l = 0;
+                                decimal total_avance = 0;
+                                decimal total_presupuesto = 0;
+                                <div class="panel-group accordion" id="accordionAdminNoCentral" role="tablist" aria-multiselectable="true">
+                                    @foreach (var item in Model.RecursosAdministracionDescentralizado)
+                                    {
+                                        var nomCollapse = "collapseOne_" + i.ToString() + "_" + j.ToString();
+                                        var nomHeading = "headingOne_" + i.ToString() + "_" + j.ToString();
+                                        total_avance += item.total_avance;
+                                        total_presupuesto += item.total_presupuesto;
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading" role="tab" id="@nomHeading">
+                                                <div class="panel-title">
+                                                    <a role="button" id="a_@item.IdItem" class="prueba_enlace" item="@item.IdItem" data-toggle="collapse" data-parent="#accordion" href="#@nomCollapse" aria-expanded="true" aria-controls="@nomCollapse">
+                                                        <div class="head">
+                                                            <div class="mainData">
+                                                                <span class="labelTit">Institución</span>
+                                                                <span class="td1"> @item.NomItem</span>
+                                                            </div>
+                                                            @*<div class="data2">
+                                                                    <span class="labelTit">Presupuestado</span>
+                                                                    <span class="td1">RD $ @String.Format("{0:n2}", @item.total_presupuesto / 1000000) Millones</span>
+                                                                </div>*@
+                                                            <div class="data2">
+                                                                <span class="labelTit">Ejecutado</span>
+                                                                <span class="td1">RD $ @String.Format("{0:n2}", @item.total_avance / 1000000) Millones</span>
+                                                            </div>
+                                                            @*<div class="data2">
+                                                                    <span class="labelTit">Cumplimiento</span>
+                                                                    <span class="td1">@String.Format("{0:n2}", @item.porcentajeCumplimiento) %</span>
+                                                                </div>*@
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div id="@nomCollapse" class="panel-collapse collapse nivel1" role="tabpanel" aria-labelTitledby="@nomHeading" item="@item.NomItem.ToUpper()">
+                                                <div class="panel-body">
+                                                    @foreach (var ent in item.Detalles)
+                                                    {
+                                                        var nomNivel2 = "accordion_l2_" + i.ToString() + "_" + j.ToString();
+                                                        var headNivel2 = "headLevel2_" + i.ToString() + "_" + j.ToString();
+                                                        var panelHijo2 = "c2_" + j.ToString() + "_" + k.ToString();
+                                                        var nomHeadLevel3 = "headLevel3_" + j.ToString() + "_" + k.ToString();
+                                                        //var val_nivel2 = @ent.avance / 1000000;
+                                                        <div class="panel-group nivel22" id="@nomNivel2" role="tablist" aria-multiselectable="true">
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading" role="tab" id="@headNivel2">
+                                                                    <div class="panel-title">
+                                                                        <a role="button" data-toggle="collapse" data-parent="#@nomNivel2" href="#@panelHijo2" aria-expanded="true" aria-controls="@nomCollapse">
+                                                                            <div class="head">
+                                                                                <div class="data2 mainData">
+                                                                                    <span class="labelTit">Unidad ejecutora</span>
+                                                                                    <span class="td1p">@ent.NomCapitulo</span>
+                                                                                </div>
+                                                                                @*<div class="data2">
+                                                                                        <span class="labelTit">Presupuestado</span>
+                                                                                        <span class="td1p">RD $ @String.Format("{0:n2}", @ent.presupuesto / 1000000) Millones</span>
+                                                                                    </div>*@
+                                                                                <div class="data2">
+                                                                                    <span class="labelTit">Ejecutado</span>
+                                                                                    <span class="td1p">RD $ @String.Format("{0:n2}", @ent.avance / 1000000) Millones</span>
+                                                                                </div>
+                                                                                @*<div class="data2">
+                                                                                        <span class="labelTit">Cumplimiento</span>
+                                                                                        <span class="td1">@String.Format("{0:n2}", @ent.porcentajeCumplimiento) %</span>
+                                                                                    </div>*@
+                                                                            </div>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="@panelHijo2" class="panel-collapse collapse level3 nivel2" role="tabpanel" aria-labelledby="@nomHeadLevel3" entidad="@ent.NomCapitulo.ToUpper()">
+                                                                    <div class="panel-body">
+                                                                        @foreach (var act in ent.Detalles)
+                                                                        {
+                                                                            var nomNivel3 = "accordion_l3_" + j.ToString() + "_" + k.ToString();
+                                                                            var nomCnivel3 = "c3_" + j.ToString() + "_" + k.ToString();
+                                                                            <div class="panel-group nivel33" id="@nomNivel3" role="tablist" aria-multiselectable="true">
+                                                                                <div class="panel panel-default">
+                                                                                    <div class="panel-heading" role="tab" id="@nomHeadLevel3">
+                                                                                        <div class="panel-title">
+                                                                                            <a role="button" data-toggle="collapse" data-parent="#@nomNivel3" aria-expanded="true" aria-controls="@nomCollapse">
+                                                                                                <div class="head">
+                                                                                                    <div class="data2 mainData">
+                                                                                                        <span class="labelTit">Cuenta</span>
+                                                                                                        <span class="td1p">@act.NomConcepto</span>
+                                                                                                    </div>
+                                                                                                    @*<div class="data2">
+                                                                                                            <span class="labelTit">Presupuestado</span>
+                                                                                                            <span class="td1p">RD$ @String.Format("{0:n2}", @act.presupuesto / 1000000) Millones</span>
+                                                                                                        </div>*@
+                                                                                                    <div class="data2">
+                                                                                                        <span class="labelTit">Ejecutado</span>
+                                                                                                        <span class="td1p">RD$ @String.Format("{0:n2}", @act.avance / 1000000) Millones</span>
+                                                                                                    </div>
+                                                                                                    @*<div class="data2">
+                                                                                                            <span class="labelTit">Cumplimiento</span>
+                                                                                                            <span class="td1p">@String.Format("{0:n2}", @act.porcentajeCumplimiento) %</span>
+                                                                                                        </div>*@
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            k++;
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        j++;
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                        i++;
+                                    }
+                                </div>
+                                <div id="divTotales" class="summUp">
+                                    <div class="panel-title">
+
+                                        <div class="head">
+                                            <div class="mainData">
+                                                <span class="labelTit">&nbsp;</span>
+                                                <span class="td1">Totales</span>
+                                            </div>
+                                            @*<div class="data2">
+                                                    <span class="labelTit">Presupuestado</span>
+                                                    <span class="td1">RD $ @String.Format("{0:n0}", @total_presupuesto / 1000000) Millones</span>
+                                                </div>*@
+                                            <div class="data2">
+                                                <span class="labelTit">Ejecutado</span>
+                                                <span class="td1">RD $ @String.Format("{0:n0}", @total_avance / 1000000) Millones</span>
+                                            </div>
+                                            @*<div class="data2">
+                                                    <span class="labelTit">Cumplimiento</span>
+                                                    <span class="td1">@String.Format("{0:n2}", @total_avance * 100 / @total_presupuesto)%</span>
+                                                </div>*@
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div id="divPagFichas">
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--GRAFICA TREEMAP-->
+    <section id="secGrafica">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="headTit">
+                        <!--<img src="~/content/img/covid/icchart.svg" />--> <h2>Organismo Financiador</h2>
+                        <div class="clearfix"></div>
+                        <p class="text-center">Explora la distribución de las fuentes internas y externas de los recursos, destinados a cubrir la emergencia @Model.NombreEmergencia </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="contenido">
+
+                <!--PRESUPUESTO Y AVANCE-->
+                <div class="wrap_avance">
+
+                    <!--OPCIONES GRAFICA-->
+                    <div id="divOptionsGrafica">
+                        <div class="row">
+                            <!-- VIEW OPTIONS-->
+                            <div class="col-md-10 col-md-offset-1">
+                                <div class="Options">
+                                    <div class="switchTable" id="filtro_iconos">
+                                        <p class="vis-none">Tipo de visualización</p>
+                                        <a id="enlacesankey_og" codigo="sankey" role="button" class="tipo_grafica btn ">
+                                            <span id="iconSankey" class="txt-bold icSankey">Según fuente</span>
+                                        </a>
+                                        <a id="enlacelistado_og" codigo="listado" role="button" class="tipo_grafica btn activo">
+                                            <span id="iconList" class="txt-bold icRD">En RD $</span>
+                                        </a>
+                                        <a id="enlacegrafica_og" codigo="grafica" role="button" class="tipo_grafica btn ">
+                                            <span id="iconTree" class="txt-bold icGraph">En términos porcentuales</span>
+                                        </a>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="wrap_sankey">
+                                <div id="sankey_basic" style="width: 100%; height: auto;"></div>
+                            </div>
+                            <div style="width:100%;" id="divListadoRecursosObje" class="objHidden">
+                                <!--TABLA COMPARATIVA-->
+                                <input type="hidden" id="migapanlistado" value="" />
+                                <div class="comparativeTable" id="divListado1">
+                                    @if (Model.DetallePerObjetoGasto.Count() > 0)
+                                    {
+                                        int i = 0;
+                                        int j = 0;
+                                        int k = 0;
+                                        int l = 0;
+                                        decimal total_avance = 0;
+                                        decimal total_presupuesto = 0;
+                                        <div class="panel-group accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                                            @foreach (var item in Model.DetallePerObjetoGasto)
+                                            {
+                                                var nomCollapse = "collapseOrganismoFinanciadorOne_" + i.ToString() + "_" + j.ToString();
+                                                var nomHeading = "headingOrganismoFinanciadorOne_" + i.ToString() + "_" + j.ToString();
+                                                total_avance += item.total_avance;
+                                                total_presupuesto += item.total_presupuesto;
+                                                var val_nivel1 = @item.avance / 1000000;
+
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading" role="tab" id="@nomHeading">
+                                                        <div class="panel-title">
+                                                            <a role="button" id="a_@item.IdItem" class="prueba_enlace" item="@item.IdItem" data-toggle="collapse" data-parent="#accordion" href="#@nomCollapse" aria-expanded="true" aria-controls="@nomCollapse">
+                                                                <div class="head">
+                                                                    <div class="data1 mainData">
+                                                                        @if (item.es_programa == true)
+                                                                        {
+                                                                            <span class="labelTit">Programa</span>
+                                                                        }
+                                                                        <span class="td1"> @item.NomItem</span>
+                                                                    </div>
+
+                                                                    <div class="data1">
+                                                                        <span class="labelTit">Gastos devengados</span>
+                                                                        @if (val_nivel1 < 1)
+                                                                        {
+                                                                            <span class="td1">RD $ @String.Format("{0:n2}", @item.avance / 1000000) Millones</span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span class="td1">RD $ @String.Format("{0:n0}", @item.avance / 1000000) Millones</span>
+                                                                        }
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <!--NIVEL 2 CON IN-->
+                                                    <div id="@nomCollapse" class="panel-collapse collapse nivel1 in" role="tabpanel" aria-labelTitledby="@nomHeading" item="@item.NomItem.ToUpper()">
+                                                        <div class="panel-body">
+                                                            @foreach (var ent in item.Detalles)
+                                                            {
+                                                                var nomNivel2 = "accordionOrganismoFinanciador_l2_" + i.ToString() + "_" + j.ToString();
+                                                                var headNivel2 = "headLevelOrganismoFinanciador2_" + i.ToString() + "_" + j.ToString();
+                                                                var panelHijo2 = "cOrganismoFinanciador2_" + j.ToString() + "_" + k.ToString();
+                                                                var nomHeadLevel3 = "headLevelOrganismoFinanciador3_" + j.ToString() + "_" + k.ToString();
+                                                                var val_nivel2 = @ent.avance / 1000000;
+
+                                                                <div class="panel-group nivel22" id="@nomNivel2" role="tablist" aria-multiselectable="true">
+                                                                    <div class="panel panel-default">
+                                                                        <div class="panel-heading" role="tab" id="@headNivel2">
+                                                                            <div class="panel-title">
+                                                                                <a role="button" data-toggle="collapse" data-parent="#@nomNivel2" href="#@panelHijo2" aria-expanded="true" aria-controls="@nomCollapse">
+                                                                                    <div class="head">
+                                                                                        <div class="data1 mainData">
+                                                                                            <span class="labelTit">Capítulo</span>
+                                                                                            <span class="td1p">@ent.NomCapitulo</span>
+                                                                                        </div>
+
+                                                                                        <div class="data1">
+                                                                                            <span class="labelTit">Gastos devengados</span>
+                                                                                            @if (val_nivel2 < 1)
+                                                                                            {
+                                                                                                <span class="td1p">RD $ @String.Format("{0:n2}", @ent.avance / 1000000) Millones</span>
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                <span class="td1p">RD $ @String.Format("{0:n0}", @ent.avance / 1000000) Millones</span>
+                                                                                            }
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div id="@panelHijo2" class="panel-collapse collapse level3 nivel2" role="tabpanel" aria-labelledby="@nomHeadLevel3" entidad="@ent.NomCapitulo.ToUpper()">
+                                                                            <div class="panel-body">
+
+                                                                                @foreach (var act in ent.Detalles)
+                                                                                {
+
+                                                                                    var nomNivel3 = "accordion_lOrganismoFinanciador3_" + j.ToString() + "_" + k.ToString();
+                                                                                    var nomCnivel3 = "cOrganismoFinanciador3_" + j.ToString() + "_" + k.ToString();
+                                                                                    var val_nivel3 = @act.avance / 1000000;
+
+                                                                                    <!--NIVEL 3-->
+                                                                                    <div class="panel-group nivel33" id="@nomNivel3" role="tablist" aria-multiselectable="true">
+                                                                                        <div class="panel panel-default">
+                                                                                            <div class="panel-heading" role="tab" id="@nomHeadLevel3">
+                                                                                                <div class="panel-title">
+                                                                                                    <a role="button" data-toggle="collapse" data-parent="#@nomNivel3" href="#@nomCnivel3" aria-expanded="true" aria-controls="@nomCollapse">
+                                                                                                        <div class="head">
+                                                                                                            <div class="data1 mainData">
+                                                                                                                <span class="labelTit">Concepto</span>
+                                                                                                                <span class="td1p">@act.NomConcepto</span>
+                                                                                                            </div>
+
+                                                                                                            <div class="data1">
+                                                                                                                <span class="labelTit">Gastos devengados</span>
+                                                                                                                @if (val_nivel3 < 1)
+                                                                                                                {
+                                                                                                                    <span class="td1p">RD$ @String.Format("{0:n2}", @act.avance / 1000000) Millones</span>
+                                                                                                                }
+                                                                                                                else
+                                                                                                                {
+                                                                                                                    <span class="td1p">RD$ @String.Format("{0:n0}", @act.avance / 1000000) Millones</span>
+                                                                                                                }
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </a>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div id="@nomCnivel3" class="panel-collapse collapse nivel3" role="tabpanel" aria-labelledby="@nomHeadLevel3" actividad="@act.NomConcepto.ToUpper()">
+
+                                                                                                <div class="panel-body">
+                                                                                                    <span class="h6">Cuenta</span>
+                                                                                                    <ul class="list-group">
+                                                                                                        @foreach (var gasto in act.Detalles)
+                                                                                                        {
+                                                                                                            var val_nivel4 = @gasto.avance / 1000000;
+                                                                                                            <li class="list-group-item">
+                                                                                                                <div class="head">
+                                                                                                                    <div class="data1 mainData">
+                                                                                                                        <span class="td1p">@gasto.nom_cuenta</span>
+                                                                                                                    </div>
+
+                                                                                                                    <div class="data1">
+                                                                                                                        <span class="labelTit">Gastos devengados</span>
+                                                                                                                        @if (val_nivel4 < 1)
+                                                                                                                        {
+                                                                                                                            <span class="td1p">RD $ @String.Format("{0:n2}", @gasto.avance / 1000000) Millones</span>
+                                                                                                                        }
+                                                                                                                        else
+                                                                                                                        {
+                                                                                                                            <span class="td1p">RD $ @String.Format("{0:n0}", @gasto.avance / 1000000) Millones</span>
+                                                                                                                        }
+
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </li>
+                                                                                                            l++;
+                                                                                                        }
+
+
+                                                                                                    </ul>
+
+                                                                                                </div>
+
+                                                                                            </div>
+
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                    k++;
+                                                                                }
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                j++;
+                                                            }
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                i++;
+                                                <!--CIERRE PANEL NIVEL 1-->
+                                            }
+                                        </div>
+                                        <div id="divTotales" class="summUp">
+                                            <div class="panel-title">
+
+                                                <div class="head">
+                                                    <div class="data1 mainData">
+                                                        <span class="labelTit">&nbsp;</span>
+                                                        <span class="td1">Totales</span>
+                                                    </div>
+                                                    @*<div class="data1">
+                                                        <span class="labelTit">Presupuesto</span>
+                                                        <span class="td1">₲ @String.Format("{0:n0}", @total_presupuesto / 1000000) Millones</span>
+                                                        </div>*@
+                                                    <div class="data1">
+                                                        <span class="labelTit">Gastos devengados</span>
+                                                        <span class="td1">RD $ @String.Format("{0:n0}", @total_avance / 1000000) Millones</span>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    }
+
+                                </div>
+
+                            </div>
+                            <div style="width:100%; height:419px!important; display:block;" id="divGraphRecursosObj"></div>
+                        </div>
+                    </div>
+                    <!--<div class="row">
+                                <div class="col-md-12">
+                                    <div class="text-center">
+                                        Fecha de corte @Model.FechaActualizacionHacienda<br>
+                    La información presentada en el módulo COVID-19 es preliminar, por lo que puede sufrir modificaciones en relación a los valores presentados hasta que no se haga un cierre definitivo sobre el estado de emergencia.
+                                    </div>
+                                </div>
+                        </div>-->
+                </div>
+
+
+
+                <!--CIERRE DIV CONTENIDO-->
+            </div>
+        </div>
+    </section>
+
+    <!--FIN GRAFICA-->
+    <div class="clearfix"></div>
+    <section class="contratos-Data">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="headTit">
+                        <!--<img src="~/content/img/covid/ic_contratos.svg" /> --><h2>Artículos comprados</h2>
+                        <div class="clearfix"></div>
+                        <p class="text-center">Explora los detalles y el estado de los contratos asociados a la atención de la emergencia @Model.NombreEmergencia</p>
+                    </div>
+                    <div style="width:100%; height:419px!important; display:block;" id="divGraphRecursosArticulos"></div>
+
+
+
+                </div>
+            </div>
+
+            <!--<div class="row">
+                <div class="text-center m-tb-25">
+                    <a class="btn btn-primary btn-lg" href="/contratista/contratoscovid" target="_self">
+                        Explorar Contratos
+                        <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                    </a>
+                </div>
+
+            </div>-->
+        </div>
+
+    </section>
+
+
+
+
+    <!--SOLICITAR MAS INFORMACION-->
+    <!--participacion y denuncias-->
+    <section class="section">
+        <div class="container">
+            <div class="headTit mb-0">
+                <h2>Control ciudadano</h2>
+            </div>
+            <div class="row">
+                <!--Participa-->
+                <div class="col-lg-4 tParticipe col-lg-offset-2">
+                    <div class="card wrap-participe">
+                        <div class="card-header"> <span class="h4">Participa</span></div>
+                        <div class="card-body">
+                            <div class="wrap-icon"><img src="/content/img/covid/ic_control1.svg" alt="Solicita mas información"></div>
+                            <div class="text-section">
+                                <p>
+                                    En una interacción rápida con las autoridades sobre la información de la plataforma, podrás hacer comentarios, preguntas, recomendaciones, recibir respuestas y conocer la participación realizada por otras personas.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-center">
+                                <a class="btn btn-outlined" id="divEnlaceParticipaCon" href="/Participa/Comentarios/">Contratos <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--mas imformación-->
+                <div class="col-lg-4 tParticipe">
+                    <div class="card wrap-participe">
+                        <div class="card-header">
+                            <span class="h4">Solicita más información</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="wrap-icon"><img src="/content/img/covid/ic_control2.svg" alt="Solicita mas informacion"></div>
+                            <div class="text-section">
+                                <p>
+                                    Gracias al libre acceso a la información pública y la transparencia gubernamental puedes realizar solicitudes de información pública específica y detallada a las instituciones responsables.
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-center">
+                                <a class="btn btn-outlined" href="https://saip.gob.do/apps/sip/?step=one" target="_blank"> Solicitar <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                                <!--id="divEnlaceSolicita"-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        @*<div>
+                @Html.Partial("DatosAbiertos");
+            </div>*@
+    </section>
+
+
+    <!--DATOS ABIERTOS-->
+    <!--DATOS ABIERTOS, new ViewDataDictionary { { "id", "emergencia" } }-->
+    @*<input type="hidden" id="param" value="presupuestoFiona" />*@
+    @{
+        var parame = "emergencia" + @Model.TipoEmergencia;
+    }
+    <input type="hidden" id="param" value="@parame" />
+    <section class="Sec_Data">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="headTit">
+                        <img src="~/content/img/covid/ic_openData.svg" alt="Datos abiertos" /> <h2>Datos abiertos</h2>
+                        <div class="clearfix"></div>
+                        <p class="text-center">Descargue datos públicos en formatos abiertos. </p>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-lg-offset-4">
+                    <label for="opendata">Seleccione el set de datos:</label>
+                    <select name="opendata" class="form-control" id="opendatalst"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box-opendata">
+                        <!--<div class="icon-box-opendata"><img src="~/content/img/covid/ic_openData.png" alt="icono contratos y procesos open data" /></div>-->
+                        <div class="row">
+                            <!--OPENDATA PROYECTOS-->
+                            <div class="col-md-4 col-md-offset-4">
+                                <div class="rowBox">
+                                    <!--<div class="tit-box-opendata"><span class="h5">Proyectos</span></div>-->
+
+                                    <div class="action-bar">
+                                        <div class="btnDownloadSection">
+                                            <a id="btncsv" style="display:none;" class="btn btn-outlined" role="button" onclick="_gaq.push(['_trackEvent','Download','CSV',this.href]);" target="_blank" href="~/opendata/Proyectos.csv"> Descargar CSV  <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                                            <a id="btnxls" style="display:none;" class="btn btn-outlined" role="button" onclick="" target="_blank" href="~/opendata/datosabiertosproyectos.xlsx"> Descargar EXCEL<span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                                            <a id="btndiccionary" style="display:none;" class="btn btn-outlined gray" onclick="_gaq.push(['_trackEvent','Download','CSV',this.href]);" target="_blank" href="~/opendata/Dictionary/Diccionario de datos Rep Dominicana - Proyectos.xlsx" role="button" id="btnDownloadDiccionario"> Diccionario de datos <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                                        </div>
+                                    </div>
+                                    <div class="info-data">
+                                        <div class="t1">Fuente: <span id="btnFuente"></span></div>
+                                        @*<div class="t1">Última actualización:<span> @Model.FechaActualizacionContratos </span></div> Sistema Nacional de Inversión Pública,&nbsp;Ministerio de Economía, Planificación y Desarrollo*@
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="clearfix"></div>
+
+    <!--<section class="section-dataFuente">
+        <div class="container">
+            @*<h3>Fuentes de Datos</h3>*@
+
+            @*<h3 style="min-height: 0px;">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_FuentesDatos_TituloPrincipal")</h3>*@
+            @if (ViewBag.dataSource != null)
+            {<text>
+
+                    @foreach (var source in @ViewBag.dataSource)
+                    {<text>
+
+                            <div class="boxDataSource">
+                                <h6 class="text-center">@source.data</h6>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        @*<span class="t1">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_FuentesDatos_Fuente") </span>*@
+                                        <span>@source.source</span>
+                                    </div>
+                                    <div class="col-md-6 col-xs-6 border-right">
+                                        @*<span class="t1">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_FuentesDatos_lblFechaData") </span>*@
+                                        <span>@source.lastUpdate.ToShortDateString()</span>
+                                    </div>
+                                    <div class="col-md-6 col-xs-6">
+                                        @*<span class="t1">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_FuentesDatos_lblFechaCorteData") </span>*@
+                                        <span>@source.FechaCorteData.ToShortDateString()</span>
+                                    </div>
+                                </div>
+                            </div>
+                    </text>}
+            </text>}
+        </div>
+    </section>-->
+
+</body>
+
+@section Scripts {
+
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/jquery.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootbox.js"></script>
+    @*<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>*@
+
+
+    <script src="~/Content/dist/js/lib/D3/d3.min.js" charset="utf-8"></script>
+    <script src="~/content/dist/js/lib/D3/d3plus.full.js"></script>
+    <script src="~/content/dist/js/sankey.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>*@
+
+
+    <!-- Scrolling Nav JavaScript -->
+    <script src="~/Scripts/jquery.easing.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+
+
+    <script type="text/javascript">
+        var jqueryObj = $;
+
+        //jqueryObj("#enlacelistado_og").on("click", function () {
+        //    //alert("Hice clic en tab");
+        //    jqueryObj("#divListadoRecursosObje").attr("class", "");
+        //    //setTimeout(function () {
+        //    //    if (!jqueryObj(".popover:hover").length) {
+        //    //        jqueryObj("#toolActivos").popover("hide");
+        //    //    }
+        //    //}, 300);
+        //});
+
+        htmlpop = '<div class="tooltipdiv">';
+        htmlpop += '<div class="tooltipdiv-head"></div>';
+        //htmlpop += '<div class="tooltipdiv-body">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Tooltips_ContratosActivos")</div>';
+        htmlpop += '</div>';
+        jqueryObj("#toolActivos").attr("data-content", htmlpop);
+        // LLamado al tooltip personalizado, el html del contenido debe ir en la propiedad data-content de la etiqueta que se use como trigger del tooltip
+        //, debe tener una clase pop y el data - toggle debe llamarse popover sino modificar javascript segun
+        jqueryObj("#toolActivos").popover({ trigger: "manual", html: true, animation: false });
+        jqueryObj("#toolActivos").on("mouseenter", function () {
+            jqueryObj("#toolActivos").popover('show');
+            jqueryObj(".popover").on("mouseleave", function () {
+                jqueryObj("#toolActivos").popover('hide');
+            });
+        });
+        jqueryObj("#toolActivos").on("mouseleave", function () {
+            setTimeout(function () {
+                if (!jqueryObj(".popover:hover").length) {
+                    jqueryObj("#toolActivos").popover("hide");
+                }
+            }, 300);
+        });
+
+
+        htmlpop = '<div class="tooltipdiv">';
+        htmlpop += '<div class="tooltipdiv-head"></div>';
+        //htmlpop += '<div class="tooltipdiv-body">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Tooltips_ContratosCancelados")</div>';
+        htmlpop += '</div>';
+        jqueryObj("#toolCancelados").attr("data-content", htmlpop);
+        // LLamado al tooltip personalizado, el html del contenido debe ir en la propiedad data-content de la etiqueta que se use como trigger del tooltip
+        //, debe tener una clase pop y el data - toggle debe llamarse popover sino modificar javascript segun
+        jqueryObj("#toolCancelados").popover({ trigger: "manual", html: true, animation: false });
+        jqueryObj("#toolCancelados").on("mouseenter", function () {
+            jqueryObj("#toolCancelados").popover('show');
+            jqueryObj(".popover").on("mouseleave", function () {
+                jqueryObj("#toolCancelados").popover('hide');
+            });
+        });
+        jqueryObj("#toolCancelados").on("mouseleave", function () {
+            setTimeout(function () {
+                if (!jqueryObj(".popover:hover").length) {
+                    jqueryObj("#toolCancelados").popover("hide");
+                }
+            }, 300);
+        });
+
+
+        htmlpop = '<div class="tooltipdiv">';
+        htmlpop += '<div class="tooltipdiv-head"></div>';
+        //htmlpop += '<div class="tooltipdiv-body">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Tooltips_ContratosPendientes")</div>';
+        htmlpop += '</div>';
+        jqueryObj("#toolPendientes").attr("data-content", htmlpop);
+        // LLamado al tooltip personalizado, el html del contenido debe ir en la propiedad data-content de la etiqueta que se use como trigger del tooltip
+        //, debe tener una clase pop y el data - toggle debe llamarse popover sino modificar javascript segun
+        jqueryObj("#toolPendientes").popover({ trigger: "manual", html: true, animation: false });
+        jqueryObj("#toolPendientes").on("mouseenter", function () {
+            jqueryObj("#toolPendientes").popover('show');
+            jqueryObj(".popover").on("mouseleave", function () {
+                jqueryObj("#toolPendientes").popover('hide');
+            });
+        });
+        jqueryObj("#toolPendientes").on("mouseleave", function () {
+            setTimeout(function () {
+                if (!jqueryObj(".popover:hover").length) {
+                    jqueryObj("#toolPendientes").popover("hide");
+                }
+            }, 300);
+        });
+
+
+        htmlpop = '<div class="tooltipdiv">';
+        htmlpop += '<div class="tooltipdiv-head"></div>';
+        //htmlpop += '<div class="tooltipdiv-body">@ViewBag.TitulosHome.BuscarTituloPorLlave("Home_Tooltips_ContratosTerminados")</div>';
+        htmlpop += '</div>';
+        jqueryObj("#toolTerminados").attr("data-content", htmlpop);
+        // LLamado al tooltip personalizado, el html del contenido debe ir en la propiedad data-content de la etiqueta que se use como trigger del tooltip
+        //, debe tener una clase pop y el data - toggle debe llamarse popover sino modificar javascript segun
+        jqueryObj("#toolTerminados").popover({ trigger: "manual", html: true, animation: false });
+        jqueryObj("#toolTerminados").on("mouseenter", function () {
+            jqueryObj("#toolTerminados").popover('show');
+            jqueryObj(".popover").on("mouseleave", function () {
+                jqueryObj("#toolTerminados").popover('hide');
+            });
+        });
+        jqueryObj("#toolTerminados").on("mouseleave", function () {
+            setTimeout(function () {
+                if (!jqueryObj(".popover:hover").length) {
+                    jqueryObj("#toolTerminados").popover("hide");
+                }
+            }, 300);
+        });
+
+    </script>
+
+    <script src="~/Content/dist/js/app/search/search.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.mCustomScrollbar.concat.min.js"></script>
+
+    @*<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&amp;mkt=es-es"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Content/dist/js/libs.min.js")" data-main="@Url.Content("~/Content/dist/js/mainCovid.js")"></script>
+    @*<script src="~/content/dist/js/datosInicioCovid.js"></script>*@
+    <script src="~/content/dist/js/cifrascovid_aux.js"></script>
+
+    <script src="~/Content/dist/js/emergencia_presupuesto_aux.js"></script>
+    <script src="~/content/dist/js/datos_abiertos_aux.js"></script>
+
+
+
+
+    @if (ViewBag.MostrarAlertaIE8 == true)
+    {
+        <script type="text/javascript">
+            //Validación IE8
+            var userAgent = navigator.userAgent.toLowerCase();
+            if (/msie/.test(userAgent) &&
+                parseFloat((userAgent.match(/.*(?:rv|ie)[\/: ](.+?)([ \);]|$)/) || [])[1]) < 9) {
+                alert("Mapa Inversiones funciona mejor en navegadores modernos, por favor actualiza tu Internet Explorer.");
+            }
+        </script>
+    }
+    @using (Html.BeginForm("DescargarIndicadoresProgramaDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProg" }))
+    {
+        <input type="button" id="btnEnviar" value="Generar Csv" style="display:none;" />
+    }
+    @using (Html.BeginForm("DescargarProgramaMetasFinancierasDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProgFin" }))
+    {
+        <input type="button" id="btnEnviar" value="Generar Csv" style="display:none;" />
+    }
+
+    @using (Html.BeginForm("DescargarEjecucionPresupuestariaDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProgEjePre" }))
+    {
+        <input type="button" id="btnEnviarEjePre" value="Generar Csv" style="display:none;" />
+    }
+    @using (Html.BeginForm("DescargarEjecucionContableDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProgEjeCon" }))
+    {
+        <input type="button" id="btnEnviarEjeCon" value="Generar Csv" style="display:none;" />
+    }
+    @using (Html.BeginForm("DescargarSubsidiosDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvSub" }))
+    {
+        <input type="button" id="btnEnviarSub" value="Generar Csv" style="display:none;" />
+    }
+    @using (Html.BeginForm("DescargarProgramasMetasFisicasDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvProMetFis" }))
+    {
+        <input type="button" id="btnEnviarProMetFis" value="Generar Csv" style="display:none;" />
+    }
+    @using (Html.BeginForm("DescargarCreditoAgricolaDatosAbiertos", "Covid", FormMethod.Post, new { id = "formCsvCredAgricola" }))
+    {
+        <input type="button" id="btnEnviarCredAgri" value="Generar Csv" style="display:none;" />
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnGenCsvCreditoAgricola").click(function () {
+                $("#formCsvCredAgricola").submit();
+            });
+            $("#btnGenCsvProg").click(function () {
+                $("#formCsvProg").submit();
+            });
+            $("#btnGenCsvProgFin").click(function () {
+                $("#formCsvProgFin").submit();
+            });
+            $("#btnGenCsvSub").click(function () {
+                $("#formCsvSub").submit();
+            });
+            $("#btnGenCsvProgEjePre").click(function () {
+                $("#formCsvProgEjePre").submit();
+            });
+            $("#btnGenCsvProgEjeCon").click(function () {
+                $("#formCsvProgEjeCon").submit();
+            });
+            $("#btnGenCsvProgMetFis").click(function () {
+                $("#formCsvProMetFis").submit();
+            });
+            $(".btn-select").each(function (e) {
+                var value = $(this).find("ul li.selected").html();
+                if (value != undefined) {
+                    $(this).find(".btn-select-input").val(value);
+                    $(this).find(".btn-select-value").html(value);
+                }
+            });
+        });
+
+        $(document).on('click', '.btn-select', function (e) {
+            //e.preventDefault();
+            var ul = $(this).find("ul");
+
+            if ($(this).hasClass("active")) {
+                if (ul.find("li").is(e.target)) {
+                    var target = $(e.target);
+                    target.addClass("selected").siblings().removeClass("selected");
+                    var value = target.html();
+                    $(this).find(".btn-select-input").val(value);
+                    $(this).find(".btn-select-value").html(value);
+                }
+                ul.hide();
+                $(this).removeClass("active");
+            }
+            else {
+                $('.btn-select').not(this).each(function () {
+                    $(this).removeClass("active").find("ul").hide();
+                });
+                ul.slideDown(300);
+                $(this).addClass("active");
+            }
+        });
+
+        $(document).on('click', function (e) {
+            var target = $(e.target).closest(".btn-select");
+            if (!target.length) {
+                $(".btn-select").removeClass("active").find("ul").hide();
+            }
+        });
+
+
+    </script>
+    @*<script src="~/content/dist/js/home_aux.js"></script>*@
+
+
+    @*<script type='text/javascript' src='//www.bing.com/api/maps/mapcontrol?callback=loadMap' async defer></script>*@
+
+}
+
+@section Styles {
+    <link rel="stylesheet" href="@Url.Content("~/content/css/home.css")">
+    <link rel="stylesheet" href="@Url.Content("~/content/css/customSkin.css")">
+    <link rel="stylesheet" href="@Url.Content("~/content/css/module_COVID.css")">
+}
+@*@Model.cadenaBuscador*@
+@section DataBody {
+    data-periods='[{"name":"2012", "id":1},{"name":"2011", "id":2},{"name":"2010", "id":3}]'
+    data-periods-default-text=""
+    data-busqueda=''
+    data-tipoEmergencia=@Model.TipoEmergencia
+    data-location='[{}]'
+    data-resourcesPerContratos='[@foreach (var item in @Model.InfoRecursosContratos)
+    {<text> {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "rawValue": "@item.rawValue"}@if (item != @Model.InfoRecursosContratos.Last())
+    {<text>,</text>}</text>}]'
+    data-recursosPerObjetoGroup='[@foreach (var grupo in @Model.RecursosPerObjeto)
+    {<text> {"labelGroup": "@grupo.labelGroup" , "label":"@grupo.label","label_inf":"@grupo.label_inf","label_nivel4":"@grupo.label_nivel4","value": "@grupo.value", "rawValue": @grupo.rawValue}@if (grupo != @Model.RecursosPerObjeto.Last())
+    {<text>,</text>}</text>}]'
+    data-recursosPerObjetoAvanceGroup='[@foreach (var grupo in @Model.RecursosPerObjetoAvance)
+    {<text> {"labelGroup": "@grupo.labelGroup" , "label":"@grupo.label","label_inf":"@grupo.label_inf","label_nivel4":"@grupo.label_nivel4","value": "@grupo.value", "rawValue": @grupo.rawValue}@if (grupo != @Model.RecursosPerObjetoAvance.Last())
+    {<text>,</text>}</text>}]'
+}

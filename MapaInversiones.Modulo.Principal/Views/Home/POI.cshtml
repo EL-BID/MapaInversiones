@@ -1,0 +1,186 @@
+﻿@page
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--MAIN BANNER-->
+<section class="banner-main-stp">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li><a href="#!">Planificación</a><i class="material-icons md-18">chevron_right</i></li>
+                            <li>Plan Operativo Institucional (POI)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-12">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h2>Plan Operativo Institucional (POI)</h2>
+                    </div>
+                    <!----<div class="banner-main-desc">
+                        <p>La <b>STP</b> impulsa el proceso de la planificación en sus diferentes ámbitos junto con las instituciones del Estado integrando los lineamientos estratégicos establecidos en el Plan Nacional de Desarrollo, prioridades del Gobierno y Objetivos de Desarrollo Sostenible.</p>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--NAVIGATION ON PAGE-->
+    <!--<div class="row navs-shortcuts">
+
+        <div class="" id="navs-header">
+            <a class="btn-section" href="#s0">
+                <span class="ic-shortcut"><i class="material-icons md-24">view_column</i></span>
+                <span class="text-btn">Etapas</span>
+            </a>
+            <a class="btn-section" href="#s1">
+                <span class="ic-shortcut"><i class="material-icons md-24">grid_view</i></span>
+                <span class="text-btn">Tipos de Planes</span>
+            </a>
+            <a class="btn-section" href="#s2">
+                <span class="ic-shortcut"><i class="material-icons md-24">topic</i></span>
+                <span class="text-btn">Plan Operativo Institucional</span>
+            </a>
+
+        </div>
+    </div>-->
+
+</section>
+<section id="s2" class="section">
+    <div class="container">
+        <!--<div class="section-heading heading-left">
+        <h2 class="mb-3">PLAN OPERATIVO INSTITUCIONAL (POI)</h2>
+    </div>-->
+        <div class="row gy-3">
+
+            <div class="col-lg-6">
+                <h3>Concepto</h3>
+                <p>
+                    El POI es un instrumento de gestión que organiza los aspectos operativos de una institución, contiene información institucional, la fundamentación de los programas y la programación de las actividades que permitirán concretar las metas y los resultados que se han definido para un periodo fiscal (corto plazo).<br /><br />
+                    La programación del POI debe ser coherente con los objetivos y metas de los programas, por ello debe reunir las prioridades establecidas en términos de la calendarización de las actividades, identificar su proceso de creación de valor público, los insumos necesarios para la generación de los productos finales, y los procesos que conlleven inversiones, contrataciones, entre otros.<br /><br />
+                    El POI es la base para la elaboración del anteproyecto de presupuesto, lo cual permite la ejecución de los recursos presupuestarios asignados en el Presupuesto General de la Nación con criterios de eficiencia, calidad de gasto y transparencia, de ahí también la importancia que haya una adecuada sintonía con las prioridades establecidas a nivel de la Planificación Estratégica Institucional (mediano plazo) y el Plan Nacional de Desarrollo (largo plazo).<br /><br />
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <h3>Marco legal específico</h3>
+                <p>
+                    <strong>Decreto de Lineamientos:</strong> Por el cual se establecen los lineamientos generales para los procesos de programación, formulación y presentación de los Anteproyectos de Presupuestos Institucionales. Capítulo Planificación Operativa.<br /><br />
+                    Contiene las disposiciones para la etapa de elaboración del POI.<br /><br />
+                    <strong>Decreto Reglamentario</strong> Por el cual se reglamenta la Ley que aprueba el Presupuesto General de la Nación. Capítulo Planificación Operativa.<br /><br />
+                    Contiene las disposiciones para las etapas de ajuste, modificación y seguimiento del POI.<br /><br />
+
+                </p>
+            </div>
+        </div>
+        <h3>
+            Componentes del Plan Operativo Institucional (POI)
+        </h3>
+        <p>
+            El Plan Operativo Institucional se compone de los siguientes elementos:
+        </p>
+        <div class="row" id="s3">
+
+            <div class="col-lg-12 gy-3">
+                <h4>Perfil institucional</h4>
+                <p>
+                    Consiste en la descripción general de la institución, favorece la reflexión acerca del pasado, presente y futuro de la organización, identificando aquellos elementos tendientes a fortalecerse para mejorar institucionalmente. El perfil institucional incluye la siguiente información: Base legal de creación, misión, visión, diagnóstico general de la institución, objetivos estratégicos y objetivos específicos.
+
+                </p>
+            </div>
+            <div class="col-lg-12 gy-3">
+                <h4>Programación de la cadena de valor</h4>
+                <p>
+                    Este componente muestra desde una estructura programática el proceso básico de la generación de valor público, contiene la programación de metas físicas de las acciones institucionales, su cadena de valor, es decir, vinculación a los resultados esperados en el corto plazo, sus indicadores y su contribución a los objetivos del Plan Nacional de Desarrollo 2030, y finalmente la programación de beneficiarios potenciales.<br /><br />
+                    La programación de la cadena de valor incluye la siguiente información:<br /><br />
+                    <strong>Cadena de Valor:</strong> Abarca la vinculación de las acciones institucionales definidas a uno o más resultados inmediatos esperados, los cuales a su vez se vinculan a los indicadores y se encuentran alineados mediante la cadena de resultados a los objetivos específicos del Plan Nacional de Desarrollo 2030.<br /><br />
+                </p>
+                <div class="row justify-content-md-center">
+                    <div class="col-lg-9 ">
+                        <img class="img-fluid" src="../img/Cadena.jpg" />
+                    </div>
+                </div>
+                <p>
+                    <br /><br />
+                    <strong>Programación Física: </strong>Consiste en la proyección anual de las metas en unidades físicas de las acciones, desagregadas en un tiempo y lugar determinado, conforme a una unidad de medida establecida y utilizando recursos específicos; de tal forma que permita medir la eficacia del cumplimiento de un programa o proyecto.<br /><br />
+                    Las acciones pueden ser entregables o intermedias, y su programación puede ser desagregada por departamentos y distritos.<br /><br />
+
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!--RELATED INFO-->
+<section class="relatedInfo">
+    <div class="container">
+        <!--LINKS OTRAS SECCIONES-->
+        <div class="row">
+            <!--LEFT COLUMN-->
+            <div class="col-lg-8">
+                <!--LINKS seccion infografia planificacion-->
+                <h2>Conoce</h2>
+                <div class="wrap-cta py-5">
+                    <a href="../PlanNacional" class="py-5 mb-5 px-0">
+                        <div class="h3">El Plan Nacional de Desarollo (PND) <i class="material-icons md-18">arrow_forward</i> </div>
+                    </a>
+                </div>
+
+                <!--LINKS seccion infografia planificacion-->
+
+                <div class="wrap-cta py-5">
+                    <p class="card-title mb-4">Información suministrada por:</p>
+                    <a href="https://www.stp.gov.py/v1/" target="_blank">
+                        <img class="img-fluid" src="../img/Logostp.png" alt="ir a Secretaria tecnica de planeación" />
+                    </a>
+                </div>
+            </div>
+            <!--RIGHT COL-->
+            <div class="col-lg-4">
+                <h2>Explora</h2>
+                <p>Instituciones y sus planes operativos</p>
+                <ul id="entidadesPlanNacional" class="list-group list-group-flush">
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!--CONTACT US-->
+<!-- Call to action-->
+<div id="helpCenter"></div>
+<script src="js/comunes_infografias.js"></script>
+<script>
+    $(document).ready(function () {
+        obtListadoEntidades();
+    });
+
+    window.onscroll = function () { myFunction() };
+
+    var header = document.getElementById("navs-header");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+            header.classList.add("bg-white");
+        } else {
+            header.classList.remove("sticky");
+            header.classList.remove("bg-white");
+        }
+    }
+</script>

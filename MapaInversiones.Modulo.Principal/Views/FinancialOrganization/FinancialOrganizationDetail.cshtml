@@ -3,7 +3,62 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
-    <link rel="stylesheet" href="~/css/sankey.css" />
+    <style>
+        .node rect {
+            cursor: pointer;
+            fill-opacity: .8;
+            shape-rendering: crispEdges;
+        }
+
+            .node rect:hover {
+                fill: #CF2E2E
+            }
+
+        .node text {
+            pointer-events: none;
+            /*text-shadow: 0 1px 0 #fff;*/
+        }
+
+        .link {
+            fill: none;
+            stroke: #000;
+            stroke-opacity: .1;
+        }
+
+            .link:hover {
+                stroke-opacity: .2;
+            }
+
+        .arc text {
+            font: 12px sans-serif;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+
+        .arc path {
+            stroke: #fff;
+        }
+
+        .toolTip {
+            position: absolute;
+            display: none;
+            width: auto;
+            height: auto;
+            background: none repeat scroll 0 0 white;
+            border: 0 none;
+            border-radius: 8px 8px 8px 8px;
+            box-shadow: -3px 3px 15px #888888;
+            color: red;
+            font: 12px sans-serif;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .seccion-breadcrumb {
+            display: none;
+        }
+
+    </style>
 </head>
 <section class="banner-main">
 
@@ -210,13 +265,13 @@
                                     <div class="col-lg-12">
                                         <h4 id="lst_proyectos_sector" class="mb-2 prestitle">Listado de proyectos financiados por este organismo</h4>
                                         <!--Listado-->
-                                        <div id="table_proyectos_financiador_annio" class="comparativeTable">
+                                        <div id="divListado" class="comparativeTable">
                                         </div>
                                         <!--Fin Listado-->
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div id="divPaginator"></div>
+                                    <div id="divPaginas"></div>
                                 </div>
                             </div>
                         </div>
@@ -230,8 +285,8 @@
 <!--Fin contenido Pagina-->
 @section Scripts {
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
     <script src="/content/dist/js/sankey.js"></script>
     <script src="js/detalle_financiador_aux.js"></script>
 }

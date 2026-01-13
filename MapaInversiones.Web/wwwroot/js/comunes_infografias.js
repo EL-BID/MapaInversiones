@@ -1,6 +1,6 @@
 ﻿function GetEntidadesPresupuesto() {
     $.ajax({
-        url: "api/ServiciosPresupuestoNew/GetEntidadesPlanNacional",
+        url: "api/ServiciosPlan/GetEntidadesPlanNacional",
         type: "GET",
         data: null,
 

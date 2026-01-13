@@ -75,6 +75,16 @@ new System.Globalization.CultureInfo("es-RD");
 </section>
 
 
+@{
+
+
+    // var Proyectos = Model.Consolidados.Where(o => o.OrigenInformacion.ToUpper().Contains("Proyectos"));
+
+    // var Oncae = Model.Consolidados.Where(o => o.OrigenInformacion.ToUpper().Contains("ONCAE"));
+
+
+}
+
 @if (@Model.CodigoProceso == null)
 {
 <section class="section-gray" id="contratosentidad" hidden="true">
@@ -328,12 +338,12 @@ new System.Globalization.CultureInfo("es-RD");
 
                         </div>*@
                     <div class="form-group">
-                        <label class="year" for="entidad">Institución</label>
+                        <label class="year" for="entidad">Entidad</label>
 
-                        <input type="search" data-results="search-home" data-search="home" id="entidad" class="search-input form-control input-lg" autocomplete="on" placeholder="Institución">
+                        <input type="search" data-results="search-home" data-search="home" id="entidad" class="search-input form-control input-lg" autocomplete="on" placeholder="Entidad">
 
                         <div id="search-home" class="search-body">
-                            <div id="divNoEncontrado" class="no-search-results" style="display: none;">No se han encontrado instituciones</div>
+                            <div id="divNoEncontrado" class="no-search-results" style="display: none;">No se han encontrado entidades</div>
 
                         </div>
                     </div>
@@ -400,7 +410,7 @@ new System.Globalization.CultureInfo("es-RD");
                 <div class="wrap-cta py-5">
                     <div class="wrap-cta py-5">
                         <p class="card-title mb-4">Información suministrada por:</p>
-                        <a href="#" target="_blank" rel="noopener">
+                        <a href="https://www.dgcp.gob.do/" target="_blank">
                             <img class="img-fluid" src="../img/logo-dgcp.svg" alt="ir a Secretaria tecnica de planeación" />
                         </a>
 
@@ -418,9 +428,24 @@ new System.Globalization.CultureInfo("es-RD");
 
 <input id="moneda" name="moneda" type="hidden" value="@Model.Moneda">
 <input id="maxyear" name="maxyear" type="hidden" value="@Model.MaxYear">
+<script>
+    window.onscroll = function () { myFunction() };
 
+    var header = document.getElementById("navs-header");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        //if (window.pageYOffset > sticky) {
+        //    header.classList.add("sticky");
+        //    header.classList.add("bg-white");
+        //} else {
+        //    header.classList.remove("sticky");
+        //    header.classList.remove("bg-white");
+        //}
+    }
+</script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" integrity="sha384-KUSBBRKMO05pX3xNidXAX5N1p4iNwntmhHY4iugl7mINOyOXFL4KZWceJtMj7M0A" crossorigin="anonymous"></script>
-<script src="https://d3js.org/d3.v4.min.js" integrity="sha384-1EOYqz4UgZkewWm70NbT1JBUXSQpOIS2AaJy6/evZH+lXOrt9ITSJbFctNeyBoIJ" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 
 <script src="js/contratos_aux.js"></script>

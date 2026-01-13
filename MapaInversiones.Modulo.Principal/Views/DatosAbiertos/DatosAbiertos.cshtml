@@ -32,7 +32,11 @@
                     <div class="banner-main-title">
                         <h1>Datos abiertos</h1>
                     </div>
-                    
+                    <!--<div class="banner-main-desc">
+                    <p>Explore y descargue datos públicos en formatos abiertos sobre información de presupuesto e indicadores del Plan Nacional de Desarrollo e información de presupuesto e indicadores de las Entidades y sus proyecto/actividad.</p>
+
+                    </div>-->
+
                 </div>
 
             </div>
@@ -227,132 +231,182 @@
             <h2>Conjuntos de datos disponibles</h2>
         </div>
         @{
-            var datospresupuesto = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosPresupuesto");
-            var esconde = "";
-            if (datospresupuesto.Content.BagPart.ContentItems.First == null)
+            var datosproyectosDeInversion = await Orchard.GetContentItemByHandleAsync("alias:DatosDeProyectosDeInversion");
+            var esconde1 = "";
+            if (datosproyectosDeInversion == null || datosproyectosDeInversion.Content.BagPart.ContentItems.First == null) esconde1 = "hidden";
+            if (datosproyectosDeInversion != null)
             {
-                esconde = "hidden";
-            }
+                <!--DATOS DE PROYECTOS DE INVERSIÓN-->
+                <div class="main-Content" @esconde1>
+                    <div class="container my-4">
+                        <div class="row justify-content-center">
 
-        }
-        <!--DATOS PRESUPUESTO-->
-        <div class="main-Content" @esconde>
-            <div class="container my-4">
-                <div class="row justify-content-center">
-
-                    <div class="section-heading heading-left">
-                        <h3>@datospresupuesto.Content.DatosAbiertos.Tituloamostrar.Text</h3>
-                        <p>@Html.Raw(datospresupuesto.Content.HtmlBodyPart.Html)</p>
-                    </div>
-
-                </div>
-                <div class="row justify-content-left items">
-                    @foreach (var caja in datospresupuesto.Content.BagPart.ContentItems)
-                    {
-                        var idfuente = @caja.DescargaDatosAbiertos.IdentificadorFuente.Value;
-                        var classdivfuente = "fuente" + idfuente;
-                        <div class="col-xl-6 col-md-6 col-12 item">
-                            <!-- Begin OpenData item -->
-                            <div class="services-item services-item-row item-style">
-                                <div class="services-item-info">
-                                    <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
-                                    <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
-                                    <div class="@classdivfuente" param="@idfuente"></div>
-                                    @foreach (var links in caja.BagPart.ContentItems)
-                                    {
-
-                                        <div class="actions-links">
-                                           
-                                            <a href="@links.LinkDatosAbiertos.EnlaceCVS.Url" target="_blank" rel="noopener noreferrer">
-                                                <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceCVS.Text</span>
-                                            </a>
-                                            <a href="@links.LinkDatosAbiertos.Diccionariodedatos.Url" target="_blank" rel="noopener noreferrer">
-                                                <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.Diccionariodedatos.Text</span>
-                                            </a>
+                            <div class="section-heading heading-left">
+                                <h3>@datosproyectosDeInversion.Content.DatosAbiertos.Tituloamostrar.Text</h3>
+                                <p>@Html.Raw(datosproyectosDeInversion.Content.HtmlBodyPart.Html)</p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-left items">
+                            @foreach (var caja in datosproyectosDeInversion.Content.BagPart.ContentItems)
+                            {
+                                var idfuente = @caja.DescargaDatosAbiertos.IdentificadorFuente.Value;
+                                var classdivfuente = "fuente" + idfuente;
+                                <div class="col-xl-6 col-md-6 col-12 item">
+                                    <!-- Begin OpenData item -->
+                                    <div class="services-item services-item-row item-style">
+                                        <div class="services-item-info">
+                                            <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
+                                            <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
+                                            <div class="@classdivfuente" param="@idfuente"></div>
+                                            @foreach (var links in caja.BagPart.ContentItems)
+                                            {
+                                                <div class="actions-links">
+                                                    @*<a href="@links.LinkDatosAbiertos.EnlaceXLS.Url" target="_blank" rel="noopener noreferrer">
+                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceXLS.Text</span>
+                                    </a>*@
+                                                    <a href="@links.LinkDatosAbiertos.EnlaceCVS.Url" target="_blank" rel="noopener noreferrer">
+                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceCVS.Text</span>
+                                                    </a>
+                                                    <a href="@links.LinkDatosAbiertos.Diccionariodedatos.Url" target="_blank" rel="noopener noreferrer">
+                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.Diccionariodedatos.Text</span>
+                                                    </a>
+                                                </div>
+                                            }
                                         </div>
-                                    }
+                                    </div>
+                                    <!-- End open data item -->
                                 </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            }
+        }
+        @{
+            var datospresupuesto = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosPresupuesto");
+            var esconde2 = "";
+            if (datospresupuesto == null || datospresupuesto.Content.BagPart.ContentItems.First == null) esconde2 = "hidden";
+            if (datospresupuesto != null)
+            {
+                <!--DATOS PRESUPUESTO HACIENDA-->
+                <div class="main-Content" @esconde2>
+                    <div class="container my-4">
+                        <div class="row justify-content-center">
 
+                            <div class="section-heading heading-left">
+                                <h3>@datospresupuesto.Content.DatosAbiertos.Tituloamostrar.Text</h3>
+                                <p>@Html.Raw(datospresupuesto.Content.HtmlBodyPart.Html)</p>
                             </div>
 
-                            <!-- End open data item -->
                         </div>
-                    }
+                        <div class="row justify-content-left items">
+                            @foreach (var caja in datospresupuesto.Content.BagPart.ContentItems)
+                            {
+                                var idfuente = @caja.DescargaDatosAbiertos.IdentificadorFuente.Value;
+                                var classdivfuente = "fuente" + idfuente;
+                                <div class="col-xl-6 col-md-6 col-12 item">
+                                    <!-- Begin OpenData item -->
+                                    <div class="services-item services-item-row item-style">
+                                        <div class="services-item-info">
+                                            <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
+                                            <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
+                                            <div class="@classdivfuente" param="@idfuente"></div>
+                                            @foreach (var links in caja.BagPart.ContentItems)
+                                            {
 
+                                                <div class="actions-links">
+                                                    @* <a href="@links.LinkDatosAbiertos.EnlaceXLS.Url" target="_blank" rel="noopener noreferrer">
+                                                      <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceXLS.Text</span>
+                                                  </a>*@
+                                                    <a href="@links.LinkDatosAbiertos.EnlaceCVS.Url" target="_blank" rel="noopener noreferrer">
+                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceCVS.Text</span>
+                                                    </a>
+                                                    <a href="@links.LinkDatosAbiertos.Diccionariodedatos.Url" target="_blank" rel="noopener noreferrer">
+                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.Diccionariodedatos.Text</span>
+                                                    </a>
+                                                </div>
+                                            }
+                                        </div>
+
+                                    </div>
+
+                                    <!-- End open data item -->
+                                </div>
+                            }
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
+                <div class="clearfix"></div>                
+            }
+        }
         @{
             var datosproyectos = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosProyectos");
-            var esconde4 = "";
-            if (datosproyectos.Content.BagPart.ContentItems.First == null)
+            var esconde3 = "";
+            if (datosproyectos == null || datosproyectos.Content.BagPart.ContentItems.First == null) esconde3 = "hidden";
+            if (datosproyectos != null)
             {
-                esconde4 = "hidden";
-            }
+                <!--DATOS RELACIONADOS CON PROYECTOS DE INVERSION-->
+                <div class="main-Content" @esconde3>
+                    <div class="container my-4">
+                        <div class="row justify-content-center">
 
-        }
-        <!--DATOS PROYECTOS-->
-        <div class="main-Content" @esconde4>
-            <div class="container my-4">
-                <div class="row justify-content-center">
-
-                    <div class="section-heading heading-left">
-                        <h3>@datosproyectos.Content.DatosAbiertos.Tituloamostrar.Text</h3>
-                        <p>@Html.Raw(datosproyectos.Content.HtmlBodyPart.Html)</p>
-                    </div>
-
-                </div>
-                <div class="row justify-content-left items">
-                    @foreach (var caja in datosproyectos.Content.BagPart.ContentItems)
-                    {
-                        var idfuente = @caja.DescargaDatosAbiertos.IdentificadorFuente.Value;
-                        var classdivfuente = "fuente" + idfuente;
-                        <div class="col-xl-6 col-md-6 col-12 item">
-                            <!-- Begin OpenData item -->
-                            <div class="services-item services-item-row item-style">
-                                <div class="services-item-info">
-                                    <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
-                                    <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
-                                    <div class="@classdivfuente" param="@idfuente"></div>
-                                    @foreach (var links in caja.BagPart.ContentItems)
-                                    {
-
-                                        <div class="actions-links">
-                                            @*<a href="@links.LinkDatosAbiertos.EnlaceXLS.Url" target="_blank" rel="noopener noreferrer">
-                                                <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceXLS.Text</span>
-                                            </a>*@
-                                            <a href="@links.LinkDatosAbiertos.EnlaceCVS.Url" target="_blank" rel="noopener noreferrer">
-                                                <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceCVS.Text</span>
-                                            </a>
-                                            <a href="@links.LinkDatosAbiertos.Diccionariodedatos.Url" target="_blank" rel="noopener noreferrer">
-                                                <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.Diccionariodedatos.Text</span>
-                                            </a>
-                                        </div>
-                                    }
-                                </div>
-
+                            <div class="section-heading heading-left">
+                                <h3>@datosproyectos.Content.DatosAbiertos.Tituloamostrar.Text</h3>
+                                <p>@Html.Raw(datosproyectos.Content.HtmlBodyPart.Html)</p>
                             </div>
 
-                            <!-- End open data item -->
                         </div>
-                    }
+                        <div class="row justify-content-left items">
+                            @foreach (var caja in datosproyectos.Content.BagPart.ContentItems)
+                            {
+                                var idfuente = @caja.DescargaDatosAbiertos.IdentificadorFuente.Value;
+                                var classdivfuente = "fuente" + idfuente;
+                                <div class="col-xl-6 col-md-6 col-12 item">
+                                    <!-- Begin OpenData item -->
+                                    <div class="services-item services-item-row item-style">
+                                        <div class="services-item-info">
+                                            <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
+                                            <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
+                                            <div class="@classdivfuente" param="@idfuente"></div>
+                                            @foreach (var links in caja.BagPart.ContentItems)
+                                            {
 
+                                                <div class="actions-links">
+                                                    @*<a href="@links.LinkDatosAbiertos.EnlaceXLS.Url" target="_blank" rel="noopener noreferrer">
+                                                <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceXLS.Text</span>
+                                            </a>*@
+                                                    <a href="@links.LinkDatosAbiertos.EnlaceCVS.Url" target="_blank" rel="noopener noreferrer">
+                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceCVS.Text</span>
+                                                    </a>
+                                                    <a href="@links.LinkDatosAbiertos.Diccionariodedatos.Url" target="_blank" rel="noopener noreferrer">
+                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.Diccionariodedatos.Text</span>
+                                                    </a>
+                                                </div>
+                                            }
+                                        </div>
+
+                                    </div>
+
+                                    <!-- End open data item -->
+                                </div>
+                            }
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-
-        <div class="clearfix"></div>
+                <div class="clearfix"></div>
+            }
+        }
         @{
             var datosPresupestoEmergencias = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosPresupuestoEmergencias");
-            var esconde5 = "";
-            if (datosPresupestoEmergencias == null || datosPresupestoEmergencias.Content.BagPart.ContentItems.First == null) esconde5 = "hidden";
+            var esconde4 = "";
+            if (datosPresupestoEmergencias == null || datosPresupestoEmergencias.Content.BagPart.ContentItems.First == null) esconde4 = "hidden";
             if (datosPresupestoEmergencias != null)
             {
                 <!--DATOS PRESUPUESTO EMERGENCIAS-->
-                <div class="main-Content" @esconde5>
+                <div class="main-Content" @esconde4>
                     <div class="container my-4">
                         <div class="row justify-content-center">
 
@@ -394,30 +448,28 @@
                         </div>
                     </div>
                 </div>
+                <div class="clearfix"></div>
             }
         }
-       
-
-        <div class="clearfix"></div>
         @{
-            var datosLluvias = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosLLuvias");
-            var esconde6 = "";
-            if (datosLluvias==null || datosLluvias.Content.BagPart.ContentItems.First == null)esconde6 = "hidden";
-            if (datosLluvias != null)
+            var datosRelacionadosEmergencias = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosRelacionadosEmergencias");
+            var esconde5 = "";
+            if (datosRelacionadosEmergencias == null || datosRelacionadosEmergencias.Content.BagPart.ContentItems.First == null) esconde5 = "hidden";
+            if (datosRelacionadosEmergencias != null)
             {
-                <!--DATOS LLUVIAS-->
-                <div class="main-Content" @esconde6>
+                <!--DATOS RELACIONADOS A EMERGENCIAS-->
+                <div class="main-Content" @esconde5>
                     <div class="container my-4">
                         <div class="row justify-content-center">
 
                             <div class="section-heading heading-left">
-                                <h3>@datosLluvias.Content.DatosAbiertos.Tituloamostrar.Text</h3>
-                                <p>@Html.Raw(datosLluvias.Content.HtmlBodyPart.Html)</p>
+                                <h3>@datosRelacionadosEmergencias.Content.DatosAbiertos.Tituloamostrar.Text</h3>
+                                <p>@Html.Raw(datosRelacionadosEmergencias.Content.HtmlBodyPart.Html)</p>
                             </div>
 
                         </div>
                         <div class="row justify-content-left items">
-                            @foreach (var caja in datosLluvias.Content.BagPart.ContentItems)
+                            @foreach (var caja in datosRelacionadosEmergencias.Content.BagPart.ContentItems)
                             {
                                 var idfuente = @caja.DescargaDatosAbiertos.IdentificadorFuente.Value;
                                 var classdivfuente = "fuente" + idfuente;
@@ -448,68 +500,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="clearfix"></div>
             }
         }
-      
-
-        <div class="clearfix"></div>
-        @{
-            var datosFiona = await Orchard.GetContentItemByHandleAsync("alias:DatosAbiertosFiona");
-            var esconde7 = "";
-            if (datosFiona== null || datosFiona.Content.BagPart.ContentItems.First == null) esconde7 = "hidden";
-            if (datosFiona != null)
-            {
-                <!--DATOS FIONA-->
-                <div class="main-Content" @esconde7>
-                    <div class="container my-4">
-                        <div class="row justify-content-center">
-
-                            <div class="section-heading heading-left">
-                                <h3>@datosFiona.Content.DatosAbiertos.Tituloamostrar.Text</h3>
-                                <p>@Html.Raw(datosLluvias.Content.HtmlBodyPart.Html)</p>
-                            </div>
-
-                        </div>
-                        <div class="row justify-content-left items">
-                            @foreach (var caja in datosFiona.Content.BagPart.ContentItems)
-                            {
-                                var idfuente = @caja.DescargaDatosAbiertos.IdentificadorFuente.Value;
-                                var classdivfuente = "fuente" + idfuente;
-                                <div class="col-xl-6 col-md-6 col-12 item">
-                                    <!-- Begin OpenData item -->
-                                    <div class="services-item services-item-row item-style">
-                                        <div class="services-item-info">
-                                            <h4 class="services-item-heading">@caja.TitlePart.Title</h4>
-                                            <div class="small">@Html.Raw(caja.HtmlBodyPart.Html)</div>
-                                            <div class="@classdivfuente" param="@idfuente"></div>
-                                            @foreach (var links in caja.BagPart.ContentItems)
-                                            {
-
-                                                <div class="actions-links">
-                                                    <a href="@links.LinkDatosAbiertos.EnlaceCVS.Url" target="_blank" rel="noopener noreferrer">
-                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.EnlaceCVS.Text</span>
-                                                    </a>
-                                                    <a href="@links.LinkDatosAbiertos.Diccionariodedatos.Url" target="_blank" rel="noopener noreferrer">
-                                                        <span class="badge badge-pill badge-primary"> @links.LinkDatosAbiertos.Diccionariodedatos.Text</span>
-                                                    </a>
-                                                </div>
-                                            }
-                                        </div>
-                                    </div>
-                                    <!-- End open data item -->
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-
     </div>
 </section>
-
-
-
 <script src="~/js/Bootbox/bootbox.min.js" type="text/javascript"></script>
-
 <script src="~/js/DatosAbiertos_aux.js"></script>

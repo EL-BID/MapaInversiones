@@ -46,8 +46,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
 
             Data = _cargaemergencia.ObtenerDatosContratosEmergencia(emergencia, entidad);
             return View(Data);
-
-
+           
         }
 
         public ActionResult ProcesosCanceladosEmergencia(int emergencia, string entidad = null, string proceso = null)
@@ -57,7 +56,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Emergencia
 
             Data = _cargaemergencia.ObtenerDatosProcesosCanceladosEmergencia(emergencia, entidad);
             return View(Data);
-
+            
         }
 
     }

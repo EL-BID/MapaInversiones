@@ -169,7 +169,7 @@ define(['lib/mvc/Observable',
 			map = new Microsoft.Maps.Map(
 				document.getElementById('map-div'),
 				{
-					credentials: 'Apwt9Qe5hfw-HjZ-yMqofEVWtwyAdIfAvFg6B-pmoa_7zI08a0EAx5vwjT5miN0M',
+					credentials: '',
 					zoom: defaultZoom,
 					showMapTypeSelector: false,
 					center: center,

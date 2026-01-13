@@ -173,7 +173,7 @@ namespace PlataformaTransparencia.Negocios.Contracts
         // Properties
         public ModelDataProjectsSearchMap DataProjectSearchMap { get; set; }
 
-
+        //public BusquedasProyectosBLL objBussinesRf { get; set; }
     }
 
 

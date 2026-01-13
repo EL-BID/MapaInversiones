@@ -56,7 +56,7 @@
 	// to configure GetSchemaOptions properties, add them here, before load metadata call
 	GetSchemaOptions.GetProcedures  = true;
 
-	LoadSqlServerMetadata("ip,puerto", "base_datos", "usuario", "passw");
+	LoadSqlServerMetadata("", "", "", ""); //datos de conexion ip, bd, usuario, contras
 
 //	LoadSqlServerMetadata(".", "MyDatabase"); // Integrated Security;
 //	LoadSqlServerMetadata(string connectionString);

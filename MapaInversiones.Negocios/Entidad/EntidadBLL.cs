@@ -134,7 +134,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                     objActividad.Id = fila.codActividad.ToString();
                     objActividad.Nombre = fila.nomActividad;
                     objActividad.presupuesto = fila.AportePresupuesto;
-                 
+                    //objActividad.avance = fila.Avance;
 
                     objProcesos = objActividad.Detalles.Find(p => p.Id == fila.codActividad.ToString());
                     if (objProcesos == null)
@@ -144,7 +144,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                         objProcesos.Nombre = fila.descProceso;
                         objProcesos.presupuesto = fila.AportePresupuesto;
                         objProcesos.Estado = fila.estadoProceso;
-                       
+                        //objProcesos.avance = fila.Avance;
 
                         objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato.ToString());
                         if (objContratos == null)
@@ -153,7 +153,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.Id = fila.codContrato.ToString();
                             objContratos.Nombre = fila.codContrato;
                             objContratos.presupuesto = fila.AportePresupuesto;
-                         
+                            //objContratos.avance = fila.Avance;
 
                             objProcesos.Detalles.Add(objContratos);
 
@@ -161,7 +161,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                         else
                         {
                             objContratos.presupuesto += fila.AportePresupuesto;
-               
+                            //objContratos.avance += fila.Avance;
 
                         }
 
@@ -170,7 +170,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                     else
                     {
                         objProcesos.presupuesto += fila.AportePresupuesto;
-                        
+                        //objProcesos.avance += fila.Avance;
 
                         objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato.ToString());
                         if (objContratos == null)
@@ -179,7 +179,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.Id = fila.codContrato;
                             objContratos.Nombre = fila.codContrato;
                             objContratos.presupuesto = fila.AportePresupuesto;
-                            
+                            //objContratos.avance = fila.Avance;
 
                             objProcesos.Detalles.Add(objContratos);
 
@@ -187,7 +187,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                         else
                         {
                             objContratos.presupuesto += fila.AportePresupuesto;
-                            
+                            //objContratos.avance += fila.Avance;
                         }
 
                     }
@@ -205,7 +205,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                         objProcesos.Nombre = fila.descProceso;
                         objProcesos.presupuesto = fila.AportePresupuesto;
                         objProcesos.Estado = fila.estadoProceso;
-                        
+                        //objProcesos.avance = fila.Avance;
 
                         objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato.ToString());
                         if (objContratos == null)
@@ -214,7 +214,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.Id = fila.codContrato;
                             objContratos.Nombre = fila.codContrato;
                             objContratos.presupuesto = fila.AportePresupuesto;
-                           
+                            //objContratos.avance = fila.Avance;
 
                             objProcesos.Detalles.Add(objContratos);
 
@@ -222,7 +222,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                         else
                         {
                             objContratos.presupuesto += fila.AportePresupuesto;
-                            
+                            //objContratos.avance += fila.Avance;
 
                         }
 
@@ -238,7 +238,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.Id = fila.codContrato.ToString();
                             objContratos.Nombre = fila.codContrato;
                             objContratos.presupuesto = fila.AportePresupuesto;
-                          
+                            //objContratos.avance = fila.Avance;
 
                             objProcesos.Detalles.Add(objContratos);
 
@@ -246,7 +246,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                         else
                         {
                             objContratos.presupuesto += fila.AportePresupuesto;
-                         
+                            //objContratos.avance += fila.Avance;
                         }
 
                     }
@@ -298,7 +298,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                               codActividad = g.Key.CodigoActividadObra,
                               codObjeto = g.Key.CodigoObjetoDeGasto,
                               vigente = (decimal)g.Sum(t => t.Vigente),
-                              
+                              //ejecutado=(decimal)g.Sum(t=>t.EjecucionDelMes)
                           });
 
 
@@ -360,7 +360,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                  codGrupoGasto = g.Key.codGrupoGasto,
                                  nomGrupoGasto = "grp|" + g.Key.nomGrupoGasto,
                                  vigente = (decimal)g.Sum(t => t.vigente),
-                                
+                                 // ejecutado= (decimal)g.Sum(t => t.ejecutado)
                              }
                           ).Distinct().OrderBy(x => x.nomGrupoGasto).ToList();
 
@@ -378,14 +378,14 @@ namespace PlataformaTransparencia.Negocios.Entidad
                     objGrupo.Id = fila.codGrupoGasto.ToString();
                     objGrupo.Nombre = fila.nomGrupoGasto;
                     objGrupo.presupuesto = (double)fila.vigente;
-                    
+                    //objGrupo.ejecutado= (double)fila.ejecutado;
 
 
                     objReturn.infoGasto.Add(objGrupo);
                 }
                 else {
                     objGrupo.presupuesto += (double)fila.vigente;
-                    
+                    //objGrupo.ejecutado += (double)fila.ejecutado;
                 }
 
             }
@@ -399,7 +399,8 @@ namespace PlataformaTransparencia.Negocios.Entidad
                     objGrupo = new infograficoGrupoGasto();
                     objGrupo.Id = fila.codGrupoGasto.ToString();
                     objGrupo.Nombre = fila.nomGrupoGasto;
-                   
+                    //objGrupo.presupuesto = fila.AportePresupuesto;
+                    //objGrupo.avance = fila.Avance;
 
 
 
@@ -412,7 +413,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                         objProcesos.presupuesto = fila.AportePresupuesto;
                         objProcesos.Estado = fila.estadoProceso;
                         objProcesos.UrlProceso = fila.UrlProceso;
-                       
+                        //objProcesos.avance = fila.Avance;
 
                         objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato.ToString());
                         if (objContratos == null)
@@ -427,7 +428,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.valor_planeado = (double)fila.ValorPlaneado;
                             objContratos.valor_adjudicado = (double)fila.ValorAdjudicado;
                             objContratos.valor_contratado = fila.ValorContratado.Value;
-                            
+                            //objContratos.avance = fila.Avance;
 
                             objProcesos.Detalles.Add(objContratos);
 
@@ -438,7 +439,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.valor_planeado += fila.ValorPlaneado;
                             objContratos.valor_adjudicado += fila.ValorAdjudicado;
                             objContratos.valor_contratado += fila.ValorContratado.Value;
-                            
+                            //objContratos.avance += fila.Avance;
 
                         }
 
@@ -447,7 +448,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                     else
                     {
                         objProcesos.presupuesto += fila.AportePresupuesto;
-                        
+                        //objProcesos.avance += fila.Avance;
 
                         objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato.ToString());
                         if (objContratos == null)
@@ -462,7 +463,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.valor_planeado = fila.ValorPlaneado;
                             objContratos.valor_adjudicado = fila.ValorAdjudicado;
                             objContratos.valor_contratado = fila.ValorContratado.Value;
-                         
+                            //objContratos.avance = fila.Avance;
 
                             objProcesos.Detalles.Add(objContratos);
 
@@ -473,7 +474,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.valor_planeado += fila.ValorPlaneado;
                             objContratos.valor_adjudicado += fila.ValorAdjudicado;
                             objContratos.valor_contratado += fila.ValorContratado.Value;
-                         
+                            //objContratos.avance += fila.Avance;
                         }
 
                     }
@@ -482,15 +483,17 @@ namespace PlataformaTransparencia.Negocios.Entidad
                 }
                 else
                 {
-                   
+                    //objGrupo.presupuesto += fila.AportePresupuesto;
                     objProcesos = objGrupo.Detalles.Find(p => p.Id == fila.codProceso.ToString());
                     if (objProcesos == null)
                     {
                         objProcesos = new infograficoProcesos();
                         objProcesos.Id = fila.codProceso.ToString();
                         objProcesos.Nombre = fila.descProceso;
+                        //objProcesos.presupuesto = fila.AportePresupuesto;
                         objProcesos.Estado = fila.estadoProceso;
                         objProcesos.UrlProceso = fila.UrlProceso;
+                        //objProcesos.avance = fila.Avance;
 
                         objContratos = objProcesos.Detalles.Find(p => p.Id == fila.codContrato.ToString());
                         if (objContratos == null)
@@ -505,6 +508,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.valor_planeado = fila.ValorPlaneado;
                             objContratos.valor_adjudicado = fila.ValorAdjudicado;
                             objContratos.valor_contratado = fila.ValorContratado.Value;
+                            //objContratos.avance = fila.Avance;
 
                             objProcesos.Detalles.Add(objContratos);
 
@@ -515,6 +519,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.valor_planeado += fila.ValorPlaneado;
                             objContratos.valor_adjudicado += fila.ValorAdjudicado;
                             objContratos.valor_contratado += fila.ValorContratado.Value;
+                            //objContratos.avance += fila.Avance;
 
                         }
 
@@ -536,6 +541,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.valor_planeado = fila.ValorPlaneado;
                             objContratos.valor_adjudicado = fila.ValorAdjudicado;
                             objContratos.valor_contratado = fila.ValorContratado.Value;
+                            //objContratos.avance = fila.Avance;
 
                             objProcesos.Detalles.Add(objContratos);
 
@@ -546,6 +552,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                             objContratos.valor_planeado += fila.ValorPlaneado;
                             objContratos.valor_adjudicado += fila.ValorAdjudicado;
                             objContratos.valor_contratado += fila.ValorContratado.Value;
+                            //objContratos.avance += fila.Avance;
                         }
 
                     }
@@ -714,6 +721,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
                                                        && (cont.Objetodelcontrato.Contains(NombreProceso) || NombreProceso == null)
                                                        && (cont.Documentoproveedor == CodigoProveedor || CodigoProveedor == null)
                                                        && (cont.CodigoInstitucion == CodigoComprador || CodigoComprador == null)
+                               //&& (cont.CodigoComprador == CodigoComprador || CodigoComprador == null)
                                let NUMBER = Sql.Ext.DenseRank().Over().OrderBy(cont.Proveedor).ThenBy(cont.Urlproceso).ToValue()
                                where
                                NUMBER > ((filtros.NumeroPagina - 1) * filtros.RegistrosPorPagina)

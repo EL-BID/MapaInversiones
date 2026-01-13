@@ -8,6 +8,7 @@
   <ItemGroup>
     <EmbeddedResource Remove="js\home_aux.js" />
     <EmbeddedResource Remove="Views\Participacion\VerificarCuenta.cshtml" />
+    <EmbeddedResource Remove="Views\Presupuesto\PresupuestoEmergencia.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

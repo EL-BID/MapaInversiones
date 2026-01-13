@@ -79,6 +79,18 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             return objReturn;
         }
 
+        ///ejemplo llamado get varios parametros
+        //[HttpGet("obtCiudades/{city}/{country}")]
+        //public string obtCiudades(string city, string country)
+        //{
+        //    return "obtCiudades";
+        //}
+
+        //[HttpGet("obtPais/{continente}")]
+        //public string obtPais(string continente)
+        //{
+        //    return "obtPais";
+        //}
     }
 
 }

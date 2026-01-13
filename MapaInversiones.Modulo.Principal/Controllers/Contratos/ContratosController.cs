@@ -124,17 +124,42 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                            }).Distinct().ToList();
 
             modelo.Consolidados = new List<ContratosConsolidado>();
-            modelo.Consolidados.Add(new ContratosConsolidado { NroContratos = modelo.Data.Sum(l => l.NumContratos) , OrigenInformacion = "Todos", CodigoOrigenInformacion = -1 });
-            foreach (var contratis in modelo.Data)
+
+            //foreach (var contratis in modelo.Data)
+            //{
+            //    modelo.Consolidados.Add(new ContratosConsolidado { NroContratos = contratis.NumContratos, OrigenInformacion = contratis.OrigenInformacion, CodigoOrigenInformacion = contratis.CodigoOrigenInformacion });
+
+            //}
+
+            modelo.Consolidados = modelo.Data
+            .GroupBy(x => new { x.OrigenInformacion, x.CodigoOrigenInformacion })
+            .Select(g => new ContratosConsolidado
             {
-                modelo.Consolidados.Add(new ContratosConsolidado { NroContratos = contratis.NumContratos, OrigenInformacion = contratis.OrigenInformacion, CodigoOrigenInformacion = contratis.CodigoOrigenInformacion });
+                OrigenInformacion = g.Key.OrigenInformacion,
+                CodigoOrigenInformacion = g.Key.CodigoOrigenInformacion,
+                NroContratos = g.Sum(x => x.NumContratos)
+            })
+            .ToList();
+            modelo.Consolidados.Add(new ContratosConsolidado { NroContratos = modelo.Data.Sum(l => l.NumContratos), OrigenInformacion = "Todos", CodigoOrigenInformacion = -1 });
+            //var dat = (from contr in _connection.VwContratosPerfilContratistas
+            //           where contr.Identificador == _contratista.ToString()
+            //           select new ContratistaData
+            //           {
+            //               Contratista = contr.Contratista,
+            //               Identificador = contr.Identificador,
+            //               ValorTotalContratos = contr.ValorTotalContratos,
+            //               NumContratos = contr.NumContratos,
+            //               NumProcesos = contr.NumProcesos,
+            //               MonedaContrato = contr.MonedaContrato,
+            //               OrigenInformacion = contr.OrigenInformacion
 
-            }
-
-         
+            //           }).Distinct();
             modelo.Contratista = _contratista;
 
-           
+            //modelo.OrigenInformacion = (from contr in _connection.VwContratosPerfilContratistas
+            //                            where contr.Numerodocumento == _contratista.ToString() && contr.OrigenInformacion !=null && contr.ValorTotalContratos != null
+            //                            select contr.OrigenInformacion).Distinct().ToList();
+                                        
             return View(modelo);
         }
 

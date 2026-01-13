@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PlataformaTransparencia.Modelos.Comunes;
+using PlataformaTransparencia.Modelos.Proyectos;
 using System.Collections.Generic;
 
 namespace PlataformaTransparencia.Modelos
@@ -39,7 +40,7 @@ namespace PlataformaTransparencia.Modelos
         {
             this.objects = new List<objectProjectsSearchMap>();
         }
-        
-        
+
+        public filtroListadoPrueba filtro { get; set; }
     }
 }

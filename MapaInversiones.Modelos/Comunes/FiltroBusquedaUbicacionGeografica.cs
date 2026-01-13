@@ -24,10 +24,10 @@ namespace PlataformaTransparencia.Modelos.Comunes
             {
                 this.CodigoMunicipio = Convert.ToString(parameters["municipio"]);
             }
-            if (parameters.Keys.Contains("department"))
-            {
-                this.CodigoDepartamento = Convert.ToString(parameters["department"]);
-            }
+            //if (parameters.Keys.Contains("department"))
+            //{
+            //    this.CodigoDepartamento = Convert.ToString(parameters["department"]);
+            //}
             if (parameters.Keys.Contains("departamento"))
             {
                 this.CodigoDepartamento = Convert.ToString(parameters["departamento"]);

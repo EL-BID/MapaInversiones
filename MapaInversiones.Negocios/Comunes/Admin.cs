@@ -93,6 +93,10 @@ namespace PlataformaTransparencia.Negocios.Comunes
             string outTxt = "";
             try
             {
+                //using (PISGREntities pisgrEntities = new PISGREntities()) {
+
+                //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+                //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
 
                 idRegNew = _connection
                 .GetTable<Comentarios>()
@@ -101,7 +105,7 @@ namespace PlataformaTransparencia.Negocios.Comunes
                 {
                     IdTipoComentario = IdTipoComentario,
                 });
-  
+                //}
                 if (idRegNew > 0)
                 {
                     outTxt = "0<||>";

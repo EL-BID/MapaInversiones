@@ -1,4 +1,5 @@
 ﻿var anyo = (new Date).getFullYear() - 1;
+//var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 var recursosPerObjetoAvanceGroup = JSON.parse(document.body.getAttribute('data-recursosPerObjetoAvanceGroup'));
 var objPerContratos = JSON.parse(document.body.getAttribute('data-resourcesPerContratos'));
 var tipoEmergencia = JSON.parse(document.body.getAttribute('data-tipoEmergencia'));
@@ -165,7 +166,7 @@ function configEnlaceOtros() {
     $(".enlace_prog").on('click', function () {
         $('#accordion .collapse').removeClass("in");
         $("#enlacelistado_og").trigger("click");
-
+        //$("#divListadoRecursosObje").show();
         $("#migapanlistado").val("");
 
         var tipo_enlace = $(this).attr("tipo")
@@ -200,7 +201,7 @@ function obtRutaEnlace(filtro, idSubsidio) {
             break;
         case "FASE TURISMO":
             rutaficha = "../Covid/PerfilSubsidio/?subsidio=" + idSubsidio;
-
+            //rutaficha = "https://programas-beneficios.hacienda.gob.do/principal";
             break;
         default:
             rutaficha = "";
@@ -236,6 +237,7 @@ function configVerMas() {
 }
 function configuraFiltro_DesgloseIconos() {
     $(".tipo_grafica").on('click', function () {
+        $(".wrap_sankey").hide();
         var tipo = $(this).attr('codigo');
         $(".tipo_grafica").removeClass("activo");
         $(this).addClass("activo");
@@ -252,7 +254,7 @@ function configuraFiltro_DesgloseIconos() {
             $(".boxCompoDesglose").hide();
             $(".boxTituloListado").show();
             $("#sankey_basic").empty();
-
+            //seleccionar tab abierto
             var lstNiveles = $("#migapanlistado").val();
             var arrayNiv = lstNiveles.split(",");
             var nom_nivel = "";
@@ -323,6 +325,7 @@ function configuraFiltro_DesgloseIconos() {
         else {
 
             //sankey
+            $(".wrap_sankey").show();
             $("#iconList").attr("class", "txt-bold icRD_blue");
             $("#iconTree").attr("class", "txt-bold icGrap_blue");
             $("#iconSankey").attr("class", "txt-bold icSankey");
@@ -330,7 +333,7 @@ function configuraFiltro_DesgloseIconos() {
             $("#divGraphRecursosObj").hide();
             $("#divListadoRecursosObje").hide();
             $("#divGraphRecursosObj").children().remove();
-
+            //$(".boxCompoDesglose").show();
             $(".boxTituloListado").hide();
             $("#sankey_basic").empty();
             ObtenerDatosArticulo(tipoEmergencia);
@@ -351,7 +354,7 @@ function configuraFiltro_DesgloseIconos() {
             $("#divListadoRecursosObjeEnte").hide();
             $("#divListadoRecursosObjeEnteNoCentral").show();
             $("#divListadoRecursosObje").hide();
-
+            //$("#divListadoRecursosObjeEnte").empty();
         }
 
     });
@@ -372,7 +375,10 @@ function configuraFiltro_Donaciones() {
 
 }
 function ObtenerDatosArticulo(tipoEmergencia) {
-
+   
+    //var params_com = {
+    //    tipoEmergencia: tipoEmergencia
+    //};
     $.ajax({
         type: 'GET',
         contentType: "application/json; charset=utf-8",
@@ -380,16 +386,17 @@ function ObtenerDatosArticulo(tipoEmergencia) {
         data: {
             typeEmergencyId: tipoEmergencia
         },
-
+       //JSON.stringify({ data: tipoEmergencia }),
         url: "/api/ServiciosCovid/ObtDistribucionPresupuestalEjecutadoPorTipoEmergencia/",// + tipoEmergencia,
         cache: false,
         success: function (result) {
             if (result.status == true) {
-                var data = result.distribucionItem;
+                var data = result.distribucionEmergencia;
                 if (data.length > 0) {
-                    var datos = obtMatrizData(data);
+                    var datos = obtMatrizData(data, 1, 3);
                     $("#sankey_basic").html("");
-                    graphSankey("sankey_basic", datos);
+                    graphSankey(datos);  
+                    
                     loadRecursosPorObjeto(objPerContratos, "divGraphRecursosArticulos", "avance");  
                 }
 
@@ -409,99 +416,376 @@ function ObtenerDatosArticulo(tipoEmergencia) {
     });
 
 }
-function graphSankey(contenedor, datos) {
+
+function obtMatrizData(data, nivel_inicial, nivel_detalle) {
+    var cant_nodos_1 = 0;
+    var cant_nodos_2 = 0;
+    var cant_nodos_3 = 0;
+    var cant_nodos_4 = 0;
+    var cant_nodos_all = 0;
+    var cant_nodos_nivel = 0;
+
+    var obj_nodos = [];
+    var obj_links = [];
+    var obj_links_ini = [];
+    var obj_nodos_nivel = [];
+    var obj_links_nivel = [];
+
+
+    $.each(data, function (key, value) {
+        //NomNivel1
+
+        var test = false;
+        var obj_aux = { name: value.nombre };
+        var nom_Nivel1 = value.nombre;
+        var id_Nivel1 = value.id;
+        if (nivel_detalle >= 1) {
+            obj_nodos.push(obj_aux);
+        }
+
+        if (nivel_inicial >= 1) {
+            obj_nodos_nivel.push(obj_aux);
+        }
+
+        cant_nodos_1 += 1;
+        $.each(value.detalles, function (key, value) {
+            //NomNivel2
+
+            var nom_Nivel2 = value.nombre;
+            var valor_Nivel2 = (value.presupuesto / 1);
+            var id_Nivel2 = value.id;
+
+            test = obj_nodos.some(item => item.name === value.nombre);
+            if (test == false) {
+                obj_aux = { name: value.nombre, id: value.id };
+                if (nivel_detalle >= 2) {
+                    obj_nodos.push(obj_aux);
+                }
+
+                if (nivel_inicial >= 2) {
+                    obj_nodos_nivel.push(obj_aux);
+                }
+
+                cant_nodos_2 += 1;
+            }
+            if (nivel_detalle >= 2) {
+                var objIndex = obj_links.findIndex((obj => obj.target == nom_Nivel2 && obj.source == nom_Nivel1));
+                if (objIndex > -1) {
+                    obj_links[objIndex].value = obj_links[objIndex].value + valor_Nivel2;
+                } else {
+                    var obj_links_aux = { source: nom_Nivel1, target: nom_Nivel2, value: valor_Nivel2 }
+                    obj_links.push(obj_links_aux);
+                }
+            }
+
+            if (nivel_inicial >= 2) {
+                var objIndex_nivel = obj_links_nivel.findIndex((obj => obj.target == nom_Nivel2 && obj.source == nom_Nivel1));
+                if (objIndex_nivel > -1) {
+                    obj_links_nivel[objIndex_nivel].value = obj_links_ini[objIndex_nivel].value + valor_Nivel2;
+                } else {
+                    var obj_links_aux_nivel = { source: nom_Nivel1, target: nom_Nivel2, value: valor_Nivel2 }
+                    obj_links_nivel.push(obj_links_aux_nivel);
+                }
+            }
+            $.each(value.detalles, function (key, value) {
+                //NomNivel3
+
+                var nom_Nivel3 = value.nombre;
+                var id_Nivel3 = value.id;
+                //if (nom_Nivel3.length > 80) {
+                //    nom_Nivel3 = nom_Nivel3.substring(0, 4) + "...";
+                //}
+
+                var valor_Nivel3 = (value.presupuesto / 1);
+                test = obj_nodos.some(item => item.name === value.nombre);
+                if (test == false) {
+                    obj_aux = { name: value.nombre, id: value.id };
+                    if (nivel_detalle >= 3) {
+                        obj_nodos.push(obj_aux);
+                    }
+
+                    if (nivel_inicial >= 3) {
+                        obj_nodos_nivel.push(obj_aux);
+                    }
+
+                    cant_nodos_3 += 1;
+                }
+
+                if (nivel_detalle >= 3) {
+                    var objIndex = obj_links.findIndex((obj => obj.target == nom_Nivel3 && obj.source == nom_Nivel2));
+                    if (objIndex > -1) {
+                        obj_links[objIndex].value = obj_links[objIndex].value + valor_Nivel3;
+                    } else {
+                        var obj_links_aux = { rama: nom_Nivel1, source: nom_Nivel2, target: nom_Nivel3, value: valor_Nivel3 }
+                        obj_links.push(obj_links_aux);
+                    }
+                }
+
+                if (nivel_inicial >= 3) {
+                    var objIndex_nivel = obj_links_nivel.findIndex((obj => obj.target == nom_Nivel3 && obj.source == nom_Nivel2));
+                    if (objIndex_nivel > -1) {
+                        obj_links_nivel[objIndex_nivel].value = obj_links_nivel[objIndex_nivel].value + valor_Nivel3;
+                    } else {
+                        var obj_links_aux = { rama: nom_Nivel1, source: nom_Nivel2, target: nom_Nivel3, value: valor_Nivel3 }
+                        obj_links_nivel.push(obj_links_aux);
+                    }
+
+
+                }
+
+
+
+                $.each(value.detalles, function (key, value) {
+                    //NomNivel4 -->Objeto gasto detalle
+
+                    var nom_Nivel4 = value.nombre;
+                    var valor_Nivel4 = (value.presupuesto / 1);
+                    var id_Nivel4 = value.id;
+                    test = obj_nodos.some(item => item.name === value.nombre);
+                    if (test == false) {
+                        obj_aux = { name: value.nombre, id: value.id };
+                        if (nivel_detalle >= 4) {
+                            obj_nodos.push(obj_aux);
+                        }
+
+                        if (nivel_inicial >= 4) {
+                            obj_nodos_nivel.push(obj_aux);
+
+                        }
+                        cant_nodos_4 += 1;
+                    }
+
+                    if (nivel_detalle >= 4) {
+                        var objIndex = obj_links.findIndex((obj => obj.target == nom_Nivel4 && obj.source == nom_Nivel3));
+                        if (objIndex > -1) {
+                            obj_links[objIndex].value = obj_links[objIndex].value + valor_Nivel4;
+                        } else {
+                            obj_links_aux = { rama: nom_Nivel2, source: nom_Nivel3, target: nom_Nivel4, value: valor_Nivel4 }
+                            obj_links.push(obj_links_aux);
+                        }
+                    }
+
+
+                    if (nivel_inicial >= 4) {
+                        var objIndex_nivel = obj_links_nivel.findIndex((obj => obj.target == nom_Nivel4 && obj.source == nom_Nivel3));
+                        if (objIndex_nivel > -1) {
+                            obj_links_nivel[objIndex_nivel].value = obj_links_nivel[objIndex_nivel].value + valor_Nivel4;
+                        } else {
+                            var obj_links_aux = { rama: nom_Nivel2, source: nom_Nivel3, target: nom_Nivel4, value: valor_Nivel4 }
+                            obj_links_nivel.push(obj_links_aux);
+                        }
+                    }
+
+
+
+
+                });
+
+
+            });
+
+
+
+        });
+    });
+
+    cant_nodos_all = cant_nodos_1;
+    if (cant_nodos_2 > cant_nodos_all) {
+        cant_nodos_all = cant_nodos_2;
+    }
+    if (cant_nodos_3 > cant_nodos_all) {
+        cant_nodos_all = cant_nodos_3;
+    }
+    if (cant_nodos_4 > cant_nodos_all) {
+        cant_nodos_all = cant_nodos_4;
+    }
+
+
+    cant_nodos_nivel = cant_nodos_1;
+    if (nivel_inicial >= 2) {
+        if (cant_nodos_2 > cant_nodos_nivel) {
+            cant_nodos_nivel = cant_nodos_2;
+        }
+    }
+    if (nivel_inicial >= 3) {
+        if (cant_nodos_3 > cant_nodos_nivel) {
+            cant_nodos_nivel = cant_nodos_3;
+        }
+    }
+
+
+
+    var datos_final =
+    {
+        "links": obj_links,
+        "nodes": obj_nodos,
+        "nodes_nivel": obj_nodos_nivel,
+        "links_nivel": obj_links_nivel,
+        "cant_nodos_all": cant_nodos_all,
+        "cant_nodos_nivel": cant_nodos_nivel
+
+
+    };
+
+    return datos_final;
+
+}
+
+function loadData(cb, datos) {
+    cb(datos)
+}
+function recalcularSize(datos) {
     var height_aux = 0;
-    var width_aux = 1100;
+    var width_aux = 1050;
     var units = "millones";
-    var cant_elementos = 10;
+    var cant_elementos = 8;
+    var factor_multiplicador = 25;
+    if (datos != undefined && datos != null) {
+        var cant_aux = datos.cant_nodos;
+        if (cant_aux != undefined) {
+            if (parseInt(cant_aux) < cant_elementos) {
+                factor_multiplicador = 20;
+            } else {
+                cant_elementos = cant_aux;
+            }
+        } else {
+            cant_elementos = (datos.nodes.length / 1);
+
+        }
+    }
 
     let isMobile = window.matchMedia("only screen and (max-width: 765px)").matches;
-    if ($(window).innerWidth() <= width_aux || isMobile) {
-        width_aux = 1100;
+
+    if ($(window).innerWidth() <= width || isMobile) {
+        width_aux = 1050;
+
     } else {
         width_aux = $(".container").innerWidth();
     }
 
     var margin = { top: 10, right: 10, bottom: 10, left: 10 },
         width = width_aux - 20 - margin.left - margin.right,
-        height = ((cant_elementos) * 50) - margin.top - margin.bottom;
+        height = ((cant_elementos) * factor_multiplicador) - margin.top - margin.bottom;
+
+    return alturas = { "margin": margin, width: width, height: height };
+}
+
+function graphSankey(datos) {
+
+
+    d3.select("#sankey_basic").selectAll("*").remove();
+
+    var units = "millones";
+
+    var sizeAux = recalcularSize(datos);
+    var margin = sizeAux.margin;
+    var width = sizeAux.width;
+    var height = sizeAux.height;
+
     var format = function (d) {
-        return "RD $ " + formatMoney((d),0, '.', ',') + " " + units;
+        return "RD$ " + formatMoney(d, 2, '.', ',') + " " + units;
     },
-    color = d3.scale.category20();
-    // append the svg canvas to the page
-    var svg = d3.select("#" + contenedor).append("svg")
+        color = d3.scale.category20();
+
+    // Append the svg canvas to the page
+    var svg = d3.select("#sankey_basic").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
+
+    draw(datos);
+
     // Set the sankey diagram properties
-    var sankey = d3.sankey()
-        .nodeWidth(30)
-        .nodePadding(20)
-        .size([width, height]);
-    var path = sankey.link();
-    loadData(function (graph) {
-        // contents of the function passed to d3.json                   
+    function draw(obj_info) {
+        var link = svg.append("g");
+        var nodes = svg.append("g");
+        var path;
+
+        var sankey = d3.sankey()
+            .nodeWidth(30)
+            .nodePadding(10)
+            .size([width, height]);
+
+        path = sankey.link();
+        var graph = obj_info;
+
         var nodeMap = {};
-        graph.nodes.forEach(function (x) { nodeMap[x.name] = x; });
-        graph.links = graph.links.map(function (x) {
-            return {
-                source: nodeMap[x.source],
-                target: nodeMap[x.target],
-                value: x.value
-            };
+        graph.nodes.forEach(function (x) {
+            nodeMap[x.name] = x;
         });
+
+        // FILTRAR LINKS CON VALOR <= 0
+        graph.links = graph.links
+            .filter(function (x) {
+                var val = parseFloat(x.value);
+                // Solo mantener links con valor válido y mayor a 0
+                return val && !isNaN(val) && val > 0;
+            })
+            .map(function (x) {
+                return {
+                    source: nodeMap[x.source],
+                    target: nodeMap[x.target],
+                    value: parseFloat(x.value)
+                }
+            });
+
         sankey
             .nodes(graph.nodes)
             .links(graph.links)
             .layout(32);
-        // add in the links
-        var link = svg.append("g").selectAll(".link")
+
+        sankey.relayout();
+
+
+        // Add in the links
+        link.selectAll(".link")
             .data(graph.links)
             .enter().append("path")
             .attr("class", "link")
+            .transition().duration(750)
             .attr("d", path)
             .style("stroke-width", function (d) {
                 return Math.max(1, d.dy);
-                //return 10;
-            })
-            .sort(function (a, b) { return b.dy - a.dy; });
-        // add the link titles
-        link.append("title")
-            .text(function (d) {
-                var destino_aux = d.target.name;
-                var origen_aux = d.source.name;
-                var vec_destino = d.target.name.split("_");
-                var vec_origen = d.source.name.split("_");
-                if (vec_destino.length > 0) {
-                    destino_aux = vec_destino[1];
-                }
-                if (vec_origen.length > 0) {
-                    origen_aux = vec_origen[1];
-                }
-                return origen_aux + " → " +
-                    destino_aux + "\n" + format(d.value);
             });
-        // add in the nodes
-        var node = svg.append("g").selectAll(".node")
+
+        // Add the link titles (tooltips)
+        link.selectAll(".link").append("title")
+            .text(function (d) {
+                var vec_origen = d.source.name.split("|");
+                var vec_destino = d.target.name.split("|");
+                var origen = d.source.name;
+                var destino = d.target.name;
+                if (vec_origen.length > 0) {
+                    origen = vec_origen[1];
+                }
+                if (vec_destino.length > 0) {
+                    destino = vec_destino[1];
+                }
+                var cadena_aux = origen + " --> " + destino + "\n" + format(d.value);
+                return cadena_aux;
+            });
+
+        sankey.relayout();
+
+        // Add in the nodes
+        var node = nodes.selectAll(".node")
             .data(graph.nodes)
             .enter().append("g")
             .attr("class", "node")
             .attr("transform", function (d) {
                 return "translate(" + d.x + "," + d.y + ")";
-            })
-            .call(d3.behavior.drag()
-                .origin(function (d) { return d; })
-                .on("dragstart", function () {
-                    this.parentNode.appendChild(this);
-                })
-                .on("drag", dragmove));
-        // add the rectangles for the nodes
+            });
+
+        // Add the rectangles for the nodes
         node.append("rect")
-            .attr("height", function (d) { return d.dy; })
-            .attr("width", sankey.nodeWidth())
+            .attr("height", function (d) {
+                return Math.max(3, d.dy);
+            })
+            .attr("width", function (d) {
+                return sankey.nodeWidth();
+            })
             .style("fill", function (d) {
                 return d.color = color(d.name.replace(/ .*/, ""));
             })
@@ -510,14 +794,15 @@ function graphSankey(contenedor, datos) {
             })
             .append("title")
             .text(function (d) {
-                var nombre = d.name;
-                var vec_aux = nombre.split("_");
-                if (vec_aux.length > 0) {
-                    nombre = vec_aux[1];
+                vec_nodo = d.name.split("|");
+                var texto_nodo = d.name;
+                if (vec_nodo.length > 0) {
+                    texto_nodo = vec_nodo[1];
                 }
-                return nombre + "\n" + format(d.value);
+                return texto_nodo + "\n" + format(d.value);
             });
-        // add in the title for the nodes
+
+        // Add in the title for the nodes (labels)
         node.append("text")
             .attr("x", -6)
             .attr("y", function (d) { return d.dy / 2; })
@@ -525,105 +810,42 @@ function graphSankey(contenedor, datos) {
             .style("font-size", "10px")
             .attr("text-anchor", "end")
             .attr("transform", null)
-            .text(function (d) {
-                var nombre = d.name;
-                var vec_aux = nombre.split("_");
-                if (vec_aux.length > 0) {
-                    nombre = vec_aux[1];
+            .html(function (d) {
+                var longitud = 60;
+                var new_cad = "";
+
+                // Valida d.name existe
+                if (!d || !d.name) {
+                    return "";
                 }
 
-                return nombre;
+                vec_nodo = d.name.split("|");
+
+                if (vec_nodo && vec_nodo.length > 1) {
+                    var cad_aux = vec_nodo[1];
+
+                    //nombres largos a 60 caracteres
+                    if (cad_aux && cad_aux.length > longitud) {
+                        new_cad = cad_aux.substring(0, longitud) + "...";
+                    } else {
+                        new_cad = cad_aux || "";
+                    }
+                } else {
+                    new_cad = d.name || "";
+                }
+
+                return new_cad;
+
             })
-            .filter(function (d) { return d.x < width / 2; })
+            .filter(function (d) { return d.x < width / 4; })
             .attr("x", 6 + sankey.nodeWidth())
             .attr("text-anchor", "start");
 
-        // the function for moving the nodes
-        function dragmove(d) {
-            d3.select(this).attr("transform",
-                "translate(" + (
-                    d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
-                ) + "," + (
-                    d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
-                ) + ")");
-            sankey.relayout();
-            link.attr("d", path);
-        }
-    }, datos);
-}
-function loadData(cb, datos) {
-    cb(datos)
-}
-function obtMatrizData(data) {
-    var cant_nodos_1 = 0;
-    var cant_nodos_2 = 0;
-    var cant_nodos_3 = 0;
-    var cant_nodos_fin = 0;
-    var obj_nodos = [];
-    var obj_links = [];
-    $.each(data, function (key, value) {
-        cant_nodos_1 += 1;
-        var test = false;
-        var obj_aux = { name: value.nombre };
-        var nomFuente = value.nombre;
-        obj_nodos.push(obj_aux);
-        $.each(value.detalles, function (key, value) {
-            cant_nodos_2 += 1;
-            var nomOrganismo = value.nombre;
-            var valor_organismo = (value.avance / 1000000);
-
-            //NomOrganismo
-            test = obj_nodos.some(item => item.name === value.nombre);
-            if (test == false) {
-                obj_aux = { name: value.nombre };
-                obj_nodos.push(obj_aux);
-            }
-            var objIndex = obj_links.findIndex((obj => obj.target == nomOrganismo && obj.source == nomFuente));
-            if (objIndex > -1) {
-                obj_links[objIndex].value = obj_links[objIndex].value + valor_organismo;
-            } else {
-                var obj_links_aux = { source: nomFuente, target: nomOrganismo, value: valor_organismo }
-                obj_links.push(obj_links_aux);
-            }
-
-            $.each(value.detalles, function (key, value) {
-                //NomPrograma
-                cant_nodos_3 += 1;
-                var nomPrograma = value.nombre;
-                var valor_programa = (value.avance / 1000000);
-                test = obj_nodos.some(item => item.name === value.nombre);
-                if (test == false) {
-                    obj_aux = { name: value.nombre };
-                    obj_nodos.push(obj_aux);
-                }
-                var objIndex = obj_links.findIndex((obj => obj.target == nomPrograma && obj.source == nomOrganismo));
-                if (objIndex > -1) {
-                    obj_links[objIndex].value = obj_links[objIndex].value + valor_programa;
-                } else {
-                    var obj_links_aux = { source: nomOrganismo, target: nomPrograma, value: valor_programa }
-                    obj_links.push(obj_links_aux);
-                }
-            });
-        });
-    });
-    cant_nodos_fin = cant_nodos_1;
-    if (cant_nodos_2 > cant_nodos_1) {
-        cant_nodos_fin = cant_nodos_2;
+        sankey.relayout();
     }
-    if (cant_nodos_3 > cant_nodos_2) {
-        cant_nodos_fin = cant_nodos_3;
-    }
-    var datos_final =
-    {
-        "links": obj_links,
-        "nodes": obj_nodos,
-        "cant_nodos_fin": {
-            cant: cant_nodos_fin
-        }
-    };
-
-    return datos_final;
 }
+
+
 function separar_miles(num) {
     var num_aux = num;
     if (num != "0" && num != undefined) {
@@ -641,7 +863,7 @@ function numberWithCommas(x) {
     return parts.join(".");
 }
 function getContratosRP() {
-
+    //alert(ruc + '      ' + nombreContratista);
     $.ajax({
         type: 'POST',
         contentType: "application/json; charset=utf-8",
@@ -650,7 +872,8 @@ function getContratosRP() {
         cache: false,
         success: function (result) {
             if (result.status == true) {
-
+                // $("#cantidadRP").html("");
+                //alert(result.valorContratos);
                 if (result.numContratos > 0) {
                     $("#cantidadRP").html("&nbsp;&nbsp;&nbsp;" + result.numContratos);
                     $("#totalRP").html("RD $ " + formatMoney(parseFloat(result.valorContratos / 1000000),0, ".", ",") + tituloMillones(parseFloat(result.valorContratos / 1000000).toFixed(0)));
@@ -691,6 +914,9 @@ function loadRecursosPorObjeto(objData, divContenedor, tipo_desglose) {
     if (objData != undefined && objData != null) {
         data_filter = objData;
 
+        //var sumaTotal = data_filter.reduce(function (acumulador, elemento) {
+        //    return acumulador + elemento.rawValue;
+        //}, 0);
         for (var i = 0; i < data_filter.length; i++) {
             data_filter[i].labelGroup = data_filter[i].labelGroup.replace(",", " ");
             data_filter[i].label = data_filter[i].label.replace(",", " ");
@@ -698,7 +924,7 @@ function loadRecursosPorObjeto(objData, divContenedor, tipo_desglose) {
             data_filter[i].label_nivel4 = data_filter[i].label_nivel4.replace(",", " ");
 
             data_filter[i].rawValue = parseFloat(data_filter[i].rawValue);
-
+            //data_filter[i].porcentaje = (((data_filter[i].rawValue / sumaTotal) * 100)).toFixed(2);
         }
 
         var paleta = {
@@ -748,7 +974,7 @@ function loadRecursosPorObjeto(objData, divContenedor, tipo_desglose) {
                 return traduc_aux;
             })
             .config({
-
+                //threshold: limitePorc,
                 data: data_filter,
                 groupBy: ["labelGroup", "label", "label_inf", "label_nivel4"],
                 height: 500,
@@ -771,14 +997,16 @@ function loadRecursosPorObjeto(objData, divContenedor, tipo_desglose) {
                             default:
                                 cad = d.labelGroup;
                         }
-
+                        //if (cad.length > longitud_tooltip) {
+                        //    cad = cad.substr(0, longitud_tooltip) + "...";
+                        //}
                         return cad;
                     },
                     tbody: [
                         [function (d) {
                             var valor = d["rawValue"] / 1000000;
                             var cad = "";
-                            cad += "<span>Gastos devengados " + "$ " + formatMoney(valor, 0, '.', ',').toString() + " Millones" + "</span></br>";
+                            cad += "<span>Gastos devengados " + "RD$ " + formatMoney(valor, 0, '.', ',').toString() + " Millones" + "</span></br>";
                             return cad;
                         }]
                     ]
@@ -790,6 +1018,7 @@ function loadRecursosPorObjeto(objData, divContenedor, tipo_desglose) {
             .sum("rawValue")
             .depth(0)
             .legend(false)
+          
             .render();
     }
 
@@ -799,7 +1028,7 @@ function loadRecursosPorObjeto(objData, divContenedor, tipo_desglose) {
 
 }
 function loadListadoRecursosPorObjeto(objData, divContenedor) {
-    
+    //cargalistado
     $("#divGraphRecursosObj").append("<div><span>Listado</span></div>")
 }
 function getContratosCovid() {
@@ -812,7 +1041,8 @@ function getContratosCovid() {
         cache: false,
         success: function (result) {
             if (result.status == true) {
-
+                // $("#cantidadRP").html("");
+                //alert(result.valorContratos);
                 if (result.NumContratosActivos > 0) {
                     $("#cantidadRP").html("&nbsp;&nbsp;&nbsp;" + result.NumContratosActivos);
                     $("#totalRP").html("RD $ " + formatMoney(parseFloat(result.ValorTotalContratosActivos / 1000000),0, ".", ",") + tituloMillones(parseFloat(result.ValorTotalContratosActivos).toFixed(0)));
@@ -852,6 +1082,7 @@ function seteaListado() {
     $(".boxCompoDesglose").hide();
     $(".boxTituloListado").show();
     $("#sankey_basic").empty();
+    //seleccionar tab abierto
     var lstNiveles = $("#migapanlistado").val();
     var arrayNiv = lstNiveles.split(",");
     var nom_nivel = "";
@@ -886,7 +1117,8 @@ function seteaListado() {
                     break;
                 default:
                     $('#accordion .collapse').removeClass("in");
-
+                // code block
+                //$('#accordion .collapse').removeClass("in");
             }
 
         }

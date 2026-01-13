@@ -24,6 +24,9 @@ var global_tab = "";
 
 var cantXPagina = 6;
 var anyo_actual = $("#annioPresupuesto option:selected").val();
+var idSector = $("#IdSector").val();
+
+///-----------------------------------------------
 inicializaDatos();
 configuraSelectPeriodo();
 //-------------------------------------------------
@@ -48,6 +51,8 @@ function inicializaDatos() {
 
 function configuraSelectPeriodo() {
     $('#annioPresupuesto').on('change', function () {
+        //globales_proy = [];
+        //globales_entidad = [];
 
         anyo_actual = this.value;
         $("#annioPresupuestoText").html("" + anyo_actual);
@@ -70,6 +75,8 @@ function configuraSelectPeriodo() {
             }
         }
         
+        
+        /*getSectoresXFuenteIni(anyo_actual);*/
         
     })
 
@@ -96,7 +103,7 @@ function getGraficoPerTipoVista() {
         };
     }
     ///--------cargue de datos
-    $("#sankey_basic").html("");
+    $("#sankey_basic").empty();
     graphSankey(global_ini);
 
 
@@ -105,6 +112,7 @@ function getGraficoPerTipoVista() {
 
 function configSelectVistaSankey() {
     $('input[name="tipoVistaSankey"]').change(function () {
+        //$("#btnAtras").hide();
         getGraficoPerTipoVista();
     });
 
@@ -112,6 +120,9 @@ function configSelectVistaSankey() {
 
 function configuraSelectDesglose() {
     $('.enlace_tab').on('click', function () {
+        //globales_proy = [];
+        //globales_entidad = [];
+
         $('.enlace_tab').each(function (i, obj) {
             $(obj).removeClass("active");
         });
@@ -124,6 +135,7 @@ function configuraSelectDesglose() {
             $("#ProyectosListado").hide();
             $("#divPerSectorTab").show();
             $("#divProyectosPerOrganismo").hide();
+            //$("#Instituciones").show();
             getSectoresXFuenteIni();
             
 
@@ -135,6 +147,7 @@ function configuraSelectDesglose() {
             $("#divInstitucionesPerSector").hide();
            
             $("#divProyectosPerOrganismo").show();
+            //$("#Instituciones").hide();
             getOrganismosXFuenteIni();
         }
     });
@@ -213,10 +226,10 @@ function getStrBarrasPerPeriodo(result, anyo_actual) {
             total_vigente += result.vigente / 1000000;
 
         global_vigente = total_vigente;
-        $("#lblValorAprobado").text("$ " + formatMoney(total_aprobado, 0, '.', ',').toString());
-        $("#lblValorEjecutado").text("$ " + formatMoney(total_ejecutado, 0, '.', ',').toString() + " M");
-        $("#lblValorVigente").text("$ " + formatMoney(total_vigente, 0, '.', ',').toString() + " M");
-        $("#lblEtiquetaMoneda").text("Millones de pesos dominicanos");
+        $("#lblValorAprobado").text("RD$ " + formatMoney(total_aprobado, 0, '.', ',').toString() + " M");
+        $("#lblValorEjecutado").text("RD$ " + formatMoney(total_ejecutado, 0, '.', ',').toString() + " M");
+        $("#lblValorVigente").text("RD$ " + formatMoney(total_vigente, 0, '.', ',').toString() + " M");
+       
 
     }
 
@@ -224,6 +237,7 @@ function getStrBarrasPerPeriodo(result, anyo_actual) {
 
 function GetRecursosPorFinalidad(anyo) {
     $("#divGraphPerFuncion").empty();
+    //finalidad_per_funcion(sector)
         $.ajax({
             contentType: "application/json; charset=utf-8",
             url: "api/ServiciosPresupuestoNew/GetRecursosPerFinalidad",
@@ -316,6 +330,7 @@ function loadRecursosPerFinalidad(objData) {
                 return traduc_aux;
             })
             .config({
+                //threshold: limitePorc,
                 data: data_filter,
                 groupBy: ["labelGroup","label"],
                 height: 500,
@@ -343,7 +358,7 @@ function loadRecursosPerFinalidad(objData) {
                         [function (d) {
                             var valor = d["rawValueDouble"] / 1000000;
                             var cad = "";
-                            cad += "<span>Presupuesto Vigente " + "$ " + formatMoney(valor,0, '.', ',').toString() + " Millones" + "</span></br>";
+                            cad += "<span>Presupuesto Vigente " + "RD$ " + formatMoney(valor,0, '.', ',').toString() + " Millones" + "</span></br>";
                             return cad;
                         }]
                     ]
@@ -386,8 +401,10 @@ function ObtenerSectoresPeriodo(anyo_actual) {
                 $("#filter_sector_sankey").html(cad_sector);
                 configuraSelectSectorSankey();
                 if (global_tab == "sector" || global_tab=="") {
-                    getSectoresXFuenteIni();
+                    getSectoresXFuenteIni(anyo_actual);
                 }
+                //getSectoresXFuenteIni(anyo_actual);
+
 
 
             }
@@ -399,12 +416,25 @@ function ObtenerSectoresPeriodo(anyo_actual) {
 }
 
 function getSectoresXFuenteIni() {
+    var val_Sel ="";
     if ($("#filter_sector_sankey").children.length > 0) {
-        var base_sel = $("#filter_sector_sankey option:eq(0)").attr("value");
-        if (base_sel != null) {
+        if (idSector != null && idSector != undefined && idSector != "") {
+            val_Sel = idSector;
+
+            const optionsArray = Array.from(document.getElementById("filter_sector_sankey").options);
+            const index = optionsArray.findIndex(option => option.value === val_Sel);
+            $('#filter_sector_sankey option:eq(' + index + ')').attr("selected", "selected");
+            $("#filter_sector_sankey").val(val_Sel);
+
+        } else {
+            val_Sel = $("#filter_sector_sankey option:eq(0)").attr("value");
             $("#filter_sector_sankey option:eq(0)").attr("selected", "selected");
-            $("#filter_sector_sankey").val(base_sel);
-            ObtenerDatosPerSectores(anyo_actual, base_sel,"sector");
+            $("#filter_sector_sankey").val(val_Sel);
+       }
+        
+        if (val_Sel != null) {
+            
+            ObtenerDatosPerSectores(anyo_actual, val_Sel,"sector");
 
         }
 
@@ -438,9 +468,11 @@ function ObtenerOrganismosPeriodo(anyo_actual) {
 
                 configuraSelectOrganismoSankey();
                 if (global_tab == "organismo") {
-                    getOrganismosXFuenteIni();
+                    getOrganismosXFuenteIni(anyo_actual);
                 }
- 
+                //getOrganismosXFuenteIni(anyo_actual);
+
+
 
             }
         }
@@ -466,6 +498,7 @@ function getOrganismosXFuenteIni() {
 function ObtenerDatosPerOrganismos(anyo, opcion, tipo) {
     global_tab = "organismo";
     global_sankey = [];
+    
     miga_pan = "";
     $("#divPagFichas").html("");
     $("#divListado_proy").empty();
@@ -520,13 +553,14 @@ function ObtenerDatosPerOrganismos(anyo, opcion, tipo) {
                             var porcentaje = ((total_ejecutado / total_vigente) * 100).toFixed(2);
                         }
 
-                        $("#totalSankeyPerOrganismo").html("$ " + formatMoney(total_vigente / 1, 2, '.', ',').toString() + " Millones");
+                        $("#totalSankeyPerOrganismo").html("RD$ " + formatMoney(total_vigente / 1, 2, '.', ',').toString() + " Millones");
                         $("#PorcEjecPerOrganismo").html(porcentaje.toString() + "%");
                     }
                     $("#sankey_basic").html("");
                     graphSankey(global_ini);
                     configSelectVistaSankey();
                     ObtenerDatosListadoPerProyectos(anyo_actual);
+                    //ObtenerDatosListadoPerEntidad(anyo_actual, "organismo");
 
                 } else {
                     $("#sankey_basic").html("");
@@ -625,6 +659,7 @@ function agruparNodos(objData) {
             var porc = 0;
             if (nivel == "n3") {
                 if (mayorValor > 0) {
+                    //porc = Math.round((valor / valor_grupo[0].value) * 100, 0);
                     porc = Math.round((valor / mayorValor) * 100, 0);
                 }
 
@@ -771,7 +806,7 @@ function agruparNodos(objData) {
             var porc = 0;
             if (nivel == "n4") {
                 if (mayorValor > 0) {
-
+                    //porc = Math.round((valor / valor_grupo[0].value) * 100, 0);
                     porc = Math.round((valor / mayorValor) * 100, 0);
                 }
 
@@ -910,6 +945,9 @@ function concatenarIds(linksArray, sourceValue) {
 }
 
 function graphSankey(datos) {
+
+    d3.select("#sankey_basic").selectAll("*").remove();
+
     $("#btnAtras").hide();
     $(".wrap_sankey").show();
     var units = "millones";
@@ -939,10 +977,6 @@ function graphSankey(datos) {
         var link = svg.append("g");
         var nodes = svg.append("g");
         var path;
-        var sizeAux = recalcularSize(obj_info);
-        var margin = sizeAux.margin;
-        var width = sizeAux.width;
-        var height = sizeAux.height;
 
         var sankey = d3.sankey()
             .nodeWidth(30)
@@ -951,17 +985,26 @@ function graphSankey(datos) {
 
         path = sankey.link();
         var graph = obj_info;
+
         var nodeMap = {};
         graph.nodes.forEach(function (x) {
             nodeMap[x.name] = x;
         });
-        graph.links = graph.links.map(function (x) {
-            return {
-                source: nodeMap[x.source],
-                target: nodeMap[x.target],
-                value: x.value
-            }
-        });
+        
+        // FILTRAR LINKS CON VALOR <= 0
+        graph.links = graph.links
+            .filter(function (x) {
+                var val = parseFloat(x.value);
+                // Solo mantener links con valor válido y mayor a 0
+                return val && !isNaN(val) && val > 0;
+            })
+            .map(function (x) {
+                return {
+                    source: nodeMap[x.source],
+                    target: nodeMap[x.target],
+                    value: parseFloat(x.value)
+                }
+            });
 
         sankey
             .nodes(graph.nodes)
@@ -980,7 +1023,7 @@ function graphSankey(datos) {
             .style("stroke-width", function (d) {
                 return Math.max(1, d.dy);
             })
-            //.sort(function (a, b) { return b.dy - a.dy; });
+        //.sort(function (a, b) { return b.dy - a.dy; });
 
         // add the link titles
         link.selectAll(".link").append("title")
@@ -996,7 +1039,7 @@ function graphSankey(datos) {
                     destino = vec_destino[1];
                 }
                 var cadena_aux = origen + " --> " + destino + "\n" + format(d.value);
-                
+
 
                 return cadena_aux;
 
@@ -1046,7 +1089,7 @@ function graphSankey(datos) {
                                     window.open(enlace_url, "_blank");
                                 }
                             }
-                         } 
+                        }
                     } else {
                         var filteredData = $.grep(global_sankey.links, function (element) {
                             return element.source === selection;
@@ -1058,49 +1101,52 @@ function graphSankey(datos) {
 
 
                 } else if (vecSelect[0] == "n4") {
-                        if (global_tab == "sector") {
-                            //proyectos de inversion--navega hacia el perfil
-                            var idProy = d.id;
-                            if (idProy != undefined) {
-                                if (idProy != "") {
-                                    var vecProy = idProy.split("*");
-                                    if (vecProy.length > 1) {
-                                        var idProyBuscador = idProy.replace(/\*/g, ',');
-                                        var enlace_url = "../../BusquedaResultados?Id=" + idProyBuscador;
-                                        window.open(enlace_url, "_blank");
-                                    } else {
-                                        var enlace_url = "../../perfilProyecto/" + idProy;
-                                        window.open(enlace_url, "_blank");
-                                    }
+                    if (global_tab == "sector") {
+                        //proyectos de inversion--navega hacia el perfil
+                        var idProy = d.id;
+                        if (idProy != undefined) {
+                            if (idProy != "") {
+                                var vecProy = idProy.split("*");
+                                if (vecProy.length > 1) {
+                                    var idProyBuscador = idProy.replace(/\*/g, ',');
+                                    var enlace_url = "../../BusquedaResultados?Id=" + idProyBuscador;
+                                    window.open(enlace_url, "_blank");
+                                } else {
+                                    var enlace_url = "../../perfilProyecto/" + idProy;
+                                    window.open(enlace_url, "_blank");
                                 }
-                            } 
-                        } else {
-                            var idProy = d.id;
-                            
-                            var filteredData = $.grep(global_sankey.links, function (element) {
-                                return element.source === selection;
-                            });
-                            if (filteredData.length > 0) {
-                                update(d);
                             }
                         }
+                    } else {
+                        var idProy = d.id;
 
-              } else {
-                       
                         var filteredData = $.grep(global_sankey.links, function (element) {
                             return element.source === selection;
                         });
                         if (filteredData.length > 0) {
                             update(d);
                         }
+                    }
+
+                } else {
+
+                    var filteredData = $.grep(global_sankey.links, function (element) {
+                        return element.source === selection;
+                    });
+                    if (filteredData.length > 0) {
+                        update(d);
+                    }
                 }
             })
-            
+        //.call(d3.behavior.drag()
+        //    .origin(function (d) { return d; })
+        //    .on("drag", dragmove)
+        //)
 
         // add the rectangles for the nodes
         node.append("rect")
             .attr("height", function (d) {
-                
+
                 if (d.dy < 3) {
                     return 3;
                 } else {
@@ -1125,7 +1171,7 @@ function graphSankey(datos) {
                     texto_nodo = vec_nodo[1];
                 }
                 return texto_nodo + "\n" + format(d.value);
-                
+
 
             });
 
@@ -1149,7 +1195,12 @@ function graphSankey(datos) {
                     var new_cad = "";
                     if (cad_aux.length > longitud) {
                         new_cad = cad_aux.substring(0, longitud) + "...";
-
+                        //var regex = new RegExp('.{1,40}', 'g');
+                        //var subStrings = cad_aux.match(regex);
+                        //subStrings.forEach(function (item) {
+                        //    //new_cad += item + "< /br>";
+                        //    new_cad += "<tspan>" + item + "</tspan>"
+                        //});
                     } else {
                         new_cad = cad_aux;
                     }
@@ -1157,11 +1208,13 @@ function graphSankey(datos) {
                 }
                 var t = "<tspan>" + new_cad + "</tspan>";
                 return new_cad;
-                
+
             })
             .filter(function (d) { return d.x < width / 4; })
             .attr("x", 6 + sankey.nodeWidth())
             .attr("text-anchor", "start");
+
+        //node.transition().duration(1750);
         sankey.relayout();
 
 
@@ -1236,7 +1289,7 @@ function graphSankey(datos) {
 
 
     function update(d) {
-
+        //miga_pan = "";
         var numAgrupador = 5;
         var cantElemAdd = 0;
         
@@ -1280,7 +1333,7 @@ function graphSankey(datos) {
             const result = miga_pan.replace(regex, '');
             if (opcion == 3) {
                 cant = 0;
-
+                //if (cant_padres > 0) {
 
                 if (vecSelect[0] == "n1") {
                     var filteredData = obtenerHijosYnietosConMismaRama(selection, global_sankey.links, "n4|");
@@ -1347,7 +1400,7 @@ function graphSankey(datos) {
 
                                         var porc = 0;
                                         if (mayorValor > 0) {
-
+                                            //porc = Math.round((valor / valor_grupo[0].value) * 100, 0);
                                             porc = Math.round((valor / mayorValor) * 100, 0);
                                         }
 
@@ -1477,7 +1530,7 @@ function graphSankey(datos) {
                                     if (nivel_destino == "n4") {
                                         //proyectos de inversion
                                         if (mayorValor > 0) {
-
+                                            //porc = Math.round((valor / valor_grupo[0].value) * 100, 0);
                                             porc = Math.round((valor / mayorValor) * 100, 0);
                                         }
 
@@ -1687,7 +1740,24 @@ function graphSankey(datos) {
                         
                     })
                     $("#btnAtras").show();
+                //}
+                //} else {
+                //    miga_pan = "";
+                //    $("#btnAtras").hide();
+                //    $("#sankey_basic").empty();
+                //    var obj_aux =
+                //    {
+                //        "links": global_sankey.links_nivel,
+                //        "nodes": global_sankey.nodes_nivel,
+                //        "cant_nodos": global_sankey.cant_nodos_nivel
+                //    };
+                //    graphSankey(obj_aux);
 
+                //}
+                //if (cant_padres <= 0) {
+                //    miga_pan = "";
+                //    $("#btnAtras").hide();
+                //}
 
             } else {
                 if (cant_hijos == 0) {
@@ -1802,8 +1872,9 @@ function recalcularSize(datos) {
 
 
 function ObtenerDatosListadoPerEntidad(periodo, tipo) {
-    $("#divProyectosPerOrganismo").hide();
-  
+    globales_entidad = [];
+
+    $("#divProyectosPerOrganismo").hide();  
     $("#divPagFichas").html("");
     $("#divListado").empty();
     $("#divListado").html(loader_proy);
@@ -1869,52 +1940,79 @@ function ObtenerDatosListadoPerEntidad(periodo, tipo) {
 }
 
 function getEstructuraInfograficoPerEntidad(datos, pagina) {
-
-    var html_list = '<div class="card-entidades-group">';
-    for (var i = 0; i < datos.length; i++) {
-        var porc_ejecutado = 0;
+    var i_aux = 0;
+    var j_aux = 0;
+    var k_aux = 0;
+    //var l = 0;
+    var total_avance = 0;
+    var total_presupuesto = 0;
+    var periodo_aux = 0;
+    var total_porc_ejecutado = 0;
+    
+    let html_list = `<div class="card-entidades-group">`;
+    
+    for (let i = 0; i < datos.length; i++) {
+        let porc_ejecutado = 0;
         if (datos[i].presupuesto > 0) {
             if (datos[i].presupuesto > 0) {
                 porc_ejecutado = (datos[i].avance / datos[i].presupuesto) * 100;
             }
         }
-
-        var nom_institucion = datos[i]['nombre'];
-        var cod_institucion = datos[i]['codigo'];
-        var presup_aprobado = datos[i]['aprobado'] / 1000000;
-        var presup_vigente = datos[i]['presupuesto'] / 1000000;
-        var presup_ejecutado = datos[i]['avance'] / 1000000;
-
-        html_list += '<div id="institucion_' + i.toString() + '" class="card d-flex">';
-        html_list += '<div class="headEnt">';
-        html_list += '<div class="data1 mainDataEntidad">';
-        html_list += '<span class="td1">' + nom_institucion + ' </span>';
-        html_list += '</div>';
-        html_list += '<div class="data1"><span class="labelTit">Presupuesto Aprobado</span><span class="td1">$ ' + formatMoney(presup_aprobado,2, '.', ',').toString() + ' Millones</span ></div > ';
-        html_list += '<div class="data1"><span class="labelTit">Presupuesto Vigente</span><span class="td1">$ ' + formatMoney(presup_vigente,2, '.', ',').toString() + ' Millones</span></div>';
-        html_list += '<div class="data1"><span class="labelTit">Presupuesto Ejecutado</span><span class="td1">$' + formatMoney(presup_ejecutado,2, '.', ',').toString() + ' Millones</span></div>';
-        html_list += '<div class="data1"><span class="labelTit">Porcentaje de Ejecución</span><span class="td1">' + formatMoney(porc_ejecutado,2, '.', ',').toString() + '%' + '</span></div>';
-        html_list += '</div>';
-        html_list += '<div class="btn-action">';
-        html_list += '<div class="btnPerfil">';
-        html_list += '<a target="_blank" href="/PerfilEntidad?codEntidad=' + datos[i].id + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br /> <span>Ver institución</span></a>';
-        html_list += '</div>';
-        html_list += '</div>';
-        html_list += '</div>';
+        
+        const nom_institucion = datos[i]['nombre'];
+        const cod_institucion = datos[i]['codigo'];
+        const presup_aprobado = datos[i]['aprobado'] / 1000000;
+        const presup_vigente = datos[i]['presupuesto'] / 1000000;
+        const presup_ejecutado = datos[i]['avance'] / 1000000;
+        
+        html_list += `
+            <div id="institucion_${i}" class="card d-flex">
+                <div class="headEnt">
+                    <div class="data1 mainDataEntidad">
+                        <span class="td1">${nom_institucion} </span>
+                    </div>
+                    <div class="data1">
+                        <span class="labelTit">Presupuesto Aprobado</span>
+                        <span class="td1">RD$ ${formatMoney(presup_aprobado, 2, '.', ',')} Millones</span>
+                    </div>
+                    <div class="data1">
+                        <span class="labelTit">Presupuesto Vigente</span>
+                        <span class="td1">RD$ ${formatMoney(presup_vigente, 2, '.', ',')} Millones</span>
+                    </div>
+                    <div class="data1">
+                        <span class="labelTit">Presupuesto Ejecutado</span>
+                        <span class="td1">RD$${formatMoney(presup_ejecutado, 2, '.', ',')} Millones</span>
+                    </div>
+                    <div class="data1">
+                        <span class="labelTit">Porcentaje de Ejecución</span>
+                        <span class="td1">${formatMoney(porc_ejecutado, 2, '.', ',')}%</span>
+                    </div>
+                </div>
+                <div class="btn-action">
+                    <div class="btnPerfil">
+                        <a target="_blank" href="/PerfilEntidad?codEntidad=${datos[i].id}" class="text-small">
+                            <i class="material-icons md-18">arrow_forward</i><br /> 
+                            <span>Ver institución</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
     }
-    html_list += '</div>';
-    ///----------------
-    html_list += '<div id="divPagFichas"></div>';
-    ///----------------
-
+    
+    html_list += `</div>`;
+    html_list += `<div id="divPagFichas"></div>`;
+    
     $("#divListado").html(html_list);
-    var totalNumber = globales_entidad.length;
-    var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
+    
+    const totalNumber = globales_entidad.length;
+    let totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
+    
     if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
         totalPages = totalPages + 1;
     }
+    
     dibujarPagNumeradasPerEntidad(pagina, totalNumber, totalPages);
-
 }
 
 function dibujarPagNumeradasPerEntidad(actual, total, totalPag) {
@@ -1983,6 +2081,7 @@ function dibujarPagNumeradasPerEntidad(actual, total, totalPag) {
 
 
 function ObtenerDatosListadoPerProyectos(periodo) {
+    globales_proy = [];
     //$("#Instituciones").hide();
     $("#divInstitucionesPerSector").hide();
     $("#divPagFichas_proy").html("");
@@ -2048,50 +2147,69 @@ function ObtenerDatosListadoPerProyectos(periodo) {
     }
 }
 
+
 function getEstructuraInfograficoPerProyecto(datos, pagina) {
-
-
-        var html_list = '<div class="card-entidades-group">';
-        for (var i = 0; i < datos.length; i++) {
-            var nombre = datos[i].nombre;
-            var idProyecto = parseFloat(datos[i].id);
-
-            html_list += '<div id="proy_' + i.toString() + '" class="card d-flex">';
-            html_list += '<div class="headEnt">';
-            html_list += '<div class="data1 mainDataEntidad">';
-            html_list += '<span class="td1">' + nombre + ' </span>';
-            html_list += '</div>';
-            html_list += '<div class="data1b"><span class="labelTit">Monto financiado</span><span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(datos[i].vigente) + ' M</span></div>';
-            html_list += '<div class="data1b"><span class="labelTit">Monto ejecutado</span><span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(datos[i].ejecutado) + ' M</span></div>';
-            html_list += '<div class="data1b"><span class="labelTit">Avance financiero</span><span class="td1">' + datos[i].avanceFinancieroOrganismo + '%</span></div>';
-            html_list += '<div class="data1b"><span class="labelTit">Estado</span><span class="td1">' + datos[i].estado + '</span></div>';
-            html_list += '<div class="btn-action">';
-            html_list += '<div class="btnPerfil">';
-            if (idProyecto > 0) {
-                html_list += '<a target="_blank" href="../projectprofile/' + idProyecto + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>Ver proyecto</span></a>';
-            }
-            html_list += '</div>';
-            html_list += '</div>';
-            html_list += '</div>';  ///fin headEnt
-
-            html_list += '</div>';  ///fin div proy
-
-        }
-        html_list += '</div>';
-        ///----------------
-        html_list += '<div id="divPagFichas_proy"></div>';
-        ///----------------
-
-        $("#divListado_proy").html(html_list);
-        var totalNumber = globales_proy.length;
-        var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
-        if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
-            totalPages = totalPages + 1;
-        }
-        dibujarPagNumeradasPerProyectos(pagina, totalNumber, totalPages);
-
+    ///---------------------------------------------
+    var i_aux = 0;
+    var j_aux = 0;
+    var k_aux = 0;
+    //var l = 0;
+    var total_avance = 0;
+    var total_presupuesto = 0;
+    var periodo_aux = 0;
+    var total_porc_ejecutado = 0;
+    ///---------------------------------------------
+    let html_list = `<div class="card-entidades-group">`;
+    for (let i = 0; i < datos.length; i++) {
+        const nombre = datos[i].nombre;
+        const idProyecto = parseFloat(datos[i].id);
+        html_list += `
+            <div id="proy_${i}" class="card d-flex">
+                <div class="headEnt">
+                    <div class="data1 mainDataEntidad2">
+                        <span class="td1">${nombre} </span>
+                    </div>
+                    <div class="data1b">
+                        <span class="labelTit">Monto financiado</span>
+                        <span class="td1">RD$${formatMoney(datos[i].vigente, 2, '.', ',')} Millones</span>
+                    </div>
+                    <div class="data1b">
+                        <span class="labelTit">Monto ejecutado</span>
+                        <span class="td1">RD$${formatMoney(datos[i].ejecutado, 2, '.', ',')} Millones</span>
+                    </div>
+                    <div class="data1b">
+                        <span class="labelTit">Avance financiero</span>
+                        <span class="td1">${datos[i].avanceFinancieroOrganismo}%</span>
+                    </div>
+                    <div class="data1b">
+                        <span class="labelTit">Estado</span>
+                        <span class="td1">${datos[i].estado}</span>
+                    </div>
+                   
+                </div>
+                <div class="btn-action">
+                        <div class="btnPerfil">
+                            ${idProyecto > 0 ? `
+                                <a target="_blank" href="../projectprofile/${idProyecto}" class="text-small">
+                                    <i class="material-icons md-18">arrow_forward</i><br> 
+                                    <span>Ver proyecto</span>
+                                </a>
+                            ` : ''}
+                        </div>
+                    </div>
+            </div>
+        `;
     }
-
+    html_list += `</div>`;
+    html_list += `<div id="divPagFichas_proy"></div>`;
+    $("#divListado_proy").html(html_list);
+    const totalNumber = globales_proy.length;
+    let totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
+    if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
+        totalPages = totalPages + 1;
+    }
+    dibujarPagNumeradasPerProyectos(pagina, totalNumber, totalPages);
+}
 
     
 
@@ -2160,21 +2278,33 @@ function dibujarPagNumeradasPerProyectos(actual, total, totalPag) {
 }
 
 ///------------SECTORES TAB--------------------------
+// Variable global para guardar el AJAX activo
+var ajaxSectoresActivo = null;
+
 function ObtenerDatosPerSectores(anyo, opcion, tipo) {
     global_tab = "sector";
     global_sankey = [];
     miga_pan = "";
-    $("#sankey_basic").html(loader_proy);
-    $.ajax({
+
+    // ABORTAR AJAX ANTERIOR SI EXISTE
+    if (ajaxSectoresActivo != null) {
+        ajaxSectoresActivo.abort();
+    }
+
+    $("#sankey_basic").empty().html(loader_proy);
+
+    ajaxSectoresActivo = $.ajax({
         contentType: "application/json; charset=utf-8",
         url: "api/ServiciosPresupuestoNew/ObtDistribucionBySectorFuentes",
         type: "GET",
         data: {
             anyo: anyo,
             opcion: opcion,
-            tipo:tipo
+            tipo: tipo
         },
         success: function (result) {
+            ajaxSectoresActivo = null; // Limpiar referencia
+
             if (result.status == true) {
                 var data = result.distribucionItemsByFuente;
                 var total_vigente = result.totalPresupuesto;
@@ -2182,13 +2312,11 @@ function ObtenerDatosPerSectores(anyo, opcion, tipo) {
                 if (data.length > 0) {
                     var datos_all = obtMatrizData(data, 3, 4);
                     global_sankey = datos_all;
-                    //----------------------------------------------
-                    var datos_iniciales = 
-                    {
+
+                    var datos_iniciales = {
                         "links": global_sankey.links_nivel,
                         "nodes": global_sankey.nodes_nivel,
                         "cant_nodos": global_sankey.cant_nodos_nivel
-
                     };
 
                     var filterAgrupados = agruparNodos(datos_iniciales);
@@ -2197,55 +2325,45 @@ function ObtenerDatosPerSectores(anyo, opcion, tipo) {
                     var tipoVista = $('input[name="tipoVistaSankey"]:checked').val();
                     if (tipoVista == "extendida") {
                         global_ini = datos_iniciales;
-                        
                     } else {
-                        global_ini =
-                        {
+                        global_ini = {
                             "links": global_agrupado.links,
                             "nodes": global_agrupado.nodes,
                             "cant_nodos": global_agrupado.cant
-
                         };
                     }
 
-
                     if (total_vigente != null) {
-
                         if (total_vigente > 0) {
                             var porcentaje = ((total_ejecutado / total_vigente) * 100).toFixed(2);
                         }
-
-                        $("#totalSankeyPerSector").text("$ " + formatMoney(total_vigente / 1, 2, '.', ',').toString() + " Millones");
+                        $("#totalSankeyPerSector").text("RD$ " + formatMoney(total_vigente / 1, 2, '.', ',').toString() + " Millones");
                         $("#PorcEjecPerSector").text(porcentaje.toString() + "%");
-
                     }
-                    $("#sankey_basic").html("");
 
+                    $("#sankey_basic").empty();
                     graphSankey(global_ini);
+
                     $("#divInstitucionesPerSector").show();
                     ObtenerDatosListadoPerEntidad(anyo_actual, "sector");
                     configuraSankeyTipoVista();
                 } else {
-                    $("#sankey_basic").html("");
-
+                    $("#sankey_basic").empty();
                 }
-
             } else {
-                alert("Error: " + result.message, function () {
-                    $("#sankey_basic").html("");
-                });
+                alert("Error: " + result.message);
+                $("#sankey_basic").empty();
             }
-
         },
-        error: function (response) {
-            alert(response.responseText);
-        },
-        failure: function (response) {
-            alert(response.responseText);
+        error: function (xhr) {
+            ajaxSectoresActivo = null;
+            // No mostrar error si fue abortado intencionalmente
+            if (xhr.statusText !== 'abort') {
+                alert(xhr.responseText);
+            }
         }
     });
 }
-
 
 
 
@@ -2325,6 +2443,9 @@ function obtMatrizData(data, nivel_inicial, nivel_detalle) {
 
                 var nom_Nivel3 = value.nombre;
                 var id_Nivel3 = value.id;
+                //if (nom_Nivel3.length > 80) {
+                //    nom_Nivel3 = nom_Nivel3.substring(0, 4) + "...";
+                //}
 
                 var valor_Nivel3 = (value.presupuesto / 1);
                 test = obj_nodos.some(item => item.name === value.nombre);
@@ -2571,7 +2692,7 @@ function configuraSelectEntidadesGasto() {
 
 function getEntidadesIni() {
     $(".selectEntidad").each(function () {
-
+        //$(this).addClass("foo");
         if ($(this).children.length > 0) {
             var id = $(this).attr("id");
             var str = id + "option:eq(0)";
@@ -2626,11 +2747,12 @@ function GetGastoEntidades(annio, filtro) {
         loadBarChartEntidades(result, "divGraphBarChartGastoEntidades");
 
     }).fail(function (handleError) {
-
+        // Some function
+        //console.log(handleError);
     });
 }
 
-function loadBarChartEntidades(objData, divContenedor, tipo) {
+function loadBarChartEntidadesOld(objData, divContenedor, tipo) {
 
     var rotacion = "";
     if (tipo == "all") {
@@ -2662,14 +2784,14 @@ function loadBarChartEntidades(objData, divContenedor, tipo) {
                 },
                 tooltipConfig: {
                     title: function (d) {
-
+                        //return d["label"] + "<br> " + "Presupuesto " + d["labelGroup"];
                         return "Presupuesto " + d["labelGroup"];
                     },
                     tbody: [
                         [function (d) {
-                            var cad_aux = "$ " + formatMoney(["rawValue"],1, '.', ',').toString() + " Millones";
+                            var cad_aux = "RD$ " + formatMoney(["rawValue"],1, '.', ',').toString() + " Millones";
                             if (d["porcentaje"] != undefined && d["porcentaje"] != null) {
-                                cad_aux = "$ " + formatMoney(d["rawValue"],1, '.', ',').toString() + " Millones";
+                                cad_aux = "RD$ " + formatMoney(d["rawValue"],1, '.', ',').toString() + " Millones";
                             }
 
                             return cad_aux;
@@ -2692,6 +2814,239 @@ function loadBarChartEntidades(objData, divContenedor, tipo) {
             .render();
     }
 }
+
+// ============================================================================
+// FUNCIONES OPTIMIZADAS PARA GRÁFICOS DE PRESUPUESTO - REPÚBLICA DOMINICANA
+// ============================================================================
+
+/**
+ * Determina la unidad óptima (pesos, millones, miles de millones, billones)
+ * basándose en el rango de valores (mínimo y máximo)
+ * @param {Array<number>} dataArray - Array de valores numéricos crudos
+ * @returns {Object} - Objeto con label y factor de la unidad óptima
+ */
+function resolveUnitMB(dataArray) {
+    // Umbral mínimo para considerar una unidad legible
+    const UMBRAL_MINIMO = 1;
+
+    const UNITS = {
+        pesos: { label: "Pesos dominicanos", factor: 1 },
+        millones: { label: "Millones de pesos dominicanos", factor: 1e6 },
+        milesMillones: { label: "Miles de millones de pesos dominicanos", factor: 1e9 },
+        billones: { label: "Billones de pesos dominicanos", factor: 1e12 }
+    };
+
+    // Filtrar valores válidos (mayores a 0)
+    const valores = dataArray.filter(v => v > 0);
+    if (!valores.length) return UNITS.millones;
+
+    const maxRaw = Math.max(...valores);
+    const minRaw = Math.min(...valores);
+
+    // Evaluar cada unidad en orden descendente
+    const order = ["billones", "milesMillones", "millones", "pesos"];
+    for (const k of order) {
+        const u = UNITS[k];
+        const maxInUnit = maxRaw / u.factor;
+        const minInUnit = minRaw / u.factor;
+
+        // Buscar balance: máximo manejable (< 10,000) y mínimo legible (>= 1)
+        if (maxInUnit >= 1 && maxInUnit < 10000 && minInUnit >= UMBRAL_MINIMO) {
+            return u;
+        }
+    }
+
+    return UNITS.millones;
+}
+
+/**
+ * Decide si las etiquetas del eje X deben rotarse según el ancho del contenedor
+ * @param {string|HTMLElement} containerEl - Selector o elemento del contenedor
+ * @param {Array} data - Datos del gráfico
+ * @param {Object} unit - Unidad seleccionada
+ * @param {Object} options - Opciones de configuración
+ * @returns {number} - Grados de rotación (0 o 90)
+ */
+function decideRotation(containerEl, data, unit, {
+    minGap = 12,
+    innerFrac = 0.75
+} = {}) {
+    const el = (typeof containerEl === "string")
+        ? document.querySelector(containerEl)
+        : containerEl;
+
+    const W = el?.getBoundingClientRect().width || 0;
+    if (!W) return 0;
+
+    // Rotación automática para contenedores angostos
+    if (W < 600) return 90;
+
+    // Si el valor máximo formateado es largo, rotar
+    const fmt = new Intl.NumberFormat("es-DO", { maximumFractionDigits: 1 });
+    const maxValue = Math.max(...data.map(d => d.rawValue / unit.factor));
+    const maxLabel = fmt.format(maxValue);
+
+    if (maxLabel.length > 5) return 90;
+
+    // Espacio disponible vs necesario
+    const estimatedLabelWidth = maxLabel.length * 8; // aprox 8px por caracter
+    const availableGap = (W * innerFrac) / 5; // aprox 5-6 ticks
+
+    return (estimatedLabelWidth + minGap > availableGap) ? 90 : 0;
+}
+
+function loadBarChartEntidades(objData, divContenedor, tipo) {
+
+    const data = (objData || []).map(d => ({ ...d, rawValue: +d.rawValue }));
+
+    d3.select("#" + divContenedor).selectAll("*").remove();
+    if (!data.length) return;
+
+    //*unidad automáticamente*/
+    const unit = resolveUnitMB(data.map(d => d.rawValue));
+
+    // Dominio 
+    const maxValue = d3.max(data, d => +d.rawValue / unit.factor) || 1;
+    let roundedMax;
+
+    // Separación de ticks 
+    if (maxValue <= 0.5) {
+        roundedMax = 1;
+    } else if (maxValue <= 1) {
+        roundedMax = 2;
+    } else if (maxValue <= 2) {
+        roundedMax = 4;
+    } else if (maxValue <= 3) {
+        roundedMax = 5;
+    } else if (maxValue <= 5) {
+        roundedMax = 8;
+    } else if (maxValue <= 8) {
+        roundedMax = 10;
+    } else if (maxValue <= 10) {
+        roundedMax = Math.ceil(maxValue / 2) * 2;
+    } else if (maxValue <= 100) {
+        roundedMax = Math.ceil(maxValue / 10) * 10;
+    } else if (maxValue <= 1000) {
+        roundedMax = Math.ceil(maxValue / 50) * 50;
+    } else {
+        roundedMax = Math.ceil(maxValue / 100) * 100;
+    }
+
+    
+    const cont = document.querySelector("#" + divContenedor);
+    const rotation = decideRotation(cont, data, unit);
+
+    // Formateo etiquetas del eje X (decimales para evitar duplicados)
+    const fmt = new Intl.NumberFormat("es-DO", {
+        maximumFractionDigits: 1,
+        minimumFractionDigits: 0
+    });
+
+    
+    const numEntidades = new Set(data.map(d => d.label)).size;
+
+    
+    let barPadding;
+    if (numEntidades <= 3) {
+        barPadding = 0;  
+    } else if (numEntidades <= 4) {
+        barPadding = 1;  
+    } else {
+        barPadding = 3;  
+    }
+
+    
+    let minHeight;
+    if (numEntidades <= 2) {
+        minHeight = 300;  
+    } else if (numEntidades <= 3) {
+        minHeight = 350;  
+    } else {
+        minHeight = 450;  
+    }
+
+    
+    const chart = new d3plus.BarChart()
+        .select("#" + divContenedor)
+        .config({
+            data,
+            groupBy: ["labelGroup"],
+            legend: true,
+            legendPosition: "bottom",
+            type: "bar",
+            height: Math.max(minHeight, data.length * 25),
+            x: d => +d.rawValue / unit.factor,
+            y: "label",
+            discrete: "y",
+
+            xConfig: {
+                scale: "linear",
+                nice: true,
+                tickFormat: v => fmt.format(v),
+                labelRotation: rotation,
+                title: unit.label, 
+                domain: [0, roundedMax]
+            },
+
+            yConfig: {
+                title: "",
+                orient: "left",
+                // Partir nombres largos en dos líneas
+                tickFormat: (d) => {
+                    const maxLineLength = 40;
+                    const maxTotalLength = 80;
+
+                    // Si es muy corto, dejarlo igual
+                    if (d.length <= maxLineLength) return d;
+
+                    let text = d.length > maxTotalLength ? d.substring(0, maxTotalLength) + "..." : d;
+
+                    const middle = text.length / 2;
+                    let splitPoint = text.lastIndexOf(" ", middle + 20);
+                    if (splitPoint === -1 || splitPoint < middle - 20) {
+                        splitPoint = text.indexOf(" ", middle);
+                    }
+
+                    if (splitPoint > 0) {
+                        return text.substring(0, splitPoint) + "\n" + text.substring(splitPoint + 1);
+                    }
+                    return text;
+                }
+            },
+
+            shapeConfig: {
+                 label: (d) => {
+                    const valorEnUnidad = d.rawValue / unit.factor;
+                    let decimales;
+                    if (valorEnUnidad < 0.01) {
+                        decimales = 4; // 0.0001
+                    } else if (valorEnUnidad < 0.1) {
+                        decimales = 3; // 0.001
+                    } else if (valorEnUnidad < 1) {
+                        decimales = 3; // 0.001
+                    } else if (valorEnUnidad < 10) {
+                        decimales = 2; // 0.11
+                    } else {
+                        decimales = 1; // 0.1
+                    }
+                    const fmtDinamico = new Intl.NumberFormat("es-DO", {
+                        maximumFractionDigits: decimales,
+                        minimumFractionDigits: 0
+                    });
+                    return fmtDinamico.format(valorEnUnidad);
+                },
+                fill: d => assignColorBarrasAvance(d.labelGroup),
+                Bar: {
+                    height: 20  
+                }
+            },
+            tooltip: false 
+        })
+        .barPadding(barPadding)
+        .groupPadding(20) 
+        .render();
+}
+
 
 function assignColorBarrasAvance(indice) {
     var color_aux = "#cccccc";
@@ -2749,16 +3104,80 @@ function GetGastoTiempoEntidades(annio, filtro) {
         LoadLineEntidadesPerTiempo(result, "grafico_lineas");
 
     }).fail(function (handleError) {
-
+        // Some function
+        //console.log(handleError);
     });
 }
 
 function LoadLineEntidadesPerTiempo(objData, divContenedor) {
+    const data = (objData || []).map(d => ({ ...d, rawValue: +d.rawValue }));
+
+    if (!data.length) return;
+
+    //unidad dinamica
+    const unit = resolveUnitMB(data.map(d => d.rawValue));
+
+    //dominio
+    const maxValue = d3.max(data, d => +d.rawValue / unit.factor) || 1;
+    let roundedMax;
+
+    // Separación de ticks
+    if (maxValue <= 0.5) {
+        roundedMax = 1;
+    } else if (maxValue <= 1) {
+        roundedMax = 2;
+    } else if (maxValue <= 2) {
+        roundedMax = 4;
+    } else if (maxValue <= 3) {
+        roundedMax = 5;
+    } else if (maxValue <= 5) {
+        roundedMax = 8;
+    } else if (maxValue <= 8) {
+        roundedMax = 10;
+    } else if (maxValue <= 10) {
+        roundedMax = Math.ceil(maxValue / 2) * 2;
+    } else if (maxValue <= 100) {
+        roundedMax = Math.ceil(maxValue / 10) * 10;
+    } else if (maxValue <= 1000) {
+        roundedMax = Math.ceil(maxValue / 50) * 50;
+    } else {
+        roundedMax = Math.ceil(maxValue / 100) * 100;
+    }
+
+    // Formateador para eje Y
+    const fmt = new Intl.NumberFormat("es-DO", {
+        maximumFractionDigits: 1,
+        minimumFractionDigits: 0
+    });
+
+    // Formateador dinámico para tooltips
+    const formatTooltip = (rawValue) => {
+        const valorEnUnidad = rawValue / unit.factor;
+        let decimales;
+        if (valorEnUnidad < 0.01) {
+            decimales = 4;
+        } else if (valorEnUnidad < 0.1) {
+            decimales = 3;
+        } else if (valorEnUnidad < 1) {
+            decimales = 3;
+        } else if (valorEnUnidad < 10) {
+            decimales = 2;
+        } else {
+            decimales = 1;
+        }
+        const fmtDinamico = new Intl.NumberFormat("es-DO", {
+            maximumFractionDigits: decimales,
+            minimumFractionDigits: 0
+        });
+        return "RD$ " + fmtDinamico.format(valorEnUnidad) + " " + unit.label;
+    };
+
     var configuracion = {
-        height: 400,
-        data: objData,
+        height: 600,
+        data: data,
         groupBy: "labelGroup",
-        lineLabels: true,
+        lineLabels: false, 
+        legend: true, 
         shapeConfig: {
             Line: {
                 strokeLinecap: "square",
@@ -2775,38 +3194,43 @@ function LoadLineEntidadesPerTiempo(objData, divContenedor) {
                 return d["labelGroup"];
             },
             tbody: [
-                ["Pagado:", function (d) { return "$ " + d["rawValue"].formatMoney(2, '.', ',').toString() + " Millones" }]
+                ["Pagado:", function (d) {
+                    return formatTooltip(d["rawValue"]);
+                }]
             ]
         },
         lineMarkers: true,
         lineMarkerConfig: {
             fill: "blue",
             r: 3
-
         },
         x: "label",
-        y: "rawValue",
+        y: d => +d.rawValue / unit.factor, 
         yConfig: {
-            title: "Millones de pesos dominicanos",
+            title: unit.label, 
+            domain: [0, roundedMax], 
+            tickFormat: v => fmt.format(v) 
         },
         xConfig: {
             title: "Meses",
             tickFormat: function (value) {
                 var cad_mes = getNomMes(value);
                 return cad_mes;
-             
             }
-
-        },
-        legend: false
+        }
     };
 
     new d3plus.LinePlot()
+        .translate(d => (d === "Back" || d === "back") ? "Atrás" :
+            d === "Click to Hide" ? "Clic para ocultar esta institución" :
+                d === "Click to Show" ? "Clic para mostrar esta institución" :
+                    d === "Shift+Click to Highlight" ? "Usar Shift+clic para resaltar solo esta institución" :
+                        d === "No Data Available" ? "Información No Disponible" : d)
         .config(configuracion)
         .select("#" + divContenedor)
         .render();
-
 }
+
 
 function getNomMes(index) {
     var item = index - 1;

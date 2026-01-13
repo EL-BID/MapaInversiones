@@ -22,7 +22,10 @@ namespace PlataformaTransparencia.Negocios.Interfaces
         public ModelContratistaData ObtenerDatosProcesosCanceladosEmergencia(int tipoEmergencia, string Entidad = null);
         public ModelInformacionContratos ObtenerInformacionProcesosCanceladosEmergenciaPorFiltros(ContratosFiltros filtros);
 
-        
+        public List<InfograficoFuentes_Nivel_1> ObtDistribucionPresupuestalEjecutadoPorTipoEmergencia(int tipoEmergencia);
+
+
+
 
     }
 }

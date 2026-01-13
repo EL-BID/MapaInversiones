@@ -1,12 +1,13 @@
 ﻿var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 var anio = $("#anios_financiador option:selected").val();
 var codigoFinanciador = $("#codigo_financiador").text().trim();
-
-var paginaActual = 1;
-var totalPorPagina = 10;
+//var sectorId = '0';
+//var sector = '';
+const cantXPagina = 10;
+const cant_por_linea = 30;
 var finData = 0;
 var inicioData = 0;
-var proyectos;
+var global_proyectos;
 
 //---sankey------------
 var global_sankey = [];
@@ -27,7 +28,6 @@ function anioSeleccionadoFinanciador(sel) {
     obtenerPerfilPorAnioFinanciador();
 }
 function obtenerPerfilPorAnioFinanciador() {
-
     obtenerDatosPerOrganismos(anio, codigoFinanciador, 'organismo');
     obtenerDetalleFinanciador(anio, codigoFinanciador);
     obtenerGraficoTreeMapProyectosFinanciadosPorFinanciadorAnio(anio, codigoFinanciador);
@@ -60,7 +60,8 @@ function obtenerInformacionMontoFinanciado(data) {
         '<div class="wrap-desc-entidad d-flex">' +
         '<div class="ic-wrap"><img src="../img/svg-icons/ICO-Org-008.svg" alt="Monto"></div>' +
         '<div class="desc-data">' +
-        '<div class="executeV"><strong>Monto total financiado</strong></div>' + '<div id="montoTotalFinanciado" class="organismoN">RD' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(data.montoFinanciado) + 'M</div>' +
+        '<div class="executeV"><strong>Monto total financiado</strong></div>' +
+        '<div id="montoTotalFinanciado" class="organismoN">RD' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(data.montoFinanciado) + 'M</div>' +
         '</div>' +
         '</div>' +
         '</div>' +
@@ -229,7 +230,11 @@ function generarGraficoProyectosFinanciadosPorSectores(objData) {
                             case 0:
                                 cad = d.labelGroup;
                                 break;
-
+                            //case 1:
+                            //    cad = d.label;
+                            //    break;
+                            //default:
+                            //    cad = d.labelGroup;
                         }
                         if (cad.length > longitud_tooltip) {
                             cad = cad.substr(0, longitud_tooltip) + "...";
@@ -268,96 +273,156 @@ function obtenerProyectosPorFinanciadorAnio(anio, codigoFinanciador) {
             codigoFinanciador: codigoFinanciador
         }
     }).done(function (data) {
-        proyectos = data.proyectos;
-        generarDivTablaDeProyectos();
+        //**Listado proyectos*/
+        global_proyectos = data.proyectos;
+    
+        var pagina_actual = 1;
+        var ini_data = ((pagina_actual - 1) * cantXPagina);
+        var fin_data = (pagina_actual * cantXPagina) - 1;
+        var data_pagina = arr = jQuery.grep(global_proyectos, function (n, i) {
+            return (i >= ini_data && i <= fin_data);
+        });
+
+       
+        showListadoProyectos(data_pagina, 1);
+        //**Fin Listado proyectos*/
+
+        //generarDivTablaDeProyectos();
     }).fail(function (xhr, ajaxOptions, thrownError) {
         alert("Error " + xhr.status + "_" + thrownError);
     });
 }
-function generarDivTablaDeProyectos() {
-    if (proyectos != null && proyectos.length > 0) {
-        inicioData = ((paginaActual - 1) * totalPorPagina);
-        finData = (paginaActual * totalPorPagina) - 1;
-        proyectosPorPagina = jQuery.grep(proyectos, function (n, i) {
-            return (i >= inicioData && i <= finData);
-        });
-        if (proyectosPorPagina.length > 0) {
-            generarDivTablaProyectosPorPagina(proyectosPorPagina);
-            dibujarPaginator(paginaActual, proyectos.length);
+
+function showListadoProyectos(datos, pagina) {
+    $("#divListado").empty();
+    if (!datos || !datos.length) return;
+
+    let html_list = `<div class="card-entidades-group">`;
+
+    for (let j = 0; j < datos.length; j++) {
+        const proyecto = datos[j];
+        const linkPerfil = (proyecto.id != 0)
+            ? `<a target="_blank" href="../projectprofile/${proyecto.id}" class="text-small">
+               <i class="material-icons md-18">arrow_forward</i><br>
+               <span>Ver proyecto</span>
+             </a>`
+            : "";
+
+        html_list += `
+          <div class="card d-flex">
+            <div class="headEnt">
+              <div class="data1 mainDataEntidad">
+                <span class="td1">${proyecto.nombre}</span>
+              </div>
+              <div class="data1b">
+                <span class="labelTit">Monto financiado</span>
+                <span class="td1">RD ${fmtMoney(proyecto.vigente)} M</span>
+              </div>
+              <div class="data1b">
+                <span class="labelTit">Monto ejecutado</span>
+                <span class="td1">RD ${fmtMoney(proyecto.ejecutado)} M</span>
+              </div>
+              <div class="data1b">
+                <span class="labelTit">Avance financiero</span>
+                <span class="td1">${proyecto.avanceFinancieroOrganismo}%</span>
+              </div>
+              <div class="data1b">
+                <span class="labelTit">Estado</span>
+                <span class="td1">${proyecto.estado}</span>
+              </div>
+              <div class="btn-action">
+                <div class="btnPerfil">
+                  ${linkPerfil}
+                </div>
+              </div>
+            </div>
+          </div>`;
+    }
+
+        html_list += `</div>`;
+        $("#divListado").html(html_list);
+
+        //ADD PAGINACION 
+        var totalNumber = global_proyectos.length;
+        var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
+        if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
+            totalPages = totalPages + 1;
+        }
+        dibujarPagNumeradas(pagina, totalNumber, totalPages);
+
+}
+
+
+
+const fmtMoney = n =>
+    new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(n);
+
+
+function dibujarPagNumeradas(actual, total, totalPag, contenedor = "#divPaginas", contenedorListado = "#divListado") {
+    $(contenedor).empty();
+
+    var pag_actual = parseInt(actual);  // Página actual al cargar
+    var pagina_actual = pag_actual;     // Página seleccionada por el usuario (puede cambiar con clic)
+    var pagesHTML = '';
+
+    var pag_enlace = "";
+
+    var cociente = Math.floor(pag_actual / cant_por_linea);
+    var residuo = pag_actual % cant_por_linea;
+    var inicio = 1;
+    if (residuo == 0) {
+        inicio = (pag_actual - cant_por_linea) + 1;
+    } else {
+        inicio = (cociente * cant_por_linea) + 1;
+    }
+
+    var fin = inicio + (cant_por_linea - 1);
+    if (totalPag < cant_por_linea) {
+        fin = totalPag;
+    }
+    if (fin > totalPag) {
+        fin = totalPag;
+    }
+    if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
+        pag_enlace += '<a id="page_left" role="button" class="material-icons md-24" data-page="' + (inicio - cant_por_linea) + '"><span class="">chevron_left</span></a>';
+    }
+
+    for (var i = inicio; i <= fin; i++) {
+        if (i == pag_actual) {
+            // Estructura para página actual
+            pag_enlace += '<span class="pag_actual" data-page="' + i + '">';
+            pag_enlace += '<text>' + i + '</text>';
+            pag_enlace += '</span>';
+        } else {
+            // Estructura para páginas clickeables
+            pag_enlace += '<a class="page_left" role="button" data-page="' + i + '">';
+            pag_enlace += '<span class="glyphicon"></span>';
+            pag_enlace += '<text class="paginacion">' + i + '</text>';
+            pag_enlace += '</a>';
         }
     }
-}
-function generarDivTablaProyectosPorPagina(proyectosPorPagina) {
-    var divListadoProyectos = ''; 
-    proyectosPorPagina.forEach(x => { divListadoProyectos = divListadoProyectos + generarDivProyecto(x); });
-    $("#table_proyectos_financiador_annio").html(divListadoProyectos);
-}
-function generarDivProyecto(proyecto) {
-    if (proyecto.id != 0) {
-        let divProyecto = '<div class="card-entidades-group">' +
-            '<div class="card d-flex">' +
-            '<div class="headEnt">' +
-            '<div class="data1 mainDataEntidad">' +
-            '<span class="td1">' + proyecto.nombre + '</span>' +
-            '</div>' +
-            '<div class="data1b">' +
-            '<span class="labelTit">Monto financiado</span>' +
-            '<span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(proyecto.vigente) + ' M</span>' +
-            '</div>' +
-            '<div class="data1b">' +
-            '<span class="labelTit">Monto ejecutado</span>' +
-            '<span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(proyecto.ejecutado) + ' M</span>' +
-            '</div>' +
-            '<div class="data1b">' +
-            '<span class="labelTit">Avance financiero</span>' +
-            '<span class="td1">' + proyecto.avanceFinancieroOrganismo + '%</span>' +
-            '</div>' +
-            '<div class="data1b">' +
-            '<span class="labelTit">Estado</span>' +
-            '<span class="td1">' + proyecto.estado + '</span>' +
-            '</div>' +
-            '<div class="btn-action">' +
-            '<div class="btnPerfil">' +
-            '<a target="_blank" href="../projectprofile/' + proyecto.id + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>Ver proyecto</span></a>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div >';
-        return divProyecto;
+
+    if (pag_actual < totalPag) {
+        if (fin < totalPag) {
+            pag_enlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
+        }
     }
-    else {
-        let divProyecto = '<div class="card-entidades-group">' +
-            '<div class="card d-flex">' +
-            '<div class="headEnt">' +
-            '<div class="data1 mainDataEntidad">' +
-            '<span class="td1">' + proyecto.nombre + '</span>' +
-            '</div>' +
-            '<div class="data1b">' +
-            '<span class="labelTit">Monto financiado</span>' +
-            '<span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(proyecto.vigente) + ' M</span>' +
-            '</div>' +
-            '<div class="data1b">' +
-            '<span class="labelTit">Monto ejecutado</span>' +
-            '<span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(proyecto.ejecutado) + ' M</span>' +
-            '</div>' +
-            '<div class="data1b">' +
-            '<span class="labelTit">Avance financiero</span>' +
-            '<span class="td1">' + proyecto.avanceFinancieroOrganismo + '%</span>' +
-            '</div>' +
-            '<div class="data1b">' +
-            '<span class="labelTit">Estado</span>' +
-            '<span class="td1">' + proyecto.estado + '</span>' +
-            '</div>' +
-            '<div class="btn-action">' +
-            '<div class="btnPerfil">' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div >';
-        return divProyecto;
-    }
+
+    $(contenedor).html(pag_enlace);
+
+    $('#page_right, #page_left, .page_left').on('click', function () {
+        pagina_actual = $(this).attr("data-page");
+        var ini_data = ((pagina_actual - 1) * cantXPagina);
+        var fin_data = (pagina_actual * cantXPagina) - 1;
+        var data_pagina = arr = jQuery.grep(global_proyectos, function (n, i) {
+            return (i >= ini_data && i <= fin_data);
+        });
+        $(contenedorListado).empty();
+        showListadoProyectos(data_pagina, pagina_actual);
+    });
 }
-function dibujarPaginator(paginaActual, totalRegistros) {
+
+function dibujarPaginatorOld(paginaActual, totalRegistros) {
     var totalPaginas = (totalRegistros > totalPorPagina) ? ((totalRegistros - (totalRegistros % totalPorPagina)) / totalPorPagina) : 1;
     if ((totalRegistros >= totalPorPagina) && ((totalRegistros % totalPorPagina) > 0)) totalPaginas = totalPaginas + 1;
     var paginaActual = parseInt(paginaActual);
@@ -416,7 +481,8 @@ function obtenerDatosPerOrganismos(anyo, opcion, tipo) {
     global_tab = "organismo";
     global_sankey = [];
     miga_pan = "";
-
+    //$("#divPagFichas").html("");
+    //$("#divListado").empty();
     $("#sankey_basic").html(loader_proy);
     $.ajax({
         contentType: "application/json; charset=utf-8",
@@ -439,6 +505,9 @@ function obtenerDatosPerOrganismos(anyo, opcion, tipo) {
                     var filterAgrupados = agruparNodos(datos_all);
                     global_agrupado = filterAgrupados;
                     var tipoVista = $('input[name="tipoVistaSankey"]:checked').val();
+
+                    console.log("Tipo Vista-->" + tipoVista);
+
                     if (tipoVista == "extendida") {
                         global_ini =
                         {
@@ -460,7 +529,7 @@ function obtenerDatosPerOrganismos(anyo, opcion, tipo) {
                             var porcentaje = ((total_ejecutado / total_vigente) * 100).toFixed(2);
                         }
 
-                        $("#totalSankeyPerOrganismo").html("$ " + formatMoney(total_vigente / 1, 2, '.', ',').toString() + " Millones");
+                        $("#totalSankeyPerOrganismo").html("RD$ " + formatMoney(total_vigente / 1, 2, '.', ',').toString() + " Millones");
                         $("#PorcEjecPerOrganismo").html(porcentaje.toString() + "%");
                     }
                     $("#sankey_basic").html("");
@@ -843,6 +912,7 @@ function agruparNodos(objData) {
             var porc = 0;
             if (nivel == "n4") {
                 if (mayorValor > 0) {
+                    //porc = Math.round((valor / valor_grupo[0].value) * 100, 0);
                     porc = Math.round((valor / mayorValor) * 100, 0);
                 }
                 if (porc >= porc_agrup_sectores) {
@@ -1071,13 +1141,19 @@ function graphSankey(datos) {
         graph.nodes.forEach(function (x) {
             nodeMap[x.name] = x;
         });
-        graph.links = graph.links.map(function (x) {
-            return {
-                source: nodeMap[x.source],
-                target: nodeMap[x.target],
-                value: x.value
-            }
-        });
+        // FILTRAR LINKS CON VALOR <= 0
+        graph.links = graph.links
+            .filter(function (x) {
+                var val = parseFloat(x.value);
+                return val && !isNaN(val) && val > 0;  
+            })
+            .map(function (x) {
+                return {
+                    source: nodeMap[x.source],
+                    target: nodeMap[x.target],
+                    value: parseFloat(x.value)
+                }
+            });
         sankey
             .nodes(graph.nodes)
             .links(graph.links)
@@ -1093,7 +1169,7 @@ function graphSankey(datos) {
             .style("stroke-width", function (d) {
                 return Math.max(1, d.dy);
             })
-
+        //.sort(function (a, b) { return b.dy - a.dy; });
         // add the link titles
         link.selectAll(".link").append("title")
             .text(function (d) {
@@ -1354,7 +1430,7 @@ function graphSankey(datos) {
             const result = miga_pan.replace(regex, '');
             if (opcion == 3) {
                 cant = 0;
-
+                //if (cant_padres > 0) {
 
                 if (vecSelect[0] == "n1") {
                     var filteredData = obtenerHijosYnietosConMismaRama(selection, global_sankey.links, "n4|");
@@ -1414,7 +1490,7 @@ function graphSankey(datos) {
                                         }, -Infinity);
                                         var porc = 0;
                                         if (mayorValor > 0) {
-
+                                            //porc = Math.round((valor / valor_grupo[0].value) * 100, 0);
                                             porc = Math.round((valor / mayorValor) * 100, 0);
                                         }
                                         if (porc >= porc_agrup_organismos) {
@@ -1520,7 +1596,7 @@ function graphSankey(datos) {
                                     if (nivel_destino == "n4") {
                                         //proyectos de inversion
                                         if (mayorValor > 0) {
-
+                                            //porc = Math.round((valor / valor_grupo[0].value) * 100, 0);
                                             porc = Math.round((valor / mayorValor) * 100, 0);
                                         }
                                         if (porc >= porc_agrup_sectores) {

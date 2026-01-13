@@ -1,0 +1,230 @@
+/*AZURE MAP STYLES*/
+:root {
+    --border: #e5e7eb;
+    --muted: #6b7280;
+    --bg: #ffffff;
+    --chip: #f9fafb;
+    --chip-b: #e5e7eb;
+    --accent: #111827;
+    --accent-ink: #fff;
+    --ok-b: #d1fae5;
+    --ok-bg: #ecfdf5;
+}
+
+.proy-results {
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: .7rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem; font-weight:700; text-align:center;
+}
+.results-badge {
+    color: #000 !important;
+    font-size: 1.7rem;
+}
+a:hover {
+    color: #24B0D4;
+}
+/* Contenedor a 80% */
+.site-wrap {
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media (max-width:1024px) {
+    .site-wrap {
+        width: 100%;
+    }
+}
+
+/* Grid general: fila principal + lista */
+.explorer {
+    display: grid;
+    gap: .75rem;
+    grid-template-rows: auto auto;
+}
+
+/* Fila principal: filtros + mapa (70% vh) */
+.explorer-row {
+    display: grid;
+    grid-template-columns: minmax(260px,20rem) 1fr;
+    gap: 1rem;
+    align-items: stretch;
+}
+
+.filters {
+    height: 85vh;
+    overflow: auto;
+    border: 1px solid var(--border);
+    border-radius: .5rem;
+    padding: .75rem;
+    background: var(--bg);
+}
+
+    .filters .hdr {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: .5rem;
+        margin-bottom: .5rem;
+    }
+
+        .filters .hdr h2 {
+            font-weight: 700;
+            margin: 0;
+        }
+
+.controls .control {
+    margin-bottom: .75rem;
+}
+
+.controls label {
+    font-weight: 600;
+    font-size: .9rem;
+    margin-bottom: .25rem;
+    display: block;
+}
+
+.controls select {
+    width: 100%;
+    padding: .35rem .5rem;
+    border: 1px solid var(--border);
+    border-radius: .375rem;
+    background: #fff;
+}
+
+.actions {
+    display: flex;
+    gap: .5rem;
+    justify-content: flex-end;
+    margin-top: .5rem;
+}
+
+.btn {
+    padding: .375rem .6rem;
+    border-radius: .375rem;
+}
+
+    .btn:hover {
+        background: #f9fafb;
+    }
+
+/* Mapa */
+.map-viewport {
+    height: 80vh;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: .5rem;
+    overflow: hidden;
+}
+
+/* Lista (70% vh) */
+.results {
+    height: 100%;
+    border: 1px solid var(--border);
+    border-radius: .5rem;
+    background: #fff;
+    /*display: grid;*/
+    grid-template-rows: 1fr auto;
+    overflow: hidden;
+}
+
+.results-list {
+    overflow: auto;
+    padding: .75rem;
+    display: grid;
+    gap: .5rem;
+}
+
+.card {
+    border: 1px solid var(--border);
+    border-radius: .5rem;
+    padding: .6rem .75rem;
+    background: #fff;
+}
+
+    .card:hover {
+        box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    }
+
+.card-title {
+    font-weight: 700;
+    text-decoration: none;
+    color: #1f2937;
+}
+
+.card .meta {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+    margin-top: .25rem;
+}
+
+.chip {
+    display: inline-block;
+    padding: .1rem .5rem;
+    border-radius: 999px;
+    border: 1px solid var(--chip-b);
+    font-size: .75rem;
+    color: #374151;
+    background: var(--chip);
+}
+
+    .chip.val {
+        border-color: var(--ok-b);
+        background: var(--ok-bg);
+    }
+
+.muted {
+    color: var(--muted);
+}
+
+/* Paginador sticky dentro del 30% */
+.pager {
+    border-top: 1px solid var(--border);
+    padding: .5rem;
+    background: #fff;
+    display: flex;
+    gap: .25rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.pg-btn {
+    border: 1px solid var(--border);
+    background: #fff;
+    padding: .5rem;
+    border-radius: .375rem;
+    font-size: .85rem;
+}
+
+    .pg-btn.active {
+        background: #fff;
+        color: #0B3E68;
+        border-color: #0B3E68;
+    }
+
+.pg-ellipsis {
+    padding: .25rem .5rem;
+    color: #9ca3af;
+}
+
+/* Mobile: filtros arriba, mapa debajo */
+@media (max-width:1024px) {
+    .explorer-row {
+        grid-template-columns: 1fr;
+    }
+
+    .filters {
+        height: auto;
+    }
+
+    .map-viewport {
+        height: 60vh;
+    }
+
+    .results {
+        height: auto;
+        /*max-height: 40vh;*/
+    }
+}

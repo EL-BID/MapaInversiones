@@ -41,6 +41,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
     {
       Configuration = configuration;
       ConsultasComunes = consultasComunes;
+      //RepositorioProyectos.Init(connection);
     }
 
     public async Task<ProyectoPdf> ObtenerDataProyectoPdfAsync(int idProyecto)
@@ -67,6 +68,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
               lstProyectos,
               filtro
               )
+          //).Distinct(new PredicateEqualityComparer<objectProjectsSearchMap>((x, y) => ((x.latitude == y.latitude) && ((x.longitude == y.longitude)))))
           );
 
       totalDineroAprobado = generador.TotalValorRegalias;
@@ -1572,7 +1574,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
       if (filtros.NombreProceso != null && filtros.NombreProceso.Trim() != "") { NombreProceso = filtros.NombreProceso; }
       using (var DataModel = new TransparenciaDB())
       {
-                try
+                try 
                 {
                     _objreturn.CantidadTotalRegistros = (from cont in DataModel.VwContratosXProyectoInvDetalles
                     where (cont.AnioUltimaActualizacion == Annio || Annio == null)

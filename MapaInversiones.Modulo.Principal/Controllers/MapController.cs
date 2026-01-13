@@ -34,26 +34,28 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             var horaInicio = DateTime.UtcNow;
             ViewBag.TitulosHome = _gestorTitulos;
 
-            HomeContract homeContract = new HomeContract(_connection);
+            HomeContract homeContract = new HomeContract(_connection, Configuration);
             homeContract.Fill();
             Debug.WriteLine("HomeController - Acción Index ejecutó en {0} ms", (horaInicio - DateTime.UtcNow).Milliseconds);
             return View(homeContract.HomeModel);
         }
+
         public IActionResult AzureMapView()
         {
             var horaInicio = DateTime.UtcNow;
             ViewBag.TitulosHome = _gestorTitulos;
-            HomeContract homeContract = new HomeContract(_configuration, _connection);
+            HomeContract homeContract = new HomeContract(_connection, Configuration);
             homeContract.Fill();
             Debug.WriteLine("HomeController - Acción Index ejecutó en {0} ms", (horaInicio - DateTime.UtcNow).Milliseconds);
             return View(homeContract.HomeModel);
         }
+
         public IActionResult MapViewMobile()
         {
             var horaInicio = DateTime.UtcNow;
             ViewBag.TitulosHome = _gestorTitulos;
 
-            HomeContract homeContract = new HomeContract(_connection);
+            HomeContract homeContract = new HomeContract(_connection, Configuration);
             homeContract.Fill();
             Debug.WriteLine("HomeController - Acción Index ejecutó en {0} ms", (horaInicio - DateTime.UtcNow).Milliseconds);
             return View(homeContract.HomeModel);

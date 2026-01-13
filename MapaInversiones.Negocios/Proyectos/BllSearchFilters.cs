@@ -92,7 +92,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                     itemsFilterGeography item = new itemsFilterGeography {
                         name = typef.name,
                         value = typef.value,
-
+                        //topLeft = this.GenerateCoordinateData(typef.topLeft),
+                        //bottomRight = this.GenerateCoordinateData(typef.bottomRight)
                     };
                     queryResults.Add(item);
                 }
@@ -124,7 +125,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                     itemsFilterGeography geography3 = new itemsFilterGeography {
                         name = type2.name + ", " + type2.departmentName,
                         value = type2.value,
-
+                        //bottomRight = this.GenerateCoordinateData(type2.bottomRight),
+                        //topLeft = this.GenerateCoordinateData(type2.topLeft),
                         dependsOn = new List<DependsOn> { type2.dependsOn }
                     };
                     list3.Add(geography3);

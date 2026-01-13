@@ -60,7 +60,67 @@
     }
 }
 <head>
-    <link rel="stylesheet" href="~/css/sankey.css" />
+    <style>
+        .node rect {
+            cursor: pointer;
+            fill-opacity: .8;
+            shape-rendering: crispEdges;
+        }
+
+            .node rect:hover {
+                fill: #CF2E2E
+            }
+        .node text {
+            pointer-events: none;
+            /*text-shadow: 0 1px 0 #fff;*/
+        }
+
+        .link {
+            fill: none;
+            stroke: #000;
+            stroke-opacity: .1;
+        }
+
+            .link:hover {
+                stroke-opacity: .2;
+            }
+
+        .arc text {
+            font: 12px sans-serif;
+            text-anchor: middle;
+            font-weight: bold;
+        }
+
+        .arc path {
+            stroke: #fff;
+        }
+
+        .toolTip {
+            position: absolute;
+            display: none;
+            width: auto;
+            height: auto;
+            background: none repeat scroll 0 0 white;
+            border: 0 none;
+            border-radius: 8px 8px 8px 8px;
+            box-shadow: -3px 3px 15px #888888;
+            color: red;
+            font: 12px sans-serif;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .seccion-breadcrumb {
+            display: none;
+        }
+
+        #divGraphPerFuncion .d3plus-viz-back text {
+            font-size: 20px !important;
+            font-weight: 700 !important;
+            fill: #000000 !important;
+        }
+
+    </style>
 </head>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -88,7 +148,7 @@
                                 <a href="\">Inicio</a>
                                 <i class="material-icons md-18">chevron_right</i>
                             </li>
-                            <li>Trazabilidad al presupuesto nacional</li>
+                            <li>Trazabilidad al presupuesto de inversión pública</li>
                         </ul>
                     </div>
                 </div>
@@ -100,7 +160,7 @@
             <div class="col-lg-8">
                 <div class="banner-main-info">
                     <div class="banner-mai-title">
-                        <h1>Trazabilidad al presupuesto nacional</h1>
+                        <h1>Trazabilidad al presupuesto de inversión pública</h1>
                     </div>
                     <div class="banner-main-desc">
                         <p>Realice el seguimiento detallado del flujo de fondos desde su origen hasta su aplicación en diversos sectores e instituciones.</p>
@@ -138,16 +198,16 @@
             <div class="col-md-6 col-sm-6">
                 <div class="section-heading heading-left">
                     <h2>
-                        El presupuesto de<br />
-                        inversión pública año <span id="annioPresupuestoText"></span>
+                        El presupuesto <br />
+                        de inversión pública año <span id="annioPresupuestoText"></span>
                     </h2>
                 </div>
                 <div class="section-body">
                     <p>
-                        El Presupuesto General de la Nación, un instrumento financiero esencial, proporciona un desglose detallado de los ingresos y gastos proyectados del gobierno para un año fiscal determinado.
+                        El Presupuesto General del Estado, un instrumento financiero esencial, proporciona un desglose detallado de los ingresos y gastos proyectados del gobierno para un año fiscal determinado.
                     </p>
                     <p>
-                        Este presupuesto, que regula el uso de los recursos públicos a nivel nacional, es presentado por el Gobierno Nacional para su aprobación al Congreso de la República.
+                        Este presupuesto, que regula el uso de los recursos públicos a nivel nacional, es presentado por el Poder Ejecutivo para su aprobación en el Congreso Nacional.
                     </p>
                 </div>
             </div>
@@ -162,9 +222,9 @@
                                     <img src="../img/svg-icons/ICO-Org-009.svg" alt="Icono decorativo Presupuesto" />
                                 </div>
                                 <div class="col-md-8 cont-pres-infograph">
-                                    <span class="h4">Presupuesto de inversión aprobado </span>
-                                    <h2 class="mb-0"><span class="big-number" id="lblValorAprobado"></span></h2>
-                                    <span class="executeV" id="lblEtiquetaMoneda"></span>
+                                    <span class="h4">Presupuesto Vigente </span>
+                                    <h2 class="mb-0"><span class="big-number" id="lblValorVigente"></span></h2>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -176,9 +236,9 @@
                                             <img src="../img/svg-icons/ICO-Org-010.svg" alt="Icono decorativo Presupuesto" />
                                         </div>
                                         <div class="desc-data">
-                                            <div class="executeV">Presupuesto Vigente</div>
-                                            <div class="presupuestoN" id="lblValorVigente"></div>
-
+                                            <div class="executeV">Presupuesto Inicial</div>
+                                            <div class="presupuestoN" id="lblValorAprobado"></div>
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -305,7 +365,20 @@
                                                         </div>
                                                  </div>
                                              </div>
-                                           
+                                            <!-- 
+                                            <div class="col-lg-3">
+                                                <div class="wrap-hint-section">
+                                                    <div class="wrap-icon-hint"><img src="../img/ic-sankey3.svg" alt="icono decorativo relacionado a desplazar el cursor" /></div>
+                                                    <div class="text-hint">
+                                                        <span class="text-bold">Escoge la densidad de los datos (vista compacta, vista extendida)</span>  que más se adapte a tus necesidades.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1">
+                                                <a class="btn btn-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    X
+                                                </a>
+                                            </div>-->
                                     </div>
                             </div>
 
@@ -431,7 +504,24 @@
          
     </div>
 </section>
-
+<!--<section class="section" id="Instituciones">
+    <div class="container">
+         
+    </div>
+</section>-->
+<!--<section class="section" id="ProyectosListado">
+    <div class="container">
+          <div class="row" id="divProyectosPerOrganismo">
+            <h4 class="prestitle text-center" id="lblTituloListado">Proyectos del Organismo</h4>
+               <div id="divListadoRecursosObje_proy">
+                TABLA COMPARATIVA
+                <input type="hidden" id="migapanlistado_proy" value="" />
+                <div class="comparativeTable" id="divListado_proy">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->
 <section class="section section-gray" id="EjecutadoVsAprobado">
     <div class="container">
         <div class="row">
@@ -491,7 +581,7 @@
 
 <!--HELP CENTER SHORTCUT-->
 
-<input id="Sector" name="Sector" type="hidden" value="@Model.Sector">
+<input id="IdSector" name="Sector" type="hidden" value="@Model.Sector">
 
 
 
@@ -513,7 +603,7 @@
 </script>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
 <script src="/content/dist/js/sankey.js"></script>
 <script src="js/presupuesto_aux.js"></script>

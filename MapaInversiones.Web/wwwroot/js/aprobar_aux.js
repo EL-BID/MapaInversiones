@@ -31,7 +31,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             $("#hdIdUsuario").val(projectPerfil[0].idUsuParticipa);
             $("#hdNomUsuario").val(projectPerfil[0].nomUsuParticipa);
             if ($("#hdIdUsuario").val() != "") {
-                validaSesionUsu();
+                validaSesionUsu($("#hdIdUsuario").val());
             } else {
                 $("#divNomUsuarioLog").text("");
                 $("#hdNomUsuario").val("");
@@ -327,10 +327,8 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
             if (!Array.isArray(_arr1) || !Array.isArray(_arr2) || _arr1.length !== _arr2.length)
                 return false;
 
-            var arr1 = _arr1.concat().sort((a, b) => isFinite(a[0]) - isFinite(b[0])
-                || a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
-            var arr2 = _arr2.concat().sort((a, b) => isFinite(a[0]) - isFinite(b[0])
-                || a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+            var arr1 = _arr1.concat().sort();
+            var arr2 = _arr2.concat().sort();
 
             for (var i = 0; i < arr1.length; i++) {
 
@@ -1185,7 +1183,7 @@ function ObtenerImgAprobar(estado, pagina) {
 
         function dibujaPaginacion(actual, total, totalPag) {
             var pag_actual = parseInt(actual);
-            var pagina_actual = pag_actual;
+            pagina_actual = pag_actual;
             var pagesHTML = '';
             var cant_por_pag = 2;
             $("#divPaginacion").html("");
@@ -1332,7 +1330,7 @@ function ObtenerImgAprobCant() {
 
 
         function ObtenerComentarios(estado, asociacion, pagina) {
-            var tipocomentario = 0;
+            tipocomentario = 0;
                     var param = {
                         "page": pagina,
                         "estado": estado,
@@ -1443,7 +1441,7 @@ function ObtenerImgAprobCant() {
 
                                 if (entidad_aux.toUpperCase() == "CONTRATO") {
                                     div_info.append("a")
-                                        .attr("href", "../../contrato/?CodigoContrato=" + data.itemcomentario[cont].codigoContrato)
+                                        .attr("href", "../../contratista/contratoprofile/?CodigoContrato=" + data.itemcomentario[cont].codigoContrato)
                                         .attr("target", "_blank")
                                         .append("span").attr("class", "text-bold").text(encabezado_aux)
 

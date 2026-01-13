@@ -26,5 +26,8 @@ namespace PlataformaTransparencia.Modelos
         public Nullable<bool> Anonimo { get; set; }
         public string JustificacionParaNoPublicar { get; set; }
 
+        //public virtual EstadoComentario EstadoComentario { get; set; }
+        //public virtual TipoComentario TipoComentario { get; set; }
+        //public virtual TipoRespuesta TipoRespuesta { get; set; }
     }
 }

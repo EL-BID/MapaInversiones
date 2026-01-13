@@ -136,7 +136,7 @@
                                             <img src="../img/svg-icons/ICO-Org-003.svg" alt="Icono decorativo Organismo Financiador" />
                                         </div>
                                         <div class="desc-data">
-                                            <div id="totalAportado" class="organismoN">$0 M.</div>
+                                            <div id="totalAportado" class="organismoN">RD$0 M.</div>
                                             <div class="executeV">Total aportado</div>
                                         </div>
                                     </div>
@@ -173,6 +173,7 @@
 <!--Fin contenido Pagina-->
 
 @section Scripts {
+    @*<script src="js/organismo_financiador_aux.js"></script>*@
     <script language="javascript">
         var anio = $("#anios_organismo_financiador option:selected").val();
         var codigoFuente = '10';
@@ -199,7 +200,7 @@
                     codigofuente: codigoFuente
                 }
             }).done(function (data) {
-
+                //console.log("data", data);
                 $("#totalFinanciadores").empty();
                 $("#totalFinanciadores").html(data.totalFinanciadores);
                 $("#totalProyectosFinanciados").empty();
@@ -231,9 +232,26 @@
                         '<span class="td1">RD ' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(data.financiadores[i].montoFinanciado) + ' M</span>' +
                         '</div>' +
                         estadosProyectos +
+                        //'<div class="data1b">' +
+                        //'<span class="labelTit">Proyectos financiados</span>' +
+                        //'<span class="td1">' + data.financiadores[i].proyectosFinanciados + '</span>' +
+                        //'</div>' +
+                        //'<div class="data1b">' +
+                        //'<span class="labelTit">Finalizados</span>' +
+                        //'<span class="td1">' + data.financiadores[i].proyectosFinalizados + '</span>' +
+                        //'</div>' +
+                        //'<div class="data1b">' +
+                        //'<span class="labelTit">En reevaluación</span>' +
+                        //'<span class="td1">' + data.financiadores[i].proyectosEnReevaluacion + '</span>' +
+                        //'</div>' +
+                        //'<div class="data1b">' +
+                        //'<span class="labelTit">Paralizados</span>' +
+                        //'<span class="td1">' + data.financiadores[i].proyectosParalizados + '</span>' +
+                        //'</div>' +
+                        //'</div>' +
                         '<div class="btn-action">' +
                         '<div class="btnPerfil">' +
-                        '<a target="_blank" rel="noopener" href="FinancialOrganizationDetail?id=' + data.financiadores[i].codigoOrganismo + '&anio=' + anio + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>Ver organismo</span></a>' +
+                        '<a target="_blank" href="FinancialOrganizationDetail?id=' + data.financiadores[i].codigoOrganismo + '&anio=' + anio + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>Ver organismo</span></a>' +
                         '</div>' +
                         '</div>' +
                         '</div>' +

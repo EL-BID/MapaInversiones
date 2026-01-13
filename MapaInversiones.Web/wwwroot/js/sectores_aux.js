@@ -3,12 +3,14 @@ var ProjectsPerSectorGroup = JSON.parse(document.body.getAttribute('data-project
 var proyectos_eje = JSON.parse(document.body.getAttribute('data-proyectoProjectData'));
 
 var cantXPagina = 5;
+//var dataPagina = [];
 var findata = 0;
 var inidata = 0;
 var proyectos = [];
 var paginaActual = 1;
 
 GetAnio()
+/*loadProyectosEjecucionSectores(proyectos_eje);*/
 loadProyectosEjecucion(proyectos_eje);
 loadConsolidaEstados();
 loadProyectosPorDepartamento();
@@ -199,7 +201,7 @@ function GetRecursosPorNivelYAnio(annio, estado) {
 function GetListadoProyectos(institucionesPorPagina) {
 
     $("#divListadoInstituciones").html("");
-
+    //console.log("Total instituciones por página:", institucionesPorPagina.length);
     var html_list = '<div class="card-entidades-group">';
     for (var i = 0; i < institucionesPorPagina.length; i++) {
 
@@ -208,8 +210,8 @@ function GetListadoProyectos(institucionesPorPagina) {
         html_list += '<div class="data1 mainDataEntidad" style="min-width: 60% !important;max-width:60% !important;"><span class="labelTit">Código SNIP: <strong>' + institucionesPorPagina[i]['codigoSnip'] +'</strong></span>';
         html_list += '<span class="td1">' + institucionesPorPagina[i]['nombreProyecto'] + ' </span>';
         html_list += '</div>';
-        html_list += '<div class="data1"><span class="labelTit">Valor inicial estimado</span><span class="td1">$ ' + institucionesPorPagina[i]['vlrTotalProyectoFuenteRegalias'].formatMoney(2, '.', ',').toString() + ' </span ></div > ';
-        html_list += '<div class="data1"><span class="labelTit">Valor ejecutado</span><span class="td1">$ ' + institucionesPorPagina[i]['vlrTotalProyectoTodasLasFuentes'].formatMoney(2, '.', ',').toString() + ' </span></div>';
+        html_list += '<div class="data1"><span class="labelTit">Valor inicial estimado</span><span class="td1">RD$ ' + institucionesPorPagina[i]['vlrTotalProyectoFuenteRegalias'].formatMoney(2, '.', ',').toString() + ' </span ></div > ';
+        html_list += '<div class="data1"><span class="labelTit">Valor ejecutado</span><span class="td1">RD$ ' + institucionesPorPagina[i]['vlrTotalProyectoTodasLasFuentes'].formatMoney(2, '.', ',').toString() + ' </span></div>';
         html_list += '</div>';
         html_list += '<div class="btn-action">';
         html_list += '<div class="btnPerfil">';
@@ -228,15 +230,19 @@ function GetListadoProyectos(institucionesPorPagina) {
 
 function dibujarPagNumeradas(paginaActual) {
     var totalNumber = proyectos.length;
-
+    var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
+    //console.log("TotalNumber:", totalNumber);
+    //console.log("Total pages:", totalPages);
+    //console.log("CantXPagina:", cantXPagina);
     if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
         totalPages = totalPages + 1;
     }
     var pagActual = parseInt(paginaActual);
-
+    //var pagesHTML = '';
+    //var cant_por_pag = 6;
     var totalNumerosPaginador = 10;
     $("#divPagFichas").html("");
-
+    //var divPag = $("#divPagFichas")
     var pagEnlace = "";
 
     var cociente = Math.floor(pagActual / totalNumerosPaginador);
@@ -277,7 +283,7 @@ function dibujarPagNumeradas(paginaActual) {
             pagEnlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
         }
     }
-
+    //console.log("pagEnlace", pagEnlace);
     $("#divPagFichas").html(pagEnlace);
 
     $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
@@ -325,9 +331,9 @@ function loadProyectosEjecucion(resultados) {
             //var div_enlace = div_caption.append("a").attr("target", "_blank")
             div_enlace.append("h3").text(nombre_aux)
             if (resultados[i].approvedTotalMoney > 1000000) {
-                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + formatMoney(valor_aux / 1000000, 2, ".", ",").toString() + ' Millones');
+                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('RD$ ' + formatMoney(valor_aux / 1000000, 2, ".", ",").toString() + ' Millones');
             } else {
-                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('$ ' + formatMoney(valor_aux / 1, 2, ".", ",").toString() + ' Millones');
+                div_enlace.append("div").attr("class", "amount").append("span").attr("class", "bigNumber").text('RD$ ' + formatMoney(valor_aux / 1, 2, ".", ",").toString() + ' Millones');
 
             }
 

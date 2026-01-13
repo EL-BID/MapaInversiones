@@ -7,8 +7,8 @@
 @section scripts
 {
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha384-KcyRSlC9FQog/lJsT+QA8AUIFBgnwKM7bxm7/YaX+NTr4D00npYawrX0h+oXI3a2" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha384-JPbtLYL10d/Z1crlc6GGGGM3PavCzzoUJ1UxH0bXHOfguWHQ6XAWrIzW+MBGGXe5" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript" src="~/js/search_aux.js"></script>
 }
 <style>
@@ -71,20 +71,29 @@
                     <div class="banner-main-title">
                         <h2>Resultados de búsqueda</h2>
                     </div>
-
+                    <!--<div class="banner-main-desc">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor</p>
+    </div>-->
                     <!--SEARCH-->
                     <div class="search-page-container">
                         @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" }))
                         {
 
                         <div class="form-field whiteSearch">
-                            <label for="page-field-search" class="form-field-label">Instituciones, Planes y programas, por ejemplo: Secretaría de Energía.</label>
+                            <label for="page-field-search" class="form-field-label">Instituciones, Planes y programas, por ejemplo: Ministerio de Salud.</label>
                             <button type="submit" class="buttonsearBTN"><span>Buscar</span></button>
                             <input type="search" class="form-field-input" name="SearchString" value="@Model.CadenaBusqueda" autocomplete="off" required="required" id="page-field-search">
                             <input type="hidden" name="Type" value="@Model.Type" id="page-field-type">
                             <!--id="page-field-search"-->
                         </div>
 
+
+                            <!--<div class="form-field">
+            <label for="page-field-search" class="form-field-label">Buscar...</label>
+            <input type="search" class="form-field-input" name="SearchString" value="@Model.CadenaBusqueda" autocomplete="off" required="required" id="page-field-search">
+            <input type="hidden" name="Type" value="@Model.Type" id="page-field-type">
+            <button type="submit" class="search-btn"><i class="material-icons md-22">search</i></button>
+        </div>-->
                         }
                     <p class="search-page-results-text">
                             Se ha encontrado <b> @Model.TotalResultados </b> resultado(s) correspondiente al criterio seleccionado.  
@@ -119,7 +128,17 @@
                     <div class="section-heading">
                         <h4>Filtre los resultados</h4>
                     </div>
-
+                    @*<div class="selected-opt">
+                <div class="option-pill">
+                    <a href="#!"> Alto Paraguay <span class="badge bg-light text-dark">X</span></a>
+                </div>
+                <div class="option-pill">
+                    <a href="#!"> Planes <span class="badge bg-light text-dark">X</span></a>
+                </div>
+                <div class="option-pill">
+                    <a href="#!"> Alto Paraguay <span class="badge bg-light text-dark">X</span></a>
+                </div>
+            </div>*@
                     <aside class="sidebar sidebar-filters sidebar-filters-mob">
 
                         <div class="sidebar-item sidebar-item-margin sidebar-item-style">
@@ -230,7 +249,14 @@
                             {
                                 <li class="paginacion" pagina="@pag">@g</li>
                             }
-
+                            @*<li class="active"><a href="#!">1</a></li>
+                    <li><a href="#!">2</a></li>
+                    <li><a href="#!">3</a></li>
+                    <li >
+                    <a href="#!">...</a></li>
+                    <li><a href="#!">12</a></li>
+                    <li><a href="#!">13</a></li>
+                    <li><a href="#!">14</a></li>*@
                         }
                         <li class="pagination-item-arrow pagination-item-arrow-next material-icons md-24 @deshabilitado" pagina="ap">chevron_right</li>
                         <li class="pagination-item-arrow pagination-item-arrow-last material-icons md-24 @deshabilitado" pagina="lp">last_page</li>

@@ -49,13 +49,13 @@ new System.Globalization.CultureInfo("es-RD");
                         <h1>Contrato @Model.Query[0].CodigoContrato</h1>
                     </div>
                     <div class="banner-main-desc" id="srcProceso">
-                        <a href="" target="_blank" rel="noopener">
+                        <a href="" target="_blank">
                             <p id="enlaceproceso"></p>
                         </a>
                         <p>
                             @LabelContrato
                         </p>
-                        <p><strong>Lorem ipsum</strong> Lorem ipsum <strong>Lorem ipsum</strong>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</p>
+                       @*  <p><strong>Lorem ipsum</strong> Lorem ipsum <strong>Lorem ipsum</strong>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</p> *@
                     </div>
 
                 </div>
@@ -83,7 +83,7 @@ new System.Globalization.CultureInfo("es-RD");
         <!--NAVIGATION ON PAGE -->
         <div class="row justify-content-center">
             <div class="col-md-12 text-center p25">
-                <a class="btn btn-outlined" href="" target="_blank" rel="noopener"><i class="material-icons md-22">launch</i> Ver Detalles del Proceso</a>
+                <a id="mas_proceso" class="btn btn-outlined" href="" target="_blank"><i class="material-icons md-22">launch</i> Ver Detalles del Proceso</a>
             </div>
         </div>
 
@@ -457,7 +457,7 @@ new System.Globalization.CultureInfo("es-RD");
                 <div class="wrap-cta py-5">
                     <div class="wrap-cta py-5">
                         <p class="card-title mb-4">Información suministrada por:</p>
-                        <a href="https://www.dgcp.gob.do/" target="_blank" rel="noopener">
+                        <a href="https://www.dgcp.gob.do/" target="_blank">
                             <img class="img-fluid" src="../img/logo-dgcp.svg" alt="ir a Secretaria tecnica de planeación" />
                         </a>
 
@@ -496,8 +496,8 @@ new System.Globalization.CultureInfo("es-RD");
     }
 </script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js" integrity="sha384-KUSBBRKMO05pX3xNidXAX5N1p4iNwntmhHY4iugl7mINOyOXFL4KZWceJtMj7M0A" crossorigin="anonymous"></script>
-<script src="https://d3js.org/d3.v4.min.js" integrity="sha384-1EOYqz4UgZkewWm70NbT1JBUXSQpOIS2AaJy6/evZH+lXOrt9ITSJbFctNeyBoIJ" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="~/js/bootstrap/3.3.5/bootstrap.min.js" type="text/javascript"></script>
 <script src="~/js/Bootbox/bootbox.min.js" type="text/javascript"></script>
 

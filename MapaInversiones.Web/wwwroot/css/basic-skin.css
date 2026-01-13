@@ -1361,6 +1361,7 @@ div.soft-blue-card {
         .Tagline h1 {
             color: #003876;
             font-weight: 700;
+            font-size:2.5rem;
         }
 
 
@@ -1372,6 +1373,11 @@ div.soft-blue-card {
 .big-number {
     font-size: 3rem;
     color: #0171BB
+}
+.big-number2 {
+    font-size: 1.2rem;
+    color: #0171BB;
+    font-weight:700;
 }
 .icon-wrapper{ margin-right:1rem}
 .fuentes-financiacion{padding-bottom:0px!important /*provisional*/}
@@ -1408,6 +1414,26 @@ div.soft-blue-card {
 }
 .fuentes-financiacion .big-number{font-size:2rem!important}
 .fuentes-financiacion .label{font-weight:600}
+
+.box {
+    margin: 10px;
+    width: 200px;
+    height: 100px;
+    border-radius: 3px;
+    background: linear-gradient(to right, #38b8cd 8px, #f2f2f2 0);
+    box-shadow: 0 5px 5px #e4dcdc;
+    padding-top: 22px;
+    padding-left: 26px;
+}
+.data-box-stacked{display:flex; flex-direction:row; justify-content:center}
+.data-box-stacked .box {
+    width: auto;
+    padding: 2rem;
+    height:auto;
+}
+#anioPresupuestoEjecutadoEmergencias {
+    color: #2169b9
+}
 /*ico*/
 .icohonduras {
     text-align: left;
@@ -1461,6 +1487,10 @@ div.soft-blue-card {
     align-items: center;
     font-size: .8em
 }
+.disclaimer {
+    background-color: #fffaf3!important;
+    align-items: center;
+}
 .wrap-hint-section {
     display: flex;
     flex-direction: row;
@@ -1484,6 +1514,13 @@ div.soft-blue-card {
 
 
 @media (max-width: 767.98px) {
+    .section{padding:2rem 0!important}
+    .data-box-stacked {
+        display: flex;
+        flex-direction: column;
+        justify-content: center
+    }
+    .data-box-stacked .box{padding:1rem}
     .card-procesos {display:flex; flex-direction:row; align-items:center}
         .card-procesos .wrap-cta {
             width: 20%;
@@ -2080,10 +2117,11 @@ div.soft-blue-card {
 .btnback {
     font-size: 0.8rem;
     cursor: pointer;
-    border: 1px solid #000;
+    border: 1px solid #ccc;
     color: #003876;
     background-color: #fff;
     font-weight:700;
+    margin-bottom:1rem
 }
 
     .btnback i {
@@ -2237,7 +2275,7 @@ div.soft-blue-card {
     align-items: center;
     font-size: 1rem;
     text-decoration: none;
-    color: var(--main-color);
+    color: var(--linkcolor);
     background-color: transparent;
 }
     .btn-link span i.material-icons { vertical-align:middle
@@ -2365,8 +2403,8 @@ div.soft-blue-card {
     .carousel-nav .carousel-cell.is-nav-selected .h4 {
         font-weight:700; color:#fff;
     }
-.wrap-cell-container{height:100%}
-.wrap-cell-container h2{ color:#000;}
+.wrap-cell-container{height:100%; padding:1rem;}
+.wrap-cell-container h2{ color:#000; font-weight:400}
 .wrap-thumbnail {
     padding: .5rem 1rem;
     text-align: center;
@@ -2405,7 +2443,7 @@ div.soft-blue-card {
         align-items: center;
         justify-content: center;
         outline: none;
-        background: transparent;
+        background: #32C5D2 !important;
         opacity: 1;
         margin: 0 1.125rem 0.625rem 0;
     }
@@ -2495,7 +2533,8 @@ div.soft-blue-card {
     }
 .wrap-head {
     width: 100%;
-    position: relative
+    position: relative;
+    display: flow;
 }
 
 /*backgrounds*/
@@ -2543,7 +2582,13 @@ padding:10px 5px 5px 10px ;
     padding: 0px;
     display: flex
 }
-
+.carousel-main{margin-top:0px!important}
+.carousel-main .carousel-cell {
+    background-color: #fff;
+    border-radius: 1rem;
+    padding-top: 2rem;
+    padding-left:2rem; padding-right:2rem
+}
 /* 2.6 Forms */
 *::-webkit-input-placeholder,
 *::placeholder {
@@ -3961,11 +4006,11 @@ input[type="search"] {
 }
 
 .wrap-proceso .cotractName {
-    background-color: #656D79;
+    background-color: #ebebeb;
     padding: 15px 0px 15px 15px;
     border-left: 3px solid #f58220;
     margin-bottom: 0px;
-    color: #fff;
+    /*color: #fff;*/
 }
 
 .processName, .contractNumberRP {
@@ -4437,7 +4482,46 @@ input[type="search"] {
 }
 
 
-/*.cntosusd .h4{ font-weight: 600;}*/
+/*Btn CHAT*/
+
+
+
+.btnchat {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+    .btnchat .section-btns {
+        margin: 0;
+    }
+
+    .btnchat .btn-cards {
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-height: 44px;
+    }
+
+        .btnchat .btn-cards img {
+            flex-shrink: 0;
+            width: 24px;
+            height: auto;
+        }
+
+
+.main-header {
+    display: flex;
+    justify-content: space-between !important;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+    .main-header .Logo {
+        flex-shrink: 0;
+    }
 
 .btn-part {
     background: #33C0D4 !important;
@@ -4841,8 +4925,8 @@ input[type="search"] {
 .mainDataEntidad2 {
     font-size: 14px;
     padding-right: 36px;
-    min-width: 28% !important;
-    max-width: 28% !important;
+    min-width: 32% !important;
+    max-width: 32% !important;
 }
 
 .row-cards, .row-cards-stacked-alert {
@@ -4851,14 +4935,12 @@ input[type="search"] {
     justify-content: center;
 }
 
+    .row-cards-stacked-alert .bigNumber, .data-box-stacked .box .bigNumber {
+        font-size: 1.8rem;
+        font-weight: 700;
+    }
 
-.data0 {
-    margin-right: 120px;
-    min-width: 40%;
-    max-width: 40%;
-}
-
-.row-cards-stacked-alert .label {
+.row-cards-stacked-alert .label, .data-box-stacked .box .label{
     margin-bottom: 10px;
     display: block;
 }
@@ -4870,10 +4952,15 @@ input[type="search"] {
     text-align: left;
 }
 
+.wrap-data-contract {
+    margin: 0px 15px;
+}
 
-.row-cards-stacked-alert .bigNumber {
-    font-size: 1.8rem;
-    font-weight: 700;
+
+.data0 {
+    margin-right: 120px;
+    min-width: 40%;
+    max-width: 40%;
 }
 
 
@@ -4882,11 +4969,6 @@ input[type="search"] {
     min-width: 20%;
     max-width: 20%;
 }
-
-.wrap-data-contract {
-    margin: 0px 15px;
-}
-
 
 .data1a {
     margin-right: 10px;
@@ -5171,7 +5253,7 @@ input[type="search"] {
     .mainData, .data1, .data1b, .data1c {
         max-width: 100% !important;
     }
-
+    .main-header{ justify-content:center;}
 
 
 
@@ -5179,7 +5261,7 @@ input[type="search"] {
         border: 1px solid #32C5D2; border-radius:3px; margin-bottom:1rem; padding:1rem; text-align:left
     }
     .main-slider .carousel-cell {
-        height: 950px;
+        height: auto;
     }
     .main-slider .carousel-nav .carousel-cell {
         height: 55px;
@@ -8162,7 +8244,7 @@ div.focused-glo {
 .main-slider {
     background-size: cover;
     padding: 6rem 1.25rem;
-    color: #003876;
+    /*color: #003876;*/
     position: relative;
     background: url(../img/bg-sliders.jpg) center no-repeat;
     background-size: cover;
@@ -8244,9 +8326,9 @@ filter-options .form-field {
 
 
 .card-category {
-    color: #2E90A8;
+    color: #303030;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .justify-content-right {
@@ -8463,11 +8545,13 @@ aside .card .list-group-item {
     color: var(--Bordertitle);
     font-weight: 700;
 }
-
-.disBody {
-    padding: 1.25rem;
-}
-
+.wrap-col{ display:flex; flex-direction:row; gap:1rem; flex-wrap:wrap}
+.wrap-col .link-location{ width:45%}
+    .wrap-col .link-location a{display:flex; flex-direction:row; justify-content:space-between}
+    .disBody {
+        padding: 1.25rem;
+    }
+.location-num-proy{ margin-left:.5rem}
 .disInf {
     padding: 1rem;
 }
@@ -10261,7 +10345,7 @@ li.main-mnu-item-has-child-activeTab ul li a {
 
 .disclaimer {
     background-color: #f8f9fa;
-    padding: .8rem;
+    /*padding: .8rem;*/
 }
 p.disclaimer i {
     vertical-align: middle;
@@ -10668,10 +10752,7 @@ p.disclaimer i {
 
     .footer-bottom img {
         /*max-width: 150px;*/
-        width: 120px;
-
     }
-    .footerMIV{ width: 280px !important;}
 
 .footer-links ul {
     display: flex;
@@ -10830,7 +10911,7 @@ p.disclaimer i {
     }
 
     .header-fixed {
-        height: 75px
+        height: 160px
     }
 
     .banner-main-section .details li {
@@ -16261,11 +16342,6 @@ ul.tabs li {
     display: block
 }
 
-.wrap-data-contract {
-    margin: 0px 15px;
-}
-
-
 .row-cards-stacked .bigNumber {
     font-size: 2.5rem;
     font-weight: 700
@@ -16641,7 +16717,7 @@ ul.tabs li {
 
 /* Large desktop */
 @media (min-width: 1200px) {
-    ...
+    
 }
 
 
@@ -16758,4 +16834,111 @@ ul.tabs li {
 /* Samsung Galaxy S5 (portrait) ----------- */
 @media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 3) {
     /* Styles */
+}
+
+
+
+/* TABLETS (768px - 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
+    .btnchat .btn-cards {
+        padding: 10px 15px !important;
+        font-size: 0.875rem;
+    }
+
+        .btnchat .btn-cards span {
+            display: inline; 
+        }
+
+        .btnchat .btn-cards img {
+            width: 20px;
+        }
+}
+
+/* MÓVILES GRANDES (576px - 767px) */
+@media (max-width: 767px) {
+    .btnchat .btn-cards span{display:none!important}
+    .main-header {
+        flex-wrap: nowrap;
+        gap: 0.5rem; flex-direction:row!important; justify-content:center!important;
+    }
+
+    .btnchat {
+        flex-shrink: 1;
+        min-width: 0; width: 50px;
+    }
+
+        .btnchat .btn-cards {
+            padding: 5px!important;
+            font-size: 0.75rem;
+        }
+
+            .btnchat .btn-cards span {
+               /* display: inline;
+                overflow: hidden;
+                text-overflow: ellipsis;*/
+            }
+
+            .btnchat .btn-cards img {
+                width: 25px;
+            }
+
+        .btnchat .btn-icon-right {
+            display: none; 
+        }
+}
+
+/* MÓVILES PEQUEÑOS (menores a 576px) */
+@media (max-width: 575px) {
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 0.5rem 0;
+    }
+
+        .main-header .Logo {
+            /*width: 100%;*/
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+
+    .btnchat {
+        /*width: 100%;*/
+        margin-left: 0;
+        justify-content: center;
+        padding-top: 16px;
+    }
+
+        .btnchat .btn-cards {
+            width: 100%;
+            max-width: 100%;
+            justify-content: center;
+            padding: 5px !important;
+            font-size: 0.875rem;
+        }
+
+            .btnchat .btn-cards span {
+                display: inline;
+            }
+
+            .btnchat .btn-cards img {
+                width: 30px;
+            }
+
+        .btnchat .btn-icon-right {
+            width: 10px;
+            height: 8px;
+        }
+}
+
+/* MÓVILES MUY PEQUEÑOS (menores a 400px) */
+@media (max-width: 399px) {
+    .btnchat .btn-cards {
+        font-size: 0.75rem;
+        padding: 8px 12px !important;
+    }
+
+        .btnchat .btn-cards span {
+            font-size: 0.75rem;
+        }
 }

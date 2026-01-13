@@ -13,6 +13,7 @@ using PlataformaTransparencia.Negocios.BLL.Contracts;
 using PlataformaTransparencia.Negocios.Home;
 using SolrNet;
 using SolrNet.Commands.Parameters;
+using Microsoft.Extensions.Configuration;
 
 namespace PlataformaTransparencia.Modulo.Principal.Controllers
 {
@@ -22,23 +23,25 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         private readonly TransparenciaDB _connection;
         private ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> _solr;
         private IHomeBLL consolidadosHome;
+        private readonly IConfiguration _configuration;
 
         public List<ContratosConsolidado> Consolidados { get; set; }
 
 
-        public HomeController(ILogger<HomeController> logger, TransparenciaDB connection, ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> solr, IHomeBLL consolidadosHomeBLL)
+        public HomeController(ILogger<HomeController> logger, TransparenciaDB connection, ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> solr, IHomeBLL consolidadosHomeBLL, IConfiguration configuration)
         {
             _logger = logger;
             _connection = connection;
             _solr = solr;
             consolidadosHome = consolidadosHomeBLL;
+            _configuration = configuration;
         }
         public ActionResult Index()
         {
-            HomeContract homeContract = new HomeContract(_connection);
+            HomeContract homeContract = new HomeContract(_connection,_configuration);
             homeContract.Fill();
             return View(homeContract.HomeModel);
-  
+            //return View();
         }
 
         [HttpGet("Search/{SearchString}")]
@@ -66,6 +69,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             foreach (var item in ListResultadosBusqueda) {
                 var busquedaItem = new PlataformaTransparencia.Modelos.ResultadoBusquedaItem() {
                     NombreProyecto = item.Principal,
+                    //Id = item.Id,
                     IdSector = item.IdSector,
                     Sector = item.Descripcion,
                     Url = item.Url,
@@ -99,6 +103,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             foreach (var item in ListResultadosBusqueda) {
                 var busquedaItem = new PlataformaTransparencia.Modelos.ResultadoBusquedaItem() {
                     NombreProyecto = item.Principal,
+                    //Id = item.Id,
                     IdSector = item.IdSector,
                     Sector = item.Descripcion,
                     Url = item.Url,
@@ -136,10 +141,62 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             return View();
         }
 
+        public ActionResult PlanODS()
+        {
+            return View();
+        }
+
+        public ActionResult PlanificacionParaguay()
+        {
+            return View();
+        }
+
+        public ActionResult PresupuestoResultados()
+        {
+            return View();
+        }
+
+        public ActionResult DesarrolloSostenible()
+        {
+            return View();
+        }
+
+        public ActionResult POI()
+        {
+            return View();
+        }
+
+        public ActionResult PND() {
+            return View();
+        }
+
+        public ActionResult Plansectorial()
+        {
+            return View();
+        }
+        public ActionResult PEI()
+        {
+            return View();
+        }
+
+        public ActionResult PDT()
+        {
+            return View();
+        }
+
         public ActionResult ProcesoCiclo()
         {
             return View();
         }
 
+        public ActionResult ProcesoGastos()
+        {
+            return View();
+        }
+
+        public ActionResult ProcesoIngresos()
+        {
+            return View();
+        }
     }
 }

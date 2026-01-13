@@ -153,10 +153,11 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             var detalleEmergenciasNoCovidPorPeriodo = (from item in _connection.GastoXProgramasEmergencias
                                                        join origen in _connection.OrigenDatos on item.IdOrigen.Value equals origen.IdOrigen
                                                        where origen.IdOrigen != 99999 && origen.IdOrigen != 1
-                                                       group item by new { item.PeriodoImputacion, origen.Descripcion } into g
+                                                       group item by new { item.PeriodoImputacion, origen.IdOrigen,origen.Descripcion } into g
                                                        select new
                                                        {
                                                            Anio = g.Key.PeriodoImputacion,
+                                                           IdOrigen=g.Key.IdOrigen,
                                                            Origen = g.Key.Descripcion,
                                                            Ejecutado = g.Sum(x => x.VlrEjecutado ?? 0)
                                                        }).Distinct().ToList();
@@ -183,7 +184,13 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                 {
                     if (int.TryParse(ano, out int anio))
                     {
-                        objReturn.Add(new InfoPresupuestoEjecutadoPorEmergencia { Anio = anio, Nombre = detalleEmergencia.Origen, PresupuestoEjecutado = Math.Round(Convert.ToDouble(detalleEmergencia.Ejecutado / 1000000.0), 2), Enlace = detalleEmergencia.Origen.ToUpper() == "LLUVIAS" ? string.Empty : ObtenerEnlacePorTipoEmergencia(detalleEmergencia.Origen) });
+                        objReturn.Add(
+                            new InfoPresupuestoEjecutadoPorEmergencia { 
+                                Anio = anio, 
+                                Nombre = detalleEmergencia.Origen, 
+                                PresupuestoEjecutado = Math.Round(Convert.ToDouble(detalleEmergencia.Ejecutado / 1000000.0), 2), 
+                                Enlace = getEnlaceOrigen(detalleEmergencia.IdOrigen) 
+                            });
                     }
                 }
             }
@@ -196,18 +203,10 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             return objReturn;
         }
 
-        private static string ObtenerEnlacePorTipoEmergencia(string tipoEmergencia)
+        private static string getEnlaceOrigen(int codEmergencia)
         {
-            switch (tipoEmergencia)
-            {
-                case "Lluvias":
-                    return "LLuvias";
-                case "Huracán Fiona":
-                    return "Emergencia";
-                case "Lluvias 2023":
-                    return "Emergencia?emergencia=5";
-            }
-            return string.Empty;
+
+            return "Emergencia?emergencia=" + codEmergencia.ToString();
         }
         private List<InfoPresupuestoGeneralPorAnio> ObtenerPresupuestoGeneralEmergenciasPorAnios()
         {
@@ -261,7 +260,35 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
         public ModelContratistaData ObtenerDatosContratos(string entidad = null)
         {
             ModelContratistaData objReturn = new();
-        
+            //using (PISGREntities DataModel = new PISGREntities())
+            //{
+            //  DataModel.Configuration.AutoDetectChangesEnabled = false;
+            //  DataModel.Configuration.LazyLoadingEnabled = false;
+
+            //  objReturn.listUnidadCompra = (from info in DataModel.ObtenerEntidadesContratosEmergencia(null)
+            //                                select new UnidadCompra
+            //                                {
+            //                                  Entidad = info.Entidad,
+            //                                  MonedaContrato = info.MonedaContrato,
+            //                                  ValorContratado = info.ValorContratado,
+            //                                  NroContratos = info.NroContratos,
+            //                                  MonedaProceso = info.MonedaContrato,
+            //                                  ValorProceso = (double?)info.ValorProceso,
+            //                                  NroProcesos = info.NroProcesos
+            //                                }).ToList();
+
+            //  objReturn.listContratista = (from info in DataModel.ObtenerContratistasContratosEmergencia()
+            //                               select new Contratista
+            //                               {
+            //                                 nombre = info.Contratista,
+            //                                 ruc = info.numerodocumento,
+            //                                 tipodocumento = info.tipodocumento,
+            //                                 ValorTotalContratos = info.ValorTotalContratos,
+            //                                 NumContratos = info.NumContratos,
+            //                                 NumProcesos = info.NumProcesos,
+            //                                 EsCovid = info.EsCovid
+            //                               }).Take(4).ToList();
+            //}
             objReturn.numContratos = objReturn.listUnidadCompra.Sum(a => a.NroContratos);
             objReturn.valorContratos = objReturn.listUnidadCompra.Sum(a => a.ValorContratado);
             objReturn.numProcesos = objReturn.listUnidadCompra.Sum(a => a.NroProcesos);
@@ -679,882 +706,281 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             else return nombreParametro.Replace("00_00", " ").Replace("0_0", "/").Replace("1_1", "Á").Replace("2_2", "É").Replace("3_3", "Í").Replace("4_4", "Ó").Replace("5_5", "Ú").Replace("1_1", "á").Replace("2_2", "é").Replace("3_3", "í").Replace("4_4", "ó").Replace("5_5", "ú");
         }
 
-        public List<InfograficoFuentePrograma> ObtDistribucionPresupuestalPorTipoEmergencia(int? tipoEmergencia)
+        public List<InfograficoFuentes_Nivel_1> ObtDistribucionPresupuestalPorTipoEmergencia(int? tipoEmergencia,int? anyo)
         {
-            List<InfograficoFuentePrograma> objReturn = new List<InfograficoFuentePrograma>();
+            List<itemSankey> RecursosPerObjetoQuery = new List<itemSankey>();
+            List<InfograficoFuentes_Nivel_1> objReturn = new List<InfograficoFuentes_Nivel_1>();
 
-            var RecursosPerObjetoQuery = (from info in _connection.GastoXProgramasEmergencias  //.VwGastoXProgramasEmergenciaCovid
-                                          where info.IdOrigen.HasValue && (info.IdOrigen.Value == tipoEmergencia || tipoEmergencia == null) && info.VlrGasto.HasValue && info.VlrGasto > 0
-                                          orderby info.DesFuente, info.DesOrgFinanciador, info.NomProgramaAsistencia, info.NomCapitulo, info.DesCcpConcepto
-                                        , info.DesCcpCuenta, info.VlrGasto descending
-                                          select new
+            RecursosPerObjetoQuery = (from info in _connection.GastoXProgramasEmergencias  //.VwGastoXProgramasEmergenciaCovid
+                                      where info.IdOrigen.HasValue
+                                      && (!tipoEmergencia.HasValue || info.IdOrigen.Value == tipoEmergencia.Value)
+                                      && (!anyo.HasValue || info.PeriodoImputacion == anyo.Value.ToString())
+                                      && info.VlrGasto.HasValue 
+                                      && info.VlrGasto > 0
+                                      group new { info } by new
                                           {
-                                              NomFuente = "fue_" + info.DesFuente,
-                                              NomOrganismo = "org_" + info.DesOrgFinanciador,
-                                              ItemPrograma = info.NomProgramaAsistencia == "FASET" ? "prog_FASE TURISMO" : "prog_" + info.NomProgramaAsistencia,
-                                              cod_capitulo = info.CodCapitulo,
-                                              nom_capitulo = info.NomCapitulo,
-                                              codigoConcepto = info.CodCcpConcepto,
-                                              NombreConcepto = info.DesCcpConcepto,
-                                              CodigoCuentaObjeto = info.CodCcpCuenta,
-                                              NombreCuentaObjeto = info.DesCcpCuenta,
-                                              AvanceProgramaxObjeto = (decimal)info.VlrGasto
+                                              info.CodFuente,
+                                              info.DesFuente,
+                                              info.CodOrgFinanciador,
+                                              info.DesOrgFinanciador,
+                                              info.NomProgramaAsistencia
+                                              
+                                          } into g                                          
+                                          select new itemSankey
+                                          {
+                                              idNivel_1= g.Key.CodFuente,
+                                              nomNivel_1 = "n1|" + g.Key.DesFuente,
+                                              idNivel_2= g.Key.CodOrgFinanciador,
+                                              nomNivel_2 = "n2|" + g.Key.DesOrgFinanciador,
+                                              idNivel_3= g.Key.NomProgramaAsistencia,
+                                              nomNivel_3 = g.Key.NomProgramaAsistencia == "FASET" ? "n3|FASE TURISMO" : "n3|" + g.Key.NomProgramaAsistencia,
+                                              Avance = (decimal)g.Sum(x => x.info.VlrGasto) / 1000000,
+                                              Presupuesto= (decimal)g.Sum(x => x.info.VlrGasto) / 1000000
+
                                           }).ToList();
 
-            InfograficoFuentePrograma objFuente = null;
-            InfograficoOrganismo objOrganismo = null;
-            InfoGraficoItemPrograma objItem = null;
-            InfograficoCapitulo objCapitulo = null;
-            InfograficoConcepto objConcepto = null;
-            InfograficoCuentaGasto objGasto = null;
+
+            InfograficoFuentes_Nivel_1 objNivel_1 = null;  //fuente de financiacion/recurso
+            InfograficoFuentes_Nivel_2 objNivel_2 = null;  //organismo
+            InfograficoFuentes_Nivel_3 objNivel_3 = null;  //programa
+            InfograficoFuentes_Nivel_4 objNivel_4 = null;  //NomCapitulo
 
             foreach (var fila in RecursosPerObjetoQuery)
             {
-                objFuente = objReturn.Find(p => p.Nombre == fila.NomFuente.ToUpper());
-                if (objFuente == null)
+                var nomNivel1_aux = fila.nomNivel_1;
+                var vec_fuente = fila.nomNivel_1.Split("_");
+
+                if (vec_fuente.Length > 0)
                 {
-                    objFuente = new InfograficoFuentePrograma("", fila.NomFuente.ToUpper());
-                    objFuente.presupuesto += 0;
-                    objFuente.avance += (decimal)fila.AvanceProgramaxObjeto;
-                    objOrganismo = objFuente.Detalles.Find(p => p.Nombre == fila.NomOrganismo.ToUpper());
-                    if (objOrganismo == null)
+                    nomNivel1_aux = vec_fuente[0];
+                }
+
+                objNivel_1 = objReturn.Find(p => p.Nombre == nomNivel1_aux);
+                if (objNivel_1 == null) //Primer detalle del infografico
+                {
+                    objNivel_1 = new InfograficoFuentes_Nivel_1(fila.idNivel_1, nomNivel1_aux);
+                    objNivel_1.presupuesto += (decimal)fila.Presupuesto;
+                    objNivel_1.avance += (decimal)fila.Avance;
+
+                    objNivel_2 = objNivel_1.Detalles.Find(p => p.Nombre == fila.nomNivel_2);
+                    if (objNivel_2 == null)
                     {
-                        objOrganismo = new InfograficoOrganismo("", fila.NomOrganismo.ToUpper());
-                        objOrganismo.presupuesto += 0;
-                        objOrganismo.avance += (decimal)fila.AvanceProgramaxObjeto;
-
-                        objItem = objOrganismo.Detalles.Find(p => p.NomItem == fila.ItemPrograma.ToUpper());
-
-                        if (objItem == null) //3 detalle del infografico
+                        objNivel_2 = new InfograficoFuentes_Nivel_2(fila.idNivel_2, fila.nomNivel_2);
+                        objNivel_2.presupuesto += (decimal)fila.Presupuesto;
+                        objNivel_2.avance += (decimal)fila.Avance;
+                        objNivel_3 = objNivel_2.Detalles.Find(p => p.Nombre == fila.nomNivel_3);
+                        if (objNivel_3 == null)
                         {
-                            objItem = new InfoGraficoItemPrograma("0", fila.ItemPrograma.ToUpper());
-                            objItem.presupuesto += 0;
-                            objItem.avance += (decimal)fila.AvanceProgramaxObjeto;
+                            objNivel_3 = new InfograficoFuentes_Nivel_3(fila.idNivel_3, fila.nomNivel_3);
+                            objNivel_3.presupuesto += (decimal)fila.Presupuesto;
+                            objNivel_3.avance += (decimal)fila.Avance;
 
-                            objCapitulo = objItem.Detalles.Find(p => p.NomCapitulo == fila.nom_capitulo.ToUpper());
-                            if (objCapitulo == null)
+                            objNivel_4 = objNivel_3.Detalles.Find(p => p.Nombre == fila.nomNivel_4);
+                            if (objNivel_4 == null)
                             {
-                                objCapitulo = new InfograficoCapitulo(fila.cod_capitulo.ToString(), fila.nom_capitulo);
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
+                                objNivel_4 = new InfograficoFuentes_Nivel_4(fila.idNivel_4, fila.nomNivel_4);
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
 
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                }
-                                objItem.Detalles.Add(objCapitulo);
+                                objNivel_3.Detalles.Add(objNivel_4);
                             }
                             else
                             {
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
 
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                }
                             }
-                            objOrganismo.Detalles.Add(objItem);
+
+                            objNivel_2.Detalles.Add(objNivel_3);
+
                         }
                         else
                         {
-                            objItem.presupuesto += 0;
-                            objItem.avance += (decimal)fila.AvanceProgramaxObjeto;
-                            objCapitulo = objItem.Detalles.Find(p => p.NomCapitulo == fila.nom_capitulo.ToUpper());
-                            if (objCapitulo == null)
+                            objNivel_3.presupuesto += (decimal)fila.Presupuesto;
+                            objNivel_3.avance += (decimal)fila.Avance;
+                            objNivel_4 = objNivel_3.Detalles.Find(p => p.Nombre == fila.nomNivel_4);
+                            if (objNivel_4 == null)
                             {
+                                objNivel_4 = new InfograficoFuentes_Nivel_4(fila.idNivel_4, fila.nomNivel_4);
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
 
-                                objCapitulo = new InfograficoCapitulo(fila.cod_capitulo.ToString(), fila.nom_capitulo);
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-
-                                }
-                                objItem.Detalles.Add(objCapitulo);
+                                objNivel_3.Detalles.Add(objNivel_4);
                             }
                             else
                             {
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                }
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
                             }
                         }
-                        objFuente.Detalles.Add(objOrganismo);
-
+                        objNivel_1.Detalles.Add(objNivel_2);
                     }
                     else
                     {
-                        objOrganismo.presupuesto += 0;
-                        objOrganismo.avance += (decimal)fila.AvanceProgramaxObjeto;
-
-                        objItem = objOrganismo.Detalles.Find(p => p.NomItem == fila.ItemPrograma.ToUpper());
-
-                        if (objItem == null) //3 detalle del infografico
+                        objNivel_2.presupuesto += (decimal)fila.Presupuesto;
+                        objNivel_2.avance += (decimal)fila.Avance;
+                        objNivel_3 = objNivel_2.Detalles.Find(p => p.Nombre == fila.nomNivel_3);
+                        if (objNivel_3 == null)
                         {
-                            objItem = new InfoGraficoItemPrograma("0", fila.ItemPrograma.ToUpper());
-                            objItem.presupuesto += 0;
-                            objItem.avance += (decimal)fila.AvanceProgramaxObjeto;
-
-                            objCapitulo = objItem.Detalles.Find(p => p.NomCapitulo == fila.nom_capitulo.ToUpper());
-                            if (objCapitulo == null)
+                            objNivel_3 = new InfograficoFuentes_Nivel_3(fila.idNivel_3, fila.nomNivel_3);
+                            objNivel_3.presupuesto += (decimal)fila.Presupuesto;
+                            objNivel_3.avance += (decimal)fila.Avance;
+                            objNivel_4 = objNivel_3.Detalles.Find(p => p.Nombre == fila.nomNivel_4);
+                            if (objNivel_4 == null)
                             {
-                                objCapitulo = new InfograficoCapitulo(fila.cod_capitulo.ToString(), fila.nom_capitulo);
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
+                                objNivel_4 = new InfograficoFuentes_Nivel_4(fila.idNivel_4, fila.nomNivel_4);
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
 
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                }
-                                objItem.Detalles.Add(objCapitulo);
+                                objNivel_3.Detalles.Add(objNivel_4);
                             }
                             else
                             {
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                }
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
                             }
-                            objOrganismo.Detalles.Add(objItem);
+
+
+                            objNivel_2.Detalles.Add(objNivel_3);
                         }
                         else
                         {
-                            objItem.presupuesto += 0;
-                            objItem.avance += (decimal)fila.AvanceProgramaxObjeto;
-                            objCapitulo = objItem.Detalles.Find(p => p.NomCapitulo == fila.nom_capitulo.ToUpper());
-                            if (objCapitulo == null)
-                            {
+                            objNivel_3.presupuesto += (decimal)fila.Presupuesto;
+                            objNivel_3.avance += (decimal)fila.Avance;
 
-                                objCapitulo = new InfograficoCapitulo(fila.cod_capitulo.ToString(), fila.nom_capitulo);
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-
-                                }
-                                objItem.Detalles.Add(objCapitulo);
-                            }
-                            else
-                            {
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                }
-                            }
                         }
-
                     }
-
-                    objReturn.Add(objFuente);
-
+                    objReturn.Add(objNivel_1);
                 }
                 else
                 {
-
-                    objFuente.presupuesto += 0;
-                    objFuente.avance += (decimal)fila.AvanceProgramaxObjeto;
-                    objOrganismo = objFuente.Detalles.Find(p => p.Nombre == fila.NomOrganismo.ToUpper());
-                    if (objOrganismo == null)
+                    objNivel_1.presupuesto += (decimal)fila.Presupuesto;
+                    objNivel_1.avance += (decimal)fila.Avance;
+                    objNivel_2 = objNivel_1.Detalles.Find(p => p.Nombre == fila.nomNivel_2);
+                    if (objNivel_2 == null)
                     {
-                        objOrganismo = new InfograficoOrganismo("", fila.NomOrganismo.ToUpper());
-                        objOrganismo.presupuesto += 0;
-                        objOrganismo.avance += (decimal)fila.AvanceProgramaxObjeto;
-
-                        objItem = objOrganismo.Detalles.Find(p => p.NomItem == fila.ItemPrograma.ToUpper());
-
-                        if (objItem == null) //3 detalle del infografico
+                        objNivel_2 = new InfograficoFuentes_Nivel_2(fila.idNivel_2, fila.nomNivel_2);
+                        objNivel_2.presupuesto += (decimal)fila.Presupuesto;
+                        objNivel_2.avance += (decimal)fila.Avance;
+                        objNivel_3 = objNivel_2.Detalles.Find(p => p.Nombre == fila.nomNivel_3.ToString());
+                        if (objNivel_3 == null)
                         {
-                            objItem = new InfoGraficoItemPrograma("0", fila.ItemPrograma.ToUpper());
-                            objItem.presupuesto += 0;
-                            objItem.avance += (decimal)fila.AvanceProgramaxObjeto;
+                            objNivel_3 = new InfograficoFuentes_Nivel_3(fila.idNivel_3, fila.nomNivel_3);
+                            objNivel_3.presupuesto += (decimal)fila.Presupuesto;
+                            objNivel_3.avance += (decimal)fila.Avance;
 
-                            objCapitulo = objItem.Detalles.Find(p => p.NomCapitulo == fila.nom_capitulo.ToUpper());
-                            if (objCapitulo == null)
+                            objNivel_4 = objNivel_3.Detalles.Find(p => p.Nombre == fila.nomNivel_4);
+                            if (objNivel_4 == null)
                             {
-                                objCapitulo = new InfograficoCapitulo(fila.cod_capitulo.ToString(), fila.nom_capitulo);
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
+                                objNivel_4 = new InfograficoFuentes_Nivel_4(fila.idNivel_4, fila.nomNivel_4);
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
 
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                }
-                                objItem.Detalles.Add(objCapitulo);
+                                objNivel_3.Detalles.Add(objNivel_4);
                             }
                             else
                             {
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                }
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
                             }
-                            objOrganismo.Detalles.Add(objItem);
+
+                            objNivel_2.Detalles.Add(objNivel_3);
                         }
                         else
                         {
-                            objItem.presupuesto += 0;
-                            objItem.avance += (decimal)fila.AvanceProgramaxObjeto;
-                            objCapitulo = objItem.Detalles.Find(p => p.NomCapitulo == fila.nom_capitulo.ToUpper());
-                            if (objCapitulo == null)
+                            objNivel_3.presupuesto += (decimal)fila.Presupuesto;
+                            objNivel_3.avance += (decimal)fila.Avance;
+
+                            objNivel_4 = objNivel_3.Detalles.Find(p => p.Nombre == fila.nomNivel_4);
+                            if (objNivel_4 == null)
                             {
+                                objNivel_4 = new InfograficoFuentes_Nivel_4(fila.idNivel_4, fila.nomNivel_4);
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
 
-                                objCapitulo = new InfograficoCapitulo(fila.cod_capitulo.ToString(), fila.nom_capitulo);
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-
-                                }
-                                objItem.Detalles.Add(objCapitulo);
+                                objNivel_3.Detalles.Add(objNivel_4);
                             }
                             else
                             {
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                }
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
                             }
-                        }
 
-                        objFuente.Detalles.Add(objOrganismo);
+                        }
+                        objNivel_1.Detalles.Add(objNivel_2);
                     }
                     else
                     {
-                        objOrganismo.presupuesto += 0;
-                        objOrganismo.avance += (decimal)fila.AvanceProgramaxObjeto;
-
-
-                        objItem = objOrganismo.Detalles.Find(p => p.NomItem == fila.ItemPrograma.ToUpper());
-
-                        if (objItem == null) //3 detalle del infografico
+                        objNivel_2.presupuesto += (decimal)fila.Presupuesto;
+                        objNivel_2.avance += (decimal)fila.Avance;
+                        objNivel_3 = objNivel_2.Detalles.Find(p => p.Nombre == fila.nomNivel_3);
+                        if (objNivel_3 == null)
                         {
-                            objItem = new InfoGraficoItemPrograma("0", fila.ItemPrograma.ToUpper());
-                            objItem.presupuesto += 0;
-                            objItem.avance += (decimal)fila.AvanceProgramaxObjeto;
+                            objNivel_3 = new InfograficoFuentes_Nivel_3(fila.idNivel_3, fila.nomNivel_3);
+                            objNivel_3.presupuesto += (decimal)fila.Presupuesto;
+                            objNivel_3.avance += (decimal)fila.Avance;
 
-                            objCapitulo = objItem.Detalles.Find(p => p.NomCapitulo == fila.nom_capitulo.ToUpper());
-                            if (objCapitulo == null)
+                            objNivel_4 = objNivel_3.Detalles.Find(p => p.Nombre == fila.nomNivel_4);
+                            if (objNivel_4 == null)
                             {
-                                objCapitulo = new InfograficoCapitulo(fila.cod_capitulo.ToString(), fila.nom_capitulo);
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
+                                objNivel_4 = new InfograficoFuentes_Nivel_4(fila.idNivel_4, fila.nomNivel_4);
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
 
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                }
-                                objItem.Detalles.Add(objCapitulo);
+                                objNivel_3.Detalles.Add(objNivel_4);
                             }
                             else
                             {
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                }
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
                             }
-                            objOrganismo.Detalles.Add(objItem);
+
+                            objNivel_2.Detalles.Add(objNivel_3);
                         }
                         else
                         {
-                            objItem.presupuesto += 0;
-                            objItem.avance += (decimal)fila.AvanceProgramaxObjeto;
-                            objCapitulo = objItem.Detalles.Find(p => p.NomCapitulo == fila.nom_capitulo.ToUpper());
-                            if (objCapitulo == null)
+                            objNivel_3.presupuesto += (decimal)fila.Presupuesto;
+                            objNivel_3.avance += (decimal)fila.Avance;
+
+                            objNivel_4 = objNivel_3.Detalles.Find(p => p.Nombre == fila.nomNivel_4);
+                            if (objNivel_4 == null)
                             {
+                                objNivel_4 = new InfograficoFuentes_Nivel_4(fila.idNivel_4, fila.nomNivel_4);
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
 
-                                objCapitulo = new InfograficoCapitulo(fila.cod_capitulo.ToString(), fila.nom_capitulo);
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-
-                                }
-                                objItem.Detalles.Add(objCapitulo);
+                                objNivel_3.Detalles.Add(objNivel_4);
                             }
                             else
                             {
-                                objCapitulo.presupuesto += 0;
-                                objCapitulo.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                objConcepto = objCapitulo.Detalles.Find(p => p.NomConcepto == fila.NombreConcepto.ToUpper());
-                                if (objConcepto == null)
-                                {
-                                    objConcepto = new InfograficoConcepto(fila.codigoConcepto.ToString(), fila.NombreConcepto);
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                    objCapitulo.Detalles.Add(objConcepto);
-                                }
-                                else
-                                {
-                                    objConcepto.presupuesto += 0;
-                                    objConcepto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    objGasto = objConcepto.Detalles.Find(p => p.nom_cuenta == fila.NombreCuentaObjeto.ToUpper());
-                                    if (objGasto == null)
-                                    {
-
-                                        objGasto = new InfograficoCuentaGasto(fila.CodigoCuentaObjeto.ToString(), fila.NombreCuentaObjeto.ToUpper(), 0, (decimal)fila.AvanceProgramaxObjeto);
-                                        objConcepto.Detalles.Add(objGasto);
-                                    }
-                                    else
-                                    {
-
-                                        objGasto.presupuesto += 0;
-                                        objGasto.avance += (decimal)fila.AvanceProgramaxObjeto;
-                                    }
-                                }
+                                objNivel_4.presupuesto += (decimal)fila.Presupuesto;
+                                objNivel_4.avance += (decimal)fila.Avance;
                             }
+
                         }
                     }
-
                 }
-
             }
+
             ///ordena primer nivel
             var result = objReturn.OrderByDescending(x => x.avance).ToList();
-            foreach (var item_entidad in result)
+            foreach (var item_nivel1 in result)
             {
-                //ordena nivel entidad
-                item_entidad.Detalles = item_entidad.Detalles.OrderByDescending(x => x.avance).ToList();
-                foreach (var item_actividad in item_entidad.Detalles)
+                //ordena nivel 2
+                item_nivel1.Detalles = item_nivel1.Detalles.OrderByDescending(x => x.avance).ToList();
+                foreach (var item_nivel2 in item_nivel1.Detalles)
                 {
-                    //ordena nivel actividad
-                    item_actividad.Detalles = item_actividad.Detalles.OrderByDescending(x => x.avance).ToList();
-                    foreach (var item_gasto in item_actividad.Detalles)
+                    //ordena nivel 3
+                    item_nivel2.Detalles = item_nivel2.Detalles.OrderByDescending(x => x.avance).ToList();
+                    foreach (var item_nivel3 in item_nivel2.Detalles)
                     {
-                        item_gasto.Detalles = item_gasto.Detalles.OrderByDescending(x => x.avance).ToList();
+                        //ordena nivel 4
+                        item_nivel3.Detalles = item_nivel3.Detalles.OrderByDescending(x => x.avance).Take(5).ToList();
                     }
                 }
             }
+
+
             return result;
         }
     }

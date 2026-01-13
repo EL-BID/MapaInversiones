@@ -584,7 +584,7 @@ define('app/search/search', [], function () {
             x1 = x1.replace(rgx, '$1' + separator + '$2')
             index++
         }
-        return '$' + x1 + x2;
+        return 'RD$' + x1 + x2;
     }
     // Assigning this to Number prototype for letting use it inside templates
     Number.prototype.toCurrency = toCurrency
@@ -1736,6 +1736,9 @@ define('app/controller/AppState',[
 		Modal
 	){
 
+	var global_listado = [];
+	var filtros_listado = [];
+	var contador_descargas = 0;
 	var filtersCleared = false,
 		ignoreHash = false,
 		// , historyPush = !!(window.history && window.history.pushState),
@@ -1781,7 +1784,190 @@ define('app/controller/AppState',[
 
 		return ''//appStates[0]
 	}
-	
+
+	///---------------------------------------------
+	///---ADD DESCARGAR LISTADO MAPA----------------
+	function getFiltrosDataCsv(result) {
+		var texto = "";
+		var filtros_mapa = filtros_listado;
+		var items_result = result;
+		var cant_filtros = 0;
+
+		if (filtros_mapa.codigosRegiones != undefined && filtros_mapa.codigosRegiones != null) {
+			if (filtros_mapa.codigosRegiones.length > 0) {
+				var codRegion = filtros_mapa.codigosRegiones[0];
+				const resultado = items_result.find(x => x.parameter === 'region').items;
+				if (resultado.length > 0) {
+					var region = resultado.find(x => x.value === codRegion);
+					if (region != undefined && region != null) {
+						texto += "Región: " + region.name;
+					}
+
+				}
+			}
+		}
+
+
+		if (filtros_mapa.codigosDepartamentos != undefined && filtros_mapa.codigosDepartamentos != null) {
+			if (filtros_mapa.codigosDepartamentos.length > 0) {
+				var codDepartamento = filtros_mapa.codigosDepartamentos[0];
+				const resultado = items_result.find(x => x.parameter === 'departamento').items;
+				if (resultado.length > 0) {
+					var departamento = resultado.find(x => x.value === codDepartamento);
+					if (departamento != undefined && departamento != null) {
+						texto += " Provincia: " + departamento.name;
+					}
+
+				}
+			}
+		}
+
+
+		if (filtros_mapa.codigosMunicipios != undefined && filtros_mapa.codigosMunicipios != null) {
+			if (filtros_mapa.codigosMunicipios.length > 0) {
+				var codMunicipio = filtros_mapa.codigosMunicipios[0];
+				const resultado = items_result.find(x => x.parameter === 'municipio').items;
+				if (resultado.length > 0) {
+					var municipio = resultado.find(x => x.value === codMunicipio);
+					if (municipio != undefined && municipio != null) {
+						texto += " Municipio: " + municipio.name;
+					}
+
+				}
+			}
+		}
+
+
+		if (filtros_mapa.codigosSector != undefined && filtros_mapa.codigosSector != null) {
+			if (filtros_mapa.codigosSector.length > 0) {
+				var codSector = filtros_mapa.codigosSector[0].toString();
+				const resultado = items_result.find(x => x.parameter === 'sector').items;
+				if (resultado.length > 0) {
+					var sector = resultado.find(x => x.value === codSector);
+					if (sector != undefined && sector != null) {
+						texto += " Sector: " + sector.name;
+					}
+				}
+			}
+		}
+
+
+		if (filtros_mapa.codigosEstado != undefined && filtros_mapa.codigosEstado != null) {
+			if (filtros_mapa.codigosEstado.length > 0) {
+				var codEstado = filtros_mapa.codigosEstado[0].toString();
+				const resultado = items_result.find(x => x.parameter === 'estado').items;
+				if (resultado.length > 0) {
+					var estado = resultado.find(x => x.value === codEstado);
+					if (estado != undefined && estado != null) {
+						texto += " Estado: " + estado.name;
+
+					}
+				}
+			}
+		}
+
+
+		if (filtros_mapa.codigosOrgFinanciador != undefined && filtros_mapa.codigosOrgFinanciador != null) {
+			if (filtros_mapa.codigosOrgFinanciador.length > 0) {
+				var codOrganismo = filtros_mapa.codigosOrgFinanciador[0].toString();
+				const resultado = items_result.find(x => x.parameter === 'orgfinanciador').items;
+				if (resultado.length > 0) {
+					var organismo = resultado.find(x => x.value === codOrganismo);
+					if (organismo != undefined && organismo != null) {
+						texto += " Organismo: " + organismo.name;
+
+					}
+				}
+			}
+		}
+
+		if (filtros_mapa.fechasEjecucion != undefined && filtros_mapa.fechasEjecucion != null) {
+			if (filtros_mapa.fechasEjecucion.length > 0) {
+				texto += " Periodos: ";
+				var periodos = filtros_mapa.fechasEjecucion;
+				periodos.forEach(element => texto += element + " ");
+
+			}
+		}
+
+		texto = texto.trimLeft();
+		texto = texto.trimRight();
+
+
+		return texto;
+	}
+
+	function dataToObj(data, encabezado) {
+		var obj = [];
+		if (encabezado != "") {
+			obj.push([encabezado]);
+		}
+		obj.push(['Nombre', 'Ejecutor', 'Valor', 'Estado']);
+		data.forEach(element =>
+			obj.push([element.name, element.ejecutor, element.value.toCurrency(), element.state])
+		);
+		return obj;
+
+	}
+
+	$('#enlace_csv_listado').click(function (event) {
+		var textoFiltros = "";
+		var datos_actuales = global_listado;
+
+		if (datos_actuales.length > 0) {
+			var filters = Services.filters.forProjects().done(function (result) {
+				var items_result = result.filters;
+				textoFiltros = getFiltrosDataCsv(items_result);
+				var datosFormato = dataToObj(global_listado, textoFiltros);
+				exportToCsv("listadoResultados", datosFormato);
+			})
+		}
+	});
+
+
+
+	function exportToCsv(filename, rows) {
+		var processRow = function (row) {
+			var finalVal = '';
+			for (var j = 0; j < row.length; j++) {
+				var innerValue = (row[j] === null || row[j] === undefined)? '' : row[j].toString();
+				if (row[j] instanceof Date) {
+					innerValue = row[j].toLocaleString();
+				};
+				var result = innerValue.replace(/"/g, '""');
+				if (result.search(/("|,|\n)/g) >= 0)
+					result = '"' + result + '"';
+				if (j > 0)
+					finalVal += ',';
+				finalVal += result;
+			}
+			return finalVal + '\n';
+		};
+
+		var csvFile = '';
+		for (var i = 0; i < rows.length; i++) {
+			csvFile += processRow(rows[i]);
+		}
+		var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
+		if (navigator.msSaveBlob) { // IE 10+
+			navigator.msSaveBlob(blob, filename);
+		} else {
+			var link = document.createElement("a");
+			if (link.download !== undefined) { // feature detection
+				// Browsers that support HTML5 download attribute
+				var url = URL.createObjectURL(blob);
+				link.setAttribute("href", url);
+				link.setAttribute("download", filename);
+				link.style.visibility = 'hidden';
+				document.body.appendChild(link);
+				link.click();
+				document.body.removeChild(link);
+			}
+		}
+	}
+	///---------------------------------------------
+
+
 
 	function areNotSameCorners( corners, corners2 ){
 		if( corners === null && corners2 !== null ||
@@ -2339,9 +2525,9 @@ define('app/controller/AppState',[
 				req = Services.search( this.state, query, {isList: true} )
 				this.fireEvent('loading-projects-list', query)
 				if( req ){
+					global_listado = [];
+					filtros_listado = [];
 					req.done(this.projectsListLoaded.bind(this))
-						//console.log('FIREEEEEEEE '+ query)
-					// this.filtersChanged( query )
 				}
 			}
 			
@@ -2455,7 +2641,19 @@ define('app/controller/AppState',[
 		},
 
 		projectsListLoaded: function( data ){
+			
+			global_listado = data.objects;
+			filtros_listado = data.filtro;
 			this.fireEvent('projects-list-loaded', data)
+
+			$('#enlace_csv_listado').html("Descargar");
+			if (global_listado != undefined && global_listado != null) {
+				if (global_listado.length > 0) {
+					$('#enlace_csv_listado').show();
+				}
+			}
+
+
 		},
 
 		setListMode: function (bool, groupException, noForce) {
@@ -3662,7 +3860,7 @@ define('app/map/Map', ['lib/mvc/Observable',
 			    map = new Microsoft.Maps.Map(
                     document.getElementById('map-div'),
                     {
-						credentials: 'AppF4dAe6qSALnU-EClRnRKDUFezTalWjiuPhmNUMGpvrSLUhnWAzQWuYKhRM4Ha',
+						credentials: '',
 						zoom: defaultZoom,
 						showMapTypeSelector: false,
 						showLocateMeButton: false,
@@ -8211,7 +8409,7 @@ define('location_profile',[
             var consolidadoPunto = txtConsolidado.split('.');
             if (txtConsolidado != "" && consolidadoPunto.length == 1) txtConsolidado = txtConsolidado.trim() + ".";
 
-	        var txtDescriptivo_aux = $("#nomLocation").text() + " es la capital y la ciudad más poblada.";
+	        var txtDescriptivo_aux = $("#nomLocation").text() + " es la capital y la ciudad más poblada de la República del Paraguay. El área metropolitana, llamada Gran Asunción, incluye las ciudades de San Lorenzo, Fernando de la Mora, Lambaré, Luque, Mariano Roque Alonso, Ñemby, San Antonio, Limpio, Capiatá y Villa Elisa, que forman parte del Departamento Central. El área metropolitana tiene más de 2 millones de habitantes.";
 	        var txtDescriptivo = "";
 	        var div_txtPadre = d3.select("#divTxtTodosProy")
 	        div_txtPadre.append("h2")

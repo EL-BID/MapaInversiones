@@ -3,7 +3,7 @@ using PlataformaTransparencia.Modelos.Comunes;
 using PlataformaTransparencia.Modelos.Proyectos;
 using System.Collections.Generic;
 
-
+//namespace MapaInversiones.Negocios.Entidades.Models SGR.MapaRegalias.Negocios.Entidades
 
 namespace PlataformaTransparencia.Modelos
 {

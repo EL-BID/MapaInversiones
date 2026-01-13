@@ -314,7 +314,23 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                     }
                     objReturn.CostoProyectosDpto = Math.Round(maxProy * 100 / departamentosXNumeroProyectosAprobadosYEjecucion.Sum(x => x.Total), 2).ToString(); ; //  Math.Round(((totalInversion / (costoProyectoXDepartamentoDadoSector.Sum(x => x.rawValue))) * 100), 2).ToString();
                 }
-             
+                //else if (costoProyectoXDepartamentoDadoSector.Any())
+                //{
+                //  decimal totalInversion = 0;
+                //  foreach (var cpdds in costoProyectoXDepartamentoDadoSector)
+                //  {
+                //    if (cpdds.rawValue > totalInversion)
+                //    {
+                //      totalInversion = cpdds.rawValue;
+                //      objReturn.sectorPrincipal = cpdds.label;
+                //    }
+                //    else if (cpdds.rawValue > totalInversion)
+                //    {
+                //      objReturn.sectorPrincipal = objReturn.sectorPrincipal == string.Empty ? cpdds.label : objReturn.sectorPrincipal + " ," + objReturn.sectorPrincipal;
+                //    }
+                //  }
+                //  objReturn.CostoProyectosDpto = Math.Round(((totalInversion / (costoProyectoXDepartamentoDadoSector.Sum(x => x.rawValue))) * 100), 2).ToString();
+                //}
             }
             #endregion
             objReturn.Status = true;
@@ -351,7 +367,19 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             return listaFiltros;
         }
 
+        //internal decimal ObtenerPresupuestoTotalSegunFiltroProyectos(FiltroBusquedaProyecto filtroProyectos)
+        //{
+        //    FiltroBusquedaRecursos filtroRecursos = new FiltroBusquedaRecursos();
+        //    if (filtroProyectos.CodigosRegion.Count > 0)
+        //        filtroRecursos.CodigoRegion = filtroProyectos.CodigosRegion.First();
+        //    if (filtroProyectos.CodigosDepartamentos.Count > 0)
+        //        filtroRecursos.CodigoDepartamento = filtroProyectos.CodigosDepartamentos.First();
+        //    if (filtroProyectos.CodigosMunicipios.Count > 0)
+        //        filtroRecursos.CodigoMunicipio = filtroProyectos.CodigosMunicipios.First();
+        //    filtroRecursos.Periodos = filtroProyectos.fechasEjecucion;
 
+        //    return Convert.ToDecimal(RepositorioRecursos.ObtenerPresupuestoPorRegionPorFiltros(filtroRecursos).Sum(p => p.ValorPresupuesto));
+        //}
 
         #region INFOGRAFICA
 
@@ -608,7 +636,56 @@ namespace PlataformaTransparencia.Negocios.Proyectos
 
         #region INFO GENERAL PARAMETRIZABLE
 
-       
+        //public List<Fact> ObtenerDatosDeInformacionNacional()
+        //{
+        //    List<Fact> FactsList = new List<Fact>();
+        //    try {
+
+        //        ///Query que obtiene los datos de hechos
+        //        ///Genera el listado de Facts
+        //        var FactsListQuery = (from facts in DataModel.ResumenEstadisticasNacionals
+        //                              select new {
+        //                                  icon = facts.RutaIcono,
+        //                                  query = facts.ConsultaSQL,
+        //                                  phrase = facts.Descripcion,
+        //                                  seccion = facts.SeccionAplicativo
+
+        //                              });
+        //        ///para cada ítem, se genera la consulta y el resultado
+        //        foreach (var item in FactsListQuery) {
+        //            List<string> query = new List<string>();
+        //            ///Variable para el query
+        //            string returnedQueryValue = string.Empty;
+        //            ///Si el query no tiene data, permite pasar sin realizar consulta
+        //            if (!string.IsNullOrEmpty(item.query)) {                            ///ejecución del query
+        //                query = DataModel.Database.SqlQuery<string>(item.query).ToList();
+        //            }
+        //            else {
+        //                query = new List<string>();
+        //            }
+        //            ///si el query retorna datos se obtiene la consulta
+        //            ///Observación: La consulta debe retornar siempre una cantidad y debe llegar en 
+        //            ///string. en el query se debe utilizar la sentencia CONVERT().
+        //            if (query.Count() > 0) {
+        //                returnedQueryValue = query.First().ToString();
+        //            }
+
+        //            FactsList.Add(
+        //                       new Fact {
+        //                           icon = item.icon,
+        //                           phrase = item.phrase.Replace(CommonConstants.ReplaceTokenFactQuery, returnedQueryValue),
+        //                           title = item.seccion.Split('_').Length > 1 ? item.seccion.Split('_')[0] : item.seccion,
+        //                           subTipo = item.seccion.Split('_').Length > 1 ? item.seccion.Split('_')[1] : null
+        //                       }
+        //                    );
+        //        }
+        //    }
+        //    catch (Exception ex) {
+        //        LogHelper.GenerateLog(ex);
+        //    }
+        //    System.Diagnostics.Trace.WriteLine("Obtenida los Datos De Informacion Nacional");
+        //    return FactsList;
+        //}
 
         #endregion
 

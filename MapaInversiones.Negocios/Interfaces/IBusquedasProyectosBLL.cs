@@ -16,7 +16,7 @@ namespace PlataformaTransparencia.Negocios.Interfaces
     public int ObtenerFotosUsuariosParaAprobarCant();
     public ModelDataProyecto ObtenerFotosUsuariosPerEstados(int estado, int page);
     public Task<List<ImagesUsuario>> ObtenerFotosUsuariosParaAprobarAsync();
-
+    //public List<Item> ObtenerAniosFuentesFinanciacionPorProyecto(int id);
     public ModelProcesoContratacionAnios ObtenerAnniosProcesoContratacion(int? IdProyecto);
     public ModelProcesosContratacionData ObtenerInformacionProcesosContratacionPorFiltros(ProcesosContratacionFiltros filtro);
 

@@ -211,7 +211,7 @@ function InicializaDatos() {
             var id_tipo = $("#filtro_TipoCometario option:selected").attr("id_tipo");
             var text_coment = $("#txtcomentario").val();
             var ch_anonimo = $("#anonimo").prop('checked');
-
+  //          var id_proyecto = projectPerfil[0].id_project;
             var CodigoContrato = $("#contrato").val();
 
             if (id_tipo == "" || id_tipo == undefined) {
@@ -304,7 +304,7 @@ function iniUsuarioLog() {
     $("#hdIdUsuario").val(PerfilUsuario[0].idUsuParticipa);
     $("#hdNomUsuario").val(PerfilUsuario[0].nomUsuParticipa);
     if ($("#hdIdUsuario").val() != "") {
-
+        //$("#divFotoUsuario").css("visibility","visible");
         $("#divUsuarioLog").slideUp(100, function () {
             $("#divNomUsuarioLog").text("Hi, " + $("#hdNomUsuario").val());
             $("#divCloseSesion").show();
@@ -312,7 +312,9 @@ function iniUsuarioLog() {
             $("#divPregParticipacion").attr("class", "objVisible");
         });
 
-    } 
+    } else {
+        //$("#divFotoUsuario").css("visibility", "collapse");
+    }
 }
 
 function limpiarCamposUsuario(opc) {
@@ -334,7 +336,8 @@ function limpiarCamposUsuario(opc) {
         $("#txtPassword_re_2").val("");
         $("#txtCodigoVerifica").val("");
         $("#txtEmailReset").val("");
-
+        //txtEmailVerifica
+        //hdIdUsuario
     } else if (opc == "all") {
         $("#txtEmailLog").val("");
         $("#txtClaveLog").val("");

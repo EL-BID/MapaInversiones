@@ -15,6 +15,7 @@ namespace PlataformaTransparencia.Negocios.Entidad
 
         public List<infograficoActividad> GetActividadByPrograma(int annio, string codEntidad, int codPrograma);
 
+        //public infograficoEntidad GetGastoByPrograma(int annio, int codEntidad, int codPrograma, string estado, string proceso);
 
         public List<InfoConsolidadoPresupuesto> ObtenerRecursosPerGrupos(int annio, int codEntidad);
 

@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using DataModels;
+﻿using DataModels;
+using LinqToDB;
 using LinqToDB.DataProvider.Informix;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
-using PlataformaTransparencia.Modelos.Proyectos;
-using PlataformaTransparencia.Modelos.Home;
-using PlataformaTransparencia.Negocios.RepositorioConsultas;
-using ModelContratistaData = PlataformaTransparencia.Modelos.ModelContratistaData;
 using PlataformaTransparencia.Modelos.Comunes;
-using LinqToDB;
-using System.Security.Cryptography;
+using PlataformaTransparencia.Modelos.Home;
+using PlataformaTransparencia.Modelos.Proyectos;
+using PlataformaTransparencia.Negocios.RepositorioConsultas;
 using SolrNet.Utils;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using ModelContratistaData = PlataformaTransparencia.Modelos.ModelContratistaData;
+using Microsoft.Extensions.Configuration;
 
 namespace PlataformaTransparencia.Negocios.Home
 {
@@ -23,11 +24,24 @@ namespace PlataformaTransparencia.Negocios.Home
     /// </summary>
 
     private readonly TransparenciaDB _connection;
+    private IConfiguration _configuration;
+    private int _estadoProyEjecucion;
 
     public HomeBLL(TransparenciaDB connection)
     {
-      _connection = connection;
+          _connection = connection;
+          _estadoProyEjecucion = 2;
+
     }
+
+    public HomeBLL(TransparenciaDB connection, IConfiguration config)
+    {
+        _connection = connection;
+        _configuration = config;        
+        _estadoProyEjecucion = int.TryParse(config["EstadoProyEjecucion"], out var v) ? v : 2;
+    }
+
+
 
     public ModelContratistaData ObtenerDatosContratosGestion(int? tipoEmergencia, string Entidad = null)
     {
@@ -42,6 +56,7 @@ namespace PlataformaTransparencia.Negocios.Home
       objReturn.valorContratos = objReturn.listTotalContratos.Sum(a => a.ValorContratado);
       objReturn.numProcesos = objReturn.listTotalProcesos.Sum(a => a.NroProcesos);
       objReturn.valorProcesos = (decimal?)objReturn.listTotalProcesos.Sum(a => a.ValorProceso);
+      //objReturn.listEstadosContratos = ConsultasComunes.ObtenerEstadosGestionContratos(tipoEmergencia);
       return objReturn;
     }
 
@@ -59,13 +74,14 @@ namespace PlataformaTransparencia.Negocios.Home
                 anyo_max = 0; 
             }
 
+       //objReturn.priorityProjects = GetProyectosPrioritarios();
       objReturn.countOngoingProjects = GetCantProyActivos();
       objReturn.valPresupuestoEncabezado = GetCantidadesPresupuesto();
       objReturn.aniospresupuesto = GetAniosPresupuesto();
       objReturn.fuentesporAnnios = GetFuentesAniosPresupuesto();
       objReturn.MaxAnnioContratos = objReturn.valPresupuestoEncabezado.AnioActual.ToString();
       objReturn.MaxAnnioEntidades = maxPeriod_presupuesto.ToString();
-      objReturn.Entidades = GetConsolidadoEntidades();
+      objReturn.Entidades = GetConsolidadoEntidades(anyo_max);
       objReturn.contprocesoscontratos = GetContadorProcesosContratos(anyo_max);
 
             objReturn.Status = true;
@@ -73,62 +89,45 @@ namespace PlataformaTransparencia.Negocios.Home
       return objReturn;
     }
 
+
+       
         /// <summary>
         /// Funcion que retorna las n primeras entidades con mayor valor vigente para el año más actual, pendiente definir la cantidad de entidades
         /// </summary>
         /// <returns></returns>
-        public List<InfoEntidadesConsolida> GetConsolidadoEntidades()
+
+        public List<InfoEntidadesConsolida> GetConsolidadoEntidades(int anyo)
         {
-
             var objReturn = new List<InfoEntidadesConsolida>();
-
-            int maxyear = DateTime.Now.Year;
-            maxyear = _connection.VwPresupuesto.Max(x => x.Periodo);
-
-
-            var result = (from info in _connection.VwPresupuesto
-                          where info.Periodo == maxyear
-                          group info by new
-                          {
-                              info.CodigoInstitucion,
-                              info.Institucion
-
-                          } into g
-                          select new InfoEntidadesConsolida
-                          {
-                              id = g.Key.CodigoInstitucion.ToString(),
-                              labelGroup = g.Key.Institucion,
-                              label="",
-                              avance = ((decimal)g.Sum(x => x.EjecucionAcumulada)),
-                              asignado = ((decimal)g.Sum(x => x.Vigente))
-                          }
-     ).ToList();
-
-            if (result != null)
-            {
-                var long_aux = result.Count();
-                for (var i = 0; i < long_aux; i++)
-                {
-                    if (result[i].asignado > 0)
+            var temp= (from info in _connection.VwPresupuesto
+                    join ct in _connection.CatalogoTiempoes
+                        on info.Periodo.ToString() equals ct.Periodo
+                    where ct.Año == anyo
+                    group info by new
                     {
-                        result[i].porcentaje = Math.Round(((decimal)(result[i].avance / result[i].asignado) * 100), 2);
+                        info.CodigoInstitucion,
+                        info.Institucion
                     }
-                }
+                    into g
+                    select new InfoEntidadesConsolida
+                    {
+                        id = g.Key.CodigoInstitucion.ToString(),
+                        labelGroup = g.Key.Institucion,
+                        label = "",
+                        avance = (decimal)g.Sum(x => x.EjecucionAcumulada.Value),
+                        asignado = (decimal)g.Sum(x => x.Vigente.Value),
+                        porcentaje = 0 
+                    })
+                   .OrderByDescending(x=>x.avance)
+                   .Take(8)
+                   .ToList();
 
-                if (long_aux >= 8)
-                {
-                    objReturn = result.OrderByDescending(x => x.avance).Take(8).ToList();
-                }
-                else
-                {
-                    objReturn = result.OrderByDescending(x => x.avance).Take(long_aux).ToList();
-                }
+            if (temp.Count>0) {
+                objReturn = temp;
             }
-
             return objReturn;
-
-
         }
+
 
 
         public itemConteoProjects GetCantProyActivos()
@@ -138,7 +137,7 @@ namespace PlataformaTransparencia.Negocios.Home
                       join he in _connection.HistoriaEstados
                       on info.IdProyecto equals he.IdProyecto
                       where he.ActualSiNo == true
-                      where he.IdEstado == 1
+                      where he.IdEstado == _estadoProyEjecucion
                       select new InfoProyectos
                       {
                         IdProyecto = info.IdProyecto,
@@ -166,17 +165,30 @@ namespace PlataformaTransparencia.Negocios.Home
                                 AprobadoTotal = g.Sum(x => x.Vigente)
                             }).OrderByDescending(x => x.Anio).ToList();
 
-            objReturn.AnioActual = consulta[0].Anio;
-            objReturn.PresupuestoActual = (double)consulta[0].AprobadoTotal; 
-            objReturn.AnioAnterior = consulta[1].Anio;
-            objReturn.PresupuestoAnterior = (double)consulta[1].AprobadoTotal;
-            objReturn.Porcentaje = (100-(objReturn.PresupuestoActual * 100/objReturn.PresupuestoAnterior))*-1;
+            if (consulta.Count > 0)
+            {
+                objReturn.AnioActual = consulta[0].Anio;
+                objReturn.PresupuestoActual = (double)consulta[0].AprobadoTotal;
+            }
+
+            if (consulta.Count > 1)
+            {
+                objReturn.AnioAnterior = consulta[1].Anio;
+                objReturn.PresupuestoAnterior = (double)consulta[1].AprobadoTotal;
+
+                if (objReturn.PresupuestoAnterior != 0)
+                {
+                    objReturn.Porcentaje = (100 - (objReturn.PresupuestoActual * 100 / objReturn.PresupuestoAnterior)) * -1;
+                }
+            }
+            
             return objReturn;
 
         }
 
         public InfoPresupuestoEncabezado GetContadorProcesosContratos(int periodo)
         {
+            //VwProcesosXProyectosInstitucionesAnio
             InfoPresupuestoEncabezado objReturn = new();
             var consulta = (from info in _connection.VwProcesosXProyectosInstitucionesAnios
                             where info.EstadoProceso == "Proceso adjudicado y celebrado"
@@ -285,6 +297,7 @@ namespace PlataformaTransparencia.Negocios.Home
       itemEstado obj_aux = new();
       List<InfoProjectPerSector> objReturn = new();
 
+            //var ProjectsPerSectoresQuery = new List<InfoProjectPerSector>();
             var ProjectsPerSectoresQuery = (from presupuesto in _connection.VwPresupuesto
                                             join ct in _connection.CatalogoTiempoes on presupuesto.Periodo.ToString() equals ct.Periodo
                                             join iconos in _connection.VwEstadoImagenes on presupuesto.Sector equals iconos.NombreSector
@@ -305,6 +318,7 @@ namespace PlataformaTransparencia.Negocios.Home
                                               orden= g.Max(x => x.iconos.MostrarSector)
                                            }).OrderByDescending(x => x.rawValue).ToList();
 
+           ///OrderBy(x => x.ordenGroup).ThenBy(y=>y.labelGroup).ToList()
 
 
             objReturn = ProjectsPerSectoresQuery;

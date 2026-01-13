@@ -31,7 +31,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 .czm-fixed.czm-chat-support {
-    display: inherit;
+    display: none;/*Se oculta momentaneamente*/
 }
 .czm-fixed .czm-button {
     position: fixed;

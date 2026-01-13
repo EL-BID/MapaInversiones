@@ -182,7 +182,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
 
 
         [HttpGet("GetCompradorByNombre")]
-        public ModelContratosData GetCompradorByNombre(string Comprador)
+        public ModelContratosData GetCompradorByNombre(string Comprador, int? Annio=null)
         {
             ModelContratosData objReturn = new ModelContratosData();
 
@@ -190,7 +190,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
             try
             {
                 var aux = new ContratosBLL(_connection);
-                var valores = aux.ObtenerComprador(Comprador);
+                var valores = aux.ObtenerComprador(Comprador, Annio);
                 objReturn.ContratosPerAnyo = valores;
                 objReturn.Status = true;
                 return objReturn;

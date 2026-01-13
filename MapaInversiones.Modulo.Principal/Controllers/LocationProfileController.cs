@@ -25,7 +25,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
     public IActionResult Location()
     {
-
+      //var horaInicio = DateTime.UtcNow;
       ViewBag.TitulosHome = _gestorTitulos;
       var type = Request.Query.ContainsKey("type") ? Request.Query["type"].ToString() : string.Empty;
       var id = Request.Query.ContainsKey("id") ? Request.Query["id"].ToString() : string.Empty;

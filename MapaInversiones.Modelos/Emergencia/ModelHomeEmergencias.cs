@@ -8,9 +8,11 @@ namespace PlataformaTransparencia.Modelos.Emergencia
 {
     public class ModelHomeEmergencias : RespuestaContratoBase
     {
+        public int TipoEmergencia { get; set; }
+        public InfoEncabezado Encabezado { get; set; }
         public ModelContratistaData resumenDatosContratos { get; set; }
         public List<InfoRecursosEmergenciaPerObjeto> InfoRecursosContratos { get; set; }
         public List<InfoRecursosEmergenciaPerObjeto> InfoRecursosProcesos { get; set; }
-        public int TipoEmergencia { get; set; }
+       
     }
 }

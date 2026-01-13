@@ -5,6 +5,10 @@ using PlataformaTransparencia.Modelos.Presupuesto;
 
 namespace PlataformaTransparencia.Modelos
 {
+    //public class ModelTrazabilidadFinanciadorData : RespuestaContratoBase
+    //{
+    //    public ModelPresupuestoData ModelPresupuestoData { get; set; }
+    //}
     public class ModelProyectoTrazabilidadFinanciadorData : RespuestaContratoBase
     {
         public List<itemGenPresupuesto> Proyectos { get; set; } = new();

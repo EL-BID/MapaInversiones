@@ -1,0 +1,508 @@
+﻿@page
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--MAIN BANNER-->
+<section class="banner-main">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>Vinculación del Presupuesto General de la Nación a los ODS</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-12">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h2>Vinculación del Presupuesto General de la Nación a los ODS</h2>
+                    </div>
+                    <div class="banner-main-desc">
+                        <!--<p>La <strong>STP</strong> impulsa el proceso el proceso de la planificación en sus diferentes ámbitos junto con las instituciones del Estado integrando en los lineamientos estratégicos establecidos en el Plan Nacional de Desarrollo, prioridades del Gobierno y Objetivos de Desarrollo Sostenible.</p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--NAVIGATION ON PAGE-->
+    <!--<div class="row navs-shortcuts">
+
+        <div class="" id="navs-header">
+            <a class="btn-section" href="#s0">
+                <span class="ic-shortcut"><i class="material-icons md-24">view_column</i></span>
+                <span class="text-btn">Etapas</span>
+            </a>
+            <a class="btn-section" href="#s1">
+                <span class="ic-shortcut"><i class="material-icons md-24">grid_view</i></span>
+                <span class="text-btn">Tipos de Planes</span>
+            </a>
+            <a class="btn-section" href="#s2">
+                <span class="ic-shortcut"><i class="material-icons md-24">topic</i></span>
+                <span class="text-btn">Plan Operativo Institucional</span>
+            </a>
+            <a class="btn-section" href="#s3">
+                <span class="ic-shortcut"><i class="material-icons md-24">rule_folder</i></span>
+                <span class="text-btn">Componentes del Plan</span>
+            </a>
+
+        </div>
+    </div>-->
+
+</section>
+
+<section id="s0" class="section">
+    <div class="container">
+        <div class="section-heading heading-left">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 class="mb-3">¿Qué es la Agenda 2030 para el Desarrollo Sostenible? </h2>
+
+                    <div class="section-subheading">
+                        <p>
+                            Es una hoja de ruta que establece una visión transformadora hacia la sostenibilidad económica, social y ambiental de los 193 Estados Miembros que la suscribieron, incluyendo a Paraguay.<br /><br />
+                            Esta Agenda, contempla 17 Objetivos de Desarrollo Sostenible (ODS) asociados, que se constituyen en una guía de referencia en pos de esta visión hasta el 2030.<br /><br />
+                            Los Objetivos de Desarrollo Sostenible (ODS) son un de conjunto objetivos globales y una llamada a la acción a todos los países para erradicar la pobreza, proteger el planeta y asegurar la prosperidad para todos como parte de una nueva agenda de desarrollo sostenible.<br /><br />
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div>
+                        <video width="560" height="315" controls autoplay poster="img/VideoODS.jpg">
+                            <source src="https://pyenresultados.rindiendocuentas.gov.py/Media/videos/hacienda/ODS_1.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="section-heading heading-left">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h2 class="mb-3">¿Cuáles son los Objetivos de Desarrollo Sostenible?</h2>
+                    <p>
+
+                        Existen 17 Objetivos de Desarrollo Sostenible, cada uno de los cuales posee una visión ambiciosa del desarrollo sostenible, que integra las dimensiones económica, social y ambiental.<br /><br />
+                        Cada objetivo tiene metas específicas que deben alcanzarse en los próximos 15 años, las cuales totalizan 169 metas.<br /><br />
+                        Para alcanzarlas, todo el mundo tiene que hacer su parte: los gobiernos, el sector privado, y la sociedad civil.<br /><br />
+
+                    </p>
+                </div>
+                <div class="col-lg-8">
+                    <div class="row gy-2 justify-content-center">
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS1.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS2.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS3.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS4.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS5.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS6.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS7.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS8.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS9.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS10.jpg" />
+                        </div>
+                        <div class="col-lg-2 ">
+                            <img src="img/ODS/Ico_ODS11.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS12.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS13.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS14.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS15.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS16.jpg" />
+                        </div>
+                        <div class="col-lg-2">
+                            <img src="img/ODS/Ico_ODS17.jpg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section gray-bg">
+    <div class="container">
+        <div class="section-heading heading-left">
+            <h2 class="mb-3">¿Para qué se realiza la vinculación de los ODS con el PGN?</h2>
+
+            <div class="section-subheading">
+                <p>
+                    Con el fin de visibilizar los esfuerzos e iniciativas que realizan las instituciones públicas como actores de los retos que implica la agenda 2030. La vinculación ODS-PGN se constituye en un mecanismo mediante el cual se tiene una visión integral de las acciones realizadas por el Sector Público y la inversión presupuestaria que representa, en términos del porcentaje de participación sobre el Presupuesto General de la Nación direccionado a uno o más objetivos de la Agenda 2030 para el Desarrollo Sostenible.
+                </p>
+            </div>
+        </div>
+        <div class="section-heading heading-left">
+            <h2 class="mb-3">¿Cómo se realiza la vinculación del PGN a los ODS?</h2>
+
+            <div class="section-subheading mb-3">
+                <p>
+                    Se sustenta en la aplicación de una metodología, que fue diseñada por la Dirección General de Presupuesto del Ministerio de Hacienda.<br /><br />
+                    La misma, se basa en la Clasificación Programática y la Clasificación por Finalidades, Funciones y Sub-funciones del Gasto, por demostrar estas clasificaciones, la naturaleza de los sectores y servicios que el Estado brinda a la ciudadanía y a la cual se vinculan cada una de las Instituciones al momento de la programación y/o modificación presupuestaria.<br /><br />
+                    Asimismo, asumiendo que el proceso presupuestario se desprende de la planificación nacional y estratégica institucional, incluye una revisión minuciosa de la planificación, que posteriormente pasa a la etapa operativa mediante la asignación de recursos.<br /><br />
+                    En ese sentido, ofrece una perspectiva de inversión pública presupuestaria sobre las acciones que consta de un total de 7 pasos para llegar a la cuantificación del aporte en términos presupuestarios del Sector público a cada Objetivo de Desarrollo Sostenible:
+                </p>
+                <div class="text-center">
+                    <img src="img/vinculacion.jpg" />
+                </div>
+                <p>Cabe resaltar, que el cálculo incluye el monto total  del Presupuesto General de la Nación, en atención a su distribución sobre la totalidad de Organismos y Instituciones del Estado (OEE) y su estructura programática.<p />
+            </div>
+        </div>
+        <div class="section-heading heading-left">
+            <div class="section-heading text-center">
+                <h2 class="mb-3">¿Qué resultados arrojan la aplicación de la metodología?</h2>
+            </div>
+            <div class="col-lg-12">
+                <div class="row gy-2">
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS1.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor1">
+                                <span class="Bignumber">8,8%</span>
+                                <h5>
+                                    G 8.078 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS2.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor2">
+                                <span class="Bignumber">2,0%</span>
+                                <h5>
+                                    G 1.913 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS3.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor3">
+                                <span class="Bignumber">14,8%</span>
+                                <h5>
+                                    G 13.575 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS4.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor4">
+                                <span class="Bignumber">9,1%</span>
+                                <h5>
+                                    G 8.378 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS5.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor5">
+                                <span class="Bignumber">
+                                    2,7%
+                                </span>
+                                <h5>
+                                    G 2.436 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS6.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor6">
+                                <span class="Bignumber">
+                                    0,3%
+                                </span>
+                                <h5>
+                                    G 251 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS7.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor7">
+                                <span class="Bignumber">
+                                    7,4%
+                                </span>
+                                <h5>
+                                    G 6.835 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS8.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor8">
+                                <span class="Bignumber">
+                                    11,4%
+                                </span>
+                                <h5>
+                                    G 10.533 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS9.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor9">
+                                <span class="Bignumber">
+                                    6,8%
+                                </span>
+                                <h5>
+                                    G 6.268 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS10.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor10">
+                                <span class="Bignumber">
+                                    6,5%
+                                </span>
+                                <h5>
+                                    G 6.002 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS11.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor11">
+                                <span class="Bignumber">
+                                    1,1%
+                                </span>
+                                <h5>
+                                    G 1.046 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS12.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor12">
+                                <span class="Bignumber">
+                                    6,4%
+                                </span>
+                                <h5>
+                                    G 5.927 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS13.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor13">
+                                <span class="Bignumber">
+                                    0,1%
+                                </span>
+                                <h5>
+                                    G 99 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS15.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor15">
+                                <span class="Bignumber">
+                                    0,1%
+                                </span>
+                                <h5>
+                                    G 52 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS16.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor16">
+                                <span class="Bignumber">
+                                    14,9%
+                                </span>
+                                <h5>
+                                    G 13.728 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ContOds">
+                            <div class="ODS">
+                                <img src="img/ODS/Ico_ODS17.jpg" />
+                            </div>
+                            <div class="ODSValue OdsColor17">
+                                <span class="Bignumber">
+                                    7,6%
+                                </span>
+                                <h5>
+                                    G  6.979 miles<br /> de millones
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<!--RELATED INFO-->
+<section class="relatedInfo">
+    <div class="container">
+        <!--LINKS OTRAS SECCIONES-->
+        <div class="row">
+            <!--LEFT COLUMN-->
+            <div class="col-lg-8">
+                <!--LINKS seccion infografia planificacion-->
+                <h2>Conoce</h2>
+                <div class="wrap-cta py-5">
+                    <a href="../ProcesoPresupuesto" class="py-5 mb-5 px-0">
+                        <div class="h3">El Proceso Presupuestario <i class="material-icons md-18">arrow_forward</i> </div>
+                    </a>
+                </div>
+
+                <!--LINKS seccion infografia planificacion-->
+
+                <div class="wrap-cta py-5">
+                    <p class="card-title mb-4">Información suministrada por:</p>
+                    <a href=https://www.hacienda.gov.py/web-hacienda/index.php" target="_blank">
+                        <img class="img-fluid" src="../img/LogoHaciendaB.png" alt="ir a Secretaria tecnica de planeación" />
+                    </a>
+                </div>
+            </div>
+            <!--RIGHT COL-->
+            <div class="col-lg-4">
+                <h2>Explora</h2>
+                <p>Los presupuestos de las instituciones</p>
+                <ul id="entidadesPlanNacional" class="list-group list-group-flush">
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!--CONTACT US-->
+<!-- Call to action-->
+<div id="helpCenter"></div>
+<script src="js/comunes_infografias.js"></script>
+<script>
+    $(document).ready(function () {
+        obtListadoEntidades();
+    });
+    window.onscroll = function () { myFunction() };
+
+    var header = document.getElementById("navs-header");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+            header.classList.add("bg-white");
+        } else {
+            header.classList.remove("sticky");
+            header.classList.remove("bg-white");
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

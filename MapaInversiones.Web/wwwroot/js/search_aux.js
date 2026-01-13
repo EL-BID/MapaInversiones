@@ -1,17 +1,113 @@
 ﻿$( function() {
  
+  //$("#SearchString").autocomplete({
+  //    source: function (request, response) {
+          
+  //        $.ajax({
+  //            type: 'GET',
+  //            contentType: "application/json; charset=utf-8",
+  //            dataType: "json",
+  //            url: "AutocompleteSearch/" + request.term,
+  //              cache: false,
+  //              /*ta: '{"keywords":"' + request.term + '"}',*/
+  //              success: function (data) {
+  //                  var datos = data;
+  //                      response($.map(datos, function (item) {
+  //                          return item.principal;
+  //                      }
+  //                    ));
+  //              },
+  //            error: function (response) {
+  //                alert(response.responseText);
+  //             },
+  //              failure: function (response) {
+  //                alert(response.responseText);
+  //            }
+  //          });
+  //      },
+  //      delay: 300,
+  //      minLength: 5
+  //});
+
+    //$('#HierarchySearch').click(function () {
+    //    var val_sel = $(this).attr("data-title");
+    //    $("#ulPaginacion").attr("refine", val_sel);
+    //   // alert(val_sel);
+    //    if (val_sel + "" != "") {
+    //        $.ajax({
+    //            type: 'GET',
+    //            contentType: "application/json; charset=utf-8",
+    //            dataType: "json",
+    //            url: "BusquedaResultados/?SearchString=" + val_sel,
+    //            cache: false,
+    //            /*ta: '{"keywords":"' + request.term + '"}',*/
+    //            success: function (data) {
+    //                console.log(data.result);   
+    //            },
+    //            error: function (response) {
+    //                alert(response.responseText);
+    //            },
+    //            failure: function (response) {
+    //                alert(response.responseText);
+    //            }
+    //        });
+    //    }
+
+    //});
+
     $('.hover-link').click(function () {
         var val_sel = $(this).attr("data-title");
+        //var val_input = document.getElementById('page-field-search').value;
         $("#tipoRefine").html('"' + val_sel+'"');
         $("#ulPaginacion").attr("refine", val_sel);
+        getListResult(0, true);
+        //alert(val_sel);
+        //if (val_sel + "" != "") {
+        //    $.ajax({
+        //        type: 'GET',
+        //        contentType: "application/json; charset=utf-8",
+        //        dataType: "json",
+        //        url: "/BusquedaAsync/?SearchString=" + val_input + "&type=" + val_sel,
+        //        cache: false,
+        //        /*ta: '{"keywords":"' + request.term + '"}',*/
+        //        success: function (data) {
+        //            var Resultados = document.getElementById("SearchResults");
+        //            Resultados.innerHTML = "";
+        //            var htmlResultados = "";
+        //            if (data != null && data.length > 0) {
+        //                for (var i = 0; i < data.length; i++) {
+        //                    htmlResultados += "<div class='card card-info-wide'>" +
+        //                        "<div class='card-body'>" +
+        //                        "<a href='" + data[i].url + "' class='h5' title='" + data[i].nombreProyecto + "'>" + data[i].nombreProyecto + "</a>" +
+        //                        "<div class='card-posted-in card-wide-item'>" +
+        //                        "<a href='' class='card-category' title='" + data[i].sector + "'>" + data[i].sector + "</a>" +
+        //                        "<a href='' class='card-category' title='" + data[i].type + "'> - " + data[i].type + "</a>" +
+        //                        "</div>" +
+        //                        "</div>" +
+        //                        "</div>" 
+        //                }
+
+        //            }
+        //            Resultados.innerHTML = htmlResultados;
+        //        },
+        //        error: function (response) {
+        //            alert(response.responseText);
+        //        },
+        //        failure: function (response) {
+        //            alert(response.responseText);
+        //        }
+        //    });
+        //}
 
 
     });
 
     $("#ulPaginacion").on("click", "li", function (e) {
+       // alert(getEventTarget(e).getAttribute("id"));
         var $target = $(e.target);
         var index = $target.attr("pagina");
-
+        //var actual = $("")
+       // alert(index);
       
 
         if (!isNaN(index)) {
@@ -49,8 +145,10 @@ function getEventTarget(e) {
 
 function pintarPaginacion(totalResultados, pagina) { //total de resultados y pagina en la que inicia la fila a mostrar en la paginacion
     var totalR = totalResultados * 1;
+    //var val_sel = $("#ulPaginacion").attr("refine");
 
 
+    // $("#ulPaginacion").attr("refine", "");
     var rows = $("#ulPaginacion").attr("rows") * 1
     var paginasimp = $("#ulPaginacion").attr("paginasimp") * 1
 
@@ -105,21 +203,22 @@ function pintarPaginacion(totalResultados, pagina) { //total de resultados y pag
 }
 
 function getListResult(pagina, repaginar=false ) {
-
+   // alert(start);
     var val_sel = $("#ulPaginacion").attr("refine");
     var val_input = document.getElementById('page-field-search').value;
     var val_start = pagina * $("#ulPaginacion").attr("rows");
     var val_sort = $("#selectOrden option:selected").val()*1;
     
     var totalResultados = 0;
-
+    
+    //alert(val_sel);
         $.ajax({
             type: 'GET',
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             url: "/BusquedaAsync/?SearchString=" + val_input + "&type=" + val_sel + "&start=" + val_start + "&sort=" + val_sort,
             cache: false,
-
+            /*ta: '{"keywords":"' + request.term + '"}',*/
             success: function (data) {
                 var Resultados = document.getElementById("SearchResults");
                 Resultados.innerHTML = "";

@@ -70,6 +70,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
 
             #region PROYXSECTOR
             objReturn.ProjectsPerSectorGroup = ObtenerProyectosPorDepartamentoDadoSector(sector_id, lstDepartamentos);
+            //var costoProyectoXDepartamentoDadoSector = ObtenerCostoProyectosPorDepartamentoDadoSector(sector_id);
             #endregion
 
             #region PROYECTOS_EN_EJECUCION
@@ -248,7 +249,15 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                                   ejecutado = g.Sum(x => x.ValorEjecutado.Value) 
 
                                               });
- 
+                //var RecursosPerObjetoQuerysql = (from info in DataModel.VwPresupuestoXProyInvs
+                //                              where info.Periodo.ToString().Contains(anio)
+                //                              group info by new { info.IdProyecto, info.Nombreproyecto } into g
+                //                              select new itemGenPresupuesto
+                //                              {
+                //                                  id = g.Key.IdProyecto.ToString(),
+                //                                  ejecutado = g.Sum(x => x.ValorEjecutado.Value)
+
+                //                              });
 
 
                 var proyectosXEstadoIdDptosql = (from vistaSectorEnte in DataModel.VwSectorListadoPorDeptoInvs
@@ -331,7 +340,13 @@ namespace PlataformaTransparencia.Negocios.Sectores
 
             string[]? deptoid = null;
             if (departamento_id is not null) { deptoid = departamento_id.Split(","); }
-
+            //var aniosql = (from vistaSectorEnte in DataModel.VwSectorListadoPorDeptoInvs
+            //                      join proyecto in DataModel.Proyectos on vistaSectorEnte.IdProyecto equals proyecto.IdProyecto
+            //                      where vistaSectorEnte.IdSector.ToString() == sector_id
+            //                      && (deptoid.Contains(vistaSectorEnte.IdDepartamento) || departamento_id == null)
+            //                      group proyecto by proyecto.FechaInicioProyecto.Year into g
+            //                      orderby g.Key ascending
+            //                      select new { });
             List<string> anios = (from vistaSectorEnte in DataModel.VwSectorListadoPorDeptoInvs
                                   //join estado in DataModel.Estados on vistaSectorEnte.IdEstado equals estado.IdEstado
                                   join proyecto in DataModel.Proyectos on vistaSectorEnte.IdProyecto equals proyecto.IdProyecto

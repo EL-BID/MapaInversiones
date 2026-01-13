@@ -87,5 +87,18 @@ namespace PlataformaTransparencia.Modelos.Proyectos
 
     }
 
+    public class filtroListadoPrueba
+    {
+        public List<string> CodigosRegiones { get; set; }
+        public List<string> CodigosDepartamentos { get; set; }
+        public List<string> CodigosMunicipios { get; set; }
+        public List<int> CodigosEstado { get; set; }
+        public List<int> CodigosSector { get; set; }
+        public List<int> fechasEjecucion { get; set; }
+        public List<int> CodigosAreaSustantiva { get; set; }
+        public List<int> CodigosOrgFinanciador { get; set; }
+        public List<string> CodigosPlan { get; set; }
 
+
+    }
 }

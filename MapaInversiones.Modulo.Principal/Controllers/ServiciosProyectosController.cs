@@ -102,7 +102,31 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         }
 
 
-       
+        //[HttpGet("GetProyNacionales")]
+        //public async Task<object> GetProyNacionales(int page, int sector)
+        //{
+        //    ModelDataProyecto objReturn = new ModelDataProyecto();
+        //    List<InfoProyectos> source = new List<InfoProyectos>();
+        //    source.AddRange(await ConsultasComunes.ObtenerProyectosNacionales(sector));
+        //    objReturn.totalNumber = source.Count<InfoProyectos>();
+        //    objReturn.pagesNumber = page;
+        //    objReturn.totalPages = (objReturn.totalNumber > CommonLabel.MaximumResultsPerPage) ? ((objReturn.totalNumber - (objReturn.totalNumber % CommonLabel.MaximumResultsPerPage)) / CommonLabel.MaximumResultsPerPage) : 1;
+        //    if ((objReturn.totalNumber >= CommonLabel.MaximumResultsPerPage) && ((objReturn.totalNumber % CommonLabel.MaximumResultsPerPage) > 0))
+        //    {
+        //        objReturn.totalPages++;
+        //    }
+        //    if (objReturn.totalNumber > CommonLabel.MaximumResultsPerPage)
+        //    {
+        //        objReturn.proyNacionales.AddRange(source.Skip<InfoProyectos>(((page - 1) * CommonLabel.MaximumResultsPerPage)).Take<InfoProyectos>(CommonLabel.MaximumResultsPerPage));
+        //    }
+        //    else
+        //    {
+        //        objReturn.proyNacionales.AddRange(source);
+        //    }
+
+        //    objReturn.Status = true;
+        //    return objReturn;
+        //}
 
         [HttpGet("GetProyectosNacional")]
         public List<InfoProyectos> GetProyectosNacional()

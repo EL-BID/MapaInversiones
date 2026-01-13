@@ -91,6 +91,8 @@ function GetRecursosPorNivel(anyo) {
             $("#PresupuestoVigente").html(textoVigente);
             
 
+            //var distintos = globales.map(item => item.labelGroup)
+            //    .filter((value, index, self) => self.indexOf(value) === index);
             var distintos = data.consolidadoNiveles;
             var totalEntidades = data.totalCantidades;
 
@@ -159,7 +161,8 @@ function getEstructuraInfograficoPerEntidad(datos, pagina) {
     for (var i = 0; i < datos.length; i++) {
         var nomCollapse = "collapseOne_" + i_aux.toString() + "_" + j_aux.toString();
         var nomHeading = "headingOne_" + i_aux.toString() + "_" + j_aux.toString();
-
+        //total_avance += datos[i].ejecutado;
+        //total_presupuesto += datos[i].vigente;
         var entidad_nom = datos[i].label;
         var porc_ejecutado = 0;
         if (datos[i].vigente > 0) {
@@ -207,7 +210,9 @@ function getEstructuraInfograficoPerEntidad(datos, pagina) {
         html_str += '<span class="labelTit">% Ejecución</span>';
         html_str += '<span class="td1">' + porc_ejecutado.formatMoney(1, '.', ',').toString() + '</span>';
         html_str += '</div>';
-
+        //------------------
+        //html_str += '<h6 class="btnPerfil badge bg-light text-dark"><i class="material-icons md-18">info_outline</i> Ver Detalle</h6>';
+        //------------------
         html_str += '</div >';
         html_str += '</a>';
         html_str += '</div>';

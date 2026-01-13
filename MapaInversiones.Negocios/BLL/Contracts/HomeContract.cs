@@ -1,28 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Extensions.Configuration;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
 using PlataformaTransparencia.Negocios.Home;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
 
 namespace PlataformaTransparencia.Negocios.BLL.Contracts
 {
     public class HomeContract : RespuestaContratoBase
     {
         private readonly TransparenciaDB _connection;
+        private readonly IConfiguration _configuration; 
+
         public ModelHomeData HomeModel { get; set; }
 
-        public HomeContract(TransparenciaDB connection)
+        public HomeContract(TransparenciaDB connection,IConfiguration configuration)
         {
             this.HomeModel = new ModelHomeData();
             _connection = connection;
+            _configuration = configuration;
+
         }
 
         public void Fill(bool esHome = true)
         {
             try {
 
-                HomeBLL objNegocioConsolidados = new HomeBLL(_connection);
+                HomeBLL objNegocioConsolidados = new HomeBLL(_connection,_configuration);
                 this.HomeModel = objNegocioConsolidados.ObtenerDatosModeloInicio(esHome);
                 this.Status = true;
 

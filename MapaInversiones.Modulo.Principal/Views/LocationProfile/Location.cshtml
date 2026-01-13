@@ -2,8 +2,8 @@
 @section scripts
     {
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha384-KcyRSlC9FQog/lJsT+QA8AUIFBgnwKM7bxm7/YaX+NTr4D00npYawrX0h+oXI3a2" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha384-JPbtLYL10d/Z1crlc6GGGGM3PavCzzoUJ1UxH0bXHOfguWHQ6XAWrIzW+MBGGXe5" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 }
 @inject OrchardCore.IOrchardHelper Orchard
 @{
@@ -55,7 +55,7 @@
                                 <span>Número de proyectos</span>
                             </li>
                             <!--<li>
-                                <span class="h2"> $/. @String.Format(cultureMoneda, "{0:n2}", @Model.AverageCostProjects) Millones</span>
+                                <span class="h2"> RD$/. @String.Format(cultureMoneda, "{0:n2}", @Model.AverageCostProjects) Millones</span>
                                 <span>Costo promedio por proyecto</span>
                             </li>-->
                             <li>
@@ -577,7 +577,7 @@
                 }
             }).done(function (data) {
                 dataLocation = data;
-
+                console.log("data",data);
                 $("#s0").empty();
                 var geneInfoProjByState = '<div class="container"> <div class="section-heading heading-left"><h2>Información general</h2></div><div class="row py-2 contadores">';
                 if (data != undefined && data.totalProjectsByState != null) {
@@ -586,7 +586,13 @@
                     });
             }
             $("#s0").append(geneInfoProjByState);
-
+            //if ($("#jurisdiction").val() != undefined && $.trim($("#jurisdiction option:selected").text()) != "TODOS") {
+            //    $("#jurisdictionName").append('<h3 class="py-4">Corregimiento <span>' + $.trim($("#jurisdiction option:selected").text()) + '</span></h3>');
+            //    var geneInfoProjByState = '<div class="row py-2 contadores">' + getDivGeneralInformacionCard("card h-100 shadow card-entidad b1", "Proyectos nuevos", dataLocation.generalInformacion.totalNewsProjects);
+            //    geneInfoProjByState = geneInfoProjByState + getDivGeneralInformacionCard("card h-100 shadow card-entidad b2", "Proyectos en continuidad", dataLocation.generalInformacion.totalContinuityProjects);
+            //    geneInfoProjByState = geneInfoProjByState + '</div>';
+            //    $("#jurisdictionName").append(geneInfoProjByState);
+            //}
         $("#s2").empty();
         if (data.generalInformacion != undefined) {
             if (data.generalInformacion.isChildLocationEnable) {
@@ -743,10 +749,11 @@
             divProject = divProject + '<span class="small">Municipio: </span><span class="small text-bold">' + project.nombreMunicipio + '</span><br/>';
             divProject = divProject + '<span class="td1">' + project.nombreProyecto + '</span>';
             divProject = divProject + '</div>';
-            divProject = divProject + '<div class="data1"><span class="labelTit">Presupuesto vigente (' + (new Date()).getFullYear() + ')</span><span class="td1 blueT">$' + project.vlrTotalProyectoTodasLasFuentes.formatMoney(0, '.', ',') + '</span></div>';
+            //divProject = divProject + '<div class="data1"><span class="labelTit">Partida presupuestaria</span><span class="td1 blueT">' + project.partidaPresupuestaria + '</span></div>';//cambiar por partida presupuestaria
+            divProject = divProject + '<div class="data1"><span class="labelTit">Presupuesto vigente (' + (new Date()).getFullYear() + ')</span><span class="td1 blueT">RD$' + project.vlrTotalProyectoTodasLasFuentes.formatMoney(0, '.', ',') + '</span></div>';
             divProject = divProject + '</div>';
             divProject = divProject + '<div class="btn-action">';
-            divProject = divProject + '<div class="btnPerfil"><a target="_blank" rel="noopener" href="/projectprofile/' + project.idProyecto + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>Ver proyecto</span></a></div>';
+            divProject = divProject + '<div class="btnPerfil"><a target="_blank" href="/projectprofile/' + project.idProyecto + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br> <span>Ver proyecto</span></a></div>';
             divProject = divProject + '</div></div>';
             return divProject;
         }
@@ -904,15 +911,19 @@
             $("#divListadoProyectos").empty();
             $("#showMessageGraph").hide();
             $("#typeProjectTitle").empty();
+            //$("#yearProject").empty();
+            //$("#statusProject").empty();
             $("#entitiesProject").empty();
             $("#sectorSelected").val('');
             $("#functionalGroupSelected").val('');
+            //console.log("Entré al funcional group");
             if (projectsByFuntional != undefined && projectsByFuntional != null) {
                 for (var i = 0; i < projectsByFuntional.length; i++) {
                     projectsByFuntional[i].value = parseFloat(projectsByFuntional[i].value);
                     projectsByFuntional[i].rawValue = parseFloat(projectsByFuntional[i].rawValue);
                 }
                 if (projectsByFuntional.length > 0) {
+                    //console.log("Entré a grafico del funcional group");
                     var visualization = d3plus.viz()
                         .container("#divGraphProy")
                         .data(projectsByFuntional)
@@ -960,9 +971,11 @@
                         .mouse({
                             "move": true,
                             "click": function (node, viz) {
+                                //getDivTableProjectsByFunctionalGroup(node.label, projectsByFuntionalGroup);
                                 getYearsAndStatusProjectsByFuntionalGroup(node.label, projectsByFuntionalGroup);
                             }
                         }).draw();
+                    //getFuntionalGreaterParticipation
                     var funtionalGreaterParticipation = getFuntionalGreaterParticipation(projectsByFuntional);
                     if (funtionalGreaterParticipation != '') {
                         $("#sectorSelected").val('');
@@ -980,22 +993,44 @@
             }
         }
         function getYearsAndStatusProjectsByFuntionalGroup(functional, projectsByFuntionalGroup) {
+            //console.log("projectsByFuntionalGroup", projectsByFuntionalGroup);
             if (projectsByFuntionalGroup != null && projectsByFuntionalGroup.length > 0) {
+                //$("#yearProject").empty();
+                //$("#statusProject").empty();
                 $("#entitiesProject").empty();
+                //let years = [];
+                //let status = [];
                 let entities = [];
                 for (var i = 0; i < projectsByFuntionalGroup.length; i++) {
                     if (projectsByFuntionalGroup[i].grupoFuncional == functional) {
-
+                        //years.push(projectsByFuntionalGroup[i].anioInicioProyecto);
+                        //status.push(projectsByFuntionalGroup[i].state);
                         entities.push(projectsByFuntionalGroup[i].entidadEjecutora);
                     }
                 }
-              
+                //console.log("entities", JSON.stringify(entities, null, 2));
+                //if (years.length > 0) {
+                //  years = years.map(x => x).filter((value, index, self) => self.indexOf(value) === index);
+                //  years.sort().reverse();
+                //  years.forEach(x => $("#yearProject").append('<option value="' + x + '">' + x + '</option>'));
+                //}
+                //if (status.length > 0) {
+                //  status = status.map(x => x).filter((value, index, self) => self.indexOf(value) === index);
+                //  status.sort();
+                //  status.forEach(x => $("#statusProject").append('<option value="' + x + '">' + x + '</option>'));
+                //}
+                //if (years.length > 0 && status.length > 0) {
+                //  $("#typeProjectTitle").html('Proyectos grupo funcional <span>' + functional + '</span>');
+                //  getDivTableProjectsByFunctionalGroup(functional, projectsByFuntionalGroup);
+                //}
                 if (entities.length > 0) {
                     entities = entities.map(x => x).filter((value, index, self) => self.indexOf(value) === index);
                     entities.sort();
                     entities.forEach(x => $("#entitiesProject").append('<option value="' + x + '">' + x + '</option>'));
                 }
-
+                //console.log("years", years);
+                //console.log("status", status);
+                //console.log("functional", functional);
                 $("#functionalGroupSelected").val(functional);
                 if (entities.length > 0) {
                     $("#typeProjectTitle").html('Proyectos grupo funcional <span>' + functional + '</span>');
@@ -1005,21 +1040,22 @@
             }
         }
         function getDivChildLocations(locationChilds) {
-            let divChildLocations = '<div class="col-lg-6"> <div class="links-container">';
+            let divChildLocations = '<div class="col-lg-6"> <div class="links-container wrap-col">';
             for (var i = 0; i < locationChilds.length; i++) {
                 divChildLocations = divChildLocations + '<div class="card blue-card link-location">';
-                divChildLocations = divChildLocations + '<a href="/Location/&type=municipio&id=' + locationChilds[i].id + '"><span class="location-name">' + locationChilds[i].name + '</span>';
-                divChildLocations = divChildLocations + '<span class="location-num-proy">(' + locationChilds[i].totalProjects + ')</span>';
+                divChildLocations = divChildLocations + '<a href="/Location/&type=municipio&id=' + locationChilds[i].id + '"><div><span class="location-name">' + locationChilds[i].name + '</span>';
+                divChildLocations = divChildLocations + '<span class="location-num-proy">(' + locationChilds[i].totalProjects + ')</span></div>';
                 divChildLocations = divChildLocations + '<i class="material-icons md-24">arrow_forward_ios</i></a></div>';
             }
             divChildLocations = divChildLocations + "</div>";
             return divChildLocations;
         }
         function getDivChildLocationsRelated(locationsRelated) {
-            let divChildLocationsRelated = '<div class="col-lg-12"> <div class="links-container">';
+            //console.log("locationRelated", locationsRelated);
+            let divChildLocationsRelated = '<div class="col-lg-12"> <div class="links-container wrap-col">';
             for (var i = 0; i < locationsRelated.length; i++) {
                 divChildLocationsRelated = divChildLocationsRelated + '<div class="card blue-card link-location">';
-                divChildLocationsRelated = divChildLocationsRelated + '<a href="/Location/&type=municipio&id=' + locationsRelated[i].id + '"><span class="location-name">' + locationsRelated[i].name + '(' + locationsRelated[i].totalProjects + ')' + '</span>';
+                divChildLocationsRelated = divChildLocationsRelated + '<a href="/Location/&type=municipio&id=' + locationsRelated[i].id + '"><div><span class="location-name">' + locationsRelated[i].name + '(' + locationsRelated[i].totalProjects + ')' + '</span></div>';
                 divChildLocationsRelated = divChildLocationsRelated + '<i class="material-icons md-24">arrow_forward_ios</i></a></div>';
             }
             divChildLocationsRelated = divChildLocationsRelated + "</div>";
@@ -1042,7 +1078,14 @@
             }
             getInformationByTypeLocationAndLocationIdAndYearAndJurisdiction();
         }
-
+        //function yearChanged() {
+        //  if ($("#functionalGroupSelected").val() != '') getDivTableProjectsByFunctionalGroup($("#functionalGroupSelected").val(), dataLocation.projectsByFunctional);
+        //  else if ($("#sectorSelected").val() != '') getDivTableProjectsBySector($("#sectorSelected").val(), dataLocation.projectsByLocation);
+        //}
+        //function statusProjectChanged() {
+        //  if ($("#functionalGroupSelected").val() != '') getDivTableProjectsByFunctionalGroup($("#functionalGroupSelected").val(), dataLocation.projectsByFunctional);
+        //  else if ($("#sectorSelected").val() != '') getDivTableProjectsBySector($("#sectorSelected").val(), dataLocation.projectsByLocation);
+        //}
         function entitiesProjectChanged() {
             if ($("#functionalGroupSelected").val() != '') getDivTableProjectsByFunctionalGroup($("#functionalGroupSelected").val(), dataLocation.projectsByFunctional);
             else if ($("#sectorSelected").val() != '') getDivTableProjectsBySector($("#sectorSelected").val(), dataLocation.projectsByLocation);

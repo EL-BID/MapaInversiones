@@ -139,6 +139,15 @@
                     <span class="ic-shortcut"><i class="material-icons md-24">grid_view</i></span>
                     <span class="text-btn">Trazabilidad de los recursos</span>
                 </a>
+               <!-- SE OCULTAN PROVISIONALMENTE <a class="btn-section" href="#participa">
+                    <span class="ic-shortcut"><i class="material-icons md-24">feedback</i></span>
+                    <span class="text-btn">Participación Ciudadana</span>
+                </a>
+                <a class="btn-section" href="#Shielo">
+                    <span class="ic-shortcut"><i class="material-icons md-24">live_help</i></span>
+                    <span class="text-btn">Proyectos Destacados</span>
+
+                         </a>-->
                
             </div>
         </div>
@@ -181,7 +190,7 @@
                         <div class="card-body">
                             <div class="wrap-desc-entidad">
                                 <div class="h5">Presupuesto Vigente</div>
-                                <div class="h1" id="PresupuestoVigente">$ @String.Format("{0:n2}", (@Model.PresupuestoVigenteAnnioDisplay / 1000000)) millones </div>
+                                <div class="h1" id="PresupuestoVigente">RD$ @String.Format("{0:n2}", (@Model.PresupuestoVigenteAnnioDisplay / 1000000)) millones </div>
                             </div>
                         </div>
                     </div>
@@ -191,7 +200,7 @@
                         <div class="card-body">
                             <div class="wrap-desc-entidad">
                                 <div class="h5">Presupuesto Ejecutado</div>
-                                <div class="h1" id="PresupuestoEjecutado">$ @String.Format("{0:n2}", (@Model.PresupuestoEjecutadoAnnioDisplay / 1000000)) millones</div>
+                                <div class="h1" id="PresupuestoEjecutado">RD$ @String.Format("{0:n2}", (@Model.PresupuestoEjecutadoAnnioDisplay / 1000000)) millones</div>
                             </div>
                         </div>
                     </div>
@@ -329,7 +338,33 @@
                     <div class="comparativeTable" id="divProcesosSection">
                         <div id="divProcesos"></div>
                         <div id="divPagFichasPro"></div>
-
+                        @* <div class="card-entidades-group">
+                            <div id="institucion_0" class="card d-flex">
+                                <div class="headEnt">
+                                    <div class="data1 mainDataEntidad" style="min-width: 60% !important;max-width:60% !important;">
+                                        <span class="labelTit">
+                                            Código Proceso: <strong>COAAROM-DAF-CM-2022-0039</strong>
+                                        </span>
+                                        <span class="td1">Compra de de 3 motores vertical con brida atornillada y motor sellada para trabajar al inteperie, 5HP,3PHASE 460 VOLTIOS </span>
+                                    </div>
+                                    <div class="data1">
+                                        <span class="labelTit">Estado del Proceso</span>
+                                        <span class="td1">Proceso adjudicado y celebrado</span>
+                                    </div> <div class="data1">
+                                        <span class="labelTit">Monto Estimado</span>
+                                        <span class="td1">RD$ 2,085,000.00 </span>
+                                    </div>
+                                </div>
+                                <div class="btn-action">
+                                    <div class="btnPerfil">
+                                        <a target="_blank" href="https://comunidad.comprasdominicana.gob.do//Public/Tendering/OpportunityDetail/Index?noticeUID=DO1.NTC.1163162" class="text-small">
+                                            <i class="material-icons md-18">arrow_forward</i>
+                                            <br> <span>VER PROCESO</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> *@
                     </div>
                     <div class="comparativeTable" id="divListadoContratos">
                         <div class="container">
@@ -394,8 +429,8 @@
     <!--HELP CENTER SHORTCUT-->
     <div id="helpCenter"></div>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha384-EZJUCwX9EfOmrML5/1WejmhFx/azi54nnVfOndPu+VTQKOHabXXC9eS7VFdkLz0V" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js" integrity="sha384-N8EP0Yml0jN7e0DcXlZ6rt+iqKU9Ck6f1ZQ+j2puxatnBq4k9E8Q6vqBcY34LNbn" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
 

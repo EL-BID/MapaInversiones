@@ -47,13 +47,16 @@ namespace PlataformaTransparencia.Negocios.Project
         BllProjectProfile bussines = new(_connection);
         ModelProjectProfile.idproject = projectId;
         ParticipacionCiudadana part = new(_connection);
-
+        //var CodPeriodos = BusquedasProyectosBLL.ObtenerPeriodosFuentes(projectId);
+        //var CodComponentes = BusquedasProyectosBLL.ObtenerComponentesProy(projectId);
+        //var ActoresProy = BusquedasProyectosBLL.ObtenerActoresByCategoriaProy(projectId);
         //----------------------------------------------------------------------------------------
         ModelProjectProfile.ProjectInformation = bussines.GetProjectInformation(projectId);
         ModelProjectProfile.periodos_fuentes = BusquedasProyectosBLL.ObtenerAniosFuentesFinanciacionPorProyecto(projectId); //    new();// CodPeriodos;
         ModelProjectProfile.componentes_proy = new();// CodComponentes;
         ModelProjectProfile.actores_proy = new();// ActoresProy;
         ModelProjectProfile.Images = BusquedasProyectosBLL.ObtenerImagenesParaProyecto(projectId);
+        //ModelProjectProfile.entregables = BusquedasProyectosBLL.ObtenerEntregablesProyecto(projectId);
         ModelProjectProfile.id_usu_participa = id_usuario_aux;
         ModelProjectProfile.nom_usu_participa = nom_usuario_aux;
         ModelProjectProfile.rol_participacion = part.ObtenerRolesProyAsync();
@@ -61,12 +64,16 @@ namespace PlataformaTransparencia.Negocios.Project
         ModelProjectProfile.medios_participacion = part.ObtenerMotivosProyAsync();
         ModelProjectProfile.tipo_comentario = part.ObtenerTipoComentarioAsync(1);
         ModelProjectProfile.avanceFisicoFaseInversion = BusquedasProyectosBLL.ObtenerAvanceFisicoPorComponenteProductoFaseProyecto(projectId);
-
+        //bussines.GetListImagesbyId(ModelProjectProfile, projectId);
+        //bussines.GetOtherProjectsbyId(ModelProjectProfile, projectId);
+        //bussines.GetProgressProject(ModelProjectProfile, projectId);
+        //bussines.GetSourcesByProject(ModelProjectProfile, projectId);
         Status = true;
       }
       catch (Exception ex)
       {
         Status = false;
+        //LogHelper.GenerateLog(ex);
         Message = "Lo sentimos, ha ocurrido un error.";
       }
     }

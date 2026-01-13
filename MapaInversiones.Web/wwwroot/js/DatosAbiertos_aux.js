@@ -1,7 +1,10 @@
 ﻿inicializaDatos();
 
 function inicializaDatos() {
-
+    //var datos = $("#datoscontratos option:selected").val()
+    //cargaannos(datoscontrato, datos, 'annocontratos', 'idDicContratos', 'idUltimaActContratos', 'FuenteContratos');
+    //var datos2 = $("#datospresupuesto option:selected").val()
+    //cargaannos(datospresupuesto, datos2, 'annopresupuesto', 'idDicPresupuesto', 'idUltimaActPresupuesto', 'FuentePresupuesto');
     cargarfuentesdatos();
 }
 
@@ -28,7 +31,7 @@ function cargarfuentesdatos() {
                         var htmldivfuente = '';
                             htmldivfuente += '<div class="fuentes-data">';
                             htmldivfuente += '<div class="source-fuente" ><span class="">Fuente de datos:</span><span class="text-bold">' + info[i].nombreFuente + '</span></div>';
-                        htmldivfuente += '<div class="source-fuente"><span class="">Última actualización:</span><span class="text-bold">' + info[i].fechaActualizacionFuente.toString().substr(0, 10) + '</span></div>';
+                        htmldivfuente += '<div class="source-fuente"><span class="">Última actualización:</span><span class="text-bold">' + info[i].fechaActualizacion + '</span></div>';
                         htmldivfuente += '</div>';
 
                         $("." + classdivfuente).html(htmldivfuente);
@@ -91,7 +94,14 @@ function descargar(sel, rad) {
     }
     if ((url == undefined) || (url == "") || (url == null) || (url == "null")) {
         alert('No existe set de datos en el formato seleccionado');
-
+        //bootbox.alert({
+        //    message: 'No existe set de datos en el formato seleccionado',
+        //    buttons: {
+        //        ok: {
+        //            label: 'Aceptar'
+        //        }
+        //    }
+        //});
     }
     else {
         window.location.href = url;

@@ -1,0 +1,265 @@
+﻿@page
+@inject OrchardCore.IOrchardHelper Orchard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!--MAIN BANNER-->
+<section class="banner-main-stp">
+
+    <div class="container">
+        <!-- Begin bread crumbs -->
+        <nav class="bread-crumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="bread-crumbs-list">
+                            <li>
+                                <a href="\">Inicio</a>
+                                <i class="material-icons md-18">chevron_right</i>
+                            </li>
+                            <li>¿Cómo se planifica en Paraguay?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav><!-- End bread crumbs -->
+
+
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h2>¿Cómo se planifica en Paraguay?</h2>
+                    </div>
+                    <!--<div class="banner-main-desc">
+                        <p>La formulación del Presupuesto General de la Nación, es responsabilidad del Poder Ejecutivo a través del Ministerio de Hacienda (MH) y su discusión y aprobación corresponde al Congreso Nacional, compuesto por las Cámaras de Diputados y Senadores. La ejecución del mismo es responsabilidad de cada uno de los Organismos y Entidades del Estados </p>
+                        <p class="text-bold">Las políticas públicas para construir el Paraguay del 2030 se concentrarán en tres grandes ejes estratégicos:</p>
+
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row navs-shortcuts">
+        <div class="" id="navs-header">
+            <a class="btn-section" href="/PlanNacional">
+                <span class="ic-shortcut"><i class="material-icons md-24">calendar_view_month</i></span>
+                Ir al Plan Nacional de Desarrollo
+            </a>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="col-lg-12">
+            <h2 class="text-center">Visión Paraguay 2030</h2>
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    Un Paraguay en el que todos pueden vivir con dignidad, con un Estado democrático, solidario y transparente que promueva la libertad individual entre un Gobierno Abierto, empresas privadas socialmente responsables, y una sociedad civil activa.<br /><br />
+                    Un país competitivo, ubicado entre los más eficientes productores de alimentos a nivel mundial, con industrias pujantes e innovadoras, que empleen fuerza laboral capacitada, proveedor de productos y servicios con tecnología, hacia una economía del conocimiento; con índices de desarrollo social en el rango más alto de Sudamérica; conectado y abierto a los vecinos y al mundo; ambiental y económicamente sostenible; con elevados índices de seguridad jurídica y ciudadana; con atención a los pueblos indígenas, fuerte protagonismo de la mujer; con jóvenes visionarios y entrenados liderando el país.<br /><br />
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="row gy-2">
+                <div class="head-axis col-lg-6">
+                    <div class="mb-5 bg-alice">
+                        <div class="row justify-content-left">
+                            <div class="col-2 col-lg-2">
+                                <div class="icon-eje ax1 h-100"><img src="../img/ax-1_white.svg" alt="icono Eje 1" /></div>
+                            </div>
+                            <div class="col-10 col-lg-10">
+                                <div class="goals-main-info">
+                                    <div class="banner-main-title-blue">
+                                        <h3 id="tituloEje">Eje 1: Reducción de pobreza y desarrollo social</h3>
+                                    </div>
+                                    <div class="banner-main-desc-blue">
+                                        <p id="descripcionEje">Está relacionado a la capacidad del Estado paraguayo para ofrecer cobertura a las necesidades humanas básicas de sus ciudadanos, ciudadanas y comunidades. Esta línea apunta al logro de objetivos sociales básicos como la disminución de la pobreza total, la erradicación de la pobreza extrema y la desnutrición infantil crónica, la universalización del agua potable, saneamiento mejorado, viviendas dignas, así como la provisión de servicios sociales de calidad.  </p>
+                                    </div>
+                                    <div class="planInf">
+                                        <h4>Objetivos Estrategicos</h4>
+                                        <ul>
+                                            <li>1.1. Lograr un desarrollo social equitativo</li>
+                                            <li>1.2. Brindar servicios sociales de calidad</li>
+                                            <li>1.3. Alcanzar un desarrollo local participativo</li>
+                                            <li>1.4. Desarrollar un hábitat adecuado y sostenible</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="head-axis col-lg-6">
+                    <div class="mb-5 bg-alice">
+                        <div class="row justify-content-left">
+                            <div class="col-2 col-lg-2">
+                                <div class="icon-eje ax2 h-100"><img src="../img/ax-2_white.svg" alt="icono Eje 2" /></div>
+                            </div>
+                            <div class="col-10 col-lg-10">
+                                <div class="goals-main-info">
+                                    <div class="banner-main-title-blue">
+                                        <h3 id="tituloEje">Eje 2: Crecimiento económico inclusivo</h3>
+                                    </div>
+                                    <div class="banner-main-desc-blue">
+                                        <p id="descripcionEje">Corresponde al aceleramiento del ritmo de crecimiento y a la diversificación productiva, promoviendo la participación de todos los agentes económicos y la redistribución de los resultados del crecimiento, principalmente con el 40% de la población de menores ingresos. Significa centrarse en la atención al empleo productivo</p>
+                                    </div>
+                                    <div class="planInf">
+                                        <h4>Objetivos Estrategicos</h4>
+                                        <ul>
+                                            <li>2.1. Promover el empleo y la seguridad social</li>
+                                            <li>2.2. Propiciar la competitividad y la innovación</li>
+                                            <li>2.3. Ampliar la regionalización y la diversificación productiva</li>
+                                            <li>2.4. Valorizar el capital ambiental</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="head-axis col-lg-6">
+                    <div class="mb-5 bg-alice">
+                        <div class="row justify-content-left">
+
+                            <div class="col-2 col-lg-2">
+                                <div class="icon-eje ax3 h-100"><img src="../img/ax-3_white.svg" alt="icono Eje 3" /></div>
+                            </div>
+                            <div class="col-10 col-lg-10">
+                                <div class="goals-main-info">
+                                    <div class="banner-main-title-blue">
+                                        <h3 id="tituloEje">Eje 3: Proyección de paraguay en el mundo</h3>
+                                    </div>
+                                    <div class="banner-main-desc-blue">
+                                        <p id="descripcionEje">Propone posicionar y mejorar la imagen país; fortalecer la participación nacional en los foros internacionales; ampliar la integración física y económica; fortalecer vínculos para la incorporación de tecnología y conocimientos. </p>
+                                    </div>
+                                    <div class="planInf">
+                                        <h4>Objetivos Estrategicos</h4>
+                                        <ul>
+                                            <li>3.1. Garantizar igualdad de oportunidades en un mundo globalizado. </li>
+                                            <li>3.2. Impulsar la atracción de inversiones, comercio exterior, turismo e imagen país</li>
+                                            <li>3.3. Fortalecer la integración económica regional</li>
+                                            <li>3.4. Contribuir en la sostenibilidad del hábitat global</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="head-axis col-lg-6">
+                    <div class="mb-5 bg-alice">
+                        <div class="row justify-content-left">
+                            <div class="col-2 col-lg-2">
+                                <div class="icon-eje ax4 h-100"><img src="../img/ax-4_white.svg" alt="icono Eje 4" /></div>
+                            </div>
+                            <div class="col-10 col-lg-10">
+                                <div class="goals-main-info">
+                                    <div class="banner-main-title-blue">
+                                        <h3 id="tituloEje">Eje 4: Fortalecimiento politico institucional</h3>
+                                    </div>
+                                    <div class="banner-main-desc-blue">
+                                        <p id="descripcionEje">Significa ubicar en el centro de los esfuerzos públicos la dignidad, el bienestar, las libertades y posibilidades de realización integral de las personas. Asegurar la defensa nacional, de cualquier tipo de amenaza tanto interna como externa, y la preservación del ecosistema. Se protegerán y promoverán los derechos humanos y culturales garantizados por el Estado facilitando los medios necesarios para su cumplimiento irrestricto. </p>
+                                    </div>
+                                    <div class="planInf">
+                                        <h4>Objetivos Estrategicos</h4>
+                                        <ul>
+                                            <li>4.1 Garantizar el acceso a los Derechos Humanos, mejorar la justicia y la seguridad</li>
+                                            <li>4.2. Modernizar la Administración Pública</li>
+                                            <li>4.3 Avanzar hacia la desentralización efectiva</li>
+                                            <li>4.4 Proteger y defender el medio ambiente y los recursos naturales</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div>
+                <a href="../PlanNacional">
+                    <img class="img-fluid" src="img/Visionparaguay.jpg" alt="Vision Paraguay 2030" />
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--RELATED INFO-->
+<section class="relatedInfo">
+    <div class="container">
+        <!--LINKS OTRAS SECCIONES-->
+        <div class="row">
+            <!--LEFT COLUMN-->
+            <div class="col-lg-8">
+                <!--LINKS seccion infografia planificacion-->
+                <h2>Conoce</h2>
+                <div class="wrap-cta py-5">
+                    <a href="../ProcesoPlanNacional" class="py-5 mb-5 px-0">
+                        <div class="h3">El Proceso de la Planificación Nacional<i class="material-icons md-18">arrow_forward</i> </div>
+                    </a>
+                </div>
+
+                <!--LINKS seccion infografia planificacion-->
+
+                <div class="wrap-cta py-5">
+                    <p class="card-title mb-4">Información suministrada por:</p>
+                    <a href="https://www.stp.gov.py/v1/" target="_blank">
+                        <img class="img-fluid" src="../img/Logostp.png" alt="ir a Secretaria tecnica de planeación" />
+                    </a>
+                </div>
+            </div>
+            <!--RIGHT COL-->
+            <div class="col-lg-4">
+                <h2>Explora</h2>
+                <p>Institución y sus planes operativos</p>
+                <ul id="entidadesPlanNacional" class="list-group list-group-flush">
+                </ul>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+<!--CONTACT US-->
+<!--HELP CENTER SHORTCUT-->
+<div id="helpCenter"></div>
+<script src="js/comunes_infografias.js"></script>
+<script>
+    $(document).ready(function () {
+        obtListadoEntidades();
+    });
+
+    window.onscroll = function () { myFunction() };
+
+    var header = document.getElementById("navs-header");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky");
+            header.classList.add("bg-white");
+        } else {
+            header.classList.remove("sticky");
+            header.classList.remove("bg-white");
+        }
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

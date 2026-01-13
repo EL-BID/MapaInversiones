@@ -81,7 +81,9 @@ namespace PlataformaTransparencia.Negocios.Project
         {
 
             itemUsuarios lstUsuarios = new itemUsuarios();
-
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 if (validarol == "S") {
                     var infoUsuario = (from query in _connection.Usuarios
                                        join entidad in _connection.UsuarioPermisoes
@@ -109,7 +111,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                        }).FirstOrDefault();
                     lstUsuarios = infoUsuario;
                 }
-           
+            //}
             return lstUsuarios;
         }
 
@@ -117,6 +119,9 @@ namespace PlataformaTransparencia.Negocios.Project
         {
 
             itemUsuarios lstUsuarios = new itemUsuarios();
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
 
                 var infoUsuario = (from query in _connection.Usuarios
                                    where query.Email == correo
@@ -129,7 +134,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                    }).FirstOrDefault();
                 lstUsuarios = infoUsuario;
 
-           
+            //}
             return lstUsuarios;
         }
 
@@ -137,7 +142,10 @@ namespace PlataformaTransparencia.Negocios.Project
         public List<RolParticipa> ObtenerRolesProyAsync()
         {
             List<RolParticipa> objReturn = new List<RolParticipa>();
- 
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
+
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 objReturn = (from roles in _connection.RolUsuarios
                                    orderby roles.NombreRol
                                    select new RolParticipa {
@@ -146,7 +154,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                    }).ToList();
 
 
-           
+            //}
 
             return objReturn;
         }
@@ -154,21 +162,27 @@ namespace PlataformaTransparencia.Negocios.Project
         public List<RolParticipa> ObtenerRolesProy()
         {
             List<RolParticipa> objReturn = new List<RolParticipa>();
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 objReturn = (from roles in _connection.RolUsuarios
                              orderby roles.NombreRol
                              select new RolParticipa {
                                  id = roles.IdRolUsuario,
                                  name = roles.NombreRol
                              }).ToList();
-           
+            //}
             return objReturn;
         }
 
         public List<GenerosParticipacion> ObtenerGenerosProyAsync()
         {
             List<GenerosParticipacion> objReturn = new List<GenerosParticipacion>();
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 objReturn = (from generos in _connection.GeneroUsuarios
                                    orderby generos.NombreGenero
                                    select new GenerosParticipacion {
@@ -177,7 +191,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                    }).ToList();
 
 
-           
+            //}
 
             return objReturn;
         }
@@ -185,28 +199,33 @@ namespace PlataformaTransparencia.Negocios.Project
         public List<GenerosParticipacion> ObtenerGenerosProy()
         {
             List<GenerosParticipacion> objReturn = new List<GenerosParticipacion>();
-
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 objReturn = (from generos in _connection.GeneroUsuarios
                              orderby generos.NombreGenero
                              select new GenerosParticipacion {
                                  id = generos.IdGeneroUsuario,
                                  name = generos.NombreGenero
                              }).ToList();
-            
+            //}
             return objReturn;
         }
 
         public List<MediosParticipacion> ObtenerMotivosProyAsync()
         {
             List<MediosParticipacion> objReturn = new List<MediosParticipacion>();
- 
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
+
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 objReturn = (from medios in _connection.MedioMapaIUsuarios
                                    orderby medios.IdMedioMapaIUsuario
                                    select new MediosParticipacion {
                                        id = medios.IdMedioMapaIUsuario,
                                        name = medios.NombreMedio
                                    }).ToList();
-            
+            //}
 
             return objReturn;
         }
@@ -214,21 +233,26 @@ namespace PlataformaTransparencia.Negocios.Project
         public List<MediosParticipacion> ObtenerMotivosProy()
         {
             List<MediosParticipacion> objReturn = new List<MediosParticipacion>();
-
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 objReturn = (from medios in _connection.MedioMapaIUsuarios
                              orderby medios.IdMedioMapaIUsuario
                              select new MediosParticipacion {
                                  id = medios.IdMedioMapaIUsuario,
                                  name = medios.NombreMedio
                              }).ToList();
-           
+            //}
             return objReturn;
         }
 
         public List<TiposComentario> ObtenerTipoComentarioAsync(int Asociacion)
         {
             List<TiposComentario> objReturn = new List<TiposComentario>();
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 objReturn =  (from TipoComentario in _connection.TipoComentarios
                                    where TipoComentario.Estado == true
                                    && TipoComentario.IdAsociacion == Asociacion
@@ -237,20 +261,23 @@ namespace PlataformaTransparencia.Negocios.Project
                                        idTC = TipoComentario.Id,
                                        nameTC = TipoComentario.TipoComentarioColumn
                                    }).ToList();
-            
+            //}
             return objReturn;
         }
 
         public List<TiposComentario> ObtenerTipoComentario()
         {
             List<TiposComentario> objReturn = new List<TiposComentario>();
-
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 objReturn = (from TipoComentario in _connection.TipoComentarios
                              orderby TipoComentario.Id
                              select new TiposComentario {
                                  idTC = TipoComentario.Id,
                                  nameTC = TipoComentario.TipoComentarioColumn
                              }).ToList();
+            //}
             return objReturn;
         }
         public string GuardarComentario(int idUsuario, int? idProyecto, int idAsociacion, int idTipoComentario, string comentarioOriginal, bool? anonimo, int IdEstado, int? ComentarioRelacionado, string id_departamento, string id_municipio, string CodigoContrato, int? TipoSubsidio)
@@ -258,6 +285,10 @@ namespace PlataformaTransparencia.Negocios.Project
             int idProy = Convert.ToInt32(idProyecto);
             string outTxt = "";
             try {
+                //using (PISGREntities pisgrEntities = new PISGREntities()) {
+
+                //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+                //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
 
                 int idRegNew = _connection.GetTable<Comentario>()
                     .InsertWithInt32Identity(() => new Comentario {
@@ -296,7 +327,9 @@ namespace PlataformaTransparencia.Negocios.Project
         {
 
             itemUsuarios lstUsuarios = new itemUsuarios();
-
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 if (validarol == "S") {
                     var infoUsuario = (from query in _connection.Usuarios
                                        join entidad in _connection.UsuarioPermisoes
@@ -324,7 +357,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                        }).FirstOrDefault();
                     lstUsuarios = infoUsuario;
                 }
-            
+            //}
             return lstUsuarios;
         }
 
@@ -332,7 +365,10 @@ namespace PlataformaTransparencia.Negocios.Project
         public String ObtenerCorreosAprobadores()
         {
             List<itemUsuarios> lstUsuarios = new List<itemUsuarios>();
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 var infoUsuario = (from usuario in _connection.Usuarios
                                    join UsuarioXEntidad in _connection.UsuarioPermisoes
                                    on usuario.IdUsuario equals UsuarioXEntidad.IdUsuario
@@ -343,7 +379,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                        email = usuario.Email
                                    }).ToList();
                 lstUsuarios = infoUsuario;
-           
+            //}
             String destinatarios = "";
             foreach (itemUsuarios item in lstUsuarios) {
                 destinatarios += item.email + ";";
@@ -357,7 +393,9 @@ namespace PlataformaTransparencia.Negocios.Project
         public itemEstadisticas ObtenerEstadisticasProyAsync(int Id)
         {
             itemEstadisticas objReturn = new itemEstadisticas();
-
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 var infoProyecto =  (from aprobadosInv in _connection.VwProyectosAprobadosInvs
                                           where aprobadosInv.IdProyecto == Id
                                           select new itemEstadisticas {
@@ -368,7 +406,7 @@ namespace PlataformaTransparencia.Negocios.Project
 
                 objReturn = infoProyecto;
 
-            
+            //}
 
             return objReturn;
         }
@@ -380,7 +418,10 @@ namespace PlataformaTransparencia.Negocios.Project
            
             string outTxt = "";
             try {
+                //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
+                //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+                //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 int id = _connection.GetTable<Usuario>()
                     .InsertWithInt32Identity(() => new Usuario {
                         Nombre = nombre,
@@ -394,7 +435,7 @@ namespace PlataformaTransparencia.Negocios.Project
                         IdMedioMapaIUsuario = medio,
                     });
 
-                
+                //}
                 if (id > 0) {
                     outTxt = "0<||>" + id.ToString();
                 }
@@ -419,6 +460,7 @@ namespace PlataformaTransparencia.Negocios.Project
             string outTxt = "";
             int cantReg = 0;
             try {
+                //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
                 cantReg = _connection
                     .GetTable<Usuario>()
@@ -426,7 +468,7 @@ namespace PlataformaTransparencia.Negocios.Project
                     .Update(t => new Usuario {
                         CodVerifica = hash_codigo,
                     });
-                
+                //}
                 if (cantReg > 0) {
                     outTxt = "0<||>";
                 }
@@ -445,7 +487,9 @@ namespace PlataformaTransparencia.Negocios.Project
             
             string outTxt = "";
             try {
-
+                //using (PISGREntities pisgrEntities = new PISGREntities()) {
+                //pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+                //pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 int idRegNew = _connection.GetTable<MeGusta>()
                     .InsertWithInt32Identity(() => new MeGusta {
                         IdUsuario = idUsuario,
@@ -456,7 +500,7 @@ namespace PlataformaTransparencia.Negocios.Project
                         IdProyecto = idProyecto,
                         Fecha = DateTime.Now,
                     });
-                
+                //}
                 if (idRegNew > 0) {
                     outTxt = "0<||>";
                 }
@@ -475,7 +519,10 @@ namespace PlataformaTransparencia.Negocios.Project
         public itemUsuarios validaEmail(string correo)
         {
             itemUsuarios lstUsuarios = new itemUsuarios();
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 var infoUsuario = (from query in _connection.Usuarios
                                    where query.Email == correo
                                    && query.Estado == "ACTIVO"
@@ -484,7 +531,7 @@ namespace PlataformaTransparencia.Negocios.Project
                                        cod_verifica = query.CodVerifica
                                    }).FirstOrDefault();
                 lstUsuarios = infoUsuario;
-           
+            //}
 
             return lstUsuarios;
 
@@ -496,7 +543,7 @@ namespace PlataformaTransparencia.Negocios.Project
             string outTxt = "";
             int cantReg = 0;
             try {
-
+                //using (PISGREntities pisgrEntities = new PISGREntities()) {
 
                     Usuario actualUsuario = (from c in _connection.Usuarios
                                              where c.IdUsuario == id_usuario
@@ -518,7 +565,7 @@ namespace PlataformaTransparencia.Negocios.Project
                         }
                     }
 
-              
+                //}
 
             }
             catch (Exception exe) {
@@ -533,7 +580,9 @@ namespace PlataformaTransparencia.Negocios.Project
         {
             string outTxt = "";
             try {
-
+                //using (PISGREntities pisgrEntities = new PISGREntities()) {
+                //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+                //pisgrEntities.Configuration.LazyLoadingEnabled = false;
 
                 int idRegNew = _connection.GetTable<FotoUsuario>()
                     .InsertWithInt32Identity(() => new FotoUsuario {
@@ -550,7 +599,7 @@ namespace PlataformaTransparencia.Negocios.Project
                             IdProyecto = proyectoId,
                             IdUsuario = idUsuario,
                     });
-          
+            //}
             if (idRegNew > 0) {
                     outTxt = "0<||>";
                 }
@@ -571,16 +620,19 @@ namespace PlataformaTransparencia.Negocios.Project
         public itemUsuarios validaUsuarioByHash(string hash_verifica)
         {
             itemUsuarios lstUsuarios = new itemUsuarios();
-
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 var infoUsuario = (from query in _connection.Usuarios
                                    where query.CodVerifica == hash_verifica
+ //AND                                  && query.Estado == "CREADO"
                                    select new itemUsuarios {
                                        IdUsuario = query.IdUsuario,
                                        email = query.Email,
                                        Nombre = query.Nombre
                                    }).FirstOrDefault();
                 lstUsuarios = infoUsuario;
-           
+            //}
             return lstUsuarios;
         }
 
@@ -590,14 +642,14 @@ namespace PlataformaTransparencia.Negocios.Project
             string outTxt = "";
             int cantReg = 0;
             try {
-    
+                //using (PISGREntities pisgrEntities = new PISGREntities()) {
                 cantReg = _connection
                            .GetTable<Usuario>()
                            .Where(t => t.IdUsuario == id_usuario)
                            .Update(t => new Usuario {
                                Estado = estado,
                            });
-
+                //}
                 if (cantReg > 0) {
                     outTxt = "0<||>";
                 }
@@ -612,14 +664,16 @@ namespace PlataformaTransparencia.Negocios.Project
         public List<filtrosParticipacion> ObtenerEstadosComentarioAsync()
         {
             List<filtrosParticipacion> objReturn = new List<filtrosParticipacion>();
-   
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
+            //    pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+            //    pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 objReturn = (from TipoComentario in _connection.EstadoComentarios
                                    orderby TipoComentario.Id
                                    select new filtrosParticipacion {
                                        id = TipoComentario.Id,
                                        name = TipoComentario.EstadoComentarioColumn
                                    }).ToList();
-            
+            //}
             return objReturn;
         }
 
@@ -652,7 +706,10 @@ namespace PlataformaTransparencia.Negocios.Project
             List<itemcomentario> info = new List<itemcomentario>();
             List<itemcomentario> info_2 = new List<itemcomentario>();
 
-
+            //using (PISGREntities pisgrEntities = new PISGREntities()) {
+                //ObjectParameter total_registros = new ObjectParameter("TOTALREGISTROS", typeof(Int32));
+                //pisgrEntities.Configuration.AutoDetectChangesEnabled = false;
+                //pisgrEntities.Configuration.LazyLoadingEnabled = false;
                 info = (from Comentario in _connection.ObtenerComentariosPorEstados(1, 1, 0, 1, 999, ref total_registros)
                         select new itemcomentario {
                             IdComentario = Comentario.IdComentario,
@@ -661,7 +718,7 @@ namespace PlataformaTransparencia.Negocios.Project
 
                 total_pendientes += total_registros.Value;
 
-    
+            //}
             return total_pendientes;
         }
 
@@ -673,9 +730,13 @@ namespace PlataformaTransparencia.Negocios.Project
 
             List<itemcomentario> listInfo = new List<itemcomentario>();
             int total_reg = 0;
-
+  //AND          //int reg_per_page = CommonLabel.MaximumResultPerFicha;
             int reg_per_page = 10;
-
+            //using (PISGREntities entities = new PISGREntities()) {
+            //    entities.Configuration.AutoDetectChangesEnabled = false;
+            //    entities.Configuration.LazyLoadingEnabled = false;
+            //    entities.Configuration.ValidateOnSaveEnabled = false;
+            //ObjectParameter total_registros = new ObjectParameter("TOTALREGISTROS", typeof(Int32));
             int? total_registros = 0;
 
             listInfo = (from x in _connection.ObtenerComentariosPorEstados(estado,1,0, page, reg_per_page, ref total_registros)
@@ -704,7 +765,7 @@ namespace PlataformaTransparencia.Negocios.Project
                             }).OrderBy(p => p.fechaCreacion).ToList();
 
                 total_reg = (int)total_registros.Value;
-           
+            //}
             objReturn.totalNumber = total_reg;
             objReturn.totalPages = (objReturn.totalNumber > reg_per_page) ? ((objReturn.totalNumber - (objReturn.totalNumber % reg_per_page)) / reg_per_page) : 1;
             if ((objReturn.totalNumber >= reg_per_page) && ((objReturn.totalNumber % reg_per_page) > 0)) {

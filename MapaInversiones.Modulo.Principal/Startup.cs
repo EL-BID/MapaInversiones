@@ -51,7 +51,7 @@ namespace PlataformaTransparencia.Modulo.Principal
             );
 
             routes.MapAreaControllerRoute(
-                name: "Geo",
+                name: "AzureGeo",
                 areaName: "PlataformaTransparencia.Modulo.Principal",
                 pattern: "AzureMapView",
                 defaults: new { controller = "Map", action = "AzureMapView" }
@@ -190,6 +190,19 @@ namespace PlataformaTransparencia.Modulo.Principal
                         defaults: new { controller = "Home", action = "PlanificacionResultados" }
             );
 
+            routes.MapAreaControllerRoute(
+                name: "PlanODS",
+                areaName: "PlataformaTransparencia.Modulo.Principal",
+                pattern: "PlanODS",
+                defaults: new { controller = "Home", action = "PlanODS" }
+            );
+
+            routes.MapAreaControllerRoute(
+                    name: "PlanificacionParaguay",
+                    areaName: "PlataformaTransparencia.Modulo.Principal",
+                    pattern: "PlanificacionParaguay",
+                    defaults: new { controller = "Home", action = "PlanificacionParaguay" }
+            );
 
             routes.MapAreaControllerRoute(
                     name: "PresupuestoResultados",
@@ -203,6 +216,13 @@ namespace PlataformaTransparencia.Modulo.Principal
                 areaName: "PlataformaTransparencia.Modulo.Principal",
                 pattern: "ElaboraPresupuesto",
                 defaults: new { controller = "Presupuesto", action = "ElaboraPresupuesto" }
+            );
+
+            routes.MapAreaControllerRoute(
+            name: "DesarrolloSostenible",
+            areaName: "PlataformaTransparencia.Modulo.Principal",
+            pattern: "DesarrolloSostenible",
+            defaults: new { controller = "Home", action = "DesarrolloSostenible" }
             );
 
             routes.MapAreaControllerRoute(
@@ -234,10 +254,24 @@ namespace PlataformaTransparencia.Modulo.Principal
             );
 
             routes.MapAreaControllerRoute(
+                name: "PND",
+                areaName: "PlataformaTransparencia.Modulo.Principal",
+                pattern: "PND",
+                defaults: new { controller = "Home", action = "PND" }
+            );
+
+            routes.MapAreaControllerRoute(
                     name: "Plansectorial",
                     areaName: "PlataformaTransparencia.Modulo.Principal",
                     pattern: "Plansectorial",
                     defaults: new { controller = "Home", action = "Plansectorial" }
+            );
+
+            routes.MapAreaControllerRoute(
+                    name: "PDT",
+                    areaName: "PlataformaTransparencia.Modulo.Principal",
+                    pattern: "PDT",
+                    defaults: new { controller = "Home", action = "PDT" }
             );
 
             routes.MapAreaControllerRoute(
@@ -297,11 +331,33 @@ namespace PlataformaTransparencia.Modulo.Principal
              );
 
             routes.MapAreaControllerRoute(
+              name: "ProcesoIngresos",
+              areaName: "PlataformaTransparencia.Modulo.Principal",
+              pattern: "Ingresos",
+              defaults: new { controller = "Home", action = "ProcesoIngresos" }
+             );
+
+            routes.MapAreaControllerRoute(
+              name: "ProcesoGastos",
+              areaName: "PlataformaTransparencia.Modulo.Principal",
+              pattern: "Gastos",
+              defaults: new { controller = "Home", action = "ProcesoGastos" }
+             );
+
+
+            routes.MapAreaControllerRoute(
                 name: "PerfilProyecto",
                 areaName: "PlataformaTransparencia.Modulo.Principal",
                 pattern: "{PerfilProyecto}/{id}",
                 defaults: new { controller = "Proyecto", action = "PerfilProyecto" }
             );
+
+            //routes.MapAreaControllerRoute(
+            //   name: "EmergenciaPresupuesto",
+            //   areaName: "PlataformaTransparencia.Modulo.Principal",
+            //   pattern: "{EmergenciaPresupuesto}/{emergencia}",
+            //   defaults: new { controller = "PresupuestoEmergencia", action = "EmergenciaPresupuesto" }
+            //);
 
             routes.MapAreaControllerRoute(
                name: "EmergenciaPresupuesto",
@@ -338,6 +394,13 @@ namespace PlataformaTransparencia.Modulo.Principal
             defaults: new { controller = "Sectores", action = "PerfilSectores" }
             );
 
+            //routes.MapAreaControllerRoute(
+            // name: "PerfilSector",
+            // areaName: "PlataformaTransparencia.Modulo.Principal",
+            // pattern: "PerfilSector",
+            // defaults: new { controller = "Sectores", action = "PerfilSectores" }
+            //);
+
             routes.MapAreaControllerRoute(
             name: "Emergencia",
             areaName: "PlataformaTransparencia.Modulo.Principal",
@@ -366,6 +429,18 @@ namespace PlataformaTransparencia.Modulo.Principal
            pattern: "PresupuestoGeneralEmergencia",
            defaults: new { controller = "PresupuestoGeneralEmergencias", action = "PresupuestoGeneralEmergencia" }
            );
+
+            routes.MapControllerRoute(
+                name: "Mapi",
+                pattern: "Mapi",
+                defaults: new { controller = "Mapi", action = "Mapi" }
+            );
+
+
+
+
+
         }
+
     }
 }

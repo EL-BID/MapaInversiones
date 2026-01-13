@@ -84,6 +84,25 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Entidad
 
         }
 
+        //[HttpGet("GetGastoByPrograma")]
+        //public ModelEntidadData GetGastoByPrograma(int annio, int codEntidad, int codPrograma, string estado, string proceso)
+        //{
+        //    ModelEntidadData objReturn = new ModelEntidadData();
+        //    try
+        //    {
+        //        objReturn.infograficoEntidad = consolidadosEntidades.GetGastoByPrograma(annio, codEntidad, codPrograma, estado, proceso);
+
+        //        objReturn.Status = true;
+        //        return objReturn;
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        objReturn.Status = false;
+        //        objReturn.Message = "Error: " + exception.Message;
+        //        return objReturn;
+        //    }
+
+        //}
 
         [HttpGet("GetRecursosPerGrupos")]
         public ModelPresupuestoData GetRecursosPerGrupos(int anyo, int codEntidad)

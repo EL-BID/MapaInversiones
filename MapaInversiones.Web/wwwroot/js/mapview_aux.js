@@ -4,6 +4,7 @@ InicializaDatos();
 
 function InicializaDatos() {
 
+    //configuraFiltro();
     GetProyectosNacionales();
     
 }
@@ -104,9 +105,9 @@ function makeCellHtml(resultados) {
         str_cad += '<h3>' + nombre_aux + '</h3>';
 
         if (resultados[i].approvedTotalMoney > 1000000) {
-            cad_valor = "$ " + (convertirMillones(resultados[i].approvedTotalMoney)*1).formatMoney(0, '.', ',').toString()  + " Millones";
+            cad_valor = "RD$ " + (convertirMillones(resultados[i].approvedTotalMoney)*1).formatMoney(0, '.', ',').toString()  + " Millones";
         } else {
-            cad_valor = "$ " + (resultados[i].approvedTotalMoney*1).formatMoney(0, '.', ',').toString() ;
+            cad_valor = "RD$ " + (resultados[i].approvedTotalMoney*1).formatMoney(0, '.', ',').toString() ;
         }
         str_cad += '<div class="amount"><span class="bigNumber">' + cad_valor + '</span></div>';
         str_cad += '</a>';

@@ -4,29 +4,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @{
-    var decreto = "";
+
     var etiquetas = await Orchard.GetContentItemByHandleAsync("alias:Etiquetas");
-    var LabelEmergencias = "";
-    var TituloEmergencias = "";
     var LabelEmergenciasTab1 = "";
     var TituloEmergenciasTab1 = "";
     var LabelEmergenciasTab2 = "";
     var TituloEmergenciasTab2 = "";
     var LabelEmergenciasTab3 = "";
     var TituloEmergenciasTab3 = "";
-    var LabelDecreto = "";
-    var TituloDecreto = "";
+    var TituloDecreto = Model.Encabezado.CodigoDecreto;
+    var TituloEmergencias = Model.Encabezado.Descripcion;
+
     System.IFormatProvider culture =
     new System.Globalization.CultureInfo("es-RD");
 }
 @foreach (var etiqueta in etiquetas.Content.BagPart.ContentItems)
 {
-    if (@etiqueta.AliasPart.Alias == "Emergencia" + Model.TipoEmergencia)
-    {
-        LabelEmergencias = @etiqueta.HtmlBodyPart.Html;
-        TituloEmergencias = @etiqueta.TitlePart.Title;
-    }
-
+    
     if (@etiqueta.AliasPart.Alias == "EmergenciaTab1_" + Model.TipoEmergencia)
     {
         LabelEmergenciasTab1 = @etiqueta.HtmlBodyPart.Html;
@@ -42,11 +36,7 @@
         LabelEmergenciasTab3 = @etiqueta.HtmlBodyPart.Html;
         TituloEmergenciasTab3 = @etiqueta.TitlePart.Title;
     }
-    if (@etiqueta.AliasPart.Alias == "EmergenciaDecreto" + Model.TipoEmergencia)
-    {
-        LabelDecreto = @etiqueta.HtmlBodyPart.Html;
-        TituloDecreto = @etiqueta.TitlePart.Title;
-    }
+    
 }
 
 
@@ -75,26 +65,20 @@
 
                 <div class="banner-main-info">
                     <div class="banner-main-title mb-0">
-                        <h1>
-
-                            <text> @TituloEmergencias</text>
-                           
-                        </h1>
-
-                        <p> Conozca el uso de los recursos asociados a la gestión emergencias</p>
+                        <h1 class="page-title">@TituloEmergencias</h1>
+                        <p> Conozca el uso de los recursos asociados a la gestión de emergencias</p>
 
                     </div>
 
                     <div class="banner-main-desc">
-                        <form class="">
+  
                             <div class="row">
 
                                 @using (Html.BeginForm("BusquedaResultados", "Home", FormMethod.Get, new { @class = "search-page-form" }))
                                 {
-                                    <div class="form-field whiteSearch mb-4" id="contentSearchDiv">
+  @*                                   <div class="form-field whiteSearch mb-4" id="contentSearchDiv">
                                         <label for="SearchString" class="form-field-label">
-                                            Contratos, Contratistas y Entidades, por ejemplo: Secretaría
-                                            de Energía.
+                                            Contratos, Contratistas y Entidades, por ejemplo: Ministerio de Educación.
                                         </label>
                                         <button type="submit" class="buttonsearBTN" title="Click para Iniciar Buqueda">
                                             <i class="material-icons md-22">search</i> <span class="d-none d-sm-inline">Buscar</span>
@@ -102,8 +86,18 @@
                                         <input type="search" class="form-field-input" name="SearchString" id="SearchString" value=""
                                                autocomplete="off" required="required">
                                         <!--id="page-field-search"-->
-                                    </div>
+                                    </div> *@
 
+                                    <div class="form-field whiteSearch">
+                                        <label for="page-field-search" class="form-field-label">
+                                            Contratos, Contratistas y Entidades, por ejemplo: Ministerio
+                                            de salud.
+                                        </label>
+                                        <button type="submit" class="buttonsearBTN"><span>Buscar</span></button>
+                                        <input type="search" class="form-field-input" name="SearchString" value="" autocomplete="off" required="required" id="page-field-search">
+                                        <input type="hidden" name="Type" value="" id="page-field-type">
+                                        <!--id="page-field-search"-->
+                                    </div>
                                 }
 
 
@@ -113,7 +107,7 @@
                                 <div class="search-results objHidden" id="divResultados">
                                 </div>
                             </div>
-                        </form>
+               
                     </div>
 
                 </div>
@@ -172,7 +166,7 @@
                                 Monto total procesos de compra
                             </span>
                             <span class="bigNumber" id="valProcesos">
-                                $ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorProcesos / 1000000)) millones
+                                RD$ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorProcesos / 1000000)) millones
                             </span>
                         </div>
                         <div class="cta-wrapper text-center p25">
@@ -239,7 +233,7 @@
                                                         Monto total contratado
                                                     </span>
                                                     <span class="bigNumber">
-                                                        $ @String.Format("{0:n2}", (item.ValorContratado / 1000000)) millones
+                                                        RD$ @String.Format("{0:n2}", (item.ValorContratado / 1000000)) millones
                                                     </span>
                                                 </div>
                                             </div>
@@ -262,9 +256,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
                         <p class="text-center p15 text-bold">
-                             @TituloEmergenciasTab2  @* @Html.Raw(TituloEmergenciasTab2) *@
-                           @*  Resumen total de los contratos válidos asociados a los procedimientos de compras realizados en el marco del decreto XXXxxx para procedimientos de contratación de emergencia. *@
-                            @* @ViewBag.TitulosHome.BuscarTituloPorLlave("Gestion_Proceso_lblcontrato" + Model.TipoEmergencia) *@
+                             @TituloEmergenciasTab2 
                         </p>
 
                     </div>
@@ -285,7 +277,7 @@
                                 Valor total contratos
                             </span>
                             <span class="bigNumber" id="valContratos">
-                                $ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorContratos / 1000000)) millones
+                                RD$ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorContratos / 1000000)) millones
                             </span>
                         </div>
                         <div class="cta-wrapper text-center p25">
@@ -298,7 +290,7 @@
                 <div class="row section justify-content-center">
                     <div class="col-lg-10 col-lg-offset-1">
                         <h3 class="text-center mb25 h4">Compras realizadas</h3>
-                        <p class="text-left">Distribución porcentual de las contrataciones realizadas por el Estado dominicano en base a los contratos oficializados en el marco del @TituloDecreto, por Institución autorizada a realizar compras de emergencia y por distribución porcentual de los artículos comprados bajo la emisión de este decreto</p>
+                        <p class="text-left">Distribución porcentual de las contrataciones realizadas por el Estado dominicano en base a los contratos oficializados en el marco del @TituloDecreto, por Institución autorizada a realizar compras de emergencia y por distribución porcentual de los artículos comprados bajo la emisión de este decreto.</p>
                     </div>
                     <div class="col-lg-4 justify-content-center">
                         <div class="form-group">
@@ -344,7 +336,7 @@
                                                         Monto total contratado
                                                     </span>
                                                     <span class="bigNumber">
-                                                        $ @String.Format("{0:n2}", (item.ValorTotalContratos / 1000000)) millones
+                                                        RD$ @String.Format("{0:n2}", (item.ValorTotalContratos / 1000000)) millones
                                                     </span>
                                                 </div>
                                             </div>
@@ -383,7 +375,7 @@
                                 Total ejecutado
                             </span>
                             <span class="bigNumber" id="valContratos">
-                                $ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorEjecutado / 1000000)) millones
+                                RD$ @String.Format("{0:n2}", (@Model.resumenDatosContratos.valorEjecutado / 1000000)) millones
                             </span>
                         </div>
                         <div class="cta-wrapper text-center p25">
@@ -415,7 +407,6 @@
         <div class="tab-content tab-content-3">
         </div>
 
-
     </div>
 </section>
 
@@ -428,7 +419,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-7">
 
-                <p class="text-bold">El gobierno ha impulsado una serie iniciativas como respuesta oportuna a las demarcaciones afectadas por la emergencia, para mitigar el nivel de vulnerabilidad creciente que pone en peligro la seguridad, salud, alimentación e integridad de las familias que perdieron sus viviendas, pertenencias y medios de subsistencia.</p>
+                <p class="text-bold">El gobierno de República Dominicana ha impulsado una serie iniciativas como respuesta oportuna a las demarcaciones afectadas por la emergencia, para mitigar el nivel de vulnerabilidad creciente que pone en peligro la seguridad, salud, alimentación e integridad de las familias que perdieron sus viviendas, pertenencias y medios de subsistencia.</p>
                 <p>Mediante la declaración de estado de emergencia en las 8 provincias mayormente afectadas por la emergencia, se otorgó autorización a 21 instituciones del Estado para poder realizar de forma inmediata, compras y contrataciones de bienes y servicios destinados a la ayuda humanitaria, rescate, provisión de medicamentos y alimentos, restablecimiento del sistema energético, aprovisionamiento de agua, asistencia social, construcción y reconstrucción de las obras afectadas en las provincias, entre otros. </p>
                 <p>El Gobierno ha impulsado una serie iniciativas y ha entregado fondos especiales directamente a los ayuntamientos y distritos municipales de las 8 provincias declaradas en estado de emergencia, para la limpieza, recuperación y asistencia ciudadana de las mismas.</p>
 
@@ -467,24 +458,6 @@
 
     </div>
 </section>
-
-<!--CONVOCATORIAS SE OCULTA MOMENTANEAMENTE-->
-@*<section class="section">
-            <div class="container">
-                <div class="row d-flex align-items-center">
-                    <div class="col-lg-6">
-                        <img class="img-responsive float-R" alt="Imagen decorativa representativa a convocatorias publicas" src="~/content/img/img-emergencia1.svg" />
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="headTit tit-left mb-0">
-                            <h2>Convocatorias</h2>
-                        </div>
-                        <p>Consulte las convocatorias vigentes en el marco de la emergencia</p>
-                        <div class="btn btn-primary">Consultar <span class="glyphicon glyphicon-arrow-right"></span></div>
-                    </div>
-                </div>
-            </div>
-        </section>*@
 <!--CONTROL CIUDADANO-->
 <section class="section">
     <div class="container">
@@ -506,7 +479,9 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-center">
-                            <a class="btn btn-outlined" id="divEnlaceParticipaCon" href="/Participa/Comentarios/">Contratos <i class="material-icons md-22">chevron_right</i></a>
+                            <a class="btn btn-outlined" id="divEnlaceParticipaCon" href="/ContratosEmergencia?emergencia=@Model.TipoEmergencia">Contratos 
+                                <i class="material-icons md-22">chevron_right</i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -529,8 +504,8 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-center">
-                            <a class="btn btn-outlined" href="https://sitio.com/apps/sip/?step=one" target="_blank" rel="noopener"> Solicitar <i class="material-icons md-22">chevron_right</i></a>
-
+                            <a class="btn btn-outlined" href="https://app.saip.gob.do/" target="_blank"> Solicitar <i class="material-icons md-22">chevron_right</i></a>
+                            <!--id="divEnlaceSolicita"-->
                         </div>
                     </div>
                 </div>
@@ -539,7 +514,7 @@
         </div>
 
     </div>
-
+    
 </section>
 <!--MARCO LEGAL-->
 <section class="section bg-50">
@@ -555,7 +530,7 @@
                                 <h2>Conozca</h2>
                             </div>
                             <p>Proceso para realizar compras de emergencia deacuerdo a la circular DGCP44-PNP-2022-0005</p>
-                            <div class="btn btn-primary"><a href="https://www.dgcp.gob.do/wp-content/uploads/page/Circ005.pdf" target="_blank" rel="noopener">Ver <i class="material-icons md-22">chevron_right</i> </a></div>
+                            <div class="btn btn-primary"><a href="https://www.dgcp.gob.do/wp-content/uploads/page/Circ005.pdf" target="_blank">Ver <i class="material-icons md-22">chevron_right</i> </a></div>
                         </div>
                     </div>
                 </div>
@@ -570,12 +545,25 @@
                             </div>
                             <p>Conozca el decreto en el cual se declara de emergencia las compras y contrataciones de bienes y servicios para ser utilizadas en las labores de ayuda humanitaria.</p>
                             <div class="btn btn-primary">
-                                @if (TituloDecreto != null && TituloDecreto.Split(" ").Count() > 1)
-                                {
-                                    decreto = @TituloDecreto.Split(" ")[1];
+                                @{
+                                    var decreto = "";
+                                    var partes = (TituloDecreto ?? "")
+                                    .Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                                    if (partes.Length > 1)
+                                    {
+                                        decreto = partes[1];  // sin @ dentro del bloque C#
+                                    }
                                 }
 
-                                <a href="https://presidencia.gob.do/decretos/@decreto" target="_blank" rel="noopener">Ver <i class="material-icons md-22">chevron_right</i></a>
+                                @if (!string.IsNullOrWhiteSpace(decreto))
+                                {
+                                    <a href="https://presidencia.gob.do/decretos/@(Uri.EscapeDataString(decreto))"
+                                       target="_blank" rel="noopener">
+                                        Ver <i class="material-icons md-22">chevron_right</i>
+                                    </a>
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -588,52 +576,42 @@
 <input type="hidden" id="tipoemergencia" value="@Model.TipoEmergencia" />
 
 
-<script>
-    var url1 = '@System.Configuration.ConfigurationManager.AppSettings["URLSoloInversion_1"]';
-    var url2 = '@System.Configuration.ConfigurationManager.AppSettings["URLSoloInversion_2"]';
-
-    if (window.location.host == url1 || window.location.host == url2) {
-        document.getElementById('navigationTabs').style.display = 'none';
-    }
-</script>
-
 <script src="~/js/flickity/flickity.pkgd.min.js" type="text/javascript"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
-<script src="https://cdn.jsdelivr.net/npm/d3plus@2" integrity="sha384-c1J7R3OBhP9G7a0SkXCaVW1lVtOHAOuukFed365bi4B0GwZvKL2hd8mjE7tRMl2U" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
 <script src="js/emergencia_aux.js"></script>
+<script src="js/search_aux.js"></script>
 
 @section DataBody {
-
-        @* data-contrato='[{"CodigoContrato":"@Model.resumenDatosContratos.listUnidadCompra"}]' *@
         data-contrato='[{"CodigoContrato":"@Model.resumenDatosContratos.listUnidadCompra"}]'
 
         data-resourcesPerContratos='[@foreach (var item in @Model.InfoRecursosContratos)
-    {
-        <text>
-            {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "rawValue": "@item.rawValue"}@if (item != @Model.InfoRecursosContratos.Last())
-            {
-                <text>,</text>
-            }
-        </text>
-    }]'
+        {
+            <text>
+                {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "rawValue": "@item.rawValue"}@if (item != @Model.InfoRecursosContratos.Last())
+                {
+                    <text>,</text>
+                }
+            </text>
+        }]'
 
         data-resourcesPerProcesos='[@foreach (var item in @Model.InfoRecursosProcesos)
-    {
+        {
         <text>
             {"labelGroup":"@item.labelGroup","label":"@item.label", "label_inf": "@item.label_inf", "rawValue": "@item.rawValue"}@if (item != @Model.InfoRecursosProcesos.Last())
             {
                 <text>,</text>
             }
         </text>
-    }]'
+        }]'
 
-}
+    }
 
 
 <script>
     $(document).ready(function () {
 
-        ///tabs
+        @* ///TABS *@
         var $carousel = $('.carouselData').flickity({
             "initialIndex": 0,
             "pageDots": false,
@@ -670,8 +648,7 @@
             });
             var cellElements = $carousel.flickity('getCellElements');
 
-        $carousel.flickity('resize');
-
+            $carousel.flickity('resize');
 
         })
 
