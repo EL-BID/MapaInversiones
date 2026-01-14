@@ -1,7 +1,5 @@
 # ChatBot_v2
 
-[![Gitleaks](https://github.com/ORG/REPO/actions/workflows/gitleaks.yml/badge.svg)](https://github.com/ORG/REPO/actions/workflows/gitleaks.yml)
-
 Backend conversacional para consultas analíticas sobre datos estructurados. Este repositorio contiene el servicio que interpreta preguntas en lenguaje natural, recupera contexto relevante, genera consultas y devuelve respuestas comprensibles para el usuario final, además de una interfaz web ligera (plantillas Jinja2 + assets estáticos) servida por FastAPI.
 
 ## Contenido
