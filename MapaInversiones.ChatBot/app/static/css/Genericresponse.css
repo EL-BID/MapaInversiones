@@ -1,0 +1,538 @@
+/* ================================================
+   ESTILOS - RESPUESTA GENÉRICA DEL CHATBOT
+   MapaInversiones República Dominicana
+   v2.0 - Correcciones de íconos y alineación
+   ================================================ */
+
+/* ========================================
+   RESET - ELIMINAR PSEUDO-ELEMENTOS
+   ======================================== */
+
+.message-content h1::before,
+.message-content h1::after,
+.message-content h2::before,
+.message-content h2::after,
+.message-content h3::before,
+.message-content h3::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* ========================================
+   TÍTULO PRINCIPAL H1
+   ======================================== */
+
+.message-content h1 {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #003876;
+    margin: 0 0 16px 0;
+    padding: 0 0 14px 0;
+    border-bottom: 2px solid rgba(0, 56, 118, 0.1);
+    line-height: 1.4;
+}
+
+@media (max-width: 576px) {
+    .message-content h1 {
+        font-size: 1.1rem;
+        gap: 8px;
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+    }
+}
+
+@media (max-width: 375px) {
+    .message-content h1 {
+        font-size: 1rem;
+    }
+}
+
+/* ========================================
+   TÍTULOS H2
+   ======================================== */
+
+.message-content h2 {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #003876;
+    margin: 18px 0 12px 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.message-content h2 strong {
+    font-weight: 600;
+    color: inherit;
+}
+
+/* H2 como header de sección (con fondo azul) */
+.message-content h2[style*="background"],
+.message-content .header-seccion {
+    background: linear-gradient(135deg, #003876 0%, #0055a5 100%) !important;
+    color: #ffffff !important;
+    padding: 11px 16px;
+    border-radius: 10px;
+    margin: 18px 0 14px 0;
+    box-shadow: 0 3px 10px rgba(0, 56, 118, 0.2);
+}
+
+.message-content h2[style*="background"] strong,
+.message-content .header-seccion strong {
+    color: #ffffff !important;
+}
+
+@media (max-width: 576px) {
+    .message-content h2 {
+        font-size: 0.9rem;
+        margin: 14px 0 10px 0;
+    }
+    
+    .message-content h2[style*="background"],
+    .message-content .header-seccion {
+        padding: 10px 14px;
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 375px) {
+    .message-content h2 {
+        font-size: 0.85rem;
+    }
+}
+
+/* ========================================
+   TÍTULOS H3
+   ======================================== */
+
+.message-content h3 {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.938rem;
+    font-weight: 600;
+    color: #003876;
+    margin: 16px 0 12px 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.message-content h3 strong {
+    font-weight: 600;
+    color: inherit;
+}
+
+@media (max-width: 576px) {
+    .message-content h3 {
+        font-size: 0.85rem;
+        margin: 12px 0 10px 0;
+    }
+}
+
+/* ========================================
+   PÁRRAFOS
+   ======================================== */
+
+/*.message-content p {
+    margin: 0 0 14px 0;
+    line-height: 1.65;
+    color: #334155;
+    font-size: 0.9rem;
+}*/
+
+.message-content p:last-child {
+    margin-bottom: 0;
+}
+
+.message-content p strong {
+    color: #003876;
+    font-weight: 600;
+}
+
+/* Párrafo introductorio destacado */
+/*.message-content > h1 + p,
+.message-content > p:first-of-type {
+    background: linear-gradient(135deg, rgba(0, 56, 118, 0.03) 0%, rgba(0, 85, 165, 0.05) 100%);
+    padding: 14px 16px;
+    border-radius: 12px;
+    border-left: 4px solid #003876;
+    margin-bottom: 16px;
+}*/
+
+@media (max-width: 576px) {
+    .message-content p {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+    
+    .message-content > h1 + p,
+    .message-content > p:first-of-type {
+        padding: 12px 14px;
+        margin-bottom: 14px;
+    }
+}
+
+@media (max-width: 375px) {
+    .message-content > h1 + p,
+    .message-content > p:first-of-type {
+        padding: 10px 12px;
+        border-left-width: 3px;
+    }
+}
+
+/* ========================================
+   HR SEPARADOR
+   ======================================== */
+
+.message-content hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(0, 56, 118, 0.12) 15%, 
+        rgba(0, 56, 118, 0.12) 85%, 
+        transparent 100%);
+    margin: 16px 0;
+}
+
+/* ========================================
+   LISTA DE ELEMENTOS CONSULTABLES
+   ======================================== */
+
+.message-content ul.respuesta-lista,
+.message-content .respuesta-lista {
+    list-style: none !important;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.message-content .respuesta-lista-elemento {
+   display: flex;
+    align-items: flex-start;
+    gap: 0;
+    padding: 14px 16px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 85, 165, 0.1);
+    transition: all 0.2s ease;
+    line-height: 1.5;
+    font-size: 0.875rem;
+    color: #1e293b;
+    list-style: none !important;
+}
+
+.message-content .respuesta-lista-elemento p {
+    /*display: flex;*/
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    width: 100%;
+}
+
+.message-content .respuesta-lista-elemento p img,
+.message-content .respuesta-lista-elemento img {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    flex-shrink: 0;
+    border-radius: 6px;
+}
+
+
+/* Eliminar cualquier marcador de lista */
+.message-content .respuesta-lista-elemento::marker {
+    content: none !important;
+    display: none !important;
+}
+
+/* Hover effect */
+.message-content .respuesta-lista-elemento:hover {
+    background: #f8fafc;
+    border-color: rgba(0, 85, 165, 0.2);
+    transform: translateX(3px);
+    box-shadow: 0 2px 8px rgba(0, 56, 118, 0.06);
+}
+
+/* ========================================
+   CHECKMARK CIRCULAR
+   ======================================== */
+
+.message-content .respuesta-lista-elemento::before {
+    content: none !important;
+    display: none !important;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    max-width: 26px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(16, 185, 129, 0.25);
+    flex-shrink: 0;
+    line-height: 1;
+}
+
+/* Cuando el elemento ya tiene emoji, ocultar checkmark */
+.message-content .respuesta-lista-elemento.has-emoji::before {
+    content: none !important;
+    display: none !important;
+}
+
+@media (max-width: 576px) {
+    .message-content .respuesta-lista {
+        gap: 8px;
+    }
+    
+     .message-content .respuesta-lista-elemento {
+        padding: 12px 14px;
+        font-size: 0.84rem;
+        border-radius: 10px;
+    }
+    
+    .message-content .respuesta-lista-elemento p {
+        gap: 8px;
+    }
+    
+    .message-content .respuesta-lista-elemento p img,
+    .message-content .respuesta-lista-elemento img {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+    }
+    
+    .message-content .respuesta-lista-elemento::before {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        max-width: 24px;
+        font-size: 12px;
+    }
+    
+    .message-content .respuesta-lista-elemento:hover {
+        transform: translateX(2px);
+    }
+}
+
+@media (max-width: 375px) {
+  .message-content .respuesta-lista-elemento {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .message-content .respuesta-lista-elemento p img,
+    .message-content .respuesta-lista-elemento img {
+        width: 18px;
+        height: 18px;
+        min-width: 18px;
+    }
+}
+
+/* ========================================
+   ELEMENTOS CON EMOJI INTEGRADO
+   ======================================== */
+
+.message-content .respuesta-lista-elemento .item-emoji {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    max-width: 28px;
+    background: linear-gradient(135deg, #00BCD4 0%, #00ACC1 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0, 188, 212, 0.2);
+    flex-shrink: 0;
+}
+
+.message-content .respuesta-lista-elemento .item-texto {
+    flex: 1;
+    min-width: 0;
+    word-wrap: break-word;
+    padding-left: 4px;
+}
+
+.message-content .respuesta-lista-elemento .item-texto strong {
+    color: #003876;
+    font-weight: 600;
+}
+
+.message-content .respuesta-lista-elemento .item-detalle {
+    color: #64748b;
+    font-size: 0.82rem;
+}
+
+@media (max-width: 576px) {
+    .message-content .respuesta-lista-elemento .item-emoji {
+        width: 24px;
+        height: 24px;
+        min-width: 24px;
+        max-width: 24px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+    
+    .message-content .respuesta-lista-elemento .item-detalle {
+        font-size: 0.78rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .message-content .respuesta-lista-elemento .item-emoji {
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+        max-width: 22px;
+        font-size: 11px;
+    }
+}
+
+/* ========================================
+   TABLAS
+   ======================================== */
+
+.message-content table {
+    width: 100%;
+    border-collapse: collapse;
+    /*margin: 14px 0;*/
+    font-size: 0.875rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 56, 118, 0.1);
+}
+
+.message-content table thead {
+    background: linear-gradient(135deg, #003876 0%, #0055a5 100%);
+    color: #ffffff;
+}
+
+.message-content table th {
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.813rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.message-content table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid rgba(0, 56, 118, 0.06);
+    color: #334155;
+}
+
+.message-content table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.message-content table tbody tr:hover {
+    background: rgba(0, 56, 118, 0.02);
+}
+
+@media (max-width: 576px) {
+    .message-content table th,
+    .message-content table td {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .message-content table th {
+        font-size: 0.75rem;
+    }
+}
+
+/* ========================================
+   ANIMACIONES
+   ======================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message-content .respuesta-lista-elemento {
+    animation: fadeInUp 0.22s ease forwards;
+}
+
+.message-content .respuesta-lista-elemento:nth-child(1) { animation-delay: 0.02s; }
+.message-content .respuesta-lista-elemento:nth-child(2) { animation-delay: 0.04s; }
+.message-content .respuesta-lista-elemento:nth-child(3) { animation-delay: 0.06s; }
+.message-content .respuesta-lista-elemento:nth-child(4) { animation-delay: 0.08s; }
+.message-content .respuesta-lista-elemento:nth-child(5) { animation-delay: 0.10s; }
+.message-content .respuesta-lista-elemento:nth-child(6) { animation-delay: 0.12s; }
+.message-content .respuesta-lista-elemento:nth-child(7) { animation-delay: 0.14s; }
+.message-content .respuesta-lista-elemento:nth-child(8) { animation-delay: 0.16s; }
+.message-content .respuesta-lista-elemento:nth-child(9) { animation-delay: 0.18s; }
+.message-content .respuesta-lista-elemento:nth-child(10) { animation-delay: 0.20s; }
+
+/* ========================================
+   ACCESIBILIDAD
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .message-content .respuesta-lista-elemento {
+        animation: none;
+        transition: none;
+    }
+    
+    .message-content .respuesta-lista-elemento:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .message-content .respuesta-lista-elemento {
+        border-width: 2px;
+        border-color: #003876;
+    }
+    
+    .message-content > h1 + p,
+    .message-content > p:first-of-type {
+        border-left-width: 5px;
+    }
+}
+
+/* ========================================
+   FIX: EMOJIS E IMÁGENES EN TÍTULOS
+   ======================================== */
+
+.message-content h1 img,
+.message-content h2 img,
+.message-content h3 img {
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+@media (max-width: 576px) {
+    .message-content h1 img,
+    .message-content h2 img,
+    .message-content h3 img {
+        width: 18px;
+        height: 18px;
+    }
+}

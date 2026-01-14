@@ -1,0 +1,53 @@
+[tool.poetry]
+name = "mapa-inversiones"
+version = "0.1.0"
+description = "BID's Mapa de Inversiones Chatbor"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+langgraph = "^0.2.34"
+python-dotenv = "^1.0.1"
+fastapi = {extras = ["standard"], version = "^0.115.0"}
+langchain-openai = "^0.2.2"
+uvicorn = "^0.31.0"
+langchain-text-splitters = "^0.3.0"
+langchain-community = "^0.3.2"
+tiktoken = "^0.8.0"
+langchain = "^0.3.3"
+pydantic = "^2.9.2"
+pydantic-settings = "^2.5.2"
+openinference-instrumentation-langchain = "^0.1.28"
+arize-phoenix-otel = "^0.5.1"
+pyodbc = "^5.2.0"
+openai = "^1.52.0"
+sqlalchemy = "^2.0.36"
+langchain-postgres = "^0.0.12"
+psycopg = { version = "^3.2.3", extras = ["binary"] }
+itsdangerous = "^2.2.0"
+pandas = "^2.2.3"
+scipy = "^1.14.1"
+alembic = "^1.13.3"
+gunicorn = "^20.1.0"
+markdown = "^3.7"
+markdown2 = "^2.5.1"
+timescale-vector = "^0.0.7"
+datasets = "^3.1.0"
+flashrank = "^0.2.9"
+nltk = "^3.9.1"
+loguru = "^0.7.3"
+langdetect = "^1.0.9"
+google-cloud-translate = "2.0.1"
+
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "8.3.3"
+black = "24.10.0"
+ragas = "^0.2.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

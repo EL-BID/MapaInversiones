@@ -1,0 +1,900 @@
+/* ============================================================================
+   ESTILOS MODERNOS PARA CHATBOT - MapaInversiones República Dominicana
+   ============================================================================
+  
+   
+   ============================================================================ */
+
+/* ============================================================================
+   VARIABLES DE TEMA
+   ============================================================================ */
+
+:root {
+  /* Colores principales */
+  --primary-color: #0066cc;
+  --primary-dark: #004999;
+  --primary-light: #3399ff;
+  
+  /* Colores de acento */
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  
+  /* Colores de texto */
+  --text-color: #2c3e50;
+  --text-light: #6c757d;
+  --text-muted: #95a5a6;
+  
+  /* Colores de fondo */
+  --bg-color: #ffffff;
+  --bg-light: #f8f9fa;
+  --bg-hover: #e3f2fd;
+  
+  /* Bordes y sombras */
+  --border-color: #dee2e6;
+  --border-radius: 8px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+  
+  /* Transiciones */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+}
+
+/* ============================================================================
+   CONTENEDOR PRINCIPAL DEL CHATBOT
+   ============================================================================ */
+
+.message-content {
+  /*font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;*/
+  line-height: 1.7;
+  color: var(--text-color);
+  font-size: 15px;
+  max-width: 100%;
+}
+
+
+/* ============================================================================
+   SISTEMA DE TABLA CON SCROLL HORIZONTAL
+   ============================================================================ */
+
+/* CONTENEDOR: Maneja el scroll horizontal */
+.respuesta-tabla {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin: 16px 0;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    background: white;
+}
+
+/* TABLA: Se expande según contenido, columnas alineadas */
+.tabla-respuesta {
+    width: 100%;
+    min-width: max-content;  /* Permite expandirse más allá del contenedor */
+    border-collapse: collapse;
+    table-layout: auto;      /* Columnas se calculan uniformemente */
+}
+
+/* Celdas con texto sin cortar */
+.tabla-respuesta th,
+.tabla-respuesta td {
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+/* Encabezado de tabla */
+.tabla-respuesta thead {
+    background: #dcedfb;
+}
+
+/* Cuerpo de tabla - hereda comportamiento nativo */
+.tabla-respuesta tbody {
+    /* Sin display:table ni width:max-content para mantener alineación */
+}
+
+/* Scrollbar del contenedor - WebKit */
+.respuesta-tabla::-webkit-scrollbar {
+    height: 12px;
+    background: #e8eef5;
+    border-radius: 6px;
+}
+
+.respuesta-tabla::-webkit-scrollbar-track {
+    background: #e8eef5;
+    border-radius: 6px;
+    margin: 0 4px;
+}
+
+.respuesta-tabla::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #003876 0%, #0055a5 100%);
+    border-radius: 6px;
+    border: 2px solid #e8eef5;
+}
+
+.respuesta-tabla::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #002554 0%, #003876 100%);
+}
+
+/* Scrollbar del contenedor - Firefox */
+.respuesta-tabla {
+    scrollbar-width: auto;
+    scrollbar-color: #003876 #e8eef5;
+}
+
+/* Indicador visual de que hay más contenido */
+.respuesta-tabla {
+    position: relative;
+}
+
+.respuesta-tabla::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 12px;
+    width: 30px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.9));
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Mostrar gradiente solo si hay scroll */
+.respuesta-tabla:not(:hover)::after {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .respuesta-tabla::-webkit-scrollbar {
+        height: 10px;
+    }
+}
+
+/* ============================================================================
+   TIPOGRAFÍA Y ÉNFASIS
+   ============================================================================ */
+
+.message-content p {
+  margin: 0 0 16px 0;
+  line-height: 1.7;
+}
+
+.message-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Negritas para datos importantes */
+.message-content strong {
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Cursivas para contexto técnico */
+.message-content em {
+  font-style: italic;
+  color: var(--text-light);
+  font-size: 0.95em;
+}
+
+/* ============================================================================
+   LISTAS MODERNAS CON ICONOS
+   ============================================================================ */
+
+.message-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 20px 0;
+}
+
+.message-content ul li {
+  position: relative;
+  padding: 14px 18px 14px 50px;
+  margin-bottom: 12px;
+  background: var(--bg-light);
+  border-left: 4px solid var(--primary-color);
+  border-radius: var(--border-radius);
+  transition: all var(--transition-normal);
+  line-height: 1.6;
+}
+
+.message-content ul li:hover {
+  background: #ffffff;
+  box-shadow: var(--shadow-md);
+  transform: translateX(6px);
+  border-left-width: 5px;
+}
+
+.message-content ul li:last-child {
+  margin-bottom: 0;
+}
+
+/* Icono base para listas */
+.message-content ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  width: 26px;
+  height: 26px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 26px;
+  text-align: center;
+}
+
+/* ============================================================================
+   VARIANTES DE LISTAS POR TIPO
+   ============================================================================ */
+
+/* Lista de proyectos */
+.message-content ul.project-list {
+  border-left: 3px solid var(--primary-color);
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.message-content ul.project-list li {
+  border-left-color: var(--primary-color);
+  background: linear-gradient(to right, #e3f2fd 0%, var(--bg-light) 100%);
+}
+
+.message-content ul.project-list li::before {
+  content: '🏗️';
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.message-content ul.project-list li:hover {
+  background: linear-gradient(to right, #bbdefb 0%, #ffffff 100%);
+}
+
+/* Lista de ubicaciones */
+.message-content ul.location-list li {
+  border-left-color: var(--info-color);
+  background: linear-gradient(to right, #e0f7fa 0%, var(--bg-light) 100%);
+}
+
+.message-content ul.location-list li::before {
+  content: '📍';
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.message-content ul.location-list li:hover {
+  background: linear-gradient(to right, #b2ebf2 0%, #ffffff 100%);
+}
+
+/* Lista de información monetaria */
+.message-content ul.money-list li {
+  border-left-color: var(--success-color);
+  background: linear-gradient(to right, #e8f5e9 0%, var(--bg-light) 100%);
+}
+
+.message-content ul.money-list li::before {
+  content: '💰';
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.message-content ul.money-list li:hover {
+  background: linear-gradient(to right, #c8e6c9 0%, #ffffff 100%);
+}
+
+/* Lista de información general */
+.message-content ul.info-list li {
+  border-left-color: #9c27b0;
+  background: linear-gradient(to right, #f3e5f5 0%, var(--bg-light) 100%);
+}
+
+.message-content ul.info-list li::before {
+  content: 'ℹ️';
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.message-content ul.info-list li:hover {
+  background: linear-gradient(to right, #e1bee7 0%, #ffffff 100%);
+}
+
+/* ============================================================================
+   LISTAS NUMERADAS (OL)
+   ============================================================================ */
+
+.message-content ol {
+  counter-reset: item;
+  list-style: none;
+  padding-left: 0;
+  margin: 20px 0;
+}
+
+.message-content ol li {
+  position: relative;
+  padding: 14px 18px 14px 52px;
+  margin-bottom: 12px;
+  background: var(--bg-light);
+  border-left: 4px solid var(--info-color);
+  border-radius: var(--border-radius);
+  counter-increment: item;
+  transition: all var(--transition-normal);
+}
+
+.message-content ol li::before {
+  content: counter(item);
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  width: 28px;
+  height: 28px;
+  background: var(--info-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.message-content ol li:hover {
+  background: #ffffff;
+  box-shadow: var(--shadow-md);
+  transform: translateX(6px);
+}
+
+
+/* ============================================================================
+   ESTILOS DE ENCABEZADO Y CELDAS DE TABLA
+   ============================================================================ */
+
+.tabla-respuesta thead th {
+  padding: 18px 16px;
+  text-align: left;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  border-bottom: 3px solid #2196f3;
+  white-space: nowrap;
+}
+
+.tabla-respuesta thead th:first-child {
+  border-top-left-radius: var(--border-radius);
+  padding-left: 24px;
+}
+
+.tabla-respuesta thead th:last-child {
+  border-top-right-radius: var(--border-radius);
+  padding-right: 24px;
+}
+
+/* Celdas de la tabla */
+.tabla-respuesta tbody td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: top;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.tabla-respuesta tbody td:first-child {
+  padding-left: 24px;
+  font-weight: 700;
+}
+
+.tabla-respuesta tbody td:last-child {
+  padding-right: 24px;
+}
+
+/* Filas alternadas (efecto zebra) */
+.tabla-respuesta tbody tr:nth-child(even) {
+  background: var(--bg-light);
+}
+
+.tabla-respuesta tbody tr:nth-child(odd) {
+  background: white;
+}
+
+/* Hover en filas */
+.tabla-respuesta tbody tr {
+  transition: all var(--transition-fast);
+  cursor: default;
+}
+
+.tabla-respuesta tbody tr:hover {
+  background: var(--bg-hover) !important;
+  box-shadow: inset 0 0 0 1px var(--primary-light);
+}
+
+/* Última fila sin borde */
+.tabla-respuesta tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Celdas con datos importantes */
+.tabla-respuesta table strong,
+.tabla-respuesta table .important {
+  font-weight: 700;
+  color: var(--primary-dark);
+}
+
+/* Columnas numéricas alineadas a la derecha */
+.tabla-respuesta table td.number,
+.tabla-respuesta table td.amount,
+.tabla-respuesta table td.percentage,
+.tabla-respuesta table td[data-type="number"] {
+  text-align: right;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-color);
+}
+
+/* Columnas de estado con colores */
+.tabla-respuesta table td.status-active,
+.tabla-respuesta table td[data-status="activo"] {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.tabla-respuesta table td.status-pending,
+.tabla-respuesta table td[data-status="pendiente"] {
+  color: var(--warning-color);
+  font-weight: 600;
+}
+
+.tabla-respuesta table td.status-completed,
+.tabla-respuesta table td[data-status="completado"] {
+  color: var(--info-color);
+  font-weight: 600;
+}
+
+
+/* ========================================
+   UTILIDADES Y MEJORAS ADICIONALES
+   ======================================== */
+
+/* Clase para detectar cuando se ha scrolleado */
+.tabla-respuesta.scrolled {
+    /* Agregar con JavaScript cuando scrollLeft > 0 */
+}
+
+/* Animación suave para el contenedor */
+.respuesta-tabla {
+    scroll-behavior: smooth;
+}
+
+/* Prevenir selección accidental al scrollear en móviles */
+@media (max-width: 768px) {
+    .tabla-respuesta-container {
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x;
+    }
+}
+
+/* Mejora de legibilidad en textos largos */
+.tabla-respuesta td {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+}
+
+/* Estilo para celdas con overflow visible (debugging) */
+.tabla-respuesta td.overflow-visible {
+    overflow: visible;
+    white-space: normal;
+}
+
+
+/* ============================================================================
+   TABLA RESPONSIVA EN MÓVILES
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .tabla-respuesta table {
+    font-size: 13px;
+  }
+  
+  /* Ocultar encabezado en móvil */
+  .tabla-respuesta thead {
+    display: none;
+  }
+  
+  /* Convertir filas en cards */
+  .tabla-respuesta tbody tr {
+    display: block;
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    background: white !important;
+  }
+  
+  .tabla-respuesta tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: right;
+  }
+  
+ .tabla-respuesta tbody td:first-child {
+    background: var(--bg-light);
+    font-weight: 600;
+  }
+  
+ .tabla-respuesta tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-color);
+    margin-right: 16px;
+    text-align: left;
+    flex: 1;
+  }
+  
+  .tabla-respuesta tbody tr:last-child td:last-child {
+    border-bottom: none;
+  }
+  
+  /* Ajustar padding de listas en móvil */
+  .tabla-respuesta ul li {
+    padding: 12px 14px 12px 44px;
+  }
+  
+  .tabla-respuesta ul li::before {
+    left: 10px;
+    top: 12px;
+    width: 24px;
+    height: 24px;
+    font-size: 20px;
+  }
+}
+
+/* ============================================================================
+   BADGES Y ETIQUETAS
+   ============================================================================ */
+
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border-radius: 14px;
+  margin: 0 4px;
+  letter-spacing: 0.3px;
+}
+
+.badge-success {
+  background: var(--success-color);
+  color: white;
+}
+
+.badge-info {
+  background: var(--info-color);
+  color: white;
+}
+
+.badge-warning {
+  background: var(--warning-color);
+  color: #212529;
+}
+
+.badge-danger {
+  background: var(--danger-color);
+  color: white;
+}
+
+.badge-primary {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* ============================================================================
+   SCROLL SUAVE PARA TABLAS
+   ============================================================================ */
+
+.chatbot-table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.chatbot-table-container::-webkit-scrollbar-track {
+  background: var(--bg-light);
+  border-radius: 4px;
+}
+
+.chatbot-table-container::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+.chatbot-table-container::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* ============================================================================
+   FIX: Contenedor de tabla con scroll horizontal aislado
+   ============================================================================ */
+
+.tabla-scroll-container {
+    position: relative;
+    margin: 16px -18px;           /* Sale del padding del padre */
+    padding: 0 18px;              /* Recupera el espacio visual */
+    width: calc(100% + 36px);     /* Compensa los márgenes negativos */
+}
+
+.tabla-scroll-inner {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    background: white;
+}
+
+.tabla-scroll-inner::-webkit-scrollbar {
+    height: 12px;
+    background: #e8eef5;
+    border-radius: 6px;
+}
+
+.tabla-scroll-inner::-webkit-scrollbar-track {
+    background: #e8eef5;
+    border-radius: 6px;
+}
+
+.tabla-scroll-inner::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #003876 0%, #0055a5 100%);
+    border-radius: 6px;
+    border: 2px solid #e8eef5;
+}
+
+.tabla-scroll-inner::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #002554 0%, #003876 100%);
+}
+
+/* Firefox */
+.tabla-scroll-inner {
+    scrollbar-width: auto;
+    scrollbar-color: #003876 #e8eef5;
+}
+
+.tabla-respuesta {
+    width: 100%;
+    min-width: max-content;
+    border-collapse: collapse;
+}
+
+.tabla-respuesta th,
+.tabla-respuesta td {
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.tabla-respuesta thead {
+    background: #dcedfb;
+}
+
+/* ============================================================================
+   FIX DEFINITIVO: Scroll horizontal en tablas
+   ============================================================================ */
+
+.message.assistant .message-content {
+    overflow-x: clip !important;
+    overflow-y: hidden !important;
+}
+
+.respuesta-tabla {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    margin: 16px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    background: white;
+}
+
+.tabla-respuesta {
+    width: 100%;
+    min-width: max-content;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+.tabla-respuesta th,
+.tabla-respuesta td {
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.tabla-respuesta thead {
+    background: #dcedfb;
+}
+
+.respuesta-tabla::-webkit-scrollbar {
+    height: 12px;
+    background: #e8eef5;
+    border-radius: 6px;
+}
+
+.respuesta-tabla::-webkit-scrollbar-track {
+    background: #e8eef5;
+    border-radius: 6px;
+}
+
+.respuesta-tabla::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #003876 0%, #0055a5 100%);
+    border-radius: 6px;
+    border: 2px solid #e8eef5;
+}
+
+.respuesta-tabla::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #002554 0%, #003876 100%);
+}
+
+.respuesta-tabla {
+    scrollbar-width: auto;
+    scrollbar-color: #003876 #e8eef5;
+}
+
+/* ============================================================================
+   FIX DEFINITIVO: Scroll horizontal en tablas
+   ============================================================================
+   
+   Este CSS debe agregarse al FINAL de chatbot-styles.css
+   
+   Requiere cambio en events.js:
+   - Línea 4602: cambiar "<div class='respuesta-tabla'>" por "<div class='tabla-outer'><div class='tabla-scroll'>"
+   - Línea 4615: cambiar "</div>" por "</div></div>"
+   
+   ============================================================================ */
+
+/* Contenedor exterior - usa grid para forzar límites */
+.tabla-outer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);  /* CLAVE: fuerza respeto de límites */
+    margin: 16px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    background: white;
+}
+
+/* Contenedor de scroll - maneja el scroll horizontal */
+.tabla-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
+/* Scrollbar - WebKit (Chrome, Safari, Edge) */
+.tabla-scroll::-webkit-scrollbar {
+    height: 14px;
+    background: #e8eef5;
+}
+
+.tabla-scroll::-webkit-scrollbar-track {
+    background: #e8eef5;
+    border-radius: 0 0 8px 8px;
+}
+
+.tabla-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #003876 0%, #0055a5 100%);
+    border-radius: 7px;
+    border: 3px solid #e8eef5;
+}
+
+.tabla-scroll::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #002554 0%, #003876 100%);
+}
+
+/* Scrollbar - Firefox */
+.tabla-scroll {
+    scrollbar-width: auto;
+    scrollbar-color: #003876 #e8eef5;
+}
+
+/* La tabla - se expande según contenido */
+.tabla-respuesta {
+    width: 100%;
+    min-width: max-content;
+    border-collapse: collapse;
+    table-layout: auto;
+}
+
+/* Celdas sin cortar texto */
+.tabla-respuesta th,
+.tabla-respuesta td {
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+/* Encabezado de tabla */
+.tabla-respuesta thead {
+    background: #dcedfb;
+}
+
+/* Estilos de celdas del encabezado */
+.tabla-respuesta thead th {
+    padding: 18px 16px;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.8px;
+    border-bottom: 3px solid #2196f3;
+}
+
+.tabla-respuesta thead th:first-child {
+    padding-left: 24px;
+    border-top-left-radius: 8px;
+}
+
+.tabla-respuesta thead th:last-child {
+    padding-right: 24px;
+    border-top-right-radius: 8px;
+}
+
+/* Estilos de celdas del cuerpo */
+.tabla-respuesta tbody td {
+    padding: 16px;
+    border-bottom: 1px solid #dee2e6;
+    vertical-align: top;
+    line-height: 1.6;
+    font-weight: 600;
+}
+
+.tabla-respuesta tbody td:first-child {
+    padding-left: 24px;
+    font-weight: 700;
+}
+
+.tabla-respuesta tbody td:last-child {
+    padding-right: 24px;
+}
+
+/* Filas alternadas (zebra) */
+.tabla-respuesta tbody tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.tabla-respuesta tbody tr:nth-child(odd) {
+    background: white;
+}
+
+/* Hover en filas */
+.tabla-respuesta tbody tr {
+    transition: background 0.2s ease;
+}
+
+.tabla-respuesta tbody tr:hover {
+    background: #e3f2fd !important;
+}
+
+/* Última fila sin borde inferior */
+.tabla-respuesta tbody tr:last-child td {
+    border-bottom: none;
+}

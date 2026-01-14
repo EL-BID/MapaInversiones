@@ -1,0 +1,87 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# env
+*.env
+.env.*
+!.env.dummy
+
+# local archives / tmp data
+archive/
+app/data_ingestion/tmp/
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+.venv/*
+
+# Poetry specific
+poetry.lock
+.cache/
+*.dist-info/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+pytestdebug.log
+
+# Pytest cache
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# IDE specific files (optional, based on what IDE you use)
+.vscode/
+.idea/
+
+# MacOS specific files (optional)
+.DS_Store
+
+# gtranslate
+/bid-mapainversiones-gtranslate-8f55b7c24074.json
+
+# logs
+app/logs/*
+logs/*
+app/log
+app/resultados.csv
+
+.history
+app/logs/chatbot_development.log
+logs/chatbot_development.log
+*.log
+
+app/test/*.csv
+app/test/batch/*.csv

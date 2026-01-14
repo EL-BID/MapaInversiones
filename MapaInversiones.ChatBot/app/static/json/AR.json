@@ -1,0 +1,22 @@
+{
+"data": {
+  "title": "Sugerencias de preguntas ARGENTINA",
+  "isMultipleCountry": false,
+  "questions": [
+  {
+	"country": "Argentina",
+	"tooltip":"¿Cuáles son las escuelas que podrían estar listas antes de 2025 en Pilar, provincia de Buenos Aires?",
+	"name":"¿Cuáles son las escuelas que podrían estar listas antes de 2025 en Pilar, provincia de Buenos Aires?"
+  },
+  {
+	"country": "Argentina",
+	"tooltip":"¿Qué tipo obra o sector tienen asociados incidencias ODS?",
+	"name":"¿Qué tipo obra o sector tienen asociados incidencias ODS?"
+  },
+  {
+	"country": "Argentina",
+	"tooltip":"¿Qué sector tiene menos inversión y cual tiene más inversión?",
+	"name":"¿Qué sector tiene menos inversión y cual tiene más inversión?"
+  }]
+  }
+}

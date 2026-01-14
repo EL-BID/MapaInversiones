@@ -1,0 +1,72 @@
+{
+  "stg_mapainv_proyectosfuentesfinanciamiento": {
+    "columns": [
+      "id_proyecto",
+      "organismo_financiador",
+      "fuente_financiacion",
+      "valor_vigente",
+      "valor_ejecutado",
+      "anio_financiacion",
+      "pais_iso3",
+      "pais_nombre"
+    ],
+    "foreign_keys": [
+      {
+        "column": "id_proyecto",
+        "referred_table": "stg_mapainv_proyectosaprobadosinv",
+        "referred_column": "id_proyecto"
+      },
+      {
+        "column": "pais_iso3",
+        "referred_table": "stg_mapainv_proyectosaprobadosinv",
+        "referred_column": "pais_iso3"
+      }
+    ]
+  },
+  "stg_mapainv_proyectosaprobadosinv": {
+    "columns": [
+      "id_proyecto",
+      "nombre_proyecto",
+      "objetivo_proyecto",
+      "estado_proyecto",
+      "fechainicio_proyecto",
+      "anio_fechainicio_proyecto",
+      "fechafin_proyecto",
+      "anio_fechafin_proyecto",
+      "duracion_proyecto",
+      "valor_proyecto",
+      "idsector_proyecto",
+      "nombresector_proyecto",
+      "porcentajeavancefinanciero_proyecto",
+      "identidadejecutora_proyecto",
+      "nombreentidadejecutora_proyecto",
+      "tipo_proyecto",
+      "pais_iso3",
+      "pais_nombre",
+      "url_link_proyecto"
+    ],
+    "foreign_keys": []
+  },
+  "stg_mapainv_proyectosterritorios": {
+    "columns": [
+      "id_proyecto",
+      "nombre_region",
+      "nombre_departamento",
+      "nombre_municipio",
+      "pais_iso3",
+      "pais_nombre"
+    ],
+    "foreign_keys": [
+      {
+        "column": "id_proyecto",
+        "referred_table": "stg_mapainv_proyectosaprobadosinv",
+        "referred_column": "id_proyecto"
+      },
+      {
+        "column": "pais_iso3",
+        "referred_table": "stg_mapainv_proyectosaprobadosinv",
+        "referred_column": "pais_iso3"
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+{
+"data": {
+  "title": "Sugerencias de preguntas REPÚBLICA DOMINICANA",
+  "isMultipleCountry": false,
+  "questions": [
+  {
+	"country": "República Dominicana",
+	"tooltip":"¿Qué entidad ejecutora es el que tiene menor inversión y cuál el que tiene mayor inversión?",
+	"name":"¿Qué entidad ejecutora es el que tiene menor inversión y cuál el que tiene mayor inversión?"
+  },
+  {
+	"country": "República Dominicana",
+	"tooltip":"¿Cuáles son las provincias con menor y mayor inversión en el sector educativo y con qué montos?",
+	"name":"¿Cuáles son las provincias con menor y mayor inversión en el sector educativo y con qué montos?"
+  },
+  {
+	"country": "República Dominicana",
+	"tooltip":"¿Qué sector es el que tiene menor inversión y cuál el que tiene mayor inversión?",
+	"name":"¿Qué sector es el que tiene menor inversión y cuál el que tiene mayor inversión?"
+  }
+  ]
+  }
+}

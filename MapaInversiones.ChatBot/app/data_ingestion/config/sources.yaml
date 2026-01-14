@@ -1,0 +1,82 @@
+sources:
+  - id: "proyectos_dom"
+    type: "sql_server"
+    enabled: true
+    connection_ref: "AZURE_SQL_MAIN"
+    country: "dom"
+    destination_table: "stg_mapainv_proyectosaprobadosinv"
+    sql_query: |
+      SELECT 
+          IdProyecto AS id_proyecto,
+          CodigoSNIP AS codigo_snip,
+          UPPER(NombreProyecto) AS nombre_proyecto,
+          REPLACE(REPLACE(UPPER(ObjetivoGeneral), CHAR(13), ''), CHAR(10), '') AS objetivo_proyecto,
+          UPPER(EstadoProyecto) AS estado_proyecto,
+          CAST(FechaInicioProyecto AS DATE) AS fechainicio_proyecto,
+          YEAR(CAST(FechaInicioProyecto AS DATE)) AS anio_fechainicio_proyecto,
+          CAST(FechafinProyecto AS DATE) AS fechafin_proyecto,
+          YEAR(CAST(FechaFinProyecto AS DATE)) AS anio_fechafin_proyecto,
+          DuracionProyecto AS duracion_proyecto,
+          ValorDelProyecto AS valor_proyecto,
+          IdSector AS idsector_proyecto,
+          UPPER(NombreSector) AS nombresector_proyecto,
+          AvanceFinanciero AS porcentajeavancefinanciero_proyecto,
+          TRY_CAST(NULLIF(IdEntidadEjecutora, '') AS BIGINT) AS identidadejecutora_proyecto,
+          UPPER(EntidadEjecutora) AS nombreentidadejecutora_proyecto,
+          UPPER(TipoProyecto) AS tipo_proyecto,
+          'dom' as pais_iso3,
+          'REPÚBLICA DOMINICANA' AS pais_nombre,
+          'https://mapainversiones.transparenciafiscal.gob.do/projectprofile/' + CAST(IdProyecto AS VARCHAR(50)) AS url_link_proyecto
+      FROM consulta.VwDatosAbiertosProyectosInv
+      where IdProyecto is not null 
+      and codigosnip is not null;
+
+  - id: "territorios_dom"
+    type: "sql_server"
+    enabled: true
+    connection_ref: "AZURE_SQL_MAIN"
+    country: "dom"
+    destination_table: "stg_mapainv_proyectosterritorios"
+    sql_query: |
+      SELECT
+          IdProyecto AS id_proyecto,
+          IdRegion AS id_region,
+          UPPER(NombreRegion) AS nombre_region,
+          IdDepartamento AS id_departamento,
+          UPPER(NombreDepartamento) AS nombre_departamento,
+          IdMunicipio AS id_municipio,
+          UPPER(NombreMunicipio) AS nombre_municipio,
+          'dom' AS pais_iso3,
+          'REPÚBLICA DOMINICANA' AS pais_nombre
+      FROM
+          consulta.VwDatosAbiertosProyectosInvXTerritorio
+      where
+          IdProyecto is not null;
+
+  - id: "fuentes_dom"
+    type: "sql_server"
+    enabled: true
+    connection_ref: "AZURE_SQL_MAIN"
+    country: "dom"
+    destination_table: "stg_mapainv_proyectosfuentesfinanciamiento"
+    sql_query: |
+      SELECT
+          cast(IdProyecto as int) as id_proyecto,
+          OrganismoFinanciador as organismo_financiador,
+          FuenteFinanciacion as fuente_financiacion,
+          ValorVigente as valor_vigente,
+          ValorEjecutado as valor_ejecutado,
+          Periodo as anio_financiacion,
+          'dom' as pais_iso3,
+          'REPÚBLICA DOMINICANA' as pais_nombre
+      FROM
+          consulta.VwDatosAbiertosProyectosInvFuentesFinanciacion
+      WHERE
+          IdProyecto IS NOT NULL;
+
+  - id: "fewshots_csv_v5"
+    type: "csv_file"
+    enabled: false
+    path: "data_ingestion/archive/data/v5_raw_fewshots.csv"
+    destination_table: "raw_fewshots"
+    description: "Carga de fewshots desde CSV local (legacy path, to be moved)"

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="/static/icons/favicon.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de Inversión Transparente</title>
+    <link rel="stylesheet" href="../static/css/libs.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/components.css">
+    <link rel="stylesheet" href="../static/font/material-design-icons-outlined.woff2">
+    <link rel="stylesheet" href="../static/font/material-design-icons.woff2">   
+    <link rel="stylesheet" href="/static/css/normalize.css">
+
+        <!-- Preconnect for Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+
+    <style>
+        .hidden {
+            display: none;
+        }
+
+        .revealed {
+            display: inline;
+            opacity: 0;
+            animation: reveal 1s forwards; /* Ajusta la duración según tus necesidades */
+        }
+
+        @keyframes reveal {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <!--MAIN CONTAINER-->
+    <div class="">
+        <div class="row tabs tabs-vertical">
+                <!--SIDEBAR FILTROS-->
+                <div class="col-lg-3 col-xl-2 col-md-3 bg-soft-blue">
+                    
+                    <aside class="sidebar sidebar-filters sidebar-filters-mob">
+                        <div class="sidebar-item sidebar-item-margin sidebar-item-style">
+                            <ul class="tabs-nav section-bg">
+                                <li class="active"><i class="material-icons md-28">info</i> Acerca de Inversión Transparente</li>
+                                <li><i class="material-icons md-28">help</i> Ayuda</li>
+                                <li><i class="material-icons md-28">verified_user</i> Política de privacidad</li>
+                            </ul>
+                            
+                        </div>						
+
+
+                        <div class="side-close"><i class="material-icons md-24">close</i></div>
+                    </aside>				
+                
+                </div>
+                <!--PREGUNTAS Y RESPUESTAS-->
+                <div class="col-lg-9 col-xl-10 col-md-9">
+                    {% include 'header.html' %}
+                    <div class="">
+                            
+
+                                <div class="tabs-item content active">
+                            <!--CONTENT QUE ES INVERSION TRANSPARENTE-->
+                                <section class="section" id="s1">
+                                    <div class="container">
+                                        <!--TITULO SECCION -->
+                                        <!-- HEAD INFO -->
+                                        <div class="banner-main-info p-0">
+                                            <div class="banner-main-title py-2 mb-0">
+                                                <h1 class="mainTit_t1 text-center mb-0">Acerca de Inversión Transparente</h1>
+                                            </div>
+
+                                        </div>
+                                        <div class="section">
+                                            <h2>¿Qué es Inversión Transparente?</h2>
+                                            <p>El chatBOT de mapaInversiones (Inversión Trasnparente), es una herramienta basada en inteligencia artificial con la que los usuarios pueden acceder a información completa, resúmenes y explicaciones claras sobre diversos aspectos de la inversión pública en cada país donde se encuentra instalado MapaInversiones.</p>
+                                            </div>
+                                            <div class="section">
+                                            <h2>¿A quién va dirigido? </h2>
+                                            <p>El chatbot de MapaInversiones está orientado a satisfacer las diversas necesidades de los usuarios, ya sea un inversor experimentado, un formulador de políticas o simplemente alguien con curiosidad sobre cómo se asignan y utilizan los fondos públicos. Mediante el procesamiento del lenguaje natural y algoritmos avanzados, el chatbot puede analizar datos complejos y presentarlos en un formato fácil de usar.</p>
+                                            <h3>¿Que tipo de información se puede acceder? </h3>
+                                            <ul>
+                                                <li>Proyectos de inversión pública específicos</li>
+                                                <li>Asignaciones presupuestarias</li>
+                                                <li>Fuentes de financiación</li>
+                                                <li>Procesos contractuales</li>
+                                                <li>Contratistas</li>
+                                            </ul>
+                                        </div>
+                                        <!--<div class="section">
+                                            <h2>Países</h2>
+                                            <div class="paises">
+                                                <div class="card">
+                                                <div class="card-body">
+                                                    <a href="">República Dominicana</a>
+                                                    <a href="btn btn-primary outlined">Iniciar conversación</a>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <a href="">Argentina</a>
+                                                    <a href="btn btn-primary outlined">Iniciar conversación</a>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                    <div class="card-body">
+                                                        <a href="">Perú País Minero</a>
+                                                        <a href="btn btn-primary outlined">Iniciar conversación</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <div class="section">
+                                        <h2>Versiones</h2>
+
+                                        </div>
+                                    </div>
+                                </section>
+                                </div>
+                                <div class="tabs-item content">
+                                    <section class="section">
+                                        <div class="container">
+                                        <!--TITULO SECCION -->
+                                        <!-- HEAD INFO -->
+                                        <div class="banner-main-info p-0">
+                                            <div class="banner-main-title py-2 mb-0">
+                                                <h1 class="mainTit_t1 text-center mb-0">Ayuda</h1>
+                                            </div>
+
+                                        </div>									
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam voluptates
+                                        reiciendis quaerat ut natus dignissimos distinctio perferendis commodi odit impedit
+                                        rerum totam, saepe corporis perspiciatis non, nam amet maxime sunt.</p>
+                                        </div>
+                                    
+                                    </section>
+                                    
+                                </div>
+                                <div class="tabs-item content">
+                                    <section class="section">
+                                        <div class="container">
+                                        <!--TITULO SECCION -->
+                                        <!-- HEAD INFO -->
+                                        <div class="banner-main-info p-0">
+                                            <div class="banner-main-title py-2 mb-0">
+                                                <h1 class="mainTit_t1 text-center mb-0">Política de privacidad</h1>
+                                            </div>
+
+                                        </div>	
+                                            <h3>1. Introducción</h3>
+                                            
+
+    <p>Esta Política de Privacidad describe cómo recopilamos, usamos, divulgamos y protegemos su información personal cuando utiliza nuestro aplicativo web [Nombre del Aplicativo]. Al acceder y utilizar nuestro aplicativo, usted acepta las prácticas descritas en esta política.</p>
+
+    <h3>2. Información que Recopilamos</h3>
+    <p>No recopilamos ninguna información personal identificable de nuestros usuarios. Nuestro aplicativo está diseñado para funcionar sin necesidad de recolectar datos personales de los usuarios.</p>
+    <h3>3. Uso de la Información</h3>
+    <p>Dado que no recopilamos información personal de los usuarios, no utilizamos ningún dato para fines específicos. Nuestra prioridad es proporcionar un servicio seguro y eficiente sin comprometer su privacidad.</p>
+
+    <h3>4. Divulgación de la Información</h3>
+    <p>No compartimos su información con terceros porque no recopilamos ninguna información personal de los usuarios.</p>
+
+                                            <h3>5. Seguridad de la Información</h3>
+                                            <p>Aunque no recopilamos información personal, implementamos medidas de seguridad razonables para proteger el aplicativo y garantizar una experiencia segura para nuestros usuarios. Sin embargo, ningún método de transmisión por internet o almacenamiento electrónico es completamente seguro.</p>
+                                            <h3>6. Retención de Datos</h3>
+                                            <p>Dado que no recopilamos datos personales, no retenemos ninguna información personal de los usuarios.</p>
+                                            <h3>7. Sus Derechos</h3>
+                                            <p>Puesto que no recopilamos ninguna información personal, los derechos de acceso, corrección y eliminación de datos personales no son aplicables en nuestro caso. No obstante, si tiene alguna preocupación sobre su privacidad, no dude en contactarnos.</p>
+                                            <h3>8. Cambios a esta Política de Privacidad</h3>
+                                            <p>Nos reservamos el derecho de actualizar esta Política de Privacidad en cualquier momento. Le notificaremos cualquier cambio publicando la nueva política en nuestro aplicativo y actualizando la fecha de vigencia. Le recomendamos que revise esta política periódicamente para estar al tanto de cualquier actualización.</p>
+
+
+                                        </div>
+                                    
+                                    </section>
+                                </div>
+
+                            </div>
+                        
+                    
+
+                </div>
+            </div>
+            
+
+        </div>
+<!-- FOOTER -->
+</body>
+
+
+
+ <!-- JS Script -->
+<!-- ... (tu HTML anterior) ... -->
+
+<!-- JS Script -->
+
+<script src="../static/javascript/lozad.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../static/javascript/jquery.min.js"></script>
+<script src="../static/javascript/jquery-ui.min.js"></script>
+<script src="../static/javascript/glide.min.js"></script>
+<script src="../static/events.js"></script>
+<script src="../static/javascript/device.js"></script>
+<script src="/static/javascript/events.js"></script>
+<!-- ... (cierra el HTML) ... -->
+<script src="/static/javascript/events_aux.js"></script>
+</html>

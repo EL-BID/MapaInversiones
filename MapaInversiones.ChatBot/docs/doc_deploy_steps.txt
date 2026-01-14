@@ -1,0 +1,403 @@
+poetry install 
+
+-- datos
+-- unica vez alembic tablas whatsap:
+-- eliminar de chatbot la tabla alembic
+sudo docker exec -it chatbot_v3-chatbot-1 /bin/bash
+alembic upgrade head (unica vez)
+-- revisar que esten creadas las tablas de chatbot langchain
+
+-- metadata load:
+datapostgres_ready_new.sh 
+	python -m data_ingestion.azure_conn (test azure sql)
+	python -m data_ingestion.dbpg_conn (test pg)
+	
+
+--restart
+docker restart chatbot_v3-chatbot-1
+
+
+-- logs
+docker logs -f chatbot_v3-chatbot-1
+
+-- down and up
+sudo docker-compose down && sudo docker-compose up --build
+
+-- bash enter
+sudo docker exec -it chatbot_v3-chatbot-1 /bin/bash
+
+
+
+------------- init data start
+
+create extension vector;
+create extension unaccent;
+alembic  upgrade head
+
+--
+python -m data_ingestion.00_azure_conn
+python -m data_ingestion.00_dbpg_conn
+python -m data_ingestion.01_stg_sql2pg
+
+
+--------------data funciones
+
+
+CREATE EXTENSION unaccent;
+
+
+CREATE OR REPLACE FUNCTION public.clean_text(input text)
+ RETURNS text
+ LANGUAGE sql
+ IMMUTABLE
+AS $function$
+  SELECT regexp_replace(lower(unaccent(input)), '[^a-z0-9\s]', '', 'g');
+$function$
+;
+
+
+
+CREATE OR REPLACE FUNCTION public.remove_stopwords_text(input text)
+ RETURNS text
+ LANGUAGE plpgsql
+ IMMUTABLE
+AS $function$
+DECLARE
+    words TEXT[];
+    result TEXT := '';
+    word TEXT;
+BEGIN
+    -- Separa el texto en palabras usando espacios en blanco
+    words := regexp_split_to_array(input, '\s+');
+    FOREACH word IN ARRAY words LOOP
+        -- Si to_tsvector devuelve algo, la palabra no es una stopword
+        IF to_tsvector('spanish', word)::text <> '' THEN
+            result := result || ' ' || word;
+        END IF;
+    END LOOP;
+    RETURN trim(result);
+END;
+$function$
+;
+
+
+CREATE OR REPLACE FUNCTION public.singularize(word text)
+ RETURNS text
+ LANGUAGE plpgsql
+ IMMUTABLE
+AS $function$
+BEGIN
+  -- Si la palabra tiene más de 3 caracteres y termina en "es", se elimina ese sufijo
+  IF length(word) > 3 AND word ~* 'es$' THEN
+      RETURN regexp_replace(word, 'es$', '', 'i');
+  -- Si la palabra tiene más de 2 caracteres y termina en "s", se elimina ese sufijo
+  ELSIF length(word) > 2 AND word ~* 's$' THEN
+      RETURN regexp_replace(word, 's$', '', 'i');
+  ELSE
+      RETURN word;
+  END IF;
+END;
+$function$
+;
+
+
+
+CREATE OR REPLACE FUNCTION public.lemmatize_text(input text)
+ RETURNS text
+ LANGUAGE sql
+ IMMUTABLE
+AS $function$
+  SELECT array_to_string(
+           ARRAY(
+             SELECT COALESCE(
+                      (ts_lexize('spanish_stem', singularize(word)))[1],
+                      singularize(word)
+                    )
+             FROM unnest(string_to_array(input, ' ')) AS word00_azure_conn.py
+           ),
+           ' '
+         );
+$function$
+;
+
+
+
+CREATE OR REPLACE FUNCTION public.lemmatize_text(input text)
+ RETURNS text
+ LANGUAGE sql
+ IMMUTABLE
+AS $function$
+  SELECT array_to_string(
+           ARRAY(
+             SELECT COALESCE(
+                      (ts_lexize('spanish_stem', singularize(word)))[1],
+                      singularize(word)
+                    )
+             FROM unnest(string_to_array(input, ' ')) AS word
+           ),
+           ' '
+         );
+$function$
+;
+
+
+------test
+select 
+lemmatize_text(remove_stopwords_text(clean_text('ministerio de las mujeres'))),
+lemmatize_text(remove_stopwords_text(clean_text('ministerio de la mujer'))),
+lemmatize_text(remove_stopwords_text(clean_text('el ministerio de la mujer'))),
+lemmatize_text(remove_stopwords_text(clean_text('el ministerio de las mujeres')))
+
+
+
+lemmatize_text(remove_stopwords_text(clean_text(STRING)))
+-------------------------------------
+
+
+data schema linking structure:
+
+
+-- 🚀 Habilitar la extensión pgvector si aún no está instalada
+CREATE EXTENSION IF NOT EXISTS vector;
+
+
+-- 🚀 1️⃣ `sch_tables`: Metadata de Tablas
+CREATE TABLE IF NOT EXISTS sch_tables (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    table_name TEXT UNIQUE NOT NULL,
+    table_description TEXT,
+    table_ddl TEXT,
+    table_recordcount INT,
+    table_embedding VECTOR(1536),
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+-- 🚀 2️⃣ `sch_columns`: Metadata de Columnas
+CREATE TABLE IF NOT EXISTS sch_columns (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    table_name TEXT NOT NULL,
+    column_name TEXT NOT NULL,
+    column_type TEXT NOT NULL,
+    is_primary BOOLEAN DEFAULT FALSE,
+    is_foreign BOOLEAN DEFAULT FALSE,
+    referenced_table TEXT,
+    column_description TEXT,
+    count_distinct INT,
+    is_catalogue BOOLEAN GENERATED ALWAYS AS (count_distinct < 250) STORED,
+    column_embedding VECTOR(1536),
+    updated_at TIMESTAMP DEFAULT NOW(),
+    UNIQUE (table_name, column_name)
+);
+
+-- 🚀 3️⃣ `sch_values`: Valores Únicos de Columnas Categóricas
+CREATE TABLE public.sch_values (
+	id uuid DEFAULT gen_random_uuid() NOT NULL,
+	table_name text NOT NULL,
+	column_name text NOT NULL,
+	unique_value text NOT NULL,
+	value_embedding public.vector NULL,
+	updated_at timestamp DEFAULT now() NULL,
+	CONSTRAINT sch_values_pkey null,
+	CONSTRAINT sch_values_table_name_column_name_unique_value_key null
+);
+
+
+-- 🚀 4️⃣ `sch_fewshots`: Ejemplos NL2SQL
+CREATE TABLE IF NOT EXISTS sch_fewshots (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    question TEXT NOT NULL,
+    example_query TEXT NOT NULL,
+    expected_output TEXT,
+    query_type TEXT,  -- (Ej: SELECT_SIMPLE, AGGREGATION, JOIN_MULTIPLE, FILTERING)
+    tables_involved TEXT[],  -- Lista de tablas involucradas
+    fewshot_description TEXT,  -- Descripción del razonamiento
+    fewshot_embedding VECTOR(1536),
+    updated_at TIMESTAMP DEFAULT NOW(),
+    UNIQUE (question, example_query)
+);
+
+
+-- 🚀 5️⃣ `sch_relations`: Relaciones Entre Tablas
+CREATE TABLE IF NOT EXISTS sch_relations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    source_table TEXT NOT NULL,
+    source_column TEXT NOT NULL,
+    target_table TEXT NOT NULL,
+    target_column TEXT NOT NULL,
+    relationship_type TEXT CHECK (relationship_type IN ('1:1', '1:M', 'M:N')),
+    relation_description TEXT,
+    relation_embedding VECTOR(1536),
+    updated_at TIMESTAMP DEFAULT NOW(),
+    UNIQUE (source_table, source_column, target_table, target_column)
+);
+
+-- 🚀 Índices para acelerar búsquedas
+CREATE INDEX IF NOT EXISTS idx_sch_tables_table_name ON sch_tables (table_name);
+CREATE INDEX IF NOT EXISTS idx_sch_columns_table_name_column ON sch_columns (table_name, column_name);
+CREATE INDEX IF NOT EXISTS idx_sch_columns_is_catalogue ON sch_columns (is_catalogue);
+CREATE INDEX IF NOT EXISTS idx_sch_values_table_name_column ON sch_values (table_name, column_name);
+CREATE INDEX IF NOT EXISTS idx_sch_fewshots_question ON sch_fewshots (question);
+CREATE INDEX IF NOT EXISTS idx_sch_relations_source_target ON sch_relations (source_table, target_table);
+
+
+-------------------------
+
+raw fewshots
+
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
+
+CREATE TABLE IF NOT EXISTS stg_fewshots (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    question TEXT NOT NULL, -- Pregunta en lenguaje natural
+    example_query TEXT NOT NULL, -- Consulta SQL de ejemplo
+    expected_output TEXT, -- Explicación esperada del resultado de la consulta
+    query_type TEXT CHECK (query_type IN ('aggregation', 'filtering', 'ranking', 'grouping', 'other')) NOT NULL,
+    tables_involved TEXT[], -- Lista de tablas utilizadas en la consulta
+    updated_at TIMESTAMP DEFAULT NOW() -- Fecha de última actualización
+);
+
+-- Índices para mejorar búsqueda por pregunta y tipo de consulta
+CREATE INDEX IF NOT EXISTS idx_stg_fewshots_question ON stg_fewshots USING GIN (question gin_trgm_ops);
+CREATE INDEX IF NOT EXISTS idx_stg_fewshots_query_type ON stg_fewshots (query_type);
+CREATE INDEX IF NOT EXISTS idx_stg_fewshots_tables_involved ON stg_fewshots USING GIN (tables_involved);
+
+
+-------inserts
+
+INSERT INTO raw_fewshots (id, question, example_query, expected_output, query_type, tables_involved, updated_at, pais_iso3)
+VALUES 
+    (gen_random_uuid(), 
+     '¿Cuántos proyectos están en ejecución?', 
+     'SELECT COUNT(*) FROM proyectos WHERE process_text(estado) = process_text(''en ejecución'');', 
+     'Número total de proyectos en ejecución', 
+     'aggregation', 
+     ARRAY['proyectos'], 
+     NOW(),'dom'),
+
+    (gen_random_uuid(), 
+     '¿Cuál es el presupuesto total asignado a los proyectos de infraestructura?', 
+     'SELECT SUM(presupuesto) FROM proyectos WHERE process_text(tipo) = process_text(''infraestructura'');', 
+     'Total del presupuesto asignado a infraestructura', 
+     'aggregation', 
+     ARRAY['proyectos'], 
+     NOW(),'dom'),
+
+    (gen_random_uuid(), 
+     'Lista de los 5 proyectos más costosos.', 
+     'SELECT nombre, presupuesto FROM proyectos ORDER BY presupuesto DESC LIMIT 5;', 
+     'Top 5 proyectos con mayor presupuesto', 
+     'ranking', 
+     ARRAY['proyectos'], 
+     NOW(),'dom'),
+
+    (gen_random_uuid(), 
+     '¿Cuántos proyectos se completaron en el año 2023?', 
+     'SELECT COUNT(*) FROM proyectos WHERE process_text(estado) = process_text(''completado'') AND EXTRACT(YEAR FROM fecha_fin) = 2023;', 
+     'Número de proyectos completados en 2023', 
+     'aggregation', 
+     ARRAY['proyectos'], 
+     NOW(),'dom'),
+
+    (gen_random_uuid(), 
+     '¿Cuál es la duración promedio de los proyectos en meses?', 
+     'SELECT AVG(EXTRACT(MONTH FROM fecha_fin - fecha_inicio)) FROM proyectos;', 
+     'Duración media de los proyectos en meses', 
+     'aggregation', 
+     ARRAY['proyectos'], 
+     NOW(),'dom'),
+
+    (gen_random_uuid(), 
+     '¿Cuántos proyectos hay por cada tipo de sector?', 
+     'SELECT sector, COUNT(*) FROM proyectos GROUP BY sector;', 
+     'Número de proyectos agrupados por sector', 
+     'aggregation', 
+     ARRAY['proyectos'], 
+     NOW(),'dom'),
+
+    (gen_random_uuid(), 
+     'Dame la cantidad de proyectos activos por provincia.', 
+     'SELECT provincia, COUNT(*) FROM proyectos WHERE process_text(estado) = process_text(''activo'') GROUP BY provincia;', 
+     'Cantidad de proyectos activos agrupados por provincia', 
+     'aggregation', 
+     ARRAY['proyectos'], 
+     NOW(),'dom'),
+
+    (gen_random_uuid(), 
+     '¿Cuál es el sector con más proyectos aprobados?', 
+     'SELECT sector FROM proyectos WHERE process_text(estado) = process_text(''aprobado'') GROUP BY sector ORDER BY COUNT(*) DESC LIMIT 1;', 
+     'Sector con más proyectos aprobados', 
+     'ranking', 
+     ARRAY['proyectos'], 
+     NOW(),'dom'),
+
+    (gen_random_uuid(), 
+     'Lista de proyectos en salud con presupuesto mayor a 1 millón.', 
+     'SELECT nombre FROM proyectos WHERE process_text(sector) = process_text(''Salud'') AND presupuesto > 1000000;', 
+     'Lista de proyectos en el sector salud con presupuesto > 1M', 
+     'filtering', 
+     ARRAY['proyectos'], 
+     NOW(),'dom'),
+
+    (gen_random_uuid(), 
+     '¿Cuáles son los proyectos con más de 2 años de duración?', 
+     'SELECT nombre FROM proyectos WHERE fecha_fin - fecha_inicio > INTERVAL ''2 years'';', 
+     'Proyectos con más de 2 años de duración', 
+     'filtering', 
+     ARRAY['proyectos'], 
+     NOW(),'dom');
+
+
+-------------------
+
+DO $$ 
+DECLARE 
+    rec RECORD;
+    sql_query TEXT;
+    country_iso3 TEXT;
+BEGIN
+    -- Recorremos todas las filas de sch_values
+    FOR rec IN SELECT id, table_name, column_name, unique_value FROM sch_values WHERE pais_iso3 IS NULL LOOP
+
+        -- Construir consulta dinámica para obtener el pais_iso3 desde la tabla correspondiente
+        sql_query := format(
+            'SELECT pais_iso3 FROM %I WHERE %I = %L LIMIT 1', 
+            rec.table_name, rec.column_name, rec.unique_value
+        );
+
+        -- Ejecutar la consulta dinámica y almacenar el resultado en country_iso3
+        EXECUTE sql_query INTO country_iso3;
+
+        -- Si encontramos un país ISO3, actualizamos la fila en sch_values
+        IF country_iso3 IS NOT NULL THEN
+            UPDATE sch_values 
+            SET pais_iso3 = country_iso3
+            WHERE id = rec.id;
+        END IF;
+
+    END LOOP;
+
+    RAISE NOTICE 'Actualización completada';
+END $$;
+
+
+----------
+DO $$ 
+DECLARE 
+    r RECORD;
+BEGIN
+    FOR r IN 
+        SELECT table_name, column_name
+        FROM information_schema.columns 
+        WHERE table_schema = 'public' 
+        AND data_type IN ('text', 'character varying') 
+    LOOP
+        EXECUTE format(
+            'ALTER TABLE %I ALTER COLUMN %I TYPE TEXT COLLATE case_insensitive;', 
+            r.table_name, r.column_name
+        );
+    END LOOP;
+END $$;
+
+
+

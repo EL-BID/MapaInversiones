@@ -1,0 +1,39 @@
+# .sqlfluff
+[sqlfluff]
+dialect = postgres
+templater = jinja                  
+exclude_rules = AL07, LT05, LT12, LT13  
+nocolor = True
+verbose = 0
+
+# ── Estilo general ───────────────────────────────────────────────────────────
+[sqlfluff:rules]
+capitalisation_policy = upper          
+extended_capitalisation_policy = lower 
+indent_unit = space
+indent_width = 4
+
+# ── Detalles que coinciden con tus prompts ───────────────────────────────────
+[sqlfluff:rules:layout.select_targets]
+wildcard_policy = single               
+
+[sqlfluff:rules:aliasing.table]
+aliasing = explicit                    
+
+[sqlfluff:rules:aliasing.column]
+aliasing = explicit                   
+
+[sqlfluff:rules:ambiguous.join]
+fully_qualify_join_types = both        
+
+[sqlfluff:rules:ambiguous.column_references]
+group_by_and_order_by_style = explicit
+
+[sqlfluff:rules:convention.casting_style]
+preferred_type_casting_style = cast
+
+[sqlfluff:rules:convention.count_rows]
+prefer_count_1 = True
+
+[sqlfluff:rules:convention.not_equal]
+preferred_not_equal_style = ansi

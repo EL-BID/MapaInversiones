@@ -1,0 +1,22 @@
+{
+"data": {
+  "title": "Sugerencias de preguntas",
+  "isMultipleCountry": true,
+  "questions": [
+  {
+	"country": "Argentina",
+	"tooltip":"¿Cuáles son las escuelas que podrían estar listas antes de 2025 en Pilar, provincia de Buenos Aires?",
+	"name":"¿Cuáles son las escuelas que podrían estar listas antes de 2025 en Pilar, provincia de Buenos Aires?"
+  },
+  {
+	"country": "Perú",
+	"tooltip":"¿Qué tipo obra o sector tienen asociados incidencias ODS?",
+	"name":"¿Qué tipo obra o sector tienen asociados incidencias ODS?"
+  },
+  {
+	"country": "República Dominicana",
+	"tooltip":"¿Qué sector tiene menos inversión en República Dominicana?",
+	"name":"¿Qué sector tiene menos inversión en República Dominicana?"
+  }]
+  }
+}
