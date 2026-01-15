@@ -3,7 +3,7 @@
 Effective: December 2025   
 
 The Software, with the exception of the Support and Usage Documentation, shall be subject to the following terms and conditions, which shall be packaged as part of each Software under a file bearing the name "LICENSE" : 
-"Copyright © [2026]. Inter-American Development Bank ("IDB"). Authorized Use." 
+"Copyright © [2025]. Inter-American Development Bank ("IDB"). Authorized Use." 
 
 ### 1. License 
 
