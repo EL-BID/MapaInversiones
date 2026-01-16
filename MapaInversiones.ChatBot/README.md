@@ -97,13 +97,6 @@ docker compose logs -f --tail 50
 - Realiza escaneos de seguridad antes de publicar o desplegar (Gitleaks en CI).
 - Reportes de seguridad: ver `SECURITY.md`.
 
-## Limitación de responsabilidades
-El BID no será responsable, bajo circunstancia alguna, de daño ni indemnización, moral o patrimonial; directo o indirecto; accesorio o especial; o por vía de consecuencia, previsto o imprevisto, que pudiese surgir:
-
-i. Bajo cualquier teoría de responsabilidad, ya sea por contrato, infracción de derechos de propiedad intelectual, negligencia o bajo cualquier otra teoría; y/o
-
-ii. A raíz del uso de esta herramienta, incluyendo, pero sin limitación de potenciales defectos en la herramienta, o la pérdida o inexactitud de los datos de cualquier tipo. Lo anterior incluye los gastos o daños asociados a fallas de comunicación y/o fallas de funcionamiento de computadoras, vinculados con su utilización.
-
 
 ## Licencia 
 ---
