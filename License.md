@@ -1,28 +1,30 @@
 ## IDB Open-Source Software License 
 
-Effective: December 2025   
+Effective: December 2025 
 
-The Software, with the exception of the Support and Usage Documentation, shall be subject to the following terms and conditions, which shall be packaged as part of each Software under a file bearing the name "LICENSE" : 
-"Copyright © [2025]. Inter-American Development Bank ("IDB"). Authorized Use." 
+The Software, with the exception of the Support and Usage Documentation, shall be subject to the following terms and conditions, which shall be packaged as part of each Software under a file bearing the name "LICENSE":  
+
+"Copyright © [2024]. Inter-American Development Bank ("IDB"). Authorized Use." 
 
 ### 1. License 
 
-The IDB hereby grants to the user ("User") a non-exclusive, worldwide, royalty-free license ("License") to reproduce, distribute, publicly perform, lend and make available to the public, and modify the software and modifications thereto, by itself or as part of a collection, subject to the terms and conditions set forth herein. Unless otherwise indicated, the Support and Use Documentation for the software is licensed under Creative Commons CC-BY 4.0 license. 
+The IDB hereby grants to the user ("User") a non-exclusive, worldwide, royalty-free license ("License") to reproduce, distribute, publicly perform, lend and make available to the public, and modify the software and modifications thereto, by itself or as part of a collection, subject to the terms and conditions set forth herein. Unless otherwise indicated, the Support and Use Documentation for the Software is licensed under Creative Commons CC-BY 4.0 license. 
 
 ### 2. Definitions 
 
-2.1 Software: a set of computer programs, instructions and rules that enable tasks to be executed on a computer in order to manage a given process or obtain a given result. Software includes (i) source code, (ii) object code and (iii) Support and Usage Documentation. 
+2.1 “Software”: a set of computer programs, instructions and rules that enable tasks to be executed on a computer in order to manage a given process or obtain a given result. Software includes (i) Source Code, (ii) Object Code and (iii) Support and Usage Documentation. 
+
 The Software may be of the type, but not limited to (i) computer executable program, (ii) mobile and desktop application, (iii) algorithm and (iv) spreadsheet containing macros, as well as other instructions to simulate, project or perform other calculations. 
 
-2.2 Source Code: set of lines of text containing the steps to be followed by the computer to execute the Software. It can be composed of any number of documents, with different extensions and organized in folders. 
+2.2 “Source Code”: set of lines of text containing the steps to be followed by the computer to execute the Software. It can be composed of any number of documents, with different extensions and organized in folders. 
 
-2.3 Object Code: code resulting from the compilation of the Source Code. Compilation is a computer process that translates the Source Code into machine language or bytecode. 
+2.3 “Object Code”: code resulting from the compilation of the Source Code. Compilation is a computer process that translates the Source Code into machine language or bytecode. 
 
-2.4 Supporting and Usage Documentation (the "Documentation"): refers to the information accompanying the source and object code that enables a human to understand the objectives, architecture and programming language of the Software. 
+2.4 “Supporting and Usage Documentation” (the "Documentation"): refers to the information accompanying the Source and Object Code that enables a human to understand the objectives, architecture and programming language of the Software. 
 
-2.5 Derivative Software: derivative works of the Software, such as modifications, updates and upgrades thereof. 
+2.5 “Derivative Software”: derivative works of the Software, such as modifications, updates and upgrades thereof. 
 
-2.6 User: any person, natural or legal, who obtains a copy of the Software. 
+2.6 “User”: any person, natural or legal, who obtains a copy of the Software. 
 
 ### 3. IDB's Rights 
 
@@ -30,7 +32,7 @@ The Software may be of the type, but not limited to (i) computer executable prog
 
 3.2 The IDB expressly reserves the rights to assign, transfer and/or sub-license the Software and/or any of its components to third parties without prior notice. 
 
-### 4. User's Rights on Derivative Software 
+4. User's Rights on Derivative Software 
 
 The User who develops Derivative Software shall retain all intellectual property rights in such Derivative Software, including without limitation copyrights, related to or associated with the Derivative Software, provided that such Derivative Software and any future releases shall be subject to the same terms and conditions of this License. 
 
@@ -46,17 +48,25 @@ The User who develops Derivative Software shall retain all intellectual property
 
 ### 6. Acknowledgment 
 
-6.1 The User agrees to the following statements and disclaimers, and shall maintain the following statements and disclaimers in the Software Documentation master file: 
-"Copyright © [year]. Inter-American Development Bank ("IDB"). Authorized Use. 
-The procedures and results obtained based on the execution of this software are those programmed by the developers and do not necessarily reflect the views of the IDB, its Board of Executive Directors or the countries it represents." 
+6.1 The User agrees to the following statements and disclaimers, and shall maintain the following statements and disclaimers in the Software Documentation master file:  
 
-6.1.1 For the Documentation, the User agrees to the following statements disclaimers, and shall maintain the following statements and disclaimers in the Software Documentation master file. Where the User is using the IDB Lab or AI-powered software, the disclaimers in Sections 6.1.2 and 6.1.3 below shall also apply: "Copyright © [year]. Inter-American Development Bank ("IDB"). The Support and Usage Documentation is licensed under the Creative Commons License CC-BY 4.0 license. The opinions expressed in the Support and Usage Documentation are those of its authors and do not necessarily reflect the opinions of the IDB, its Board of Executive Directors, or the countries it represents.” 
+"Copyright © [year]. Inter-American Development Bank ("IDB"). Authorized Use. The procedures and results obtained based on the execution of this software are those programmed by the developers and do not necessarily reflect the views of the IDB, its Board of Executive Directors or the countries it represents." 
 
-6.1.2 In the case of Multilateral Investment Fund ("IDB Lab") Software, the disclaimer shall be: "The opinions expressed in this work are those of the authors and do not necessarily reflect the views of the IDB, its Board of Executive Directors or the countries it represents, nor those of the MIF Donors Committee or the countries it represents". 
+6.1.1 For the Documentation, the User agrees to the following statements disclaimers, and shall maintain the following statements and disclaimers in the Software Documentation master file. Where the User is using a Multilateral Investment Fund (“IDB Lab”) Software or an Artificial Intelligence (“AI”)-powered Software, the disclaimers in Sections 6.1.2 and 6.1.3 below shall also apply:  
 
-6.1.2.1 For the Documentation associated with IDB Lab Software, the disclaimer of the Documentation shall be: "The opinions expressed in the Support and Usage Documentation are those of its authors and do not necessarily reflect the opinions of the IDB, its Board of Executive Directors, or the countries it represents, nor those of the IDB Lab Donors Committee or the countries it represents.” 
+"Copyright © [year]. Inter-American Development Bank ("IDB"). The Support and Usage Documentation is licensed under the Creative Commons License CC-BY 4.0 license. The opinions expressed in the Support and Usage Documentation are those of its authors and do not necessarily reflect the opinions of the IDB, its Board of Executive Directors, or the countries it represents.” 
 
-6.1.3 Where the Software is, or incorporates, any AI-powered software, the disclaimer shall include: “The Software may include features which use, are powered by, or are an artificial intelligence system (“AI-Powered Services”), and as a result, the services provided via the Software may not be completely error-free or up to date. Additionally, the User acknowledges that due to the incorporation of AI-Powered Services in the Software, the Software may not dynamically (in “real time”) retrieve information and that, consequently, the output provided to the User may not account for events, updates, or other facts that have occurred or become available after the Software was trained. Accordingly, the User acknowledges that the use of the Software, and that any actions taken or reliance on such products, are at the User’s own risk, and the User acknowledges that the User must independently verify any information provided by the Software.  
+6.1.2 In the case of IDB Lab Software, the disclaimer shall be: 
+
+"The procedures and results obtained based on the execution of this software are those programmed by the developers and do not necessarily reflect the  views of the IDB, its Board of Executive Directors or the countries it represents, nor those of the IDB Lab Donors Committee or the countries it represents". 
+
+6.1.2.1 For the Documentation associated with IDB Lab Software, the disclaimer of the Documentation shall be: 
+
+"The opinions expressed in the Support and Usage Documentation are those of its authors and do not necessarily reflect the opinions of the IDB, its Board of Executive Directors, or the countries it represents, nor those of the IDB Lab Donors Committee or the countries it represents.” 
+
+6.1.3 Where the Software is, or incorporates, any AI-powered Software, the disclaimer shall include:  
+
+“The Software may include features which use, are powered by, or are an artificial intelligence system (“AI-Powered Services”), and as a result, the services provided via the Software may not be completely error-free or up to date. Additionally, the User acknowledges that due to the incorporation of AI-Powered Services in the Software, the Software may not dynamically (in “real time”) retrieve information and that, consequently, the output provided to the User may not account for events, updates, or other facts that have occurred or become available after the Software was trained. Accordingly, the User acknowledges that the use of the Software, and that any actions taken or reliance on such products, are at the User’s own risk, and the User acknowledges that the User must independently verify any information provided by the Software”. 
 
 ### 7. IDB Name and Logo 
 
@@ -66,11 +76,11 @@ Other than as expressly permitted in this License, the User may not use the IDB'
 
 8.1 The IDB grants this License without express or implied warranty of any kind, objective or subjective, in contract or tort, including, but not limited to, warranties of merchantability, fitness, suitability, compliance with standards or requirements, or fitness for a particular purpose. 
 
-8.2 The IDB does not warrant that the operation of the Software will be uninterrupted or error free and assumes no obligation to update, correct or improve the Software.  
+8.2 The IDB does not warrant that the operation of the Software will be uninterrupted or error free and assumes no obligation to update, correct or improve the Software. 
 
 8.3 The User assumes sole risk for its use, and shall so inform third parties when using, distributing or making the Software available to third parties. 
 
-8.4 The User also represents and warrants that it will not use the Software in a way that compromises the safety of others including but not limited to use that is not in compliance with applicable laws.  
+8.4 The User also represents and warrants that it will not use the Software in a way that compromises the safety of others including but not limited to use that is not in compliance with applicable laws. 
 
 ### 9. Disclaimer and Limitation of Liability 
 
@@ -82,7 +92,7 @@ Other than as expressly permitted in this License, the User may not use the IDB'
 
 9.2 Certain services, materials, datasets, features, or components made available via the Software are delivered by third-party providers or derived from materials provided by third-party providers (together, the “Third-Party Materials”). By using the Software, the User acknowledges and consents that the IDB may share information and data with applicable third-party providers as may be required to enable and make available the Third-Party Materials via the Software. Further, the IDB EXPRESSLY DISCLAIMS RESPONSIBILITY AND LIABILITY FOR ANY SUCH THIRD-PARTY MATERIALS SET FORTH, DESCRIBED ON, OR ACCESSED THROUGH THE SOFTWARE, AND THE USER AGREES THAT THE IDB SHALL NOT BE RESPONSIBLE FOR ANY LOSS OR DAMAGE INCURRED AS A RESULT OF ANY DEALINGS BETWEEN THE USER AND A THIRD-PARTY PROVIDER, WHETHER OR NOT FACILITATED BY OR MADE IN CONNECTION WITH THE SOFTWARE. 
 
-Additional terms and conditions may also apply to specific portions or features of the Software, including without limitation the terms governing any Third-Party Materials. The User hereby agrees that: (a) this Agreement operates in addition to any terms of use imposed or required by any such third-party provider; and (b) the terms of this Agreement supplement and do not alter or amend any such third-party terms of use. 
+Additional terms and conditions may also apply to specific portions or features of the Software, including without limitation the terms governing any Third-Party Materials. The User hereby agrees that: (a) this License operates in addition to any terms of use imposed or required by any such third-party provider; and (b) the terms of this License supplement and do not alter or amend any such third-party terms of use. 
 
 ### 10. Indemnification 
 
@@ -140,6 +150,7 @@ This License may be amended only with the prior express written consent of the I
 
 This License constitutes the final agreement between the parties and supersedes all prior communications, understandings or agreements, written or oral, between the parties relating to the subject matter of this License. 
 
+ 
  
 
  
