@@ -60,9 +60,13 @@ También cualquier versión puede tener la sección de banner y anuncios, la cua
 
 ![carrusel](/MapaInversiones.Web/media/carrusel.jpg "carrusel")
 
+Dentro de la evolución de esta rama/versión se han ido haciendo ajustes, en la siguiente imagen se ve como se reemplazo el carrusel de banner anterior por uno con una sola imagen que lleva a una nueva seccion en donde se detalla todo lo referente a como se esta invirtiendo el dinero.
+
+![carrusel_nuevo](/MapaInversiones.Web/media/carrusel2.jpg "carrusel_nuevo")
+
 Uno de los elementos con los que el usuario puede interactuar, son las fichas resumen. 
 Las primeras que se ven en esta version muestran algunas preguntas con su respuesta de manera grafica, relacionadas con el dinero que estaba disponible, en que se invirtio y quien lo invirtio.
-En esta fichs se pueden incluir graficas con librerias como d3.js que permiten mostrar de manera interactiva la información. 
+En esta fichas se pueden incluir graficas con librerias como d3.js que permiten mostrar de manera interactiva la información. 
 
 ![en que se invirtio](/MapaInversiones.Web/media/fichapresenqueseinvirtio.jpg "en que se invirtio?")
 
@@ -89,6 +93,10 @@ La principal sección y una de las primeras características que se desarrollaro
 Una vez se ingrese al enlace, como se ve en la siguiente imagen, Mapa de Inversión presenta en la parte izquierda un filtro por diferentes características, estas sirven para ir reduciendo la cantidad de elementos mostrados en el mismo.
 
 ![mapa de inversión](/MapaInversiones.Web/media/mapa.jpg "mapa de inversión")
+
+Despues en la parte inferior, se encuentra un listado que va cambiando de acuerdo a los elementos que se muestren en el mapa y el filtro del mismo, este listado presenta el titulo del proyecto, el estao, el valor, y su id.
+
+![mapa de inversión proyectos](/MapaInversiones.Web/media/mapa2.jpg "mapa de inversión proyectos")
 
 Con la inclusion del WCM tambien se pueden crear secciones como la de noticias, las cuales se presenta como un listado y configuran desde el administrador de contenido, en estas secciones pueden ver las noticias más recientes, ver una imagen, el titulo y un pequeño resumen o subtitulo, según la version de MapaInversiones puede tener tambien la fecha publicación, usar el título de noticias para dirigirse a la sección completa de noticias, o usar un botón para ver todas las que han sido publicadas.
 
@@ -129,7 +137,7 @@ Para el manejo de datos se utiliza LINQ2DB, por lo cual, en caso de ser necesari
 
     2.1. Configuración (Debug o Release - Any CPU)
     
-    2.2. Target framework 3.1
+    2.2. Target .Net 6
     
     2.3. Seleccione el tipo de despliegue que quiere realizar. Existen dos opciones:
    	Framework-dependent deployment (El framework de .Net Core debe estar preinstalado).
@@ -139,7 +147,7 @@ Para el manejo de datos se utiliza LINQ2DB, por lo cual, en caso de ser necesari
 
 #### Instalación en IIS
 
-4. Instale o verifique que el framework de .Net Core 3.1 este instalado en el servidor que hospedará la aplicación (https://dotnet.microsoft.com/en-us/download/dotnet/3.1).
+4. Instale o verifique que el framework de .Net 6 este instalado en el servidor que hospedará la aplicación (https://dotnet.microsoft.com/en-us/download/dotnet).
 5. Como esta es una plataforma web el runtime requerido es ASP.NET Core Runtime 3.1.24
 6. Se recomienda instalar el Windows Hosting Bundle que contiene el runtime y el ASP.NET Core Module.
 7. Instale o verifique el componente SQLClrTypes de 64 bits (x64\SQLSysClrTypes.msi,https://www.microsoft.com/en-us/download/details.aspx?id=55992) 
