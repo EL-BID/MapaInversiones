@@ -73,27 +73,19 @@ Una vez se ingrese al enlace, como se ve en la siguiente imagen, Mapa de Inversi
 
 ![mapa de inversión](/MapaInversiones.Web/media/mapa.jpg "mapa de inversión")
 
-Uno de los elementos con los que el usuario puede interactuar, son las fichas resumen. Las primeras de estas muestran algunas preguntas con su respuesta, relacionadas con los presupuestos ciudadanos, y un botón que envía a la sección correspondiente. 
+Uno de los elementos con los que el usuario puede interactuar, son las fichas resumen. Las primeras de estas muestran los tipos de proyectos que se puden encontrar, como son los de inversión, los de desarrollo local y los relacionados a plan de ordenamiento territorial.
 
-![fichas presupuesto ciudadano](/MapaInversiones.Web/media/fichapresupuestociudadano.jpg "fichas presupuesto ciudadano")
+![tipos de proyecto](/MapaInversiones.Web/media/fichapresupuestociudadano.jpg "Tipos de proyecto")
 
-Después el usuario puede encontrar otras fichas con el presupuesto ejecutado por institución, junto con el enlace para ir a la sección de Presupuestos por Instituciones.
+Después el usuario puede encontrar otras fichas con las principales inversiones de cada sector.
 
-![fichas presupuesto por institucion](/MapaInversiones.Web/media/presupuestointitucion.jpg "fichas presupuesto por institución")
+![inversiones estrategicas](/MapaInversiones.Web/media/presupuestointitucion.jpg "inversiones estrategicas")
 
-Dad la utilidad del WCM tambien el usuario puede encontrar fichas resumen como lo son las correspondientes a los contratos, en el caso del país de ejemplo la fuente de datos proviene de dos fuentes diferentes.
+Dada la utilidad del WCM tambien el usuario no tecnico puede realizar publicaciones, que pueden ser fichas, baners, entre otros.
 
-![contratos](/MapaInversiones.Web/media/contratos.jpg "contratos")
-
-La siguiente sección de la página principal muestra una sección dividida. En la parte de la izquierda aparece un listado de noticias, las cuales se configuran desde el administrador de contenido, en estas secciones pueden ver las 4 noticias más recientes, ver una imagen, el titulo y un pequeño resumen o subtitulo, junto con la fecha publicación, en la parte del título de noticias redirige a la sección completa de noticias, donde se pueden ver todas las que han sido publicadas.
-
-En la parte izquierda, que se ha incorporado en alguno de los paises donde se ha instalado MapaInversiones, se encuentra “sigue la conversación”, en donde se encuentra un widget de Twitter para ver los últimos mensajes publicados por la entidad en esa red social.
+La siguiente sección de la página principal muestra una sección dividida en tres. En esta parte aparece un listado de noticias, las cuales se configuran desde el administrador de contenido, en estas secciones pueden ver las noticias más recientes, ver una imagen, el titulo y un pequeño resumen o subtitulo. EL título de cada noticia redirige a la sección completa de la misma, donde se pueden ver todo el contenido publicado.
 
 ![noticias](/MapaInversiones.Web/media/noticias.jpg "noticias")
-
-Mas adelante el usuario encontrara la sección que envía a formato de contacto que sirve para enviar una opinión correo configurado en la aplicación.
-
-![contacto](/MapaInversiones.Web/media/contacto.jpg "contacto")
 
 La siguiente sección es un menú de pie de página, mostrando nuevamente las diferentes secciones de la aplicación. Adicional, al final existe otro apartado que muestra los diferentes logos de las entidades participantes.
 
