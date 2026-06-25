@@ -1,0 +1,80 @@
+services:
+
+  chatbot:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/app
+      - ./.env:/app/.env:ro
+      - flashrank_cache:/app/.cache/flashrank
+      - tiktoken_cache:/app/.cache/tiktoken
+    working_dir: /app
+    ports:
+      - "80:8000"   # HOST 80 → CONTENEDOR 8000
+    restart: on-failure
+    ulimits:
+      nofile:
+        soft: 4096
+        hard: 8192
+    env_file:
+      - ./.env
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+      - PGSSLMODE=${POSTGRES_SSLMODE:-}
+      - POSTGRES_SUPERUSER=
+      - USE_PGBOUNCER=${USE_PGBOUNCER:-0}
+      - PGBOUNCER_HOST=${PGBOUNCER_HOST:-pgbouncer}
+      - PGBOUNCER_PORT=${PGBOUNCER_PORT:-6432}
+    networks:
+      - chatbot_network
+    depends_on:
+      - pgbouncer
+    deploy:
+      resources:
+        limits:
+          # cpus: '2'
+          memory: 25G
+        reservations:
+          # cpus: '1'
+          memory: 12G
+
+  pgbouncer:
+    build:
+      context: .
+      dockerfile: docker/pgbouncer/Dockerfile
+    restart: unless-stopped
+    environment:
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+      - POSTGRES_UPSTREAM_HOST=${POSTGRES_UPSTREAM_HOST:-}
+      - POSTGRES_UPSTREAM_PORT=${POSTGRES_UPSTREAM_PORT:-}
+      - PGBOUNCER_PORT=${PGBOUNCER_PORT:-6432}
+      - PGBOUNCER_POOL_MODE=${PGBOUNCER_POOL_MODE:-transaction}
+      - PGBOUNCER_DEFAULT_POOL_SIZE=${PGBOUNCER_DEFAULT_POOL_SIZE:-20}
+      - PGBOUNCER_RESERVE_POOL_SIZE=${PGBOUNCER_RESERVE_POOL_SIZE:-5}
+      - PGBOUNCER_MAX_CLIENT_CONN=${PGBOUNCER_MAX_CLIENT_CONN:-200}
+      - PGBOUNCER_IGNORE_STARTUP_PARAMETERS=${PGBOUNCER_IGNORE_STARTUP_PARAMETERS:-extra_float_digits}
+      - PGBOUNCER_AUTH_TYPE=${PGBOUNCER_AUTH_TYPE:-plain}
+      - PGBOUNCER_IDLE_TRANSACTION_TIMEOUT=${PGBOUNCER_IDLE_TRANSACTION_TIMEOUT:-30}
+      - PGBOUNCER_SERVER_RESET_QUERY_ALWAYS=${PGBOUNCER_SERVER_RESET_QUERY_ALWAYS:-0}
+    networks:
+      - chatbot_network
+
+networks:
+  chatbot_network:
+    driver: bridge
+
+volumes:
+  flashrank_cache:
+  tiktoken_cache:

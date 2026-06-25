@@ -1,0 +1,48 @@
+    {% include 'mobile_menu.html' %}
+
+<!-- Begin header -->
+<header id="topbar" class="header">
+<nav class="header-fixed">
+  <div class="container-fluid">
+    <div class="d-flex flex-nowrap align-items-center justify-content-between">
+
+      <!-- Botón sidebar: SÓLO desktop -->
+      <div class="d-none d-lg-block me-2">
+        <button id="btnSidebar"
+                class="main-mnu-btn border-0 bg-transparent p-0"
+                aria-label="Menú lateral">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+          <span class="bar bar-3"></span>
+          <span class="bar bar-4"></span>
+        </button>
+      </div>
+
+      <!-- Botón-país -->
+        <button id="countryBtn"
+                class="btn-country is-default"
+                aria-label="Cambiar país">
+        🌐
+        </button>
+
+          <!-- TÍTULO -->
+          <h2 class="mb-0 text-xl fw-semibold text-primary-700 text-center">
+            Inversión Transparente
+          </h2>
+
+      <!-- Ayuda -->
+        <button id="helpBtn"
+                class="icon-btn ms-2 d-none d-lg-flex"  
+                aria-label="Ayuda">
+        <span class="material-symbols-outlined">help</span>
+        </button>
+
+    </div>
+  </div>
+</nav>
+</header>
+<!-- End header -->
+
+
+
+

@@ -1,0 +1,978 @@
+/* ============================================================================
+   CLARIFICATION.CSS - HOJA DE ESTILOS UNIFICADA
+   MapaInversiones República Dominicana
+   ============================================================================
+   
+   Este archivo centraliza TODOS los estilos relacionados con:
+   - Clarification (wrapper, block, chips, title, note)
+   - Non-blocking hints (sugerencias de refinamiento)
+   - Citizen action shell (puntos a aclarar)
+   - No-data hints (cuando no hay resultados)
+   - Message error block
+   
+   IMPORTANTE: Cargar AL FINAL de todos los CSS para evitar conflictos.
+   
+   ============================================================================ */
+
+/* ============================================================================
+   1. VARIABLES DEL SISTEMA
+   ============================================================================ */
+
+:root {
+    /* Colores institucionales unificados */
+    --chip-primary: #003876;
+    --chip-primary-light: #0055a5;
+    --chip-primary-dark: #002554;
+    --chip-gradient: linear-gradient(135deg, #003876 0%, #0055a5 100%);
+    --chip-gradient-hover: linear-gradient(135deg, #002554 0%, #003876 100%);
+    
+    /* Colores de fondo para contenedores */
+    --chip-container-bg: rgba(0, 56, 118, 0.04);
+    --chip-container-border: rgba(0, 56, 118, 0.12);
+    
+    /* Sombras */
+    --chip-shadow: 0 1px 3px rgba(0, 56, 118, 0.1);
+    --chip-shadow-hover: 0 4px 12px rgba(0, 56, 118, 0.2);
+}
+
+/* ============================================================================
+   2. ANIMACIONES
+   ============================================================================ */
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes chipSpinUnified {
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+@keyframes ripple {
+    to { 
+        transform: scale(1.5); 
+        opacity: 0; 
+    }
+}
+
+@keyframes inputPrefillGlow {
+    0% { box-shadow: 0 0 0 rgba(0, 56, 118, 0); }
+    40% { box-shadow: 0 0 0 3px rgba(0, 56, 118, 0.35); }
+    100% { box-shadow: 0 0 0 rgba(0, 56, 118, 0); }
+}
+
+@keyframes citizenSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ============================================================================
+   3. CLARIFICATION WRAPPER Y BLOQUES
+   ============================================================================ */
+
+.clarification-wrapper {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 56, 118, 0.1);
+    animation: fadeSlideIn 0.3s ease-out;
+}
+
+.clarification-block {
+    margin-bottom: 12px;
+}
+
+.clarification-block:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================================================
+   4. TÍTULOS Y NOTAS DE CLARIFICATION
+   ============================================================================ */
+
+.clarification-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1a2332;
+    margin: 0 0 10px 0;
+    line-height: 1.4;
+}
+
+.clarification-note {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 0 0 12px 0;
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #f0f7ff 0%, #f5f7fa 100%);
+    border-left: 3px solid var(--chip-primary);
+    border-radius: 0 8px 8px 0;
+    line-height: 1.5;
+}
+
+.clarification-empty {
+    font-size: 0.85rem;
+    color: #64748b;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+    text-align: center;
+    margin: 8px 0;
+}
+
+.clarification-hints-list {
+    margin: 0;
+    padding-left: 18px;
+    color: #611717;
+    font-size: 0.88rem;
+}
+
+/* ============================================================================
+   5. NON-BLOCKING HINTS (Sugerencias de refinamiento)
+   ============================================================================ */
+
+.non-blocking-hints {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: var(--chip-container-bg);
+    border: 1px solid var(--chip-container-border);
+    animation: fadeSlideIn 0.3s ease-out;
+}
+
+.non-blocking-hints-title {
+    margin: 0 0 8px 0;
+    font-weight: 600;
+    color: var(--chip-primary);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.non-blocking-hints-title::before {
+    content: '💡';
+    font-size: 1rem;
+}
+
+.non-blocking-hints-message {
+    margin: 0 0 12px 0;
+    font-size: 0.85rem;
+    color: #4a5568;
+    line-height: 1.5;
+}
+
+.non-blocking-hints-list {
+    margin: 0 0 8px 18px;
+    padding: 0;
+    color: #3b4a66;
+    font-size: 0.88rem;
+}
+
+/* Contenedor implícito de chips en non-blocking-hints */
+.non-blocking-hints > div:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* ============================================================================
+   6. CITIZEN ACTION SHELL (Puntos a aclarar)
+   ============================================================================ */
+
+.citizen-action-shell {
+    position: relative;
+    margin-top: 14px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafe 100%);
+    border: 1.5px solid var(--chip-container-border);
+    border-radius: 12px;
+    box-shadow: var(--chip-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    animation: fadeSlideIn 0.3s ease-out;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.citizen-action-shell:hover {
+    box-shadow: var(--chip-shadow-hover);
+    border-color: rgba(0, 56, 118, 0.2);
+    transform: translateY(-1px);
+}
+
+/* Variantes de estado */
+.citizen-action-shell.info::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+    border-radius: 12px 0 0 12px;
+}
+
+.citizen-action-shell.warning::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+    border-radius: 12px 0 0 12px;
+}
+
+.citizen-action-shell.success::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    border-radius: 12px 0 0 12px;
+}
+
+/* Variante compacta */
+.citizen-action-shell.compact {
+    padding: 12px 16px;
+    gap: 10px;
+}
+
+.citizen-action-shell.compact .citizen-action-lead {
+    font-size: 0.75rem;
+}
+
+.citizen-action-shell.compact .citizen-chip {
+    min-height: 38px;
+    padding: 8px 14px;
+    font-size: 0.75rem;
+}
+
+/* Animación de entrada */
+.citizen-action-shell.animate-in {
+    animation: citizenSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.citizen-action-lead {
+    margin: 0;
+    padding-left: 24px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--chip-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    line-height: 1.4;
+}
+
+.citizen-action-lead::before {
+    content: '💡';
+    position: absolute;
+    left: 0;
+    font-size: 0.95rem;
+}
+
+.citizen-action-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ============================================================================
+   7. NO-DATA HINTS (Cuando no hay resultados)
+   ============================================================================ */
+
+.no-data-hints {
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 12px;
+    background: var(--chip-container-bg);
+    border: 1px solid var(--chip-container-border);
+    animation: fadeSlideIn 0.3s ease-out;
+}
+
+.no-data-lead {
+    margin: 0 0 8px 0;
+    font-weight: 600;
+    color: var(--chip-primary);
+}
+
+.no-data-hints-list {
+    margin: 0 0 10px 18px;
+    padding: 0;
+    color: #2f3b58;
+    font-size: 0.9rem;
+}
+
+.no-data-chip-group {
+    margin-top: 10px;
+}
+
+.no-data-chip-title {
+    margin: 0 0 6px 0;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--chip-primary);
+}
+
+.no-data-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* ============================================================================
+   8. MESSAGE ERROR BLOCK
+   ============================================================================ */
+
+.message-error-block {
+    background: #fff3f3;
+    border: 1px solid rgba(215, 49, 49, 0.35);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: #611717;
+}
+
+.message-error-block p {
+    margin: 0 0 8px 0;
+    font-weight: 600;
+}
+
+/* ============================================================================
+   9. CONTENEDOR DE CHIPS UNIFICADO
+   ============================================================================ */
+
+.clarification-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================================================
+   10. ESTILO BASE UNIFICADO PARA TODOS LOS CHIPS
+   ============================================================================ */
+
+.clarification-chip,
+.non-blocking-chip,
+.citizen-chip {
+    /* Reset */
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: inherit;
+    
+    /* Tipografía */
+    font-size: 0.82rem;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: left;
+    white-space: normal;
+    word-break: break-word;
+    
+    /* Espaciado */
+    padding: 10px 18px;
+    margin: 0;
+    
+    /* Colores - Estilo Outlined */
+    background: #ffffff;
+    color: var(--chip-primary);
+    border: 1.5px solid var(--chip-primary);
+    
+    /* Forma PILL unificada */
+    border-radius: 24px;
+    
+    /* Transiciones */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Sombra sutil */
+    box-shadow: var(--chip-shadow);
+    
+    /* Layout */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    
+    /* Touch target */
+    min-height: 42px;
+    
+    /* Posición para pseudo-elementos */
+    position: relative;
+    overflow: hidden;
+}
+
+/* ============================================================================
+   11. CHIPS - ESTADOS INTERACTIVOS
+   ============================================================================ */
+
+/* Hover */
+.clarification-chip:hover,
+.non-blocking-chip:hover,
+.citizen-chip:hover {
+    background: var(--chip-gradient);
+    color: #ffffff;
+    border-color: var(--chip-primary);
+    box-shadow: var(--chip-shadow-hover);
+    transform: translateY(-2px);
+    will-change: transform, box-shadow;
+}
+
+/* Focus */
+.clarification-chip:focus,
+.non-blocking-chip:focus,
+.citizen-chip:focus {
+    background: var(--chip-gradient);
+    color: #ffffff;
+    border-color: var(--chip-primary);
+    box-shadow: 
+        var(--chip-shadow-hover),
+        0 0 0 3px rgba(0, 56, 118, 0.15);
+    outline: none;
+}
+
+/* Active */
+.clarification-chip:active,
+.non-blocking-chip:active,
+.citizen-chip:active {
+    background: var(--chip-gradient-hover);
+    color: #ffffff;
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 56, 118, 0.15);
+}
+
+/* Ripple effect en active */
+.citizen-chip:active::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+    animation: ripple 0.6s ease-out;
+}
+
+/* Focus visible (solo teclado) */
+.clarification-chip:focus-visible,
+.non-blocking-chip:focus-visible,
+.citizen-chip:focus-visible {
+    box-shadow: 
+        var(--chip-shadow-hover),
+        0 0 0 3px rgba(0, 85, 165, 0.4);
+    outline: 3px solid var(--chip-primary);
+    outline-offset: 3px;
+}
+
+/* Quitar will-change cuando no hay hover */
+.citizen-chip:not(:hover),
+.clarification-chip:not(:hover),
+.non-blocking-chip:not(:hover) {
+    will-change: auto;
+}
+
+/* ============================================================================
+   12. CHIPS - VARIANTES
+   ============================================================================ */
+
+/* Variante primaria (acción principal) */
+.citizen-chip-primary {
+    background: var(--chip-gradient);
+    color: #ffffff;
+    border-color: transparent;
+    font-weight: 600;
+    box-shadow: 
+        0 2px 6px rgba(0, 56, 118, 0.25),
+        0 1px 2px rgba(0, 56, 118, 0.15);
+}
+
+.citizen-chip-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.citizen-chip-primary:hover::before {
+    left: 100%;
+}
+
+.citizen-chip-primary:hover {
+    background: var(--chip-gradient-hover);
+    box-shadow: 0 6px 16px rgba(0, 56, 118, 0.3);
+    transform: translateY(-2px);
+}
+
+/* Variante secundaria */
+.citizen-chip-secondary,
+.clarification-chip--secondary {
+    background: rgba(245, 247, 250, 0.5);
+    color: #4a5568;
+    border-color: rgba(0, 56, 118, 0.15);
+    font-weight: 500;
+}
+
+.citizen-chip-secondary:hover,
+.clarification-chip--secondary:hover {
+    background: var(--chip-gradient);
+    color: #ffffff;
+    border-color: var(--chip-primary);
+}
+
+/* Variante estática (solo información) */
+.citizen-chip-static {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.9;
+}
+
+/* ============================================================================
+   13. CHIPS - BADGE CONTADOR
+   ============================================================================ */
+
+.citizen-chip-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    background: #c8102e; /* Rojo institucional */
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    border-radius: 11px;
+    margin-left: 6px;
+    box-shadow: 0 2px 6px rgba(200, 16, 46, 0.3);
+}
+
+/* ============================================================================
+   14. CHIPS - ESTADOS ESPECIALES
+   ============================================================================ */
+
+/* Deshabilitado */
+.citizen-chip:disabled,
+.clarification-chip:disabled,
+.non-blocking-chip:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    filter: grayscale(0.3);
+}
+
+.citizen-chip:disabled:hover,
+.clarification-chip:disabled:hover,
+.non-blocking-chip:disabled:hover {
+    background: #ffffff;
+    color: var(--chip-primary);
+    box-shadow: var(--chip-shadow);
+    transform: none;
+}
+
+/* Estado de carga */
+.citizen-chip.loading,
+.clarification-chip.loading,
+.non-blocking-chip.loading {
+    pointer-events: none;
+    opacity: 0.7;
+    position: relative;
+    padding-right: 40px;
+}
+
+.citizen-chip.loading::after,
+.clarification-chip.loading::after,
+.non-blocking-chip.loading::after {
+    content: '';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: chipSpinUnified 0.8s linear infinite;
+}
+
+/* ============================================================================
+   15. ICONOS DENTRO DE CHIPS
+   ============================================================================ */
+
+.citizen-chip svg,
+.citizen-chip i,
+.citizen-chip [data-feather],
+.clarification-chip svg,
+.non-blocking-chip svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    stroke-width: 2.5;
+}
+
+/* ============================================================================
+   16. UTILIDADES ADICIONALES
+   ============================================================================ */
+
+/* Animación para input prefill */
+.input-prefill-highlight {
+    animation: inputPrefillGlow 1.1s ease;
+}
+
+/* ============================================================================
+   17. RESPONSIVE - TABLETS (≤768px)
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    /* Contenedores */
+    .clarification-wrapper {
+        margin-top: 14px;
+        padding-top: 14px;
+    }
+    
+    .non-blocking-hints,
+    .citizen-action-shell,
+    .no-data-hints {
+        padding: 12px 14px;
+        margin-top: 12px;
+    }
+    
+    /* Títulos */
+    .clarification-title {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+    
+    .clarification-note {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+        margin-bottom: 10px;
+    }
+    
+    .non-blocking-hints-title,
+    .citizen-action-lead {
+        font-size: 0.75rem;
+        padding-left: 22px;
+    }
+    
+    .citizen-action-lead::before {
+        font-size: 0.85rem;
+    }
+    
+    /* Chips */
+    .clarification-chips {
+        gap: 6px;
+    }
+    
+    .clarification-chip,
+    .non-blocking-chip,
+    .citizen-chip {
+        font-size: 0.78rem;
+        padding: 8px 14px;
+        min-height: 38px;
+        border-radius: 20px;
+    }
+    
+    .citizen-action-group {
+        gap: 6px;
+    }
+    
+    /* Iconos */
+    .citizen-chip svg,
+    .citizen-chip i,
+    .clarification-chip svg,
+    .non-blocking-chip svg {
+        width: 14px;
+        height: 14px;
+    }
+    
+    /* Badge */
+    .citizen-chip-badge {
+        min-width: 20px;
+        height: 20px;
+        font-size: 0.65rem;
+    }
+}
+
+/* ============================================================================
+   18. RESPONSIVE - MÓVILES (≤480px)
+   ============================================================================ */
+
+@media (max-width: 480px) {
+    /* Contenedores */
+    .clarification-wrapper {
+        margin-top: 12px;
+        padding-top: 12px;
+    }
+    
+    .non-blocking-hints,
+    .citizen-action-shell,
+    .no-data-hints {
+        padding: 10px 12px;
+        margin-top: 10px;
+        border-radius: 10px;
+    }
+    
+    /* Títulos */
+    .clarification-title {
+        font-size: 0.82rem;
+    }
+    
+    .non-blocking-hints-title,
+    .citizen-action-lead {
+        font-size: 0.72rem;
+        padding-left: 20px;
+    }
+    
+    .citizen-action-lead::before,
+    .non-blocking-hints-title::before {
+        font-size: 0.8rem;
+    }
+    
+    /* Chips */
+    .clarification-chips,
+    .no-data-chip-row,
+    .citizen-action-group {
+        gap: 6px;
+    }
+    
+    .clarification-chip,
+    .non-blocking-chip,
+    .citizen-chip {
+        font-size: 0.75rem;
+        padding: 8px 12px;
+        min-height: 36px;
+        border-radius: 18px;
+        flex: 1 1 auto;
+        justify-content: center;
+        text-align: center;
+        max-width: 100%;
+    }
+    
+    /* Iconos */
+    .citizen-chip svg,
+    .citizen-chip i,
+    .clarification-chip svg,
+    .non-blocking-chip svg {
+        width: 13px;
+        height: 13px;
+    }
+}
+
+/* ============================================================================
+   19. RESPONSIVE - MÓVILES MUY PEQUEÑOS (≤360px)
+   ============================================================================ */
+
+@media (max-width: 360px) {
+    .clarification-chip,
+    .non-blocking-chip,
+    .citizen-chip {
+        font-size: 0.72rem;
+        padding: 7px 10px;
+        min-height: 34px;
+        border-radius: 16px;
+        width: 100%;
+    }
+    
+    .citizen-chip-badge {
+        min-width: 18px;
+        height: 18px;
+        font-size: 0.6rem;
+        margin-left: 4px;
+    }
+}
+
+/* ============================================================================
+   20. FORZAR TEMA CLARO (Dark Mode del SO)
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+    /* Contenedores */
+    .clarification-wrapper {
+        border-top-color: rgba(0, 56, 118, 0.1);
+    }
+    
+    .non-blocking-hints,
+    .citizen-action-shell,
+    .no-data-hints {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafe 100%);
+        border-color: var(--chip-container-border);
+    }
+    
+    /* Títulos */
+    .clarification-title {
+        color: #1a2332;
+    }
+    
+    .clarification-note {
+        background: linear-gradient(135deg, #f0f7ff 0%, #f5f7fa 100%);
+        color: #64748b;
+        border-left-color: var(--chip-primary);
+    }
+    
+    .non-blocking-hints-title,
+    .citizen-action-lead,
+    .no-data-lead,
+    .no-data-chip-title {
+        color: var(--chip-primary);
+    }
+    
+    .non-blocking-hints-message {
+        color: #4a5568;
+    }
+    
+    /* Chips */
+    .clarification-chip,
+    .non-blocking-chip,
+    .citizen-chip {
+        background: #ffffff;
+        color: var(--chip-primary);
+        border-color: var(--chip-primary);
+    }
+    
+    .clarification-chip:hover,
+    .non-blocking-chip:hover,
+    .citizen-chip:hover,
+    .clarification-chip:focus,
+    .non-blocking-chip:focus,
+    .citizen-chip:focus {
+        background: var(--chip-gradient);
+        color: #ffffff;
+    }
+    
+    .clarification-chip:active,
+    .non-blocking-chip:active,
+    .citizen-chip:active {
+        background: var(--chip-gradient-hover);
+        color: #ffffff;
+    }
+}
+
+/* ============================================================================
+   21. ACCESIBILIDAD - REDUCCIÓN DE MOVIMIENTO
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .clarification-wrapper,
+    .non-blocking-hints,
+    .citizen-action-shell,
+    .no-data-hints {
+        animation: none;
+    }
+    
+    .clarification-chip,
+    .non-blocking-chip,
+    .citizen-chip,
+    .citizen-action-shell {
+        transition: none;
+    }
+    
+    .clarification-chip:hover,
+    .non-blocking-chip:hover,
+    .citizen-chip:hover,
+    .citizen-action-shell:hover {
+        transform: none;
+    }
+    
+    .citizen-chip.loading::after,
+    .clarification-chip.loading::after,
+    .non-blocking-chip.loading::after {
+        animation: none;
+    }
+    
+    .citizen-chip-primary::before {
+        transition: none;
+    }
+    
+    .citizen-chip:active::after {
+        animation: none;
+    }
+    
+    .input-prefill-highlight {
+        animation: none;
+    }
+}
+
+/* ============================================================================
+   22. ACCESIBILIDAD - ALTO CONTRASTE
+   ============================================================================ */
+
+@media (prefers-contrast: high) {
+    .clarification-chip,
+    .non-blocking-chip,
+    .citizen-chip {
+        border-width: 2.5px;
+    }
+    
+    .clarification-chip:focus,
+    .non-blocking-chip:focus,
+    .citizen-chip:focus {
+        box-shadow: 0 0 0 4px #000000;
+    }
+    
+    .non-blocking-hints,
+    .citizen-action-shell,
+    .no-data-hints {
+        border-width: 2px;
+        border-color: var(--chip-primary);
+    }
+    
+    .clarification-note {
+        border-left-width: 5px;
+    }
+}
+
+/* ============================================================================
+   23. PARCHE: UNIFICACIÓN DE MESSAGE-CONTENT
+   ============================================================================ */
+
+/* Unificar line-height y font-size entre archivos CSS */
+.message-content {
+    line-height: 1.65;
+    font-size: 0.9375rem;
+}
+
+.message-content p {
+    margin: 0 0 14px 0;
+    line-height: 1.65;
+    font-size: inherit;
+}
+
+.message-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* FIX: Color de <strong> según tipo de mensaje */
+.message.user .message-content strong {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.message.assistant .message-content strong {
+    font-weight: 700;
+    /*color: var(--chip-primary);*/
+}
+
+.message-content em {
+    font-style: italic;
+    color: #4a5568;
+    font-size: 0.95em;
+}

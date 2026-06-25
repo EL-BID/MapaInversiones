@@ -1,0 +1,5 @@
+logs/*
+logs/chatbot_development.log
+app/logs/chatbot_development.log
+test/batch/*.csv
+app/test/batch/*.csv

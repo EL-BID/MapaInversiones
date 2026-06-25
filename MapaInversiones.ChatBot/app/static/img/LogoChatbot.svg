@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 543.3 141.53">
+  <defs>
+    <linearGradient id="Degradado_sin_nombre_31" data-name="Degradado sin nombre 31" x1="-8.14" y1="61.41" x2="563.85" y2="61.41" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1d71b8"/>
+      <stop offset=".42" stop-color="#e71d73"/>
+      <stop offset=".64" stop-color="#e71d73"/>
+      <stop offset=".99" stop-color="#1d71b8"/>
+    </linearGradient>
+    <linearGradient id="Degradado_sin_nombre_31-2" data-name="Degradado sin nombre 31" y1="85.16" y2="85.16" xlink:href="#Degradado_sin_nombre_31"/>
+    <linearGradient id="Degradado_sin_nombre_31-3" data-name="Degradado sin nombre 31" y1="71.97" y2="71.97" xlink:href="#Degradado_sin_nombre_31"/>
+    <linearGradient id="Degradado_sin_nombre_31-4" data-name="Degradado sin nombre 31" y1="71.31" y2="71.31" xlink:href="#Degradado_sin_nombre_31"/>
+    <linearGradient id="Degradado_sin_nombre_31-5" data-name="Degradado sin nombre 31" y1="76.31" y2="76.31" xlink:href="#Degradado_sin_nombre_31"/>
+    <linearGradient id="Degradado_sin_nombre_31-6" data-name="Degradado sin nombre 31" y1="82.05" y2="82.05" xlink:href="#Degradado_sin_nombre_31"/>
+    <linearGradient id="Degradado_sin_nombre_31-7" data-name="Degradado sin nombre 31" y1="76.31" y2="76.31" xlink:href="#Degradado_sin_nombre_31"/>
+    <linearGradient id="Degradado_sin_nombre_31-8" data-name="Degradado sin nombre 31" y1="71.31" y2="71.31" xlink:href="#Degradado_sin_nombre_31"/>
+    <linearGradient id="Degradado_sin_nombre_31-9" data-name="Degradado sin nombre 31" y1="71.31" y2="71.31" xlink:href="#Degradado_sin_nombre_31"/>
+    <linearGradient id="Degradado_sin_nombre_31-10" data-name="Degradado sin nombre 31" y1="71.31" y2="71.31" xlink:href="#Degradado_sin_nombre_31"/>
+  </defs>
+  <g>
+    <g>
+      <path d="M62.95,56.11c0,2.8,1.6,6.5,3.9,10.2l.2.1c1.1,1.6,2.6,3.4,3.4,3.4.3,0,6.1-8.4,6.1-8.4l4.2,5.1,7.7-11.5,1.6,2.4.2-9.2-7.8,6.1,3.8-.3-5.5,8.6-5.1-6s-3.7,5.5-5.5,7.8c-2-3.1-3.4-6.1-3.4-8.5,0-7.4,6.4-13.5,14.1-13.5s14.1,6.1,14.1,13.5-13.8,22-13.8,22c0,0-3.5-3.4-7.3-8.3-.3.6-1.9,2-2.2,2.6,4.8,6.3,9.5,11.8,9.5,11.8,0,0,17.7-18.4,17.7-28s-8-17.2-17.9-17.2c-10,.1-18,7.8-18,17.3Z" style="fill: url(#Degradado_sin_nombre_31); stroke-width: 0px;"/>
+      <path d="M86.55,80.71c4.1,1.1,6,3.1,4.7,5.1s-5.3,3.4-10.2,3.4-9-1.3-10.5-3.2c-1.4-2,.3-4.1,4.3-5.2l-3.3-2.2c-6.4,1.8-9,5-6.8,8.1s8.7,5.1,16.3,5.1c7.6-.1,13.9-2.2,15.9-5.3,2-3.1-.9-6.3-7.4-8l-3,2.2Z" style="fill: url(#Degradado_sin_nombre_31-2); stroke-width: 0px;"/>
+    </g>
+    <path d="M130.25,112.51h-62l-30.8,23.4c-1.6,1.2-4,.9-5.2-.7-.7-.9-.9-1.9-.7-2.9l3.7-19.9c-2.5-.4-4.7-1.6-6.4-3.3l-.2-.2c-2-2.1-3.2-5-3.2-8.1V35.11c0-3.2,1.3-6.2,3.5-8.3h0c2.1-2.1,5.1-3.5,8.3-3.5h37.9v-4.2c0-3.1,1.2-6,3.2-8.1l.2-.2c2.1-2.1,5.1-3.5,8.3-3.5h93.1c3.2,0,6.2,1.3,8.3,3.5h0c2.1,2.1,3.5,5.1,3.5,8.3v65.6c0,3.3-1.3,6.2-3.5,8.3h0c-1.7,1.7-4,2.9-6.4,3.3l3.7,19.9c.2,1,0,2.1-.7,2.9-1.2,1.6-3.6,2-5.2.7l-30.8-23.4h-6.8v4.2c0,3.3-1.3,6.2-3.5,8.3l-.2.2c-2.1,2.2-4.9,3.4-8.1,3.4h0ZM142.15,43.71v16.7M142.15,67.81v21.2h8c1,0,1.9.4,2.5,1l23.9,18.1-2.7-14.7c-.4-2,1-4,3-4.3.2,0,.4-.1.7-.1h2.6c1.2,0,2.3-.5,3.1-1.3h0c.8-.8,1.3-1.9,1.3-3.1V19.11c0-1.2-.5-2.3-1.3-3.1h0c-.8-.8-1.9-1.3-3.1-1.3h-93.2c-1.2,0-2.3.5-3.1,1.3l-.1.1c-.7.8-1.1,1.8-1.1,2.9v4.3h47.7c3.2,0,6.2,1.3,8.3,3.5h0c2.1,2.1,3.5,5.1,3.5,8.3v1.1M67.05,105.11h63.2c1.1,0,2.2-.4,2.9-1.1l.1-.1c.8-.8,1.3-1.9,1.3-3.1V35.11c0-1.2-.5-2.3-1.3-3.1h0c-.8-.8-1.9-1.3-3.1-1.3H36.95c-1.2,0-2.3.5-3.1,1.3h0c-.8.8-1.3,1.9-1.3,3.1v65.6c0,1.1.4,2.2,1.1,2.9l.1.1c.8.8,1.9,1.3,3.1,1.3h2.5c.2,0,.4,0,.7.1,2,.4,3.4,2.3,3,4.3l-2.7,14.7,23.9-18.1c1-.6,1.9-.9,2.8-.9Z" style="fill: url(#Degradado_sin_nombre_31-3); fill-rule: evenodd; stroke-width: 0px;"/>
+  </g>
+  <g>
+    <path d="M244.85,92.91l-.06-25.92-12.71,21.36h-4.51l-12.65-20.8v25.37h-9.38v-43.21h8.27l16.17,26.85,15.92-26.85h8.21l.12,43.21h-9.38Z" style="fill: url(#Degradado_sin_nombre_31-4); stroke-width: 0px;"/>
+    <path d="M293.18,73.97v18.95h-9.01v-4.14c-1.79,3.02-5.25,4.63-10.12,4.63-7.78,0-12.41-4.32-12.41-10.06s4.14-9.94,14.26-9.94h7.65c0-4.14-2.47-6.54-7.65-6.54-3.52,0-7.16,1.17-9.57,3.09l-3.46-6.73c3.64-2.59,9.01-4.01,14.32-4.01,10.12,0,15.99,4.69,15.99,14.75ZM283.55,82.42v-3.39h-6.6c-4.51,0-5.92,1.67-5.92,3.89,0,2.41,2.04,4.01,5.43,4.01,3.21,0,5.99-1.48,7.1-4.51Z" style="fill: url(#Degradado_sin_nombre_31-5); stroke-width: 0px;"/>
+    <path d="M338.05,76.31c0,10.43-7.22,17.1-16.54,17.1-4.13,0-7.53-1.3-10-4.01v15.49h-9.63v-45.18h9.2v3.83c2.41-2.9,5.99-4.32,10.43-4.32,9.32,0,16.54,6.67,16.54,17.1ZM328.3,76.31c0-5.74-3.64-9.2-8.46-9.2s-8.46,3.46-8.46,9.2,3.64,9.2,8.46,9.2,8.46-3.46,8.46-9.2Z" style="fill: url(#Degradado_sin_nombre_31-6); stroke-width: 0px;"/>
+    <path d="M373.3,73.97v18.95h-9.01v-4.14c-1.79,3.02-5.25,4.63-10.12,4.63-7.78,0-12.41-4.32-12.41-10.06s4.13-9.94,14.26-9.94h7.65c0-4.14-2.47-6.54-7.65-6.54-3.52,0-7.16,1.17-9.57,3.09l-3.46-6.73c3.64-2.59,9.01-4.01,14.32-4.01,10.12,0,15.99,4.69,15.99,14.75ZM363.67,82.42v-3.39h-6.6c-4.51,0-5.93,1.67-5.93,3.89,0,2.41,2.04,4.01,5.43,4.01,3.21,0,5.99-1.48,7.1-4.51Z" style="fill: url(#Degradado_sin_nombre_31-7); stroke-width: 0px;"/>
+    <path d="M422.3,81.13c0,7.47-5.92,11.79-17.28,11.79h-22.34v-43.21h21.11c10.8,0,16.36,4.51,16.36,11.23,0,4.32-2.22,7.65-5.74,9.5,4.81,1.54,7.9,5.25,7.9,10.68ZM392.62,57.24v10.18h9.94c4.88,0,7.53-1.73,7.53-5.12s-2.65-5.06-7.53-5.06h-9.94ZM412.24,80.08c0-3.64-2.78-5.37-7.96-5.37h-11.67v10.68h11.67c5.18,0,7.96-1.6,7.96-5.31Z" style="fill: url(#Degradado_sin_nombre_31-8); stroke-width: 0px;"/>
+    <path d="M427.18,71.31c0-12.84,10-22.34,23.64-22.34s23.64,9.44,23.64,22.34-10.06,22.34-23.64,22.34-23.64-9.5-23.64-22.34ZM464.34,71.31c0-8.21-5.8-13.83-13.52-13.83s-13.52,5.62-13.52,13.83,5.8,13.83,13.52,13.83,13.52-5.62,13.52-13.83Z" style="fill: url(#Degradado_sin_nombre_31-9); stroke-width: 0px;"/>
+    <path d="M490.33,57.86h-13.83v-8.15h37.65v8.15h-13.83v35.06h-10v-35.06Z" style="fill: url(#Degradado_sin_nombre_31-10); stroke-width: 0px;"/>
+  </g>
+</svg>

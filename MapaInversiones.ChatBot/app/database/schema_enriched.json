@@ -1,0 +1,296 @@
+{
+  "stg_mapainv_proyectosaprobadosinv": {
+    "table_name": "stg_mapainv_proyectosaprobadosinv",
+    "description": "La tabla 'stg_mapainv_proyectosaprobadosinv' almacena información sobre proyectos aprobados, incluyendo su ID, nombre, objetivo, estado, fechas, duración, valor, sector, avance financiero, entidad ejecutora, tipo y país.",
+    "recordcount": 6100,
+    "primary_key": [],
+    "columns": {
+      "codigo_snip": {
+        "type": "text",
+        "description": "atributo: codigo_snip | tipo: text | descripción: Identificador único en formato textual que representa el código de un proyecto aprobado en el sistema de gestión de inventarios.",
+        "sample_values": "16692, 12533",
+        "is_catalogue": false
+      },
+      "duracion_proyecto": {
+        "type": "double precision",
+        "description": "atributo: duracion_proyecto | tipo: double precision | descripción: Duración del proyecto expresada en unidades de tiempo, representando el tiempo total estimado para su finalización.",
+        "sample_values": "2.0, 11.0",
+        "is_catalogue": true
+      },
+      "valor_proyecto": {
+        "type": "double precision",
+        "description": "atributo: valor_proyecto | tipo: double precision | descripción: Monto total asignado al proyecto en unidades monetarias.",
+        "sample_values": "0.0, 14757766.41",
+        "is_catalogue": false
+      },
+      "nombresector_proyecto": {
+        "type": "text",
+        "description": "atributo: nombresector_proyecto | tipo: text | descripción: Sector al que pertenece el proyecto, que puede incluir áreas como deportes, cultura, administración y agricultura.",
+        "sample_values": [
+          "ACTIVIDADES DEPORTIVAS, RECREATIVAS, CULTURALES Y RELIGIOSAS",
+          "ADMINISTRACIÓN GENERAL"
+        ],
+        "is_catalogue": true
+      },
+      "porcentajeavancefinanciero_proyecto": {
+        "type": "double precision",
+        "description": "atributo: porcentajeavancefinanciero_proyecto | tipo: double precision | descripción: Porcentaje que indica el avance financiero acumulado del proyecto en relación con el presupuesto total asignado.",
+        "sample_values": "54.39, 130.77",
+        "is_catalogue": false
+      },
+      "estado_proyecto": {
+        "type": "text",
+        "description": "atributo: estado_proyecto | tipo: text | descripción: Indica la situación actual del proyecto, reflejando su progreso o estado de aprobación.",
+        "sample_values": [
+          "APROBADO",
+          "EJECUCIÓN"
+        ],
+        "is_catalogue": true
+      },
+      "fechainicio_proyecto": {
+        "type": "date",
+        "description": "atributo: fechainicio_proyecto | tipo: date | descripción: Fecha en que se inicia formalmente el proyecto aprobado.",
+        "sample_values": "2017-09-25, 2017-01-03",
+        "is_catalogue": false
+      },
+      "anio_fechainicio_proyecto": {
+        "type": "bigint",
+        "description": "atributo: anio_fechainicio_proyecto | tipo: bigint | descripción: Año en que se inició el proyecto aprobado.",
+        "sample_values": "2000, 2020",
+        "is_catalogue": true
+      },
+      "fechafin_proyecto": {
+        "type": "date",
+        "description": "atributo: fechafin_proyecto | tipo: date | descripción: Fecha en que finaliza el proyecto aprobado.",
+        "sample_values": "2024-12-29, 2027-12-23",
+        "is_catalogue": false
+      },
+      "anio_fechafin_proyecto": {
+        "type": "bigint",
+        "description": "atributo: anio_fechafin_proyecto | tipo: bigint | descripción: Año en que se prevé finalizar el proyecto aprobado.",
+        "sample_values": "2023, 2040",
+        "is_catalogue": true
+      },
+      "id_proyecto": {
+        "type": "bigint",
+        "description": "atributo: id_proyecto | tipo: bigint | descripción: Identificador único del proyecto aprobado en la tabla de proyectos.",
+        "sample_values": "2, 3",
+        "is_catalogue": false
+      },
+      "nombre_proyecto": {
+        "type": "text",
+        "description": "atributo: nombre_proyecto | tipo: text | descripción: Nombre del proyecto aprobado que describe su objetivo y alcance.",
+        "sample_values": "PROYECTO MUNICIPIOS MAS SEGUROS, REHABILITACIÓN PLANTA DE TRATAMIENTO DE AGUAS RESIDUALES ALCANTARILLADO SANITARIO DE COMENDADOR",
+        "is_catalogue": false
+      },
+      "objetivo_proyecto": {
+        "type": "text",
+        "description": "atributo: objetivo_proyecto | tipo: text | descripción: Descripción del propósito y alcance del proyecto aprobado, incluyendo sus metas y beneficios esperados para la comunidad.",
+        "sample_values": "RECONSTRUCCIÓN DE LA INFRAESTRUCTURA DE LA PLAZA DE VENDEDORES, CAMBIANDO SU UBICACIÓN",
+        "is_catalogue": false
+      },
+      "nombreentidadejecutora_proyecto": {
+        "type": "text",
+        "description": "atributo: nombreentidadejecutora_proyecto | tipo: text | descripción: Nombre de la entidad responsable de la ejecución del proyecto, que puede incluir organismos gubernamentales, empresas o agencias.",
+        "sample_values": "ADMINISTRACIÓN NACIONAL DE ELECTRICIDAD, ADMINISTRACIÓN NACIONAL DE NAVEGACIÓN Y PUERTOS",
+        "is_catalogue": false
+      },
+      "tipo_proyecto": {
+        "type": "text",
+        "description": "atributo: tipo_proyecto | tipo: text | descripción: Clasificación del proyecto según su naturaleza y entidad responsable, como gobierno central, empresas públicas o municipalidades.",
+        "sample_values": [
+          "DEPARTAMENTAL O MUNICIPAL",
+          "NACIONAL"
+        ],
+        "is_catalogue": true
+      },
+      "pais_iso3": {
+        "type": "USER-DEFINED",
+        "description": "atributo: pais_iso3 | tipo: USER-DEFINED | descripción: Código de tres letras que representa de manera única a un país en el contexto de los proyectos aprobados.",
+        "sample_values": [
+          "dom"
+        ],
+        "is_catalogue": true
+      },
+      "pais_nombre": {
+        "type": "text",
+        "description": "atributo: pais_nombre | tipo: text | descripción: Nombre del país donde se lleva a cabo el proyecto aprobado.",
+        "sample_values": [
+          "REPÚBLICA DOMINICANA"
+        ],
+        "is_catalogue": true
+      },
+      "url_link_proyecto": {
+        "type": "character varying",
+        "description": "atributo: url_link_proyecto | tipo: character varying | descripción: Enlace web que dirige al perfil detallado del proyecto aprobado en la plataforma correspondiente.",
+        "sample_values": "https://gestiontransparentepanama.mef.gob.pa/projectprofile/8110123, https://gestiontransparentepanama.mef.gob.pa/projectprofile/7120303",
+        "is_catalogue": false
+      }
+    },
+    "foreign_keys": []
+  },
+  "stg_mapainv_proyectosterritorios": {
+    "table_name": "stg_mapainv_proyectosterritorios",
+    "description": "La tabla 'stg_mapainv_proyectosterritorios' almacena información sobre proyectos en diferentes territorios, incluyendo el id_proyecto, regiones, departamentos y municipios, así como el país en formato ISO y su nombre.",
+    "recordcount": 38663,
+    "primary_key": [],
+    "columns": {
+      "nombre_region": {
+        "type": "text",
+        "description": "atributo: nombre_region | tipo: text | descripción: Nombre de la región geográfica asociada a los proyectos en el territorio, utilizada para clasificar y agrupar información regional.",
+        "sample_values": [
+          "NACIONALES",
+          "REGION CIBAO NORDESTE"
+        ],
+        "is_catalogue": true
+      },
+      "nombre_departamento": {
+        "type": "text",
+        "description": "atributo: nombre_departamento | tipo: text | descripción: Nombre del departamento correspondiente a los proyectos territoriales, utilizado como referencia geográfica en la base de datos.",
+        "sample_values": [
+          "AZUA",
+          "BAORUCO"
+        ],
+        "is_catalogue": true
+      },
+      "nombre_municipio": {
+        "type": "text",
+        "description": "atributo: nombre_municipio | tipo: text | descripción: Nombre del municipio asociado a los proyectos territoriales en la base de datos.",
+        "sample_values": "25 DE DICIEMBRE, 3 DE FEBRERO",
+        "is_catalogue": false
+      },
+      "pais_iso3": {
+        "type": "USER-DEFINED",
+        "description": "atributo: pais_iso3 | tipo: USER-DEFINED | descripción: Código de tres letras que representa de manera única a un país, utilizado como clave referencial en la tabla.",
+        "sample_values": [
+          "dom"
+        ],
+        "is_catalogue": true
+      },
+      "pais_nombre": {
+        "type": "text",
+        "description": "atributo: pais_nombre | tipo: text | descripción: Nombre del país asociado a los territorios en el contexto de los proyectos.",
+        "sample_values": [
+          "REPÚBLICA DOMINICANA"
+        ],
+        "is_catalogue": true
+      },
+      "id_proyecto": {
+        "type": "bigint",
+        "description": "atributo: id_proyecto | tipo: bigint | descripción: Identificador único del proyecto asociado a los territorios en la tabla.",
+        "sample_values": "2, 3",
+        "is_catalogue": false
+      }
+    },
+    "foreign_keys": [
+      {
+        "column": "id_proyecto",
+        "referred_table": "stg_mapainv_proyectosaprobadosinv",
+        "referred_column": "id_proyecto"
+      },
+      {
+        "column": "pais_iso3",
+        "referred_table": "stg_mapainv_proyectosaprobadosinv",
+        "referred_column": "pais_iso3"
+      },
+      {
+        "column": "id_proyecto",
+        "referred_table": "stg_mapainv_proyectosaprobadosinv",
+        "referred_column": "pais_iso3"
+      },
+      {
+        "column": "pais_iso3",
+        "referred_table": "stg_mapainv_proyectosaprobadosinv",
+        "referred_column": "id_proyecto"
+      }
+    ]
+  },
+  "stg_mapainv_proyectosfuentesfinanciamiento": {
+    "table_name": "stg_mapainv_proyectosfuentesfinanciamiento",
+    "description": "La tabla 'stg_mapainv_proyectosfuentesfinanciamiento' almacena información sobre proyectos financiados, incluyendo el id_proyecto, organismo financiador, fuente de financiación, valores vigentes y ejecutados, año de financiación, y datos del país.",
+    "recordcount": 12743,
+    "primary_key": [],
+    "columns": {
+      "id_proyecto": {
+        "type": "bigint",
+        "description": "atributo: id_proyecto | tipo: bigint | descripción: Identificador único del proyecto asociado a la fuente de financiamiento, utilizado como clave foránea en otras tablas.",
+        "sample_values": "10, 24",
+        "is_catalogue": false
+      },
+      "organismo_financiador": {
+        "type": "text",
+        "description": "atributo: organismo_financiador | tipo: text | descripción: Este atributo almacena el nombre del organismo que financia los proyectos, como AGENCIA ANDALUZA DE COOPERACION INTERNACIONAL PARA EL DESARR",
+        "sample_values": [
+          "agencia andaluza de cooperación internacional para el desarrollo (aacid)",
+          "Agencia de Cooperación Internacional del Japón (JICA)"
+        ],
+        "is_catalogue": true
+      },
+      "fuente_financiacion": {
+        "type": "text",
+        "description": "atributo: fuente_financiacion | tipo: text | descripción: Este atributo almacena la descripción de la fuente de financiamiento asociada a los proyectos, como por ejemplo, \"BONOS INTERNOS PARA APOYO PR",
+        "sample_values": [
+          "2° ProgramaMejoramiento Educación Básica BIRF 3951-DO",
+          "6183 proyecto de respuesta a emergencias y resiliencia de la republica dominicana"
+        ],
+        "is_catalogue": true
+      },
+      "valor_vigente": {
+        "type": "double precision",
+        "description": "atributo: valor_vigente | tipo: double precision | descripción: representa el monto actual disponible o asignado para proyectos de financiamiento en la tabla.",
+        "sample_values": "129339325.7, 61888062.0",
+        "is_catalogue": false
+      },
+      "valor_ejecutado": {
+        "type": "double precision",
+        "description": "atributo: valor_ejecutado | tipo: double precision | descripción: Representa el monto financiero ejecutado en proyectos, expresado en formato numérico de doble precisión.",
+        "sample_values": "330653138.82, 3375841.05",
+        "is_catalogue": false
+      },
+      "anio_financiacion": {
+        "type": "bigint",
+        "description": "atributo: anio_financiacion | tipo: bigint | descripción: representa el año en que se asignó la financiación a un proyecto específico, con valores que pueden variar desde 2016 hasta 2020.",
+        "sample_values": "2016, 2017",
+        "is_catalogue": true
+      },
+      "pais_iso3": {
+        "type": "USER-DEFINED",
+        "description": "atributo: pais_iso3 | tipo: USER-DEFINED | descripción: Este atributo representa el código ISO 3166-1 de tres letras que identifica de manera única a un país, utilizado como clave foránea para relacio",
+        "sample_values": [
+          "dom"
+        ],
+        "is_catalogue": true
+      },
+      "pais_nombre": {
+        "type": "text",
+        "description": "atributo: pais_nombre | tipo: text | descripción: Este atributo almacena el nombre del país asociado a los proyectos de financiamiento, permitiendo identificar la ubicación geográfica de cada fuente.",
+        "sample_values": [
+          "REPÚBLICA DOMINICANA"
+        ],
+        "is_catalogue": true
+      }
+    },
+    "foreign_keys": [
+      {
+        "column": "pais_iso3",
+        "referred_table": "stg_mapainv_proyectosaprobadosinv",
+        "referred_column": "id_proyecto"
+      },
+      {
+        "column": "id_proyecto",
+        "referred_table": "stg_mapainv_proyectosaprobadosinv",
+        "referred_column": "id_proyecto"
+      },
+      {
+        "column": "pais_iso3",
+        "referred_table": "stg_mapainv_proyectosaprobadosinv",
+        "referred_column": "pais_iso3"
+      },
+      {
+        "column": "id_proyecto",
+        "referred_table": "stg_mapainv_proyectosaprobadosinv",
+        "referred_column": "pais_iso3"
+      }
+    ]
+  }
+}

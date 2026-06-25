@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Chatbot inteligente de MapaInversiones para consultar proyectos de inversión pública en República Dominicana. Accede a datos del Sistema Nacional de Inversión Pública (SNIP) desde 2013 hasta hoy.">
+    <meta name="keywords"
+        content="MapaInversiones, República Dominicana, inversión pública, SNIP, proyectos públicos, transparencia, gobierno dominicano, chatbot IA, MEPYD">
+    <meta name="author" content="Ministerio de Economía, Planificación y Desarrollo - MEPYD">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <link rel="canonical" href="https://mapainversiones.mepyd.gob.do/">
+
+    <!-- Geo Tags -->
+    <meta name="geo.region" content="DO">
+    <meta name="geo.placename" content="República Dominicana">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mapainversiones.mepyd.gob.do/">
+    <meta property="og:title" content="MapaInversiones Chatbot - Consulta Inversiones Públicas RD">
+    <meta property="og:description"
+        content="Chatbot inteligente para consultar proyectos de inversión pública en República Dominicana. Datos oficiales del SNIP desde 2013.">
+    <meta property="og:image" content="https://mapainversiones.mepyd.gob.do/static/img/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="es_DO">
+    <meta property="og:site_name" content="MapaInversiones República Dominicana">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://mapainversiones.mepyd.gob.do/">
+    <meta name="twitter:title" content="MapaInversiones Chatbot - Consulta Inversiones Públicas RD">
+    <meta name="twitter:description"
+        content="Chatbot inteligente para consultar proyectos de inversión pública en República Dominicana. Datos oficiales del SNIP desde 2013.">
+    <meta name="twitter:image" content="https://mapainversiones.mepyd.gob.do/static/img/og-image.png">
+
+    <!-- Favicons (inline para evitar 404 en dev) -->
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' rx='56' fill='%23005bbb'/%3E%3Cpath d='M56 128h144' stroke='%23fff' stroke-width='28' stroke-linecap='round'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon"
+        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAHElEQVR4nO3BMQEAAADCoPVPbQhPoAAAAAAAAAAAAN4G2ewAAR3k5mIAAAAASUVORK5CYII=">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- CSP defensiva: bloquea data: en scripts (evita el CORS “not http” de ads inyectados) -->
+    <meta http-equiv="Content-Security-Policy"
+        content="script-src 'self' https: 'unsafe-inline'; object-src 'none'; base-uri 'self';">
+
+    <title>MapaInversiones República Dominicana - Iniciativa de MapaInversiones</title>
+
+    <!-- Favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" href="../static/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../static/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/assets/favicon-16x16.png">
+    <link rel="manifest" href="../static/assets/site.webmanifest">
+    <link rel="mask-icon" href="../static/assets/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" />
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Feather Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
+    <!-- D3 Charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/css/flag-icons.min.css">
+
+
+    <!---CSS PARA BOT-->
+    <!--******************************-->
+    <!--<link rel="stylesheet" href="../static/css/libs.css">-->
+    <link rel="stylesheet" href="../static/css/stylenewtheme.css">
+    <link rel="stylesheet" href="../static/css/Citizen-shell.css">
+    <link rel="stylesheet" href="../static/css/chatbot-styles.css">
+    <link rel="stylesheet" href="../static/css/normalize.css">
+    <link rel="stylesheet" href="../static/css/Genericresponse.css">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "MapaInversiones Chatbot",
+      "description": "Chatbot inteligente para consultar proyectos de inversión pública en República Dominicana del Sistema Nacional de Inversión Pública (SNIP)",
+      "url": "https://mapainversiones.mepyd.gob.do/",
+      "applicationCategory": "GovernmentApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "DOP"
+      },
+      "provider": {
+        "@type": "GovernmentOrganization",
+        "name": "Ministerio de Economía, Planificación y Desarrollo",
+        "alternateName": "MEPYD",
+        "url": "https://mepyd.gob.do/",
+        "logo": "https://mapainversiones.mepyd.gob.do/static/img/logoGobierno.svg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "DO",
+          "addressLocality": "Santo Domingo"
+        }
+      },
+      "inLanguage": "es-DO",
+      "featureList": [
+        "Consulta de proyectos de inversión pública",
+        "Datos del SNIP desde 2013",
+        "Información por sector, provincia y año",
+        "Estadísticas de inversión pública",
+        "Chatbot con inteligencia artificial"
+      ]
+    }
+    </script>
+
+
+
+
+    <style>
+        .feedback-inline-container {
+            display: none;
+        }
+
+        .feedback-inline-container.show {
+            display: block;
+        }
+
+        .message.error .message-content {
+            background-color: #f8d7da;
+            color: #842029;
+            border: 1px solid #f5c2c7;
+        }
+
+      
+        @keyframes citizenChipSpin{
+            to{transform:rotate(360deg);}
+        }
+
+        .input-prefill-highlight {
+            animation: inputPrefillGlow 1.1s ease;
+        }
+
+        @keyframes inputPrefillGlow {
+            0% {
+                box-shadow: 0 0 0 rgba(47, 111, 237, 0);
+            }
+
+            40% {
+                box-shadow: 0 0 0 3px rgba(47, 111, 237, 0.35);
+            }
+
+            100% {
+                box-shadow: 0 0 0 rgba(47, 111, 237, 0);
+            }
+        }
+
+        .non-blocking-hints {
+            margin-top: 12px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: rgba(80, 118, 221, 0.08);
+            border: 1px solid rgba(80, 118, 221, 0.22);
+        }
+
+        .non-blocking-hints-title {
+            margin: 0 0 6px 0;
+            font-weight: 600;
+            color: #1f2f52;
+            font-size: .92rem;
+        }
+
+        .non-blocking-hints-message {
+            margin: 0 0 8px 0;
+            font-size: .88rem;
+            color: #304160;
+        }
+
+        .non-blocking-hints-list {
+            margin: 0 0 8px 18px;
+            padding: 0;
+            color: #3b4a66;
+            font-size: .88rem;
+        }
+
+        .non-blocking-chip {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 999px;
+            border: 1px solid rgba(47, 111, 237, 0.4);
+            padding: 6px 14px;
+            font-size: .78rem;
+            margin: 4px 6px 0 0;
+            cursor: pointer;
+            background: #fff;
+            color: #1f3885;
+            font-weight: 600;
+            transition: all .18s ease;
+        }
+
+        .non-blocking-chip:hover {
+            background: #2f6fed;
+            color: #fff;
+            border-color: #2f6fed;
+        }
+
+        .no-data-hints {
+            margin-top: 18px;
+            padding: 14px;
+            border-radius: 12px;
+            background: rgba(47, 111, 237, 0.08);
+            border: 1px solid rgba(47, 111, 237, 0.18);
+        }
+
+        .no-data-lead {
+            margin: 0 0 8px 0;
+            font-weight: 600;
+            color: #1f2f52;
+        }
+
+        .no-data-hints-list {
+            margin: 0 0 10px 18px;
+            padding: 0;
+            color: #2f3b58;
+            font-size: .9rem;
+        }
+
+        .no-data-chip-group {
+            margin-top: 10px;
+        }
+
+        .no-data-chip-title {
+            margin: 0 0 6px 0;
+            font-size: .82rem;
+            font-weight: 600;
+            color: #1f3885;
+        }
+
+        .no-data-chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .clarification-note {
+            margin: 4px 0 0 0;
+            font-size: .75rem;
+            color: #52627d;
+            font-style: italic;
+        }
+
+        .message-error-block {
+            background: #fff3f3;
+            border: 1px solid rgba(215, 49, 49, 0.35);
+            border-radius: 10px;
+            padding: 12px 14px;
+            color: #611717;
+        }
+
+        .message-error-block p {
+            margin: 0 0 8px 0;
+            font-weight: 600;
+        }
+
+        .clarification-hints-list {
+            margin: 0;
+            padding-left: 18px;
+            color: #611717;
+            font-size: .88rem;
+        }
+
+        /* Componentes heredados del front funcional */
+        .feedback-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, .45);
+            z-index: 1055;
+        }
+
+        .feedback-modal.show {
+            display: flex;
+        }
+
+        .feedback-modal-content {
+            width: 90%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
+            animation: feedbackModalIn .25s ease-out;
+            overflow: hidden;
+        }
+
+        @keyframes feedbackModalIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .feedback-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .feedback-modal-title {
+            font-size: 1rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .feedback-modal-close {
+            background: transparent;
+            border: 0;
+            padding: .25rem;
+            line-height: 0;
+            cursor: pointer;
+        }
+
+        .feedback-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            padding: 1rem 1.25rem 1.25rem;
+        }
+
+        .feedback-option {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            border: 1px solid #e6e6e6;
+            border-radius: 20px;
+            padding: .5rem 1rem;
+            font-size: .875rem;
+            background: #fafafa;
+            cursor: pointer;
+            transition: background .15s ease;
+        }
+
+        .feedback-option:hover {
+            background: #f0f0f0;
+        }
+
+        .feedback-option-icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        .feedback-modal-footer {
+            padding: 0 1.25rem 1rem;
+        }
+
+        .feedback-modal-note {
+            margin: 0;
+            font-size: .75rem;
+            color: #777;
+            text-align: center;
+        }
+
+        .gray-zone-message {
+            background-color: #fff8e6;
+            border-left: 4px solid #f5a623;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+        }
+
+        .gray-zone-details-btn {
+            background: #2f6fed;
+            color: #fff;
+            border: 0;
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: .8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .18s ease;
+            margin-left: auto;
+        }
+
+        .gray-zone-details-btn:hover {
+            background: #1d4ecc;
+        }
+
+        .technical-details-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            margin-left: 8px;
+            box-shadow: 0 2px 6px rgba(30, 64, 175, 0.15);
+            white-space: nowrap;
+        }
+
+        .technical-details-btn {
+            visibility: hidden;
+            transform: translateY(-1px);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 7px 14px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            margin-left: 8px;
+            box-shadow: 0 4px 10px rgba(30, 64, 175, 0.25);
+            white-space: nowrap;
+        }
+
+        .technical-details-btn:hover {
+            background: linear-gradient(135deg, #002554 0%, #003876 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 56, 118, 0.25);
+        }
+
+        .technical-details-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 56, 118, 0.2);
+        }
+
+        .technical-details-btn svg,
+        .technical-details-btn i {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+
+        /* Responsive tablet */
+        @media (max-width: 768px) {
+            .technical-details-btn {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+                gap: 5px;
+                margin-left: 6px;
+            }
+
+            .technical-details-btn svg,
+            .technical-details-btn i {
+                width: 13px;
+                height: 13px;
+            }
+        }
+
+        /* Responsive mobile */
+        @media (max-width: 480px) {
+            .technical-details-btn {
+                padding: 5px 10px;
+                font-size: 0.7rem;
+                gap: 4px;
+                margin-left: 4px;
+            }
+
+            .technical-details-btn svg,
+            .technical-details-btn i {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        /* ========================================
+   AJUSTE DEL MESSAGE-META PARA ALINEACIÓN
+   ======================================== */
+
+        .message-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .message-meta .response-actions {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex: 0 0 auto;
+        }
+
+        .message-meta .message-time {
+            margin-left: auto;
+            flex: 0 0 auto;
+        }
+
+        @media (max-width: 576px) {
+            .message-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px;
+            }
+
+            .message-meta .message-time {
+                margin-left: 0;
+                width: 100%;
+                text-align: right;
+            }
+        }
+
+        .download-data-btn {
+            background: #28a745;
+            color: #fff;
+            border: 0;
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: .8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background .18s ease;
+            margin-left: 8px;
+        }
+
+        .download-data-btn:hover {
+            background: #218838;
+        }
+
+        .technical-details-section {
+            margin-bottom: 1.25rem;
+        }
+
+        .technical-details-section h4 {
+            font-size: .95rem;
+            font-weight: 600;
+            margin-bottom: .35rem;
+            color: #0f1e46;
+        }
+
+        .technical-details-section ul {
+            padding-left: 1.1rem;
+            margin-bottom: .35rem;
+        }
+
+        .technical-details-pre {
+            background: #f5f7fb;
+            border: 1px solid #e1e5ef;
+            border-radius: 8px;
+            padding: .75rem;
+            font-size: .82rem;
+            max-height: 280px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* Estilos para ordenamiento de tablas */
+        .sortable-header {
+            position: relative;
+            padding-right: 24px !important;
+            transition: background-color .15s ease;
+        }
+
+        .sortable-header:hover {
+            background-color: #e0e7ee;
+            color: var(--primary-color)
+        }
+
+          .sortable-header:hover  strong{
+            color: var(--primary-color) !important;
+        }
+
+        .sort-indicator {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: .7rem;
+            color: #6c757d;
+            opacity: 0;
+            transition: opacity .15s ease;
+        }
+
+        .sortable-header:hover .sort-indicator {
+            opacity: 0.5;
+        }
+
+        .sortable-header.sort-asc .sort-indicator::before {
+            content: '▲';
+            opacity: 1;
+            color: #2f6fed;
+        }
+
+        .sortable-header.sort-desc .sort-indicator::before {
+            content: '▼';
+            opacity: 1;
+            color: #2f6fed;
+        }
+
+        /* Soportes para dashboards generados con D3 */
+        .stats-dashboard svg {
+            font-family: inherit;
+        }
+
+        .stats-dashboard h6 {
+            font-weight: 600;
+        }
+
+        .stats-kpis .kpi h4 {
+            font-size: 1.35rem;
+            margin-bottom: .25rem;
+        }
+
+        .stats-kpis .kpi {
+            min-width: 120px;
+        }
+
+        .chart-row {
+            margin-bottom: 2rem;
+        }
+
+        .d3-tooltip {
+            font-size: .8rem;
+            position: absolute;
+            z-index: 2000;
+        }
+
+        .pie-label {
+            pointer-events: none;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        @media (max-width:768px) {
+            .pie-label {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+        <div class="container-fluid px-3">
+            <!-- Grupo izquierdo: Toggle sidebar + Logos institucionales -->
+            <div class="d-flex align-items-center navbar-left-group">
+                <button class="btn btn-outline-icon" type="button" id="sidebarToggle">
+                    <span class="material-symbols-outlined">dock_to_right</span>
+                </button>
+
+                <!-- Logo Gobierno -->
+                <a class="navbar-logo-mapa" href="https://mapainversiones.mepyd.gob.do/" target="_blank"
+                    rel="noopener noreferrer">
+                    <img src="../static/img/logoGobierno.svg" alt="Logo Gobierno República Dominicana"
+                        class="navbar-logo navbar-logo-gobierno">
+                </a>
+
+                <!-- Separador vertical -->
+                <div class="navbar-logo-divider"></div>
+
+                <!-- Logo MapaInversiones -->
+                <a class="navbar-brand-logo" href="https://mapainversiones.mepyd.gob.do/" target="_blank"
+                    rel="noopener noreferrer">
+                    <img src="../static/img/logoMIV.svg" alt="Logo MapaInversiones"
+                        class="navbar-logo navbar-logo-mapa">
+                </a>
+            </div>
+
+            <!-- Logo central: Chatbot (sin enlace, mismo nivel visual) -->
+            <!--<div class="navbar-center-logo">
+            <img src="../static/img/logoMIVBOT.svg" alt="Chatea con MapaInversiones" class="navbar-logo navbar-logo-chatbot">
+        </div>-->
+
+            <!-- Grupo derecho: Botones de acción -->
+            <div class="d-flex align-items-center navbar-right-group">
+                <!-- Botón "¿Qué puedo preguntar?" -->
+                <button class="btn btn-what-can-ask" type="button" id="headerWhatCanAskBtn" data-bs-toggle="tooltip"
+                    title="Ver ejemplos de preguntas">
+                    <span class="material-symbols-outlined">lightbulb</span>
+                    <span class="btn-text">¿Qué puedo preguntar?</span>
+                </button>
+
+                <!-- Botón Ayuda -->
+                <button class="btn btn-outline-icon" type="button" data-bs-toggle="tooltip" title="Ayuda y Soporte"
+                    id="helpTriggerBtn">
+                    <span class="material-symbols-outlined">help</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sidebar sidebar-expanded" id="sidebar">
+        <div class="sidebar-content">
+            <div class="sidebar-top">
+                <div class="sidebar-section mb-4 ssidebar-info-alert">
+                    <div class="sidebar-alert-header">
+
+                    </div>
+                    <div class="sidebar-alert-content">
+                        <p class="sidebar-alert-text">
+                            MapaInversiones utiliza inteligencia artificial (IA) para ayudarte a explorar cómo se
+                            invierten los recursos públicos. La información proviene de fuentes oficiales del Gobierno
+                            de República Dominicana.
+                        </p>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary w-100 mb-3" id="newChatBtn" aria-label="Crear nueva conversación">
+                    <i data-feather="message-square"></i>
+                    <span class="sidebar-text">Nuevo chat</span>
+                </button>
+
+
+
+                <!-- Botón de historial colapsado (solo visible cuando sidebar está colapsado) -->
+                <button class="btn history-btn-collapsed mb-3" id="historyBtnCollapsed" aria-label="Ver recientes">
+                    <i data-feather="clock"></i>
+                    <span class="sidebar-text">Pregutas Recientes</span>
+                </button>
+
+                <div class="sidebar-divider"></div>
+                <div class="history-section" id="historySection">
+                    <h6 class="text-muted mb-3 sidebar-text d-flex align-items-center">
+                        Preguntas Recientes
+                    </h6>
+
+                    <div class="conversation-list" id="sidebarHistory"></div>
+                </div>
+            </div>
+
+            <div class="sidebar-bottom">
+                <div class="sidebar-divider mb-3"></div>
+                <div class="sidebar-info-links">
+                    <button class="sidebar-info-link" id="sidebarHelpBtn">
+                        <i data-feather="message-circle" style="width: 14px; height: 14px;"></i>
+                        <span class="sidebar-text">Ayuda y Soporte</span>
+                    </button>
+
+                    <button class="sidebar-info-link" id="termsBtn">
+                        <i data-feather="file-text" style="width: 14px; height: 14px;"></i>
+                        <span class="sidebar-text">Términos de uso</span>
+                    </button>
+
+                    <button class="sidebar-info-link" id="aboutBtn">
+                        <i data-feather="info" style="width: 14px; height: 14px;"></i>
+                        <span class="sidebar-text">Acerca de</span>
+                    </button>
+                </div>
+
+            </div>
+            <!-- Badge de versión fuera de sidebar-bottom para mantener posición consistente -->
+            <div class="sidebar-version-badge">
+                <span class="material-symbols-outlined version-icon">verified</span>
+                <span class="sidebar-text version-text">{{ app_version }} — {{ data_cutoff_date }}</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="main-content" id="mainContent">
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+
+                <!-- ========================================
+     PANTALLA DE BIENVENIDA INICIAL (Hero)
+     ======================================== -->
+                <div class="welcome-hero" id="welcomeHero">
+                    <div class="welcome-hero-content">
+                        <!-- Título principal -->
+                        <h1 class="hero-title" id="heroGreetingText">
+                            ¿Qué quieres saber sobre las inversiones públicas<br>
+                            de la República Dominicana?
+                        </h1>
+
+                        <!-- Tagline -->
+                        <p class="hero-subtitle">
+                            Consulta información sobre proyectos de inversión pública registrados en el Sistema Nacional
+                            de Inversión Pública (SNIP) de República Dominicana, desde el año 2013 hasta la fecha.
+                        </p>
+
+                        <!-- Input de búsqueda hero -->
+                        <div class="hero-input-wrapper">
+                            <div class="hero-input-container">
+                                <textarea class="hero-input" id="heroMessageInput"
+                                    placeholder="Escribe tu pregunta aquí" rows="1"
+                                    aria-label="Escribe tu pregunta"></textarea>
+                                <button class="hero-voice-btn" id="heroVoiceBtn" type="button"
+                                    aria-label="Dictar pregunta">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                                        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                                        <line x1="12" y1="19" x2="12" y2="23" />
+                                        <line x1="8" y1="23" x2="16" y2="23" />
+                                    </svg>
+                                </button>
+                                <button class="hero-send-btn" id="heroSendBtn" type="button"
+                                    aria-label="Enviar pregunta">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="12" y1="19" x2="12" y2="5" />
+                                        <polyline points="5 12 12 5 19 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Separador -->
+                        <div class="hero-divider"></div>
+
+                        <!-- Chips de sugerencias - Vertical -->
+                        <div class="hero-suggestions">
+                            <p class="hero-suggestions-label">O empieza con una de estas preguntas de ejemplo:</p>
+                            <div class="hero-chips-container">
+                                <button class="hero-chip"
+                                    data-question="¿Cuáles son los sectores que tienen la mayor cantidad de proyectos?">
+                                    <span class="hero-chip-text">¿Cuáles son los sectores que tienen la mayor cantidad de proyectos?</span>
+                                </button>
+                                <button class="hero-chip"
+                                    data-question="¿cual es el monto total invertido en proyectos del sector educativo en lo últimos 5 años?">
+                                    <span class="hero-chip-text">¿Cuánto se ha invertido en el sector educativo en los
+                                        últimos 5 años?</span>
+                                </button>
+                                <button class="hero-chip"
+                                    data-question="¿Cuáles son los tres proyectos de mayor inversión en Santo Domingo?">
+                                    <span class="hero-chip-text">¿Cuáles son los tres proyectos de mayor inversión en
+                                        Santo Domingo?</span>
+                                </button>
+                                <button class="hero-chip"
+                                    data-question="¿Qué porcentaje de la inversión en proyectos se destina al sector salud en 2025?">
+                                    <span class="hero-chip-text">¿Qué porcentaje de la inversión en proyectos se destina
+                                        al sector salud en 2025?</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Disclaimer en Hero (texto controlado por config-disclaimer.js) -->
+                        <div class="chat-disclaimer">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="12" y1="16" x2="12" y2="12"></line>
+                                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            </svg>
+                            <span id="heroDisclaimerText"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="chat-input-container">
+                <div class="position-relative">
+                    <textarea class="chat-input" id="messageInput" placeholder="Escribe tu pregunta aquí..." rows="1"
+                        aria-label="Escribe tu pregunta"></textarea>
+                    <button class="voice-btn" id="voiceBtn" type="button" aria-label="Dictar pregunta">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                            <line x1="12" y1="19" x2="12" y2="23" />
+                            <line x1="8" y1="23" x2="16" y2="23" />
+                        </svg>
+                    </button>
+                    <button class="send-btn" id="sendBtn" type="button" aria-label="Enviar pregunta">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="19" x2="12" y2="5" />
+                            <polyline points="5 12 12 5 19 12" />
+                        </svg>
+                    </button>
+                    <div id="suggestionsContainer" class="suggestions-dropdown" style="display: none;">
+                        <ul id="suggestionsList" class="suggestions-list"></ul>
+                    </div>
+                </div>
+                <!-- Disclaimer en Hero (texto controlado por config-disclaimer.js) -->
+                <div class="chat-disclaimer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <span id="chatDisclaimerText"></span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast" id="toast"></div>
+
+    <div class="privacy-modal-overlay" id="privacyModal">
+        <div class="privacy-modal">
+            <div class="privacy-modal-header">
+                <div class="privacy-modal-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <path d="M9 12l2 2 4-4" />
+                    </svg>
+                </div>
+                <h3 class="privacy-modal-title">Aviso de Privacidad</h3>
+                <p class="privacy-modal-subtitle">Información importante sobre el uso de datos</p>
+            </div>
+
+            <div class="privacy-modal-content">
+                <p class="privacy-modal-text">
+                    <strong>¡Bienvenid@ al Chatbot de MapaInversiones!</strong><br /><br />
+                    Esta es una herramienta para ayudarte a encontrar y entender datos de proyectos públicos en nuestro
+                    país.<br /><br />
+                    <strong>🛡️ Tu privacidad es importante</strong><br />
+                    ¿Qué almacenamos? Para mejorar continuamente la calidad de las respuestas, podemos guardar algunas
+                    de las preguntas que hagas.
+                    ¿Qué NO almacenamos? Nunca asociaremos tus preguntas con tu información personal. Tus datos de
+                    identidad están protegidos y permanecen anónimos.
+                    Cookies: Solo usamos cookies técnicas esenciales para asegurar el correcto funcionamiento de la
+                    herramienta.<br /><br />
+                    <strong>✨ Mejora continua</strong> <br />Recuerda que esta es una herramienta en constante
+                    desarrollo y mejora. Tu uso nos ayuda a hacerla más precisa y útil para todos.
+                    Al hacer clic en "Lo entiendo", aceptas estas condiciones de uso y privacidad.
+                </p>
+            </div>
+
+            <div class="privacy-modal-footer">
+                <button class="privacy-accept-btn" id="privacyAcceptBtn">
+                    Lo entiendo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 1: ¿Qué puedo preguntar? -->
+    <div class="unified-modal-overlay" id="whatCanIAskModal">
+        <div class="unified-modal">
+            <div class="unified-modal-header">
+                <div class="unified-modal-title-wrapper">
+                    <div class="unified-modal-icon">
+                        <i data-feather="message-circle"></i>
+                    </div>
+                    <h3 class="unified-modal-title">¿Qué puedo preguntar?</h3>
+                </div>
+                <button class="unified-modal-close" id="whatCanIAskModalClose" aria-label="Cerrar modal">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+
+            <div class="unified-modal-content">
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="target"></i>
+                        <h4>Alcance del chatbot</h4>
+                    </div>
+                    <p>
+                        Este chatbot te permite consultar información sobre <strong>proyectos de inversión
+                            pública</strong> registrados en el <strong>Sistema Nacional de Inversión Pública
+                            (SNIP)</strong> de República Dominicana, desde el año 2013 hasta la fecha (corte de datos:
+                        {{ data_cutoff_date }}).
+                    </p>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header success">
+                        <i data-feather="check-circle"></i>
+                        <h4>Qué SÍ puedes preguntar</h4>
+                    </div>
+                    <ul class="unified-list">
+                        <li><strong>Ubicación:</strong> ¿En qué provincia o municipio se ejecutan los proyectos?</li>
+                        <li><strong>Montos:</strong> ¿Cuánto se invierte en determinado sector o territorio?</li>
+                        <li><strong>Instituciones:</strong> ¿Qué entidades ejecutan o financian los proyectos?</li>
+                        <li><strong>Sectores:</strong> ¿Cuáles son los sectores con mayor inversión (salud, educación,
+                            transporte, etc.)?</li>
+                        <li><strong>Estado de avance:</strong> ¿Qué proyectos están en ejecución, finalizados o
+                            planificados?</li>
+                        <li><strong>Comparativas:</strong> Top de provincias, sectores o instituciones por monto o
+                            cantidad de proyectos</li>
+                        <li><strong>Financiamiento:</strong> ¿Qué organismos internacionales financian proyectos en el
+                            país?</li>
+                    </ul>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="edit-3"></i>
+                        <h4>Ejemplos de preguntas</h4>
+                    </div>
+                    <ul class="unified-list">
+                        <li>¿Cuántos proyectos de salud se ejecutan en Santo Domingo?</li>
+                        <li>¿Cuál es el monto total invertido en educación en 2024?</li>
+                        <li>Top 5 provincias con mayor inversión pública</li>
+                        <li>¿Qué instituciones ejecutan proyectos de transporte?</li>
+                        <li>¿Cuántos proyectos financia el Banco Interamericano de Desarrollo en República Dominicana?
+                        </li>
+                        <li>¿Qué proyectos nuevos comenzaron en los últimos 6 meses?</li>
+                    </ul>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header error">
+                        <i data-feather="x-circle"></i>
+                        <h4>Qué NO puedes preguntar</h4>
+                    </div>
+                    <ul class="unified-list">
+                        <li>Información sobre <strong>gasto corriente</strong> o presupuesto general del Estado</li>
+                        <li>Detalles de <strong>licitaciones o procesos de contratación</strong> específicos</li>
+                        <li>Datos personales de funcionarios o contratistas</li>
+                        <li>Información de años anteriores a 2013</li>
+                        <li>Consultas sobre leyes, decretos o normativas (solo datos de proyectos)</li>
+                    </ul>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header info">
+                        <i data-feather="edit"></i>
+                        <h4>Consejo</h4>
+                    </div>
+                    <p>
+                        Escribe tus preguntas en <strong>lenguaje natural</strong>, como si hablaras con una persona. No
+                        necesitas usar términos técnicos. El chatbot interpretará tu consulta y buscará la información
+                        relevante.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Términos de Uso -->
+    <!-- Modal: Términos de Uso -->
+    <div class="unified-modal-overlay" id="termsModal">
+        <div class="unified-modal">
+            <div class="unified-modal-header">
+                <div class="unified-modal-title-wrapper">
+                    <div class="unified-modal-icon">
+                        <i data-feather="file-text"></i>
+                    </div>
+                    <h3 class="unified-modal-title">Términos de Uso</h3>
+                </div>
+                <button class="unified-modal-close" id="termsModalClose" aria-label="Cerrar modal">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+
+            <div class="unified-modal-content">
+                <p>
+                    El acceso y uso de la plataforma MapaInversiones República Dominicana implica la aceptación plena de
+                    los presentes Términos de Uso, así como de la Política de Privacidad aplicable. Estos términos
+                    regulan la utilización del sitio web, sus componentes digitales —incluyendo el Chatbot
+                    MapaInversiones— y todos los servicios asociados.
+                </p>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="target"></i>
+                        <h4>1. Finalidad</h4>
+                    </div>
+                    <p>
+                        MapaInversiones República Dominicana es una herramienta pública desarrollada por el Banco
+                        Interamericano de Desarrollo (BID) en coordinación con las instituciones gubernamentales de
+                        República Dominicana. Su objetivo es fortalecer la transparencia, la rendición de cuentas y la
+                        participación ciudadana mediante el acceso a información oficial sobre proyectos, presupuestos y
+                        contrataciones públicas.
+                    </p>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="user-check"></i>
+                        <h4>2. Uso aceptable</h4>
+                    </div>
+                    <p>
+                        El usuario se compromete a utilizar la plataforma y sus componentes exclusivamente para fines
+                        informativos, educativos o de control ciudadano. Queda prohibido el uso del sitio o del chatbot
+                        para:
+                    </p>
+                    <ul class="unified-list">
+                        <li>Actividades ilícitas o contrarias al orden público.</li>
+                        <li>Fines políticos, comerciales o de propaganda.</li>
+                        <li>Ingresar, alterar o eliminar información de manera no autorizada.</li>
+                        <li>Distribuir contenido falso, difamatorio o que vulnere derechos de terceros.</li>
+                    </ul>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="award"></i>
+                        <h4>3. Propiedad intelectual</h4>
+                    </div>
+                    <p>
+                        El contenido, la arquitectura y el código fuente de la plataforma se encuentran protegidos bajo
+                        la Licencia Abierta AM-331-A3, disponible en el repositorio oficial del BID (<a
+                            href="https://github.com/EL-BID/MapaInversiones" target="_blank"
+                            rel="noopener noreferrer">https://github.com/EL-BID/MapaInversiones</a>). Dicha licencia
+                        permite el uso, copia, modificación y redistribución del código, siempre que se mantenga la
+                        referencia a la fuente original y se respeten los principios de apertura y transparencia
+                        establecidos por el BID. El Usuario que desarrolle software derivado conservará los derechos de
+                        propiedad intelectual sobre sus modificaciones, en la medida en que se mantenga el mismo régimen
+                        de licencia abierta.
+                    </p>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="alert-triangle"></i>
+                        <h4>4. Limitación de responsabilidad</h4>
+                    </div>
+                    <p>
+                        Los datos publicados en la plataforma provienen de fuentes oficiales del Gobierno de República
+                        Dominicana. Aunque se aplican mecanismos de verificación y control de calidad, no se garantiza
+                        la ausencia total de errores u omisiones. Las respuestas generadas por el Chatbot
+                        MapaInversiones son producidas automáticamente mediante modelos de lenguaje basados en
+                        inteligencia artificial y pueden contener imprecisiones o interpretaciones parciales. El uso de
+                        esta información es responsabilidad exclusiva del usuario, quien deberá contrastarla con las
+                        fuentes oficiales disponibles en la propia plataforma.
+                    </p>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="server"></i>
+                        <h4>5. Disponibilidad del servicio</h4>
+                    </div>
+                    <p>
+                        MapaInversiones podrá suspender temporalmente el acceso a la plataforma o al chatbot por razones
+                        técnicas, de mantenimiento o fuerza mayor, sin que ello implique derecho a compensación alguna.
+                    </p>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="external-link"></i>
+                        <h4>6. Enlaces a sitios externos</h4>
+                    </div>
+                    <p>
+                        El sitio puede contener vínculos a portales de terceros, incluyendo otros organismos públicos.
+                        MapaInversiones no asume responsabilidad alguna por el contenido, políticas o funcionamiento de
+                        dichos sitios.
+                    </p>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="book"></i>
+                        <h4>7. Jurisdicción y normativa aplicable</h4>
+                    </div>
+                    <p>
+                        Estos Términos de Uso se rigen por las leyes de República Dominicana, en particular por la Ley
+                        de Transparencia y Acceso a la Información Pública, la Ley de Protección de Datos Personales, y
+                        demás disposiciones nacionales e internacionales aplicables.
+                    </p>
+                    <p>
+                        La interpretación y resolución de conflictos se someterán a la jurisdicción de los tribunales
+                        dominicanos competentes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Acerca de -->
+    <div class="unified-modal-overlay" id="aboutModal">
+        <div class="unified-modal">
+            <div class="unified-modal-header">
+                <div class="unified-modal-title-wrapper">
+                    <div class="unified-modal-icon">
+                        <i data-feather="info"></i>
+                    </div>
+                    <h3 class="unified-modal-title">Acerca de Chatea con MapaInversiones</h3>
+                </div>
+                <button class="unified-modal-close" id="aboutModalClose" aria-label="Cerrar modal">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+
+            <div class="unified-modal-content">
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="file"></i>
+                        <h4>Ficha técnica</h4>
+                    </div>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="cpu"></i>
+                        <h4>Modelo actual</h4>
+                    </div>
+                    <p>Azure OpenAI GPT-4.1-mini</p>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="book-open"></i>
+                        <h4>Descripción</h4>
+                    </div>
+                    <p>
+                        El chatbot fue desarrollado empleando tecnologías de código abierto, garantizando flexibilidad,
+                        transparencia y capacidad de integración con distintos entornos.
+                    </p>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="award"></i>
+                        <h4>Licencias utilizadas</h4>
+                    </div>
+                    <ul class="unified-list">
+                        <li>MIT License: aplicada en múltiples componentes del proyecto.</li>
+                        <li>PostgreSQL License: utilizada para la gestión y manejo de base de datos.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Ayuda y Soporte -->
+    <div class="unified-modal-overlay" id="helpModal">
+        <div class="unified-modal">
+            <div class="unified-modal-header">
+                <div class="unified-modal-title-wrapper">
+                    <div class="unified-modal-icon">
+                        <i data-feather="help-circle"></i>
+                    </div>
+                    <h3 class="unified-modal-title">Ayuda y Soporte – República Dominicana</h3>
+                </div>
+                <button class="unified-modal-close" id="helpModalClose" aria-label="Cerrar modal">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+
+            <div class="unified-modal-content">
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="zap"></i>
+                        <h4>Guía rápida</h4>
+                    </div>
+                    <p>
+                        El Chatbot MapaInversiones República Dominicana permite consultar, en lenguaje natural,
+                        información oficial sobre los proyectos en los que el Gobierno invierte recursos públicos en
+                        República Dominicana.
+                    </p>
+                    <p><strong>A través de este asistente puedes conocer:</strong></p>
+                    <ul class="unified-list">
+                        <li>Dónde se ejecutan los proyectos</li>
+                        <li>Cuáles son sus montos</li>
+                        <li>Sectores, instituciones responsables y estado de avance</li>
+                        <li>Entre otros datos relevantes</li>
+                    </ul>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="message-square"></i>
+                        <h4>Ejemplos de consultas</h4>
+                    </div>
+                    <p>Puedes escribir preguntas en lenguaje natural, sin necesidad de usar términos técnicos. Ejemplos:
+                    </p>
+                    <ul class="unified-list">
+                        <li>¿Cuántos proyectos de inversión se ejecutan actualmente en la provincia de San Juan y cuál
+                            es su monto total?</li>
+                        <li>¿Qué instituciones tienen más proyectos en educación?</li>
+                        <li>¿Qué proyectos de salud están en ejecución en mi provincia?</li>
+                        <li>¿Qué sectores concentran la mayor inversión este año?</li>
+                        <li>¿Qué proyectos nuevos comenzaron en 2024?</li>
+                        <li>Top 3 provincias con mayor monto de inversión.</li>
+                        <li>Dime cuántos proyectos financia el Banco Interamericano de Desarrollo</li>
+                    </ul>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="database"></i>
+                        <h4>Alcance de la información</h4>
+                    </div>
+                    <p>
+                        El chatbot utiliza <strong>datos estructurados y públicos</strong> proveniente del <strong>Banco
+                            de Proyectos de Inversión Pública</strong> del <strong>Sistema Nacional de Inversión Pública
+                            (SNIP),</strong> administrado por la <strong>Dirección General de Inversión Pública
+                            (DGIP)</strong> del <strong>Ministerio de Hacienda y Economía</strong>. La frecuencia de
+                        actualización de los datos es periódica según la disponibilidad oficial.
+                    </p>
+                    <p>
+                        Las respuestas se generan automáticamente mediante un modelo de <strong>inteligencia artificial
+                            generativa,</strong> que interpreta la pregunta, consulta la base de datos y presenta la
+                        información en formato legible y verificable.
+                    </p>
+                    <p>
+                        El chatbot se centra exclusivamente en proyectos de inversión pública registrados en el SNIP. No
+                        incluye información sobre gasto corriente, transferencias u otros componentes del presupuesto
+                        nacional.
+                    </p>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="thumbs-up"></i>
+                        <h4>Sistema de retroalimentación (feedback)</h4>
+                    </div>
+                    <p>
+                        Cada respuesta incluye un mecanismo de evaluación y mejora continua, que permite al usuario
+                        indicar si la información fue útil o si necesita correcciones. A través del botón 👍 o 👎 puedes
+                        calificar la respuesta, y luego seleccionar el motivo:
+                    </p>
+                    <ul class="unified-list">
+                        <li>La respuesta está incompleta o falta información importante.</li>
+                        <li>Los datos o cifras son incorrectos.</li>
+                        <li>La información está desactualizada.</li>
+                        <li>La explicación no es clara o es confusa.</li>
+                        <li>No responde a mi pregunta específica.</li>
+                        <li>Muestra sesgo político o falta objetividad.</li>
+                        <li>Faltan fuentes oficiales o enlaces de referencia.</li>
+                        <li>Otro motivo.</li>
+                    </ul>
+                    <p>
+                        Esta información se utiliza para <strong>mejorar la precisión, claridad y cobertura del
+                            chatbot,</strong> y para fortalecer los mecanismos de verificación de datos en futuras
+                        actualizaciones.
+                    </p>
+                    <p>
+                        Aunque el chatbot emplea controles de validación y verificación automática, <strong>pueden
+                            producirse errores o interpretaciones imprecisas</strong> —por ejemplo, si la pregunta es
+                        ambigua o la fuente aún no refleja la información más reciente. Por eso, se recomienda
+                        <strong>verificar los resultados directamente en las fuentes oficiales</strong> antes de usarlos
+                        con fines técnicos, académicos o públicos.
+                    </p>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="copy"></i>
+                        <h4>Copiar y compartir respuestas</h4>
+                    </div>
+                    <p>
+                        Además, cada respuesta puede <strong>copiarse o compartirse</strong> directamente desde el icono
+                        correspondiente. Esto permite que usuarios, periodistas, investigadores o funcionarios puedan
+                        reutilizar la información en presentaciones, reportes o redes sociales, manteniendo la cita a la
+                        fuente oficial.
+                    </p>
+                    <p class="unified-note">
+                        <i data-feather="link"></i>
+                        Al compartir una respuesta, se incluye la referencia al origen de los datos (SNIP / DGIP /
+                        Ministerio de Hacienda y Economía) para asegurar trazabilidad y transparencia.
+                    </p>
+                </div>
+
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="search"></i>
+                        <h4>Buenas prácticas de uso</h4>
+                    </div>
+                    <ul class="unified-list">
+                        <li>Formula preguntas específicas y claras</li>
+                        <li>Verifica siempre la información con fuentes oficiales</li>
+                        <li>Utiliza el sistema de feedback para ayudarnos a mejorar</li>
+                        <li>Comparte responsablemente la información obtenida</li>
+                    </ul>
+                </div>
+                <div class="unified-modal-section">
+                    <div class="unified-section-header">
+                        <i data-feather="file-text"></i>
+                        <h4>Notas de la versión</h4>
+                    </div>
+                    <p>
+                        Última actualización: 9 de diciembre de 2025
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Detalles de zona gris -->
+    <div class="unified-modal-overlay" id="grayZoneModal">
+        <div class="unified-modal">
+            <div class="unified-modal-header">
+                <div class="unified-modal-title-wrapper">
+                    <div class="unified-modal-icon">
+                        <i data-feather="alert-triangle"></i>
+                    </div>
+                    <h3 class="unified-modal-title">Detalles de la zona gris</h3>
+                </div>
+                <button class="unified-modal-close" id="grayZoneModalClose" aria-label="Cerrar detalles">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="unified-modal-content grayzone-modal-body">
+                <p>No hay información adicional disponible.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Detalles técnicos -->
+    <div class="unified-modal-overlay" id="technicalDetailsModal">
+        <div class="unified-modal">
+            <div class="unified-modal-header">
+                <div class="unified-modal-title-wrapper">
+                    <div class="unified-modal-icon">
+                        <i data-feather="info"></i>
+                    </div>
+                    <h3 class="unified-modal-title">Detalles técnicos de la respuesta</h3>
+                </div>
+                <button class="unified-modal-close" id="technicalDetailsModalClose"
+                    aria-label="Cerrar detalles técnicos">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="unified-modal-content technical-modal-body">
+                <p>No hay detalles adicionales disponibles.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="unified-modal-overlay" id="clarificationModal">
+        <div class="unified-modal">
+            <div class="unified-modal-header">
+                <div class="unified-modal-title-wrapper">
+                    <div class="unified-modal-icon">
+                        <i data-feather="help-circle"></i>
+                    </div>
+                    <h3 class="unified-modal-title">Necesito un dato más</h3>
+                </div>
+                <button class="unified-modal-close" id="clarificationModalClose" aria-label="Cerrar guía de aclaración">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="unified-modal-content" id="clarificationModalBody">
+                <p class="mb-0">Estoy revisando qué información falta para avanzar.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar de Detalles Técnicos -->
+    <div id="technicalDetailsSidebar" class="technical-sidebar" aria-hidden="true">
+        <div class="technical-sidebar-header">
+            <h3 class="technical-sidebar-title">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Transparencia y explicabilidad
+
+            </h3>
+            <div class="technical-sidebar-actions">
+                <button type="button" class="technical-sidebar-download-btn" id="sidebarDownloadBtn"
+                    data-tooltip="Descargar datos">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                </button>
+                <button type="button" class="technical-sidebar-close" id="closeTechnicalSidebar"
+                    aria-label="Cerrar sidebar">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+            <div class="sidebar-ethics-link">
+        <a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" 
+           target="_blank" 
+           rel="noopener noreferrer">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            Ética de la Inteligencia Artificial
+        </a>
+    </div>
+        <div class="technical-sidebar-content" id="technicalSidebarContent">
+
+        </div>
+    </div>
+
+    <!-- Overlay para cerrar el sidebar al hacer clic fuera -->
+    <div id="technicalSidebarOverlay" class="technical-sidebar-overlay"></div>
+
+    <!-- ============================================
+     MODAL DE FUENTE DE INFORMACIÓN
+     ============================================ -->
+
+    <div id="sourceModal" class="info-modal-overlay" role="dialog" aria-labelledby="sourceModalTitle"
+        aria-hidden="true">
+        <div class="info-modal source-modal">
+            <div class="info-modal-header">
+                <h3 id="sourceModalTitle" class="info-modal-title">
+                    <i data-feather="external-link"></i>
+                    Fuente de la información
+                </h3>
+                <button class="info-modal-close" id="sourceModalClose" aria-label="Cerrar modal de fuente">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="info-modal-content source-modal-body">
+                <p class="source-description">Esta información proviene de:</p>
+                <a href="https://mapainversiones.transparenciafiscal.gob.do/" target="_blank" rel="noopener noreferrer"
+                    class="source-link" id="sourceLinkDisplay">
+                    <i data-feather="link"></i>
+                    <span>Ver fuente</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+<script src="../static/javascript/Genericresponse.js"></script>
+<script src="../static/javascript/events.js"></script>
+<script src="../static/javascript/config-disclaimer.js"></script>
+
+</body>
+
+</html>

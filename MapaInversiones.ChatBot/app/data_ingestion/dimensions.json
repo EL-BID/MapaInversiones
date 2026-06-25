@@ -1,0 +1,7 @@
+{
+  "05_dim_sectores": true,
+  "05_dim_entidades": true,
+  "05_dim_estados": true,
+  "05_dim_territorios": true,
+  "05_dim_fuentes": true
+}
