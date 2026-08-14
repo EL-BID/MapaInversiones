@@ -33,7 +33,7 @@
 <input type="hidden" id="hdIdUsuario" value="" />
 <body>
     <!--MAIN BANNER-->
-    <section id="s0" class="banner-main-section s0-section" style="background-image: url('../img/preview-project.jpg')">
+    <section id="s0" class="banner-main-section s0-section" style="background-image: url(@Model.urlImgBackground)">
         <div class="bgBlueOverlay op-80">&nbsp;</div><!-- DON'T EREASE-->
         <div class="container">
             <!-- Begin bread crumbs -->
@@ -51,7 +51,8 @@
                                     <a>
                                         @if (@Model.ProjectInformation.name != null)
                                         {
-                                            @Model.ProjectInformation.name.Trim();
+                                            @Model.ProjectInformation.name.Trim()
+                                            ;
                                         }
                                     </a>
                                 </li>
@@ -68,7 +69,8 @@
                             <h1 class="text-center">
                                 @if (@Model.ProjectInformation.name != null)
                                 {
-                                    @Model.ProjectInformation.name.Trim();
+                                    @Model.ProjectInformation.name.Trim()
+                                    ;
                                 }
                             </h1>
                         </div>
@@ -133,20 +135,20 @@
                                             <text>
                                                 @if (@item.Tipo == "MUNICIPIO" || @item.Tipo == "COUNTY")
                                                 {
-                                                    <li>@item.Nombre ,</li>
+                                                <li>@item.Nombre ,</li>
                                                 }
                                                 else if (@item.Tipo == "DEPARTAMENTO" || @item.Tipo == "REGION")
                                                 {
-                                                    <li>@item.Nombre ,</li>
+                                                <li>@item.Nombre ,</li>
                                                 }
                                                 else
                                                 {
-                                                    <li>@item.Nombre ,</li>
+                                                <li>@item.Nombre ,</li>
                                                 }
                                             </text>
                                         }
 
-                                        beneficiarios += ""+@item.Nombre+", ";
+                                        beneficiarios += "" + @item.Nombre + ", ";
                                         count++;
                                     }
                                     <li> y <a href="#benefi">otros @String.Format("{0}", @count - 3)</a></li>
@@ -162,7 +164,7 @@
                                 }
                                 else
                                 {
-                                  <span class="h3">@String.Format(cultureCountry, "{0:n1}", @Model.ProjectInformation.duracion) Meses</span>
+                                    <span class="h3">@String.Format(cultureCountry, "{0:n1}", @Model.ProjectInformation.duracion) Meses</span>
                                 }
                                 <div class="h6">Duración Del Proyecto</div>
                             </li>
@@ -177,7 +179,7 @@
                                     <div class="h6">Presupuesto Asignado acumulado desde &nbsp; <span class="yearSelected"> 2024</span></div>
                                 }
                             </li>
-                          
+
                         </ul>
                     </div>
                 </div>
@@ -191,7 +193,7 @@
                     <span class="ic-shortcut"><i class="material-icons md-24">feed</i></span>
                     <span class="text-btn">Información General</span>
                 </a>
-              
+
                 <a class="btn-section" href="#s2">
                     <span class="ic-shortcut"><i class="material-icons md-24">earbuds</i></span>
                     <span class="text-btn">Proceso de Contratación</span>
@@ -225,54 +227,54 @@
                 <div class="col-lg-4">
                     <div class="card description-box mb-4">
                         <div class="section-heading-Project">
-                      
-                                <ul class="listDetail">
-                                    <li class="data-list">
-                                        <span class="label-desc">Ente gestor</span>
-                                        <span class="text-desc">@Model.ProjectInformation.NombreActor</span>
-                                    </li>
-                                   
-                                    <li class="data-list">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <span class="label-desc">Estado</span>
-                                                <span class="text-desc">@Model.ProjectInformation.Status</span>
-                                            </div>
 
+                            <ul class="listDetail">
+                                <li class="data-list">
+                                    <span class="label-desc">Ente gestor</span>
+                                    <span class="text-desc">@Model.ProjectInformation.NombreActor</span>
+                                </li>
+
+                                <li class="data-list">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="label-desc">Estado</span>
+                                            <span class="text-desc">@Model.ProjectInformation.Status</span>
                                         </div>
-                                    </li>
-                                    <li class="data-list">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <span class="label-desc">Fecha de Inicio</span>
-                                                <span class="text-desc">@Model.ProjectInformation.startdate</span>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <span class="label-desc">Fecha de Finalización</span>
-                                                <span class="text-desc">@Model.ProjectInformation.enddate</span>
-                                            </div>
+
+                                    </div>
+                                </li>
+                                <li class="data-list">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="label-desc">Fecha de Inicio</span>
+                                            <span class="text-desc">@Model.ProjectInformation.startdate</span>
                                         </div>
+                                        <div class="col-md-6">
+                                            <span class="label-desc">Fecha de Finalización</span>
+                                            <span class="text-desc">@Model.ProjectInformation.enddate</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="data-list" id="benefi">
+                                    <span class="label-desc">Código BPIN</span>
+                                    <span class="text-desc">@Model.ProjectInformation.BPIN</span>
+                                </li>
+                                @if (beneficiarios.Trim() != "")
+                                {
+                                    <text>
+                                    <li class="data-list">
+                                        <span class="label-desc"><strong>Beneficiarios</strong></span>
+                                        <span class=""><br>@Html.Raw(@beneficiarios.Substring(0, @beneficiarios.Length - 1))</span>
+
+
                                     </li>
-                                    <li class="data-list" id="benefi">
-                                        <span class="label-desc">Código BPIN</span>
-                                        <span class="text-desc">@Model.ProjectInformation.BPIN</span>
-                                    </li>
-                                     @if (beneficiarios.Trim() != "")
-                                     {
-                                        <text>
-                                        <li class="data-list" >
-                                            <span class="label-desc"><strong>Beneficiarios</strong></span>
-                                            <span class=""><br>@Html.Raw(@beneficiarios.Substring(0, @beneficiarios.Length - 1))</span>
+                                    </text>
+                                }
 
-
-                                        </li>
-                                        </text>
-                                     }
-                                
-                                </ul>
-                            </div>
-
+                            </ul>
                         </div>
+
+                    </div>
                     <div class="card description-box mb-4">
                         <div class="data-list">
                             <span class="label-desc">Plan de desarrollo:</span>
@@ -308,13 +310,21 @@
                     <!--PRESPUESTO-->
                     <div class="py-4">
                         <div class="heading-Project">
-                        <h3>Presupuesto <span id="info_general_annio" class="yearSelected">2024</span></h3>
+                            <h3>
+                                Presupuesto <span id="info_general_annio" class="yearSelected">2024</span>&nbsp;<a href="#popup1" class="p-2 popup1_open ic-ttip">
+                                    <span class="material-icons md-32">
+                                        info
+                                    </span>
+                                </a>
+                            </h3>
+
                         </div>
                         <div class="row">
                             <div class="col-lg-4 h100">
                                 <div class="card general-datos">
-                                    <span class="">Presupuesto asginado acumulado</span>
-                                <span id="presupuestoVigenteInfoGeneral" class="bigNumber"></span>
+                                    <span class="">Presupuesto asignado acumulado</span>
+                                    <span id="presupuestoVigenteInfoGeneral" class="bigNumber"></span>
+
                                 </div>
                             </div>
                             <div class="col-lg-4 h-100">
@@ -333,25 +343,47 @@
 
                     </div>
 
-                     <div class="mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="heading-Project">
-                                    <h3>Ejecución Financiera</h3>
-                                    <p>Esta ejecución permite entender qué porcentaje de los recursos del proyecto se han usado para cumplir la meta.</p>
-                                    </div>
-                                    <div class="containerGraph" style="width:auto;height:auto;" id="divGraphAvanceFinancieroInfoGeneral"></div>
+                    <div class="mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="heading-Project">
+                                    <h3>Porcentaje de ejecución</h3>
+                                    <p>Es el progreso del proyecto en términos de contratación. Muestra cuánto del presupuesto ya está comprometido a través de contratos u otros métodos que permite la ley.</p>
                                 </div>
+                                <div class="containerGraph" style="width:auto;height:auto;" id="divGraphPorcentajeEjecucion"></div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="heading-Project">
+                                    <h3>Avance financiero</h3>
+                                    <p>Se refiere a la cantidad de plata que se va pagando a los proveedores por las obras, bienes o servicios que ya han sido entregados.</p>
+                                </div>
+                                <div class="containerGraph" style="width:auto;height:auto;" id="divGraphAvanceFinancieroInfoGeneral"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="mb-4">
                         <div class="card">
                             <div class="card-body">
                                 <div class="heading-Project">
-                                    <h3>Ejecución Física</h3>
-                                    <p>Se refiere al avance real de las obras y proyectos que desarrolla la Administración Distrital. Por ejemplo, si estás construyendo un muro en tu casa, la ejecución física te permite determinar cuántos ladrillos se han puesto y cuántos faltan por poner.</p>
+                                    <h3>Avance físico</h3>
+                                    <p>
+                                        Es el progreso visible del proyecto. El momento en el que se evidencian los resultados concretos de la obra, bien o servicio que se contrató. Su actualización se realiza al finalizar cada trimestre, una vez el Departamento de Planeación ha concluido el seguimiento.
+                                    </p>
                                 </div>
                                 <div class="containerGraph" style="width:auto;height:auto;" id="divGraphAvanceFisicoInfoGeneral"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="alert alert-warning" role="alert">
+                            <div class="alert-ico"><i class="material-icons md-22">info</i></div>
+                            <div class="alert-text">
+                                <span class="text-bold">¡Importante!: La ejecución financiera y la ejecución física no siempre son iguales,</span> generalmente una va más avanzada que la otra y eso se debe a varias cosas. Puede ser que un contrato permita pagos anticipados al proveedor o en otros casos que solo se pague cuando ya está todo hecho. También sucede que hay platica que no alcanza a pagarse a los proveedores el mismo año por cambios en cronograma, porque no alcanzaron a pasar su factura a tiempo, entre otros. Pa que veás qué sucede en la ejecución de este proyecto, revisá los contratos (ver abajo) o escribile al ente gestor.
                             </div>
                         </div>
                     </div>
@@ -372,13 +404,14 @@
                                                     @if (Model.componentes_proy.Count > 0)
                                                     {
                                                         foreach (var item in Model.componentes_proy)
-                                                        {<text>
-                                                                <option codigo="@item.Id" value="@item.Id">
-                                                                    <span class="indicatorCat"> @item.Id </span>@item.Nombre
-                                                                </option>
-                                                        </text>
+                                                        {
+                                                            <text>
+                                                            <option codigo="@item.Id" value="@item.Id">
+                                                                <span class="indicatorCat"> @item.Id </span>@item.Nombre
+                                                            </option>
+                                                            </text>
+                                                        }
                                                     }
-                                                }
                                                 </select>
                                             </div>
                                         </div>
@@ -387,17 +420,16 @@
                                 </div>
                             </div>
                         }
-                    </div>                    
+                    </div>
                 </div>
                 <div class="row mb-4">
-                        <div class="col-lg-12">                            
-                                <div class="heading-Project">
-                                    <h3>Objetivo General</h3>
-                                </div>
-                                <span class="text-desc">@Model.ProjectInformation.objGeneral</span>                            
+                    <div class="col-lg-12">
+                        <div class="heading-Project">
+                            <h3>Objetivo General</h3>
                         </div>
-                 </div>
-                 
+                        <p class="text-desc">@Model.ProjectInformation.objGeneral</p>
+                    </div>
+                </div>
                 <section class="separator-H py-4" id="sctejecucionfinanciera">
                     <div class="row mb-4">
                         <div class="col-lg-12">
@@ -406,15 +438,15 @@
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <p>En esta sección podés encontrar los tipos de recursos que financian el proyecto. En los que podés encontrar: </p>
+                            <p>En esta seccion podes encontrar el avance financiero detallado según los tipos de recursos que financian el proyecto. En los que podés encontrar: </p>
                             <ul>
                                 <li><span class="text-bold">Recursos Propios de Libre Destinación</span> (Lo que los caleños pagamos a la ciudad)</li>
                                 <li>
-                                    <span class="text-bold">Recursos Propios con Destinacion Especifica</span> (Lo que los caleños pagamos a la ciudad que se destinan para atender temas específicos como Adulto mayor, Niñez, etc.)
+                                    <span class="text-bold">Recursos Propios con Destinación Específica</span> (Lo que los caleños pagamos a la ciudad que se destinan para atender temas específicos como adulto mayor, niñez, etc.)
 
                                 </li>
-                                <li><span class="text-bold">Recursos con Destinación específica del SGP</span> (Transferencias de la nación para atender temas como Salud y educación entre otros)</li>
-                                <li><span class="text-bold">Otros Recursos con Destinación Específica</span> (Otro tipo de transferencias de la Nación o el Departamento para Temas particulares como ICBF y ADRES, etc.)</li>
+                                <li><span class="text-bold">Recursos con Destinación Específica del SGP</span> (Transferencias de la Nación para atender temas como salud y educación entre otros)</li>
+                                <li><span class="text-bold">Otros Recursos con Destinación Específica</span> (Otro tipo de transferencias de la Nación o el Departamento para temas particulares como ICBF y ADRES, etc.)</li>
                             </ul>
 
 
@@ -440,15 +472,14 @@
                                 </div>
                             </div>
                             <div class="wrap-fuenteFinance" id="ejecucion_presupuestal_fondo"></div>
-                           
                         </div>
                     </div>
                 </section>
             </div>
         </div>
     </section>
-  
-
+    <!--Entregables-->
+    <!--Fin entregables-->
     <!--Ordenes de Pago-->
     <section class="section" id="s2">
         <div class="container">
@@ -484,7 +515,6 @@
                     <!--ESTRUCTURA HTML PARA TOMAR COMO REFERENCIA-->
                     <!--CIERRE DE ESTRUCTURA-->
                     <div class="wrap-proceso whiteBg" id="srcContratos">
-                     
                     </div>
 
                     <div id="divPagContratos" class="">
@@ -500,7 +530,7 @@
     <section class="section section-bg2" id="s3">
         <div class="container">
             <div class="section-heading heading-left">
-                <h2>Fotos de la unidad ejecutora</h2>
+                <h2>Fotos oficiales</h2>
             </div>
             @if (Model.Images.Count() == 0)
             {
@@ -520,7 +550,9 @@
                                 <div class="thumbnail type5">
 
                                     <div class="enlace_img" descrip="@photo.description" data-src="@photo.large" style="background-image: url('@photo.large')">
-                                        <div class="btn-zoom" data-toggle="modal" data-target="#FotoModal"><div class="ic-gal"><i class="material-icons md-48">zoom_in</i></div></div>
+                                        <div class="btn-zoom" data-toggle="modal" data-target="#FotoModalOficial">
+                                            <div class="ic-gal"><i class="material-icons md-48">zoom_in</i></div>
+                                        </div>
                                         <div class="labelCategory">
                                             <div class="d-flex">
                                                 <div class="desc-gal">
@@ -540,24 +572,47 @@
                 </div>
 
             }
-
-            <!--MODAL-->
-            <div id="FotoModal" class="modal fade" role="dialog">
+            <div id="FotoModalOficial" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
                 <div class="modal-dialog MIVBox">
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">Fotos</h3>
-                            <button type="button" id="btnCloseFotoModal" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
+                            <h3 class="modal-title">Fotos Oficiales</h3>
+                            <button type="button" id="btnCloseFotoModalOficial" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="modal-body" id="divDatosModal">
-                            <img class="img-fluid" id="img-modal" alt="imagen complementaria" src="">
-                            <div id="des"></div>
+                        <div class="modal-body" id="divDatosModalOficial">
+                            <img class="img-fluid" id="img-modal-oficial" alt="imagen complementaria" src="">
+                            <div id="des-oficial"></div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+            <!--MODAL 2-->
+            <div id="popup1" class="popup_style popup_style_wide popup_style_sally open_popup" style="display:none;">
+                <div class="popup">
+                    <div class="popup_content">
+                        <h4 class="popup_title">Tipos de presupuesto</h4>
+                        <div class="content2">
+                            <ul>
+                                <li><span class="text-bold">Presupuesto asignado/vigente:</span> <br />Es el total de recursos/dinero que la Alcaldía destinó para el desarrollo de un proyecto y que puede ejecutarse mediante diferentes contratos. Similar a cuando destinás una parte de tu salario para una actividad en específico como salir a comer con tu pareja.</li>
+                                <li>
+                                    <span class="text-bold">Presupuesto ejecutado:</span>  <br />Es el dinero que la Alcaldía ha pagado al proveedor para el desarrollo de un proyecto o la entrega de un servicio. Es decir, la cantidad de dinero que gastaste de lo que habías asignado para salir a comer con tu pareja.
+                                </li>
+                                <li>
+                                    <span class="text-bold">Presupuesto obligado:</span>  <br />Es el dinero que la Alcaldía se comprometió a pagar a un proveedor por el desarrollo de una obra o proyecto y/o la entrega de un servicio. Similar a cuando suscribís un contrato de arrendamiento para pagar una suma en específico al dueño de la casa mes a mes.
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="popup1_close popup_close"><i class="material-icons md-24">close</i></div>
+                </div>
+            </div>
+
         </div>
     </section>
     <div class="clearfix"></div>
@@ -574,22 +629,23 @@
                         <h2 class="mb-3">Fotos cargadas por los ciudadanos </h2>
                     </div>
                     <div class="empty-gallery">No existen imágenes aún para este proyecto</div>
-                </text> }
+                </text>
+            }
             else
             {
-                <div class="section-heading heading-left">
-                    <h2 class="mb-3">Fotos cargadas por los ciudadanos(@Model.FotosU.Count()) </h2>
-                </div>
-                <div class="project-carusel w4col" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true }'>
+                <div class="project-carusel w2col" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "contain": true, "prevNextButtons": true }'>
                     @foreach (var photo in Model.FotosU)
-                    {<!--ITEM 1-->
+                    {
+                        <!--ITEM 1-->
                         <div class="project-col gallery-col-carusel">
                             <!-- Begin project item -->
                             <div class="gallery-card">
                                 <div class="thumbnail type5">
 
-                                    <div class="enlace_img" descrip="@photo.description" data-src="@photo.large" style="background-image: url('@photo.large')">
-                                        <div class="btn-zoom" data-toggle="modal" data-target="#FotoModal"><div class="ic-gal"><i class="material-icons md-48">zoom_in</i></div></div>
+                                    <div class="enlace_img_ciudadanos" descrip="@photo.description" data-src="@photo.large" style="background-image: url('@photo.large')">
+                                        <div class="btn-zoom" data-toggle="modal" data-target="#FotoModalCiudadano">
+                                            <div class="ic-gal"><i class="material-icons md-48">zoom_in</i></div>
+                                        </div>
                                         <div class="labelCategory">
                                             <div class="d-flex">
                                                 <div class="desc-gal">
@@ -603,8 +659,11 @@
 
                                 </div>
                             </div><!-- End project item -->
-                        </div>}
-                </div>}
+                        </div>
+
+                    }
+                </div>
+            }
             <!--BOTONERA-->
             <div class="col-md-12">
                 <div class="filtersBox">
@@ -612,30 +671,34 @@
 
                         <div class="col-md-12 text-center py-5" id="divFotoUsuario">
                             <a class="btn btn-outlined btn-simple" id="btnSubirFoto_AUX" role="button"><i class="material-icons md-24">add_photo_alternate</i> SUBIR FOTO</a>
-                            <button class="btn outlined btn-simple" id="btnSubirFoto" data-toggle="modal" data-target="#myModal" role="button" style="display:none;"><i class="material-icons md-24">add_photo_alternate</i> SUBIR FOTO2</button>
+                            <button type="button" class="btn outlined btn-simple" id="btnSubirFoto" data-toggle="modal" data-target="#myModal" role="button" style="display:none;">
+                                <i class="material-icons md-24">add_photo_alternate</i> SUBIR FOTO2
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
             <!--MODAL-->
-            <div id="FotoModal" class="modal fade" role="dialog">
+            <div id="FotoModalCiudadano" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
                 <div class="modal-dialog MIVBox">
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title">Fotos</h3>
-                            <button type="button" id="btnCloseFotoModal" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
+                            <h3 class="modal-title">Fotos Ciudadanas</h3>
+                            <button type="button" id="btnCloseFotoModalCiudadano" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="modal-body" id="divDatosModal">
-                            <img class="img-fluid" id="img-modal" alt="imagen complementaria" src="">
-                            <div id="des"></div>
+                        <div class="modal-body" id="divDatosModalCiudadano">
+                            <img class="img-fluid" id="img-modal-ciudadano" alt="imagen complementaria" src="">
+                            <div id="des-ciudadano"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="myModal" class="modal fade" role="dialog">
+
+            <div id="myModal" class="modal fade" data-backdrop="static" data-keyboard="false" role="dialog">
                 <div class="modal-dialog MIVBox">
                     <!-- Modal content-->
                     <div class="modal-content">
@@ -928,7 +991,7 @@
                                     </div>
 
                                 </div>
-                               
+
                                 <div>
                                     <label for="txtcomentario" class="required">Escribe tu comentario:</label>
                                     <div id="divComentario">
@@ -962,7 +1025,8 @@
                         </div>
                     </div>
                     <div class="text-center closeSesion" id="divCloseSesion" style="display:none;">
-                        <a role="button" id="enlace_cierre"><i class="material-icons md-24">logout</i> Cerrar Sesión </a></div>
+                        <a role="button" id="enlace_cierre"><i class="material-icons md-24">logout</i> Cerrar Sesión </a>
+                    </div>
                 </div>
                 <div class="col-md-6 col-lg-8 s2" id="divComentarios">
                     <div class="Tcomments">
@@ -972,7 +1036,6 @@
                         </div>
                     </div>
                     <div id="content-2" class="content mCustomScrollbar" data-mcs-theme="dark">
-
                     </div>
 
                 </div>
@@ -983,7 +1046,7 @@
     </section>
     <div class="clearfix"></div>
     <!-- Fin Participación ciudadana -->
-        <!-- PROYECTOS RELACIONADOS -->
+    <!-- PROYECTOS RELACIONADOS -->
     <section class="section proy-relacionados section-bg2">
         <div class="container">
             <div class="row">
@@ -1042,23 +1105,23 @@
         <input type="button" id="btnEnviar" value="Download Pdf" style="display:none;" />
     }
     <script type="text/javascript">
-    $(function () {
-        $("#btnGenPdfProy").click(function () {
-            var id_proy=@Model.idproject;
-            var cant_cont= 50000;
-            var annio=$("#top_contratista_periodos").val();
-            $("#id_obj_pdf").val(id_proy);
-            $("#cant_cont").val(cant_cont);
-            $("#annio").val(annio);
-            $("#formPdfProy").submit();
-        });
-        $("#btnEnviarExc").click(function () {
-            var id_proy=@Model.idproject;
-            $("#id_obj_exc").val(id_proy);
-            $("#formExComent").submit();
+        $(function () {
+            $("#btnGenPdfProy").click(function () {
+                var id_proy=@Model.idproject;
+                var cant_cont= 50000;
+                var annio=$("#top_contratista_periodos").val();
+                $("#id_obj_pdf").val(id_proy);
+                $("#cant_cont").val(cant_cont);
+                $("#annio").val(annio);
+                $("#formPdfProy").submit();
+            });
+            $("#btnEnviarExc").click(function () {
+                var id_proy=@Model.idproject;
+                $("#id_obj_exc").val(id_proy);
+                $("#formExComent").submit();
 
+            });
         });
-    });
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -1141,274 +1204,288 @@
         });
     </script>
     <script type="text/javascript">
-    $(document).ready(function () {
-        var selectElement = document.getElementById('filtro_periodo_info_general');
-        if (selectElement && selectElement.options.length > 0) {
-            selectElement.selectedIndex = 0; // Selecciona el primer elemento
-            var anio = selectElement.options[0].value; // Obtén el valor del primer elemento
-            var idProyecto =  $('#hdIdProyecto').val();
-            getInformacionGeneralPorProyectoAnio(anio,idProyecto);
-        }
-        var selectElementEjecucionPresupuestalPorFondo = document.getElementById('filtro_ejecucion_presupuestal_por_fondo');
-        if (selectElementEjecucionPresupuestalPorFondo && selectElementEjecucionPresupuestalPorFondo.options.length > 0) {
-            selectElementEjecucionPresupuestalPorFondo.selectedIndex = 0; // Selecciona el primer elemento
-            var anio = selectElement.options[0].value; // Obtén el valor del primer elemento
-            var idProyecto =  $('#hdIdProyecto').val();
-            getInformacionPresupuestalPorFondoPorProyectoAnio(anio, idProyecto);
-        }
-        else{
-                $('#sctejecucionfinanciera').hide();
-        }
-        function graficarBarra(divContenedor, value) {
-                new d3plus.BarChart()
-                    .select("#" + divContenedor)
-                    .config({
-                        backgroundConfig: {
-                            "strokeWidth": 1,
-                            "stroke": "#e25126",
-                            "fill": "transparent",
-                        },
-                        font: { "family": "inherit", "size": 14 },
-                        data: [
-
-                            {
-                                id: 'proy',
-                                x: 1,
-                                y: value
-                            }
-                        ],
-                        height: 170,
-                        title: "",
-                        titleConfig: {
-                            "ariaHidden": true,
-                            "fontSize": 22,
-                            "padding": 10,
-                            "resize": false,
-                            "weight": 600,
-                            "textAnchor": "middle"
-                        },
-                        colorScale: 'id',
-                        colorScaleConfig: {
-                            color: [
-                                '#e25126',
-                            ]
-                        },
-                        discrete: 'y',
-                        groupBy: 'id',
-                        stacked: true,
-                        tooltip: false,
-                        label: d => `${d['y'].toLocaleString('es-ES')}%`,
-
-                        x: 'y',
-                        xConfig: {
-                            title: false,
-                            tickFormat: d => `${d.toLocaleString('es-ES')}%`,
-                            ticks: [],
-                            labels: [0, 20, 40, 60, 80, 100],
-                            color: "#666",
-                            grid: false
-                        },
-                        xDomain: [
-                            0,
-                            100
-                        ],
-                        y: 'x',
-                        yConfig: {
-                            tickFormat: d => `${d}%`,
-
-                            title: false,
-                            ticks: []
-                        }
-                    }
-                    )
-                    .legend(false)
-                    .render();
-        }
-        function getInformacionGeneralPorProyectoAnio(anio,idProyecto){
-            $('#presupuestoVigenteInfoGeneral').html("");
-            $('#presupuestoEjecutadoInfoGeneral').html("");
-            $('#presupuestoObligadoInfoGeneral').html("");
-            $('#divGraphAvanceFinancieroInfoGeneral').html("");
-            $('#divGraphAvanceFisicoInfoGeneral').html("");
-            $('#info_general_annio').html(anio)
-            //console.log("Valor seleccionado:", anio);
-            //console.log("Id proyecto:", $('#hdIdProyecto').val());           
-            $.ajax({
-                    contentType: "application/json; charset=utf-8",
-                    url: "/api/serviciosproyectos/GetInformacionGeneralProyectoPorAnioPresupuestal",
-                    type: "GET",
-                    data: {
-                        idProyecto:idProyecto,
-                        anio: anio
-                    }
-                }).done(function (data) {
-                    //console.log("data InformacionGeneralProyectoPorAnioPresupuestal", data);
-                    if(data!=null && data!= undefined)
-                     {
-                        $('#presupuestoVigenteInfoGeneral').html('$ '+ separar_milesv2(data.propuestoAsignadoVigencia, 2, '.', ',') + " Millones");
-                        $('#presupuestoEjecutadoInfoGeneral').html('$ '+  separar_milesv2(data.propuestoEjecutado, 2, '.', ',') + " Millones");
-                        $('#presupuestoObligadoInfoGeneral').html('$ '+  separar_milesv2(data.propuestoObligado, 2, '.', ',') + " Millones");
-                        graficarBarra("divGraphAvanceFinancieroInfoGeneral",data.ejecucionFinanciera);
-                        graficarBarra("divGraphAvanceFisicoInfoGeneral",data.ejecucionFisica);
-                    }                 
-                }).fail(function (xhr, ajaxOptions, thrownError) {
-                    alert("Error projec profile:" + xhr.status + "_" + thrownError);
-                });
-        }
-        function getInformacionPresupuestalPorFondoPorProyectoAnio(anio, idProyecto) {
-            $('#ejecucion_presupuestal_fondo').html("");
-            console.log("Valor seleccionado:", anio);
-            console.log("id del proyecto:", idProyecto);
-            $.ajax({
-                contentType: "application/json; charset=utf-8",
-                    url: "/api/serviciosproyectos/GetInformacionPresupuestalProyectoAnioPorClasificacionDeFondo",
-                type: "GET",
-                data: {
-                    idProyecto: idProyecto,
-                    anio: anio
+            $(document).ready(function () {
+                var selectElement = document.getElementById('filtro_periodo_info_general');
+                if (selectElement && selectElement.options.length > 0) {
+                    selectElement.selectedIndex = 0; // Selecciona el primer elemento
+                    var anio = selectElement.options[0].value; // Obtén el valor del primer elemento
+                    var idProyecto =  $('#hdIdProyecto').val();
+                    getInformacionGeneralPorProyectoAnio(anio,idProyecto);
                 }
-            }).done(function (data) {
-                //console.log("data getInformacionPresupuestalPorFondoPorProyectoAnio", data);
-                if (data != null && data != undefined) {
-                    let htmlEjecucion='';
-                    let datoencontrado=[];
-                    let porcentaje=[];
-                    let posicion=0;
-                    for (var i = 0; i < data.length; i++) {
-                        //console.log("data getInformacionPresupuestalPorFondoPorProyectoAnio i", data[i]);
-                       if(data[i].presupuestoObligado){
-                                          datoencontrado[posicion]=i;
-                                          porcentaje[posicion]=data[i].porcentaje;
-                                          posicion=posicion+1;
-                            htmlEjecucion= htmlEjecucion + 
-                            '<div class="wrap-fuenteFinance">' +
-                                '<div class="row">'+
-                                    '<div class="col-xs-12 col-lg-12 headSource">'+
-                                        '<span class="small">Clasificación fondo:</span>'+
-                                        '<span class="h4">'+data[i].clasificacionFondo+'</span>'+
-                                    '</div>'+
-                                    '<div class="col-lg-8 d-flex cont-data-fin">'+
-                                        '<div class="rounded-box d-flex">'+
-                                            '<span class="small">Presupuesto asignado:</span>'+
-                                            '<span class="text-bold">$'+ separar_milesv2(data[i].presupuestoAsignado, 2, '.', ',')+ ' Millones</span>'+
-                                        '</div>'+
-                                       '<div class="rounded-box d-flex">'+
-                                           '<span class="small">Presupuesto Obligado:</span>'+
-                                                                            '<span class="text-bold">$'+ separar_milesv2(data[i].presupuestoObligado, 2, '.', ',')+ ' Millones</span>'+
-                                        '</div>'+
-                                    '</div>'+
-                                '</div>'+
-                                '<div class="clearfix"></div>'+
-                                '<div class="contendor-grafica-avance" id="divInfoPresupuestoFondo_' + i+'">'+
-                                '</div>'+
-                                 '</div>'+
-                               '</div>'+
-                            '</div>';
+                var selectElementEjecucionPresupuestalPorFondo = document.getElementById('filtro_ejecucion_presupuestal_por_fondo');
+                if (selectElementEjecucionPresupuestalPorFondo && selectElementEjecucionPresupuestalPorFondo.options.length > 0) {
+                    selectElementEjecucionPresupuestalPorFondo.selectedIndex = 0; // Selecciona el primer elemento
+                    var anio = selectElement.options[0].value; // Obtén el valor del primer elemento
+                    var idProyecto =  $('#hdIdProyecto').val();
+                    getInformacionPresupuestalPorFondoPorProyectoAnio(anio, idProyecto);
+                }
+                else{
+                        $('#sctejecucionfinanciera').hide();
+                }
+                function graficarBarra(divContenedor, value) {
+                        new d3plus.BarChart()
+                            .select("#" + divContenedor)
+                            .config({
+                                backgroundConfig: {
+                                    "strokeWidth": 1,
+                                    "stroke": "#e25126",
+                                    "fill": "transparent",
+                                },
+                                font: { "family": "inherit", "size": 14 },
+                                data: [
+
+                                    {
+                                        id: 'proy',
+                                        x: 1,
+                                        y: value
                                     }
-                    }
-                    // if(htmlEjecucion==''){
-                    //             $('#sctejecucionfinanciera').hide();
-                    // }
-                    // else{
+                                ],
+                                height: 170,
+                                title: "",
+                                titleConfig: {
+                                    "ariaHidden": true,
+                                    "fontSize": 22,
+                                    "padding": 10,
+                                    "resize": false,
+                                    "weight": 600,
+                                    "textAnchor": "middle"
+                                },
+                                colorScale: 'id',
+                                colorScaleConfig: {
+                                    color: [
+                                        '#e25126',
+                                    ]
+                                },
+                                discrete: 'y',
+                                groupBy: 'id',
+                                stacked: true,
+                                tooltip: false,
+                                label: d => `${d['y'].toLocaleString('es-ES')}%`,
+
+                                x: 'y',
+                                xConfig: {
+                                    title: false,
+                                    tickFormat: d => `${d.toLocaleString('es-ES')}%`,
+                                    ticks: [],
+                                    labels: [0, 20, 40, 60, 80, 100],
+                                    color: "#666",
+                                    grid: false
+                                },
+                                xDomain: [
+                                    0,
+                                    100
+                                ],
+                                y: 'x',
+                                yConfig: {
+                                    tickFormat: d => `${d}%`,
+
+                                    title: false,
+                                    ticks: []
+                                }
+                            }
+                            )
+                            .legend(false)
+                            .render();
+                }
+                function getInformacionGeneralPorProyectoAnio(anio,idProyecto){
+                    $('#presupuestoVigenteInfoGeneral').html("");
+                    $('#presupuestoEjecutadoInfoGeneral').html("");
+                    $('#presupuestoObligadoInfoGeneral').html("");
+                    $('#divGraphPorcentajeEjecucion').html("");
+                    $('#divGraphAvanceFinancieroInfoGeneral').html("");
+                    $('#divGraphAvanceFisicoInfoGeneral').html("");
+                    $('#info_general_annio').html(anio)
+                    //console.log("Valor seleccionado:", anio);
+                    //console.log("Id proyecto:", $('#hdIdProyecto').val());
+                    $.ajax({
+                            contentType: "application/json; charset=utf-8",
+                            url: "/api/serviciosproyectos/GetInformacionGeneralProyectoPorAnioPresupuestal",
+                            type: "GET",
+                            data: {
+                                idProyecto:idProyecto,
+                                anio: anio
+                            }
+                        }).done(function (data) {
+                            //console.log("data InformacionGeneralProyectoPorAnioPresupuestal", data);
+                            if(data!=null && data!= undefined)
+                             {
+                                $('#presupuestoVigenteInfoGeneral').html('$ '+ separar_milesv2(data.propuestoAsignadoVigencia, 2, '.', ',') + " Millones");
+                                $('#presupuestoEjecutadoInfoGeneral').html('$ '+  separar_milesv2(data.propuestoEjecutado, 2, '.', ',') + " Millones");
+                                $('#presupuestoObligadoInfoGeneral').html('$ '+  separar_milesv2(data.propuestoObligado, 2, '.', ',') + " Millones");
+                                graficarBarra("divGraphAvanceFinancieroInfoGeneral",data.ejecucionFinanciera);
+                                graficarBarra("divGraphAvanceFisicoInfoGeneral",data.ejecucionFisica);
+                                graficarBarra("divGraphPorcentajeEjecucion",data.porcentajeEjecucion);
+                            }
+                        }).fail(function (xhr, ajaxOptions, thrownError) {
+                            alert("Error projec profile:" + xhr.status + "_" + thrownError);
+                        });
+                }
+                function getInformacionPresupuestalPorFondoPorProyectoAnio(anio, idProyecto) {
+                    $('#ejecucion_presupuestal_fondo').html("");
+                    console.log("Valor seleccionado:", anio);
+                    console.log("id del proyecto:", idProyecto);
+                    $.ajax({
+                        contentType: "application/json; charset=utf-8",
+                            url: "/api/serviciosproyectos/GetInformacionPresupuestalProyectoAnioPorClasificacionDeFondo",
+                        type: "GET",
+                        data: {
+                            idProyecto: idProyecto,
+                            anio: anio
+                        }
+                    }).done(function (data) {
+                        //console.log("data getInformacionPresupuestalPorFondoPorProyectoAnio", data);
+                        if (data != null && data != undefined) {
+                            let htmlEjecucion='';
+                            let datoencontrado=[];
+                            let porcentaje=[];
+                            let posicion=0;
+                            for (var i = 0; i < data.length; i++) {
+                               if(data[i].presupuestoObligado>=0){
+                                                  datoencontrado[posicion]=i;
+                                                  porcentaje[posicion]=data[i].porcentaje;
+                                                  posicion=posicion+1;
+                                    htmlEjecucion= htmlEjecucion +
+                                    '<div class="wrap-fuenteFinance">' +
+                                        '<div class="row">'+
+                                            '<div class="col-xs-12 col-lg-12 headSource">'+
+                                                '<span class="small">Clasificación fondo:</span>'+
+                                                '<span class="h4">'+data[i].clasificacionFondo+'</span>'+
+                                            '</div>'+
+                                            '<div class="col-lg-8 d-flex cont-data-fin">'+
+                                                '<div class="rounded-box d-flex">'+
+                                                    '<span class="small">Presupuesto asignado:</span>'+
+                                                    '<span class="text-bold">$'+ separar_milesv2(data[i].presupuestoAsignado, 2, '.', ',')+ ' Millones</span>'+
+                                                '</div>'+
+                                               '<div class="rounded-box d-flex">'+
+                                                   '<span class="small">Presupuesto Obligado:</span>'+
+                                                                                    '<span class="text-bold">$'+ separar_milesv2(data[i].presupuestoObligado, 2, '.', ',')+ ' Millones</span>'+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="clearfix"></div>'+
+                                        '<div class="contendor-grafica-avance" id="divInfoPresupuestoFondo_' + i+'">'+
+                                        '</div>'+
+                                         '</div>'+
+                                       '</div>'+
+                                    '</div>';
+                                            }
+                            }
                             $('#ejecucion_presupuestal_fondo').html(htmlEjecucion);
                               for (var i = 0; i < datoencontrado.length; i++) {
                                         graficarBarra("divInfoPresupuestoFondo_"+datoencontrado[i], porcentaje[i]);
                             }
-                    // }
-                }
-            }).fail(function (xhr, ajaxOptions, thrownError) {
-                alert("Error projec profile:" + xhr.status + "_" + thrownError);
-            });
-        }
-        $('#btnUploadFile').on('click', function () {
-            var data = new FormData();
-            var maxFileSize = 1048576; // 1MB ->  1024 * 1024
-          var files = $("#fileUpload").get(0).files;
-
-            // Add the uploaded image content to the form data collection
-            if (files.length > 0)
-            {
-                if (files[0].size < maxFileSize) {
-
-                  var reader = new FileReader();
-                  const fileByteArray = [];
-                  reader.readAsArrayBuffer(files[0]);
-                  reader.onloadend = (evt) => {
-                    if (evt.target.readyState === FileReader.DONE) {
-                      const arrayBuffer = evt.target.result,
-                        array = new Uint8Array(arrayBuffer);
-                      for (const a of array) {
-                        fileByteArray.push(a);
-                      }
-                      var params_img = {
-                        UploadedImage: fileByteArray,
-                        DescripcionImage: $('#tbDescripcion').val(),
-                        LocationImage: $('#filtro_AreaFotoUsuUpload option:selected').val(),
-                        ProjectImage:@Model.idproject
-	                        };
-                      $.ajax({
-                        type: 'POST',
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                                    url: "/api/ServiciosParticipacion/SubirArchivo",
-                        cache: false,
-                        data: JSON.stringify(params_img),
-                        success: function (result) {
-                          //separa error y mensaje
-                          var cad_result = result.message.split("<||>");
-                          if (cad_result.length > 1) {
-                            var cod_error = cad_result[0];
-                            var mensaje_error = cad_result[1];
-                            if (cod_error == "0") {
-                              bootbox.alert(mensaje_error, function () {
-                                $('select,input[type=text],input[type=radio],textarea', $('#divDatosModal')).each(function (i, e) {
-                                  $(e).val("");
-                                });
-                                $("#btnCloseFotos").trigger("click");
-                              });
-                            } else {
-                              bootbox.alert(mensaje_error);
-                            }
-                          } else {
-                            bootbox.alert(result);
-                          }
-                        },
-                        error: function (response) {
-                          bootbox.alert('Error: ' + response.responseText);
-                        },
-                        failure: function (response) {
-                          bootbox.alert('Fallo: ' + response.responseText);
                         }
-                      });
+                    }).fail(function (xhr, ajaxOptions, thrownError) {
+                        alert("Error projec profile:" + xhr.status + "_" + thrownError);
+                    });
+                }
+                $('#btnUploadFile').on('click', function () {
+                    var data = new FormData();
+                    var maxFileSize = 1048576; // 1MB ->  1024 * 1024
+                  var files = $("#fileUpload").get(0).files;
+                  //console.log("Entro por clic:");
+                    // Add the uploaded image content to the form data collection
+                    if (files.length > 0)
+                    {
+                        if (files[0].size < maxFileSize) {
+        //                  console.log(files[0]);
+                          var reader = new FileReader();
+                          const fileByteArray = [];
+                          reader.readAsArrayBuffer(files[0]);
+                          reader.onloadend = (evt) => {
+                            if (evt.target.readyState === FileReader.DONE) {
+                              const arrayBuffer = evt.target.result,
+                                array = new Uint8Array(arrayBuffer);
+                              for (const a of array) {
+                                fileByteArray.push(a);
+                              }
+                              var params_img = {
+                                UploadedImage: fileByteArray,
+                                DescripcionImage: $('#tbDescripcion').val(),
+                                LocationImage: $('#filtro_AreaFotoUsuUpload option:selected').val(),
+                                ProjectImage:@Model.idproject
+                                    };
+                              $.ajax({
+                                type: 'POST',
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                            url: "/api/ServiciosParticipacion/SubirArchivo",
+                                cache: false,
+                                data: JSON.stringify(params_img),
+                                success: function (result) {
+                                  //separa error y mensaje
+                                  var cad_result = result.message.split("<||>");
+                                  if (cad_result.length > 1) {
+                                    var cod_error = cad_result[0];
+                                    var mensaje_error = cad_result[1];
+                                    if (cod_error == "0") {
+                                      bootbox.alert(mensaje_error, function () {
+                                        $('select,input[type=text],input[type=radio],textarea', $('#divDatosModal')).each(function (i, e) {
+                                          $(e).val("");
+                                        });
+                                        $("#btnCloseFotos").trigger("click");
+                                      });
+                                    } else {
+                                      bootbox.alert(mensaje_error);
+                                    }
+                                  } else {
+                                    bootbox.alert(result);
+                                  }
+                                },
+                                error: function (response) {
+                                  bootbox.alert('Error: ' + response.responseText);
+                                },
+                                failure: function (response) {
+                                  bootbox.alert('Fallo: ' + response.responseText);
+                                }
+                              });
 
+                            }
+                          }
+                        }
+                        else {
+                            var tamanoArchivo = Math.round(files[0].size / maxFileSize);
+                            bootbox.alert('Lo sentimos, el archivo tiene un tamaño de ' + tamanoArchivo +' MB y supera el máximo tamaño permitido que es de 1MB.\nPor favor, modifique la imagen disminuyendo el tamaño del archivo antes de subirlo al sistema.');
+                        }
                     }
-                  }
-                }
-                else {
-                    var tamanoArchivo = Math.round(files[0].size / maxFileSize);
-                    bootbox.alert('Lo sentimos, el archivo tiene un tamaño de ' + tamanoArchivo +' MB y supera el máximo tamaño permitido que es de 1MB.\nPor favor, modifique la imagen disminuyendo el tamaño del archivo antes de subirlo al sistema.');
-                }
-            }
-            else bootbox.alert('No existe archivo para subir.');
-        });
-        $('.enlace_img').on('click' , function(e){
-            var id = $(this).attr("data-src");
-            $('#img-modal').attr("src", id);
-            var des = $(this).attr("descrip");
-        });
-        $('#filtro_periodo_info_general').on('change', function (e) {
-            e.preventDefault(); // Previene el comportamiento predeterminado si es necesario
-            var anio = $(this).val(); // Obtiene el valor del elemento seleccionado
-            var idProyecto =  $('#hdIdProyecto').val(); // Obtiene el texto del elemento seleccionado
-            getInformacionGeneralPorProyectoAnio(anio,idProyecto);
-        });
-         $('#filtro_ejecucion_presupuestal_por_fondo').on('change', function (e) {
-            e.preventDefault(); // Previene el comportamiento predeterminado si es necesario
-            var anio = $(this).val(); // Obtiene el valor del elemento seleccionado
-            var idProyecto =  $('#hdIdProyecto').val(); // Obtiene el texto del elemento seleccionado
-                getInformacionPresupuestalPorFondoPorProyectoAnio(anio, idProyecto);
-        });
-    });
+                    else bootbox.alert('No existe archivo para subir.');
+                });
+
+
+              $('.enlace_img').on('click', function(e){
+                  e.preventDefault();
+                  e.stopPropagation();
+                  var id = $(this).attr("data-src");
+                  $('#img-modal-oficial').attr("src", id);
+                  var des = $(this).attr("descrip");
+                  //$('#des-oficial').html(des);
+                  $('#FotoModalOficial').modal('show');
+                });
+
+
+                $('.enlace_img_ciudadanos').on('click', function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var id = $(this).attr("data-src");
+                    $('#img-modal-ciudadano').attr("src", id);
+                    var des = $(this).attr("descrip");
+                    //$('#des-oficial').html(des);
+                     $('#FotoModalCiudadano').modal('show');
+                });
+
+                $('#filtro_periodo_info_general').on('change', function (e) {
+                    e.preventDefault(); // Previene el comportamiento predeterminado si es necesario
+                    var anio = $(this).val(); // Obtiene el valor del elemento seleccionado
+                    var idProyecto =  $('#hdIdProyecto').val(); // Obtiene el texto del elemento seleccionado
+                    getInformacionGeneralPorProyectoAnio(anio,idProyecto);
+                });
+                 $('#filtro_ejecucion_presupuestal_por_fondo').on('change', function (e) {
+                    e.preventDefault(); // Previene el comportamiento predeterminado si es necesario
+                    var anio = $(this).val(); // Obtiene el valor del elemento seleccionado
+                    var idProyecto =  $('#hdIdProyecto').val(); // Obtiene el texto del elemento seleccionado
+                        getInformacionPresupuestalPorFondoPorProyectoAnio(anio, idProyecto);
+                });
+            });
     </script>
     <div id="fb-root"></div>
     <script src="~/js/jquery/jquery-ui.min.js"></script>
@@ -1424,8 +1501,14 @@
     @section DataBody {
         data-profile='[{"avance_financiero":"@Model.ProjectInformation.avance_financiero","id_project":"@Model.idproject"}]'
         data-actores='[@foreach (var info in @Model.actores_proy)
-        {<text> {"idCategoria":"@info.idCategoria","Categoria": "@info.Categoria","nomActor": "@info.nomActor"}@if (info != @Model.actores_proy.Last())
-        {<text>,</text>}</text>}]'
+        {
+            <text>
+                {"idCategoria":"@info.idCategoria","Categoria": "@info.Categoria","nomActor": "@info.nomActor"}@if (info != @Model.actores_proy.Last())
+                {
+                    <text>,</text>
+                }
+            </text>
+        }]'
         data-proyectoProjectData='@Html.Raw(jsonData)'
     }
 

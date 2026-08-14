@@ -25,6 +25,7 @@ define(function (require) {
                 .attr("class", "thumbnail type3")
             aux_div_col.append("img")
                 .attr("class", "img-responsive")
+                //.attr("src", "../content/img/img1.jpg")
                 .attr("src", resultados.UrlImagen)
                 .attr("alt", resultados.NombreMunicipio)
             aux_div_col.append("div")
@@ -34,8 +35,10 @@ define(function (require) {
             var aux_div_proy_celda_int = aux_div_proy_celda.append("div")
                 .attr("class", "amount")
             aux_div_proy_celda_int.append("span")
+                //.attr("class", "bigNumber").text("TT" + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits:0 }).format(resultados.approvedTotalMoney))
                 .attr("class", "bigNumber").text("TT$ " + convertirMillones(resultados.approvedTotalMoney) + " Million")
             aux_div_proy_celda.append("a")
+                //.attr("href", "")
                 .attr("href", "../projectprofile/" + resultados.IdProyecto)
                 .append("h4").text(resultados.NombreProyecto)
             var aux_div_proy_clear = aux_div_col.append("div")
@@ -44,6 +47,7 @@ define(function (require) {
                 .attr("class", "percentage")
             var aux_div_proy_porc3 = aux_div_proy_porc2.append("div")
                 .attr("class", "completed")
+                //.attr("style", "width:30%")
                 .attr("style", "width:" + quitardecimal(resultados.porcentajeGastado) + "%")
             var aux_div_proy_porc4 = aux_div_proy_porc2.append("div")
                 .attr("class", "indicatorValues")
@@ -92,6 +96,7 @@ define(function (require) {
                 .attr("class", "thumbnail type3")
             aux_div_col.append("img")
                 .attr("class", "img-responsive")
+                //.attr("src", "../content/img/img1.jpg")
                 .attr("src", resultados.UrlImagen)
                 .attr("alt", resultados.NombreMunicipio)
             aux_div_col.append("div")
@@ -101,8 +106,10 @@ define(function (require) {
             var aux_div_proy_celda_int = aux_div_proy_celda.append("div")
                 .attr("class", "amount")
             aux_div_proy_celda_int.append("span")
+                //.attr("class", "bigNumber").text("TT" + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(resultados.approvedTotalMoney)) //separar_miles(convertirMillones(resultados.approvedTotalMoney))
                 .attr("class", "bigNumber").text("TT$ " + convertirMillones(resultados.approvedTotalMoney) + " Million")
             aux_div_proy_celda.append("a")
+                //.attr("href", "")
                 .attr("href", "../projectprofile/" + resultados.IdProyecto)
                 .append("h4").text(resultados.NombreProyecto)
             var aux_div_proy_clear = aux_div_col.append("div")
@@ -111,6 +118,7 @@ define(function (require) {
                 .attr("class", "percentage")
             var aux_div_proy_porc3 = aux_div_proy_porc2.append("div")
                 .attr("class", "completed")
+                //.attr("style", "width:30%")
                 .attr("style", "width:" + quitardecimal(resultados.porcentajeGastado) + "%")
             var aux_div_proy_porc4 = aux_div_proy_porc2.append("div")
                 .attr("class", "indicatorValues")
@@ -231,6 +239,7 @@ define(function (require) {
                 return num[0]
             }
             else {
+                //var num = num.toFixed(0);
                 return num;
             }
         }

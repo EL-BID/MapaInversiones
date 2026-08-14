@@ -24,7 +24,29 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             return View();
         }
 
-       
+        //public IActionResult GetFuenteDeLosRecursos()
+        //{
+        //    ModelDatosAbiertosData modelo = new ModelDatosAbiertosData();
+        //    var _sector = Request.Query["sector"];
+        //    using (var DataModel = new TransparenciaDB())
+        //    {
+
+        //        var grupos = (from pre in _connection.FuenteDeLosRecursos
+        //                      join ct in _connection.CatalogoTiempos on pre.Periodo.ToString() equals ct.Periodo
+        //                      group ct by ct.Año into g
+        //                      select new Period
+        //                      {
+        //                          id = g.Key,
+        //                          name = g.Key.ToString()
+        //                      }).Distinct().OrderByDescending(x => x.id).ToList();
+        //        modelo.periodos = grupos;
+
+        //    }
+        //    modelo.Sector = _sector;
+        //    ViewData["ruta"] = "Presupuesto";
+        //    return View(modelo);
+        //}
+
 
     }
 }

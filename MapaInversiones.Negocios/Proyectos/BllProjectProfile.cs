@@ -37,6 +37,9 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         public void GetSourcesByProject(ModelProjectProfile ModelProjectProfile, int IdProject)
         {
             try {
+                //Seleccionamos los años.
+                //BllPeriods period = new BllPeriods();
+                //List<int> listYears = period.GetYearsList();
 
 
                 List<int> listYears = new List<int>();
@@ -45,6 +48,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                              where p.IdProyecto == IdProject
                              select p.FechaInicioVigencia.Year).Distinct().ToList();
 
+                //TODO Falta consulta de linq de metricas por Id, Comentariar metrics, Revisar dependiendo del modelo
                 List<Sources> sources = new List<Sources>();
                 foreach (int year in listYears) {
                     List<SourcesPerYear> sourcebyYear;
@@ -132,7 +136,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
                                     TotalValueAll = project.VlrTotalProyectoTodasLasFuentes,
                                     Status = estados.NombreEstado.Trim(),
                                     IdStatus = estados.IdEstado,
-                                    avance_financiero = aprobadosInv.AvanceFinanciero.Value/100,
+                                    avance_financiero = aprobadosInv.AvanceFinanciero/100,
                                     contMegusta = aprobadosInv.MeGusta,
                                     contComentarios = aprobadosInv.Comentarios,
                                     duracion =Math.Round(Convert.ToDecimal((project.FechaFinProyecto- project.FechaInicioProyecto).TotalDays*12.0/365.0),2), //Convert.ToDecimal(aprobadosInv.DuracionProyecto),
@@ -186,16 +190,16 @@ namespace PlataformaTransparencia.Negocios.Proyectos
         {
             List<Period> objReturn = new List<Period>();
 
-                objReturn = (from fuentes in DataModel.VwFuenteFinanciacions
+                objReturn = (from fuentes in DataModel.VwFuentesFinanciacion
                              where fuentes.IdProyecto == Id
                                    group fuentes by new
                                    {
-                                       fuentes.Vigencia
+                                       fuentes.Periodo
                                    } into g
                                    select new Period
                                    {
-                                       id = g.Key.Vigencia,
-                                       name = g.Key.Vigencia.ToString()
+                                       id = (int)g.Key.Periodo,
+                                       name = g.Key.Periodo.ToString()
                                    }).OrderBy(p => p.id).ToList();
 
 

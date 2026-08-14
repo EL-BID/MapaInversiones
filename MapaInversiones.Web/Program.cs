@@ -1,4 +1,5 @@
-﻿using LinqToDB.AspNet;
+﻿using LinqToDB;
+using LinqToDB.AspNet;
 using LinqToDB.AspNet.Logging;
 using LinqToDB.Configuration;
 using LinqToDB.Data;
@@ -19,7 +20,7 @@ builder.Services.AddOrchardCms();
 
 var ConnectionString = builder.Configuration.GetConnectionString("Default").ToString();
 
-builder.Services.AddLinqToDbContext<TransparenciaDB>((provider, options) => options
+builder.Services.AddLinqToDBContext<TransparenciaDB>((provider, options) => options
     .UseSqlServer(ConnectionString)
     .UseDefaultLogging(provider));
 
@@ -72,6 +73,8 @@ builder.Services.AddTransient(typeof(PlataformaTransparencia.Negocios.Interfaces
 builder.Services.AddTransient(typeof(PlataformaTransparencia.Negocios.Interfaces.IConsolidadosNacionalesBLL), typeof(PlataformaTransparencia.Negocios.Proyectos.ConsolidadosNacionalesBLL));
 builder.Services.AddTransient(typeof(PlataformaTransparencia.Negocios.Comunes.IDatosAbiertosBLL), typeof(PlataformaTransparencia.Negocios.Comunes.DatosAbiertosBLL));
 builder.Services.AddTransient(typeof(PlataformaTransparencia.Negocios.Interfaces.IPresupuestoEmergenciaBLL), typeof(PlataformaTransparencia.Negocios.Presupuesto.PresupuestoEmergenciaBLL));
+builder.Services.AddTransient(typeof(PlataformaTransparencia.Negocios.Interfaces.IEmprestitosBLL), typeof(PlataformaTransparencia.Negocios.Emprestitos.EmprestitosBLL));
+
 
 //AND Para participacion
 builder.Services.AddHttpContextAccessor();

@@ -8,7 +8,7 @@ var procesos = [];
 var paginaActual = 1;
 loadTreeMapGraph("divGraphRecursosObj", objPerContratos, ["labelGroup", "label_inf"], 0, "");
 loadTreeMapGraphProc("divGraphRecursosProcesos", objPerProcesos, ["labelGroup", "label_inf"], 0, "");
-
+/*configuraSelectDesglose();*/
 configuraBtnVolver();
 getEntidad($("#top_contratos_periodos option:selected").val());
 
@@ -78,7 +78,13 @@ function GetProcesosEntidad(annio, entidad) {
         var institucionesPorPagina = jQuery.grep(procesos, function (n, i) {
             return (i >= inidata && i <= findata);
         });
-
+        //if (institucionesPorPagina.length > 1) {
+        //    institucionesPorPagina = institucionesPorPagina.sort((a, b) => {
+        //        if (a.vlrTotalProyectoFuenteRegalias > b.vlrTotalProyectoFuenteRegalias) return -1;
+        //        if (a.vlrTotalProyectoFuenteRegalias < b.vlrTotalProyectoFuenteRegalias) return 1;
+        //        return 0;
+        //    });
+        //}
         GetListadoProcesos(institucionesPorPagina);
         dibujarPagNumeradas(paginaActual);
     }).fail(function (xhr, ajaxOptions, thrownError) {
@@ -123,15 +129,18 @@ function GetListadoProcesos(institucionesPorPagina) {
 function dibujarPagNumeradas(paginaActual) {
     var totalNumber = procesos.length;
     var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
-
+    //console.log("TotalNumber:", totalNumber);
+    //console.log("Total pages:", totalPages);
+    //console.log("CantXPagina:", cantXPagina);
     if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
         totalPages = totalPages + 1;
     }
     var pagActual = parseInt(paginaActual);
-
+    //var pagesHTML = '';
+    //var cant_por_pag = 6;
     var totalNumerosPaginador = 10;
     $("#divPagFichas").html("");
-
+    //var divPag = $("#divPagFichas")
     var pagEnlace = "";
 
     var cociente = Math.floor(pagActual / totalNumerosPaginador);
@@ -198,6 +207,26 @@ function dibujarPagNumeradas(paginaActual) {
 
 
 
+//function configuraSelectDesglose() {
+//    $('.selDesglose').on('change', function () {
+//        var funciones = "";
+//        $(".selDesglose option:selected").each(function () {
+//            funciones += $(this).val() + ",";
+//        });
+//        funciones = funciones.replace(/,\s*$/, "");
+//        getArticulosGraphic(funciones);
+//    });
+
+//    $('.selDesgloseProc').on('change', function () {
+//        var funciones = "";
+//        $(".selDesgloseProc option:selected").each(function () {
+//            funciones += $(this).val() + ",";
+//        });
+//        funciones = funciones.replace(/,\s*$/, "");
+//        getArticulosGraphicProc(funciones);
+//    });
+
+//}
 
 function configuraBtnVolver() {
     $('#btnVolver').click(function () {
@@ -207,6 +236,33 @@ function configuraBtnVolver() {
         loadTreeMapGraph("divGraphRecursosObj", objPerContratos, ["labelGroup", "label_inf"], 0, "");
     });
 }
+
+//function getArticulosGraphic(opcion) {
+//    switch (opcion) {
+//        case "entidad":
+//            loadTreeMapGraph("divGraphRecursosObj", objPerContratos, ["labelGroup", "label_inf"], 0, "");
+//            break;
+//        case "articulo":
+//            loadTreeMapGraph("divGraphRecursosObj", objPerContratos, ["label_inf"], 1, "");
+//            break;
+//        default:
+//        // code block
+//    }
+//}
+
+//function getArticulosGraphicProc(opcion) {
+//    switch (opcion) {
+//        case "entidad":
+//            loadTreeMapGraphProc("divGraphRecursosProcesos", objPerProcesos, ["labelGroup", "label_inf"], 0, "");
+//            break;
+//        case "articulo":
+//            loadTreeMapGraphProc("divGraphRecursosProcesos", objPerProcesos, ["label_inf"], 1, "");
+//            break;
+//        default:
+//        // code block
+//    }
+
+//}
 
 function assignColor(indice) {
     var color_aux = "#ECEFF1";
@@ -579,6 +635,12 @@ $('#enlace_contratos').click(function () {
 $('#enlace_procesos').click(function () {
     window.location.href = "/Contratos?annio=" + $("#top_contratos_periodos option:selected").val();
 })
+
+//$('#enlace_presupuesto_emergencia').click(function () {
+//    console.log("tipoemergencia")
+//    console.log("tipoemergencia", $('#tipoemergencia').val());
+//    window.location.href = "/EmergenciaPresupuesto?emergencia=" + $('#tipoemergencia').val();
+//})
 
 
 Number.prototype.formatMoney = function (c, d, t) {

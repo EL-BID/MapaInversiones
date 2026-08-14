@@ -1,0 +1,185 @@
+﻿@inject OrchardCore.IOrchardHelper Orchard
+@model PlataformaTransparencia.Modelos.Emprestitos.EntidadFinanciadora
+@using PlataformaTransparencia.Modulo.Principal.Helpers
+@using System.Globalization
+
+@{
+    System.Globalization.CultureInfo cultureCO = new System.Globalization.CultureInfo("es-CO");
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style>
+        .lblporc-small {
+            font-weight: 500;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <!--MAIN BANNER-->
+    <section class="banner-main bg-beige">
+        @if (Model.Id != "")
+        {
+            <div class="container">
+                <!-- Begin bread crumbs -->
+                <nav class="bread-crumbs">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="bread-crumbs-list">
+                                    <li>
+                                        <a href="\">Inicio</a>
+                                        <i class="material-icons md-18">chevron_right</i>
+                                    </li>
+                                    <li><a href="/invertir-para-crecer-cali">Invertir para Crecer</a> <i class="material-icons md-18">chevron_right</i></li>
+                                    <li>Crédito </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="codigoPrestamo" value="@Model.Id" />
+                </nav>
+                <div class="banner-main-info">
+                    <div class="banner-main-title">
+                        <h1 class="text-center">Crédito @Model.Id</h1>
+                        
+                    </div>
+                    <div class="banner-main-desc text-center">
+                        <div class="text-center">
+                            <p>Empréstito</p>
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-inline details text-center">
+                    <li>
+                        <span class="h3">$ @Html.FormatoMoneda(Model.Monto, decimales: 0, nivel: 1)</span>
+                        <div class="h6">Monto total del crédito</div>
+                    </li>
+                    <li>
+                        <span class="h3" id="">@Model.Plazo</span>
+                        <div class="h6">Plazo</div>
+                    </li>
+                    <li>
+                        <span class="h3" id="">@Model.ProyectosFinanciar</span>
+                        <div class="h6">Proyectos a financiar</div>
+                    </li>
+
+                </ul>
+
+            </div>
+        }
+        else
+        {
+          <div class="container">
+                <p><b>Entidad financiadora</b> no existe en la base de datos.</p>
+          </div>
+        }
+        
+    </section>
+
+    <!--detalles del prestamo-->
+    <section class="section" id="s1">
+        <div class="container">
+            <div class="section-heading heading-left mb-3">
+                <h2>Detalles del crédito</h2>
+            </div>
+            <div class="card shadow border-0 b3 py-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="wrap-content">
+                                <span class="label text-bold">Banco que presta</span>
+                                <div class="wrap-img">
+                                    <img class="img-fluid" src="@($"{Model.Icono}")" onerror="this.src='img/logo-banco-default.png'" alt="logo entidad bancaria" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="monto"><span class="label">Plazo:</span> <span>@Model.Plazo</span></div>
+                            <div class="monto"><span class="label">Período de gracia:</span><span>@Model.PeriodoDeGracia</span></div>
+                            <div class="monto"><span class="label">Fecha del contrato</span><span>@Model.FechaContrato</span></div>
+
+
+
+                        </div>
+                        <div class="col-lg-3">
+                            
+                            <div class="monto"><span class="label">Destinado a financiar:</span><span>@Model.ProyectosFinanciar proyectos</span></div>
+                            <div class="monto"><span class="label">Tasa de interés</span><span>@Model.TasaInteres</span> </div>
+
+
+                        </div>
+                        <div class="col-lg-3">
+
+                            <a class="btn btn-link" href="@($"{Model.UrlContrato}")" target="_blank">
+                                <span class="ic-shortcut"><i class="material-icons md-24">open_in_new</i></span>
+                                <span class="text-btn">Ver contrato del empréstito</span>
+                            </a>
+
+                        </div>
+                        
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+        
+        </div>
+    </section>
+    <!--en que se invierte-->
+    <section class="section" id="s2">
+        <div class="container">
+            <div class="section-heading heading-left mb-3">
+                <h2>¿En qué se invierte?</h2>
+
+            </div>
+            <div class="sub-heading">
+                <p>Conocé los proyectos que se financian con este crédito. Los porcentajes están definidos según la cantidad de inversión en cada uno</p>
+            </div>
+            <div class="wrap-proyectos">
+                <!--Inicia Tab Contentido-->
+                <div class="row">
+                    <div class="col-lg-12 py-4">
+                        <div class="pChart">
+                            <div id="divGraphPerTab">
+                                <!--TREEMAP -->
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!--Ini Listado proyectos de inversion-->
+                <div class="row">
+                    <div class="col-lg-12 py-4">
+                        <div class="comparativeTable">
+                            <div class="card-entidades-group" id="divListado">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="divPagFichas" class="">
+                    </div>
+                </div>
+                <!--Fin Listado proyectos de inversion-->
+                <!--Fin Tab 1-->
+
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>
+@section scripts
+{
+    <script type="text/javascript" src="~/js/lib/d3/d3.v7.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+    <script src="~/js/emprestitos_aux.js"></script>
+}

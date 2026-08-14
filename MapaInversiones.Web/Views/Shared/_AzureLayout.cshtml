@@ -30,10 +30,11 @@
     <link href="~/css/glide.core.min.css" rel="stylesheet" />
     <link href="~/css/basic-skin.css" rel="stylesheet" />
     <link href="~/css/libs.css" rel="stylesheet" />
+    <link href="~/css/azureMaps.css" rel="stylesheet" />
     <!--CHAT BOT COMPONENT -->
     <script src="~/js/jquery/jquery.min.js" type="text/javascript"></script>
     <script src="~/js/shared_utils.js" type="text/javascript"></script>
-    
+    @RenderSection("Styles", required: false)
 </head>
 
 <!body class="d-flex flex-column h-100" @RenderSection("DataBody", required: false)>
@@ -136,11 +137,21 @@ else
     @Html.Partial("Footer")
     <!-- End footer -->
 <!-- JS: dependencias globales en orden correcto -->
-<script src="~/js/jquery-3.6.0.min.js"></script>
-<script src="~/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/lozad.min.js"></script>
+@* <script src="~/js/jquery-3.6.0.min.js"></script> *@
+
+<!-- Desactiva AMD momentáneamente -->
+<script>window._define = window.define; window.define = undefined;</script>
+
+<script src="~/js/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="~/js/jquery-ui-range/jquery-ui.min.js" type="text/javascript"></script>
+<script src="~/js/device.js"></script>
+<script src="~/js/bootstrap/3.3.5/bootstrap.min.js"></script>
+<script src="~/js/lozad/lozad.min.js"></script>
 <script src="~/js/jquery.popupoverlay.js"></script>
 <script src="~/js/autosize.min.js"></script>
+<script src="~/js/bootbox/bootbox.min.js"></script>
+<!-- Reactiva AMD para RequireJS -->
+<script>window.define = window._define; delete window._define;</script>
 @* 
 <!-- Plugins -->
 <script src="~/js/flickity/flickity.pkgd.min.js"></script>
@@ -158,6 +169,11 @@ else
             RenderSection("scripts", required: false);
     }
  *@
+
+    @if (IsSectionDefined("scripts"))
+    {
+        RenderSection("scripts", required: false);
+    }
 
 </!body>
 </html>

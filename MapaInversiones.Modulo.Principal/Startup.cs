@@ -388,7 +388,19 @@ namespace PlataformaTransparencia.Modulo.Principal
                       defaults: new { controller = "CentroAyuda", action = "PlanDesarrolloCali" }
              );
 
-            
+            routes.MapAreaControllerRoute(
+                     name: "invertir-para-crecer-cali",
+                     areaName: "PlataformaTransparencia.Modulo.Principal",
+                     pattern: "invertir-para-crecer-cali",
+                     defaults: new { controller = "InvertirParaCrecer", action = "InfografiaPrestamosCali" }
+            );
+
+            routes.MapAreaControllerRoute(
+             name: "PerfilPrestamo",
+             areaName: "PlataformaTransparencia.Modulo.Principal",
+             pattern: "PerfilPrestamo",
+             defaults: new { controller = "InvertirParaCrecer", action = "PerfilPrestamo" }
+             );
         }
     }
 }

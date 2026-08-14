@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Azure Map - Auto Init";
+}
+
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Azure Maps Web SDK -->
+    <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.css" />
+    <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.js"></script>
+
+    <!-- RequireJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        #map-div {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+    <script>
+    require.config({
+        baseUrl: '/',
+        paths: {
+            'lib/mvc/Observable': 'content/dist/js/lib/mvc/Observable',
+            'jquery': 'https://code.jquery.com/jquery-3.7.1.min',
+            'doT': 'https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.3/doT.min',
+            'app/utils/Modal': 'content/dist/js/app/utils/Modal',
+            'app/network/urlsMap': 'content/dist/js/app/network/urlsMap',
+            'app/storage/Storage': 'content/dist/js/app/storage/Storage',
+            'app': 'content/dist/js/app',
+            'lib': 'content/dist/js/lib'
+        },
+        shim: {
+            'app/utils/Modal': { deps: ['doT'] }
+        }
+    });
+    </script>
+    <div id="map-div"></div>
+
+    <script src="/content/dist/js/main_azuremaps.js"></script>

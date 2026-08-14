@@ -22,8 +22,8 @@ namespace PlataformaTransparencia.Modelos.Comunes
         {
             //AND Temporal
             FechasEjecucion = new List<int>();
-            AñoInicial = 2013;
-            AñoFinal = DateTime.Today.Year + 4;
+            AñoInicial = 2019;
+            AñoFinal = DateTime.Today.Year + 2;
             //CMC: Comite tecnico 19 de Junio de 2013: a.	Los periodos se comparten durante todo el aplicativo b.	Los periodos saldrán a partir del 2012 al año actual +2           
             ConstruirListaDeAños(AñoInicial, AñoFinal);
         }

@@ -82,7 +82,7 @@ namespace PlataformaTransparencia.Negocios
             }
 
             results = SolrResponse;
-            if (results.Count() > 0) { results.ElementAt(0).numFound = SolrResponse.NumFound; }
+            if (results.Count() > 0) { results.ElementAt(0).numFound = (int)SolrResponse.NumFound; }
 
             return results;
         }

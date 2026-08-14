@@ -58,7 +58,7 @@
         dato += " 			<div class='col-lg-4'><div class='ratio ratio-16x9'> <iframe width = '280' height='157' src='" + @item.MonitoreoIndicadores.EnlaceVideo.Url + "' title='" + @item.MonitoreoIndicadores.EnlaceVideo.Text + "' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe></div></div>";
         dato += " 		</div>";
         dato += " 		<div class='wrap-cta my-2'>";
-        dato += " 			<a href = '" + @item.MonitoreoIndicadores.EnlaceBoton.Url + "' class='btn btn-primary btn-lg'>";
+        dato += " 			<a href = '" + @item.MonitoreoIndicadores.EnlaceBoton.Url + "' class='btn btn-primary btn-lg' target='_blank' rel='noopener noreferrer'>";
         dato += " 				<span title = '" + @item.MonitoreoIndicadores.EnlaceBoton.Text + "' >" + @item.MonitoreoIndicadores.EnlaceBoton.Text + "</span>";
         dato += " 				<svg class='btn-icon-right' viewBox='0 0 13 9' width='13' height='9'>";
         dato += " 					<use xlink:href='../../../img/sprite.svg#arrow-right'></use>";
@@ -102,7 +102,7 @@
         dato += " 			<div class='col-lg-4'><div class='ratio ratio-16x9'><iframe width = '280' height='157' src='" + @item.MonitoreoReportes.EnlaceVideo.Url + "' title='" + @item.MonitoreoReportes.EnlaceVideo.Text + "' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe></div></div>";
         dato += " 		</div>";
         dato += " 		<div class='wrap-cta my-2'>";
-        dato += " 			<a href = '" + @item.MonitoreoReportes.EnlaceBoton.Url + "' class='btn btn-primary btn-lg'>";
+        dato += " 			<a href = '" + @item.MonitoreoReportes.EnlaceBoton.Url + "' class='btn btn-primary btn-lg' target='_blank' rel='noopener noreferrer'>";
         dato += " 				<span title = '" + @item.MonitoreoReportes.EnlaceBoton.Text + "' >" + @item.MonitoreoReportes.EnlaceBoton.Text + "</span>";
         dato += " 				<svg class='btn-icon-right' viewBox='0 0 13 9' width='13' height='9'>";
         dato += " 					<use xlink:href='../../../img/sprite.svg#arrow-right'></use>";
@@ -144,7 +144,7 @@
         dato += " 		</div>";
         dato += " 		<div class='col-lg-4'>";
         dato += " 		    <div class='wrap-cta my-2'>";
-        dato += " 			<a href = '" + @item.MonitoreoCursos.EnlaceBoton.Url + "' class='btn btn-primary btn-lg'>";
+        dato += " 			<a href = '" + @item.MonitoreoCursos.EnlaceBoton.Url + "' class='btn btn-primary btn-lg' target='_blank' rel='noopener noreferrer'>";
         dato += " 				<span title = '" + @item.MonitoreoCursos.EnlaceBoton.Text + "' >" + @item.MonitoreoCursos.EnlaceBoton.Text + "</span>";
         dato += " 				<svg class='btn-icon-right' viewBox='0 0 13 9' width='13' height='9'>";
         dato += " 					<use xlink:href='../../../img/sprite.svg#arrow-right'></use>";
@@ -214,10 +214,11 @@
 
 
 <section class="section toolbox-citizens">
+    <input type="hidden" id="tabEnlace" value="@Model.tab_enlace" />
     <div class="container">
             <div class="tabs goals">
                 <ul class="tabs-nav">
-                    <li class="@(string.IsNullOrEmpty(Model.tab_enlace) || Model.tab_enlace == "1" ? "active" : "")" id="tab_empresario">
+                    <li class="active" id="tab_empresario">
                         <div class="goal-number">
                             <img class="img-responsive" src="../img/ic-ut1.svg" alt="icono decorativo relacionado a empresarios" />
                         </div>
@@ -225,7 +226,7 @@
                             <div class="h4">Soy empresario/a</div>
                         </div>
                     </li>
-                    <li class="@(Model.tab_enlace == "2" ? "active" : "")" id="tab_veedor">
+                    <li id="tab_veedor">
                         <div class="goal-number">
                             <img class="img-responsive" src="../img/ic-ut2.svg" alt="icono decorativo relacionado a veedores" />
                         </div>
@@ -438,7 +439,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="wrap-btn text-center mb-4">
-                                    <a href="https://transparencia.cali.gov.co/formulario-denuncias/" target="_blank" class="btn btn-primary btn-lg">
+                                    <a href="https://transparencia.cali.gov.co/transparencia/publicaciones/186326/formulario-denuncia-aqui/" target='_blank' rel='noopener noreferrer' class="btn btn-primary btn-lg">
                                         <span>¡Denunciá aquí!</span>
                                         <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
                                             <use xlink:href="../../../img/sprite.svg#arrow-right"></use>
@@ -459,7 +460,7 @@
                                             <div class="wrap-icon"><img class="img-fluid" src="../img/16.png" alt="icono decorativo" /></div>
                                         <div class="card-body">
                                                 <span class="h5 d-block">1. Visitá el link de denuncias</span>
-                                                <a href="https://transparencia.cali.gov.co/formulario-denuncias/" target="_blank" class="btn btn-primary btn-lg">
+                                                <a href="https://transparencia.cali.gov.co/transparencia/publicaciones/186326/formulario-denuncia-aqui/" target='_blank' rel='noopener noreferrer' class="btn btn-primary btn-lg">
                                                     <span>¡Denunciá aquí!</span>
                                                     <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
                                                         <use xlink:href="../../../img/sprite.svg#arrow-right"></use>
@@ -562,8 +563,13 @@
 </main>
 <!--HELP CENTER SHORTCUT-->
 <div id="helpCenter"></div>
-<script src="~/js/jquery/jquery-ui.min.js"></script>
-<script type="text/javascript" src="~/js/lib/d3/d3.v7.min.js"></script>
+@section scripts
+{
+    <script type="text/javascript" src="~/js/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/js/lib/d3/d3.v7.min.js"></script>
+    <script src="~/js/monitoreo_ciudadano_aux.js"></script>
+}
+
 
 
 

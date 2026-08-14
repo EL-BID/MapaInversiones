@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Linq;
 using System.Xml.Linq;
+using LinqToDB;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
 using PlataformaTransparencia.Modelos.Comunes;
@@ -32,7 +33,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
       {
 
         var RecursosPerObjetoQuery = (from info in _connection.VwPresupuesto
-                                      join anyos in _connection.CatalogoTiempoes
+                                      join anyos in _connection.CatalogoTiempos
                                       on info.Periodo equals anyos.Periodo
                                       where anyos.Año == anyo
                                       group new { info, anyos } by new { anyos.Año } into g
@@ -59,7 +60,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
 
       List<InfoConsolidadoPresupuesto> objReturn = new List<InfoConsolidadoPresupuesto>();
       var RecursosPerObjetoQuery = (from info in _connection.VwPresupuesto
-                                    join ct in _connection.CatalogoTiempoes on info.Periodo equals ct.Periodo
+                                    join ct in _connection.CatalogoTiempos on info.Periodo equals ct.Periodo
                                     where ct.Año == annio
                                     group info by new { info.Finalidad, info.Sector } into g
 
@@ -103,7 +104,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
       List<itemGenerico> objReturn = new List<itemGenerico>();
 
       objReturn = (from pre in _connection.VwPresupuesto
-                   join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                   join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                    where ct.Año == anyo 
                    && pre.Vigente>0
                    group pre by new { pre.CodigoOrganismoFinanciador, pre.OrganismoFinanciador } into g
@@ -146,7 +147,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                 //SECTOR
                 RecursosPerObjetoQuery = (from info in _connection.VwPresupuestoXProyInvs
                                           join pre in _connection.VwPresupuesto on new { info.IdCatalogoLineaPresupuestal, info.CodigoFondo, info.CodigoInstitucion, info.Periodo } equals new { pre.IdCatalogoLineaPresupuestal, pre.CodigoFondo, pre.CodigoInstitucion, pre.Periodo }
-                                          join t in _connection.CatalogoTiempoes on pre.Periodo equals t.Periodo
+                                          join t in _connection.CatalogoTiempos on pre.Periodo equals t.Periodo
                                           where t.Año == annio
                                               && (!string.IsNullOrEmpty(pre.Sector))
                                               && (pre.Sector != "NULL")
@@ -173,7 +174,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                 //TAB ORGANISMOS
                 RecursosPerObjetoQuery = (from info in _connection.VwPresupuestoXProyInvs
                                           join pre in _connection.VwPresupuesto on new { info.IdCatalogoLineaPresupuestal, info.CodigoFondo, info.CodigoInstitucion, info.Periodo } equals new { pre.IdCatalogoLineaPresupuestal, pre.CodigoFondo, pre.CodigoInstitucion, pre.Periodo }
-                                          join t in _connection.CatalogoTiempoes on pre.Periodo equals t.Periodo
+                                          join t in _connection.CatalogoTiempos on pre.Periodo equals t.Periodo
                                           where t.Año == annio
                                           && pre.CodigoOrganismoFinanciador == idAux
                                           && pre.Vigente > 0
@@ -451,7 +452,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
         if (tipo.Equals("sector"))
         {
           var infoQuery = (from info in _connection.VwPresupuesto
-                           join ct in _connection.CatalogoTiempoes on info.Periodo equals ct.Periodo
+                           join ct in _connection.CatalogoTiempos on info.Periodo equals ct.Periodo
                            where ct.Año == annio && info.IdSector.ToString().Equals(id)
                            group info by new
                            {
@@ -472,7 +473,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
         else
         {
           var infoQuery = (from info in _connection.VwPresupuesto
-                           join ct in _connection.CatalogoTiempoes on info.Periodo equals ct.Periodo
+                           join ct in _connection.CatalogoTiempos on info.Periodo equals ct.Periodo
                            where ct.Año == annio && info.CodigoOrganismoFinanciador.ToString().Equals(id)
                            group info by new
                            {
@@ -506,7 +507,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             List<InfoConsolidadoPresupuesto> query2 = new List<InfoConsolidadoPresupuesto>();
 
             var queryTotalVigente = (from pre in _connection.VwPresupuesto
-                                     join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                                     join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                                      where ct.Año == anyo
                                      group new { pre, ct } by new { ct.Año } into g
                                      select new InfoConsolidadoPresupuesto
@@ -517,7 +518,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                                      }).ToList();
 
             var queryTotalAvance = (from pre in _connection.VwPresupuesto
-                                    join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                                    join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                                     where ct.Año == anyo
                                     group new { pre, ct } by new { ct.Año } into g
                                     select new InfoConsolidadoPresupuesto
@@ -531,7 +532,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             {
                 //sectores seleccionados
                 query1 = (from pre in _connection.VwPresupuesto
-                          join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                          join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                           where ct.Año == anyo
                           && filtro_sec.Contains(pre.Institucion)
                           group new { ct, pre } by new { ct.Año, pre.Institucion} into g
@@ -546,7 +547,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
 
 
                 query2 = (from pre in _connection.VwPresupuesto
-                          join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                          join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                           where ct.Año == anyo
                           && filtro_sec.Contains(pre.Institucion)
                           group new { ct, pre } by new { ct.Año, pre.Institucion } into g
@@ -564,7 +565,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             {
                 //top 4
                 var q0 = ((from pre in _connection.VwPresupuesto
-                           join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                           join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                            where ct.Año == anyo
                            ///top del presupuesto del año seleccionado
                            group pre by new { pre.Institucion } into h
@@ -575,7 +576,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                            }).OrderByDescending(h => h.rawValue).Take(4));
 
                 query1 = (from pre in _connection.VwPresupuesto
-                          join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                          join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                           where ct.Año == anyo
                           group new { ct, pre } by new { ct.Año, pre.Institucion } into g
                           from top in q0
@@ -589,7 +590,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                           }).ToList();
 
                 query2 = (from pre in _connection.VwPresupuesto
-                          join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                          join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                           where ct.Año == anyo
                            group new { ct, pre } by new { ct.Año, pre.Institucion } into g
                           from top in q0
@@ -643,7 +644,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             List<InformationGraphics> objReturn = new List<InformationGraphics>();
 
             objReturn = (from pre in _connection.VwPresupuesto
-                         join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                         join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                          where ct.Año == anyo
                          && pre.Vigente>0
                          group pre by pre.Institucion into g
@@ -667,8 +668,8 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             if (filtro_sec.Count > 0)
             {
                 //sectores seleccionados
-                query1 = (from pre in _connection.VwPresupuestoHistoricoes
-                          join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                query1 = (from pre in _connection.VwPresupuestoHistoricos
+                          join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                           where ct.Año == anyo
                           && filtro_sec.Contains(pre.Institucion)
                           group pre by new { pre.Institucion, pre.Periodo, pre.Mes } into g
@@ -684,8 +685,8 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             else
             {
                 //top 4
-                var q0 = ((from pre in _connection.VwPresupuestoHistoricoes
-                           join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                var q0 = ((from pre in _connection.VwPresupuestoHistoricos
+                           join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                            where ct.Año == anyo
                            group pre by new { pre.Institucion } into h
                            select new InfoConsolidadoPresupuesto
@@ -695,8 +696,8 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
                            }).OrderByDescending(h => h.rawValue).Take(4));
 
 
-                query1 = (from pre in _connection.VwPresupuestoHistoricoes
-                          join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                query1 = (from pre in _connection.VwPresupuestoHistoricos
+                          join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                           where ct.Año == anyo
                           group pre by new { pre.Institucion, pre.Periodo, pre.Mes } into g
                           from top in q0
@@ -728,7 +729,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             }
 
                var RecursosPerObjetoQuery = (from info in _connection.VwPresupuestoXProyInvs
-                                          join t in _connection.CatalogoTiempoes on info.Periodo equals t.Periodo
+                                          join t in _connection.CatalogoTiempos on info.Periodo equals t.Periodo
                                           where t.Año == annio
                                           && info.CodigoOrganismoFinanciador == idAux
                                           && info.ValorFinanciado > 0

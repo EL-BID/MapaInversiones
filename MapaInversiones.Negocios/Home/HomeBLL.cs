@@ -86,7 +86,7 @@ namespace PlataformaTransparencia.Negocios.Home
             objReturn.Comunas = proyectosPorEnteTerritorial.Where(x => x.Tipo != null && x.Tipo.ToUpper().Trim() == comuna).OrderBy(x => x.Id).ToList();
             objReturn.Corregimientos = proyectosPorEnteTerritorial.Where(x => x.Tipo != null && x.Tipo.ToUpper().Trim() == centroPoblado).OrderBy(x => x.Nombre).ToList();
             objReturn.countOngoingProjects = GetTotalesProyectos();
-            
+            //objReturn.countOngoingProjects = new() { costo = Convert.ToDouble(proyectosPorEnteTerritorial.Sum(x => x.ValorProyectos)), cantidad = proyectosPorEnteTerritorial.Sum(x => x.CantidadProyectos) };
             //--------------------
             objReturn.Status = true;
             return objReturn;
@@ -171,7 +171,7 @@ namespace PlataformaTransparencia.Negocios.Home
 
             var objReturn = new List<InfoEntidadesConsolida>();
             var result = (from info in _connection.VwPresupuesto
-                          join ct in _connection.CatalogoTiempoes on info.Periodo equals ct.Periodo
+                          join ct in _connection.CatalogoTiempos on info.Periodo equals ct.Periodo
                           where ct.Año == maxyear
                           group info by new
                           {
@@ -211,7 +211,7 @@ namespace PlataformaTransparencia.Negocios.Home
         {
             List<InfoPresupuestoEncabezado> objReturn = new List<InfoPresupuestoEncabezado>();
             objReturn = (from info in _connection.VwPresupuesto
-                             join ct in _connection.CatalogoTiempoes
+                             join ct in _connection.CatalogoTiempos
                                on info.Periodo equals ct.Periodo
                              where anios.Contains(ct.Año)
                              group info by ct.Año into g
@@ -230,7 +230,7 @@ namespace PlataformaTransparencia.Negocios.Home
         {
             List<string> objReturn = new List<string>();
             objReturn = (from info in _connection.VwPresupuesto
-                         join ct in _connection.CatalogoTiempoes
+                         join ct in _connection.CatalogoTiempos
                          on info.Periodo equals ct.Periodo
                          group info by new { ct.Año } into g
                          orderby g.Key.Año descending

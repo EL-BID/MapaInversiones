@@ -1,21 +1,24 @@
 ﻿//const { treemap } = require("d3-hierarchy");
-
-var cant_contratos = 5;
+var cant_XPaginaContratos = 5;
 var grafica_treemap =null;
-
-inicializaDatosEntidad();
 var pestaniaSeleccionada = 1;
 var scrol = 0;
 var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 var cantXPaginaInv = 6;
 var cantXPagina = 10;
+var cantXPaginaProc = 10;
 var globales_gasto = [];
 var globales_lineas = [];
-var globales_otras_lineas = [];
 var proyectos = [];
 var findata = 0;
 var inidata = 0;
 var paginaActual = 1;
+var globales_procesos = [];
+var cant_global_contratos = 0;
+//------------------------------------------
+
+inicializaDatosEntidad();
+//-----------------------------------------
 function seleccionoAnio(sel) {
     scrol = 0;
     inicializaDatosEntidad();
@@ -23,7 +26,12 @@ function seleccionoAnio(sel) {
 }
 
 function inicializaDatosEntidad() {
-    
+    //------------------------------
+    globales_gasto = [];
+    globales_lineas = [];
+    globales_procesos = [];
+    cant_global_contratos = 0;
+    //------------------------------
 
     var selectAnio = document.getElementById("annioEntidad");
     var anioEntidad = selectAnio.options[selectAnio.selectedIndex].text;
@@ -35,9 +43,8 @@ function inicializaDatosEntidad() {
     //----------------------------------
     
     getProgramasByEntidad(anioEntidad);
-    getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val());
-
-    GetRecursosPorNivelYAnio(anioEntidad);
+    getContratos(1, cant_XPaginaContratos, $("#entidad").val(), $('#proceso').val());
+    GetProcesosPerAnio(anioEntidad);
 
 }
 
@@ -189,7 +196,10 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                 $('html, body').animate({ scrollTop: $('#trazabilidad').offset().top }, 2000);
             } else { scrol = scrol + 1; }
             if (result.status == true) {
-                if (result.cantidadTotalRegistros > 0) {
+                if (pagina == 1) {
+                    cant_global_contratos = result.cantidadTotalRegistros;
+                }
+                if (cant_global_contratos > 0) {
                     var info = result.data;
                     var proceso = "";
                     var entidad = "";
@@ -482,7 +492,7 @@ function dibujarPagNumeradasPerContratos(actual, totalPag) {
 
     $('#page_right_c,#page_left_c,.page_left_c,.page_right_c').bind('click', function () {
         pagina_actual = $(this).attr("data-page_c");
-        getContratos(pagina_actual, cant_contratos, $("#entidad").val(), $('#proceso').val());
+        getContratos(pagina_actual, cant_XPaginaContratos, $("#entidad").val(), $('#proceso').val());
     });
 
 }
@@ -513,11 +523,11 @@ function clickbotoncontratosasoc(id) {
     $("#divListadoContratos").show().delay(800);
 
 
-    getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val(), idproyecto);
+    getContratos(1, cant_XPaginaContratos, $("#entidad").val(), $('#proceso').val(), idproyecto);
 
 }
 
-$("#btnLimpiar").click(function () {
+$("#btnLimpiar").on("click", function () {
     if (!disableClick) {
         $("#spanfiltrado").attr("hidden", "hidden");
         $("#top_contratos_periodos").val(0);
@@ -525,14 +535,14 @@ $("#btnLimpiar").click(function () {
         $("#entidad").val("");
         $("#proceso").val("");
         deshabilita(true);
-        getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val());
+        getContratos(1, cant_XPaginaContratos, $("#entidad").val(), $('#proceso').val());
     }
 });
 
-$("#btn-buscar").click(function () {
+$("#btn-buscar").on("click", function () {
     if (!disableClick) {
         deshabilita(true);
-        getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val());
+        getContratos(1, cant_XPaginaContratos, $("#entidad").val(), $('#proceso').val());
     }
 
 });
@@ -857,10 +867,16 @@ function getEstructuraInfograficoNew(datos, pagina) {
         var nombre = datos[i]['nombre'];
         var codigo = datos[i]['id'];
         var avance_fisico = datos[i]['avance_fisico'];
-        var avance_financiero = datos[i]['avance_financiero'];
+        var avance_financiero = 0;
         var url_proy = datos[i].url;
         var lineas_vec = datos[i].detalleLineas;
         var valor_proyecto = datos[i].comprometido;
+        var valor_ejecutado = datos[i].ejecutado;
+        var valor_vigente = datos[i].vigente;
+
+        if (valor_vigente > 0) {
+            avance_financiero = (valor_ejecutado / valor_vigente)*100;
+        }
 
         html_str += '<div class="panel panel-default ">';
         html_str += '<div class="panel-heading" role="tab" id="' + nomHeading + '">';
@@ -877,7 +893,7 @@ function getEstructuraInfograficoNew(datos, pagina) {
         html_str += '</div>';
 
         html_str += '<div class="data1">';
-        html_str += '<span class="labelTit">Avance Financiero</span>';
+        html_str += '<span class="labelTit">Porcentaje de ejecución</span>';
         html_str += '<span class="td1">' + avance_financiero.formatMoney(2, ',', '.').toString() + '%</span>';
         html_str += '</div>';
 
@@ -918,7 +934,11 @@ function getEstructuraInfograficoNew(datos, pagina) {
             var presup_aprobado = lineas_vec[j]['aprobado'] / 1;
             var presup_vigente = lineas_vec[j]['vigente'] / 1;
             var presup_ejecutado = lineas_vec[j]['ejecutado'] / 1;
-            var porc_ejecutado = lineas_vec[j]['porcentaje'] * 100;
+            var porc_ejecutado = 0;
+
+            if (presup_vigente > 0) {
+                porc_ejecutado = (presup_ejecutado / presup_vigente)*100;
+            }
 
 
             html_str += '<div class="panel-group nivel22" id="' + nomNivel2 + '" role="tablist" aria-multiselectable="true">';
@@ -1729,7 +1749,7 @@ function wrap(text, width, offset = 0) {
     });
 }
 ////////////////////////////////////////// Procesos ////////////////////////////////////////////////////
-function GetRecursosPorNivelYAnio(anio) {
+function GetProcesosPerAnio(anio) {
     procesos = [];
     $.ajax({
         contentType: "application/json; charset=utf-8",
@@ -1740,16 +1760,22 @@ function GetRecursosPorNivelYAnio(anio) {
             codEntidad: $("#codigoEntidadId").val()
         }
     }).done(function (data) {
+        globales_procesos = data.data;
+        
+        var pagina_actual = 1;
+        if (globales_procesos != null) {
+            var inidata = ((pagina_actual - 1) * cantXPaginaProc);
+            var findata = (pagina_actual * cantXPaginaProc) - 1;
+            var data_pagina = jQuery.grep(globales_procesos, function (n, i) {
+                return (i >= inidata && i <= findata);
+            });
+            showListadoProcesos(data_pagina, pagina_actual);
+        } else {
+            $("#divProcesos").html("<span class='lblErrorNoData'>Información No Disponible</span>");
 
-        procesos = data.data;
-        inidata = ((paginaActual - 1) * cantXPagina);
-        findata = (paginaActual * cantXPagina) - 1;
+        }
 
-        var institucionesPorPagina = jQuery.grep(procesos, function (n, i) {
-            return (i >= inidata && i <= findata);
-        });
-        GetListadoInstituciones(institucionesPorPagina);
-        dibujarPagNumeradas(paginaActual);
+        
     }).fail(function (xhr, ajaxOptions, thrownError) {
         alert("Error " + xhr.status + "_" + thrownError);
     });
@@ -1757,25 +1783,25 @@ function GetRecursosPorNivelYAnio(anio) {
 }
 
 
-function GetListadoInstituciones(institucionesPorPagina) {
+function showListadoProcesos(datos, pagina) {
 
     $("#divProcesos").html("");
     var html_list = '<div class="card-entidades-group">';
-    for (var i = 0; i < institucionesPorPagina.length; i++) {
+    for (var i = 0; i < datos.length; i++) {
         var descripcion = "";
-        if (institucionesPorPagina[i]['descripcion']) { descripcion = institucionesPorPagina[i]['descripcion'].toString(); }
+        if (datos[i]['descripcion']) { descripcion = datos[i]['descripcion'].toString(); }
         html_list += '<div id="proceso_' + i.toString() + '" class="card d-flex">';
         html_list += '<div class="headEnt">';
-        html_list += '<div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>' + institucionesPorPagina[i]['codigoproceso'] + '</strong></span>';
+        html_list += '<div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>' + datos[i]['codigoproceso'] + '</strong></span>';
         html_list += '<span class="td1">' + descripcion + ' </span>';
         html_list += '</div>';
-        html_list += '<div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">' + institucionesPorPagina[i]['estadoProceso'].toString() + ' </span ></div > ';
-        html_list += '<div class="data1"><span class="labelTit">Modalidad</span><span class="td1">' + institucionesPorPagina[i]['modalidad'].toString() + ' </span></div>';
-        html_list += '<div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">$ ' + institucionesPorPagina[i]['montoEstimado'].formatMoney(2, '.', ',').toString() + ' </span></div>';
+        html_list += '<div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">' + datos[i]['estadoProceso'].toString() + ' </span ></div > ';
+        html_list += '<div class="data1"><span class="labelTit">Modalidad</span><span class="td1">' + datos[i]['modalidad'].toString() + ' </span></div>';
+        html_list += '<div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">$ ' + datos[i]['montoEstimado'].formatMoney(2, '.', ',').toString() + ' </span></div>';
         html_list += '</div>';
         html_list += '<div class="btn-action">';
         html_list += '<div class="btnPerfil">';
-        html_list += '<a target="_blank" href="' + institucionesPorPagina[i]['url'] + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br /> <span>VER PROCESO</span></a>';
+        html_list += '<a target="_blank" href="' + datos[i]['url'] + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br /> <span>VER PROCESO</span></a>';
         html_list += '</div>';
         html_list += '</div>';
         html_list += '</div>';
@@ -1784,81 +1810,82 @@ function GetListadoInstituciones(institucionesPorPagina) {
     html_list += '</div>';
     $("#divProcesos").html(html_list);
 
-    dibujarPagNumeradas(1);
+
+    var totalNumber = globales_procesos.length;
+    var totalPages = (totalNumber > cantXPaginaProc) ? ((totalNumber - (totalNumber % cantXPaginaProc)) / cantXPaginaProc) : 1;
+    if ((totalNumber >= cantXPaginaProc) && ((totalNumber % cantXPaginaProc) > 0)) {
+        totalPages = totalPages + 1;
+    }
+    if (totalPages > 1) {
+        dibujarPagNumeradasProcesos(pagina, totalNumber, totalPages);
+    }
+   
 }
 
 //paginador
+function dibujarPagNumeradasProcesos(actual, total, totalPag) {
+    var pag_actual = parseInt(actual);
+    var pagina_actual = pag_actual;
+    var pagesHTML = '';
+    var cant_por_linea = 30;
+    $("#divPagFichasProcesos").html("");
+    var divPag = $("#divPagFichasProcesos")
+    var pag_enlace = "";
 
-function dibujarPagNumeradas(paginaActual) {
-    var totalNumber = proyectos.length;
-    var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
-
-    if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
-        totalPages = totalPages + 1;
-    }
-    var pagActual = parseInt(paginaActual);
-
-    var totalNumerosPaginador = 10;
-    $("#divPagFichasPro").html("");
-
-    var pagEnlace = "";
-
-    var cociente = Math.floor(pagActual / totalNumerosPaginador);
-    var residuo = pagActual % totalNumerosPaginador;
+    var cociente = Math.floor(pag_actual / cant_por_linea);
+    var residuo = pag_actual % cant_por_linea;
     var inicio = 1;
     if (residuo == 0) {
-        inicio = (pagActual - totalNumerosPaginador) + 1;
+        inicio = (pag_actual - cant_por_linea) + 1;
     } else {
-        inicio = (cociente * totalNumerosPaginador) + 1;
+        inicio = (cociente * cant_por_linea) + 1;
     }
 
-    var fin = inicio + (totalNumerosPaginador - 1);
-    if (totalPages < totalNumerosPaginador) {
-        fin = totalPages;
+    var fin = inicio + (cant_por_linea - 1);
+    if (totalPag < cant_por_linea) {
+        fin = totalPag;
     }
-    if (fin > totalPages) {
-        fin = totalPages;
+    if (fin > totalPag) {
+        fin = totalPag;
     }
-    if (pagActual > totalNumerosPaginador && totalPages >= totalNumerosPaginador) {
-        pagEnlace += '<a id="page_left" role="button" class="material-icons md-24" data-page="' + (inicio - totalNumerosPaginador) + '"><span class="">chevron_left</span></a>';
+    if (pag_actual > cant_por_linea && totalPag >= cant_por_linea) {
+        pag_enlace += '<a id="page_left" role="button" class="material-icons md-24" data-page="' + (inicio - cant_por_linea) + '"><span class="">chevron_left</span></a>';
     }
+
 
     for (var i = inicio; i <= fin; i++) {
-        if (i == pagActual) {
-            pagEnlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
+
+        if (i == pag_actual) {
+            pag_enlace += '<span class="pag_actual" data-page="' + i + '"><text>' + i + '</text></span>';
         } else {
-            pagEnlace += '<a class="page_left" role="button" data-page="' + i + '">';
-            pagEnlace += '<span class="glyphicon"></span>';
-            pagEnlace += '<text class="paginacion">' + i + '</text>';
-            pagEnlace += '</a>';
+            pag_enlace += '<a class="page_left" role="button" data-page="' + i + '">';
+            pag_enlace += '<span class="glyphicon"><text class="paginacion">' + i + '</text></span>';
+            pag_enlace += '</a>';
         }
 
     }
 
-    if (pagActual < totalPages) {
-        if (fin < totalPages) {
-            pagEnlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
+    if (pag_actual < totalPag) {
+        if (fin < totalPag) {
+            pag_enlace += '<a id="page_right" role="button" class="material-icons md-24" data-page="' + (fin + 1) + '"><span class="">chevron_right</span></a>';
         }
     }
 
-    $("#divPagFichasPro").html(pagEnlace);
+    $("#divPagFichasProcesos").html(pag_enlace);
 
-    $('#page_right,#page_left,.page_left,.page_right').bind('click', function () {
-        paginaActual = $(this).attr("data-page");
-
-        $("#divProcesos").empty();
-        inidata = ((paginaActual - 1) * cantXPagina);
-        findata = (paginaActual * cantXPagina) - 1;
-
-        var institucionesPorPagina = jQuery.grep(proyectos, function (n, i) {
-            return (i >= inidata && i <= findata);
+    $('#page_right,#page_left,.page_left,.page_right').on('click', function () {
+        pagina_actual = $(this).attr("data-page");
+        var ini_data = ((pagina_actual - 1) * cantXPagina);
+        var fin_data = (pagina_actual * cantXPagina) - 1;
+        var data_pagina = arr = jQuery.grep(globales_procesos, function (n, i) {
+            return (i >= ini_data && i <= fin_data);
         });
-
-        GetListadoInstituciones(institucionesPorPagina);
-        dibujarPagNumeradas(paginaActual);
+        $("#divProcesos").empty();
+        showListadoProcesos(data_pagina, pagina_actual);
     });
 
 }
+
 
 function configuraEnlaceContratista()
 {

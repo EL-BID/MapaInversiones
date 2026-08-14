@@ -95,14 +95,13 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                                        OrigenInformacion = datos.Key.OrigenInformacion,
                                        CodigoOrigenInformacion = (int)datos.Key.CodigoOrigenInformacion,
                                        MonedaContrato = datos.Key.MonedaContrato,
-                                       ValorContratado = datos.Sum(x => x.ValorContratado),
+                                       ValorContratado = (double)datos.Sum(x => x.ValorContratado),
                                        NroContratos = datos.Sum(x => x.NroContratos),
                                    }).Distinct().ToList();
 
 
             modelo.selectCon = (from contr in _connection.VwContratosDetalles
                       where (contr.MonedaContrato == moneda.ToString() || moneda == DBNull.Value)
-                    && contr.ValorContratado != null
                       group contr by new { contr.CodigoOrigenInformacion, contr.OrigenInformacion } into datos
                       select new ContratosConsolidado
                       {
@@ -218,7 +217,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
 
             objReturn.listUnidadCompra = (from info in _connection.VwConsolidadoProcesosContratacions
                                           where info.Origen.HasValue && info.Origen == origen && info.ValorProceso.HasValue  && info.Anio == annio
-                                         
+                                          //group info by new { info.Entidad, info.MonedaProceso } into g
                                           select new UnidadCompras
                                           {
                                               Entidad = info.Entidad,

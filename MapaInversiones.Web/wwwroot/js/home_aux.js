@@ -1,13 +1,15 @@
 ﻿var sector_ideas_globales = [];
 var anyo_actual = $("#anioPresupuesto").val();
-$("#lblAnyoBannerSec").text(anyo_actual);
+var anteriorVigencia = $("#anteriorVigencia").val();
+//------------------------------------------------
 var graficaDibujada = false;
 ///-------------------------------------------------------
 
 document.addEventListener("DOMContentLoaded", function () {
+    //config inicial
     configRedirectMonitoreo();
-    ObtenerPorcentajeParticipacionSector(anyo_actual);
-    ObtenerPorcentajeParticipacionEntidad(anyo_actual);
+    //ObtenerPorcentajeParticipacionSector(anteriorVigencia);
+    //ObtenerPorcentajeParticipacionEntidad(anteriorVigencia);
 });
 ///--------------------------------------------------------
 function configRedirectMonitoreo() {
@@ -19,7 +21,7 @@ function configRedirectMonitoreo() {
     });
 }
 
-function ObtenerPorcentajeParticipacionSector(anyo_actual) {
+function ObtenerPorcentajeParticipacionSector(anyo) {
     $("#divEnQueInvirtieron").empty();
     $("#cardEnQueInvirtieron").empty();
     $.ajax({
@@ -28,7 +30,7 @@ function ObtenerPorcentajeParticipacionSector(anyo_actual) {
         dataType: "json",
         url: "/api/ServiciosHome/ObtenerPorcentajeParticipacionSector",
         cache: false,
-        data: { Annio: anyo_actual },
+        data: { Annio: anyo },
         success: function (result) {
             if (result.status == true) {
                 var data = result.participacionSector;
@@ -74,6 +76,7 @@ function loadDonaGraph(divContenedor, myData) {
             var parentStyles = window.getComputedStyle(parentCarousel);
             if (parentStyles.display !== "none" && parentStyles.visibility !== "hidden")
             {
+                //alert("El contenedor está visible dentro del carrusel.");
                
 
                 if (myData != undefined && myData != null) {
@@ -124,7 +127,7 @@ function loadDonaGraph(divContenedor, myData) {
                         .on({ "click.legend": () => { } })
                         .render();
 
- 
+                    //alert("Termina-->drawDona");
                 }
 
             }
@@ -137,7 +140,8 @@ function loadDonaGraph(divContenedor, myData) {
         }
 
     function updateDona() {
-
+        //alert("updateDona-->" + graficaDibujada);
+        //alert(graficaDibujada);
         // Solo se renderiza si el contenedor es visible y la gráfica aún no se ha dibujado.
         if (!graficaDibujada && $("#" + divContenedor).is(":visible")) {
             drawDona(divContenedor, myData);
@@ -146,21 +150,22 @@ function loadDonaGraph(divContenedor, myData) {
     }
 
     // Intento inicial de renderizar
-
+    //updateDona();
 
     /// Listener para redibujar la gráfica cuando se haga visible la diapositiva en el carrusel.
     $('.carousel').on('settle.flickity', function () {
         // Si la diapositiva activa contiene el contenedor y la gráfica aún no se ha dibujado.
         var $activeSlide = $(this).find('.is-selected');
         if ($activeSlide.find('#' + divContenedor).length > 0) {
-
+            
+            //alert("$activeSlide Dona");
             updateDona();
         }
     });
 
     // Cada vez que se redimensiona la ventana, usa debounce para evitar llamadas múltiples.
     window.addEventListener("resize", debounce(() => {
-
+        //alert("resize");
         drawDona(divContenedor, myData);
     }, 300));
 
@@ -220,7 +225,7 @@ function loadSectores(divContenedor, objData) {
 
 
 }
-function ObtenerPorcentajeParticipacionEntidad(anyo_actual) {
+function ObtenerPorcentajeParticipacionEntidad(anyo) {
     $("#divQuienInvirtio").empty();
     $("#cardQuienInvirtio").empty();
     $.ajax({
@@ -229,7 +234,7 @@ function ObtenerPorcentajeParticipacionEntidad(anyo_actual) {
         dataType: "json",
         url: "/api/ServiciosHome/ObtenerPorcentajeParticipacionEntidad",
         cache: false,
-        data: { Annio: anyo_actual },
+        data: { Annio: anyo },
         success: function (result) {
             if (result.status == true) {
                 var data = result.participacionEntidad;

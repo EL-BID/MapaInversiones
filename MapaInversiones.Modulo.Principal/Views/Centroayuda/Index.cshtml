@@ -1,5 +1,5 @@
 ﻿@page
-
+@using Newtonsoft.Json.Linq
 @inject OrchardCore.IOrchardHelper Orchard
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -128,44 +128,64 @@
         <div class="sect-tab preguntas" id="preguntas" style="@displaypreguntas">
             <div class="row">
                 @{ var preguntas = await Orchard.GetContentItemByHandleAsync("alias:Preguntas");
-        List<string> categorias = new List<string>(); }
+                List<string> categorias = new List<string>(); }
                 <!--LEFT COLUMN-->
                 <div class="col-lg-3">
                     @foreach (var pregunta in preguntas.Content.BagPart.ContentItems)
                     {
-        @foreach (var termId in pregunta.Pregunta.Categoria.TermContentItemIds)
+                        @foreach (var termId in pregunta.Pregunta.Categoria.TermContentItemIds)
                         {
-            string term = termId + "";
-            string taxonomy = pregunta.Pregunta.Categoria.TaxonomyContentItemId + "";
-            var display = await Orchard.GetTaxonomyTermAsync(taxonomy, term);
-            if (!categorias.Contains(term))
-            {
-                categorias.Add(term);
-                                <div class="categoriapregunta" id="@term">
+                            string term = termId + "";
+                            string taxonomy = pregunta.Pregunta.Categoria.TaxonomyContentItemId + "";
+                            var categoryTerm = await Orchard.GetTaxonomyTermAsync(taxonomy, term);
+                            var display = categoryTerm.DisplayText;
+
+                            if (!categorias.Contains(term))
+                            {
+                                categorias.Add(term);
+                                
+                                var content = (JObject)categoryTerm.Content;
+
+                                string aliasText =
+                                (string)content["Categoria"]?["Alias"]?["Text"] // tu campo Alias
+                                ?? (string)content["AutoroutePart"]?["Path"]     // fallback al slug
+                                ?? "";
+
+                                <div class="categoriapregunta"
+                                     data-alias="@aliasText"
+                                     data-debug-display="@display">
                                     <span class="h5">@display</span>
-                                </div>}
-                        }}
+                                </div>                               
+
+                               
+                            }
+                        }
+                    }
+                    
                 </div>
                 <!--RIGHT COLUMN-->
                 <div class="col-lg-8">
-
-
                     @foreach (var pregunta in preguntas.Content.BagPart.ContentItems)
                     {
-        @foreach (var termId in pregunta.Pregunta.Categoria.TermContentItemIds)
+                        @foreach (var termId in pregunta.Pregunta.Categoria.TermContentItemIds)
                         {
-            string term = termId + "";
-            string taxonomy = pregunta.Pregunta.Categoria.TaxonomyContentItemId + "";
-            var display = await Orchard.GetTaxonomyTermAsync(taxonomy, term);
+                            string term = termId + "";
+                            string taxonomy = pregunta.Pregunta.Categoria.TaxonomyContentItemId + "";
+                            var categoryTerm = await Orchard.GetTaxonomyTermAsync(taxonomy, term);
 
-                            <div class="pregunta @term">
-                                <span class="h4"><strong>
-                                        @pregunta.DisplayText
-                                    </strong>
-                                </span>
+                            var content = (JObject)categoryTerm.Content;
+
+                            string aliasText =
+                            (string)content["Categoria"]?["Alias"]?["Text"] // tu campo Alias
+                            ?? (string)content["AutoroutePart"]?["Path"]     // fallback al slug
+                            ?? "";
+
+                            <div class="pregunta @aliasText">
+                                <span class="h4"><strong>@pregunta.DisplayText</strong></span>
                                 <div>@Html.Raw(pregunta.HtmlBodyPart.Html)</div>
-                            </div>}}
-
+                            </div>
+                        }
+                    }
 
                 </div>
             </div>
@@ -197,75 +217,95 @@
 </section>
 
 <script type="text/javascript">
+  $(document).ready(function () {
 
-    $(document).ready(function () {
-      var enlacePregunta = document.getElementById("preguntas");
-      if (enlacePregunta.style.display != "none") {
-        //Muestra las preguntas de la primera categoria
-        var c = document.getElementsByClassName("categoriapregunta");
-        id = "pregunta " + c[0].id;
-          Mostrar("pregunta", id)
-          var p = document.getElementById(c[0].id);
-          p.className = "categoriapregunta focused-cat"
-        //Muestra las palabras del glosario de la primera letra
-          Mostrar("palabra", "palabra A")
-          var g = document.getElementById('A');
-          g.className = "indice focused-glo"
+    var enlacePregunta = document.getElementById("preguntas");
+    if (enlacePregunta && enlacePregunta.style.display != "none") {
+      // Mostrar preguntas de la primera categoría
+      var c = document.getElementsByClassName("categoriapregunta");
+      if (c.length) {
+        var alias0 = (c[0].dataset.alias || '').toLowerCase();
+        Mostrar("pregunta", "pregunta " + alias0);
+        c[0].className = "categoriapregunta focused-cat";
       }
-      else {
-          Mostrar("sect-tab", "sect-tab contacto");
-          
-      }
-       $('.section-question').hide();
-        
 
-    });
-
-    $(document).on('click', '.categoriapregunta', function (e) {
-        id = "pregunta " + this.id;
-        Mostrar('pregunta', id);
-        var y = document.getElementsByClassName('categoriapregunta');
-        var i;
-        for (i = 0; i < y.length; i++) {
-            y[i].className = "categoriapregunta";
-        }
-        this.className = "categoriapregunta focused-cat"
-    });
-
-    $(document).on('click', '.btn-section', function (e) {
-        id = "sect-tab " + this.id;
-        Mostrar('sect-tab', id);
-        var y = document.getElementsByClassName('btn-section');
-        var i;
-        for (i = 0; i < y.length; i++) {
-            y[i].className = "btn-section";
-        }
-        this.className = "btn-section focused-btn"
-    });
-
-
-    $(document).on('click', '.indice', function (e) {
-        id = "palabra " + this.id;
-        Mostrar('palabra', id);
-        var y = document.getElementsByClassName('indice');
-        var i;
-        for (i = 0; i < y.length; i++) {
-            y[i].className = "indice";
-        }
-        this.className = "indice focused-glo"
-    });
-  function Mostrar(ocultar, mostrar) {
-    console.log("Ocultar:" + ocultar);
-    console.log("Mostrar:" + mostrar);
-        var y = document.getElementsByClassName(ocultar);
-        var i;
-        for (i = 0; i < y.length; i++) {
-            y[i].style.display = "none";
-        }
-        var x = document.getElementsByClassName(mostrar);
-        var i;
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "block";
-        }
+      // Glosario: primera letra
+      Mostrar("palabra", "palabra A");
+      var g = document.getElementById('A');
+      if (g) g.className = "indice focused-glo";
     }
+    else {
+      Mostrar("sect-tab", "sect-tab contacto");
+    }
+
+    $('.section-question').hide();
+
+    // ---------------- MODIFICACIÓN: abrir por ?section= ----------------
+    const urlParams = new URLSearchParams(window.location.search);
+    const section = (urlParams.get('section') || '').trim().toLowerCase();
+
+    if (section) {
+      setTimeout(() => {
+        if (enlacePregunta) $(enlacePregunta).trigger('click');
+
+        //categoria por data-alias
+        const sel = `.categoriapregunta[data-alias="${section}"]`;
+        const menuItem = document.querySelector(sel);
+
+        if (menuItem) {
+          const alias = (menuItem.dataset.alias || '').toLowerCase();
+
+          //ver preguntas
+          $(menuItem).trigger('click');
+          Mostrar('pregunta', 'pregunta ' + alias);
+
+          // Estilos
+          document.querySelectorAll('.categoriapregunta')
+            .forEach(el => el.className = 'categoriapregunta');
+          menuItem.className = 'categoriapregunta focused-cat';
+        } else {
+          console.warn('Categoría no encontrada:', section);
+        }
+      }, 0);
+    }
+    // ---------------- FIN MODIFICACIÓN ----------------
+  });
+
+  // Click en categoría x data-alias
+  $(document).on('click', '.categoriapregunta', function () {
+    var alias = (this.dataset.alias || '').toLowerCase();
+    Mostrar('pregunta', 'pregunta ' + alias);
+
+    var y = document.getElementsByClassName('categoriapregunta');
+    for (var i = 0; i < y.length; i++) y[i].className = "categoriapregunta";
+    this.className = "categoriapregunta focused-cat";
+  });
+
+  // Click en botones de sección
+  $(document).on('click', '.btn-section', function () {
+    var id = "sect-tab " + this.id;
+    Mostrar('sect-tab', id);
+    var y = document.getElementsByClassName('btn-section');
+    for (var i = 0; i < y.length; i++) y[i].className = "btn-section";
+    this.className = "btn-section focused-btn";
+  });
+
+  // Click en índice del glosario
+  $(document).on('click', '.indice', function () {
+    var id = "palabra " + this.id;
+    Mostrar('palabra', id);
+    var y = document.getElementsByClassName('indice');
+    for (var i = 0; i < y.length; i++) y[i].className = "indice";
+    this.className = "indice focused-glo";
+  });
+
+   function Mostrar(ocultar, mostrar) {
+    
+    var y = document.getElementsByClassName(ocultar);
+    for (var i = 0; i < y.length; i++) y[i].style.display = "none";
+
+    var x = document.getElementsByClassName(mostrar);
+    for (var j = 0; j < x.length; j++) x[j].style.display = "block";
+  }
 </script>
+

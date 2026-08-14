@@ -194,7 +194,8 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                 if (val_Sel != "") {
                     ObtenerImgAprobar(val_Sel, 1);
                 } else {
-
+                    //opcion vacia
+                    //ObtenerImgAprobar(1, 1);
                     $("#divDetImg").attr("estado", "");
                 }
 

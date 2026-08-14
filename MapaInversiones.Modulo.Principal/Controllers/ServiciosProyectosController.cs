@@ -40,6 +40,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             //leemos el querystring. lo convertimos a un diccionario.   
             Dictionary<string, string> parameters = Request.Query.ToDictionary(q => q.Key, q => (string)q.Value);
             ProjectsSearchMapContract projectsSearchMapContract = new ProjectsSearchMapContract(parameters, ConsultasComunes, BusquedasProyectosBLL);
+            
             projectsSearchMapContract.Fill();
             return projectsSearchMapContract.DataProjectSearchMap;
 
@@ -111,7 +112,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             if (!int.TryParse(idProyecto, out int proyectoId)) return new();
             if (!int.TryParse(annio, out int anio)) return new();
             var dataPrespuestoAnualProyecto = BusquedasProyectosBLL.GetInformacionGeneralProyectoPorAnioPresupuestal(proyectoId, anio);
-            if (dataPrespuestoAnualProyecto == null) return new ModelDataPresupuestoAnualProyecto() {  EjecucionFinanciera=0, EjecucionFisica=0, PropuestoAsignadoVigencia=0, PropuestoEjecutado=0, PropuestoObligado=0 };
+            if (dataPrespuestoAnualProyecto == null) return new ModelDataPresupuestoAnualProyecto() { PorcentajeEjecucion=0,  EjecucionFinanciera=0, EjecucionFisica=0, PropuestoAsignadoVigencia=0, PropuestoEjecutado=0, PropuestoObligado=0 };
             return dataPrespuestoAnualProyecto;
         }
 

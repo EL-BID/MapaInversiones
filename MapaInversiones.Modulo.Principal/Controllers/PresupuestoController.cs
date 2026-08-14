@@ -61,7 +61,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             {
 
                 var grupos = (from pre in _connection.VwPresupuesto
-                              join ct in _connection.CatalogoTiempoes on pre.Periodo equals ct.Periodo
+                              join ct in _connection.CatalogoTiempos on pre.Periodo equals ct.Periodo
                               group ct by ct.Año into g
                               select new Period
                               {

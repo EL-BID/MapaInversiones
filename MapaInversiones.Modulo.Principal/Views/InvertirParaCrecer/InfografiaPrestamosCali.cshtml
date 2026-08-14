@@ -1,0 +1,649 @@
+﻿@inject OrchardCore.IOrchardHelper Orchard
+@model PlataformaTransparencia.Modelos.ModelEmprestitoData
+@using PlataformaTransparencia.Modulo.Principal.Helpers
+@using System.Globalization
+
+@{
+    System.Globalization.CultureInfo cultureCO = new System.Globalization.CultureInfo("es-CO");
+    
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style>
+        .d3plus-tooltip {
+            z-index: 9999 !important;
+        }
+    </style>
+
+</head>
+<body>
+    <!--MAIN BANNER-->
+    <section class="banner-main-section s0-section bg-inv-crecer">
+        <div class="container">
+            <!-- Begin bread crumbs -->
+            <nav class="bread-crumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="bread-crumbs-list">
+                                <li>
+                                    <a href="\">Inicio</a>
+                                    <i class="material-icons md-18">chevron_right</i>
+                                </li>
+                                <li>Invertir para Crecer</li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="banner-main-info">
+                <div class="banner-main-title">
+                    <h1 class="displaced">Invertir para Crecer</h1>
+                </div>
+                <div class="banner-main-desc text-center">
+                    <div class="text-center">
+                        <p>
+                            <span class="text-bold"> Estamos construyendo la ciudad que soñamos con resultados tangibles.</span><br /> Acá te contamos cómo invertimos los primeros $1.4 billones para recuperar a Cali y proyectarla al futuro.
+                        </p>
+                    </div>
+                </div>
+               
+                
+            </div>
+            <!--NAVIGATION ON PAGE-->
+            <div class="row navs-shortcuts">
+                <div class="" id="navs-header">
+                    <a class="btn-section" href="#s1">
+                        <span class="ic-shortcut"><i class="material-icons md-24">feed</i></span>
+                        <span class="text-btn">¿En qué se está invirtiendo la plata?</span>
+                    </a>
+
+                    <a class="btn-section" href="#s2">
+                        <span class="ic-shortcut"><i class="material-icons md-24">donut_large</i></span>
+                        <span class="text-btn">Así va el crédito</span>
+                    </a>
+                    <a class="btn-section" href="#s5">
+                        <span class="ic-shortcut"><i class="material-icons md-24">earbuds</i></span>
+                        <span class="text-btn">¿Cómo funciona el crédito público?</span>
+                    </a>
+                    <a class="btn-section" href="#s3">
+                        <span class="ic-shortcut"><i class="material-icons md-24">collections</i></span>
+                        <span class="text-btn"> Historia de Invertir para Crecer</span>
+                    </a>
+
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--slider MAPA-->
+    <section class="section" id="s1">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-heading heading-center">
+                        <h2>¿En qué se está invirtiendo la plata?</h2>
+                    </div>
+                    <div class="sub-heading text-center mb-3">
+                        <!--<p>Estamos construyendo la ciudad que soñamos con resultados tangibles. Acá te contamos cómo invertimos los primeros $1.4 billones para recuperar a Cali y proyectarla al futuro.</p>-->
+                        <p class="text-bold">
+                            En esta infografía te resumimos los proyectos que se están desarrollando con recursos del crédito público. <br />¡Así recuperamos Cali!
+                        </p>
+                    </div>
+                    
+
+                </div>
+            </div>
+
+        <div class="bg-gradient-slider px-5">
+            <div class="wrap-slider-ipc py-3">
+                    <div class="carousel carousel-nav" data-flickity='{ "asNavFor": ".carousel-ipc", "contain": true, "freeScroll": true, "prevNextButtons": false, "pageDots": false  }'>
+                        @{
+                            
+                            var list = await Orchard.GetContentItemByHandleAsync("alias:bannerhome");
+                            var items = ((IEnumerable<dynamic>)list.Content.BagPart.ContentItems)
+                            .OrderBy(x => (int?)(x.Banner?.orden?.Value) ?? 0)
+                            .ToList();
+                        }
+                        @foreach (var item in items)
+                        {
+                            var titulo = (string)(item.Banner?.Titulo?.Text ?? "");
+                            var icono = (string)(item.Banner?.Icono?.Paths?.Count > 0
+                            ? item.Banner.Icono.Paths[0]
+                            : null ?? "");
+
+                            <div class="carousel-cell">
+                                <div class="wrap-icon">
+                                    <img class="img-fluid" src="@Orchard.AssetUrl((string)icono)" alt="icono decorativo de obras" />
+                                </div>
+                                <div class="tit-slide">@titulo</div>
+                            </div>
+                        }
+                    </div>
+                    <div class="carousel carousel-ipc" data-flickity='{ "fullscreen": true }'>
+                        @foreach (var item in items)
+                        {
+                            var ruta = (string)(item.Banner?.Fondo?.Paths?.Count > 0
+                            ? item.Banner.Fondo.Paths[0]
+                            : null ?? "");
+                            
+                            <div class="carousel-cell">
+                                <img class="img-fluid"
+                                     src="@Orchard.AssetUrl((string)ruta)"
+                                     alt="Listado de obras" />
+                            </div>
+                        }
+
+                    </div>
+            </div>
+
+
+        </div>
+       
+         <!--FIN FECHA CORTE INFORMACION-->
+        </div>
+    </section>
+    <!--Conocé más-->
+    <!--<section class="section bg-gray2">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-heading heading-center">
+                        <h2>¿Querés conocer más sobre cómo Cali crece?</h2>
+                    </div>
+                    <div class="sub-heading py-3 text-center">
+                        <p class="h4">Pilláte este video</p>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="ratio ratio-16x9">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/BvP7IBHTfl4?si=JtbLHSMGmsRLpBBr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>-->
+
+
+
+    <!--asi va el credito-->
+    <section class="section" id="s2">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-heading heading-center">
+                        <h2>Así va el crédito</h2>
+                    </div>
+                    <div class="sub-heading text-center mb-5">
+                        <p class="text-bold">Aquí podrás ver el avance del proceso de crédito. Qué préstamos han sido aprobados, por cuánto dinero, con qué bancos y lo más importante: en qué proyectos se están invirtiendo los recursos.</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-5">
+                    <div id="divGraphDona" class="graficoInteractivo" style="max-width: 100%; height: auto;"></div>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="accordion-list">
+                        @foreach (var item in Model.Creditos)
+                        {
+                            <li class="accordion-item">
+                                <div class="accordion-trigger"><div class="c-graph" data-identidad="@item.IdEntidadFinanciera">&nbsp;</div> <span class="h5">Crédito @($"{item.IdEntidadFinanciera}")</span></div>
+                                <div class="accordion-content content" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="wrap-content">
+                                                <span class="label text-bold">Banco que presta</span>
+                                                <div class="wrap-img">
+                                                    <img class="img-fluid" src="@item.IconoEntidadFinanciera" onerror="this.src='img/logo-banco-default.png'" alt="logo entidad bancaria" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="monto h4"><span class="label">Monto <br /></span>@Html.FormatoMoneda(item.Monto, decimales: 0, nivel: 1)</div>
+                                            <!--
+                                            <div class="wrap-desc-entidad">
+                                                <div class="execute">Porcentaje comprometido en contratos</div>
+                                                <div class="progress position-relative">
+                                                    <div class="progress-bar" aria-label="Porcentaje comprometido en contratos" role="progressbar"
+                                                         style="width:@(item.PorcentajeEjecucion.ToString("F1", CultureInfo.InvariantCulture))%"
+                                                         aria-valuenow="@item.PorcentajeEjecucion" aria-valuemin="0" aria-valuemax="100">
+                                                        @if (item.PorcentajeEjecucion >= 10)
+                                                        {
+                                                            <span class="lblporc">@Html.FormatoNumero(item.PorcentajeEjecucion) %</span>
+                                                        }
+                                                    </div>
+                                                    @if (item.PorcentajeEjecucion < 10)
+                                                    {
+                                                        <span class="lblporc-small position-absolute" style="left: calc(@(item.PorcentajeEjecucion.ToString("F1", CultureInfo.InvariantCulture))% + 8px); top: 50%; transform: translateY(-50%); color: #666; font-size: 0.85em; white-space: nowrap; font-weight: bold !important;">
+                                                            @Html.FormatoNumero(item.PorcentajeEjecucion) %
+                                                        </span>
+                                                    }
+                                                </div>
+
+                                            </div>
+                                            -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="monto"><span class="label">Plazo</span><br /> @($"{item.Plazo}")</div>
+                                            <div class="monto"><span class="label">Período de gracia</span><br />@($"{item.PeriodoGracia}")</div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="monto"><span class="label">Fecha del contrato</span><br />@($"{item.FechaContrato}")</div>
+                                            <div class="monto"><span class="label">Proyectos que financia:</span><br />@Html.FormatoNumero(item.NumeroProyectos,decimales:0)</div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="monto"><span class="label">Tasa de interés</span><br /> @item.TasaInteres</div>
+
+                                        </div>
+                                        <!-- <div class="col-12">
+                                            <div class="card p-3 my-3">
+                                                <p class="small m-0">
+                                                    La barra de porcentaje comprometido aumenta a medida que se firman los contratos para ejecutar los proyectos financiados con cada crédito.
+                                                </p>
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                    <div class="wrap-btn">
+                                        <a href="/PerfilPrestamo?id=@($"{item.IdEntidadFinanciera}")" target="_blank" class="btn btn-primary btn-sm">
+                                            <span>Proyectos</span>
+                                            <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
+                                                <use xlink:href="../../../img/sprite.svg#arrow-right"></use>
+                                            </svg>
+                                        </a>
+                                        <a href="@($"{item.UrlContrato}")" target="_blank" class="btn btn-outlined">
+                                            <span>Contrato de crédito</span>
+                                            <i class="material-icons md-24">open_in_new</i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </li>
+
+
+                        }
+                        
+                       
+
+                    </ul>
+
+
+                </div>
+            </div>
+            
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="disclaimer highlightedMSG px-3">
+                            <div class="wrap-text">
+                            <div class="wrap-img"><img src="img/ic-alcaldia-aaa.svg" alt="icono de calificacion triple A"/></div>
+                            <p><span class=" text-bold">La Alcaldía de Cali cuenta con la calificación AAA de Fitch Ratings, que ratifica su solidez financiera y el adecuado manejo de las finanzas.</span> Por eso podemos acceder a créditos de esta magnitud</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+    <!--COMO FUNCIONA EL CREDITO PUBLICO-->
+    <section class="section bg-gray2" id="s5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-heading heading-center">
+                        <h2>
+                            ¿Cómo funciona el crédito público?
+                        </h2>
+                    </div>
+                    <div class="sub-heading py-3 text-center">
+                        <p class="h4">Te lo explicamos de forma fácil y sencilla.</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="ratio ratio-16x9">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/7YiAf63rIvw?si=Q_MBPtUYcF4fTp-8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center py-5">
+                <div class="col-lg-8 text-center">
+                    <h3 class="text-center">
+                        Del banco a la acción
+                    </h3>
+                    <p class="text-center">Conocé cómo es el camino para financiar las obras de ‘Invertir para Crecer’. Este proceso se repite en cada préstamo.</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    
+                    <img class="img-fluid" src="../img/step-by-step.svg" alt="Proceso de financiación  de las obras de invertir para crecer" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!--HISTORIA-->
+    <section class="section" id="s3">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="section-heading heading-center">
+                        <h2>¡Esta es la historia de ‘Invertir para Crecer’!</h2>
+                    </div>
+                    <div class="sub-heading py-3 text-center">
+                        <p>Este sueño no se construyó de un día para otro. Es parte de un proceso serio y riguroso liderado por el Departamento Administrativo de Hacienda.</p>
+                        <p class="h4 green-text">Mirá cómo se ha dado cada paso:</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row news-timeline">
+                <div class="col-12">
+                    <h3 class="news-timeline-title h4"><span>2023</span></h3>
+                </div>
+                <div class="col-xl-4 col-lg-5 offset-xl-1 col-12 news-timeline-item-left">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+                            <h3 class="news-item-heading item-heading">
+                                
+                            </h3>
+                            <div class="news-item-desc">
+                                <p>
+                                    Durante su campaña a la Alcaldía de Cali, el alcalde Alejandro Eder escucha y comprende el clamor de los ciudadanos por inversiones importantes en la ciudad que mejoren su calidad de vida.
+                                </p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+                <div class="col-12">
+                    <h3 class="news-timeline-title h4"><span>2024</span></h3>
+                </div>
+                <div class="col-xl-4 col-lg-5 offset-xl-1 col-12 news-timeline-item-left">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+                            <h3 class="news-item-heading item-heading">
+                                Enero - junio
+                            </h3>
+                            <div class="news-item-desc">
+                                <p>
+                                    <span class="text-bold">Se construyó y aprobó en el Concejo Distrital el Plan de Desarrollo ‘Cali, Capital Pacífica de Colombia’,</span> que contempla grandes inversiones para recuperar a Cali y proyectarla a Cali hacia el futuro.
+                                </p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+                <div class="col-xl-4 col-lg-5 offset-lg-2 col-12 news-timeline-item-right">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+                            <h3 class="news-item-heading item-heading">
+                                Noviembre
+                            </h3>
+                            <div class="news-item-desc">
+                                <p>Ante la imposibilidad de desarrollar inversiones a gran escala, <span class="text-bold">la Alcaldía propone al Concejo autorizar créditos hasta por $3,5 billones para recuperar la ciudad con el proyecto de <a href="https://www.concejodecali.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=32875" target="_blank"> Acuerdo 0592</a></span></p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+
+                <div class="col-xl-4 col-lg-5 offset-xl-1 col-12 news-timeline-item-left">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+                            <h3 class="news-item-heading item-heading">
+                                Diciembre
+                            </h3>
+                            <div class="news-item-desc">
+                                <p>
+                                    <span class="text-bold">El Concejo aprueba el <a href="https://www.concejodecali.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=32875" target="_blank">Acuerdo 0592</a></span>, con el que nace ‘Invertir para Crecer’.
+
+                                </p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+                <div class="col-xl-4 col-lg-5 offset-lg-2 col-12 news-timeline-item-right">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+                            <h3 class="news-item-heading item-heading">
+                                Diciembre
+                            </h3>
+                            <div class="news-item-desc">
+                                <p>
+                                    <span class="text-bold">El Departamento Administrativo de Hacienda solicita a los bancos presentar propuestas</span> para desarrollar los préstamos o créditos públicos.
+
+                                </p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+                <div class="col-12">
+                    <h3 class="news-timeline-title news-timeline-title-mt h4"><span>2025</span></h3>
+                </div>
+                <div class="col-xl-4 col-lg-5 offset-xl-1 col-12 news-timeline-item-left">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+
+                            <h3 class="news-item-heading item-heading">
+                                Febrero
+                            </h3>
+                            <div class="news-item-desc">
+                                <p><span class="text-bold">Consolidamos las necesidades priorizadas en temas como infraestructura vial, deportiva y educativa</span> mediante diálogos con la comunidad.</p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+                <div class="col-xl-4 col-lg-5 offset-lg-2 col-12 news-timeline-item-right">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+
+                            <h3 class="news-item-heading item-heading"> Mayo
+                            </h3>
+                            <div class="news-item-desc">
+                                <p><span class="text-bold">Se anuncia la firma del primer crédito por $365.000 millones con Bancolombia</span>, que financia más de 13 proyectos. El Concejo aprueba la adición de los recursos al presupuesto de la Alcaldía mediante el <a href="https://www.concejodecali.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=33546" target="_blank">Acuerdo 0602.</a></p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+                <!--JUNIO 2025-->
+                <div class="col-xl-4 col-lg-5 offset-xl-1 col-12 news-timeline-item-left">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+                            <h3 class="news-item-heading item-heading">
+                                Junio
+                            </h3>
+                            <div class="news-item-desc">
+                                <p>
+                                    <span class="text-bold">Se anuncia la firma del segundo crédito por valor de $600.000 millones con el Banco Davivienda.</span>
+
+                                </p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+
+                <div class="col-xl-4 col-lg-5 offset-lg-2 col-12 news-timeline-item-right">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+
+                            <h3 class="news-item-heading item-heading">
+                                Julio
+                            </h3>
+                            <div class="news-item-desc">
+                                <p>
+                                    El Concejo aprueba la adición de los recursos al presupuesto de la Alcaldía mediante los acuerdos <a href="https://www.concejodecali.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=33787" target="_blank">0607</a> y <a href="https://www.concejodecali.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=34292" target="_blank">0611</a>.
+                                </p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+                <div class="col-xl-4 col-lg-5 offset-xl-1 col-12 news-timeline-item-left">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+                            <h3 class="news-item-heading item-heading">
+                                Agosto
+                            </h3>
+                            <div class="news-item-desc">
+                                <p>
+                                    <span class="text-bold">
+                                        Se firma el tercer crédito, por valor de $250.000 millones con el Banco BBVA.
+                                    </span>
+
+                                </p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+
+                <div class="col-xl-4 col-lg-5 offset-lg-2 col-12 news-timeline-item-right">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+
+                            <h3 class="news-item-heading item-heading">
+                                Septiembre
+                            </h3>
+                            <div class="news-item-desc">
+                                <p>
+                                    <span class="text-bold">
+                                        Se firma el cuarto crédito, por valor de $250.000 millones con Banco de Occidente.
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+                <div class="col-xl-4 col-lg-5 offset-xl-1 col-12 news-timeline-item-left">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+                            <h3 class="news-item-heading item-heading">
+                                Octubre
+                            </h3>
+                            <div class="news-item-desc">
+                                <p>
+                                    El concejo aprueba la adición de los recursos del <span class="text-bold">crédito de BBVA al presupuesto de la Administración, mediante el <a href="https://www.concejodecali.gov.co/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=descargar&idFile=34544" target="_blank">acuerdo 0616</a>.</span>
+
+                                </p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+                <div class="col-xl-4 col-lg-5 offset-lg-2 col-12 news-timeline-item-right">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+
+                            <h3 class="news-item-heading item-heading">
+                                Diciembre
+                            </h3>
+                            <div class="news-item-desc">
+                                <p>
+
+                                    Se incluyen  <span class="text-bold">
+                                        $159.215 millones del crédito de Banco de Occidente en el presupuesto de la Administración Distrital para la vigencia 2026 mediante el <a href="https://www.cali.gov.co/hacienda/loader.php?lServicio=Tools2&lTipo=descargas&lFuncion=visorpdf&id=103419&pdf=1" target="_blank">decreto de liquidación presupuestal 1069.</a>
+
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+                <div class="col-12">
+                    <h3 class="news-timeline-title news-timeline-title-mt h4"><span>2026</span></h3>
+                </div>
+                <div class="col-xl-4 col-lg-5 offset-xl-1 col-12 news-timeline-item-left">
+                    <!-- Begin news item -->
+                    <article class="news-item item-style">
+                        <div class="news-item-info">
+                            <h3 class="news-item-heading item-heading">
+                                Abril
+                            </h3>
+                            <div class="news-item-desc">
+                                <p>
+                                     Actualmente, se están ejecutando 113 contratos con recursos del empréstito.
+                                </p>
+                            </div>
+                        </div>
+                    </article><!-- End news item -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--VISITA NUESTRO CENTRO DE AYUDA-->
+    <section class="section cta-section text-center" id="s4">
+        <div class="container">
+            <div class="section-heading heading-center">
+                <h2>¡No te quedés con la duda!</h2>
+            </div>
+            <div class="sub-heading py-3 text-center">
+                <p>Respondemos las preguntas más comunes sobre ‘Invertir para Crecer’.</p>
+                <p class="text-bold">Si tenés otra, escribinos a <a href="mailto:transparencia@cali.gov.co">transparencia@cali.gov.co</a></p>
+            </div>
+            <a href="/CentroAyuda?section=emprestito" target="_blank" class="btn btn-primary">
+                <span>Ver preguntas frecuentes</span>
+                <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
+                    <use xlink:href="../../../img/sprite.svg#arrow-right"></use>
+                </svg>
+            </a>
+
+        </div>
+    </section>
+</body>
+</html>
+@section scripts
+{
+    <script type="text/javascript" src="~/js/lib/d3/d3.v7.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/d3plus@2"></script>
+    <script src="~/js/prestamos_aux.js"></script>
+}
+ @section DataBody {
+    data-creditos='[@{ 
+        var last = Model.Creditos.LastOrDefault(); 
+        if (last != null) {
+            foreach (var c in Model.Creditos) {
+                <text>{ "Monto": @c.Monto.ToString(System.Globalization.CultureInfo.InvariantCulture), "IdEntidadFinanciera": @c.IdEntidadFinanciera }@((c != last) ? "," : "")</text>
+            }
+        }
+    }]'
+}
+
+
+
+
+
+
+
+
+

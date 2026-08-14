@@ -469,7 +469,52 @@ function loadProyectosEjecucion(resultados) {
 
 
 }
+//function listarActores() {
+//    $("#divGruposActores").empty();
+//    $("#listActPerGrupo").empty();
+//    if (actoresGlobal != null) {
+//        var distintos = actoresGlobal.map(item => item.Categoria)
+//            .filter((value, index, self) => self.indexOf(value) === index);
 
+//        if (distintos.length > 0) {
+//            var str_cad = '<select class="form-select" aria-label="Institucionales:" id="selectGrupActores">';
+//            for (var i = 0; i < distintos.length; i++) {
+//                var nombre = distintos[i].split("|")[1];
+//                var id = distintos[i].split("|")[0];
+//                str_cad += ' <option value="' + id + '">' + nombre + '</option>';
+
+//            }
+//            str_cad += '</select>';
+//            $("#divGruposActores").html(str_cad);
+//            configuraSelectActores();
+//        } else {
+//            $("#divContainerActores").hide();
+//        }
+//    } else {
+//        $("#divContainerActores").hide();
+//    }
+
+    
+//}
+
+//function configuraSelectActores() {
+//    if ($("#selectGrupActores").length > 0) {
+//        $('#selectGrupActores').on('change', function () {
+//            var val_Sel = $(this).val();
+//            $(this).attr("class", "selected");
+//            if ($.trim(val_Sel) != "" && val_Sel != undefined) {
+//                GetActoresByCat(val_Sel);
+
+//            } else {
+//                //opcion vacia
+//                $("#divDetFuentes").children().remove();
+//            }
+//        });
+
+
+//    }
+
+//}
 
 function GetActoresByCat(idCat) {
     $("#listActPerGrupo").empty();
@@ -712,6 +757,81 @@ function GetFuentesByPeriodo(id_proyecto, id_periodo) {
     });
 }
 
+
+//function make_viz_fuentes(divContenedor, data_contenido, titulo, color, etiqueta) {
+//    new d3plus.BarChart()
+//        .select("#" + divContenedor)
+//        .config({
+//            backgroundConfig: {
+//                "strokeWidth": 2,
+//                "stroke": color,
+//                "fill": "transparent",
+//            },
+//            font: { "family": "inherit", "size": 14 },
+//            data: data_contenido,
+//            height: 80,
+//            title: titulo,
+//            titleConfig: {
+//                "ariaHidden": true,
+//                "fontSize": 14,
+//                "resize": false,
+//                "weight": 600,
+//                "textAnchor": "left"
+//            },
+//            colorScale: 'name',
+//            colorScaleConfig: {
+//                color: [
+//                    color,
+//                ]
+//            },
+//            discrete: 'y',
+//            groupBy: 'name',
+//            stacked: true,
+//            tooltip: false,
+//            label: d => `${(d['value'])}%`,
+
+//            x: 'value',
+//            xConfig: {
+//                title: false,
+//                tickFormat: d => `${d}%`,
+//                ticks: [],
+//                labels: [0, 20, 40, 60, 80, 100],
+//                color: "#666",
+//                grid: false
+//            },
+//            xDomain: [
+//                0,
+//                100
+//            ],
+//            y: 'year',
+//            yConfig: {
+//                tickFormat: d => `${d}%`,
+//                title: false,
+//                ticks: []
+//            }
+//        }
+//        )
+//        .legend(false)
+//        .render();
+//}
+
+//comunes
+//function separar_miles(num) {
+//    var num_aux = num;
+//    if (num != "0" && num != undefined) {
+//        try {
+//            num_aux = num.toString().replace(/\./g, '');
+//            if (!isNaN(num_aux)) {
+//                num_aux = num_aux.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g, '$1.');
+//                num_aux = num_aux.split('').reverse().join('').replace(/^[\.]/, '');
+//            }
+//        }
+//        catch (error) {
+//            console.error("function separar_miles: " + error);
+//        }
+//    }
+//    return num_aux;
+//}
 
 function separar_milesv2(num, decimales = 2, separadorMiles = '.', separadorDecimales = ',') {
     if (isNaN(num) || num === null || num === undefined) return "";

@@ -363,3 +363,4 @@ FodyWeavers.xsd
 *.bak
 /MapaInversiones.Web/App_Data/Sites/Default/IdentityModel-Signing-Certificates
 /MapaInversiones.Web/wwwroot/is-cache
+/MapaInversiones.Web/App_Data/Sites/Default

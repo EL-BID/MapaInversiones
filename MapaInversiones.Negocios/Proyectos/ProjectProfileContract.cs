@@ -48,6 +48,7 @@ namespace PlataformaTransparencia.Negocios.Project
                 BllProjectProfile bussines = new(_connection);
                 ModelProjectProfile.idproject = projectId;
                 ParticipacionCiudadana part = new(_connection);
+                
                 //----------------------------------------------------------------------------------------
                 ModelProjectProfile.ProjectInformation = bussines.GetProjectInformation(projectId);
                 ModelProjectProfile.periodos_fuentes = BusquedasProyectosBLL.ObtenerAniosFuentesFinanciacionPorProyecto(projectId); //    new();// CodPeriodos;
@@ -76,6 +77,11 @@ namespace PlataformaTransparencia.Negocios.Project
                 ModelProjectProfile.medios_participacion = part.ObtenerMotivosProyAsync();
                 ModelProjectProfile.tipo_comentario = part.ObtenerTipoComentarioAsync(1);
                 ModelProjectProfile.avanceFisicoFaseInversion = new();
+                
+
+
+               
+
                 //ModelProjectProfile.avanceFisicoFaseInversion = BusquedasProyectosBLL.ObtenerAvanceFisicoPorComponenteProductoFaseProyecto(projectId);
                 Status = true;
             }

@@ -113,11 +113,11 @@
     <section class="section welcome">
         <div class="container">
             <div class="row align-items-center justify-content-center">
-                <div class="col-lg-6">
-                    <h1>¿Qué es ¡Pa’ qué Veás!?</h1>
+                <div class="col-lg-8">
+                    <h1>¿Qué es ¡Pa’ que Veás!?</h1>
                     <p class="">Bienvenido (a) a ¡Pa’ que Veás!, el monitor de Inversión Pública de la Alcaldía de Cali, donde podrás conocer el avance de los proyectos que se desarrollan en cada comuna y corregimiento de la ciudad con dinero público, filtrándolos por zona, sector de la inversión, dependencia gestora y estado del proyecto. </p>
                     <p class="text-bold">¡Gracias por tu compromiso con el control social para recuperar a Cali!</p>
-                    <div class="wrap-cta my-3">
+                    <div class="wrap-cta">
                         <a href="/Acercade" target="_blank" class="btn btn-outlined btn-lg">
                             <span title="Ver más">Conocé más </span>
 
@@ -129,9 +129,25 @@
                 </div>
                 @if (!string.IsNullOrWhiteSpace(url_aux))
                 {
-                    <div class="col-lg-4">
+                    
+                    var urlParts = url_aux.Split('/');
+                    var videoIdWithParams = urlParts[urlParts.Length - 1];  
+                    var videoId = videoIdWithParams.Split('?')[0];
+
+                    <div class="col-lg-4 d-none">
                         <div class="ratio ratio-16x9">
-                            <iframe width="560" height="315" src="@url_aux" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            
+                            <div class="video-placeholder" style="background-image: url('https://img.youtube.com/vi/@videoId/maxresdefault.jpg'); background-size: cover; background-position: center; height: 100%; display: flex; justify-content: center; align-items: center;">
+                                <button class="play-button" onclick="loadVideo('@videoId')" style="background-color: rgba(0, 0, 0, 0.6); color: white; border: none; padding: 10px 20px; font-size: 24px; cursor: pointer;">▶</button>
+                            </div>
+
+                            <!-- El iframe se carga solo cuando se hace clic en el botón de reproducción -->
+                            <div id="video-container-@videoId" style="display:none;">
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/@videoId?autoplay=1"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+                            </div>
                         </div>
                     </div>
                 }
@@ -140,10 +156,250 @@
             </div>
         </div>
     </section>
+    <!--INVERTIR PARA CRECER-->
+    <section class="section invertir-para-crecer">
+        <div class="container">
+            <div class="section-heading heading-center py-4">
+                <h2 class="displaced">Invertir para crecer</h2>
+            </div>
+            <div class="section-subheading">
+                <p class="text-bold">¡Descubrí cómo estamos invirtiendo el dinero del crédito público para recuperar a Cali! </p>
+            </div>
+
+            <a href="/invertir-para-crecer-cali" class="btn btn-primary">
+                <span>Hacé clic para conocer más</span>
+                <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
+                    <use xlink:href="../../../img/sprite.svg#arrow-right"></use>
+                </svg>
+            </a>
+        </div>
+    </section>
+  
+
+    <!-- COMO VA LA EJECUCIóN 2025 -->
+    
+    
+    <section class="section wrap-instituciones soft-gradient">
+        <div class="container">
+            <div class="row align-items-center justify-content-center mb-4" id="divVigenciaActual">
+                <div class="section-heading heading-center py-4">
+                    <h2>¿Cómo va la ejecución del presupuesto en <span class="anio">@maxAnyo?</span></h2>
+                </div>
+                <div class="col-lg-12">
+                    <div class="wrap-icon text-center">
+                        <img class="img-fluid" src="img/icon-budget.svg" alt="icono decorativo" />
+                    </div>
+                    <div class="wrap-summary mb-4">
+                        <span class="h5">Recursos disponibles</span>
+                        <span class="big-number">$ @vigente_actual billones</span>
+                        
+                    </div>
+
+                </div>
+                <div class="col-lg-8">
+                    <div class="wrap-summary mb-4">
+                        <span class="h5">Ejecutado con fecha de corte: @Model.fechasCorte.fechaCorte</span>
+                        <div class="progesscontainer pgreen">
+                            <div class="progress" style="height:65px;">
+                                <div class="bg-proexec" role="progressbar"
+                                     style='@($"width:{porc_actual}%")'
+                                     aria-valuenow='@(porc_actual)'
+                                     aria-valuemin="0"
+                                     aria-valuemax="100">
+                                    @(porc_actual)%
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <div class="sep-H-shadow"></div>
+            </div>
+            <!-- INSTITUCIONES -->
+            <div class="row py-4">
+                <div class="col-12">
+                    <div class="section-heading heading-center py-4">
+                        <h2>¿Cuánto presupuesto ejecutan secretarías, departamentos y unidades de la Alcaldía durante el <span class="anio">@maxAnyo?</span></h2>
+                        <div class="section-subheading">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div id="divContenedorFichas22" class="project-carusel" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "prevNextButtons": true, "autoPlay": false}'>
+                        @if (Model.Entidades != null)
+                        {
+                            @foreach (var item in Model.Entidades)
+                            {
+                                var porcentaje = "0%";
+                                var anyo = @Model.MaxAnnioEntidades;
+                                var href_aux = "/perfilEntidad?codEntidad=" + item.id;
+                                var porcentajeFormateado = @item.porcentaje.ToString("N2", cultureRD) + "%";
+                                porcentaje = @item.porcentaje.ToString().Replace(',', '.') + "%";
+
+
+                                <text>
+                                    <div class="col-lg-3 mb-3">
+                                        <div class="card h-100 shadow border-0 card-entidad">
+                                            <a href=@href_aux>
+                                                <div class="card-body">
+                                                    <div class="card-title-container mh56">
+                                                        <span class="h5" id="@item.id">@item.labelGroup</span>
+                                                    </div>
+                                                    <div class="wrap-desc-entidad">
+                                                        <div class="execute">Valor total ejecutado</div>
+                                                        <div class="progress">
+                                                            <div class="progress-bar" aria-label="Porcentaje Ejecutado" role="progressbar" style="width:@porcentaje" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                                                                <span class="lblporc">@porcentajeFormateado </span>
+                                                            </div>
+                                                        </div>
+                                                       
+                                                        <div class="wrap-data-advance py-3">
+                                                            <span class="executeN">$ @String.Format(cultureRD, "{0:n0}", item.avance / 1000000)</span><span class="executeV"> millones</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </text>
+                            }
+                        }
+                    </div>
+                </div>
+
+            </div>
+            <div class="section-btns justify-content-center py-3">
+                <a title="Ver todos los entes gestores" href="/BusquedaResultados?Type=Ente" class="btn btn-primary">
+                    <span>Ver todos los entes gestores</span>
+                    <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
+                        <use xlink:href="../../../img/sprite.svg#arrow-right"></use>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- MAPA COMUNAS Y CORREGIMIENTOS -->
+    <section class="section provincias pb-0">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-8">
+                    <div class="section-heading heading-center">
+                        <h2>¿Qué proyectos hay en tu zona?</h2>
+                        <p class="section-subheading">En ¡Pa' que Veás! te mostramos los proyectos que se adelantan en tu comuna o corregimiento.<br /> <span class="text-bold">¡En la jugada porque eso también es tuyo! Hacé clic y revisá</span></p>
+
+                    </div>
+                    <div class="wrap-counter d-flex">
+                        <div class="counters">
+                            <div class="desc-data">
+                                <div class="executeV">Proyectos Totales</div>
+                                <div class="executeN" id="numProyExe">@String.Format(cultureRD, "{0:n0}", Model.countOngoingProjects.cantidad)</div>
+                            </div>
+                        </div>
+                        <div class="counters">
+                            <div class="desc-data">
+                                <div class="executeV">Presupuesto acumulado de los proyectos desde 2024</div>
+                                <div class="executeN" id="costoProyExce">$ @String.Format(cultureRD, "{0:n0}", Model.countOngoingProjects.costo / 1000000) millones</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div class="row location-tabs">
+                <!--COMUNAS-->
+                <div class="location-card mb-4">
+                    <h3 class="text-center">Comunas</h3>
+                    <div class="carousel" data-flickity='{ "contain": true, "pageDots": true, "autoPlay": false, "cellAlign": "right", "groupCells": true,  "lazyLoad": true, "lazyLoad": 10 }'>
+                        @foreach (var item in Model.Comunas)
+                        {
+                            <div class="carousel-cell">
+                                <div class="card comuna" style="background-image:url(@Url.Content($"../img/{item.UrlImg}"))">
+                                    <div class="card-body">
+                                        <a href="@item.LinkLocationProfile" class="h4">@item.Nombre</a>
+                                        <span class="number-proyecto">(@item.CantidadProyectos proyectos)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                                       
+                    </div>
+                </div>
+                <!--CORRREGIMIENTOS-->
+                <div class="location-card">
+                    <h3 class="text-center">Corregimientos</h3>
+                    <div class="carousel" data-flickity='{ "contain": true, "pageDots": true, "autoPlay": false, "cellAlign": "right", "groupCells": true,  "lazyLoad": true, "lazyLoad": 10 }'>
+                        @foreach (var item in Model.Corregimientos)
+                        {
+                            <div class="carousel-cell">
+                                <div class="card comuna" style="background-image:url(@Url.Content($"../img/{item.UrlImg}")">
+                                    <div class="card-body">
+                                        <a href="@item.LinkLocationProfile" class="h4">@item.Nombre</a>
+                                        <span class="number-proyecto">(@item.CantidadProyectos proyectos)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!--tabs-->
+            <div class="row d-none">
+
+
+                <div class="tabs location-tabs">
+                    <ul class="tabs-nav">
+                        <li class="active">Comunas</li>
+                        <li class="">Corregimientos</li>
+
+                    </ul>
+                    <div class="tabs-container">
+                        <div class="tabs-item location-card content active">
+                        </div>
+                        <!--tabs corregimiento-->
+                        <div class="tabs-item location-card content">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section map-link">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="section-heading heading-center">
+                            <h2>Explorá el Mapa de Proyectos</h2>
+                            <div class="section-subheading">
+                                Descubrí cómo se transforma tu comunidad a través de nuestro Mapa de Proyectos y conocé en detalle cómo se está utilizando la plata de todos para recuperar a Cali y mejorar tu entorno.
+                            </div>
+                        </div>
+                        <div class="wrap-cta my-3">
+                            <a href="/MapView" class="btn btn-primary btn-lg">
+                                <span title="Ver más">Ver Mapa </span>
+
+                                <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
+                                    <use xlink:href="../../../img/sprite.svg#arrow-right"></use>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+    </section>
     <!-- MAIN SLIDER SECTION -->
     <input id="anioPresupuesto" value="@maxAnyo" hidden />
     <input id="anteriorVigencia" value="@anteriorVigencia" hidden />
-    <section class="section main-slider" id="ContenedorVigencia">
+    <section class="section main-slider" id="ContenedorVigencia" style="display:none;">
         @if (flag_vigencia_anterior)
         {
             <div class="container">
@@ -167,7 +423,7 @@
                 <div class="slide-vertical-thumb">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-xl-3 col-lg-3 col-xxl-3 thumb-left">
-                            <div class="carousel carousel-nav " data-flickity='{"asNavFor": ".carousel-mainX", "draggable": false, "percentPosition": false, "groupCells": "100%", "pageDots": false, "prevNextButtons": false }'>
+                            <div class="carousel carousel-nav " data-flickity='{"asNavFor": ".carousel-mainX", "draggable": false, "percentPosition": false, "groupCells": 3, "pageDots": false, "prevNextButtons": false,  "groupCells": true }'>
                                 <div class="carousel-cell"> <div>¿Cuánta fue la plata disponible?</div></div>
                                 <div class="carousel-cell"> <div>¿En qué se invirtió la plata de los caleños?</div></div>
                                 <div class="carousel-cell"><div> ¿Quién invirtió?</div></div>
@@ -180,8 +436,8 @@
                                     <div class="wrap-cell-container">
                                         <div class="row align-items-center">
                                             <div class="col-lg-12"><h3 class="py-3">¿Cuánta fue la plata disponible?</h3></div>
-                                            <div class="col-md-6 col-lg-5 h-100">
-                                                <img class="img-s1 img-fluid" src="img/img-slide1.png" alt="Grupo de personas reunidas en un taller de participación ciudadana  de la Alcaldía de Cali" />
+                                            <div class="col-md-6 col-lg-5 h-100 text-center">
+                                                <img class="img-s1 img-fluid" src="img/img-slide1.webp" alt="Grupo de personas reunidas en un taller de participación ciudadana  de la Alcaldía de Cali" />
                                             </div>
                                             <div class="col-sm-12 col-md-6 col-lg-7 h-100">
                                                 <div class="wrap-main-datos">
@@ -277,229 +533,12 @@
                 </div>
 
             </div>
-        
-        
+
+
         }
-        
+
     </section>
 
-
-    <!-- COMO VA LA EJECUCIóN 2025 -->
-    
-    
-    <section class="section wrap-instituciones soft-gradient">
-        <div class="container">
-            <div class="row align-items-center justify-content-center mb-4" id="divVigenciaActual">
-                <div class="section-heading heading-center py-4">
-                    <h2>¿Cómo va la ejecución del presupuesto en <span class="anio">@maxAnyo?</span></h2>
-                </div>
-                <div class="col-lg-12">
-                    <div class="wrap-icon text-center">
-                        <img class="img-fluid" src="img/icon-budget.svg" alt="icono decorativo" />
-                    </div>
-                    <div class="wrap-summary mb-4">
-                        <span class="h5">Recursos disponibles</span>
-                        <span class="big-number">$ @vigente_actual billones</span>
-                        
-                    </div>
-
-                </div>
-                <div class="col-lg-8">
-                    <div class="wrap-summary mb-4">
-                        <span class="h5">Ejecutado con fecha de corte: @Model.fechasCorte.fechaCorte</span>
-                        <div class="progesscontainer pgreen">
-                            <div class="progress" style="height:65px;">
-                                <div class="bg-proexec" role="progressbar"
-                                     style='@($"width:{porc_actual}%")'
-                                     aria-valuenow='@(porc_actual)'
-                                     aria-valuemin="0"
-                                     aria-valuemax="100">
-                                    @(porc_actual)%
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    
-                </div>
-                <div class="sep-H-shadow"></div>
-            </div>
-            <!-- INSTITUCIONES -->
-            <div class="row py-4">
-                <div class="col-12">
-                    <div class="section-heading heading-center py-4">
-                        <h2>¿Cuánto presupuesto ejecutan secretarías, departamentos y unidades de la Alcaldía durante el <span class="anio">@maxAnyo?</span></h2>
-                        <div class="section-subheading">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div id="divContenedorFichas22" class="project-carusel" data-flickity='{ "imagesLoaded": true, "pageDots": false, "lazyLoad": true, "lazyLoad": 10, "groupCells": true, "contain": true, "prevNextButtons": true, "autoPlay": 8000 }'>
-                        @if (Model.Entidades != null)
-                        {
-                            @foreach (var item in Model.Entidades)
-                            {
-                                var porcentaje = "0%";
-                                var anyo = @Model.MaxAnnioEntidades;
-                                var href_aux = "/perfilEntidad?codEntidad=" + item.id;
-                                porcentaje = @item.porcentaje.ToString().Replace(',', '.') + "%";
-
-                                <text>
-                                    <div class="col-lg-3 mb-3">
-                                        <div class="card h-100 shadow border-0 card-entidad">
-                                            <a href=@href_aux>
-                                                <div class="card-body">
-                                                    <div class="card-title-container mh56">
-                                                        <span class="h5" id="@item.id">@item.labelGroup</span>
-                                                    </div>
-                                                    <div class="wrap-desc-entidad">
-                                                        <div class="execute">Valor total ejecutado</div>
-                                                        <div class="progress">
-                                                            <div class="progress-bar" aria-label="Porcentaje Ejecutado" role="progressbar"
-                                                                 style="width:@porcentaje" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                        <div class="wrap-data-advance py-3">
-                                                            <span class="executeN">$ @String.Format(cultureRD, "{0:n0}", item.avance / 1000000)</span><span class="executeV"> millones</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </text>
-                            }
-                        }
-                    </div>
-                </div>
-
-            </div>
-            <div class="section-btns justify-content-center py-3">
-                <a title="Ver todos los entes gestores" href="/BusquedaResultados?Type=Ente" class="btn btn-primary">
-                    <span>Ver todos los entes gestores</span>
-                    <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
-                        <use xlink:href="../../../img/sprite.svg#arrow-right"></use>
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </section>
-    <!-- MAPA COMUNAS Y CORREGIMIENTOS -->
-    <section class="section provincias pb-0">
-        <div class="container-fluid">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-lg-8">
-                    <div class="section-heading heading-center">
-                        <h2>¿Qué proyectos hay en tu zona?</h2>
-                        <p class="section-subheading">En ¡Pa' que Veás! te mostramos los proyectos que se adelantan en tu comuna o corregimiento.<br /> <span class="text-bold">¡En la jugada porque eso también es tuyo! Hacé clic y revisá</span></p>
-
-                    </div>
-                    <div class="wrap-counter d-flex">
-                        <div class="counters">
-                            <div class="desc-data">
-                                <div class="executeV">Proyectos en ejecución</div>
-                                <div class="executeN" id="numProyExe">@String.Format(cultureRD, "{0:n0}", Model.countOngoingProjects.cantidad)</div>
-                            </div>
-                        </div>
-                        <div class="counters">
-                            <div class="desc-data">
-                                <div class="executeV">Costo total de proyectos en ejecución</div>
-                                <div class="executeN" id="costoProyExce">$ @String.Format(cultureRD, "{0:n0}", Model.countOngoingProjects.costo / 1000000) millones</div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-
-            </div>
-            <div class="row location-tabs">
-                <!--COMUNAS-->
-                <div class="location-card mb-4">
-                    <h3 class="text-center">Comunas</h3>
-                    <div class="carousel" data-flickity='{ "contain": true, "pageDots": true, "autoPlay": 9000, "cellAlign": "right", "groupCells": true }'>
-                        @foreach (var item in Model.Comunas)
-                        {
-                            <div class="carousel-cell">
-                                <div class="card comuna" style="background-image:url(@Url.Content($"../img/{item.UrlImg}"))">
-                                    <div class="card-body">
-                                        <a href="@item.LinkLocationProfile" class="h4">@item.Nombre</a>
-                                        <span class="number-proyecto">(@item.CantidadProyectos proyectos)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                                       
-                    </div>
-                </div>
-                <!--CORRREGIMIENTOS-->
-                <div class="location-card">
-                    <h3 class="text-center">Corregimientos</h3>
-                    <div class="carousel" data-flickity='{ "contain": true, "pageDots": true, "autoPlay": 9000, "cellAlign": "right", "groupCells": true }'>
-                        @foreach (var item in Model.Corregimientos)
-                        {
-                            <div class="carousel-cell">
-                                <div class="card comuna" style="background-image:url(@Url.Content($"../img/{item.UrlImg}")">
-                                    <div class="card-body">
-                                        <a href="@item.LinkLocationProfile" class="h4">@item.Nombre</a>
-                                        <span class="number-proyecto">(@item.CantidadProyectos proyectos)</span>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-            </div>
-            <!--tabs-->
-            <div class="row d-none">
-
-
-                <div class="tabs location-tabs">
-                    <ul class="tabs-nav">
-                        <li class="active">Comunas</li>
-                        <li class="">Corregimientos</li>
-
-                    </ul>
-                    <div class="tabs-container">
-                        <div class="tabs-item location-card content active">
-                        </div>
-                        <!--tabs corregimiento-->
-                        <div class="tabs-item location-card content">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section map-link">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <div class="section-heading heading-center">
-                            <h2>Explorá el Mapa de Proyectos</h2>
-                            <div class="section-subheading">
-                                Descubrí cómo se transforma tu comunidad a través de nuestro Mapa de Proyectos y conocé en detalle cómo se está utilizando la plata de todos para recuperar a Cali y mejorar tu entorno.
-                            </div>
-                        </div>
-                        <div class="wrap-cta my-3">
-                            <a href="/MapView" class="btn btn-primary btn-lg">
-                                <span title="Ver más">Ver Mapa </span>
-
-                                <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
-                                    <use xlink:href="../../../img/sprite.svg#arrow-right"></use>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-
-
-
-            </div>
-
-
-        </div>
-    </section>
     <!-- Call to action-->
     <section class="highlightedMSG">
         <div class="container">
@@ -644,7 +683,21 @@
 {
     <script type="text/javascript" src="~/js/lib/d3/d3.v7.min.js"></script>
     <script type="text/javascript" src="~/js/search_aux.js"></script>
-    <script type="text/javascript" src="~/js/lib/d3/d3plus@2.js"></script>
+    <script type="text/javascript" src="~/js/lib/d3/d3plus@2.js></script>
     <script src="~/js/scripts.js"></script>
     <script src="~/js/home_aux.js"></script>
+    <script type="text/javascript">
+            function loadVideo(videoId) {
+            // Muestra el iframe y oculta el placeholder
+            var videoContainer = document.getElementById('video-container-' + videoId);
+            var placeholder = videoContainer.previousElementSibling;
+
+            // Muestra el iframe
+            videoContainer.style.display = 'block';
+
+            // Oculta el placeholder
+            placeholder.style.display = 'none';
+        }
+
+    </script>
 }

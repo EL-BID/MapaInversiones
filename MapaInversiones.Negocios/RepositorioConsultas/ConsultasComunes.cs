@@ -202,14 +202,14 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                             list = (from aprobado in queryable
                                     join proyecto in DataModel.Proyectos on aprobado.IdProyecto equals proyecto.IdProyecto
                                     join pxe in DataModel.ProyectoXEntidadTerritorials on aprobado.IdProyecto equals pxe.IdProyecto
-                                    join financiador in DataModel.VwFuenteFinanciacions on aprobado.IdProyecto equals financiador.IdProyecto
+                                    join financiador in DataModel.VwFuentesFinanciacion on aprobado.IdProyecto equals financiador.IdProyecto
                                     join entEjecutora in DataModel.VwEntidadEjecutoras on aprobado.IdProyecto equals entEjecutora.IdProyecto
                                     join region in DataModel.EnteTerritorials on new { idDepartamento = pxe.IdDepartamento.Trim(), idMunicipio = pxe.IdMunicipio.Trim() } equals new { idDepartamento = region.IdDepartamento.Trim(), idMunicipio = region.IdMunicipio.Trim() }
                                     where ((((filtros.CodigosRegion.Contains(region.IdRegion) || (filtros.CodigosRegion.Count == 0)))
                                     && (filtros.CodigosDepartamentos.Contains(pxe.IdDepartamento) || (filtros.CodigosDepartamentos.Count == 0)))
                                     && (filtros.CodigosMunicipios.Contains(pxe.IdMunicipio) || (filtros.CodigosMunicipios.Count == 0)))
                                     && (filtros.CodigosSector.Contains(aprobado.IdSector) || (filtros.CodigosSector.Count == 0))
-                                    && (filtros.CodigosOrgFinanciador.Contains(int.Parse(financiador.IdOrganismoFinanciador)) || (filtros.CodigosOrgFinanciador.Count == 0))
+                                    && (filtros.CodigosOrgFinanciador.Contains(financiador.IdOrganismoFinanciador) || (filtros.CodigosOrgFinanciador.Count == 0))
                                     select proyecto).Distinct<PlataformaTransparencia.Infrastructura.DataModels.Proyecto>().ToList<PlataformaTransparencia.Infrastructura.DataModels.Proyecto>();
                         }
                     }
@@ -410,6 +410,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                     join region in DataModel.EnteTerritorials on new { idDepartamento = pxe.IdDepartamento.Trim(), idMunicipio = pxe.IdMunicipio.Trim() } equals new { idDepartamento = region.IdDepartamento.Trim(), idMunicipio = region.IdMunicipio.Trim() }
                                     join history in DataModel.HistoriaEstados on proyecto.IdProyecto equals history.IdProyecto
                                     join estado in queryable2 on history.IdEstado equals estado.IdEstado
+                                    //where aprobado.TipoProyecto.ToUpper().Equals("NACIONAL")
                                     where (((history.ActualSiNo && (filtros.CodigosRegion.Contains(region.IdRegion) || (filtros.CodigosRegion.Count == 0))) && (filtros.CodigosDepartamentos.Contains(pxe.IdDepartamento) || (filtros.CodigosDepartamentos.Count == 0))) && (filtros.CodigosMunicipios.Contains(pxe.IdMunicipio) || (filtros.CodigosMunicipios.Count == 0))) && (filtros.CodigosSector.Contains(proyecto.IdSector) || (filtros.CodigosSector.Count == 0))
                                     where (history.ActualSiNo && (filtros.CodigosSector.Contains(proyecto.IdSector) || (filtros.CodigosSector.Count == 0)))
                                     select new InfoProyectos
@@ -434,6 +435,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
 
                                     }).Distinct<InfoProyectos>().ToList<InfoProyectos>();
 
+                        //select proyecto).Distinct<PlataformaTransparencia.Infrastructura.DataModels.Proyecto>().ToList<PlataformaTransparencia.Infrastructura.DataModels.Proyecto>();
                     }
                     if (limite > listInfo.Count())
                     {
@@ -456,7 +458,8 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                                                    where c < '\x0080'
                                                                    select c).ToArray<char>()).ToLower().Contains(search.ToLower());
                         }
-
+                        //listInfo = listInfo.Where<InfoProyectos>(predicate).ToList<InfoProyectos>();
+                        //PENDIENTE REVISAR
                     }
 
                 }
@@ -777,8 +780,12 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
         
         public IEnumerable<InfoProyectos> ObtenerInfoProyectos3(FiltroBusquedaProyecto filtros)
         {
+            //bool obtenerPendientesSegunHistorico = false;
             IEnumerable<InfoProyectos> list = null;
             string search = string.Empty;
+            //string criterioEstadosPendientes = ArchivoRecursosNegocioMapaInversiones.CriterioEstadosPendientesSegunHistorico;
+            //string criterioEstadosEjecucion = ArchivoRecursosNegocioMapaInversiones.CriterioEstadosEjecucion;
+            //string criterioEstadosEjecutados = ArchivoRecursosNegocioMapaInversiones.CriterioEstadosEjecutado;
 
             string key = "ObtenerInfoProyectos" + ObtenerKeyPorEstadoFiltro(filtros, true);
             if (!ShortCacheHelper.Get<IEnumerable<InfoProyectos>>(key, out list))
@@ -808,11 +815,13 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                     on geo.NombreReferencia equals ente.IdMunicipio
                                 join history in entities.HistoriaEstados on proyecto.IdProyecto equals history.IdProyecto
                                 join estado in queryable2 on history.IdEstado equals estado.IdEstado
+                                //join Financiador in entities.ProyectoOrganismoFinanciadors on proyecto.IdProyecto equals Financiador.IdProyecto
                                 where (((history.ActualSiNo && (filtros.CodigosRegion.Contains(ente.IdRegion) || (filtros.CodigosRegion.Count == 0)))
                                     && (filtros.CodigosDepartamentos.Contains(ente.IdDepartamento) || (filtros.CodigosDepartamentos.Count == 0)))
                                     && (filtros.CodigosMunicipios.Contains(ente.IdMunicipio) || (filtros.CodigosMunicipios.Count == 0)))
                                     && (filtros.CodigosSector.Contains(proyecto.IdSector) || (filtros.CodigosSector.Count == 0))
-
+                                    //&& (filtros.CodigosOrgFinanciador.Contains((int)Financiador.IdOrganismoFinanciador) || (filtros.CodigosOrgFinanciador.Count == 0))
+                                //&& poligonoInicial.Intersects(geo.GeoPuntoUbicacion)
                                 select new InfoProyectos
                                 {
                                     IdProyecto = proyecto.IdProyecto,
@@ -835,6 +844,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                 join history in entities.HistoriaEstados on proyecto.IdProyecto equals history.IdProyecto
                                 join estado in queryable2 on history.IdEstado equals estado.IdEstado
                                 join aprobado in queryable on proyecto.IdProyecto equals aprobado.IdProyecto
+                                //join Financiador in entities.ProyectoOrganismoFinanciadors on proyecto.IdProyecto equals Financiador.IdProyecto
                                 join geo in entities.Georreferenciacions
                                     on proyecto.IdProyecto equals geo.IdProyecto
                                 join ente in entities.EnteTerritorials
@@ -843,7 +853,8 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                     && (filtros.CodigosDepartamentos.Contains(ente.IdDepartamento) || (filtros.CodigosDepartamentos.Count == 0)))
                                     && (filtros.CodigosMunicipios.Contains(ente.IdMunicipio) || (filtros.CodigosMunicipios.Count == 0)))
                                     && (filtros.CodigosSector.Contains(proyecto.IdSector) || (filtros.CodigosSector.Count == 0))
-                                    
+                                    //&& (filtros.CodigosOrgFinanciador.Contains((int)Financiador.IdOrganismoFinanciador) || (filtros.CodigosOrgFinanciador.Count == 0))
+                                //&& poligonoInicial.Intersects(geo.GeoPuntoUbicacion)
                                 select new InfoProyectos
                                 {
                                     IdProyecto = proyecto.IdProyecto,
@@ -925,22 +936,24 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                             //join region in DataModel.EnteTerritorials on new { idDepartamento = pxe.IdDepartamento.Trim(), idMunicipio = pxe.IdMunicipio.Trim() } equals new { idDepartamento = region.IdDepartamento.Trim(), idMunicipio = region.IdMunicipio.Trim() }
                             join history in DataModel.HistoriaEstados on new { IdProyecto = proyecto.IdProyecto, Actual = true } equals new { IdProyecto = history.IdProyecto, Actual = history.ActualSiNo } //((proyecto.IdProyecto equals history.IdProyecto) && history.ActualSiNo == true)
                             join estado in queryable2 on history.IdEstado equals estado.IdEstado
+                            //join geo in DataModel.Georreferenciacions
+                            //    on proyecto.IdProyecto equals geo.idProyecto
 
-
+                            //on geo.NombreReferencia equals ente.IdMunicipio
                             where (((history.ActualSiNo && (filtros.CodigosRegion.Contains(ente.IdRegion) || (filtros.CodigosRegion.Count == 0)))
                                 && (filtros.CodigosDepartamentos.Contains(ente.IdDepartamento) || (filtros.CodigosDepartamentos.Count == 0)))
                                 && (filtros.CodigosMunicipios.Contains(ente.IdMunicipio) || (filtros.CodigosMunicipios.Count == 0)))
                                 && (filtros.CodigosSector.Contains(proyecto.IdSector) || (filtros.CodigosSector.Count == 0))
-
+                            //&& poligonoInicial.Intersects(geo.GeoPuntoUbicacion)
                             select new InfoProyectos
                             {
                                 IdProyecto = proyecto.IdProyecto,
-                                NombreMunicipio = string.Empty,
-                                Geography = null,
+                                NombreMunicipio = string.Empty,//ente.NombreMunicipio,
+                                Geography = null,//geo.GeoPuntoUbicacion,
                                 NombreProyecto = proyecto.NombreProyecto.ToUpper(),
                                 Value = proyecto.VlrTotalProyectoFuenteRegalias,
                                 approvedTotalMoney = proyecto.VlrTotalProyectoTodasLasFuentes,
-                                Location = string.Empty,
+                                Location = string.Empty,// filtros.CodigosDepartamentos.Count() > 0 ? filtros.CodigosDepartamentos.FirstOrDefault() : proyecto.NombreProyecto.ToUpper(),
                                 State = estado.NombreEstado
                             }).ToList().Distinct(new PredicateEqualityComparer<InfoProyectos>((x, y) => (x.IdProyecto == y.IdProyecto)));
                     if (!string.IsNullOrEmpty(filtros.ContieneNombreProyecto))//Busqueda no sensible a acentos
@@ -953,11 +966,12 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
 
                     list = (from info in list
                             join geo in DataModel.Georreferenciacions on info.IdProyecto equals geo.IdProyecto
-                 
+                            //where poligonoInicial.Intersects(geo.GeoPuntoUbicacion)
                             select new InfoProyectos
                             {
                                 IdProyecto = info.IdProyecto,
-                                NombreMunicipio = string.Empty,
+                                NombreMunicipio = string.Empty,//ente.NombreMunicipio,
+                                                               //Geography = geo.GeoPuntoUbicacion,
                                 NombreProyecto = info.NombreProyecto,
                                 Value = info.Value,
                                 approvedTotalMoney = info.approvedTotalMoney,
@@ -1006,6 +1020,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                     default:
                         break;
                 }
+                //codigosFaltantes.AddRange(codigosEntesTerritoriales.TakeWhile(et => !(consolidados.Contains(et))));
 
                 if (codigosEntesTerritoriales.Count > 0)
                 {
@@ -1115,8 +1130,11 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                       select new
                                       {
                                           dependsOn = new List<DependsOn> { new DependsOn { id = maestro.IdRegion, type = "region" } },
+                                          //topLeft = default(string),
+                                          //bottomRight = default(string),
                                           name = maestro.NombreDepartamento,
                                           value = maestro.IdDepartamento,
+                                          //subTipo = default(string)
 
                                       }).ToListAsync();
 
@@ -1124,8 +1142,11 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                         select new
                                         {
                                             dependsOn = new List<DependsOn> { new DependsOn { id = maestro.IdDepartamento, type = "departamento" } },
+                                            ////topLeft = default(string),
+                                            ////bottomRight = default(string),
                                             name = maestro.NombreMunicipio + ", " + maestro.NombreDepartamento,
                                             value = maestro.IdMunicipio,
+                                            //subTipo = default(string)
 
                                         }).ToListAsync();
 
@@ -1162,16 +1183,23 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
 
             using (var db = new TransparenciaDB())
             {
-
+                //var lstRegiones = await (from maestro in db.GetTable<EnteTerritorial>().Where(p => p.Tipo == "REGION")
+                //                         select new
+                //                         {
+                //                             name = maestro.NombreRegion,
+                //                             value = maestro.IdRegion
+                //                         }).ToListAsync();
 
                 var lstDptos = await (from maestro in db.GetTable<EnteTerritorial>().Where(p => p.Tipo == "DEPARTAMENTO").Where(p => p.NombreRegion == "COMUNA")
                                       .OrderBy(p => p.NombreDepartamento)
                                       select new
                                       {
-
+                                          //dependsOn = new List<DependsOn> { new DependsOn { id = maestro.IdRegion, type = "region" } },
+                                          //topLeft = default(string),
+                                          //bottomRight = default(string),
                                           name = maestro.NombreDepartamento,
                                           value = maestro.IdDepartamento,
-
+                                          //subTipo = default(string)
 
                                       }).ToListAsync();
 
@@ -1179,14 +1207,25 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                         .OrderBy(p => p.NombreMunicipio)
                                         select new
                                         {
-
-                                            name = maestro.NombreMunicipio, 
+                                            //dependsOn = new List<DependsOn> { new DependsOn { id = maestro.IdDepartamento, type = "departamento" } },
+                                            ////topLeft = default(string),
+                                            ////bottomRight = default(string),
+                                            name = maestro.NombreMunicipio, // + ", " + maestro.NombreDepartamento,
                                             value = maestro.IdMunicipio,
-
+                                            //subTipo = default(string)
 
                                         }).ToListAsync();
 
-
+                //filtros.Add(new
+                //{
+                //    name = CommonLabel.RegionLabel,
+                //    parameter = "region",
+                //    esMultiple = false,
+                //    usaServicioAjax = false,
+                //    urlServicioAjax = default(string),
+                //    seccionAplicativo = GenericEnumerators.SeccionFuncionalAplicativo.Comunes.ToString(),
+                //    items = lstRegiones
+                //});
 
                 filtros.Add(new
                 {
@@ -1309,6 +1348,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                     join region in DataModel.EnteTerritorials on new { idDepartamento = pxe.IdDepartamento.Trim(), idMunicipio = pxe.IdMunicipio.Trim() } equals new { idDepartamento = region.IdDepartamento.Trim(), idMunicipio = region.IdMunicipio.Trim() }
                                     where (((filtros.CodigosRegion.Contains(region.IdRegion) || (filtros.CodigosRegion.Count == 0))) && (filtros.CodigosDepartamentos.Contains(pxe.IdDepartamento) || (filtros.CodigosDepartamentos.Count == 0))) && (filtros.CodigosMunicipios.Contains(pxe.IdMunicipio) || (filtros.CodigosMunicipios.Count == 0))
                                     where ((filtros.CodigosSector.Contains(aprobado.IdSector) || (filtros.CodigosSector.Count == 0)) && aprobado.VlrTotalProyectoFuenteRegalias > 0)
+                                    //where ((filtros.CodigoPrograma.Contains(aprobado.IdPrograma) || (filtros.CodigoPrograma.Count == 0)) && aprobado.VlrTotalProyectoFuenteRegalias > 0)
                                     select new InfoProyectos
                                     {
                                         IdProyecto = aprobado.IdProyecto,
@@ -1329,6 +1369,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                         Comentarios = aprobado.Comentarios,
 
 
+                                        //).Distinct<InfoProyectos>().ToList<InfoProyectos>().GetRange(0,1);
                                     }).Distinct<InfoProyectos>().ToList<InfoProyectos>();
                     }
                     else
@@ -1347,6 +1388,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                     join estado in queryable2 on history.IdEstado equals estado.IdEstado
                                     where history.ActualSiNo && (filtros.CodigosRegion.Contains(region.IdRegion) || (filtros.CodigosRegion.Count == 0)) && (filtros.CodigosDepartamentos.Contains(pxe.IdDepartamento) || (filtros.CodigosDepartamentos.Count == 0)) && (filtros.CodigosMunicipios.Contains(pxe.IdMunicipio) || (filtros.CodigosMunicipios.Count == 0))
                                     where ((filtros.CodigosSector.Contains(aprobado.IdSector) || (filtros.CodigosSector.Count == 0)) && aprobado.VlrTotalProyectoFuenteRegalias > 0)
+                                    //where ((filtros.CodigoPrograma.Contains(aprobado.IdPrograma) || (filtros.CodigoPrograma.Count == 0)) && aprobado.VlrTotalProyectoFuenteRegalias > 0)
                                     select new InfoProyectos
                                     {
                                         IdProyecto = proyecto.IdProyecto,
@@ -1449,7 +1491,7 @@ namespace PlataformaTransparencia.Negocios.RepositorioConsultas
                                  },
                                  InformacionFinanciera = new InformacionFinancieraProyectoPdf
                                  {
-                                     AvanceFinanciero = Math.Round(proyectoInversion.AvanceFinanciero ?? 0, 2) * 100,
+                                     AvanceFinanciero = Math.Round(proyectoInversion.AvanceFinanciero, 2) * 100,
                                      AvanceFisico = Math.Round(proyectoInversion.AvanceFisico, 2) * 100,
                                  }
                              }).FirstOrDefaultAsync();

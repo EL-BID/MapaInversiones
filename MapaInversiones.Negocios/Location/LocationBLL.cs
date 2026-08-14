@@ -43,7 +43,7 @@ namespace PlataformaTransparencia.Negocios.Location
         objReturn.AverageDurationProjects = projectsByLocation.Select(x => x.AnioFinProyecto - x.AnioInicioProyecto).Average();
         objReturn.AverageCostProjects = projectsByLocation.Select(x => x.VlrTotalProyectoFuenteRegalias).Average() / 1000000;
       }
-      int locationImageId = Convert.ToInt32(objReturn.LocationId); 
+      int locationImageId = Convert.ToInt32(objReturn.LocationId); // objReturn.LocationId.Replace("00",string.Empty);
       string nameImage = objReturn.Name.Replace(" ", "_");
       objReturn.UrlImage = objReturn.IsProvince ? $"../GaleriaEnteTerritorial/XL/comuna{locationImageId}_XL.jpg" : $"../GaleriaEnteTerritorial/XL/{nameImage}_XL.jpg";
       objReturn.Locations = GetChildsLocations(locationId, type);
@@ -377,6 +377,9 @@ namespace PlataformaTransparencia.Negocios.Location
                        TotalProjects = loc?.TotalProjects ?? 0
                      }).ToList();
             }
+            //objReturn.GeneralInformacion.IsChildLocationEnable = true;
+            //objReturn.GeneralInformacion.ChildLocationName = typeLocation.ToUpper().Trim() == Province.Name ? Province.ChildLocation.Name : Department.ChildLocation.Name;
+            //objReturn.LocationChilds = new List<LocationProfileChild>(locationChildren.OrderBy(x => x.Name));
           }
           break;
       }
