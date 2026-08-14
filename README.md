@@ -174,26 +174,6 @@ Para el manejo de datos se utiliza LINQ2DB, por lo cual, en caso de ser necesari
 :dexación de contenidos (https://solr.apache.org/)
 - Linq2DB: Es una biblioteca de acceso a bases de datos LINQ más rápida que ofrece una capa simple, liviana, rápida y segura entre sus objetos POCO y su base de datos.(https://github.com/linq2db/linq2db)
 
-## Autor/es:
-
----
-- [Juan Cruz Vieyra](https://www.linkedin.com/in/juan-cruz-vieyra-345b253/ "Juan Cruz Vieyra")
-- [Sebastian del Hoyo](https://www.linkedin.com/in/sebastiandelhoyo/ "Sebastian del Hoyo")
-- [José Niño](https://www.linkedin.com/in/jose-ni%C3%B1o-a2a8a731/ "José Niño")
-- [Diego Hernan Perez Jaramillo](mailto:diperez@uniandes.edu.co  "Diego Hernan Perez Jaramillo")
-- [Álvaro González Hernández](mailto:alvarogh_22@hotmail.com  "Álvaro González Hernández")
-- [Wilson Muñoz Camelo](https://www.linkedin.com/in/wilson-mu%C3%B1oz-camelo-24b11324/ "Wilson Muñoz Camelo")
-- [Jaime Alberto Osorio](mailto:jaime.osorio@yahoo.com  "Jaime Alberto Osorio")
-- [David Olaciregui](https://www.linkedin.com/in/david-olaciregui-35196015/ "David Olaciregui")
-- [Anyela Milena Chavarro Muñoz ](https://www.linkedin.com/in/anyela-milena-chavarro-mu%C3%B1oz-0a79a524/ "Anyela Milena Chavarro Muñoz ")
-- [Vladimiro Bellini](https://www.linkedin.com/in/vladimirobellini/ "Vladimiro Bellini")
-- [Andrés Felipe Villamizar Vecino](mailto:villamizarvecino@hotmail.com "Andrés Felipe Villamizar Vecino")
-- [Diana Villamizar](https://www.linkedin.com/in/diana-villamizar-4737762a/ "Diana Villamizar")
-- [Paulette Desormeaux](https://www.linkedin.com/in/paulette-desormeaux/ "Paulette Desormeaux")
-- [William García](mailto:williamlgr2006@gmail.com "William García")
-- [Enrique José Oyaga Arias](mailto:enriqueoyaga@gmail.com "Enrique José Oyaga Arias")
-- [Luis Mendez](https://www.linkedin.com/in/luisefe80/ "Luis Mendez")
-
 ## Licencia 
 ---
 Licencia BID [LICENSE](/License.md)
