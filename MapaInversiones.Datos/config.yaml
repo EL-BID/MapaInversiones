@@ -1,0 +1,278 @@
+project_name: "Pipeline ETL Colombia - Cali"
+version: 2.0
+
+# --- ETAPA 1: EXTRACT (Fuentes a tablas Stage) ---
+extract_sources:   
+  - name: "CUIPO"
+    enabled: true
+    source_type: "xlsx"
+    target_stage_table: "dbo.stg_cali_cuipo"
+    details:
+      base_dir: "data"
+      path: "G:/My Drive/BID/COL/Cali/PruebaCali/202512/CUIPO.xlsx"
+      periodo: "202512"
+      xlsx_sheet: "CUIPO"
+      header: true
+  - name: "CATALOGO PRODUCTOS"
+    enabled: true
+    source_type: "xlsx"
+    target_stage_table: "dbo.stg_cali_catalogo_productos"
+    details:
+      base_dir: "data"
+      path: "G:/My Drive/BID/COL/Cali/PruebaCali/202512/CATALOGO_DE_PRODUCTOS.xlsx"
+      periodo: "202512"
+      xlsx_sheet: "Catálogo de Productos"
+      header: true  
+  - name: "PROCESOS"
+    enabled: true
+    source_type: "xlsx"
+    target_stage_table: "dbo.stg_cali_procesos"
+    details:
+      base_dir: "data"
+      path: "G:/My Drive/BID/COL/Cali/PruebaCali/202512/BASE BID.xlsx"
+      periodo: "202512"
+      xlsx_sheet: "Procesos"
+      header: true            
+  - name: "CONTRATOS"
+    enabled: true
+    source_type: "xlsx"
+    target_stage_table: "dbo.stg_cali_contratos"
+    details:
+      base_dir: "data"
+      path: "G:/My Drive/BID/COL/Cali/PruebaCali/202512/BASE BID.xlsx"
+      periodo: "202512"
+      xlsx_sheet: "Contratos"
+      header: true  
+  - name: "REPORTE RPC"
+    enabled: true
+    source_type: "xlsx"
+    target_stage_table: "dbo.stg_cali_reporte_rpc"
+    details:
+      base_dir: "data"
+      path: "G:/My Drive/BID/COL/Cali/PruebaCali/202512/REPORTE_RPC.xlsx"
+      periodo: "202512"
+      xlsx_sheet: "REPORTE"
+      header: true      
+                  
+opendata_exports:
+  - name: "DatosAbiertosPresupuestoXProyInv"
+    enable: true
+    view: "MapainversionesCali.consulta.VwDatosAbiertosPresupuestoXProyInv"
+    formats: ["csv", "xlsx"]
+    output_path: "src/data/opendata"
+  - name: "DatosAbiertosProcesosXProyectosInv"
+    enable: true
+    view: "MapainversionesCali.consulta.VwDatosAbiertosProcesosXProyectosInv"
+    formats: ["csv", "xlsx"]
+    output_path: "src/data/opendata"   
+  - name: "DatosAbiertosContratosXProyectosInv"
+    enable: true
+    view: "MapainversionesCali.consulta.VwDatosAbiertosContratosXProyectosInv"
+    formats: ["csv", "xlsx"]
+    output_path: "src/data/opendata"     
+  - name: "DatosAbiertosProyectosInversion"
+    enable: true
+    view: "MapainversionesCali.consulta.VwDatosAbiertosProyectosAprobadosInv"
+    formats: ["csv", "xlsx"]
+    output_path: "src/data/opendata"         
+  - name: "DatosAbiertosProyectosInversionPresupuestoAvanceFisicoxAnio"
+    enable: true
+    view: "MapainversionesCali.consulta.VwDatosAbiertosProyectosPresupuestoAvanceFisicoXAnio"
+    formats: ["csv", "xlsx"]
+    output_path: "src/data/opendata"    
+  - name: "DatosAbiertosProyectosInversionEjecucionFinancieraDetallada"
+    enable: true
+    view: "MapainversionesCali.consulta.VwDatosAbiertosProyectosEjecucionFinancieraDetallada"
+    formats: ["csv", "xlsx"]
+    output_path: "src/data/opendata"     
+  - name: "DatosAbiertosProyectosInversionXTerritorio"
+    enable: true
+    view: "MapainversionesCali.consulta.VwDatosAbiertosProyectosXTerritorio"
+    formats: ["csv", "xlsx"]
+    output_path: "src/data/opendata"  
+  - name: "DatosAbiertosEmprestito"
+    enable: true
+    view: "MapainversionesCali.consulta.VwDatosAbiertosEmprestito"
+    formats: ["csv", "xlsx"]
+    output_path: "src/data/opendata"     
+  - name: "DatosAbiertosProyectosInversionEmprestito"
+    enable: true
+    view: "MapainversionesCali.consulta.VwDatosAbiertosProyectosEmprestito"
+    formats: ["csv", "xlsx"]
+    output_path: "src/data/opendata"                    
+
+
+# --- ETAPA 2: TRANSFORM (Stage a Válidos) ---
+transform_models:
+  - name: 'valid_procesar_cuipo_historico'
+    enabled: true
+    script_path: 'sql/valid/valid_procesar_cuipo_historico.sql'
+  - name: 'valid_entidades'
+    enabled: true
+    script_path: 'sql/valid/valid_entidades.sql'
+  - name: 'valid_fondo'
+    enabled: true
+    script_path: 'sql/valid/valid_fondo.sql'  
+  - name: 'valid_area_funcional'
+    enabled: true
+    script_path: 'sql/valid/valid_area_funcional.sql'    
+  - name: 'valid_linea_presupuestal'
+    enabled: true
+    script_path: 'sql/valid/valid_linea_presupuestal.sql'    
+  - name: 'valid_procesos'
+    enabled: true
+    script_path: 'sql/valid/valid_procesos.sql'              
+
+# --- ETAPA 3: LOAD (Válidos al Modelo Final) ---
+load_models:
+  - name: 'model_entidades'
+    enabled: true
+    script_path: 'sql/model/model_entidades.sql'  
+  - name: 'model_area_funcional'
+    enabled: true
+    script_path: 'sql/model/model_area_funcional.sql'        
+  - name: 'model_fondo'
+    enabled: true
+    script_path: 'sql/model/model_fondo.sql'    
+  - name: 'model_linea_presupuestal'
+    enabled: true
+    script_path: 'sql/model/model_linea_presupuestal.sql'     
+  - name: 'model_FactPresupuesto'
+    enabled: true
+    script_path: 'sql/model/model_FactPresupuesto.sql'                
+  - name: 'model_CatalogoPresupuestoXProyInv'
+    enabled: true
+    script_path: 'sql/model/model_CatalogoPresupuestoXProyInv.sql'                    
+  - name: 'model_procesos'
+    enabled: true
+    script_path: 'sql/model/model_procesos.sql'   
+  - name: 'model_contratos'
+    enabled: true
+    script_path: 'sql/model/model_contratos.sql'                        
+  - name: 'model_contratista'
+    enabled: true
+    script_path: 'sql/model/model_contratista.sql'   
+  - name: 'model_ContratoXEntidad'
+    enabled: true
+    script_path: 'sql/model/model_ContratoXEntidad.sql'                                    
+  - name: 'model_ContratoXProyectoInversion'
+    enabled: true
+    script_path: 'sql/model/model_ContratoXProyectoInversion.sql'      
+  - name: 'model_ProcesoXProyectoInversion'
+    enabled: true
+    script_path: 'sql/model/model_ProcesoXProyectoInversion.sql'     
+  - name: 'model_fuente_de_los_recursos_ppto'
+    enabled: true
+    script_path: 'sql/model/model_fuente_de_los_recursos_ppto.sql'                                                
+  - name: 'model_fuente_de_los_recursos_contratos'
+    enabled: true
+    script_path: 'sql/model/model_fuente_de_los_recursos_contratos.sql'                                                    
+
+# --- SELECCION POR DOMINIOS (OPCIONAL) ---
+# Cada dominio referencia items por 'name' definidos en los bloques top-level.
+domains:
+  presupuesto:
+    extract_sources:
+      - "CUIPO"
+      - "CATALOGO PRODUCTOS"
+    transform_models:
+      - "valid_procesar_cuipo_historico"
+      - "valid_entidades"
+      - "valid_fondo"
+      - "valid_area_funcional"
+      - "valid_linea_presupuestal"
+    load_models:
+      - "model_entidades"
+      - "model_area_funcional"
+      - "model_fondo"
+      - "model_linea_presupuestal"
+      - "model_FactPresupuesto"
+      - "model_CatalogoPresupuestoXProyInv"
+      - "model_fuente_de_los_recursos_ppto"
+    opendata_exports:
+      - "DatosAbiertosPresupuestoXProyInv"
+  procesos:
+    extract_sources:
+      - "PROCESOS"
+      - "REPORTE RPC"
+    transform_models:
+      - "valid_procesos"
+    load_models:
+      - "model_procesos"
+      - "model_ProcesoXProyectoInversion"
+    opendata_exports:
+      - "DatosAbiertosProcesosXProyectosInv"
+  contratos:
+    extract_sources:
+      - "CONTRATOS"
+    load_models:
+      - "model_contratos"
+      - "model_contratista"
+      - "model_ContratoXEntidad"
+      - "model_ContratoXProyectoInversion"
+      - "model_fuente_de_los_recursos_contratos"
+      - "model_fuente_de_los_recursos_contratos"
+    opendata_exports:
+      - "DatosAbiertosContratosXProyectosInv"
+  proyectos:
+    opendata_exports:
+      - "DatosAbiertosProyectosInversion"
+      - "DatosAbiertosProyectosInversionPresupuestoAvanceFisicoxAnio"
+      - "DatosAbiertosProyectosInversionEjecucionFinancieraDetallada"
+      - "DatosAbiertosProyectosInversionXTerritorio"
+      - "DatosAbiertosEmprestito"
+      - "DatosAbiertosProyectosInversionEmprestito"
+
+# --- PERFILES DE EJECUCION (OPCIONAL) ---
+runs:
+  presupuesto_full:
+    domains: ["presupuesto"]
+    stages: ["extract", "transform", "load", "opendata"]
+  presupuesto_extract:
+    domains: ["presupuesto"]
+    stages: ["extract"]
+  presupuesto_transform:
+    domains: ["presupuesto"]
+    stages: ["transform"]
+  presupuesto_load:
+    domains: ["presupuesto"]
+    stages: ["load"]
+
+  procesos_full:
+    domains: ["procesos"]
+    stages: ["extract", "transform", "load", "opendata"]
+  procesos_extract:
+    domains: ["procesos"]
+    stages: ["extract"]
+  procesos_transform:
+    domains: ["procesos"]
+    stages: ["transform"]
+  procesos_load:
+    domains: ["procesos"]
+    stages: ["load"]
+
+  contratos_full:
+    domains: ["contratos"]
+    stages: ["extract", "load", "opendata"]
+  contratos_extract:
+    domains: ["contratos"]
+    stages: ["extract"]
+  contratos_load:
+    domains: ["contratos"]
+    stages: ["load"]
+
+  opendata_full:
+    domains: ["presupuesto", "procesos", "contratos", "proyectos"]
+    stages: ["opendata"]
+  opendata_presupuesto:
+    domains: ["presupuesto"]
+    stages: ["opendata"]
+  opendata_procesos:
+    domains: ["procesos"]
+    stages: ["opendata"]
+  opendata_contratos:
+    domains: ["contratos"]
+    stages: ["opendata"]
+  opendata_proyectos:
+    domains: ["proyectos"]
+    stages: ["opendata"]

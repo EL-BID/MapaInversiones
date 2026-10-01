@@ -1,0 +1,63 @@
+# ---- Archivos y carpetas de Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.pkl
+
+# ---- Entornos virtuales ----
+.venv/
+venv/
+ENV/
+env/
+
+# ---- Archivos de compilación / build ----
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# ---- Configuración de IDEs ----
+# VS Code
+.vscode/
+# PyCharm
+.idea/
+
+# ---- Archivos de sistema ----
+.DS_Store
+Thumbs.db
+
+# ---- Archivos temporales ----
+*.log
+*.tmp
+*.temp
+
+# ---- Archivos de Jupyter ----
+.ipynb_checkpoints
+
+# ---- Configuración personal ----
+*.env
+*.local
+secrets.json
+
+# ---- Otros posibles ----
+# Archivos de datos temporales
+*.sqlite
+*.db
+.aider*
+.env
+
+# ---- Credenciales (nunca versionar) ----
+.env
+.env.*
+!.env.example
+
+# ---- Datos de entrada (Excel fuente) ----
+data/
+
+# ---- Outputs ETL (opendata generado) ----
+src/data/opendata/
+
+# ---- Artefactos Azurite (emulador Azure local) ----
+__azurite_db_blob__*.json
