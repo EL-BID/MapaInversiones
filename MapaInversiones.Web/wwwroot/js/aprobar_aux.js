@@ -539,6 +539,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         url: "/api/ServiciosParticipacion/ValidaLogin",
+                        headers: { 'RequestVerificationToken': obtTokenCsrf() },
                         cache: false,
                         data: JSON.stringify(params_usu),
                         success: function (result) {
@@ -815,6 +816,7 @@ var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         url: "/api/ServiciosParticipacion/insComentario",
+                        headers: { 'RequestVerificationToken': obtTokenCsrf() },
                         cache: false,
                         data: JSON.stringify(params_comen),
                         success: function (result) {
@@ -1732,5 +1734,7 @@ function validaEnteroMayorCero(cadena) {
     }
 }
 
-
-
+//Token antiforgery de la vista (@Html.AntiForgeryToken()); va en el header RequestVerificationToken
+function obtTokenCsrf() {
+    return $('input[name="__RequestVerificationToken"]').val();
+}

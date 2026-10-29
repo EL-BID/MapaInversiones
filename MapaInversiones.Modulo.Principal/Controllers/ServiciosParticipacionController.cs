@@ -45,7 +45,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
 
         [HttpPost("AddUsuarios")]
-        [IgnoreAntiforgeryTokenAttribute]
+        [ValidateAntiForgeryToken]
         public object AddUsuarios([FromBody] itemUsuarios params_usu)
         {
             ModelDataParticipacion objReturn = new ModelDataParticipacion();
@@ -168,7 +168,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
 
         [HttpPost("ValidaLogin")]
-        [IgnoreAntiforgeryTokenAttribute]
+        [ValidateAntiForgeryToken]
         public object ValidaLogin([FromBody] itemUsuarios params_usu)
         {
             ModelDataParticipacion objReturn = new ModelDataParticipacion();
@@ -320,7 +320,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
 
         [HttpPost("insComentario")]
-        [IgnoreAntiforgeryTokenAttribute]
+        [ValidateAntiForgeryToken]
         public object insComentario([FromBody] itemcomentario params_com)
         {
             ModelDataParticipacion objReturn = new ModelDataParticipacion();
@@ -503,12 +503,11 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         }
 
         [HttpPost("ValidaEmail")]
-        [IgnoreAntiforgeryTokenAttribute]
+        [ValidateAntiForgeryToken]
         public object ValidaEmail([FromBody] itemUsuarios params_usu)
         {
             string hash_verifica = "";
             string hash_codigo = "";
-            string id_usuario = "";
             ModeloRespuestaCorreo objReturn = new ModeloRespuestaCorreo();
             ParticipacionCiudadana part = new ParticipacionCiudadana(_connection);
 
@@ -518,7 +517,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             if (infoUsuario != null)
             {
                 //usuario existe y se encuentra activo, 
-                id_usuario = infoUsuario.IdUsuario.ToString();
                 //hash_verifica = infoUsuario.cod_verifica;
                 Random rnd = new Random();
                 int cont = rnd.Next(1000, 1000001);
@@ -552,7 +550,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
                 }
 
-                objReturn.id_usuario = id_usuario;
 
             }
             else
@@ -625,9 +622,6 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         [IgnoreAntiforgeryTokenAttribute]
         public object ValidaCodigo([FromBody] itemUsuarios params_usu)
         {
-            string hash_verifica = "";
-            string hash_codigo = "";
-            string id_usuario = "";
             ModeloRespuestaCorreo objReturn = new ModeloRespuestaCorreo();
             ParticipacionCiudadana part = new ParticipacionCiudadana(_connection);
 
@@ -636,18 +630,16 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
             if (infoUsuario != null)
             {
-                //usuario existe y se encuentra activo, 
-                id_usuario = infoUsuario.IdUsuario.ToString();
-                hash_verifica = infoUsuario.cod_verifica;
-                hash_codigo = hash_verifica.Substring(0, 6);
-                if (hash_codigo.Equals(params_usu.cod_verifica))
+                if (codigoVerificaValido(infoUsuario, params_usu.cod_verifica))
                 {
                     objReturn.Status = true;
                     objReturn.Message = "";
-                    objReturn.id_usuario = id_usuario;
                 }
-
-
+                else
+                {
+                    objReturn.Status = false;
+                    objReturn.Message = "Código de verificación inválido";
+                }
             }
             else
             {
@@ -658,6 +650,18 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
 
             return objReturn;
 
+        }
+
+        //Compara el código digitado con los 6 primeros caracteres del hash guardado en el usuario
+        private bool codigoVerificaValido(itemUsuarios infoUsuario, string cod_verifica)
+        {
+            string hash_verifica = infoUsuario.cod_verifica;
+            if (string.IsNullOrEmpty(hash_verifica) || hash_verifica.Length < 6 || string.IsNullOrEmpty(cod_verifica))
+            {
+                return false;
+            }
+            string hash_codigo = hash_verifica.Substring(0, 6);
+            return hash_codigo.Equals(cod_verifica);
         }
 
 
@@ -683,13 +687,24 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             ModelDataParticipacion objReturn = new ModelDataParticipacion();
             ParticipacionCiudadana part = new ParticipacionCiudadana(_connection);
 
+            //El usuario sale del email + código de verificación, nunca del IdUsuario que manda el navegador
+            itemUsuarios infoUsuario = part.validaEmail(params_usu.email);
+            if (infoUsuario == null || !codigoVerificaValido(infoUsuario, params_usu.cod_verifica))
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Código de verificación inválido";
+                return objReturn;
+            }
+
             string hash_new = SHA256Encripta(params_usu.hash_clave);
-            string outTxt = part.updClaveUsuario(params_usu.IdUsuario, hash_new);
+            string outTxt = part.updClaveUsuario(infoUsuario.IdUsuario, hash_new);
             string[] separador = new string[] { "<||>" };
             var result = outTxt.Split(separador, StringSplitOptions.None);
 
             if (result[0].Equals("0"))
             {
+                //Se reemplaza el código para que no se pueda volver a usar
+                part.updCodigoVerifica(infoUsuario.IdUsuario, SHA256Encripta(Guid.NewGuid().ToString()));
                 objReturn.Status = true;
                 objReturn.Message = "Clave modificada exitosamente";
             }

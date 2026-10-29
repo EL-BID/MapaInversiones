@@ -99,6 +99,7 @@ function InicializaDatos() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 url: "/api/ServiciosParticipacion/ValidaEmail",
+                headers: { 'RequestVerificationToken': obtTokenCsrf() },
                 cache: false,
                 data: JSON.stringify(params_usu),
                 success: function (result) {
@@ -149,14 +150,14 @@ function InicializaDatos() {
             success: function (result) {
                 if (result.status == true) {
                     //usuario, se ha enviado correo con codigo
-                    $("#hdIdUsuario").val(result.id_usuario);
+                    $("#hdCodigoVerifica").val(params_usu.cod_verifica);
                     $("#divConfirmaCodigo").slideUp(100, function () {
                         $("#divResetPassword").slideDown(function () {
                             limpiarCamposUsuario("clave");
                         });
                     });
                 } else {
-                    $("#hdIdUsuario").val("");
+                    $("#hdCodigoVerifica").val("");
                     if (result.message == null || result.message == undefined) {
                         bootbox.alert("Error: " + "Fallo la verificación", function () {
 
@@ -198,9 +199,10 @@ function InicializaDatos() {
                 if (validaClaveUsu(clave_usu) == false) {
                     bootbox.alert("Formato de clave incorrecto: La clave debe tener al menos 8 carácteres, entre ellos, una letra mayúscula y un número");
                 } else {
-                    if ($("#hdIdUsuario").val() != "") {
+                    if ($("#hdCodigoVerifica").val() != "") {
                         var params_usu = {
-                            IdUsuario: $("#hdIdUsuario").val(),
+                            email: $("#txtEmailVerifica").val(),
+                            cod_verifica: $("#hdCodigoVerifica").val(),
                             hash_clave: clave_usu,
                         };
                         //add nuevo registro
@@ -297,6 +299,7 @@ function InicializaDatos() {
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     url: "/api/ServiciosParticipacion/insComentario",
+                    headers: { 'RequestVerificationToken': obtTokenCsrf() },
                     cache: false,
                     data: JSON.stringify(params_com),
                     success: function (result) {
@@ -1720,6 +1723,7 @@ function limpiarCamposUsuario(opc) {
         //txtEmailVerifica
         //hdIdUsuario
     } else if (opc == "all") {
+        $("#hdCodigoVerifica").val("");
         $("#txtEmailLog").val("");
         $("#txtClaveLog").val("");
         $("#txtNombre").val("");
@@ -1802,6 +1806,7 @@ function AddNuevaCuentaUsuario() {
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             url: "/api/ServiciosParticipacion/AddUsuarios",
+                            headers: { 'RequestVerificationToken': obtTokenCsrf() },
                             cache: false,
                             data: JSON.stringify(params_usu),
                             success: function (result) {
@@ -1908,6 +1913,7 @@ function validaLoginUsu() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 url: "/api/ServiciosParticipacion/ValidaLogin",
+                headers: { 'RequestVerificationToken': obtTokenCsrf() },
                 cache: false,
                 data: JSON.stringify(params_usu),
                 success: function (result) {
@@ -2203,4 +2209,9 @@ function configuraEnlaceContratista() {
     });
 
 
+}
+
+//Token antiforgery de la vista (@Html.AntiForgeryToken()); va en el header RequestVerificationToken
+function obtTokenCsrf() {
+    return $('input[name="__RequestVerificationToken"]').val();
 }
