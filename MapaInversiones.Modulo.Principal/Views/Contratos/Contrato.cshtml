@@ -290,6 +290,8 @@
 <script type="text/javascript" src="@Cdn.Url(Url, "~/js/lib/D3/d3.v7.min.js")"></script>
 <script type="text/javascript" src="@Cdn.Url(Url, "~/js/Bootbox/bootbox.min.js")"></script>
 <script type="text/javascript" src="@Cdn.Url(Url, "~/js/contrato_aux.js")"></script>
+@*Token antiforgery: lo exigen AddUsuarios, ValidaLogin, ValidaEmail e insComentario ([ValidateAntiForgeryToken]); obtTokenCsrf() en el js*@
+@Html.AntiForgeryToken()
 <script type="text/javascript" src="@Cdn.Url(Url, "~/js/participacion_aux.js")"></script>
 
 

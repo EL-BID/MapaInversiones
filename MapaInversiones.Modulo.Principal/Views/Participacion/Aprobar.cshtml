@@ -389,4 +389,6 @@
 @section DataBody {
     data-profile='[{"idUsuParticipa":"@Model.id_usu_participa" , "nomUsuParticipa" : "@Model.nom_usu_participa"}]'
 }
+@*Token antiforgery: lo exigen AddUsuarios, ValidaLogin, ValidaEmail e insComentario ([ValidateAntiForgeryToken]); obtTokenCsrf() en el js*@
+@Html.AntiForgeryToken()
 <script src="@Cdn.Url(Url, "~/js/aprobar_aux.js")"></script>

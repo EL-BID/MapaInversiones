@@ -1255,6 +1255,8 @@ Sirve para rastrear, registrar y hacer seguimiento a la ejecución presupuestal 
     <script src="https://cdn.jsdelivr.net/npm/d3plus@3/build/d3plus.full.min.js"></script> *@
     <script src="@Cdn.Url(Url, "~/js/bootstrap/3.3.5/bootstrap.min.js")" type="text/javascript"></script>
     <script src="@Cdn.Url(Url, "~/js/Bootbox/bootbox.min.js")" type="text/javascript"></script>
+    @*Token antiforgery: lo exigen AddUsuarios, ValidaLogin, ValidaEmail e insComentario ([ValidateAntiForgeryToken]); obtTokenCsrf() en el js*@
+    @Html.AntiForgeryToken()
     <script src="@Cdn.Url(Url, "~/js/proyectosinv_aux.js")"></script>
     <script>
        window.onscroll = function () { myFunction() };
