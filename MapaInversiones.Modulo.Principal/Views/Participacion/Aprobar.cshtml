@@ -189,6 +189,8 @@
 <script src="~/js/bootstrap/3.3.5/bootstrap.min.js" type="text/javascript"></script>
 <script src="~/js/Bootbox/bootbox.min.js" type="text/javascript"></script>
 
+@*Token antiforgery: lo exigen AddUsuarios, ValidaLogin, ValidaEmail e insComentario ([ValidateAntiForgeryToken]); obtTokenCsrf() en el js*@
+@Html.AntiForgeryToken()
 <script src="~/js/aprobar_aux.js"></script>
 
 <script type="text/javascript">
