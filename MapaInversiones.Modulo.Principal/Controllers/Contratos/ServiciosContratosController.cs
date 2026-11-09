@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos.Contratos;
 using PlataformaTransparencia.Negocios.Contratos;
+using PlataformaTransparencia.Modelos.Emergencia;
 
 namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
 {
@@ -241,6 +242,69 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers.Contratos
                 var aux = new ContratosBLL(_connection);
                 var valores = aux.ObtenerArticulosContrato(CodigoContrato);
                 objReturn = valores;
+                objReturn.Status = true;
+                return objReturn;
+            }
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.InnerException;
+                return objReturn;
+            }
+        }
+
+
+
+        [HttpGet("GetEntidadesHomeContratos")]
+        public ModelUnidadCompras GetEntidadesHomeContratos(int annio)
+        {
+            ModelUnidadCompras objReturn = new ModelUnidadCompras();
+            try
+            {
+                var aux = new ContratosBLL(_connection);
+                var valores = aux.ObtenerEntidadesHomeContratos(annio);
+                objReturn.unidadCompras = valores;
+                objReturn.Status = true;
+                return objReturn;
+            }
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.InnerException;
+                return objReturn;
+            }
+        }
+
+
+
+        [HttpGet("GetProcesosEntidadesHomeContratos")]
+        public ModelUnidadCompras GetProcesosEntidadesHomeContratos(int annio, string entidad)
+        {
+            ModelUnidadCompras objReturn = new ModelUnidadCompras();
+            try
+            {
+                var aux = new ContratosBLL(_connection);
+                var valores = aux.ObtenerProcesosEntidadesHomeContratos(annio, entidad);
+                objReturn.unidadCompras = valores;
+                objReturn.Status = true;
+                return objReturn;
+            }
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.InnerException;
+                return objReturn;
+            }
+        }
+
+        [HttpGet("GetEncabezadoHomeContratos")]
+        public ModelHomeContratos GetEncabezadoHomeContratos(int annio)
+        {
+            ModelHomeContratos objReturn = new ModelHomeContratos();
+            try
+            {
+                var aux = new ContratosBLL(_connection);
+                objReturn = aux.ObtenerEncabezadoHomeContratos(0, annio);
                 objReturn.Status = true;
                 return objReturn;
             }

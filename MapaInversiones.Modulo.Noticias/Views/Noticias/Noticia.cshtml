@@ -6,7 +6,7 @@
     var blogPost = await Orchard.GetContentItemByIdAsync(Model.Id);
 }
 <!--MAIN BANNER-->
-<section class="banner-main-asc">
+<section class="banner-main">
 
     <div class="container">
         <!-- Begin bread crumbs -->
@@ -33,26 +33,30 @@
         </nav><!-- End bread crumbs -->
         <div class="row justify-content-center">
 
-        </div>
+            <div class="col-lg-8">
+                <div class="news-main-title">
+                    <h1>@blogPost.DisplayText</h1>
+                </div>
+            </div>
+         </div>
+
     </div>
 </section>
 <!--main content-->
 <main class="news">
     <!-- Page Content-->
-    <section class="py-5 bg-light">
+    <section class="py-5">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-lg-8">
-                    <div class="news-main-title">
-                        <h1>@blogPost.DisplayText</h1>
-                    </div>
+
                     <div class="image-Container">
                         @{
                             var imgpath = "img/Pic001.jpg";
                             if (@blogPost.Content.BlogPost.BannerImage.Paths.Count != 0)
                             {
                                 imgpath = @blogPost.Content.BlogPost.BannerImage.Paths[0];
-                                <img class="img-fluid-news" src=@Orchard.AssetUrl((string)imgpath) alt="...">
+                                <img class="img-fluid" src=@Orchard.AssetUrl((string)imgpath) alt="...">
                             }
                             else
                             {

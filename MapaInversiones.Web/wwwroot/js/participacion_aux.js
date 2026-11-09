@@ -1,8 +1,8 @@
 ﻿var PerfilUsuario = JSON.parse(document.body.getAttribute('data-profile'));
 
-InicializaDatos();
+InicializaDatosParticipacion();
 
-function InicializaDatos() {
+function InicializaDatosParticipacion() {
     //usuario en session
     iniUsuarioLog();
     //add funciones login
@@ -49,7 +49,6 @@ function InicializaDatos() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 url: "/api/ServiciosParticipacion/ValidaEmail",
-                headers: { 'RequestVerificationToken': obtTokenCsrf() },
                 cache: false,
                 data: JSON.stringify(params_usu),
                 success: function (result) {
@@ -247,7 +246,6 @@ function InicializaDatos() {
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     url: "/api/ServiciosParticipacion/insComentario",
-                    headers: { 'RequestVerificationToken': obtTokenCsrf() },
                     cache: false,
                     data: JSON.stringify(params_com),
                     success: function (result) {
@@ -422,7 +420,6 @@ function AddNuevaCuentaUsuario() {
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             url: "/api/ServiciosParticipacion/AddUsuarios",
-                            headers: { 'RequestVerificationToken': obtTokenCsrf() },
                             cache: false,
                             data: JSON.stringify(params_usu),
                             success: function (result) {
@@ -526,7 +523,6 @@ function validaLoginUsu() {
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 url: "/api/ServiciosParticipacion/ValidaLogin",
-                headers: { 'RequestVerificationToken': obtTokenCsrf() },
                 cache: false,
                 data: JSON.stringify(params_usu),
                 success: function (result) {
@@ -646,8 +642,8 @@ function GetComentarios(id) {
                 id_padre = items_result[i].comentarioRelacionado;
                 if ($("#content-2").length > 0) {
 
-                    var d = new Date(items_result[i].fechaCreacion);
-                    var fecha_aux = pad(d.getDate(), 2) + "/" + pad(parseInt((d.getMonth()) + 1), 2) + "/" + d.getFullYear();
+                    const d = new Date(items_result[i].fechaCreacion);
+                    const fecha_aux = new Intl.DateTimeFormat('es-ES').format(d);
                     var nombre = "";
                     if (items_result[i].anonimo == false) {
                         nombre = items_result[i].nom_usuario.toString();
@@ -689,7 +685,7 @@ function GetComentarios(id) {
                         var usr_pic = div_gov.append("div")
                             .attr("class", "Pic_user")
                             .append("img")
-                            .attr("src", "/content/img/PCM_profile.jpg")
+                            .attr("src", "/img/PCM_profile.jpg")
                         var usr_poster = div_gov.append("div")
                             .attr("class", "Post_user")
                         var usr_txt = usr_poster.append("div")
@@ -709,9 +705,4 @@ function GetComentarios(id) {
 
     });
 
-}
-
-//Token antiforgery de la vista (@Html.AntiForgeryToken()); va en el header RequestVerificationToken
-function obtTokenCsrf() {
-    return $('input[name="__RequestVerificationToken"]').val();
 }

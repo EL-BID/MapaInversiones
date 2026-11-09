@@ -26,5 +26,7 @@ namespace PlataformaTransparencia.Modelos
         /// Fecha de ingreso de la foto.
         /// </summary>
         public Nullable<System.DateTime> fechaFoto { get; set; }
+
+        public bool? priority { get; set; }
     }
 }

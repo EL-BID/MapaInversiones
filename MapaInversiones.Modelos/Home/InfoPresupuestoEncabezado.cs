@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlataformaTransparencia.Modelos.Entidad;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,23 @@ namespace PlataformaTransparencia.Modelos.Home
 {
     public class InfoPresupuestoEncabezado
     {
-        public int AnioActual { get; set; }
-        public int AnioAnterior { get; set; }
-        public double PresupuestoActual { get; set; }
-        public double PresupuestoAnterior { get; set; }
-        public double Porcentaje { get; set; }
-        public int CantProcesosAdjudicados { get; set; }
-        public int CantContratosActivos { get; set; }
-        public int CantContratosCerrados { get; set; }
+        public int Periodo { get; set; }
+        
+        public double Presupuesto{ get; set; }
+        public double Ejecutado { get; set; }
+
+        public double AprobadoFondoPropio { get; set; }
+
+        public InfoPresupuestoEncabezado()
+        {
+            Periodo = DateTime.Now.Year;
+            Presupuesto = 0;
+            Ejecutado = 0;
+            AprobadoFondoPropio = 0;
+
+        }
 
 
     }
+
 }

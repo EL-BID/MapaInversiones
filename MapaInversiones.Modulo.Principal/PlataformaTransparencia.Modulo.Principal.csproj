@@ -6,19 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Remove="js\home_aux.js" />
     <EmbeddedResource Remove="Views\Participacion\VerificarCuenta.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <RazorGenerate Remove="Views\Participacion\VerificarCuenta.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="js\home_aux.js">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>

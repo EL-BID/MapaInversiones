@@ -1,40 +1,54 @@
-﻿var cant_contratos = 5;
+﻿//const { treemap } = require("d3-hierarchy");
 
-inicializaDatos();
+var cant_contratos = 5;
+var grafica_treemap =null;
+
+inicializaDatosEntidad();
 var pestaniaSeleccionada = 1;
 var scrol = 0;
 var loader_proy = "<div class=\"MIVloader\">&nbsp;</div>";
 var cantXPaginaInv = 6;
 var cantXPagina = 10;
-var globales_gasto = [];
+var globales_inv = [];
 var globales_lineas = [];
 var globales_otras_lineas = [];
-var proyectos = [];
+var global_procesos = [];
 var findata = 0;
 var inidata = 0;
 var paginaActual = 1;
+var global_cant_contratos = 0;
+var accordion_interactuando = false;
+var select_programas_inicializado = false;
 function seleccionoAnio(sel) {
     scrol = 0;
-    inicializaDatos();
-    GetDatosPorAnnio(sel);
+    inicializaDatosEntidad();   
 }
 
-function inicializaDatos() {
-    
+function inicializaDatosEntidad() {
+    globales_inv = [];
+    globales_lineas = [];
+    globales_otras_lineas = [];
+    global_procesos = [];    
+    global_cant_contratos = 0;
+    //-----------------------------------------------------------------
 
     var selectAnio = document.getElementById("annioEntidad");
     var anioEntidad = selectAnio.options[selectAnio.selectedIndex].text;
+
+    GetDatosPorAnnio(anioEntidad);
+
     configuraSelectTabContratos("analisis");
     //---------------------------------- Analisis
     GetRecursosPorFinalidad(anioEntidad);
     getDataByFuncion(anioEntidad);
-    getProcesosByFuncion(anioEntidad);
+    getProcesosByFuncion(anioEntidad);   //grafico barras 1 Tab 
     //----------------------------------
     
     getProgramasByEntidad(anioEntidad);
-    getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val());
+    GetProcesosPerAnio(anioEntidad);   //Listado procesos 
+    getContratos(1, cant_contratos, $("#entidad").val(), $('#proceso').val());   //listado contratos
 
-    GetRecursosPorNivelYAnio(anioEntidad);
+   
 
 }
 
@@ -153,7 +167,7 @@ function GetDatosPorAnnio(anio) {
 function monedaSimbolo(codigo) {
     var moneda = [];
     moneda["USD"] = "USD$";
-    moneda["RD"] = "$";
+    moneda["COP"] = "$";
 
     return moneda[codigo];
 }
@@ -186,7 +200,11 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                 $('html, body').animate({ scrollTop: $('#trazabilidad').offset().top }, 2000);
             } else { scrol = scrol + 1; }
             if (result.status == true) {
-                if (result.cantidadTotalRegistros > 0) {
+                if (pagina == 1) {
+                    global_cant_contratos = result.cantidadTotalRegistros;
+                }
+                console.log(pagina + "-->" + global_cant_contratos);
+                if (global_cant_contratos > 0) {
                     var info = result.data;
                     var proceso = "";
                     var entidad = "";
@@ -235,10 +253,15 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                                 + '      </div> '
                                 + '	</div>'
                                 + '<div class="contractNumberRP"><span class="">Más Información del Proveedor: </span>'
-                                + '	<span class="text-bold"><a role="button" class="enlace_contratista" data-type="CONTRATISTA" data-parameter="' + info[i].documentoproveedor.toString() + '"><span class="amount_adj"><span class="glyphicon glyphicon-share-alt"></span> ' + info[i].proveedor.toString() + '</span></a></span></div>' //info[i].codigoProceso.toString()
-                                + '<div class="contractNumberRP"><span class="">Proceso: </span>'
-                                + '	<span class="text-bold">' + info[i].codigoProceso.toString() + '</span></div>' //info[i].descripcionProceso.toString()
-                                + '<div class="wrap-head-process">';
+                                + '	<span class="text-bold"><a role="button" class="enlace_contratista" data-type="CONTRATISTA" data-parameter="' + info[i].documentoproveedor.toString() + '"><span class="amount_adj"><span class="glyphicon glyphicon-share-alt"></span> ' + info[i].proveedor.toString() + '</span></a></span></div>'; 
+
+
+                            if (info[i].descripcionProceso) {
+                                fila += '<div class="contractNumberRP"><span class="">Proceso: </span>'
+                                    + '	<span class="text-bold">' + info[i].descripcionProceso.toString() + '</span></div>';
+
+                            }
+                            fila += '<div class="wrap-head-process">';
                             fila += '<div class="contractData">';
 
 
@@ -319,7 +342,7 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                             + '                    </div>'
                             + '                    <div class="row border-b">'
                             + '                        <div class="col-xs-6 col-md-6"><span class="small"> Valor Contrato</span><span class="amount_adj"> ' + moneda + ' ' + (info[i].valorcontrato * 1).formatMoney(1, '.', ',').toString() + ' </span></div>'
-                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span><span class="amount_adj">RD</span></div>' //DOP //' + info[i].monedaContrato.toString() + '
+                            + '                        <div class="col-xs-6 col-md-6"><span class="small"> MONEDA</span><span class="amount_adj">COP</span></div>' //DOP //' + info[i].monedaContrato.toString() + '
                             + '                    </div>';
 
                         filaconfirma += '                    <div class="row border-b">';
@@ -395,9 +418,8 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
                    
 
                     configuraEnlaceContratista();
-                    if (Math.ceil(result.cantidadTotalRegistros / registros) > 1) {
-                        dibujarPagNumeradasPerContratos(pagina, Math.ceil(result.cantidadTotalRegistros / registros));
-                    }
+                    dibujarPagNumeradasPerContratos(pagina, Math.ceil(result.cantidadTotalRegistros / registros));
+
                 }
                 else {
                     $("#divPagContratos").empty();
@@ -428,7 +450,7 @@ function getContratos(pagina, registros, entidad, proceso, proyecto) {
 
 function dibujarPagNumeradasPerContratos(actual, totalPag) {
     var pag_actual = parseInt(actual);
-    var cant_por_linea = 10;
+    var cant_por_linea = 20;
     $("#divPagContratos").html("");
     var pag_enlace = "";
     
@@ -621,12 +643,31 @@ function getProgramasByEntidad(annio) {
 
 }
 
-function iniProgramaXDefecto() {
+function iniProgramaXDefecto_antes() {
     if ($('#selectProgramas').children('option').length > 0) {
         $('#selectProgramas').val($('#selectProgramas option:first').val());
         $('#selectProgramas').trigger('change');
     }
 
+}
+
+function iniProgramaXDefecto() {
+    if ($('#selectProgramas').children('option').length > 0) {
+        $('#selectProgramas').val($('#selectProgramas option:first').val());
+
+        // ✅ Llamar directamente en lugar de .trigger('change')
+        if (!select_programas_inicializado) {
+            var prog_actual = $('#selectProgramas').val();
+            var filter_prog = $.grep(global_programas, function (elemento) {
+                return elemento.id * 1 === prog_actual * 1;
+            });
+            if (filter_prog != null) {
+                setValoresXPrograma(filter_prog);
+            }
+            consultaInfograficoPerPrograma(prog_actual);
+            select_programas_inicializado = true;
+        }
+    }
 }
 
 function pintaProgramas(data) {
@@ -662,7 +703,7 @@ function pintaProgramas(data) {
     }
 
 }
-function configuraSelectProgramas() {
+function configuraSelectProgramas_anterior() {
     $('#selectProgramas').on('change', function () {
         var prog_actual = this.value;
         var filter_prog = $.grep(global_programas, function (elemento) {
@@ -676,15 +717,39 @@ function configuraSelectProgramas() {
     });
 
 }
+
+function configuraSelectProgramas() {
+    $('#selectProgramas').off('change').on('change', function () {
+        console.log('🔄 Change event disparado. accordion_interactuando:', accordion_interactuando);
+
+        if (accordion_interactuando) {
+            console.log('❌ Evento change BLOQUEADO - acordeón en uso');
+            return;
+        }
+
+        console.log('✅ Evento change EJECUTADO - regenerando acordeón');
+
+        var prog_actual = this.value;
+        var filter_prog = $.grep(global_programas, function (elemento) {
+            return elemento.id * 1 === prog_actual * 1;
+        });
+        if (filter_prog != null) {
+            setValoresXPrograma(filter_prog);
+        }
+
+        consultaInfograficoPerPrograma(prog_actual);
+    });
+}
+
 function setValoresXPrograma(data) {
     var valor_vigente = data[0].presupuesto;
     var valor_ejecutado = data[0].ejecutado;
     var valor_aprobado = data[0].aprobado;
     //--------------------------------------------------------------------
 
-    var texto_aprobado = '<span class="">' + monedaSimbolo("RD") + ' ' + (valor_aprobado / 1000000).formatMoney(1, ',', '.').toString() + ' Millones</span>';
-    var texto_vigente = '<span class="">' + monedaSimbolo("RD") + ' ' + (valor_vigente / 1000000).formatMoney(1, ',', '.').toString() + ' Millones</span>';
-    var texto_ejecutado = '<span class="">' + monedaSimbolo("RD") + ' ' + (valor_ejecutado / 1000000).formatMoney(1, ',', '.').toString() + ' Millones</span>';
+    var texto_aprobado = '<span class="">' + monedaSimbolo("COP") + ' ' + (valor_aprobado / 1000000).formatMoney(1, ',', '.').toString() + ' Millones</span>';
+    var texto_vigente = '<span class="">' + monedaSimbolo("COP") + ' ' + (valor_vigente / 1000000).formatMoney(1, ',', '.').toString() + ' Millones</span>';
+    var texto_ejecutado = '<span class="">' + monedaSimbolo("COP") + ' ' + (valor_ejecutado / 1000000).formatMoney(1, ',', '.').toString() + ' Millones</span>';
 
     var porcentaje_programa = 0;
     if (valor_vigente > 0) {
@@ -768,10 +833,13 @@ function GetDatosByTipo(anyo, tipo, programa)
 
     }).done(function (data) {
         var resultado = data.detalleTipo;
-        proyectos = resultado.proyInv;
+        var proyectos = resultado.proyInv;
         var otras_lineas = resultado.otrasLineas;
         var gen_tipo = resultado.genericoTipo;
         var pagina_actual = 1;
+
+        console.log("otras_lineas-->" + otras_lineas.length);
+
         if (resultado != null) {
             if (tipo_aux != "INVERSION" && tipo_aux != "INVERSIÓN") {
                 globales_gasto = gen_tipo;
@@ -795,11 +863,11 @@ function GetDatosByTipo(anyo, tipo, programa)
 
                 } else {
                     if (proyectos != null) {
-                        globales_gasto = proyectos;
+                        globales_inv = proyectos;
 
                         var ini_data = ((pagina_actual - 1) * cantXPaginaInv);
                         var fin_data = (pagina_actual * cantXPaginaInv) - 1;
-                        var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
+                        var data_pagina = arr = jQuery.grep(globales_inv, function (n, i) {
                             return (i >= ini_data && i <= fin_data);
                         });
                         getEstructuraInfograficoNew(data_pagina, 1);
@@ -836,8 +904,8 @@ function GetDatosByTipo(anyo, tipo, programa)
 
 }
 
-
 function getEstructuraInfograficoNew(datos, pagina) {
+    
     var i_aux = 0;
     var j_aux = 0;
     var k_aux = 0;
@@ -853,6 +921,9 @@ function getEstructuraInfograficoNew(datos, pagina) {
         var avance_financiero = datos[i]['avance_financiero'];
         var url_proy = datos[i].url;
         var lineas_vec = datos[i].detalleLineas;
+
+        //console.log("detalleLineasProy-->" + codigo +  "-->" + lineas_vec.length);
+
         var valor_proyecto = datos[i].comprometido;
 
         html_str += '<div class="panel panel-default ">';
@@ -865,7 +936,7 @@ function getEstructuraInfograficoNew(datos, pagina) {
         html_str += '<span class="td1">' + nombre + '</span>';
         html_str += '</div>';
         html_str += '<div class="data1">';
-        html_str += '<span class="labelTit">Valor Proyecto</span>';
+        html_str += '<span class="labelTit">Valor Asignado Acumulado</span>';
         html_str += '<span class="td1">$ ' + (valor_proyecto*1/1000000).formatMoney(2, ',', '.').toString() + ' Millones</span>';
         html_str += '</div>';
 
@@ -879,8 +950,6 @@ function getEstructuraInfograficoNew(datos, pagina) {
         html_str += '<div class="actions-links">';
         html_str += '<span class="badge badge-pill badge-primary">Ver líneas presupuestales</span>';
         html_str += '</div>';
-
-
 
         html_str += '</div>';
 
@@ -923,22 +992,22 @@ function getEstructuraInfograficoNew(datos, pagina) {
 
             html_str += '<div class="head">';
             html_str += '<div class="data1 mainData">';
-            html_str += '<span class="labelTit">Objeto de gasto</span>';
+            html_str += '<span class="labelTit">Fuente de financiamiento</span>';
             html_str += '<span class="td1p">' + nombre + '</span>';
             html_str += '</div>';
 
             html_str += '<div class="data1">';
-            html_str += '<span class="labelTit">Presupuesto Aprobado</span>';
-            html_str += '<span class="td1p">' + '$' + ' ' + presup_aprobado.formatMoney(1, ',', '.').toString() + ' Millones</span>';
+            html_str += '<span class="labelTit">Presupuesto Asignado</span>';
+            html_str += '<span class="td1p">' + '$' + ' ' + presup_vigente.formatMoney(1, ',', '.').toString() + ' Millones</span>';
             html_str += '</div>';
 
             html_str += '<div class="data1">';
-            html_str += '<span class="labelTit">Presupuesto Vigente</span>';
-            html_str += '<span class="td1p">' + '$' + ' ' + presup_vigente.formatMoney(0, ',', '.').toString() + ' Millones</span>';
+            html_str += '<span class="labelTit">Presupuesto Obligado</span>';
+            html_str += '<span class="td1p">' + '$' + ' ' + presup_aprobado.formatMoney(0, ',', '.').toString() + ' Millones</span>';
             html_str += '</div>';
 
             html_str += '<div class="data1">';
-            html_str += '<span class="labelTit">Ejecución Acumulada</span>';
+            html_str += '<span class="labelTit">Presupuesto Ejecutado</span>';
             html_str += '<span class="td1p">' + '$' + ' ' + presup_ejecutado.formatMoney(0, ',', '.').toString() + ' Millones</span>';
             html_str += '</div>';
 
@@ -992,7 +1061,7 @@ function getEstructuraInfograficoNew(datos, pagina) {
     html_str += '<div id="divPagFichas"></div>';
 
     $("#divInversion").html(html_str);
-    var totalNumber = globales_gasto.length;
+    var totalNumber = globales_inv.length;
     var totalPages = (totalNumber > cantXPaginaInv) ? ((totalNumber - (totalNumber % cantXPaginaInv)) / cantXPaginaInv) : 1;
     if ((totalNumber >= cantXPaginaInv) && ((totalNumber % cantXPaginaInv) > 0)) {
         totalPages = totalPages + 1;
@@ -1058,7 +1127,7 @@ function dibujarPagNumeradasPerTipoInv(actual, total, totalPag) {
         pagina_actual = $(this).attr("data-page");
         var ini_data = ((pagina_actual - 1) * cantXPaginaInv);
         var fin_data = (pagina_actual * cantXPaginaInv) - 1;
-        var data_pagina = arr = jQuery.grep(globales_gasto, function (n, i) {
+        var data_pagina = arr = jQuery.grep(globales_inv, function (n, i) {
             return (i >= ini_data && i <= fin_data);
         });
         $("#divInversion").empty();
@@ -1093,19 +1162,19 @@ function getEstructuraInfograficoPerLineas(datos_lineas, pagina) {
             str_lineas += '<div class="card d-flex">';
             str_lineas += '<div class="headEnt">';
             str_lineas += '<div class="data1 mainDataEntidad">';
-            str_lineas += '<span class="labelTit">Objeto de Gasto</span>';
+            str_lineas += '<span class="labelTit">Clasificación de costo</span>';
             str_lineas += '<span class="td1obj">' + nombre + '</span>';
             str_lineas += '</div>';
             str_lineas += '<div class="data1">';
-            str_lineas += '<span class="labelTit">Presupuesto Aprobado</span>';
+            str_lineas += '<span class="labelTit">Presupuesto Asignado</span>';
             str_lineas += '<span class="td1">$ ' + presup_aprobado.formatMoney(2, '.', ', ').toString() + ' Millones</span>';
             str_lineas += '</div>';
             str_lineas += '<div class="data1">';
-            str_lineas += '<span class="labelTit">Presupuesto Vigente</span>';
+            str_lineas += '<span class="labelTit">Presupuesto Modificado</span>';
             str_lineas += '<span class="td1">$ ' + presup_vigente.formatMoney(2, '.', ', ').toString() + ' Millones</span>';
             str_lineas += '</div>';
             str_lineas += '<div class="data1">';
-            str_lineas += '<span class="labelTit">Ejecución Acumulada</span>';
+            str_lineas += '<span class="labelTit">Presupuesto Ejecutado</span>';
             str_lineas += '<span class="td1">$ ' + presup_ejecutado.formatMoney(2, '.', ', ').toString() + ' Millones</span>';
             str_lineas += '</div>';
             str_lineas += '<div class="data1">';
@@ -1232,16 +1301,31 @@ function GetRecursosPorFinalidad(anyo) {
 
 }
 
+function asignarColorTreemap(indice){
+    var color_aux = "#CCCCCC";
+    var col_sel = color_aux;
+    const colores_default = [
+        "#459F81", "#C6C95E", "#7DC95E",
+        "#C9598C", "#C159CB", "#5983CB",
+        "#59C9C9", "#59C982", "#7DC95E"
+    ];
+    if (indice < colores_default.length) {
+        col_sel = colores_default[indice];
+    }
+    return col_sel;
+
+}
+
 function assignColorPaleta(indice) {
     var color_aux = "#CCCCCC";
     var col_sel = color_aux;
-    var colores_default = ["#639CBF", "#78B8BF", "#A65D5D", "#4C5959", "#56B4D6", "#56D6B2", "#4FBCE3", "#9BDDCA", "#41A387", "#5A6A70", "#3185A3",
-        "#387CA6", "#96D2D9", "#F2E8C9", "#728EA6", "#BACDD9", "#F2E4DC", "#B0C1D9", "#88A5BF", "#D9BFA9", "#F29863", "#F2C1AE", "#BF9C99"];
+    var colores_default = ["#8B3CB8", "#459F7D", "F19D5B", "#E3CF85", "#E99FD4", "#99A7CC", "#97CFAE", "#BCD7CE", "#F19996"];
     if (indice < colores_default.length) {
         col_sel = colores_default[indice];
     }
     return col_sel;
 }
+
 function loadRecursosPerFinalidad(objData) {
     $("#divGraphPerFuncion").empty();
     var titulo = "Otros";
@@ -1251,36 +1335,38 @@ function loadRecursosPerFinalidad(objData) {
     if (objData != undefined && objData != null) {
         data_filter = objData;
 
-        var sumaTotal = data_filter.reduce(function (acumulador, elemento) {
-            return acumulador + elemento.rawValueDouble;
-        }, 0);
-        for (var i = 0; i < data_filter.length; i++) {
+        let sumaTotal = data_filter.reduce((acum, d) => acum + parseFloat(d.rawValueDouble), 0);
+        let groupSums = {};
+
+        for (let i = 0; i < data_filter.length; i++) {
             data_filter[i].labelGroup = data_filter[i].labelGroup.replace(",", " ");
             data_filter[i].label = data_filter[i].label.replace(",", " ");
 
-            data_filter[i].rawValueDouble = parseFloat(data_filter[i].rawValueDouble);
-            data_filter[i].porcentaje = (((data_filter[i].rawValueDouble / sumaTotal) * 100)).toFixed(2);
+            let valor = parseFloat(data_filter[i].rawValueDouble);
+            data_filter[i].rawValueDouble = valor;
+
+            //SumaPerGrupo
+            if (!groupSums[data_filter[i].labelGroup]) {
+                groupSums[data_filter[i].labelGroup] = 0;
+            }
+            groupSums[data_filter[i].labelGroup] += valor;
         }
 
+        for (let i = 0; i < data_filter.length; i++) {
+            data_filter[i].porc_nivel_0 = ((data_filter[i].rawValueDouble / sumaTotal) * 100).toFixed(2);
+            let sumaGrupo = groupSums[data_filter[i].labelGroup];
+            data_filter[i].porc_nivel_1 = sumaGrupo
+                ? ((data_filter[i].rawValueDouble / sumaGrupo) * 100).toFixed(2)
+                : "0";
+        }
      
-        var distintos = objData.map(item => item.labelGroup)
+        var distintos = data_filter.map(item => item.labelGroup)
             .filter((value, index, self) => self.indexOf(value) === index);
 
-        grafica = new d3plus.Treemap()
+        var prueba = 0;
+
+        grafica_treemap = new d3plus.Treemap()
             .select("#divGraphPerFuncion")
-
-            .shapeConfig({
-                labelConfig: {
-                    fontFamily: "'Montserrat', sans-serif",
-                    align: "center",
-                    size: 6,
-                    transform: "capitalize"
-                },
-                 fill: function (d, index) {
-                    return assignColorPaleta(index);
-
-                }
-            })
             .translate(function (d) {
                 var traduc_aux = d;
                 if (d === "Back" || d === "back") {
@@ -1298,10 +1384,12 @@ function loadRecursosPerFinalidad(objData) {
                 //threshold: limitePorc,
                 data: data_filter,
                 groupBy: ["labelGroup", "label"],
+
                 height: 500,
                 tooltipConfig: {
                     title: function (d) {
-                        var depth_aux = grafica.depth();
+                        var depth_aux = grafica_treemap.depth();
+                        
                         var longitud_tooltip = 80;
                         var cad = '';
                         switch (depth_aux) {
@@ -1323,7 +1411,7 @@ function loadRecursosPerFinalidad(objData) {
                         [function (d) {
                             var valor = d["rawValueDouble"] / 1000000;
                             var cad = "";
-                            cad += "<span>Presupuesto Vigente " + "$ " + valor.formatMoney( 0, '.', ',').toString() + " Millones" + "</span></br>";
+                            cad += "<span>Presupuesto Vigente " + "$ " + valor.formatMoney( 0, '.', ',').toString() + " millones" + "</span></br>";
                             return cad;
                         }]
                     ]
@@ -1332,75 +1420,151 @@ function loadRecursosPerFinalidad(objData) {
                     title: "",
                 }
             })
+            .shapeConfig({
+                label: (d) => {
+                    let porc_aux = "";
+                    var nivel = (grafica_treemap && typeof grafica_treemap.depth === 'function')
+                        ? grafica_treemap.depth()
+                        : 0;
+
+                    if (nivel == 0) {
+                        auxiliar = d["labelGroup"];
+                        let sum_aux = sum_porcentaje(d["porc_nivel_0"]);
+                        porc_aux = formatoDecimales(sum_aux, 2, ',', '.').toString();
+
+                    } else {
+                        auxiliar = d["label"];
+                        porc_aux = formatoDecimales(d["porc_nivel_1"], 2, ',', '.').toString();
+                    }
+                    return [auxiliar, porc_aux + "%"];
+                    
+                    
+                },
+                labelConfig: {
+                    fontFamily: "'Montserrat', sans-serif",
+                    align: "center",
+                    size: 6,
+                    transform: "capitalize"
+                },
+                fill: function (d, index) {
+                    return asignarColorTreemap(index);
+
+                }
+            })
             .sum("rawValueDouble")
             .depth(0)
             .legend(false)
+            
             .render();
     }
 
 }
+function sum_porcentaje(porc_item) {
+    var suma = 0;
 
+   if (Array.isArray(porc_item)) {
+            // Convertir cada valor a número usando parseFloat
+            suma = porc_item.reduce((acum, valor) => acum + parseFloat(valor), 0);
+    }
+    else if (typeof porc_item === "string") {
+        // Si es una cadena, puede ser un único valor o una cadena que represente un array
+        porc_item = porc_item.trim();
+        if (porc_item.startsWith("[")) {
+            // La cadena representa un array, se parsea y se suma
+            try {
+                let arrayValores = JSON.parse(porc_item);
+                if (Array.isArray(arrayValores)) {
+                    suma = arrayValores.reduce((acum, valor) => acum + valor, 0);
+                }
+            } catch (e) {
+                console.error("Error al parsear el array de porcentaje:", e);
+            }
+        } else {
+            // Se asume que es un único valor numérico en cadena
+            suma = parseFloat(porc_item);
+        }
+    } else if (typeof porc_item === "number") {
+        // Si ya es número, se usa directamente
+        suma = porc_item;
+    }
 
+    return suma;
+
+}
 function assignColorPaletaD(indice) {
     var color_aux = "#CCCCCC";
     var col_sel = color_aux;
-    var colores_default = ["#639CBF", "#78B8BF", "#A65D5D", "#4C5959", "#56B4D6", "#56D6B2", "#4FBCE3", "#9BDDCA", "#41A387", "#5A6A70", "#3185A3",
-        "#387CA6", "#96D2D9", "#F2E8C9", "#728EA6", "#BACDD9", "#F2E4DC", "#B0C1D9", "#88A5BF", "#D9BFA9", "#F29863", "#FAC1AE", "#BF9C09",
-        "#56BFD6", "#5ED6B2", "#4FBC03", "#9B0DCA"];
+    var colores_default = ["#8B3CB8", "#459F7D", "F19D5B", "#E3CF85", "#E99FD4", "#99A7CC", "#97CFAE", "#BCD7CE", "#F19996"];
     if (indice < colores_default.length) {
         col_sel = colores_default[indice];
     }
     return col_sel;
 }
 
-function loadDonaGraph(myData,divContenedor) {
+function loadDonaGraph(myData, divContenedor) {
 
-    $("#" + divContenedor).html("");
-    new d3plus.Donut()
-        .select("#" + divContenedor)
+    function drawDona(divContenedor, myData) {
+        $("#" + divContenedor).empty();
+        if (myData != undefined && myData != null) {
+            const container = document.getElementById(divContenedor);
+            const containerWidth = container.getBoundingClientRect().width;
+            const containerHeight = containerWidth * 1.2; 
 
-        .config({
-            data: myData,
-            groupBy: "labelGroup",
-            label: d => (d["porcentaje"]*1).formatMoney(2, ',', '.')+ "%",
+            new d3plus.Donut()
+                .select("#" + divContenedor)
 
-            height: 665,
-            //innerRadius: 50,
-            padAngle: 0.01,
-            legend: false,
-            legendPosition: function () {
-                return this._width > this._height ? "right" : "bottom";
-            },
-            value: "rawValue",
-            color: function (d, index) {
-                return assignColorPaletaD(index);
-            },
-            tooltipConfig: {
-                title: function (d) {
-                    return d["labelGroup"];
-                },
-                tbody: [
-                    [function (d) {
+                .config({
+                    data: myData,
+                    groupBy: "labelGroup",
+                    label: d => formatoDecimales(d["porcentaje"], 2, ',', '.').toString() + "%",
+                    height: Math.min(containerHeight, 450),
+                    padAngle: 0.01,
+                    legend: false,
+                    legendPosition: function () {
+                        return this._width > this._height ? "right" : "bottom";
+                    },
+                    value: "rawValue",
+                    color: function (d, index) {
+                        return assignColorPaletaD(index);
+                    },
+                    tooltipConfig: {
+                        title: function (d) {
+                            return d["labelGroup"];
+                        },
+                        tbody: [
+                            [function (d) {
 
-                        var cad_aux = "$ " + d["rawValue"].formatMoney(1, ',', '.').toString() + " ";
-                        if (d["porcentaje"] != undefined && d["porcentaje"] != null) {
-                            cad_aux = "$ " + d["rawValue"].formatMoney(1, ',', '.').toString() + " " + " <strong>(" + d["porcentaje"].formatMoney(1, '.', ',').toString() + " %)</strong>";
-                        }
-                        return cad_aux;
+                                var cad_aux = "$ " + d["rawValue"].formatMoney(1, ',', '.').toString() + " ";
+                                if (d["porcentaje"] != undefined && d["porcentaje"] != null) {
+                                    cad_aux = "$ " + d["rawValue"].formatMoney(1, ',', '.').toString() + " " + " <strong>(" + d["porcentaje"].formatMoney(1, '.', ',').toString() + " %)</strong>";
+                                }
+                                return cad_aux;
 
-                    }]
-                ]
-            }
-            , legendConfig: {
-                label(d, i) {
-                    return d["labelGroup"];
-                },
+                            }]
+                        ]
+                    }
+                    , legendConfig: {
+                        label(d, i) {
+                            return d["labelGroup"];
+                        },
 
-            }
-        })
-        .legendTooltip({ footer: "" })
-        .on({ "click.legend": () => { } })
-        .render();
+                    }
+                })
+                .legendTooltip({ footer: "" })
+                .on({ "click.legend": () => { } })
+                .render();
+
+        }
+
+    }
+   
+    // Llamada inicial
+    drawDona(divContenedor, myData);
+
+    // Cada vez que se “resize” la ventana:
+    window.addEventListener("resize", () => {
+        drawDona(divContenedor, myData);
+    });
 
 }
 
@@ -1408,8 +1572,11 @@ function loadConsolidaGastoEntidad(data, div) {
     var txt_aux = "";
 
     for (var i = 0; i < data.length; i++) {
+       
+        var cad_valor = "$ " + formatoDecimales(data[i].rawValue/1000000,2, ',', '.').toString() + " millones";
+        
         txt_aux += "<div class='box' style='background:linear-gradient(to right, " + assignColorPaletaD(i) +" 20px, #f2f2f2 0) !important;'>"
-            + "<div class='h3'>$ " + (data[i].rawValue*1).formatMoney(1, ',', '.').toString() + "</div>"
+            + "<div class='h3'>" + cad_valor + "</div>"
             + "<div class='desc-item-expenditure'>" + data[i].labelGroup + "</div>"
             + "<div class='wrap-expenditure-link'></div>"
             + "</div>";
@@ -1493,117 +1660,138 @@ function getProcesosByFuncion(annio) {
 
 
 }
+
 function horizontalBar(data, div) {
-    $("#" + div).html("");
-    //sort bars based on value
-    data = data.sort(function (a, b) {
-        return d3.ascending(a.rawValueDouble, b.rawValueDouble);
-    })
+    function drawBarras(data, div) {
+        d3.select("#" + div).html("");
 
-    //set up svg using margin conventions - we'll need plenty of room on the left for labels
-    var margin = {
-        top: 5,
-        right: 40,
-        bottom: 15,
-        left: 80
-    };
-    ancho = $(document).width() - ($(document).width()/3);
-    var width = ancho - margin.left - margin.right,
-        height = (ancho /2) - margin.top - margin.bottom;
+        const container = d3.select("#" + div);
+        const containerWidth = container.node().clientWidth;
 
-    var svg = d3.select("#" + div).append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        const margin = {
+            top: 5,
+            right: 40,
+            bottom: 15,
+            left: 80
+        };
+        const width = containerWidth - margin.left - margin.right;
+        const maxBarHeight = 50; // Altura máxima barra
+        const innerHeight = data.length * maxBarHeight * 1.5; // Altura total para las barras
+        const height = innerHeight + margin.top + margin.bottom;
 
-    var x = d3.scale.linear()
-        .range([0, width])
-        .domain([0, d3.max(data, function (d) {
-            return d.rawValueDouble;
-        })]);
+        const svg = container.append("svg")
+            .attr("width", containerWidth)
+            .attr("height", height)
+            .style("font-family", "inherit")
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    var y = d3.scale.ordinal()
-        .rangeRoundBands([height, 0], .1)
-        .domain(data.map(function (d) {
-            return d.labelGroup.trim();
-        }));
+        // Escala x lineal
+        const x = d3.scaleLinear()
+            .range([0, width])
+            .domain([0, d3.max(data, d => d.rawValueDouble)]);
 
-    //make y axis to show bar names
-    var yAxis = d3.svg.axis()
-        .scale(y)
-        //no tick marks
-        .tickSize(0)
-        .orient("left");
+        // Escala y tipo banda
+        const y = d3.scaleBand()
+            .range([innerHeight, 0])
+            .padding(0.1)
+            .domain(data.map(d => d.labelGroup.trim()));
 
-    var gy = svg.append("g")
-        .attr("class", "y axis")
-        .call(yAxis)
-        .selectAll(".tick text")
-        .call(wrap, 75)
-        .attr("transform", "translate(-2,-30)")
+        // Crear el eje Y sin tick marks
+        const yAxis = d3.axisLeft(y).tickSize(0);
 
-    var bars = svg.selectAll(".bar")
-        .data(data)
-        .enter()
-        .append("g")
+        // Agregar el eje Y
+        const axisGroup = svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
 
-    //append rects
-    bars.append("rect")
-        .attr("class", "bar")
-        .attr("y", function (d) {
-            return y(d.labelGroup);
-        })
-        .attr("height", y.rangeBand()-20)
-        .attr("x", 0)
-        .attr("width", function (d) {
-            return x(d.rawValueDouble);
-        });
+        const wrapWidth = margin.left - 10;
 
-    //add a value label to the right of each bar
-    bars.append("text")
-        .attr("class", "label")
-        //y position of the label is halfway down the bar
-        .attr("y", function (d) {
-            return y(d.labelGroup) + y.rangeBand() / 2 -10;
-        })
-        //x position is 3 pixels to the right of the bar
-        .attr("x", function (d) {
-            return x(d.rawValueDouble) + 3;
-        })
-        .text(function (d) {
-            return d.rawValueDouble;
-        });
+        axisGroup.selectAll(".tick text")
+            .call(wrap, wrapWidth, -10)
+            .attr("text-anchor", "end");
 
+        // Crear un grupo para cada barra
+        const bars = svg.selectAll(".bar-group")
+            .data(data)
+            .enter()
+            .append("g")
+            .attr("class", "bar-group");
+
+        bars.append("rect")
+            .attr("class", "bar")
+            .attr("y", d => y(d.labelGroup))
+            .attr("height", d => Math.min(y.bandwidth(), maxBarHeight))
+            .attr("x", 0)
+            .attr("width", d => x(d.rawValueDouble))
+            .attr("fill", "#99A7CC");
+
+        // Agregar etiquetas sobre cada barra
+        bars.append("text")
+            .attr("class", "label")
+            .attr("y", d => {
+                const barHeight = Math.min(y.bandwidth(), maxBarHeight);
+                return y(d.labelGroup) + barHeight / 2;
+            })
+            .attr("x", d => x(d.rawValueDouble) + 3)
+            .attr("dy", ".35em")
+            .style("font-size", "clamp(12px, 2vw, 14px)")
+            .style("font-family", "inherit")
+            .text(d => d.rawValueDouble);
+
+    }
+
+    drawBarras(data, div);
+
+    window.addEventListener('resize', () => {
+        drawBarras(data, div);
+    });
+
+    
 }
 
-function wrap(text, width) {
+function wrap(text, width, offset = 0) {
     text.each(function () {
-        var text = d3.select(this),
-            words = text.text().split(/\s+/).reverse(),
-            word,
-            line = [],
-            lineNumber = 0,
-            lineHeight = 1.1, // ems
-            y = text.attr("y"),
-            dy = parseFloat(text.attr("dy")),
-            tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em")
-        while (word = words.pop()) {
-            line.push(word)
-            tspan.text(line.join(" "))
+        const textEl = d3.select(this),
+            words = textEl.text().split(/\s+/).reverse(),
+            lineHeight = 1.1, 
+            y = textEl.attr("y");
+        let line = [],
+            lineNumber = 0;
+
+        // Eliminar el texto original y crear el primer <tspan> con el offset dado
+        textEl.text(null);
+        let tspan = textEl.append("tspan")
+            .attr("x", offset)
+            .attr("y", y)
+            .attr("dy", "0em");
+        const tspans = [tspan];
+
+        let word;
+        while ((word = words.pop())) {
+            line.push(word);
+            tspan.text(line.join(" "));
             if (tspan.node().getComputedTextLength() > width) {
-                line.pop()
-                tspan.text(line.join(" "))
-                line = [word]
-                tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", `${++lineNumber * lineHeight + dy}em`).text(word)
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [word];
+                tspan = textEl.append("tspan")
+                    .attr("x", offset)
+                    .attr("y", y)
+                    .attr("dy", lineHeight + "em")
+                    .text(word);
+                tspans.push(tspan);
             }
         }
-    })
+
+        // Centrar verticalmente el bloque de líneas
+        const n = tspans.length;
+        const shift = -((n - 1) / 2) * lineHeight;
+        tspans[0].attr("dy", shift + "em");
+    });
 }
-
-
 ////////////////////////////////////////// Procesos ////////////////////////////////////////////////////
-function GetRecursosPorNivelYAnio(anio) {
+function GetProcesosPerAnio(anio) {
     procesos = [];
     $.ajax({
         contentType: "application/json; charset=utf-8",
@@ -1614,41 +1802,48 @@ function GetRecursosPorNivelYAnio(anio) {
             codEntidad: $("#codigoEntidadId").val()
         }
     }).done(function (data) {
+        global_procesos = data.data;
 
-        procesos = data.data;
-        inidata = ((paginaActual - 1) * cantXPagina);
-        findata = (paginaActual * cantXPagina) - 1;
+        if (global_procesos.length > 0) {
+            var pagina = 1;
+            var inidata = ((pagina - 1) * cantXPagina);
+            var findata = (pagina * cantXPagina) - 1;
 
-        var institucionesPorPagina = jQuery.grep(procesos, function (n, i) {
-            return (i >= inidata && i <= findata);
-        });
-        GetListadoInstituciones(institucionesPorPagina);
-        dibujarPagNumeradas(paginaActual);
+            var dataPagina = jQuery.grep(global_procesos, function (n, i) {
+                return (i >= inidata && i <= findata);
+            });
+            ShowListadoProcesos(dataPagina);
+            dibujarPagNumeradasProcesos(pagina);
+        }
+
+        
     }).fail(function (xhr, ajaxOptions, thrownError) {
+        
         alert("Error " + xhr.status + "_" + thrownError);
     });
 
 }
 
 
-function GetListadoInstituciones(institucionesPorPagina) {
+function ShowListadoProcesos(data) {
 
     $("#divProcesos").html("");
     var html_list = '<div class="card-entidades-group">';
-    for (var i = 0; i < institucionesPorPagina.length; i++) {
-
+    for (var i = 0; i < data.length; i++) {
+        var descripcion = "";
+        if (data[i]['descripcion']) { descripcion = data[i]['descripcion'].toString(); }
         html_list += '<div id="proceso_' + i.toString() + '" class="card d-flex">';
         html_list += '<div class="headEnt">';
-        html_list += '<div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>' + institucionesPorPagina[i]['codigoproceso'] + '</strong></span>';
-        html_list += '<span class="td1">' + institucionesPorPagina[i]['descripcion'] + ' </span>';
+        html_list += '<div class="data1 mainDataEntidad2"><span class="labelTit">Código Proceso: <strong>' + data[i]['codigoproceso'] + '</strong></span>';
+        html_list += '<span class="td1">' + descripcion + ' </span>';
         html_list += '</div>';
-        html_list += '<div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">' + institucionesPorPagina[i]['estadoProceso'].toString() + ' </span ></div > ';
-        html_list += '<div class="data1"><span class="labelTit">Modalidad</span><span class="td1">' + institucionesPorPagina[i]['modalidad'].toString() + ' </span></div>';
-        html_list += '<div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">$ ' + institucionesPorPagina[i]['montoEstimado'].formatMoney(2, '.', ',').toString() + ' </span></div>';
+        html_list += '<div class="data1"><span class="labelTit">Estado del Proceso</span><span class="td1">' + data[i]['estadoProceso'].toString() + ' </span ></div > ';
+        html_list += '<div class="data1"><span class="labelTit">Modalidad</span><span class="td1">' + data[i]['modalidad'].toString() + ' </span></div>';
+        html_list += '<div class="data1"><span class="labelTit">Monto estimado</span><span class="td1">$ ' + data[i]['montoEstimado'].formatMoney(2, '.', ',').toString() + ' </span></div>';
         html_list += '</div>';
         html_list += '<div class="btn-action">';
         html_list += '<div class="btnPerfil">';
-        html_list += '<a target="_blank" href="' + institucionesPorPagina[i]['url'] + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br /> <span>VER PROCESO</span></a>';
+        html_list += '<a target="_blank" href="' + data[i]['url'] + '" class="text-small"><i class="material-icons md-18">arrow_forward</i><br /> <span>VER PROCESO</span></a>';
         html_list += '</div>';
         html_list += '</div>';
         html_list += '</div>';
@@ -1657,13 +1852,13 @@ function GetListadoInstituciones(institucionesPorPagina) {
     html_list += '</div>';
     $("#divProcesos").html(html_list);
 
-    dibujarPagNumeradas(1);
+    //dibujarPagNumeradasProcesos(1);
 }
 
 //paginador
 
-function dibujarPagNumeradas(paginaActual) {
-    var totalNumber = proyectos.length;
+function dibujarPagNumeradasProcesos(paginaActual) {
+    var totalNumber = global_procesos.length;
     var totalPages = (totalNumber > cantXPagina) ? ((totalNumber - (totalNumber % cantXPagina)) / cantXPagina) : 1;
 
     if ((totalNumber >= cantXPagina) && ((totalNumber % cantXPagina) > 0)) {
@@ -1671,7 +1866,7 @@ function dibujarPagNumeradas(paginaActual) {
     }
     var pagActual = parseInt(paginaActual);
 
-    var totalNumerosPaginador = 10;
+    var totalNumerosPaginador = 30;
     $("#divPagFichasPro").html("");
 
     var pagEnlace = "";
@@ -1720,20 +1915,21 @@ function dibujarPagNumeradas(paginaActual) {
         paginaActual = $(this).attr("data-page");
 
         $("#divProcesos").empty();
-        inidata = ((paginaActual - 1) * cantXPagina);
-        findata = (paginaActual * cantXPagina) - 1;
+        var inidata = ((paginaActual - 1) * cantXPagina);
+        var findata = (paginaActual * cantXPagina) - 1;
 
-        var institucionesPorPagina = jQuery.grep(proyectos, function (n, i) {
+        var dataPagina = jQuery.grep(global_procesos, function (n, i) {
             return (i >= inidata && i <= findata);
         });
 
-        GetListadoInstituciones(institucionesPorPagina);
-        dibujarPagNumeradas(paginaActual);
+        ShowListadoProcesos(dataPagina);
+        dibujarPagNumeradasProcesos(paginaActual);
     });
 
 }
 
-        function configuraEnlaceContratista() {
+function configuraEnlaceContratista()
+{
             $(".enlace_contratista").click(function () {
                 var ruc = $(this).attr('data-parameter');
                 var dataValue = $(this).attr('data-parameter'),
@@ -1743,9 +1939,20 @@ function dibujarPagNumeradas(paginaActual) {
                 window.open(url, '_blank');
 
             });
+}
+function formatoDecimales(n, c, d, t) {
+    //var n = this,
+    c = isNaN(c = Math.abs(c)) ? 2 : c,
+        d = d == undefined ? "." : d,
+        t = t == undefined ? "," : t,
+        s = n < 0 ? "-" : "",
+        i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+
+}
 
 
-        }
 Number.prototype.formatMoney = function (c, d, t) {
     var n = this,
         c = isNaN(c = Math.abs(c)) ? 2 : c,

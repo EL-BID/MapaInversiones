@@ -10,6 +10,9 @@ namespace PlataformaTransparencia.Modelos
 {
     public class ModelHomeData : RespuestaContratoBase
     {
+        public List<InfoEntidadTerritorial> Comunas { get; set; }
+        public List<InfoEntidadTerritorial> Corregimientos { get; set; }
+
         /// <summary>
         /// El valor del dinero recaudado en la historia.
         /// </summary>
@@ -30,7 +33,8 @@ namespace PlataformaTransparencia.Modelos
         /// Arreglo con los periodos TO DO revisar como se cargan.
         /// </summary>
         [Newtonsoft.Json.JsonProperty("periods")]
-        public List<Period> Periods {
+        public List<Period> Periods
+        {
             get { return periods; }
             set { periods = value; }
         }
@@ -48,7 +52,8 @@ namespace PlataformaTransparencia.Modelos
         /// Arreglo con objetos representando el grafico de proyectos por sector en toda la historia. 
         /// Dentro de los objetos rawValue representa el alto de las barras, siendo 100 el valor más alto disponible y 0 el 0%.
         /// </summary>
-        public List<InfoProjectPerSector> ProjectsPerSector {
+        public List<InfoProjectPerSector> ProjectsPerSector
+        {
             get { return projectsPerSector; }
             set { projectsPerSector = value; }
         }
@@ -58,13 +63,15 @@ namespace PlataformaTransparencia.Modelos
         /// <summary>
         /// Listado de proyectos a cargar en el inicio
         /// </summary>
-        public List<InfoProyectos> ProyectosAprobados {
+        public List<InfoProyectos> ProyectosAprobados
+        {
             get { return proyectosAprobados; }
             set { proyectosAprobados = value; }
         }
         private List<InfoProyectos> proyectosAprobados = new List<InfoProyectos>();
 
-        public List<InfoProyectos> ProyectosNacionales {
+        public List<InfoProyectos> ProyectosNacionales
+        {
             get { return proyectosNacionales; }
             set { proyectosNacionales = value; }
         }
@@ -75,7 +82,8 @@ namespace PlataformaTransparencia.Modelos
         /// Arreglo con objetos representando el grafico de recursos por sector en toda la historia. 
         /// Dentro de los objetos rawValue representa el alto de las barras, siendo 100 el valor más alto disponible y 0 el 0%.
         /// </summary>
-        public List<InfoResourcesPerSector> ResourcesPerSector {
+        public List<InfoResourcesPerSector> ResourcesPerSector
+        {
             get { return resourcesPerSector; }
             set { resourcesPerSector = value; }
         }
@@ -84,7 +92,8 @@ namespace PlataformaTransparencia.Modelos
         /// <summary>
         /// Arreglo con objetos conteniendo los tips a mostrar en datos consolidados de toda la historia
         /// </summary>
-        public List<Fact> Facts {
+        public List<Fact> Facts
+        {
             get { return facts; }
             set { facts = value; }
         }
@@ -94,7 +103,8 @@ namespace PlataformaTransparencia.Modelos
         /// Arreglo con objetos representando el grafico de recursos por sector en toda la historia. 
         /// Dentro de los objetos rawValue representa el alto de las barras, siendo 100 el valor más alto disponible y 0 el 0%
         /// </summary>
-        public List<InfoResourcesPerRegion> ResourcesPerRegion {
+        public List<InfoResourcesPerRegion> ResourcesPerRegion
+        {
             get { return resourcesPerRegion; }
             set { resourcesPerRegion = value; }
         }
@@ -104,7 +114,8 @@ namespace PlataformaTransparencia.Modelos
         /// Arreglo con objetos representando el grafico de recursos por sector en toda la historia. 
         /// Dentro de los objetos rawValue representa el alto de las barras, siendo 100 el valor más alto disponible y 0 el 0%.
         /// </summary>
-        public List<InfoResourcesPerDepartment> ResourcesPerDepartment {
+        public List<InfoResourcesPerDepartment> ResourcesPerDepartment
+        {
             get { return resourcesPerDepartment; }
             set { resourcesPerDepartment = value; }
         }
@@ -114,7 +125,8 @@ namespace PlataformaTransparencia.Modelos
         /// <summary>
         /// Arreglo con hasta 3 de las más próximas sesiones de OCADs TODO REVISAR.
         /// </summary>
-        public List<Object> Agenda {
+        public List<Object> Agenda
+        {
             get { return agenda; }
             set { agenda = value; }
         }
@@ -123,20 +135,23 @@ namespace PlataformaTransparencia.Modelos
         /// <summary>
         /// Es un arreglo de objetos para armar el mapa. 
         /// </summary>
-        public List<ConsolidatedDepartmentProjects> DepartmentProjectData {
+        public List<ConsolidatedDepartmentProjects> DepartmentProjectData
+        {
             get { return departmentProjectData; }
             set { departmentProjectData = value; }
         }
         private List<ConsolidatedDepartmentProjects> departmentProjectData = new List<ConsolidatedDepartmentProjects>();
 
 
-        public List<ProyectoConsolidadoPorMunicipio> MunicipioProjectData {
+        public List<ProyectoConsolidadoPorMunicipio> MunicipioProjectData
+        {
             get { return municipioProjectData; }
             set { municipioProjectData = value; }
         }
         private List<ProyectoConsolidadoPorMunicipio> municipioProjectData = new List<ProyectoConsolidadoPorMunicipio>();
 
-        public List<InfoProyectos> ProyectoProjectData {
+        public List<InfoProyectos> ProyectoProjectData
+        {
             get { return proyectoProjectData; }
             set { proyectoProjectData = value; }
         }
@@ -146,7 +161,8 @@ namespace PlataformaTransparencia.Modelos
         /// <summary>
         /// Es un arreglo de objetos para armar el mapa. 
         /// </summary>
-        public List<ConsolidateRegionsProjects> RegionProjectData {
+        public List<ConsolidateRegionsProjects> RegionProjectData
+        {
             get { return regionProjectData; }
             set { regionProjectData = value; }
         }
@@ -156,7 +172,8 @@ namespace PlataformaTransparencia.Modelos
         /// Propiedad de dodne se saca la fuete de la informacion 
         /// para la pagina.
         /// </summary>
-        public DataCommonSections DataCommonSections {
+        public DataCommonSections DataCommonSections
+        {
             get { return dataCommonSections; }
             set { dataCommonSections = value; }
         }
@@ -180,6 +197,8 @@ namespace PlataformaTransparencia.Modelos
 
         public int maxAnnioPresupuesto { get; set; }
 
+        public string anteriorVigencia { get; set; }
+
         /// <summary>
         /// Arreglo con objetos representando el grafico de proyectos por sector - obras
         /// </summary>
@@ -191,9 +210,21 @@ namespace PlataformaTransparencia.Modelos
         private List<InfoProjectPerSector> projectsPerSectorGroup = new List<InfoProjectPerSector>();
 
 
-        public itemConteoProjects countOngoingProjects { get;set; }
+        /// <summary>
+        /// Arreglo con objetos representando el grafico de proyectos por sector - obras
+        /// </summary>
+        public List<InfoProjectPerSector> PercentagePerSectorGroup
+        {
+            get { return percentagePerSectorGroup; }
+            set { percentagePerSectorGroup = value; }
+        }
+        private List<InfoProjectPerSector> percentagePerSectorGroup = new List<InfoProjectPerSector>();
 
-        public InfoPresupuestoEncabezado valPresupuestoEncabezado { get; set; }
+        public itemConteoProjects countOngoingProjects { get; set; }
+
+        public InfoPresupuestoEncabezado InfoVigenciaAnterior { get; set; }
+
+        public InfoPresupuestoEncabezado InfoVigenciaActual { get; set; }
 
         public List<string> aniospresupuesto = new List<string>();
 
@@ -204,5 +235,12 @@ namespace PlataformaTransparencia.Modelos
         public List<InfoOrganismosFinan> OrganismosFinanciadores = new List<InfoOrganismosFinan>();
 
         public ModelDataConsolidadoFinanciador ConsolidadoOrganismoFinanciador { get; set; } = new();
+
+
+        public List<InfoParticipacionSector> ParticipacionSector = new List<InfoParticipacionSector>();
+
+        public List<InfoParticipacionEntidad> ParticipacionEntidad = new List<InfoParticipacionEntidad>();
+
+        public itemFechasCorte fechasCorte { get; set; }
     }
 }

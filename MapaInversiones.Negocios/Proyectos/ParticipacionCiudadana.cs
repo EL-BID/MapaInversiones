@@ -666,7 +666,7 @@ namespace PlataformaTransparencia.Negocios.Project
         }
 
 
-        public ModelDataParticipacion ObtenerComentariosAproAsync(int page, int estado)
+        public ModelDataParticipacion ObtenerComentariosAproAsync(int page, int estado, int asociacion)
         {
             ModelDataParticipacion objReturn = new ModelDataParticipacion();
             var comentarios = new List<object>();
@@ -678,7 +678,7 @@ namespace PlataformaTransparencia.Negocios.Project
 
             int? total_registros = 0;
 
-            listInfo = (from x in _connection.ObtenerComentariosPorEstados(estado,1,0, page, reg_per_page, ref total_registros)
+            listInfo = (from x in _connection.ObtenerComentariosPorEstados(estado,asociacion,0, page, reg_per_page, ref total_registros)
                             select new itemcomentario {
                                 IdUsuario = x.IdUsuario,
                                 nom_usuario = x.Nombre,
@@ -699,7 +699,9 @@ namespace PlataformaTransparencia.Negocios.Project
                                 NombreTipoComentario = x.TipoComentario,
                                 CodEnteTerritorialBeneficiario = x.CodEnteTerritorialBeneficiario,
                                 nom_municipio = x.NombreMunicipio,
-                                nom_departamento = x.NombreDepartamento
+                                nom_departamento = x.NombreDepartamento,
+                                IdAsociacion = (int)x.IdAsociacion,
+                                CodigoContrato = x.CodigoContrato
 
                             }).OrderBy(p => p.fechaCreacion).ToList();
 

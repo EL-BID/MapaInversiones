@@ -6,7 +6,7 @@ using System.Text;
 
 namespace PlataformaTransparencia.Utilitarios
 {
-    [ExcludeFromCodeCoverage]
+    
     public class Utilidades
     {      
 

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PlataformaTransparencia.Modelos;
+using PlataformaTransparencia.Modelos.OrganismoFinanciador;
 using PlataformaTransparencia.Modelos.Proyectos;
 using PlataformaTransparencia.Negocios.Comunes;
 using PlataformaTransparencia.Negocios.Contracts;
 using PlataformaTransparencia.Negocios.Interfaces;
+using PlataformaTransparencia.Negocios.OrganismoFinanciador;
 
 namespace PlataformaTransparencia.Modulo.Principal.Controllers
 {
@@ -101,8 +103,28 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
             return objReturn;
         }
 
+        [HttpGet("GetInformacionGeneralProyectoPorAnioPresupuestal")]
+        public ModelDataPresupuestoAnualProyecto GetInformacionGeneralProyectoPorAnioPresupuestal()
+        {
+            string idProyecto = Request.Query.ContainsKey("idProyecto") ? Request.Query["idProyecto"].ToString() : string.Empty;
+            string annio = Request.Query.ContainsKey("anio") ? Request.Query["anio"].ToString() : string.Empty;
+            if (!int.TryParse(idProyecto, out int proyectoId)) return new();
+            if (!int.TryParse(annio, out int anio)) return new();
+            var dataPrespuestoAnualProyecto = BusquedasProyectosBLL.GetInformacionGeneralProyectoPorAnioPresupuestal(proyectoId, anio);
+            if (dataPrespuestoAnualProyecto == null) return new ModelDataPresupuestoAnualProyecto() {  EjecucionFinanciera=0, EjecucionFisica=0, PropuestoAsignadoVigencia=0, PropuestoEjecutado=0, PropuestoObligado=0 };
+            return dataPrespuestoAnualProyecto;
+        }
 
-       
+        [HttpGet("GetInformacionPresupuestalProyectoAnioPorClasificacionDeFondo")]
+        public List<ModelDataInformacionPresupuestalPorClasificacionDeFondo> GetInformacionPresupuestalProyectoAnioPorClasificacionDeFondo()
+        {
+            string idProyecto = Request.Query.ContainsKey("idProyecto") ? Request.Query["idProyecto"].ToString() : string.Empty;
+            string annio = Request.Query.ContainsKey("anio") ? Request.Query["anio"].ToString() : string.Empty;
+            if (!int.TryParse(idProyecto, out int proyectoId)) return new();
+            if (!int.TryParse(annio, out int anio)) return new();
+            return BusquedasProyectosBLL.GetInformacionPresupuestalProyectoAnioPorClasificacionDeFondo(proyectoId, anio);
+        }
+
 
         [HttpGet("GetProyectosNacional")]
         public List<InfoProyectos> GetProyectosNacional()
@@ -116,11 +138,11 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         }
 
         [HttpGet("GetProyectosNacionalfiltro")]
-        public List<InfoProyectos> GetProyectosNacionalfiltro(string campo)
+        public List<InfoProyectos> GetProyectosNacionalfiltro(string campo, int pagina, int cantidad)
         {
             List<InfoProyectos> objReturn = new List<InfoProyectos>();
 
-            objReturn = ConsolidadosNacionales.GetProyectosNacionalesfiltro(campo);
+            objReturn = ConsolidadosNacionales.GetProyectosNacionalesfiltro(campo, pagina, cantidad);
 
             return objReturn;
 

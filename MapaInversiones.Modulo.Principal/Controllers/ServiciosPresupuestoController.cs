@@ -51,15 +51,36 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
       }
     }
 
-        [HttpGet("GetRecursosPerfinalidad")]
-        public ModelPresupuestoData GetRecursosPerfinalidad(int anyo)
+        [HttpGet("GetRecursosPerPlan")]
+        public ModelPresupuestoData GetRecursosPerPlan(int anyo)
         {
             List<itemNiveles> objGrupo = new List<itemNiveles>();
             List<InfoConsolidadoPresupuesto> info = new List<InfoConsolidadoPresupuesto>();
             ModelPresupuestoData objReturn = new ModelPresupuestoData();
             try
             {
-                info = consolidadoPresupuesto.GetRecursosPerfinalidad(anyo);
+                info = consolidadoPresupuesto.GetRecursosPerPlan(anyo);
+                objReturn.InfoRecursos = info;
+                objReturn.Status = true;
+                return objReturn;
+            }
+            catch (Exception exception)
+            {
+                objReturn.Status = false;
+                objReturn.Message = "Error: " + exception.Message;
+                return objReturn;
+            }
+        }
+
+        [HttpGet("GetRecursosPerInstitucion")]
+        public ModelPresupuestoData GetRecursosPerInstitucion(int anyo)
+        {
+            List<itemNiveles> objGrupo = new List<itemNiveles>();
+            List<InfoConsolidadoPresupuesto> info = new List<InfoConsolidadoPresupuesto>();
+            ModelPresupuestoData objReturn = new ModelPresupuestoData();
+            try
+            {
+                info = consolidadoPresupuesto.GetRecursosPerInstitucion(anyo);
                 objReturn.InfoRecursos = info;
                 objReturn.Status = true;
                 return objReturn;

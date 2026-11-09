@@ -27,17 +27,21 @@
 			this.detectIE();
 
 			//=== Plugins ===\\
+			// 2026-11-06: se comentan las llamadas a módulos cuyo plugin no se carga en _Layout.cshtml y que ninguna
+			// vista usa (lightGallery, scrollToFixed, jquery.validate, isotope, spincrement). Fallaban con
+			// "is not a function" y cortaban el resto de init(). autosize ahora sí se carga en _Layout.cshtml.
+			// Si una vista nueva necesita alguno: cargar su plugin en el layout y descomentar la llamada.
 			this.autoSizeTextarea();
 			this.device();
 			this.popUp();
-			this.lightGallery();
-			this.scrollToFixed();
+			//this.lightGallery();
+			//this.scrollToFixed();
 			this.carusels();
-			this.forms();
-			this.isotopeProjects();
-			this.isotopeGallery();
-			this.isotopeGalleryMasonry();
-			this.spincrement();
+			//this.forms();
+			//this.isotopeProjects();
+			//this.isotopeGallery();
+			//this.isotopeGalleryMasonry();
+			//this.spincrement();
 
 		},
  
@@ -366,13 +370,19 @@
 			$(this).parent().toggleClass("open");
 
 		},
-		headerNavbarNotEl: function(e) {
-
-			if ($(e.originalEvent.target).closest(".header-navbar").length) return;
+		headerNavbarNotEl: function (e) {
+			// Si no hay originalEvent, asumimos que el evento fue disparado programáticamente y salimos
+			if (!e.originalEvent) {
+				return;
+			}
+			var target = e.originalEvent.target || e.target;
+			if ($(target).closest(".header-navbar").length) {
+				return;
+			}
 			$(".header-navbar").removeClass("open");
 			e.originalEvent.stopPropagation();
-
 		},
+
 
 		//=== Side toggle ===\\
 		sideOpen: function(e) {

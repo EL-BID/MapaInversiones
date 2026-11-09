@@ -8,27 +8,29 @@ namespace PlataformaTransparencia.Negocios.Interfaces
 {
   public interface IPresupuestoBLL
   {
-    public InfoConsolidadoPresupuesto GetConsolidadoPeriodos(int anyo);
+        public List<InfoConsolidadoPresupuesto> GetConsolidadoPeriodos(int anyo);
 
-    public List<InfoConsolidadoPresupuesto> GetRecursosPerfinalidad(int annio);
+        public List<InfoConsolidadoPresupuesto> GetRecursosPerPlan(int annio);
 
-    public List<InfoPerSector> ObtenerSectoresPerNombre(int anyo);
+        public List<InfoConsolidadoPresupuesto> GetRecursosPerInstitucion(int annio);
 
-    public List<InfograficoFuentes_Nivel_1> ObtDistribucionBySectorFuentes(int annio, string opcion, string tipo);
+        public List<InfoPerSector> ObtenerSectoresPerNombre(int anyo);
 
-    public List<itemGenerico> ObtenerOrganismosPerNombre(int anyo);
+        public List<InfograficoFuentes_Nivel_1> ObtDistribucionBySectorFuentes(int annio, string opcion, string tipo);
 
-    public List<infograficoEntidadPerPresup> GetInfograficoPerEntidad(int annio, string id, string tipo);
+        public List<itemGenerico> ObtenerOrganismosPerNombre(int anyo);
 
-    public List<InfoConsolidadoPresupuesto> ObtenerGastoEntidades(int anyo, List<string> filtro_sec);
+        public List<infograficoEntidadPerPresup> GetInfograficoPerEntidad(int annio, string id, string tipo);
 
-    public List<InformationGraphics> ObtenerEntidadesPerNombre(int anyo);
+        public List<InfoConsolidadoPresupuesto> ObtenerGastoEntidades(int anyo, List<string> filtro_sec);
 
-    public List<InfoConsolidadoPresupuesto> ObtenerGastoPerTiempoEntidades(int anyo, List<string> filtro_sec);
+        public List<InformationGraphics> ObtenerEntidadesPerNombre(int anyo);
 
-    public List<itemGenPresupuesto> GetInfograficoPerProyecto(int annio, string id);
+        public List<InfoConsolidadoPresupuesto> ObtenerGastoPerTiempoEntidades(int anyo, List<string> filtro_sec);
+
+        public List<itemGenPresupuesto> GetInfograficoPerProyecto(int annio, string id);
 
 
 
-  }
+    }
 }

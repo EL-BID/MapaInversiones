@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PlataformaTransparencia.Modelos.Comunes;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity.Spatial;
 
 namespace PlataformaTransparencia.Modelos.Proyectos
@@ -34,6 +36,12 @@ namespace PlataformaTransparencia.Modelos.Proyectos
     public string GrupoFuncional { get; set; }
     public string PartidaPresupuestaria { get; set; }
     public string IdMunicipio { get; set; }
-        public string NombreDepartamento { get; set; }
-    }
+    public string NombreDepartamento { get; set; }
+    public List<Period> Periodos { get; set; }
+    /// <summary>
+    /// True cuando la ubicación fue resuelta como centroide de la Comuna/Corregimiento
+    /// asignado al proyecto (no coordenada exacta desde Georreferenciacion).
+    /// </summary>
+    public bool IsApproximate { get; set; }
+  }
 }

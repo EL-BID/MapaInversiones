@@ -10,6 +10,7 @@ using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos.Comunes;
 using PlataformaTransparencia.Modelos.Entidad;
 using LinqToDB;
+using System.Security.Cryptography;
 
 namespace PlataformaTransparencia.Negocios.Sectores
 {
@@ -104,7 +105,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                  Duracion = Math.Round((decimal)perfilSector.DuracionPromedioProyectos, 2),
                                  CantProyectos = Math.Round((decimal)perfilSector.NumeroProyectos, 2),
                              }).ToList();
-            //objReturn = queryInfo;
+           
 
             return objReturn.FirstOrDefault();
         }
@@ -236,35 +237,32 @@ namespace PlataformaTransparencia.Negocios.Sectores
             {
                 List<Modelos.Comunes.Departamento> lstDepartamentos = ConsultasComunes.ObtenerDepartamentosPorSectores(codigo_filtro);
                 lstDepartamentos.Add(new Modelos.Comunes.Departamento { IdDepartamento = "0", NombreDepartamento = "Proyectos Nacionales" });
-
-
-                var RecursosPerObjetoQuery = (from info in DataModel.VwPresupuestoXProyInvs
-                                              where info.Periodo.ToString().Contains(anio)
-                                              group info by new { info.IdProyecto, info.Nombreproyecto} into g
+                var RecursosPerObjetoQuery = (from vslpdi in DataModel.VwSectorListadoPorDeptoInvs
+                                              join vff in DataModel.VwFuentesFinanciacions2024 on vslpdi.IdProyecto equals vff.IdProyecto
+                                              where vslpdi.IdSector.ToString()== sector_id 
+                                              && vff.Periodo.HasValue
+                                              && vff.Periodo.ToString()== anio
+                                              group vff by new { vff.IdProyecto } into g
                                               select new itemGenPresupuesto
                                               {
-
-                                                  id = g.Key.IdProyecto.ToString(),
-                                                  ejecutado = g.Sum(x => x.ValorEjecutado.Value) 
-
+                                                id = g.Key.IdProyecto.ToString(),
+                                                ejecutado = g.Sum(x => x.ValorEjecutado.Value),
+                                                comprometido = g.Sum(x => x.ValorVigente.Value)
                                               });
- 
 
-
-                var proyectosXEstadoIdDptosql = (from vistaSectorEnte in DataModel.VwSectorListadoPorDeptoInvs
+        var proyectosXEstadoIdDptosql = (from vistaSectorEnte in DataModel.VwSectorListadoPorDeptoInvs
                                               join estado in DataModel.Estados on vistaSectorEnte.IdEstado equals estado.IdEstado
                                               join proyecto in DataModel.Proyectos on vistaSectorEnte.IdProyecto equals proyecto.IdProyecto
                                               from ejecutado in RecursosPerObjetoQuery.LeftJoin( pr => int.Parse(pr.id)== proyecto.IdProyecto)
                                               where
                                               vistaSectorEnte.IdSector.ToString() == sector_id
                                                && (vistaSectorEnte.IdEstado.ToString() == id_estado || id_estado == null)
-                                               && (proyecto.FechaInicioProyecto.Year==year || proyecto.FechaFinProyecto.Year== year)
+                                               && (proyecto.FechaInicioProyecto.Year<=year && proyecto.FechaFinProyecto.Year>= year)
                                               select new
                                               {
                                                   proyecto.IdProyecto,
                                                   proyecto.NombreProyecto,
-                                                  proyecto.VlrTotalProyectoFuenteRegalias,
-                                                  //proyecto.VlrTotalProyectoTodasLasFuentes,
+                                                  ejecutado.comprometido,
                                                   ejecutado.ejecutado,
                                                   CodigoSnip = proyecto.CodigoBPIN,
                                                   vistaSectorEnte.IdDepartamento
@@ -276,13 +274,12 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                               from ejecutado in RecursosPerObjetoQuery.LeftJoin(pr => int.Parse(pr.id) == proyecto.IdProyecto)
                                               where vistaSectorEnte.IdSector.ToString() == sector_id
                                                && (vistaSectorEnte.IdEstado.ToString() == id_estado || id_estado == null)
-                                               && (proyecto.FechaInicioProyecto.Year == year || proyecto.FechaFinProyecto.Year == year)
+                                               && (proyecto.FechaInicioProyecto.Year <= year && proyecto.FechaFinProyecto.Year >= year)
                                               select new
                                               {
                                                   proyecto.IdProyecto,
                                                   proyecto.NombreProyecto,
-                                                  proyecto.VlrTotalProyectoFuenteRegalias,
-                                                  //proyecto.VlrTotalProyectoTodasLasFuentes,
+                                                  ejecutado.comprometido,
                                                   ejecutado.ejecutado,
                                                   CodigoSnip = proyecto.CodigoBPIN,
                                                   vistaSectorEnte.IdDepartamento
@@ -294,7 +291,7 @@ namespace PlataformaTransparencia.Negocios.Sectores
                                                   {
                                                       IdProyecto = proyecto.IdProyecto,
                                                       NombreProyecto = proyecto.NombreProyecto,
-                                                      VlrTotalProyectoFuenteRegalias = proyecto.VlrTotalProyectoFuenteRegalias,
+                                                      VlrTotalProyectoFuenteRegalias = proyecto.comprometido,
                                                       VlrTotalProyectoTodasLasFuentes = proyecto.ejecutado,
                                                       CodigoSnip = proyecto.CodigoSnip,
                                                       IdDepartamento = dpto.IdDepartamento,
@@ -333,7 +330,6 @@ namespace PlataformaTransparencia.Negocios.Sectores
             if (departamento_id is not null) { deptoid = departamento_id.Split(","); }
 
             List<string> anios = (from vistaSectorEnte in DataModel.VwSectorListadoPorDeptoInvs
-                                  //join estado in DataModel.Estados on vistaSectorEnte.IdEstado equals estado.IdEstado
                                   join proyecto in DataModel.Proyectos on vistaSectorEnte.IdProyecto equals proyecto.IdProyecto
                                   where vistaSectorEnte.IdSector.ToString() == sector_id 
                                   && (deptoid.Contains(vistaSectorEnte.IdDepartamento) || departamento_id == null)
@@ -351,15 +347,15 @@ namespace PlataformaTransparencia.Negocios.Sectores
             if (string.IsNullOrEmpty(sector_id)) return objReturn;
             objReturn.location_id = sector_id;
             List<string> anios = (from vistaSectorEnte in DataModel.VwSectorListadoPorDeptoInvs
-                                  join proyecto in DataModel.Proyectos on vistaSectorEnte.IdProyecto equals proyecto.IdProyecto
+                                  join fuente in DataModel.VwFuentesFinanciacions2024 on vistaSectorEnte.IdProyecto equals fuente.IdProyecto
                                   where vistaSectorEnte.IdSector.ToString() == sector_id
                                   && vistaSectorEnte.IdDepartamento.Equals(departamento_id)
-                                  group proyecto by proyecto.FechaInicioProyecto.Year into g
+                                  group fuente by fuente.Periodo into g
                                   orderby g.Key ascending
                                   select g.Key.ToString()).ToList();
-            if (anios != null && anios.Count > 1) anios = anios.OrderBy(x => x).ToList();
-            objReturn.Anios = anios;
-            return objReturn;
+          if (anios != null && anios.Count > 1) anios = anios.OrderBy(x => x).ToList();
+                objReturn.Anios = anios;
+                return objReturn;
         }
 
     }

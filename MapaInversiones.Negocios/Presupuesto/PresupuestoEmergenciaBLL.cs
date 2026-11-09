@@ -1,4 +1,5 @@
-﻿using PlataformaTransparencia.Infrastructura.DataModels;
+﻿using Microsoft.Extensions.Configuration;
+using PlataformaTransparencia.Infrastructura.DataModels;
 using PlataformaTransparencia.Modelos;
 using PlataformaTransparencia.Modelos.Emergencia;
 using PlataformaTransparencia.Modelos.Presupuesto;
@@ -13,6 +14,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
     public class PresupuestoEmergenciaBLL : IPresupuestoEmergenciaBLL
     {
         private readonly TransparenciaDB _connection;
+        private IConfiguration _configuration;
         private List<Infrastructura.DataModels.Proyecto> lstProyectosConsistentes;
         private List<EnteTerritorial> lstDepartamentosIni;
         private List<EnteTerritorial> lstMunicipiosIni;
@@ -20,9 +22,10 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
         private List<InfoProyectos> lstProyectosAll;
         private List<InfoProyectos> lstProyNacionales;
 
-        public PresupuestoEmergenciaBLL(TransparenciaDB connection)
+        public PresupuestoEmergenciaBLL(TransparenciaDB connection, IConfiguration configuration)
         {
             _connection = connection;
+            _configuration = configuration;
             lstProyectosConsistentes = new();
             lstDepartamentosIni = new();
             lstMunicipiosIni = new();
@@ -349,7 +352,7 @@ namespace PlataformaTransparencia.Negocios.Presupuesto
             ModelPresupuestoEmergenciaData objReturn = new();
             #region DATOSCONTRATOS
             ///RECUADRO CONSOLIDADOS NEW VERSION
-            Home.HomeBLL objDatosConsolidados = new(_connection);
+            Home.HomeBLL objDatosConsolidados = new(_connection, _configuration);
             objReturn.ResumenDatosContratos = objDatosConsolidados.ObtenerDatosContratosGestion(tipoEmergencia);
             #endregion
             #region RECXOBJETOGASTO

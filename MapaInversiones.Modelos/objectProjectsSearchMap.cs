@@ -29,7 +29,12 @@ namespace PlataformaTransparencia.Modelos
         /// </summary>
         public bool UsanMismaGeorefenciacion { get; set; }
 
-
+        /// <summary>
+        /// True cuando la ubicación fue resuelta como centroide de la Comuna/Corregimiento
+        /// asignado al proyecto (no coordenada exacta desde Georreferenciacion).
+        /// El frontend agrupa estos pines como "aproximados".
+        /// </summary>
+        public bool isApproximate { get; set; }
 
     }
     /// <summary>

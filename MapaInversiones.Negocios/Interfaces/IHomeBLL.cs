@@ -13,9 +13,9 @@ namespace PlataformaTransparencia.Negocios.Home
 
         public List<HierarchyModel> GetSearchHierarchyModel();
 
-        public List<InfoProjectPerSector> ObtenerProyectoPorSectorGroupHome(int anyo);
+        public List<InfoParticipacionSector> ObtenerPorcentajeParticipacionSector(string Annio);
 
-        public List<InfoOrganismosFinan> ObtenerOrganismosPorFuenteHome(string Annio, int IdFuente);
+        public List<InfoParticipacionEntidad> ObtenerPorcentajeParticipacionEntidad(string Annio);
 
     }
 }

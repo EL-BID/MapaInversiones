@@ -29,6 +29,9 @@ namespace PlataformaTransparencia.Negocios.Contracts
         private List<decimal> topleft = new List<decimal>();
         private int zoom = -1;
         private List<int> programa = new List<int>();
+        // formato=pines: lo manda el mapa Azure (main_azuremaps.js) para recibir un pin por proyecto (ObtenerPinesIndividuales).
+        // Sin el parámetro se mantiene el formato del mapa clásico /MapView (ObtenerInfograficos).
+        private bool pinesIndividuales = false;
         private IConsultasComunes _consultasComunes;
         private readonly IBusquedasProyectosBLL BusquedasProyectosBLL;
 
@@ -54,7 +57,7 @@ namespace PlataformaTransparencia.Negocios.Contracts
 
             try
             {
-                string key = "BusquedaTabProyectos" + _consultasComunes.ObtenerKeyPorEstadoFiltro(filtro, true);
+                string key = "BusquedaTabProyectos" + (pinesIndividuales ? "Pines" : "") + _consultasComunes.ObtenerKeyPorEstadoFiltro(filtro, true);
 
                 if (filtro.Zoom < 6)
                 {
@@ -63,7 +66,9 @@ namespace PlataformaTransparencia.Negocios.Contracts
 
                 if (!ShortCacheHelper.Get(key, out objReturn))
                 {
-                    list = BusquedasProyectosBLL.ObtenerInfograficos(filtro, out cantidadProyectos, out valorRegalias, out valorTotalRegalias);
+                    list = pinesIndividuales
+                        ? BusquedasProyectosBLL.ObtenerPinesIndividuales(filtro, out cantidadProyectos, out valorRegalias, out valorTotalRegalias)
+                        : BusquedasProyectosBLL.ObtenerInfograficos(filtro, out cantidadProyectos, out valorRegalias, out valorTotalRegalias);
                     this.DataProjectSearchMap.objects = list;
                     this.DataProjectSearchMap.approvedMoney = Math.Round(valorRegalias);
                     this.DataProjectSearchMap.approvedMoneyTotal = Math.Round(valorTotalRegalias);
@@ -155,6 +160,10 @@ namespace PlataformaTransparencia.Negocios.Contracts
                 else if (parameters.Keys.Contains<string>("periods"))
                 {
                     this.periods = (from n in parameters["periods"].Split(new char[] { ',' }) select int.Parse(n, CultureInfo.InvariantCulture)).ToList<int>();
+                }
+                if (parameters.Keys.Contains<string>("formato"))
+                {
+                    this.pinesIndividuales = parameters["formato"] == "pines";
                 }
             }
             catch (Exception exception)

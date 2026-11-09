@@ -237,7 +237,7 @@ function obtenerPresupuestoEjecutadoPorEmergencia(anio) {
             var item = presupuestoEjecutadoPorEmergencia[i];
             emergenciaCarrusel = "<div class='carousel-cell col-lg-3' style='height:200px;'><div class='card'><div class='card-header'>";//
             emergenciaCarrusel = emergenciaCarrusel + item.nombre + "</div><div class='card-body d-flex'><span class='bigNumber'>";
-            emergenciaCarrusel = emergenciaCarrusel + "$ " + parseFloat(item.presupuestoEjecutado).toLocaleString('es-DO') + " millones </span><span class='label'>Monto total ejecutado</span></div>";
+            emergenciaCarrusel = emergenciaCarrusel + "$ " + parseFloat(item.presupuestoEjecutado).toLocaleString('es-CO') + " millones </span><span class='label'>Monto total ejecutado</span></div>";
             if (item.enlace == "") {
                 emergenciaCarrusel = emergenciaCarrusel + "</div></div>";
             }
@@ -269,7 +269,7 @@ function obtenerPresupuestoEjecutadoPorEmergencia(anio) {
 
             let emergenciaOtrosCarrusel = "<div class='carousel-cell col-lg-3'><div class='card'><div class='card-header'>";//
             emergenciaOtrosCarrusel += "Otras</div><div class='card-body d-flex'><span class='bigNumber'>";
-            emergenciaOtrosCarrusel += "$ " + parseFloat(presupuestoEjecutado).toLocaleString('es-DO') + " millones </span><span class='label'>Monto total ejecutado</span></div>";
+            emergenciaOtrosCarrusel += "$ " + parseFloat(presupuestoEjecutado).toLocaleString('es-CO') + " millones </span><span class='label'>Monto total ejecutado</span></div>";
             emergenciaOtrosCarrusel += "</div></div>";
 
             var $cellElems = $(emergenciaOtrosCarrusel);
@@ -285,8 +285,8 @@ function obtenerPresupuestoGeneralPerAnio(anio) {
     if (presupuestoAnio != undefined && presupuestoAnio.length > 0) {
 
         presupuestoEjecutado = presupuestoAnio[0].presupuestoEjecutado;
-        $("#presupuestoAsignadoPorAnio").text("$ " + parseFloat(presupuestoAnio[0].presupuestoAsignado).toLocaleString('es-DO') + " millones");
-        $("#presupuestoEjecutadoPorAnio").text("$ " + parseFloat(presupuestoEjecutado).toLocaleString('es-DO') + " millones");
+        $("#presupuestoAsignadoPorAnio").text("$ " + parseFloat(presupuestoAnio[0].presupuestoAsignado).toLocaleString('es-CO') + " millones");
+        $("#presupuestoEjecutadoPorAnio").text("$ " + parseFloat(presupuestoEjecutado).toLocaleString('es-CO') + " millones");
         $("#porcentajeEjecutadoPorAnio").text(presupuestoAnio[0].porcentajeAvance);
     }
 }

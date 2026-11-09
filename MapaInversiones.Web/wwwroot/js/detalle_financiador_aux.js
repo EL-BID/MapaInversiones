@@ -27,6 +27,9 @@ function anioSeleccionadoFinanciador(sel) {
     obtenerPerfilPorAnioFinanciador();
 }
 function obtenerPerfilPorAnioFinanciador() {
+    console.log("Anio", anio);
+    console.log("CodigoFinanciador", codigoFinanciador);
+    console.log("Entré a obtenerDatosPerOrganismos desde obtenerPerfilPorAnioFinanciador");
 
     obtenerDatosPerOrganismos(anio, codigoFinanciador, 'organismo');
     obtenerDetalleFinanciador(anio, codigoFinanciador);
@@ -60,7 +63,8 @@ function obtenerInformacionMontoFinanciado(data) {
         '<div class="wrap-desc-entidad d-flex">' +
         '<div class="ic-wrap"><img src="../img/svg-icons/ICO-Org-008.svg" alt="Monto"></div>' +
         '<div class="desc-data">' +
-        '<div class="executeV"><strong>Monto total financiado</strong></div>' + '<div id="montoTotalFinanciado" class="organismoN">RD' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(data.montoFinanciado) + 'M</div>' +
+        '<div class="executeV"><strong>Monto total financiado</strong></div>' +
+        '<div id="montoTotalFinanciado" class="organismoN">RD' + new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 0 }).format(data.montoFinanciado) + 'M</div>' +
         '</div>' +
         '</div>' +
         '</div>' +
@@ -268,6 +272,7 @@ function obtenerProyectosPorFinanciadorAnio(anio, codigoFinanciador) {
             codigoFinanciador: codigoFinanciador
         }
     }).done(function (data) {
+        //console.log(data);
         proyectos = data.proyectos;
         generarDivTablaDeProyectos();
     }).fail(function (xhr, ajaxOptions, thrownError) {

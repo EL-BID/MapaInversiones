@@ -13,6 +13,7 @@ using PlataformaTransparencia.Negocios.BLL.Contracts;
 using PlataformaTransparencia.Negocios.Home;
 using SolrNet;
 using SolrNet.Commands.Parameters;
+using Microsoft.Extensions.Configuration;
 
 namespace PlataformaTransparencia.Modulo.Principal.Controllers
 {
@@ -22,27 +23,29 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         private readonly TransparenciaDB _connection;
         private ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> _solr;
         private IHomeBLL consolidadosHome;
+        private readonly IConfiguration _configuration;
 
         public List<ContratosConsolidado> Consolidados { get; set; }
 
 
-        public HomeController(ILogger<HomeController> logger, TransparenciaDB connection, ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> solr, IHomeBLL consolidadosHomeBLL)
+        public HomeController(IConfiguration configuration, ILogger<HomeController> logger, TransparenciaDB connection, ISolrOperations<PlataformaTransparencia.Modelos.SolrResponse> solr, IHomeBLL consolidadosHomeBLL)
         {
             _logger = logger;
             _connection = connection;
             _solr = solr;
             consolidadosHome = consolidadosHomeBLL;
+            _configuration = configuration;
         }
         public ActionResult Index()
         {
-            HomeContract homeContract = new HomeContract(_connection);
+            HomeContract homeContract = new HomeContract(_configuration, _connection);
             homeContract.Fill();
             return View(homeContract.HomeModel);
-  
+
         }
 
         [HttpGet("Search/{SearchString}")]
-        public async Task<List<PlataformaTransparencia.Modelos.SolrResponse>> SearchAsync(string SearchString = "", string Type = "", string Id = "", int start = 0, int sort=0, int rows = 10)
+        public async Task<List<PlataformaTransparencia.Modelos.SolrResponse>> SearchAsync(string SearchString = "", string Type = "", string Id = "", int start = 0, int sort = 0, int rows = 10)
         {
             return (List<PlataformaTransparencia.Modelos.SolrResponse>)await new MySolrRepository(_solr).Search(SearchString, Type, Id, start, sort, rows);
         }
@@ -55,7 +58,7 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         }
 
         [HttpGet]
-        public ViewResult BusquedaResultados(string SearchString = "", string Type="", string Id = "", int start = 0, int sort=0, int rows = 10)
+        public ViewResult BusquedaResultados(string SearchString = "", string Type = "", string Id = "", int start = 0, int sort = 0, int rows = 10)
         {
             var ListResultadosBusqueda = SearchAsync(SearchString, Type, Id, start, sort, rows).Result;
             var busquedaViewModel = new PlataformaTransparencia.Modelos.ResultadoBusquedaViewModel {
@@ -74,8 +77,8 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                 };
                 busquedaViewModel.ListaResultados.Add(busquedaItem);
             }
-            busquedaViewModel.TotalResultados = (ListResultadosBusqueda.Count>0 ? ListResultadosBusqueda[0].numFound : busquedaViewModel.ListaResultados.Count);
-            busquedaViewModel.Type= (Type!="" ? Type : "");
+            busquedaViewModel.TotalResultados = (ListResultadosBusqueda.Count > 0 ? ListResultadosBusqueda[0].numFound : busquedaViewModel.ListaResultados.Count);
+            busquedaViewModel.Type = (Type != "" ? Type : "");
             busquedaViewModel.ListaJerarquia = consolidadosHome.GetSearchHierarchyModel();
             return View(busquedaViewModel);
         }
@@ -103,11 +106,11 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
                     Sector = item.Descripcion,
                     Url = item.Url,
                     Type = item.Type,
-                    numFound=item.numFound
+                    numFound = item.numFound
                 };
                 busquedaViewModel.ListaResultados.Add(busquedaItem);
             }
-            busquedaViewModel.TotalResultados =  (ListResultadosBusqueda.Count>0 ? ListResultadosBusqueda[0].numFound : busquedaViewModel.ListaResultados.Count);
+            busquedaViewModel.TotalResultados = (ListResultadosBusqueda.Count > 0 ? ListResultadosBusqueda[0].numFound : busquedaViewModel.ListaResultados.Count);
             busquedaViewModel.ListaJerarquia = consolidadosHome.GetSearchHierarchyModel();
             return busquedaViewModel.ListaResultados;
         }
@@ -140,6 +143,8 @@ namespace PlataformaTransparencia.Modulo.Principal.Controllers
         {
             return View();
         }
+
+        
 
     }
 }

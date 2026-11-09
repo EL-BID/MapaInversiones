@@ -18,7 +18,7 @@ namespace PlataformaTransparencia.Modelos
         public decimal TotalAprobado { get; set; }
         public decimal TotalEjecutado { get; set; }
 
-        public InfoConsolidadoPresupuesto InfoConsolidado { get; set; }
+        public List<InfoConsolidadoPresupuesto> InfoConsolidado { get; set; }
 
         public List<InfoConsolidadoPresupuesto> ListInfoConsolidado { get; set; }
 

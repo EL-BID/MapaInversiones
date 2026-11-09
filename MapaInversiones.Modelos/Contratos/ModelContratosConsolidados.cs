@@ -13,5 +13,8 @@ namespace PlataformaTransparencia.Modelos.Contratos
         public string? MaxYear { get; set; }
 
         public List<ContratosConsolidado> selectCon { get; set; }
+        public string Entidad { get; set; }
+
+        public string tab_enlace { get; set; }
     }
 }

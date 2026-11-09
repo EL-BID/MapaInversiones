@@ -28,7 +28,7 @@ namespace PlataformaTransparencia.Modelos.Comunes
             ConstruirListaDeAños(AñoInicial, AñoFinal);
         }
 
-        [ExcludeFromCodeCoverage]
+        
         private void ConstruirListaDeAños(int añoInicio, int añoFin)
         {
             int añoMaximo = añoFin;

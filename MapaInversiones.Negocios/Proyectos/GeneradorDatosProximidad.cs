@@ -49,14 +49,17 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             decimal latitudInferior = bottomRight[0];
             decimal longitudDer = bottomRight[1];
 
-            if (latitudSuperior > 19.9M)
-                latitudSuperior = 19.9M;//Punto mas al Oeste
-            if (latitudInferior < 17.58M)
-                latitudInferior = 17.58M;//Punto mas al Este
-            if (longitudIzq < -71.96M)
-                longitudIzq = -71.96M;//Punto mas al Norte
-            if (longitudDer > -68.15M)
-                longitudDer = -68.15M;//Punto mas al oeste
+            // Límites de Bucaramanga (comunas + corregimientos, cartografía 2026-11-06, con margen).
+            // Antes tenía los de Cali (3.20 a 3.57 / -76.88 a -76.39, herencia del fork) y por eso nunca
+            // encontraba proyectos de Bucaramanga.
+            if (latitudSuperior > 7.27M)
+                latitudSuperior = 7.27M;//Punto mas al Norte
+            if (latitudInferior < 7.06M)
+                latitudInferior = 7.06M;//Punto mas al Sur
+            if (longitudIzq < -73.18M)
+                longitudIzq = -73.18M;//Punto mas al Oeste
+            if (longitudDer > -73.03M)
+                longitudDer = -73.03M;//Punto mas al Este
 
             decimal incrementoLatitud = Math.Abs(latitudSuperior - latitudInferior) / segmentosCuadricula;
             decimal incrementoLongitud = Math.Abs(longitudIzq - longitudDer) / segmentosCuadricula;
@@ -143,6 +146,7 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             retonroProyecto.latitude = (decimal)infoProyectos.Geography.Latitude;
             retonroProyecto.longitude = (decimal)infoProyectos.Geography.Longitude;
             retonroProyecto.location = infoProyectos.NombreMunicipio;
+            retonroProyecto.isApproximate = infoProyectos.IsApproximate;
 
             TotalCantidadProyectos++;//juanka
             TotalValorRegalias += retonroProyecto.value;
@@ -162,6 +166,8 @@ namespace PlataformaTransparencia.Negocios.Proyectos
             retonroProyecto.totalValue = Math.Round(infoProyectos.Sum(p => p.Value));
             retonroProyecto.approvedTotalMoney = Math.Round(infoProyectos.Sum(p => p.approvedTotalMoney));
             retonroProyecto.type = CommonConstants.ProjectsGroup;
+            // Un grupo es "aproximado" si todos sus proyectos lo son (cayeron sobre el mismo centroide).
+            retonroProyecto.isApproximate = infoProyectos.All(p => p.IsApproximate);
 
             TotalCantidadProyectos += retonroProyecto.count;
             TotalValorRegalias += retonroProyecto.totalValue;

@@ -1,16 +1,30 @@
 ﻿@inject OrchardCore.IOrchardHelper Orchard
-    <!--CONTACT US-->
-<!-- Call to action-->
+<section class="section data-source border-t-1" id="data-fuente-cortes">
+    <div class="container">
+        <div class="fuentes-datos">
+            <div class="section-heading heading-center py-4">
+                <h2 class="h3">Fuentes de los datos</h2>
+            </div>
+            <div id="datosAbiertosFooter" class="contenedor-columnas">
+               
+            </div>
+        </div>
+    </div>
+
+</section>
 
 @if (ViewData["ShowContacts"] as bool? ?? true)
 {
     <section class="section border-t-1">
         <div class="container">
             <div class="col-12 text-center">
-                <h3>&#191;No has encontrado lo que estabas buscando&#63;</h3>
+                <h2 class="h3">¿No encontraste lo que buscabas?</h2>
                 <div class="section-btns justify-content-center py-3">
-                    <a aria-label="Contactenos" href="/Contactanos" class="btn btn-cards">
-                        <span>CONT&Aacute;CTANOS</span>
+                    <a aria-label="Contactenos" href="/Contactanos" class="btn btn-primary">
+                        <span>Contactános</span>
+                        <svg class="btn-icon-right" viewBox="0 0 13 9" width="13" height="9">
+                            <use xlink:href="../../../img/sprite.svg#arrow-right"></use>
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -21,14 +35,16 @@
 }
 
 
+
 <footer class="footer">
     <div class="footer-main">
+
         <div class="container">
-            <div class="row">
-                <div class="col-lg-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
                     <!-- Begin company info -->
                     <div class="footer-company-info">
-                        <div class="footer-company-top">
+                        <div class="footer-company-top text-center">
                             <a href="/">
                                 <img class="img-fluid" src="/img/logoMIV.svg" alt="Logo MapaInversiones">
                             </a>
@@ -40,7 +56,7 @@
                     <!-- End company info -->
 
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-10">
                     <div class="items">
                         @{
                         var menu = await Orchard.GetContentItemByHandleAsync("alias:second-menu");
@@ -99,15 +115,15 @@
             </div>
 
         </div>
+        
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="footer-company-links text-lg-center py-5">
 
-                        <a href="/Acercade">Acerca de MapaInversiones</a>
-                        <a href="/CentroAyuda?id=2">Centro de Ayuda</a>
+                        <a href="/Acercade">Acerca de Échele Ojo Mano</a>
                         <a href="/MarcoLegal">Marco Legal</a>
-                        <a href="/Contactanos">Contáctenos</a>
+                        <a href="/Contactanos">Contáctanos</a>
                         <a href="/PoliticasdePrivacidad">Pol&iacute;tica de Privacidad</a>
                         <a href="/TerminosyCondiciones">T&eacute;rminos y Condiciones</a>
                         
@@ -116,31 +132,103 @@
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
+    <div class="logos-entidades">
+        <a href="https://www.iadb.org/es/quienes-somos/topicos/modernizacion-del-estado/mapainversiones" target="_blank" rel="noopener">
+            <img alt="Logo MapaInversiones" class="img-fluid footerMIV" src="~/img/Footer/logo-mapa-inversiones.svg" />
+        </a>
+        <a href="https://www.iadb.org/es" target="_blank" rel="noopener">
+            <img alt="Logo Banco Inter-Americano de Desarrollo" class="img-fluid footerMIV" src="~/img/Footer/logo-bid.svg" />
+        </a>
+    </div>
     <div class="footer-bottom">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12 justify-content-center">
+            <div class="row">
+                <div class="col-lg-3 justify-content-center">
                     <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Gobierno" class="img-fluid" src="~/img/logoEntidad.svg" />
-                    </a>
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Entidad" class="img-fluid" src="~/img/logoEntidad2.svg" />
-                    </a>
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Logo Entidad" class="img-fluid" src="~/img/logoEntidad0.svg" />
-                    </a>
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Logo Entidad" class="img-fluid" src="~/img/logoEntidad3.svg" />
-                    </a>
-                    <br />
+                        <img alt="Logo Alcaldía de Bucaramanga" class="img-fluid" src="~/img/logoGobierno_w.svg" />
+                    </a>                  
+                </div>
+                <div class="col-lg-5">
+                    <span class="h4">
+                        Ubicación
+                    </span><br />
+                    ALCALDIA DE BUCARAMANGA
+                    <p>
+                        Dirección Fase I: Calle 35 # 10-43, Bucaramanga, Santander, Colombia.
 
-                    <a href="#" target="_blank" rel="noopener">
-                        <img alt="Logo Mapainversiones" class="img-fluid footerMIV" src="~/img/Footer/logo-mapa-inversiones.png" />
-                    </a>
+                    </p>
+                    <p>
+                        Dirección Fase II: Carrera 11 # 34-52, Bucaramanga, Santander, Colombia
+
+                    </p>
+                    <p>
+                        Código Postal: 680006. Código Dane: 68001.
+
+                    </p>
+                    <p>
+                        Horario de Atención: Lunes a jueves de 7:30 a.m. a 12:00 m y de 1:00 p.m. a 5:00 p.m. / Viernes jornada continua en el horario de 7:00 a.m. a 4:00 p.m., con 30 minutos de descanso al medio día.
+
+                    </p>
+                    <p>
+                        Horario de Atención CAME (Central):
+
+                    </p>
+                    <p>
+                        Lunes a jueves: 7:30 a.m. a 12:00 m y de 1:00 p.m. a 5:00 p.m.
+
+                    </p>
+                    <p> Viernes: 7:00 a.m. a 4:00 p.m. en Jornada Continua con 30 minutos de descanso al medio día.</p>
+
+                </div>
+                <div class="col-lg-4">
+                    <span class="h4">Contáctenos</span>
+                    <ul>
+                        <li>Teléfono Conmutador:   +57 (607) 633 70 00</li>
+                        <li>Línea gratuita: +57 (607) 652 55 55</li>
+                        <li>Correo Institucional: contactenos@bucaramanga.gov.co</li>
+                        <li>Correo de notificaciones judiciales: notificaciones@bucaramanga.gov.co</li>
+                        <li>Canal de denuncia para presuntos actos de corrupción: https://canaldenuncia.bucaramanga.gov.co/</li>
+                        <li>Emergencia: https://emergencia.bucaramanga.gov.co/</li>
+
+
+                    </ul>
+
+
+                </div>
+
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="socialmedia-links">
+                        <a href="https://www.instagram.com/alcaldiadebucaramanga/?hl=es" target="_blank"><img alt="Logo instagram" class="img-fluid" src="~/img/social1.png" /></a>
+                        <a href="https://www.facebook.com/alcaldiadebucaramanga/" target="_blank"><img alt="Logo Facebook" class="img-fluid" src="~/img/social2.png" /></a>
+                        <a href="https://x.com/AlcaldiaBGA" target="_blank"><img alt="Logo X" class="img-fluid" src="~/img/social3.png" /></a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- TOP HEADER -->
+    <nav class="header-top">
+        <div class="container-fluid">
+            <div class="row justify-content-between">
+                <div class="col-md-1 col-lg-1 col-xl-1">
+                    <a href="https://www.gov.co/home/">
+                        <img class="img-fluid" src="~/img/govco-logo.png" alt="Logotipo de Gobierno de Colombia">
+                    </a>
+                </div>
+                <div class="col-auto">
+                    <span>Todos los derechos Reservados 2025</span>
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
+    <!-- End header top -->
+
 </footer>
+
+<script src="~/js/DatosAbiertos_aux.js"></script>

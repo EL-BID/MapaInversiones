@@ -4341,9 +4341,8 @@ textarea.form-control-lg {
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
-    border: none !important; /*
-    1px solid rgba(0, 0, 0, 0.125) !important;*/
-    border-radius: 0.25rem;
+    border: 1px solid #f3f3f3 !important;
+    border-radius: 1rem;
 }
 
 .card-login {

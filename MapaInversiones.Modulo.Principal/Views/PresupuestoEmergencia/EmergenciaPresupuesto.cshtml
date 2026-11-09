@@ -2,7 +2,53 @@
 @inject OrchardCore.IOrchardHelper Orchard
 @{ Layout = "~/Views/Shared/_Layout.cshtml"; }
 
+<style>
+    .node rect {
+        cursor: move;
+        fill-opacity: .8;
+        shape-rendering: crispEdges;
+    }
 
+    .node text {
+        pointer-events: none;
+
+    }
+
+    .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .1;
+    }
+
+        .link:hover {
+            stroke-opacity: .2;
+        }
+
+    .arc text {
+        font: 12px sans-serif;
+        text-anchor: middle;
+        font-weight: bold;
+    }
+
+    .arc path {
+        stroke: #fff;
+    }
+
+    .toolTip {
+        position: absolute;
+        display: none;
+        width: auto;
+        height: auto;
+        background: none repeat scroll 0 0 white;
+        border: 0 none;
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: -3px 3px 15px #888888;
+        color: black;
+        font: 12px sans-serif;
+        padding: 5px;
+        text-align: center;
+    }
+</style>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-bottom" class="contractProfile">
 
@@ -678,7 +724,7 @@
                         </div>
                         <div class="card-footer">
                             <div class="text-center">
-                                <a class="btn btn-outlined" href="https://sitio.com/apps/sip/?step=one" target="_blank" rel="noopener"> Solicitar <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
+                                <a class="btn btn-outlined" href="https://saip.gob.do/apps/sip/?step=one" target="_blank" rel="noopener"> Solicitar <span class="glyphicon glyphicon-circle-arrow-right"></span></a>
                                
                             </div>
                         </div>
